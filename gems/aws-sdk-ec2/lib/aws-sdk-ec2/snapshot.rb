@@ -431,10 +431,10 @@ module Aws::EC2
     # @option options [Boolean] :encrypted
     #   To encrypt a copy of an unencrypted snapshot if encryption by default
     #   is not enabled, enable encryption using this parameter. Otherwise,
-    #   omit this parameter. Encrypted snapshots are encrypted, even if you
-    #   omit this parameter and encryption by default is not enabled. You
-    #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon EBS User Guide*.
+    #   omit this parameter. Copies of encrypted snapshots are encrypted, even
+    #   if you omit this parameter and encryption by default is not enabled.
+    #   You cannot set this parameter to false. For more information, see
+    #   [Amazon EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #

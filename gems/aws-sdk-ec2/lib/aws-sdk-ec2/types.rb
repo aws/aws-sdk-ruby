@@ -7707,9 +7707,9 @@ module Aws::EC2
     # @!attribute [rw] encrypted
     #   To encrypt a copy of an unencrypted snapshot if encryption by
     #   default is not enabled, enable encryption using this parameter.
-    #   Otherwise, omit this parameter. Encrypted snapshots are encrypted,
-    #   even if you omit this parameter and encryption by default is not
-    #   enabled. You cannot set this parameter to false. For more
+    #   Otherwise, omit this parameter. Copies of encrypted snapshots are
+    #   encrypted, even if you omit this parameter and encryption by default
+    #   is not enabled. You cannot set this parameter to false. For more
     #   information, see [Amazon EBS encryption][1] in the *Amazon EBS User
     #   Guide*.
     #
@@ -15796,6 +15796,38 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The maximum age for allowed images.
+    #
+    # @!attribute [rw] maximum_days_since_created
+    #   The maximum number of days that have elapsed since the image was
+    #   created. For example, a value of `300` allows images that were
+    #   created within the last 300 days.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreationDateCondition AWS API Documentation
+    #
+    class CreationDateCondition < Struct.new(
+      :maximum_days_since_created)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum age for allowed images.
+    #
+    # @!attribute [rw] maximum_days_since_created
+    #   The maximum number of days that have elapsed since the image was
+    #   created. For example, a value of `300` allows images that were
+    #   created within the last 300 days.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreationDateConditionRequest AWS API Documentation
+    #
+    class CreationDateConditionRequest < Struct.new(
+      :maximum_days_since_created)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the credit option for CPU usage of a T instance.
     #
     # @!attribute [rw] cpu_credits
@@ -18937,6 +18969,36 @@ module Aws::EC2
     class DeleteVpnGatewayRequest < Struct.new(
       :vpn_gateway_id,
       :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum period since deprecation for allowed images.
+    #
+    # @!attribute [rw] maximum_days_since_deprecated
+    #   The maximum number of days that have elapsed since the image was
+    #   deprecated. When set to `0`, no deprecated images are allowed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprecationTimeCondition AWS API Documentation
+    #
+    class DeprecationTimeCondition < Struct.new(
+      :maximum_days_since_deprecated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum period since deprecation for allowed images.
+    #
+    # @!attribute [rw] maximum_days_since_deprecated
+    #   The maximum number of days that have elapsed since the image was
+    #   deprecated. Set to `0` to exclude all deprecated images.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprecationTimeConditionRequest AWS API Documentation
+    #
+    class DeprecationTimeConditionRequest < Struct.new(
+      :maximum_days_since_deprecated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22667,7 +22729,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ami-references-works.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html#how-ami-references-works
     #   @return [Boolean]
     #
     # @!attribute [rw] resource_types
@@ -24554,15 +24616,16 @@ module Aws::EC2
     #
     #   * `platform-details` - The platform (`Linux/UNIX` \| `Red Hat BYOL
     #     Linux` \| ` Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     with HA` \| `Red Hat Enterprise Linux with SQL Server Standard and
-    #     HA` \| `Red Hat Enterprise Linux with SQL Server Enterprise and
-    #     HA` \| `Red Hat Enterprise Linux with SQL Server Standard` \| `Red
-    #     Hat Enterprise Linux with SQL Server Web` \| `Red Hat Enterprise
-    #     Linux with SQL Server Enterprise` \| `SQL Server Enterprise` \|
-    #     `SQL Server Standard` \| `SQL Server Web` \| `SUSE Linux` \|
-    #     `Ubuntu Pro` \| `Windows` \| `Windows BYOL` \| `Windows with SQL
-    #     Server Enterprise` \| `Windows with SQL Server Standard` \|
-    #     `Windows with SQL Server Web`).
+    #     with HA` \| `Red Hat Enterprise Linux with High Availability` \|
+    #     `Red Hat Enterprise Linux with SQL Server Standard and HA` \| `Red
+    #     Hat Enterprise Linux with SQL Server Enterprise and HA` \| `Red
+    #     Hat Enterprise Linux with SQL Server Standard` \| `Red Hat
+    #     Enterprise Linux with SQL Server Web` \| `Red Hat Enterprise Linux
+    #     with SQL Server Enterprise` \| `SQL Server Enterprise` \| `SQL
+    #     Server Standard` \| `SQL Server Web` \| `SUSE Linux` \| `Ubuntu
+    #     Pro` \| `Windows` \| `Windows BYOL` \| `Windows with SQL Server
+    #     Enterprise` \| `Windows with SQL Server Standard` \| `Windows with
+    #     SQL Server Web`).
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -43722,87 +43785,181 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The list of criteria that are evaluated to determine whch AMIs are
-    # discoverable and usable in the account in the specified Amazon Web
-    # Services Region. Currently, the only criteria that can be specified
-    # are AMI providers.
+    # The criteria that are evaluated to determine which AMIs are
+    # discoverable and usable in your account for the specified Amazon Web
+    # Services Region.
     #
-    # Up to 10 `imageCriteria` objects can be specified, and up to a total
-    # of 200 values for all `imageProviders`. For more information, see
-    # [JSON configuration for the Allowed AMIs criteria][1] in the *Amazon
+    # For more information, see [How Allowed AMIs works][1] in the *Amazon
     # EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#how-allowed-amis-works
     #
     # @!attribute [rw] image_providers
-    #   A list of AMI providers whose AMIs are discoverable and useable in
-    #   the account. Up to a total of 200 values can be specified.
+    #   The image providers whose images are allowed.
     #
     #   Possible values:
     #
-    #   `amazon`: Allow AMIs created by Amazon Web Services.
+    #   * `amazon`: Allow AMIs created by Amazon or verified providers.
     #
-    #   `aws-marketplace`: Allow AMIs created by verified providers in the
-    #   Amazon Web Services Marketplace.
+    #   * `aws-marketplace`: Allow AMIs created by verified providers in the
+    #     Amazon Web Services Marketplace.
     #
-    #   `aws-backup-vault`: Allow AMIs created by Amazon Web Services
-    #   Backup.
+    #   * `aws-backup-vault`: Allow AMIs created by Amazon Web Services
+    #     Backup.
     #
-    #   12-digit account ID: Allow AMIs created by this account. One or more
-    #   account IDs can be specified.
+    #   * 12-digit account ID: Allow AMIs created by this account. One or
+    #     more account IDs can be specified.
     #
-    #   `none`: Allow AMIs created by your own account only.
+    #   * `none`: Allow AMIs created by your own account only.
+    #
+    #   Maximum: 200 values
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] marketplace_product_codes
+    #   The Amazon Web Services Marketplace product codes for allowed
+    #   images.
+    #
+    #   Length: 1-25 characters
+    #
+    #   Valid characters: Letters (`A–Z, a–z`) and numbers (`0–9`)
+    #
+    #   Maximum: 50 values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_names
+    #   The names of allowed images. Names can include wildcards (`?` and
+    #   `*`).
+    #
+    #   Length: 1–128 characters. With `?`, the minimum is 3 characters.
+    #
+    #   Valid characters:
+    #
+    #   * Letters: `A–Z, a–z`
+    #
+    #   * Numbers: `0–9`
+    #
+    #   * Special characters: `( ) [ ] . / - ' @ _ * ?`
+    #
+    #   * Spaces
+    #
+    #   Maximum: 50 values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deprecation_time_condition
+    #   The maximum period since deprecation for allowed images.
+    #   @return [Types::DeprecationTimeCondition]
+    #
+    # @!attribute [rw] creation_date_condition
+    #   The maximum age for allowed images.
+    #   @return [Types::CreationDateCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageCriterion AWS API Documentation
     #
     class ImageCriterion < Struct.new(
-      :image_providers)
+      :image_providers,
+      :marketplace_product_codes,
+      :image_names,
+      :deprecation_time_condition,
+      :creation_date_condition)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The list of criteria that are evaluated to determine whch AMIs are
-    # discoverable and usable in the account in the specified Amazon Web
-    # Services Region. Currently, the only criteria that can be specified
-    # are AMI providers.
+    # The criteria that are evaluated to determine which AMIs are
+    # discoverable and usable in your account for the specified Amazon Web
+    # Services Region.
     #
-    # Up to 10 `imageCriteria` objects can be specified, and up to a total
-    # of 200 values for all `imageProviders`. For more information, see
-    # [JSON configuration for the Allowed AMIs criteria][1] in the *Amazon
+    # The `ImageCriteria` can include up to:
+    #
+    # * 10 `ImageCriterion`
+    #
+    # ^
+    #
+    # Each `ImageCriterion` can include up to:
+    #
+    # * 200 values for `ImageProviders`
+    #
+    # * 50 values for `ImageNames`
+    #
+    # * 50 values for `MarketplaceProductCodes`
+    #
+    # For more information, see [How Allowed AMIs works][1] in the *Amazon
     # EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#how-allowed-amis-works
     #
     # @!attribute [rw] image_providers
-    #   A list of image providers whose AMIs are discoverable and useable in
-    #   the account. Up to a total of 200 values can be specified.
+    #   The image providers whose images are allowed.
     #
     #   Possible values:
     #
-    #   `amazon`: Allow AMIs created by Amazon Web Services.
+    #   * `amazon`: Allow AMIs created by Amazon or verified providers.
     #
-    #   `aws-marketplace`: Allow AMIs created by verified providers in the
-    #   Amazon Web Services Marketplace.
+    #   * `aws-marketplace`: Allow AMIs created by verified providers in the
+    #     Amazon Web Services Marketplace.
     #
-    #   `aws-backup-vault`: Allow AMIs created by Amazon Web Services
-    #   Backup.
+    #   * `aws-backup-vault`: Allow AMIs created by Amazon Web Services
+    #     Backup.
     #
-    #   12-digit account ID: Allow AMIs created by this account. One or more
-    #   account IDs can be specified.
+    #   * 12-digit account ID: Allow AMIs created by the specified accounts.
+    #     One or more account IDs can be specified.
     #
-    #   `none`: Allow AMIs created by your own account only. When `none` is
-    #   specified, no other values can be specified.
+    #   * `none`: Allow AMIs created by your own account only. When `none`
+    #     is specified, no other values can be specified.
+    #
+    #   Maximum: 200 values
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] marketplace_product_codes
+    #   The Amazon Web Services Marketplace product codes for allowed
+    #   images.
+    #
+    #   Length: 1-25 characters
+    #
+    #   Valid characters: Letters (`A–Z, a–z`) and numbers (`0–9`)
+    #
+    #   Maximum: 50 values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_names
+    #   The names of allowed images. Names can include wildcards (`?` and
+    #   `*`).
+    #
+    #   Length: 1–128 characters. With `?`, the minimum is 3 characters.
+    #
+    #   Valid characters:
+    #
+    #   * Letters: `A–Z, a–z`
+    #
+    #   * Numbers: `0–9`
+    #
+    #   * Special characters: `( ) [ ] . / - ' @ _ * ?`
+    #
+    #   * Spaces
+    #
+    #   Maximum: 50 values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deprecation_time_condition
+    #   The maximum period since deprecation for allowed images.
+    #   @return [Types::DeprecationTimeConditionRequest]
+    #
+    # @!attribute [rw] creation_date_condition
+    #   The maximum age for allowed images.
+    #   @return [Types::CreationDateConditionRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageCriterionRequest AWS API Documentation
     #
     class ImageCriterionRequest < Struct.new(
-      :image_providers)
+      :image_providers,
+      :marketplace_product_codes,
+      :image_names,
+      :deprecation_time_condition,
+      :creation_date_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -67716,6 +67873,9 @@ module Aws::EC2
     #
     #   * `EnableVgwRoutePropagation` - The route was propagated by route
     #     propagation.
+    #
+    #   * `Advertisement` - The route was created dynamically by Amazon VPC
+    #     Route Server.
     #   @return [String]
     #
     # @!attribute [rw] state

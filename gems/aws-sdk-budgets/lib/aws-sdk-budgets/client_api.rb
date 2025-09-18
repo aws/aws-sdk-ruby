@@ -32,6 +32,7 @@ module Aws::Budgets
     AutoAdjustData = Shapes::StructureShape.new(name: 'AutoAdjustData')
     AutoAdjustType = Shapes::StringShape.new(name: 'AutoAdjustType')
     BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
+    BillingViewHealthStatusException = Shapes::StructureShape.new(name: 'BillingViewHealthStatusException')
     Budget = Shapes::StructureShape.new(name: 'Budget')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
     BudgetNotificationsForAccount = Shapes::StructureShape.new(name: 'BudgetNotificationsForAccount')
@@ -215,6 +216,9 @@ module Aws::Budgets
     AutoAdjustData.add_member(:historical_options, Shapes::ShapeRef.new(shape: HistoricalOptions, location_name: "HistoricalOptions"))
     AutoAdjustData.add_member(:last_auto_adjust_time, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "LastAutoAdjustTime"))
     AutoAdjustData.struct_class = Types::AutoAdjustData
+
+    BillingViewHealthStatusException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    BillingViewHealthStatusException.struct_class = Types::BillingViewHealthStatusException
 
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
@@ -689,6 +693,7 @@ module Aws::Budgets
         o.input = Shapes::ShapeRef.new(shape: CreateBudgetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateBudgetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: CreationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
@@ -1049,6 +1054,7 @@ module Aws::Budgets
         o.output = Shapes::ShapeRef.new(shape: UpdateBudgetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

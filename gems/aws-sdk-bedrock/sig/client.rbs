@@ -2322,7 +2322,6 @@ module Aws
                                                          last_updated_at: ::Time,
                                                          expected_aggregated_findings_result: ("VALID" | "INVALID" | "SATISFIABLE" | "IMPOSSIBLE" | "TRANSLATION_AMBIGUOUS" | "TOO_COMPLEX" | "NO_TRANSLATION"),
                                                          ?confidence_threshold: ::Float,
-                                                         ?kms_key_arn: ::String,
                                                          ?client_request_token: ::String
                                                        ) -> _UpdateAutomatedReasoningPolicyTestCaseResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutomatedReasoningPolicyTestCaseResponseSuccess

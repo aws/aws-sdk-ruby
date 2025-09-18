@@ -117,6 +117,9 @@ module Aws::EC2
     #
     # * `EnableVgwRoutePropagation` - The route was propagated by route
     #   propagation.
+    #
+    # * `Advertisement` - The route was created dynamically by Amazon VPC
+    #   Route Server.
     # @return [String]
     def origin
       data[:origin]

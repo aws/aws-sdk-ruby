@@ -7211,10 +7211,6 @@ module Aws::Bedrock
     #   The updated minimum confidence level for logic validation. If null is
     #   provided, the threshold will be removed.
     #
-    # @option params [String] :kms_key_arn
-    #   The KMS key ARN for encrypting the test at rest. If not provided, the
-    #   key will not be updated. Use `DISCARD` to remove the key.
-    #
     # @option params [String] :client_request_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -7239,7 +7235,6 @@ module Aws::Bedrock
     #     last_updated_at: Time.now, # required
     #     expected_aggregated_findings_result: "VALID", # required, accepts VALID, INVALID, SATISFIABLE, IMPOSSIBLE, TRANSLATION_AMBIGUOUS, TOO_COMPLEX, NO_TRANSLATION
     #     confidence_threshold: 1.0,
-    #     kms_key_arn: "KmsKeyArn",
     #     client_request_token: "IdempotencyToken",
     #   })
     #
@@ -7614,7 +7609,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

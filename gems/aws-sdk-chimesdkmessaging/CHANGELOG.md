@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2025-09-18)
+------------------
+
+* Feature - Amazon Chime SDK Messaging GetMessagingSessionEndpoint API now returns dual-stack WebSocket endpoints supporting IPv4/IPv6.
+
 1.54.0 (2025-08-26)
 ------------------
 

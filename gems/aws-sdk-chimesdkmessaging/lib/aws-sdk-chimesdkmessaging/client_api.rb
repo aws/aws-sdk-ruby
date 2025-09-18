@@ -159,6 +159,7 @@ module Aws::ChimeSDKMessaging
     MessagingSessionEndpoint = Shapes::StructureShape.new(name: 'MessagingSessionEndpoint')
     Metadata = Shapes::StringShape.new(name: 'Metadata')
     MinimumMembershipPercentage = Shapes::IntegerShape.new(name: 'MinimumMembershipPercentage')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyContent = Shapes::StringShape.new(name: 'NonEmptyContent')
     NonEmptyResourceName = Shapes::StringShape.new(name: 'NonEmptyResourceName')
@@ -617,6 +618,7 @@ module Aws::ChimeSDKMessaging
     GetChannelMessageStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: ChannelMessageStatusStructure, location_name: "Status"))
     GetChannelMessageStatusResponse.struct_class = Types::GetChannelMessageStatusResponse
 
+    GetMessagingSessionEndpointRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location: "querystring", location_name: "network-type"))
     GetMessagingSessionEndpointRequest.struct_class = Types::GetMessagingSessionEndpointRequest
 
     GetMessagingSessionEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: MessagingSessionEndpoint, location_name: "Endpoint"))

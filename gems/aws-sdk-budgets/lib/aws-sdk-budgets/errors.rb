@@ -28,6 +28,7 @@ module Aws::Budgets
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {BillingViewHealthStatusException}
   # * {CreationLimitExceededException}
   # * {DuplicateRecordException}
   # * {ExpiredNextTokenException}
@@ -50,6 +51,21 @@ module Aws::Budgets
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Budgets::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class BillingViewHealthStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Budgets::Types::BillingViewHealthStatusException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

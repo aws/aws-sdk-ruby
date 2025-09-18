@@ -700,7 +700,8 @@ module Aws::ChimeSDKMessaging
     #   API call.
     #
     # @option params [String] :channel_id
-    #   The ID of the channel in the request.
+    #   An ID for the channel being created. If you do not specify an ID, a
+    #   UUID will be created for the channel.
     #
     # @option params [Array<String>] :member_arns
     #   The ARNs of the channel members in the request.
@@ -838,7 +839,7 @@ module Aws::ChimeSDKMessaging
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/using-the-messaging-sdk.html#msg-types
     #
     # @option params [required, String] :app_instance_arn
     #   The ARN of the channel flow request.
@@ -1902,9 +1903,19 @@ module Aws::ChimeSDKMessaging
 
     # The details of the endpoint for the messaging session.
     #
+    # @option params [String] :network_type
+    #   The type of network for the messaging session endpoint. Either IPv4
+    #   only or dual-stack (IPv4 and IPv6).
+    #
     # @return [Types::GetMessagingSessionEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMessagingSessionEndpointResponse#endpoint #endpoint} => Types::MessagingSessionEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_messaging_session_endpoint({
+    #     network_type: "IPV4_ONLY", # accepts IPV4_ONLY, DUAL_STACK
+    #   })
     #
     # @example Response structure
     #
@@ -2074,7 +2085,7 @@ module Aws::ChimeSDKMessaging
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html
     #
     # @option params [required, String] :channel_arn
     #   The maximum number of channel memberships that you want returned.
@@ -2786,8 +2797,8 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Redacts message content, but not metadata. The message exists in the
-    # back end, but the action returns null content, and the state shows as
+    # Redacts message content and metadata. The message exists in the back
+    # end, but the action returns null content, and the state shows as
     # redacted.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
@@ -2847,6 +2858,11 @@ module Aws::ChimeSDKMessaging
     # The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
     # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
     # the value in the header.
+    #
+    # <note markdown="1"> This operation isn't supported for `AppInstanceUsers` with a large
+    # number of memberships.
+    #
+    #  </note>
     #
     # @option params [String] :chime_bearer
     #   The `AppInstanceUserArn` of the user making the API call.
@@ -3312,7 +3328,7 @@ module Aws::ChimeSDKMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

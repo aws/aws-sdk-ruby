@@ -1202,7 +1202,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] channel_id
-    #   The ID of the channel in the request.
+    #   An ID for the channel being created. If you do not specify an ID, a
+    #   UUID will be created for the channel.
     #   @return [String]
     #
     # @!attribute [rw] member_arns
@@ -1870,11 +1871,18 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # @api private
+    # @!attribute [rw] network_type
+    #   The type of network for the messaging session endpoint. Either IPv4
+    #   only or dual-stack (IPv4 and IPv6).
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingSessionEndpointRequest AWS API Documentation
     #
-    class GetMessagingSessionEndpointRequest < Aws::EmptyStructure; end
+    class GetMessagingSessionEndpointRequest < Struct.new(
+      :network_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] endpoint
     #   The endpoint returned in the response.
@@ -2901,6 +2909,11 @@ module Aws::ChimeSDKMessaging
 
     # A `Field` of the channel that you want to search.
     #
+    # <note markdown="1"> This operation isn't supported for `AppInstanceUsers` with a large
+    # number of memberships.
+    #
+    #  </note>
+    #
     # @!attribute [rw] key
     #   An `enum` value that indicates the key to search the channel on.
     #   `MEMBERS` allows you to search channels based on memberships. You
@@ -2914,7 +2927,7 @@ module Aws::ChimeSDKMessaging
     #   The values that you want to search for, a list of strings. The
     #   values must be `AppInstanceUserArns` specified as a list of strings.
     #
-    #   <note markdown="1"> This operation isn't supported for `AppInstanceUsers` with large
+    #   <note markdown="1"> This operation isn't supported for `AppInstanceUsers` with a large
     #   number of memberships.
     #
     #    </note>

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.558.0 (2025-09-18)
+------------------
+
+* Feature - Allowed AMIs adds support for four new parameters - marketplaceProductCodes, deprecationTimeCondition, creationDateCondition and imageNames
+
 1.557.0 (2025-09-17)
 ------------------
 

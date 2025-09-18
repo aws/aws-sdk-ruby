@@ -14,6 +14,9 @@ module Aws
       class AccessDeniedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class BillingViewHealthStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class CreationLimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

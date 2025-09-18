@@ -54,7 +54,7 @@ module Aws::ChimeSDKMessaging
   autoload :EndpointProvider, 'aws-sdk-chimesdkmessaging/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkmessaging/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 

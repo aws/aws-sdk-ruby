@@ -172,6 +172,19 @@ module Aws::Budgets
       include Aws::Structure
     end
 
+    # The billing view status must be HEALTHY to perform this action. Try
+    # again when the status is HEALTHY.
+    #
+    # @!attribute [rw] message
+    #   The error message the exception carries.
+    #   @return [String]
+    #
+    class BillingViewHealthStatusException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the output of the `CreateBudget` operation. The content
     # consists of the detailed metadata and data file information, and the
     # current status of the `budget` object.

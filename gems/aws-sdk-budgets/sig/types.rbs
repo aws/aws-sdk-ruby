@@ -54,6 +54,11 @@ module Aws::Budgets
       SENSITIVE: []
     end
 
+    class BillingViewHealthStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Budget
       attr_accessor budget_name: ::String
       attr_accessor budget_limit: Types::Spend

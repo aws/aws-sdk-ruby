@@ -979,7 +979,7 @@ module Aws::Bedrock
       :document_content_type,
       :document_name,
       :document_description)
-      SENSITIVE = [:document_name, :document_description]
+      SENSITIVE = [:document, :document_name, :document_description]
       include Aws::Structure
     end
 
@@ -12245,11 +12245,6 @@ module Aws::Bedrock
     #   is provided, the threshold will be removed.
     #   @return [Float]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The KMS key ARN for encrypting the test at rest. If not provided,
-    #   the key will not be updated. Use `DISCARD` to remove the key.
-    #   @return [String]
-    #
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -12270,7 +12265,6 @@ module Aws::Bedrock
       :last_updated_at,
       :expected_aggregated_findings_result,
       :confidence_threshold,
-      :kms_key_arn,
       :client_request_token)
       SENSITIVE = [:guard_content, :query_content]
       include Aws::Structure

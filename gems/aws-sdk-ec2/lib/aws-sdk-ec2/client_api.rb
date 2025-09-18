@@ -660,6 +660,8 @@ module Aws::EC2
     CreateVpnConnectionRouteRequest = Shapes::StructureShape.new(name: 'CreateVpnConnectionRouteRequest')
     CreateVpnGatewayRequest = Shapes::StructureShape.new(name: 'CreateVpnGatewayRequest')
     CreateVpnGatewayResult = Shapes::StructureShape.new(name: 'CreateVpnGatewayResult')
+    CreationDateCondition = Shapes::StructureShape.new(name: 'CreationDateCondition')
+    CreationDateConditionRequest = Shapes::StructureShape.new(name: 'CreationDateConditionRequest')
     CreditSpecification = Shapes::StructureShape.new(name: 'CreditSpecification')
     CreditSpecificationRequest = Shapes::StructureShape.new(name: 'CreditSpecificationRequest')
     CurrencyCodeValues = Shapes::StringShape.new(name: 'CurrencyCodeValues')
@@ -852,6 +854,8 @@ module Aws::EC2
     DeleteVpnConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVpnConnectionRequest')
     DeleteVpnConnectionRouteRequest = Shapes::StructureShape.new(name: 'DeleteVpnConnectionRouteRequest')
     DeleteVpnGatewayRequest = Shapes::StructureShape.new(name: 'DeleteVpnGatewayRequest')
+    DeprecationTimeCondition = Shapes::StructureShape.new(name: 'DeprecationTimeCondition')
+    DeprecationTimeConditionRequest = Shapes::StructureShape.new(name: 'DeprecationTimeConditionRequest')
     DeprovisionByoipCidrRequest = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrRequest')
     DeprovisionByoipCidrResult = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrResult')
     DeprovisionIpamByoasnRequest = Shapes::StructureShape.new(name: 'DeprovisionIpamByoasnRequest')
@@ -1825,6 +1829,10 @@ module Aws::EC2
     ImageIdStringList = Shapes::ListShape.new(name: 'ImageIdStringList')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageMetadata = Shapes::StructureShape.new(name: 'ImageMetadata')
+    ImageName = Shapes::StringShape.new(name: 'ImageName')
+    ImageNameList = Shapes::ListShape.new(name: 'ImageNameList')
+    ImageNameRequest = Shapes::StringShape.new(name: 'ImageNameRequest')
+    ImageNameRequestList = Shapes::ListShape.new(name: 'ImageNameRequestList')
     ImageProvider = Shapes::StringShape.new(name: 'ImageProvider')
     ImageProviderList = Shapes::ListShape.new(name: 'ImageProviderList')
     ImageProviderRequest = Shapes::StringShape.new(name: 'ImageProviderRequest')
@@ -2332,12 +2340,18 @@ module Aws::EC2
     ManagedPrefixList = Shapes::StructureShape.new(name: 'ManagedPrefixList')
     ManagedPrefixListSet = Shapes::ListShape.new(name: 'ManagedPrefixListSet')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
+    MarketplaceProductCode = Shapes::StringShape.new(name: 'MarketplaceProductCode')
+    MarketplaceProductCodeList = Shapes::ListShape.new(name: 'MarketplaceProductCodeList')
+    MarketplaceProductCodeRequest = Shapes::StringShape.new(name: 'MarketplaceProductCodeRequest')
+    MarketplaceProductCodeRequestList = Shapes::ListShape.new(name: 'MarketplaceProductCodeRequestList')
     MaxIpv4AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv4AddrPerInterface')
     MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
     MaxNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaxNetworkInterfaces')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsParam = Shapes::IntegerShape.new(name: 'MaxResultsParam')
     MaximumBandwidthInMbps = Shapes::IntegerShape.new(name: 'MaximumBandwidthInMbps')
+    MaximumDaysSinceCreatedValue = Shapes::IntegerShape.new(name: 'MaximumDaysSinceCreatedValue')
+    MaximumDaysSinceDeprecatedValue = Shapes::IntegerShape.new(name: 'MaximumDaysSinceDeprecatedValue')
     MaximumEbsAttachments = Shapes::IntegerShape.new(name: 'MaximumEbsAttachments')
     MaximumEfaInterfaces = Shapes::IntegerShape.new(name: 'MaximumEfaInterfaces')
     MaximumEnaQueueCount = Shapes::IntegerShape.new(name: 'MaximumEnaQueueCount')
@@ -6405,6 +6419,12 @@ module Aws::EC2
     CreateVpnGatewayResult.add_member(:vpn_gateway, Shapes::ShapeRef.new(shape: VpnGateway, location_name: "vpnGateway"))
     CreateVpnGatewayResult.struct_class = Types::CreateVpnGatewayResult
 
+    CreationDateCondition.add_member(:maximum_days_since_created, Shapes::ShapeRef.new(shape: MaximumDaysSinceCreatedValue, location_name: "maximumDaysSinceCreated"))
+    CreationDateCondition.struct_class = Types::CreationDateCondition
+
+    CreationDateConditionRequest.add_member(:maximum_days_since_created, Shapes::ShapeRef.new(shape: MaximumDaysSinceCreatedValue, location_name: "MaximumDaysSinceCreated"))
+    CreationDateConditionRequest.struct_class = Types::CreationDateConditionRequest
+
     CreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
     CreditSpecification.struct_class = Types::CreditSpecification
 
@@ -7056,6 +7076,12 @@ module Aws::EC2
     DeleteVpnGatewayRequest.add_member(:vpn_gateway_id, Shapes::ShapeRef.new(shape: VpnGatewayId, required: true, location_name: "VpnGatewayId"))
     DeleteVpnGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteVpnGatewayRequest.struct_class = Types::DeleteVpnGatewayRequest
+
+    DeprecationTimeCondition.add_member(:maximum_days_since_deprecated, Shapes::ShapeRef.new(shape: MaximumDaysSinceDeprecatedValue, location_name: "maximumDaysSinceDeprecated"))
+    DeprecationTimeCondition.struct_class = Types::DeprecationTimeCondition
+
+    DeprecationTimeConditionRequest.add_member(:maximum_days_since_deprecated, Shapes::ShapeRef.new(shape: MaximumDaysSinceDeprecatedValue, location_name: "MaximumDaysSinceDeprecated"))
+    DeprecationTimeConditionRequest.struct_class = Types::DeprecationTimeConditionRequest
 
     DeprovisionByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     DeprovisionByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -11046,11 +11072,19 @@ module Aws::EC2
     ImageAttribute.struct_class = Types::ImageAttribute
 
     ImageCriterion.add_member(:image_providers, Shapes::ShapeRef.new(shape: ImageProviderList, location_name: "imageProviderSet"))
+    ImageCriterion.add_member(:marketplace_product_codes, Shapes::ShapeRef.new(shape: MarketplaceProductCodeList, location_name: "marketplaceProductCodeSet"))
+    ImageCriterion.add_member(:image_names, Shapes::ShapeRef.new(shape: ImageNameList, location_name: "imageNameSet"))
+    ImageCriterion.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeCondition, location_name: "deprecationTimeCondition"))
+    ImageCriterion.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateCondition, location_name: "creationDateCondition"))
     ImageCriterion.struct_class = Types::ImageCriterion
 
     ImageCriterionList.member = Shapes::ShapeRef.new(shape: ImageCriterion, location_name: "item")
 
     ImageCriterionRequest.add_member(:image_providers, Shapes::ShapeRef.new(shape: ImageProviderRequestList, location_name: "ImageProvider"))
+    ImageCriterionRequest.add_member(:marketplace_product_codes, Shapes::ShapeRef.new(shape: MarketplaceProductCodeRequestList, location_name: "MarketplaceProductCode"))
+    ImageCriterionRequest.add_member(:image_names, Shapes::ShapeRef.new(shape: ImageNameRequestList, location_name: "ImageName"))
+    ImageCriterionRequest.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeConditionRequest, location_name: "DeprecationTimeCondition"))
+    ImageCriterionRequest.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateConditionRequest, location_name: "CreationDateCondition"))
     ImageCriterionRequest.struct_class = Types::ImageCriterionRequest
 
     ImageCriterionRequestList.member = Shapes::ShapeRef.new(shape: ImageCriterionRequest, location_name: "ImageCriterion")
@@ -11081,6 +11115,10 @@ module Aws::EC2
     ImageMetadata.add_member(:image_allowed, Shapes::ShapeRef.new(shape: Boolean, location_name: "imageAllowed"))
     ImageMetadata.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
     ImageMetadata.struct_class = Types::ImageMetadata
+
+    ImageNameList.member = Shapes::ShapeRef.new(shape: ImageName, location_name: "item")
+
+    ImageNameRequestList.member = Shapes::ShapeRef.new(shape: ImageNameRequest, location_name: "item")
 
     ImageProviderList.member = Shapes::ShapeRef.new(shape: ImageProvider, location_name: "item")
 
@@ -12899,6 +12937,10 @@ module Aws::EC2
     ManagedPrefixList.struct_class = Types::ManagedPrefixList
 
     ManagedPrefixListSet.member = Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "item")
+
+    MarketplaceProductCodeList.member = Shapes::ShapeRef.new(shape: MarketplaceProductCode, location_name: "item")
+
+    MarketplaceProductCodeRequestList.member = Shapes::ShapeRef.new(shape: MarketplaceProductCodeRequest, location_name: "item")
 
     MediaAcceleratorInfo.add_member(:accelerators, Shapes::ShapeRef.new(shape: MediaDeviceInfoList, location_name: "accelerators"))
     MediaAcceleratorInfo.add_member(:total_media_memory_in_mi_b, Shapes::ShapeRef.new(shape: TotalMediaMemory, location_name: "totalMediaMemoryInMiB"))

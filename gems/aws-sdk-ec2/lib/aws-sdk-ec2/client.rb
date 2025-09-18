@@ -5151,32 +5151,29 @@ module Aws::EC2
     #
     # * If the source snapshot is on an Outpost, you can't copy it.
     #
-    # When copying snapshots to a Region, copies of encrypted EBS snapshots
-    # remain encrypted. Copies of unencrypted snapshots remain unencrypted,
-    # unless you enable encryption for the snapshot copy operation. By
-    # default, encrypted snapshot copies use the default KMS key; however,
-    # you can specify a different KMS key. To copy an encrypted snapshot
-    # that has been shared from another account, you must have permissions
-    # for the KMS key used to encrypt the snapshot.
+    # When copying snapshots to a Region, the encryption outcome for the
+    # snapshot copy depends on the Amazon EBS encryption by default setting
+    # for the destination Region, the encryption status of the source
+    # snapshot, and the encryption parameters you specify in the request.
+    # For more information, see [ Encryption and snapshot copying][1].
     #
-    # Snapshots copied to an Outpost are encrypted by default using the
-    # default encryption key for the Region, or a different key that you
-    # specify in the request using **KmsKeyId**. Outposts do not support
-    # unencrypted snapshots. For more information, see [Amazon EBS local
-    # snapshots on Outposts][1] in the *Amazon EBS User Guide*.
+    # Snapshots copied to an Outpost must be encrypted. Unencrypted
+    # snapshots are not supported on Outposts. For more information, [
+    # Amazon EBS local snapshots on Outposts][2].
     #
     # <note markdown="1"> Snapshots copies have an arbitrary source volume ID. Do not use this
     # volume ID for any purpose.
     #
     #  </note>
     #
-    # For more information, see [Copy an Amazon EBS snapshot][2] in the
+    # For more information, see [Copy an Amazon EBS snapshot][3] in the
     # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
-    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html#creating-encrypted-snapshots
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#considerations
+    # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html
     #
     # @option params [String] :description
     #   A description for the EBS snapshot.
@@ -5210,10 +5207,10 @@ module Aws::EC2
     # @option params [Boolean] :encrypted
     #   To encrypt a copy of an unencrypted snapshot if encryption by default
     #   is not enabled, enable encryption using this parameter. Otherwise,
-    #   omit this parameter. Encrypted snapshots are encrypted, even if you
-    #   omit this parameter and encryption by default is not enabled. You
-    #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon EBS User Guide*.
+    #   omit this parameter. Copies of encrypted snapshots are encrypted, even
+    #   if you omit this parameter and encryption by default is not enabled.
+    #   You cannot set this parameter to false. For more information, see
+    #   [Amazon EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #
@@ -7810,8 +7807,8 @@ module Aws::EC2
     # Creates an Amazon FPGA Image (AFI) from the specified design
     # checkpoint (DCP).
     #
-    # The create operation is asynchronous. To verify that the AFI is ready
-    # for use, check the output logs.
+    # The create operation is asynchronous. To verify that the AFI was
+    # successfully created and is ready for use, check the output logs.
     #
     # An AFI contains the FPGA bitstream that is ready to download to an
     # FPGA. You can securely deploy an AFI on multiple FPGA-accelerated
@@ -26987,7 +26984,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ami-references-works.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html#how-ami-references-works
     #
     # @option params [Array<Types::ResourceTypeRequest>] :resource_types
     #   The Amazon Web Services resource types to check for image references.
@@ -29715,15 +29712,16 @@ module Aws::EC2
     #
     #   * `platform-details` - The platform (`Linux/UNIX` \| `Red Hat BYOL
     #     Linux` \| ` Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     with HA` \| `Red Hat Enterprise Linux with SQL Server Standard and
-    #     HA` \| `Red Hat Enterprise Linux with SQL Server Enterprise and HA`
-    #     \| `Red Hat Enterprise Linux with SQL Server Standard` \| `Red Hat
-    #     Enterprise Linux with SQL Server Web` \| `Red Hat Enterprise Linux
-    #     with SQL Server Enterprise` \| `SQL Server Enterprise` \| `SQL
-    #     Server Standard` \| `SQL Server Web` \| `SUSE Linux` \| `Ubuntu Pro`
-    #     \| `Windows` \| `Windows BYOL` \| `Windows with SQL Server
-    #     Enterprise` \| `Windows with SQL Server Standard` \| `Windows with
-    #     SQL Server Web`).
+    #     with HA` \| `Red Hat Enterprise Linux with High Availability` \|
+    #     `Red Hat Enterprise Linux with SQL Server Standard and HA` \| `Red
+    #     Hat Enterprise Linux with SQL Server Enterprise and HA` \| `Red Hat
+    #     Enterprise Linux with SQL Server Standard` \| `Red Hat Enterprise
+    #     Linux with SQL Server Web` \| `Red Hat Enterprise Linux with SQL
+    #     Server Enterprise` \| `SQL Server Enterprise` \| `SQL Server
+    #     Standard` \| `SQL Server Web` \| `SUSE Linux` \| `Ubuntu Pro` \|
+    #     `Windows` \| `Windows BYOL` \| `Windows with SQL Server Enterprise`
+    #     \| `Windows with SQL Server Standard` \| `Windows with SQL Server
+    #     Web`).
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -44014,18 +44012,12 @@ module Aws::EC2
     # you can publicly share your AMIs in the specified Amazon Web Services
     # Region.
     #
-    # The API can take up to 10 minutes to configure this setting. During
-    # this time, if you run [GetImageBlockPublicAccessState][1], the
-    # response will be `block-new-sharing`. When the API has completed the
-    # configuration, the response will be `unblocked`.
-    #
-    # For more information, see [Block public access to your AMIs][2] in the
+    # For more information, see [Block public access to your AMIs][1] in the
     # *Amazon EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -46917,6 +46909,12 @@ module Aws::EC2
     #   resp.image_criteria #=> Array
     #   resp.image_criteria[0].image_providers #=> Array
     #   resp.image_criteria[0].image_providers[0] #=> String
+    #   resp.image_criteria[0].marketplace_product_codes #=> Array
+    #   resp.image_criteria[0].marketplace_product_codes[0] #=> String
+    #   resp.image_criteria[0].image_names #=> Array
+    #   resp.image_criteria[0].image_names[0] #=> String
+    #   resp.image_criteria[0].deprecation_time_condition.maximum_days_since_deprecated #=> Integer
+    #   resp.image_criteria[0].creation_date_condition.maximum_days_since_created #=> Integer
     #   resp.managed_by #=> String, one of "account", "declarative-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAllowedImagesSettings AWS API Documentation
@@ -61128,6 +61126,14 @@ module Aws::EC2
     #     image_criteria: [
     #       {
     #         image_providers: ["ImageProviderRequest"],
+    #         marketplace_product_codes: ["MarketplaceProductCodeRequest"],
+    #         image_names: ["ImageNameRequest"],
+    #         deprecation_time_condition: {
+    #           maximum_days_since_deprecated: 1,
+    #         },
+    #         creation_date_condition: {
+    #           maximum_days_since_created: 1,
+    #         },
     #       },
     #     ],
     #     dry_run: false,
@@ -67158,7 +67164,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.557.0'
+      context[:gem_version] = '1.558.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

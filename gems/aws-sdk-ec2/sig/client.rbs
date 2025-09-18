@@ -12987,7 +12987,15 @@ module Aws
       def replace_image_criteria_in_allowed_images_settings: (
                                                                ?image_criteria: Array[
                                                                  {
-                                                                   image_providers: Array[::String]?
+                                                                   image_providers: Array[::String]?,
+                                                                   marketplace_product_codes: Array[::String]?,
+                                                                   image_names: Array[::String]?,
+                                                                   deprecation_time_condition: {
+                                                                     maximum_days_since_deprecated: ::Integer?
+                                                                   }?,
+                                                                   creation_date_condition: {
+                                                                     maximum_days_since_created: ::Integer?
+                                                                   }?
                                                                  },
                                                                ],
                                                                ?dry_run: bool

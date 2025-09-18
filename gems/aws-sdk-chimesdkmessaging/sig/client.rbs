@@ -425,6 +425,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMessaging/Client.html#get_messaging_session_endpoint-instance_method
       def get_messaging_session_endpoint: (
+                                            ?network_type: ("IPV4_ONLY" | "DUAL_STACK")
                                           ) -> _GetMessagingSessionEndpointResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMessagingSessionEndpointResponseSuccess
 

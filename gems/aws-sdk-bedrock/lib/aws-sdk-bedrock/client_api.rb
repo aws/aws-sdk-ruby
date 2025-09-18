@@ -74,6 +74,7 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAnnotationRuleNaturalLanguage = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyAnnotationRuleNaturalLanguage')
     AutomatedReasoningPolicyAnnotationStatus = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyAnnotationStatus')
     AutomatedReasoningPolicyArn = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyArn')
+    AutomatedReasoningPolicyBuildDocumentBlob = Shapes::BlobShape.new(name: 'AutomatedReasoningPolicyBuildDocumentBlob')
     AutomatedReasoningPolicyBuildDocumentContentType = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyBuildDocumentContentType')
     AutomatedReasoningPolicyBuildDocumentDescription = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyBuildDocumentDescription')
     AutomatedReasoningPolicyBuildDocumentName = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyBuildDocumentName')
@@ -89,7 +90,6 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildStepMessage = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyBuildStepMessage')
     AutomatedReasoningPolicyBuildStepMessageList = Shapes::ListShape.new(name: 'AutomatedReasoningPolicyBuildStepMessageList')
     AutomatedReasoningPolicyBuildWorkflowDocument = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyBuildWorkflowDocument')
-    AutomatedReasoningPolicyBuildWorkflowDocumentDocumentBlob = Shapes::BlobShape.new(name: 'AutomatedReasoningPolicyBuildWorkflowDocumentDocumentBlob')
     AutomatedReasoningPolicyBuildWorkflowDocumentList = Shapes::ListShape.new(name: 'AutomatedReasoningPolicyBuildWorkflowDocumentList')
     AutomatedReasoningPolicyBuildWorkflowId = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyBuildWorkflowId')
     AutomatedReasoningPolicyBuildWorkflowRepairContent = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyBuildWorkflowRepairContent')
@@ -1010,7 +1010,7 @@ module Aws::Bedrock
 
     AutomatedReasoningPolicyBuildStepMessageList.member = Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildStepMessage)
 
-    AutomatedReasoningPolicyBuildWorkflowDocument.add_member(:document, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildWorkflowDocumentDocumentBlob, required: true, location_name: "document"))
+    AutomatedReasoningPolicyBuildWorkflowDocument.add_member(:document, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildDocumentBlob, required: true, location_name: "document"))
     AutomatedReasoningPolicyBuildWorkflowDocument.add_member(:document_content_type, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildDocumentContentType, required: true, location_name: "documentContentType"))
     AutomatedReasoningPolicyBuildWorkflowDocument.add_member(:document_name, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildDocumentName, required: true, location_name: "documentName"))
     AutomatedReasoningPolicyBuildWorkflowDocument.add_member(:document_description, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildDocumentDescription, location_name: "documentDescription"))
@@ -3226,7 +3226,6 @@ module Aws::Bedrock
     UpdateAutomatedReasoningPolicyTestCaseRequest.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     UpdateAutomatedReasoningPolicyTestCaseRequest.add_member(:expected_aggregated_findings_result, Shapes::ShapeRef.new(shape: AutomatedReasoningCheckResult, required: true, location_name: "expectedAggregatedFindingsResult"))
     UpdateAutomatedReasoningPolicyTestCaseRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: AutomatedReasoningCheckTranslationConfidence, location_name: "confidenceThreshold"))
-    UpdateAutomatedReasoningPolicyTestCaseRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     UpdateAutomatedReasoningPolicyTestCaseRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateAutomatedReasoningPolicyTestCaseRequest.struct_class = Types::UpdateAutomatedReasoningPolicyTestCaseRequest
 
@@ -3640,6 +3639,7 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

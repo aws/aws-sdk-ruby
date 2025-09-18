@@ -310,7 +310,7 @@ module Aws::Bedrock
       attr_accessor document_content_type: ("pdf" | "txt")
       attr_accessor document_name: ::String
       attr_accessor document_description: ::String
-      SENSITIVE: [:document_name, :document_description]
+      SENSITIVE: [:document, :document_name, :document_description]
     end
 
     class AutomatedReasoningPolicyBuildWorkflowRepairContent
@@ -3147,7 +3147,6 @@ module Aws::Bedrock
       attr_accessor last_updated_at: ::Time
       attr_accessor expected_aggregated_findings_result: ("VALID" | "INVALID" | "SATISFIABLE" | "IMPOSSIBLE" | "TRANSLATION_AMBIGUOUS" | "TOO_COMPLEX" | "NO_TRANSLATION")
       attr_accessor confidence_threshold: ::Float
-      attr_accessor kms_key_arn: ::String
       attr_accessor client_request_token: ::String
       SENSITIVE: [:guard_content, :query_content]
     end

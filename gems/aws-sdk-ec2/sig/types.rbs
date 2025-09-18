@@ -3457,6 +3457,16 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreationDateCondition
+      attr_accessor maximum_days_since_created: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreationDateConditionRequest
+      attr_accessor maximum_days_since_created: ::Integer
+      SENSITIVE: []
+    end
+
     class CreditSpecification
       attr_accessor cpu_credits: ::String
       SENSITIVE: []
@@ -4400,6 +4410,16 @@ module Aws::EC2
     class DeleteVpnGatewayRequest
       attr_accessor vpn_gateway_id: ::String
       attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeprecationTimeCondition
+      attr_accessor maximum_days_since_deprecated: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeprecationTimeConditionRequest
+      attr_accessor maximum_days_since_deprecated: ::Integer
       SENSITIVE: []
     end
 
@@ -9655,11 +9675,19 @@ module Aws::EC2
 
     class ImageCriterion
       attr_accessor image_providers: ::Array[::String]
+      attr_accessor marketplace_product_codes: ::Array[::String]
+      attr_accessor image_names: ::Array[::String]
+      attr_accessor deprecation_time_condition: Types::DeprecationTimeCondition
+      attr_accessor creation_date_condition: Types::CreationDateCondition
       SENSITIVE: []
     end
 
     class ImageCriterionRequest
       attr_accessor image_providers: ::Array[::String]
+      attr_accessor marketplace_product_codes: ::Array[::String]
+      attr_accessor image_names: ::Array[::String]
+      attr_accessor deprecation_time_condition: Types::DeprecationTimeConditionRequest
+      attr_accessor creation_date_condition: Types::CreationDateConditionRequest
       SENSITIVE: []
     end
 

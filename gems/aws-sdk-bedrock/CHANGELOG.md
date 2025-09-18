@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2025-09-18)
+------------------
+
+* Feature - Release includes an increase to the maximum policy build document size, an update to DeleteAutomatedReasoningPolicyBuildWorkflow to add ResourceInUseException, and corrections to UpdateAutomatedReasoningPolicyTestCaseRequest.
+
 1.61.0 (2025-08-26)
 ------------------
 

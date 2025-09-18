@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2025-09-18)
+------------------
+
+* Feature - Added BillingViewHealthStatus Exception which is thrown when a Budget is created or updated with a Billing View that is not in the HEALTHY status
+
 1.94.0 (2025-09-16)
 ------------------
 
