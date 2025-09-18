@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'find'
 require 'set'
 
 module Aws
@@ -22,7 +21,6 @@ module Aws
         @client = options[:client] || Client.new
         @executor = options[:executor] || DefaultExecutor.new
         @options = options
-        @mutex = Mutex.new
       end
 
       # @return [Client]
@@ -32,13 +30,13 @@ module Aws
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source)
 
         upload_opts = options.dup
+        bucket = bucket
         @source = source
-        @bucket = bucket
+        @s3_prefix = upload_opts.delete(:s3_prefix)
         @recursive = upload_opts.delete(:recursive) || false
         @follow_symlinks = upload_opts.delete(:follow_symlinks) || false
-        @s3_prefix = upload_opts.delete(:s3_prefix)
-        # @filter_callback = upload_opts.delete(:filter_callback)  # need to impl
-        @failure_policy = upload_opts.delete(:failure_policy) || :abort # need to add validation, available opts are :abort, :ignore
+        @ignore_failure = upload_opts.delete(:failure_policy) || false
+        @filter_callback = upload_opts.delete(:filter_callback)
 
         uploader = FileUploader.new(
           multipart_threshold: upload_opts.delete(:multipart_threshold),
@@ -54,7 +52,7 @@ module Aws
           if @recursive
             stream_recursive_files
           else
-            stream_direct_files
+            direct_traverse
           end
           @upload_queue << :done
         end
@@ -68,16 +66,15 @@ module Aws
 
           upload_attempts += 1
           queue_executor.post(file) do |f|
-            uploader.upload(f[:full_path], upload_opts.merge(bucket: @bucket, key: f[:key]))
+            uploader.upload(f[:path], upload_opts.merge(bucket: bucket, key: f[:key]))
           rescue StandardError => e
             @errors << e
-            @abort_upload = true if @failure_policy == :abort
+            @abort_upload = true unless @ignore_failure
           ensure
             completion_queue << :done
           end
         end
         upload_attempts.times { completion_queue.pop }
-        queue_executor.shutdown
 
         if @abort_upload
           msg = "failed to upload directory: uploaded #{upload_attempts - @errors.count} files " \
@@ -89,96 +86,81 @@ module Aws
             failed_uploads: @errors.count
           }
         end
-        @executor.shutdown
+      ensure
+        queue_executor.shutdown
+        @executor.shutdown unless @options[:executor]
       end
 
       private
 
       def stream_recursive_files
         if @follow_symlinks
-          puts 'streaming files with symlinks'
-          stream_with_symlinks
+          visited = Set.new
+          visited << File.stat(@source).ino
+          traverse_directory(@source, visited: visited)
         else
-          puts 'streaming files without symlinks'
-          stream_without_symlinks
+          traverse_directory(@source)
         end
       end
 
-      def stream_with_symlinks
-        source_prefix = "#{@source}/"
-        visited_dirs = Set.new
-        visited_files = Set.new
+      def traverse_directory(dir_path, relative_prefix: '', visited: nil)
+        return if @abort_upload
 
-        Find.find(@source) do |path|
+        Dir.each_child(dir_path) do |file|
           break if @abort_upload
 
+          full_path = File.join(dir_path, file)
+          next if @filter_callback&.call(full_path, file)
+          next if File.symlink?(full_path) && !@follow_symlinks
+
+          if File.directory?(full_path)
+            process_directory(full_path, file, relative_prefix, visited)
+          elsif File.file?(full_path) || File.symlink?(full_path)
+            key = relative_prefix.empty? ? file : File.join(relative_prefix, file)
+            queue_file(full_path, key)
+          end
+        rescue StandardError => e
+          @errors << e
+          @abort_upload = true unless @ignore_failure
+        end
+      end
+
+      def process_directory(path, file, relative_prefix, visited)
+        if @follow_symlinks && visited
           stat = File.stat(path)
-          if stat.directory?
-            if visited_dirs.include?(stat.ino)
-              Find.prune
-              next
-            end
-            visited_dirs << stat.ino
-            next
-          end
+          return if visited.include?(stat.ino)
 
-          next if visited_files.include?(stat.ino)
+          visited << stat.ino
+        end
+        new_prefix = relative_prefix.empty? ? file : File.join(relative_prefix, file)
+        traverse_directory(path, relative_prefix: new_prefix, visited: visited)
+      end
 
-          visited_files << stat.ino
-          key = path.gsub(source_prefix, '')
-          entry = { full_path: path }
-          entry[:key] = @s3_prefix ? File.join(@s3_prefix, key) : key
+      def direct_traverse
+        Dir.each_child(@source) do |file|
+          break if @abort_upload
 
-          puts "adding #{entry}"
-          @upload_queue << entry
+          full_path = File.join(@source, file)
+          next if @filter_callback&.call(full_path, file)
+          next unless should_upload_file?(full_path)
+
+          queue_file(full_path, file)
         rescue StandardError => e
           @errors << e
-          @abort_upload = true if @failure_policy == :abort
+          @abort_upload = true unless @ignore_failure
         end
       end
 
-      def stream_without_symlinks
-        source_prefix = "#{@source}/"
-        Find.find(@source) do |path|
-          break if @abort_upload
-
-          stat = File.lstat(path)
-          if stat.symlink?
-            Find.prune
-            next
-          end
-          next unless stat.file?
-
-          key = path.gsub(source_prefix, '')
-          entry = { full_path: path }
-          entry[:key] = @s3_prefix ? File.join(@s3_prefix, key) : key
-
-          puts "adding #{entry}"
-          @upload_queue << entry
-        rescue StandardError => e
-          @errors << e
-          @abort_upload = true if @failure_policy == :abort
-        end
+      def should_upload_file?(path)
+        return false if File.directory?(path)
+        return false if !@follow_symlinks && File.symlink?(path)
+        File.file?(path) || File.symlink?(path)
       end
 
-      def stream_direct_files
-        Dir.each_child(@source) do |key|
-          break if @abort_upload
-
-          path = File.join(@source, key)
-          next unless File.file?(path)
-
-          next if !@follow_symlinks && File.symlink?(path)
-
-          entry = { full_path: path }
-          entry[:key] = @s3_prefix ? File.join(@s3_prefix, key) : key
-
-          puts "adding #{entry}"
-          @upload_queue << entry
-        rescue StandardError => e
-          @errors << e
-          @abort_upload = true if @failure_policy == :abort
-        end
+      def queue_file(path, key)
+        entry = { path: path }
+        entry[:key] = @s3_prefix ? File.join(@s3_prefix, key) : key
+        @upload_queue << entry
       end
     end
   end
