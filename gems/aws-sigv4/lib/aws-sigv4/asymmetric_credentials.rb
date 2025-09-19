@@ -11,7 +11,6 @@ module Aws
       class << self
         # @return [OpenSSL::PKey::EC, Hash]
         def derive_asymmetric_key(access_key_id, secret_access_key) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-          check_openssl_support!
           label = 'AWS4-ECDSA-P256-SHA256'
           bit_len = 256
           counter = 0x1
@@ -83,16 +82,6 @@ module Aws
             ]
           )
           OpenSSL::PKey::EC.new(asn1.to_der)
-        end
-
-        def check_openssl_support!
-          return true unless defined?(JRUBY_VERSION)
-
-          # See: https://github.com/jruby/jruby-openssl/issues/306
-          # JRuby-openssl < 0.15 does not support OpenSSL::PKey::EC::Point#mul
-          return true if OpenSSL::PKey::EC::Point.instance_methods.include?(:mul)
-
-          raise 'Sigv4a Asymmetric Credential derivation requires jruby-openssl >= 0.15'
         end
       end
     end

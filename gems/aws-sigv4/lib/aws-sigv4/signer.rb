@@ -41,7 +41,7 @@ module Aws
     # The signer requires credentials. You can configure the signer
     # with static credentials:
     #
-    #     signer = Aws::Sigv4::Signer.new(
+    #     signer = Aws::SigV4::Signer.new(
     #       access_key_id: 'akid',
     #       secret_access_key: 'secret',
     #       ...
@@ -49,7 +49,7 @@ module Aws
     #
     # or with a credentials object:
     #
-    #     signer = Aws::Sigv4::Signer.new(
+    #     signer = Aws::SigV4::Signer.new(
     #       credentials: Aws::SigV4::Credentials.new(
     #         access_key_id: 'akid',
     #         secret_access_key: 'secret'
@@ -61,7 +61,7 @@ module Aws
     # If you are using the AWS SDK for Ruby, you can use any of the credential
     # provider classes:
     #
-    #     signer = Aws::Sigv4::Signer.new(
+    #     signer = Aws::SigV4::Signer.new(
     #       credentials_provider: Aws::Core::InstanceProfileCredentials.new,
     #       ...
     #     )
@@ -409,12 +409,14 @@ module Aws
       end
 
       def extract_unsigned_headers(options)
-        unsigned_headers = Set.new(options.fetch(:unsigned_headers, []).map(&:downcase))
-        unsigned_headers << 'expect'
-        unsigned_headers << 'transfer-encoding'
-        unsigned_headers << 'user-agent'
-        unsigned_headers << 'x-amzn-trace-id'
-        unsigned_headers
+        default_headers = %w[
+          expect
+          transfer-encoding
+          user-agent
+          x-amzn-trace-id
+        ]
+        unsigned_headers = options.fetch(:unsigned_headers, []).map(&:downcase)
+        Set.new(unsigned_headers.concat(default_headers))
       end
 
       def fetch_credentials
@@ -431,22 +433,16 @@ module Aws
           !credentials.secret_access_key.nil? && !credentials.secret_access_key.empty?
       end
 
-      def extract_http_method(request)
-        if request[:http_method]
-          request[:http_method].upcase
-        else
-          msg = 'missing required option :http_method'
-          raise ArgumentError, msg
-        end
+      def extract_http_method(options)
+        raise ArgumentError, 'missing required option :http_method' unless options[:http_method]
+
+        options[:http_method].upcase
       end
 
-      def extract_url(request)
-        if request[:url]
-          URI.parse(request[:url].to_s)
-        else
-          msg = 'missing required option :url'
-          raise ArgumentError, msg
-        end
+      def extract_url(options)
+        raise ArgumentError, 'missing required option :url' unless options[:url]
+
+        URI.parse(options[:url].to_s)
       end
 
       def downcase_headers(headers)
@@ -662,8 +658,7 @@ module Aws
         # @api private
         def normalize_path(uri)
           normalized_path = Pathname.new(uri.path).cleanpath.to_s
-          # Pathname is probably not correct to use. Empty paths will
-          # resolve to "." and should be disregarded
+          # Empty paths will resolve to "." and should be disregarded
           normalized_path = '' if normalized_path == '.'
           # Ensure trailing slashes are correctly preserved
           normalized_path << '/' if uri.path.end_with?('/') && !normalized_path.end_with?('/')
