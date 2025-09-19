@@ -27,7 +27,7 @@ module AwsSdkCodeGenerator
       end
 
       def add_dependencies
-        { 'aws-sigv4' => '~> 1' }
+        { 'aws-sigv4' => '2.0.0.pre0' }
       end
     end
   end

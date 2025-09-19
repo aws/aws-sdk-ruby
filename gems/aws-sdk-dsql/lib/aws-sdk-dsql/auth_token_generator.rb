@@ -44,7 +44,7 @@ module Aws
         param_list = Aws::Core::Query::ParamList.new
         param_list.set('Action', action)
 
-        signer = Aws::Sigv4::Signer.new(
+        signer = Aws::SigV4::Signer.new(
           service: 'dsql',
           region: options.fetch(:region),
           credentials: @credentials.identity
@@ -55,9 +55,9 @@ module Aws
           url: "https://#{options.fetch(:endpoint)}/?#{param_list}",
           body: '',
           expires_in: options.fetch(:expires_in, 900)
-        ).to_s
+        )
         # Remove extra scheme for token
-        presigned_url[8..-1]
+        presigned_url.url.to_s[8..-1]
       end
     end
   end

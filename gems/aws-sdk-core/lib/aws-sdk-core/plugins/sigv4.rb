@@ -51,7 +51,7 @@ module Aws
 
           def sign(context) # rubocop:disable Metrics/AbcSize
             reset(context)
-            signer = Aws::Sigv4::Signer.new(
+            signer = Aws::SigV4::Signer.new(
               service: context.config.service.traits['aws.auth#sigv4']['name'],
               # TODO: hardcoded for now to pass protocol tests, update after implementing region resolution
               region: 'us-west-2',
