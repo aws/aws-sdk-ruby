@@ -29,10 +29,17 @@ module Aws
       # @return [String, nil]
       attr_reader :account_id
 
-      # Removing the secret access key from the default inspect string.
+      # @return [Boolean]
+      def set?
+        !@access_key_id.nil? && !@access_key_id.empty? &&
+          !@secret_access_key.nil? && !@secret_access_key.empty?
+      end
+
       # @api private
       def inspect
-        "#<#{self.class.name} access_key_id=#{access_key_id.inspect}>"
+        super
+          .gsub(/@secret_access_key=\S+/, '@secret_access_key=[FILTERED]')
+          .gsub(/@session_token=\S+/, '@session_token=[FILTERED]')
       end
     end
   end

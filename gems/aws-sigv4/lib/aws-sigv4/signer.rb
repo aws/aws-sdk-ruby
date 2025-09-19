@@ -207,7 +207,7 @@ module Aws
       #  `canonical_request`, `content_sha256`, and `signature` attributes are useful
       #  for debugging signature errors returned by AWS.
       def sign_request(options) # rubocop:disable Metrics
-        creds = fetch_credentials
+        creds, _creds_expiration = fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
@@ -315,10 +315,11 @@ module Aws
       #   The `string_to_sign`, `canonical_request`, `content_sha256`, and `signature` attributes are useful
       #   for debugging signature errors returned by AWS.
       def presign_url(options) # rubocop:disable Metrics
-        creds = fetch_credentials
+        creds, creds_expiration = fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
+        expires_in = extract_expires_in(options)
         Signer.normalize_path(url) if @normalize_path
         headers = downcase_headers(options[:headers])
 
@@ -336,7 +337,7 @@ module Aws
         params['X-Amz-Algorithm'] = algorithm
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
-        params['X-Amz-Expires'] = presigned_url_expiration(options, creds, datetime).to_s
+        params['X-Amz-Expires'] = presigned_url_expiration(expires_in, creds_expiration, datetime).to_s
         params['X-Amz-Region-Set'] = @region if @signing_algorithm == 'sigv4a'
         if creds.session_token && !@omit_session_token
           if @signing_algorithm == 'sigv4-s3express'
@@ -420,12 +421,11 @@ module Aws
       end
 
       def fetch_credentials
-        credentials = @credentials_provider.credentials
-        unless credentials_set?(credentials)
+        unless @credentials_provider.set?
           raise MissingCredentialsError, 'unable to sign request without credentials set'
         end
 
-        credentials
+        [@credentials_provider.credentials, @credentials_provider.expiration]
       end
 
       def credentials_set?(credentials)
@@ -625,9 +625,7 @@ module Aws
         end
       end
 
-      def presigned_url_expiration(options, creds, datetime)
-        expires_in = extract_expires_in(options)
-        creds_expiration = creds.expiration
+      def presigned_url_expiration(expires_in, creds_expiration, datetime)
         return expires_in unless creds_expiration
 
         expiration_seconds = (creds_expiration - Time.strptime(datetime, '%Y%m%dT%H%M%S%Z')).to_i

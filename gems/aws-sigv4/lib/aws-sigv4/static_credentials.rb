@@ -17,10 +17,19 @@ module Aws
       #   @option options [Time, nil] :expiration (nil)
       def initialize(options = {})
         @credentials = options[:credentials] || Credentials.new(options)
+        @expiration = options[:expiration]
       end
 
       # @return [Credentials]
       attr_reader :credentials
+
+      # @return [Time, nil]
+      attr_reader :expiration
+
+      # @return [Boolean]
+      def set?
+        !!credentials && credentials.set?
+      end
     end
   end
 end

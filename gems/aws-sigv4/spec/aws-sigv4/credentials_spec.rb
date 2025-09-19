@@ -23,14 +23,12 @@ module Aws
               access_key_id: 'akid',
               secret_access_key: 'secret',
               session_token: 'token',
-              account_id: '123456789012',
-              expiration: expiration
+              account_id: '123456789012'
             )
             expect(creds.access_key_id).to eq('akid')
             expect(creds.secret_access_key).to eq('secret')
             expect(creds.session_token).to eq('token')
             expect(creds.account_id).to eq('123456789012')
-            expect(creds.expiration).to eq(expiration)
           end
         end
 
@@ -40,15 +38,13 @@ module Aws
               access_key_id: 'akid',
               secret_access_key: 'secret',
               session_token: 'token',
-              account_id: '123456789012',
-              expiration: Time.now
+              account_id: '123456789012'
             )
             inspected = creds.inspect
             expect(inspected).to include('@access_key_id="akid"')
             expect(inspected).to include('@secret_access_key=[FILTERED]')
             expect(inspected).to include('@session_token=[FILTERED]')
             expect(inspected).to include('@account_id="123456789012"')
-            expect(inspected).to match(/@expiration=.+>/)
           end
         end
       end

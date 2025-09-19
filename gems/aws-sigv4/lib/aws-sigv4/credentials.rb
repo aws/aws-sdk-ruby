@@ -8,13 +8,11 @@ module Aws
       # @option options [String] :secret_access_key
       # @option options [String, nil] :session_token (nil)
       # @option options [String, nil] :account_id (nil)
-      # @option options [Time, nil] :expiration (nil)
       def initialize(options = {})
         @access_key_id = options.fetch(:access_key_id)
         @secret_access_key = options.fetch(:secret_access_key)
         @session_token = options[:session_token]
         @account_id = options[:account_id]
-        @expiration = options[:expiration]
       end
 
       # @return [String]
@@ -29,8 +27,11 @@ module Aws
       # @return [String, nil]
       attr_reader :account_id
 
-      # @return [Time, nil]
-      attr_reader :expiration
+      # @return [Boolean]
+      def set?
+        !@access_key_id.nil? && !@access_key_id.empty? &&
+          !@secret_access_key.nil? && !@secret_access_key.empty?
+      end
 
       # @api private
       def inspect
