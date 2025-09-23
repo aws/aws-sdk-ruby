@@ -18,7 +18,6 @@ module Aws
 
         describe 'attributes' do
           it 'gets values' do
-            expiration = Time.now
             creds = Credentials.new(
               access_key_id: 'akid',
               secret_access_key: 'secret',

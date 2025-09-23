@@ -3,19 +3,15 @@
 require 'smithy-client/identities/token'
 
 module Aws
-  module SSOOIDC
+  module Core
     # Auto-refreshing token provider that loads a cached access token from disk derived from the AWS SSO device grant
     # authorization flow.
     class SSOOIDCToken
-      include Core::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Raised when SSO Token is invalid
       class InvalidSSOToken < RuntimeError; end
-
-      # @api private
-      SSO_LOGIN_GUIDANCE = 'The SSO session associated with this profile has expired or is otherwise invalid. ' \
-        'To refresh this SSO session run `aws sso login` with the corresponding profile.'
 
       # @option options [required, String] :sso_session The SSO Session used to for fetching this token.
       # @option options [required, String] :sso_region The AWS region where the SSO directory for the given sso_session
@@ -23,13 +19,14 @@ module Aws
       # @option options [SSOOIDC::Client] :client Optional `SSOOIDC::Client`. If not provided, a client will be
       #   constructed.
       def initialize(options = {})
+        raise 'The aws-sdk-ssooidc gem must be required in order to use SSOOIDCToken.' unless defined?(Aws::SSOOIDC)
 
         missing_keys = %i[sso_region sso_session].select { |k| options[k].nil? }
         raise ArgumentError, "Missing required keys: #{missing_keys}" unless missing_keys.empty?
 
         @sso_session = options.delete(:sso_session)
         @sso_region = options.delete(:sso_region)
-        @client = options[:client] || Client.new(options.merge(region: @sso_region, credentials: nil))
+        @client = options[:client] || SSOOIDC::Client.new(options.merge(region: @sso_region, credentials: nil))
 
         super()
       end
@@ -39,26 +36,29 @@ module Aws
 
       private
 
-      def refresh
+      def refresh # rubocop:disable Metrics
         # token is valid and not in refresh window - do not refresh it.
         return if @identity&.expiration && !near_expiration?(sync_expiration_length)
 
         # token may not exist or is out of the expiration window
         # attempt to refresh from disk first (another process/application may have refreshed already)
         token_json = read_cached_token
-        @identity = Smithy::Client::Identities::Token.new(token: token_json['accessToken'], expiration: token_json['expiresAt'])
+        @identity = Smithy::Client::Identities::Token.new(
+          token: token_json['accessToken'],
+          expiration: token_json['expiresAt']
+        )
         return if @identity&.expiration && !near_expiration?(sync_expiration_length)
 
         # The token is expired and needs to be refreshed
         attempt_refresh(token_json) if can_refresh_token?(token_json)
 
-        if !@identity.expiration || @identity.expiration < Time.now
-          # Token is hard expired, raise an exception
-          raise InvalidSSOToken, 'Token is invalid and failed to refresh.'
-        end
+        return unless !@identity.expiration || @identity.expiration < Time.now
+
+        # Token is hard expired, raise an exception
+        raise InvalidSSOToken, 'Token is expired and failed to refresh.'
       end
 
-      def attempt_refresh(token_json)
+      def attempt_refresh(token_json) # rubocop:disable Metrics/AbcSize
         current_time = Time.now
         resp = @client.create_token(
           grant_type: 'refresh_token',
@@ -68,7 +68,10 @@ module Aws
         )
         token_json['accessToken'] = resp.access_token
         token_json['expiresAt'] = current_time + resp.expires_in
-        @identity = Smithy::Client::Identities::Token.new(token: token_json['accessToken'], expiration: token_json['expiresAt'])
+        @identity = Smithy::Client::Identities::Token.new(
+          token: token_json['accessToken'],
+          expiration: token_json['expiresAt']
+        )
 
         if resp.refresh_token
           token_json['refreshToken'] = resp.refresh_token
@@ -77,18 +80,19 @@ module Aws
         end
 
         update_token_cache(token_json)
-      rescue
+      rescue StandardError
         # refresh has failed, continue attempting to use the token if it's not hard expired
       end
 
       def read_cached_token
-        cached_token = JSON.load(File.read(sso_cache_file))
+        cached_token = JSON.load_file(sso_cache_file)
         raise ArgumentError unless cached_token['accessToken'] && cached_token['expiresAt']
 
         cached_token['expiresAt'] = Time.parse(cached_token['expiresAt'])
         cached_token
       rescue Errno::ENOENT, JSON::ParserError, ArgumentError
-        raise InvalidSSOToken, SSO_LOGIN_GUIDANCE
+        raise InvalidSSOToken, 'The SSO session associated with this profile has expired or is otherwise invalid. ' \
+                               'To refresh this SSO session run `aws sso login` with the corresponding profile.'
       end
 
       def update_token_cache(token_json)

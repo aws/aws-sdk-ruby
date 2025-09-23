@@ -3,18 +3,18 @@
 require_relative '../spec_helper'
 
 module Aws
-  module SSOOIDC
+  module Core
     describe SSOOIDCToken do
       let(:client) do
-        Client.new(
+        SSOOIDC::Client.new(
           region: 'us-west-2',
           stub_responses: true
         )
       end
 
       let(:now) { Time.now }
-      let(:in_one_hour) { now + 60 * 60 }
-      let(:one_hour_ago) { now - 60 * 60 }
+      let(:in_one_hour) { now + (60 * 60) }
+      let(:one_hour_ago) { now - (60 * 60) }
 
       let(:expiration) { in_one_hour }
 
@@ -22,7 +22,7 @@ module Aws
 
       let(:cached_token) do
         {
-          'accessToken' =>  access_token,
+          'accessToken' => access_token,
           'expiresAt' => expiration
         }
       end
@@ -33,7 +33,7 @@ module Aws
       let(:sso_opts) do
         {
           sso_session: sso_session,
-          sso_region: sso_region,
+          sso_region: sso_region
         }
       end
 
@@ -42,9 +42,7 @@ module Aws
         allow(Dir).to receive(:home).and_return('HOME')
         path = File.join(Dir.home, '.aws', 'sso', 'cache', "#{sso_session_sha1}.json")
 
-        allow(File).to receive(:read).with(path).and_return(
-          JSON.dump(cached_token)
-        )
+        allow(JSON).to receive(:load_file).with(path).and_return(cached_token)
       end
 
       def expect_token_write_back(sso_session, expected_token)
@@ -54,12 +52,12 @@ module Aws
 
         expect(File).to receive(:write) do |arg1, arg2|
           expect(arg1).to eq(path)
-          expect(JSON.load(arg2)).to eq(expected_token)
+          expect(JSON.parse(arg2)).to eq(expected_token)
         end
       end
 
       it 'constructs an client with passed arguments when not given' do
-        expect(Client).to receive(:new).with({region: sso_region, credentials: nil}).and_return(client)
+        expect(SSOOIDC::Client).to receive(:new).with({ region: sso_region, credentials: nil }).and_return(client)
         mock_token_file(sso_session, cached_token)
         provider = SSOOIDCToken.new(sso_opts)
         expect(provider.client).to be(client)
@@ -70,18 +68,18 @@ module Aws
       end
 
       it 'raises an InvalidSSOToken error when token file is missing' do
-        expect(Client).to receive(:new).with({region: sso_region, credentials: nil}).and_return(client)
+        expect(SSOOIDC::Client).to receive(:new).with({ region: sso_region, credentials: nil }).and_return(client)
         sso_session_sha1 = OpenSSL::Digest::SHA1.hexdigest(sso_session.encode('utf-8'))
         allow(Dir).to receive(:home).and_return('HOME')
         path = File.join(Dir.home, '.aws', 'sso', 'cache', "#{sso_session_sha1}.json")
-        allow(File).to receive(:read).with(path).and_raise(Errno::ENOENT)
+        allow(JSON).to receive(:load_file).with(path).and_raise(Errno::ENOENT)
         expect do
           SSOOIDCToken.new(sso_opts).identity
         end.to raise_error(SSOOIDCToken::InvalidSSOToken)
       end
 
       it 'raises an InvalidSSOCredentials error when token file is missing fields' do
-        mock_token_file(sso_session, {'accessToken' =>  access_token})
+        mock_token_file(sso_session, { 'accessToken' => access_token })
         expect do
           SSOOIDCToken.new(sso_opts).identity
         end.to raise_error(SSOOIDCToken::InvalidSSOToken)
@@ -89,7 +87,7 @@ module Aws
 
       it 'sets the client when passed in and does not create a new one' do
         test_client = client # force construction
-        expect(Client).not_to receive(:new)
+        expect(SSOOIDC::Client).not_to receive(:new)
         mock_token_file(sso_session, cached_token)
         provider = SSOOIDCToken.new(sso_opts.merge(client: test_client))
         expect(provider.client).to be(test_client)
@@ -134,18 +132,18 @@ module Aws
 
         context 'valid token with all fields' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "startUrl": "https://d-123.awsapps.com/start",
-                "region": "us-west-2",
-                "accessToken": "cachedtoken",
-                "expiresAt": "2021-12-25T21:30:00Z",
-                "clientId": "clientid",
-                "clientSecret": "YSBzZWNyZXQ=",
-                "registrationExpiresAt": "2022-12-25T13:30:00Z",
-                "refreshToken": "cachedrefreshtoken"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "startUrl": "https://d-123.awsapps.com/start",
+                  "region": "us-west-2",
+                  "accessToken": "cachedtoken",
+                  "expiresAt": "2021-12-25T21:30:00Z",
+                  "clientId": "clientid",
+                  "clientSecret": "YSBzZWNyZXQ=",
+                  "registrationExpiresAt": "2022-12-25T13:30:00Z",
+                  "refreshToken": "cachedrefreshtoken"
+              }
+            JSON
           end
 
           it 'returns the token' do
@@ -158,12 +156,12 @@ module Aws
 
         context 'minimal valid cached token' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "accessToken": "cachedtoken",
-                "expiresAt": "2021-12-25T21:30:00Z"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "accessToken": "cachedtoken",
+                  "expiresAt": "2021-12-25T21:30:00Z"
+              }
+            JSON
           end
 
           it 'returns the token' do
@@ -176,12 +174,12 @@ module Aws
 
         context 'minimal expired cached token' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "accessToken": "cachedtoken",
-                "expiresAt": "2021-12-25T13:00:00Z"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "accessToken": "cachedtoken",
+                  "expiresAt": "2021-12-25T13:00:00Z"
+              }
+            JSON
           end
 
           it 'raises an exception' do
@@ -195,11 +193,11 @@ module Aws
 
         context 'Token missing the expiresAt field' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "accessToken": "cachedtoken"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "accessToken": "cachedtoken"
+              }
+            JSON
           end
 
           it 'raises an exception' do
@@ -213,11 +211,11 @@ module Aws
 
         context 'Token missing the accessToken field' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "expiresAt": "2021-12-25T21:30:00Z"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "expiresAt": "2021-12-25T21:30:00Z"
+              }
+            JSON
           end
 
           it 'raises an exception' do
@@ -231,50 +229,53 @@ module Aws
 
         context 'Expired token refresh with refresh token' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "startUrl": "https://d-123.awsapps.com/start",
-                "region": "us-west-2",
-                "accessToken": "cachedtoken",
-                "expiresAt": "2021-12-25T13:00:00Z",
-                "clientId": "clientid",
-                "clientSecret": "YSBzZWNyZXQ=",
-                "registrationExpiresAt": "2022-12-25T13:30:00Z",
-                "refreshToken": "cachedrefreshtoken"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "startUrl": "https://d-123.awsapps.com/start",
+                  "region": "us-west-2",
+                  "accessToken": "cachedtoken",
+                  "expiresAt": "2021-12-25T13:00:00Z",
+                  "clientId": "clientid",
+                  "clientSecret": "YSBzZWNyZXQ=",
+                  "registrationExpiresAt": "2022-12-25T13:30:00Z",
+                  "refreshToken": "cachedrefreshtoken"
+              }
+            JSON
           end
 
           let(:expected_token_write_back) do
-            JSON.load(<<~JSON)
-            {
-                "startUrl": "https://d-123.awsapps.com/start",
-                "region": "us-west-2",
-                "accessToken": "newtoken",
-                "expiresAt": "2021-12-25T21:30:00Z",
-                "clientId": "clientid",
-                "clientSecret": "YSBzZWNyZXQ=",
-                "registrationExpiresAt": "2022-12-25T13:30:00Z",
-                "refreshToken": "newrefreshtoken"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "startUrl": "https://d-123.awsapps.com/start",
+                  "region": "us-west-2",
+                  "accessToken": "newtoken",
+                  "expiresAt": "2021-12-25T21:30:00Z",
+                  "clientId": "clientid",
+                  "clientSecret": "YSBzZWNyZXQ=",
+                  "registrationExpiresAt": "2022-12-25T13:30:00Z",
+                  "refreshToken": "newrefreshtoken"
+              }
+            JSON
           end
 
           it 'refreshes the token' do
-            mock_token_file(sso_session, cached_token)
+            client.stub_responses(
+              :create_token,
+              token_type: 'Bearer',
+              access_token: 'newtoken',
+              expires_in: 28_800,
+              refresh_token: 'newrefreshtoken'
+            )
             expect(client).to receive(:create_token).with(
               grant_type: 'refresh_token',
               client_id: cached_token['clientId'],
               client_secret: cached_token['clientSecret'],
               refresh_token: cached_token['refreshToken']
-            ).and_return(double('Response', token_type: 'Bearer',
-                                access_token: 'newtoken', expires_in: 28800,
-                                refresh_token: 'newrefreshtoken'))
-
+            ).and_call_original
+            mock_token_file(sso_session, cached_token)
             expect_token_write_back(sso_session, expected_token_write_back)
 
             provider = SSOOIDCToken.new(sso_opts)
-
             expect(provider.identity.token).to eq('newtoken')
             expect(provider.identity.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
           end
@@ -282,48 +283,52 @@ module Aws
 
         context 'Expired token refresh without new refresh token' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "startUrl": "https://d-123.awsapps.com/start",
-                "region": "us-west-2",
-                "accessToken": "cachedtoken",
-                "expiresAt": "2021-12-25T13:00:00Z",
-                "clientId": "clientid",
-                "clientSecret": "YSBzZWNyZXQ=",
-                "registrationExpiresAt": "2022-12-25T13:30:00Z",
-                "refreshToken": "cachedrefreshtoken"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "startUrl": "https://d-123.awsapps.com/start",
+                  "region": "us-west-2",
+                  "accessToken": "cachedtoken",
+                  "expiresAt": "2021-12-25T13:00:00Z",
+                  "clientId": "clientid",
+                  "clientSecret": "YSBzZWNyZXQ=",
+                  "registrationExpiresAt": "2022-12-25T13:30:00Z",
+                  "refreshToken": "cachedrefreshtoken"
+              }
+            JSON
           end
 
           let(:expected_token_write_back) do
-            JSON.load(<<~JSON)
-            {
-                "startUrl": "https://d-123.awsapps.com/start",
-                "region": "us-west-2",
-                "accessToken": "newtoken",
-                "expiresAt": "2021-12-25T21:30:00Z",
-                "clientId": "clientid",
-                "clientSecret": "YSBzZWNyZXQ=",
-                "registrationExpiresAt": "2022-12-25T13:30:00Z"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "startUrl": "https://d-123.awsapps.com/start",
+                  "region": "us-west-2",
+                  "accessToken": "newtoken",
+                  "expiresAt": "2021-12-25T21:30:00Z",
+                  "clientId": "clientid",
+                  "clientSecret": "YSBzZWNyZXQ=",
+                  "registrationExpiresAt": "2022-12-25T13:30:00Z"
+              }
+            JSON
           end
 
           it 'refreshes the token' do
-            mock_token_file(sso_session, cached_token)
+            client.stub_responses(
+              :create_token,
+              token_type: 'Bearer',
+              access_token: 'newtoken',
+              expires_in: 28_800,
+              refresh_token: nil
+            )
             expect(client).to receive(:create_token).with(
               grant_type: 'refresh_token',
               client_id: cached_token['clientId'],
               client_secret: cached_token['clientSecret'],
               refresh_token: cached_token['refreshToken']
-            ).and_return(double('Response', token_type: 'Bearer',
-                                access_token: 'newtoken', expires_in: 28800, refresh_token: nil))
-
+            ).and_call_original
+            mock_token_file(sso_session, cached_token)
             expect_token_write_back(sso_session, expected_token_write_back)
 
             provider = SSOOIDCToken.new(sso_opts)
-
             expect(provider.identity.token).to eq('newtoken')
             expect(provider.identity.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
           end
@@ -331,18 +336,18 @@ module Aws
 
         context 'Expired token and expired client registration' do
           let(:cached_token) do
-            JSON.load(<<~JSON)
-            {
-                "startUrl": "https://d-123.awsapps.com/start",
-                "region": "us-west-2",
-                "accessToken": "cachedtoken",
-                "expiresAt": "2021-10-25T13:00:00Z",
-                "clientId": "clientid",
-                "clientSecret": "YSBzZWNyZXQ=",
-                "registrationExpiresAt": "2021-11-25T13:30:00Z",
-                "refreshToken": "cachedrefreshtoken"
-            }
-          JSON
+            JSON.parse(<<~JSON)
+              {
+                  "startUrl": "https://d-123.awsapps.com/start",
+                  "region": "us-west-2",
+                  "accessToken": "cachedtoken",
+                  "expiresAt": "2021-10-25T13:00:00Z",
+                  "clientId": "clientid",
+                  "clientSecret": "YSBzZWNyZXQ=",
+                  "registrationExpiresAt": "2021-11-25T13:30:00Z",
+                  "refreshToken": "cachedrefreshtoken"
+              }
+            JSON
           end
 
           it 'raises an exception' do
