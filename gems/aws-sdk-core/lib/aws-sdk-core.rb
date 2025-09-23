@@ -23,6 +23,8 @@ require_relative 'aws-sdk-core/default_credentials'
 require_relative 'aws-sdk-core/container_credentials'
 require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/process_credentials'
+require_relative 'aws-sdk-core/sso_credentials'
+require_relative 'aws-sdk-core/ssooidc_token'
 require_relative 'aws-sdk-core/static_credentials'
 
 module Aws

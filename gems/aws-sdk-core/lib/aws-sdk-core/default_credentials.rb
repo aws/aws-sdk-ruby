@@ -111,7 +111,7 @@ module Aws
         sso_session = Aws::Core::SharedConfig.sso_session(profile, profile_config['sso_session'])
         validate_sso_conflicts(profile, profile_config, sso_session)
 
-        creds = Aws::SSO::SSOCredentials.new(
+        creds = SSOCredentials.new(
           sso_session: profile_config['sso_session'],
           sso_account_id: profile_config['sso_account_id'],
           sso_role_name: profile_config['sso_role_name'],
@@ -122,8 +122,7 @@ module Aws
       end
 
       def valid_sso_inputs?(profile_config)
-        # SSO and SSOOIDC gems must be required
-        return false unless defined?(Aws::SSO::SSOCredentials) && defined?(Aws::SSOOIDC::SSOOIDCToken)
+        return false unless defined?(Aws::SSO) && defined?(Aws::SSOOIDC)
 
         return false unless profile_config && profile_config['sso_session'] &&
                             profile_config['sso_account_id'] && profile_config['sso_role_name']
