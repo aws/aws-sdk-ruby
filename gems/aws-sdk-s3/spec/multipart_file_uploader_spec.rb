@@ -85,7 +85,6 @@ module Aws
         end
 
         it 'reports progress for multipart uploads' do
-          allow(Thread).to receive(:new).and_yield.and_return(double(value: nil))
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
           expect(client).to receive(:upload_part).exactly(24).times do |args|
@@ -127,10 +126,6 @@ module Aws
         end
 
         it 'reports when it is unable to abort a failed multipart upload' do
-          allow(Thread).to receive(:new) do |_, &block|
-            double(value: block.call)
-          end
-
           client.stub_responses(
             :upload_part,
             [

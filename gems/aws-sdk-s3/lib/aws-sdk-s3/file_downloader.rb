@@ -43,7 +43,7 @@ module Aws
           when 'get_range'
             raise ArgumentError, 'In get_range mode, :chunk_size must be provided' unless @chunk_size
 
-            resp = @client.head_object(@params)
+            resp = @client.head_object(params)
             multithreaded_get_by_ranges(resp.content_length, resp.etag, params)
           else
             raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
