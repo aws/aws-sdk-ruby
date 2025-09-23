@@ -143,9 +143,9 @@ module Aws
           subject.download(path, range_params.merge(chunk_size: one_meg))
         end
 
-        context 'legacy is true' do
+        context 'enable_direct_writes is set true' do
           it 'writes directly to the destination path' do
-            downloader = FileDownloader.new(client: client, legacy: true)
+            downloader = FileDownloader.new(client: client, enable_direct_writes: true)
             client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
             temp_file = Tempfile.new
 

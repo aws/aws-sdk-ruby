@@ -14,7 +14,7 @@ module Aws
 
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @legacy = options[:legacy] || false
+        @enable_direct_writes = options[:enable_direct_writes] || false
       end
 
       # @return [Client]
@@ -124,7 +124,7 @@ module Aws
       def download_in_threads(pending, total_size)
         threads = []
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
-        unless @legacy || [File, Tempfile].include?(@destination.class)
+        unless @enable_direct_writes || [File, Tempfile].include?(@destination.class)
           @temp_path = "#{@destination}.s3tmp.#{SecureRandom.alphanumeric(8)}"
         end
         @thread_count.times do
