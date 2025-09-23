@@ -533,7 +533,7 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, options = {})
-        downloader = FileDownloader.new(client: client)
+        downloader = FileDownloader.new(client: client, legacy: true)
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           downloader.download(destination, options.merge(bucket: bucket_name, key: key))
         end
