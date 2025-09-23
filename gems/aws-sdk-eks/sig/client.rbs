@@ -348,7 +348,19 @@ module Aws
                                 update_strategy: ("DEFAULT" | "MINIMAL")?
                               },
                               ?node_repair_config: {
-                                enabled: bool?
+                                enabled: bool?,
+                                max_unhealthy_node_threshold_count: ::Integer?,
+                                max_unhealthy_node_threshold_percentage: ::Integer?,
+                                max_parallel_nodes_repaired_count: ::Integer?,
+                                max_parallel_nodes_repaired_percentage: ::Integer?,
+                                node_repair_config_overrides: Array[
+                                  {
+                                    node_monitoring_condition: ::String?,
+                                    node_unhealthy_reason: ::String?,
+                                    min_repair_wait_time_mins: ::Integer?,
+                                    repair_action: ("Replace" | "Reboot" | "NoAction")?
+                                  },
+                                ]?
                               },
                               ?capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK"),
                               ?version: ::String,
@@ -1049,7 +1061,19 @@ module Aws
                                        update_strategy: ("DEFAULT" | "MINIMAL")?
                                      },
                                      ?node_repair_config: {
-                                       enabled: bool?
+                                       enabled: bool?,
+                                       max_unhealthy_node_threshold_count: ::Integer?,
+                                       max_unhealthy_node_threshold_percentage: ::Integer?,
+                                       max_parallel_nodes_repaired_count: ::Integer?,
+                                       max_parallel_nodes_repaired_percentage: ::Integer?,
+                                       node_repair_config_overrides: Array[
+                                         {
+                                           node_monitoring_condition: ::String?,
+                                           node_unhealthy_reason: ::String?,
+                                           min_repair_wait_time_mins: ::Integer?,
+                                           repair_action: ("Replace" | "Reboot" | "NoAction")?
+                                         },
+                                       ]?
                                      },
                                      ?client_request_token: ::String
                                    ) -> _UpdateNodegroupConfigResponseSuccess

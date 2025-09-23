@@ -49,12 +49,13 @@ module Aws::LicenseManagerUserSubscriptions
   end
   autoload :Client, 'aws-sdk-licensemanagerusersubscriptions/client'
   autoload :Errors, 'aws-sdk-licensemanagerusersubscriptions/errors'
+  autoload :Waiters, 'aws-sdk-licensemanagerusersubscriptions/waiters'
   autoload :Resource, 'aws-sdk-licensemanagerusersubscriptions/resource'
   autoload :EndpointParameters, 'aws-sdk-licensemanagerusersubscriptions/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-licensemanagerusersubscriptions/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-licensemanagerusersubscriptions/endpoints'
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
 

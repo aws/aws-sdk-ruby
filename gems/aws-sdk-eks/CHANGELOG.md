@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2025-09-22)
+------------------
+
+* Feature - Adds support for RepairConfig overrides and configurations in EKS Managed Node Groups.
+
 1.147.0 (2025-08-27)
 ------------------
 

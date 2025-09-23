@@ -14,26 +14,27 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class ActiveDirectoryIdentityProvider
+      attr_accessor directory_id: ::String
       attr_accessor active_directory_settings: Types::ActiveDirectorySettings
       attr_accessor active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")
-      attr_accessor directory_id: ::String
+      attr_accessor is_shared_active_directory: bool
       SENSITIVE: []
     end
 
     class ActiveDirectorySettings
-      attr_accessor domain_credentials_provider: Types::CredentialsProvider
-      attr_accessor domain_ipv_4_list: ::Array[::String]
       attr_accessor domain_name: ::String
+      attr_accessor domain_ipv_4_list: ::Array[::String]
+      attr_accessor domain_credentials_provider: Types::CredentialsProvider
       attr_accessor domain_network_settings: Types::DomainNetworkSettings
       SENSITIVE: []
     end
 
     class AssociateUserRequest
-      attr_accessor domain: ::String
-      attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor instance_id: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor username: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor domain: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
     end
 
@@ -84,8 +85,8 @@ module Aws::LicenseManagerUserSubscriptions
 
     class DeregisterIdentityProviderRequest
       attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor identity_provider_arn: ::String
       attr_accessor product: ::String
+      attr_accessor identity_provider_arn: ::String
       SENSITIVE: []
     end
 
@@ -95,11 +96,11 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class DisassociateUserRequest
-      attr_accessor domain: ::String
-      attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor instance_id: ::String
-      attr_accessor instance_user_arn: ::String
       attr_accessor username: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor instance_user_arn: ::String
+      attr_accessor domain: ::String
       SENSITIVE: []
     end
 
@@ -132,34 +133,37 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class IdentityProviderSummary
-      attr_accessor failure_message: ::String
       attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor identity_provider_arn: ::String
-      attr_accessor product: ::String
       attr_accessor settings: Types::Settings
+      attr_accessor product: ::String
       attr_accessor status: ::String
+      attr_accessor identity_provider_arn: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor owner_account_id: ::String
       SENSITIVE: []
     end
 
     class InstanceSummary
       attr_accessor instance_id: ::String
-      attr_accessor last_status_check_date: ::String
-      attr_accessor products: ::Array[::String]
       attr_accessor status: ::String
+      attr_accessor products: ::Array[::String]
+      attr_accessor last_status_check_date: ::String
       attr_accessor status_message: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
       SENSITIVE: []
     end
 
     class InstanceUserSummary
+      attr_accessor username: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor status: ::String
+      attr_accessor instance_user_arn: ::String
+      attr_accessor status_message: ::String
+      attr_accessor domain: ::String
       attr_accessor association_date: ::String
       attr_accessor disassociation_date: ::String
-      attr_accessor domain: ::String
-      attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor instance_id: ::String
-      attr_accessor instance_user_arn: ::String
-      attr_accessor status: ::String
-      attr_accessor status_message: ::String
-      attr_accessor username: ::String
       SENSITIVE: []
     end
 
@@ -169,34 +173,34 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class LicenseServer
+      attr_accessor provisioning_status: ("PROVISIONING" | "PROVISIONING_FAILED" | "PROVISIONED" | "DELETING" | "DELETION_FAILED" | "DELETED")
       attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "NOT_APPLICABLE")
       attr_accessor ipv_4_address: ::String
-      attr_accessor provisioning_status: ("PROVISIONING" | "PROVISIONING_FAILED" | "PROVISIONED" | "DELETING" | "DELETION_FAILED" | "DELETED")
       SENSITIVE: []
     end
 
     class LicenseServerEndpoint
-      attr_accessor creation_time: ::Time
       attr_accessor identity_provider_arn: ::String
-      attr_accessor license_server_endpoint_arn: ::String
+      attr_accessor server_type: ("RDS_SAL")
+      attr_accessor server_endpoint: Types::ServerEndpoint
+      attr_accessor status_message: ::String
       attr_accessor license_server_endpoint_id: ::String
+      attr_accessor license_server_endpoint_arn: ::String
       attr_accessor license_server_endpoint_provisioning_status: ("PROVISIONING" | "PROVISIONING_FAILED" | "PROVISIONED" | "DELETING" | "DELETION_FAILED" | "DELETED")
       attr_accessor license_servers: ::Array[Types::LicenseServer]
-      attr_accessor server_endpoint: Types::ServerEndpoint
-      attr_accessor server_type: ("RDS_SAL")
-      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
       SENSITIVE: []
     end
 
     class LicenseServerSettings
-      attr_accessor server_settings: Types::ServerSettings
       attr_accessor server_type: ("RDS_SAL")
+      attr_accessor server_settings: Types::ServerSettings
       SENSITIVE: []
     end
 
     class ListIdentityProvidersRequest
-      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -208,9 +212,9 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class ListInstancesRequest
-      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
       SENSITIVE: []
     end
 
@@ -221,8 +225,8 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class ListLicenseServerEndpointsRequest
-      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -234,17 +238,17 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class ListProductSubscriptionsRequest
-      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor product: ::String
       attr_accessor identity_provider: Types::IdentityProvider
       attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor next_token: ::String
-      attr_accessor product: ::String
       SENSITIVE: []
     end
 
     class ListProductSubscriptionsResponse
-      attr_accessor next_token: ::String
       attr_accessor product_user_summaries: ::Array[Types::ProductUserSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -259,10 +263,10 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class ListUserAssociationsRequest
-      attr_accessor filters: ::Array[Types::Filter]
-      attr_accessor identity_provider: Types::IdentityProvider
       attr_accessor instance_id: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
       attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -274,15 +278,15 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class ProductUserSummary
-      attr_accessor domain: ::String
-      attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor product: ::String
-      attr_accessor product_user_arn: ::String
-      attr_accessor status: ::String
-      attr_accessor status_message: ::String
-      attr_accessor subscription_end_date: ::String
-      attr_accessor subscription_start_date: ::String
       attr_accessor username: ::String
+      attr_accessor product: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor status: ::String
+      attr_accessor product_user_arn: ::String
+      attr_accessor status_message: ::String
+      attr_accessor domain: ::String
+      attr_accessor subscription_start_date: ::String
+      attr_accessor subscription_end_date: ::String
       SENSITIVE: []
     end
 
@@ -336,17 +340,17 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class Settings
-      attr_accessor security_group_id: ::String
       attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_id: ::String
       SENSITIVE: []
     end
 
     class StartProductSubscriptionRequest
-      attr_accessor domain: ::String
+      attr_accessor username: ::String
       attr_accessor identity_provider: Types::IdentityProvider
       attr_accessor product: ::String
+      attr_accessor domain: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor username: ::String
       SENSITIVE: [:tags]
     end
 
@@ -356,11 +360,11 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     class StopProductSubscriptionRequest
-      attr_accessor domain: ::String
+      attr_accessor username: ::String
       attr_accessor identity_provider: Types::IdentityProvider
       attr_accessor product: ::String
       attr_accessor product_user_arn: ::String
-      attr_accessor username: ::String
+      attr_accessor domain: ::String
       SENSITIVE: []
     end
 
@@ -394,8 +398,8 @@ module Aws::LicenseManagerUserSubscriptions
 
     class UpdateIdentityProviderSettingsRequest
       attr_accessor identity_provider: Types::IdentityProvider
-      attr_accessor identity_provider_arn: ::String
       attr_accessor product: ::String
+      attr_accessor identity_provider_arn: ::String
       attr_accessor update_settings: Types::UpdateSettings
       SENSITIVE: []
     end

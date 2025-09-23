@@ -436,6 +436,7 @@ module Aws::MediaLive
     H265Deblocking = Shapes::StringShape.new(name: 'H265Deblocking')
     H265FilterSettings = Shapes::StructureShape.new(name: 'H265FilterSettings')
     H265FlickerAq = Shapes::StringShape.new(name: 'H265FlickerAq')
+    H265GopBReference = Shapes::StringShape.new(name: 'H265GopBReference')
     H265GopSizeUnits = Shapes::StringShape.new(name: 'H265GopSizeUnits')
     H265Level = Shapes::StringShape.new(name: 'H265Level')
     H265LookAheadRateControl = Shapes::StringShape.new(name: 'H265LookAheadRateControl')
@@ -446,6 +447,7 @@ module Aws::MediaLive
     H265ScanType = Shapes::StringShape.new(name: 'H265ScanType')
     H265SceneChangeDetect = Shapes::StringShape.new(name: 'H265SceneChangeDetect')
     H265Settings = Shapes::StructureShape.new(name: 'H265Settings')
+    H265SubGopLength = Shapes::StringShape.new(name: 'H265SubGopLength')
     H265Tier = Shapes::StringShape.new(name: 'H265Tier')
     H265TilePadding = Shapes::StringShape.new(name: 'H265TilePadding')
     H265TimecodeInsertionBehavior = Shapes::StringShape.new(name: 'H265TimecodeInsertionBehavior')
@@ -1057,14 +1059,17 @@ module Aws::MediaLive
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max2000 = Shapes::IntegerShape.new(name: '__integerMin0Max2000')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
+    __integerMin0Max3 = Shapes::IntegerShape.new(name: '__integerMin0Max3')
     __integerMin0Max30 = Shapes::IntegerShape.new(name: '__integerMin0Max30')
     __integerMin0Max32768 = Shapes::IntegerShape.new(name: '__integerMin0Max32768')
     __integerMin0Max3600 = Shapes::IntegerShape.new(name: '__integerMin0Max3600')
+    __integerMin0Max40000000 = Shapes::IntegerShape.new(name: '__integerMin0Max40000000')
     __integerMin0Max500 = Shapes::IntegerShape.new(name: '__integerMin0Max500')
     __integerMin0Max600 = Shapes::IntegerShape.new(name: '__integerMin0Max600')
     __integerMin0Max65535 = Shapes::IntegerShape.new(name: '__integerMin0Max65535')
     __integerMin0Max65536 = Shapes::IntegerShape.new(name: '__integerMin0Max65536')
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
+    __integerMin0Max8000000 = Shapes::IntegerShape.new(name: '__integerMin0Max8000000')
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin100 = Shapes::IntegerShape.new(name: '__integerMin100')
@@ -1416,6 +1421,7 @@ module Aws::MediaLive
     Av1Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max12000000, location_name: "bitrate"))
     Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
+    Av1Settings.add_member(:min_bitrate, Shapes::ShapeRef.new(shape: __integerMin0Max8000000, location_name: "minBitrate"))
     Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
@@ -3166,6 +3172,7 @@ module Aws::MediaLive
     H264Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H264TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
     H264Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     H264Settings.add_member(:min_qp, Shapes::ShapeRef.new(shape: __integerMin1Max51, location_name: "minQp"))
+    H264Settings.add_member(:min_bitrate, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "minBitrate"))
     H264Settings.struct_class = Types::H264Settings
 
     H265ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
@@ -3217,6 +3224,10 @@ module Aws::MediaLive
     H265Settings.add_member(:treeblock_size, Shapes::ShapeRef.new(shape: H265TreeblockSize, location_name: "treeblockSize"))
     H265Settings.add_member(:min_qp, Shapes::ShapeRef.new(shape: __integerMin1Max51, location_name: "minQp"))
     H265Settings.add_member(:deblocking, Shapes::ShapeRef.new(shape: H265Deblocking, location_name: "deblocking"))
+    H265Settings.add_member(:gop_b_reference, Shapes::ShapeRef.new(shape: H265GopBReference, location_name: "gopBReference"))
+    H265Settings.add_member(:gop_num_b_frames, Shapes::ShapeRef.new(shape: __integerMin0Max3, location_name: "gopNumBFrames"))
+    H265Settings.add_member(:min_bitrate, Shapes::ShapeRef.new(shape: __integerMin0Max40000000, location_name: "minBitrate"))
+    H265Settings.add_member(:subgop_length, Shapes::ShapeRef.new(shape: H265SubGopLength, location_name: "subgopLength"))
     H265Settings.struct_class = Types::H265Settings
 
     Hdr10Settings.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxCll"))

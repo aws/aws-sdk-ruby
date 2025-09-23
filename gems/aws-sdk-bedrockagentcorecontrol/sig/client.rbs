@@ -98,7 +98,11 @@ module Aws
                                   },
                                   role_arn: ::String,
                                   network_configuration: {
-                                    network_mode: ("PUBLIC")
+                                    network_mode: ("PUBLIC" | "VPC"),
+                                    network_mode_config: {
+                                      security_groups: Array[::String],
+                                      subnets: Array[::String]
+                                    }?
                                   },
                                   ?protocol_configuration: {
                                     server_protocol: ("MCP" | "HTTP")
@@ -111,7 +115,11 @@ module Aws
                                       allowed_audience: Array[::String]?,
                                       allowed_clients: Array[::String]?
                                     }?
-                                  }
+                                  },
+                                  ?request_header_configuration: {
+                                    request_header_allowlist: Array[::String]?
+                                  },
+                                  ?tags: Hash[::String, ::String]
                                 ) -> _CreateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeResponseSuccess
 
@@ -129,7 +137,8 @@ module Aws
                                            name: ::String,
                                            ?agent_runtime_version: ::String,
                                            ?description: ::String,
-                                           ?client_token: ::String
+                                           ?client_token: ::String,
+                                           ?tags: Hash[::String, ::String]
                                          ) -> _CreateAgentRuntimeEndpointResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeEndpointResponseSuccess
 
@@ -159,7 +168,11 @@ module Aws
                             ?description: ::String,
                             ?execution_role_arn: ::String,
                             network_configuration: {
-                              network_mode: ("PUBLIC")
+                              network_mode: ("PUBLIC" | "VPC"),
+                              vpc_config: {
+                                security_groups: Array[::String],
+                                subnets: Array[::String]
+                              }?
                             },
                             ?recording: {
                               enabled: bool?,
@@ -168,7 +181,8 @@ module Aws
                                 prefix: ::String
                               }?
                             },
-                            ?client_token: ::String
+                            ?client_token: ::String,
+                            ?tags: Hash[::String, ::String]
                           ) -> _CreateBrowserResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserResponseSuccess
 
@@ -185,9 +199,14 @@ module Aws
                                      ?description: ::String,
                                      ?execution_role_arn: ::String,
                                      network_configuration: {
-                                       network_mode: ("PUBLIC" | "SANDBOX")
+                                       network_mode: ("PUBLIC" | "SANDBOX" | "VPC"),
+                                       vpc_config: {
+                                         security_groups: Array[::String],
+                                         subnets: Array[::String]
+                                       }?
                                      },
-                                     ?client_token: ::String
+                                     ?client_token: ::String,
+                                     ?tags: Hash[::String, ::String]
                                    ) -> _CreateCodeInterpreterResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeInterpreterResponseSuccess
 
@@ -577,11 +596,12 @@ module Aws
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def role_arn: () -> ::String
-        def agent_runtime_artifact: () -> Types::AgentArtifact
+        def agent_runtime_artifact: () -> Types::AgentRuntimeArtifact
         def network_configuration: () -> Types::NetworkConfiguration
         def protocol_configuration: () -> Types::ProtocolConfiguration
         def environment_variables: () -> ::Hash[::String, ::String]
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def request_header_configuration: () -> Types::RequestHeaderConfiguration
         def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
@@ -636,6 +656,7 @@ module Aws
         def network_configuration: () -> Types::BrowserNetworkConfiguration
         def recording: () -> Types::RecordingConfig
         def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def failure_reason: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
       end
@@ -654,6 +675,7 @@ module Aws
         def execution_role_arn: () -> ::String
         def network_configuration: () -> Types::CodeInterpreterNetworkConfiguration
         def status: () -> ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def failure_reason: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
       end
@@ -763,7 +785,7 @@ module Aws
 
       interface _ListAgentRuntimeEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimeEndpointsResponse]
-        def runtime_endpoints: () -> ::Array[Types::AgentEndpoint]
+        def runtime_endpoints: () -> ::Array[Types::AgentRuntimeEndpoint]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_runtime_endpoints-instance_method
@@ -776,7 +798,7 @@ module Aws
 
       interface _ListAgentRuntimeVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimeVersionsResponse]
-        def agent_runtimes: () -> ::Array[Types::Agent]
+        def agent_runtimes: () -> ::Array[Types::AgentRuntime]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_runtime_versions-instance_method
@@ -789,7 +811,7 @@ module Aws
 
       interface _ListAgentRuntimesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimesResponse]
-        def agent_runtimes: () -> ::Array[Types::Agent]
+        def agent_runtimes: () -> ::Array[Types::AgentRuntime]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_runtimes-instance_method
@@ -886,6 +908,16 @@ module Aws
                                              ) -> _ListOauth2CredentialProvidersResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOauth2CredentialProvidersResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _ListWorkloadIdentitiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadIdentitiesResponse]
         def workload_identities: () -> ::Array[Types::WorkloadIdentityType]
@@ -914,6 +946,26 @@ module Aws
                                ) -> _SetTokenVaultCMKResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTokenVaultCMKResponseSuccess
 
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
       interface _UpdateAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentRuntimeResponse]
         def agent_runtime_arn: () -> ::String
@@ -935,7 +987,11 @@ module Aws
                                   },
                                   role_arn: ::String,
                                   network_configuration: {
-                                    network_mode: ("PUBLIC")
+                                    network_mode: ("PUBLIC" | "VPC"),
+                                    network_mode_config: {
+                                      security_groups: Array[::String],
+                                      subnets: Array[::String]
+                                    }?
                                   },
                                   ?protocol_configuration: {
                                     server_protocol: ("MCP" | "HTTP")
@@ -948,6 +1004,9 @@ module Aws
                                       allowed_audience: Array[::String]?,
                                       allowed_clients: Array[::String]?
                                     }?
+                                  },
+                                  ?request_header_configuration: {
+                                    request_header_allowlist: Array[::String]?
                                   }
                                 ) -> _UpdateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeResponseSuccess

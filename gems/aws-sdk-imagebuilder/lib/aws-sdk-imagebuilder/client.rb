@@ -3365,7 +3365,7 @@ module Aws::Imagebuilder
     # Returns the list of component build versions for the specified
     # component version Amazon Resource Name (ARN).
     #
-    # @option params [required, String] :component_version_arn
+    # @option params [String] :component_version_arn
     #   The component version Amazon Resource Name (ARN) whose versions you
     #   want to list.
     #
@@ -3387,7 +3387,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_component_build_versions({
-    #     component_version_arn: "ComponentVersionArn", # required
+    #     component_version_arn: "ComponentVersionArn",
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -3655,7 +3655,7 @@ module Aws::Imagebuilder
 
     # Returns a list of image build versions.
     #
-    # @option params [required, String] :image_version_arn
+    # @option params [String] :image_version_arn
     #   The Amazon Resource Name (ARN) of the image whose build versions you
     #   want to retrieve.
     #
@@ -3690,7 +3690,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_build_versions({
-    #     image_version_arn: "ImageVersionArn", # required
+    #     image_version_arn: "ImageVersionArn",
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -4639,7 +4639,7 @@ module Aws::Imagebuilder
 
     # Returns a list of build versions for a specific workflow resource.
     #
-    # @option params [required, String] :workflow_version_arn
+    # @option params [String] :workflow_version_arn
     #   The Amazon Resource Name (ARN) of the workflow resource for which to
     #   get a list of build versions.
     #
@@ -4660,7 +4660,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_workflow_build_versions({
-    #     workflow_version_arn: "WorkflowWildcardVersionArn", # required
+    #     workflow_version_arn: "WorkflowWildcardVersionArn",
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -5827,7 +5827,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

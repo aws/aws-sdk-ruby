@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2025-09-19)
+------------------
+
+* Feature - Model whitespace change - no client difference
+
 1.35.0 (2025-08-26)
 ------------------
 

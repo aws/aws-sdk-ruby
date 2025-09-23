@@ -504,6 +504,10 @@ module Aws::Batch
     #   role with the `spotIamFleetRole` parameter. For more information,
     #   see [Amazon EC2 spot fleet role][2] in the *Batch User Guide*.
     #
+    #   <note markdown="1"> Multi-node parallel jobs aren't supported on Spot Instances.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
@@ -2415,6 +2419,11 @@ module Aws::Batch
     # @!attribute [rw] eks_configuration
     #   The details for the Amazon EKS cluster that supports the compute
     #   environment.
+    #
+    #   <note markdown="1"> To create a compute environment that uses EKS resources, the caller
+    #   must have permissions to call `eks:DescribeCluster`.
+    #
+    #    </note>
     #   @return [Types::EksConfiguration]
     #
     # @!attribute [rw] context
@@ -3562,19 +3571,28 @@ module Aws::Batch
     #     latest Amazon ECS optimized AMI for that image type that's
     #     supported by Batch is used.
     #
+    #     Amazon Web Services will end support for Amazon ECS optimized
+    #     AL2-optimized and AL2-accelerated AMIs. Starting in January 2026,
+    #     Batch will change the default AMI for new Amazon ECS compute
+    #     environments from Amazon Linux 2 to Amazon Linux 2023. We
+    #     recommend migrating Batch Amazon ECS compute environments to
+    #     Amazon Linux 2023 to maintain optimal performance and security.
+    #     For more information on upgrading from AL2 to AL2023, see [How to
+    #     migrate from ECS AL2 to ECS AL2023][2] in the *Batch User Guide*.
+    #
     #     ECS\_AL2
     #
     #     : [Amazon Linux 2][1]: Default for all non-GPU instance families.
     #
     #     ECS\_AL2\_NVIDIA
     #
-    #     : [Amazon Linux 2 (GPU)][2]: Default for all GPU instance families
+    #     : [Amazon Linux 2 (GPU)][3]: Default for all GPU instance families
     #       (for example `P4` and `G4`) and can be used for all non Amazon
     #       Web Services Graviton-based instance types.
     #
     #     ECS\_AL2023
     #
-    #     : [Amazon Linux 2023][3]: Batch supports Amazon Linux 2023.
+    #     : [Amazon Linux 2023][4]: Batch supports Amazon Linux 2023.
     #
     #       <note markdown="1"> Amazon Linux 2023 does not support `A1` instances.
     #
@@ -3582,7 +3600,7 @@ module Aws::Batch
     #
     #     ECS\_AL2023\_NVIDIA
     #
-    #     : [Amazon Linux 2023 (GPU)][2]: For all GPU instance families and
+    #     : [Amazon Linux 2023 (GPU)][3]: For all GPU instance families and
     #       can be used for all non Amazon Web Services Graviton-based
     #       instance types.
     #
@@ -3591,16 +3609,10 @@ module Aws::Batch
     #
     #        </note>
     #
-    #     ECS\_AL1
-    #
-    #     : [Amazon Linux][4]. Amazon Linux has reached the end-of-life of
-    #       standard support. For more information, see [Amazon Linux
-    #       AMI][5].
-    #
     #   EKS
     #
     #   : If the `imageIdOverride` parameter isn't specified, then a recent
-    #     [Amazon EKS-optimized Amazon Linux AMI][6] (`EKS_AL2`) is used. If
+    #     [Amazon EKS-optimized Amazon Linux AMI][5] (`EKS_AL2`) is used. If
     #     a new image type is specified in an update, but neither an
     #     `imageId` nor a `imageIdOverride` parameter is specified, then the
     #     latest Amazon EKS optimized AMI for that image type that Batch
@@ -3619,22 +3631,22 @@ module Aws::Batch
     #     end-of-support date, these compute environments will no longer
     #     receive any new software updates, security patches, or bug fixes
     #     from Amazon Web Services. For more information on upgrading from
-    #     AL2 to AL2023, see [How to upgrade from EKS AL2 to EKS AL2023]()
+    #     AL2 to AL2023, see [How to upgrade from EKS AL2 to EKS AL2023][6]
     #     in the *Batch User Guide*.
     #
     #     EKS\_AL2
     #
-    #     : [Amazon Linux 2][6]: Default for all non-GPU instance families.
+    #     : [Amazon Linux 2][5]: Default for all non-GPU instance families.
     #
     #     EKS\_AL2\_NVIDIA
     #
-    #     : [Amazon Linux 2 (accelerated)][6]: Default for all GPU instance
+    #     : [Amazon Linux 2 (accelerated)][5]: Default for all GPU instance
     #       families (for example, `P4` and `G4`) and can be used for all
     #       non Amazon Web Services Graviton-based instance types.
     #
     #     EKS\_AL2023
     #
-    #     : [Amazon Linux 2023][6]: Batch supports Amazon Linux 2023.
+    #     : [Amazon Linux 2023][5]: Batch supports Amazon Linux 2023.
     #
     #       <note markdown="1"> Amazon Linux 2023 does not support `A1` instances.
     #
@@ -3642,18 +3654,18 @@ module Aws::Batch
     #
     #     EKS\_AL2023\_NVIDIA
     #
-    #     : [Amazon Linux 2023 (accelerated)][6]: GPU instance families and
+    #     : [Amazon Linux 2023 (accelerated)][5]: GPU instance families and
     #       can be used for all non Amazon Web Services Graviton-based
     #       instance types.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
-    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
-    #   [5]: http://aws.amazon.com/amazon-linux-ami/
-    #   [6]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/ecs-migration-2023.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [5]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
+    #   [6]: https://docs.aws.amazon.com/batch/latest/userguide/eks-migration-2023.html
     #   @return [String]
     #
     # @!attribute [rw] image_id_override
@@ -3783,6 +3795,12 @@ module Aws::Batch
     #
     # @!attribute [rw] ipc_mode
     #   The IPC resource namespace to use for the containers in the task.
+    #   The valid values are `host`, `task`, or `none`. For more information
+    #   see `ipcMode` in [EcsTaskProperties][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EcsTaskProperties.html
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
@@ -3802,7 +3820,13 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] pid_mode
-    #   The process namespace to use for the containers in the task.
+    #   The process namespace to use for the containers in the task. The
+    #   valid values are `host`, or `task`. For more information see
+    #   `pidMode` in [EcsTaskProperties][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EcsTaskProperties.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -7256,8 +7280,9 @@ module Aws::Batch
     #   listed for this parameter are log drivers that the Amazon ECS
     #   container agent can communicate with by default.
     #
-    #   The supported log drivers are `awslogs`, `fluentd`, `gelf`,
-    #   `json-file`, `journald`, `logentries`, `syslog`, and `splunk`.
+    #   The supported log drivers are `awsfirelens`, `awslogs`, `fluentd`,
+    #   `gelf`, `json-file`, `journald`, `logentries`, `syslog`, and
+    #   `splunk`.
     #
     #   <note markdown="1"> Jobs that are running on Fargate resources are restricted to the
     #   `awslogs` and `splunk` log drivers.
@@ -8827,7 +8852,7 @@ module Aws::Batch
     #
     # @!attribute [rw] share_identifier
     #   The share identifier for the service job. Don't specify this
-    #   parameter if the job queue doesn't have a fair- share scheduling
+    #   parameter if the job queue doesn't have a fair-share scheduling
     #   policy. If the job queue has a fair-share scheduling policy, then
     #   this parameter must be specified.
     #   @return [String]

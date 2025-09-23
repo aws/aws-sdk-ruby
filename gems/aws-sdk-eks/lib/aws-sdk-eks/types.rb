@@ -5203,10 +5203,87 @@ module Aws::EKS
     #   Node auto repair is disabled by default.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_unhealthy_node_threshold_count
+    #   Specify a count threshold of unhealthy nodes, above which node auto
+    #   repair actions will stop. When using this, you cannot also set
+    #   `maxUnhealthyNodeThresholdPercentage` at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_unhealthy_node_threshold_percentage
+    #   Specify a percentage threshold of unhealthy nodes, above which node
+    #   auto repair actions will stop. When using this, you cannot also set
+    #   `maxUnhealthyNodeThresholdCount` at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_parallel_nodes_repaired_count
+    #   Specify the maximum number of nodes that can be repaired
+    #   concurrently or in parallel, expressed as a count of unhealthy
+    #   nodes. This gives you finer-grained control over the pace of node
+    #   replacements. When using this, you cannot also set
+    #   `maxParallelNodesRepairedPercentage` at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_parallel_nodes_repaired_percentage
+    #   Specify the maximum number of nodes that can be repaired
+    #   concurrently or in parallel, expressed as a percentage of unhealthy
+    #   nodes. This gives you finer-grained control over the pace of node
+    #   replacements. When using this, you cannot also set
+    #   `maxParallelNodesRepairedCount` at the same time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_repair_config_overrides
+    #   Specify granular overrides for specific repair actions. These
+    #   overrides control the repair action and the repair delay time before
+    #   a node is considered eligible for repair. If you use this, you must
+    #   specify all the values.
+    #   @return [Array<Types::NodeRepairConfigOverrides>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodeRepairConfig AWS API Documentation
     #
     class NodeRepairConfig < Struct.new(
-      :enabled)
+      :enabled,
+      :max_unhealthy_node_threshold_count,
+      :max_unhealthy_node_threshold_percentage,
+      :max_parallel_nodes_repaired_count,
+      :max_parallel_nodes_repaired_percentage,
+      :node_repair_config_overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify granular overrides for specific repair actions. These
+    # overrides control the repair action and the repair delay time before a
+    # node is considered eligible for repair. If you use this, you must
+    # specify all the values.
+    #
+    # @!attribute [rw] node_monitoring_condition
+    #   Specify an unhealthy condition reported by the node monitoring agent
+    #   that this override would apply to.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_unhealthy_reason
+    #   Specify a reason reported by the node monitoring agent that this
+    #   override would apply to.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_repair_wait_time_mins
+    #   Specify the minimum time in minutes to wait before attempting to
+    #   repair a node with this specific `nodeMonitoringCondition` and
+    #   `nodeUnhealthyReason`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] repair_action
+    #   Specify the repair action to take for nodes when all of the
+    #   specified conditions are met.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodeRepairConfigOverrides AWS API Documentation
+    #
+    class NodeRepairConfigOverrides < Struct.new(
+      :node_monitoring_condition,
+      :node_unhealthy_reason,
+      :min_repair_wait_time_mins,
+      :repair_action)
       SENSITIVE = []
       include Aws::Structure
     end

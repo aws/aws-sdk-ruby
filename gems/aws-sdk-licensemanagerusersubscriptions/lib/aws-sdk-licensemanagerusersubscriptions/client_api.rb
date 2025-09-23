@@ -22,6 +22,7 @@ module Aws::LicenseManagerUserSubscriptions
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateUserRequest = Shapes::StructureShape.new(name: 'AssociateUserRequest')
     AssociateUserResponse = Shapes::StructureShape.new(name: 'AssociateUserResponse')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxInteger = Shapes::IntegerShape.new(name: 'BoxInteger')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateLicenseServerEndpointRequest = Shapes::StructureShape.new(name: 'CreateLicenseServerEndpointRequest')
@@ -108,24 +109,25 @@ module Aws::LicenseManagerUserSubscriptions
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    ActiveDirectoryIdentityProvider.add_member(:directory_id, Shapes::ShapeRef.new(shape: Directory, location_name: "DirectoryId"))
     ActiveDirectoryIdentityProvider.add_member(:active_directory_settings, Shapes::ShapeRef.new(shape: ActiveDirectorySettings, location_name: "ActiveDirectorySettings"))
     ActiveDirectoryIdentityProvider.add_member(:active_directory_type, Shapes::ShapeRef.new(shape: ActiveDirectoryType, location_name: "ActiveDirectoryType"))
-    ActiveDirectoryIdentityProvider.add_member(:directory_id, Shapes::ShapeRef.new(shape: Directory, location_name: "DirectoryId"))
+    ActiveDirectoryIdentityProvider.add_member(:is_shared_active_directory, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsSharedActiveDirectory"))
     ActiveDirectoryIdentityProvider.struct_class = Types::ActiveDirectoryIdentityProvider
 
-    ActiveDirectorySettings.add_member(:domain_credentials_provider, Shapes::ShapeRef.new(shape: CredentialsProvider, location_name: "DomainCredentialsProvider"))
-    ActiveDirectorySettings.add_member(:domain_ipv_4_list, Shapes::ShapeRef.new(shape: ActiveDirectorySettingsDomainIpv4ListList, location_name: "DomainIpv4List"))
     ActiveDirectorySettings.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainName"))
+    ActiveDirectorySettings.add_member(:domain_ipv_4_list, Shapes::ShapeRef.new(shape: ActiveDirectorySettingsDomainIpv4ListList, location_name: "DomainIpv4List"))
+    ActiveDirectorySettings.add_member(:domain_credentials_provider, Shapes::ShapeRef.new(shape: CredentialsProvider, location_name: "DomainCredentialsProvider"))
     ActiveDirectorySettings.add_member(:domain_network_settings, Shapes::ShapeRef.new(shape: DomainNetworkSettings, location_name: "DomainNetworkSettings"))
     ActiveDirectorySettings.struct_class = Types::ActiveDirectorySettings
 
     ActiveDirectorySettingsDomainIpv4ListList.member = Shapes::ShapeRef.new(shape: IpV4)
 
-    AssociateUserRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
-    AssociateUserRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
-    AssociateUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
-    AssociateUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     AssociateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
+    AssociateUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    AssociateUserRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
+    AssociateUserRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    AssociateUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     AssociateUserRequest.struct_class = Types::AssociateUserRequest
 
     AssociateUserResponse.add_member(:instance_user_summary, Shapes::ShapeRef.new(shape: InstanceUserSummary, required: true, location_name: "InstanceUserSummary"))
@@ -157,18 +159,18 @@ module Aws::LicenseManagerUserSubscriptions
     DeleteLicenseServerEndpointResponse.struct_class = Types::DeleteLicenseServerEndpointResponse
 
     DeregisterIdentityProviderRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "IdentityProvider"))
-    DeregisterIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IdentityProviderArn"))
     DeregisterIdentityProviderRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, location_name: "Product"))
+    DeregisterIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IdentityProviderArn"))
     DeregisterIdentityProviderRequest.struct_class = Types::DeregisterIdentityProviderRequest
 
     DeregisterIdentityProviderResponse.add_member(:identity_provider_summary, Shapes::ShapeRef.new(shape: IdentityProviderSummary, required: true, location_name: "IdentityProviderSummary"))
     DeregisterIdentityProviderResponse.struct_class = Types::DeregisterIdentityProviderResponse
 
-    DisassociateUserRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
-    DisassociateUserRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "IdentityProvider"))
-    DisassociateUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
-    DisassociateUserRequest.add_member(:instance_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "InstanceUserArn"))
     DisassociateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    DisassociateUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
+    DisassociateUserRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "IdentityProvider"))
+    DisassociateUserRequest.add_member(:instance_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "InstanceUserArn"))
+    DisassociateUserRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     DisassociateUserRequest.struct_class = Types::DisassociateUserRequest
 
     DisassociateUserResponse.add_member(:instance_user_summary, Shapes::ShapeRef.new(shape: InstanceUserSummary, required: true, location_name: "InstanceUserSummary"))
@@ -192,34 +194,37 @@ module Aws::LicenseManagerUserSubscriptions
     IdentityProvider.add_member_subclass(:unknown, Types::IdentityProvider::Unknown)
     IdentityProvider.struct_class = Types::IdentityProvider
 
-    IdentityProviderSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     IdentityProviderSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
-    IdentityProviderSummary.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IdentityProviderArn"))
-    IdentityProviderSummary.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
     IdentityProviderSummary.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, required: true, location_name: "Settings"))
+    IdentityProviderSummary.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
     IdentityProviderSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
+    IdentityProviderSummary.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IdentityProviderArn"))
+    IdentityProviderSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    IdentityProviderSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
     IdentityProviderSummary.struct_class = Types::IdentityProviderSummary
 
     IdentityProviderSummaryList.member = Shapes::ShapeRef.new(shape: IdentityProviderSummary)
 
     InstanceSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
-    InstanceSummary.add_member(:last_status_check_date, Shapes::ShapeRef.new(shape: String, location_name: "LastStatusCheckDate"))
-    InstanceSummary.add_member(:products, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Products"))
     InstanceSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
+    InstanceSummary.add_member(:products, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Products"))
+    InstanceSummary.add_member(:last_status_check_date, Shapes::ShapeRef.new(shape: String, location_name: "LastStatusCheckDate"))
     InstanceSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    InstanceSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
+    InstanceSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "IdentityProvider"))
     InstanceSummary.struct_class = Types::InstanceSummary
 
     InstanceSummaryList.member = Shapes::ShapeRef.new(shape: InstanceSummary)
 
+    InstanceUserSummary.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
+    InstanceUserSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    InstanceUserSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
+    InstanceUserSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
+    InstanceUserSummary.add_member(:instance_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "InstanceUserArn"))
+    InstanceUserSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    InstanceUserSummary.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     InstanceUserSummary.add_member(:association_date, Shapes::ShapeRef.new(shape: String, location_name: "AssociationDate"))
     InstanceUserSummary.add_member(:disassociation_date, Shapes::ShapeRef.new(shape: String, location_name: "DisassociationDate"))
-    InstanceUserSummary.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
-    InstanceUserSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
-    InstanceUserSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
-    InstanceUserSummary.add_member(:instance_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "InstanceUserArn"))
-    InstanceUserSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
-    InstanceUserSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
-    InstanceUserSummary.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
     InstanceUserSummary.struct_class = Types::InstanceUserSummary
 
     InstanceUserSummaryList.member = Shapes::ShapeRef.new(shape: InstanceUserSummary)
@@ -227,32 +232,32 @@ module Aws::LicenseManagerUserSubscriptions
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    LicenseServer.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: LicenseServerEndpointProvisioningStatus, location_name: "ProvisioningStatus"))
     LicenseServer.add_member(:health_status, Shapes::ShapeRef.new(shape: LicenseServerHealthStatus, location_name: "HealthStatus"))
     LicenseServer.add_member(:ipv_4_address, Shapes::ShapeRef.new(shape: String, location_name: "Ipv4Address"))
-    LicenseServer.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: LicenseServerEndpointProvisioningStatus, location_name: "ProvisioningStatus"))
     LicenseServer.struct_class = Types::LicenseServer
 
-    LicenseServerEndpoint.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     LicenseServerEndpoint.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdentityProviderArn"))
-    LicenseServerEndpoint.add_member(:license_server_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseServerEndpointArn"))
+    LicenseServerEndpoint.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, location_name: "ServerType"))
+    LicenseServerEndpoint.add_member(:server_endpoint, Shapes::ShapeRef.new(shape: ServerEndpoint, location_name: "ServerEndpoint"))
+    LicenseServerEndpoint.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
     LicenseServerEndpoint.add_member(:license_server_endpoint_id, Shapes::ShapeRef.new(shape: LicenseServerEndpointId, location_name: "LicenseServerEndpointId"))
+    LicenseServerEndpoint.add_member(:license_server_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseServerEndpointArn"))
     LicenseServerEndpoint.add_member(:license_server_endpoint_provisioning_status, Shapes::ShapeRef.new(shape: LicenseServerEndpointProvisioningStatus, location_name: "LicenseServerEndpointProvisioningStatus"))
     LicenseServerEndpoint.add_member(:license_servers, Shapes::ShapeRef.new(shape: LicenseServerList, location_name: "LicenseServers"))
-    LicenseServerEndpoint.add_member(:server_endpoint, Shapes::ShapeRef.new(shape: ServerEndpoint, location_name: "ServerEndpoint"))
-    LicenseServerEndpoint.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, location_name: "ServerType"))
-    LicenseServerEndpoint.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    LicenseServerEndpoint.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     LicenseServerEndpoint.struct_class = Types::LicenseServerEndpoint
 
     LicenseServerEndpointList.member = Shapes::ShapeRef.new(shape: LicenseServerEndpoint)
 
     LicenseServerList.member = Shapes::ShapeRef.new(shape: LicenseServer)
 
-    LicenseServerSettings.add_member(:server_settings, Shapes::ShapeRef.new(shape: ServerSettings, required: true, location_name: "ServerSettings"))
     LicenseServerSettings.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, required: true, location_name: "ServerType"))
+    LicenseServerSettings.add_member(:server_settings, Shapes::ShapeRef.new(shape: ServerSettings, required: true, location_name: "ServerSettings"))
     LicenseServerSettings.struct_class = Types::LicenseServerSettings
 
-    ListIdentityProvidersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListIdentityProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
+    ListIdentityProvidersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListIdentityProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListIdentityProvidersRequest.struct_class = Types::ListIdentityProvidersRequest
 
@@ -260,17 +265,17 @@ module Aws::LicenseManagerUserSubscriptions
     ListIdentityProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListIdentityProvidersResponse.struct_class = Types::ListIdentityProvidersResponse
 
-    ListInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
     ListInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListInstancesRequest.struct_class = Types::ListInstancesRequest
 
     ListInstancesResponse.add_member(:instance_summaries, Shapes::ShapeRef.new(shape: InstanceSummaryList, location_name: "InstanceSummaries"))
     ListInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListInstancesResponse.struct_class = Types::ListInstancesResponse
 
-    ListLicenseServerEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListLicenseServerEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLicenseServerEndpointsRequestMaxResultsInteger, location_name: "MaxResults"))
+    ListLicenseServerEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListLicenseServerEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLicenseServerEndpointsRequest.struct_class = Types::ListLicenseServerEndpointsRequest
 
@@ -278,15 +283,15 @@ module Aws::LicenseManagerUserSubscriptions
     ListLicenseServerEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLicenseServerEndpointsResponse.struct_class = Types::ListLicenseServerEndpointsResponse
 
-    ListProductSubscriptionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListProductSubscriptionsRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, location_name: "Product"))
     ListProductSubscriptionsRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
     ListProductSubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
+    ListProductSubscriptionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListProductSubscriptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListProductSubscriptionsRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, location_name: "Product"))
     ListProductSubscriptionsRequest.struct_class = Types::ListProductSubscriptionsRequest
 
-    ListProductSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListProductSubscriptionsResponse.add_member(:product_user_summaries, Shapes::ShapeRef.new(shape: ProductUserSummaryList, location_name: "ProductUserSummaries"))
+    ListProductSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListProductSubscriptionsResponse.struct_class = Types::ListProductSubscriptionsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
@@ -295,10 +300,10 @@ module Aws::LicenseManagerUserSubscriptions
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    ListUserAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    ListUserAssociationsRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
     ListUserAssociationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    ListUserAssociationsRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
     ListUserAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
+    ListUserAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListUserAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListUserAssociationsRequest.struct_class = Types::ListUserAssociationsRequest
 
@@ -306,15 +311,15 @@ module Aws::LicenseManagerUserSubscriptions
     ListUserAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListUserAssociationsResponse.struct_class = Types::ListUserAssociationsResponse
 
-    ProductUserSummary.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
-    ProductUserSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
-    ProductUserSummary.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
-    ProductUserSummary.add_member(:product_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProductUserArn"))
-    ProductUserSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
-    ProductUserSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
-    ProductUserSummary.add_member(:subscription_end_date, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionEndDate"))
-    ProductUserSummary.add_member(:subscription_start_date, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionStartDate"))
     ProductUserSummary.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
+    ProductUserSummary.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
+    ProductUserSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
+    ProductUserSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
+    ProductUserSummary.add_member(:product_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProductUserArn"))
+    ProductUserSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ProductUserSummary.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    ProductUserSummary.add_member(:subscription_start_date, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionStartDate"))
+    ProductUserSummary.add_member(:subscription_end_date, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionEndDate"))
     ProductUserSummary.struct_class = Types::ProductUserSummary
 
     ProductUserSummaryList.member = Shapes::ShapeRef.new(shape: ProductUserSummary)
@@ -349,27 +354,27 @@ module Aws::LicenseManagerUserSubscriptions
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    Settings.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroup, required: true, location_name: "SecurityGroupId"))
     Settings.add_member(:subnets, Shapes::ShapeRef.new(shape: SettingsSubnetsList, required: true, location_name: "Subnets"))
+    Settings.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroup, required: true, location_name: "SecurityGroupId"))
     Settings.struct_class = Types::Settings
 
     SettingsSubnetsList.member = Shapes::ShapeRef.new(shape: Subnet)
 
-    StartProductSubscriptionRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    StartProductSubscriptionRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
     StartProductSubscriptionRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
     StartProductSubscriptionRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
+    StartProductSubscriptionRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     StartProductSubscriptionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    StartProductSubscriptionRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
     StartProductSubscriptionRequest.struct_class = Types::StartProductSubscriptionRequest
 
     StartProductSubscriptionResponse.add_member(:product_user_summary, Shapes::ShapeRef.new(shape: ProductUserSummary, required: true, location_name: "ProductUserSummary"))
     StartProductSubscriptionResponse.struct_class = Types::StartProductSubscriptionResponse
 
-    StopProductSubscriptionRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    StopProductSubscriptionRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     StopProductSubscriptionRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "IdentityProvider"))
     StopProductSubscriptionRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, location_name: "Product"))
     StopProductSubscriptionRequest.add_member(:product_user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProductUserArn"))
-    StopProductSubscriptionRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    StopProductSubscriptionRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     StopProductSubscriptionRequest.struct_class = Types::StopProductSubscriptionRequest
 
     StopProductSubscriptionResponse.add_member(:product_user_summary, Shapes::ShapeRef.new(shape: ProductUserSummary, required: true, location_name: "ProductUserSummary"))
@@ -400,8 +405,8 @@ module Aws::LicenseManagerUserSubscriptions
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateIdentityProviderSettingsRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "IdentityProvider"))
-    UpdateIdentityProviderSettingsRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IdentityProviderArn"))
     UpdateIdentityProviderSettingsRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, location_name: "Product"))
+    UpdateIdentityProviderSettingsRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IdentityProviderArn"))
     UpdateIdentityProviderSettingsRequest.add_member(:update_settings, Shapes::ShapeRef.new(shape: UpdateSettings, required: true, location_name: "UpdateSettings"))
     UpdateIdentityProviderSettingsRequest.struct_class = Types::UpdateIdentityProviderSettingsRequest
 
@@ -426,7 +431,6 @@ module Aws::LicenseManagerUserSubscriptions
         "apiVersion" => "2018-05-10",
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "license-manager-user-subscriptions",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "AWS License Manager User Subscriptions",
@@ -443,8 +447,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: AssociateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -458,8 +462,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: CreateLicenseServerEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLicenseServerEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -473,8 +477,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: DeleteLicenseServerEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLicenseServerEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -488,8 +492,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: DeregisterIdentityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterIdentityProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -503,8 +507,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: DisassociateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -518,8 +522,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: ListIdentityProvidersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListIdentityProvidersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -539,8 +543,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: ListInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInstancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -560,8 +564,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: ListLicenseServerEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLicenseServerEndpointsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -580,8 +584,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: ListProductSubscriptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProductSubscriptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -612,8 +616,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: ListUserAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListUserAssociationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -633,8 +637,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: RegisterIdentityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterIdentityProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -648,8 +652,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: StartProductSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: StartProductSubscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -663,8 +667,8 @@ module Aws::LicenseManagerUserSubscriptions
         o.input = Shapes::ShapeRef.new(shape: StopProductSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: StopProductSubscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

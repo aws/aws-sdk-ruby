@@ -5393,6 +5393,13 @@ module Aws::MediaLive
     #   appropriate value.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_bitrate
+    #   Used for QVBR rate control mode only. Optional. Enter a minimum
+    #   bitrate if you want to keep the output bitrate about a threshold, in
+    #   order to prevent the downstream system from de-allocating network
+    #   bandwidth for this output.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264Settings AWS API Documentation
     #
     class H264Settings < Struct.new(
@@ -5438,7 +5445,8 @@ module Aws::MediaLive
       :temporal_aq,
       :timecode_insertion,
       :timecode_burnin_settings,
-      :min_qp)
+      :min_qp,
+      :min_bitrate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5740,6 +5748,24 @@ module Aws::MediaLive
     #   edges might appear in the output, especially at lower bitrates.
     #   @return [String]
     #
+    # @!attribute [rw] gop_b_reference
+    #   H265 Gop BReference
+    #   @return [String]
+    #
+    # @!attribute [rw] gop_num_b_frames
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_bitrate
+    #   Used for QVBR rate control mode only. Optional. Enter a minimum
+    #   bitrate if you want to keep the output bitrate about a threshold, in
+    #   order to prevent the downstream system from de-allocating network
+    #   bandwidth for this output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subgop_length
+    #   H265 Sub Gop Length
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
     #
     class H265Settings < Struct.new(
@@ -5780,7 +5806,11 @@ module Aws::MediaLive
       :tile_width,
       :treeblock_size,
       :min_qp,
-      :deblocking)
+      :deblocking,
+      :gop_b_reference,
+      :gop_num_b_frames,
+      :min_bitrate,
+      :subgop_length)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18382,6 +18412,13 @@ module Aws::MediaLive
     #   bitrates.
     #   @return [String]
     #
+    # @!attribute [rw] min_bitrate
+    #   Used for QVBR rate control mode only. Optional. Enter a minimum
+    #   bitrate if you want to keep the output bitrate about a threshold, in
+    #   order to prevent the downstream system from de-allocating network
+    #   bandwidth for this output.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
     #
     class Av1Settings < Struct.new(
@@ -18403,7 +18440,8 @@ module Aws::MediaLive
       :scene_change_detect,
       :timecode_burnin_settings,
       :bitrate,
-      :rate_control_mode)
+      :rate_control_mode,
+      :min_bitrate)
       SENSITIVE = []
       include Aws::Structure
     end

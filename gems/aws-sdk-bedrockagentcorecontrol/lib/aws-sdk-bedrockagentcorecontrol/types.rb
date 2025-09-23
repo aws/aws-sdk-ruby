@@ -55,9 +55,9 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the agent runtime.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Agent AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentRuntime AWS API Documentation
     #
-    class Agent < Struct.new(
+    class AgentRuntime < Struct.new(
       :agent_runtime_arn,
       :agent_runtime_id,
       :agent_runtime_version,
@@ -71,25 +71,25 @@ module Aws::BedrockAgentCoreControl
 
     # The artifact of the agent.
     #
-    # @note AgentArtifact is a union - when making an API calls you must set exactly one of the members.
+    # @note AgentRuntimeArtifact is a union - when making an API calls you must set exactly one of the members.
     #
-    # @note AgentArtifact is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgentArtifact corresponding to the set member.
+    # @note AgentRuntimeArtifact is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgentRuntimeArtifact corresponding to the set member.
     #
     # @!attribute [rw] container_configuration
     #   The container configuration for the agent artifact.
     #   @return [Types::ContainerConfiguration]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentArtifact AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentRuntimeArtifact AWS API Documentation
     #
-    class AgentArtifact < Struct.new(
+    class AgentRuntimeArtifact < Struct.new(
       :container_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class ContainerConfiguration < AgentArtifact; end
-      class Unknown < AgentArtifact; end
+      class ContainerConfiguration < AgentRuntimeArtifact; end
+      class Unknown < AgentRuntimeArtifact; end
     end
 
     # Contains information about an agent runtime endpoint. An endpoint
@@ -138,9 +138,9 @@ module Aws::BedrockAgentCoreControl
     #   The timestamp when the agent runtime endpoint was last updated.
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentEndpoint AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentRuntimeEndpoint AWS API Documentation
     #
-    class AgentEndpoint < Struct.new(
+    class AgentRuntimeEndpoint < Struct.new(
       :name,
       :live_version,
       :target_version,
@@ -282,10 +282,15 @@ module Aws::BedrockAgentCoreControl
     #   browser connects to the network.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   VpcConfig for the Agent.
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BrowserNetworkConfiguration AWS API Documentation
     #
     class BrowserNetworkConfiguration < Struct.new(
-      :network_mode)
+      :network_mode,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -343,10 +348,15 @@ module Aws::BedrockAgentCoreControl
     #   the code interpreter connects to the network.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   VpcConfig for the Agent.
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CodeInterpreterNetworkConfiguration AWS API Documentation
     #
     class CodeInterpreterNetworkConfiguration < Struct.new(
-      :network_mode)
+      :network_mode,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -461,20 +471,20 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime to create an endpoint
+    #   The unique identifier of the AgentCore Runtime to create an endpoint
     #   for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the agent runtime endpoint.
+    #   The name of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_version
-    #   The version of the agent runtime to use for the endpoint.
+    #   The version of the AgentCore Runtime to use for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the agent runtime endpoint.
+    #   The description of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -485,6 +495,12 @@ module Aws::BedrockAgentCoreControl
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the agent runtime
+    #   endpoint. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeEndpointRequest AWS API Documentation
     #
     class CreateAgentRuntimeEndpointRequest < Struct.new(
@@ -492,29 +508,30 @@ module Aws::BedrockAgentCoreControl
       :name,
       :agent_runtime_version,
       :description,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = [:name]
       include Aws::Structure
     end
 
     # @!attribute [rw] target_version
-    #   The target version of the agent runtime for the endpoint.
+    #   The target version of the AgentCore Runtime for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_endpoint_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime endpoint.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the agent runtime endpoint.
+    #   The current status of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the agent runtime endpoint was created.
+    #   The timestamp when the AgentCore Runtime endpoint was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeEndpointResponse AWS API Documentation
@@ -530,23 +547,24 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_name
-    #   The name of the secure agent.
+    #   The name of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the agent runtime.
+    #   The description of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_artifact
-    #   The artifact of the agent.
-    #   @return [Types::AgentArtifact]
+    #   The artifact of the AgentCore Runtime.
+    #   @return [Types::AgentRuntimeArtifact]
     #
     # @!attribute [rw] role_arn
-    #   The IAM role ARN that provides permissions for the agent runtime.
+    #   The IAM role ARN that provides permissions for the AgentCore
+    #   Runtime.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   The network configuration for the agent runtime.
+    #   The network configuration for the AgentCore Runtime.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] protocol_configuration
@@ -563,12 +581,23 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
-    #   Environment variables to set in the agent runtime environment.
+    #   Environment variables to set in the AgentCore Runtime environment.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The authorizer configuration for the agent runtime.
+    #   The authorizer configuration for the AgentCore Runtime.
     #   @return [Types::AuthorizerConfiguration]
+    #
+    # @!attribute [rw] request_header_configuration
+    #   Configuration for HTTP request headers that will be passed through
+    #   to the runtime.
+    #   @return [Types::RequestHeaderConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the agent runtime. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
@@ -581,33 +610,35 @@ module Aws::BedrockAgentCoreControl
       :protocol_configuration,
       :client_token,
       :environment_variables,
-      :authorizer_configuration)
+      :authorizer_configuration,
+      :request_header_configuration,
+      :tags)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
 
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the agent runtime.
+    #   The workload identity details for the AgentCore Runtime.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime.
+    #   The unique identifier of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_version
-    #   The version of the agent runtime.
+    #   The version of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the agent runtime was created.
+    #   The timestamp when the AgentCore Runtime was created.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the agent runtime.
+    #   The current status of the AgentCore Runtime.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeResponse AWS API Documentation
@@ -700,6 +731,12 @@ module Aws::BedrockAgentCoreControl
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the browser. Tags enable
+    #   you to categorize your resources in different ways, for example, by
+    #   purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateBrowserRequest AWS API Documentation
     #
     class CreateBrowserRequest < Struct.new(
@@ -708,7 +745,8 @@ module Aws::BedrockAgentCoreControl
       :execution_role_arn,
       :network_configuration,
       :recording,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -770,6 +808,12 @@ module Aws::BedrockAgentCoreControl
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the code interpreter. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateCodeInterpreterRequest AWS API Documentation
     #
     class CreateCodeInterpreterRequest < Struct.new(
@@ -777,7 +821,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :execution_role_arn,
       :network_configuration,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -819,13 +864,17 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier to ensure that the operation
+    #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, the service ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -834,13 +883,12 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The protocol type for the gateway. Currently supports MCP (Model
-    #   Context Protocol).
+    #   The protocol type for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_configuration
     #   The configuration settings for the protocol specified in the
-    #   protocolType parameter.
+    #   `protocolType` parameter.
     #   @return [Types::GatewayProtocolConfiguration]
     #
     # @!attribute [rw] authorizer_type
@@ -848,7 +896,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The authorizer configuration for the Gateway.
+    #   The authorizer configuration for the gateway.
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] kms_key_arn
@@ -857,10 +905,14 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned
+    #     to help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to
+    #     the end user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRequest AWS API Documentation
@@ -934,7 +986,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The authorizer configuration for the created Gateway.
+    #   The authorizer configuration for the created gateway.
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] kms_key_arn
@@ -943,14 +995,18 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the created Gateway.
+    #   The workload identity details for the created gateway.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @!attribute [rw] exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned
+    #     to help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to
+    #     the end user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayResponse AWS API Documentation
@@ -978,8 +1034,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The identifier of the gateway to create a target for. This can be
-    #   either the gateway ID or the gateway ARN.
+    #   The identifier of the gateway to create a target for.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -992,13 +1047,17 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier to ensure that the operation
+    #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, the service ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] target_configuration
@@ -1555,12 +1614,12 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime associated with the
+    #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the agent runtime endpoint to delete.
+    #   The name of the AgentCore Runtime endpoint to delete.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1582,7 +1641,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] status
-    #   The current status of the agent runtime endpoint deletion.
+    #   The current status of the AgentCore Runtime endpoint deletion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeEndpointResponse AWS API Documentation
@@ -1594,7 +1653,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime to delete.
+    #   The unique identifier of the AgentCore Runtime to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeRequest AWS API Documentation
@@ -1606,7 +1665,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] status
-    #   The current status of the agent runtime deletion.
+    #   The current status of the AgentCore Runtime deletion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeResponse AWS API Documentation
@@ -1720,8 +1779,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The identifier of the gateway to delete. This can be either the
-    #   gateway ID or the gateway ARN.
+    #   The identifier of the gateway to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayRequest AWS API Documentation
@@ -1733,15 +1791,15 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_id
-    #   The unique identifier of the deleted Gateway.
+    #   The unique identifier of the deleted gateway.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the Gateway deletion.
+    #   The current status of the gateway deletion.
     #   @return [String]
     #
     # @!attribute [rw] status_reasons
-    #   The reasons for the current status of the Gateway deletion.
+    #   The reasons for the current status of the gateway deletion.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayResponse AWS API Documentation
@@ -1755,11 +1813,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The unique identifier of the Gateway associated with the target.
+    #   The unique identifier of the gateway associated with the target.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier of the Gateway Target to delete.
+    #   The unique identifier of the gateway target to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayTargetRequest AWS API Documentation
@@ -1772,19 +1830,19 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the Gateway.
+    #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier of the deleted Gateway Target.
+    #   The unique identifier of the deleted gateway target.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the Gateway Target deletion.
+    #   The current status of the gateway target deletion.
     #   @return [String]
     #
     # @!attribute [rw] status_reasons
-    #   The reasons for the current status of the Gateway Target deletion.
+    #   The reasons for the current status of the gateway target deletion.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayTargetResponse AWS API Documentation
@@ -1821,11 +1879,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] memory_id
-    #   The unique identifier of the deleted memory.
+    #   The unique identifier of the deleted AgentCore Memory resource.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the memory deletion.
+    #   The current status of the AgentCore Memory resource deletion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteMemoryOutput AWS API Documentation
@@ -1993,12 +2051,12 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime associated with the
+    #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the agent runtime endpoint to retrieve.
+    #   The name of the AgentCore Runtime endpoint to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeEndpointRequest AWS API Documentation
@@ -2011,48 +2069,49 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] live_version
-    #   The currently deployed version of the agent runtime on the endpoint.
+    #   The currently deployed version of the AgentCore Runtime on the
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] target_version
-    #   The target version of the agent runtime for the endpoint.
+    #   The target version of the AgentCore Runtime for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_endpoint_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime endpoint.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the agent runtime endpoint.
+    #   The description of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the agent runtime endpoint.
+    #   The current status of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the agent runtime endpoint was created.
+    #   The timestamp when the AgentCore Runtime endpoint was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The timestamp when the agent runtime endpoint was last updated.
+    #   The timestamp when the AgentCore Runtime endpoint was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for failure if the agent runtime endpoint is in a failed
-    #   state.
+    #   The reason for failure if the AgentCore Runtime endpoint is in a
+    #   failed state.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the agent runtime endpoint.
+    #   The name of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier of the agent runtime endpoint.
+    #   The unique identifier of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeEndpointResponse AWS API Documentation
@@ -2074,11 +2133,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime to retrieve.
+    #   The unique identifier of the AgentCore Runtime to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_version
-    #   The version of the agent runtime to retrieve.
+    #   The version of the AgentCore Runtime to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeRequest AWS API Documentation
@@ -2091,47 +2150,48 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the agent runtime.
+    #   The workload identity details for the AgentCore Runtime.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @!attribute [rw] agent_runtime_name
-    #   The name of the agent runtime.
+    #   The name of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the agent runtime.
+    #   The description of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime.
+    #   The unique identifier of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_version
-    #   The version of the agent runtime.
+    #   The version of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the agent runtime was created.
+    #   The timestamp when the AgentCore Runtime was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The timestamp when the agent runtime was last updated.
+    #   The timestamp when the AgentCore Runtime was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   The IAM role ARN that provides permissions for the agent runtime.
+    #   The IAM role ARN that provides permissions for the AgentCore
+    #   Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_artifact
-    #   The artifact of the agent runtime.
-    #   @return [Types::AgentArtifact]
+    #   The artifact of the AgentCore Runtime.
+    #   @return [Types::AgentRuntimeArtifact]
     #
     # @!attribute [rw] network_configuration
-    #   The network configuration for the agent runtime.
+    #   The network configuration for the AgentCore Runtime.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] protocol_configuration
@@ -2140,15 +2200,20 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] environment_variables
-    #   Environment variables set in the agent runtime environment.
+    #   Environment variables set in the AgentCore Runtime environment.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The authorizer configuration for the agent runtime.
+    #   The authorizer configuration for the AgentCore Runtime.
     #   @return [Types::AuthorizerConfiguration]
     #
+    # @!attribute [rw] request_header_configuration
+    #   Configuration for HTTP request headers that will be passed through
+    #   to the runtime.
+    #   @return [Types::RequestHeaderConfiguration]
+    #
     # @!attribute [rw] status
-    #   The current status of the agent runtime.
+    #   The current status of the AgentCore Runtime.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
@@ -2168,6 +2233,7 @@ module Aws::BedrockAgentCoreControl
       :protocol_configuration,
       :environment_variables,
       :authorizer_configuration,
+      :request_header_configuration,
       :status)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -2264,6 +2330,10 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the browser.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the browser is in a failed state.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the browser was created.
     #   @return [Time]
@@ -2283,6 +2353,7 @@ module Aws::BedrockAgentCoreControl
       :network_configuration,
       :recording,
       :status,
+      :failure_reason,
       :created_at,
       :last_updated_at)
       SENSITIVE = [:description]
@@ -2330,6 +2401,10 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the code interpreter.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure if the code interpreter is in a failed state.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the code interpreter was created.
     #   @return [Time]
@@ -2348,6 +2423,7 @@ module Aws::BedrockAgentCoreControl
       :execution_role_arn,
       :network_configuration,
       :status,
+      :failure_reason,
       :created_at,
       :last_updated_at)
       SENSITIVE = [:description]
@@ -2355,8 +2431,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The identifier of the gateway to retrieve. This can be either the
-    #   gateway ID or the gateway ARN.
+    #   The identifier of the gateway to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayRequest AWS API Documentation
@@ -2368,47 +2443,47 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the Gateway.
+    #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
-    #   The unique identifier of the Gateway.
+    #   The unique identifier of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_url
-    #   An endpoint for invoking Gateway.
+    #   An endpoint for invoking gateway.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the Gateway was created.
+    #   The timestamp when the gateway was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp when the Gateway was last updated.
+    #   The timestamp when the gateway was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the Gateway.
+    #   The current status of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] status_reasons
-    #   The reasons for the current status of the Gateway.
+    #   The reasons for the current status of the gateway.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The name of the Gateway.
+    #   The name of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the Gateway.
+    #   The description of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The IAM role ARN that provides permissions for the Gateway.
+    #   The IAM role ARN that provides permissions for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   Protocol applied to a Gateway.
+    #   Protocol applied to a gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_configuration
@@ -2421,22 +2496,27 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The authorizer configuration for the Gateway.
+    #   The authorizer configuration for the gateway.
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the KMS key used to encrypt the Gateway.
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the Gateway.
+    #   The workload identity details for the gateway.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @!attribute [rw] exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned
+    #     to help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to
+    #     the end user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayResponse AWS API Documentation
@@ -2464,8 +2544,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The identifier of the gateway that contains the target. This can be
-    #   either the gateway ID or the gateway ARN.
+    #   The identifier of the gateway that contains the target.
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -2482,35 +2561,35 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the Gateway.
+    #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier of the Gateway Target.
+    #   The unique identifier of the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the Gateway Target was created.
+    #   The timestamp when the gateway target was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp when the Gateway Target was last updated.
+    #   The timestamp when the gateway target was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the Gateway Target.
+    #   The current status of the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] status_reasons
-    #   The reasons for the current status of the Gateway Target.
+    #   The reasons for the current status of the gateway target.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The name of the Gateway Target.
+    #   The name of the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the Gateway Target.
+    #   The description of the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] target_configuration
@@ -2519,7 +2598,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::TargetConfiguration]
     #
     # @!attribute [rw] credential_provider_configurations
-    #   The credential provider configurations for the Gateway Target.
+    #   The credential provider configurations for the gateway target.
     #   @return [Array<Types::CredentialProviderConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTargetResponse AWS API Documentation
@@ -2552,7 +2631,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] memory
-    #   The retrieved memory details.
+    #   The retrieved AgentCore Memory resource details.
     #   @return [Types::Memory]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetMemoryOutput AWS API Documentation
@@ -2797,7 +2876,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime to list endpoints for.
+    #   The unique identifier of the AgentCore Runtime to list endpoints
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2819,8 +2899,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] runtime_endpoints
-    #   The list of agent runtime endpoints.
-    #   @return [Array<Types::AgentEndpoint>]
+    #   The list of AgentCore Runtime endpoints.
+    #   @return [Array<Types::AgentRuntimeEndpoint>]
     #
     # @!attribute [rw] next_token
     #   A token to retrieve the next page of results.
@@ -2836,7 +2916,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime to list versions for.
+    #   The unique identifier of the AgentCore Runtime to list versions for.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2858,8 +2938,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtimes
-    #   The list of agent runtime versions.
-    #   @return [Array<Types::Agent>]
+    #   The list of AgentCore Runtime versions.
+    #   @return [Array<Types::AgentRuntime>]
     #
     # @!attribute [rw] next_token
     #   A token to retrieve the next page of results.
@@ -2892,8 +2972,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtimes
-    #   The list of agent runtimes.
-    #   @return [Array<Types::Agent>]
+    #   The list of AgentCore Runtime resources.
+    #   @return [Array<Types::AgentRuntime>]
     #
     # @!attribute [rw] next_token
     #   A token to retrieve the next page of results.
@@ -3025,19 +3105,21 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The identifier of the gateway to list targets for. This can be
-    #   either the gateway ID or the gateway ARN.
+    #   The identifier of the gateway to list targets for.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. The
-    #   default value is 10. The maximum value is 50.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
-    #   results.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewayTargetsRequest AWS API Documentation
@@ -3051,11 +3133,14 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] items
-    #   The list of Gateway Target summaries.
+    #   The list of gateway target summaries.
     #   @return [Array<Types::TargetSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token for the next paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewayTargetsResponse AWS API Documentation
@@ -3068,14 +3153,17 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. The
-    #   default value is 10. The maximum value is 50.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
-    #   results.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewaysRequest AWS API Documentation
@@ -3088,11 +3176,14 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] items
-    #   The list of Gateway summaries.
+    #   The list of gateway summaries.
     #   @return [Array<Types::GatewaySummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token for the next paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListGatewaysResponse AWS API Documentation
@@ -3125,7 +3216,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] memories
-    #   The list of memory summaries.
+    #   The list of AgentCore Memory resource summaries.
     #   @return [Array<Types::MemorySummary>]
     #
     # @!attribute [rw] next_token
@@ -3171,6 +3262,31 @@ module Aws::BedrockAgentCoreControl
     class ListOauth2CredentialProvidersResponse < Struct.new(
       :credential_providers,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3648,13 +3764,18 @@ module Aws::BedrockAgentCoreControl
     # SecurityConfig for the Agent.
     #
     # @!attribute [rw] network_mode
-    #   The network mode for the agent runtime.
+    #   The network mode for the AgentCore Runtime.
     #   @return [String]
+    #
+    # @!attribute [rw] network_mode_config
+    #   The network mode configuration for the AgentCore Runtime.
+    #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/NetworkConfiguration AWS API Documentation
     #
     class NetworkConfiguration < Struct.new(
-      :network_mode)
+      :network_mode,
+      :network_mode_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3919,6 +4040,31 @@ module Aws::BedrockAgentCoreControl
       :s3_location)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Configuration for HTTP request headers that will be passed through to
+    # the runtime.
+    #
+    # @note RequestHeaderConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RequestHeaderConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RequestHeaderConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] request_header_allowlist
+    #   A list of HTTP request headers that are allowed to be passed through
+    #   to the runtime.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RequestHeaderConfiguration AWS API Documentation
+    #
+    class RequestHeaderConfiguration < Struct.new(
+      :request_header_allowlist,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RequestHeaderAllowlist < RequestHeaderConfiguration; end
+      class Unknown < RequestHeaderConfiguration; end
     end
 
     # Exception thrown when a resource limit is exceeded.
@@ -4401,6 +4547,27 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is a key-value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The configuration for a gateway target. This structure defines how the
     # gateway connects to and interacts with the target endpoint.
     #
@@ -4573,21 +4740,43 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   untag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys of the tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime associated with the
+    #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_name
-    #   The name of the agent runtime endpoint to update.
+    #   The name of the AgentCore Runtime endpoint to update.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_version
-    #   The updated version of the agent runtime for the endpoint.
+    #   The updated version of the AgentCore Runtime for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the agent runtime endpoint.
+    #   The updated description of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -4611,31 +4800,32 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] live_version
-    #   The currently deployed version of the agent runtime on the endpoint.
+    #   The currently deployed version of the AgentCore Runtime on the
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] target_version
-    #   The target version of the agent runtime for the endpoint.
+    #   The target version of the AgentCore Runtime for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_endpoint_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime endpoint.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Resource Name (ARN) of the agent runtime.
+    #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the updated agent runtime endpoint.
+    #   The current status of the updated AgentCore Runtime endpoint.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the agent runtime endpoint was created.
+    #   The timestamp when the AgentCore Runtime endpoint was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The timestamp when the agent runtime endpoint was last updated.
+    #   The timestamp when the AgentCore Runtime endpoint was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntimeEndpointResponse AWS API Documentation
@@ -4653,24 +4843,24 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the agent runtime to update.
+    #   The unique identifier of the AgentCore Runtime to update.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the agent runtime.
+    #   The updated description of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_artifact
-    #   The updated artifact of the agent runtime.
-    #   @return [Types::AgentArtifact]
+    #   The updated artifact of the AgentCore Runtime.
+    #   @return [Types::AgentRuntimeArtifact]
     #
     # @!attribute [rw] role_arn
-    #   The updated IAM role ARN that provides permissions for the agent
-    #   runtime.
+    #   The updated IAM role ARN that provides permissions for the AgentCore
+    #   Runtime.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   The updated network configuration for the agent runtime.
+    #   The updated network configuration for the AgentCore Runtime.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] protocol_configuration
@@ -4687,13 +4877,18 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
-    #   Updated environment variables to set in the agent runtime
+    #   Updated environment variables to set in the AgentCore Runtime
     #   environment.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The updated authorizer configuration for the agent runtime.
+    #   The updated authorizer configuration for the AgentCore Runtime.
     #   @return [Types::AuthorizerConfiguration]
+    #
+    # @!attribute [rw] request_header_configuration
+    #   The updated configuration for HTTP request headers that will be
+    #   passed through to the runtime.
+    #   @return [Types::RequestHeaderConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntimeRequest AWS API Documentation
     #
@@ -4706,37 +4901,38 @@ module Aws::BedrockAgentCoreControl
       :protocol_configuration,
       :client_token,
       :environment_variables,
-      :authorizer_configuration)
+      :authorizer_configuration,
+      :request_header_configuration)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
 
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Resource Name (ARN) of the updated agent runtime.
+    #   The Amazon Resource Name (ARN) of the updated AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_id
-    #   The unique identifier of the updated agent runtime.
+    #   The unique identifier of the updated AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the updated agent runtime.
+    #   The workload identity details for the updated AgentCore Runtime.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @!attribute [rw] agent_runtime_version
-    #   The version of the updated agent runtime.
+    #   The version of the updated AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the agent runtime was created.
+    #   The timestamp when the AgentCore Runtime was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The timestamp when the agent runtime was last updated.
+    #   The timestamp when the AgentCore Runtime was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the updated agent runtime.
+    #   The current status of the updated AgentCore Runtime.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntimeResponse AWS API Documentation
@@ -4805,24 +5001,24 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The identifier of the gateway to update. This can be either the
-    #   gateway ID or the gateway ARN.
+    #   The identifier of the gateway to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The updated name for the Gateway.
+    #   The name of the gateway. This name must be the same as the one when
+    #   the gateway was created.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description for the Gateway.
+    #   The updated description for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The updated IAM role ARN that provides permissions for the Gateway.
+    #   The updated IAM role ARN that provides permissions for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The updated protocol type for the Gateway.
+    #   The updated protocol type for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_configuration
@@ -4831,22 +5027,26 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::GatewayProtocolConfiguration]
     #
     # @!attribute [rw] authorizer_type
-    #   The updated authorizer type for the Gateway.
+    #   The updated authorizer type for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The updated authorizer configuration for the Gateway.
+    #   The updated authorizer configuration for the gateway.
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] kms_key_arn
-    #   The updated ARN of the KMS key used to encrypt the Gateway.
+    #   The updated ARN of the KMS key used to encrypt the gateway.
     #   @return [String]
     #
     # @!attribute [rw] exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned
+    #     to help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to
+    #     the end user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRequest AWS API Documentation
@@ -4867,47 +5067,47 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the updated Gateway.
+    #   The Amazon Resource Name (ARN) of the updated gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
-    #   The unique identifier of the updated Gateway.
+    #   The unique identifier of the updated gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_url
-    #   An endpoint for invoking the updated Gateway.
+    #   An endpoint for invoking the updated gateway.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the Gateway was created.
+    #   The timestamp when the gateway was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp when the Gateway was last updated.
+    #   The timestamp when the gateway was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the updated Gateway.
+    #   The current status of the updated gateway.
     #   @return [String]
     #
     # @!attribute [rw] status_reasons
-    #   The reasons for the current status of the updated Gateway.
+    #   The reasons for the current status of the updated gateway.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The updated name of the Gateway.
+    #   The name of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the Gateway.
+    #   The updated description of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The updated IAM role ARN that provides permissions for the Gateway.
+    #   The updated IAM role ARN that provides permissions for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The updated protocol type for the Gateway.
+    #   The updated protocol type for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] protocol_configuration
@@ -4916,26 +5116,30 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::GatewayProtocolConfiguration]
     #
     # @!attribute [rw] authorizer_type
-    #   The updated authorizer type for the Gateway.
+    #   The updated authorizer type for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
-    #   The updated authorizer configuration for the Gateway.
+    #   The updated authorizer configuration for the gateway.
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] kms_key_arn
-    #   The updated ARN of the KMS key used to encrypt the Gateway.
+    #   The updated ARN of the KMS key used to encrypt the gateway.
     #   @return [String]
     #
     # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the updated Gateway.
+    #   The workload identity details for the updated gateway.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @!attribute [rw] exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned
+    #     to help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to
+    #     the end user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayResponse AWS API Documentation
@@ -4963,19 +5167,19 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_identifier
-    #   The unique identifier of the Gateway associated with the target.
+    #   The unique identifier of the gateway associated with the target.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier of the Gateway Target to update.
+    #   The unique identifier of the gateway target to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The updated name for the Gateway Target.
+    #   The updated name for the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description for the Gateway Target.
+    #   The updated description for the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] target_configuration
@@ -4984,8 +5188,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::TargetConfiguration]
     #
     # @!attribute [rw] credential_provider_configurations
-    #   The updated credential provider configurations for the Gateway
-    #   Target.
+    #   The updated credential provider configurations for the gateway
+    #   target.
     #   @return [Array<Types::CredentialProviderConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTargetRequest AWS API Documentation
@@ -5002,35 +5206,35 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the Gateway.
+    #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier of the updated Gateway Target.
+    #   The unique identifier of the updated gateway target.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the Gateway Target was created.
+    #   The timestamp when the gateway target was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp when the Gateway Target was last updated.
+    #   The timestamp when the gateway target was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the updated Gateway Target.
+    #   The current status of the updated gateway target.
     #   @return [String]
     #
     # @!attribute [rw] status_reasons
-    #   The reasons for the current status of the updated Gateway Target.
+    #   The reasons for the current status of the updated gateway target.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The updated name of the Gateway Target.
+    #   The updated name of the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the Gateway Target.
+    #   The updated description of the gateway target.
     #   @return [String]
     #
     # @!attribute [rw] target_configuration
@@ -5039,8 +5243,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::TargetConfiguration]
     #
     # @!attribute [rw] credential_provider_configurations
-    #   The updated credential provider configurations for the Gateway
-    #   Target.
+    #   The updated credential provider configurations for the gateway
+    #   target.
     #   @return [Array<Types::CredentialProviderConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTargetResponse AWS API Documentation
@@ -5074,7 +5278,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the memory.
+    #   The updated description of the AgentCore Memory resource.
     #   @return [String]
     #
     # @!attribute [rw] event_expiry_duration
@@ -5083,7 +5287,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Integer]
     #
     # @!attribute [rw] memory_execution_role_arn
-    #   The ARN of the IAM role that provides permissions for the memory.
+    #   The ARN of the IAM role that provides permissions for the AgentCore
+    #   Memory resource.
     #   @return [String]
     #
     # @!attribute [rw] memory_strategies
@@ -5104,7 +5309,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] memory
-    #   The updated memory details.
+    #   The updated AgentCore Memory resource details.
     #   @return [Types::Memory]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateMemoryOutput AWS API Documentation
@@ -5389,6 +5594,25 @@ module Aws::BedrockAgentCoreControl
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # VpcConfig for the Agent.
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups associated with the VPC configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The subnets associated with the VPC configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :security_groups,
+      :subnets)
       SENSITIVE = []
       include Aws::Structure
     end

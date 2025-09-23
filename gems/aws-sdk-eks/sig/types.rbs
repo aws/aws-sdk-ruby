@@ -1141,6 +1141,19 @@ module Aws::EKS
 
     class NodeRepairConfig
       attr_accessor enabled: bool
+      attr_accessor max_unhealthy_node_threshold_count: ::Integer
+      attr_accessor max_unhealthy_node_threshold_percentage: ::Integer
+      attr_accessor max_parallel_nodes_repaired_count: ::Integer
+      attr_accessor max_parallel_nodes_repaired_percentage: ::Integer
+      attr_accessor node_repair_config_overrides: ::Array[Types::NodeRepairConfigOverrides]
+      SENSITIVE: []
+    end
+
+    class NodeRepairConfigOverrides
+      attr_accessor node_monitoring_condition: ::String
+      attr_accessor node_unhealthy_reason: ::String
+      attr_accessor min_repair_wait_time_mins: ::Integer
+      attr_accessor repair_action: ("Replace" | "Reboot" | "NoAction")
       SENSITIVE: []
     end
 
@@ -1559,7 +1572,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig")
       attr_accessor value: ::String
       SENSITIVE: []
     end

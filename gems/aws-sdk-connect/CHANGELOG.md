@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.217.0 (2025-09-19)
+------------------
+
+* Feature - This release adds a persistent connection field to UserPhoneConfig that maintains agent's softphone media connection for faster call connections.
+
 1.216.0 (2025-09-09)
 ------------------
 

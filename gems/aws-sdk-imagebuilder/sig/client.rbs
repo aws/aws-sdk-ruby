@@ -902,11 +902,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_component_build_versions-instance_method
       def list_component_build_versions: (
-                                           component_version_arn: ::String,
+                                           ?component_version_arn: ::String,
                                            ?max_results: ::Integer,
                                            ?next_token: ::String
                                          ) -> _ListComponentBuildVersionsResponseSuccess
-                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentBuildVersionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentBuildVersionsResponseSuccess
 
       interface _ListComponentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsResponse]
@@ -976,7 +976,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_image_build_versions-instance_method
       def list_image_build_versions: (
-                                       image_version_arn: ::String,
+                                       ?image_version_arn: ::String,
                                        ?filters: Array[
                                          {
                                            name: ::String?,
@@ -986,7 +986,7 @@ module Aws
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
                                      ) -> _ListImageBuildVersionsResponseSuccess
-                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageBuildVersionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageBuildVersionsResponseSuccess
 
       interface _ListImagePackagesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListImagePackagesResponse]
@@ -1214,11 +1214,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#list_workflow_build_versions-instance_method
       def list_workflow_build_versions: (
-                                          workflow_version_arn: ::String,
+                                          ?workflow_version_arn: ::String,
                                           ?max_results: ::Integer,
                                           ?next_token: ::String
                                         ) -> _ListWorkflowBuildVersionsResponseSuccess
-                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowBuildVersionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowBuildVersionsResponseSuccess
 
       interface _ListWorkflowExecutionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowExecutionsResponse]

@@ -25,6 +25,10 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Details about an Active Directory identity provider.
     #
+    # @!attribute [rw] directory_id
+    #   The directory ID for an Active Directory identity provider.
+    #   @return [String]
+    #
     # @!attribute [rw] active_directory_settings
     #   The `ActiveDirectorySettings` resource contains details about the
     #   Active Directory, including network access details such as domain
@@ -37,16 +41,18 @@ module Aws::LicenseManagerUserSubscriptions
     #   Directory or an Amazon Web Services Managed Active Directory.
     #   @return [String]
     #
-    # @!attribute [rw] directory_id
-    #   The directory ID for an Active Directory identity provider.
-    #   @return [String]
+    # @!attribute [rw] is_shared_active_directory
+    #   Whether this directory is shared from an Amazon Web Services Managed
+    #   Active Directory. The default value is false.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ActiveDirectoryIdentityProvider AWS API Documentation
     #
     class ActiveDirectoryIdentityProvider < Struct.new(
+      :directory_id,
       :active_directory_settings,
       :active_directory_type,
-      :directory_id)
+      :is_shared_active_directory)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54,19 +60,19 @@ module Aws::LicenseManagerUserSubscriptions
     # Contains network access and credential details that are needed for
     # user administration in the Active Directory.
     #
-    # @!attribute [rw] domain_credentials_provider
-    #   Points to the `CredentialsProvider` resource that contains
-    #   information about the credential provider for user administration.
-    #   @return [Types::CredentialsProvider]
+    # @!attribute [rw] domain_name
+    #   The domain name for the Active Directory.
+    #   @return [String]
     #
     # @!attribute [rw] domain_ipv_4_list
     #   A list of domain IPv4 addresses that are used for the Active
     #   Directory.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] domain_name
-    #   The domain name for the Active Directory.
-    #   @return [String]
+    # @!attribute [rw] domain_credentials_provider
+    #   Points to the `CredentialsProvider` resource that contains
+    #   information about the credential provider for user administration.
+    #   @return [Types::CredentialsProvider]
     #
     # @!attribute [rw] domain_network_settings
     #   The `DomainNetworkSettings` resource contains an array of subnets
@@ -76,44 +82,44 @@ module Aws::LicenseManagerUserSubscriptions
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ActiveDirectorySettings AWS API Documentation
     #
     class ActiveDirectorySettings < Struct.new(
-      :domain_credentials_provider,
-      :domain_ipv_4_list,
       :domain_name,
+      :domain_ipv_4_list,
+      :domain_credentials_provider,
       :domain_network_settings)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] domain
-    #   The domain name of the Active Directory that contains information
-    #   for the user to associate.
+    # @!attribute [rw] username
+    #   The user name from the identity provider.
     #   @return [String]
-    #
-    # @!attribute [rw] identity_provider
-    #   The identity provider for the user.
-    #   @return [Types::IdentityProvider]
     #
     # @!attribute [rw] instance_id
     #   The ID of the EC2 instance that provides the user-based
     #   subscription.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider
+    #   The identity provider for the user.
+    #   @return [Types::IdentityProvider]
+    #
+    # @!attribute [rw] domain
+    #   The domain name of the Active Directory that contains information
+    #   for the user to associate.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags that apply for the user association.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] username
-    #   The user name from the identity provider.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/AssociateUserRequest AWS API Documentation
     #
     class AssociateUserRequest < Struct.new(
-      :domain,
-      :identity_provider,
+      :username,
       :instance_id,
-      :tags,
-      :username)
+      :identity_provider,
+      :domain,
+      :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -252,11 +258,6 @@ module Aws::LicenseManagerUserSubscriptions
     #   provider.
     #   @return [Types::IdentityProvider]
     #
-    # @!attribute [rw] identity_provider_arn
-    #   The Amazon Resource Name (ARN) that identifies the identity provider
-    #   to deregister.
-    #   @return [String]
-    #
     # @!attribute [rw] product
     #   The name of the user-based subscription product.
     #
@@ -265,12 +266,17 @@ module Aws::LicenseManagerUserSubscriptions
     #   `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_arn
+    #   The Amazon Resource Name (ARN) that identifies the identity provider
+    #   to deregister.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/DeregisterIdentityProviderRequest AWS API Documentation
     #
     class DeregisterIdentityProviderRequest < Struct.new(
       :identity_provider,
-      :identity_provider_arn,
-      :product)
+      :product,
+      :identity_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -288,9 +294,13 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @!attribute [rw] domain
-    #   The domain name of the Active Directory that contains information
-    #   for the user to disassociate.
+    # @!attribute [rw] username
+    #   The user name from the Active Directory identity provider for the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the EC2 instance which provides user-based subscriptions.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider
@@ -298,28 +308,24 @@ module Aws::LicenseManagerUserSubscriptions
     #   provider.
     #   @return [Types::IdentityProvider]
     #
-    # @!attribute [rw] instance_id
-    #   The ID of the EC2 instance which provides user-based subscriptions.
-    #   @return [String]
-    #
     # @!attribute [rw] instance_user_arn
     #   The Amazon Resource Name (ARN) of the user to disassociate from the
     #   EC2 instance.
     #   @return [String]
     #
-    # @!attribute [rw] username
-    #   The user name from the Active Directory identity provider for the
-    #   user.
+    # @!attribute [rw] domain
+    #   The domain name of the Active Directory that contains information
+    #   for the user to disassociate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/DisassociateUserRequest AWS API Documentation
     #
     class DisassociateUserRequest < Struct.new(
-      :domain,
-      :identity_provider,
+      :username,
       :instance_id,
+      :identity_provider,
       :instance_user_arn,
-      :username)
+      :domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -404,22 +410,10 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Describes an identity provider.
     #
-    # @!attribute [rw] failure_message
-    #   The failure message associated with an identity provider.
-    #   @return [String]
-    #
     # @!attribute [rw] identity_provider
     #   The `IdentityProvider` resource contains information about an
     #   identity provider.
     #   @return [Types::IdentityProvider]
-    #
-    # @!attribute [rw] identity_provider_arn
-    #   The Amazon Resource Name (ARN) of the identity provider.
-    #   @return [String]
-    #
-    # @!attribute [rw] product
-    #   The name of the user-based subscription product.
-    #   @return [String]
     #
     # @!attribute [rw] settings
     #   The `Settings` resource contains details about the registered
@@ -427,19 +421,36 @@ module Aws::LicenseManagerUserSubscriptions
     #   the subnets to provision VPC endpoints.
     #   @return [Types::Settings]
     #
+    # @!attribute [rw] product
+    #   The name of the user-based subscription product.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_arn
+    #   The Amazon Resource Name (ARN) of the identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   The failure message associated with an identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The AWS Account ID of the owner of this resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/IdentityProviderSummary AWS API Documentation
     #
     class IdentityProviderSummary < Struct.new(
-      :failure_message,
       :identity_provider,
-      :identity_provider_arn,
-      :product,
       :settings,
-      :status)
+      :product,
+      :status,
+      :identity_provider_arn,
+      :failure_message,
+      :owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -450,35 +461,76 @@ module Aws::LicenseManagerUserSubscriptions
     #   The ID of the EC2 instance, which provides user-based subscriptions.
     #   @return [String]
     #
-    # @!attribute [rw] last_status_check_date
-    #   The date of the last status check.
+    # @!attribute [rw] status
+    #   The status of an EC2 instance resource.
     #   @return [String]
     #
     # @!attribute [rw] products
     #   A list of provided user-based subscription products.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] status
-    #   The status of an EC2 instance resource.
+    # @!attribute [rw] last_status_check_date
+    #   The date of the last status check.
     #   @return [String]
     #
     # @!attribute [rw] status_message
     #   The status message for an EC2 instance.
     #   @return [String]
     #
+    # @!attribute [rw] owner_account_id
+    #   The AWS Account ID of the owner of this resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider
+    #   The `IdentityProvider` resource specifies details about the identity
+    #   provider.
+    #   @return [Types::IdentityProvider]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/InstanceSummary AWS API Documentation
     #
     class InstanceSummary < Struct.new(
       :instance_id,
-      :last_status_check_date,
-      :products,
       :status,
-      :status_message)
+      :products,
+      :last_status_check_date,
+      :status_message,
+      :owner_account_id,
+      :identity_provider)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Describes users of an EC2 instance providing user-based subscriptions.
+    #
+    # @!attribute [rw] username
+    #   The user name from the identity provider for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the EC2 instance that provides user-based subscriptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider
+    #   The `IdentityProvider` resource specifies details about the identity
+    #   provider.
+    #   @return [Types::IdentityProvider]
+    #
+    # @!attribute [rw] status
+    #   The status of a user associated with an EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_user_arn
+    #   The Amazon Resource Name (ARN) that identifies the instance user.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for users of an EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain name of the Active Directory that contains the user
+    #   information for the product subscription.
+    #   @return [String]
     #
     # @!attribute [rw] association_date
     #   The date a user was associated with an EC2 instance.
@@ -488,48 +540,18 @@ module Aws::LicenseManagerUserSubscriptions
     #   The date a user was disassociated from an EC2 instance.
     #   @return [String]
     #
-    # @!attribute [rw] domain
-    #   The domain name of the Active Directory that contains the user
-    #   information for the product subscription.
-    #   @return [String]
-    #
-    # @!attribute [rw] identity_provider
-    #   The `IdentityProvider` resource specifies details about the identity
-    #   provider.
-    #   @return [Types::IdentityProvider]
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the EC2 instance that provides user-based subscriptions.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_user_arn
-    #   The Amazon Resource Name (ARN) that identifies the instance user.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of a user associated with an EC2 instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   The status message for users of an EC2 instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] username
-    #   The user name from the identity provider for the user.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/InstanceUserSummary AWS API Documentation
     #
     class InstanceUserSummary < Struct.new(
-      :association_date,
-      :disassociation_date,
-      :domain,
-      :identity_provider,
+      :username,
       :instance_id,
-      :instance_user_arn,
+      :identity_provider,
       :status,
+      :instance_user_arn,
       :status_message,
-      :username)
+      :domain,
+      :association_date,
+      :disassociation_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -549,6 +571,11 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Information about a Remote Desktop Services (RDS) license server.
     #
+    # @!attribute [rw] provisioning_status
+    #   The current state of the provisioning process for the RDS license
+    #   server.
+    #   @return [String]
+    #
     # @!attribute [rw] health_status
     #   The health status of the RDS license server.
     #   @return [String]
@@ -558,17 +585,12 @@ module Aws::LicenseManagerUserSubscriptions
     #   server.
     #   @return [String]
     #
-    # @!attribute [rw] provisioning_status
-    #   The current state of the provisioning process for the RDS license
-    #   server.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/LicenseServer AWS API Documentation
     #
     class LicenseServer < Struct.new(
+      :provisioning_status,
       :health_status,
-      :ipv_4_address,
-      :provisioning_status)
+      :ipv_4_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -576,22 +598,31 @@ module Aws::LicenseManagerUserSubscriptions
     # Contains details about a network endpoint for a Remote Desktop
     # Services (RDS) license server.
     #
-    # @!attribute [rw] creation_time
-    #   The timestamp when License Manager created the license server
-    #   endpoint.
-    #   @return [Time]
-    #
     # @!attribute [rw] identity_provider_arn
     #   The Amazon Resource Name (ARN) of the identity provider that's
     #   associated with the RDS license server endpoint.
     #   @return [String]
     #
-    # @!attribute [rw] license_server_endpoint_arn
-    #   The ARN of the `ServerEndpoint` resource for the RDS license server.
+    # @!attribute [rw] server_type
+    #   The type of license server.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_endpoint
+    #   The `ServerEndpoint` resource contains the network address of the
+    #   RDS license server endpoint.
+    #   @return [Types::ServerEndpoint]
+    #
+    # @!attribute [rw] status_message
+    #   The message associated with the provisioning status, if there is
+    #   one.
     #   @return [String]
     #
     # @!attribute [rw] license_server_endpoint_id
     #   The ID of the license server endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_server_endpoint_arn
+    #   The ARN of the `ServerEndpoint` resource for the RDS license server.
     #   @return [String]
     #
     # @!attribute [rw] license_server_endpoint_provisioning_status
@@ -604,55 +635,50 @@ module Aws::LicenseManagerUserSubscriptions
     #   servers that are accessed through this endpoint.
     #   @return [Array<Types::LicenseServer>]
     #
-    # @!attribute [rw] server_endpoint
-    #   The `ServerEndpoint` resource contains the network address of the
-    #   RDS license server endpoint.
-    #   @return [Types::ServerEndpoint]
-    #
-    # @!attribute [rw] server_type
-    #   The type of license server.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   The message associated with the provisioning status, if there is
-    #   one.
-    #   @return [String]
+    # @!attribute [rw] creation_time
+    #   The timestamp when License Manager created the license server
+    #   endpoint.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/LicenseServerEndpoint AWS API Documentation
     #
     class LicenseServerEndpoint < Struct.new(
-      :creation_time,
       :identity_provider_arn,
-      :license_server_endpoint_arn,
+      :server_type,
+      :server_endpoint,
+      :status_message,
       :license_server_endpoint_id,
+      :license_server_endpoint_arn,
       :license_server_endpoint_provisioning_status,
       :license_servers,
-      :server_endpoint,
-      :server_type,
-      :status_message)
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The settings to configure your license server.
     #
-    # @!attribute [rw] server_settings
-    #   The `ServerSettings` resource contains the settings for your server.
-    #   @return [Types::ServerSettings]
-    #
     # @!attribute [rw] server_type
     #   The type of license server.
     #   @return [String]
     #
+    # @!attribute [rw] server_settings
+    #   The `ServerSettings` resource contains the settings for your server.
+    #   @return [Types::ServerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/LicenseServerSettings AWS API Documentation
     #
     class LicenseServerSettings < Struct.new(
-      :server_settings,
-      :server_type)
+      :server_type,
+      :server_settings)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return from a single request.
+    #   @return [Integer]
+    #
     # @!attribute [rw] filters
     #   You can use the following filters to streamline results:
     #
@@ -660,10 +686,6 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   * DirectoryId
     #   @return [Array<Types::Filter>]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return from a single request.
-    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   A token to specify where to start paginating. This is the nextToken
@@ -673,8 +695,8 @@ module Aws::LicenseManagerUserSubscriptions
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListIdentityProvidersRequest AWS API Documentation
     #
     class ListIdentityProvidersRequest < Struct.new(
-      :filters,
       :max_results,
+      :filters,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -702,14 +724,6 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @!attribute [rw] filters
-    #   You can use the following filters to streamline results:
-    #
-    #   * Status
-    #
-    #   * InstanceId
-    #   @return [Array<Types::Filter>]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return from a single request.
     #   @return [Integer]
@@ -719,12 +733,20 @@ module Aws::LicenseManagerUserSubscriptions
     #   from a previously truncated response.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   You can use the following filters to streamline results:
+    #
+    #   * Status
+    #
+    #   * InstanceId
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListInstancesRequest AWS API Documentation
     #
     class ListInstancesRequest < Struct.new(
-      :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -751,6 +773,10 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return from a single request.
+    #   @return [Integer]
+    #
     # @!attribute [rw] filters
     #   You can use the following filters to streamline results:
     #
@@ -758,10 +784,6 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   ^
     #   @return [Array<Types::Filter>]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return from a single request.
-    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   A token to specify where to start paginating. This is the nextToken
@@ -771,8 +793,8 @@ module Aws::LicenseManagerUserSubscriptions
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListLicenseServerEndpointsRequest AWS API Documentation
     #
     class ListLicenseServerEndpointsRequest < Struct.new(
-      :filters,
       :max_results,
+      :filters,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -800,6 +822,22 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
+    # @!attribute [rw] product
+    #   The name of the user-based subscription product.
+    #
+    #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
+    #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
+    #   `REMOTE_DESKTOP_SERVICES`
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider
+    #   An object that specifies details for the identity provider.
+    #   @return [Types::IdentityProvider]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return from a single request.
+    #   @return [Integer]
+    #
     # @!attribute [rw] filters
     #   You can use the following filters to streamline results:
     #
@@ -810,39 +848,27 @@ module Aws::LicenseManagerUserSubscriptions
     #   * Domain
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] identity_provider
-    #   An object that specifies details for the identity provider.
-    #   @return [Types::IdentityProvider]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return from a single request.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
     #   @return [String]
     #
-    # @!attribute [rw] product
-    #   The name of the user-based subscription product.
-    #
-    #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
-    #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListProductSubscriptionsRequest AWS API Documentation
     #
     class ListProductSubscriptionsRequest < Struct.new(
-      :filters,
+      :product,
       :identity_provider,
       :max_results,
-      :next_token,
-      :product)
+      :filters,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] product_user_summaries
+    #   Metadata that describes the list product subscriptions operation.
+    #   @return [Array<Types::ProductUserSummary>]
+    #
     # @!attribute [rw] next_token
     #   The next token used for paginated responses. When this field isn't
     #   empty, there are additional elements that the service hasn't
@@ -850,15 +876,11 @@ module Aws::LicenseManagerUserSubscriptions
     #   retrieve additional objects.
     #   @return [String]
     #
-    # @!attribute [rw] product_user_summaries
-    #   Metadata that describes the list product subscriptions operation.
-    #   @return [Array<Types::ProductUserSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListProductSubscriptionsResponse AWS API Documentation
     #
     class ListProductSubscriptionsResponse < Struct.new(
-      :next_token,
-      :product_user_summaries)
+      :product_user_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -888,6 +910,18 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The ID of the EC2 instance, which provides user-based subscriptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider
+    #   An object that specifies details for the identity provider.
+    #   @return [Types::IdentityProvider]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return from a single request.
+    #   @return [Integer]
+    #
     # @!attribute [rw] filters
     #   You can use the following filters to streamline results:
     #
@@ -898,18 +932,6 @@ module Aws::LicenseManagerUserSubscriptions
     #   * Domain
     #   @return [Array<Types::Filter>]
     #
-    # @!attribute [rw] identity_provider
-    #   An object that specifies details for the identity provider.
-    #   @return [Types::IdentityProvider]
-    #
-    # @!attribute [rw] instance_id
-    #   The ID of the EC2 instance, which provides user-based subscriptions.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return from a single request.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   A token to specify where to start paginating. This is the nextToken
     #   from a previously truncated response.
@@ -918,10 +940,10 @@ module Aws::LicenseManagerUserSubscriptions
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListUserAssociationsRequest AWS API Documentation
     #
     class ListUserAssociationsRequest < Struct.new(
-      :filters,
-      :identity_provider,
       :instance_id,
+      :identity_provider,
       :max_results,
+      :filters,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -949,55 +971,55 @@ module Aws::LicenseManagerUserSubscriptions
 
     # A summary of the user-based subscription products for a specific user.
     #
-    # @!attribute [rw] domain
-    #   The domain name of the Active Directory that contains the user
-    #   information for the product subscription.
+    # @!attribute [rw] username
+    #   The user name from the identity provider for this product user.
+    #   @return [String]
+    #
+    # @!attribute [rw] product
+    #   The name of the user-based subscription product.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider
     #   An object that specifies details for the identity provider.
     #   @return [Types::IdentityProvider]
     #
-    # @!attribute [rw] product
-    #   The name of the user-based subscription product.
+    # @!attribute [rw] status
+    #   The status of a product for this user.
     #   @return [String]
     #
     # @!attribute [rw] product_user_arn
     #   The Amazon Resource Name (ARN) for this product user.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of a product for this user.
-    #   @return [String]
-    #
     # @!attribute [rw] status_message
     #   The status message for a product for this user.
     #   @return [String]
     #
-    # @!attribute [rw] subscription_end_date
-    #   The end date of a subscription.
+    # @!attribute [rw] domain
+    #   The domain name of the Active Directory that contains the user
+    #   information for the product subscription.
     #   @return [String]
     #
     # @!attribute [rw] subscription_start_date
     #   The start date of a subscription.
     #   @return [String]
     #
-    # @!attribute [rw] username
-    #   The user name from the identity provider for this product user.
+    # @!attribute [rw] subscription_end_date
+    #   The end date of a subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ProductUserSummary AWS API Documentation
     #
     class ProductUserSummary < Struct.new(
-      :domain,
-      :identity_provider,
+      :username,
       :product,
-      :product_user_arn,
+      :identity_provider,
       :status,
+      :product_user_arn,
       :status_message,
-      :subscription_end_date,
+      :domain,
       :subscription_start_date,
-      :username)
+      :subscription_end_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1147,28 +1169,27 @@ module Aws::LicenseManagerUserSubscriptions
     # security group should permit inbound TCP port 1688 communication from
     # resources in the VPC.
     #
+    # @!attribute [rw] subnets
+    #   The subnets defined for the registered identity provider.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] security_group_id
     #   A security group ID that allows inbound TCP port 1688 communication
     #   between resources in your VPC and the VPC endpoint for activation
     #   servers.
     #   @return [String]
     #
-    # @!attribute [rw] subnets
-    #   The subnets defined for the registered identity provider.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/Settings AWS API Documentation
     #
     class Settings < Struct.new(
-      :security_group_id,
-      :subnets)
+      :subnets,
+      :security_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] domain
-    #   The domain name of the Active Directory that contains the user for
-    #   whom to start the product subscription.
+    # @!attribute [rw] username
+    #   The user name from the identity provider of the user.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider
@@ -1183,22 +1204,23 @@ module Aws::LicenseManagerUserSubscriptions
     #   `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
+    # @!attribute [rw] domain
+    #   The domain name of the Active Directory that contains the user for
+    #   whom to start the product subscription.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags that apply to the product subscription.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] username
-    #   The user name from the identity provider of the user.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/StartProductSubscriptionRequest AWS API Documentation
     #
     class StartProductSubscriptionRequest < Struct.new(
-      :domain,
+      :username,
       :identity_provider,
       :product,
-      :tags,
-      :username)
+      :domain,
+      :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -1215,9 +1237,8 @@ module Aws::LicenseManagerUserSubscriptions
       include Aws::Structure
     end
 
-    # @!attribute [rw] domain
-    #   The domain name of the Active Directory that contains the user for
-    #   whom to stop the product subscription.
+    # @!attribute [rw] username
+    #   The user name from the identity provider for the user.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider
@@ -1236,18 +1257,19 @@ module Aws::LicenseManagerUserSubscriptions
     #   The Amazon Resource Name (ARN) of the product user.
     #   @return [String]
     #
-    # @!attribute [rw] username
-    #   The user name from the identity provider for the user.
+    # @!attribute [rw] domain
+    #   The domain name of the Active Directory that contains the user for
+    #   whom to stop the product subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/StopProductSubscriptionRequest AWS API Documentation
     #
     class StopProductSubscriptionRequest < Struct.new(
-      :domain,
+      :username,
       :identity_provider,
       :product,
       :product_user_arn,
-      :username)
+      :domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1325,16 +1347,16 @@ module Aws::LicenseManagerUserSubscriptions
     #   Refers to an identity provider.
     #   @return [Types::IdentityProvider]
     #
-    # @!attribute [rw] identity_provider_arn
-    #   The Amazon Resource Name (ARN) of the identity provider to update.
-    #   @return [String]
-    #
     # @!attribute [rw] product
     #   The name of the user-based subscription product.
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
     #   `REMOTE_DESKTOP_SERVICES`
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_arn
+    #   The Amazon Resource Name (ARN) of the identity provider to update.
     #   @return [String]
     #
     # @!attribute [rw] update_settings
@@ -1353,8 +1375,8 @@ module Aws::LicenseManagerUserSubscriptions
     #
     class UpdateIdentityProviderSettingsRequest < Struct.new(
       :identity_provider,
-      :identity_provider_arn,
       :product,
+      :identity_provider_arn,
       :update_settings)
       SENSITIVE = []
       include Aws::Structure

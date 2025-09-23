@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2025-09-19)
+------------------
+
+* Feature - Update invalid character handling documentation for SQS SendMessage API
+
 1.103.0 (2025-08-26)
 ------------------
 

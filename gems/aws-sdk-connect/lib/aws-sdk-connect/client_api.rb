@@ -962,6 +962,7 @@ module Aws::Connect
     Permission = Shapes::StringShape.new(name: 'Permission')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
     PersistentChat = Shapes::StructureShape.new(name: 'PersistentChat')
+    PersistentConnection = Shapes::BooleanShape.new(name: 'PersistentConnection')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
     PhoneNumberCountryCodes = Shapes::ListShape.new(name: 'PhoneNumberCountryCodes')
@@ -6607,6 +6608,7 @@ module Aws::Connect
     UserPhoneConfig.add_member(:auto_accept, Shapes::ShapeRef.new(shape: AutoAccept, location_name: "AutoAccept"))
     UserPhoneConfig.add_member(:after_contact_work_time_limit, Shapes::ShapeRef.new(shape: AfterContactWorkTimeLimit, location_name: "AfterContactWorkTimeLimit"))
     UserPhoneConfig.add_member(:desk_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DeskPhoneNumber"))
+    UserPhoneConfig.add_member(:persistent_connection, Shapes::ShapeRef.new(shape: PersistentConnection, location_name: "PersistentConnection", metadata: {"box" => true}))
     UserPhoneConfig.struct_class = Types::UserPhoneConfig
 
     UserProficiency.add_member(:attribute_name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location_name: "AttributeName"))
