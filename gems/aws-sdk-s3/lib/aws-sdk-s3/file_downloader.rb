@@ -14,6 +14,7 @@ module Aws
 
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @legacy = options[:legacy] || false
       end
 
       # @return [Client]
@@ -123,19 +124,14 @@ module Aws
       def download_in_threads(pending, total_size)
         threads = []
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
-        unless [File, Tempfile].include?(@destination.class)
+        unless @legacy || [File, Tempfile].include?(@destination.class)
           @temp_path = "#{@destination}.s3tmp.#{SecureRandom.alphanumeric(8)}"
         end
         @thread_count.times do
           thread = Thread.new do
             begin
               while (part = pending.shift)
-                if progress
-                  part.params[:on_chunk_received] =
-                    proc do |_chunk, bytes, total|
-                      progress.call(part.part_number, bytes, total)
-                    end
-                end
+                update_progress(progress, part) if progress
                 resp = @client.get_object(part.params)
                 range = extract_range(resp.content_range)
                 validate_range(range, part.params[:range]) if part.params[:range]
@@ -184,6 +180,13 @@ module Aws
         proc do |_chunk, bytes_read, total_size|
           @progress_callback.call([bytes_read], [total_size], total_size)
         end
+      end
+
+      def update_progress(progress, part)
+        part.params[:on_chunk_received] =
+          proc do |_chunk, bytes, total|
+            progress.call(part.part_number, bytes, total)
+          end
       end
 
       # @api private
