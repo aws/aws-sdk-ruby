@@ -52,8 +52,8 @@ module Aws
       #
       #   * **String/Pathname paths**: Downloads to a temporary file first, then atomically moves to the final
       #    destination. This ensures the original file is not corrupted if the download fails.
-      #   * **File/Tempfile objects**: Downloads directly to the file object without using temporary files.
-      #
+      #   * **File/Tempfile objects**: Downloads directly to the file object without using temporary files. You
+      #    are responsible for closing it after the download completes.
       #
       # @param [String] bucket
       #   The name of the S3 bucket to upload to.
