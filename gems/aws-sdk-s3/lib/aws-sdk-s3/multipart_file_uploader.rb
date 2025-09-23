@@ -24,12 +24,12 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
-        @custom_executor = !options[:executor].nil?
         @executor = options[:executor] || DefaultExecutor.new(max_threads: @thread_count)
+        @options = options
       end
 
       # @return [Client]
-      attr_reader :client, :executor
+      attr_reader :client
 
       # @param [String, Pathname, File, Tempfile] source The file to upload.
       # @option options [required, String] :bucket The bucket to upload to.
@@ -77,7 +77,7 @@ module Aws
       end
 
       def shutdown_executor
-        @executor.shutdown if @executor.running? && !@custom_executor
+        @executor.shutdown if @executor.running? && @options[:executor].nil?
       end
 
       def abort_upload(upload_id, options, errors)
@@ -158,13 +158,7 @@ module Aws
 
           upload_attempts += 1
           @executor.post(part) do |p|
-            if progress
-              p[:on_chunk_sent] =
-                proc do |_chunk, bytes, _total|
-                  progress.call(p[:part_number], bytes)
-                end
-            end
-
+            update_progress(progress, p) if progress
             resp = @client.upload_part(p)
             p[:body].close
             completed_part = { etag: resp.etag, part_number: p[:part_number] }
@@ -194,6 +188,13 @@ module Aws
         else
           part_size
         end
+      end
+
+      def update_progress(progress, part)
+        part[:on_chunk_sent] =
+          proc do |_chunk, bytes, _total|
+            progress.call(part[:part_number], bytes)
+          end
       end
 
       # @api private
