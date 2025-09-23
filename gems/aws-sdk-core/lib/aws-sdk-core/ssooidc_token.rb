@@ -13,10 +13,6 @@ module Aws
       # Raised when SSO Token is invalid
       class InvalidSSOToken < RuntimeError; end
 
-      # @api private
-      SSO_LOGIN_GUIDANCE = 'The SSO session associated with this profile has expired or is otherwise invalid. ' \
-                           'To refresh this SSO session run `aws sso login` with the corresponding profile.'
-
       # @option options [required, String] :sso_session The SSO Session used to for fetching this token.
       # @option options [required, String] :sso_region The AWS region where the SSO directory for the given sso_session
       #   is hosted.
@@ -59,7 +55,7 @@ module Aws
         return unless !@identity.expiration || @identity.expiration < Time.now
 
         # Token is hard expired, raise an exception
-        raise InvalidSSOToken, 'Token is invalid and failed to refresh.'
+        raise InvalidSSOToken, 'Token is expired and failed to refresh.'
       end
 
       def attempt_refresh(token_json) # rubocop:disable Metrics/AbcSize
@@ -95,7 +91,8 @@ module Aws
         cached_token['expiresAt'] = Time.parse(cached_token['expiresAt'])
         cached_token
       rescue Errno::ENOENT, JSON::ParserError, ArgumentError
-        raise InvalidSSOToken, SSO_LOGIN_GUIDANCE
+        raise InvalidSSOToken, 'The SSO session associated with this profile has expired or is otherwise invalid. ' \
+                               'To refresh this SSO session run `aws sso login` with the corresponding profile.'
       end
 
       def update_token_cache(token_json)

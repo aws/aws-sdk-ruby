@@ -259,15 +259,20 @@ module Aws
           end
 
           it 'refreshes the token' do
+            resp = double(
+              'Response',
+              token_type: 'Bearer',
+              access_token: 'newtoken',
+              expires_in: 28_800,
+              refresh_token: 'newrefreshtoken'
+            )
             mock_token_file(sso_session, cached_token)
             expect(client).to receive(:create_token).with(
               grant_type: 'refresh_token',
               client_id: cached_token['clientId'],
               client_secret: cached_token['clientSecret'],
               refresh_token: cached_token['refreshToken']
-            ).and_return(double('Response', token_type: 'Bearer',
-                                            access_token: 'newtoken', expires_in: 28_800,
-                                            refresh_token: 'newrefreshtoken'))
+            ).and_return(resp)
 
             expect_token_write_back(sso_session, expected_token_write_back)
 
@@ -309,14 +314,20 @@ module Aws
           end
 
           it 'refreshes the token' do
+            resp = double(
+              'Response',
+              token_type: 'Bearer',
+              access_token: 'newtoken',
+              expires_in: 28_800,
+              refresh_token: nil
+            )
             mock_token_file(sso_session, cached_token)
             expect(client).to receive(:create_token).with(
               grant_type: 'refresh_token',
               client_id: cached_token['clientId'],
               client_secret: cached_token['clientSecret'],
               refresh_token: cached_token['refreshToken']
-            ).and_return(double('Response', token_type: 'Bearer',
-                                            access_token: 'newtoken', expires_in: 28_800, refresh_token: nil))
+            ).and_return(resp)
 
             expect_token_write_back(sso_session, expected_token_write_back)
 
