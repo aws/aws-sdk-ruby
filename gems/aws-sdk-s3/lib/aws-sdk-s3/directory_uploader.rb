@@ -34,7 +34,7 @@ module Aws
         @s3_prefix = upload_opts.delete(:s3_prefix)
         @recursive = upload_opts.delete(:recursive) || false
         @follow_symlinks = upload_opts.delete(:follow_symlinks) || false
-        @ignore_failure = upload_opts.delete(:failure_policy) || false
+        @ignore_failure = upload_opts.delete(:ignore_failure) || false
         @filter_callback = upload_opts.delete(:filter_callback)
         @abort_upload = false
         @upload_queue = SizedQueue.new(100)
