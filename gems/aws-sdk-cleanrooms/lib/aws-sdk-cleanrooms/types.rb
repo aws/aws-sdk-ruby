@@ -7005,11 +7005,35 @@ module Aws::CleanRooms
     #   table that you want to populate.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   The job type of the rule-based ID mapping job. Valid values include:
+    #
+    #   `INCREMENTAL`: Processes only new or changed data since the last job
+    #   run. This is the default job type if the ID mapping workflow was
+    #   created in Entity Resolution with `incrementalRunConfig` specified.
+    #
+    #   `BATCH`: Processes all data from the input source, regardless of
+    #   previous job runs. This is the default job type if the ID mapping
+    #   workflow was created in Entity Resolution but `incrementalRunConfig`
+    #   wasn't specified.
+    #
+    #   `DELETE_ONLY`: Processes only deletion requests from
+    #   `BatchDeleteUniqueId`, which is set in Entity Resolution.
+    #
+    #   For more information about `incrementalRunConfig` and
+    #   `BatchDeleteUniqueId`, see the [Entity Resolution API Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIdMappingTableInput AWS API Documentation
     #
     class PopulateIdMappingTableInput < Struct.new(
       :id_mapping_table_identifier,
-      :membership_identifier)
+      :membership_identifier,
+      :job_type)
       SENSITIVE = []
       include Aws::Structure
     end

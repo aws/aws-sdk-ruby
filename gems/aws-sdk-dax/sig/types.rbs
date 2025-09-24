@@ -27,6 +27,7 @@ module Aws::DAX
       attr_accessor parameter_group: Types::ParameterGroupStatus
       attr_accessor sse_description: Types::SSEDescription
       attr_accessor cluster_endpoint_encryption_type: ("NONE" | "TLS")
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
       SENSITIVE: []
     end
 
@@ -54,6 +55,7 @@ module Aws::DAX
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sse_specification: Types::SSESpecification
       attr_accessor cluster_endpoint_encryption_type: ("NONE" | "TLS")
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
       SENSITIVE: []
     end
 
@@ -386,6 +388,7 @@ module Aws::DAX
     class Subnet
       attr_accessor subnet_identifier: ::String
       attr_accessor subnet_availability_zone: ::String
+      attr_accessor supported_network_types: ::Array[("ipv4" | "ipv6" | "dual_stack")]
       SENSITIVE: []
     end
 
@@ -394,6 +397,7 @@ module Aws::DAX
       attr_accessor description: ::String
       attr_accessor vpc_id: ::String
       attr_accessor subnets: ::Array[Types::Subnet]
+      attr_accessor supported_network_types: ::Array[("ipv4" | "ipv6" | "dual_stack")]
       SENSITIVE: []
     end
 
@@ -410,6 +414,9 @@ module Aws::DAX
     end
 
     class SubnetInUse < Aws::EmptyStructure
+    end
+
+    class SubnetNotAllowedFault < Aws::EmptyStructure
     end
 
     class SubnetQuotaExceededFault < Aws::EmptyStructure

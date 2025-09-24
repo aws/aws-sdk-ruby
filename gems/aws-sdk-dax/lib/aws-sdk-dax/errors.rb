@@ -51,6 +51,7 @@ module Aws::DAX
   # * {SubnetGroupNotFoundFault}
   # * {SubnetGroupQuotaExceededFault}
   # * {SubnetInUse}
+  # * {SubnetNotAllowedFault}
   # * {SubnetQuotaExceededFault}
   # * {TagNotFoundFault}
   # * {TagQuotaPerResourceExceeded}
@@ -306,6 +307,16 @@ module Aws::DAX
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DAX::Types::SubnetInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SubnetNotAllowedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DAX::Types::SubnetNotAllowedFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

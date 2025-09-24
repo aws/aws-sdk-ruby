@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2025-09-23)
+------------------
+
+* Feature - Add support for encryption at rest with Customer Managed KMS Key in AWS IAM Identity Center
+
 1.61.0 (2025-08-26)
 ------------------
 

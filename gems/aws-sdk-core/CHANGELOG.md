@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.233.0 (2025-09-23)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - This release includes exception definition and documentation updates.
+
 3.232.0 (2025-08-28)
 ------------------
 

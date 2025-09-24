@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2025-09-23)
+------------------
+
+* Feature - Support incremental id mapping workflow for AWS Entity Resolution
+
 1.36.0 (2025-08-28)
 ------------------
 

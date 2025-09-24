@@ -1734,6 +1734,8 @@ module Aws::SSOAdmin
     #   * {Types::DescribeInstanceResponse#name #name} => String
     #   * {Types::DescribeInstanceResponse#created_date #created_date} => Time
     #   * {Types::DescribeInstanceResponse#status #status} => String
+    #   * {Types::DescribeInstanceResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeInstanceResponse#encryption_configuration_details #encryption_configuration_details} => Types::EncryptionConfigurationDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -1748,7 +1750,12 @@ module Aws::SSOAdmin
     #   resp.owner_account_id #=> String
     #   resp.name #=> String
     #   resp.created_date #=> Time
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "ACTIVE"
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"
+    #   resp.status_reason #=> String
+    #   resp.encryption_configuration_details.key_type #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KEY"
+    #   resp.encryption_configuration_details.kms_key_arn #=> String
+    #   resp.encryption_configuration_details.encryption_status #=> String, one of "UPDATING", "ENABLED", "UPDATE_FAILED"
+    #   resp.encryption_configuration_details.encryption_status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstance AWS API Documentation
     #
@@ -3043,7 +3050,8 @@ module Aws::SSOAdmin
     #   resp.instances[0].owner_account_id #=> String
     #   resp.instances[0].name #=> String
     #   resp.instances[0].created_date #=> Time
-    #   resp.instances[0].status #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "ACTIVE"
+    #   resp.instances[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"
+    #   resp.instances[0].status_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListInstances AWS API Documentation
@@ -3874,7 +3882,7 @@ module Aws::SSOAdmin
     # Update the details for the instance of IAM Identity Center that is
     # owned by the Amazon Web Services account.
     #
-    # @option params [required, String] :name
+    # @option params [String] :name
     #   Updates the instance name.
     #
     # @option params [required, String] :instance_arn
@@ -3884,13 +3892,23 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the encryption configuration for your IAM Identity Center
+    #   instance. You can use this to configure customer managed KMS keys
+    #   (CMK) or Amazon Web Services owned KMS keys for encrypting your
+    #   instance data.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_instance({
-    #     name: "NameType", # required
+    #     name: "NameType",
     #     instance_arn: "InstanceArn", # required
+    #     encryption_configuration: {
+    #       key_type: "AWS_OWNED_KMS_KEY", # required, accepts AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KEY
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstance AWS API Documentation
@@ -4058,7 +4076,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

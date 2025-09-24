@@ -56,6 +56,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
       attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -68,6 +69,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
       attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig
       attr_accessor role_arn: ::String
       SENSITIVE: []
     end
@@ -247,6 +249,7 @@ module Aws::EntityResolution
       attr_accessor metrics: Types::IdMappingJobMetrics
       attr_accessor error_details: Types::ErrorDetails
       attr_accessor output_source_config: ::Array[Types::IdMappingJobOutputSource]
+      attr_accessor job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
       SENSITIVE: []
     end
 
@@ -264,6 +267,7 @@ module Aws::EntityResolution
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -390,14 +394,27 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class IdMappingIncrementalRunConfig
+      attr_accessor incremental_run_type: ("ON_DEMAND")
+      SENSITIVE: []
+    end
+
     class IdMappingJobMetrics
       attr_accessor input_records: ::Integer
       attr_accessor total_records_processed: ::Integer
       attr_accessor records_not_processed: ::Integer
+      attr_accessor delete_records_processed: ::Integer
       attr_accessor total_mapped_records: ::Integer
       attr_accessor total_mapped_source_records: ::Integer
       attr_accessor total_mapped_target_records: ::Integer
       attr_accessor unique_records_loaded: ::Integer
+      attr_accessor new_mapped_records: ::Integer
+      attr_accessor new_mapped_source_records: ::Integer
+      attr_accessor new_mapped_target_records: ::Integer
+      attr_accessor new_unique_records_loaded: ::Integer
+      attr_accessor mapped_records_removed: ::Integer
+      attr_accessor mapped_source_records_removed: ::Integer
+      attr_accessor mapped_target_records_removed: ::Integer
       SENSITIVE: []
     end
 
@@ -499,6 +516,7 @@ module Aws::EntityResolution
       attr_accessor input_records: ::Integer
       attr_accessor total_records_processed: ::Integer
       attr_accessor records_not_processed: ::Integer
+      attr_accessor delete_records_processed: ::Integer
       attr_accessor match_i_ds: ::Integer
       SENSITIVE: []
     end
@@ -807,12 +825,14 @@ module Aws::EntityResolution
     class StartIdMappingJobInput
       attr_accessor workflow_name: ::String
       attr_accessor output_source_config: ::Array[Types::IdMappingJobOutputSource]
+      attr_accessor job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
       SENSITIVE: []
     end
 
     class StartIdMappingJobOutput
       attr_accessor job_id: ::String
       attr_accessor output_source_config: ::Array[Types::IdMappingJobOutputSource]
+      attr_accessor job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
       SENSITIVE: []
     end
 
@@ -855,6 +875,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
       attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig
       attr_accessor role_arn: ::String
       SENSITIVE: []
     end
@@ -866,6 +887,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
       attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig
       attr_accessor role_arn: ::String
       SENSITIVE: []
     end

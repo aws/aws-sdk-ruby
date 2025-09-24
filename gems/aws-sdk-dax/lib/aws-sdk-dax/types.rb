@@ -102,6 +102,16 @@ module Aws::DAX
     #     `TLS` for Transport Layer Security
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The IP address type of the cluster. Values are:
+    #
+    #   * `ipv4` - IPv4 addresses only
+    #
+    #   * `ipv6` - IPv6 addresses only
+    #
+    #   * `dual_stack` - Both IPv4 and IPv6 addresses
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -122,7 +132,8 @@ module Aws::DAX
       :iam_role_arn,
       :parameter_group,
       :sse_description,
-      :cluster_endpoint_encryption_type)
+      :cluster_endpoint_encryption_type,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -140,7 +151,7 @@ module Aws::DAX
     class ClusterNotFoundFault < Aws::EmptyStructure; end
 
     # You have attempted to exceed the maximum number of DAX clusters for
-    # your AWS account.
+    # your Amazon Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ClusterQuotaForCustomerExceededFault AWS API Documentation
     #
@@ -179,7 +190,8 @@ module Aws::DAX
     #   parameter is provided, its length must equal the
     #   `ReplicationFactor`.
     #
-    #   <note markdown="1"> AWS recommends that you have at least two read replicas per cluster.
+    #   <note markdown="1"> Amazon Web Services recommends that you have at least two read
+    #   replicas per cluster.
     #
     #    </note>
     #   @return [Integer]
@@ -274,6 +286,23 @@ module Aws::DAX
     #   * `TLS` for Transport Layer Security
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   Specifies the IP protocol(s) the cluster uses for network
+    #   communications. Values are:
+    #
+    #   * `ipv4` - The cluster is accessible only through IPv4 addresses
+    #
+    #   * `ipv6` - The cluster is accessible only through IPv6 addresses
+    #
+    #   * `dual_stack` - The cluster is accessible through both IPv4 and
+    #     IPv6 addresses.
+    #
+    #   <note markdown="1"> If no explicit `NetworkType` is provided, the network type is
+    #   derived based on the subnet group's configuration.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -290,7 +319,8 @@ module Aws::DAX
       :parameter_group_name,
       :tags,
       :sse_specification,
-      :cluster_endpoint_encryption_type)
+      :cluster_endpoint_encryption_type,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -886,7 +916,7 @@ module Aws::DAX
     end
 
     # @!attribute [rw] cluster
-    #   A description of the DAX cluster. with its new replication factor.
+    #   A description of the DAX cluster, with its new replication factor.
     #   @return [Types::Cluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactorResponse AWS API Documentation
@@ -1055,8 +1085,8 @@ module Aws::DAX
     #
     class NodeQuotaForClusterExceededFault < Aws::EmptyStructure; end
 
-    # You have attempted to exceed the maximum number of nodes for your AWS
-    # account.
+    # You have attempted to exceed the maximum number of nodes for your
+    # Amazon Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NodeQuotaForCustomerExceededFault AWS API Documentation
     #
@@ -1343,9 +1373,9 @@ module Aws::DAX
     class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure; end
 
     # You have reached the maximum number of x509 certificates that can be
-    # created for encrypted clusters in a 30 day period. Contact AWS
-    # customer support to discuss options for continuing to create encrypted
-    # clusters.
+    # created for encrypted clusters in a 30 day period. Contact Amazon Web
+    # Services customer support to discuss options for continuing to create
+    # encrypted clusters.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ServiceQuotaExceededException AWS API Documentation
     #
@@ -1363,11 +1393,18 @@ module Aws::DAX
     #   The Availability Zone (AZ) for the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] supported_network_types
+    #   The network types supported by this subnet. Returns an array of
+    #   strings that can include `ipv4`, `ipv6`, or both, indicating whether
+    #   the subnet supports IPv4 only, IPv6 only, or dual-stack deployments.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
       :subnet_identifier,
-      :subnet_availability_zone)
+      :subnet_availability_zone,
+      :supported_network_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1395,13 +1432,21 @@ module Aws::DAX
     #   A list of subnets associated with the subnet group.
     #   @return [Array<Types::Subnet>]
     #
+    # @!attribute [rw] supported_network_types
+    #   The network types supported by this subnet. Returns an array of
+    #   strings that can include `ipv4`, `ipv6`, or both, indicating whether
+    #   the subnet group supports IPv4 only, IPv6 only, or dual-stack
+    #   deployments.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetGroup AWS API Documentation
     #
     class SubnetGroup < Struct.new(
       :subnet_group_name,
       :description,
       :vpc_id,
-      :subnets)
+      :subnets,
+      :supported_network_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1438,6 +1483,17 @@ module Aws::DAX
     #
     class SubnetInUse < Aws::EmptyStructure; end
 
+    # The specified subnet can't be used for the requested network type.
+    # This error occurs when either there aren't enough subnets of the
+    # required network type to create the cluster, or when you try to use a
+    # subnet that doesn't support the requested network type (for example,
+    # trying to create a dual-stack cluster with a subnet that doesn't have
+    # IPv6 CIDR).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetNotAllowedFault AWS API Documentation
+    #
+    class SubnetNotAllowedFault < Aws::EmptyStructure; end
+
     # The request cannot be processed because it would exceed the allowed
     # number of subnets in a subnet group.
     #
@@ -1448,10 +1504,10 @@ module Aws::DAX
     # A description of a tag. Every tag is a key-value pair. You can add up
     # to 50 tags to a single DAX cluster.
     #
-    # AWS-assigned tag names and values are automatically assigned the
-    # `aws:` prefix, which the user cannot assign. AWS-assigned tag names do
-    # not count towards the tag limit of 50. User-assigned tag names have
-    # the prefix `user:`.
+    # Amazon Web Services-assigned tag names and values are automatically
+    # assigned the `aws:` prefix, which the user cannot assign. Amazon Web
+    # Services-assigned tag names do not count towards the tag limit of 50.
+    # User-assigned tag names have the prefix `user:`.
     #
     # You cannot backdate the application of a tag.
     #

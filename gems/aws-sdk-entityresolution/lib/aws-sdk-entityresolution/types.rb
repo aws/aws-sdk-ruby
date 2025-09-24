@@ -144,7 +144,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # The request could not be processed because of conflict in the current
+    # The request couldn't be processed because of conflict in the current
     # state of the resource. Example: Workflow already exists, Schema
     # already exists, Workflow is currently running, etc.
     #
@@ -183,6 +183,10 @@ module Aws::EntityResolution
     #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
+    # @!attribute [rw] incremental_run_config
+    #   The incremental run configuration for the ID mapping workflow.
+    #   @return [Types::IdMappingIncrementalRunConfig]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to create resources on your behalf as part of
@@ -202,6 +206,7 @@ module Aws::EntityResolution
       :input_source_config,
       :output_source_config,
       :id_mapping_techniques,
+      :incremental_run_config,
       :role_arn,
       :tags)
       SENSITIVE = []
@@ -236,6 +241,10 @@ module Aws::EntityResolution
     #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
+    # @!attribute [rw] incremental_run_config
+    #   The incremental run configuration for the ID mapping workflow.
+    #   @return [Types::IdMappingIncrementalRunConfig]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to create resources on your behalf as part of
@@ -251,6 +260,7 @@ module Aws::EntityResolution
       :input_source_config,
       :output_source_config,
       :id_mapping_techniques,
+      :incremental_run_config,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -408,8 +418,8 @@ module Aws::EntityResolution
     #   object contains only the `incrementalRunType` field, which appears
     #   as "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
-    #   processing is not supported.
+    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
+    #   incremental processing is not supported.
     #   @return [Types::IncrementalRunConfig]
     #
     # @!attribute [rw] role_arn
@@ -689,14 +699,21 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # The Delete Unique Id error.
+    # The error information provided when the delete unique ID operation
+    # doesn't complete.
     #
     # @!attribute [rw] unique_id
-    #   The unique ID that could not be deleted.
+    #   The unique ID that couldn't be deleted.
     #   @return [String]
     #
     # @!attribute [rw] error_type
-    #   The error type for the batch delete unique ID operation.
+    #   The error type for the delete unique ID operation.
+    #
+    #   The `SERVICE_ERROR` value indicates that an internal service-side
+    #   problem occurred during the deletion operation.
+    #
+    #   The `VALIDATION_ERROR` value indicates that the deletion operation
+    #   couldn't complete because of invalid input parameters or data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/DeleteUniqueIdError AWS API Documentation
@@ -888,6 +905,22 @@ module Aws::EntityResolution
     #   A list of `OutputSource` objects.
     #   @return [Array<Types::IdMappingJobOutputSource>]
     #
+    # @!attribute [rw] job_type
+    #   The job type of the ID mapping job.
+    #
+    #   A value of `INCREMENTAL` indicates that only new or changed data was
+    #   processed since the last job run. This is the default job type if
+    #   the workflow was created with an `incrementalRunConfig`.
+    #
+    #   A value of `BATCH` indicates that all data was processed from the
+    #   input source, regardless of previous job runs. This is the default
+    #   job type if the workflow wasn't created with an
+    #   `incrementalRunConfig`.
+    #
+    #   A value of `DELETE_ONLY` indicates that only deletion requests from
+    #   `BatchDeleteUniqueIds` were processed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetIdMappingJobOutput AWS API Documentation
     #
     class GetIdMappingJobOutput < Struct.new(
@@ -897,7 +930,8 @@ module Aws::EntityResolution
       :end_time,
       :metrics,
       :error_details,
-      :output_source_config)
+      :output_source_config,
+      :job_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -950,6 +984,10 @@ module Aws::EntityResolution
     #   The timestamp of when the workflow was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] incremental_run_config
+    #   The incremental run configuration for the ID mapping workflow.
+    #   @return [Types::IdMappingIncrementalRunConfig]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to access Amazon Web Services resources on your
@@ -972,6 +1010,7 @@ module Aws::EntityResolution
       :id_mapping_techniques,
       :created_at,
       :updated_at,
+      :incremental_run_config,
       :role_arn,
       :tags)
       SENSITIVE = []
@@ -1441,6 +1480,24 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # Incremental run configuration for an ID mapping workflow.
+    #
+    # @!attribute [rw] incremental_run_type
+    #   The incremental run type for an ID mapping workflow.
+    #
+    #   It takes only one value: `ON_DEMAND`. This setting runs the ID
+    #   mapping workflow when it's manually triggered through the
+    #   `StartIdMappingJob` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdMappingIncrementalRunConfig AWS API Documentation
+    #
+    class IdMappingIncrementalRunConfig < Struct.new(
+      :incremental_run_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains metrics about an ID mapping job, including
     # counts of input records, processed records, and mapped records between
     # source and target identifiers.
@@ -1457,6 +1514,12 @@ module Aws::EntityResolution
     #   The total number of records that did not get processed.
     #   @return [Integer]
     #
+    # @!attribute [rw] delete_records_processed
+    #   The number of records processed that were marked for deletion in the
+    #   input file using the DELETE schema mapping field. These are the
+    #   records to be removed from the ID mapping table.
+    #   @return [Integer]
+    #
     # @!attribute [rw] total_mapped_records
     #   The total number of records that were mapped.
     #   @return [Integer]
@@ -1470,13 +1533,47 @@ module Aws::EntityResolution
     #   @return [Integer]
     #
     # @!attribute [rw] unique_records_loaded
-    #   The number of records remaining after loading and aggregating
-    #   duplicate records. Duplicates are determined by the field marked as
-    #   UNIQUE\_ID in your schema mapping - records sharing the same value
-    #   in this field are considered duplicates. For example, if you
-    #   specified "customer\_id" as a UNIQUE\_ID field and had three
-    #   records with the same customer\_id value, they would count as one
-    #   unique record in this metric.
+    #   The number of de-duplicated processed records across all runs,
+    #   excluding deletion-related records. Duplicates are determined by the
+    #   field marked as UNIQUE\_ID in your schema mapping. Records sharing
+    #   the same value in this field are considered duplicates. For example,
+    #   if you specified "customer\_id" as a UNIQUE\_ID field and had
+    #   three records with the same customer\_id value, they would count as
+    #   one unique record in this metric.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] new_mapped_records
+    #   The number of new mapped records.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] new_mapped_source_records
+    #   The number of new source records mapped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] new_mapped_target_records
+    #   The number of new mapped target records.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] new_unique_records_loaded
+    #   The number of new unique records processed in the current job run,
+    #   after removing duplicates. This metric excludes deletion-related
+    #   records. Duplicates are determined by the field marked as UNIQUE\_ID
+    #   in your schema mapping. Records sharing the same value in this field
+    #   are considered duplicates. For example, if your current run
+    #   processes five new records with the same UNIQUE\_ID value, they
+    #   would count as one new unique record in this metric.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mapped_records_removed
+    #   The number of mapped records removed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mapped_source_records_removed
+    #   The number of source records removed due to ID mapping.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mapped_target_records_removed
+    #   The number of mapped target records removed.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdMappingJobMetrics AWS API Documentation
@@ -1485,10 +1582,18 @@ module Aws::EntityResolution
       :input_records,
       :total_records_processed,
       :records_not_processed,
+      :delete_records_processed,
       :total_mapped_records,
       :total_mapped_source_records,
       :total_mapped_target_records,
-      :unique_records_loaded)
+      :unique_records_loaded,
+      :new_mapped_records,
+      :new_mapped_source_records,
+      :new_mapped_target_records,
+      :new_unique_records_loaded,
+      :mapped_records_removed,
+      :mapped_source_records_removed,
+      :mapped_target_records_removed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1800,15 +1905,15 @@ module Aws::EntityResolution
     # contains only the `incrementalRunType` field, which appears as
     # "Automatic" in the console.
     #
-    # For workflows where `resolutionType` is `ML_MATCHING`, incremental
-    # processing is not supported.
+    # For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
+    # incremental processing is not supported.
     #
     # @!attribute [rw] incremental_run_type
     #   The type of incremental run. The only valid value is `IMMEDIATE`.
     #   This appears as "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
-    #   processing is not supported.
+    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
+    #   incremental processing is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IncrementalRunConfig AWS API Documentation
@@ -1893,6 +1998,12 @@ module Aws::EntityResolution
     #   The total number of records that did not get processed.
     #   @return [Integer]
     #
+    # @!attribute [rw] delete_records_processed
+    #   The number of records processed that were marked for deletion
+    #   (`DELETE` = True) in the input file. This metric tracks records
+    #   flagged for removal during the job execution.
+    #   @return [Integer]
+    #
     # @!attribute [rw] match_i_ds
     #   The total number of `matchID`s generated.
     #   @return [Integer]
@@ -1903,6 +2014,7 @@ module Aws::EntityResolution
       :input_records,
       :total_records_processed,
       :records_not_processed,
+      :delete_records_processed,
       :match_i_ds)
       SENSITIVE = []
       include Aws::Structure
@@ -2761,8 +2873,15 @@ module Aws::EntityResolution
     # `ruleBasedProperties`.
     #
     # @!attribute [rw] resolution_type
-    #   The type of matching. There are three types of matching:
-    #   `RULE_MATCHING`, `ML_MATCHING`, and `PROVIDER`.
+    #   The type of matching workflow to create. Specify one of the
+    #   following types:
+    #
+    #   * `RULE_MATCHING`: Match records using configurable rule-based
+    #     criteria
+    #
+    #   * `ML_MATCHING`: Match records using machine learning models
+    #
+    #   * `PROVIDER`: Match records using a third-party matching provider
     #   @return [String]
     #
     # @!attribute [rw] rule_based_properties
@@ -2789,7 +2908,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # The resource could not be found.
+    # The resource couldn't be found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3055,11 +3174,29 @@ module Aws::EntityResolution
     #   A list of `OutputSource` objects.
     #   @return [Array<Types::IdMappingJobOutputSource>]
     #
+    # @!attribute [rw] job_type
+    #   The job type for the ID mapping job.
+    #
+    #   If the `jobType` value is set to `INCREMENTAL`, only new or changed
+    #   data is processed since the last job run. This is the default value
+    #   if the `CreateIdMappingWorkflow` API is configured with an
+    #   `incrementalRunConfig`.
+    #
+    #   If the `jobType` value is set to `BATCH`, all data is processed from
+    #   the input source, regardless of previous job runs. This is the
+    #   default value if the `CreateIdMappingWorkflow` API isn't configured
+    #   with an `incrementalRunConfig`.
+    #
+    #   If the `jobType` value is set to `DELETE_ONLY`, only deletion
+    #   requests from `BatchDeleteUniqueIds` are processed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/StartIdMappingJobInput AWS API Documentation
     #
     class StartIdMappingJobInput < Struct.new(
       :workflow_name,
-      :output_source_config)
+      :output_source_config,
+      :job_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3072,11 +3209,28 @@ module Aws::EntityResolution
     #   A list of `OutputSource` objects.
     #   @return [Array<Types::IdMappingJobOutputSource>]
     #
+    # @!attribute [rw] job_type
+    #   The job type for the started ID mapping job.
+    #
+    #   A value of `INCREMENTAL` indicates that only new or changed data was
+    #   processed since the last job run. This is the default job type if
+    #   the workflow was created with an `incrementalRunConfig`.
+    #
+    #   A value of `BATCH` indicates that all data was processed from the
+    #   input source, regardless of previous job runs. This is the default
+    #   job type if the workflow wasn't created with an
+    #   `incrementalRunConfig`.
+    #
+    #   A value of `DELETE_ONLY` indicates that only deletion requests from
+    #   `BatchDeleteUniqueIds` were processed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/StartIdMappingJobOutput AWS API Documentation
     #
     class StartIdMappingJobOutput < Struct.new(
       :job_id,
-      :output_source_config)
+      :output_source_config,
+      :job_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3184,6 +3338,11 @@ module Aws::EntityResolution
     #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
+    # @!attribute [rw] incremental_run_config
+    #   The incremental run configuration for the update ID mapping
+    #   workflow.
+    #   @return [Types::IdMappingIncrementalRunConfig]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to access Amazon Web Services resources on your
@@ -3198,6 +3357,7 @@ module Aws::EntityResolution
       :input_source_config,
       :output_source_config,
       :id_mapping_techniques,
+      :incremental_run_config,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -3232,6 +3392,11 @@ module Aws::EntityResolution
     #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
+    # @!attribute [rw] incremental_run_config
+    #   The incremental run configuration for the update ID mapping workflow
+    #   output.
+    #   @return [Types::IdMappingIncrementalRunConfig]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to access Amazon Web Services resources on your
@@ -3247,6 +3412,7 @@ module Aws::EntityResolution
       :input_source_config,
       :output_source_config,
       :id_mapping_techniques,
+      :incremental_run_config,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -3379,8 +3545,8 @@ module Aws::EntityResolution
     #   object contains only the `incrementalRunType` field, which appears
     #   as "Automatic" in the console.
     #
-    #   For workflows where `resolutionType` is `ML_MATCHING`, incremental
-    #   processing is not supported.
+    #   For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
+    #   incremental processing is not supported.
     #   @return [Types::IncrementalRunConfig]
     #
     # @!attribute [rw] role_arn

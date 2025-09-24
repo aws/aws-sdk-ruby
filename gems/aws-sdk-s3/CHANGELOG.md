@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - TODO
 
+* Issue - Update `TransferManager#download_file` and `Object#download_file` documentation regarding temporary file usage and failure handling for different destination types.
+
 1.199.0 (2025-09-08)
 ------------------
 

@@ -428,7 +428,9 @@ module Aws
         def owner_account_id: () -> ::String
         def name: () -> ::String
         def created_date: () -> ::Time
-        def status: () -> ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
+        def status_reason: () -> ::String
+        def encryption_configuration_details: () -> Types::EncryptionConfigurationDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_instance-instance_method
       def describe_instance: (
@@ -1027,8 +1029,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_instance-instance_method
       def update_instance: (
-                             name: ::String,
-                             instance_arn: ::String
+                             ?name: ::String,
+                             instance_arn: ::String,
+                             ?encryption_configuration: {
+                               key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KEY"),
+                               kms_key_arn: ::String?
+                             }
                            ) -> _UpdateInstanceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceResponseSuccess
 
