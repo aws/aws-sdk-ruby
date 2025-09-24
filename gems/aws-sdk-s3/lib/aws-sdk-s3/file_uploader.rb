@@ -41,7 +41,6 @@ module Aws
           else
             # remove multipart parameters not supported by put_object
             options.delete(:thread_count)
-            options.delete(:executor)
             put_object(source, options)
           end
         end
@@ -49,9 +48,9 @@ module Aws
 
       private
 
-      def open_file(source)
-        if String === source || Pathname === source
-          File.open(source, 'rb') { |file| yield(file) }
+      def open_file(source, &block)
+        if source.is_a?(String) || source.is_a?(Pathname)
+          File.open(source, 'rb', &block)
         else
           yield(source)
         end

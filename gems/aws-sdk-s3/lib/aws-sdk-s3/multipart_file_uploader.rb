@@ -22,10 +22,10 @@ module Aws
       # @option options [Client] :client
       # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
+        @options = options
         @client = options[:client] || Client.new
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
         @executor = options[:executor] || DefaultExecutor.new(max_threads: @thread_count)
-        @options = options
       end
 
       # @return [Client]
@@ -39,11 +39,12 @@ module Aws
       #   It will be invoked with [bytes_read], [total_sizes]
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(source, options = {})
-        raise ArgumentError, 'unable to multipart upload files smaller than 5MB' if File.size(source) < MIN_PART_SIZE
+        file_size = File.size(source)
+        raise ArgumentError, 'unable to multipart upload files smaller than 5MB' if file_size < MIN_PART_SIZE
 
         upload_id = initiate_upload(options)
-        parts = upload_parts(upload_id, source, options)
-        complete_upload(upload_id, parts, source, options)
+        parts = upload_parts(upload_id, source, file_size, options)
+        complete_upload(upload_id, parts, file_size, options)
         shutdown_executor
       end
 
@@ -53,21 +54,21 @@ module Aws
         @client.create_multipart_upload(create_opts(options)).upload_id
       end
 
-      def complete_upload(upload_id, parts, source, options)
+      def complete_upload(upload_id, parts, file_size, options)
         @client.complete_multipart_upload(
           **complete_opts(options).merge(
             upload_id: upload_id,
             multipart_upload: { parts: parts },
-            mpu_object_size: File.size(source)
+            mpu_object_size: file_size
           )
         )
       rescue StandardError => e
         abort_upload(upload_id, options, [e])
       end
 
-      def upload_parts(upload_id, source, options)
+      def upload_parts(upload_id, source, file_size, options)
         completed = PartList.new
-        pending = PartList.new(compute_parts(upload_id, source, options))
+        pending = PartList.new(compute_parts(upload_id, source, file_size, options))
         errors = upload_with_executor(pending, completed, options)
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
@@ -94,17 +95,20 @@ module Aws
         raise MultipartUploadError.new(msg, errors + [e])
       end
 
-      def compute_parts(upload_id, source, options)
-        size = File.size(source)
-        default_part_size = compute_default_part_size(size)
+      def compute_parts(upload_id, source, file_size, options)
+        default_part_size = compute_default_part_size(file_size)
         offset = 0
         part_number = 1
         parts = []
-        while offset < size
+        while offset < file_size
           parts << upload_part_opts(options).merge(
             upload_id: upload_id,
             part_number: part_number,
-            body: FilePart.new(source: source, offset: offset, size: part_size(size, default_part_size, offset))
+            body: FilePart.new(
+              source: source,
+              offset: offset,
+              size: part_size(file_size, default_part_size, offset)
+            )
           )
           part_number += 1
           offset += default_part_size
@@ -123,17 +127,13 @@ module Aws
       def create_opts(options)
         opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
         opts[:checksum_type] = 'FULL_OBJECT' if checksum_keys?(options.keys)
-        CREATE_OPTIONS.each_with_object(opts) do |key, hash|
-          hash[key] = options[key] if options.key?(key)
-        end
+        CREATE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
       def complete_opts(options)
         opts = {}
         opts[:checksum_type] = 'FULL_OBJECT' if checksum_keys?(options.keys)
-        COMPLETE_OPTIONS.each_with_object(opts) do |key, hash|
-          hash[key] = options[key] if options.key?(key)
-        end
+        COMPLETE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
       def upload_part_opts(options)
