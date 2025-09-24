@@ -14,10 +14,6 @@ module Aws
 
       def initialize(options = {})
         @client = options[:client] || Client.new
-        # Downloads now use temporary files for String/Pathname destinations to prevent
-        # corruption on failure. However, customers who pass File/Tempfile paths expect
-        # the object to reflect changes during download. This flag restores direct writes
-        # for backward compatibility. Will be removed in next major version.
         @enable_direct_writes = options[:enable_direct_writes] || false
       end
 
