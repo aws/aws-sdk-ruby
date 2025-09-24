@@ -45,7 +45,8 @@ module Aws
         upload_id = initiate_upload(options)
         parts = upload_parts(upload_id, source, file_size, options)
         complete_upload(upload_id, parts, file_size, options)
-        shutdown_executor
+      ensure
+        @executor.shutdown if @executor.running? && @options[:executor].nil?
       end
 
       private
@@ -77,19 +78,13 @@ module Aws
         end
       end
 
-      def shutdown_executor
-        @executor.shutdown if @executor.running? && @options[:executor].nil?
-      end
-
       def abort_upload(upload_id, options, errors)
         @client.abort_multipart_upload(bucket: options[:bucket], key: options[:key], upload_id: upload_id)
         msg = "multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors)
       rescue MultipartUploadError => e
-        shutdown_executor
         raise e
       rescue StandardError => e
-        shutdown_executor
         msg = "failed to abort multipart upload: #{e.message}. "\
           "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [e])
