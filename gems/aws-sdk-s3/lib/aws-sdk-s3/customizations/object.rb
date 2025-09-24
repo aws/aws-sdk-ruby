@@ -491,7 +491,13 @@ module Aws
       # @param [String, Pathname, File, Tempfile] destination
       #   Where to download the file to. This can either be a String or Pathname to the file, an open File object,
       #   or an open Tempfile object. If you pass an open File or Tempfile object, then you are responsible for
-      #   closing it after the download completes.
+      #   closing it after the download completes. Download behavior varies by destination type:
+      #
+      #   * **String/Pathname paths**: Downloads to a temporary file first, then atomically moves to the final
+      #    destination. This prevents corruption of any existing file if the download fails.
+      #   * **File/Tempfile objects**: Downloads directly to the file object without using temporary files.
+      #    You are responsible for managing the file object's state and closing it after the download completes.
+      #    If the download fails, the file object may contain partial data.
       #
       # @param [Hash] options
       #   Additional options for {Client#get_object} and #{Client#head_object} may be provided.
