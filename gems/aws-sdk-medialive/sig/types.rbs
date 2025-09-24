@@ -1417,6 +1417,7 @@ module Aws::MediaLive
       attr_accessor timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
       attr_accessor min_qp: ::Integer
+      attr_accessor min_bitrate: ::Integer
       SENSITIVE: []
     end
 
@@ -1474,6 +1475,10 @@ module Aws::MediaLive
       attr_accessor treeblock_size: ("AUTO" | "TREE_SIZE_32X32")
       attr_accessor min_qp: ::Integer
       attr_accessor deblocking: ("DISABLED" | "ENABLED")
+      attr_accessor gop_b_reference: ("DISABLED" | "ENABLED")
+      attr_accessor gop_num_b_frames: ::Integer
+      attr_accessor min_bitrate: ::Integer
+      attr_accessor subgop_length: ("DYNAMIC" | "FIXED")
       SENSITIVE: []
     end
 
@@ -4766,6 +4771,7 @@ module Aws::MediaLive
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
       attr_accessor bitrate: ::Integer
       attr_accessor rate_control_mode: ("CBR" | "QVBR")
+      attr_accessor min_bitrate: ::Integer
       SENSITIVE: []
     end
 

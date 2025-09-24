@@ -20,7 +20,7 @@ module Aws::KendraRanking
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
             if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
                 return Aws::Endpoints::Endpoint.new(url: "https://kendra-ranking-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
               end
               raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
@@ -28,7 +28,7 @@ module Aws::KendraRanking
             return Aws::Endpoints::Endpoint.new(url: "https://kendra-ranking.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               return Aws::Endpoints::Endpoint.new(url: "https://kendra-ranking-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

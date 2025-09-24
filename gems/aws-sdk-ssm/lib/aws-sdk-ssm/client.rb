@@ -1016,6 +1016,11 @@ module Aws::SSM
     #   action to create an association in multiple Regions and multiple
     #   accounts.
     #
+    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   State Manager.
+    #
+    #    </note>
+    #
     # @option params [Integer] :schedule_offset
     #   Number of days to wait after the scheduled day to run an association.
     #   For example, if you specified a cron schedule of `cron(0 0 ? * THU#2
@@ -2170,10 +2175,20 @@ module Aws::SSM
     #
     #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
-    #     Manager under any circumstances. If a package was installed before
-    #     it was added to the rejected patches list, or is installed outside
-    #     of Patch Manager afterward, it's considered noncompliant with the
-    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
+    #     Manager under any circumstances.
+    #
+    #     State value assignment for patch compliance:
+    #
+    #     * If a package was installed before it was added to the rejected
+    #       patches list, or is installed outside of Patch Manager afterward,
+    #       it's considered noncompliant with the patch baseline and its
+    #       status is reported as `INSTALLED_REJECTED`.
+    #
+    #     * If an update attempts to install a dependency package that is now
+    #       rejected by the baseline, when previous versions of the package
+    #       were not rejected, the package being updated is reported as
+    #       `MISSING` for `SCAN` operations and as `FAILED` for `INSTALL`
+    #       operations.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -6249,6 +6264,13 @@ module Aws::SSM
     # @option params [Types::BaselineOverride] :baseline_override
     #   Defines the basic information about a patch baseline override.
     #
+    # @option params [Boolean] :use_s3_dual_stack_endpoint
+    #   Specifies whether to use S3 dualstack endpoints for the patch snapshot
+    #   download URL. Set to `true` to receive a presigned URL that supports
+    #   both IPv4 and IPv6 connectivity. Set to `false` to use standard
+    #   IPv4-only endpoints. Default is `false`. This parameter is required
+    #   for managed nodes in IPv6-only environments.
+    #
     # @return [Types::GetDeployablePatchSnapshotForInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDeployablePatchSnapshotForInstanceResult#instance_id #instance_id} => String
@@ -6303,6 +6325,7 @@ module Aws::SSM
     #       ],
     #       available_security_updates_compliance_status: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
     #     },
+    #     use_s3_dual_stack_endpoint: false,
     #   })
     #
     # @example Response structure
@@ -11739,6 +11762,11 @@ module Aws::SSM
     #   action to update an association in multiple Regions and multiple
     #   accounts.
     #
+    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   State Manager.
+    #
+    #    </note>
+    #
     # @option params [Integer] :schedule_offset
     #   Number of days to wait after the scheduled day to run an association.
     #   For example, if you specified a cron schedule of `cron(0 0 ? * THU#2
@@ -13195,10 +13223,20 @@ module Aws::SSM
     #
     #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
-    #     Manager under any circumstances. If a package was installed before
-    #     it was added to the rejected patches list, or is installed outside
-    #     of Patch Manager afterward, it's considered noncompliant with the
-    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
+    #     Manager under any circumstances.
+    #
+    #     State value assignment for patch compliance:
+    #
+    #     * If a package was installed before it was added to the rejected
+    #       patches list, or is installed outside of Patch Manager afterward,
+    #       it's considered noncompliant with the patch baseline and its
+    #       status is reported as `INSTALLED_REJECTED`.
+    #
+    #     * If an update attempts to install a dependency package that is now
+    #       rejected by the baseline, when previous versions of the package
+    #       were not rejected, the package being updated is reported as
+    #       `MISSING` for `SCAN` operations and as `FAILED` for `INSTALL`
+    #       operations.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -13510,7 +13548,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.202.0'
+      context[:gem_version] = '1.203.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

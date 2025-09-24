@@ -2680,6 +2680,7 @@ module Aws::SSM
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:baseline_override, Shapes::ShapeRef.new(shape: BaselineOverride, location_name: "BaselineOverride"))
+    GetDeployablePatchSnapshotForInstanceRequest.add_member(:use_s3_dual_stack_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseS3DualStackEndpoint"))
     GetDeployablePatchSnapshotForInstanceRequest.struct_class = Types::GetDeployablePatchSnapshotForInstanceRequest
 
     GetDeployablePatchSnapshotForInstanceResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))

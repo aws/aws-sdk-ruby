@@ -21,6 +21,7 @@ module Aws::SSOAdmin
 
     class AccessDeniedException
       attr_accessor message: ::String
+      attr_accessor reason: ("KMS_AccessDeniedException")
       SENSITIVE: []
     end
 
@@ -445,7 +446,9 @@ module Aws::SSOAdmin
       attr_accessor owner_account_id: ::String
       attr_accessor name: ::String
       attr_accessor created_date: ::Time
-      attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
+      attr_accessor status_reason: ::String
+      attr_accessor encryption_configuration_details: Types::EncryptionConfigurationDetails
       SENSITIVE: []
     end
 
@@ -508,6 +511,20 @@ module Aws::SSOAdmin
       attr_accessor display_name: ::String
       attr_accessor icon_url: ::String
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KEY")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfigurationDetails
+      attr_accessor key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KEY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_status: ("UPDATING" | "ENABLED" | "UPDATE_FAILED")
+      attr_accessor encryption_status_reason: ::String
       SENSITIVE: []
     end
 
@@ -629,7 +646,8 @@ module Aws::SSOAdmin
       attr_accessor owner_account_id: ::String
       attr_accessor name: ::String
       attr_accessor created_date: ::Time
-      attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
+      attr_accessor status_reason: ::String
       SENSITIVE: []
     end
 
@@ -1069,6 +1087,7 @@ module Aws::SSOAdmin
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      attr_accessor reason: ("KMS_NotFoundException")
       SENSITIVE: []
     end
 
@@ -1118,6 +1137,7 @@ module Aws::SSOAdmin
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor reason: ("KMS_ThrottlingException")
       SENSITIVE: []
     end
 
@@ -1192,6 +1212,7 @@ module Aws::SSOAdmin
     class UpdateInstanceRequest
       attr_accessor name: ::String
       attr_accessor instance_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
     end
 
@@ -1222,6 +1243,7 @@ module Aws::SSOAdmin
 
     class ValidationException
       attr_accessor message: ::String
+      attr_accessor reason: ("KMS_InvalidKeyUsageException" | "KMS_InvalidStateException" | "KMS_DisabledException")
       SENSITIVE: []
     end
   end

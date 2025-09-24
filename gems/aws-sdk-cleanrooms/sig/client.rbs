@@ -1137,7 +1137,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#populate_id_mapping_table-instance_method
       def populate_id_mapping_table: (
                                        id_mapping_table_identifier: ::String,
-                                       membership_identifier: ::String
+                                       membership_identifier: ::String,
+                                       ?job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
                                      ) -> _PopulateIdMappingTableResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PopulateIdMappingTableResponseSuccess
 

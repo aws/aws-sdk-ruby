@@ -331,6 +331,7 @@ module Aws::CleanRooms
     IdNamespaceType = Shapes::StringShape.new(name: 'IdNamespaceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobComputePaymentConfig = Shapes::StructureShape.new(name: 'JobComputePaymentConfig')
+    JobType = Shapes::StringShape.new(name: 'JobType')
     JoinOperator = Shapes::StringShape.new(name: 'JoinOperator')
     JoinOperatorsList = Shapes::ListShape.new(name: 'JoinOperatorsList')
     JoinRequiredOption = Shapes::StringShape.new(name: 'JoinRequiredOption')
@@ -2102,6 +2103,7 @@ module Aws::CleanRooms
 
     PopulateIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))
     PopulateIdMappingTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    PopulateIdMappingTableInput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     PopulateIdMappingTableInput.struct_class = Types::PopulateIdMappingTableInput
 
     PopulateIdMappingTableOutput.add_member(:id_mapping_job_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "idMappingJobId"))
@@ -2940,6 +2942,7 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: CreatePrivacyBudgetTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: CreatePrivacyBudgetTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

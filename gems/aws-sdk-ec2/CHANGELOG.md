@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.559.0 (2025-09-23)
+------------------
+
+* Feature - Add Amazon EC2 R8gn instance types
+
 1.558.0 (2025-09-18)
 ------------------
 

@@ -1453,7 +1453,8 @@ module Aws
                                                             },
                                                           ]?,
                                                           available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")?
-                                                        }
+                                                        },
+                                                        ?use_s3_dual_stack_endpoint: bool
                                                       ) -> _GetDeployablePatchSnapshotForInstanceResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeployablePatchSnapshotForInstanceResponseSuccess
 

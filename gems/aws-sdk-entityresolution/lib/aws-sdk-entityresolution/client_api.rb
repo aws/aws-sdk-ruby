@@ -60,7 +60,6 @@ module Aws::EntityResolution
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceedsLimitException = Shapes::StructureShape.new(name: 'ExceedsLimitException')
     FailedRecord = Shapes::StructureShape.new(name: 'FailedRecord')
-    FailedRecordInputSourceARNString = Shapes::StringShape.new(name: 'FailedRecordInputSourceARNString')
     FailedRecordsList = Shapes::ListShape.new(name: 'FailedRecordsList')
     GenerateMatchIdInput = Shapes::StructureShape.new(name: 'GenerateMatchIdInput')
     GenerateMatchIdInputRecordsList = Shapes::ListShape.new(name: 'GenerateMatchIdInputRecordsList')
@@ -84,6 +83,8 @@ module Aws::EntityResolution
     GetSchemaMappingInput = Shapes::StructureShape.new(name: 'GetSchemaMappingInput')
     GetSchemaMappingOutput = Shapes::StructureShape.new(name: 'GetSchemaMappingOutput')
     HeaderSafeUniqueId = Shapes::StringShape.new(name: 'HeaderSafeUniqueId')
+    IdMappingIncrementalRunConfig = Shapes::StructureShape.new(name: 'IdMappingIncrementalRunConfig')
+    IdMappingIncrementalRunType = Shapes::StringShape.new(name: 'IdMappingIncrementalRunType')
     IdMappingJobMetrics = Shapes::StructureShape.new(name: 'IdMappingJobMetrics')
     IdMappingJobOutputSource = Shapes::StructureShape.new(name: 'IdMappingJobOutputSource')
     IdMappingJobOutputSourceConfig = Shapes::ListShape.new(name: 'IdMappingJobOutputSourceConfig')
@@ -95,7 +96,6 @@ module Aws::EntityResolution
     IdMappingWorkflowArn = Shapes::StringShape.new(name: 'IdMappingWorkflowArn')
     IdMappingWorkflowInputSource = Shapes::StructureShape.new(name: 'IdMappingWorkflowInputSource')
     IdMappingWorkflowInputSourceConfig = Shapes::ListShape.new(name: 'IdMappingWorkflowInputSourceConfig')
-    IdMappingWorkflowInputSourceInputSourceARNString = Shapes::StringShape.new(name: 'IdMappingWorkflowInputSourceInputSourceARNString')
     IdMappingWorkflowList = Shapes::ListShape.new(name: 'IdMappingWorkflowList')
     IdMappingWorkflowOutputSource = Shapes::StructureShape.new(name: 'IdMappingWorkflowOutputSource')
     IdMappingWorkflowOutputSourceConfig = Shapes::ListShape.new(name: 'IdMappingWorkflowOutputSourceConfig')
@@ -109,15 +109,14 @@ module Aws::EntityResolution
     IdNamespaceIdMappingWorkflowPropertiesList = Shapes::ListShape.new(name: 'IdNamespaceIdMappingWorkflowPropertiesList')
     IdNamespaceInputSource = Shapes::StructureShape.new(name: 'IdNamespaceInputSource')
     IdNamespaceInputSourceConfig = Shapes::ListShape.new(name: 'IdNamespaceInputSourceConfig')
-    IdNamespaceInputSourceInputSourceARNString = Shapes::StringShape.new(name: 'IdNamespaceInputSourceInputSourceARNString')
     IdNamespaceList = Shapes::ListShape.new(name: 'IdNamespaceList')
     IdNamespaceSummary = Shapes::StructureShape.new(name: 'IdNamespaceSummary')
     IdNamespaceType = Shapes::StringShape.new(name: 'IdNamespaceType')
     IncrementalRunConfig = Shapes::StructureShape.new(name: 'IncrementalRunConfig')
     IncrementalRunType = Shapes::StringShape.new(name: 'IncrementalRunType')
     InputSource = Shapes::StructureShape.new(name: 'InputSource')
+    InputSourceARN = Shapes::StringShape.new(name: 'InputSourceARN')
     InputSourceConfig = Shapes::ListShape.new(name: 'InputSourceConfig')
-    InputSourceInputSourceARNString = Shapes::StringShape.new(name: 'InputSourceInputSourceARNString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntermediateSourceConfiguration = Shapes::StructureShape.new(name: 'IntermediateSourceConfiguration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -128,6 +127,7 @@ module Aws::EntityResolution
     JobOutputSourceConfig = Shapes::ListShape.new(name: 'JobOutputSourceConfig')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobSummary = Shapes::StructureShape.new(name: 'JobSummary')
+    JobType = Shapes::StringShape.new(name: 'JobType')
     KMSArn = Shapes::StringShape.new(name: 'KMSArn')
     ListIdMappingJobsInput = Shapes::StructureShape.new(name: 'ListIdMappingJobsInput')
     ListIdMappingJobsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListIdMappingJobsInputMaxResultsInteger')
@@ -156,7 +156,6 @@ module Aws::EntityResolution
     MatchGroupsList = Shapes::ListShape.new(name: 'MatchGroupsList')
     MatchPurpose = Shapes::StringShape.new(name: 'MatchPurpose')
     MatchedRecord = Shapes::StructureShape.new(name: 'MatchedRecord')
-    MatchedRecordInputSourceARNString = Shapes::StringShape.new(name: 'MatchedRecordInputSourceARNString')
     MatchedRecordsList = Shapes::ListShape.new(name: 'MatchedRecordsList')
     MatchingWorkflowArn = Shapes::StringShape.new(name: 'MatchingWorkflowArn')
     MatchingWorkflowList = Shapes::ListShape.new(name: 'MatchingWorkflowList')
@@ -193,7 +192,6 @@ module Aws::EntityResolution
     RecordAttributeMapString255KeyString = Shapes::StringShape.new(name: 'RecordAttributeMapString255KeyString')
     RecordAttributeMapString255ValueString = Shapes::StringShape.new(name: 'RecordAttributeMapString255ValueString')
     RecordAttributeMapValueString = Shapes::StringShape.new(name: 'RecordAttributeMapValueString')
-    RecordInputSourceARNString = Shapes::StringShape.new(name: 'RecordInputSourceARNString')
     RecordMatchingModel = Shapes::StringShape.new(name: 'RecordMatchingModel')
     RecordMatchingModelList = Shapes::ListShape.new(name: 'RecordMatchingModelList')
     RequiredBucketActionsList = Shapes::ListShape.new(name: 'RequiredBucketActionsList')
@@ -293,6 +291,7 @@ module Aws::EntityResolution
     CreateIdMappingWorkflowInput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     CreateIdMappingWorkflowInput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
     CreateIdMappingWorkflowInput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
+    CreateIdMappingWorkflowInput.add_member(:incremental_run_config, Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: "incrementalRunConfig"))
     CreateIdMappingWorkflowInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     CreateIdMappingWorkflowInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateIdMappingWorkflowInput.struct_class = Types::CreateIdMappingWorkflowInput
@@ -303,6 +302,7 @@ module Aws::EntityResolution
     CreateIdMappingWorkflowOutput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     CreateIdMappingWorkflowOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
     CreateIdMappingWorkflowOutput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
+    CreateIdMappingWorkflowOutput.add_member(:incremental_run_config, Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: "incrementalRunConfig"))
     CreateIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     CreateIdMappingWorkflowOutput.struct_class = Types::CreateIdMappingWorkflowOutput
 
@@ -413,7 +413,7 @@ module Aws::EntityResolution
     ExceedsLimitException.add_member(:quota_value, Shapes::ShapeRef.new(shape: Integer, location_name: "quotaValue"))
     ExceedsLimitException.struct_class = Types::ExceedsLimitException
 
-    FailedRecord.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: FailedRecordInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    FailedRecord.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceARN, required: true, location_name: "inputSourceARN"))
     FailedRecord.add_member(:unique_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "uniqueId"))
     FailedRecord.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
     FailedRecord.struct_class = Types::FailedRecord
@@ -442,6 +442,7 @@ module Aws::EntityResolution
     GetIdMappingJobOutput.add_member(:metrics, Shapes::ShapeRef.new(shape: IdMappingJobMetrics, location_name: "metrics"))
     GetIdMappingJobOutput.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     GetIdMappingJobOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingJobOutputSourceConfig, location_name: "outputSourceConfig"))
+    GetIdMappingJobOutput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     GetIdMappingJobOutput.struct_class = Types::GetIdMappingJobOutput
 
     GetIdMappingWorkflowInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location: "uri", location_name: "workflowName"))
@@ -455,6 +456,7 @@ module Aws::EntityResolution
     GetIdMappingWorkflowOutput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
     GetIdMappingWorkflowOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     GetIdMappingWorkflowOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetIdMappingWorkflowOutput.add_member(:incremental_run_config, Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: "incrementalRunConfig"))
     GetIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     GetIdMappingWorkflowOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetIdMappingWorkflowOutput.struct_class = Types::GetIdMappingWorkflowOutput
@@ -552,13 +554,24 @@ module Aws::EntityResolution
     GetSchemaMappingOutput.add_member(:has_workflows, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "hasWorkflows"))
     GetSchemaMappingOutput.struct_class = Types::GetSchemaMappingOutput
 
+    IdMappingIncrementalRunConfig.add_member(:incremental_run_type, Shapes::ShapeRef.new(shape: IdMappingIncrementalRunType, location_name: "incrementalRunType"))
+    IdMappingIncrementalRunConfig.struct_class = Types::IdMappingIncrementalRunConfig
+
     IdMappingJobMetrics.add_member(:input_records, Shapes::ShapeRef.new(shape: Integer, location_name: "inputRecords"))
     IdMappingJobMetrics.add_member(:total_records_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRecordsProcessed"))
     IdMappingJobMetrics.add_member(:records_not_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "recordsNotProcessed"))
+    IdMappingJobMetrics.add_member(:delete_records_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "deleteRecordsProcessed"))
     IdMappingJobMetrics.add_member(:total_mapped_records, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMappedRecords"))
     IdMappingJobMetrics.add_member(:total_mapped_source_records, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMappedSourceRecords"))
     IdMappingJobMetrics.add_member(:total_mapped_target_records, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMappedTargetRecords"))
     IdMappingJobMetrics.add_member(:unique_records_loaded, Shapes::ShapeRef.new(shape: Integer, location_name: "uniqueRecordsLoaded"))
+    IdMappingJobMetrics.add_member(:new_mapped_records, Shapes::ShapeRef.new(shape: Integer, location_name: "newMappedRecords"))
+    IdMappingJobMetrics.add_member(:new_mapped_source_records, Shapes::ShapeRef.new(shape: Integer, location_name: "newMappedSourceRecords"))
+    IdMappingJobMetrics.add_member(:new_mapped_target_records, Shapes::ShapeRef.new(shape: Integer, location_name: "newMappedTargetRecords"))
+    IdMappingJobMetrics.add_member(:new_unique_records_loaded, Shapes::ShapeRef.new(shape: Integer, location_name: "newUniqueRecordsLoaded"))
+    IdMappingJobMetrics.add_member(:mapped_records_removed, Shapes::ShapeRef.new(shape: Integer, location_name: "mappedRecordsRemoved"))
+    IdMappingJobMetrics.add_member(:mapped_source_records_removed, Shapes::ShapeRef.new(shape: Integer, location_name: "mappedSourceRecordsRemoved"))
+    IdMappingJobMetrics.add_member(:mapped_target_records_removed, Shapes::ShapeRef.new(shape: Integer, location_name: "mappedTargetRecordsRemoved"))
     IdMappingJobMetrics.struct_class = Types::IdMappingJobMetrics
 
     IdMappingJobOutputSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
@@ -581,7 +594,7 @@ module Aws::EntityResolution
     IdMappingTechniques.add_member(:provider_properties, Shapes::ShapeRef.new(shape: ProviderProperties, location_name: "providerProperties"))
     IdMappingTechniques.struct_class = Types::IdMappingTechniques
 
-    IdMappingWorkflowInputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    IdMappingWorkflowInputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceARN, required: true, location_name: "inputSourceARN"))
     IdMappingWorkflowInputSource.add_member(:schema_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "schemaName"))
     IdMappingWorkflowInputSource.add_member(:type, Shapes::ShapeRef.new(shape: IdNamespaceType, location_name: "type"))
     IdMappingWorkflowInputSource.struct_class = Types::IdMappingWorkflowInputSource
@@ -616,7 +629,7 @@ module Aws::EntityResolution
 
     IdNamespaceIdMappingWorkflowPropertiesList.member = Shapes::ShapeRef.new(shape: IdNamespaceIdMappingWorkflowProperties)
 
-    IdNamespaceInputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: IdNamespaceInputSourceInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    IdNamespaceInputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceARN, required: true, location_name: "inputSourceARN"))
     IdNamespaceInputSource.add_member(:schema_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "schemaName"))
     IdNamespaceInputSource.struct_class = Types::IdNamespaceInputSource
 
@@ -636,7 +649,7 @@ module Aws::EntityResolution
     IncrementalRunConfig.add_member(:incremental_run_type, Shapes::ShapeRef.new(shape: IncrementalRunType, location_name: "incrementalRunType"))
     IncrementalRunConfig.struct_class = Types::IncrementalRunConfig
 
-    InputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    InputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceARN, required: true, location_name: "inputSourceARN"))
     InputSource.add_member(:schema_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "schemaName"))
     InputSource.add_member(:apply_normalization, Shapes::ShapeRef.new(shape: Boolean, location_name: "applyNormalization"))
     InputSource.struct_class = Types::InputSource
@@ -654,6 +667,7 @@ module Aws::EntityResolution
     JobMetrics.add_member(:input_records, Shapes::ShapeRef.new(shape: Integer, location_name: "inputRecords"))
     JobMetrics.add_member(:total_records_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRecordsProcessed"))
     JobMetrics.add_member(:records_not_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "recordsNotProcessed"))
+    JobMetrics.add_member(:delete_records_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "deleteRecordsProcessed"))
     JobMetrics.add_member(:match_i_ds, Shapes::ShapeRef.new(shape: Integer, location_name: "matchIDs"))
     JobMetrics.struct_class = Types::JobMetrics
 
@@ -742,7 +756,7 @@ module Aws::EntityResolution
 
     MatchGroupsList.member = Shapes::ShapeRef.new(shape: MatchGroup)
 
-    MatchedRecord.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: MatchedRecordInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    MatchedRecord.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceARN, required: true, location_name: "inputSourceARN"))
     MatchedRecord.add_member(:record_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recordId"))
     MatchedRecord.struct_class = Types::MatchedRecord
 
@@ -840,7 +854,7 @@ module Aws::EntityResolution
     PutPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
     PutPolicyOutput.struct_class = Types::PutPolicyOutput
 
-    Record.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: RecordInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    Record.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: InputSourceARN, required: true, location_name: "inputSourceARN"))
     Record.add_member(:unique_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "uniqueId"))
     Record.add_member(:record_attribute_map, Shapes::ShapeRef.new(shape: RecordAttributeMapString255, required: true, location_name: "recordAttributeMap"))
     Record.struct_class = Types::Record
@@ -911,10 +925,12 @@ module Aws::EntityResolution
 
     StartIdMappingJobInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityNameOrIdMappingWorkflowArn, required: true, location: "uri", location_name: "workflowName"))
     StartIdMappingJobInput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingJobOutputSourceConfig, location_name: "outputSourceConfig"))
+    StartIdMappingJobInput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     StartIdMappingJobInput.struct_class = Types::StartIdMappingJobInput
 
     StartIdMappingJobOutput.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
     StartIdMappingJobOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingJobOutputSourceConfig, location_name: "outputSourceConfig"))
+    StartIdMappingJobOutput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     StartIdMappingJobOutput.struct_class = Types::StartIdMappingJobOutput
 
     StartMatchingJobInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location: "uri", location_name: "workflowName"))
@@ -954,6 +970,7 @@ module Aws::EntityResolution
     UpdateIdMappingWorkflowInput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     UpdateIdMappingWorkflowInput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
     UpdateIdMappingWorkflowInput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
+    UpdateIdMappingWorkflowInput.add_member(:incremental_run_config, Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: "incrementalRunConfig"))
     UpdateIdMappingWorkflowInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     UpdateIdMappingWorkflowInput.struct_class = Types::UpdateIdMappingWorkflowInput
 
@@ -963,6 +980,7 @@ module Aws::EntityResolution
     UpdateIdMappingWorkflowOutput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     UpdateIdMappingWorkflowOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
     UpdateIdMappingWorkflowOutput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
+    UpdateIdMappingWorkflowOutput.add_member(:incremental_run_config, Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: "incrementalRunConfig"))
     UpdateIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     UpdateIdMappingWorkflowOutput.struct_class = Types::UpdateIdMappingWorkflowOutput
 

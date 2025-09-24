@@ -63,6 +63,11 @@ module Aws::SSOOIDC
       end
 
       # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
       def error_description
         @data[:error_description]
       end
@@ -220,6 +225,11 @@ module Aws::SSOOIDC
       # @return [String]
       def error
         @data[:error]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
 
       # @return [String]

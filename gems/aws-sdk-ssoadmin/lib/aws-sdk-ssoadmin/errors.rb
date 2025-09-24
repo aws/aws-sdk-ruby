@@ -54,6 +54,11 @@ module Aws::SSOAdmin
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ConflictException < ServiceError
@@ -99,6 +104,11 @@ module Aws::SSOAdmin
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -129,6 +139,11 @@ module Aws::SSOAdmin
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ValidationException < ServiceError
@@ -143,6 +158,11 @@ module Aws::SSOAdmin
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
     end
 

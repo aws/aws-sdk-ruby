@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2025-09-24)
+------------------
+
+* Feature - Documentation only updates for KMS.
+
 1.112.0 (2025-08-27)
 ------------------
 

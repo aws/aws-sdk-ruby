@@ -13,7 +13,7 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
-    class Agent
+    class AgentRuntime
       attr_accessor agent_runtime_arn: ::String
       attr_accessor agent_runtime_id: ::String
       attr_accessor agent_runtime_version: ::String
@@ -24,18 +24,18 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:description]
     end
 
-    class AgentArtifact
+    class AgentRuntimeArtifact
       attr_accessor container_configuration: Types::ContainerConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class ContainerConfiguration < AgentArtifact
+      class ContainerConfiguration < AgentRuntimeArtifact
       end
-      class Unknown < AgentArtifact
+      class Unknown < AgentRuntimeArtifact
       end
     end
 
-    class AgentEndpoint
+    class AgentRuntimeEndpoint
       attr_accessor name: ::String
       attr_accessor live_version: ::String
       attr_accessor target_version: ::String
@@ -91,7 +91,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     class BrowserNetworkConfiguration
-      attr_accessor network_mode: ("PUBLIC")
+      attr_accessor network_mode: ("PUBLIC" | "VPC")
+      attr_accessor vpc_config: Types::VpcConfig
       SENSITIVE: []
     end
 
@@ -107,7 +108,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     class CodeInterpreterNetworkConfiguration
-      attr_accessor network_mode: ("PUBLIC" | "SANDBOX")
+      attr_accessor network_mode: ("PUBLIC" | "SANDBOX" | "VPC")
+      attr_accessor vpc_config: Types::VpcConfig
       SENSITIVE: []
     end
 
@@ -154,6 +156,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_version: ::String
       attr_accessor description: ::String
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:name]
     end
 
@@ -169,13 +172,15 @@ module Aws::BedrockAgentCoreControl
     class CreateAgentRuntimeRequest
       attr_accessor agent_runtime_name: ::String
       attr_accessor description: ::String
-      attr_accessor agent_runtime_artifact: Types::AgentArtifact
+      attr_accessor agent_runtime_artifact: Types::AgentRuntimeArtifact
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor protocol_configuration: Types::ProtocolConfiguration
       attr_accessor client_token: ::String
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor request_header_configuration: Types::RequestHeaderConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -209,6 +214,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor network_configuration: Types::BrowserNetworkConfiguration
       attr_accessor recording: Types::RecordingConfig
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -226,6 +232,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor execution_role_arn: ::String
       attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -661,11 +668,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor role_arn: ::String
-      attr_accessor agent_runtime_artifact: Types::AgentArtifact
+      attr_accessor agent_runtime_artifact: Types::AgentRuntimeArtifact
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor protocol_configuration: Types::ProtocolConfiguration
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor request_header_configuration: Types::RequestHeaderConfiguration
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
       SENSITIVE: [:description, :environment_variables]
     end
@@ -698,6 +706,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor network_configuration: Types::BrowserNetworkConfiguration
       attr_accessor recording: Types::RecordingConfig
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor failure_reason: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: [:description]
@@ -716,6 +725,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor execution_role_arn: ::String
       attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor failure_reason: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: [:description]
@@ -860,7 +870,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class ListAgentRuntimeEndpointsResponse
-      attr_accessor runtime_endpoints: ::Array[Types::AgentEndpoint]
+      attr_accessor runtime_endpoints: ::Array[Types::AgentRuntimeEndpoint]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -873,7 +883,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class ListAgentRuntimeVersionsResponse
-      attr_accessor agent_runtimes: ::Array[Types::Agent]
+      attr_accessor agent_runtimes: ::Array[Types::AgentRuntime]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -885,7 +895,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class ListAgentRuntimesResponse
-      attr_accessor agent_runtimes: ::Array[Types::Agent]
+      attr_accessor agent_runtimes: ::Array[Types::AgentRuntime]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -974,6 +984,16 @@ module Aws::BedrockAgentCoreControl
     class ListOauth2CredentialProvidersResponse
       attr_accessor credential_providers: ::Array[Types::Oauth2CredentialProviderItem]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1132,7 +1152,8 @@ module Aws::BedrockAgentCoreControl
     end
 
     class NetworkConfiguration
-      attr_accessor network_mode: ("PUBLIC")
+      attr_accessor network_mode: ("PUBLIC" | "VPC")
+      attr_accessor network_mode_config: Types::VpcConfig
       SENSITIVE: []
     end
 
@@ -1235,6 +1256,17 @@ module Aws::BedrockAgentCoreControl
       attr_accessor enabled: bool
       attr_accessor s3_location: Types::S3Location
       SENSITIVE: []
+    end
+
+    class RequestHeaderConfiguration
+      attr_accessor request_header_allowlist: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RequestHeaderAllowlist < RequestHeaderConfiguration
+      end
+      class Unknown < RequestHeaderConfiguration
+      end
     end
 
     class ResourceLimitExceededException
@@ -1386,6 +1418,15 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:append_to_prompt]
     end
 
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class TargetConfiguration
       attr_accessor mcp: Types::McpTargetConfiguration
       attr_accessor unknown: untyped
@@ -1444,6 +1485,15 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
     class UpdateAgentRuntimeEndpointRequest
       attr_accessor agent_runtime_id: ::String
       attr_accessor endpoint_name: ::String
@@ -1467,13 +1517,14 @@ module Aws::BedrockAgentCoreControl
     class UpdateAgentRuntimeRequest
       attr_accessor agent_runtime_id: ::String
       attr_accessor description: ::String
-      attr_accessor agent_runtime_artifact: Types::AgentArtifact
+      attr_accessor agent_runtime_artifact: Types::AgentRuntimeArtifact
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor protocol_configuration: Types::ProtocolConfiguration
       attr_accessor client_token: ::String
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor request_header_configuration: Types::RequestHeaderConfiguration
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -1657,6 +1708,12 @@ module Aws::BedrockAgentCoreControl
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
       SENSITIVE: []
     end
 

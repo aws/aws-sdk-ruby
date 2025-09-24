@@ -762,7 +762,9 @@ module Aws::Neptune
     #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter is
-    #   not case-sensitive.
+    #   not case-sensitive. If the source DB cluster snapshot is in a
+    #   different region or owned by another account, specify the snapshot
+    #   ARN.
     #
     #   Constraints:
     #
@@ -7781,7 +7783,7 @@ module Aws::Neptune
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

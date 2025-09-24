@@ -22,6 +22,7 @@ module Aws::SSOAdmin
     AccessControlAttributeValueSourceList = Shapes::ListShape.new(name: 'AccessControlAttributeValueSourceList')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedExceptionMessage = Shapes::StringShape.new(name: 'AccessDeniedExceptionMessage')
+    AccessDeniedExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedExceptionReason')
     AccountAssignment = Shapes::StructureShape.new(name: 'AccountAssignment')
     AccountAssignmentForPrincipal = Shapes::StructureShape.new(name: 'AccountAssignmentForPrincipal')
     AccountAssignmentList = Shapes::ListShape.new(name: 'AccountAssignmentList')
@@ -129,6 +130,8 @@ module Aws::SSOAdmin
     DetachManagedPolicyFromPermissionSetResponse = Shapes::StructureShape.new(name: 'DetachManagedPolicyFromPermissionSetResponse')
     DisplayData = Shapes::StructureShape.new(name: 'DisplayData')
     Duration = Shapes::StringShape.new(name: 'Duration')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionConfigurationDetails = Shapes::StructureShape.new(name: 'EncryptionConfigurationDetails')
     FederationProtocol = Shapes::StringShape.new(name: 'FederationProtocol')
     GetApplicationAccessScopeRequest = Shapes::StructureShape.new(name: 'GetApplicationAccessScopeRequest')
     GetApplicationAccessScopeResponse = Shapes::StructureShape.new(name: 'GetApplicationAccessScopeResponse')
@@ -163,6 +166,9 @@ module Aws::SSOAdmin
     JMESPath = Shapes::StringShape.new(name: 'JMESPath')
     JwksRetrievalOption = Shapes::StringShape.new(name: 'JwksRetrievalOption')
     JwtBearerGrant = Shapes::StructureShape.new(name: 'JwtBearerGrant')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    KmsKeyStatus = Shapes::StringShape.new(name: 'KmsKeyStatus')
+    KmsKeyType = Shapes::StringShape.new(name: 'KmsKeyType')
     ListAccountAssignmentCreationStatusRequest = Shapes::StructureShape.new(name: 'ListAccountAssignmentCreationStatusRequest')
     ListAccountAssignmentCreationStatusResponse = Shapes::StructureShape.new(name: 'ListAccountAssignmentCreationStatusResponse')
     ListAccountAssignmentDeletionStatusRequest = Shapes::StructureShape.new(name: 'ListAccountAssignmentDeletionStatusRequest')
@@ -249,6 +255,7 @@ module Aws::SSOAdmin
     RefreshTokenGrant = Shapes::StructureShape.new(name: 'RefreshTokenGrant')
     RelayState = Shapes::StringShape.new(name: 'RelayState')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceNotFoundExceptionReason = Shapes::StringShape.new(name: 'ResourceNotFoundExceptionReason')
     ResourceNotFoundMessage = Shapes::StringShape.new(name: 'ResourceNotFoundMessage')
     ResourceServerConfig = Shapes::StructureShape.new(name: 'ResourceServerConfig')
     ResourceServerScope = Shapes::StringShape.new(name: 'ResourceServerScope')
@@ -276,6 +283,7 @@ module Aws::SSOAdmin
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThrottlingExceptionMessage = Shapes::StringShape.new(name: 'ThrottlingExceptionMessage')
+    ThrottlingExceptionReason = Shapes::StringShape.new(name: 'ThrottlingExceptionReason')
     Token = Shapes::StringShape.new(name: 'Token')
     TokenExchangeGrant = Shapes::StructureShape.new(name: 'TokenExchangeGrant')
     TokenIssuerAudience = Shapes::StringShape.new(name: 'TokenIssuerAudience')
@@ -306,6 +314,7 @@ module Aws::SSOAdmin
     UserBackgroundSessionApplicationStatus = Shapes::StringShape.new(name: 'UserBackgroundSessionApplicationStatus')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
+    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
 
     AccessControlAttribute.add_member(:key, Shapes::ShapeRef.new(shape: AccessControlAttributeKey, required: true, location_name: "Key"))
     AccessControlAttribute.add_member(:value, Shapes::ShapeRef.new(shape: AccessControlAttributeValue, required: true, location_name: "Value"))
@@ -319,6 +328,7 @@ module Aws::SSOAdmin
     AccessControlAttributeValueSourceList.member = Shapes::ShapeRef.new(shape: AccessControlAttributeValueSource)
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: AccessDeniedExceptionMessage, location_name: "Message"))
+    AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "Reason"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccountAssignment.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
@@ -641,6 +651,8 @@ module Aws::SSOAdmin
     DescribeInstanceResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     DescribeInstanceResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     DescribeInstanceResponse.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
+    DescribeInstanceResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    DescribeInstanceResponse.add_member(:encryption_configuration_details, Shapes::ShapeRef.new(shape: EncryptionConfigurationDetails, location_name: "EncryptionConfigurationDetails"))
     DescribeInstanceResponse.struct_class = Types::DescribeInstanceResponse
 
     DescribePermissionSetProvisioningStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
@@ -684,6 +696,16 @@ module Aws::SSOAdmin
     DisplayData.add_member(:icon_url, Shapes::ShapeRef.new(shape: IconUrl, location_name: "IconUrl"))
     DisplayData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DisplayData.struct_class = Types::DisplayData
+
+    EncryptionConfiguration.add_member(:key_type, Shapes::ShapeRef.new(shape: KmsKeyType, required: true, location_name: "KeyType"))
+    EncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    EncryptionConfigurationDetails.add_member(:key_type, Shapes::ShapeRef.new(shape: KmsKeyType, location_name: "KeyType"))
+    EncryptionConfigurationDetails.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    EncryptionConfigurationDetails.add_member(:encryption_status, Shapes::ShapeRef.new(shape: KmsKeyStatus, location_name: "EncryptionStatus"))
+    EncryptionConfigurationDetails.add_member(:encryption_status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "EncryptionStatusReason"))
+    EncryptionConfigurationDetails.struct_class = Types::EncryptionConfigurationDetails
 
     GetApplicationAccessScopeRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
     GetApplicationAccessScopeRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
@@ -765,6 +787,7 @@ module Aws::SSOAdmin
     InstanceMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     InstanceMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     InstanceMetadata.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
+    InstanceMetadata.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
     InstanceMetadata.struct_class = Types::InstanceMetadata
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: InternalFailureMessage, location_name: "Message"))
@@ -1079,6 +1102,7 @@ module Aws::SSOAdmin
     RefreshTokenGrant.struct_class = Types::RefreshTokenGrant
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ResourceNotFoundMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:reason, Shapes::ShapeRef.new(shape: ResourceNotFoundExceptionReason, location_name: "Reason"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceServerConfig.add_member(:scopes, Shapes::ShapeRef.new(shape: ResourceServerScopes, location_name: "Scopes"))
@@ -1122,6 +1146,7 @@ module Aws::SSOAdmin
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ThrottlingExceptionMessage, location_name: "Message"))
+    ThrottlingException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottlingExceptionReason, location_name: "Reason"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TokenExchangeGrant.struct_class = Types::TokenExchangeGrant
@@ -1172,8 +1197,9 @@ module Aws::SSOAdmin
 
     UpdateInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::UpdateInstanceAccessControlAttributeConfigurationResponse
 
-    UpdateInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameType, required: true, location_name: "Name"))
+    UpdateInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     UpdateInstanceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    UpdateInstanceRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     UpdateInstanceRequest.struct_class = Types::UpdateInstanceRequest
 
     UpdateInstanceResponse.struct_class = Types::UpdateInstanceResponse
@@ -1195,6 +1221,7 @@ module Aws::SSOAdmin
     UpdateTrustedTokenIssuerResponse.struct_class = Types::UpdateTrustedTokenIssuerResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: "Message"))
+    ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.struct_class = Types::ValidationException
 
 
@@ -2303,6 +2330,7 @@ module Aws::SSOAdmin
         o.output = Shapes::ShapeRef.new(shape: UpdateInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

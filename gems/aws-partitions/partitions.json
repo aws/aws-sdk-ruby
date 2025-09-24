@@ -3799,6 +3799,7 @@
       },
       "bedrock" : {
         "endpoints" : {
+          "ap-east-2" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-northeast-3" : { },
@@ -3808,6 +3809,8 @@
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
           "ap-southeast-4" : { },
+          "ap-southeast-5" : { },
+          "ap-southeast-7" : { },
           "bedrock-ap-northeast-1" : {
             "credentialScope" : {
               "region" : "ap-northeast-1"
@@ -4105,6 +4108,8 @@
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
+          "il-central-1" : { },
+          "me-central-1" : { },
           "sa-east-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
@@ -7525,6 +7530,7 @@
           } ]
         },
         "endpoints" : {
+          "ap-east-1" : { },
           "ap-east-2" : { },
           "ap-northeast-1" : {
             "hostname" : "datazone.ap-northeast-1.api.aws"
@@ -7573,6 +7579,7 @@
           "eu-central-1" : {
             "hostname" : "datazone.eu-central-1.api.aws"
           },
+          "eu-central-2" : { },
           "eu-north-1" : {
             "hostname" : "datazone.eu-north-1.api.aws"
           },
@@ -14055,6 +14062,7 @@
       },
       "kafkaconnect" : {
         "endpoints" : {
+          "ap-east-2" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-south-1" : { },
@@ -14062,12 +14070,16 @@
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-5" : { },
+          "ap-southeast-7" : { },
           "ca-central-1" : { },
+          "ca-west-1" : { },
           "eu-central-1" : { },
           "eu-north-1" : { },
+          "eu-south-2" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
+          "mx-central-1" : { },
           "sa-east-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
@@ -17888,6 +17900,7 @@
             },
             "hostname" : "oidc.ap-southeast-5.amazonaws.com"
           },
+          "ap-southeast-7" : { },
           "ca-central-1" : {
             "credentialScope" : {
               "region" : "ca-central-1"
@@ -17966,6 +17979,7 @@
             },
             "hostname" : "oidc.me-south-1.amazonaws.com"
           },
+          "mx-central-1" : { },
           "sa-east-1" : {
             "credentialScope" : {
               "region" : "sa-east-1"
@@ -20240,6 +20254,7 @@
         "endpoints" : {
           "af-south-1" : { },
           "ap-east-1" : { },
+          "ap-east-2" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-south-1" : { },
@@ -22988,6 +23003,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "ap-southeast-6" : { },
           "ap-southeast-7" : {
             "variants" : [ {
               "hostname" : "securityhub.ap-southeast-7.api.aws",

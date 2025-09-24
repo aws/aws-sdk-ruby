@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2025-09-24)
+------------------
+
+* Feature - This release adds support for IPv6-only, DUAL_STACK DAX instances
+
 1.76.0 (2025-08-26)
 ------------------
 

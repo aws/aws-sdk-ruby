@@ -247,6 +247,8 @@ module Aws::EKS
     Logging = Shapes::StructureShape.new(name: 'Logging')
     MarketplaceInformation = Shapes::StructureShape.new(name: 'MarketplaceInformation')
     NodeRepairConfig = Shapes::StructureShape.new(name: 'NodeRepairConfig')
+    NodeRepairConfigOverrides = Shapes::StructureShape.new(name: 'NodeRepairConfigOverrides')
+    NodeRepairConfigOverridesList = Shapes::ListShape.new(name: 'NodeRepairConfigOverridesList')
     Nodegroup = Shapes::StructureShape.new(name: 'Nodegroup')
     NodegroupHealth = Shapes::StructureShape.new(name: 'NodegroupHealth')
     NodegroupIssueCode = Shapes::StringShape.new(name: 'NodegroupIssueCode')
@@ -276,6 +278,7 @@ module Aws::EKS
     RemoteNodeNetworkList = Shapes::ListShape.new(name: 'RemoteNodeNetworkList')
     RemotePodNetwork = Shapes::StructureShape.new(name: 'RemotePodNetwork')
     RemotePodNetworkList = Shapes::ListShape.new(name: 'RemotePodNetworkList')
+    RepairAction = Shapes::StringShape.new(name: 'RepairAction')
     ResolveConflicts = Shapes::StringShape.new(name: 'ResolveConflicts')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
@@ -1234,7 +1237,20 @@ module Aws::EKS
     MarketplaceInformation.struct_class = Types::MarketplaceInformation
 
     NodeRepairConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
+    NodeRepairConfig.add_member(:max_unhealthy_node_threshold_count, Shapes::ShapeRef.new(shape: NonZeroInteger, location_name: "maxUnhealthyNodeThresholdCount"))
+    NodeRepairConfig.add_member(:max_unhealthy_node_threshold_percentage, Shapes::ShapeRef.new(shape: PercentCapacity, location_name: "maxUnhealthyNodeThresholdPercentage"))
+    NodeRepairConfig.add_member(:max_parallel_nodes_repaired_count, Shapes::ShapeRef.new(shape: NonZeroInteger, location_name: "maxParallelNodesRepairedCount"))
+    NodeRepairConfig.add_member(:max_parallel_nodes_repaired_percentage, Shapes::ShapeRef.new(shape: PercentCapacity, location_name: "maxParallelNodesRepairedPercentage"))
+    NodeRepairConfig.add_member(:node_repair_config_overrides, Shapes::ShapeRef.new(shape: NodeRepairConfigOverridesList, location_name: "nodeRepairConfigOverrides"))
     NodeRepairConfig.struct_class = Types::NodeRepairConfig
+
+    NodeRepairConfigOverrides.add_member(:node_monitoring_condition, Shapes::ShapeRef.new(shape: String, location_name: "nodeMonitoringCondition"))
+    NodeRepairConfigOverrides.add_member(:node_unhealthy_reason, Shapes::ShapeRef.new(shape: String, location_name: "nodeUnhealthyReason"))
+    NodeRepairConfigOverrides.add_member(:min_repair_wait_time_mins, Shapes::ShapeRef.new(shape: NonZeroInteger, location_name: "minRepairWaitTimeMins"))
+    NodeRepairConfigOverrides.add_member(:repair_action, Shapes::ShapeRef.new(shape: RepairAction, location_name: "repairAction"))
+    NodeRepairConfigOverrides.struct_class = Types::NodeRepairConfigOverrides
+
+    NodeRepairConfigOverridesList.member = Shapes::ShapeRef.new(shape: NodeRepairConfigOverrides)
 
     Nodegroup.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     Nodegroup.add_member(:nodegroup_arn, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupArn"))

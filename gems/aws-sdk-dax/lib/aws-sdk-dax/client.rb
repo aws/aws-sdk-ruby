@@ -513,7 +513,8 @@ module Aws::DAX
     #   primary and nine read replicas). `If the AvailabilityZones` parameter
     #   is provided, its length must equal the `ReplicationFactor`.
     #
-    #   <note markdown="1"> AWS recommends that you have at least two read replicas per cluster.
+    #   <note markdown="1"> Amazon Web Services recommends that you have at least two read
+    #   replicas per cluster.
     #
     #    </note>
     #
@@ -596,6 +597,22 @@ module Aws::DAX
     #
     #   * `TLS` for Transport Layer Security
     #
+    # @option params [String] :network_type
+    #   Specifies the IP protocol(s) the cluster uses for network
+    #   communications. Values are:
+    #
+    #   * `ipv4` - The cluster is accessible only through IPv4 addresses
+    #
+    #   * `ipv6` - The cluster is accessible only through IPv6 addresses
+    #
+    #   * `dual_stack` - The cluster is accessible through both IPv4 and IPv6
+    #     addresses.
+    #
+    #   <note markdown="1"> If no explicit `NetworkType` is provided, the network type is derived
+    #   based on the subnet group's configuration.
+    #
+    #    </note>
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -624,6 +641,7 @@ module Aws::DAX
     #       enabled: false, # required
     #     },
     #     cluster_endpoint_encryption_type: "NONE", # accepts NONE, TLS
+    #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
     #   })
     #
     # @example Response structure
@@ -663,6 +681,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.cluster.cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateCluster AWS API Documentation
     #
@@ -740,6 +759,10 @@ module Aws::DAX
     #   resp.subnet_group.subnets #=> Array
     #   resp.subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.subnet_group.subnets[0].subnet_availability_zone #=> String
+    #   resp.subnet_group.subnets[0].supported_network_types #=> Array
+    #   resp.subnet_group.subnets[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.subnet_group.supported_network_types #=> Array
+    #   resp.subnet_group.supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroup AWS API Documentation
     #
@@ -819,6 +842,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.cluster.cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor AWS API Documentation
     #
@@ -884,6 +908,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.cluster.cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteCluster AWS API Documentation
     #
@@ -1044,6 +1069,7 @@ module Aws::DAX
     #   resp.clusters[0].parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.clusters[0].sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.clusters[0].cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.clusters[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters AWS API Documentation
     #
@@ -1341,6 +1367,10 @@ module Aws::DAX
     #   resp.subnet_groups[0].subnets #=> Array
     #   resp.subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.subnet_groups[0].subnets[0].subnet_availability_zone #=> String
+    #   resp.subnet_groups[0].subnets[0].supported_network_types #=> Array
+    #   resp.subnet_groups[0].subnets[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.subnet_groups[0].supported_network_types #=> Array
+    #   resp.subnet_groups[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeSubnetGroups AWS API Documentation
     #
@@ -1414,6 +1444,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.cluster.cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactor AWS API Documentation
     #
@@ -1526,6 +1557,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.cluster.cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNode AWS API Documentation
     #
@@ -1697,6 +1729,7 @@ module Aws::DAX
     #   resp.cluster.parameter_group.node_ids_to_reboot[0] #=> String
     #   resp.cluster.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.cluster.cluster_endpoint_encryption_type #=> String, one of "NONE", "TLS"
+    #   resp.cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateCluster AWS API Documentation
     #
@@ -1788,6 +1821,10 @@ module Aws::DAX
     #   resp.subnet_group.subnets #=> Array
     #   resp.subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.subnet_group.subnets[0].subnet_availability_zone #=> String
+    #   resp.subnet_group.subnets[0].supported_network_types #=> Array
+    #   resp.subnet_group.subnets[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.subnet_group.supported_network_types #=> Array
+    #   resp.subnet_group.supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroup AWS API Documentation
     #
@@ -1816,7 +1853,7 @@ module Aws::DAX
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dax'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

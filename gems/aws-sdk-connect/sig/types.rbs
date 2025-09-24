@@ -6349,6 +6349,7 @@ module Aws::Connect
       attr_accessor auto_accept: bool
       attr_accessor after_contact_work_time_limit: ::Integer
       attr_accessor desk_phone_number: ::String
+      attr_accessor persistent_connection: bool
       SENSITIVE: []
     end
 

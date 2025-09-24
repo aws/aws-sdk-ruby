@@ -64,10 +64,15 @@ module Aws::SSOAdmin
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for the access denied exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1608,6 +1613,22 @@ module Aws::SSOAdmin
     #   The status of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   Provides additional context about the current status of the IAM
+    #   Identity Center instance. This field is particularly useful when an
+    #   instance is in a non-ACTIVE state, such as CREATE\_FAILED. When an
+    #   instance fails to create or update, this field contains information
+    #   about the cause, which may include issues with KMS key
+    #   configuration, permission problems with the specified KMS key, or
+    #   service-related errors.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration_details
+    #   Contains the encryption configuration for your IAM Identity Center
+    #   instance, including the encryption status, KMS key type, and KMS key
+    #   ARN.
+    #   @return [Types::EncryptionConfigurationDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceResponse AWS API Documentation
     #
     class DescribeInstanceResponse < Struct.new(
@@ -1616,7 +1637,9 @@ module Aws::SSOAdmin
       :owner_account_id,
       :name,
       :created_date,
-      :status)
+      :status,
+      :status_reason,
+      :encryption_configuration_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1813,6 +1836,64 @@ module Aws::SSOAdmin
       :display_name,
       :icon_url,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that specifies the KMS key type and KMS key ARN used to
+    # encrypt data in your IAM Identity Center instance.
+    #
+    # @!attribute [rw] key_type
+    #   The type of KMS key used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key used to encrypt data. Required when KeyType
+    #   is CUSTOMER\_MANAGED\_KEY. Cannot be specified when KeyType is
+    #   AWS\_OWNED\_KMS\_KEY.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :key_type,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption configuration of your IAM Identity Center instance,
+    # including the key type, KMS key ARN, and current encryption status.
+    #
+    # @!attribute [rw] key_type
+    #   The type of KMS key used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key currently used to encrypt data in your IAM
+    #   Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status
+    #   The current status of encryption configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status_reason
+    #   Provides additional context about the current encryption status.
+    #   This field is particularly useful when the encryption status is
+    #   UPDATE\_FAILED. When encryption configuration update fails, this
+    #   field contains information about the cause, which may include KMS
+    #   key access issues, key not found errors, invalid key configuration,
+    #   key in an invalid state, or a disabled key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/EncryptionConfigurationDetails AWS API Documentation
+    #
+    class EncryptionConfigurationDetails < Struct.new(
+      :key_type,
+      :kms_key_arn,
+      :encryption_status,
+      :encryption_status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2168,6 +2249,15 @@ module Aws::SSOAdmin
     #   The current status of this Identity Center instance.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   Provides additional context about the current status of the IAM
+    #   Identity Center instance. This field is particularly useful when an
+    #   instance is in a non-ACTIVE state, such as CREATE\_FAILED. When an
+    #   instance creation fails, this field contains information about the
+    #   cause, which may include issues with KMS key configuration or
+    #   insufficient permissions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/InstanceMetadata AWS API Documentation
     #
     class InstanceMetadata < Struct.new(
@@ -2176,7 +2266,8 @@ module Aws::SSOAdmin
       :owner_account_id,
       :name,
       :created_date,
-      :status)
+      :status,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3852,10 +3943,15 @@ module Aws::SSOAdmin
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for the resource not found exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4017,10 +4113,15 @@ module Aws::SSOAdmin
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for the throttling exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4237,11 +4338,19 @@ module Aws::SSOAdmin
     #   *Amazon Web Services General Reference*.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption configuration for your IAM Identity Center
+    #   instance. You can use this to configure customer managed KMS keys
+    #   (CMK) or Amazon Web Services owned KMS keys for encrypting your
+    #   instance data.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceRequest AWS API Documentation
     #
     class UpdateInstanceRequest < Struct.new(
       :name,
-      :instance_arn)
+      :instance_arn,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4328,10 +4437,15 @@ module Aws::SSOAdmin
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for the validation exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1700,6 +1700,7 @@ module Aws::SSM
       attr_accessor instance_id: ::String
       attr_accessor snapshot_id: ::String
       attr_accessor baseline_override: Types::BaselineOverride
+      attr_accessor use_s3_dual_stack_endpoint: bool
       SENSITIVE: []
     end
 

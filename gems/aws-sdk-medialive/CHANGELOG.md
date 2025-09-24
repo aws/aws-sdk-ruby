@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2025-09-19)
+------------------
+
+* Feature - Add MinBitrate for QVBR mode under H264/H265/AV1 output codec. Add GopBReference, GopNumBFrames, SubGopLength fields under H265 output codec.
+
 1.162.0 (2025-09-11)
 ------------------
 

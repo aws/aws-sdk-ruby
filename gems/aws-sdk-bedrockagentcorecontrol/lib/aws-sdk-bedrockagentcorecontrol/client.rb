@@ -476,22 +476,22 @@ module Aws::BedrockAgentCoreControl
 
     # @!group API Operations
 
-    # Creates an Amazon Secure Agent.
+    # Creates an Amazon Bedrock AgentCore Runtime.
     #
     # @option params [required, String] :agent_runtime_name
-    #   The name of the secure agent.
+    #   The name of the AgentCore Runtime.
     #
     # @option params [String] :description
-    #   The description of the agent runtime.
+    #   The description of the AgentCore Runtime.
     #
-    # @option params [required, Types::AgentArtifact] :agent_runtime_artifact
-    #   The artifact of the agent.
+    # @option params [required, Types::AgentRuntimeArtifact] :agent_runtime_artifact
+    #   The artifact of the AgentCore Runtime.
     #
     # @option params [required, String] :role_arn
-    #   The IAM role ARN that provides permissions for the agent runtime.
+    #   The IAM role ARN that provides permissions for the AgentCore Runtime.
     #
     # @option params [required, Types::NetworkConfiguration] :network_configuration
-    #   The network configuration for the agent runtime.
+    #   The network configuration for the AgentCore Runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
     #   The protocol configuration for an agent runtime. This structure
@@ -505,10 +505,19 @@ module Aws::BedrockAgentCoreControl
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :environment_variables
-    #   Environment variables to set in the agent runtime environment.
+    #   Environment variables to set in the AgentCore Runtime environment.
     #
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   The authorizer configuration for the agent runtime.
+    #   The authorizer configuration for the AgentCore Runtime.
+    #
+    # @option params [Types::RequestHeaderConfiguration] :request_header_configuration
+    #   Configuration for HTTP request headers that will be passed through to
+    #   the runtime.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the agent runtime. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -531,7 +540,11 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     role_arn: "RoleArn", # required
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC", # required, accepts PUBLIC
+    #       network_mode: "PUBLIC", # required, accepts PUBLIC, VPC
+    #       network_mode_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP
@@ -546,6 +559,12 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #       },
+    #     },
+    #     request_header_configuration: {
+    #       request_header_allowlist: ["HeaderName"],
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -567,19 +586,20 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Creates an Amazon Secure AgentEndpoint.
+    # Creates an AgentCore Runtime endpoint.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime to create an endpoint for.
+    #   The unique identifier of the AgentCore Runtime to create an endpoint
+    #   for.
     #
     # @option params [required, String] :name
-    #   The name of the agent runtime endpoint.
+    #   The name of the AgentCore Runtime endpoint.
     #
     # @option params [String] :agent_runtime_version
-    #   The version of the agent runtime to use for the endpoint.
+    #   The version of the AgentCore Runtime to use for the endpoint.
     #
     # @option params [String] :description
-    #   The description of the agent runtime endpoint.
+    #   The description of the AgentCore Runtime endpoint.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -587,6 +607,11 @@ module Aws::BedrockAgentCoreControl
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the agent runtime endpoint.
+    #   Tags enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
     #
     # @return [Types::CreateAgentRuntimeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -604,6 +629,9 @@ module Aws::BedrockAgentCoreControl
     #     agent_runtime_version: "AgentRuntimeVersion",
     #     description: "AgentEndpointDescription",
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -690,6 +718,11 @@ module Aws::BedrockAgentCoreControl
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the browser. Tags enable you
+    #   to categorize your resources in different ways, for example, by
+    #   purpose, owner, or environment.
+    #
     # @return [Types::CreateBrowserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBrowserResponse#browser_id #browser_id} => String
@@ -704,7 +737,11 @@ module Aws::BedrockAgentCoreControl
     #     description: "Description",
     #     execution_role_arn: "RoleArn",
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC", # required, accepts PUBLIC
+    #       network_mode: "PUBLIC", # required, accepts PUBLIC, VPC
+    #       vpc_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
     #     },
     #     recording: {
     #       enabled: false,
@@ -714,6 +751,9 @@ module Aws::BedrockAgentCoreControl
     #       },
     #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -759,6 +799,11 @@ module Aws::BedrockAgentCoreControl
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the code interpreter. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateCodeInterpreterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCodeInterpreterResponse#code_interpreter_id #code_interpreter_id} => String
@@ -773,9 +818,16 @@ module Aws::BedrockAgentCoreControl
     #     description: "Description",
     #     execution_role_arn: "RoleArn",
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC", # required, accepts PUBLIC, SANDBOX
+    #       network_mode: "PUBLIC", # required, accepts PUBLIC, SANDBOX, VPC
+    #       vpc_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
     #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -808,41 +860,48 @@ module Aws::BedrockAgentCoreControl
     #   The description of the gateway.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier to ensure that the operation
+    #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, the service ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
     #   permissions for the gateway to access Amazon Web Services services.
     #
     # @option params [required, String] :protocol_type
-    #   The protocol type for the gateway. Currently supports MCP (Model
-    #   Context Protocol).
+    #   The protocol type for the gateway.
     #
     # @option params [Types::GatewayProtocolConfiguration] :protocol_configuration
     #   The configuration settings for the protocol specified in the
-    #   protocolType parameter.
+    #   `protocolType` parameter.
     #
     # @option params [required, String] :authorizer_type
     #   The type of authorizer to use for the gateway.
     #
     # @option params [required, Types::AuthorizerConfiguration] :authorizer_configuration
-    #   The authorizer configuration for the Gateway.
+    #   The authorizer configuration for the gateway.
     #
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key used to encrypt data
     #   associated with the gateway.
     #
     # @option params [String] :exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned to
+    #     help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to the
+    #     end user.
     #
     # @return [Types::CreateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -931,12 +990,8 @@ module Aws::BedrockAgentCoreControl
     # Creates a target for a gateway. A target defines an endpoint that the
     # gateway can connect to.
     #
-    # To create a target, you must specify the gateway identifier and target
-    # configuration.
-    #
     # @option params [required, String] :gateway_identifier
-    #   The identifier of the gateway to create a target for. This can be
-    #   either the gateway ID or the gateway ARN.
+    #   The identifier of the gateway to create a target for.
     #
     # @option params [required, String] :name
     #   The name of the gateway target. The name must be unique within the
@@ -946,13 +1001,17 @@ module Aws::BedrockAgentCoreControl
     #   The description of the gateway target.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier to ensure that the operation
+    #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, the service ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, Types::TargetConfiguration] :target_configuration
     #   The configuration settings for the target, including endpoint
@@ -1122,7 +1181,7 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Creates a new memory.
+    # Creates a new Amazon Bedrock AgentCore Memory resource.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
@@ -1382,10 +1441,10 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes an Amazon Secure Agent.
+    # Deletes an Amazon Bedrock AgentCore Runtime.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime to delete.
+    #   The unique identifier of the AgentCore Runtime to delete.
     #
     # @return [Types::DeleteAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1410,14 +1469,14 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes an Amazon Secure AgentEndpoint.
+    # Deletes an AAgentCore Runtime endpoint.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime associated with the
+    #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the agent runtime endpoint to delete.
+    #   The name of the AgentCore Runtime endpoint to delete.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -1553,11 +1612,10 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes a Gateway.
+    # Deletes a gateway.
     #
     # @option params [required, String] :gateway_identifier
-    #   The identifier of the gateway to delete. This can be either the
-    #   gateway ID or the gateway ARN.
+    #   The identifier of the gateway to delete.
     #
     # @return [Types::DeleteGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1587,13 +1645,13 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes a Gateway Target.
+    # Deletes a gateway target.
     #
     # @option params [required, String] :gateway_identifier
-    #   The unique identifier of the Gateway associated with the target.
+    #   The unique identifier of the gateway associated with the target.
     #
     # @option params [required, String] :target_id
-    #   The unique identifier of the Gateway Target to delete.
+    #   The unique identifier of the gateway target to delete.
     #
     # @return [Types::DeleteGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1626,7 +1684,7 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes a memory.
+    # Deletes an Amazon Bedrock AgentCore Memory resource.
     #
     # @option params [String] :client_token
     #   A client token is used for keeping track of idempotent requests. It
@@ -1709,13 +1767,13 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Gets an Amazon Secure Agent.
+    # Gets an Amazon Bedrock AgentCore Runtime.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime to retrieve.
+    #   The unique identifier of the AgentCore Runtime to retrieve.
     #
     # @option params [String] :agent_runtime_version
-    #   The version of the agent runtime to retrieve.
+    #   The version of the AgentCore Runtime to retrieve.
     #
     # @return [Types::GetAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1728,11 +1786,12 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#created_at #created_at} => Time
     #   * {Types::GetAgentRuntimeResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetAgentRuntimeResponse#role_arn #role_arn} => String
-    #   * {Types::GetAgentRuntimeResponse#agent_runtime_artifact #agent_runtime_artifact} => Types::AgentArtifact
+    #   * {Types::GetAgentRuntimeResponse#agent_runtime_artifact #agent_runtime_artifact} => Types::AgentRuntimeArtifact
     #   * {Types::GetAgentRuntimeResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
     #   * {Types::GetAgentRuntimeResponse#protocol_configuration #protocol_configuration} => Types::ProtocolConfiguration
     #   * {Types::GetAgentRuntimeResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
     #   * {Types::GetAgentRuntimeResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
+    #   * {Types::GetAgentRuntimeResponse#request_header_configuration #request_header_configuration} => Types::RequestHeaderConfiguration
     #   * {Types::GetAgentRuntimeResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -1754,7 +1813,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.last_updated_at #=> Time
     #   resp.role_arn #=> String
     #   resp.agent_runtime_artifact.container_configuration.container_uri #=> String
-    #   resp.network_configuration.network_mode #=> String, one of "PUBLIC"
+    #   resp.network_configuration.network_mode #=> String, one of "PUBLIC", "VPC"
+    #   resp.network_configuration.network_mode_config.security_groups #=> Array
+    #   resp.network_configuration.network_mode_config.security_groups[0] #=> String
+    #   resp.network_configuration.network_mode_config.subnets #=> Array
+    #   resp.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP"
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
@@ -1763,6 +1826,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.request_header_configuration.request_header_allowlist #=> Array
+    #   resp.request_header_configuration.request_header_allowlist[0] #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
@@ -1777,11 +1842,11 @@ module Aws::BedrockAgentCoreControl
     # Gets information about an Amazon Secure AgentEndpoint.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime associated with the
+    #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the agent runtime endpoint to retrieve.
+    #   The name of the AgentCore Runtime endpoint to retrieve.
     #
     # @return [Types::GetAgentRuntimeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1878,6 +1943,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetBrowserResponse#network_configuration #network_configuration} => Types::BrowserNetworkConfiguration
     #   * {Types::GetBrowserResponse#recording #recording} => Types::RecordingConfig
     #   * {Types::GetBrowserResponse#status #status} => String
+    #   * {Types::GetBrowserResponse#failure_reason #failure_reason} => String
     #   * {Types::GetBrowserResponse#created_at #created_at} => Time
     #   * {Types::GetBrowserResponse#last_updated_at #last_updated_at} => Time
     #
@@ -1894,11 +1960,16 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
-    #   resp.network_configuration.network_mode #=> String, one of "PUBLIC"
+    #   resp.network_configuration.network_mode #=> String, one of "PUBLIC", "VPC"
+    #   resp.network_configuration.vpc_config.security_groups #=> Array
+    #   resp.network_configuration.vpc_config.security_groups[0] #=> String
+    #   resp.network_configuration.vpc_config.subnets #=> Array
+    #   resp.network_configuration.vpc_config.subnets[0] #=> String
     #   resp.recording.enabled #=> Boolean
     #   resp.recording.s3_location.bucket #=> String
     #   resp.recording.s3_location.prefix #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
+    #   resp.failure_reason #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #
@@ -1925,6 +1996,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetCodeInterpreterResponse#execution_role_arn #execution_role_arn} => String
     #   * {Types::GetCodeInterpreterResponse#network_configuration #network_configuration} => Types::CodeInterpreterNetworkConfiguration
     #   * {Types::GetCodeInterpreterResponse#status #status} => String
+    #   * {Types::GetCodeInterpreterResponse#failure_reason #failure_reason} => String
     #   * {Types::GetCodeInterpreterResponse#created_at #created_at} => Time
     #   * {Types::GetCodeInterpreterResponse#last_updated_at #last_updated_at} => Time
     #
@@ -1941,8 +2013,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
-    #   resp.network_configuration.network_mode #=> String, one of "PUBLIC", "SANDBOX"
+    #   resp.network_configuration.network_mode #=> String, one of "PUBLIC", "SANDBOX", "VPC"
+    #   resp.network_configuration.vpc_config.security_groups #=> Array
+    #   resp.network_configuration.vpc_config.security_groups[0] #=> String
+    #   resp.network_configuration.vpc_config.subnets #=> Array
+    #   resp.network_configuration.vpc_config.subnets[0] #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
+    #   resp.failure_reason #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #
@@ -1958,8 +2035,7 @@ module Aws::BedrockAgentCoreControl
     # Retrieves information about a specific Gateway.
     #
     # @option params [required, String] :gateway_identifier
-    #   The identifier of the gateway to retrieve. This can be either the
-    #   gateway ID or the gateway ARN.
+    #   The identifier of the gateway to retrieve.
     #
     # @return [Types::GetGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2024,11 +2100,10 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Retrieves information about a specific Gateway Target.
+    # Retrieves information about a specific gateway target.
     #
     # @option params [required, String] :gateway_identifier
-    #   The identifier of the gateway that contains the target. This can be
-    #   either the gateway ID or the gateway ARN.
+    #   The identifier of the gateway that contains the target.
     #
     # @option params [required, String] :target_id
     #   The unique identifier of the target to retrieve.
@@ -2111,7 +2186,7 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Retrieve an existing memory.
+    # Retrieve an existing Amazon Bedrock AgentCore Memory resource.
     #
     # @option params [required, String] :memory_id
     #   The unique identifier of the memory to retrieve.
@@ -2323,7 +2398,7 @@ module Aws::BedrockAgentCoreControl
     # Lists all endpoints for a specific Amazon Secure Agent.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime to list endpoints for.
+    #   The unique identifier of the AgentCore Runtime to list endpoints for.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -2333,7 +2408,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @return [Types::ListAgentRuntimeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListAgentRuntimeEndpointsResponse#runtime_endpoints #runtime_endpoints} => Array&lt;Types::AgentEndpoint&gt;
+    #   * {Types::ListAgentRuntimeEndpointsResponse#runtime_endpoints #runtime_endpoints} => Array&lt;Types::AgentRuntimeEndpoint&gt;
     #   * {Types::ListAgentRuntimeEndpointsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2373,7 +2448,7 @@ module Aws::BedrockAgentCoreControl
     # Lists all versions of a specific Amazon Secure Agent.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime to list versions for.
+    #   The unique identifier of the AgentCore Runtime to list versions for.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -2383,7 +2458,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @return [Types::ListAgentRuntimeVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListAgentRuntimeVersionsResponse#agent_runtimes #agent_runtimes} => Array&lt;Types::Agent&gt;
+    #   * {Types::ListAgentRuntimeVersionsResponse#agent_runtimes #agent_runtimes} => Array&lt;Types::AgentRuntime&gt;
     #   * {Types::ListAgentRuntimeVersionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2427,7 +2502,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @return [Types::ListAgentRuntimesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListAgentRuntimesResponse#agent_runtimes #agent_runtimes} => Array&lt;Types::Agent&gt;
+    #   * {Types::ListAgentRuntimesResponse#agent_runtimes #agent_runtimes} => Array&lt;Types::AgentRuntime&gt;
     #   * {Types::ListAgentRuntimesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2598,19 +2673,21 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Lists all targets for a specific Gateway.
+    # Lists all targets for a specific gateway.
     #
     # @option params [required, String] :gateway_identifier
-    #   The identifier of the gateway to list targets for. This can be either
-    #   the gateway ID or the gateway ARN.
+    #   The identifier of the gateway to list targets for.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. The default
-    #   value is 10. The maximum value is 50.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
     #   results.
     #
     # @return [Types::ListGatewayTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2648,15 +2725,18 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Lists all Gateways in the account.
+    # Lists all gateways in the account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call. The default
-    #   value is 10. The maximum value is 50.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
     #   results.
     #
     # @return [Types::ListGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2695,7 +2775,8 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Lists the memory present.
+    # Lists the available Amazon Bedrock AgentCore Memory resources in the
+    # current Amazon Web Services Region.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. The default
@@ -2780,6 +2861,36 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Lists the tags associated with the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TaggableResourcesArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists all workload identities in your account.
     #
     # @option params [String] :next_token
@@ -2859,23 +2970,80 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Associates the specified tags to a resource with the specified
+    # resourceArn. If existing tags on a resource are not specified in the
+    # request parameters, they are not changed. When a resource is deleted,
+    # the tags associated with that resource are also deleted.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource. A tag is a key-value pair.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TaggableResourcesArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to untag.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys of the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TaggableResourcesArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Secure Agent.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime to update.
+    #   The unique identifier of the AgentCore Runtime to update.
     #
     # @option params [String] :description
-    #   The updated description of the agent runtime.
+    #   The updated description of the AgentCore Runtime.
     #
-    # @option params [required, Types::AgentArtifact] :agent_runtime_artifact
-    #   The updated artifact of the agent runtime.
+    # @option params [required, Types::AgentRuntimeArtifact] :agent_runtime_artifact
+    #   The updated artifact of the AgentCore Runtime.
     #
     # @option params [required, String] :role_arn
-    #   The updated IAM role ARN that provides permissions for the agent
-    #   runtime.
+    #   The updated IAM role ARN that provides permissions for the AgentCore
+    #   Runtime.
     #
     # @option params [required, Types::NetworkConfiguration] :network_configuration
-    #   The updated network configuration for the agent runtime.
+    #   The updated network configuration for the AgentCore Runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
     #   The protocol configuration for an agent runtime. This structure
@@ -2889,10 +3057,15 @@ module Aws::BedrockAgentCoreControl
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :environment_variables
-    #   Updated environment variables to set in the agent runtime environment.
+    #   Updated environment variables to set in the AgentCore Runtime
+    #   environment.
     #
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   The updated authorizer configuration for the agent runtime.
+    #   The updated authorizer configuration for the AgentCore Runtime.
+    #
+    # @option params [Types::RequestHeaderConfiguration] :request_header_configuration
+    #   The updated configuration for HTTP request headers that will be passed
+    #   through to the runtime.
     #
     # @return [Types::UpdateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2916,7 +3089,11 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     role_arn: "RoleArn", # required
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC", # required, accepts PUBLIC
+    #       network_mode: "PUBLIC", # required, accepts PUBLIC, VPC
+    #       network_mode_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP
@@ -2931,6 +3108,9 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"],
     #       },
+    #     },
+    #     request_header_configuration: {
+    #       request_header_allowlist: ["HeaderName"],
     #     },
     #   })
     #
@@ -2953,20 +3133,20 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Secure AgentEndpoint.
+    # Updates an existing Amazon Bedrock AgentCore Runtime endpoint.
     #
     # @option params [required, String] :agent_runtime_id
-    #   The unique identifier of the agent runtime associated with the
+    #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the agent runtime endpoint to update.
+    #   The name of the AgentCore Runtime endpoint to update.
     #
     # @option params [String] :agent_runtime_version
-    #   The updated version of the agent runtime for the endpoint.
+    #   The updated version of the AgentCore Runtime for the endpoint.
     #
     # @option params [String] :description
-    #   The updated description of the agent runtime endpoint.
+    #   The updated description of the AgentCore Runtime endpoint.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -3055,42 +3235,46 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Updates an existing Gateway.
+    # Updates an existing gateway.
     #
     # @option params [required, String] :gateway_identifier
-    #   The identifier of the gateway to update. This can be either the
-    #   gateway ID or the gateway ARN.
+    #   The identifier of the gateway to update.
     #
     # @option params [required, String] :name
-    #   The updated name for the Gateway.
+    #   The name of the gateway. This name must be the same as the one when
+    #   the gateway was created.
     #
     # @option params [String] :description
-    #   The updated description for the Gateway.
+    #   The updated description for the gateway.
     #
     # @option params [required, String] :role_arn
-    #   The updated IAM role ARN that provides permissions for the Gateway.
+    #   The updated IAM role ARN that provides permissions for the gateway.
     #
     # @option params [required, String] :protocol_type
-    #   The updated protocol type for the Gateway.
+    #   The updated protocol type for the gateway.
     #
     # @option params [Types::GatewayProtocolConfiguration] :protocol_configuration
     #   The configuration for a gateway protocol. This structure defines how
     #   the gateway communicates with external services.
     #
     # @option params [required, String] :authorizer_type
-    #   The updated authorizer type for the Gateway.
+    #   The updated authorizer type for the gateway.
     #
     # @option params [required, Types::AuthorizerConfiguration] :authorizer_configuration
-    #   The updated authorizer configuration for the Gateway.
+    #   The updated authorizer configuration for the gateway.
     #
     # @option params [String] :kms_key_arn
-    #   The updated ARN of the KMS key used to encrypt the Gateway.
+    #   The updated ARN of the KMS key used to encrypt the gateway.
     #
     # @option params [String] :exception_level
-    #   The verbosity of exception messages. Use DEBUG mode to see granular
-    #   exception messages from a Gateway. If this parameter is not set,
-    #   exception messages are by default sanitized for presentation to end
-    #   users.
+    #   The level of detail in error messages returned when invoking the
+    #   gateway.
+    #
+    #   * If the value is `DEBUG`, granular exception messages are returned to
+    #     help a user debug the gateway.
+    #
+    #   * If the value is omitted, a generic error message is returned to the
+    #     end user.
     #
     # @return [Types::UpdateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3176,26 +3360,26 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Updates an existing Gateway Target.
+    # Updates an existing gateway target.
     #
     # @option params [required, String] :gateway_identifier
-    #   The unique identifier of the Gateway associated with the target.
+    #   The unique identifier of the gateway associated with the target.
     #
     # @option params [required, String] :target_id
-    #   The unique identifier of the Gateway Target to update.
+    #   The unique identifier of the gateway target to update.
     #
     # @option params [required, String] :name
-    #   The updated name for the Gateway Target.
+    #   The updated name for the gateway target.
     #
     # @option params [String] :description
-    #   The updated description for the Gateway Target.
+    #   The updated description for the gateway target.
     #
     # @option params [required, Types::TargetConfiguration] :target_configuration
     #   The configuration for a gateway target. This structure defines how the
     #   gateway connects to and interacts with the target endpoint.
     #
     # @option params [required, Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
-    #   The updated credential provider configurations for the Gateway Target.
+    #   The updated credential provider configurations for the gateway target.
     #
     # @return [Types::UpdateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3356,7 +3540,7 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Update memory.
+    # Update an Amazon Bedrock AgentCore Memory resource memory.
     #
     # @option params [String] :client_token
     #   A client token is used for keeping track of idempotent requests. It
@@ -3370,14 +3554,15 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the memory to update.
     #
     # @option params [String] :description
-    #   The updated description of the memory.
+    #   The updated description of the AgentCore Memory resource.
     #
     # @option params [Integer] :event_expiry_duration
     #   The number of days after which memory events will expire, between 7
     #   and 365 days.
     #
     # @option params [String] :memory_execution_role_arn
-    #   The ARN of the IAM role that provides permissions for the memory.
+    #   The ARN of the IAM role that provides permissions for the AgentCore
+    #   Memory resource.
     #
     # @option params [Types::ModifyMemoryStrategies] :memory_strategies
     #   The memory strategies to add, modify, or delete.
@@ -3713,7 +3898,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

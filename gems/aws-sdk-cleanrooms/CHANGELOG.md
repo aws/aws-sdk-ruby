@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2025-09-23)
+------------------
+
+* Feature - Added support for running incremental ID mapping for rule-based workflows.
+
 1.54.0 (2025-09-04)
 ------------------
 

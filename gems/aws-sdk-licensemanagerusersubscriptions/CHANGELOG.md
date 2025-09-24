@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-09-19)
+------------------
+
+* Feature - Added support for cross-account Active Directories.
+
 1.39.0 (2025-08-28)
 ------------------
 

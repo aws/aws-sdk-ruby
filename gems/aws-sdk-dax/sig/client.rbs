@@ -105,7 +105,8 @@ module Aws
                             ?sse_specification: {
                               enabled: bool
                             },
-                            ?cluster_endpoint_encryption_type: ("NONE" | "TLS")
+                            ?cluster_endpoint_encryption_type: ("NONE" | "TLS"),
+                            ?network_type: ("ipv4" | "ipv6" | "dual_stack")
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 

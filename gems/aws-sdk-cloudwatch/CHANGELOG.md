@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-09-24)
+------------------
+
+* Feature - Fix default dualstack FIPS endpoints in AWS GovCloud(US) regions
+
 1.121.0 (2025-09-09)
 ------------------
 

@@ -1087,7 +1087,8 @@ module Aws
                            phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
                            auto_accept: bool?,
                            after_contact_work_time_limit: ::Integer?,
-                           desk_phone_number: ::String?
+                           desk_phone_number: ::String?,
+                           persistent_connection: bool?
                          },
                          ?directory_user_id: ::String,
                          security_profile_ids: Array[::String],
@@ -5273,7 +5274,8 @@ module Aws
                                         phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
                                         auto_accept: bool?,
                                         after_contact_work_time_limit: ::Integer?,
-                                        desk_phone_number: ::String?
+                                        desk_phone_number: ::String?,
+                                        persistent_connection: bool?
                                       },
                                       user_id: ::String,
                                       instance_id: ::String

@@ -1898,7 +1898,7 @@ module Aws::ConfigService
 
     class RemediationExecutionStatus
       attr_accessor resource_key: Types::ResourceKey
-      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "UNKNOWN")
       attr_accessor step_details: ::Array[Types::RemediationExecutionStep]
       attr_accessor invocation_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -1907,7 +1907,7 @@ module Aws::ConfigService
 
     class RemediationExecutionStep
       attr_accessor name: ::String
-      attr_accessor state: ("SUCCEEDED" | "PENDING" | "FAILED")
+      attr_accessor state: ("SUCCEEDED" | "PENDING" | "FAILED" | "IN_PROGRESS" | "EXITED" | "UNKNOWN")
       attr_accessor error_message: ::String
       attr_accessor start_time: ::Time
       attr_accessor stop_time: ::Time

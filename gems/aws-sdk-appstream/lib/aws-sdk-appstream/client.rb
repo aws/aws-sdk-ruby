@@ -1377,6 +1377,16 @@ module Aws::AppStream
     #
     #   * stream.graphics.gr6.8xlarge
     #
+    #   * stream.graphics.g6f.large
+    #
+    #   * stream.graphics.g6f.xlarge
+    #
+    #   * stream.graphics.g6f.2xlarge
+    #
+    #   * stream.graphics.g6f.4xlarge
+    #
+    #   * stream.graphics.gr6f.4xlarge
+    #
     #   The following instance types are available for Elastic fleets:
     #
     #   * stream.standard.small
@@ -1752,6 +1762,16 @@ module Aws::AppStream
     #   * stream.graphics.gr6.4xlarge
     #
     #   * stream.graphics.gr6.8xlarge
+    #
+    #   * stream.graphics.g6f.large
+    #
+    #   * stream.graphics.g6f.xlarge
+    #
+    #   * stream.graphics.g6f.2xlarge
+    #
+    #   * stream.graphics.g6f.4xlarge
+    #
+    #   * stream.graphics.gr6f.4xlarge
     #
     # @option params [String] :description
     #   The description to display.
@@ -5002,6 +5022,48 @@ module Aws::AppStream
     #
     #   * stream.graphics-pro.16xlarge
     #
+    #   * stream.graphics.g5.xlarge
+    #
+    #   * stream.graphics.g5.2xlarge
+    #
+    #   * stream.graphics.g5.4xlarge
+    #
+    #   * stream.graphics.g5.8xlarge
+    #
+    #   * stream.graphics.g5.16xlarge
+    #
+    #   * stream.graphics.g5.12xlarge
+    #
+    #   * stream.graphics.g5.24xlarge
+    #
+    #   * stream.graphics.g6.xlarge
+    #
+    #   * stream.graphics.g6.2xlarge
+    #
+    #   * stream.graphics.g6.4xlarge
+    #
+    #   * stream.graphics.g6.8xlarge
+    #
+    #   * stream.graphics.g6.16xlarge
+    #
+    #   * stream.graphics.g6.12xlarge
+    #
+    #   * stream.graphics.g6.24xlarge
+    #
+    #   * stream.graphics.gr6.4xlarge
+    #
+    #   * stream.graphics.gr6.8xlarge
+    #
+    #   * stream.graphics.g6f.large
+    #
+    #   * stream.graphics.g6f.xlarge
+    #
+    #   * stream.graphics.g6f.2xlarge
+    #
+    #   * stream.graphics.g6f.4xlarge
+    #
+    #   * stream.graphics.gr6f.4xlarge
+    #
     #   The following instance types are available for Elastic fleets:
     #
     #   * stream.standard.small
@@ -5507,7 +5569,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

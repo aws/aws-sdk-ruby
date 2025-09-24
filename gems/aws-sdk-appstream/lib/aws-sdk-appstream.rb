@@ -55,7 +55,7 @@ module Aws::AppStream
   autoload :EndpointProvider, 'aws-sdk-appstream/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appstream/endpoints'
 
-  GEM_VERSION = '1.117.0'
+  GEM_VERSION = '1.118.0'
 
 end
 

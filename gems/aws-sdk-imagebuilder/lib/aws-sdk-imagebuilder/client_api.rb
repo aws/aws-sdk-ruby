@@ -1549,7 +1549,7 @@ module Aws::Imagebuilder
 
     LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
 
-    ListComponentBuildVersionsRequest.add_member(:component_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArn, required: true, location_name: "componentVersionArn"))
+    ListComponentBuildVersionsRequest.add_member(:component_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArn, location_name: "componentVersionArn"))
     ListComponentBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListComponentBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentBuildVersionsRequest.struct_class = Types::ListComponentBuildVersionsRequest
@@ -1592,7 +1592,7 @@ module Aws::Imagebuilder
     ListDistributionConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDistributionConfigurationsResponse.struct_class = Types::ListDistributionConfigurationsResponse
 
-    ListImageBuildVersionsRequest.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, required: true, location_name: "imageVersionArn"))
+    ListImageBuildVersionsRequest.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, location_name: "imageVersionArn"))
     ListImageBuildVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImageBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImageBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -1732,7 +1732,7 @@ module Aws::Imagebuilder
     ListWaitingWorkflowStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWaitingWorkflowStepsResponse.struct_class = Types::ListWaitingWorkflowStepsResponse
 
-    ListWorkflowBuildVersionsRequest.add_member(:workflow_version_arn, Shapes::ShapeRef.new(shape: WorkflowWildcardVersionArn, required: true, location_name: "workflowVersionArn"))
+    ListWorkflowBuildVersionsRequest.add_member(:workflow_version_arn, Shapes::ShapeRef.new(shape: WorkflowWildcardVersionArn, location_name: "workflowVersionArn"))
     ListWorkflowBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListWorkflowBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowBuildVersionsRequest.struct_class = Types::ListWorkflowBuildVersionsRequest

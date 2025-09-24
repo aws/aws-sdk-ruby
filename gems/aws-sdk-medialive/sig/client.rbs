@@ -1260,7 +1260,8 @@ module Aws
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
                                       }?,
-                                      min_qp: ::Integer?
+                                      min_qp: ::Integer?,
+                                      min_bitrate: ::Integer?
                                     }?,
                                     h265_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "HIGHER" | "LOW" | "MAX" | "MEDIUM" | "OFF")?,
@@ -1326,7 +1327,11 @@ module Aws
                                       tile_width: ::Integer?,
                                       treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?,
                                       min_qp: ::Integer?,
-                                      deblocking: ("DISABLED" | "ENABLED")?
+                                      deblocking: ("DISABLED" | "ENABLED")?,
+                                      gop_b_reference: ("DISABLED" | "ENABLED")?,
+                                      gop_num_b_frames: ::Integer?,
+                                      min_bitrate: ::Integer?,
+                                      subgop_length: ("DYNAMIC" | "FIXED")?
                                     }?,
                                     mpeg_2_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")?,
@@ -1390,7 +1395,8 @@ module Aws
                                         prefix: ::String?
                                       }?,
                                       bitrate: ::Integer?,
-                                      rate_control_mode: ("CBR" | "QVBR")?
+                                      rate_control_mode: ("CBR" | "QVBR")?,
+                                      min_bitrate: ::Integer?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -3385,7 +3391,8 @@ module Aws
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
                                       }?,
-                                      min_qp: ::Integer?
+                                      min_qp: ::Integer?,
+                                      min_bitrate: ::Integer?
                                     }?,
                                     h265_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "HIGHER" | "LOW" | "MAX" | "MEDIUM" | "OFF")?,
@@ -3451,7 +3458,11 @@ module Aws
                                       tile_width: ::Integer?,
                                       treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?,
                                       min_qp: ::Integer?,
-                                      deblocking: ("DISABLED" | "ENABLED")?
+                                      deblocking: ("DISABLED" | "ENABLED")?,
+                                      gop_b_reference: ("DISABLED" | "ENABLED")?,
+                                      gop_num_b_frames: ::Integer?,
+                                      min_bitrate: ::Integer?,
+                                      subgop_length: ("DYNAMIC" | "FIXED")?
                                     }?,
                                     mpeg_2_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")?,
@@ -3515,7 +3526,8 @@ module Aws
                                         prefix: ::String?
                                       }?,
                                       bitrate: ::Integer?,
-                                      rate_control_mode: ("CBR" | "QVBR")?
+                                      rate_control_mode: ("CBR" | "QVBR")?,
+                                      min_bitrate: ::Integer?
                                     }?
                                   }?,
                                   height: ::Integer?,

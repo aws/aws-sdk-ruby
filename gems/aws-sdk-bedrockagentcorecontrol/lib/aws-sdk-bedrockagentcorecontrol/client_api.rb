@@ -15,20 +15,20 @@ module Aws::BedrockAgentCoreControl
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
-    Agent = Shapes::StructureShape.new(name: 'Agent')
-    AgentArtifact = Shapes::UnionShape.new(name: 'AgentArtifact')
-    AgentEndpoint = Shapes::StructureShape.new(name: 'AgentEndpoint')
     AgentEndpointDescription = Shapes::StringShape.new(name: 'AgentEndpointDescription')
-    AgentEndpointStatus = Shapes::StringShape.new(name: 'AgentEndpointStatus')
-    AgentEndpoints = Shapes::ListShape.new(name: 'AgentEndpoints')
+    AgentRuntime = Shapes::StructureShape.new(name: 'AgentRuntime')
     AgentRuntimeArn = Shapes::StringShape.new(name: 'AgentRuntimeArn')
+    AgentRuntimeArtifact = Shapes::UnionShape.new(name: 'AgentRuntimeArtifact')
+    AgentRuntimeEndpoint = Shapes::StructureShape.new(name: 'AgentRuntimeEndpoint')
     AgentRuntimeEndpointArn = Shapes::StringShape.new(name: 'AgentRuntimeEndpointArn')
     AgentRuntimeEndpointId = Shapes::StringShape.new(name: 'AgentRuntimeEndpointId')
+    AgentRuntimeEndpointStatus = Shapes::StringShape.new(name: 'AgentRuntimeEndpointStatus')
+    AgentRuntimeEndpoints = Shapes::ListShape.new(name: 'AgentRuntimeEndpoints')
     AgentRuntimeId = Shapes::StringShape.new(name: 'AgentRuntimeId')
     AgentRuntimeName = Shapes::StringShape.new(name: 'AgentRuntimeName')
+    AgentRuntimeStatus = Shapes::StringShape.new(name: 'AgentRuntimeStatus')
     AgentRuntimeVersion = Shapes::StringShape.new(name: 'AgentRuntimeVersion')
-    AgentStatus = Shapes::StringShape.new(name: 'AgentStatus')
-    Agents = Shapes::ListShape.new(name: 'Agents')
+    AgentRuntimes = Shapes::ListShape.new(name: 'AgentRuntimes')
     AllowedAudience = Shapes::StringShape.new(name: 'AllowedAudience')
     AllowedAudienceList = Shapes::ListShape.new(name: 'AllowedAudienceList')
     AllowedClient = Shapes::StringShape.new(name: 'AllowedClient')
@@ -182,6 +182,7 @@ module Aws::BedrockAgentCoreControl
     GithubOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GithubOauth2ProviderConfigOutput')
     GoogleOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigInput')
     GoogleOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigOutput')
+    HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     InlinePayload = Shapes::StringShape.new(name: 'InlinePayload')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IssuerUrlType = Shapes::StringShape.new(name: 'IssuerUrlType')
@@ -211,6 +212,8 @@ module Aws::BedrockAgentCoreControl
     ListOauth2CredentialProvidersRequest = Shapes::StructureShape.new(name: 'ListOauth2CredentialProvidersRequest')
     ListOauth2CredentialProvidersRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOauth2CredentialProvidersRequestMaxResultsInteger')
     ListOauth2CredentialProvidersResponse = Shapes::StructureShape.new(name: 'ListOauth2CredentialProvidersResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListWorkloadIdentitiesRequest = Shapes::StructureShape.new(name: 'ListWorkloadIdentitiesRequest')
     ListWorkloadIdentitiesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkloadIdentitiesRequestMaxResultsInteger')
     ListWorkloadIdentitiesResponse = Shapes::StructureShape.new(name: 'ListWorkloadIdentitiesResponse')
@@ -267,6 +270,8 @@ module Aws::BedrockAgentCoreControl
     Prompt = Shapes::StringShape.new(name: 'Prompt')
     ProtocolConfiguration = Shapes::StructureShape.new(name: 'ProtocolConfiguration')
     RecordingConfig = Shapes::StructureShape.new(name: 'RecordingConfig')
+    RequestHeaderAllowlist = Shapes::ListShape.new(name: 'RequestHeaderAllowlist')
+    RequestHeaderConfiguration = Shapes::UnionShape.new(name: 'RequestHeaderConfiguration')
     RequiredProperties = Shapes::ListShape.new(name: 'RequiredProperties')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -291,6 +296,8 @@ module Aws::BedrockAgentCoreControl
     SearchType = Shapes::StringShape.new(name: 'SearchType')
     Secret = Shapes::StructureShape.new(name: 'Secret')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     SemanticConsolidationOverride = Shapes::StructureShape.new(name: 'SemanticConsolidationOverride')
     SemanticExtractionOverride = Shapes::StructureShape.new(name: 'SemanticExtractionOverride')
     SemanticMemoryStrategyInput = Shapes::StructureShape.new(name: 'SemanticMemoryStrategyInput')
@@ -308,10 +315,19 @@ module Aws::BedrockAgentCoreControl
     StatusReasons = Shapes::ListShape.new(name: 'StatusReasons')
     StrategyConfiguration = Shapes::StructureShape.new(name: 'StrategyConfiguration')
     String = Shapes::StringShape.new(name: 'String')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    Subnets = Shapes::ListShape.new(name: 'Subnets')
     SummaryConsolidationOverride = Shapes::StructureShape.new(name: 'SummaryConsolidationOverride')
     SummaryMemoryStrategyInput = Shapes::StructureShape.new(name: 'SummaryMemoryStrategyInput')
     SummaryOverrideConfigurationInput = Shapes::StructureShape.new(name: 'SummaryOverrideConfigurationInput')
     SummaryOverrideConsolidationConfigurationInput = Shapes::StructureShape.new(name: 'SummaryOverrideConsolidationConfigurationInput')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggableResourcesArn = Shapes::StringShape.new(name: 'TaggableResourcesArn')
+    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     TargetConfiguration = Shapes::UnionShape.new(name: 'TargetConfiguration')
     TargetDescription = Shapes::StringShape.new(name: 'TargetDescription')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
@@ -330,6 +346,8 @@ module Aws::BedrockAgentCoreControl
     ToolDefinitions = Shapes::ListShape.new(name: 'ToolDefinitions')
     ToolSchema = Shapes::UnionShape.new(name: 'ToolSchema')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentRuntimeEndpointRequest = Shapes::StructureShape.new(name: 'UpdateAgentRuntimeEndpointRequest')
     UpdateAgentRuntimeEndpointResponse = Shapes::StructureShape.new(name: 'UpdateAgentRuntimeEndpointResponse')
     UpdateAgentRuntimeRequest = Shapes::StructureShape.new(name: 'UpdateAgentRuntimeRequest')
@@ -358,6 +376,7 @@ module Aws::BedrockAgentCoreControl
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     WorkloadIdentityArn = Shapes::StringShape.new(name: 'WorkloadIdentityArn')
     WorkloadIdentityArnType = Shapes::StringShape.new(name: 'WorkloadIdentityArnType')
     WorkloadIdentityDetails = Shapes::StructureShape.new(name: 'WorkloadIdentityDetails')
@@ -368,36 +387,36 @@ module Aws::BedrockAgentCoreControl
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    Agent.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
-    Agent.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location_name: "agentRuntimeId"))
-    Agent.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "agentRuntimeVersion"))
-    Agent.add_member(:agent_runtime_name, Shapes::ShapeRef.new(shape: AgentRuntimeName, required: true, location_name: "agentRuntimeName"))
-    Agent.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
-    Agent.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
-    Agent.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
-    Agent.struct_class = Types::Agent
+    AgentRuntime.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
+    AgentRuntime.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location_name: "agentRuntimeId"))
+    AgentRuntime.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "agentRuntimeVersion"))
+    AgentRuntime.add_member(:agent_runtime_name, Shapes::ShapeRef.new(shape: AgentRuntimeName, required: true, location_name: "agentRuntimeName"))
+    AgentRuntime.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
+    AgentRuntime.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    AgentRuntime.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeStatus, required: true, location_name: "status"))
+    AgentRuntime.struct_class = Types::AgentRuntime
 
-    AgentArtifact.add_member(:container_configuration, Shapes::ShapeRef.new(shape: ContainerConfiguration, location_name: "containerConfiguration"))
-    AgentArtifact.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    AgentArtifact.add_member_subclass(:container_configuration, Types::AgentArtifact::ContainerConfiguration)
-    AgentArtifact.add_member_subclass(:unknown, Types::AgentArtifact::Unknown)
-    AgentArtifact.struct_class = Types::AgentArtifact
+    AgentRuntimeArtifact.add_member(:container_configuration, Shapes::ShapeRef.new(shape: ContainerConfiguration, location_name: "containerConfiguration"))
+    AgentRuntimeArtifact.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgentRuntimeArtifact.add_member_subclass(:container_configuration, Types::AgentRuntimeArtifact::ContainerConfiguration)
+    AgentRuntimeArtifact.add_member_subclass(:unknown, Types::AgentRuntimeArtifact::Unknown)
+    AgentRuntimeArtifact.struct_class = Types::AgentRuntimeArtifact
 
-    AgentEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "name"))
-    AgentEndpoint.add_member(:live_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "liveVersion"))
-    AgentEndpoint.add_member(:target_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "targetVersion"))
-    AgentEndpoint.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
-    AgentEndpoint.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
-    AgentEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: AgentEndpointStatus, required: true, location_name: "status"))
-    AgentEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointId, required: true, location_name: "id"))
-    AgentEndpoint.add_member(:description, Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: "description"))
-    AgentEndpoint.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    AgentEndpoint.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
-    AgentEndpoint.struct_class = Types::AgentEndpoint
+    AgentRuntimeEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "name"))
+    AgentRuntimeEndpoint.add_member(:live_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "liveVersion"))
+    AgentRuntimeEndpoint.add_member(:target_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "targetVersion"))
+    AgentRuntimeEndpoint.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
+    AgentRuntimeEndpoint.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
+    AgentRuntimeEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
+    AgentRuntimeEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointId, required: true, location_name: "id"))
+    AgentRuntimeEndpoint.add_member(:description, Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: "description"))
+    AgentRuntimeEndpoint.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    AgentRuntimeEndpoint.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    AgentRuntimeEndpoint.struct_class = Types::AgentRuntimeEndpoint
 
-    AgentEndpoints.member = Shapes::ShapeRef.new(shape: AgentEndpoint)
+    AgentRuntimeEndpoints.member = Shapes::ShapeRef.new(shape: AgentRuntimeEndpoint)
 
-    Agents.member = Shapes::ShapeRef.new(shape: Agent)
+    AgentRuntimes.member = Shapes::ShapeRef.new(shape: AgentRuntime)
 
     AllowedAudienceList.member = Shapes::ShapeRef.new(shape: AllowedAudience)
 
@@ -432,6 +451,7 @@ module Aws::BedrockAgentCoreControl
     AuthorizerConfiguration.struct_class = Types::AuthorizerConfiguration
 
     BrowserNetworkConfiguration.add_member(:network_mode, Shapes::ShapeRef.new(shape: BrowserNetworkMode, required: true, location_name: "networkMode"))
+    BrowserNetworkConfiguration.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     BrowserNetworkConfiguration.struct_class = Types::BrowserNetworkConfiguration
 
     BrowserSummaries.member = Shapes::ShapeRef.new(shape: BrowserSummary)
@@ -446,6 +466,7 @@ module Aws::BedrockAgentCoreControl
     BrowserSummary.struct_class = Types::BrowserSummary
 
     CodeInterpreterNetworkConfiguration.add_member(:network_mode, Shapes::ShapeRef.new(shape: CodeInterpreterNetworkMode, required: true, location_name: "networkMode"))
+    CodeInterpreterNetworkConfiguration.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     CodeInterpreterNetworkConfiguration.struct_class = Types::CodeInterpreterNetworkConfiguration
 
     CodeInterpreterSummaries.member = Shapes::ShapeRef.new(shape: CodeInterpreterSummary)
@@ -479,24 +500,27 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeEndpointRequest.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "agentRuntimeVersion"))
     CreateAgentRuntimeEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: "description"))
     CreateAgentRuntimeEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateAgentRuntimeEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateAgentRuntimeEndpointRequest.struct_class = Types::CreateAgentRuntimeEndpointRequest
 
     CreateAgentRuntimeEndpointResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "targetVersion"))
     CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
     CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
-    CreateAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentEndpointStatus, required: true, location_name: "status"))
+    CreateAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
     CreateAgentRuntimeEndpointResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     CreateAgentRuntimeEndpointResponse.struct_class = Types::CreateAgentRuntimeEndpointResponse
 
     CreateAgentRuntimeRequest.add_member(:agent_runtime_name, Shapes::ShapeRef.new(shape: AgentRuntimeName, required: true, location_name: "agentRuntimeName"))
     CreateAgentRuntimeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateAgentRuntimeRequest.add_member(:agent_runtime_artifact, Shapes::ShapeRef.new(shape: AgentArtifact, required: true, location_name: "agentRuntimeArtifact"))
+    CreateAgentRuntimeRequest.add_member(:agent_runtime_artifact, Shapes::ShapeRef.new(shape: AgentRuntimeArtifact, required: true, location_name: "agentRuntimeArtifact"))
     CreateAgentRuntimeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateAgentRuntimeRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "networkConfiguration"))
     CreateAgentRuntimeRequest.add_member(:protocol_configuration, Shapes::ShapeRef.new(shape: ProtocolConfiguration, location_name: "protocolConfiguration"))
     CreateAgentRuntimeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentRuntimeRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     CreateAgentRuntimeRequest.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
+    CreateAgentRuntimeRequest.add_member(:request_header_configuration, Shapes::ShapeRef.new(shape: RequestHeaderConfiguration, location_name: "requestHeaderConfiguration"))
+    CreateAgentRuntimeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateAgentRuntimeRequest.struct_class = Types::CreateAgentRuntimeRequest
 
     CreateAgentRuntimeResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
@@ -504,7 +528,7 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeResponse.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location_name: "agentRuntimeId"))
     CreateAgentRuntimeResponse.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "agentRuntimeVersion"))
     CreateAgentRuntimeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    CreateAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    CreateAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeStatus, required: true, location_name: "status"))
     CreateAgentRuntimeResponse.struct_class = Types::CreateAgentRuntimeResponse
 
     CreateApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -522,6 +546,7 @@ module Aws::BedrockAgentCoreControl
     CreateBrowserRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: BrowserNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     CreateBrowserRequest.add_member(:recording, Shapes::ShapeRef.new(shape: RecordingConfig, location_name: "recording"))
     CreateBrowserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateBrowserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateBrowserRequest.struct_class = Types::CreateBrowserRequest
 
     CreateBrowserResponse.add_member(:browser_id, Shapes::ShapeRef.new(shape: BrowserId, required: true, location_name: "browserId"))
@@ -535,6 +560,7 @@ module Aws::BedrockAgentCoreControl
     CreateCodeInterpreterRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
     CreateCodeInterpreterRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: CodeInterpreterNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     CreateCodeInterpreterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateCodeInterpreterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateCodeInterpreterRequest.struct_class = Types::CreateCodeInterpreterRequest
 
     CreateCodeInterpreterResponse.add_member(:code_interpreter_id, Shapes::ShapeRef.new(shape: CodeInterpreterId, required: true, location_name: "codeInterpreterId"))
@@ -712,13 +738,13 @@ module Aws::BedrockAgentCoreControl
     DeleteAgentRuntimeEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAgentRuntimeEndpointRequest.struct_class = Types::DeleteAgentRuntimeEndpointRequest
 
-    DeleteAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentEndpointStatus, required: true, location_name: "status"))
+    DeleteAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
     DeleteAgentRuntimeEndpointResponse.struct_class = Types::DeleteAgentRuntimeEndpointResponse
 
     DeleteAgentRuntimeRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     DeleteAgentRuntimeRequest.struct_class = Types::DeleteAgentRuntimeRequest
 
-    DeleteAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    DeleteAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeStatus, required: true, location_name: "status"))
     DeleteAgentRuntimeResponse.struct_class = Types::DeleteAgentRuntimeResponse
 
     DeleteApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -824,7 +850,7 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
     GetAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
     GetAgentRuntimeEndpointResponse.add_member(:description, Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: "description"))
-    GetAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentEndpointStatus, required: true, location_name: "status"))
+    GetAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
     GetAgentRuntimeEndpointResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetAgentRuntimeEndpointResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetAgentRuntimeEndpointResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
@@ -845,12 +871,13 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetAgentRuntimeResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetAgentRuntimeResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
-    GetAgentRuntimeResponse.add_member(:agent_runtime_artifact, Shapes::ShapeRef.new(shape: AgentArtifact, location_name: "agentRuntimeArtifact"))
+    GetAgentRuntimeResponse.add_member(:agent_runtime_artifact, Shapes::ShapeRef.new(shape: AgentRuntimeArtifact, location_name: "agentRuntimeArtifact"))
     GetAgentRuntimeResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "networkConfiguration"))
     GetAgentRuntimeResponse.add_member(:protocol_configuration, Shapes::ShapeRef.new(shape: ProtocolConfiguration, location_name: "protocolConfiguration"))
     GetAgentRuntimeResponse.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     GetAgentRuntimeResponse.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
-    GetAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    GetAgentRuntimeResponse.add_member(:request_header_configuration, Shapes::ShapeRef.new(shape: RequestHeaderConfiguration, location_name: "requestHeaderConfiguration"))
+    GetAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeStatus, required: true, location_name: "status"))
     GetAgentRuntimeResponse.struct_class = Types::GetAgentRuntimeResponse
 
     GetApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -874,6 +901,7 @@ module Aws::BedrockAgentCoreControl
     GetBrowserResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: BrowserNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     GetBrowserResponse.add_member(:recording, Shapes::ShapeRef.new(shape: RecordingConfig, location_name: "recording"))
     GetBrowserResponse.add_member(:status, Shapes::ShapeRef.new(shape: BrowserStatus, required: true, location_name: "status"))
+    GetBrowserResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetBrowserResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetBrowserResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetBrowserResponse.struct_class = Types::GetBrowserResponse
@@ -888,6 +916,7 @@ module Aws::BedrockAgentCoreControl
     GetCodeInterpreterResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
     GetCodeInterpreterResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: CodeInterpreterNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     GetCodeInterpreterResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeInterpreterStatus, required: true, location_name: "status"))
+    GetCodeInterpreterResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetCodeInterpreterResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetCodeInterpreterResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetCodeInterpreterResponse.struct_class = Types::GetCodeInterpreterResponse
@@ -992,7 +1021,7 @@ module Aws::BedrockAgentCoreControl
     ListAgentRuntimeEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAgentRuntimeEndpointsRequest.struct_class = Types::ListAgentRuntimeEndpointsRequest
 
-    ListAgentRuntimeEndpointsResponse.add_member(:runtime_endpoints, Shapes::ShapeRef.new(shape: AgentEndpoints, required: true, location_name: "runtimeEndpoints"))
+    ListAgentRuntimeEndpointsResponse.add_member(:runtime_endpoints, Shapes::ShapeRef.new(shape: AgentRuntimeEndpoints, required: true, location_name: "runtimeEndpoints"))
     ListAgentRuntimeEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAgentRuntimeEndpointsResponse.struct_class = Types::ListAgentRuntimeEndpointsResponse
 
@@ -1001,7 +1030,7 @@ module Aws::BedrockAgentCoreControl
     ListAgentRuntimeVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAgentRuntimeVersionsRequest.struct_class = Types::ListAgentRuntimeVersionsRequest
 
-    ListAgentRuntimeVersionsResponse.add_member(:agent_runtimes, Shapes::ShapeRef.new(shape: Agents, required: true, location_name: "agentRuntimes"))
+    ListAgentRuntimeVersionsResponse.add_member(:agent_runtimes, Shapes::ShapeRef.new(shape: AgentRuntimes, required: true, location_name: "agentRuntimes"))
     ListAgentRuntimeVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAgentRuntimeVersionsResponse.struct_class = Types::ListAgentRuntimeVersionsResponse
 
@@ -1009,7 +1038,7 @@ module Aws::BedrockAgentCoreControl
     ListAgentRuntimesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAgentRuntimesRequest.struct_class = Types::ListAgentRuntimesRequest
 
-    ListAgentRuntimesResponse.add_member(:agent_runtimes, Shapes::ShapeRef.new(shape: Agents, required: true, location_name: "agentRuntimes"))
+    ListAgentRuntimesResponse.add_member(:agent_runtimes, Shapes::ShapeRef.new(shape: AgentRuntimes, required: true, location_name: "agentRuntimes"))
     ListAgentRuntimesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAgentRuntimesResponse.struct_class = Types::ListAgentRuntimesResponse
 
@@ -1071,6 +1100,12 @@ module Aws::BedrockAgentCoreControl
     ListOauth2CredentialProvidersResponse.add_member(:credential_providers, Shapes::ShapeRef.new(shape: Oauth2CredentialProviders, required: true, location_name: "credentialProviders"))
     ListOauth2CredentialProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListOauth2CredentialProvidersResponse.struct_class = Types::ListOauth2CredentialProvidersResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListWorkloadIdentitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListWorkloadIdentitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkloadIdentitiesRequestMaxResultsInteger, location_name: "maxResults"))
@@ -1190,6 +1225,7 @@ module Aws::BedrockAgentCoreControl
     NamespacesList.member = Shapes::ShapeRef.new(shape: Namespace)
 
     NetworkConfiguration.add_member(:network_mode, Shapes::ShapeRef.new(shape: NetworkMode, required: true, location_name: "networkMode"))
+    NetworkConfiguration.add_member(:network_mode_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "networkModeConfig"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     OAuthCredentialProvider.add_member(:provider_arn, Shapes::ShapeRef.new(shape: OAuthCredentialProviderArn, required: true, location_name: "providerArn"))
@@ -1264,6 +1300,14 @@ module Aws::BedrockAgentCoreControl
     RecordingConfig.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
     RecordingConfig.struct_class = Types::RecordingConfig
 
+    RequestHeaderAllowlist.member = Shapes::ShapeRef.new(shape: HeaderName)
+
+    RequestHeaderConfiguration.add_member(:request_header_allowlist, Shapes::ShapeRef.new(shape: RequestHeaderAllowlist, location_name: "requestHeaderAllowlist"))
+    RequestHeaderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RequestHeaderConfiguration.add_member_subclass(:request_header_allowlist, Types::RequestHeaderConfiguration::RequestHeaderAllowlist)
+    RequestHeaderConfiguration.add_member_subclass(:unknown, Types::RequestHeaderConfiguration::Unknown)
+    RequestHeaderConfiguration.struct_class = Types::RequestHeaderConfiguration
+
     RequiredProperties.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1303,6 +1347,8 @@ module Aws::BedrockAgentCoreControl
 
     Secret.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretArn"))
     Secret.struct_class = Types::Secret
+
+    SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     SemanticConsolidationOverride.add_member(:append_to_prompt, Shapes::ShapeRef.new(shape: Prompt, required: true, location_name: "appendToPrompt"))
     SemanticConsolidationOverride.add_member(:model_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "modelId"))
@@ -1358,6 +1404,8 @@ module Aws::BedrockAgentCoreControl
     StrategyConfiguration.add_member(:consolidation, Shapes::ShapeRef.new(shape: ConsolidationConfiguration, location_name: "consolidation"))
     StrategyConfiguration.struct_class = Types::StrategyConfiguration
 
+    Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
+
     SummaryConsolidationOverride.add_member(:append_to_prompt, Shapes::ShapeRef.new(shape: Prompt, required: true, location_name: "appendToPrompt"))
     SummaryConsolidationOverride.add_member(:model_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "modelId"))
     SummaryConsolidationOverride.struct_class = Types::SummaryConsolidationOverride
@@ -1373,6 +1421,17 @@ module Aws::BedrockAgentCoreControl
     SummaryOverrideConsolidationConfigurationInput.add_member(:append_to_prompt, Shapes::ShapeRef.new(shape: Prompt, required: true, location_name: "appendToPrompt"))
     SummaryOverrideConsolidationConfigurationInput.add_member(:model_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "modelId"))
     SummaryOverrideConsolidationConfigurationInput.struct_class = Types::SummaryOverrideConsolidationConfigurationInput
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
     TargetConfiguration.add_member(:mcp, Shapes::ShapeRef.new(shape: McpTargetConfiguration, location_name: "mcp"))
     TargetConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1415,6 +1474,12 @@ module Aws::BedrockAgentCoreControl
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
 
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
     UpdateAgentRuntimeEndpointRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     UpdateAgentRuntimeEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "endpointName"))
     UpdateAgentRuntimeEndpointRequest.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "agentRuntimeVersion"))
@@ -1426,20 +1491,21 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeEndpointResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: "targetVersion"))
     UpdateAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
     UpdateAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
-    UpdateAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentEndpointStatus, required: true, location_name: "status"))
+    UpdateAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
     UpdateAgentRuntimeEndpointResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     UpdateAgentRuntimeEndpointResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     UpdateAgentRuntimeEndpointResponse.struct_class = Types::UpdateAgentRuntimeEndpointResponse
 
     UpdateAgentRuntimeRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     UpdateAgentRuntimeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateAgentRuntimeRequest.add_member(:agent_runtime_artifact, Shapes::ShapeRef.new(shape: AgentArtifact, required: true, location_name: "agentRuntimeArtifact"))
+    UpdateAgentRuntimeRequest.add_member(:agent_runtime_artifact, Shapes::ShapeRef.new(shape: AgentRuntimeArtifact, required: true, location_name: "agentRuntimeArtifact"))
     UpdateAgentRuntimeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     UpdateAgentRuntimeRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "networkConfiguration"))
     UpdateAgentRuntimeRequest.add_member(:protocol_configuration, Shapes::ShapeRef.new(shape: ProtocolConfiguration, location_name: "protocolConfiguration"))
     UpdateAgentRuntimeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAgentRuntimeRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     UpdateAgentRuntimeRequest.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
+    UpdateAgentRuntimeRequest.add_member(:request_header_configuration, Shapes::ShapeRef.new(shape: RequestHeaderConfiguration, location_name: "requestHeaderConfiguration"))
     UpdateAgentRuntimeRequest.struct_class = Types::UpdateAgentRuntimeRequest
 
     UpdateAgentRuntimeResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
@@ -1448,7 +1514,7 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeResponse.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "agentRuntimeVersion"))
     UpdateAgentRuntimeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     UpdateAgentRuntimeResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
-    UpdateAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    UpdateAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeStatus, required: true, location_name: "status"))
     UpdateAgentRuntimeResponse.struct_class = Types::UpdateAgentRuntimeResponse
 
     UpdateApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -1584,6 +1650,10 @@ module Aws::BedrockAgentCoreControl
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VpcConfig.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, required: true, location_name: "securityGroups"))
+    VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "subnets"))
+    VpcConfig.struct_class = Types::VpcConfig
 
     WorkloadIdentityDetails.add_member(:workload_identity_arn, Shapes::ShapeRef.new(shape: WorkloadIdentityArn, required: true, location_name: "workloadIdentityArn"))
     WorkloadIdentityDetails.struct_class = Types::WorkloadIdentityDetails
@@ -2240,6 +2310,19 @@ module Aws::BedrockAgentCoreControl
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_workload_identities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkloadIdentities"
         o.http_method = "POST"
@@ -2272,6 +2355,33 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

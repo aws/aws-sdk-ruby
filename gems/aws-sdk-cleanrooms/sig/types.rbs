@@ -1945,6 +1945,7 @@ module Aws::CleanRooms
     class PopulateIdMappingTableInput
       attr_accessor id_mapping_table_identifier: ::String
       attr_accessor membership_identifier: ::String
+      attr_accessor job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
       SENSITIVE: []
     end
 

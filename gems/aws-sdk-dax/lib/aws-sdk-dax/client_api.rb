@@ -69,6 +69,8 @@ module Aws::DAX
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
+    NetworkTypeList = Shapes::ListShape.new(name: 'NetworkTypeList')
     Node = Shapes::StructureShape.new(name: 'Node')
     NodeIdentifierList = Shapes::ListShape.new(name: 'NodeIdentifierList')
     NodeList = Shapes::ListShape.new(name: 'NodeList')
@@ -114,6 +116,7 @@ module Aws::DAX
     SubnetIdentifierList = Shapes::ListShape.new(name: 'SubnetIdentifierList')
     SubnetInUse = Shapes::StructureShape.new(name: 'SubnetInUse')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
+    SubnetNotAllowedFault = Shapes::StructureShape.new(name: 'SubnetNotAllowedFault')
     SubnetQuotaExceededFault = Shapes::StructureShape.new(name: 'SubnetQuotaExceededFault')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -151,6 +154,7 @@ module Aws::DAX
     Cluster.add_member(:parameter_group, Shapes::ShapeRef.new(shape: ParameterGroupStatus, location_name: "ParameterGroup"))
     Cluster.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     Cluster.add_member(:cluster_endpoint_encryption_type, Shapes::ShapeRef.new(shape: ClusterEndpointEncryptionType, location_name: "ClusterEndpointEncryptionType"))
+    Cluster.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -177,6 +181,7 @@ module Aws::DAX
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateClusterRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     CreateClusterRequest.add_member(:cluster_endpoint_encryption_type, Shapes::ShapeRef.new(shape: ClusterEndpointEncryptionType, location_name: "ClusterEndpointEncryptionType"))
+    CreateClusterRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -331,6 +336,8 @@ module Aws::DAX
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
+    NetworkTypeList.member = Shapes::ShapeRef.new(shape: NetworkType)
+
     Node.add_member(:node_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeId"))
     Node.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
     Node.add_member(:node_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "NodeCreateTime"))
@@ -425,12 +432,14 @@ module Aws::DAX
 
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SubnetAvailabilityZone"))
+    Subnet.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: "SupportedNetworkTypes"))
     Subnet.struct_class = Types::Subnet
 
     SubnetGroup.add_member(:subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName"))
     SubnetGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     SubnetGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
     SubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
+    SubnetGroup.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: "SupportedNetworkTypes"))
     SubnetGroup.struct_class = Types::SubnetGroup
 
     SubnetGroupAlreadyExistsFault.struct_class = Types::SubnetGroupAlreadyExistsFault
@@ -450,6 +459,8 @@ module Aws::DAX
     SubnetInUse.struct_class = Types::SubnetInUse
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet)
+
+    SubnetNotAllowedFault.struct_class = Types::SubnetNotAllowedFault
 
     SubnetQuotaExceededFault.struct_class = Types::SubnetQuotaExceededFault
 
@@ -573,6 +584,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
       end)
 
       api.add_operation(:decrease_replication_factor, Seahorse::Model::Operation.new.tap do |o|
@@ -808,6 +820,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: SubnetInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
       end)
     end
 

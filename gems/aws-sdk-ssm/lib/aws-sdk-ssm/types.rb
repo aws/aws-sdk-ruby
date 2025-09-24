@@ -3382,6 +3382,11 @@ module Aws::SSM
     #   Amazon Web Services accounts where you want to run the association.
     #   Use this action to create an association in multiple Regions and
     #   multiple accounts.
+    #
+    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   State Manager.
+    #
+    #    </note>
     #   @return [Array<Types::TargetLocation>]
     #
     # @!attribute [rw] schedule_offset
@@ -4084,10 +4089,20 @@ module Aws::SSM
     #
     #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
-    #     Manager under any circumstances. If a package was installed before
-    #     it was added to the rejected patches list, or is installed outside
-    #     of Patch Manager afterward, it's considered noncompliant with the
-    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
+    #     Manager under any circumstances.
+    #
+    #     State value assignment for patch compliance:
+    #
+    #     * If a package was installed before it was added to the rejected
+    #       patches list, or is installed outside of Patch Manager
+    #       afterward, it's considered noncompliant with the patch baseline
+    #       and its status is reported as `INSTALLED_REJECTED`.
+    #
+    #     * If an update attempts to install a dependency package that is
+    #       now rejected by the baseline, when previous versions of the
+    #       package were not rejected, the package being updated is reported
+    #       as `MISSING` for `SCAN` operations and as `FAILED` for `INSTALL`
+    #       operations.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -8045,12 +8060,21 @@ module Aws::SSM
     #   Defines the basic information about a patch baseline override.
     #   @return [Types::BaselineOverride]
     #
+    # @!attribute [rw] use_s3_dual_stack_endpoint
+    #   Specifies whether to use S3 dualstack endpoints for the patch
+    #   snapshot download URL. Set to `true` to receive a presigned URL that
+    #   supports both IPv4 and IPv6 connectivity. Set to `false` to use
+    #   standard IPv4-only endpoints. Default is `false`. This parameter is
+    #   required for managed nodes in IPv6-only environments.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstanceRequest AWS API Documentation
     #
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
       :instance_id,
       :snapshot_id,
-      :baseline_override)
+      :baseline_override,
+      :use_s3_dual_stack_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19065,12 +19089,13 @@ module Aws::SSM
     # @!attribute [rw] target_location_max_concurrency
     #   The maximum number of Amazon Web Services Regions and Amazon Web
     #   Services accounts allowed to run the Automation concurrently.
+    #   `TargetLocationMaxConcurrency` has a default value of 1.
     #   @return [String]
     #
     # @!attribute [rw] target_location_max_errors
     #   The maximum number of errors allowed before the system stops
     #   queueing additional Automation executions for the currently running
-    #   Automation.
+    #   Automation. `TargetLocationMaxErrors` has a default value of 0.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -19087,6 +19112,10 @@ module Aws::SSM
     # @!attribute [rw] include_child_organization_units
     #   Indicates whether to include child organizational units (OUs) that
     #   are children of the targeted OUs. The default is `false`.
+    #
+    #   <note markdown="1"> This parameter is not supported by State Manager.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] exclude_accounts
@@ -19620,6 +19649,11 @@ module Aws::SSM
     #   Amazon Web Services accounts where you want to run the association.
     #   Use this action to update an association in multiple Regions and
     #   multiple accounts.
+    #
+    #   <note markdown="1"> The `IncludeChildOrganizationUnits` parameter is not supported by
+    #   State Manager.
+    #
+    #    </note>
     #   @return [Array<Types::TargetLocation>]
     #
     # @!attribute [rw] schedule_offset
@@ -20779,10 +20813,20 @@ module Aws::SSM
     #
     #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
-    #     Manager under any circumstances. If a package was installed before
-    #     it was added to the rejected patches list, or is installed outside
-    #     of Patch Manager afterward, it's considered noncompliant with the
-    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
+    #     Manager under any circumstances.
+    #
+    #     State value assignment for patch compliance:
+    #
+    #     * If a package was installed before it was added to the rejected
+    #       patches list, or is installed outside of Patch Manager
+    #       afterward, it's considered noncompliant with the patch baseline
+    #       and its status is reported as `INSTALLED_REJECTED`.
+    #
+    #     * If an update attempts to install a dependency package that is
+    #       now rejected by the baseline, when previous versions of the
+    #       package were not rejected, the package being updated is reported
+    #       as `MISSING` for `SCAN` operations and as `FAILED` for `INSTALL`
+    #       operations.
     #   @return [String]
     #
     # @!attribute [rw] description

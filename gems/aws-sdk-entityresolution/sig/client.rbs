@@ -118,6 +118,7 @@ module Aws
         def input_source_config: () -> ::Array[Types::IdMappingWorkflowInputSource]
         def output_source_config: () -> ::Array[Types::IdMappingWorkflowOutputSource]
         def id_mapping_techniques: () -> Types::IdMappingTechniques
+        def incremental_run_config: () -> Types::IdMappingIncrementalRunConfig
         def role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#create_id_mapping_workflow-instance_method
@@ -158,6 +159,9 @@ module Aws
                                               intermediate_s3_path: ::String
                                             }?
                                           }?
+                                        },
+                                        ?incremental_run_config: {
+                                          incremental_run_type: ("ON_DEMAND")?
                                         },
                                         ?role_arn: ::String,
                                         ?tags: Hash[::String, ::String]
@@ -392,6 +396,7 @@ module Aws
         def metrics: () -> Types::IdMappingJobMetrics
         def error_details: () -> Types::ErrorDetails
         def output_source_config: () -> ::Array[Types::IdMappingJobOutputSource]
+        def job_type: () -> ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_id_mapping_job-instance_method
       def get_id_mapping_job: (
@@ -410,6 +415,7 @@ module Aws
         def id_mapping_techniques: () -> Types::IdMappingTechniques
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def incremental_run_config: () -> Types::IdMappingIncrementalRunConfig
         def role_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -655,6 +661,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::StartIdMappingJobOutput]
         def job_id: () -> ::String
         def output_source_config: () -> ::Array[Types::IdMappingJobOutputSource]
+        def job_type: () -> ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#start_id_mapping_job-instance_method
       def start_id_mapping_job: (
@@ -665,7 +672,8 @@ module Aws
                                       output_s3_path: ::String,
                                       kms_arn: ::String?
                                     },
-                                  ]
+                                  ],
+                                  ?job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
                                 ) -> _StartIdMappingJobResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIdMappingJobResponseSuccess
 
@@ -707,6 +715,7 @@ module Aws
         def input_source_config: () -> ::Array[Types::IdMappingWorkflowInputSource]
         def output_source_config: () -> ::Array[Types::IdMappingWorkflowOutputSource]
         def id_mapping_techniques: () -> Types::IdMappingTechniques
+        def incremental_run_config: () -> Types::IdMappingIncrementalRunConfig
         def role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#update_id_mapping_workflow-instance_method
@@ -747,6 +756,9 @@ module Aws
                                               intermediate_s3_path: ::String
                                             }?
                                           }?
+                                        },
+                                        ?incremental_run_config: {
+                                          incremental_run_type: ("ON_DEMAND")?
                                         },
                                         ?role_arn: ::String
                                       ) -> _UpdateIdMappingWorkflowResponseSuccess

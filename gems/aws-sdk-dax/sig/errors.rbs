@@ -61,6 +61,8 @@ module Aws
       end
       class SubnetInUse < ::Aws::Errors::ServiceError
       end
+      class SubnetNotAllowedFault < ::Aws::Errors::ServiceError
+      end
       class SubnetQuotaExceededFault < ::Aws::Errors::ServiceError
       end
       class TagNotFoundFault < ::Aws::Errors::ServiceError

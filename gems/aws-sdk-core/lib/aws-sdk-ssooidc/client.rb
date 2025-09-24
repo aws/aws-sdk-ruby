@@ -523,10 +523,9 @@ module Aws::SSOOIDC
     #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
     #
     # @option params [Array<String>] :scope
-    #   The list of scopes for which authorization is requested. The access
-    #   token that is issued is limited to the scopes that are granted. If
-    #   this value is not specified, IAM Identity Center authorizes all scopes
-    #   that are configured for the client during the call to RegisterClient.
+    #   The list of scopes for which authorization is requested. This
+    #   parameter has no effect; the access token will always include all
+    #   scopes configured during client registration.
     #
     # @option params [String] :redirect_uri
     #   Used only when calling this API for the Authorization Code grant type.
@@ -615,11 +614,25 @@ module Aws::SSOOIDC
       req.send_request(options)
     end
 
-    # Creates and returns access and refresh tokens for clients and
-    # applications that are authenticated using IAM entities. The access
+    # Creates and returns access and refresh tokens for authorized client
+    # applications that are authenticated using any IAM entity, such as a
+    # service role or user. These tokens might contain defined scopes that
+    # specify permissions such as `read:profile` or `write:data`. Through
+    # downscoping, you can use the scopes parameter to request tokens with
+    # reduced permissions compared to the original client application's
+    # permissions or, if applicable, the refresh token's scopes. The access
     # token can be used to fetch short-lived credentials for the assigned
     # Amazon Web Services accounts or to access application APIs using
     # `bearer` authentication.
+    #
+    # <note markdown="1"> This API is used with Signature Version 4. For more information, see
+    # [Amazon Web Services Signature Version 4 for API Requests][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
     #
     # @option params [required, String] :client_id
     #   The unique identifier string for the client or application. This value
@@ -1068,7 +1081,7 @@ module Aws::SSOOIDC
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.232.0'
+      context[:gem_version] = '3.233.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

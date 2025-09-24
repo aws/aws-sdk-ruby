@@ -4593,6 +4593,28 @@ module Aws::CleanRooms
     #   The unique identifier of the membership that contains the ID mapping
     #   table that you want to populate.
     #
+    # @option params [String] :job_type
+    #   The job type of the rule-based ID mapping job. Valid values include:
+    #
+    #   `INCREMENTAL`: Processes only new or changed data since the last job
+    #   run. This is the default job type if the ID mapping workflow was
+    #   created in Entity Resolution with `incrementalRunConfig` specified.
+    #
+    #   `BATCH`: Processes all data from the input source, regardless of
+    #   previous job runs. This is the default job type if the ID mapping
+    #   workflow was created in Entity Resolution but `incrementalRunConfig`
+    #   wasn't specified.
+    #
+    #   `DELETE_ONLY`: Processes only deletion requests from
+    #   `BatchDeleteUniqueId`, which is set in Entity Resolution.
+    #
+    #   For more information about `incrementalRunConfig` and
+    #   `BatchDeleteUniqueId`, see the [Entity Resolution API Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html
+    #
     # @return [Types::PopulateIdMappingTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PopulateIdMappingTableOutput#id_mapping_job_id #id_mapping_job_id} => String
@@ -4602,6 +4624,7 @@ module Aws::CleanRooms
     #   resp = client.populate_id_mapping_table({
     #     id_mapping_table_identifier: "UUID", # required
     #     membership_identifier: "MembershipIdentifier", # required
+    #     job_type: "BATCH", # accepts BATCH, INCREMENTAL, DELETE_ONLY
     #   })
     #
     # @example Response structure
@@ -5883,7 +5906,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-09-24)
+------------------
+
+* Feature - G6f instance support for AppStream 2.0
+
 1.117.0 (2025-08-26)
 ------------------
 

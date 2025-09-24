@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2025-09-19)
+------------------
+
+* Feature - Add UNKNOWN state to RemediationExecutionState and add IN_PROGRESS/EXITED/UNKNOWN states to RemediationExecutionStepState.
+
 1.137.0 (2025-08-26)
 ------------------
 
