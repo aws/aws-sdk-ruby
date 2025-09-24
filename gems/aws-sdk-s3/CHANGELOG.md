@@ -1,10 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Update TransferManager documentation to clarify download behavior differences between destination types.
-
-* Issue - Fix `FileDownloader` compatibility with string paths from File/Tempfile objects in `Object#download_file`.
-
 1.199.0 (2025-09-08)
 ------------------
 

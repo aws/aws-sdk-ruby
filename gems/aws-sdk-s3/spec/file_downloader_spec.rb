@@ -109,8 +109,9 @@ module Aws
 
         it 'calls on_checksum_validated on multipart object' do
           callback_data = { called: 0 }
-          stub_params = { body: 'body', content_range: 'bytes 0-3/4', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' }
-          client.stub_responses(:get_object, stub_params)
+          client.stub_responses(
+            :get_object, { body: 'body', content_range: 'bytes 0-3/4', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' }
+          )
           mutex = Mutex.new
           callback = proc do |_alg, _resp|
             mutex.synchronize { callback_data[:called] += 1 }
@@ -141,20 +142,6 @@ module Aws
           })
 
           subject.download(path, range_params.merge(chunk_size: one_meg))
-        end
-
-        context 'enable_direct_writes is set true' do
-          it 'writes directly to the destination path' do
-            downloader = FileDownloader.new(client: client, enable_direct_writes: true)
-            client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
-            temp_file = Tempfile.new
-
-            # Test legacy behavior: download to string path should write directly to file
-            # without using temporary files, so the Tempfile object reflects the changes
-            downloader.download(temp_file.path, parts_params)
-            expect(temp_file.read).to eq('body')
-            expect(temp_file.size).to eq(4)
-          end
         end
 
         context 'multipart progress' do

@@ -48,12 +48,7 @@ module Aws
       # @param [String, Pathname, File, Tempfile] destination
       #   Where to download the file to. This can either be a String or Pathname to the file, an open File object,
       #   or an open Tempfile object. If you pass an open File or Tempfile object, then you are responsible for
-      #   closing it after the download completes. Download behavior varies by destination type:
-      #
-      #   * **String/Pathname paths**: Downloads to a temporary file first, then atomically moves to the final
-      #    destination. This ensures the original file is not corrupted if the download fails.
-      #   * **File/Tempfile objects**: Downloads directly to the file object without using temporary files. You
-      #    are responsible for closing it after the download completes.
+      #   closing it after the download completes.
       #
       # @param [String] bucket
       #   The name of the S3 bucket to upload to.
