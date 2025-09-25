@@ -17,11 +17,14 @@ module Aws
     class DirectoryDownloader
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @executor = options[:executor]
+        @executor = options[:executor] || DefaultExecutor.new
+        @options = options
+        @abort_download = false
       end
 
-      attr_reader :client, :executor
+      attr_reader :client, :abort_download
 
+      # TODO: need to add progress tracker
       def download(destination, bucket:, **options)
         if File.exist?(destination)
           raise ArgumentError 'invalid destination, expected a directory' unless File.directory?(destination)
@@ -30,75 +33,122 @@ module Aws
         end
 
         download_opts = options.dup
-        @destination = destination
         @bucket = bucket
-        @recursive = download_opts.delete(:recursive) || false
-        @s3_prefix = download_opts.delete(:s3_prefix)
-        @s3_delimiter = download_opts.delete(:s3_delimiter) || '/'
-        @failure_policy = download_opts.delete(:failure_policy) || :abort
-
-        downloader = FileDownloader.new(client: client, executor: @executor)
-        @download_queue = SizedQueue.new(100)
-        @abort_download = false
+        @ignore_failure = download_opts.delete(:ignore_failure) || false
         @errors = []
 
-        Thread.new do
-          stream_keys
-          @download_queue << :done
-        end
+        downloader = FileDownloader.new(client: client, executor: @executor)
+        producer = ObjectProducer.new(destination, build_producer_opts(download_opts))
+        producer.run
 
+        downloads = process_download_queue(producer, downloader, download_opts)
+        build_result(downloads)
+      ensure
+        @executor.shutdown unless @options[:executor]
+      end
+
+      def build_producer_opts(opts)
+        {
+          directory_downloader: self,
+          client: @client,
+          bucket: @bucket,
+          s3_prefix: opts.delete(:s3_prefix),
+          ignore_failure: @ignore_failure,
+          filter_callback: opts.delete(:filter_callback),
+          errors: @errors
+        }
+      end
+
+      def build_result(download_count)
+        downloads = [download_count - @errors.count, 0].max
+
+        if @abort_download
+          msg = "failed to download directory: downloaded #{downloads} files " \
+            "and failed to download #{@errors.count} files."
+          raise DirectoryDownloadError.new(msg, @errors)
+        else
+          result = { completed_downloads: downloads, failed_downloads: @errors.count }
+          result[:errors] = @errors if @errors.any?
+          result
+        end
+      end
+
+      def process_download_queue(producer, downloader, opts)
         download_attempts = 0
         completion_queue = Queue.new
-        while (queue_key = @download_queue.shift) != :done
+        queue_executor = DefaultExecutor.new
+        while (object = producer.object_queue.shift) != :done
           break if @abort_download
 
           download_attempts += 1
-          @executor.post(queue_key) do |k|
-            normalized_key = normalize_key(k)
-            full_path = File.join(@destination, normalized_key)
-            dir_path = File.dirname(full_path)
+          queue_executor.post(object) do |o|
+            dir_path = File.dirname(o[:path])
             FileUtils.mkdir_p(dir_path) unless dir_path == @destination || Dir.exist?(dir_path)
 
-            downloader.download(full_path, download_opts.merge(bucket: @bucket, key: k))
+            downloader.download(o[:path], opts.merge(bucket: @bucket, key: o[:key]))
           rescue StandardError => e
             @errors << e
-            @abort_download = true if @failure_policy == :abort
+            @abort_download = true unless @ignore_failure
           ensure
             completion_queue << :done
           end
         end
-
         download_attempts.times { completion_queue.pop }
-
-        if @abort_download
-          msg = "failed to download directory: attempt to download #{download_attempts} objects " \
-                "but failed to download #{@errors.count} objects."
-          raise DirectoryDownloadError, msg + @errors.to_s
-        else
-          {
-            downloaded: download_attempts - @errors.count,
-            errors: @errors.count
-          }
-        end
+        download_attempts
+      ensure
+        queue_executor.shutdown
       end
 
-      def normalize_key(key)
-        key = key.delete_prefix(@s3_prefix) if @s3_prefix
-        return key.tr('/', @s3_delimiter) if @s3_delimiter != '/'
-        return key if File::SEPARATOR == '/'
-
-        key.tr('/', File::SEPARATOR)
-      end
-
-      def stream_keys(continuation_token: nil)
-        resp = @client.list_objects_v2(bucket: @bucket, continuation_token: continuation_token)
-        resp.contents.each do |o|
-          break if @abort_download
-          next if o.key.end_with?('/')
-
-          @download_queue << o.key
+      # @api private
+      class ObjectProducer
+        def initialize(destination_dir, options = {})
+          @destination_dir = destination_dir
+          @client = options[:client]
+          @bucket = options[:bucket]
+          @s3_prefix = options[:s3_prefix]
+          @ignore_failure = options[:ignore_failure]
+          @filter_callback = options[:filter_callback]
+          @errors = options[:errors]
+          @directory_downloader = options[:directory_downloader]
+          @object_queue = SizedQueue.new(100)
         end
-        stream_keys(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
+
+        attr_reader :object_queue
+
+        def run
+          Thread.new do
+            stream_objects
+            @object_queue << :done
+          end
+        end
+
+        private
+
+        def build_object_entry(key)
+          { path: File.join(@destination_dir, normalize_key(key)), key: key }
+        end
+
+        # TODO: need to add filter callback, double check handling of objects that ends with /
+        def stream_objects(continuation_token: nil)
+          resp = @client.list_objects_v2(bucket: @bucket, continuation_token: continuation_token)
+          resp.contents.each do |o|
+            break if @directory_downloader.abort_download
+            next if o.key.end_with?('/')
+
+            @object_queue << build_object_entry(o.key)
+          rescue StandardError => e
+            @errors << e
+            @abort_download = true unless @ignore_failure
+          end
+          stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
+        end
+
+        def normalize_key(key)
+          key = key.delete_prefix(@s3_prefix) if @s3_prefix
+          return key if File::SEPARATOR == '/'
+
+          key.tr('/', File::SEPARATOR)
+        end
       end
     end
   end
