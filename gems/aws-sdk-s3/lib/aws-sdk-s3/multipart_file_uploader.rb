@@ -22,10 +22,10 @@ module Aws
       # @option options [Client] :client
       # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
-        @options = options
         @client = options[:client] || Client.new
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
         @executor = options[:executor] || DefaultExecutor.new(max_threads: @thread_count)
+        @options = options
       end
 
       # @return [Client]
