@@ -6,11 +6,11 @@ module Aws::Bedrock
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [String]
+    # @return [Hash]
     def resolve(parameters)
       options = []
-      options << 'aws.auth#sigv4'
-      options << 'smithy.api#httpBearerAuth'
+      options << { scheme_id: 'aws.auth#sigv4' }
+      options << { scheme_id: 'smithy.api#httpBearerAuth' }
       options
     end
   end

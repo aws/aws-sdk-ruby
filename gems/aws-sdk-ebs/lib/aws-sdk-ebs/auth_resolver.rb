@@ -6,14 +6,14 @@ module Aws::EBS
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [String]
+    # @return [Hash]
     def resolve(parameters)
       options = []
       case parameters.operation_name
       when :put_snapshot_block
-        options << 'aws.auth#sigv4'
+        options << { scheme_id: 'aws.auth#sigv4' }
       else
-      options << 'aws.auth#sigv4'
+      options << { scheme_id: 'aws.auth#sigv4' }
       end
       options
     end

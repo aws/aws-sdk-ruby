@@ -65,6 +65,11 @@ module Aws::Bedrock
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
     #  An object that resolves authentication schemes for request signing
+    # @option options [String] :bearer_token
+    #  The bearer token to use for authentication.
+    # @option options [Smithy::Client::BearerTokenProvider] :bearer_token_provider
+    #  A bearer token identity provider. This can be an instance of a {Smithy::Client::BearerTokenProvider} or any
+    #  class that responds to #identity and returns a {Smithy::Client::BearerToken}.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials
@@ -78,11 +83,6 @@ module Aws::Bedrock
     #  Custom Endpoint
     # @option options [Aws::Bedrock::EndpointProvider] :endpoint_provider
     #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
-    # @option options [Smithy::Client::HttpBearerProvider] :http_bearer_provider
-    #  A bearer token identity provider. This can be an instance of a {Smithy::Client::HttpBearerProvider} or any
-    #  class that responds to #identity and returns a {Smithy::Client::Identities::HttpBearer}.
-    # @option options [String] :http_bearer_token
-    #  The bearer token to use for authentication.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
