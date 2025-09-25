@@ -69,7 +69,7 @@ module Aws
               secret_access_key: 'secret'
             )
           )
-          creds = signer.credentials_provider.credentials
+          creds = signer.credentials_provider.identity
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
           expect(creds.session_token).to be(nil)
@@ -83,7 +83,7 @@ module Aws
               session_token: 'token'
             )
           )
-          creds = signer.credentials_provider.credentials
+          creds = signer.credentials_provider.identity
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
           expect(creds.session_token).to eq('token')
@@ -99,7 +99,7 @@ module Aws
               )
             )
           )
-          creds = signer.credentials_provider.credentials
+          creds = signer.credentials_provider.identity
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
           expect(creds.session_token).to eq('token')
@@ -108,14 +108,14 @@ module Aws
         it 'accepts :credentials_provider' do
           signer = Signer.new(
             options.merge(
-              credentials_provider: StaticCredentials.new(
+              credentials_provider: StaticCredentialsProvider.new(
                 access_key_id: 'akid',
                 secret_access_key: 'secret',
                 session_token: 'token'
               )
             )
           )
-          creds = signer.credentials_provider.credentials
+          creds = signer.credentials_provider.identity
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
           expect(creds.session_token).to eq('token')
@@ -128,7 +128,7 @@ module Aws
               secret_access_key: ''
             )
           )
-          creds = signer.credentials_provider.credentials
+          creds = signer.credentials_provider.identity
           expect(creds.access_key_id).to eq('')
           expect(creds.secret_access_key).to eq('')
         end
@@ -407,11 +407,12 @@ module Aws
             now = Time.now
             expiration = now + 60 # 60 seconds from now
 
-            provider = StaticCredentials.new(
+            provider = StaticCredentialsProvider.new(
               access_key_id: 'provider_key_id',
-              secret_access_key: 'provider_secret_key',
-              expiration: expiration
+              secret_access_key: 'provider_secret_key'
             )
+            # static provider doesn't support expiration, so we hack it in here
+            provider.instance_variable_set(:@expiration, expiration)
             signer = Signer.new(
               service: 'SERVICE',
               region: 'REGION',

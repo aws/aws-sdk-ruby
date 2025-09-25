@@ -1,68 +1,87 @@
 # frozen_string_literal: true
 
+require 'resolv'
+
 module Aws
   module Core
-    # Auto-refreshing credentials that loads credentials from
-    # instances running in containers.
+    # Auto-refreshing credentials that loads credentials from instances running in containers.
     #
-    #     creds = Aws::Core::ContainerCredentials.new(retries: 3)
-    #     ec2 = Aws::EC2::Client.new(credentials: creds)
-    class ContainerCredentials
-      include IdentityProvider
+    #     credentials = Aws::Core::ContainerCredentialsProvider.new(retries: 3)
+    #     ec2 = Aws::EC2::Client.new(credentials_provider: credentials)
+    #
+    # This credentials provider can be configured by setting one of the following environment variables:
+    # * `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` - The relative URI path to the credentials in the container.
+    #   This assumes an endpoint of `http://169.254.170.2`.
+    # * `AWS_CONTAINER_CREDENTIALS_FULL_URI` - The full URI to the credentials path in the container.
+    #
+    # The relative path takes precedence over the full URI if both are set. If using ECS or EKS, either of these
+    # environment variables should be set automatically for you.
+    #
+    # This provider also supports the following optional environment variables:
+    # * `AWS_CONTAINER_AUTHORIZATION_TOKEN` - An authorization token to be sent in the `Authorization`
+    #   header of the HTTP request to the credentials endpoint.
+    # * `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` - A path to a file containing the authorization token to be sent
+    #   in the `Authorization` header of the HTTP request to the credentials endpoint.
+    #
+    # The token file takes precedence over the token string if both are set.
+    #
+    # Automatically handles refreshing credentials if an Expiration time is provided in the credentials payload.
+    class ContainerCredentialsProvider
+      include Smithy::Client::IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # @api private
       class Non200Response < RuntimeError; end
 
-      # @api private
       # Raised when the token file cannot be read.
       class TokenFileReadError < RuntimeError; end
 
-      # @api private
       # Raised when the token file is invalid.
       class InvalidTokenError < RuntimeError; end
 
       # @param [Hash] options
-      # @option options [String] :credential_path By default, the value of the
-      #   AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variable.
-      # @option options [String] :endpoint The container credential endpoint.
-      #   By default, this is the value of the AWS_CONTAINER_CREDENTIALS_FULL_URI
-      #   environment variable. This value is ignored if `credential_path` or
-      #   ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] is set.
-      # @option options [Integer] :retries (5) Number of times to retry
-      #   when retrieving credentials.
-      # @option options [Float] :http_open_timeout (5)
-      # @option options [Float] :http_read_timeout (5)
-      # @option options [IO] :http_debug_output (nil) HTTP wire
-      #   traces are sent to this object.  You can specify something
-      #   like $stdout.
-      # @option options [Numeric, Proc] :backoff By default, failures are retried
-      #   with exponential backoff, i.e. `sleep(1.2 ** num_failures)`. You can
-      #   pass a number of seconds to sleep between failed attempts, or
-      #   a Proc that accepts the number of failures.
+      # @option options [Integer] :retries (3)
+      #   Number of times to retry when retrieving credentials.
+      # @option options [Float] :http_open_timeout (1)
+      # @option options [Float] :http_read_timeout (1)
+      # @option options [IO] :http_debug_output (nil)
+      #   The IO object to send wire trace output to, such as $stdout.
+      # @option options [Numeric, Proc] :backoff
+      #   By default, failures are retried with exponential backoff, i.e. `sleep(1.2 ** num_failures)`.
+      #   You can pass a number of seconds to sleep between failed attempts,
+      #   or a Proc that accepts the number of failures.
       def initialize(options = {})
-        credential_path = options[:credential_path] || ENV.fetch('AWS_CONTAINER_CREDENTIALS_RELATIVE_URI', nil)
-        endpoint = options[:endpoint] || ENV.fetch('AWS_CONTAINER_CREDENTIALS_FULL_URI', nil)
-
-        initialize_uri(options, credential_path, endpoint)
-
-        @retries = options[:retries] || 5
-        @http_open_timeout = options[:http_open_timeout] || 5
-        @http_read_timeout = options[:http_read_timeout] || 5
+        initialize_uri
+        @retries = options[:retries] || 3
+        @http_open_timeout = options[:http_open_timeout] || 1
+        @http_read_timeout = options[:http_read_timeout] || 1
         @http_debug_output = options[:http_debug_output]
         @backoff = resolve_backoff(options[:backoff])
+
         @async_refresh = false
         @features = ['CREDENTIALS_HTTP']
-        super()
+        super
       end
+
+      # @return [String]
+      attr_reader :host
+
+      # @return [Integer]
+      attr_reader :port
+
+      # @return [String]
+      attr_reader :scheme
+
+      # @return [String]
+      attr_reader :credential_path
 
       # @return [Integer]
       attr_reader :retries
 
-      # @return [Integer]
+      # @return [Float]
       attr_reader :http_open_timeout
 
-      # @return [Integer]
+      # @return [Float]
       attr_reader :http_read_timeout
 
       # @return [IO, nil]
@@ -71,25 +90,29 @@ module Aws
       # @return [Proc]
       attr_reader :backoff
 
+      # Feature IDs for the User-Agent
+      # @api private
+      attr_accessor :features
+
       private
 
-      def initialize_uri(options, credential_path, endpoint)
+      def initialize_uri
         # Prioritize checking for RELATIVE_URI/path
-        if credential_path
-          initialize_relative_uri(options, credential_path)
+        if (credential_path = ENV.fetch('AWS_CONTAINER_CREDENTIALS_RELATIVE_URI', nil))
+          initialize_relative_uri(credential_path)
         # Use FULL_URI/endpoint only if RELATIVE_URI/path is not set
-        elsif endpoint
+        elsif (endpoint = ENV.fetch('AWS_CONTAINER_CREDENTIALS_FULL_URI', nil))
           initialize_full_uri(endpoint)
         else
           raise ArgumentError, 'Cannot instantiate an HTTP Credentials without a credential path or endpoint.'
         end
       end
 
-      def initialize_relative_uri(options, path)
-        @host = options[:ip_address] || '169.254.170.2'
-        @port = options[:port] || 80
+      def initialize_relative_uri(credential_path)
+        @host = '169.254.170.2'
+        @port = 80
         @scheme = 'http'
-        @credential_path = path
+        @credential_path = credential_path
       end
 
       def initialize_full_uri(endpoint)
@@ -121,7 +144,7 @@ module Aws
         end
 
         raise ArgumentError,
-              'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a local loopback ' \
+              "ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] must use a local loopback " \
               'or an ECS or EKS link-local address when using the http scheme.'
       end
 
@@ -155,18 +178,18 @@ module Aws
         # Retry loading credentials up to a configurable number of times if the instance metadata service
         # is not responding or if the instance metadata service is responding but is returning invalid
         # JSON documents in response to the GET profile credentials call.
-        retry_errors([JSON::ParserError, StandardError], max_retries: @retries) do
+        retry_errors([JSON::ParserError, StandardError]) do
           creds = JSON.parse(get_credentials.to_s)
+          @expiration = Time.parse(creds['Expiration']) if creds['Expiration']
           @identity = Credentials.new(
             access_key_id: creds['AccessKeyId'],
             secret_access_key: creds['SecretAccessKey'],
             session_token: creds['Token'],
-            account_id: creds['AccountId'],
-            expiration: creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
+            account_id: creds['AccountId']
           )
         end
       rescue JSON::ParserError
-        raise 'Failed to parse HTTP service response.'
+        raise 'Failed to parse HTTP service response'
       end
 
       def get_credentials # rubocop:disable Naming/AccessorMethodName
@@ -179,15 +202,14 @@ module Aws
         raise "Error retrieving HTTP Credentials: #{e.message}"
       end
 
-      def retry_errors(error_classes, options = {})
-        max_retries = options[:max_retries]
+      def retry_errors(error_classes)
         attempts = 0
         begin
           yield
         rescue TokenFileReadError, InvalidTokenError
           raise
         rescue *error_classes => _e
-          raise unless attempts < max_retries
+          raise unless attempts < @retries
 
           @backoff.call(attempts)
           attempts += 1
@@ -233,16 +255,14 @@ module Aws
         File.read(path).strip
       rescue Errno::ENOENT
         raise TokenFileReadError,
-              'AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE is set ' \
-              "but the file doesn't exist: #{path}"
+              "AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE is set but the file doesn't exist: #{path}"
       end
 
       def validate_authorization_token!(token)
         return unless token.include?("\r\n")
 
         raise InvalidTokenError,
-              'Invalid Authorization token: token contains ' \
-              'a newline and carriage return character.'
+              'Invalid Authorization token: token contains a newline and carriage return character.'
       end
     end
   end

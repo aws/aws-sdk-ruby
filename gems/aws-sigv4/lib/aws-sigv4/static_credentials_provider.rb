@@ -3,7 +3,7 @@
 module Aws
   module SigV4
     # Returns static credentials.
-    class StaticCredentials
+    class StaticCredentialsProvider
       # @overload initialize(options)
       #   Initializes with a credentials object.
       #   @option options [Credentials] :credentials
@@ -14,21 +14,19 @@ module Aws
       #   @option options [String] :secret_access_key
       #   @option options [String, nil] :session_token (nil)
       #   @option options [String, nil] :account_id (nil)
-      #   @option options [Time, nil] :expiration (nil)
       def initialize(options = {})
-        @credentials = options[:credentials] || Credentials.new(options)
-        @expiration = options[:expiration]
+        @identity = options[:credentials] || Credentials.new(options)
       end
 
       # @return [Credentials]
-      attr_reader :credentials
+      attr_reader :identity
 
-      # @return [Time, nil]
+      # @return [nil]
       attr_reader :expiration
 
       # @return [Boolean]
       def set?
-        !!credentials && credentials.set?
+        !!identity && identity.set?
       end
     end
   end

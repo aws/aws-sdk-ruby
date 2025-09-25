@@ -3,25 +3,25 @@
 module Aws
   module Core
     # An auto-refreshing credentials provider that assumes a role via {Aws::SSO::Client#get_role_credentials} using a
-    # cached access token. When `sso_session` is specified, token refresh logic from {Aws::Core::SSOOIDCToken} will
-    # be used to refresh the token if possible. This class does NOT implement the SSO login token flow - tokens must be
-    # generated separately by running `aws login` from the AWS CLI with the correct profile.
+    # cached access token. When `sso_session` is specified, token refresh logic from {Aws::Core::SSOOIDCTokenProvider}
+    # will be used to refresh the token if possible. This class does NOT implement the SSO login token flow - tokens
+    # must be generated separately by running `aws login` from the AWS CLI with the correct profile.
     #
     #     # You must first run aws sso login --profile your-sso-profile
-    #     provider = Aws::Core::SSOCredentials.new(
+    #     credentials = Aws::Core::SSOCredentialsProvider.new(
     #       sso_account_id: '123456789',
     #       sso_role_name: 'role_name',
     #       sso_region: 'us-east-1',
     #       sso_session: 'your-sso-profile'
     #     )
-    #     ec2 = Aws::EC2::Client.new(credentials: provider)
+    #     ec2 = Aws::EC2::Client.new(credentials_provider: credentials)
     #
     # If you omit the `:client` option, a new {Aws::SSO::Client} object will be constructed.
     #
     # @see Aws::SSO::Client#get_role_credentials
     # @see https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
-    class SSOCredentials
-      include IdentityProvider
+    class SSOCredentialsProvider
+      include Smithy::Client::IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # @param [String] :sso_session The SSO Session used for fetching the SSO token.
@@ -37,14 +37,30 @@ module Aws
         @sso_account_id = sso_account_id
         @sso_region = sso_region
         @sso_role_name = sso_role_name
-        @client = client || SSO::Client.new(region: sso_region)
-        @token_provider = SSOOIDCToken.new(sso_session: sso_session, sso_region: sso_region)
+        @client = client || SSO::Client.new(region: sso_region, credentials_provider: nil)
+        @token_provider = SSOOIDCTokenProvider.new(sso_session: sso_session, sso_region: sso_region)
         @features = ['CREDENTIALS_SSO']
         super()
       end
 
+      # @return [String]
+      attr_reader :sso_session
+
+      # @return [String]
+      attr_reader :sso_account_id
+
+      # @return [String]
+      attr_reader :sso_region
+
+      # @return [String]
+      attr_reader :sso_role_name
+
       # @return [SSO::Client]
       attr_reader :client
+
+      # Feature IDs for the User-Agent
+      # @api private
+      attr_accessor :features
 
       private
 
@@ -54,12 +70,12 @@ module Aws
           role_name: @sso_role_name,
           access_token: @token_provider.identity.token
         ).role_credentials
+        @expiration = Time.at(creds.expiration / 1000.0)
         @identity = Credentials.new(
           access_key_id: creds.access_key_id,
           secret_access_key: creds.secret_access_key,
           session_token: creds.session_token,
-          account_id: @sso_account_id,
-          expiration: Time.at(creds.expiration / 1000.0)
+          account_id: @sso_account_id
         )
       end
     end

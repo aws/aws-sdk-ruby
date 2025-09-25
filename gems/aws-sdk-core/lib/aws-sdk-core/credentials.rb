@@ -3,18 +3,16 @@
 module Aws
   module Core
     # Represents static AWS credentials.
-    class Credentials < Smithy::Client::Identity
-      # @param [String] access_key_id
-      # @param [String] secret_access_key
-      # @param [String] session_token (nil)
-      # @param [String] account_id (nil)
-      # (see Smithy::Client::Identity#initialize)
-      def initialize(access_key_id:, secret_access_key:, session_token: nil, account_id: nil, **)
-        @access_key_id = access_key_id
-        @secret_access_key = secret_access_key
-        @session_token = session_token
-        @account_id = account_id
-        super(**)
+    class Credentials
+      # @option options [String] :access_key_id
+      # @option options [String] :secret_access_key
+      # @option options [String, nil] :session_token
+      # @option options [String, nil] :account_id
+      def initialize(options = {})
+        @access_key_id = options[:access_key_id]
+        @secret_access_key = options[:secret_access_key]
+        @session_token = options[:session_token]
+        @account_id = options[:account_id]
       end
 
       # @return [String]

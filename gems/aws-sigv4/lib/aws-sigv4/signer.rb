@@ -403,7 +403,7 @@ module Aws
         if options[:credentials_provider]
           options[:credentials_provider]
         elsif options.key?(:credentials) || options.key?(:access_key_id)
-          StaticCredentials.new(options)
+          StaticCredentialsProvider.new(options)
         else
           raise Errors::MissingCredentialsError
         end
@@ -422,10 +422,10 @@ module Aws
 
       def fetch_credentials
         unless @credentials_provider.set?
-          raise MissingCredentialsError, 'unable to sign request without credentials set'
+          raise Errors::MissingCredentialsError, 'unable to sign request without credentials set'
         end
 
-        [@credentials_provider.credentials, @credentials_provider.expiration]
+        [@credentials_provider.identity, @credentials_provider.expiration]
       end
 
       def credentials_set?(credentials)

@@ -44,21 +44,3 @@ RSpec.configure do |config|
     mock_shared_config
   end
 end
-
-RSpec.shared_examples 'a refreshing credentials provider' do
-  # expire in 5 minutes
-  let(:expiration) { Time.now.utc + 299 }
-  let(:expiration2) { expiration + 3600 }
-  let(:provider) { described_class.new }
-
-  it 'auto-refreshes within 5 minutes from expiration' do
-    # Set expiring credentials
-    provider.identity
-    # Refresh credentials
-    creds = provider.identity
-    expect(creds.access_key_id).to eq('akid-2')
-    expect(creds.secret_access_key).to eq('secret-2')
-    expect(creds.session_token).to eq('session-token-2')
-    expect(creds.expiration.to_s).to eq(expiration2.to_s)
-  end
-end

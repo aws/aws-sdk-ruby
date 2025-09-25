@@ -4,21 +4,15 @@ module Aws
   module Core
     # An auto-refreshing credential provider that loads credentials from EC2 instances.
     #
-    #     creds = Aws::Core::InstanceProfileCredentials.new
-    #     ec2 = Aws::EC2::Client.new(credentials: creds)
+    #     credentials = Aws::Core::InstanceProfileCredentialsProvider.new
+    #     ec2 = Aws::EC2::Client.new(credentials_provider: credentials)
+    #
+    # Automatically handles refreshing credentials if an Expiration time is provided in the credentials payload.
     #
     # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html
-    class InstanceProfileCredentials
-      include IdentityProvider
+    class InstanceProfileCredentialsProvider
+      include Smithy::Client::IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
-
-      # Raised when InstanceProfileCredentialsProvider fails to parse the metadata response after retries
-      class MetadataParserError < RuntimeError
-        def initialize(*_args)
-          msg = 'Failed to parse metadata service response.'
-          super(msg)
-        end
-      end
 
       # Path base for GET request for profile and credentials
       # @api private
@@ -29,10 +23,11 @@ module Aws
       def initialize(options = {})
         @ec2_instance_profile_name = options.delete(:ec2_instance_profile_name)
         @ec2_metadata = EC2Metadata.new(options)
-        @async_refresh = false
         @no_refresh_until = nil
+
+        @async_refresh = false
         @features = ['CREDENTIALS_IMDS']
-        super()
+        super
       end
 
       # @return [String]
@@ -40,6 +35,10 @@ module Aws
 
       # @return [EC2Metadata]
       attr_reader :ec2_metadata
+
+      # Feature IDs for the User-Agent
+      # @api private
+      attr_accessor :features
 
       private
 
@@ -53,10 +52,10 @@ module Aws
           begin
             JSON.parse(retrieve_credentials.to_s)
           rescue JSON::ParserError
-            raise MetadataParserError
+            raise 'Failed to parse IMDS service response'
           end
 
-        if existing_credentials_set?(@identity) && new_credentials_empty?(new_creds)
+        if @identity&.set? && new_credentials_empty?(new_creds)
           # credentials are already set, but there was an error getting new credentials
           # so don't update the credentials and use stale ones (static stability)
           @no_refresh_until = Time.now + rand(300..360)
@@ -89,12 +88,12 @@ module Aws
       end
 
       def update_credentials(creds)
-        expiration = creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
+        @expiration = Time.parse(creds['Expiration']) if creds['Expiration']
         @identity = Credentials.new(
           access_key_id: creds['AccessKeyId'],
           secret_access_key: creds['SecretAccessKey'],
           session_token: creds['Token'],
-          expiration: expiration
+          account_id: creds['AccountId']
         )
         return unless expiration && expiration < Time.now
 
@@ -105,15 +104,6 @@ module Aws
       def warn_expired_credentials
         warn('Attempting credential expiration extension due to a credential service availability issue. ' \
              'A refresh of these credentials will be attempted again in 5 minutes.')
-      end
-
-      def existing_credentials_set?(identity)
-        return false unless identity
-
-        !identity.access_key_id.nil? &&
-          !identity.access_key_id.empty? &&
-          !identity.secret_access_key.nil? &&
-          !identity.secret_access_key.empty?
       end
 
       def new_credentials_empty?(creds_json)

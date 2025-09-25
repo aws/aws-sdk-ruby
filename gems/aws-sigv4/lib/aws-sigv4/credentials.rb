@@ -6,11 +6,11 @@ module Aws
     class Credentials
       # @option options [String] :access_key_id
       # @option options [String] :secret_access_key
-      # @option options [String, nil] :session_token (nil)
-      # @option options [String, nil] :account_id (nil)
+      # @option options [String, nil] :session_token
+      # @option options [String, nil] :account_id
       def initialize(options = {})
-        @access_key_id = options.fetch(:access_key_id)
-        @secret_access_key = options.fetch(:secret_access_key)
+        @access_key_id = options[:access_key_id]
+        @secret_access_key = options[:secret_access_key]
         @session_token = options[:session_token]
         @account_id = options[:account_id]
       end

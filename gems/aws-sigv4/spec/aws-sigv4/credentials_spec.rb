@@ -5,46 +5,56 @@ require_relative '../spec_helper'
 module Aws
   module SigV4
     describe Credentials do
-      describe '#initialize' do
-        it 'requires :access_key_id and :secret_access_key' do
-          expect do
-            Credentials.new(secret_access_key: 'secret')
-          end.to raise_error(KeyError, /:access_key_id/)
+      describe 'attributes' do
+        it 'gets values' do
+          creds = Credentials.new(
+            access_key_id: 'akid',
+            secret_access_key: 'secret',
+            session_token: 'token',
+            account_id: '123456789012'
+          )
+          expect(creds.access_key_id).to eq('akid')
+          expect(creds.secret_access_key).to eq('secret')
+          expect(creds.session_token).to eq('token')
+          expect(creds.account_id).to eq('123456789012')
+        end
+      end
 
-          expect do
-            Credentials.new(access_key_id: 'akid')
-          end.to raise_error(KeyError, /:secret_access_key/)
+      describe '#set?' do
+        it 'returns true when access_key_id and secret_access_key are set' do
+          creds = Credentials.new(access_key_id: 'akid', secret_access_key: 'secret')
+          expect(creds.set?).to be(true)
         end
 
-        describe 'attributes' do
-          it 'gets values' do
-            creds = Credentials.new(
-              access_key_id: 'akid',
-              secret_access_key: 'secret',
-              session_token: 'token',
-              account_id: '123456789012'
-            )
-            expect(creds.access_key_id).to eq('akid')
-            expect(creds.secret_access_key).to eq('secret')
-            expect(creds.session_token).to eq('token')
-            expect(creds.account_id).to eq('123456789012')
-          end
+        it 'returns false if access_key_id or secret_access_key are missing' do
+          creds = Credentials.new(access_key_id: nil, secret_access_key: 'secret')
+          expect(creds.set?).to be(false)
+          creds = Credentials.new(access_key_id: '', secret_access_key: 'secret')
+          expect(creds.set?).to be(false)
+          creds = Credentials.new(access_key_id: 'akid', secret_access_key: nil)
+          expect(creds.set?).to be(false)
+          creds = Credentials.new(access_key_id: 'akid', secret_access_key: '')
+          expect(creds.set?).to be(false)
+          creds = Credentials.new(access_key_id: nil, secret_access_key: nil)
+          expect(creds.set?).to be(false)
+          creds = Credentials.new
+          expect(creds.set?).to be(false)
         end
+      end
 
-        describe '#inspect' do
-          it 'filters sensitive information' do
-            creds = Credentials.new(
-              access_key_id: 'akid',
-              secret_access_key: 'secret',
-              session_token: 'token',
-              account_id: '123456789012'
-            )
-            inspected = creds.inspect
-            expect(inspected).to include('@access_key_id="akid"')
-            expect(inspected).to include('@secret_access_key=[FILTERED]')
-            expect(inspected).to include('@session_token=[FILTERED]')
-            expect(inspected).to include('@account_id="123456789012"')
-          end
+      describe '#inspect' do
+        it 'filters sensitive information' do
+          creds = Credentials.new(
+            access_key_id: 'akid',
+            secret_access_key: 'secret',
+            session_token: 'token',
+            account_id: '123456789012'
+          )
+          inspected = creds.inspect
+          expect(inspected).to include('@access_key_id="akid"')
+          expect(inspected).to include('@secret_access_key=[FILTERED]')
+          expect(inspected).to include('@session_token=[FILTERED]')
+          expect(inspected).to include('@account_id="123456789012"')
         end
       end
     end

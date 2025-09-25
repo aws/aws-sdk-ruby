@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module DSQL
     describe AuthTokenGenerator do
-      let(:credentials) { Core::StaticCredentials.new(access_key_id: 'akid', secret_access_key: 'secret') }
+      let(:credentials) { Core::StaticCredentialsProvider.new(access_key_id: 'akid', secret_access_key: 'secret') }
       let(:generator) { AuthTokenGenerator.new(credentials: credentials) }
 
       describe '#initialize' do

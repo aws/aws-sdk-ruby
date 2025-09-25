@@ -4,13 +4,8 @@ require_relative '../spec_helper'
 
 module Aws
   module Core
-    describe SSOOIDCToken do
-      let(:client) do
-        SSOOIDC::Client.new(
-          region: 'us-west-2',
-          stub_responses: true
-        )
-      end
+    describe SSOOIDCTokenProvider do
+      let(:client) { SSOOIDC::Client.new(stub_responses: true) }
 
       let(:now) { Time.now }
       let(:in_one_hour) { now + (60 * 60) }
@@ -23,7 +18,7 @@ module Aws
       let(:cached_token) do
         {
           'accessToken' => access_token,
-          'expiresAt' => expiration
+          'expiresAt' => expiration.iso8601
         }
       end
 
@@ -57,39 +52,41 @@ module Aws
       end
 
       it 'constructs an client with passed arguments when not given' do
-        expect(SSOOIDC::Client).to receive(:new).with({ region: sso_region, credentials: nil }).and_return(client)
+        params = { region: sso_region, credentials_provider: nil }
+        expect(SSOOIDC::Client).to receive(:new).with(params).and_return(client)
         mock_token_file(sso_session, cached_token)
-        provider = SSOOIDCToken.new(sso_opts)
+        provider = SSOOIDCTokenProvider.new(sso_opts)
         expect(provider.client).to be(client)
       end
 
       it 'raises an argument error when arguments are missing' do
-        expect { SSOOIDCToken.new }.to raise_error(ArgumentError, /Missing required keys/)
+        expect { SSOOIDCTokenProvider.new }.to raise_error(ArgumentError, /Missing required keys/)
       end
 
       it 'raises an InvalidSSOToken error when token file is missing' do
-        expect(SSOOIDC::Client).to receive(:new).with({ region: sso_region, credentials: nil }).and_return(client)
+        params = { region: sso_region, credentials_provider: nil }
+        expect(SSOOIDC::Client).to receive(:new).with(params).and_return(client)
         sso_session_sha1 = OpenSSL::Digest::SHA1.hexdigest(sso_session.encode('utf-8'))
         allow(Dir).to receive(:home).and_return('HOME')
         path = File.join(Dir.home, '.aws', 'sso', 'cache', "#{sso_session_sha1}.json")
         allow(JSON).to receive(:load_file).with(path).and_raise(Errno::ENOENT)
         expect do
-          SSOOIDCToken.new(sso_opts).identity
-        end.to raise_error(SSOOIDCToken::InvalidSSOToken)
+          SSOOIDCTokenProvider.new(sso_opts).identity
+        end.to raise_error(SSOOIDCTokenProvider::InvalidSSOToken)
       end
 
       it 'raises an InvalidSSOCredentials error when token file is missing fields' do
         mock_token_file(sso_session, { 'accessToken' => access_token })
         expect do
-          SSOOIDCToken.new(sso_opts).identity
-        end.to raise_error(SSOOIDCToken::InvalidSSOToken)
+          SSOOIDCTokenProvider.new(sso_opts).identity
+        end.to raise_error(SSOOIDCTokenProvider::InvalidSSOToken)
       end
 
       it 'sets the client when passed in and does not create a new one' do
         test_client = client # force construction
         expect(SSOOIDC::Client).not_to receive(:new)
         mock_token_file(sso_session, cached_token)
-        provider = SSOOIDCToken.new(sso_opts.merge(client: test_client))
+        provider = SSOOIDCTokenProvider.new(sso_opts.merge(client: test_client))
         expect(provider.client).to be(test_client)
       end
 
@@ -98,7 +95,7 @@ module Aws
           test_client = client # force construction
           sso_session = 'admin'
           mock_token_file(sso_session, cached_token)
-          provider = SSOOIDCToken.new(sso_opts.merge(sso_session: sso_session, client: test_client))
+          provider = SSOOIDCTokenProvider.new(sso_opts.merge(sso_session: sso_session, client: test_client))
           expect(File.basename(provider.send(:sso_cache_file))).to eq('d033e22ae348aeb5660fc2140aec35850c4da997.json')
         end
 
@@ -106,7 +103,7 @@ module Aws
           test_client = client # force construction
           sso_session = 'dev-scopes'
           mock_token_file(sso_session, cached_token)
-          provider = SSOOIDCToken.new(sso_opts.merge(sso_session: sso_session, client: test_client))
+          provider = SSOOIDCTokenProvider.new(sso_opts.merge(sso_session: sso_session, client: test_client))
           expect(File.basename(provider.send(:sso_cache_file))).to eq('75e4d41276d8bd17f85986fc6cccef29fd725ce3.json')
         end
       end
@@ -148,9 +145,9 @@ module Aws
 
           it 'returns the token' do
             mock_token_file(sso_session, cached_token)
-            provider = SSOOIDCToken.new(sso_opts)
+            provider = SSOOIDCTokenProvider.new(sso_opts)
             expect(provider.identity.token).to eq('cachedtoken')
-            expect(provider.identity.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+            expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
           end
         end
 
@@ -166,9 +163,9 @@ module Aws
 
           it 'returns the token' do
             mock_token_file(sso_session, cached_token)
-            provider = SSOOIDCToken.new(sso_opts)
+            provider = SSOOIDCTokenProvider.new(sso_opts)
             expect(provider.identity.token).to eq('cachedtoken')
-            expect(provider.identity.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+            expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
           end
         end
 
@@ -186,8 +183,8 @@ module Aws
             mock_token_file(sso_session, cached_token)
 
             expect do
-              SSOOIDCToken.new(sso_opts).identity
-            end.to raise_error(SSOOIDCToken::InvalidSSOToken)
+              SSOOIDCTokenProvider.new(sso_opts).identity
+            end.to raise_error(SSOOIDCTokenProvider::InvalidSSOToken)
           end
         end
 
@@ -204,8 +201,8 @@ module Aws
             mock_token_file(sso_session, cached_token)
 
             expect do
-              SSOOIDCToken.new(sso_opts).identity
-            end.to raise_error(SSOOIDCToken::InvalidSSOToken)
+              SSOOIDCTokenProvider.new(sso_opts).identity
+            end.to raise_error(SSOOIDCTokenProvider::InvalidSSOToken)
           end
         end
 
@@ -222,8 +219,8 @@ module Aws
             mock_token_file(sso_session, cached_token)
 
             expect do
-              SSOOIDCToken.new(sso_opts).identity
-            end.to raise_error(SSOOIDCToken::InvalidSSOToken)
+              SSOOIDCTokenProvider.new(sso_opts).identity
+            end.to raise_error(SSOOIDCTokenProvider::InvalidSSOToken)
           end
         end
 
@@ -275,9 +272,9 @@ module Aws
             mock_token_file(sso_session, cached_token)
             expect_token_write_back(sso_session, expected_token_write_back)
 
-            provider = SSOOIDCToken.new(sso_opts)
+            provider = SSOOIDCTokenProvider.new(sso_opts)
             expect(provider.identity.token).to eq('newtoken')
-            expect(provider.identity.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+            expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
           end
         end
 
@@ -328,9 +325,9 @@ module Aws
             mock_token_file(sso_session, cached_token)
             expect_token_write_back(sso_session, expected_token_write_back)
 
-            provider = SSOOIDCToken.new(sso_opts)
+            provider = SSOOIDCTokenProvider.new(sso_opts)
             expect(provider.identity.token).to eq('newtoken')
-            expect(provider.identity.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
+            expect(provider.expiration).to eq(Time.parse('2021-12-25T21:30:00Z'))
           end
         end
 
@@ -355,8 +352,8 @@ module Aws
             expect(client).not_to receive(:create_token)
 
             expect do
-              SSOOIDCToken.new(sso_opts).identity
-            end.to raise_error(SSOOIDCToken::InvalidSSOToken)
+              SSOOIDCTokenProvider.new(sso_opts).identity
+            end.to raise_error(SSOOIDCTokenProvider::InvalidSSOToken)
           end
         end
       end

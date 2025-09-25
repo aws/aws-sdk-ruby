@@ -25,17 +25,17 @@ module Aws
         end
 
         option(
-          :credentials,
+          :credentials_provider,
           doc_type: '#identity',
           docstring: <<~DOCS) do |config|
             The credentials provider used to resolve credentials. Any object that responds to `#identity`
             and returns a {Aws::Core::Credentials}.
           DOCS
-          DefaultCredentials.new(config)
+          CredentialsProviderChain.new(config).resolve
         end
 
         def after_initialize(client)
-          client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials
+          client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials_provider
         end
 
         # @api private
@@ -43,7 +43,7 @@ module Aws
           def call(context)
             if context.auth[:scheme_id] == 'aws.auth#sigv4'
               sign(context)
-              track_features(context.config.credentials) { @handler.call(context) }
+              track_features(context.config.credentials_provider) { @handler.call(context) }
             else
               @handler.call(context)
             end
@@ -55,7 +55,7 @@ module Aws
               service: context.config.service.traits['aws.auth#sigv4']['name'],
               # TODO: hardcoded for now to pass protocol tests, update after implementing region resolution
               region: 'us-west-2',
-              credentials: context.auth[:identity]
+              credentials_provider: context.config.credentials_provider
             )
             signature = signer.sign_request(
               http_method: context.http_request.http_method,

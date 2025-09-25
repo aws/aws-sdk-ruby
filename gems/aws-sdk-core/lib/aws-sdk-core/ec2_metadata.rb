@@ -13,23 +13,18 @@ module Aws
 
       # Raised when the PUT request is not valid. This would be thrown if
       # `token_ttl` is not an Integer.
-      # @api private
       class TokenRetrievalError < RuntimeError; end
 
       # Token has expired, and the request can be retried with a new token.
-      # @api private
       class TokenExpiredError < RuntimeError; end
 
       # The requested metadata path does not exist.
-      # @api private
       class MetadataNotFoundError < RuntimeError; end
 
       # The request is not allowed or IMDS is turned off.
-      # @api private
       class RequestForbiddenError < RuntimeError; end
 
       # The request has been throttled by the service.
-      # @api private
       class ThrottlingError < RuntimeError; end
 
       # Creates a client that can query version 2 of the EC2 Instance Metadata
@@ -128,7 +123,7 @@ module Aws
       def resolve_endpoint(options)
         return options[:endpoint] if options[:endpoint]
 
-        endpoint_mode = options.fetch(:endpoint_mode, 'IPv4')
+        endpoint_mode = options[:endpoint_mode] || 'IPv4'
         case endpoint_mode.downcase
         when 'ipv4' then 'http://169.254.169.254'
         when 'ipv6' then 'http://[fd00:ec2::254]'
