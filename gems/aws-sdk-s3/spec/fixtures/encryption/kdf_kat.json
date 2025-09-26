@@ -1,0 +1,16 @@
+[
+  {
+    "comment": "Basic S3EC.ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY",
+    "data_key": "80d90dc4cc7e77d8a6332efa44eba56230a7fe7b89af37d1e501ab2e07c0a163",
+    "message_id": "b8ea76bed24c7b85382a148cb9dcd1cfdfb765f55ded4dfa6e0c4c79",
+    "encryption_key": "6dd14f546cc006e639126e83f5d4d1b118576bb5df97f38c6fb3a1db87bbc338",
+    "commitment_key": "f89818bc0a346d3a3426b68e9509b6b2ae5fe1f904aa329fb73625db"
+  },
+  {
+    "comment": "Basic S3EC.ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY",
+    "data_key": "501afb8227d22e75e68010414b8abdaf3064c081e8e922dafef4992036394d60",
+    "message_id": "61a00b4981a5aacfd136c55cb726e32d2a547dc7600a7d4675c69127",
+    "encryption_key": "e14786a714748d1d2c3a4a6816dec56ddf1881bbeabb4f39420ffb9f63700b2f",
+    "commitment_key": "5c1e73e47f6fe3a70d6d094283aceaa76d2975feb829212d88f0afc1"
+  }
+]

@@ -1,0 +1,153 @@
+# frozen_string_literal: true
+
+require 'base64'
+
+module Aws
+  module S3
+    module EncryptionV3
+      # @api private
+      class DefaultCipherProvider
+
+        def initialize(options = {})
+          @key_provider = options[:key_provider]
+          @key_wrap_schema = validate_key_wrap(
+            options[:key_wrap_schema],
+            @key_provider.encryption_materials.key
+          )
+          @content_encryption_schema = '115'
+        end
+
+        V3_IV_BYTES = ("\x00" * 12).freeze
+        ALGO_ID = [0x00, 0x73].pack('C*').freeze
+
+        # @return [Array<Hash,Cipher>] Creates an returns a new encryption
+        #   envelope and encryption cipher.
+        def encryption_cipher(options = {})
+          validate_options(options)
+          data_key = Utils.generate_data_key()
+          cipher, message_id, commitment_key = Utils.alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
+          enc_key = if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
+              enc_key = encode64(
+                encrypt_rsa(data_key, @content_encryption_schema)
+              )
+            else
+              enc_key = encode64(
+                encrypt_aes_gcm(data_key, @content_encryption_schema)
+              )
+            end
+
+          envelope = {
+            'x-amz-3' => enc_key,
+            'x-amz-c' => @content_encryption_schema,
+            'x-amz-w' => @key_wrap_schema,
+            'x-amz-m' => materials_description,
+            'x-amz-d' => encode64(commitment_key),
+            'x-amz-i' => encode64(message_id)
+          }
+
+          [envelope, cipher]
+        end
+
+        # @return [Cipher] Given an encryption envelope, returns a
+        #   decryption cipher.
+        def decryption_cipher(envelope, options = {})
+          validate_options(options)
+          wrapping_key = @key_provider.key_for(envelope['x-amz-m'])
+          unless envelope.key?('x-amz-key') || envelope.key?('x-amz-key-v2')
+            raise Errors::LegacyDecryptionError
+          end
+
+          data_key =
+            case envelope['x-amz-w']
+            when '02'
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##% - The wrapping algorithm value "02" MUST be translated to AES/GCM upon retrieval, and vice versa on write.
+              if wrapping_key.is_a? OpenSSL::PKey::RSA
+                raise ArgumentError, 'Key mismatch - Client is configured' \
+                  ' with an RSA key and the x-amz-wrap-alg is AES/GCM.'
+              end
+              Utils.decrypt_aes_gcm(wrapping_key,
+                                  decode64(envelope['x-amz-3']),
+                                  @content_encryption_schema)
+            when '22'
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##% - The wrapping algorithm value "22" MUST be translated to RSA-OAEP-SHA1 upon retrieval, and vice versa on write.
+              unless wrapping_key.is_a? OpenSSL::PKey::RSA
+                raise ArgumentError, 'Key mismatch - Client is configured' \
+                  ' with an AES key and the x-amz-wrap-alg is RSA-OAEP-SHA1.'
+              end
+              key, cek_alg = Utils.decrypt_rsa(wrapping_key, decode64(envelope['x-amz-3']))
+              raise Errors::CEKAlgMismatchError unless cek_alg == @content_encryption_schema
+              key
+            when '12'
+              raise ArgumentError, 'Key mismatch - Client is configured' \
+                  ' with a user provided key and the x-amz-w is' \
+                  ' kms+context.  Please configure the client with the' \
+                  ' required kms_key_id'
+            else
+              raise ArgumentError, 'Unsupported wrapping algorithm: ' \
+                    "#{envelope['x-amz-w']}"
+            end
+          
+          message_id = decode64(envelope['x-amz-i'])
+          commitment_key = decode64(envelope['x-amz-d'])
+
+          Utils.derive_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id, commitment_key)
+        end
+
+        private
+
+        # Validate that the key_wrap_schema
+        # is valid, supported and matches the provided key.
+        # Returns the string version for the x-amz-key-wrap-alg
+        def validate_key_wrap(key_wrap_schema, key)
+          if key.is_a? OpenSSL::PKey::RSA
+            unless key_wrap_schema == :rsa_oaep_sha1
+              raise ArgumentError, ':key_wrap_schema must be set to :rsa_oaep_sha1 for RSA keys.'
+            end
+          else
+            unless key_wrap_schema == :aes_gcm
+              raise ArgumentError, ':key_wrap_schema must be set to :aes_gcm for AES keys.'
+            end
+          end
+
+          case key_wrap_schema
+          when :rsa_oaep_sha1 then '22'
+          when :aes_gcm then '02'
+          when :kms_context
+            raise ArgumentError, 'A kms_key_id is required when using :kms_context.'
+          else
+            raise ArgumentError, "Unsupported key_wrap_schema: #{key_wrap_schema}"
+          end
+        end
+
+        def encrypt_aes_gcm(data, auth_data)
+          Utils.encrypt_aes_gcm(@key_provider.encryption_materials.key, data, auth_data)
+        end
+
+        def encrypt_rsa(data, auth_data)
+          Utils.encrypt_rsa(@key_provider.encryption_materials.key, data, auth_data)
+        end
+
+        def materials_description
+          @key_provider.encryption_materials.description
+        end
+
+        def encode64(str)
+          Base64.encode64(str).split("\n") * ''
+        end
+
+        def decode64(str)
+          Base64.decode64(str)
+        end
+
+        def validate_options(options)
+          if !options[:kms_encryption_context].nil?
+            raise ArgumentError, 'Cannot provide :kms_encryption_context ' \
+            'with non KMS client.'
+          end
+        end
+      end
+    end
+  end
+end
