@@ -1,0 +1,204 @@
+module Aws::STS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::STS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssumeRoleResponse
+      include Smithy::Client::_Response[Types::AssumeRoleResponse]
+      def credentials: () -> Types::Credentials?
+      def assumed_role_user: () -> Types::AssumedRoleUser?
+      def packed_policy_size: () -> Integer?
+      def source_identity: () -> String?
+    end
+    def assume_role: (
+      ?role_arn: String,
+      ?role_session_name: String,
+      ?policy_arns: Array[
+        {
+          arn: String
+        }
+      ],
+      ?policy: String,
+      ?duration_seconds: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?transitive_tag_keys: Array[String],
+      ?external_id: String,
+      ?serial_number: String,
+      ?token_code: String,
+      ?source_identity: String,
+      ?provided_contexts: Array[
+        {
+          provider_arn: String,
+          context_assertion: String
+        }
+      ]
+    ) -> _AssumeRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleResponse
+
+    interface _AssumeRoleWithSAMLResponse
+      include Smithy::Client::_Response[Types::AssumeRoleWithSAMLResponse]
+      def credentials: () -> Types::Credentials?
+      def assumed_role_user: () -> Types::AssumedRoleUser?
+      def packed_policy_size: () -> Integer?
+      def subject: () -> String?
+      def subject_type: () -> String?
+      def issuer: () -> String?
+      def audience: () -> String?
+      def name_qualifier: () -> String?
+      def source_identity: () -> String?
+    end
+    def assume_role_with_saml: (
+      ?role_arn: String,
+      ?principal_arn: String,
+      ?saml_assertion: String,
+      ?policy_arns: Array[
+        {
+          arn: String
+        }
+      ],
+      ?policy: String,
+      ?duration_seconds: Integer
+    ) -> _AssumeRoleWithSAMLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleWithSAMLResponse
+
+    interface _AssumeRoleWithWebIdentityResponse
+      include Smithy::Client::_Response[Types::AssumeRoleWithWebIdentityResponse]
+      def credentials: () -> Types::Credentials?
+      def subject_from_web_identity_token: () -> String?
+      def assumed_role_user: () -> Types::AssumedRoleUser?
+      def packed_policy_size: () -> Integer?
+      def provider: () -> String?
+      def audience: () -> String?
+      def source_identity: () -> String?
+    end
+    def assume_role_with_web_identity: (
+      ?role_arn: String,
+      ?role_session_name: String,
+      ?web_identity_token: String,
+      ?provider_id: String,
+      ?policy_arns: Array[
+        {
+          arn: String
+        }
+      ],
+      ?policy: String,
+      ?duration_seconds: Integer
+    ) -> _AssumeRoleWithWebIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleWithWebIdentityResponse
+
+    interface _AssumeRootResponse
+      include Smithy::Client::_Response[Types::AssumeRootResponse]
+      def credentials: () -> Types::Credentials?
+      def source_identity: () -> String?
+    end
+    def assume_root: (
+      ?target_principal: String,
+      ?task_policy_arn: {
+        arn: String
+      },
+      ?duration_seconds: Integer
+    ) -> _AssumeRootResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRootResponse
+
+    interface _DecodeAuthorizationMessageResponse
+      include Smithy::Client::_Response[Types::DecodeAuthorizationMessageResponse]
+      def decoded_message: () -> String?
+    end
+    def decode_authorization_message: (
+      ?encoded_message: String
+    ) -> _DecodeAuthorizationMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DecodeAuthorizationMessageResponse
+
+    interface _GetAccessKeyInfoResponse
+      include Smithy::Client::_Response[Types::GetAccessKeyInfoResponse]
+      def account: () -> String?
+    end
+    def get_access_key_info: (
+      ?access_key_id: String
+    ) -> _GetAccessKeyInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessKeyInfoResponse
+
+    interface _GetCallerIdentityResponse
+      include Smithy::Client::_Response[Types::GetCallerIdentityResponse]
+      def user_id: () -> String?
+      def account: () -> String?
+      def arn: () -> String?
+    end
+    def get_caller_identity: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCallerIdentityResponse
+
+    interface _GetFederationTokenResponse
+      include Smithy::Client::_Response[Types::GetFederationTokenResponse]
+      def credentials: () -> Types::Credentials?
+      def federated_user: () -> Types::FederatedUser?
+      def packed_policy_size: () -> Integer?
+    end
+    def get_federation_token: (
+      ?name: String,
+      ?policy: String,
+      ?policy_arns: Array[
+        {
+          arn: String
+        }
+      ],
+      ?duration_seconds: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _GetFederationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFederationTokenResponse
+
+    interface _GetSessionTokenResponse
+      include Smithy::Client::_Response[Types::GetSessionTokenResponse]
+      def credentials: () -> Types::Credentials?
+    end
+    def get_session_token: (
+      ?duration_seconds: Integer,
+      ?serial_number: String,
+      ?token_code: String
+    ) -> _GetSessionTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionTokenResponse
+  end
+end

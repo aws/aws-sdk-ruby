@@ -1,0 +1,472 @@
+module Aws::STS
+  module Types
+
+    class AssumeRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?role_session_name: String,
+        ?policy_arns: Array[Types::PolicyDescriptorType],
+        ?policy: String,
+        ?duration_seconds: Integer,
+        ?tags: Array[Types::Tag],
+        ?transitive_tag_keys: Array[String],
+        ?external_id: String,
+        ?serial_number: String,
+        ?token_code: String,
+        ?source_identity: String,
+        ?provided_contexts: Array[Types::ProvidedContext],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor role_session_name: String?
+      attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
+      attr_accessor policy: String?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor transitive_tag_keys: Array[String]?
+      attr_accessor external_id: String?
+      attr_accessor serial_number: String?
+      attr_accessor token_code: String?
+      attr_accessor source_identity: String?
+      attr_accessor provided_contexts: Array[Types::ProvidedContext]?
+    end
+
+    class AssumeRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?assumed_role_user: Types::AssumedRoleUser,
+        ?packed_policy_size: Integer,
+        ?source_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor assumed_role_user: Types::AssumedRoleUser?
+      attr_accessor packed_policy_size: Integer?
+      attr_accessor source_identity: String?
+    end
+
+    class AssumeRoleWithSAMLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?principal_arn: String,
+        ?saml_assertion: String,
+        ?policy_arns: Array[Types::PolicyDescriptorType],
+        ?policy: String,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor principal_arn: String?
+      attr_accessor saml_assertion: String?
+      attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
+      attr_accessor policy: String?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class AssumeRoleWithSAMLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?assumed_role_user: Types::AssumedRoleUser,
+        ?packed_policy_size: Integer,
+        ?subject: String,
+        ?subject_type: String,
+        ?issuer: String,
+        ?audience: String,
+        ?name_qualifier: String,
+        ?source_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor assumed_role_user: Types::AssumedRoleUser?
+      attr_accessor packed_policy_size: Integer?
+      attr_accessor subject: String?
+      attr_accessor subject_type: String?
+      attr_accessor issuer: String?
+      attr_accessor audience: String?
+      attr_accessor name_qualifier: String?
+      attr_accessor source_identity: String?
+    end
+
+    class AssumeRoleWithWebIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?role_session_name: String,
+        ?web_identity_token: String,
+        ?provider_id: String,
+        ?policy_arns: Array[Types::PolicyDescriptorType],
+        ?policy: String,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor role_session_name: String?
+      attr_accessor web_identity_token: String?
+      attr_accessor provider_id: String?
+      attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
+      attr_accessor policy: String?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class AssumeRoleWithWebIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?subject_from_web_identity_token: String,
+        ?assumed_role_user: Types::AssumedRoleUser,
+        ?packed_policy_size: Integer,
+        ?provider: String,
+        ?audience: String,
+        ?source_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor subject_from_web_identity_token: String?
+      attr_accessor assumed_role_user: Types::AssumedRoleUser?
+      attr_accessor packed_policy_size: Integer?
+      attr_accessor provider: String?
+      attr_accessor audience: String?
+      attr_accessor source_identity: String?
+    end
+
+    class AssumeRootRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_principal: String,
+        ?task_policy_arn: Types::PolicyDescriptorType,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_principal: String?
+      attr_accessor task_policy_arn: Types::PolicyDescriptorType?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class AssumeRootResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?source_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor source_identity: String?
+    end
+
+    class AssumedRoleUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assumed_role_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assumed_role_id: String?
+      attr_accessor arn: String?
+    end
+
+    class Credentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class DecodeAuthorizationMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoded_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoded_message: String?
+    end
+
+    class DecodeAuthorizationMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decoded_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decoded_message: String?
+    end
+
+    class ExpiredTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FederatedUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?federated_user_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor federated_user_id: String?
+      attr_accessor arn: String?
+    end
+
+    class GetAccessKeyInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+    end
+
+    class GetAccessKeyInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: String?
+    end
+
+    class GetCallerIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetCallerIdentityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?account: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor account: String?
+      attr_accessor arn: String?
+    end
+
+    class GetFederationTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?policy: String,
+        ?policy_arns: Array[Types::PolicyDescriptorType],
+        ?duration_seconds: Integer,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor policy: String?
+      attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class GetFederationTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?federated_user: Types::FederatedUser,
+        ?packed_policy_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor federated_user: Types::FederatedUser?
+      attr_accessor packed_policy_size: Integer?
+    end
+
+    class GetSessionTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_seconds: Integer,
+        ?serial_number: String,
+        ?token_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_seconds: Integer?
+      attr_accessor serial_number: String?
+      attr_accessor token_code: String?
+    end
+
+    class GetSessionTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+    end
+
+    class IDPCommunicationErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IDPRejectedClaimException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAuthorizationMessageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidIdentityTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PackedPolicyTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyDescriptorType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ProvidedContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_arn: String,
+        ?context_assertion: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_arn: String?
+      attr_accessor context_assertion: String?
+    end
+
+    class RegionDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+  end
+end

@@ -1,0 +1,28 @@
+module Aws::STS
+  module Errors
+    class ExpiredTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IDPCommunicationErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IDPRejectedClaimException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAuthorizationMessageException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidIdentityTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PackedPolicyTooLargeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RegionDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -56,6 +56,18 @@ module AwsSdkCodeGenerator
             render_test_set: proc do |_plan, value|
               { 'use_fips' => value }
             end
+          },
+          # TODO: find a way to staticly generate option to true and do not expose configuration
+          'AWS::STS::UseGlobalEndpoint' => {
+            render_config: proc do |_plan|
+              ''
+            end,
+            render_build: proc do |_plan|
+              'false'
+            end,
+            render_test_set: proc do |_plan|
+              { 'sts_use_global_endpoint' => false }
+            end
           }
         }
       end
