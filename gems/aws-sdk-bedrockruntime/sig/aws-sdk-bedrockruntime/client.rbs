@@ -10,7 +10,7 @@ module Aws::BedrockRuntime
       ?bearer_token: String,
       ?bearer_token_provider: Smithy::Client::BearerTokenProvider,
       ?convert_params: bool,
-      ?credentials: #identity,
+      ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
       ?disable_request_compression: bool,
       ?endpoint: String,

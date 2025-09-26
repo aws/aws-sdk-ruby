@@ -65,7 +65,7 @@ module Aws::GeoPlaces
     #  An object that resolves authentication schemes for request signing
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
-    # @option options [#identity] :credentials
+    # @option options [#identity] :credentials_provider
     #  The credentials provider used to resolve credentials. Any object that responds to `#identity`
     #  and returns a {Aws::Core::Credentials}.
     # @option options [Boolean] :disable_host_prefix_injection

@@ -8,7 +8,7 @@ module Aws::MarketplaceDeployment
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?convert_params: bool,
-      ?credentials: #identity,
+      ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
       ?disable_request_compression: bool,
       ?endpoint: String,
