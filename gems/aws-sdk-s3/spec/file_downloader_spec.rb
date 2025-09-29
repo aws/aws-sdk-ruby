@@ -49,7 +49,6 @@ module Aws
           subject.download(path, single_params)
         end
 
-        # TODO: flakey only in jruby? attemp to fix it
         it 'downloads a large object in parts' do
           parts = 0
           client.stub_responses(:get_object, lambda do |_ctx|

@@ -114,7 +114,7 @@ module Aws
         chunk_size = compute_chunk(opts[:chunk_size], file_size)
         part_size = (file_size.to_f / total_parts).ceil
 
-        set_temp_path(opts)
+        resolve_temp_path(opts)
         if chunk_size < part_size
           multithreaded_get_by_ranges(file_size, etag, opts)
         else
@@ -134,7 +134,7 @@ module Aws
           if resp.content_length <= MIN_CHUNK_SIZE
             single_request(opts)
           else
-            set_temp_path(opts)
+            resolve_temp_path(opts)
             multithreaded_get_by_ranges(resp.content_length, resp.etag, opts)
           end
         else
@@ -174,11 +174,11 @@ module Aws
 
       def range_request(opts)
         resp = @client.head_object(head_opts(opts[:params]))
-        set_temp_path(opts)
+        resolve_temp_path(opts)
         multithreaded_get_by_ranges(resp.content_length, resp.etag, opts)
       end
 
-      def set_temp_path(opts)
+      def resolve_temp_path(opts)
         return if [File, Tempfile].include?(opts[:destination].class)
 
         opts[:temp_path] ||= "#{opts[:destination]}.s3tmp.#{SecureRandom.alphanumeric(8)}"
