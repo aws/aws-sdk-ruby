@@ -539,9 +539,11 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, options = {})
-        downloader = FileDownloader.new(client: client)
+        executor = DefaultExecutor.new(max_threads: options[:thread_count])
+        downloader = FileDownloader.new(client: client, executor: executor)
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           downloader.download(destination, options.merge(bucket: bucket_name, key: key))
+          executor.shutdown
         end
         true
       end
