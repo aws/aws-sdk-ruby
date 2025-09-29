@@ -20,12 +20,9 @@ module Aws
       )
 
       # @option options [Client] :client
-      # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
-        @executor = options[:executor] || DefaultExecutor.new(max_threads: @thread_count)
-        @options = options
+        @executor = options[:executor]
       end
 
       # @return [Client]
@@ -45,8 +42,6 @@ module Aws
         upload_id = initiate_upload(options)
         parts = upload_parts(upload_id, source, file_size, options)
         complete_upload(upload_id, parts, file_size, options)
-      ensure
-        @executor.shutdown if @executor.running? && @options[:executor].nil?
       end
 
       private
@@ -115,19 +110,19 @@ module Aws
         CHECKSUM_KEYS.include?(key)
       end
 
-      def checksum_keys?(keys)
+      def has_checksum_keys?(keys)
         keys.any? { |key| checksum_key?(key) }
       end
 
       def create_opts(options)
         opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
-        opts[:checksum_type] = 'FULL_OBJECT' if checksum_keys?(options.keys)
+        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_keys?(options.keys)
         CREATE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
       def complete_opts(options)
         opts = {}
-        opts[:checksum_type] = 'FULL_OBJECT' if checksum_keys?(options.keys)
+        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_keys?(options.keys)
         COMPLETE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
@@ -173,8 +168,8 @@ module Aws
         errors
       end
 
-      def compute_default_part_size(source_size)
-        [(source_size.to_f / MAX_PARTS).ceil, MIN_PART_SIZE].max.to_i
+      def compute_default_part_size(file_size)
+        [(file_size.to_f / MAX_PARTS).ceil, MIN_PART_SIZE].max.to_i
       end
 
       def part_size(total_size, part_size, offset)
