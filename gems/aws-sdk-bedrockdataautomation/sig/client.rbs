@@ -180,7 +180,17 @@ module Aws
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?
+                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?,
+                                                    type_configuration: {
+                                                      transcript: {
+                                                        speaker_labeling: {
+                                                          state: ("ENABLED" | "DISABLED")
+                                                        }?,
+                                                        channel_labeling: {
+                                                          state: ("ENABLED" | "DISABLED")
+                                                        }?
+                                                      }?
+                                                    }?
                                                   }
                                                 }?,
                                                 generative_field: {
@@ -443,7 +453,17 @@ module Aws
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?
+                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?,
+                                                    type_configuration: {
+                                                      transcript: {
+                                                        speaker_labeling: {
+                                                          state: ("ENABLED" | "DISABLED")
+                                                        }?,
+                                                        channel_labeling: {
+                                                          state: ("ENABLED" | "DISABLED")
+                                                        }?
+                                                      }?
+                                                    }?
                                                   }
                                                 }?,
                                                 generative_field: {

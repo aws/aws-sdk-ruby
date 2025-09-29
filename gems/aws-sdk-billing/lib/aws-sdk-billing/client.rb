@@ -483,6 +483,57 @@ module Aws::Billing
 
     # @!group API Operations
 
+    # Associates one or more source billing views with an existing billing
+    # view. This allows creating aggregate billing views that combine data
+    # from multiple sources.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the billing view to associate source
+    #   views with.
+    #
+    # @option params [required, Array<String>] :source_views
+    #   A list of ARNs of the source billing views to associate.
+    #
+    # @return [Types::AssociateSourceViewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSourceViewsResponse#arn #arn} => String
+    #
+    #
+    # @example Example: Invoke AssociateSourceViews
+    #
+    #   resp = client.associate_source_views({
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899", 
+    #     source_views: [
+    #       "arn:aws:billing::123456789012:billingview/primary", 
+    #       "arn:aws:billing::123456789012:billingview/custom-d3f9c7e4-8b2f-4a6e-9d3b-2f7c8a1e5f6d", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_source_views({
+    #     arn: "BillingViewArn", # required
+    #     source_views: ["BillingViewArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateSourceViews AWS API Documentation
+    #
+    # @overload associate_source_views(params = {})
+    # @param [Hash] params ({})
+    def associate_source_views(params = {}, options = {})
+      req = build_request(:associate_source_views, params)
+      req.send_request(options)
+    end
+
     # Creates a billing view with the specified billing view attributes.
     #
     # @option params [required, String] :name
@@ -562,6 +613,10 @@ module Aws::Billing
     #         key: "TagKey", # required
     #         values: ["Value"], # required
     #       },
+    #       time_range: {
+    #         begin_date_inclusive: Time.now,
+    #         end_date_inclusive: Time.now,
+    #       },
     #     },
     #     client_token: "ClientToken",
     #     resource_tags: [
@@ -592,6 +647,11 @@ module Aws::Billing
     #   The Amazon Resource Name (ARN) that can be used to uniquely identify
     #   the billing view.
     #
+    # @option params [Boolean] :force
+    #   If set to true, forces deletion of the billing view even if it has
+    #   derived resources (e.g. other billing views or budgets). Use with
+    #   caution as this may break dependent resources.
+    #
     # @return [Types::DeleteBillingViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteBillingViewResponse#arn #arn} => String
@@ -612,6 +672,7 @@ module Aws::Billing
     #
     #   resp = client.delete_billing_view({
     #     arn: "BillingViewArn", # required
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -624,6 +685,57 @@ module Aws::Billing
     # @param [Hash] params ({})
     def delete_billing_view(params = {}, options = {})
       req = build_request(:delete_billing_view, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between one or more source billing views and
+    # an existing billing view. This allows modifying the composition of
+    # aggregate billing views.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the billing view to disassociate
+    #   source views from.
+    #
+    # @option params [required, Array<String>] :source_views
+    #   A list of ARNs of the source billing views to disassociate.
+    #
+    # @return [Types::DisassociateSourceViewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateSourceViewsResponse#arn #arn} => String
+    #
+    #
+    # @example Example: Invoke DisassociateSourceViews
+    #
+    #   resp = client.disassociate_source_views({
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899", 
+    #     source_views: [
+    #       "arn:aws:billing::123456789012:billingview/primary", 
+    #       "arn:aws:billing::123456789012:billingview/custom-d3f9c7e4-8b2f-4a6e-9d3b-2f7c8a1e5f6d", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_source_views({
+    #     arn: "BillingViewArn", # required
+    #     source_views: ["BillingViewArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DisassociateSourceViews AWS API Documentation
+    #
+    # @overload disassociate_source_views(params = {})
+    # @param [Hash] params ({})
+    def disassociate_source_views(params = {}, options = {})
+      req = build_request(:disassociate_source_views, params)
       req.send_request(options)
     end
 
@@ -676,14 +788,23 @@ module Aws::Billing
     #   resp.billing_view.description #=> String
     #   resp.billing_view.billing_view_type #=> String, one of "PRIMARY", "BILLING_GROUP", "CUSTOM"
     #   resp.billing_view.owner_account_id #=> String
+    #   resp.billing_view.source_account_id #=> String
     #   resp.billing_view.data_filter_expression.dimensions.key #=> String, one of "LINKED_ACCOUNT"
     #   resp.billing_view.data_filter_expression.dimensions.values #=> Array
     #   resp.billing_view.data_filter_expression.dimensions.values[0] #=> String
     #   resp.billing_view.data_filter_expression.tags.key #=> String
     #   resp.billing_view.data_filter_expression.tags.values #=> Array
     #   resp.billing_view.data_filter_expression.tags.values[0] #=> String
+    #   resp.billing_view.data_filter_expression.time_range.begin_date_inclusive #=> Time
+    #   resp.billing_view.data_filter_expression.time_range.end_date_inclusive #=> Time
     #   resp.billing_view.created_at #=> Time
     #   resp.billing_view.updated_at #=> Time
+    #   resp.billing_view.derived_view_count #=> Integer
+    #   resp.billing_view.source_view_count #=> Integer
+    #   resp.billing_view.view_definition_last_updated_at #=> Time
+    #   resp.billing_view.health_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY", "CREATING", "UPDATING"
+    #   resp.billing_view.health_status.status_reasons #=> Array
+    #   resp.billing_view.health_status.status_reasons[0] #=> String, one of "SOURCE_VIEW_UNHEALTHY", "SOURCE_VIEW_UPDATING", "SOURCE_VIEW_ACCESS_DENIED", "SOURCE_VIEW_NOT_FOUND", "CYCLIC_DEPENDENCY", "SOURCE_VIEW_DEPTH_EXCEEDED", "AGGREGATE_SOURCE", "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetBillingView AWS API Documentation
     #
@@ -763,6 +884,10 @@ module Aws::Billing
     # @option params [String] :owner_account_id
     #   The list of owners of the billing view.
     #
+    # @option params [String] :source_account_id
+    #   Filters the results to include only billing views that use the
+    #   specified account as a source.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of billing views to retrieve. Default is 100.
     #
@@ -818,6 +943,7 @@ module Aws::Billing
     #     arns: ["BillingViewArn"],
     #     billing_view_types: ["PRIMARY"], # accepts PRIMARY, BILLING_GROUP, CUSTOM
     #     owner_account_id: "AccountId",
+    #     source_account_id: "AccountId",
     #     max_results: 1,
     #     next_token: "PageToken",
     #   })
@@ -829,7 +955,11 @@ module Aws::Billing
     #   resp.billing_views[0].name #=> String
     #   resp.billing_views[0].description #=> String
     #   resp.billing_views[0].owner_account_id #=> String
+    #   resp.billing_views[0].source_account_id #=> String
     #   resp.billing_views[0].billing_view_type #=> String, one of "PRIMARY", "BILLING_GROUP", "CUSTOM"
+    #   resp.billing_views[0].health_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY", "CREATING", "UPDATING"
+    #   resp.billing_views[0].health_status.status_reasons #=> Array
+    #   resp.billing_views[0].health_status.status_reasons[0] #=> String, one of "SOURCE_VIEW_UNHEALTHY", "SOURCE_VIEW_UPDATING", "SOURCE_VIEW_ACCESS_DENIED", "SOURCE_VIEW_NOT_FOUND", "CYCLIC_DEPENDENCY", "SOURCE_VIEW_DEPTH_EXCEEDED", "AGGREGATE_SOURCE", "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBillingViews AWS API Documentation
@@ -1099,6 +1229,10 @@ module Aws::Billing
     #         key: "TagKey", # required
     #         values: ["Value"], # required
     #       },
+    #       time_range: {
+    #         begin_date_inclusive: Time.now,
+    #         end_date_inclusive: Time.now,
+    #       },
     #     },
     #   })
     #
@@ -1134,7 +1268,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

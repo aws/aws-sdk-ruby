@@ -848,6 +848,38 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateContactWithUserRequest AWS API Documentation
+    #
+    class AssociateContactWithUserRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateContactWithUserResponse AWS API Documentation
+    #
+    class AssociateContactWithUserResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] language_code
     #   The language code of the vocabulary entries. For a list of languages
     #   and their corresponding language codes, see [What is Amazon
@@ -1141,12 +1173,17 @@ module Aws::Connect
     #   The queues to associate with this routing profile.
     #   @return [Array<Types::RoutingProfileQueueConfig>]
     #
+    # @!attribute [rw] manual_assignment_queue_configs
+    #   The manual assignment queues to associate with this routing profile.
+    #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateRoutingProfileQueuesRequest AWS API Documentation
     #
     class AssociateRoutingProfileQueuesRequest < Struct.new(
       :instance_id,
       :routing_profile_id,
-      :queue_configs)
+      :queue_configs,
+      :manual_assignment_queue_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3479,7 +3516,6 @@ module Aws::Connect
     end
 
     # The contact with the specified ID is not active or does not exist.
-    # Applies to Voice calls only, not to Chat or Task contacts.
     #
     # @!attribute [rw] message
     #   The message.
@@ -3555,6 +3591,14 @@ module Aws::Connect
     #   Set of segment attributes for a contact.
     #   @return [Hash<String,Types::ContactSearchSummarySegmentAttributeValue>]
     #
+    # @!attribute [rw] name
+    #   Indicates name of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_criteria
+    #   Latest routing criteria on the contact.
+    #   @return [Types::RoutingCriteria]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummary AWS API Documentation
     #
     class ContactSearchSummary < Struct.new(
@@ -3569,8 +3613,10 @@ module Aws::Connect
       :initiation_timestamp,
       :disconnect_timestamp,
       :scheduled_timestamp,
-      :segment_attributes)
-      SENSITIVE = [:segment_attributes]
+      :segment_attributes,
+      :name,
+      :routing_criteria)
+      SENSITIVE = [:segment_attributes, :name]
       include Aws::Structure
     end
 
@@ -3621,10 +3667,15 @@ module Aws::Connect
     #   The value of a segment attribute represented as a string.
     #   @return [String]
     #
+    # @!attribute [rw] value_map
+    #   The key and value of a segment attribute.
+    #   @return [Hash<String,Types::SegmentAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummarySegmentAttributeValue AWS API Documentation
     #
     class ContactSearchSummarySegmentAttributeValue < Struct.new(
-      :value_string)
+      :value_string,
+      :value_map)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5124,6 +5175,17 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     #   @return [Array<Types::RoutingProfileQueueConfig>]
     #
+    # @!attribute [rw] manual_assignment_queue_configs
+    #   The manual assignment queues associated with the routing profile. If
+    #   no queue is added, agents and supervisors can't pick or assign any
+    #   contacts from this routing profile. The limit of 10 array members
+    #   applies to the maximum number of
+    #   RoutingProfileManualAssignmentQueueConfig objects that can be passed
+    #   during a CreateRoutingProfile API request. It is different from the
+    #   quota of 50 queues per routing profile per instance that is listed
+    #   in Amazon Connect service quotas.
+    #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
+    #
     # @!attribute [rw] media_concurrencies
     #   The channels that agents can handle in the Contact Control Panel
     #   (CCP) for this routing profile.
@@ -5149,6 +5211,7 @@ module Aws::Connect
       :description,
       :default_outbound_queue_id,
       :queue_configs,
+      :manual_assignment_queue_configs,
       :media_concurrencies,
       :tags,
       :agent_availability_timer)
@@ -8322,12 +8385,18 @@ module Aws::Connect
     #   The queues to disassociate from this routing profile.
     #   @return [Array<Types::RoutingProfileQueueReference>]
     #
+    # @!attribute [rw] manual_assignment_queue_references
+    #   The manual assignment queues to disassociate with this routing
+    #   profile.
+    #   @return [Array<Types::RoutingProfileQueueReference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateRoutingProfileQueuesRequest AWS API Documentation
     #
     class DisassociateRoutingProfileQueuesRequest < Struct.new(
       :instance_id,
       :routing_profile_id,
-      :queue_references)
+      :queue_references,
+      :manual_assignment_queue_references)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16491,6 +16560,70 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileManualAssignmentQueuesRequest AWS API Documentation
+    #
+    class ListRoutingProfileManualAssignmentQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_manual_assignment_queue_config_summary_list
+    #   Information about the manual assignment queues associated with the
+    #   routing profile.
+    #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfigSummary>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileManualAssignmentQueuesResponse AWS API Documentation
+    #
+    class ListRoutingProfileManualAssignmentQueuesResponse < Struct.new(
+      :next_token,
+      :routing_profile_manual_assignment_queue_config_summary_list,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
     #   The maximum number of results to return per page. The default
     #   MaxResult size is 100.
     #   @return [Integer]
@@ -17743,6 +17876,26 @@ module Aws::Connect
       :contact_id,
       :contact_arn)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria based on the contact name
+    #
+    # @!attribute [rw] search_text
+    #   The words or phrases used to match the contact name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type combining name search criteria using multiple search
+    #   texts in a name criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/NameCriteria AWS API Documentation
+    #
+    class NameCriteria < Struct.new(
+      :search_text,
+      :match_type)
+      SENSITIVE = [:search_text]
       include Aws::Structure
     end
 
@@ -20436,6 +20589,11 @@ module Aws::Connect
     #   The number of associated queues in routing profile.
     #   @return [Integer]
     #
+    # @!attribute [rw] number_of_associated_manual_assignment_queues
+    #   The number of associated manual assignment queues in routing
+    #   profile.
+    #   @return [Integer]
+    #
     # @!attribute [rw] number_of_associated_users
     #   The number of associated users in routing profile.
     #   @return [Integer]
@@ -20463,6 +20621,10 @@ module Aws::Connect
     #   The IDs of the associated queue.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] associated_manual_assignment_queue_ids
+    #   The IDs of the associated manual assignment queues.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -20475,12 +20637,60 @@ module Aws::Connect
       :default_outbound_queue_id,
       :tags,
       :number_of_associated_queues,
+      :number_of_associated_manual_assignment_queues,
       :number_of_associated_users,
       :agent_availability_timer,
       :last_modified_time,
       :last_modified_region,
       :is_default,
-      :associated_queue_ids)
+      :associated_queue_ids,
+      :associated_manual_assignment_queue_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the queue and channel for manual assignment
+    # behaviour can be enabled.
+    #
+    # @!attribute [rw] queue_reference
+    #   Contains the channel and queue identifier for a routing profile.
+    #   @return [Types::RoutingProfileQueueReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileManualAssignmentQueueConfig AWS API Documentation
+    #
+    class RoutingProfileManualAssignmentQueueConfig < Struct.new(
+      :queue_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a routing profile manual assignment
+    # queue.
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_arn
+    #   The Amazon Resource Name (ARN) of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channels this queue supports. Valid Values: CHAT \| TASK \|
+    #   EMAIL
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileManualAssignmentQueueConfigSummary AWS API Documentation
+    #
+    class RoutingProfileManualAssignmentQueueConfigSummary < Struct.new(
+      :queue_id,
+      :queue_arn,
+      :queue_name,
+      :channel)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21220,6 +21430,44 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Time range that you additionally want to filter on.
+    #
+    # @!attribute [rw] criteria
+    #   List of criteria of the time range to additionally filter on.
+    #   @return [Array<Types::SearchContactsAdditionalTimeRangeCriteria>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type combining multiple time range filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsAdditionalTimeRange AWS API Documentation
+    #
+    class SearchContactsAdditionalTimeRange < Struct.new(
+      :criteria,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria of the time range to additionally filter on.
+    #
+    # @!attribute [rw] time_range
+    #   A structure of time range that you want to search results.
+    #   @return [Types::SearchContactsTimeRange]
+    #
+    # @!attribute [rw] timestamp_condition
+    #   List of the timestamp conditions.
+    #   @return [Types::SearchContactsTimestampCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsAdditionalTimeRangeCriteria AWS API Documentation
+    #
+    class SearchContactsAdditionalTimeRangeCriteria < Struct.new(
+      :time_range,
+      :timestamp_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of Amazon Connect instance. You can find the instance
     #   ID in the Amazon Resource Name (ARN) of the instance.
@@ -21307,7 +21555,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The timestamp condition indicating which timestamp should be used and
+    # how it should be filtered.
+    #
+    # @!attribute [rw] type
+    #   Type of the timestamps to use for the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_type
+    #   Condition of the timestamp on the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactsTimestampCondition AWS API Documentation
+    #
+    class SearchContactsTimestampCondition < Struct.new(
+      :type,
+      :condition_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure of search criteria to be used to return contacts.
+    #
+    # @!attribute [rw] name
+    #   Name of the contact.
+    #   @return [Types::NameCriteria]
     #
     # @!attribute [rw] agent_ids
     #   The identifiers of agents who handled the contacts.
@@ -21335,6 +21607,14 @@ module Aws::Connect
     #   The list of queue IDs associated with contacts.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] routing_criteria
+    #   Routing criteria for the contact.
+    #   @return [Types::SearchableRoutingCriteria]
+    #
+    # @!attribute [rw] additional_time_range
+    #   Additional TimeRange used to filter contacts.
+    #   @return [Types::SearchContactsAdditionalTimeRange]
+    #
     # @!attribute [rw] searchable_contact_attributes
     #   The search criteria based on user-defined contact attributes that
     #   have been configured for contact search. For more information, see
@@ -21361,12 +21641,15 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchCriteria AWS API Documentation
     #
     class SearchCriteria < Struct.new(
+      :name,
       :agent_ids,
       :agent_hierarchy_groups,
       :channels,
       :contact_analysis,
       :initiation_methods,
       :queue_ids,
+      :routing_criteria,
+      :additional_time_range,
       :searchable_contact_attributes,
       :searchable_segment_attributes)
       SENSITIVE = []
@@ -22223,6 +22506,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The agent criteria to search for preferred agents on the routing
+    # criteria.
+    #
+    # @!attribute [rw] agent_ids
+    #   The identifiers of agents used in preferred agents matching.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_type
+    #   The match type combining multiple agent criteria steps.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableAgentCriteriaStep AWS API Documentation
+    #
+    class SearchableAgentCriteriaStep < Struct.new(
+      :agent_ids,
+      :match_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that defines search criteria based on user-defined contact
     # attributes that are configured for contact search.
     #
@@ -22263,6 +22566,34 @@ module Aws::Connect
       :key,
       :values)
       SENSITIVE = [:key, :values]
+      include Aws::Structure
+    end
+
+    # Routing criteria of the contact to match on.
+    #
+    # @!attribute [rw] steps
+    #   The list of Routing criteria steps of the contact routing.
+    #   @return [Array<Types::SearchableRoutingCriteriaStep>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableRoutingCriteria AWS API Documentation
+    #
+    class SearchableRoutingCriteria < Struct.new(
+      :steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Routing criteria of the contact to match on.
+    #
+    # @!attribute [rw] agent_criteria
+    #   Agent matching the routing step of the routing criteria
+    #   @return [Types::SearchableAgentCriteriaStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchableRoutingCriteriaStep AWS API Documentation
+    #
+    class SearchableRoutingCriteriaStep < Struct.new(
+      :agent_criteria)
+      SENSITIVE = []
       include Aws::Structure
     end
 

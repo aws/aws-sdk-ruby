@@ -35,11 +35,30 @@ module Aws::BedrockDataAutomation
     #   List of Audio Extraction Category Type
     #   @return [Array<String>]
     #
+    # @!attribute [rw] type_configuration
+    #   Configuration for different audio extraction category types
+    #   @return [Types::AudioExtractionCategoryTypeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/AudioExtractionCategory AWS API Documentation
     #
     class AudioExtractionCategory < Struct.new(
       :state,
-      :types)
+      :types,
+      :type_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for different audio extraction category types
+    #
+    # @!attribute [rw] transcript
+    #   Configuration for transcript related features
+    #   @return [Types::TranscriptConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/AudioExtractionCategoryTypeConfiguration AWS API Documentation
+    #
+    class AudioExtractionCategoryTypeConfiguration < Struct.new(
+      :transcript)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -253,6 +272,20 @@ module Aws::BedrockDataAutomation
       :creation_time,
       :last_modified_time)
       SENSITIVE = [:blueprint_name]
+      include Aws::Structure
+    end
+
+    # Channel labeling configuration
+    #
+    # @!attribute [rw] state
+    #   State
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ChannelLabelingConfiguration AWS API Documentation
+    #
+    class ChannelLabelingConfiguration < Struct.new(
+      :state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1242,6 +1275,20 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Speaker labeling configuration
+    #
+    # @!attribute [rw] state
+    #   State
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/SpeakerLabelingConfiguration AWS API Documentation
+    #
+    class SpeakerLabelingConfiguration < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration of Splitter
     #
     # @!attribute [rw] state
@@ -1336,6 +1383,25 @@ module Aws::BedrockDataAutomation
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for transcript related features
+    #
+    # @!attribute [rw] speaker_labeling
+    #   Speaker labeling configuration
+    #   @return [Types::SpeakerLabelingConfiguration]
+    #
+    # @!attribute [rw] channel_labeling
+    #   Channel labeling configuration
+    #   @return [Types::ChannelLabelingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/TranscriptConfiguration AWS API Documentation
+    #
+    class TranscriptConfiguration < Struct.new(
+      :speaker_labeling,
+      :channel_labeling)
       SENSITIVE = []
       include Aws::Structure
     end

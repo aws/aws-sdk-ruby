@@ -28,6 +28,7 @@ module Aws::Billing
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {BillingViewHealthStatusException}
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
@@ -46,6 +47,21 @@ module Aws::Billing
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Billing::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class BillingViewHealthStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Billing::Types::BillingViewHealthStatusException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

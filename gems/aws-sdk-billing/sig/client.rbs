@@ -79,6 +79,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AssociateSourceViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSourceViewsResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#associate_source_views-instance_method
+      def associate_source_views: (
+                                    arn: ::String,
+                                    source_views: Array[::String]
+                                  ) -> _AssociateSourceViewsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceViewsResponseSuccess
+
       interface _CreateBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBillingViewResponse]
         def arn: () -> ::String
@@ -97,6 +108,10 @@ module Aws
                                    tags: {
                                      key: ::String,
                                      values: Array[::String]
+                                   }?,
+                                   time_range: {
+                                     begin_date_inclusive: ::Time?,
+                                     end_date_inclusive: ::Time?
                                    }?
                                  },
                                  ?client_token: ::String,
@@ -115,9 +130,21 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#delete_billing_view-instance_method
       def delete_billing_view: (
-                                 arn: ::String
+                                 arn: ::String,
+                                 ?force: bool
                                ) -> _DeleteBillingViewResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBillingViewResponseSuccess
+
+      interface _DisassociateSourceViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSourceViewsResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#disassociate_source_views-instance_method
+      def disassociate_source_views: (
+                                       arn: ::String,
+                                       source_views: Array[::String]
+                                     ) -> _DisassociateSourceViewsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSourceViewsResponseSuccess
 
       interface _GetBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBillingViewResponse]
@@ -154,6 +181,7 @@ module Aws
                                 ?arns: Array[::String],
                                 ?billing_view_types: Array[("PRIMARY" | "BILLING_GROUP" | "CUSTOM")],
                                 ?owner_account_id: ::String,
+                                ?source_account_id: ::String,
                                 ?max_results: ::Integer,
                                 ?next_token: ::String
                               ) -> _ListBillingViewsResponseSuccess
@@ -225,6 +253,10 @@ module Aws
                                    tags: {
                                      key: ::String,
                                      values: Array[::String]
+                                   }?,
+                                   time_range: {
+                                     begin_date_inclusive: ::Time?,
+                                     end_date_inclusive: ::Time?
                                    }?
                                  }
                                ) -> _UpdateBillingViewResponseSuccess

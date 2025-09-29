@@ -290,7 +290,7 @@ module Aws::Lightsail
     #     *Amazon Lightsail Developer Guide*.
     #
     #   * `Unknown` - The reason that synchronization failed is unknown.
-    #     Contact Amazon Web ServicesSupport for more information.
+    #     Contact Amazon Web Services Support for more information.
     #
     #
     #

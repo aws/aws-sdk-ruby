@@ -572,6 +572,13 @@ module Aws::Glue
     #   The secret manager ARN to store credentials.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt
+    #   sensitive authentication information. This key is used to protect
+    #   credentials and other sensitive data stored within the
+    #   authentication configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] o_auth_2_properties
     #   The properties for OAuth2 authentication.
     #   @return [Types::OAuth2Properties]
@@ -581,6 +588,7 @@ module Aws::Glue
     class AuthenticationConfiguration < Struct.new(
       :authentication_type,
       :secret_arn,
+      :kms_key_arn,
       :o_auth_2_properties)
       SENSITIVE = []
       include Aws::Structure
@@ -3877,10 +3885,10 @@ module Aws::Glue
     #   * `JDBC_CONNECTION_URL` - The URL for connecting to a JDBC data
     #     source.
     #
-    #   * `JDBC_ENFORCE_SSL` - A Boolean string (true, false) specifying
-    #     whether Secure Sockets Layer (SSL) with hostname matching is
-    #     enforced for the JDBC connection on the client. The default is
-    #     false.
+    #   * `JDBC_ENFORCE_SSL` - A case-insensitive Boolean string (true,
+    #     false) specifying whether Secure Sockets Layer (SSL) with hostname
+    #     matching is enforced for the JDBC connection on the client. The
+    #     default is false.
     #
     #   * `CUSTOM_JDBC_CERT` - An Amazon S3 location specifying the
     #     customer's root certificate. Glue uses this root certificate to

@@ -82,6 +82,8 @@ module Aws::Connect
     AssociateAnalyticsDataSetResponse = Shapes::StructureShape.new(name: 'AssociateAnalyticsDataSetResponse')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
     AssociateBotRequest = Shapes::StructureShape.new(name: 'AssociateBotRequest')
+    AssociateContactWithUserRequest = Shapes::StructureShape.new(name: 'AssociateContactWithUserRequest')
+    AssociateContactWithUserResponse = Shapes::StructureShape.new(name: 'AssociateContactWithUserResponse')
     AssociateDefaultVocabularyRequest = Shapes::StructureShape.new(name: 'AssociateDefaultVocabularyRequest')
     AssociateDefaultVocabularyResponse = Shapes::StructureShape.new(name: 'AssociateDefaultVocabularyResponse')
     AssociateFlowRequest = Shapes::StructureShape.new(name: 'AssociateFlowRequest')
@@ -827,6 +829,8 @@ module Aws::Connect
     ListQuickConnectsResponse = Shapes::StructureShape.new(name: 'ListQuickConnectsResponse')
     ListRealtimeContactAnalysisSegmentsV2Request = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Request')
     ListRealtimeContactAnalysisSegmentsV2Response = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Response')
+    ListRoutingProfileManualAssignmentQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileManualAssignmentQueuesRequest')
+    ListRoutingProfileManualAssignmentQueuesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfileManualAssignmentQueuesResponse')
     ListRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesRequest')
     ListRoutingProfileQueuesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesResponse')
     ListRoutingProfilesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfilesRequest')
@@ -903,6 +907,7 @@ module Aws::Connect
     MonitorContactResponse = Shapes::StructureShape.new(name: 'MonitorContactResponse')
     Name = Shapes::StringShape.new(name: 'Name')
     Name128 = Shapes::StringShape.new(name: 'Name128')
+    NameCriteria = Shapes::StructureShape.new(name: 'NameCriteria')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NewChatCreated = Shapes::BooleanShape.new(name: 'NewChatCreated')
     NewSessionDetails = Shapes::StructureShape.new(name: 'NewSessionDetails')
@@ -1157,6 +1162,10 @@ module Aws::Connect
     RoutingProfileDescription = Shapes::StringShape.new(name: 'RoutingProfileDescription')
     RoutingProfileId = Shapes::StringShape.new(name: 'RoutingProfileId')
     RoutingProfileList = Shapes::ListShape.new(name: 'RoutingProfileList')
+    RoutingProfileManualAssignmentQueueConfig = Shapes::StructureShape.new(name: 'RoutingProfileManualAssignmentQueueConfig')
+    RoutingProfileManualAssignmentQueueConfigList = Shapes::ListShape.new(name: 'RoutingProfileManualAssignmentQueueConfigList')
+    RoutingProfileManualAssignmentQueueConfigSummary = Shapes::StructureShape.new(name: 'RoutingProfileManualAssignmentQueueConfigSummary')
+    RoutingProfileManualAssignmentQueueConfigSummaryList = Shapes::ListShape.new(name: 'RoutingProfileManualAssignmentQueueConfigSummaryList')
     RoutingProfileName = Shapes::StringShape.new(name: 'RoutingProfileName')
     RoutingProfileQueueConfig = Shapes::StructureShape.new(name: 'RoutingProfileQueueConfig')
     RoutingProfileQueueConfigList = Shapes::ListShape.new(name: 'RoutingProfileQueueConfigList')
@@ -1192,11 +1201,16 @@ module Aws::Connect
     SearchContactFlowModulesResponse = Shapes::StructureShape.new(name: 'SearchContactFlowModulesResponse')
     SearchContactFlowsRequest = Shapes::StructureShape.new(name: 'SearchContactFlowsRequest')
     SearchContactFlowsResponse = Shapes::StructureShape.new(name: 'SearchContactFlowsResponse')
+    SearchContactsAdditionalTimeRange = Shapes::StructureShape.new(name: 'SearchContactsAdditionalTimeRange')
+    SearchContactsAdditionalTimeRangeCriteria = Shapes::StructureShape.new(name: 'SearchContactsAdditionalTimeRangeCriteria')
+    SearchContactsAdditionalTimeRangeCriteriaList = Shapes::ListShape.new(name: 'SearchContactsAdditionalTimeRangeCriteriaList')
     SearchContactsMatchType = Shapes::StringShape.new(name: 'SearchContactsMatchType')
     SearchContactsRequest = Shapes::StructureShape.new(name: 'SearchContactsRequest')
     SearchContactsResponse = Shapes::StructureShape.new(name: 'SearchContactsResponse')
     SearchContactsTimeRange = Shapes::StructureShape.new(name: 'SearchContactsTimeRange')
+    SearchContactsTimeRangeConditionType = Shapes::StringShape.new(name: 'SearchContactsTimeRangeConditionType')
     SearchContactsTimeRangeType = Shapes::StringShape.new(name: 'SearchContactsTimeRangeType')
+    SearchContactsTimestampCondition = Shapes::StructureShape.new(name: 'SearchContactsTimestampCondition')
     SearchCriteria = Shapes::StructureShape.new(name: 'SearchCriteria')
     SearchEmailAddressesRequest = Shapes::StructureShape.new(name: 'SearchEmailAddressesRequest')
     SearchEmailAddressesResponse = Shapes::StructureShape.new(name: 'SearchEmailAddressesResponse')
@@ -1226,6 +1240,7 @@ module Aws::Connect
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
     SearchVocabulariesRequest = Shapes::StructureShape.new(name: 'SearchVocabulariesRequest')
     SearchVocabulariesResponse = Shapes::StructureShape.new(name: 'SearchVocabulariesResponse')
+    SearchableAgentCriteriaStep = Shapes::StructureShape.new(name: 'SearchableAgentCriteriaStep')
     SearchableContactAttributeKey = Shapes::StringShape.new(name: 'SearchableContactAttributeKey')
     SearchableContactAttributeValue = Shapes::StringShape.new(name: 'SearchableContactAttributeValue')
     SearchableContactAttributeValueList = Shapes::ListShape.new(name: 'SearchableContactAttributeValueList')
@@ -1233,6 +1248,9 @@ module Aws::Connect
     SearchableContactAttributesCriteria = Shapes::StructureShape.new(name: 'SearchableContactAttributesCriteria')
     SearchableContactAttributesCriteriaList = Shapes::ListShape.new(name: 'SearchableContactAttributesCriteriaList')
     SearchableQueueType = Shapes::StringShape.new(name: 'SearchableQueueType')
+    SearchableRoutingCriteria = Shapes::StructureShape.new(name: 'SearchableRoutingCriteria')
+    SearchableRoutingCriteriaStep = Shapes::StructureShape.new(name: 'SearchableRoutingCriteriaStep')
+    SearchableRoutingCriteriaStepList = Shapes::ListShape.new(name: 'SearchableRoutingCriteriaStepList')
     SearchableSegmentAttributeKey = Shapes::StringShape.new(name: 'SearchableSegmentAttributeKey')
     SearchableSegmentAttributeValue = Shapes::StringShape.new(name: 'SearchableSegmentAttributeValue')
     SearchableSegmentAttributeValueList = Shapes::ListShape.new(name: 'SearchableSegmentAttributeValueList')
@@ -1760,6 +1778,13 @@ module Aws::Connect
     AssociateBotRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     AssociateBotRequest.struct_class = Types::AssociateBotRequest
 
+    AssociateContactWithUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateContactWithUserRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    AssociateContactWithUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: AgentResourceId, required: true, location_name: "UserId"))
+    AssociateContactWithUserRequest.struct_class = Types::AssociateContactWithUserRequest
+
+    AssociateContactWithUserResponse.struct_class = Types::AssociateContactWithUserResponse
+
     AssociateDefaultVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateDefaultVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, required: true, location: "uri", location_name: "LanguageCode"))
     AssociateDefaultVocabularyRequest.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, location_name: "VocabularyId"))
@@ -1806,7 +1831,8 @@ module Aws::Connect
 
     AssociateRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
-    AssociateRoutingProfileQueuesRequest.add_member(:queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, required: true, location_name: "QueueConfigs"))
+    AssociateRoutingProfileQueuesRequest.add_member(:queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, location_name: "QueueConfigs"))
+    AssociateRoutingProfileQueuesRequest.add_member(:manual_assignment_queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigList, location_name: "ManualAssignmentQueueConfigs"))
     AssociateRoutingProfileQueuesRequest.struct_class = Types::AssociateRoutingProfileQueuesRequest
 
     AssociateSecurityKeyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -2282,6 +2308,8 @@ module Aws::Connect
     ContactSearchSummary.add_member(:disconnect_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "DisconnectTimestamp"))
     ContactSearchSummary.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
     ContactSearchSummary.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: ContactSearchSummarySegmentAttributes, location_name: "SegmentAttributes"))
+    ContactSearchSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    ContactSearchSummary.add_member(:routing_criteria, Shapes::ShapeRef.new(shape: RoutingCriteria, location_name: "RoutingCriteria"))
     ContactSearchSummary.struct_class = Types::ContactSearchSummary
 
     ContactSearchSummaryAgentInfo.add_member(:id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "Id"))
@@ -2293,6 +2321,7 @@ module Aws::Connect
     ContactSearchSummaryQueueInfo.struct_class = Types::ContactSearchSummaryQueueInfo
 
     ContactSearchSummarySegmentAttributeValue.add_member(:value_string, Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: "ValueString"))
+    ContactSearchSummarySegmentAttributeValue.add_member(:value_map, Shapes::ShapeRef.new(shape: SegmentAttributeValueMap, location_name: "ValueMap"))
     ContactSearchSummarySegmentAttributeValue.struct_class = Types::ContactSearchSummarySegmentAttributeValue
 
     ContactSearchSummarySegmentAttributes.key = Shapes::ShapeRef.new(shape: SegmentAttributeName)
@@ -2552,6 +2581,7 @@ module Aws::Connect
     CreateRoutingProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: RoutingProfileDescription, required: true, location_name: "Description"))
     CreateRoutingProfileRequest.add_member(:default_outbound_queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "DefaultOutboundQueueId"))
     CreateRoutingProfileRequest.add_member(:queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, location_name: "QueueConfigs"))
+    CreateRoutingProfileRequest.add_member(:manual_assignment_queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigList, location_name: "ManualAssignmentQueueConfigs"))
     CreateRoutingProfileRequest.add_member(:media_concurrencies, Shapes::ShapeRef.new(shape: MediaConcurrencies, required: true, location_name: "MediaConcurrencies"))
     CreateRoutingProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateRoutingProfileRequest.add_member(:agent_availability_timer, Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: "AgentAvailabilityTimer"))
@@ -3173,7 +3203,8 @@ module Aws::Connect
 
     DisassociateRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
-    DisassociateRoutingProfileQueuesRequest.add_member(:queue_references, Shapes::ShapeRef.new(shape: RoutingProfileQueueReferenceList, required: true, location_name: "QueueReferences"))
+    DisassociateRoutingProfileQueuesRequest.add_member(:queue_references, Shapes::ShapeRef.new(shape: RoutingProfileQueueReferenceList, location_name: "QueueReferences"))
+    DisassociateRoutingProfileQueuesRequest.add_member(:manual_assignment_queue_references, Shapes::ShapeRef.new(shape: RoutingProfileQueueReferenceList, location_name: "ManualAssignmentQueueReferences"))
     DisassociateRoutingProfileQueuesRequest.struct_class = Types::DisassociateRoutingProfileQueuesRequest
 
     DisassociateSecurityKeyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -4375,6 +4406,18 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsV2Response.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Response
 
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListRoutingProfileManualAssignmentQueuesRequest.struct_class = Types::ListRoutingProfileManualAssignmentQueuesRequest
+
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:routing_profile_manual_assignment_queue_config_summary_list, Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigSummaryList, location_name: "RoutingProfileManualAssignmentQueueConfigSummaryList"))
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    ListRoutingProfileManualAssignmentQueuesResponse.struct_class = Types::ListRoutingProfileManualAssignmentQueuesResponse
+
     ListRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
     ListRoutingProfileQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -4617,6 +4660,10 @@ module Aws::Connect
     MonitorContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     MonitorContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactArn"))
     MonitorContactResponse.struct_class = Types::MonitorContactResponse
+
+    NameCriteria.add_member(:search_text, Shapes::ShapeRef.new(shape: SearchTextList, required: true, location_name: "SearchText"))
+    NameCriteria.add_member(:match_type, Shapes::ShapeRef.new(shape: SearchContactsMatchType, required: true, location_name: "MatchType"))
+    NameCriteria.struct_class = Types::NameCriteria
 
     NewSessionDetails.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
     NewSessionDetails.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, location_name: "ParticipantDetails"))
@@ -5207,15 +5254,30 @@ module Aws::Connect
     RoutingProfile.add_member(:default_outbound_queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "DefaultOutboundQueueId"))
     RoutingProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     RoutingProfile.add_member(:number_of_associated_queues, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedQueues"))
+    RoutingProfile.add_member(:number_of_associated_manual_assignment_queues, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedManualAssignmentQueues"))
     RoutingProfile.add_member(:number_of_associated_users, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedUsers"))
     RoutingProfile.add_member(:agent_availability_timer, Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: "AgentAvailabilityTimer"))
     RoutingProfile.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     RoutingProfile.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     RoutingProfile.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
     RoutingProfile.add_member(:associated_queue_ids, Shapes::ShapeRef.new(shape: AssociatedQueueIdList, location_name: "AssociatedQueueIds"))
+    RoutingProfile.add_member(:associated_manual_assignment_queue_ids, Shapes::ShapeRef.new(shape: AssociatedQueueIdList, location_name: "AssociatedManualAssignmentQueueIds"))
     RoutingProfile.struct_class = Types::RoutingProfile
 
     RoutingProfileList.member = Shapes::ShapeRef.new(shape: RoutingProfile)
+
+    RoutingProfileManualAssignmentQueueConfig.add_member(:queue_reference, Shapes::ShapeRef.new(shape: RoutingProfileQueueReference, required: true, location_name: "QueueReference"))
+    RoutingProfileManualAssignmentQueueConfig.struct_class = Types::RoutingProfileManualAssignmentQueueConfig
+
+    RoutingProfileManualAssignmentQueueConfigList.member = Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfig)
+
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "QueueId"))
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "QueueArn"))
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "QueueName"))
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
+    RoutingProfileManualAssignmentQueueConfigSummary.struct_class = Types::RoutingProfileManualAssignmentQueueConfigSummary
+
+    RoutingProfileManualAssignmentQueueConfigSummaryList.member = Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigSummary)
 
     RoutingProfileQueueConfig.add_member(:queue_reference, Shapes::ShapeRef.new(shape: RoutingProfileQueueReference, required: true, location_name: "QueueReference"))
     RoutingProfileQueueConfig.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "Priority", metadata: {"box" => true}))
@@ -5362,6 +5424,16 @@ module Aws::Connect
     SearchContactFlowsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchContactFlowsResponse.struct_class = Types::SearchContactFlowsResponse
 
+    SearchContactsAdditionalTimeRange.add_member(:criteria, Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRangeCriteriaList, required: true, location_name: "Criteria"))
+    SearchContactsAdditionalTimeRange.add_member(:match_type, Shapes::ShapeRef.new(shape: SearchContactsMatchType, required: true, location_name: "MatchType"))
+    SearchContactsAdditionalTimeRange.struct_class = Types::SearchContactsAdditionalTimeRange
+
+    SearchContactsAdditionalTimeRangeCriteria.add_member(:time_range, Shapes::ShapeRef.new(shape: SearchContactsTimeRange, location_name: "TimeRange"))
+    SearchContactsAdditionalTimeRangeCriteria.add_member(:timestamp_condition, Shapes::ShapeRef.new(shape: SearchContactsTimestampCondition, location_name: "TimestampCondition"))
+    SearchContactsAdditionalTimeRangeCriteria.struct_class = Types::SearchContactsAdditionalTimeRangeCriteria
+
+    SearchContactsAdditionalTimeRangeCriteriaList.member = Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRangeCriteria)
+
     SearchContactsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchContactsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: SearchContactsTimeRange, required: true, location_name: "TimeRange"))
     SearchContactsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: SearchCriteria, location_name: "SearchCriteria"))
@@ -5380,12 +5452,19 @@ module Aws::Connect
     SearchContactsTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
     SearchContactsTimeRange.struct_class = Types::SearchContactsTimeRange
 
+    SearchContactsTimestampCondition.add_member(:type, Shapes::ShapeRef.new(shape: SearchContactsTimeRangeType, required: true, location_name: "Type"))
+    SearchContactsTimestampCondition.add_member(:condition_type, Shapes::ShapeRef.new(shape: SearchContactsTimeRangeConditionType, required: true, location_name: "ConditionType"))
+    SearchContactsTimestampCondition.struct_class = Types::SearchContactsTimestampCondition
+
+    SearchCriteria.add_member(:name, Shapes::ShapeRef.new(shape: NameCriteria, location_name: "Name"))
     SearchCriteria.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentResourceIdList, location_name: "AgentIds"))
     SearchCriteria.add_member(:agent_hierarchy_groups, Shapes::ShapeRef.new(shape: AgentHierarchyGroups, location_name: "AgentHierarchyGroups"))
     SearchCriteria.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelList, location_name: "Channels"))
     SearchCriteria.add_member(:contact_analysis, Shapes::ShapeRef.new(shape: ContactAnalysis, location_name: "ContactAnalysis"))
     SearchCriteria.add_member(:initiation_methods, Shapes::ShapeRef.new(shape: InitiationMethodList, location_name: "InitiationMethods"))
     SearchCriteria.add_member(:queue_ids, Shapes::ShapeRef.new(shape: QueueIdList, location_name: "QueueIds"))
+    SearchCriteria.add_member(:routing_criteria, Shapes::ShapeRef.new(shape: SearchableRoutingCriteria, location_name: "RoutingCriteria"))
+    SearchCriteria.add_member(:additional_time_range, Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRange, location_name: "AdditionalTimeRange"))
     SearchCriteria.add_member(:searchable_contact_attributes, Shapes::ShapeRef.new(shape: SearchableContactAttributes, location_name: "SearchableContactAttributes"))
     SearchCriteria.add_member(:searchable_segment_attributes, Shapes::ShapeRef.new(shape: SearchableSegmentAttributes, location_name: "SearchableSegmentAttributes"))
     SearchCriteria.struct_class = Types::SearchCriteria
@@ -5546,6 +5625,10 @@ module Aws::Connect
     SearchVocabulariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: "NextToken"))
     SearchVocabulariesResponse.struct_class = Types::SearchVocabulariesResponse
 
+    SearchableAgentCriteriaStep.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentResourceIdList, location_name: "AgentIds"))
+    SearchableAgentCriteriaStep.add_member(:match_type, Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: "MatchType"))
+    SearchableAgentCriteriaStep.struct_class = Types::SearchableAgentCriteriaStep
+
     SearchableContactAttributeValueList.member = Shapes::ShapeRef.new(shape: SearchableContactAttributeValue)
 
     SearchableContactAttributes.add_member(:criteria, Shapes::ShapeRef.new(shape: SearchableContactAttributesCriteriaList, required: true, location_name: "Criteria"))
@@ -5557,6 +5640,14 @@ module Aws::Connect
     SearchableContactAttributesCriteria.struct_class = Types::SearchableContactAttributesCriteria
 
     SearchableContactAttributesCriteriaList.member = Shapes::ShapeRef.new(shape: SearchableContactAttributesCriteria)
+
+    SearchableRoutingCriteria.add_member(:steps, Shapes::ShapeRef.new(shape: SearchableRoutingCriteriaStepList, location_name: "Steps"))
+    SearchableRoutingCriteria.struct_class = Types::SearchableRoutingCriteria
+
+    SearchableRoutingCriteriaStep.add_member(:agent_criteria, Shapes::ShapeRef.new(shape: SearchableAgentCriteriaStep, location_name: "AgentCriteria"))
+    SearchableRoutingCriteriaStep.struct_class = Types::SearchableRoutingCriteriaStep
+
+    SearchableRoutingCriteriaStepList.member = Shapes::ShapeRef.new(shape: SearchableRoutingCriteriaStep)
 
     SearchableSegmentAttributeValueList.member = Shapes::ShapeRef.new(shape: SearchableSegmentAttributeValue)
 
@@ -6824,6 +6915,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:associate_contact_with_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateContactWithUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/contacts/{InstanceId}/{ContactId}/associate-user"
+        o.input = Shapes::ShapeRef.new(shape: AssociateContactWithUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateContactWithUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:associate_default_vocabulary, Seahorse::Model::Operation.new.tap do |o|
@@ -9203,6 +9308,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_routing_profile_manual_assignment_queues, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRoutingProfileManualAssignmentQueues"
+        o.http_method = "GET"
+        o.http_request_uri = "/routing-profiles/{InstanceId}/{RoutingProfileId}/manual-assignment-queues"
+        o.input = Shapes::ShapeRef.new(shape: ListRoutingProfileManualAssignmentQueuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRoutingProfileManualAssignmentQueuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

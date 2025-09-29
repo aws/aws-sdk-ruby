@@ -550,7 +550,14 @@ module Aws
                                                    },
                                                  ]?
                                                },
-                                             ]
+                                             ],
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ],
+                                             ?sso_tag_keys: Array[::String]
                                            ) -> _CreateRedshiftIdcApplicationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRedshiftIdcApplicationResponseSuccess
 

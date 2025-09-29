@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2025-09-26)
+------------------
+
+* Feature - Add ability to combine custom billing views to create new consolidated views.
+
 1.13.0 (2025-08-26)
 ------------------
 

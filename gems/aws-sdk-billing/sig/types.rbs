@@ -19,16 +19,43 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class AssociateSourceViewsRequest
+      attr_accessor arn: ::String
+      attr_accessor source_views: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateSourceViewsResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class BillingViewElement
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP" | "CUSTOM")
       attr_accessor owner_account_id: ::String
+      attr_accessor source_account_id: ::String
       attr_accessor data_filter_expression: Types::Expression
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor derived_view_count: ::Integer
+      attr_accessor source_view_count: ::Integer
+      attr_accessor view_definition_last_updated_at: ::Time
+      attr_accessor health_status: Types::BillingViewHealthStatus
       SENSITIVE: [:name, :description]
+    end
+
+    class BillingViewHealthStatus
+      attr_accessor status_code: ("HEALTHY" | "UNHEALTHY" | "CREATING" | "UPDATING")
+      attr_accessor status_reasons: ::Array[("SOURCE_VIEW_UNHEALTHY" | "SOURCE_VIEW_UPDATING" | "SOURCE_VIEW_ACCESS_DENIED" | "SOURCE_VIEW_NOT_FOUND" | "CYCLIC_DEPENDENCY" | "SOURCE_VIEW_DEPTH_EXCEEDED" | "AGGREGATE_SOURCE" | "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT")]
+      SENSITIVE: []
+    end
+
+    class BillingViewHealthStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class BillingViewListElement
@@ -36,7 +63,9 @@ module Aws::Billing
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor owner_account_id: ::String
+      attr_accessor source_account_id: ::String
       attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP" | "CUSTOM")
+      attr_accessor health_status: Types::BillingViewHealthStatus
       SENSITIVE: [:name, :description]
     end
 
@@ -65,6 +94,7 @@ module Aws::Billing
 
     class DeleteBillingViewRequest
       attr_accessor arn: ::String
+      attr_accessor force: bool
       SENSITIVE: []
     end
 
@@ -79,9 +109,21 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class DisassociateSourceViewsRequest
+      attr_accessor arn: ::String
+      attr_accessor source_views: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateSourceViewsResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class Expression
       attr_accessor dimensions: Types::DimensionValues
       attr_accessor tags: Types::TagValues
+      attr_accessor time_range: Types::TimeRange
       SENSITIVE: []
     end
 
@@ -116,6 +158,7 @@ module Aws::Billing
       attr_accessor arns: ::Array[::String]
       attr_accessor billing_view_types: ::Array[("PRIMARY" | "BILLING_GROUP" | "CUSTOM")]
       attr_accessor owner_account_id: ::String
+      attr_accessor source_account_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -189,6 +232,12 @@ module Aws::Billing
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeRange
+      attr_accessor begin_date_inclusive: ::Time
+      attr_accessor end_date_inclusive: ::Time
       SENSITIVE: []
     end
 

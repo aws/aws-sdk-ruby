@@ -1009,7 +1009,7 @@ module Aws::NetworkFirewall
     class RulesSourceList
       attr_accessor targets: ::Array[::String]
       attr_accessor target_types: ::Array[("TLS_SNI" | "HTTP_HOST")]
-      attr_accessor generated_rules_type: ("ALLOWLIST" | "DENYLIST")
+      attr_accessor generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
       SENSITIVE: []
     end
 

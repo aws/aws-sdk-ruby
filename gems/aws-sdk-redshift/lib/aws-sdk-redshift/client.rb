@@ -2766,6 +2766,14 @@ module Aws::Redshift
     #   A collection of service integrations for the Redshift IAM Identity
     #   Center application.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags.
+    #
+    # @option params [Array<String>] :sso_tag_keys
+    #   A list of tags keys that Redshift Identity Center applications copy to
+    #   IAM Identity Center. For each input key, the tag corresponding to the
+    #   key-value pair is propagated.
+    #
     # @return [Types::CreateRedshiftIdcApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRedshiftIdcApplicationResult#redshift_idc_application #redshift_idc_application} => Types::RedshiftIdcApplication
@@ -2802,6 +2810,13 @@ module Aws::Redshift
     #         ],
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     sso_tag_keys: ["String"],
     #   })
     #
     # @example Response structure
@@ -2823,6 +2838,11 @@ module Aws::Redshift
     #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants #=> Array
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.tags #=> Array
+    #   resp.redshift_idc_application.tags[0].key #=> String
+    #   resp.redshift_idc_application.tags[0].value #=> String
+    #   resp.redshift_idc_application.sso_tag_keys #=> Array
+    #   resp.redshift_idc_application.sso_tag_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateRedshiftIdcApplication AWS API Documentation
     #
@@ -6716,6 +6736,11 @@ module Aws::Redshift
     #   resp.redshift_idc_applications[0].service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.redshift_idc_applications[0].service_integrations[0].s3_access_grants #=> Array
     #   resp.redshift_idc_applications[0].service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_applications[0].tags #=> Array
+    #   resp.redshift_idc_applications[0].tags[0].key #=> String
+    #   resp.redshift_idc_applications[0].tags[0].value #=> String
+    #   resp.redshift_idc_applications[0].sso_tag_keys #=> Array
+    #   resp.redshift_idc_applications[0].sso_tag_keys[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeRedshiftIdcApplications AWS API Documentation
@@ -10538,6 +10563,11 @@ module Aws::Redshift
     #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants #=> Array
     #   resp.redshift_idc_application.service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.tags #=> Array
+    #   resp.redshift_idc_application.tags[0].key #=> String
+    #   resp.redshift_idc_application.tags[0].value #=> String
+    #   resp.redshift_idc_application.sso_tag_keys #=> Array
+    #   resp.redshift_idc_application.sso_tag_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyRedshiftIdcApplication AWS API Documentation
     #
@@ -12968,7 +12998,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

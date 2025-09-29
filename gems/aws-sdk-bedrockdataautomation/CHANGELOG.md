@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-09-26)
+------------------
+
+* Feature - Added support for configurable Speaker Labeling and Channel Labeling features for Audio modality.
+
 1.16.0 (2025-08-26)
 ------------------
 

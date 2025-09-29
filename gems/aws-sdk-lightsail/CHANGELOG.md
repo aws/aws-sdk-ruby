@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-09-25)
+------------------
+
+* Feature - Attribute HTTP binding update for Get/Delete operations
+
 1.117.0 (2025-08-26)
 ------------------
 

@@ -482,6 +482,20 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The billing view status must be `HEALTHY` to perform this action. Try
+    # again when the status is `HEALTHY`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/BillingViewHealthStatusException AWS API Documentation
+    #
+    class BillingViewHealthStatusException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for the commitment purchase analysis.
     #
     # @!attribute [rw] savings_plans_purchase_analysis_configuration

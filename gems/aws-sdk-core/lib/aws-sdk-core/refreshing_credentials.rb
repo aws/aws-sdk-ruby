@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Aws
-
   # Base class used credential classes that can be refreshed. This
   # provides basic refresh logic in a thread-safe manner. Classes mixing in
   # this module are expected to implement a #refresh method that populates
@@ -12,9 +11,7 @@ module Aws
   # * `@session_token`
   # * `@expiration`
   #
-  # @api private
   module RefreshingCredentials
-
     SYNC_EXPIRATION_LENGTH = 300 # 5 minutes
     ASYNC_EXPIRATION_LENGTH = 600 # 10 minutes
 
@@ -22,7 +19,7 @@ module Aws
 
     def initialize(options = {})
       @mutex = Mutex.new
-      @before_refresh = options.delete(:before_refresh) if Hash === options
+      @before_refresh = options.delete(:before_refresh) if options.is_a?(Hash)
 
       @before_refresh.call(self) if @before_refresh
       refresh
@@ -59,7 +56,7 @@ module Aws
     # Otherwise, if we're approaching expiration, use the existing credentials
     # but attempt a refresh in the background.
     def refresh_if_near_expiration!
-      # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
+      # NOTE: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
       # call, we check before doing so, and then we check within the mutex to avoid a race condition.
       # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
       if near_expiration?(sync_expiration_length)
@@ -91,6 +88,5 @@ module Aws
         true
       end
     end
-
   end
 end

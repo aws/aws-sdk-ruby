@@ -42,6 +42,37 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the billing view to associate
+    #   source views with.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_views
+    #   A list of ARNs of the source billing views to associate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateSourceViewsRequest AWS API Documentation
+    #
+    class AssociateSourceViewsRequest < Struct.new(
+      :arn,
+      :source_views)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the billing view that the source views were associated
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateSourceViewsResponse AWS API Documentation
+    #
+    class AssociateSourceViewsResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The metadata associated to the billing view.
     #
     # @!attribute [rw] arn
@@ -65,6 +96,11 @@ module Aws::Billing
     #   The account owner of the billing view.
     #   @return [String]
     #
+    # @!attribute [rw] source_account_id
+    #   The Amazon Web Services account ID that owns the source billing
+    #   view, if this is a derived billing view.
+    #   @return [String]
+    #
     # @!attribute [rw] data_filter_expression
     #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
     #   `Tags`.
@@ -82,6 +118,22 @@ module Aws::Billing
     #   The time when the billing view was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] derived_view_count
+    #   The number of billing views that use this billing view as a source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_view_count
+    #   The number of source views associated with this billing view.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] view_definition_last_updated_at
+    #   The timestamp of when the billing view definition was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] health_status
+    #   The current health status of the billing view.
+    #   @return [Types::BillingViewHealthStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewElement AWS API Documentation
     #
     class BillingViewElement < Struct.new(
@@ -90,10 +142,51 @@ module Aws::Billing
       :description,
       :billing_view_type,
       :owner_account_id,
+      :source_account_id,
       :data_filter_expression,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :derived_view_count,
+      :source_view_count,
+      :view_definition_last_updated_at,
+      :health_status)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # Represents the health status of a billing view, including a status
+    # code and optional reasons for the status.
+    #
+    # @!attribute [rw] status_code
+    #   The current health status code of the billing view.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   A list of reasons explaining the current health status, if
+    #   applicable.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewHealthStatus AWS API Documentation
+    #
+    class BillingViewHealthStatus < Struct.new(
+      :status_code,
+      :status_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exception thrown when a billing view's health status prevents an
+    # operation from being performed. This may occur if the billing view is
+    # in a state other than `HEALTHY`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewHealthStatusException AWS API Documentation
+    #
+    class BillingViewHealthStatusException < Struct.new(
+      :message)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -116,9 +209,18 @@ module Aws::Billing
     #   The list of owners of the Billing view.
     #   @return [String]
     #
+    # @!attribute [rw] source_account_id
+    #   The Amazon Web Services account ID that owns the source billing
+    #   view, if this is a derived billing view.
+    #   @return [String]
+    #
     # @!attribute [rw] billing_view_type
     #   The type of billing view.
     #   @return [String]
+    #
+    # @!attribute [rw] health_status
+    #   The current health status of the billing view.
+    #   @return [Types::BillingViewHealthStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewListElement AWS API Documentation
     #
@@ -127,7 +229,9 @@ module Aws::Billing
       :name,
       :description,
       :owner_account_id,
-      :billing_view_type)
+      :source_account_id,
+      :billing_view_type,
+      :health_status)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -231,10 +335,17 @@ module Aws::Billing
     #   the billing view.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   If set to true, forces deletion of the billing view even if it has
+    #   derived resources (e.g. other billing views or budgets). Use with
+    #   caution as this may break dependent resources.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DeleteBillingViewRequest AWS API Documentation
     #
     class DeleteBillingViewRequest < Struct.new(
-      :arn)
+      :arn,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -273,6 +384,37 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the billing view to disassociate
+    #   source views from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_views
+    #   A list of ARNs of the source billing views to disassociate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DisassociateSourceViewsRequest AWS API Documentation
+    #
+    class DisassociateSourceViewsRequest < Struct.new(
+      :arn,
+      :source_views)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the billing view that the source views were disassociated
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DisassociateSourceViewsResponse AWS API Documentation
+    #
+    class DisassociateSourceViewsResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
     # `Tags`.
     #
@@ -288,11 +430,16 @@ module Aws::Billing
     #   The specific `Tag` to use for `Expression`.
     #   @return [Types::TagValues]
     #
+    # @!attribute [rw] time_range
+    #   Specifies a time range filter for the billing view data.
+    #   @return [Types::TimeRange]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/Expression AWS API Documentation
     #
     class Expression < Struct.new(
       :dimensions,
-      :tags)
+      :tags,
+      :time_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -389,6 +536,11 @@ module Aws::Billing
     #   The list of owners of the billing view.
     #   @return [String]
     #
+    # @!attribute [rw] source_account_id
+    #   Filters the results to include only billing views that use the
+    #   specified account as a source.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of billing views to retrieve. Default is 100.
     #   @return [Integer]
@@ -405,6 +557,7 @@ module Aws::Billing
       :arns,
       :billing_view_types,
       :owner_account_id,
+      :source_account_id,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -621,6 +774,25 @@ module Aws::Billing
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a time range with inclusive begin and end dates.
+    #
+    # @!attribute [rw] begin_date_inclusive
+    #   The inclusive start date of the time range.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_inclusive
+    #   The inclusive end date of the time range.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/TimeRange AWS API Documentation
+    #
+    class TimeRange < Struct.new(
+      :begin_date_inclusive,
+      :end_date_inclusive)
       SENSITIVE = []
       include Aws::Structure
     end

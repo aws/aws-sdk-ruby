@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2025-09-26)
+------------------
+
+* Feature - Support for payer account dimension and billing view health status.
+
 1.134.0 (2025-09-15)
 ------------------
 

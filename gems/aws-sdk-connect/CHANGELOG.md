@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.218.0 (2025-09-26)
+------------------
+
+* Feature - Adds supports for manual contact picking (WorkList) operations on Routing Profiles, Agent Management and SearchContacts APIs.
+
 1.217.0 (2025-09-19)
 ------------------
 

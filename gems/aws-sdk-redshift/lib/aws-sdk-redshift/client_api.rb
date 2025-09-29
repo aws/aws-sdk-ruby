@@ -1194,6 +1194,8 @@ module Aws::Redshift
     CreateRedshiftIdcApplicationMessage.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
     CreateRedshiftIdcApplicationMessage.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
     CreateRedshiftIdcApplicationMessage.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    CreateRedshiftIdcApplicationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRedshiftIdcApplicationMessage.add_member(:sso_tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "SsoTagKeys"))
     CreateRedshiftIdcApplicationMessage.struct_class = Types::CreateRedshiftIdcApplicationMessage
 
     CreateRedshiftIdcApplicationResult.add_member(:redshift_idc_application, Shapes::ShapeRef.new(shape: RedshiftIdcApplication, location_name: "RedshiftIdcApplication"))
@@ -2454,6 +2456,8 @@ module Aws::Redshift
     RedshiftIdcApplication.add_member(:idc_onboard_status, Shapes::ShapeRef.new(shape: String, location_name: "IdcOnboardStatus"))
     RedshiftIdcApplication.add_member(:authorized_token_issuer_list, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: "AuthorizedTokenIssuerList"))
     RedshiftIdcApplication.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
+    RedshiftIdcApplication.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RedshiftIdcApplication.add_member(:sso_tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "SsoTagKeys"))
     RedshiftIdcApplication.struct_class = Types::RedshiftIdcApplication
 
     RedshiftIdcApplicationAlreadyExistsFault.struct_class = Types::RedshiftIdcApplicationAlreadyExistsFault
@@ -3385,6 +3389,8 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: RedshiftIdcApplicationQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
       api.add_operation(:create_scheduled_action, Seahorse::Model::Operation.new.tap do |o|

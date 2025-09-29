@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.236.0 (2025-09-25)
+------------------
+
+* Feature - Update GetConnection(s) API to return KmsKeyArn & Add 63 missing connection types
+
 1.235.0 (2025-08-28)
 ------------------
 

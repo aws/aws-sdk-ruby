@@ -1746,6 +1746,7 @@ module Aws::Glue
 
     AuthenticationConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
     AuthenticationConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    AuthenticationConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     AuthenticationConfiguration.add_member(:o_auth_2_properties, Shapes::ShapeRef.new(shape: OAuth2Properties, location_name: "OAuth2Properties"))
     AuthenticationConfiguration.struct_class = Types::AuthenticationConfiguration
 

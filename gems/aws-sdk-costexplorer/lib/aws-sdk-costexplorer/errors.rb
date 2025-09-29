@@ -30,6 +30,7 @@ module Aws::CostExplorer
   # * {AnalysisNotFoundException}
   # * {BackfillLimitExceededException}
   # * {BillExpirationException}
+  # * {BillingViewHealthStatusException}
   # * {DataUnavailableException}
   # * {GenerationExistsException}
   # * {InvalidNextTokenException}
@@ -83,6 +84,21 @@ module Aws::CostExplorer
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CostExplorer::Types::BillExpirationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class BillingViewHealthStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::BillingViewHealthStatusException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

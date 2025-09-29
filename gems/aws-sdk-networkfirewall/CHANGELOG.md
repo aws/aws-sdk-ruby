@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2025-09-25)
+------------------
+
+* Feature - Network Firewall now introduces Reject and Alert action support for stateful domain list rule groups, providing customers with more granular control over their network traffic.
+
 1.76.0 (2025-09-17)
 ------------------
 

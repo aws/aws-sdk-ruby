@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:billing)
 # structure.
 #
 #     billing = Aws::Billing::Client.new
-#     resp = billing.create_billing_view(params)
+#     resp = billing.associate_source_views(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::Billing
   autoload :EndpointProvider, 'aws-sdk-billing/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-billing/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

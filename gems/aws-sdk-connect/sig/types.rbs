@@ -214,6 +214,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AssociateContactWithUserRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateContactWithUserResponse < Aws::EmptyStructure
+    end
+
     class AssociateDefaultVocabularyRequest
       attr_accessor instance_id: ::String
       attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
@@ -280,6 +290,7 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor routing_profile_id: ::String
       attr_accessor queue_configs: ::Array[Types::RoutingProfileQueueConfig]
+      attr_accessor manual_assignment_queue_configs: ::Array[Types::RoutingProfileManualAssignmentQueueConfig]
       SENSITIVE: []
     end
 
@@ -834,7 +845,9 @@ module Aws::Connect
       attr_accessor disconnect_timestamp: ::Time
       attr_accessor scheduled_timestamp: ::Time
       attr_accessor segment_attributes: ::Hash[::String, Types::ContactSearchSummarySegmentAttributeValue]
-      SENSITIVE: [:segment_attributes]
+      attr_accessor name: ::String
+      attr_accessor routing_criteria: Types::RoutingCriteria
+      SENSITIVE: [:segment_attributes, :name]
     end
 
     class ContactSearchSummaryAgentInfo
@@ -851,6 +864,7 @@ module Aws::Connect
 
     class ContactSearchSummarySegmentAttributeValue
       attr_accessor value_string: ::String
+      attr_accessor value_map: ::Hash[::String, Types::SegmentAttributeValue]
       SENSITIVE: []
     end
 
@@ -1178,6 +1192,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor default_outbound_queue_id: ::String
       attr_accessor queue_configs: ::Array[Types::RoutingProfileQueueConfig]
+      attr_accessor manual_assignment_queue_configs: ::Array[Types::RoutingProfileManualAssignmentQueueConfig]
       attr_accessor media_concurrencies: ::Array[Types::MediaConcurrency]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
@@ -2062,6 +2077,7 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor routing_profile_id: ::String
       attr_accessor queue_references: ::Array[Types::RoutingProfileQueueReference]
+      attr_accessor manual_assignment_queue_references: ::Array[Types::RoutingProfileQueueReference]
       SENSITIVE: []
     end
 
@@ -3575,6 +3591,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListRoutingProfileManualAssignmentQueuesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor routing_profile_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRoutingProfileManualAssignmentQueuesResponse
+      attr_accessor next_token: ::String
+      attr_accessor routing_profile_manual_assignment_queue_config_summary_list: ::Array[Types::RoutingProfileManualAssignmentQueueConfigSummary]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class ListRoutingProfileQueuesRequest
       attr_accessor instance_id: ::String
       attr_accessor routing_profile_id: ::String
@@ -3897,6 +3929,12 @@ module Aws::Connect
     class MonitorContactResponse
       attr_accessor contact_id: ::String
       attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NameCriteria
+      attr_accessor search_text: ::Array[::String]
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
       SENSITIVE: []
     end
 
@@ -4608,12 +4646,27 @@ module Aws::Connect
       attr_accessor default_outbound_queue_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor number_of_associated_queues: ::Integer
+      attr_accessor number_of_associated_manual_assignment_queues: ::Integer
       attr_accessor number_of_associated_users: ::Integer
       attr_accessor agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
       attr_accessor is_default: bool
       attr_accessor associated_queue_ids: ::Array[::String]
+      attr_accessor associated_manual_assignment_queue_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RoutingProfileManualAssignmentQueueConfig
+      attr_accessor queue_reference: Types::RoutingProfileQueueReference
+      SENSITIVE: []
+    end
+
+    class RoutingProfileManualAssignmentQueueConfigSummary
+      attr_accessor queue_id: ::String
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_name: ::String
+      attr_accessor channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
       SENSITIVE: []
     end
 
@@ -4786,6 +4839,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class SearchContactsAdditionalTimeRange
+      attr_accessor criteria: ::Array[Types::SearchContactsAdditionalTimeRangeCriteria]
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
+      SENSITIVE: []
+    end
+
+    class SearchContactsAdditionalTimeRangeCriteria
+      attr_accessor time_range: Types::SearchContactsTimeRange
+      attr_accessor timestamp_condition: Types::SearchContactsTimestampCondition
+      SENSITIVE: []
+    end
+
     class SearchContactsRequest
       attr_accessor instance_id: ::String
       attr_accessor time_range: Types::SearchContactsTimeRange
@@ -4804,19 +4869,28 @@ module Aws::Connect
     end
 
     class SearchContactsTimeRange
-      attr_accessor type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP")
+      attr_accessor type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "ENQUEUE_TIMESTAMP")
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
+    class SearchContactsTimestampCondition
+      attr_accessor type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "ENQUEUE_TIMESTAMP")
+      attr_accessor condition_type: ("NOT_EXISTS")
+      SENSITIVE: []
+    end
+
     class SearchCriteria
+      attr_accessor name: Types::NameCriteria
       attr_accessor agent_ids: ::Array[::String]
       attr_accessor agent_hierarchy_groups: Types::AgentHierarchyGroups
       attr_accessor channels: ::Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]
       attr_accessor contact_analysis: Types::ContactAnalysis
       attr_accessor initiation_methods: ::Array[("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND" | "WEBRTC_API" | "AGENT_REPLY" | "FLOW")]
       attr_accessor queue_ids: ::Array[::String]
+      attr_accessor routing_criteria: Types::SearchableRoutingCriteria
+      attr_accessor additional_time_range: Types::SearchContactsAdditionalTimeRange
       attr_accessor searchable_contact_attributes: Types::SearchableContactAttributes
       attr_accessor searchable_segment_attributes: Types::SearchableSegmentAttributes
       SENSITIVE: []
@@ -5028,9 +5102,15 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class SearchableAgentCriteriaStep
+      attr_accessor agent_ids: ::Array[::String]
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
+      SENSITIVE: []
+    end
+
     class SearchableContactAttributes
       attr_accessor criteria: ::Array[Types::SearchableContactAttributesCriteria]
-      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
       SENSITIVE: []
     end
 
@@ -5040,9 +5120,19 @@ module Aws::Connect
       SENSITIVE: [:key]
     end
 
+    class SearchableRoutingCriteria
+      attr_accessor steps: ::Array[Types::SearchableRoutingCriteriaStep]
+      SENSITIVE: []
+    end
+
+    class SearchableRoutingCriteriaStep
+      attr_accessor agent_criteria: Types::SearchableAgentCriteriaStep
+      SENSITIVE: []
+    end
+
     class SearchableSegmentAttributes
       attr_accessor criteria: ::Array[Types::SearchableSegmentAttributesCriteria]
-      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
       SENSITIVE: []
     end
 
@@ -5190,7 +5280,7 @@ module Aws::Connect
     end
 
     class Sort
-      attr_accessor field_name: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "INITIATION_METHOD" | "CHANNEL")
+      attr_accessor field_name: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "INITIATION_METHOD" | "CHANNEL" | "EXPIRY_TIMESTAMP")
       attr_accessor order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
@@ -5671,14 +5761,14 @@ module Aws::Connect
 
     class Transcript
       attr_accessor criteria: ::Array[Types::TranscriptCriteria]
-      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
       SENSITIVE: []
     end
 
     class TranscriptCriteria
       attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
       attr_accessor search_text: ::Array[::String]
-      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY")
+      attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
       SENSITIVE: []
     end
 

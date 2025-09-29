@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2025-09-26)
+------------------
+
+* Feature - This release enhances the information provided through Flow Traces. New information includes source/next node tracking, execution chains for complex nodes, dependency action (operation) details, and dependency traces.
+
 1.63.0 (2025-08-26)
 ------------------
 

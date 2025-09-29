@@ -698,6 +698,16 @@ module Aws::BedrockDataAutomation
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
     #             types: ["AUDIO_CONTENT_MODERATION"], # accepts AUDIO_CONTENT_MODERATION, TRANSCRIPT, TOPIC_CONTENT_MODERATION
+    #             type_configuration: {
+    #               transcript: {
+    #                 speaker_labeling: {
+    #                   state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                 },
+    #                 channel_labeling: {
+    #                   state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #         generative_field: {
@@ -931,6 +941,8 @@ module Aws::BedrockDataAutomation
     #   resp.project.standard_output_configuration.audio.extraction.category.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.audio.extraction.category.types #=> Array
     #   resp.project.standard_output_configuration.audio.extraction.category.types[0] #=> String, one of "AUDIO_CONTENT_MODERATION", "TRANSCRIPT", "TOPIC_CONTENT_MODERATION"
+    #   resp.project.standard_output_configuration.audio.extraction.category.type_configuration.transcript.speaker_labeling.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.standard_output_configuration.audio.extraction.category.type_configuration.transcript.channel_labeling.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.audio.generative_field.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.audio.generative_field.types #=> Array
     #   resp.project.standard_output_configuration.audio.generative_field.types[0] #=> String, one of "AUDIO_SUMMARY", "IAB", "TOPIC_SUMMARY"
@@ -1313,6 +1325,16 @@ module Aws::BedrockDataAutomation
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
     #             types: ["AUDIO_CONTENT_MODERATION"], # accepts AUDIO_CONTENT_MODERATION, TRANSCRIPT, TOPIC_CONTENT_MODERATION
+    #             type_configuration: {
+    #               transcript: {
+    #                 speaker_labeling: {
+    #                   state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                 },
+    #                 channel_labeling: {
+    #                   state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #         generative_field: {
@@ -1402,7 +1424,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

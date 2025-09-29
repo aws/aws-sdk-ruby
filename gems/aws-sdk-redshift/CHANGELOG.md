@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2025-09-26)
+------------------
+
+* Feature - Support tagging and tag propagation to IAM Identity Center for Redshift Idc Applications
+
 1.146.0 (2025-08-27)
 ------------------
 

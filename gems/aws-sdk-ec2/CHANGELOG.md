@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.560.0 (2025-09-26)
+------------------
+
+* Feature - This release includes documentation updates for Amazon EBS General Purpose SSD (gp3) volumes with larger size and higher IOPS and throughput.
+
 1.559.0 (2025-09-23)
 ------------------
 

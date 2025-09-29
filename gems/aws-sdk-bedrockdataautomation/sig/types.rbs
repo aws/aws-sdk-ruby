@@ -16,6 +16,12 @@ module Aws::BedrockDataAutomation
     class AudioExtractionCategory
       attr_accessor state: ("ENABLED" | "DISABLED")
       attr_accessor types: ::Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]
+      attr_accessor type_configuration: Types::AudioExtractionCategoryTypeConfiguration
+      SENSITIVE: []
+    end
+
+    class AudioExtractionCategoryTypeConfiguration
+      attr_accessor transcript: Types::TranscriptConfiguration
       SENSITIVE: []
     end
 
@@ -77,6 +83,11 @@ module Aws::BedrockDataAutomation
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       SENSITIVE: [:blueprint_name]
+    end
+
+    class ChannelLabelingConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
     end
 
     class ConflictException
@@ -377,6 +388,11 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class SpeakerLabelingConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class SplitterConfiguration
       attr_accessor state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -407,6 +423,12 @@ module Aws::BedrockDataAutomation
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TranscriptConfiguration
+      attr_accessor speaker_labeling: Types::SpeakerLabelingConfiguration
+      attr_accessor channel_labeling: Types::ChannelLabelingConfiguration
       SENSITIVE: []
     end
 

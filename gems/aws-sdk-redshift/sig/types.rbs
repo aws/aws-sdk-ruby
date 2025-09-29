@@ -674,6 +674,8 @@ module Aws::Redshift
       attr_accessor iam_role_arn: ::String
       attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
       attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sso_tag_keys: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2314,6 +2316,8 @@ module Aws::Redshift
       attr_accessor idc_onboard_status: ::String
       attr_accessor authorized_token_issuer_list: ::Array[Types::AuthorizedTokenIssuer]
       attr_accessor service_integrations: ::Array[Types::ServiceIntegrationsUnion]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sso_tag_keys: ::Array[::String]
       SENSITIVE: []
     end
 

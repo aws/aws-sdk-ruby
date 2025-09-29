@@ -45,6 +45,7 @@ module Aws::CostExplorer
     BackfillLimitExceededException = Shapes::StructureShape.new(name: 'BackfillLimitExceededException')
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
+    BillingViewHealthStatusException = Shapes::StructureShape.new(name: 'BillingViewHealthStatusException')
     CommitmentPurchaseAnalysisConfiguration = Shapes::StructureShape.new(name: 'CommitmentPurchaseAnalysisConfiguration')
     ComparisonMetricValue = Shapes::StructureShape.new(name: 'ComparisonMetricValue')
     ComparisonMetrics = Shapes::MapShape.new(name: 'ComparisonMetrics')
@@ -473,6 +474,9 @@ module Aws::CostExplorer
 
     BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BillExpirationException.struct_class = Types::BillExpirationException
+
+    BillingViewHealthStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BillingViewHealthStatusException.struct_class = Types::BillingViewHealthStatusException
 
     CommitmentPurchaseAnalysisConfiguration.add_member(:savings_plans_purchase_analysis_configuration, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseAnalysisConfiguration, location_name: "SavingsPlansPurchaseAnalysisConfiguration"))
     CommitmentPurchaseAnalysisConfiguration.struct_class = Types::CommitmentPurchaseAnalysisConfiguration
@@ -1924,6 +1928,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_cost_and_usage_comparisons, Seahorse::Model::Operation.new.tap do |o|
@@ -1936,6 +1941,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1956,6 +1962,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_cost_categories, Seahorse::Model::Operation.new.tap do |o|
@@ -1970,6 +1977,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_cost_comparison_drivers, Seahorse::Model::Operation.new.tap do |o|
@@ -1982,6 +1990,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1999,6 +2008,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_dimension_values, Seahorse::Model::Operation.new.tap do |o|
@@ -2013,6 +2023,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_reservation_coverage, Seahorse::Model::Operation.new.tap do |o|
@@ -2134,6 +2145,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_usage_forecast, Seahorse::Model::Operation.new.tap do |o|
@@ -2146,6 +2158,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:list_commitment_purchase_analyses, Seahorse::Model::Operation.new.tap do |o|

@@ -17,6 +17,7 @@ module Aws::BedrockDataAutomation
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AudioExtractionCategory = Shapes::StructureShape.new(name: 'AudioExtractionCategory')
     AudioExtractionCategoryType = Shapes::StringShape.new(name: 'AudioExtractionCategoryType')
+    AudioExtractionCategoryTypeConfiguration = Shapes::StructureShape.new(name: 'AudioExtractionCategoryTypeConfiguration')
     AudioExtractionCategoryTypes = Shapes::ListShape.new(name: 'AudioExtractionCategoryTypes')
     AudioOverrideConfiguration = Shapes::StructureShape.new(name: 'AudioOverrideConfiguration')
     AudioStandardExtraction = Shapes::StructureShape.new(name: 'AudioStandardExtraction')
@@ -36,6 +37,7 @@ module Aws::BedrockDataAutomation
     BlueprintSummary = Shapes::StructureShape.new(name: 'BlueprintSummary')
     BlueprintVersion = Shapes::StringShape.new(name: 'BlueprintVersion')
     Blueprints = Shapes::ListShape.new(name: 'Blueprints')
+    ChannelLabelingConfiguration = Shapes::StructureShape.new(name: 'ChannelLabelingConfiguration')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateBlueprintRequest = Shapes::StructureShape.new(name: 'CreateBlueprintRequest')
@@ -109,6 +111,7 @@ module Aws::BedrockDataAutomation
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SpeakerLabelingConfiguration = Shapes::StructureShape.new(name: 'SpeakerLabelingConfiguration')
     SplitterConfiguration = Shapes::StructureShape.new(name: 'SplitterConfiguration')
     StandardOutputConfiguration = Shapes::StructureShape.new(name: 'StandardOutputConfiguration')
     State = Shapes::StringShape.new(name: 'State')
@@ -121,6 +124,7 @@ module Aws::BedrockDataAutomation
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TranscriptConfiguration = Shapes::StructureShape.new(name: 'TranscriptConfiguration')
     Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -147,7 +151,11 @@ module Aws::BedrockDataAutomation
 
     AudioExtractionCategory.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     AudioExtractionCategory.add_member(:types, Shapes::ShapeRef.new(shape: AudioExtractionCategoryTypes, location_name: "types"))
+    AudioExtractionCategory.add_member(:type_configuration, Shapes::ShapeRef.new(shape: AudioExtractionCategoryTypeConfiguration, location_name: "typeConfiguration"))
     AudioExtractionCategory.struct_class = Types::AudioExtractionCategory
+
+    AudioExtractionCategoryTypeConfiguration.add_member(:transcript, Shapes::ShapeRef.new(shape: TranscriptConfiguration, location_name: "transcript"))
+    AudioExtractionCategoryTypeConfiguration.struct_class = Types::AudioExtractionCategoryTypeConfiguration
 
     AudioExtractionCategoryTypes.member = Shapes::ShapeRef.new(shape: AudioExtractionCategoryType)
 
@@ -200,6 +208,9 @@ module Aws::BedrockDataAutomation
     BlueprintSummary.struct_class = Types::BlueprintSummary
 
     Blueprints.member = Shapes::ShapeRef.new(shape: BlueprintSummary)
+
+    ChannelLabelingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
+    ChannelLabelingConfiguration.struct_class = Types::ChannelLabelingConfiguration
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -419,6 +430,9 @@ module Aws::BedrockDataAutomation
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SpeakerLabelingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
+    SpeakerLabelingConfiguration.struct_class = Types::SpeakerLabelingConfiguration
+
     SplitterConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     SplitterConfiguration.struct_class = Types::SplitterConfiguration
 
@@ -444,6 +458,10 @@ module Aws::BedrockDataAutomation
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TranscriptConfiguration.add_member(:speaker_labeling, Shapes::ShapeRef.new(shape: SpeakerLabelingConfiguration, location_name: "speakerLabeling"))
+    TranscriptConfiguration.add_member(:channel_labeling, Shapes::ShapeRef.new(shape: ChannelLabelingConfiguration, location_name: "channelLabeling"))
+    TranscriptConfiguration.struct_class = Types::TranscriptConfiguration
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "resourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))

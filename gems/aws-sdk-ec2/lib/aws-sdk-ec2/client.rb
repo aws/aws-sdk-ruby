@@ -16273,7 +16273,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -16330,7 +16330,9 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -16385,12 +16387,12 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #
     # @option params [Integer] :throughput
-    #   The throughput to provision for a volume, with a maximum of 1,000
+    #   The throughput to provision for a volume, with a maximum of 2,000
     #   MiB/s.
     #
     #   This parameter is valid only for `gp3` volumes.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -57559,7 +57561,9 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -57587,7 +57591,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -57607,12 +57611,12 @@ module Aws::EC2
     #
     # @option params [Integer] :throughput
     #   The target throughput of the volume, in MiB/s. This parameter is valid
-    #   only for `gp3` volumes. The maximum value is 1,000.
+    #   only for `gp3` volumes. The maximum value is 2,000.
     #
     #   Default: The existing value is retained if the source and target
     #   volume type is `gp3`. Otherwise, the default value is 125.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #
     # @option params [Boolean] :multi_attach_enabled
     #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
@@ -67164,7 +67168,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.559.0'
+      context[:gem_version] = '1.560.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2991,6 +2991,16 @@ module Aws::Redshift
     #   Center application.
     #   @return [Array<Types::ServiceIntegrationsUnion>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] sso_tag_keys
+    #   A list of tags keys that Redshift Identity Center applications copy
+    #   to IAM Identity Center. For each input key, the tag corresponding to
+    #   the key-value pair is propagated.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateRedshiftIdcApplicationMessage AWS API Documentation
     #
     class CreateRedshiftIdcApplicationMessage < Struct.new(
@@ -3000,7 +3010,9 @@ module Aws::Redshift
       :idc_display_name,
       :iam_role_arn,
       :authorized_token_issuer_list,
-      :service_integrations)
+      :service_integrations,
+      :tags,
+      :sso_tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9843,6 +9855,16 @@ module Aws::Redshift
     #   application.
     #   @return [Array<Types::ServiceIntegrationsUnion>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] sso_tag_keys
+    #   A list of tags keys that Redshift Identity Center applications copy
+    #   to IAM Identity Center. For each input key, the tag corresponding to
+    #   the key-value pair is propagated.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftIdcApplication AWS API Documentation
     #
     class RedshiftIdcApplication < Struct.new(
@@ -9855,7 +9877,9 @@ module Aws::Redshift
       :idc_managed_application_arn,
       :idc_onboard_status,
       :authorized_token_issuer_list,
-      :service_integrations)
+      :service_integrations,
+      :tags,
+      :sso_tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end

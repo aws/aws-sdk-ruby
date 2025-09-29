@@ -14895,7 +14895,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -14956,7 +14956,9 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -15017,12 +15019,12 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] throughput
-    #   The throughput to provision for a volume, with a maximum of 1,000
+    #   The throughput to provision for a volume, with a maximum of 2,000
     #   MiB/s.
     #
     #   This parameter is valid only for `gp3` volumes.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -35005,7 +35007,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -35035,7 +35037,9 @@ module Aws::EC2
     #
     #   The following are the supported sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -35075,7 +35079,7 @@ module Aws::EC2
     #
     #   This parameter is valid only for `gp3` volumes.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #   @return [Integer]
     #
     # @!attribute [rw] outpost_arn
@@ -38570,7 +38574,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -38593,7 +38597,7 @@ module Aws::EC2
     #
     #   This parameter is valid only for `gp3` volumes.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -38623,7 +38627,9 @@ module Aws::EC2
     #
     #   The following are the supported sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -51506,7 +51512,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -51538,7 +51544,9 @@ module Aws::EC2
     #   ID or a volume size. The following are the supported volumes sizes
     #   for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -51560,9 +51568,9 @@ module Aws::EC2
     #
     # @!attribute [rw] throughput
     #   The throughput to provision for a `gp3` volume, with a maximum of
-    #   1,000 MiB/s.
+    #   2,000 MiB/s.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_initialization_rate
@@ -51630,8 +51638,6 @@ module Aws::EC2
     # @!attribute [rw] count
     #   The number of elastic inference accelerators to attach to the
     #   instance.
-    #
-    #   Default: 1
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAccelerator AWS API Documentation
@@ -51657,8 +51663,6 @@ module Aws::EC2
     # @!attribute [rw] count
     #   The number of elastic inference accelerators to attach to the
     #   instance.
-    #
-    #   Default: 1
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAcceleratorResponse AWS API Documentation
@@ -51947,8 +51951,6 @@ module Aws::EC2
     #   The desired HTTP PUT response hop limit for instance metadata
     #   requests. The larger the number, the further instance metadata
     #   requests can travel.
-    #
-    #   Default: 1
     #
     #   Possible values: Integers from 1 to 64
     #   @return [Integer]
@@ -58597,7 +58599,9 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1 - 16,384 GiB
+    #   * `gp2`: 1 - 16,384 GiB
+    #
+    #   * `gp3`: 1 - 65,536 GiB
     #
     #   * `io1`: 4 - 16,384 GiB
     #
@@ -58627,7 +58631,7 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000 - 16,000 IOPS
+    #   * `gp3`: 3,000 - 80,000 IOPS
     #
     #   * `io1`: 100 - 64,000 IOPS
     #
@@ -58648,12 +58652,12 @@ module Aws::EC2
     #
     # @!attribute [rw] throughput
     #   The target throughput of the volume, in MiB/s. This parameter is
-    #   valid only for `gp3` volumes. The maximum value is 1,000.
+    #   valid only for `gp3` volumes. The maximum value is 2,000.
     #
     #   Default: The existing value is retained if the source and target
     #   volume type is `gp3`. Otherwise, the default value is 125.
     #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_attach_enabled

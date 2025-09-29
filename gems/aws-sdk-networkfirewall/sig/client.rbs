@@ -287,7 +287,7 @@ module Aws
                                    rules_source_list: {
                                      targets: Array[::String],
                                      target_types: Array[("TLS_SNI" | "HTTP_HOST")],
-                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST")
+                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
                                    }?,
                                    stateful_rules: Array[
                                      {
@@ -1243,7 +1243,7 @@ module Aws
                                    rules_source_list: {
                                      targets: Array[::String],
                                      target_types: Array[("TLS_SNI" | "HTTP_HOST")],
-                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST")
+                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
                                    }?,
                                    stateful_rules: Array[
                                      {

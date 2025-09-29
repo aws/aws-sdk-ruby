@@ -129,6 +129,17 @@ module Aws
                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _AssociateContactWithUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateContactWithUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_contact_with_user-instance_method
+      def associate_contact_with_user: (
+                                         instance_id: ::String,
+                                         contact_id: ::String,
+                                         user_id: ::String
+                                       ) -> _AssociateContactWithUserResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateContactWithUserResponseSuccess
+
       interface _AssociateDefaultVocabularyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDefaultVocabularyResponse]
       end
@@ -229,7 +240,7 @@ module Aws
       def associate_routing_profile_queues: (
                                               instance_id: ::String,
                                               routing_profile_id: ::String,
-                                              queue_configs: Array[
+                                              ?queue_configs: Array[
                                                 {
                                                   queue_reference: {
                                                     queue_id: ::String,
@@ -237,6 +248,14 @@ module Aws
                                                   },
                                                   priority: ::Integer,
                                                   delay: ::Integer
+                                                },
+                                              ],
+                                              ?manual_assignment_queue_configs: Array[
+                                                {
+                                                  queue_reference: {
+                                                    queue_id: ::String,
+                                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
+                                                  }
                                                 },
                                               ]
                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -834,6 +853,14 @@ module Aws
                                         },
                                         priority: ::Integer,
                                         delay: ::Integer
+                                      },
+                                    ],
+                                    ?manual_assignment_queue_configs: Array[
+                                      {
+                                        queue_reference: {
+                                          queue_id: ::String,
+                                          channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
+                                        }
                                       },
                                     ],
                                     media_concurrencies: Array[
@@ -1798,7 +1825,13 @@ module Aws
       def disassociate_routing_profile_queues: (
                                                  instance_id: ::String,
                                                  routing_profile_id: ::String,
-                                                 queue_references: Array[
+                                                 ?queue_references: Array[
+                                                   {
+                                                     queue_id: ::String,
+                                                     channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
+                                                   },
+                                                 ],
+                                                 ?manual_assignment_queue_references: Array[
                                                    {
                                                      queue_id: ::String,
                                                      channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
@@ -2594,6 +2627,22 @@ module Aws
                                                       ) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
 
+      interface _ListRoutingProfileManualAssignmentQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingProfileManualAssignmentQueuesResponse]
+        def next_token: () -> ::String
+        def routing_profile_manual_assignment_queue_config_summary_list: () -> ::Array[Types::RoutingProfileManualAssignmentQueueConfigSummary]
+        def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_routing_profile_manual_assignment_queues-instance_method
+      def list_routing_profile_manual_assignment_queues: (
+                                                           instance_id: ::String,
+                                                           routing_profile_id: ::String,
+                                                           ?next_token: ::String,
+                                                           ?max_results: ::Integer
+                                                         ) -> _ListRoutingProfileManualAssignmentQueuesResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutingProfileManualAssignmentQueuesResponseSuccess
+
       interface _ListRoutingProfileQueuesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingProfileQueuesResponse]
         def next_token: () -> ::String
@@ -3095,11 +3144,15 @@ module Aws
       def search_contacts: (
                              instance_id: ::String,
                              time_range: {
-                               type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP"),
+                               type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "ENQUEUE_TIMESTAMP"),
                                start_time: ::Time,
                                end_time: ::Time
                              },
                              ?search_criteria: {
+                               name: {
+                                 search_text: Array[::String],
+                                 match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
+                               }?,
                                agent_ids: Array[::String]?,
                                agent_hierarchy_groups: {
                                  l1_ids: Array[::String]?,
@@ -3115,14 +3168,40 @@ module Aws
                                      {
                                        participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR"),
                                        search_text: Array[::String],
-                                       match_type: ("MATCH_ALL" | "MATCH_ANY")
+                                       match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
                                      },
                                    ],
-                                   match_type: ("MATCH_ALL" | "MATCH_ANY")?
+                                   match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                  }?
                                }?,
                                initiation_methods: Array[("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND" | "WEBRTC_API" | "AGENT_REPLY" | "FLOW")]?,
                                queue_ids: Array[::String]?,
+                               routing_criteria: {
+                                 steps: Array[
+                                   {
+                                     agent_criteria: {
+                                       agent_ids: Array[::String]?,
+                                       match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               additional_time_range: {
+                                 criteria: Array[
+                                   {
+                                     time_range: {
+                                       type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "ENQUEUE_TIMESTAMP"),
+                                       start_time: ::Time,
+                                       end_time: ::Time
+                                     }?,
+                                     timestamp_condition: {
+                                       type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "ENQUEUE_TIMESTAMP"),
+                                       condition_type: ("NOT_EXISTS")
+                                     }?
+                                   },
+                                 ],
+                                 match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
+                               }?,
                                searchable_contact_attributes: {
                                  criteria: Array[
                                    {
@@ -3130,7 +3209,7 @@ module Aws
                                      values: Array[::String]
                                    },
                                  ],
-                                 match_type: ("MATCH_ALL" | "MATCH_ANY")?
+                                 match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                }?,
                                searchable_segment_attributes: {
                                  criteria: Array[
@@ -3139,13 +3218,13 @@ module Aws
                                      values: Array[::String]
                                    },
                                  ],
-                                 match_type: ("MATCH_ALL" | "MATCH_ANY")?
+                                 match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                }?
                              },
                              ?max_results: ::Integer,
                              ?next_token: ::String,
                              ?sort: {
-                               field_name: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "INITIATION_METHOD" | "CHANNEL"),
+                               field_name: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "INITIATION_METHOD" | "CHANNEL" | "EXPIRY_TIMESTAMP"),
                                order: ("ASCENDING" | "DESCENDING")
                              }
                            ) -> _SearchContactsResponseSuccess

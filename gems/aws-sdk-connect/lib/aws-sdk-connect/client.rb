@@ -683,6 +683,85 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates a queued contact with an agent.
+    #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * Custom contact routing. You can build custom contact routing
+    #   mechanisms beyond the default system routing in Amazon Connect. You
+    #   can create tailored contact distribution logic that offers queued
+    #   contacts directly to specific agents.
+    #
+    # * Manual contact assignment. You can programmatically assign queued
+    #   contacts to available users. This provides flexibility to contact
+    #   centers that require manual oversight or specialized routing
+    #   workflows outside of standard queue management.
+    #
+    #   For information about how manual contact assignment works in the
+    #   agent workspace, see the [Access the Worklist app in the Amazon
+    #   Connect agent workspace][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    # **Important things to know**
+    #
+    # * Use this API chat/SMS, email, and task contacts. It does not support
+    #   voice contacts.
+    #
+    # * Use it to associate contacts with users regardless of their current
+    #   state, including custom states. Ensure your application logic
+    #   accounts for user availability before making associations.
+    #
+    # * It honors the IAM context key `connect:PreferredUserArn` to prevent
+    #   unauthorized contact associations.
+    #
+    # * It respects the IAM context key `connect:PreferredUserArn` to
+    #   enforce authorization controls and prevent unauthorized contact
+    #   associations. Verify that your IAM policies are properly configured
+    #   to support your intended use cases.
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_contact_with_user({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     user_id: "AgentResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateContactWithUser AWS API Documentation
+    #
+    # @overload associate_contact_with_user(params = {})
+    # @param [Hash] params ({})
+    def associate_contact_with_user(params = {}, options = {})
+      req = build_request(:associate_contact_with_user, params)
+      req.send_request(options)
+    end
+
     # Associates an existing vocabulary as the default. Contact Lens for
     # Amazon Connect uses the vocabulary in post-call and real-time analysis
     # sessions for the given language.
@@ -1081,8 +1160,11 @@ module Aws::Connect
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
     #
-    # @option params [required, Array<Types::RoutingProfileQueueConfig>] :queue_configs
+    # @option params [Array<Types::RoutingProfileQueueConfig>] :queue_configs
     #   The queues to associate with this routing profile.
+    #
+    # @option params [Array<Types::RoutingProfileManualAssignmentQueueConfig>] :manual_assignment_queue_configs
+    #   The manual assignment queues to associate with this routing profile.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1091,7 +1173,7 @@ module Aws::Connect
     #   resp = client.associate_routing_profile_queues({
     #     instance_id: "InstanceId", # required
     #     routing_profile_id: "RoutingProfileId", # required
-    #     queue_configs: [ # required
+    #     queue_configs: [
     #       {
     #         queue_reference: { # required
     #           queue_id: "QueueId", # required
@@ -1099,6 +1181,14 @@ module Aws::Connect
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
+    #       },
+    #     ],
+    #     manual_assignment_queue_configs: [
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         },
     #       },
     #     ],
     #   })
@@ -3300,6 +3390,16 @@ module Aws::Connect
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     #
+    # @option params [Array<Types::RoutingProfileManualAssignmentQueueConfig>] :manual_assignment_queue_configs
+    #   The manual assignment queues associated with the routing profile. If
+    #   no queue is added, agents and supervisors can't pick or assign any
+    #   contacts from this routing profile. The limit of 10 array members
+    #   applies to the maximum number of
+    #   RoutingProfileManualAssignmentQueueConfig objects that can be passed
+    #   during a CreateRoutingProfile API request. It is different from the
+    #   quota of 50 queues per routing profile per instance that is listed in
+    #   Amazon Connect service quotas.
+    #
     # @option params [required, Array<Types::MediaConcurrency>] :media_concurrencies
     #   The channels that agents can handle in the Contact Control Panel (CCP)
     #   for this routing profile.
@@ -3334,6 +3434,14 @@ module Aws::Connect
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
+    #       },
+    #     ],
+    #     manual_assignment_queue_configs: [
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         },
     #       },
     #     ],
     #     media_concurrencies: [ # required
@@ -6548,6 +6656,7 @@ module Aws::Connect
     #   resp.routing_profile.tags #=> Hash
     #   resp.routing_profile.tags["TagKey"] #=> String
     #   resp.routing_profile.number_of_associated_queues #=> Integer
+    #   resp.routing_profile.number_of_associated_manual_assignment_queues #=> Integer
     #   resp.routing_profile.number_of_associated_users #=> Integer
     #   resp.routing_profile.agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
     #   resp.routing_profile.last_modified_time #=> Time
@@ -6555,6 +6664,8 @@ module Aws::Connect
     #   resp.routing_profile.is_default #=> Boolean
     #   resp.routing_profile.associated_queue_ids #=> Array
     #   resp.routing_profile.associated_queue_ids[0] #=> String
+    #   resp.routing_profile.associated_manual_assignment_queue_ids #=> Array
+    #   resp.routing_profile.associated_manual_assignment_queue_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -7494,8 +7605,12 @@ module Aws::Connect
     # @option params [required, String] :routing_profile_id
     #   The identifier of the routing profile.
     #
-    # @option params [required, Array<Types::RoutingProfileQueueReference>] :queue_references
+    # @option params [Array<Types::RoutingProfileQueueReference>] :queue_references
     #   The queues to disassociate from this routing profile.
+    #
+    # @option params [Array<Types::RoutingProfileQueueReference>] :manual_assignment_queue_references
+    #   The manual assignment queues to disassociate with this routing
+    #   profile.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7504,7 +7619,13 @@ module Aws::Connect
     #   resp = client.disassociate_routing_profile_queues({
     #     instance_id: "InstanceId", # required
     #     routing_profile_id: "RoutingProfileId", # required
-    #     queue_references: [ # required
+    #     queue_references: [
+    #       {
+    #         queue_id: "QueueId", # required
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #       },
+    #     ],
+    #     manual_assignment_queue_references: [
     #       {
     #         queue_id: "QueueId", # required
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
@@ -13027,6 +13148,94 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists the manual assignment queues associated with a routing profile.
+    #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * This API returns list of queues where contacts can be manually
+    #   assigned or picked. The user can additionally filter on queues, if
+    #   they have access to those queues (otherwise a invalid request
+    #   exception will be thrown).
+    #
+    #   For information about how manual contact assignment works in the
+    #   agent workspace, see the [Access the Worklist app in the Amazon
+    #   Connect agent workspace][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    # **Important things to know**
+    #
+    # * This API only returns the manual assignment queues associated with a
+    #   routing profile. Use the ListRoutingProfileQueues API to list the
+    #   auto assignment queues for the routing profile.
+    #
+    # ^
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListRoutingProfileManualAssignmentQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoutingProfileManualAssignmentQueuesResponse#next_token #next_token} => String
+    #   * {Types::ListRoutingProfileManualAssignmentQueuesResponse#routing_profile_manual_assignment_queue_config_summary_list #routing_profile_manual_assignment_queue_config_summary_list} => Array&lt;Types::RoutingProfileManualAssignmentQueueConfigSummary&gt;
+    #   * {Types::ListRoutingProfileManualAssignmentQueuesResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListRoutingProfileManualAssignmentQueuesResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_routing_profile_manual_assignment_queues({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.routing_profile_manual_assignment_queue_config_summary_list #=> Array
+    #   resp.routing_profile_manual_assignment_queue_config_summary_list[0].queue_id #=> String
+    #   resp.routing_profile_manual_assignment_queue_config_summary_list[0].queue_arn #=> String
+    #   resp.routing_profile_manual_assignment_queue_config_summary_list[0].queue_name #=> String
+    #   resp.routing_profile_manual_assignment_queue_config_summary_list[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileManualAssignmentQueues AWS API Documentation
+    #
+    # @overload list_routing_profile_manual_assignment_queues(params = {})
+    # @param [Hash] params ({})
+    def list_routing_profile_manual_assignment_queues(params = {}, options = {})
+      req = build_request(:list_routing_profile_manual_assignment_queues, params)
+      req.send_request(options)
+    end
+
     # Lists the queues associated with a routing profile.
     #
     # @option params [required, String] :instance_id
@@ -14799,11 +15008,15 @@ module Aws::Connect
     #   resp = client.search_contacts({
     #     instance_id: "InstanceId", # required
     #     time_range: { # required
-    #       type: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP
+    #       type: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, ENQUEUE_TIMESTAMP
     #       start_time: Time.now, # required
     #       end_time: Time.now, # required
     #     },
     #     search_criteria: {
+    #       name: {
+    #         search_text: ["SearchText"], # required
+    #         match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
+    #       },
     #       agent_ids: ["AgentResourceId"],
     #       agent_hierarchy_groups: {
     #         l1_ids: ["HierarchyGroupId"],
@@ -14819,14 +15032,40 @@ module Aws::Connect
     #             {
     #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT, SUPERVISOR
     #               search_text: ["SearchText"], # required
-    #               match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY
+    #               match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
     #             },
     #           ],
-    #           match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #           match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
     #         },
     #       },
     #       initiation_methods: ["INBOUND"], # accepts INBOUND, OUTBOUND, TRANSFER, QUEUE_TRANSFER, CALLBACK, API, DISCONNECT, MONITOR, EXTERNAL_OUTBOUND, WEBRTC_API, AGENT_REPLY, FLOW
     #       queue_ids: ["QueueId"],
+    #       routing_criteria: {
+    #         steps: [
+    #           {
+    #             agent_criteria: {
+    #               agent_ids: ["AgentResourceId"],
+    #               match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       additional_time_range: {
+    #         criteria: [ # required
+    #           {
+    #             time_range: {
+    #               type: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, ENQUEUE_TIMESTAMP
+    #               start_time: Time.now, # required
+    #               end_time: Time.now, # required
+    #             },
+    #             timestamp_condition: {
+    #               type: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, ENQUEUE_TIMESTAMP
+    #               condition_type: "NOT_EXISTS", # required, accepts NOT_EXISTS
+    #             },
+    #           },
+    #         ],
+    #         match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
+    #       },
     #       searchable_contact_attributes: {
     #         criteria: [ # required
     #           {
@@ -14834,7 +15073,7 @@ module Aws::Connect
     #             values: ["SearchableContactAttributeValue"], # required
     #           },
     #         ],
-    #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
     #       },
     #       searchable_segment_attributes: {
     #         criteria: [ # required
@@ -14843,13 +15082,13 @@ module Aws::Connect
     #             values: ["SearchableSegmentAttributeValue"], # required
     #           },
     #         ],
-    #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
     #       },
     #     },
     #     max_results: 1,
     #     next_token: "LargeNextToken",
     #     sort: {
-    #       field_name: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, INITIATION_METHOD, CHANNEL
+    #       field_name: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, INITIATION_METHOD, CHANNEL, EXPIRY_TIMESTAMP
     #       order: "ASCENDING", # required, accepts ASCENDING, DESCENDING
     #     },
     #   })
@@ -14872,6 +15111,40 @@ module Aws::Connect
     #   resp.contacts[0].scheduled_timestamp #=> Time
     #   resp.contacts[0].segment_attributes #=> Hash
     #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_string #=> String
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map #=> Hash
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"].value_string #=> String
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"].value_map #=> Types::SegmentAttributeValueMap
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"].value_integer #=> Integer
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"].value_list #=> Array
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"].value_list[0] #=> Types::SegmentAttributeValue
+    #   resp.contacts[0].segment_attributes["SegmentAttributeName"].value_map["SegmentAttributeName"].value_arn #=> String
+    #   resp.contacts[0].name #=> String
+    #   resp.contacts[0].routing_criteria.steps #=> Array
+    #   resp.contacts[0].routing_criteria.steps[0].expiry.duration_in_seconds #=> Integer
+    #   resp.contacts[0].routing_criteria.steps[0].expiry.expiry_timestamp #=> Time
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.name #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.value #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.proficiency_level #=> Float
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.range.min_proficiency_level #=> Float
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.range.max_proficiency_level #=> Float
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.match_criteria.agents_criteria.agent_ids #=> Array
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.match_criteria.agents_criteria.agent_ids[0] #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.attribute_condition.comparison_operator #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.and_expression #=> Array
+    #   resp.contacts[0].routing_criteria.steps[0].expression.and_expression[0] #=> Types::Expression
+    #   resp.contacts[0].routing_criteria.steps[0].expression.or_expression #=> Array
+    #   resp.contacts[0].routing_criteria.steps[0].expression.or_expression[0] #=> Types::Expression
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.name #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.value #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.proficiency_level #=> Float
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.range.min_proficiency_level #=> Float
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.range.max_proficiency_level #=> Float
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.match_criteria.agents_criteria.agent_ids #=> Array
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.match_criteria.agents_criteria.agent_ids[0] #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].expression.not_attribute_condition.comparison_operator #=> String
+    #   resp.contacts[0].routing_criteria.steps[0].status #=> String, one of "ACTIVE", "INACTIVE", "JOINED", "EXPIRED"
+    #   resp.contacts[0].routing_criteria.activation_timestamp #=> Time
+    #   resp.contacts[0].routing_criteria.index #=> Integer
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -15825,6 +16098,7 @@ module Aws::Connect
     #   resp.routing_profiles[0].tags #=> Hash
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
     #   resp.routing_profiles[0].number_of_associated_queues #=> Integer
+    #   resp.routing_profiles[0].number_of_associated_manual_assignment_queues #=> Integer
     #   resp.routing_profiles[0].number_of_associated_users #=> Integer
     #   resp.routing_profiles[0].agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
     #   resp.routing_profiles[0].last_modified_time #=> Time
@@ -15832,6 +16106,8 @@ module Aws::Connect
     #   resp.routing_profiles[0].is_default #=> Boolean
     #   resp.routing_profiles[0].associated_queue_ids #=> Array
     #   resp.routing_profiles[0].associated_queue_ids[0] #=> String
+    #   resp.routing_profiles[0].associated_manual_assignment_queue_ids #=> Array
+    #   resp.routing_profiles[0].associated_manual_assignment_queue_ids[0] #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -21777,7 +22053,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.217.0'
+      context[:gem_version] = '1.218.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

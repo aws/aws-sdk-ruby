@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2025-09-26)
+------------------
+
+* Feature - Added support for IPv6 compatible endpoints for DynamoDB Streams.
+
 1.82.0 (2025-08-26)
 ------------------
 
