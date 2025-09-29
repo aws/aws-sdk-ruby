@@ -51,6 +51,13 @@ module Aws
         end
       end
 
+      it 'raises if aws-sdk-ssooidc is not required' do
+        hide_const('Aws::SSOOIDC')
+        expect do
+          SSOOIDCTokenProvider.new
+        end.to raise_error(/aws-sdk-ssooidc gem must be required/)
+      end
+
       it 'constructs an client with passed arguments when not given' do
         params = { region: sso_region, credentials_provider: nil }
         expect(SSOOIDC::Client).to receive(:new).with(params).and_return(client)

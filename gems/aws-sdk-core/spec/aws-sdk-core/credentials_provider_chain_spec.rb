@@ -110,6 +110,72 @@ module Aws
           end
         end
 
+        describe '#env_assume_role_web_identity_credentials' do
+          let(:client) { STS::Client.new(stub_responses: true) }
+          let(:token_file) { Tempfile.new('token.jwt') }
+          let(:token_file_path) { token_file.path }
+
+          context 'resolves' do
+            before do
+              expect(STS::Client).to receive(:new).and_return(client)
+              client.stub_responses(
+                :assume_role_with_web_identity,
+                {
+                  credentials: {
+                    access_key_id: 'akid_web_id_env',
+                    secret_access_key: 'secret_web_ib_env',
+                    session_token: 'token_web_id_env'
+                  }
+                }
+              )
+            end
+
+            it 'resolves assume role web identity credentials from environment' do
+              ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
+              ENV['AWS_ROLE_ARN'] = 'role_arn'
+              ENV['AWS_ROLE_SESSION_NAME'] = 'role_session_name'
+              client = client_class.new
+              creds = client.config.credentials_provider.identity
+              expect(creds.access_key_id).to eq('akid_web_id_env')
+              expect(creds.secret_access_key).to eq('secret_web_ib_env')
+              expect(creds.session_token).to eq('token_web_id_env')
+            end
+
+            it 'resolves assume role web identity credentials when AWS_ROLE_SESSION_NAME is not set' do
+              ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
+              ENV['AWS_ROLE_ARN'] = 'role_arn'
+              client = client_class.new
+              creds = client.config.credentials_provider.identity
+              expect(creds.access_key_id).to eq('akid_web_id_env')
+              expect(creds.secret_access_key).to eq('secret_web_ib_env')
+              expect(creds.session_token).to eq('token_web_id_env')
+            end
+
+            it 'tracks the correct feature id' do
+              ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
+              ENV['AWS_ROLE_ARN'] = 'role_arn'
+              ENV['AWS_ROLE_SESSION_NAME'] = 'role_session_name'
+              client = client_class.new(
+                access_key_id: nil,
+                secret_access_key: nil,
+                stub_responses: true
+              )
+              provider = client.config.credentials_provider
+              expect(provider.features).to eq(
+                %w[CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN]
+              )
+            end
+          end
+
+          context 'fails to resolve' do
+            it 'fails to resolve assume role web identity credentials when required ENV variables are not set' do
+              expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
+              client = client_class.new
+              expect(client.config.credentials_provider).to be_nil
+            end
+          end
+        end
+
         describe '#profile_static_credentials' do
           it 'resolves static credentials from profile' do
             shared_config = <<~CONFIG
@@ -182,6 +248,101 @@ module Aws
             )
             provider = client.config.credentials_provider
             expect(provider.features).to eq(%w[CREDENTIALS_PROFILE])
+          end
+        end
+
+        describe '#profile_assume_role_web_identity_credentials' do
+          let(:client) { STS::Client.new(stub_responses: true) }
+          let(:token_file) { Tempfile.new('token.jwt') }
+          let(:token_file_path) { token_file.path }
+
+          context 'resolves' do
+            before do
+              expect(STS::Client).to receive(:new).and_return(client)
+              client.stub_responses(
+                :assume_role_with_web_identity,
+                {
+                  credentials: {
+                    access_key_id: 'akid_web_id_profile',
+                    secret_access_key: 'secret_web_id_profile',
+                    session_token: 'token_web_id_profile'
+                  }
+                }
+              )
+            end
+
+            it 'resolves assume role web identity credentials from profile' do
+              shared_config = <<~CONFIG
+                [profile default]
+                web_identity_token_file = #{token_file_path}
+                role_arn = 'role_arn'
+                role_session_name = 'role_session_name'
+                region = 'us-west-2'
+              CONFIG
+              mock_shared_config(shared_config)
+              client = client_class.new
+              creds = client.config.credentials_provider.identity
+              expect(creds.access_key_id).to eq('akid_web_id_profile')
+              expect(creds.secret_access_key).to eq('secret_web_id_profile')
+              expect(creds.session_token).to eq('token_web_id_profile')
+            end
+
+            it 'resolves assume role web identity credentials when role_session_name is not set' do
+              shared_config = <<~CONFIG
+                [profile default]
+                web_identity_token_file = #{token_file_path}
+                role_arn = 'role_arn'
+                region = 'us-west-2'
+              CONFIG
+              mock_shared_config(shared_config)
+              client = client_class.new
+              creds = client.config.credentials_provider.identity
+              expect(creds.access_key_id).to eq('akid_web_id_profile')
+              expect(creds.secret_access_key).to eq('secret_web_id_profile')
+              expect(creds.session_token).to eq('token_web_id_profile')
+            end
+
+            it 'tracks the correct feature id' do
+              shared_config = <<~CONFIG
+                [profile default]
+                web_identity_token_file = #{token_file_path}
+                role_arn = 'role_arn'
+                role_session_name = 'role_session_name'
+                region = 'us-west-2'
+              CONFIG
+              mock_shared_config(shared_config)
+              client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+              provider = client.config.credentials_provider
+              expect(provider.features).to eq(
+                %w[CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN]
+              )
+            end
+          end
+
+          context 'fails to resolve' do
+            it 'fails to resolve assume role web identity credentials when profile does not exist' do
+              expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
+              shared_config = <<~CONFIG
+                [profile default]
+                web_identity_token_file = #{token_file_path}
+                role_arn = 'role_arn'
+                role_session_name = 'role_session_name'
+              CONFIG
+              mock_shared_config(shared_config)
+              client = client_class.new(profile: 'nonexistent')
+              expect(client.config.credentials_provider).to be_nil
+            end
+
+            it 'fails to resolve assume role web identity credentials when required config variables are not set' do
+              expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
+              shared_config = <<~CONFIG
+                [profile default]
+                role_session_name = 'role_session_name'
+              CONFIG
+              mock_shared_config(shared_config)
+              client = client_class.new
+              expect(client.config.credentials_provider).to be_nil
+            end
           end
         end
 
@@ -569,6 +730,15 @@ module Aws
                 stub_const('ENV', values)
               when 'configFiles'
                 mock_shared_config(values['aws']) if values['aws']
+              when 'stsResponse'
+                assume_role_web_identity_provider = double(
+                  'AssumeRoleWebIdentityCredentialsProvider',
+                  identity: credentials(values),
+                  set?: true
+                )
+                allow(AssumeRoleWebIdentityCredentialsProvider)
+                  .to receive(:new).and_return(assume_role_web_identity_provider)
+                allow(assume_role_web_identity_provider).to receive(:features=)
               when 'ssoResponse'
                 sso_provider = double(
                   'SSOCredentialsProvider',
@@ -605,9 +775,6 @@ module Aws
                 )
                 allow(InstanceProfileCredentialsProvider)
                   .to receive(:new).and_return(instance_provider)
-              when 'stsResponse'
-                # Not implemented yet
-                next
               else
                 raise 'Unknown input type'
               end
@@ -620,10 +787,8 @@ module Aws
               '10' => 'Legacy SSO is not supported',
               '12' => 'Boto 2 config file is not supported',
               '13' => 'Windows AWS SDK store is not supported',
-              '4' => 'ENV WebID: Not implemented',
               '6' => 'Source Profile: Not implemented',
-              '7' => 'Credential Source: Not implemented',
-              '8' => 'WebID: Not implemented'
+              '7' => 'Credential Source: Not implemented'
             }
 
             it "passes: #{test_case['documentation']}" do

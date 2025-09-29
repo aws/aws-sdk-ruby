@@ -18,7 +18,9 @@ module Aws
       # @option options [SSOOIDC::Client] :client Optional `SSOOIDC::Client`. If not provided, a client will be
       #   constructed.
       def initialize(options = {})
-        raise 'The aws-sdk-ssooidc gem must be required in order to use SSOOIDCToken.' unless defined?(Aws::SSOOIDC)
+        unless defined?(Aws::SSOOIDC)
+          raise 'The aws-sdk-ssooidc gem must be required in order to use SSOOIDCTokenProvider.'
+        end
 
         missing_keys = %i[sso_region sso_session].select { |k| options[k].nil? }
         raise ArgumentError, "Missing required keys: #{missing_keys}" unless missing_keys.empty?

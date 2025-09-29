@@ -4,8 +4,6 @@ module Aws
   module Core
     # @api private
     class CredentialsProviderChain
-      include IdentityProvider
-
       def initialize(config)
         @config = config
         @profile_config = Aws::Core.shared_config.profiles[config.profile] || {}
@@ -63,7 +61,19 @@ module Aws
       end
 
       def env_assume_role_web_identity_credentials
-        nil
+        token_file = ENV.fetch('AWS_WEB_IDENTITY_TOKEN_FILE', nil)
+        role_arn = ENV.fetch('AWS_ROLE_ARN', nil)
+        return unless defined?(Aws::STS) && token_file && role_arn
+
+        # TODO: update after adding region resolution
+        provider = AssumeRoleWebIdentityCredentialsProvider.new(
+          web_identity_token_file: token_file,
+          role_arn: role_arn,
+          role_session_name: ENV.fetch('AWS_ROLE_SESSION_NAME', nil),
+          config: @config
+        )
+        provider.features = %w[CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN]
+        provider
       end
 
       def profile_static_credentials
@@ -84,7 +94,18 @@ module Aws
       end
 
       def profile_assume_role_web_identity_credentials
-        nil
+        return unless defined?(Aws::STS) && @profile_config['web_identity_token_file'] && @profile_config['role_arn']
+
+        # TODO: update after adding region resolution
+        provider = AssumeRoleWebIdentityCredentialsProvider.new(
+          profile: @profile,
+          web_identity_token_file: @profile_config['web_identity_token_file'],
+          role_arn: @profile_config['role_arn'],
+          role_session_name: @profile_config['role_session_name'],
+          config: @config
+        )
+        provider.features = %w[CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN]
+        provider
       end
 
       def profile_sso_credentials
@@ -93,14 +114,14 @@ module Aws
         sso_session = Aws::Core::SharedConfig.sso_session(@config.profile, @profile_config['sso_session'])
         validate_sso_conflicts(sso_session)
 
-        creds = SSOCredentialsProvider.new(
+        provider = SSOCredentialsProvider.new(
           sso_session: @profile_config['sso_session'],
           sso_account_id: @profile_config['sso_account_id'],
           sso_role_name: @profile_config['sso_role_name'],
           sso_region: sso_session['sso_region']
         )
-        creds.features = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
-        creds
+        provider.features = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+        provider
       end
 
       def valid_sso_inputs?
@@ -134,9 +155,9 @@ module Aws
       def profile_process_credentials
         return unless @profile_config['credential_process']
 
-        creds = ProcessCredentialsProvider.new([@profile_config['credential_process']])
-        creds.features = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
-        creds
+        provider = ProcessCredentialsProvider.new([@profile_config['credential_process']])
+        provider.features = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
+        provider
       end
 
       def container_credentials

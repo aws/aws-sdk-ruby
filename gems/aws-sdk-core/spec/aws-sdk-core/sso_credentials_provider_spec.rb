@@ -41,6 +41,13 @@ module Aws
         client.stub_responses(:get_role_credentials, sso_resp)
       end
 
+      it 'raises if aws-sdk-sso is not required' do
+        hide_const('Aws::SSO')
+        expect do
+          SSOCredentialsProvider.new(**provider_options)
+        end.to raise_error(/aws-sdk-sso gem must be required/)
+      end
+
       it 'constructs a client if not provided' do
         expect(SSO::Client).to receive(:new).with(region: sso_region, credentials_provider: nil).and_return(client)
         provider = SSOCredentialsProvider.new(**provider_options)

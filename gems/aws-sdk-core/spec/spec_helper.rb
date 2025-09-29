@@ -7,6 +7,7 @@ require 'webmock/rspec'
 require 'aws-sdk-core'
 require 'aws-sdk-sso'
 require 'aws-sdk-ssooidc'
+require 'aws-sdk-sts'
 
 require_relative 'client_helper'
 

@@ -31,7 +31,7 @@ module Aws
       # @param [String] :sso_region The AWS region where the SSO directory for the given sso_session is hosted.
       # @param [SSO::Client] :client (Client.new)
       def initialize(sso_session:, sso_account_id:, sso_role_name:, sso_region:, client: nil)
-        raise 'The aws-sdk-sso gem must be required in order to use SSOCredentials.' unless defined?(Aws::SSO)
+        raise 'The aws-sdk-sso gem must be required in order to use SSOCredentialsProvider.' unless defined?(Aws::SSO)
 
         @sso_session = sso_session
         @sso_account_id = sso_account_id
@@ -40,7 +40,7 @@ module Aws
         @client = client || SSO::Client.new(region: sso_region, credentials_provider: nil)
         @token_provider = SSOOIDCTokenProvider.new(sso_session: sso_session, sso_region: sso_region)
         @features = ['CREDENTIALS_SSO']
-        super()
+        super
       end
 
       # @return [String]
