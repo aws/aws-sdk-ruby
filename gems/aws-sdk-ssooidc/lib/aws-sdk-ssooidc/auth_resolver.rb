@@ -6,7 +6,7 @@ module Aws::SSOOIDC
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [Hash]
+    # @return [Array<Hash>]
     def resolve(parameters)
       options = []
       case parameters.operation_name
