@@ -76,8 +76,14 @@ module Seahorse
         #
         # @return (see #session_for)
         def request(endpoint, request, &block)
-          session_for(endpoint) do |http|
-            yield(http.request(request))
+          response = nil
+          should_close = { value: false }
+
+          session_for(endpoint, close_connection: should_close) do |http|
+            response = http.request(request)
+            # Check if server wants to close the connection
+            should_close[:value] = response['connection']&.downcase == 'close'
+            yield(response)
           end
         end
 
@@ -87,7 +93,7 @@ module Seahorse
         # @yieldparam [Net::HTTPSession] session
         #
         # @return [nil]
-        def session_for(endpoint, &block)
+        def session_for(endpoint, close_connection: { value: false }, &block)
           endpoint = remove_path_and_query(endpoint)
           session = nil
 
@@ -109,10 +115,15 @@ module Seahorse
             session.finish if session
             raise
           else
-            # No error raised? Good, check the session into the pool.
-            @pool_mutex.synchronize do
-              @pool[endpoint] = [] unless @pool.key?(endpoint)
-              @pool[endpoint] << session
+            # Only pool if server didn't request close
+            if close_connection[:value]
+              session.finish
+            else
+              # No error raised? Good, check the session into the pool.
+              @pool_mutex.synchronize do
+                @pool[endpoint] = [] unless @pool.key?(endpoint)
+                @pool[endpoint] << session
+              end
             end
           end
           nil
