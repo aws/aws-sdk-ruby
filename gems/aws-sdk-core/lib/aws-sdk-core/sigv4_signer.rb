@@ -12,11 +12,10 @@ module Aws
 
       def sign_request(context) # rubocop:disable Metrics/AbcSize
         reset(context)
-        require 'byebug'
-        byebug
         signer = Aws::SigV4::Signer.new(
           service: context.auth.signer_properties['signingName'] || @name,
-          region: context.auth.signer_properties['signingRegion'] || context.config.region,
+          # TODO: fix default region
+          region: context.auth.signer_properties['signingRegion'] || 'us-west-2', # context.config.region,
           credentials_provider: context.config.credentials_provider
         )
         signature = signer.sign_request(
