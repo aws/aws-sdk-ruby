@@ -56,7 +56,7 @@ module Aws::STS
         use_dual_stack: config.use_dual_stack_endpoint,
         use_fips: config.use_fips_endpoint,
         endpoint: config.endpoint,
-        use_global_endpoint: false,
+        use_global_endpoint: config.use_global_endpoint,
       }.compact)
     end
   end

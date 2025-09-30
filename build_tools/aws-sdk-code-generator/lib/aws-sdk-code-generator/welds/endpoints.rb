@@ -60,13 +60,19 @@ module AwsSdkCodeGenerator
           # TODO: find a way to staticly generate option to true and do not expose configuration
           'AWS::STS::UseGlobalEndpoint' => {
             render_config: proc do |_plan|
-              ''
+              <<~ADD_OPTION
+                option(
+                  :use_global_endpoint,
+                  doc_type: 'Boolean',
+                  docstring: 'TODO'
+                )
+              ADD_OPTION
             end,
             render_build: proc do |_plan|
-              'false'
+              'config.use_global_endpoint'
             end,
-            render_test_set: proc do |_plan|
-              { 'sts_use_global_endpoint' => false }
+            render_test_set: proc do |_plan, value|
+              { 'use_global_endpoint' => value }
             end
           }
         }
