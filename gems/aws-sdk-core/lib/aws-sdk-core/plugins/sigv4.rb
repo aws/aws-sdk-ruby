@@ -45,6 +45,12 @@ module Aws
             scheme_id: 'aws.auth#sigv4',
             signer: client.config.sigv4_signer
           )
+          # TODO: temporary
+          client.config.auth_schemes['aws.auth#sigv4a'] = Smithy::Client::AuthScheme.new(
+            identity_provider: client.config.credentials_provider,
+            scheme_id: 'aws.auth#sigva4',
+            signer: client.config.sigv4_signer
+          )
         end
 
         # @api private
