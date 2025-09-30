@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'aws-sigv4'
+require_relative '../sigv4_signer'
 
 module Aws
   module Core
@@ -34,43 +34,27 @@ module Aws
           CredentialsProviderChain.new(config).resolve
         end
 
+        option(:sigv4_signer) do |config|
+          trait = config.service.traits['aws.auth#sigv4']
+          Aws::Core::SigV4Signer.new(name: trait['name'])
+        end
+
         def after_initialize(client)
-          client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials_provider
+          client.config.auth_schemes['aws.auth#sigv4'] = Smithy::Client::AuthScheme.new(
+            identity_provider: client.config.credentials_provider,
+            scheme_id: 'aws.auth#sigv4',
+            signer: client.config.sigv4_signer
+          )
         end
 
         # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
-            if context.auth[:scheme_id] == 'aws.auth#sigv4'
-              sign(context)
+            if context.auth.scheme_id == 'aws.auth#sigv4'
               track_features(context.config.credentials_provider) { @handler.call(context) }
             else
               @handler.call(context)
             end
-          end
-
-          def sign(context) # rubocop:disable Metrics/AbcSize
-            reset(context)
-            signer = Aws::SigV4::Signer.new(
-              service: context.config.service.traits['aws.auth#sigv4']['name'],
-              # TODO: hardcoded for now to pass protocol tests, update after implementing region resolution
-              region: 'us-west-2',
-              credentials_provider: context.config.credentials_provider
-            )
-            signature = signer.sign_request(
-              http_method: context.http_request.http_method,
-              url: context.http_request.endpoint,
-              headers: context.http_request.headers,
-              body: context.http_request.body
-            )
-            context.http_request.headers.update(signature.headers)
-          end
-
-          def reset(context)
-            context.http_request.headers.delete('Authorization')
-            context.http_request.headers.delete('X-Amz-Security-Token')
-            context.http_request.headers.delete('X-Amz-Date')
-            context.http_request.headers.delete('x-Amz-Region-Set')
           end
 
           def track_features(provider, &block)
@@ -80,7 +64,7 @@ module Aws
           end
         end
 
-        handler(Handler, step: :sign)
+        handler(Handler, step: :sign, priority: 75)
       end
     end
   end

@@ -77,6 +77,13 @@ module AwsSdkCodeGenerator
           'aws.partition' => 'Aws::Core::EndpointRules.aws_partition'
         }
       end
+
+      def endpoint_auth_scheme_bindings
+        {
+          'sigv4a' => 'aws.auth#sigv4a',
+          'sigv4' => 'aws.auth#sigv4'
+        }
+      end
     end
   end
 end
