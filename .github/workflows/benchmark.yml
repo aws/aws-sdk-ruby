@@ -51,7 +51,7 @@ jobs:
         run: bundle exec rake benchmark:run
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         continue-on-error: true
         with:
           role-to-assume: arn:aws:iam::373952703873:role/BenchmarkReporter
