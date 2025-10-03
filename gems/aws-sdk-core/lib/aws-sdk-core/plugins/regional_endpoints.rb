@@ -54,20 +54,20 @@ module Aws
           def resolve_region(config)
             ENV['AWS_REGION'] ||
               ENV['AWS_DEFAULT_REGION'] ||
-              Aws::Core.shared_config.profiles[config.profile]['region']
+              Aws::Core.shared_config.profiles.fetch(config.profile, {})['region']
           end
 
           def resolve_use_dualstack_endpoint(config) # rubocop:disable Naming/PredicateMethod
             value =
               ENV['AWS_USE_DUALSTACK_ENDPOINT'] ||
-              Aws::Core.shared_config.profiles[config.profile]['use_dualstack_endpoint']
+              Aws::Core.shared_config.profiles.fetch(config.profile, {})['use_dualstack_endpoint']
             value == 'true'
           end
 
           def resolve_use_fips_endpoint(config) # rubocop:disable Naming/PredicateMethod
             value =
               ENV['AWS_USE_FIPS_ENDPOINT'] ||
-              Aws::Core.shared_config.profiles[config.profile]['use_fips_endpoint']
+              Aws::Core.shared_config.profiles.fetch(config.profile, {})['use_fips_endpoint']
             value == 'true'
           end
         end
