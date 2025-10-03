@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-# TODO: consider whether this is awful or not
-require_relative '../../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/sigv4'
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/sigv4'
 
 module AwsSdkCodeGenerator
   module Welds

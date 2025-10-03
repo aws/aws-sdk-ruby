@@ -6,16 +6,16 @@ module Aws::STS
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [Array<Hash>]
+    # @return [Array<Smithy::Client::AuthOption>]
     def resolve(parameters)
       options = []
       case parameters.operation_name
       when :assume_role_with_saml
-        options << { scheme_id: 'smithy.api#noAuth' }
+        options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#noAuth')
       when :assume_role_with_web_identity
-        options << { scheme_id: 'smithy.api#noAuth' }
+        options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#noAuth')
       else
-      options << { scheme_id: 'aws.auth#sigv4' }
+      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       end
       options
     end

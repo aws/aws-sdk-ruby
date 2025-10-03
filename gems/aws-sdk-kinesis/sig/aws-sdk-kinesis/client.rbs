@@ -1,0 +1,431 @@
+module Aws::Kinesis
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Kinesis::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsToStreamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def add_tags_to_stream: (
+      ?stream_name: String,
+      ?tags: Hash[String, String],
+      ?stream_arn: String
+    ) -> _AddTagsToStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToStreamResponse
+
+    interface _CreateStreamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_stream: (
+      ?stream_name: String,
+      ?shard_count: Integer,
+      ?stream_mode_details: {
+        stream_mode: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamResponse
+
+    interface _DecreaseStreamRetentionPeriodResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def decrease_stream_retention_period: (
+      ?stream_name: String,
+      ?retention_period_hours: Integer,
+      ?stream_arn: String
+    ) -> _DecreaseStreamRetentionPeriodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DecreaseStreamRetentionPeriodResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteStreamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_stream: (
+      ?stream_name: String,
+      ?enforce_consumer_deletion: bool,
+      ?stream_arn: String
+    ) -> _DeleteStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamResponse
+
+    interface _DeregisterStreamConsumerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_stream_consumer: (
+      ?stream_arn: String,
+      ?consumer_name: String,
+      ?consumer_arn: String
+    ) -> _DeregisterStreamConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterStreamConsumerResponse
+
+    interface _DescribeLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeLimitsOutput]
+      def shard_limit: () -> Integer?
+      def open_shard_count: () -> Integer?
+      def on_demand_stream_count: () -> Integer?
+      def on_demand_stream_count_limit: () -> Integer?
+    end
+    def describe_limits: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLimitsResponse
+
+    interface _DescribeStreamResponse
+      include Smithy::Client::_Response[Types::DescribeStreamOutput]
+      def stream_description: () -> Types::StreamDescription?
+    end
+    def describe_stream: (
+      ?stream_name: String,
+      ?limit: Integer,
+      ?exclusive_start_shard_id: String,
+      ?stream_arn: String
+    ) -> _DescribeStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamResponse
+
+    interface _DescribeStreamConsumerResponse
+      include Smithy::Client::_Response[Types::DescribeStreamConsumerOutput]
+      def consumer_description: () -> Types::ConsumerDescription?
+    end
+    def describe_stream_consumer: (
+      ?stream_arn: String,
+      ?consumer_name: String,
+      ?consumer_arn: String
+    ) -> _DescribeStreamConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamConsumerResponse
+
+    interface _DescribeStreamSummaryResponse
+      include Smithy::Client::_Response[Types::DescribeStreamSummaryOutput]
+      def stream_description_summary: () -> Types::StreamDescriptionSummary?
+    end
+    def describe_stream_summary: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DescribeStreamSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamSummaryResponse
+
+    interface _DisableEnhancedMonitoringResponse
+      include Smithy::Client::_Response[Types::DisableEnhancedMonitoringOutput]
+      def stream_name: () -> String?
+      def current_shard_level_metrics: () -> Array[String]?
+      def desired_shard_level_metrics: () -> Array[String]?
+      def stream_arn: () -> String?
+    end
+    def disable_enhanced_monitoring: (
+      ?stream_name: String,
+      ?shard_level_metrics: Array[String],
+      ?stream_arn: String
+    ) -> _DisableEnhancedMonitoringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableEnhancedMonitoringResponse
+
+    interface _EnableEnhancedMonitoringResponse
+      include Smithy::Client::_Response[Types::EnableEnhancedMonitoringOutput]
+      def stream_name: () -> String?
+      def current_shard_level_metrics: () -> Array[String]?
+      def desired_shard_level_metrics: () -> Array[String]?
+      def stream_arn: () -> String?
+    end
+    def enable_enhanced_monitoring: (
+      ?stream_name: String,
+      ?shard_level_metrics: Array[String],
+      ?stream_arn: String
+    ) -> _EnableEnhancedMonitoringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableEnhancedMonitoringResponse
+
+    interface _GetRecordsResponse
+      include Smithy::Client::_Response[Types::GetRecordsOutput]
+      def records: () -> Array[Types::Record]?
+      def next_shard_iterator: () -> String?
+      def millis_behind_latest: () -> Integer?
+      def child_shards: () -> Array[Types::ChildShard]?
+    end
+    def get_records: (
+      ?shard_iterator: String,
+      ?limit: Integer,
+      ?stream_arn: String
+    ) -> _GetRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecordsResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetShardIteratorResponse
+      include Smithy::Client::_Response[Types::GetShardIteratorOutput]
+      def shard_iterator: () -> String?
+    end
+    def get_shard_iterator: (
+      ?stream_name: String,
+      ?shard_id: String,
+      ?shard_iterator_type: String,
+      ?starting_sequence_number: String,
+      ?timestamp: Time,
+      ?stream_arn: String
+    ) -> _GetShardIteratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetShardIteratorResponse
+
+    interface _IncreaseStreamRetentionPeriodResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def increase_stream_retention_period: (
+      ?stream_name: String,
+      ?retention_period_hours: Integer,
+      ?stream_arn: String
+    ) -> _IncreaseStreamRetentionPeriodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IncreaseStreamRetentionPeriodResponse
+
+    interface _ListShardsResponse
+      include Smithy::Client::_Response[Types::ListShardsOutput]
+      def shards: () -> Array[Types::Shard]?
+      def next_token: () -> String?
+    end
+    def list_shards: (
+      ?stream_name: String,
+      ?next_token: String,
+      ?exclusive_start_shard_id: String,
+      ?max_results: Integer,
+      ?stream_creation_timestamp: Time,
+      ?shard_filter: {
+        type: String,
+        shard_id: String,
+        timestamp: Time
+      },
+      ?stream_arn: String
+    ) -> _ListShardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListShardsResponse
+
+    interface _ListStreamConsumersResponse
+      include Smithy::Client::_Response[Types::ListStreamConsumersOutput]
+      def consumers: () -> Array[Types::Consumer]?
+      def next_token: () -> String?
+    end
+    def list_stream_consumers: (
+      ?stream_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?stream_creation_timestamp: Time
+    ) -> _ListStreamConsumersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamConsumersResponse
+
+    interface _ListStreamsResponse
+      include Smithy::Client::_Response[Types::ListStreamsOutput]
+      def stream_names: () -> Array[String]?
+      def has_more_streams: () -> bool?
+      def next_token: () -> String?
+      def stream_summaries: () -> Array[Types::StreamSummary]?
+    end
+    def list_streams: (
+      ?limit: Integer,
+      ?exclusive_start_stream_name: String,
+      ?next_token: String
+    ) -> _ListStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTagsForStreamResponse
+      include Smithy::Client::_Response[Types::ListTagsForStreamOutput]
+      def tags: () -> Array[Types::Tag]?
+      def has_more_tags: () -> bool?
+    end
+    def list_tags_for_stream: (
+      ?stream_name: String,
+      ?exclusive_start_tag_key: String,
+      ?limit: Integer,
+      ?stream_arn: String
+    ) -> _ListTagsForStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForStreamResponse
+
+    interface _MergeShardsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def merge_shards: (
+      ?stream_name: String,
+      ?shard_to_merge: String,
+      ?adjacent_shard_to_merge: String,
+      ?stream_arn: String
+    ) -> _MergeShardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergeShardsResponse
+
+    interface _PutRecordResponse
+      include Smithy::Client::_Response[Types::PutRecordOutput]
+      def shard_id: () -> String?
+      def sequence_number: () -> String?
+      def encryption_type: () -> String?
+    end
+    def put_record: (
+      ?stream_name: String,
+      ?data: String,
+      ?partition_key: String,
+      ?explicit_hash_key: String,
+      ?sequence_number_for_ordering: String,
+      ?stream_arn: String
+    ) -> _PutRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordResponse
+
+    interface _PutRecordsResponse
+      include Smithy::Client::_Response[Types::PutRecordsOutput]
+      def failed_record_count: () -> Integer?
+      def records: () -> Array[Types::PutRecordsResultEntry]?
+      def encryption_type: () -> String?
+    end
+    def put_records: (
+      ?records: Array[
+        {
+          data: String,
+          explicit_hash_key: String,
+          partition_key: String
+        }
+      ],
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _PutRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RegisterStreamConsumerResponse
+      include Smithy::Client::_Response[Types::RegisterStreamConsumerOutput]
+      def consumer: () -> Types::Consumer?
+    end
+    def register_stream_consumer: (
+      ?stream_arn: String,
+      ?consumer_name: String,
+      ?tags: Hash[String, String]
+    ) -> _RegisterStreamConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterStreamConsumerResponse
+
+    interface _RemoveTagsFromStreamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def remove_tags_from_stream: (
+      ?stream_name: String,
+      ?tag_keys: Array[String],
+      ?stream_arn: String
+    ) -> _RemoveTagsFromStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromStreamResponse
+
+    interface _SplitShardResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def split_shard: (
+      ?stream_name: String,
+      ?shard_to_split: String,
+      ?new_starting_hash_key: String,
+      ?stream_arn: String
+    ) -> _SplitShardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SplitShardResponse
+
+    interface _StartStreamEncryptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_stream_encryption: (
+      ?stream_name: String,
+      ?encryption_type: String,
+      ?key_id: String,
+      ?stream_arn: String
+    ) -> _StartStreamEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamEncryptionResponse
+
+    interface _StopStreamEncryptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_stream_encryption: (
+      ?stream_name: String,
+      ?encryption_type: String,
+      ?key_id: String,
+      ?stream_arn: String
+    ) -> _StopStreamEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopStreamEncryptionResponse
+
+    interface _SubscribeToShardResponse
+      include Smithy::Client::_Response[Types::SubscribeToShardOutput]
+      def event_stream: () -> Types::SubscribeToShardEventStream?
+    end
+    def subscribe_to_shard: (
+      ?consumer_arn: String,
+      ?shard_id: String,
+      ?starting_position: {
+        type: String,
+        sequence_number: String,
+        timestamp: Time
+      }
+    ) -> _SubscribeToShardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubscribeToShardResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?tags: Hash[String, String],
+      ?resource_arn: String
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?tag_keys: Array[String],
+      ?resource_arn: String
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateShardCountResponse
+      include Smithy::Client::_Response[Types::UpdateShardCountOutput]
+      def stream_name: () -> String?
+      def current_shard_count: () -> Integer?
+      def target_shard_count: () -> Integer?
+      def stream_arn: () -> String?
+    end
+    def update_shard_count: (
+      ?stream_name: String,
+      ?target_shard_count: Integer,
+      ?scaling_type: String,
+      ?stream_arn: String
+    ) -> _UpdateShardCountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateShardCountResponse
+
+    interface _UpdateStreamModeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_stream_mode: (
+      ?stream_arn: String,
+      ?stream_mode_details: {
+        stream_mode: String
+      }
+    ) -> _UpdateStreamModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamModeResponse
+  end
+end

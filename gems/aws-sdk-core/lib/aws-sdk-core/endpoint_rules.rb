@@ -7,7 +7,7 @@ module Aws
     # @api private
     module EndpointRules
       # aws.partition(region: string) Option<Partition>
-      def self.aws_partition(region) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+      def self.partition(region) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
         partitions = Aws::Partitions.partitions
         partition =
           partitions.find { |p| p.regions.map(&:name).include?(region) } ||
@@ -24,6 +24,20 @@ module Aws
           'supportsDualStack' => partition.supports_dual_stack?,
           'supportsFIPS' => partition.supports_fips?
         }
+      end
+
+      # aws.parseArn(value: string) Option<ARN>
+      def self.parse_arn(value)
+        arn = ARNParser.parse(value)
+        {
+          'partition' => arn.partition,
+          'service' => arn.service,
+          'region' => arn.region,
+          'accountId' => arn.account_id,
+          'resourceId' => arn.resource.split(%r{[:/]}, -1)
+        }
+      rescue ARNParser::InvalidARNError
+        nil
       end
     end
   end

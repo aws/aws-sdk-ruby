@@ -1,0 +1,295 @@
+module Aws::CloudFrontKeyValueStore
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kvs_arn: String,
+        ?key: String,
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kvs_arn: String?
+      attr_accessor key: String?
+      attr_accessor if_match: String?
+    end
+
+    class DeleteKeyRequestListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+    end
+
+    class DeleteKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_count: Integer,
+        ?total_size_in_bytes: Integer,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_count: Integer?
+      attr_accessor total_size_in_bytes: Integer?
+      attr_accessor e_tag: String?
+    end
+
+    class DescribeKeyValueStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kvs_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kvs_arn: String?
+    end
+
+    class DescribeKeyValueStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_count: Integer,
+        ?total_size_in_bytes: Integer,
+        ?kvs_arn: String,
+        ?created: Time,
+        ?e_tag: String,
+        ?last_modified: Time,
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_count: Integer?
+      attr_accessor total_size_in_bytes: Integer?
+      attr_accessor kvs_arn: String?
+      attr_accessor created: Time?
+      attr_accessor e_tag: String?
+      attr_accessor last_modified: Time?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class GetKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kvs_arn: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kvs_arn: String?
+      attr_accessor key: String?
+    end
+
+    class GetKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?item_count: Integer,
+        ?total_size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor item_count: Integer?
+      attr_accessor total_size_in_bytes: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kvs_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kvs_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::ListKeysResponseListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ListKeysResponseListItem]?
+    end
+
+    class ListKeysResponseListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class PutKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?kvs_arn: String,
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor kvs_arn: String?
+      attr_accessor if_match: String?
+    end
+
+    class PutKeyRequestListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class PutKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_count: Integer,
+        ?total_size_in_bytes: Integer,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_count: Integer?
+      attr_accessor total_size_in_bytes: Integer?
+      attr_accessor e_tag: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kvs_arn: String,
+        ?if_match: String,
+        ?puts: Array[Types::PutKeyRequestListItem],
+        ?deletes: Array[Types::DeleteKeyRequestListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kvs_arn: String?
+      attr_accessor if_match: String?
+      attr_accessor puts: Array[Types::PutKeyRequestListItem]?
+      attr_accessor deletes: Array[Types::DeleteKeyRequestListItem]?
+    end
+
+    class UpdateKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_count: Integer,
+        ?total_size_in_bytes: Integer,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_count: Integer?
+      attr_accessor total_size_in_bytes: Integer?
+      attr_accessor e_tag: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end
