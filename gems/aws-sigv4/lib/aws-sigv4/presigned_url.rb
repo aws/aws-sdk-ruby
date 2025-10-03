@@ -13,7 +13,7 @@ module Aws
         @signature = options[:signature]
       end
 
-      # @return [URI] The presigned URL that includes all necessary authentication
+      # @return [String] The presigned URL that includes all necessary authentication
       #  information as query string parameters.
       attr_reader :url
 
