@@ -6,10 +6,10 @@ module Aws::CodeCatalyst
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [Hash]
+    # @return [Array<Smithy::Client::AuthOption>]
     def resolve(parameters)
       options = []
-      options << { scheme_id: 'smithy.api#httpBearerAuth' }
+      options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#httpBearerAuth')
       options
     end
   end

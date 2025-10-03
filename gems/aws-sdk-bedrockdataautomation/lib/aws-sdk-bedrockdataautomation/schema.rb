@@ -9,6 +9,7 @@ module Aws::BedrockDataAutomation
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AudioExtractionCategory = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#AudioExtractionCategory', name: 'AudioExtractionCategory')
     AudioExtractionCategoryType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomation#AudioExtractionCategoryType', name: 'AudioExtractionCategoryType')
+    AudioExtractionCategoryTypeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypeConfiguration', name: 'AudioExtractionCategoryTypeConfiguration')
     AudioExtractionCategoryTypes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockdataautomation#AudioExtractionCategoryTypes', name: 'AudioExtractionCategoryTypes')
     AudioOverrideConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#AudioOverrideConfiguration', name: 'AudioOverrideConfiguration')
     AudioStandardExtraction = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#AudioStandardExtraction', name: 'AudioStandardExtraction')
@@ -28,6 +29,7 @@ module Aws::BedrockDataAutomation
     BlueprintSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#BlueprintSummary', name: 'BlueprintSummary')
     BlueprintVersion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomation#BlueprintVersion', name: 'BlueprintVersion', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[0-9]*$"})
     Blueprints = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockdataautomation#Blueprints', name: 'Blueprints')
+    ChannelLabelingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#ChannelLabelingConfiguration', name: 'ChannelLabelingConfiguration')
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomation#ClientToken', name: 'ClientToken', traits: {"smithy.api#length" => {"min" => 33, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,256}$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateBlueprintRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#CreateBlueprintRequest', name: 'CreateBlueprintRequest')
@@ -101,6 +103,7 @@ module Aws::BedrockDataAutomation
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceOwner = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomation#ResourceOwner', name: 'ResourceOwner')
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    SpeakerLabelingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#SpeakerLabelingConfiguration', name: 'SpeakerLabelingConfiguration')
     SplitterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#SplitterConfiguration', name: 'SplitterConfiguration')
     StandardOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#StandardOutputConfiguration', name: 'StandardOutputConfiguration')
     State = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomation#State', name: 'State')
@@ -113,6 +116,7 @@ module Aws::BedrockDataAutomation
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomation#TagValue', name: 'TagValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockdataautomation#TaggableResourceArn', name: 'TaggableResourceArn', traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]*:[0-9]{12}:(blueprint|data-automation-project)/[a-zA-Z0-9-]{12,36}$"})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TranscriptConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#TranscriptConfiguration', name: 'TranscriptConfiguration')
     Type = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockdataautomation#Type', name: 'Type')
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#UntagResourceRequest', name: 'UntagResourceRequest')
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockdataautomation#UntagResourceResponse', name: 'UntagResourceResponse')
@@ -138,10 +142,13 @@ module Aws::BedrockDataAutomation
     AccessDeniedException.type = Types::AccessDeniedException
     AudioExtractionCategory.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: State, location_name: 'state', traits: {"smithy.api#required" => {}}))
     AudioExtractionCategory.add_member(:types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioExtractionCategoryTypes, location_name: 'types'))
+    AudioExtractionCategory.add_member(:type_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioExtractionCategoryTypeConfiguration, location_name: 'typeConfiguration'))
     AudioExtractionCategory.type = Types::AudioExtractionCategory
     AudioExtractionCategoryType.add_member(:audio_content_moderation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AUDIO_CONTENT_MODERATION', traits: {"smithy.api#enumValue" => "AUDIO_CONTENT_MODERATION"}))
     AudioExtractionCategoryType.add_member(:transcript, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TRANSCRIPT', traits: {"smithy.api#enumValue" => "TRANSCRIPT"}))
     AudioExtractionCategoryType.add_member(:topic_content_moderation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TOPIC_CONTENT_MODERATION', traits: {"smithy.api#enumValue" => "TOPIC_CONTENT_MODERATION"}))
+    AudioExtractionCategoryTypeConfiguration.add_member(:transcript, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranscriptConfiguration, location_name: 'transcript'))
+    AudioExtractionCategoryTypeConfiguration.type = Types::AudioExtractionCategoryTypeConfiguration
     AudioExtractionCategoryTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AudioExtractionCategoryType)
     AudioOverrideConfiguration.add_member(:modality_processing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: 'modalityProcessing'))
     AudioOverrideConfiguration.type = Types::AudioOverrideConfiguration
@@ -190,6 +197,8 @@ module Aws::BedrockDataAutomation
     BlueprintSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastModifiedTime'))
     BlueprintSummary.type = Types::BlueprintSummary
     Blueprints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintSummary)
+    ChannelLabelingConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: State, location_name: 'state', traits: {"smithy.api#required" => {}}))
+    ChannelLabelingConfiguration.type = Types::ChannelLabelingConfiguration
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
     ConflictException.type = Types::ConflictException
     CreateBlueprintRequest.add_member(:blueprint_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintName, location_name: 'blueprintName', traits: {"smithy.api#required" => {}}))
@@ -383,6 +392,8 @@ module Aws::BedrockDataAutomation
     ResourceOwner.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACCOUNT', traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    SpeakerLabelingConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: State, location_name: 'state', traits: {"smithy.api#required" => {}}))
+    SpeakerLabelingConfiguration.type = Types::SpeakerLabelingConfiguration
     SplitterConfiguration.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: State, location_name: 'state'))
     SplitterConfiguration.type = Types::SplitterConfiguration
     StandardOutputConfiguration.add_member(:document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentStandardOutputConfiguration, location_name: 'document'))
@@ -403,6 +414,9 @@ module Aws::BedrockDataAutomation
     TagResourceResponse.type = Types::TagResourceResponse
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
     ThrottlingException.type = Types::ThrottlingException
+    TranscriptConfiguration.add_member(:speaker_labeling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpeakerLabelingConfiguration, location_name: 'speakerLabeling'))
+    TranscriptConfiguration.add_member(:channel_labeling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelLabelingConfiguration, location_name: 'channelLabeling'))
+    TranscriptConfiguration.type = Types::TranscriptConfiguration
     Type.add_member(:document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DOCUMENT', traits: {"smithy.api#enumValue" => "DOCUMENT"}))
     Type.add_member(:image, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMAGE', traits: {"smithy.api#enumValue" => "IMAGE"}))
     Type.add_member(:audio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AUDIO', traits: {"smithy.api#enumValue" => "AUDIO"}))

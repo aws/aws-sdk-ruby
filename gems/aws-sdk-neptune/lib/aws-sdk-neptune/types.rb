@@ -340,7 +340,8 @@ module Aws::Neptune
 
     # @!attribute source_db_cluster_snapshot_identifier
     #   <p>The identifier of the DB cluster snapshot to copy. This parameter is not
-    #         case-sensitive.</p>
+    #         case-sensitive. If the source DB cluster snapshot is in a different region or 
+    #         owned by another account, specify the snapshot ARN.</p>
     #            <p>Constraints:</p>
     #            <ul>
     #               <li>

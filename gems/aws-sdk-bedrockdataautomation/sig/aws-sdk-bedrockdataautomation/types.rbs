@@ -18,17 +18,30 @@ module Aws::BedrockDataAutomation
       def initialize: (
         ?state: String,
         ?types: Array[String],
+        ?type_configuration: Types::AudioExtractionCategoryTypeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor state: String?
       attr_accessor types: Array[String]?
+      attr_accessor type_configuration: Types::AudioExtractionCategoryTypeConfiguration?
     end
 
     module AudioExtractionCategoryType
       AUDIO_CONTENT_MODERATION: String
       TRANSCRIPT: String
       TOPIC_CONTENT_MODERATION: String
+    end
+
+    class AudioExtractionCategoryTypeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript: Types::TranscriptConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript: Types::TranscriptConfiguration?
     end
 
     class AudioOverrideConfiguration
@@ -174,6 +187,17 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_name: String?
       attr_accessor creation_time: Time?
       attr_accessor last_modified_time: Time?
+    end
+
+    class ChannelLabelingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
     end
 
     class ConflictException
@@ -876,6 +900,17 @@ module Aws::BedrockDataAutomation
       attr_accessor message: String?
     end
 
+    class SpeakerLabelingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
     class SplitterConfiguration
       include Smithy::Schema::Structure
 
@@ -953,6 +988,19 @@ module Aws::BedrockDataAutomation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class TranscriptConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_labeling: Types::SpeakerLabelingConfiguration,
+        ?channel_labeling: Types::ChannelLabelingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_labeling: Types::SpeakerLabelingConfiguration?
+      attr_accessor channel_labeling: Types::ChannelLabelingConfiguration?
     end
 
     module Type

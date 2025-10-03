@@ -73,6 +73,8 @@ module Aws::PCS
     QueueIdentifier: StringShape
     QueueList: ListShape
     QueueName: StringShape
+    QueueSlurmConfiguration: StructureShape
+    QueueSlurmConfigurationRequest: StructureShape
     QueueStatus: EnumShape
     QueueSummary: StructureShape
     RegisterComputeNodeGroupInstanceRequest: StructureShape
@@ -105,11 +107,16 @@ module Aws::PCS
     TagValue: StringShape
     ThrottlingException: StructureShape
     UntagResourceRequest: StructureShape
+    UpdateAccountingRequest: StructureShape
+    UpdateClusterRequest: StructureShape
+    UpdateClusterResponse: StructureShape
+    UpdateClusterSlurmConfigurationRequest: StructureShape
     UpdateComputeNodeGroupRequest: StructureShape
     UpdateComputeNodeGroupResponse: StructureShape
     UpdateComputeNodeGroupSlurmConfigurationRequest: StructureShape
     UpdateQueueRequest: StructureShape
     UpdateQueueResponse: StructureShape
+    UpdateQueueSlurmConfigurationRequest: StructureShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape

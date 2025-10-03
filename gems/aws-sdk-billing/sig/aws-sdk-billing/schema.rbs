@@ -5,14 +5,21 @@ module Aws::Billing
     AccessDeniedException: StructureShape
     AccountId: StringShape
     ActiveTimeRange: StructureShape
+    AssociateSourceViewsRequest: StructureShape
+    AssociateSourceViewsResponse: StructureShape
     BillingViewArn: StringShape
     BillingViewArnList: ListShape
     BillingViewDescription: StringShape
     BillingViewElement: StructureShape
+    BillingViewHealthStatus: StructureShape
+    BillingViewHealthStatusException: StructureShape
     BillingViewList: ListShape
     BillingViewListElement: StructureShape
     BillingViewName: StringShape
     BillingViewSourceViewsList: ListShape
+    BillingViewStatus: EnumShape
+    BillingViewStatusReason: EnumShape
+    BillingViewStatusReasons: ListShape
     BillingViewType: EnumShape
     BillingViewTypeList: ListShape
     BillingViewsMaxResults: IntegerShape
@@ -24,6 +31,8 @@ module Aws::Billing
     DeleteBillingViewResponse: StructureShape
     Dimension: EnumShape
     DimensionValues: StructureShape
+    DisassociateSourceViewsRequest: StructureShape
+    DisassociateSourceViewsResponse: StructureShape
     ErrorMessage: StringShape
     Expression: StructureShape
     FieldName: StringShape
@@ -57,6 +66,7 @@ module Aws::Billing
     TagResourceResponse: StructureShape
     TagValues: StructureShape
     ThrottlingException: StructureShape
+    TimeRange: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateBillingViewRequest: StructureShape

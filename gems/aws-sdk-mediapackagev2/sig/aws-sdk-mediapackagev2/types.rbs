@@ -19,6 +19,7 @@ module Aws::MediaPackageV2
 
     module AdMarkerHls
       DATERANGE: String
+      SCTE35_ENHANCED: String
     end
 
     class CancelHarvestJobRequest

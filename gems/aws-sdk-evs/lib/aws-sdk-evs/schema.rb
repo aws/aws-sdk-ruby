@@ -6,7 +6,11 @@ module Aws::Evs
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AllocationId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#AllocationId', name: 'AllocationId', traits: {"smithy.api#length" => {"min" => 9, "max" => 26}, "smithy.api#pattern" => "^eipalloc-[a-zA-Z0-9_-]+$"})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#Arn', name: 'Arn', traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^arn:aws:evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$"})
+    AssociateEipToVlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#AssociateEipToVlanRequest', name: 'AssociateEipToVlanRequest')
+    AssociateEipToVlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#AssociateEipToVlanResponse', name: 'AssociateEipToVlanResponse')
+    AssociationId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#AssociationId', name: 'AssociationId', traits: {"smithy.api#length" => {"min" => 9, "max" => 26}, "smithy.api#pattern" => "^eipassoc-[a-zA-Z0-9_-]+$"})
     Check = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#Check', name: 'Check')
     CheckResult = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.evs#CheckResult', name: 'CheckResult')
     CheckType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.evs#CheckType', name: 'CheckType')
@@ -23,6 +27,10 @@ module Aws::Evs
     DeleteEnvironmentHostResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#DeleteEnvironmentHostResponse', name: 'DeleteEnvironmentHostResponse')
     DeleteEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#DeleteEnvironmentRequest', name: 'DeleteEnvironmentRequest')
     DeleteEnvironmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#DeleteEnvironmentResponse', name: 'DeleteEnvironmentResponse')
+    DisassociateEipFromVlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#DisassociateEipFromVlanRequest', name: 'DisassociateEipFromVlanRequest')
+    DisassociateEipFromVlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#DisassociateEipFromVlanResponse', name: 'DisassociateEipFromVlanResponse')
+    EipAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#EipAssociation', name: 'EipAssociation')
+    EipAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.evs#EipAssociationList', name: 'EipAssociationList')
     Environment = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#Environment', name: 'Environment')
     EnvironmentId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#EnvironmentId', name: 'EnvironmentId', traits: {"smithy.api#pattern" => "^(env-[a-zA-Z0-9]{10})$"})
     EnvironmentName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#EnvironmentName', name: 'EnvironmentName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
@@ -54,6 +62,7 @@ module Aws::Evs
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.evs#EnvironmentResource", "ids" => {"environmentId" => "resourceArn"}}]})
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.evs#MaxResults', name: 'MaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    NetworkAclId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#NetworkAclId', name: 'NetworkAclId', traits: {"smithy.api#length" => {"min" => 4, "max" => 21}, "smithy.api#pattern" => "^acl-[a-zA-Z0-9_-]+$"})
     NetworkInterface = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.evs#NetworkInterface', name: 'NetworkInterface')
     NetworkInterfaceId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#NetworkInterfaceId', name: 'NetworkInterfaceId', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     NetworkInterfaceList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.evs#NetworkInterfaceList', name: 'NetworkInterfaceList', traits: {"smithy.api#length" => {"max" => 2}})
@@ -96,6 +105,13 @@ module Aws::Evs
     VlanState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.evs#VlanState', name: 'VlanState')
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.evs#VpcId', name: 'VpcId', traits: {"smithy.api#length" => {"min" => 12, "max" => 21}, "smithy.api#pattern" => "^vpc-[a-f0-9]{8}([a-f0-9]{9})?$"})
 
+    AssociateEipToVlanRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    AssociateEipToVlanRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: 'environmentId', traits: {"smithy.api#required" => {}}))
+    AssociateEipToVlanRequest.add_member(:vlan_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'vlanName', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
+    AssociateEipToVlanRequest.add_member(:allocation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllocationId, location_name: 'allocationId', traits: {"smithy.api#required" => {}}))
+    AssociateEipToVlanRequest.type = Types::AssociateEipToVlanRequest
+    AssociateEipToVlanResponse.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Vlan, location_name: 'vlan'))
+    AssociateEipToVlanResponse.type = Types::AssociateEipToVlanResponse
     Check.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckType, location_name: 'type'))
     Check.add_member(:result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CheckResult, location_name: 'result'))
     Check.add_member(:impaired_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'impairedSince'))
@@ -147,6 +163,18 @@ module Aws::Evs
     DeleteEnvironmentRequest.type = Types::DeleteEnvironmentRequest
     DeleteEnvironmentResponse.add_member(:environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Environment, location_name: 'environment'))
     DeleteEnvironmentResponse.type = Types::DeleteEnvironmentResponse
+    DisassociateEipFromVlanRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    DisassociateEipFromVlanRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: 'environmentId', traits: {"smithy.api#required" => {}}))
+    DisassociateEipFromVlanRequest.add_member(:vlan_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'vlanName', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
+    DisassociateEipFromVlanRequest.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationId, location_name: 'associationId', traits: {"smithy.api#required" => {}}))
+    DisassociateEipFromVlanRequest.type = Types::DisassociateEipFromVlanRequest
+    DisassociateEipFromVlanResponse.add_member(:vlan, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Vlan, location_name: 'vlan'))
+    DisassociateEipFromVlanResponse.type = Types::DisassociateEipFromVlanResponse
+    EipAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationId, location_name: 'associationId'))
+    EipAssociation.add_member(:allocation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllocationId, location_name: 'allocationId'))
+    EipAssociation.add_member(:ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: 'ipAddress'))
+    EipAssociation.type = Types::EipAssociation
+    EipAssociationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EipAssociation)
     Environment.add_member(:environment_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: 'environmentId'))
     Environment.add_member(:environment_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentState, location_name: 'environmentState'))
     Environment.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateDetails, location_name: 'stateDetails'))
@@ -228,6 +256,8 @@ module Aws::Evs
     InitialVlans.add_member(:hcx, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialVlanInfo, location_name: 'hcx', traits: {"smithy.api#required" => {}}))
     InitialVlans.add_member(:expansion_vlan1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialVlanInfo, location_name: 'expansionVlan1', traits: {"smithy.api#required" => {}}))
     InitialVlans.add_member(:expansion_vlan2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitialVlanInfo, location_name: 'expansionVlan2', traits: {"smithy.api#required" => {}}))
+    InitialVlans.add_member(:is_hcx_public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isHcxPublic', traits: {"smithy.api#default" => false}))
+    InitialVlans.add_member(:hcx_network_acl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkAclId, location_name: 'hcxNetworkAclId'))
     InitialVlans.type = Types::InitialVlans
     InstanceType.add_member(:i4_i_metal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'I4I_METAL', traits: {"smithy.api#enumValue" => "i4i.metal"}))
     LicenseInfo.add_member(:solution_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SolutionKey, location_name: 'solutionKey', traits: {"smithy.api#required" => {}}))
@@ -327,6 +357,9 @@ module Aws::Evs
     Vlan.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'modifiedAt'))
     Vlan.add_member(:vlan_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VlanState, location_name: 'vlanState'))
     Vlan.add_member(:state_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateDetails, location_name: 'stateDetails'))
+    Vlan.add_member(:eip_associations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EipAssociationList, location_name: 'eipAssociations'))
+    Vlan.add_member(:is_public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isPublic'))
+    Vlan.add_member(:network_acl_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkAclId, location_name: 'networkAclId'))
     Vlan.type = Types::Vlan
     VlanList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Vlan)
     VlanState.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -340,6 +373,16 @@ module Aws::Evs
       service.name = "AmazonElasticVMwareService"
       service.version = "2023-07-27"
       service.traits = {"aws.api#service" => {"sdkId" => "evs", "arnNamespace" => "evs"}, "aws.auth#sigv4" => {"name" => "evs"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"]}, "smithy.api#title" => "Amazon Elastic VMware Service"}
+      service.add_operation(:associate_eip_to_vlan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#AssociateEipToVlan"
+        operation.name = "AssociateEipToVlan"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateEipToVlanRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateEipToVlanResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.evs#CreateEnvironment"
         operation.name = "CreateEnvironment"
@@ -372,6 +415,16 @@ module Aws::Evs
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentHostRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentHostResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:disassociate_eip_from_vlan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#DisassociateEipFromVlan"
+        operation.name = "DisassociateEipFromVlan"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateEipFromVlanRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateEipFromVlanResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)

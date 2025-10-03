@@ -11,7 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('BedrockAgentCoreControl', Module.new) unless Aws.const_defined?('BedrockAgentCoreControl')
 
 # @title Amazon Bedrock Agent Core Control Plane Fronting Layer
-# <note> <p>Amazon Bedrock AgentCore is in preview release and is subject to change.</p> </note> <p>Amazon Bedrock Agent Core Control is a service that enables you to manage memory resources for your Amazon Bedrock agents.</p> <p>Use this API to create, retrieve, update, and delete memory resources and their associated memory strategies. Memory resources enable your agents to store and retrieve information from conversations and interactions.</p>
+# <note> <p> is in preview release and is subject to change.</p> </note> <p>Welcome to the Amazon Bedrock AgentCore Control plane API reference. Control plane actions configure, create, modify, and monitor Amazon Web Services resources.</p>
 module Aws::BedrockAgentCoreControl
   VERSION = '2.0.0.pre0'
 end

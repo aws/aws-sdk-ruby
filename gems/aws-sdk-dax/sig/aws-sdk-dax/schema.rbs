@@ -58,6 +58,8 @@ module Aws::DAX
     KeyList: ListShape
     ListTagsRequest: StructureShape
     ListTagsResponse: StructureShape
+    NetworkType: EnumShape
+    NetworkTypeList: ListShape
     Node: StructureShape
     NodeIdentifierList: ListShape
     NodeList: ListShape
@@ -103,6 +105,7 @@ module Aws::DAX
     SubnetIdentifierList: ListShape
     SubnetInUse: StructureShape
     SubnetList: ListShape
+    SubnetNotAllowedFault: StructureShape
     SubnetQuotaExceededFault: StructureShape
     TStamp: TimestampShape
     Tag: StructureShape

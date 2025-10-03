@@ -7,6 +7,7 @@ module Aws::BedrockAgentCoreControl
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -65,7 +66,11 @@ module Aws::BedrockAgentCoreControl
       },
       ?role_arn: String,
       ?network_configuration: {
-        network_mode: String
+        network_mode: String,
+        network_mode_config: {
+          security_groups: Array[String],
+          subnets: Array[String]
+        }
       },
       ?protocol_configuration: {
         server_protocol: String
@@ -78,7 +83,11 @@ module Aws::BedrockAgentCoreControl
           allowed_audience: Array[String],
           allowed_clients: Array[String]
         }
-      }
+      },
+      ?request_header_configuration: {
+        request_header_allowlist: Array[String]
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentRuntimeResponse
 
     interface _CreateAgentRuntimeEndpointResponse
@@ -94,7 +103,8 @@ module Aws::BedrockAgentCoreControl
       ?name: String,
       ?agent_runtime_version: String,
       ?description: String,
-      ?client_token: String
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _CreateAgentRuntimeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentRuntimeEndpointResponse
 
     interface _CreateApiKeyCredentialProviderResponse
@@ -120,7 +130,11 @@ module Aws::BedrockAgentCoreControl
       ?description: String,
       ?execution_role_arn: String,
       ?network_configuration: {
-        network_mode: String
+        network_mode: String,
+        vpc_config: {
+          security_groups: Array[String],
+          subnets: Array[String]
+        }
       },
       ?recording: {
         enabled: bool,
@@ -129,7 +143,8 @@ module Aws::BedrockAgentCoreControl
           prefix: untyped
         }
       },
-      ?client_token: String
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _CreateBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrowserResponse
 
     interface _CreateCodeInterpreterResponse
@@ -144,9 +159,14 @@ module Aws::BedrockAgentCoreControl
       ?description: String,
       ?execution_role_arn: String,
       ?network_configuration: {
-        network_mode: String
+        network_mode: String,
+        vpc_config: {
+          security_groups: Array[String],
+          subnets: Array[String]
+        }
       },
-      ?client_token: String
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _CreateCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeInterpreterResponse
 
     interface _CreateGatewayResponse
@@ -191,7 +211,8 @@ module Aws::BedrockAgentCoreControl
         }
       },
       ?kms_key_arn: String,
-      ?exception_level: String
+      ?exception_level: String,
+      ?tags: Hash[String, String]
     ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
 
     interface _CreateGatewayTargetResponse
@@ -498,11 +519,12 @@ module Aws::BedrockAgentCoreControl
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
       def role_arn: () -> String?
-      def agent_runtime_artifact: () -> Types::AgentArtifact?
+      def agent_runtime_artifact: () -> Types::AgentRuntimeArtifact?
       def network_configuration: () -> Types::NetworkConfiguration?
       def protocol_configuration: () -> Types::ProtocolConfiguration?
       def environment_variables: () -> Hash[String, String]?
       def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def request_header_configuration: () -> Types::RequestHeaderConfiguration?
       def status: () -> String?
     end
     def get_agent_runtime: (
@@ -551,6 +573,7 @@ module Aws::BedrockAgentCoreControl
       def network_configuration: () -> Types::BrowserNetworkConfiguration?
       def recording: () -> Types::RecordingConfig?
       def status: () -> String?
+      def failure_reason: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
     end
@@ -567,6 +590,7 @@ module Aws::BedrockAgentCoreControl
       def execution_role_arn: () -> String?
       def network_configuration: () -> Types::CodeInterpreterNetworkConfiguration?
       def status: () -> String?
+      def failure_reason: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
     end
@@ -662,7 +686,7 @@ module Aws::BedrockAgentCoreControl
 
     interface _ListAgentRuntimeEndpointsResponse
       include Smithy::Client::_Response[Types::ListAgentRuntimeEndpointsResponse]
-      def runtime_endpoints: () -> Array[Types::AgentEndpoint]?
+      def runtime_endpoints: () -> Array[Types::AgentRuntimeEndpoint]?
       def next_token: () -> String?
     end
     def list_agent_runtime_endpoints: (
@@ -673,7 +697,7 @@ module Aws::BedrockAgentCoreControl
 
     interface _ListAgentRuntimeVersionsResponse
       include Smithy::Client::_Response[Types::ListAgentRuntimeVersionsResponse]
-      def agent_runtimes: () -> Array[Types::Agent]?
+      def agent_runtimes: () -> Array[Types::AgentRuntime]?
       def next_token: () -> String?
     end
     def list_agent_runtime_versions: (
@@ -684,7 +708,7 @@ module Aws::BedrockAgentCoreControl
 
     interface _ListAgentRuntimesResponse
       include Smithy::Client::_Response[Types::ListAgentRuntimesResponse]
-      def agent_runtimes: () -> Array[Types::Agent]?
+      def agent_runtimes: () -> Array[Types::AgentRuntime]?
       def next_token: () -> String?
     end
     def list_agent_runtimes: (
@@ -765,6 +789,14 @@ module Aws::BedrockAgentCoreControl
       ?max_results: Integer
     ) -> _ListOauth2CredentialProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOauth2CredentialProvidersResponse
 
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
     interface _ListWorkloadIdentitiesResponse
       include Smithy::Client::_Response[Types::ListWorkloadIdentitiesResponse]
       def workload_identities: () -> Array[Types::WorkloadIdentityType]?
@@ -789,6 +821,22 @@ module Aws::BedrockAgentCoreControl
       }
     ) -> _SetTokenVaultCMKResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTokenVaultCMKResponse
 
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
     interface _UpdateAgentRuntimeResponse
       include Smithy::Client::_Response[Types::UpdateAgentRuntimeResponse]
       def agent_runtime_arn: () -> String?
@@ -809,7 +857,11 @@ module Aws::BedrockAgentCoreControl
       },
       ?role_arn: String,
       ?network_configuration: {
-        network_mode: String
+        network_mode: String,
+        network_mode_config: {
+          security_groups: Array[String],
+          subnets: Array[String]
+        }
       },
       ?protocol_configuration: {
         server_protocol: String
@@ -822,6 +874,9 @@ module Aws::BedrockAgentCoreControl
           allowed_audience: Array[String],
           allowed_clients: Array[String]
         }
+      },
+      ?request_header_configuration: {
+        request_header_allowlist: Array[String]
       }
     ) -> _UpdateAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentRuntimeResponse
 

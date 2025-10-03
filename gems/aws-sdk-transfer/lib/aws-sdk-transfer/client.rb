@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Transfer
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Transfer
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Transfer
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Transfer::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Transfer::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -432,7 +437,7 @@ module Aws::Transfer
     # @option params [Array<String>] :structured_log_destinations
     #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     # @option params [Types::S3StorageOptions] :s3_storage_options
-    #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
+    #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
     # @option params [String] :ip_address_type
     #   <p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html">EndpointDetails</a> for the server.</p> </note>
     # @example Request syntax with placeholder values
@@ -1100,7 +1105,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Describes the certificate that's identified by the <code>CertificateId</code>.</p>
+    # <p>Describes the certificate that's identified by the <code>CertificateId</code>.</p> <note> <p>Transfer Family automatically publishes a Amazon CloudWatch metric called <code>DaysUntilExpiry</code> for imported certificates. This metric tracks the number of days until the certificate expires based on the <code>InactiveDate</code>. The metric is available in the <code>AWS/Transfer</code> namespace and includes the <code>CertificateId</code> as a dimension.</p> </note>
     # @param [Hash, Types::DescribeCertificateRequest] params
     # @option params [String] :certificate_id
     #   <p>An array of identifiers for the imported certificates. You use this identifier for working with profiles and partner profiles.</p>
@@ -1727,7 +1732,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Imports the signing and encryption certificates that you need to create local (AS2) profiles and partner profiles.</p> <p>You can import both the certificate and its chain in the <code>Certificate</code> parameter.</p> <note> <p>If you use the <code>Certificate</code> parameter to upload both the certificate and its chain, don't use the <code>CertificateChain</code> parameter.</p> </note>
+    # <p>Imports the signing and encryption certificates that you need to create local (AS2) profiles and partner profiles.</p> <p>You can import both the certificate and its chain in the <code>Certificate</code> parameter.</p> <p>After importing a certificate, Transfer Family automatically creates a Amazon CloudWatch metric called <code>DaysUntilExpiry</code> that tracks the number of days until the certificate expires. The metric is based on the <code>InactiveDate</code> parameter and is published daily in the <code>AWS/Transfer</code> namespace.</p> <important> <p>It can take up to a full day after importing a certificate for Transfer Family to emit the <code>DaysUntilExpiry</code> metric to your account.</p> </important> <note> <p>If you use the <code>Certificate</code> parameter to upload both the certificate and its chain, don't use the <code>CertificateChain</code> parameter.</p> </note> <p> <b>CloudWatch monitoring</b> </p> <p>The <code>DaysUntilExpiry</code> metric includes the following specifications:</p> <ul> <li> <p> <b>Units:</b> Count (days)</p> </li> <li> <p> <b>Dimensions:</b> <code>CertificateId</code> (always present), <code>Description</code> (if provided during certificate import)</p> </li> <li> <p> <b>Statistics:</b> Minimum, Maximum, Average</p> </li> <li> <p> <b>Frequency:</b> Published daily</p> </li> </ul>
     # @param [Hash, Types::ImportCertificateRequest] params
     # @option params [String] :usage
     #   <p>Specifies how this certificate is used. It can be used in the following ways:</p> <ul> <li> <p> <code>SIGNING</code>: For signing AS2 messages</p> </li> <li> <p> <code>ENCRYPTION</code>: For encrypting AS2 messages</p> </li> <li> <p> <code>TLS</code>: For securing AS2 communications sent over HTTPS</p> </li> </ul>
@@ -2909,9 +2914,11 @@ module Aws::Transfer
     # @option params [Array<String>] :structured_log_destinations
     #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     # @option params [Types::S3StorageOptions] :s3_storage_options
-    #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
+    #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
     # @option params [String] :ip_address_type
     #   <p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html">EndpointDetails</a> for the server.</p> </note>
+    # @option params [String] :identity_provider_type
+    #   <p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     certificate: "Certificate",
@@ -2961,7 +2968,8 @@ module Aws::Transfer
     #     s3_storage_options: {
     #       directory_listing_optimization: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #     },
-    #     ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
+    #     ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"],
+    #     identity_provider_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE", "AWS_LAMBDA"]
     #   }
     #   options = {}
     #   response = client.update_server(params, options)

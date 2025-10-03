@@ -14,8 +14,7 @@ module Aws::DAX
     #   <p>The description of the cluster.</p>
     #   @return [String]
     # @!attribute cluster_arn
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-    #           </p>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster. </p>
     #   @return [String]
     # @!attribute total_nodes
     #   <p>The total number of nodes in the cluster.</p>
@@ -25,16 +24,16 @@ module Aws::DAX
     #               requests).</p>
     #   @return [Integer]
     # @!attribute node_type
-    #   <p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of
-    #               the same type.)</p>
+    #   <p>The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the
+    #               same type.)</p>
     #   @return [String]
     # @!attribute status
     #   <p>The current status of the cluster.</p>
     #   @return [String]
     # @!attribute cluster_discovery_endpoint
-    #   <p>The endpoint for this DAX cluster, consisting of a DNS name, a port number,
-    #                and a URL. Applications should use the URL to configure the DAX client to find
-    #                their cluster.</p>
+    #   <p>The endpoint for this DAX cluster, consisting of a DNS name, a port
+    #               number, and a URL. Applications should use the URL to configure the DAX
+    #               client to find their cluster.</p>
     #   @return [Types::Endpoint]
     # @!attribute node_ids_to_remove
     #   <p>A list of nodes to be removed from the cluster.</p>
@@ -56,12 +55,13 @@ module Aws::DAX
     #   <p>The subnet group where the DAX cluster is running.</p>
     #   @return [String]
     # @!attribute security_groups
-    #   <p>A list of security groups, and the status of each, for the nodes in the cluster.</p>
+    #   <p>A list of security groups, and the status of each, for the nodes in the
+    #               cluster.</p>
     #   @return [Array<Types::SecurityGroupMembership>]
     # @!attribute iam_role_arn
-    #   <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX
-    #               will assume this role and use the role's permissions to access DynamoDB on your
-    #               behalf.</p>
+    #   <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At
+    #               runtime, DAX will assume this role and use the role's permissions to
+    #               access DynamoDB on your behalf.</p>
     #   @return [String]
     # @!attribute parameter_group
     #   <p>The parameter group being used by nodes in the cluster.</p>
@@ -71,12 +71,29 @@ module Aws::DAX
     #   @return [Types::SSEDescription]
     # @!attribute cluster_endpoint_encryption_type
     #   <p>The type of encryption supported by the cluster's endpoint. Values are:</p>
-    #           <ul>
+    #            <ul>
     #               <li>
-    #                   <p>
+    #                  <p>
     #                     <code>NONE</code> for no encryption</p>
-    #                   <p>
+    #                  <p>
     #                     <code>TLS</code> for Transport Layer Security</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute network_type
+    #   <p>The IP address type of the cluster. Values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv4</code> - IPv4 addresses only</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv6</code> - IPv6 addresses only</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>dual_stack</code> - Both IPv4 and IPv6 addresses</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -99,6 +116,7 @@ module Aws::DAX
       :parameter_group,
       :sse_description,
       :cluster_endpoint_encryption_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -114,7 +132,8 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The requested cluster ID does not refer to an existing DAX cluster.</p>
+    # <p>The requested cluster ID does not refer to an existing DAX
+    #             cluster.</p>
     # @!attribute message
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
@@ -124,8 +143,8 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You have attempted to exceed the maximum number of DAX clusters for your AWS
-    #             account.</p>
+    # <p>You have attempted to exceed the maximum number of DAX clusters for
+    #             your Amazon Web Services account.</p>
     # @!attribute message
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
@@ -136,21 +155,20 @@ module Aws::DAX
     end
 
     # @!attribute cluster_name
-    #   <p>The cluster identifier. This parameter is stored as a lowercase
-    #               string.</p>
-    #           <p>
+    #   <p>The cluster identifier. This parameter is stored as a lowercase string.</p>
+    #            <p>
     #               <b>Constraints:</b>
-    #           </p>
-    #           <ul>
+    #            </p>
+    #            <ul>
     #               <li>
-    #                   <p>A name must contain from 1 to 20 alphanumeric characters or
+    #                  <p>A name must contain from 1 to 20 alphanumeric characters or
     #                       hyphens.</p>
     #               </li>
     #               <li>
-    #                   <p>The first character must be a letter.</p>
+    #                  <p>The first character must be a letter.</p>
     #               </li>
     #               <li>
-    #                   <p>A name cannot end with a hyphen or contain two consecutive
+    #                  <p>A name cannot end with a hyphen or contain two consecutive
     #                       hyphens.</p>
     #               </li>
     #            </ul>
@@ -162,116 +180,149 @@ module Aws::DAX
     #   <p>A description of the cluster.</p>
     #   @return [String]
     # @!attribute replication_factor
-    #   <p>The number of nodes in the DAX cluster. A replication factor of 1 will
-    #               create a single-node cluster, without any read replicas. For additional fault tolerance,
-    #               you can create a multiple node cluster with one or more read replicas. To do this, set
-    #                   <code>ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). 
-    #                    <code>If the AvailabilityZones</code> parameter is provided, its length must equal the <code>ReplicationFactor</code>.</p>
-    #           <note>
-    #               <p>AWS recommends that you have at least two read replicas per cluster.</p>
+    #   <p>The number of nodes in the DAX cluster. A replication factor of 1
+    #               will create a single-node cluster, without any read replicas. For additional fault
+    #               tolerance, you can create a multiple node cluster with one or more read replicas. To do
+    #               this, set <code>ReplicationFactor</code> to a number between 3 (one primary and two read
+    #               replicas) and 10 (one primary and nine read replicas). <code>If the
+    #                   AvailabilityZones</code> parameter is provided, its length must equal the
+    #                   <code>ReplicationFactor</code>.</p>
+    #            <note>
+    #               <p>Amazon Web Services recommends that you have at least two read replicas per
+    #                   cluster.</p>
     #            </note>
     #   @return [Integer]
     # @!attribute availability_zones
-    #   <p>The Availability Zones (AZs) in which the cluster nodes will reside after the cluster
-    #            has been created or updated. If provided, the length of this list must equal the <code>ReplicationFactor</code> parameter.
-    #            If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.</p>
+    #   <p>The Availability Zones (AZs) in which the cluster nodes will reside after the
+    #               cluster has been created or updated. If provided, the length of this list must equal the
+    #                   <code>ReplicationFactor</code> parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest
+    #               availability.</p>
     #   @return [Array<String>]
     # @!attribute subnet_group_name
     #   <p>The name of the subnet group to be used for the replication group.</p>
-    #           <important>
-    #               <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets
-    #                   that you specify in a subnet group must exist in the same VPC.</p>
-    #           </important>
+    #            <important>
+    #               <p>DAX clusters can only run in an Amazon VPC environment.
+    #                   All of the subnets that you specify in a subnet group must exist in the same
+    #                   VPC.</p>
+    #            </important>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the 
-    #                security group ID is system-generated.)</p>
-    #           <p>If this parameter is not specified, DAX assigns the default VPC security group to
-    #               each node.</p>
+    #   <p>A list of security group IDs to be assigned to each node in the DAX
+    #               cluster. (Each of the security group ID is system-generated.)</p>
+    #            <p>If this parameter is not specified, DAX assigns the default VPC
+    #               security group to each node.</p>
     #   @return [Array<String>]
     # @!attribute preferred_maintenance_window
     #   <p>Specifies the weekly time range during which maintenance on the DAX cluster is
     #               performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock
     #               UTC). The minimum maintenance window is a 60 minute period. Valid values for
     #                   <code>ddd</code> are:</p>
-    #           <ul>
+    #            <ul>
     #               <li>
-    #                   <p>
-    #                       <code>sun</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>sun</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>mon</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>mon</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>tue</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>tue</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>wed</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>wed</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>thu</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>thu</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>fri</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>fri</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>sat</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>sat</code>
+    #                  </p>
     #               </li>
     #            </ul>
-    #           <p>Example: <code>sun:05:00-sun:09:00</code>
-    #           </p>
-    #           <note>
+    #            <p>Example: <code>sun:05:00-sun:09:00</code>
+    #            </p>
+    #            <note>
     #               <p>If you don't specify a preferred maintenance window when you create or modify a
-    #                   cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected day
-    #                   of the week.</p>
+    #                   cache cluster, DAX assigns a 60-minute maintenance window on a
+    #                   randomly selected day of the week.</p>
     #            </note>
     #   @return [String]
     # @!attribute notification_topic_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will
-    #               be sent.</p>
-    #           <note>
-    #               <p>The Amazon SNS topic owner must be same as the DAX cluster owner.</p>
-    #           </note>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which
+    #               notifications will be sent.</p>
+    #            <note>
+    #               <p>The Amazon SNS topic owner must be same as the DAX
+    #                   cluster owner.</p>
+    #            </note>
     #   @return [String]
     # @!attribute iam_role_arn
-    #   <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX
-    #               will assume this role and use the role's permissions to access DynamoDB on your
-    #               behalf.</p>
+    #   <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At
+    #               runtime, DAX will assume this role and use the role's permissions to
+    #               access DynamoDB on your behalf.</p>
     #   @return [String]
     # @!attribute parameter_group_name
     #   <p>The parameter group to be associated with the DAX cluster.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A set of tags to associate with the DAX cluster.  </p>
+    #   <p>A set of tags to associate with the DAX cluster.
+    #               </p>
     #   @return [Array<Types::Tag>]
     # @!attribute sse_specification
-    #   <p>Represents the settings used to enable server-side encryption on the cluster.</p>
+    #   <p>Represents the settings used to enable server-side encryption on the
+    #               cluster.</p>
     #   @return [Types::SSESpecification]
     # @!attribute cluster_endpoint_encryption_type
     #   <p>The type of encryption the cluster's endpoint should support. Values are:</p>
-    #           <ul>
+    #            <ul>
     #               <li>
-    #                   <p>
+    #                  <p>
     #                     <code>NONE</code> for no encryption</p>
     #               </li>
     #               <li>
-    #                   <p>
+    #                  <p>
     #                     <code>TLS</code> for Transport Layer Security</p>
     #               </li>
     #            </ul>
+    #   @return [String]
+    # @!attribute network_type
+    #   <p>Specifies the IP protocol(s) the cluster uses for network communications. Values
+    #               are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv4</code> - The cluster is accessible only through IPv4
+    #                       addresses</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv6</code> - The cluster is accessible only through IPv6
+    #                       addresses</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>dual_stack</code> - The cluster is accessible through both IPv4 and
+    #                       IPv6 addresses.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>If no explicit <code>NetworkType</code> is provided, the network type is
+    #                   derived based on the subnet group's configuration.</p>
+    #            </note>
     #   @return [String]
     class CreateClusterRequest < Struct.new(
       :cluster_name,
@@ -288,6 +339,7 @@ module Aws::DAX
       :tags,
       :sse_specification,
       :cluster_endpoint_encryption_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -359,7 +411,8 @@ module Aws::DAX
     end
 
     # @!attribute cluster_name
-    #   <p>The name of the DAX cluster from which you want to remove nodes.</p>
+    #   <p>The name of the DAX cluster from which you want to remove
+    #               nodes.</p>
     #   @return [String]
     # @!attribute new_replication_factor
     #   <p>The new number of nodes for the DAX cluster.</p>
@@ -381,8 +434,8 @@ module Aws::DAX
     end
 
     # @!attribute cluster
-    #   <p>A description of the DAX cluster, after you have decreased its replication
-    #               factor.</p>
+    #   <p>A description of the DAX cluster, after you have decreased its
+    #               replication factor.</p>
     #   @return [Types::Cluster]
     class DecreaseReplicationFactorResponse < Struct.new(
       :cluster,
@@ -460,7 +513,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
@@ -482,7 +535,7 @@ module Aws::DAX
     #   @return [String]
     # @!attribute clusters
     #   <p>The descriptions of your DAX clusters, in response to a
-    #               <i>DescribeClusters</i> request.</p>
+    #                   <i>DescribeClusters</i> request.</p>
     #   @return [Array<Types::Cluster>]
     class DescribeClustersResponse < Struct.new(
       :next_token,
@@ -496,7 +549,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
@@ -516,7 +569,7 @@ module Aws::DAX
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>A list of parameters.  Each element in the list represents one parameter.</p>
+    #   <p>A list of parameters. Each element in the list represents one parameter.</p>
     #   @return [Array<Types::Parameter>]
     class DescribeDefaultParametersResponse < Struct.new(
       :next_token,
@@ -549,7 +602,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
@@ -574,7 +627,7 @@ module Aws::DAX
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     # @!attribute events
-    #   <p>An array of events.  Each element in the array represents one event.</p>
+    #   <p>An array of events. Each element in the array represents one event.</p>
     #   @return [Array<Types::Event>]
     class DescribeEventsResponse < Struct.new(
       :next_token,
@@ -591,7 +644,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
@@ -612,7 +665,8 @@ module Aws::DAX
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     # @!attribute parameter_groups
-    #   <p>An array of parameter groups.  Each element in the array represents one parameter group.</p>
+    #   <p>An array of parameter groups. Each element in the array represents one parameter
+    #               group.</p>
     #   @return [Array<Types::ParameterGroup>]
     class DescribeParameterGroupsResponse < Struct.new(
       :next_token,
@@ -633,7 +687,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
@@ -655,7 +709,8 @@ module Aws::DAX
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>A list of parameters within a parameter group.  Each element in the list represents one parameter.</p>
+    #   <p>A list of parameters within a parameter group. Each element in the list represents
+    #               one parameter.</p>
     #   @return [Array<Types::Parameter>]
     class DescribeParametersResponse < Struct.new(
       :next_token,
@@ -672,7 +727,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #               <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
@@ -693,7 +748,8 @@ module Aws::DAX
     #   <p>Provides an identifier to allow retrieval of paginated results.</p>
     #   @return [String]
     # @!attribute subnet_groups
-    #   <p>An array of subnet groups.  Each element in the array represents a single subnet group.</p>
+    #   <p>An array of subnet groups. Each element in the array represents a single subnet
+    #               group.</p>
     #   @return [Array<Types::SubnetGroup>]
     class DescribeSubnetGroupsResponse < Struct.new(
       :next_token,
@@ -703,8 +759,8 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents the information required for client programs to connect to the
-    #             endpoint for a DAX cluster.</p>
+    # <p>Represents the information required for client programs to connect to the endpoint
+    #             for a DAX cluster.</p>
     # @!attribute address
     #   <p>The DNS hostname of the endpoint.</p>
     #   @return [String]
@@ -712,8 +768,8 @@ module Aws::DAX
     #   <p>The port number that applications should use to connect to the endpoint.</p>
     #   @return [Integer]
     # @!attribute url
-    #   <p>The URL that applications should use to connect to the endpoint. The default
-    #               ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.</p>
+    #   <p>The URL that applications should use to connect to the endpoint. The default ports
+    #               are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.</p>
     #   @return [String]
     class Endpoint < Struct.new(
       :address,
@@ -730,8 +786,8 @@ module Aws::DAX
     end
 
     # <p>Represents a single occurrence of something interesting within the system. Some
-    #             examples of events are creating a DAX cluster, adding or removing a node, or rebooting
-    #             a node.</p>
+    #             examples of events are creating a DAX cluster, adding or removing a node, or rebooting a
+    #             node.</p>
     # @!attribute source_name
     #   <p>The source of the event. For example, if the event occurred at the node level, the
     #               source would be the node ID.</p>
@@ -764,8 +820,8 @@ module Aws::DAX
     #   @return [Integer]
     # @!attribute availability_zones
     #   <p>The Availability Zones (AZs) in which the cluster nodes will be created. All nodes
-    #               belonging to the cluster are placed in these Availability Zones. Use this parameter if you want
-    #               to distribute the nodes across multiple AZs.</p>
+    #               belonging to the cluster are placed in these Availability Zones. Use this parameter if
+    #               you want to distribute the nodes across multiple AZs.</p>
     #   @return [Array<String>]
     class IncreaseReplicationFactorRequest < Struct.new(
       :cluster_name,
@@ -777,7 +833,8 @@ module Aws::DAX
     end
 
     # @!attribute cluster
-    #   <p>A description of the DAX cluster. with its new replication factor.</p>
+    #   <p>A description of the DAX cluster, with its new replication
+    #               factor.</p>
     #   @return [Types::Cluster]
     class IncreaseReplicationFactorResponse < Struct.new(
       :cluster,
@@ -807,8 +864,8 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The requested DAX cluster is not in the <i>available</i>
-    #             state.</p>
+    # <p>The requested DAX cluster is not in the
+    #                 <i>available</i> state.</p>
     # @!attribute message
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
@@ -888,8 +945,9 @@ module Aws::DAX
     #   <p>A list of tags currently associated with the DAX cluster.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute next_token
-    #   <p>If this value is present, there are additional results to be displayed.  To retrieve them, call 
-    #               <code>ListTags</code> again, with <code>NextToken</code> set to this value.</p>
+    #   <p>If this value is present, there are additional results to be displayed. To retrieve
+    #               them, call <code>ListTags</code> again, with <code>NextToken</code> set to this
+    #               value.</p>
     #   @return [String]
     class ListTagsResponse < Struct.new(
       :tags,
@@ -906,8 +964,8 @@ module Aws::DAX
     # @!attribute endpoint
     #   <p>The endpoint for the node, consisting of a DNS name and a port number. Client
     #               applications can connect directly to a node endpoint, if desired (as an alternative to
-    #               allowing DAX client software to intelligently route requests and responses to nodes in
-    #               the DAX cluster.</p>
+    #               allowing DAX client software to intelligently route requests and
+    #               responses to nodes in the DAX cluster.</p>
     #   @return [Types::Endpoint]
     # @!attribute node_create_time
     #   <p>The date and time (in UNIX epoch format) when the node was launched.</p>
@@ -955,8 +1013,7 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You have attempted to exceed the maximum number of nodes for your AWS
-    #             account.</p>
+    # <p>You have attempted to exceed the maximum number of nodes for your Amazon Web Services account.</p>
     # @!attribute message
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
@@ -986,12 +1043,12 @@ module Aws::DAX
     #             publishing DAX events to subscribers using Amazon Simple Notification Service
     #             (SNS).</p>
     # @!attribute topic_arn
-    #   <p>The Amazon Resource Name (ARN) that identifies the topic. </p>
+    #   <p>The Amazon Resource Name (ARN) that identifies the topic.</p>
     #   @return [String]
     # @!attribute topic_status
     #   <p>The current state of the topic. A value of “active” means that notifications will
-    #           be sent to the topic. A value of “inactive” means that notifications will not be sent to the
-    #           topic.</p>
+    #               be sent to the topic. A value of “inactive” means that notifications will not be sent to
+    #               the topic.</p>
     #   @return [String]
     class NotificationConfiguration < Struct.new(
       :topic_arn,
@@ -1053,8 +1110,7 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A named set of parameters that are applied to all of the nodes in a DAX
-    #             cluster.</p>
+    # <p>A named set of parameters that are applied to all of the nodes in a DAX cluster.</p>
     # @!attribute parameter_group_name
     #   <p>The name of the parameter group.</p>
     #   @return [String]
@@ -1134,7 +1190,8 @@ module Aws::DAX
     end
 
     # @!attribute cluster_name
-    #   <p>The name of the DAX cluster containing the node to be rebooted.</p>
+    #   <p>The name of the DAX cluster containing the node to be
+    #               rebooted.</p>
     #   @return [String]
     # @!attribute node_id
     #   <p>The system-assigned ID of the node to be rebooted.</p>
@@ -1148,7 +1205,8 @@ module Aws::DAX
     end
 
     # @!attribute cluster
-    #   <p>A description of the DAX cluster after a node has been rebooted.</p>
+    #   <p>A description of the DAX cluster after a node has been
+    #               rebooted.</p>
     #   @return [Types::Cluster]
     class RebootNodeResponse < Struct.new(
       :cluster,
@@ -1157,7 +1215,8 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The description of the server-side encryption status on the specified DAX cluster.</p>
+    # <p>The description of the server-side encryption status on the specified DAX
+    #             cluster.</p>
     # @!attribute status
     #   <p>The current state of server-side encryption:</p>
     #            <ul>
@@ -1188,7 +1247,8 @@ module Aws::DAX
 
     # <p>Represents the settings used to enable server-side encryption.</p>
     # @!attribute enabled
-    #   <p>Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.</p>
+    #   <p>Indicates whether server-side encryption is enabled (true) or disabled (false) on
+    #               the cluster.</p>
     #   @return [Boolean]
     class SSESpecification < Struct.new(
       :enabled,
@@ -1223,42 +1283,48 @@ module Aws::DAX
     end
 
     # <p>You have reached the maximum number of x509 certificates that can be created for
-    #             encrypted clusters in a 30 day period. Contact AWS customer support to discuss options
-    #             for continuing to create encrypted clusters.</p>
+    #             encrypted clusters in a 30 day period. Contact Amazon Web Services customer support to
+    #             discuss options for continuing to create encrypted clusters.</p>
     class ServiceQuotaExceededException < Struct.new(
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents the subnet associated with a DAX cluster. This parameter refers to
-    #             subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with
-    #             DAX.</p>
+    # <p>Represents the subnet associated with a DAX cluster. This parameter
+    #             refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with
+    #                 DAX.</p>
     # @!attribute subnet_identifier
     #   <p>The system-assigned identifier for the subnet.</p>
     #   @return [String]
     # @!attribute subnet_availability_zone
     #   <p>The Availability Zone (AZ) for the subnet.</p>
     #   @return [String]
+    # @!attribute supported_network_types
+    #   <p>The network types supported by this subnet. Returns an array of strings that can
+    #               include <code>ipv4</code>, <code>ipv6</code>, or both, indicating whether the subnet
+    #               supports IPv4 only, IPv6 only, or dual-stack deployments.</p>
+    #   @return [Array<String>]
     class Subnet < Struct.new(
       :subnet_identifier,
       :subnet_availability_zone,
+      :supported_network_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following actions:</p>
-    #         <ul>
+    #          <ul>
     #             <li>
-    #                 <p>
-    #                     <i>CreateSubnetGroup</i>
-    #                 </p>
+    #                <p>
+    #                   <i>CreateSubnetGroup</i>
+    #                </p>
     #             </li>
     #             <li>
-    #                 <p>
-    #                     <i>ModifySubnetGroup</i>
-    #                 </p>
+    #                <p>
+    #                   <i>ModifySubnetGroup</i>
+    #                </p>
     #             </li>
     #          </ul>
     # @!attribute subnet_group_name
@@ -1273,11 +1339,17 @@ module Aws::DAX
     # @!attribute subnets
     #   <p>A list of subnets associated with the subnet group. </p>
     #   @return [Array<Types::Subnet>]
+    # @!attribute supported_network_types
+    #   <p>The network types supported by this subnet. Returns an array of strings that can
+    #               include <code>ipv4</code>, <code>ipv6</code>, or both, indicating whether the subnet
+    #               group supports IPv4 only, IPv6 only, or dual-stack deployments. </p>
+    #   @return [Array<String>]
     class SubnetGroup < Struct.new(
       :subnet_group_name,
       :description,
       :vpc_id,
       :subnets,
+      :supported_network_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1335,6 +1407,20 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The specified subnet can't be used for the requested network type. This error
+    #             occurs when either there aren't enough subnets of the required network type to create
+    #             the cluster, or when you try to use a subnet that doesn't support the requested network
+    #             type (for example, trying to create a dual-stack cluster with a subnet that doesn't have
+    #             IPv6 CIDR). </p>
+    # @!attribute message
+    #   @return [String]
+    class SubnetNotAllowedFault < Struct.new(
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request cannot be processed because it would exceed the allowed number of
     #             subnets in a subnet group.</p>
     # @!attribute message
@@ -1346,19 +1432,20 @@ module Aws::DAX
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A description of a tag.  Every tag is a key-value pair. You can add up to 50 tags to a single
-    #             DAX cluster.</p>
-    #         <p>AWS-assigned tag names and values are automatically assigned the <code>aws:</code>
-    #             prefix, which the user cannot assign. AWS-assigned tag names do not count towards the
-    #             tag limit of 50. User-assigned tag names have the prefix <code>user:</code>.</p> 
-    #         <p>You cannot backdate the application of a tag.</p>
+    # <p>A description of a tag. Every tag is a key-value pair. You can add up to 50 tags to
+    #             a single DAX cluster.</p>
+    #          <p>Amazon Web Services-assigned tag names and values are automatically assigned the
+    #                 <code>aws:</code> prefix, which the user cannot assign. Amazon Web Services-assigned
+    #             tag names do not count towards the tag limit of 50. User-assigned tag names have the
+    #             prefix <code>user:</code>.</p>
+    #          <p>You cannot backdate the application of a tag.</p>
     # @!attribute key
-    #   <p>The key for the tag.  Tag keys are case sensitive. Every DAX cluster can only have
-    #               one tag with the same key. If you try to add an existing tag (same key), the
-    #               existing tag value will be updated to the new value.</p>
+    #   <p>The key for the tag. Tag keys are case sensitive. Every DAX cluster
+    #               can only have one tag with the same key. If you try to add an existing tag (same key),
+    #               the existing tag value will be updated to the new value.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>The value of the tag. Tag values are case-sensitive and can be null. </p>
+    #   <p>The value of the tag. Tag values are case-sensitive and can be null.</p>
     #   @return [String]
     class Tag < Struct.new(
       :key,
@@ -1389,7 +1476,8 @@ module Aws::DAX
     end
 
     # @!attribute resource_name
-    #   <p>The name of the DAX resource to which tags should be added.</p>
+    #   <p>The name of the DAX resource to which tags should be
+    #               added.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags to be assigned to the DAX resource. </p>
@@ -1413,10 +1501,12 @@ module Aws::DAX
     end
 
     # @!attribute resource_name
-    #   <p>The name of the DAX resource from which the tags should be removed.</p>
+    #   <p>The name of the DAX resource from which the tags should be
+    #               removed.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>A list of tag keys. If the DAX cluster has any tags with these keys, then the tags are removed from the cluster.</p>
+    #   <p>A list of tag keys. If the DAX cluster has any tags with these keys,
+    #               then the tags are removed from the cluster.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
       :resource_name,
@@ -1452,15 +1542,16 @@ module Aws::DAX
     #   @return [String]
     # @!attribute notification_topic_status
     #   <p>The current state of the topic. A value of “active” means that notifications will
-    #           be sent to the topic. A value of “inactive” means that notifications will not be sent to the
-    #           topic.</p>
+    #               be sent to the topic. A value of “inactive” means that notifications will not be sent to
+    #               the topic.</p>
     #   @return [String]
     # @!attribute parameter_group_name
     #   <p>The name of a parameter group for this cluster.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>A list of user-specified security group IDs to be assigned to each node in the DAX cluster.  If this parameter is not 
-    #               specified, DAX assigns the default VPC security group to each node.</p>
+    #   <p>A list of user-specified security group IDs to be assigned to each node in the DAX
+    #               cluster. If this parameter is not specified, DAX assigns the default VPC security group
+    #               to each node.</p>
     #   @return [Array<String>]
     class UpdateClusterRequest < Struct.new(
       :cluster_name,
@@ -1491,10 +1582,11 @@ module Aws::DAX
     # @!attribute parameter_name_values
     #   <p>An array of name-value pairs for the parameters in the group. Each element in the
     #               array represents a single parameter.</p>
-    #               <note>
+    #            <note>
     #               <p>
-    #                  <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p>
-    #           </note>
+    #                  <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only
+    #                   supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p>
+    #            </note>
     #   @return [Array<Types::ParameterNameValue>]
     class UpdateParameterGroupRequest < Struct.new(
       :parameter_group_name,

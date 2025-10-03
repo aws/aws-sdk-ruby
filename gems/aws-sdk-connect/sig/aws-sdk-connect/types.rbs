@@ -495,6 +495,30 @@ module Aws::Connect
       attr_accessor client_token: String?
     end
 
+    class AssociateContactWithUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?contact_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor contact_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class AssociateContactWithUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class AssociateDefaultVocabularyRequest
       include Smithy::Schema::Structure
 
@@ -640,12 +664,14 @@ module Aws::Connect
         ?instance_id: String,
         ?routing_profile_id: String,
         ?queue_configs: Array[Types::RoutingProfileQueueConfig],
+        ?manual_assignment_queue_configs: Array[Types::RoutingProfileManualAssignmentQueueConfig],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_id: String?
       attr_accessor routing_profile_id: String?
       attr_accessor queue_configs: Array[Types::RoutingProfileQueueConfig]?
+      attr_accessor manual_assignment_queue_configs: Array[Types::RoutingProfileManualAssignmentQueueConfig]?
     end
 
     class AssociateSecurityKeyRequest
@@ -1895,6 +1921,8 @@ module Aws::Connect
         ?disconnect_timestamp: Time,
         ?scheduled_timestamp: Time,
         ?segment_attributes: Hash[String, Types::ContactSearchSummarySegmentAttributeValue],
+        ?name: String,
+        ?routing_criteria: Types::RoutingCriteria,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1910,6 +1938,8 @@ module Aws::Connect
       attr_accessor disconnect_timestamp: Time?
       attr_accessor scheduled_timestamp: Time?
       attr_accessor segment_attributes: Hash[String, Types::ContactSearchSummarySegmentAttributeValue]?
+      attr_accessor name: String?
+      attr_accessor routing_criteria: Types::RoutingCriteria?
     end
 
     class ContactSearchSummaryAgentInfo
@@ -1943,10 +1973,12 @@ module Aws::Connect
 
       def initialize: (
         ?value_string: String,
+        ?value_map: Hash[String, Types::SegmentAttributeValue],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor value_string: String?
+      attr_accessor value_map: Hash[String, Types::SegmentAttributeValue]?
     end
 
     module ContactState
@@ -2488,12 +2520,16 @@ module Aws::Connect
         ?instance_id: String,
         ?name: String,
         ?values: Types::PredefinedAttributeValues,
+        ?purposes: Array[String],
+        ?attribute_configuration: Types::InputPredefinedAttributeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_id: String?
       attr_accessor name: String?
       attr_accessor values: Types::PredefinedAttributeValues?
+      attr_accessor purposes: Array[String]?
+      attr_accessor attribute_configuration: Types::InputPredefinedAttributeConfiguration?
     end
 
     class CreatePromptRequest
@@ -2641,6 +2677,7 @@ module Aws::Connect
         ?description: String,
         ?default_outbound_queue_id: String,
         ?queue_configs: Array[Types::RoutingProfileQueueConfig],
+        ?manual_assignment_queue_configs: Array[Types::RoutingProfileManualAssignmentQueueConfig],
         ?media_concurrencies: Array[Types::MediaConcurrency],
         ?tags: Hash[String, String],
         ?agent_availability_timer: String,
@@ -2652,6 +2689,7 @@ module Aws::Connect
       attr_accessor description: String?
       attr_accessor default_outbound_queue_id: String?
       attr_accessor queue_configs: Array[Types::RoutingProfileQueueConfig]?
+      attr_accessor manual_assignment_queue_configs: Array[Types::RoutingProfileManualAssignmentQueueConfig]?
       attr_accessor media_concurrencies: Array[Types::MediaConcurrency]?
       attr_accessor tags: Hash[String, String]?
       attr_accessor agent_availability_timer: String?
@@ -4602,12 +4640,14 @@ module Aws::Connect
         ?instance_id: String,
         ?routing_profile_id: String,
         ?queue_references: Array[Types::RoutingProfileQueueReference],
+        ?manual_assignment_queue_references: Array[Types::RoutingProfileQueueReference],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_id: String?
       attr_accessor routing_profile_id: String?
       attr_accessor queue_references: Array[Types::RoutingProfileQueueReference]?
+      attr_accessor manual_assignment_queue_references: Array[Types::RoutingProfileQueueReference]?
     end
 
     class DisassociateSecurityKeyRequest
@@ -6636,6 +6676,17 @@ module Aws::Connect
       COMPLETED: String
     end
 
+    class InputPredefinedAttributeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_value_validation_on_association: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_value_validation_on_association: bool?
+    end
+
     class Instance
       include Smithy::Schema::Structure
 
@@ -8026,6 +8077,40 @@ module Aws::Connect
       attr_accessor next_token: String?
     end
 
+    class ListRoutingProfileManualAssignmentQueuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?routing_profile_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor routing_profile_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRoutingProfileManualAssignmentQueuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?routing_profile_manual_assignment_queue_config_summary_list: Array[Types::RoutingProfileManualAssignmentQueueConfigSummary],
+        ?last_modified_time: Time,
+        ?last_modified_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor routing_profile_manual_assignment_queue_config_summary_list: Array[Types::RoutingProfileManualAssignmentQueueConfigSummary]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor last_modified_region: String?
+    end
+
     class ListRoutingProfileQueuesRequest
       include Smithy::Schema::Structure
 
@@ -8736,6 +8821,19 @@ module Aws::Connect
 
       attr_accessor contact_id: String?
       attr_accessor contact_arn: String?
+    end
+
+    class NameCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_text: Array[String],
+        ?match_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_text: Array[String]?
+      attr_accessor match_type: String?
     end
 
     class NewSessionDetails
@@ -9461,6 +9559,8 @@ module Aws::Connect
       def initialize: (
         ?name: String,
         ?values: Types::PredefinedAttributeValues,
+        ?purposes: Array[String],
+        ?attribute_configuration: Types::PredefinedAttributeConfiguration,
         ?last_modified_time: Time,
         ?last_modified_region: String,
       ) -> void
@@ -9468,8 +9568,23 @@ module Aws::Connect
 
       attr_accessor name: String?
       attr_accessor values: Types::PredefinedAttributeValues?
+      attr_accessor purposes: Array[String]?
+      attr_accessor attribute_configuration: Types::PredefinedAttributeConfiguration?
       attr_accessor last_modified_time: Time?
       attr_accessor last_modified_region: String?
+    end
+
+    class PredefinedAttributeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_value_validation_on_association: bool,
+        ?is_read_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_value_validation_on_association: bool?
+      attr_accessor is_read_only: bool?
     end
 
     class PredefinedAttributeSearchCriteria
@@ -10628,12 +10743,14 @@ module Aws::Connect
         ?default_outbound_queue_id: String,
         ?tags: Hash[String, String],
         ?number_of_associated_queues: Integer,
+        ?number_of_associated_manual_assignment_queues: Integer,
         ?number_of_associated_users: Integer,
         ?agent_availability_timer: String,
         ?last_modified_time: Time,
         ?last_modified_region: String,
         ?is_default: bool,
         ?associated_queue_ids: Array[String],
+        ?associated_manual_assignment_queue_ids: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10646,12 +10763,42 @@ module Aws::Connect
       attr_accessor default_outbound_queue_id: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor number_of_associated_queues: Integer?
+      attr_accessor number_of_associated_manual_assignment_queues: Integer?
       attr_accessor number_of_associated_users: Integer?
       attr_accessor agent_availability_timer: String?
       attr_accessor last_modified_time: Time?
       attr_accessor last_modified_region: String?
       attr_accessor is_default: bool?
       attr_accessor associated_queue_ids: Array[String]?
+      attr_accessor associated_manual_assignment_queue_ids: Array[String]?
+    end
+
+    class RoutingProfileManualAssignmentQueueConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_reference: Types::RoutingProfileQueueReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_reference: Types::RoutingProfileQueueReference?
+    end
+
+    class RoutingProfileManualAssignmentQueueConfigSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_id: String,
+        ?queue_arn: String,
+        ?queue_name: String,
+        ?channel: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_id: String?
+      attr_accessor queue_arn: String?
+      attr_accessor queue_name: String?
+      attr_accessor channel: String?
     end
 
     class RoutingProfileQueueConfig
@@ -11021,9 +11168,37 @@ module Aws::Connect
       attr_accessor approximate_total_count: Integer?
     end
 
+    class SearchContactsAdditionalTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?criteria: Array[Types::SearchContactsAdditionalTimeRangeCriteria],
+        ?match_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor criteria: Array[Types::SearchContactsAdditionalTimeRangeCriteria]?
+      attr_accessor match_type: String?
+    end
+
+    class SearchContactsAdditionalTimeRangeCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::SearchContactsTimeRange,
+        ?timestamp_condition: Types::SearchContactsTimestampCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::SearchContactsTimeRange?
+      attr_accessor timestamp_condition: Types::SearchContactsTimestampCondition?
+    end
+
     module SearchContactsMatchType
       MATCH_ALL: String
       MATCH_ANY: String
+      MATCH_EXACT: String
+      MATCH_NONE: String
     end
 
     class SearchContactsRequest
@@ -11077,34 +11252,58 @@ module Aws::Connect
       attr_accessor end_time: Time?
     end
 
+    module SearchContactsTimeRangeConditionType
+      NOT_EXISTS: String
+    end
+
     module SearchContactsTimeRangeType
       INITIATION_TIMESTAMP: String
       SCHEDULED_TIMESTAMP: String
       CONNECTED_TO_AGENT_TIMESTAMP: String
       DISCONNECT_TIMESTAMP: String
+      ENQUEUE_TIMESTAMP: String
+    end
+
+    class SearchContactsTimestampCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?condition_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor condition_type: String?
     end
 
     class SearchCriteria
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?name: Types::NameCriteria,
         ?agent_ids: Array[String],
         ?agent_hierarchy_groups: Types::AgentHierarchyGroups,
         ?channels: Array[String],
         ?contact_analysis: Types::ContactAnalysis,
         ?initiation_methods: Array[String],
         ?queue_ids: Array[String],
+        ?routing_criteria: Types::SearchableRoutingCriteria,
+        ?additional_time_range: Types::SearchContactsAdditionalTimeRange,
         ?searchable_contact_attributes: Types::SearchableContactAttributes,
         ?searchable_segment_attributes: Types::SearchableSegmentAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor name: Types::NameCriteria?
       attr_accessor agent_ids: Array[String]?
       attr_accessor agent_hierarchy_groups: Types::AgentHierarchyGroups?
       attr_accessor channels: Array[String]?
       attr_accessor contact_analysis: Types::ContactAnalysis?
       attr_accessor initiation_methods: Array[String]?
       attr_accessor queue_ids: Array[String]?
+      attr_accessor routing_criteria: Types::SearchableRoutingCriteria?
+      attr_accessor additional_time_range: Types::SearchContactsAdditionalTimeRange?
       attr_accessor searchable_contact_attributes: Types::SearchableContactAttributes?
       attr_accessor searchable_segment_attributes: Types::SearchableSegmentAttributes?
     end
@@ -11547,6 +11746,19 @@ module Aws::Connect
       attr_accessor next_token: String?
     end
 
+    class SearchableAgentCriteriaStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_ids: Array[String],
+        ?match_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_ids: Array[String]?
+      attr_accessor match_type: String?
+    end
+
     class SearchableContactAttributes
       include Smithy::Schema::Structure
 
@@ -11575,6 +11787,28 @@ module Aws::Connect
 
     module SearchableQueueType
       STANDARD: String
+    end
+
+    class SearchableRoutingCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::SearchableRoutingCriteriaStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::SearchableRoutingCriteriaStep]?
+    end
+
+    class SearchableRoutingCriteriaStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_criteria: Types::SearchableAgentCriteriaStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_criteria: Types::SearchableAgentCriteriaStep?
     end
 
     class SearchableSegmentAttributes
@@ -11724,12 +11958,16 @@ module Aws::Connect
         ?value_string: String,
         ?value_map: Hash[String, Types::SegmentAttributeValue],
         ?value_integer: Integer,
+        ?value_list: Array[Types::SegmentAttributeValue],
+        ?value_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor value_string: String?
       attr_accessor value_map: Hash[String, Types::SegmentAttributeValue]?
       attr_accessor value_integer: Integer?
+      attr_accessor value_list: Array[Types::SegmentAttributeValue]?
+      attr_accessor value_arn: String?
     end
 
     class SendChatIntegrationEventRequest
@@ -11923,6 +12161,7 @@ module Aws::Connect
       DISCONNECT_TIMESTAMP: String
       INITIATION_METHOD: String
       CHANNEL: String
+      EXPIRY_TIMESTAMP: String
     end
 
     class SourceCampaign
@@ -13739,12 +13978,16 @@ module Aws::Connect
         ?instance_id: String,
         ?name: String,
         ?values: Types::PredefinedAttributeValues,
+        ?purposes: Array[String],
+        ?attribute_configuration: Types::InputPredefinedAttributeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_id: String?
       attr_accessor name: String?
       attr_accessor values: Types::PredefinedAttributeValues?
+      attr_accessor purposes: Array[String]?
+      attr_accessor attribute_configuration: Types::InputPredefinedAttributeConfiguration?
     end
 
     class UpdatePromptRequest
@@ -14505,6 +14748,7 @@ module Aws::Connect
         ?auto_accept: bool,
         ?after_contact_work_time_limit: Integer,
         ?desk_phone_number: String,
+        ?persistent_connection: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -14512,6 +14756,7 @@ module Aws::Connect
       attr_accessor auto_accept: bool?
       attr_accessor after_contact_work_time_limit: Integer?
       attr_accessor desk_phone_number: String?
+      attr_accessor persistent_connection: bool?
     end
 
     class UserProficiency

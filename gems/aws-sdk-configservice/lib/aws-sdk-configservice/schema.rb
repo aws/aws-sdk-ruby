@@ -1874,6 +1874,7 @@ module Aws::ConfigService
     RemediationExecutionState.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IN_PROGRESS', traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     RemediationExecutionState.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUCCEEDED', traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     RemediationExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
+    RemediationExecutionState.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNKNOWN', traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     RemediationExecutionStatus.add_member(:resource_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceKey, location_name: 'ResourceKey'))
     RemediationExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionState, location_name: 'State'))
     RemediationExecutionStatus.add_member(:step_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionSteps, location_name: 'StepDetails'))
@@ -1890,6 +1891,9 @@ module Aws::ConfigService
     RemediationExecutionStepState.add_member(:succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUCCEEDED', traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     RemediationExecutionStepState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING', traits: {"smithy.api#enumValue" => "PENDING"}))
     RemediationExecutionStepState.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
+    RemediationExecutionStepState.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IN_PROGRESS', traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    RemediationExecutionStepState.add_member(:exited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXITED', traits: {"smithy.api#enumValue" => "EXITED"}))
+    RemediationExecutionStepState.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNKNOWN', traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     RemediationExecutionSteps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemediationExecutionStep)
     RemediationInProgressException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     RemediationInProgressException.type = Types::RemediationInProgressException

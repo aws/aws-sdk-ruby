@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::EntityResolution
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::EntityResolution
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::EntityResolution
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::EntityResolution::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::EntityResolution::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -265,7 +270,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Creates an <code>IdMappingWorkflow</code> object which stores the configuration of the data processing job to be run. Each <code>IdMappingWorkflow</code> must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.</p>
+    # <p>Creates an <code>IdMappingWorkflow</code> object which stores the configuration of the data processing job to be run. Each <code>IdMappingWorkflow</code> must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.</p> <important> <p>Incremental processing is not supported for ID mapping workflows. </p> </important>
     # @param [Hash, Types::CreateIdMappingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow. There can't be multiple <code>IdMappingWorkflows</code> with the same name.</p>
@@ -277,6 +282,8 @@ module Aws::EntityResolution
     #   <p>A list of <code>IdMappingWorkflowOutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>
     # @option params [Types::IdMappingTechniques] :id_mapping_techniques
     #   <p>An object which defines the ID mapping technique and any additional configurations.</p>
+    # @option params [Types::IdMappingIncrementalRunConfig] :incremental_run_config
+    #   <p> The incremental run configuration for the ID mapping workflow.</p>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     # @option params [Hash<String, String>] :tags
@@ -287,7 +294,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName",
     #         type: "SOURCE" # One of: ["SOURCE", "TARGET"]
     #       }
@@ -319,6 +326,9 @@ module Aws::EntityResolution
     #         }
     #       }
     #     },
+    #     incremental_run_config: {
+    #       incremental_run_type: "ON_DEMAND" # One of: ["ON_DEMAND"]
+    #     },
     #     role_arn: "IdMappingRoleArn",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -334,7 +344,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName",
     #         type: "SOURCE" # One of: ["SOURCE", "TARGET"]
     #       }
@@ -365,6 +375,9 @@ module Aws::EntityResolution
     #           intermediate_s3_path: "S3Path", # required
     #         }
     #       }
+    #     },
+    #     incremental_run_config: {
+    #       incremental_run_type: "ON_DEMAND" # One of: ["ON_DEMAND"]
     #     },
     #     role_arn: "IdMappingRoleArn"
     #   }
@@ -396,7 +409,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName"
     #       }
     #     ],
@@ -436,7 +449,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName"
     #       }
     #     ],
@@ -474,7 +487,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Creates a matching workflow that defines the configuration for a data processing job. The workflow name must be unique. To modify an existing workflow, use <code>UpdateMatchingWorkflow</code>. </p> <important> <p>For workflows where <code>resolutionType</code> is ML_MATCHING, incremental processing is not supported. </p> </important>
+    # <p>Creates a matching workflow that defines the configuration for a data processing job. The workflow name must be unique. To modify an existing workflow, use <code>UpdateMatchingWorkflow</code>. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @param [Hash, Types::CreateMatchingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow. There can't be multiple <code>MatchingWorkflows</code> with the same name.</p>
@@ -487,7 +500,7 @@ module Aws::EntityResolution
     # @option params [Types::ResolutionTechniques] :resolution_techniques
     #   <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
     # @option params [Types::IncrementalRunConfig] :incremental_run_config
-    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>
+    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     # @option params [Hash<String, String>] :tags
@@ -498,7 +511,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName", # required
     #         apply_normalization: false
     #       }
@@ -562,7 +575,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName", # required
     #         apply_normalization: false
     #       }
@@ -795,7 +808,7 @@ module Aws::EntityResolution
     #     workflow_name: "EntityName", # required
     #     records: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         unique_id: "UniqueId", # required
     #         record_attribute_map: { # required
     #           "String" => "String"
@@ -813,7 +826,7 @@ module Aws::EntityResolution
     #       {
     #         records: [ # required
     #           {
-    #             input_source_arn: "String", # required
+    #             input_source_arn: "InputSourceARN", # required
     #             record_id: "String", # required
     #           }
     #         ],
@@ -823,7 +836,7 @@ module Aws::EntityResolution
     #     ],
     #     failed_records: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         unique_id: "String", # required
     #         error_message: "ErrorMessage", # required
     #       }
@@ -859,10 +872,18 @@ module Aws::EntityResolution
     #       input_records: 1,
     #       total_records_processed: 1,
     #       records_not_processed: 1,
+    #       delete_records_processed: 1,
     #       total_mapped_records: 1,
     #       total_mapped_source_records: 1,
     #       total_mapped_target_records: 1,
-    #       unique_records_loaded: 1
+    #       unique_records_loaded: 1,
+    #       new_mapped_records: 1,
+    #       new_mapped_source_records: 1,
+    #       new_mapped_target_records: 1,
+    #       new_unique_records_loaded: 1,
+    #       mapped_records_removed: 1,
+    #       mapped_source_records_removed: 1,
+    #       mapped_target_records_removed: 1
     #     },
     #     error_details: {
     #       error_message: "ErrorMessage"
@@ -873,7 +894,8 @@ module Aws::EntityResolution
     #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn"
     #       }
-    #     ]
+    #     ],
+    #     job_type: "BATCH" # One of: ["BATCH", "INCREMENTAL", "DELETE_ONLY"]
     #   }
     # @return [Types::GetIdMappingJobOutput]
     def get_id_mapping_job(params = {}, options = {})
@@ -899,7 +921,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName",
     #         type: "SOURCE" # One of: ["SOURCE", "TARGET"]
     #       }
@@ -933,6 +955,9 @@ module Aws::EntityResolution
     #     },
     #     created_at: Time.now, # required
     #     updated_at: Time.now, # required
+    #     incremental_run_config: {
+    #       incremental_run_type: "ON_DEMAND" # One of: ["ON_DEMAND"]
+    #     },
     #     role_arn: "IdMappingRoleArn",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -962,7 +987,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName"
     #       }
     #     ],
@@ -1000,7 +1025,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Returns the corresponding Match ID of a customer record if the record has been processed in a rule-based matching workflow or ML matching workflow.</p> <p>You can call this API as a dry run of an incremental load on the rule-based matching workflow.</p>
+    # <p>Returns the corresponding Match ID of a customer record if the record has been processed in a rule-based matching workflow.</p> <p>You can call this API as a dry run of an incremental load on the rule-based matching workflow.</p>
     # @param [Hash, Types::GetMatchIdInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow.</p>
@@ -1054,6 +1079,7 @@ module Aws::EntityResolution
     #       input_records: 1,
     #       total_records_processed: 1,
     #       records_not_processed: 1,
+    #       delete_records_processed: 1,
     #       match_i_ds: 1
     #     },
     #     error_details: {
@@ -1091,7 +1117,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName", # required
     #         apply_normalization: false
     #       }
@@ -1579,6 +1605,8 @@ module Aws::EntityResolution
     #   <p>The name of the ID mapping job to be retrieved.</p>
     # @option params [Array<Types::IdMappingJobOutputSource>] :output_source_config
     #   <p>A list of <code>OutputSource</code> objects.</p>
+    # @option params [String] :job_type
+    #   <p> The job type for the ID mapping job.</p> <p>If the <code>jobType</code> value is set to <code>INCREMENTAL</code>, only new or changed data is processed since the last job run. This is the default value if the <code>CreateIdMappingWorkflow</code> API is configured with an <code>incrementalRunConfig</code>.</p> <p>If the <code>jobType</code> value is set to <code>BATCH</code>, all data is processed from the input source, regardless of previous job runs. This is the default value if the <code>CreateIdMappingWorkflow</code> API isn't configured with an <code>incrementalRunConfig</code>.</p> <p>If the <code>jobType</code> value is set to <code>DELETE_ONLY</code>, only deletion requests from <code>BatchDeleteUniqueIds</code> are processed.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workflow_name: "EntityNameOrIdMappingWorkflowArn", # required
@@ -1588,7 +1616,8 @@ module Aws::EntityResolution
     #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn"
     #       }
-    #     ]
+    #     ],
+    #     job_type: "BATCH" # One of: ["BATCH", "INCREMENTAL", "DELETE_ONLY"]
     #   }
     #   options = {}
     #   response = client.start_id_mapping_job(params, options)
@@ -1602,7 +1631,8 @@ module Aws::EntityResolution
     #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn"
     #       }
-    #     ]
+    #     ],
+    #     job_type: "BATCH" # One of: ["BATCH", "INCREMENTAL", "DELETE_ONLY"]
     #   }
     # @return [Types::StartIdMappingJobOutput]
     def start_id_mapping_job(params = {}, options = {})
@@ -1677,7 +1707,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Updates an existing <code>IdMappingWorkflow</code>. This method is identical to CreateIdMappingWorkflow, except it uses an HTTP <code>PUT</code> request instead of a <code>POST</code> request, and the <code>IdMappingWorkflow</code> must already exist for the method to succeed.</p>
+    # <p>Updates an existing <code>IdMappingWorkflow</code>. This method is identical to CreateIdMappingWorkflow, except it uses an HTTP <code>PUT</code> request instead of a <code>POST</code> request, and the <code>IdMappingWorkflow</code> must already exist for the method to succeed.</p> <important> <p>Incremental processing is not supported for ID mapping workflows. </p> </important>
     # @param [Hash, Types::UpdateIdMappingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow.</p>
@@ -1689,6 +1719,8 @@ module Aws::EntityResolution
     #   <p>A list of <code>OutputSource</code> objects, each of which contains fields <code>outputS3Path</code> and <code>KMSArn</code>.</p>
     # @option params [Types::IdMappingTechniques] :id_mapping_techniques
     #   <p>An object which defines the ID mapping technique and any additional configurations.</p>
+    # @option params [Types::IdMappingIncrementalRunConfig] :incremental_run_config
+    #   <p> The incremental run configuration for the update ID mapping workflow.</p>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access Amazon Web Services resources on your behalf.</p>
     # @example Request syntax with placeholder values
@@ -1697,7 +1729,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName",
     #         type: "SOURCE" # One of: ["SOURCE", "TARGET"]
     #       }
@@ -1729,6 +1761,9 @@ module Aws::EntityResolution
     #         }
     #       }
     #     },
+    #     incremental_run_config: {
+    #       incremental_run_type: "ON_DEMAND" # One of: ["ON_DEMAND"]
+    #     },
     #     role_arn: "IdMappingRoleArn"
     #   }
     #   options = {}
@@ -1741,7 +1776,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName",
     #         type: "SOURCE" # One of: ["SOURCE", "TARGET"]
     #       }
@@ -1772,6 +1807,9 @@ module Aws::EntityResolution
     #           intermediate_s3_path: "S3Path", # required
     #         }
     #       }
+    #     },
+    #     incremental_run_config: {
+    #       incremental_run_type: "ON_DEMAND" # One of: ["ON_DEMAND"]
     #     },
     #     role_arn: "IdMappingRoleArn"
     #   }
@@ -1799,7 +1837,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName"
     #       }
     #     ],
@@ -1835,7 +1873,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName"
     #       }
     #     ],
@@ -1870,7 +1908,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Updates an existing matching workflow. The workflow must already exist for this operation to succeed.</p> <important> <p>For workflows where <code>resolutionType</code> is ML_MATCHING, incremental processing is not supported. </p> </important>
+    # <p>Updates an existing matching workflow. The workflow must already exist for this operation to succeed.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @param [Hash, Types::UpdateMatchingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow to be retrieved.</p>
@@ -1883,7 +1921,7 @@ module Aws::EntityResolution
     # @option params [Types::ResolutionTechniques] :resolution_techniques
     #   <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
     # @option params [Types::IncrementalRunConfig] :incremental_run_config
-    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>
+    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     # @example Request syntax with placeholder values
@@ -1892,7 +1930,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName", # required
     #         apply_normalization: false
     #       }
@@ -1952,7 +1990,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     input_source_config: [ # required
     #       {
-    #         input_source_arn: "String", # required
+    #         input_source_arn: "InputSourceARN", # required
     #         schema_name: "EntityName", # required
     #         apply_normalization: false
     #       }

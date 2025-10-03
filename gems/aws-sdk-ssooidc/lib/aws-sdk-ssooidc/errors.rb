@@ -55,6 +55,11 @@ module Aws::SSOOIDC
         @data[:error]
       end
 
+      # <p>A string that uniquely identifies a reason for the error.</p>
+      def reason
+        @data[:reason]
+      end
+
       # <p>Human-readable text providing additional information, used to assist the client developer
       #       in understanding the error that occurred.</p>
       def error_description
@@ -226,6 +231,11 @@ module Aws::SSOOIDC
       #       <code>invalid_request</code>.</p>
       def error
         @data[:error]
+      end
+
+      # <p>A string that uniquely identifies a reason for the error.</p>
+      def reason
+        @data[:reason]
       end
 
       # <p>Human-readable text providing additional information, used to assist the client developer

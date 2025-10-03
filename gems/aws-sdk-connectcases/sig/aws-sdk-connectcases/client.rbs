@@ -7,6 +7,7 @@ module Aws::ConnectCases
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -240,6 +241,23 @@ module Aws::ConnectCases
             ],
             target_sla_minutes: Integer
           }
+        },
+        connect_case: {
+          case_id: String
+        },
+        custom: {
+          fields: Array[
+            {
+              id: untyped,
+              value: {
+                string_value: untyped,
+                double_value: untyped,
+                boolean_value: untyped,
+                empty_value: untyped,
+                user_arn_value: untyped
+              }
+            }
+          ]
         }
       },
       ?performed_by: {
@@ -527,6 +545,75 @@ module Aws::ConnectCases
       }
     ) -> _PutCaseEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCaseEventConfigurationResponse
 
+    interface _SearchAllRelatedItemsResponse
+      include Smithy::Client::_Response[Types::SearchAllRelatedItemsResponse]
+      def next_token: () -> String?
+      def related_items: () -> Array[Types::SearchAllRelatedItemsResponseItem?]?
+    end
+    def search_all_related_items: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          contact: {
+            channel: Array[String],
+            contact_arn: String
+          },
+          comment: {
+          },
+          file: {
+            file_arn: String
+          },
+          sla: {
+            name: String,
+            status: String
+          },
+          connect_case: {
+            case_id: String
+          },
+          custom: {
+            fields: {
+              field: {
+                equal_to: {
+                  id: String,
+                  value: {
+                    string_value: String,
+                    double_value: Float,
+                    boolean_value: bool,
+                    empty_value: {
+                    },
+                    user_arn_value: untyped
+                  }
+                },
+                contains: untyped,
+                greater_than: untyped,
+                greater_than_or_equal_to: untyped,
+                less_than: untyped,
+                less_than_or_equal_to: untyped
+              },
+              not: untyped,
+              and_all: Array[
+                {
+                  field: untyped,
+                  not: untyped,
+                  and_all: untyped,
+                  or_all: untyped
+                }
+              ],
+              or_all: untyped
+            }
+          }
+        }
+      ],
+      ?sorts: Array[
+        {
+          sort_property: String,
+          sort_order: String
+        }
+      ]
+    ) -> _SearchAllRelatedItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAllRelatedItemsResponse
+
     interface _SearchCasesResponse
       include Smithy::Client::_Response[Types::SearchCasesOutput]
       def next_token: () -> String?
@@ -604,6 +691,41 @@ module Aws::ConnectCases
           sla: {
             name: String,
             status: String
+          },
+          connect_case: {
+            case_id: String
+          },
+          custom: {
+            fields: {
+              field: {
+                equal_to: {
+                  id: String,
+                  value: {
+                    string_value: String,
+                    double_value: Float,
+                    boolean_value: bool,
+                    empty_value: {
+                    },
+                    user_arn_value: untyped
+                  }
+                },
+                contains: untyped,
+                greater_than: untyped,
+                greater_than_or_equal_to: untyped,
+                less_than: untyped,
+                less_than_or_equal_to: untyped
+              },
+              not: untyped,
+              and_all: Array[
+                {
+                  field: untyped,
+                  not: untyped,
+                  and_all: untyped,
+                  or_all: untyped
+                }
+              ],
+              or_all: untyped
+            }
           }
         }
       ]

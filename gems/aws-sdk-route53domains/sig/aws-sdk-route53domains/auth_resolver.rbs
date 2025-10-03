@@ -1,5 +1,5 @@
 module Aws::Route53Domains
   class AuthResolver
-    def resolve: (AuthParameters) -> Array[String]
+    def resolve: (AuthParameters) -> Array[Smithy::Client::AuthOption]
   end
 end

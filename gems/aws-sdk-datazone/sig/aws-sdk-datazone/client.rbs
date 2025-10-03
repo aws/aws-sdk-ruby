@@ -7,6 +7,7 @@ module Aws::DataZone
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -600,7 +601,8 @@ module Aws::DataZone
           log_uri: untyped,
           python_virtual_env: untyped,
           runtime_role: untyped,
-          trusted_certificates_s3_uri: untyped
+          trusted_certificates_s3_uri: untyped,
+          managed_endpoint_arn: untyped
         },
         spark_glue_properties: {
           additional_args: {
@@ -913,6 +915,41 @@ module Aws::DataZone
       },
       ?description: String
     ) -> _CreateEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentActionResponse
+
+    interface _CreateEnvironmentBlueprintResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentBlueprintOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def provider: () -> String?
+      def provisioning_properties: () -> Types::ProvisioningProperties?
+      def deployment_properties: () -> Types::DeploymentProperties?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+      def glossary_terms: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_environment_blueprint: (
+      ?domain_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?provisioning_properties: {
+        cloud_formation: {
+          template_url: String
+        }
+      },
+      ?user_parameters: Array[
+        {
+          key_name: String,
+          description: String,
+          field_type: untyped,
+          default_value: untyped,
+          is_editable: bool,
+          is_optional: untyped,
+          is_update_supported: untyped
+        }
+      ]
+    ) -> _CreateEnvironmentBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentBlueprintResponse
 
     interface _CreateEnvironmentProfileResponse
       include Smithy::Client::_Response[Types::CreateEnvironmentProfileOutput]
@@ -1439,6 +1476,14 @@ module Aws::DataZone
       ?environment_identifier: String,
       ?identifier: String
     ) -> _DeleteEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentActionResponse
+
+    interface _DeleteEnvironmentBlueprintResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_environment_blueprint: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteEnvironmentBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentBlueprintResponse
 
     interface _DeleteEnvironmentBlueprintConfigurationResponse
       include Smithy::Client::_Response[Types::DeleteEnvironmentBlueprintConfigurationOutput]
@@ -2810,6 +2855,7 @@ module Aws::DataZone
       ?regional_parameters: Hash[String,
         Hash[String, String]
       ],
+      ?global_parameters: Hash[String, String],
       ?provisioning_configurations: Array[
         {
           lake_formation_configuration: {
@@ -3346,7 +3392,8 @@ module Aws::DataZone
           log_uri: untyped,
           python_virtual_env: untyped,
           runtime_role: untyped,
-          trusted_certificates_s3_uri: untyped
+          trusted_certificates_s3_uri: untyped,
+          managed_endpoint_arn: untyped
         },
         s3_properties: {
           s3_uri: String,
@@ -3551,6 +3598,41 @@ module Aws::DataZone
       ?name: String,
       ?description: String
     ) -> _UpdateEnvironmentActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentActionResponse
+
+    interface _UpdateEnvironmentBlueprintResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentBlueprintOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def provider: () -> String?
+      def provisioning_properties: () -> Types::ProvisioningProperties?
+      def deployment_properties: () -> Types::DeploymentProperties?
+      def user_parameters: () -> Array[Types::CustomParameter]?
+      def glossary_terms: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_environment_blueprint: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?description: String,
+      ?provisioning_properties: {
+        cloud_formation: {
+          template_url: String
+        }
+      },
+      ?user_parameters: Array[
+        {
+          key_name: String,
+          description: String,
+          field_type: untyped,
+          default_value: untyped,
+          is_editable: bool,
+          is_optional: untyped,
+          is_update_supported: untyped
+        }
+      ]
+    ) -> _UpdateEnvironmentBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentBlueprintResponse
 
     interface _UpdateEnvironmentProfileResponse
       include Smithy::Client::_Response[Types::UpdateEnvironmentProfileOutput]

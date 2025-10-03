@@ -150,6 +150,7 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest: StructureShape
     Distribution: EnumShape
     DynamicTokenPosition: IntegerShape
+    EmitSystemFields: ListShape
     EncryptionKey: StringShape
     Entity: StructureShape
     EntityAttributes: MapShape
@@ -185,6 +186,7 @@ module Aws::CloudWatchLogs
     FieldIndex: StructureShape
     FieldIndexName: StringShape
     FieldIndexes: ListShape
+    FieldSelectionCriteria: StringShape
     FieldsData: StructureShape
     FilterCount: IntegerShape
     FilterLogEventsRequest: StructureShape
@@ -485,6 +487,7 @@ module Aws::CloudWatchLogs
     SuppressionState: EnumShape
     SuppressionType: EnumShape
     SuppressionUnit: EnumShape
+    SystemField: StringShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagList: ListShape

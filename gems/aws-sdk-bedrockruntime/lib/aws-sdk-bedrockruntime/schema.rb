@@ -972,6 +972,7 @@ module Aws::BedrockRuntime
     StopReason.add_member(:stop_sequence, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STOP_SEQUENCE', traits: {"smithy.api#enumValue" => "stop_sequence"}))
     StopReason.add_member(:guardrail_intervened, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'GUARDRAIL_INTERVENED', traits: {"smithy.api#enumValue" => "guardrail_intervened"}))
     StopReason.add_member(:content_filtered, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CONTENT_FILTERED', traits: {"smithy.api#enumValue" => "content_filtered"}))
+    StopReason.add_member(:model_context_window_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MODEL_CONTEXT_WINDOW_EXCEEDED', traits: {"smithy.api#enumValue" => "model_context_window_exceeded"}))
     SystemContentBlock.add_member(:text, Types::SystemContentBlock::Text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'text'))
     SystemContentBlock.add_member(:guard_content, Types::SystemContentBlock::GuardContent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailConverseContentBlock, location_name: 'guardContent'))
     SystemContentBlock.add_member(:cache_point, Types::SystemContentBlock::CachePoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CachePointBlock, location_name: 'cachePoint'))
@@ -1069,6 +1070,7 @@ module Aws::BedrockRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply"}}

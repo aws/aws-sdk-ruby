@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::BedrockAgentRuntime
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::BedrockAgentRuntime
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::BedrockAgentRuntime
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::BedrockAgentRuntime::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::BedrockAgentRuntime::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -1920,7 +1925,21 @@ module Aws::BedrockAgentRuntime
     #                 content: { # required
     #                   # One of:
     #                   document: ""null""
-    #                 }
+    #                 },
+    #                 source: {
+    #                   node_name: "NodeName", # required
+    #                   output_field_name: "FlowNodeOutputName", # required
+    #                   expression: "FlowNodeInputExpression", # required
+    #                 },
+    #                 type: "String" # One of: ["String", "Number", "Boolean", "Object", "Array"],
+    #                 category: "LoopCondition" # One of: ["LoopCondition", "ReturnValueToLoopStart", "ExitLoop"],
+    #                 execution_chain: [
+    #                   {
+    #                     node_name: "NodeName", # required
+    #                     index: 1,
+    #                     type: "Iterator" # One of: ["Iterator", "Loop"], # required
+    #                   }
+    #                 ]
     #               }
     #             ]
     #           },
@@ -1933,7 +1952,14 @@ module Aws::BedrockAgentRuntime
     #                 content: { # required
     #                   # One of:
     #                   document: ""null""
-    #                 }
+    #                 },
+    #                 next: [
+    #                   {
+    #                     node_name: "NodeName", # required
+    #                     input_field_name: "FlowNodeInputName", # required
+    #                   }
+    #                 ],
+    #                 type: "String" # One of: ["String", "Number", "Boolean", "Object", "Array"]
     #               }
     #             ]
     #           },
@@ -1952,6 +1978,906 @@ module Aws::BedrockAgentRuntime
     #             request_id: "String", # required
     #             service_name: "String", # required
     #             operation_name: "String", # required
+    #             operation_request: ""null"",
+    #             operation_response: ""null""
+    #           },
+    #           node_dependency_trace: {
+    #             node_name: "NodeName", # required
+    #             timestamp: Time.now, # required
+    #             trace_elements: { # required
+    #               # One of:
+    #               agent_traces: [
+    #                 {
+    #                   session_id: "SessionId",
+    #                   trace: {
+    #                     # One of:
+    #                     guardrail_trace: {
+    #                       action: "INTERVENED" # One of: ["INTERVENED", "NONE"],
+    #                       trace_id: "TraceId",
+    #                       input_assessments: [
+    #                         {
+    #                           topic_policy: {
+    #                             topics: [
+    #                               {
+    #                                 name: "String",
+    #                                 type: "DENY" # One of: ["DENY"],
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           content_policy: {
+    #                             filters: [
+    #                               {
+    #                                 type: "INSULTS" # One of: ["INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"],
+    #                                 confidence: "NONE" # One of: ["NONE", "LOW", "MEDIUM", "HIGH"],
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           word_policy: {
+    #                             custom_words: [
+    #                               {
+    #                                 match: "String",
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ],
+    #                             managed_word_lists: [
+    #                               {
+    #                                 match: "String",
+    #                                 type: "PROFANITY" # One of: ["PROFANITY"],
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           sensitive_information_policy: {
+    #                             pii_entities: [
+    #                               {
+    #                                 type: "ADDRESS" # One of: ["ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"],
+    #                                 match: "String",
+    #                                 action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                               }
+    #                             ],
+    #                             regexes: [
+    #                               {
+    #                                 name: "String",
+    #                                 regex: "String",
+    #                                 match: "String",
+    #                                 action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                               }
+    #                             ]
+    #                           }
+    #                         }
+    #                       ],
+    #                       output_assessments: [
+    #                         {
+    #                           topic_policy: {
+    #                             topics: [
+    #                               {
+    #                                 name: "String",
+    #                                 type: "DENY" # One of: ["DENY"],
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           content_policy: {
+    #                             filters: [
+    #                               {
+    #                                 type: "INSULTS" # One of: ["INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"],
+    #                                 confidence: "NONE" # One of: ["NONE", "LOW", "MEDIUM", "HIGH"],
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           word_policy: {
+    #                             custom_words: [
+    #                               {
+    #                                 match: "String",
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ],
+    #                             managed_word_lists: [
+    #                               {
+    #                                 match: "String",
+    #                                 type: "PROFANITY" # One of: ["PROFANITY"],
+    #                                 action: "BLOCKED" # One of: ["BLOCKED"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           sensitive_information_policy: {
+    #                             pii_entities: [
+    #                               {
+    #                                 type: "ADDRESS" # One of: ["ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"],
+    #                                 match: "String",
+    #                                 action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                               }
+    #                             ],
+    #                             regexes: [
+    #                               {
+    #                                 name: "String",
+    #                                 regex: "String",
+    #                                 match: "String",
+    #                                 action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                               }
+    #                             ]
+    #                           }
+    #                         }
+    #                       ],
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     pre_processing_trace: {
+    #                       # One of:
+    #                       model_invocation_input: {
+    #                         trace_id: "TraceId",
+    #                         text: "PromptText",
+    #                         type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                         override_lambda: "LambdaArn",
+    #                         prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         inference_configuration: {
+    #                           temperature: 1.0,
+    #                           top_p: 1.0,
+    #                           top_k: 1,
+    #                           maximum_length: 1,
+    #                           stop_sequences: ["String"]
+    #                         },
+    #                         parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         foundation_model: "ModelIdentifier"
+    #                       },
+    #                       model_invocation_output: {
+    #                         trace_id: "TraceId",
+    #                         parsed_response: {
+    #                           rationale: "RationaleString",
+    #                           is_valid: false
+    #                         },
+    #                         raw_response: {
+    #                           content: "String"
+    #                         },
+    #                         metadata: {
+    #                           start_time: Time.now,
+    #                           end_time: Time.now,
+    #                           total_time_ms: 1,
+    #                           operation_total_time_ms: 1,
+    #                           client_request_id: "String",
+    #                           usage: {
+    #                             input_tokens: 1,
+    #                             output_tokens: 1
+    #                           }
+    #                         },
+    #                         reasoning_content: {
+    #                           # One of:
+    #                           reasoning_text: {
+    #                             text: "String", # required
+    #                             signature: "String"
+    #                           },
+    #                           redacted_content: "data"
+    #                         }
+    #                       }
+    #                     },
+    #                     orchestration_trace: {
+    #                       # One of:
+    #                       rationale: {
+    #                         trace_id: "TraceId",
+    #                         text: "RationaleString"
+    #                       },
+    #                       invocation_input: {
+    #                         trace_id: "TraceId",
+    #                         invocation_type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"],
+    #                         action_group_invocation_input: {
+    #                           action_group_name: "ActionGroupName",
+    #                           verb: "Verb",
+    #                           api_path: "ApiPath",
+    #                           parameters: [
+    #                             {
+    #                               name: "String",
+    #                               type: "String",
+    #                               value: "String"
+    #                             }
+    #                           ],
+    #                           request_body: {
+    #                             content: {
+    #                               "String" => [
+    #                                 {
+    #                                   name: "String",
+    #                                   type: "String",
+    #                                   value: "String"
+    #                                 }
+    #                               ]
+    #                             }
+    #                           },
+    #                           function: "Function",
+    #                           execution_type: "LAMBDA" # One of: ["LAMBDA", "RETURN_CONTROL"],
+    #                           invocation_id: "String"
+    #                         },
+    #                         knowledge_base_lookup_input: {
+    #                           text: "KnowledgeBaseLookupInputString",
+    #                           knowledge_base_id: "TraceKnowledgeBaseId"
+    #                         },
+    #                         code_interpreter_invocation_input: {
+    #                           code: "String",
+    #                           files: ["String"]
+    #                         },
+    #                         agent_collaborator_invocation_input: {
+    #                           agent_collaborator_name: "String",
+    #                           agent_collaborator_alias_arn: "AgentAliasArn",
+    #                           input: {
+    #                             type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                             text: "AgentCollaboratorPayloadString",
+    #                             return_control_results: {
+    #                               invocation_id: "String",
+    #                               return_control_invocation_results: [{
+    #                                 # One of:
+    #                                 api_result: {
+    #                                   action_group: "String", # required
+    #                                   http_method: "String",
+    #                                   api_path: "ApiPath",
+    #                                   confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                                   response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                                   http_status_code: 1,
+    #                                   response_body: {
+    #                                     "String" => {
+    #                                       body: "String",
+    #                                       images: [
+    #                                         {
+    #                                           format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                           source: { # required
+    #                                             # One of:
+    #                                             bytes: "data"
+    #                                           }
+    #                                         }
+    #                                       ]
+    #                                     }
+    #                                   },
+    #                                   agent_id: "String"
+    #                                 },
+    #                                 function_result: {
+    #                                   action_group: "String", # required
+    #                                   confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                                   function: "String",
+    #                                   response_body: {
+    #                                     "String" => {
+    #                                       body: "String",
+    #                                       images: [
+    #                                         {
+    #                                           format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                           source: { # required
+    #                                             # One of:
+    #                                             bytes: "data"
+    #                                           }
+    #                                         }
+    #                                       ]
+    #                                     }
+    #                                   },
+    #                                   response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                                   agent_id: "String"
+    #                                 }
+    #                               }]
+    #                             }
+    #                           }
+    #                         }
+    #                       },
+    #                       observation: {
+    #                         trace_id: "TraceId",
+    #                         type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"],
+    #                         action_group_invocation_output: {
+    #                           text: "ActionGroupOutputString",
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         agent_collaborator_invocation_output: {
+    #                           agent_collaborator_name: "String",
+    #                           agent_collaborator_alias_arn: "AgentAliasArn",
+    #                           output: {
+    #                             type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                             text: "AgentCollaboratorPayloadString",
+    #                             return_control_payload: {
+    #                               invocation_inputs: [{
+    #                                 # One of:
+    #                                 api_invocation_input: {
+    #                                   action_group: "String", # required
+    #                                   http_method: "String",
+    #                                   api_path: "ApiPath",
+    #                                   parameters: [
+    #                                     {
+    #                                       name: "String",
+    #                                       type: "String",
+    #                                       value: "String"
+    #                                     }
+    #                                   ],
+    #                                   request_body: {
+    #                                     content: {
+    #                                       "String" => {
+    #                                         properties: [
+    #                                           {
+    #                                             name: "String",
+    #                                             type: "String",
+    #                                             value: "String"
+    #                                           }
+    #                                         ]
+    #                                       }
+    #                                     }
+    #                                   },
+    #                                   action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                                   agent_id: "String",
+    #                                   collaborator_name: "Name"
+    #                                 },
+    #                                 function_invocation_input: {
+    #                                   action_group: "String", # required
+    #                                   parameters: [
+    #                                     {
+    #                                       name: "String",
+    #                                       type: "String",
+    #                                       value: "String"
+    #                                     }
+    #                                   ],
+    #                                   function: "String",
+    #                                   action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                                   agent_id: "String",
+    #                                   collaborator_name: "Name"
+    #                                 }
+    #                               }],
+    #                               invocation_id: "String"
+    #                             }
+    #                           },
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         knowledge_base_lookup_output: {
+    #                           retrieved_references: [
+    #                             {
+    #                               content: {
+    #                                 type: "TEXT" # One of: ["TEXT", "IMAGE", "ROW"],
+    #                                 text: "String",
+    #                                 byte_content: "String",
+    #                                 row: [
+    #                                   {
+    #                                     column_name: "String",
+    #                                     column_value: "String",
+    #                                     type: "BLOB" # One of: ["BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"]
+    #                                   }
+    #                                 ]
+    #                               },
+    #                               location: {
+    #                                 type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"], # required
+    #                                 s3_location: {
+    #                                   uri: "String"
+    #                                 },
+    #                                 web_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 confluence_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 salesforce_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 share_point_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 custom_document_location: {
+    #                                   id: "String"
+    #                                 },
+    #                                 kendra_document_location: {
+    #                                   uri: "String"
+    #                                 },
+    #                                 sql_location: {
+    #                                   query: "String"
+    #                                 }
+    #                               },
+    #                               metadata: {
+    #                                 "RetrievalResultMetadataKey" => ""null""
+    #                               }
+    #                             }
+    #                           ],
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         final_response: {
+    #                           text: "FinalResponseString",
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         reprompt_response: {
+    #                           text: "String",
+    #                           source: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"]
+    #                         },
+    #                         code_interpreter_invocation_output: {
+    #                           execution_output: "String",
+    #                           execution_error: "String",
+    #                           files: ["String"],
+    #                           execution_timeout: false,
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         }
+    #                       },
+    #                       model_invocation_input: {
+    #                         trace_id: "TraceId",
+    #                         text: "PromptText",
+    #                         type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                         override_lambda: "LambdaArn",
+    #                         prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         inference_configuration: {
+    #                           temperature: 1.0,
+    #                           top_p: 1.0,
+    #                           top_k: 1,
+    #                           maximum_length: 1,
+    #                           stop_sequences: ["String"]
+    #                         },
+    #                         parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         foundation_model: "ModelIdentifier"
+    #                       },
+    #                       model_invocation_output: {
+    #                         trace_id: "TraceId",
+    #                         raw_response: {
+    #                           content: "String"
+    #                         },
+    #                         metadata: {
+    #                           start_time: Time.now,
+    #                           end_time: Time.now,
+    #                           total_time_ms: 1,
+    #                           operation_total_time_ms: 1,
+    #                           client_request_id: "String",
+    #                           usage: {
+    #                             input_tokens: 1,
+    #                             output_tokens: 1
+    #                           }
+    #                         },
+    #                         reasoning_content: {
+    #                           # One of:
+    #                           reasoning_text: {
+    #                             text: "String", # required
+    #                             signature: "String"
+    #                           },
+    #                           redacted_content: "data"
+    #                         }
+    #                       }
+    #                     },
+    #                     post_processing_trace: {
+    #                       # One of:
+    #                       model_invocation_input: {
+    #                         trace_id: "TraceId",
+    #                         text: "PromptText",
+    #                         type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                         override_lambda: "LambdaArn",
+    #                         prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         inference_configuration: {
+    #                           temperature: 1.0,
+    #                           top_p: 1.0,
+    #                           top_k: 1,
+    #                           maximum_length: 1,
+    #                           stop_sequences: ["String"]
+    #                         },
+    #                         parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         foundation_model: "ModelIdentifier"
+    #                       },
+    #                       model_invocation_output: {
+    #                         trace_id: "TraceId",
+    #                         parsed_response: {
+    #                           text: "OutputString"
+    #                         },
+    #                         raw_response: {
+    #                           content: "String"
+    #                         },
+    #                         metadata: {
+    #                           start_time: Time.now,
+    #                           end_time: Time.now,
+    #                           total_time_ms: 1,
+    #                           operation_total_time_ms: 1,
+    #                           client_request_id: "String",
+    #                           usage: {
+    #                             input_tokens: 1,
+    #                             output_tokens: 1
+    #                           }
+    #                         },
+    #                         reasoning_content: {
+    #                           # One of:
+    #                           reasoning_text: {
+    #                             text: "String", # required
+    #                             signature: "String"
+    #                           },
+    #                           redacted_content: "data"
+    #                         }
+    #                       }
+    #                     },
+    #                     routing_classifier_trace: {
+    #                       # One of:
+    #                       invocation_input: {
+    #                         trace_id: "TraceId",
+    #                         invocation_type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"],
+    #                         action_group_invocation_input: {
+    #                           action_group_name: "ActionGroupName",
+    #                           verb: "Verb",
+    #                           api_path: "ApiPath",
+    #                           parameters: [
+    #                             {
+    #                               name: "String",
+    #                               type: "String",
+    #                               value: "String"
+    #                             }
+    #                           ],
+    #                           request_body: {
+    #                             content: {
+    #                               "String" => [
+    #                                 {
+    #                                   name: "String",
+    #                                   type: "String",
+    #                                   value: "String"
+    #                                 }
+    #                               ]
+    #                             }
+    #                           },
+    #                           function: "Function",
+    #                           execution_type: "LAMBDA" # One of: ["LAMBDA", "RETURN_CONTROL"],
+    #                           invocation_id: "String"
+    #                         },
+    #                         knowledge_base_lookup_input: {
+    #                           text: "KnowledgeBaseLookupInputString",
+    #                           knowledge_base_id: "TraceKnowledgeBaseId"
+    #                         },
+    #                         code_interpreter_invocation_input: {
+    #                           code: "String",
+    #                           files: ["String"]
+    #                         },
+    #                         agent_collaborator_invocation_input: {
+    #                           agent_collaborator_name: "String",
+    #                           agent_collaborator_alias_arn: "AgentAliasArn",
+    #                           input: {
+    #                             type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                             text: "AgentCollaboratorPayloadString",
+    #                             return_control_results: {
+    #                               invocation_id: "String",
+    #                               return_control_invocation_results: [{
+    #                                 # One of:
+    #                                 api_result: {
+    #                                   action_group: "String", # required
+    #                                   http_method: "String",
+    #                                   api_path: "ApiPath",
+    #                                   confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                                   response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                                   http_status_code: 1,
+    #                                   response_body: {
+    #                                     "String" => {
+    #                                       body: "String",
+    #                                       images: [
+    #                                         {
+    #                                           format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                           source: { # required
+    #                                             # One of:
+    #                                             bytes: "data"
+    #                                           }
+    #                                         }
+    #                                       ]
+    #                                     }
+    #                                   },
+    #                                   agent_id: "String"
+    #                                 },
+    #                                 function_result: {
+    #                                   action_group: "String", # required
+    #                                   confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                                   function: "String",
+    #                                   response_body: {
+    #                                     "String" => {
+    #                                       body: "String",
+    #                                       images: [
+    #                                         {
+    #                                           format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                           source: { # required
+    #                                             # One of:
+    #                                             bytes: "data"
+    #                                           }
+    #                                         }
+    #                                       ]
+    #                                     }
+    #                                   },
+    #                                   response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                                   agent_id: "String"
+    #                                 }
+    #                               }]
+    #                             }
+    #                           }
+    #                         }
+    #                       },
+    #                       observation: {
+    #                         trace_id: "TraceId",
+    #                         type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"],
+    #                         action_group_invocation_output: {
+    #                           text: "ActionGroupOutputString",
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         agent_collaborator_invocation_output: {
+    #                           agent_collaborator_name: "String",
+    #                           agent_collaborator_alias_arn: "AgentAliasArn",
+    #                           output: {
+    #                             type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                             text: "AgentCollaboratorPayloadString",
+    #                             return_control_payload: {
+    #                               invocation_inputs: [{
+    #                                 # One of:
+    #                                 api_invocation_input: {
+    #                                   action_group: "String", # required
+    #                                   http_method: "String",
+    #                                   api_path: "ApiPath",
+    #                                   parameters: [
+    #                                     {
+    #                                       name: "String",
+    #                                       type: "String",
+    #                                       value: "String"
+    #                                     }
+    #                                   ],
+    #                                   request_body: {
+    #                                     content: {
+    #                                       "String" => {
+    #                                         properties: [
+    #                                           {
+    #                                             name: "String",
+    #                                             type: "String",
+    #                                             value: "String"
+    #                                           }
+    #                                         ]
+    #                                       }
+    #                                     }
+    #                                   },
+    #                                   action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                                   agent_id: "String",
+    #                                   collaborator_name: "Name"
+    #                                 },
+    #                                 function_invocation_input: {
+    #                                   action_group: "String", # required
+    #                                   parameters: [
+    #                                     {
+    #                                       name: "String",
+    #                                       type: "String",
+    #                                       value: "String"
+    #                                     }
+    #                                   ],
+    #                                   function: "String",
+    #                                   action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                                   agent_id: "String",
+    #                                   collaborator_name: "Name"
+    #                                 }
+    #                               }],
+    #                               invocation_id: "String"
+    #                             }
+    #                           },
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         knowledge_base_lookup_output: {
+    #                           retrieved_references: [
+    #                             {
+    #                               content: {
+    #                                 type: "TEXT" # One of: ["TEXT", "IMAGE", "ROW"],
+    #                                 text: "String",
+    #                                 byte_content: "String",
+    #                                 row: [
+    #                                   {
+    #                                     column_name: "String",
+    #                                     column_value: "String",
+    #                                     type: "BLOB" # One of: ["BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"]
+    #                                   }
+    #                                 ]
+    #                               },
+    #                               location: {
+    #                                 type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"], # required
+    #                                 s3_location: {
+    #                                   uri: "String"
+    #                                 },
+    #                                 web_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 confluence_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 salesforce_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 share_point_location: {
+    #                                   url: "String"
+    #                                 },
+    #                                 custom_document_location: {
+    #                                   id: "String"
+    #                                 },
+    #                                 kendra_document_location: {
+    #                                   uri: "String"
+    #                                 },
+    #                                 sql_location: {
+    #                                   query: "String"
+    #                                 }
+    #                               },
+    #                               metadata: {
+    #                                 "RetrievalResultMetadataKey" => ""null""
+    #                               }
+    #                             }
+    #                           ],
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         final_response: {
+    #                           text: "FinalResponseString",
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         },
+    #                         reprompt_response: {
+    #                           text: "String",
+    #                           source: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"]
+    #                         },
+    #                         code_interpreter_invocation_output: {
+    #                           execution_output: "String",
+    #                           execution_error: "String",
+    #                           files: ["String"],
+    #                           execution_timeout: false,
+    #                           metadata: {
+    #                             start_time: Time.now,
+    #                             end_time: Time.now,
+    #                             total_time_ms: 1,
+    #                             operation_total_time_ms: 1,
+    #                             client_request_id: "String",
+    #                             usage: {
+    #                               input_tokens: 1,
+    #                               output_tokens: 1
+    #                             }
+    #                           }
+    #                         }
+    #                       },
+    #                       model_invocation_input: {
+    #                         trace_id: "TraceId",
+    #                         text: "PromptText",
+    #                         type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                         override_lambda: "LambdaArn",
+    #                         prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         inference_configuration: {
+    #                           temperature: 1.0,
+    #                           top_p: 1.0,
+    #                           top_k: 1,
+    #                           maximum_length: 1,
+    #                           stop_sequences: ["String"]
+    #                         },
+    #                         parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                         foundation_model: "ModelIdentifier"
+    #                       },
+    #                       model_invocation_output: {
+    #                         trace_id: "TraceId",
+    #                         raw_response: {
+    #                           content: "String"
+    #                         },
+    #                         metadata: {
+    #                           start_time: Time.now,
+    #                           end_time: Time.now,
+    #                           total_time_ms: 1,
+    #                           operation_total_time_ms: 1,
+    #                           client_request_id: "String",
+    #                           usage: {
+    #                             input_tokens: 1,
+    #                             output_tokens: 1
+    #                           }
+    #                         }
+    #                       }
+    #                     },
+    #                     failure_trace: {
+    #                       trace_id: "TraceId",
+    #                       failure_reason: "FailureReasonString",
+    #                       failure_code: 1,
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     custom_orchestration_trace: {
+    #                       trace_id: "TraceId",
+    #                       event: {
+    #                         text: "String"
+    #                       }
+    #                     }
+    #                   },
+    #                   caller_chain: [{
+    #                     # One of:
+    #                     agent_alias_arn: "AgentAliasArn"
+    #                   }],
+    #                   event_time: Time.now,
+    #                   collaborator_name: "Name",
+    #                   agent_id: "AgentId",
+    #                   agent_alias_id: "AgentAliasId",
+    #                   agent_version: "AgentVersion"
+    #                 }
+    #               ]
+    #             }
     #           }
     #         }
     #       },
@@ -3645,7 +4571,21 @@ module Aws::BedrockAgentRuntime
     #             content: { # required
     #               # One of:
     #               document: ""null""
-    #             }
+    #             },
+    #             source: {
+    #               node_name: "NodeName", # required
+    #               output_field_name: "FlowNodeOutputName", # required
+    #               expression: "FlowNodeInputExpression", # required
+    #             },
+    #             type: "String" # One of: ["String", "Number", "Boolean", "Object", "Array"],
+    #             category: "LoopCondition" # One of: ["LoopCondition", "ReturnValueToLoopStart", "ExitLoop"],
+    #             execution_chain: [
+    #               {
+    #                 node_name: "NodeName", # required
+    #                 index: 1,
+    #                 type: "Iterator" # One of: ["Iterator", "Loop"], # required
+    #               }
+    #             ]
     #           }
     #         ]
     #       },
@@ -3658,7 +4598,14 @@ module Aws::BedrockAgentRuntime
     #             content: { # required
     #               # One of:
     #               document: ""null""
-    #             }
+    #             },
+    #             next: [
+    #               {
+    #                 node_name: "NodeName", # required
+    #                 input_field_name: "FlowNodeInputName", # required
+    #               }
+    #             ],
+    #             type: "String" # One of: ["String", "Number", "Boolean", "Object", "Array"]
     #           }
     #         ]
     #       },
@@ -3681,6 +4628,913 @@ module Aws::BedrockAgentRuntime
     #         timestamp: Time.now, # required
     #         error_code: "VALIDATION" # One of: ["VALIDATION", "INTERNAL_SERVER", "NODE_EXECUTION_FAILED"], # required
     #         error_message: "String", # required
+    #       },
+    #       node_action_event: {
+    #         node_name: "NodeName", # required
+    #         timestamp: Time.now, # required
+    #         request_id: "String", # required
+    #         service_name: "String", # required
+    #         operation_name: "String", # required
+    #         operation_request: ""null"",
+    #         operation_response: ""null""
+    #       },
+    #       node_dependency_event: {
+    #         node_name: "NodeName", # required
+    #         timestamp: Time.now, # required
+    #         trace_elements: { # required
+    #           # One of:
+    #           agent_traces: [
+    #             {
+    #               session_id: "SessionId",
+    #               trace: {
+    #                 # One of:
+    #                 guardrail_trace: {
+    #                   action: "INTERVENED" # One of: ["INTERVENED", "NONE"],
+    #                   trace_id: "TraceId",
+    #                   input_assessments: [
+    #                     {
+    #                       topic_policy: {
+    #                         topics: [
+    #                           {
+    #                             name: "String",
+    #                             type: "DENY" # One of: ["DENY"],
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ]
+    #                       },
+    #                       content_policy: {
+    #                         filters: [
+    #                           {
+    #                             type: "INSULTS" # One of: ["INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"],
+    #                             confidence: "NONE" # One of: ["NONE", "LOW", "MEDIUM", "HIGH"],
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ]
+    #                       },
+    #                       word_policy: {
+    #                         custom_words: [
+    #                           {
+    #                             match: "String",
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ],
+    #                         managed_word_lists: [
+    #                           {
+    #                             match: "String",
+    #                             type: "PROFANITY" # One of: ["PROFANITY"],
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ]
+    #                       },
+    #                       sensitive_information_policy: {
+    #                         pii_entities: [
+    #                           {
+    #                             type: "ADDRESS" # One of: ["ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"],
+    #                             match: "String",
+    #                             action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                           }
+    #                         ],
+    #                         regexes: [
+    #                           {
+    #                             name: "String",
+    #                             regex: "String",
+    #                             match: "String",
+    #                             action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                           }
+    #                         ]
+    #                       }
+    #                     }
+    #                   ],
+    #                   output_assessments: [
+    #                     {
+    #                       topic_policy: {
+    #                         topics: [
+    #                           {
+    #                             name: "String",
+    #                             type: "DENY" # One of: ["DENY"],
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ]
+    #                       },
+    #                       content_policy: {
+    #                         filters: [
+    #                           {
+    #                             type: "INSULTS" # One of: ["INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"],
+    #                             confidence: "NONE" # One of: ["NONE", "LOW", "MEDIUM", "HIGH"],
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ]
+    #                       },
+    #                       word_policy: {
+    #                         custom_words: [
+    #                           {
+    #                             match: "String",
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ],
+    #                         managed_word_lists: [
+    #                           {
+    #                             match: "String",
+    #                             type: "PROFANITY" # One of: ["PROFANITY"],
+    #                             action: "BLOCKED" # One of: ["BLOCKED"]
+    #                           }
+    #                         ]
+    #                       },
+    #                       sensitive_information_policy: {
+    #                         pii_entities: [
+    #                           {
+    #                             type: "ADDRESS" # One of: ["ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"],
+    #                             match: "String",
+    #                             action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                           }
+    #                         ],
+    #                         regexes: [
+    #                           {
+    #                             name: "String",
+    #                             regex: "String",
+    #                             match: "String",
+    #                             action: "BLOCKED" # One of: ["BLOCKED", "ANONYMIZED"]
+    #                           }
+    #                         ]
+    #                       }
+    #                     }
+    #                   ],
+    #                   metadata: {
+    #                     start_time: Time.now,
+    #                     end_time: Time.now,
+    #                     total_time_ms: 1,
+    #                     operation_total_time_ms: 1,
+    #                     client_request_id: "String",
+    #                     usage: {
+    #                       input_tokens: 1,
+    #                       output_tokens: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 pre_processing_trace: {
+    #                   # One of:
+    #                   model_invocation_input: {
+    #                     trace_id: "TraceId",
+    #                     text: "PromptText",
+    #                     type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                     override_lambda: "LambdaArn",
+    #                     prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     inference_configuration: {
+    #                       temperature: 1.0,
+    #                       top_p: 1.0,
+    #                       top_k: 1,
+    #                       maximum_length: 1,
+    #                       stop_sequences: ["String"]
+    #                     },
+    #                     parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     foundation_model: "ModelIdentifier"
+    #                   },
+    #                   model_invocation_output: {
+    #                     trace_id: "TraceId",
+    #                     parsed_response: {
+    #                       rationale: "RationaleString",
+    #                       is_valid: false
+    #                     },
+    #                     raw_response: {
+    #                       content: "String"
+    #                     },
+    #                     metadata: {
+    #                       start_time: Time.now,
+    #                       end_time: Time.now,
+    #                       total_time_ms: 1,
+    #                       operation_total_time_ms: 1,
+    #                       client_request_id: "String",
+    #                       usage: {
+    #                         input_tokens: 1,
+    #                         output_tokens: 1
+    #                       }
+    #                     },
+    #                     reasoning_content: {
+    #                       # One of:
+    #                       reasoning_text: {
+    #                         text: "String", # required
+    #                         signature: "String"
+    #                       },
+    #                       redacted_content: "data"
+    #                     }
+    #                   }
+    #                 },
+    #                 orchestration_trace: {
+    #                   # One of:
+    #                   rationale: {
+    #                     trace_id: "TraceId",
+    #                     text: "RationaleString"
+    #                   },
+    #                   invocation_input: {
+    #                     trace_id: "TraceId",
+    #                     invocation_type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"],
+    #                     action_group_invocation_input: {
+    #                       action_group_name: "ActionGroupName",
+    #                       verb: "Verb",
+    #                       api_path: "ApiPath",
+    #                       parameters: [
+    #                         {
+    #                           name: "String",
+    #                           type: "String",
+    #                           value: "String"
+    #                         }
+    #                       ],
+    #                       request_body: {
+    #                         content: {
+    #                           "String" => [
+    #                             {
+    #                               name: "String",
+    #                               type: "String",
+    #                               value: "String"
+    #                             }
+    #                           ]
+    #                         }
+    #                       },
+    #                       function: "Function",
+    #                       execution_type: "LAMBDA" # One of: ["LAMBDA", "RETURN_CONTROL"],
+    #                       invocation_id: "String"
+    #                     },
+    #                     knowledge_base_lookup_input: {
+    #                       text: "KnowledgeBaseLookupInputString",
+    #                       knowledge_base_id: "TraceKnowledgeBaseId"
+    #                     },
+    #                     code_interpreter_invocation_input: {
+    #                       code: "String",
+    #                       files: ["String"]
+    #                     },
+    #                     agent_collaborator_invocation_input: {
+    #                       agent_collaborator_name: "String",
+    #                       agent_collaborator_alias_arn: "AgentAliasArn",
+    #                       input: {
+    #                         type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                         text: "AgentCollaboratorPayloadString",
+    #                         return_control_results: {
+    #                           invocation_id: "String",
+    #                           return_control_invocation_results: [{
+    #                             # One of:
+    #                             api_result: {
+    #                               action_group: "String", # required
+    #                               http_method: "String",
+    #                               api_path: "ApiPath",
+    #                               confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                               response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                               http_status_code: 1,
+    #                               response_body: {
+    #                                 "String" => {
+    #                                   body: "String",
+    #                                   images: [
+    #                                     {
+    #                                       format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                       source: { # required
+    #                                         # One of:
+    #                                         bytes: "data"
+    #                                       }
+    #                                     }
+    #                                   ]
+    #                                 }
+    #                               },
+    #                               agent_id: "String"
+    #                             },
+    #                             function_result: {
+    #                               action_group: "String", # required
+    #                               confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                               function: "String",
+    #                               response_body: {
+    #                                 "String" => {
+    #                                   body: "String",
+    #                                   images: [
+    #                                     {
+    #                                       format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                       source: { # required
+    #                                         # One of:
+    #                                         bytes: "data"
+    #                                       }
+    #                                     }
+    #                                   ]
+    #                                 }
+    #                               },
+    #                               response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                               agent_id: "String"
+    #                             }
+    #                           }]
+    #                         }
+    #                       }
+    #                     }
+    #                   },
+    #                   observation: {
+    #                     trace_id: "TraceId",
+    #                     type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"],
+    #                     action_group_invocation_output: {
+    #                       text: "ActionGroupOutputString",
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     agent_collaborator_invocation_output: {
+    #                       agent_collaborator_name: "String",
+    #                       agent_collaborator_alias_arn: "AgentAliasArn",
+    #                       output: {
+    #                         type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                         text: "AgentCollaboratorPayloadString",
+    #                         return_control_payload: {
+    #                           invocation_inputs: [{
+    #                             # One of:
+    #                             api_invocation_input: {
+    #                               action_group: "String", # required
+    #                               http_method: "String",
+    #                               api_path: "ApiPath",
+    #                               parameters: [
+    #                                 {
+    #                                   name: "String",
+    #                                   type: "String",
+    #                                   value: "String"
+    #                                 }
+    #                               ],
+    #                               request_body: {
+    #                                 content: {
+    #                                   "String" => {
+    #                                     properties: [
+    #                                       {
+    #                                         name: "String",
+    #                                         type: "String",
+    #                                         value: "String"
+    #                                       }
+    #                                     ]
+    #                                   }
+    #                                 }
+    #                               },
+    #                               action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                               agent_id: "String",
+    #                               collaborator_name: "Name"
+    #                             },
+    #                             function_invocation_input: {
+    #                               action_group: "String", # required
+    #                               parameters: [
+    #                                 {
+    #                                   name: "String",
+    #                                   type: "String",
+    #                                   value: "String"
+    #                                 }
+    #                               ],
+    #                               function: "String",
+    #                               action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                               agent_id: "String",
+    #                               collaborator_name: "Name"
+    #                             }
+    #                           }],
+    #                           invocation_id: "String"
+    #                         }
+    #                       },
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     knowledge_base_lookup_output: {
+    #                       retrieved_references: [
+    #                         {
+    #                           content: {
+    #                             type: "TEXT" # One of: ["TEXT", "IMAGE", "ROW"],
+    #                             text: "String",
+    #                             byte_content: "String",
+    #                             row: [
+    #                               {
+    #                                 column_name: "String",
+    #                                 column_value: "String",
+    #                                 type: "BLOB" # One of: ["BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           location: {
+    #                             type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"], # required
+    #                             s3_location: {
+    #                               uri: "String"
+    #                             },
+    #                             web_location: {
+    #                               url: "String"
+    #                             },
+    #                             confluence_location: {
+    #                               url: "String"
+    #                             },
+    #                             salesforce_location: {
+    #                               url: "String"
+    #                             },
+    #                             share_point_location: {
+    #                               url: "String"
+    #                             },
+    #                             custom_document_location: {
+    #                               id: "String"
+    #                             },
+    #                             kendra_document_location: {
+    #                               uri: "String"
+    #                             },
+    #                             sql_location: {
+    #                               query: "String"
+    #                             }
+    #                           },
+    #                           metadata: {
+    #                             "RetrievalResultMetadataKey" => ""null""
+    #                           }
+    #                         }
+    #                       ],
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     final_response: {
+    #                       text: "FinalResponseString",
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     reprompt_response: {
+    #                       text: "String",
+    #                       source: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"]
+    #                     },
+    #                     code_interpreter_invocation_output: {
+    #                       execution_output: "String",
+    #                       execution_error: "String",
+    #                       files: ["String"],
+    #                       execution_timeout: false,
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   },
+    #                   model_invocation_input: {
+    #                     trace_id: "TraceId",
+    #                     text: "PromptText",
+    #                     type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                     override_lambda: "LambdaArn",
+    #                     prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     inference_configuration: {
+    #                       temperature: 1.0,
+    #                       top_p: 1.0,
+    #                       top_k: 1,
+    #                       maximum_length: 1,
+    #                       stop_sequences: ["String"]
+    #                     },
+    #                     parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     foundation_model: "ModelIdentifier"
+    #                   },
+    #                   model_invocation_output: {
+    #                     trace_id: "TraceId",
+    #                     raw_response: {
+    #                       content: "String"
+    #                     },
+    #                     metadata: {
+    #                       start_time: Time.now,
+    #                       end_time: Time.now,
+    #                       total_time_ms: 1,
+    #                       operation_total_time_ms: 1,
+    #                       client_request_id: "String",
+    #                       usage: {
+    #                         input_tokens: 1,
+    #                         output_tokens: 1
+    #                       }
+    #                     },
+    #                     reasoning_content: {
+    #                       # One of:
+    #                       reasoning_text: {
+    #                         text: "String", # required
+    #                         signature: "String"
+    #                       },
+    #                       redacted_content: "data"
+    #                     }
+    #                   }
+    #                 },
+    #                 post_processing_trace: {
+    #                   # One of:
+    #                   model_invocation_input: {
+    #                     trace_id: "TraceId",
+    #                     text: "PromptText",
+    #                     type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                     override_lambda: "LambdaArn",
+    #                     prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     inference_configuration: {
+    #                       temperature: 1.0,
+    #                       top_p: 1.0,
+    #                       top_k: 1,
+    #                       maximum_length: 1,
+    #                       stop_sequences: ["String"]
+    #                     },
+    #                     parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     foundation_model: "ModelIdentifier"
+    #                   },
+    #                   model_invocation_output: {
+    #                     trace_id: "TraceId",
+    #                     parsed_response: {
+    #                       text: "OutputString"
+    #                     },
+    #                     raw_response: {
+    #                       content: "String"
+    #                     },
+    #                     metadata: {
+    #                       start_time: Time.now,
+    #                       end_time: Time.now,
+    #                       total_time_ms: 1,
+    #                       operation_total_time_ms: 1,
+    #                       client_request_id: "String",
+    #                       usage: {
+    #                         input_tokens: 1,
+    #                         output_tokens: 1
+    #                       }
+    #                     },
+    #                     reasoning_content: {
+    #                       # One of:
+    #                       reasoning_text: {
+    #                         text: "String", # required
+    #                         signature: "String"
+    #                       },
+    #                       redacted_content: "data"
+    #                     }
+    #                   }
+    #                 },
+    #                 routing_classifier_trace: {
+    #                   # One of:
+    #                   invocation_input: {
+    #                     trace_id: "TraceId",
+    #                     invocation_type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER", "AGENT_COLLABORATOR"],
+    #                     action_group_invocation_input: {
+    #                       action_group_name: "ActionGroupName",
+    #                       verb: "Verb",
+    #                       api_path: "ApiPath",
+    #                       parameters: [
+    #                         {
+    #                           name: "String",
+    #                           type: "String",
+    #                           value: "String"
+    #                         }
+    #                       ],
+    #                       request_body: {
+    #                         content: {
+    #                           "String" => [
+    #                             {
+    #                               name: "String",
+    #                               type: "String",
+    #                               value: "String"
+    #                             }
+    #                           ]
+    #                         }
+    #                       },
+    #                       function: "Function",
+    #                       execution_type: "LAMBDA" # One of: ["LAMBDA", "RETURN_CONTROL"],
+    #                       invocation_id: "String"
+    #                     },
+    #                     knowledge_base_lookup_input: {
+    #                       text: "KnowledgeBaseLookupInputString",
+    #                       knowledge_base_id: "TraceKnowledgeBaseId"
+    #                     },
+    #                     code_interpreter_invocation_input: {
+    #                       code: "String",
+    #                       files: ["String"]
+    #                     },
+    #                     agent_collaborator_invocation_input: {
+    #                       agent_collaborator_name: "String",
+    #                       agent_collaborator_alias_arn: "AgentAliasArn",
+    #                       input: {
+    #                         type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                         text: "AgentCollaboratorPayloadString",
+    #                         return_control_results: {
+    #                           invocation_id: "String",
+    #                           return_control_invocation_results: [{
+    #                             # One of:
+    #                             api_result: {
+    #                               action_group: "String", # required
+    #                               http_method: "String",
+    #                               api_path: "ApiPath",
+    #                               confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                               response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                               http_status_code: 1,
+    #                               response_body: {
+    #                                 "String" => {
+    #                                   body: "String",
+    #                                   images: [
+    #                                     {
+    #                                       format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                       source: { # required
+    #                                         # One of:
+    #                                         bytes: "data"
+    #                                       }
+    #                                     }
+    #                                   ]
+    #                                 }
+    #                               },
+    #                               agent_id: "String"
+    #                             },
+    #                             function_result: {
+    #                               action_group: "String", # required
+    #                               confirmation_state: "CONFIRM" # One of: ["CONFIRM", "DENY"],
+    #                               function: "String",
+    #                               response_body: {
+    #                                 "String" => {
+    #                                   body: "String",
+    #                                   images: [
+    #                                     {
+    #                                       format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
+    #                                       source: { # required
+    #                                         # One of:
+    #                                         bytes: "data"
+    #                                       }
+    #                                     }
+    #                                   ]
+    #                                 }
+    #                               },
+    #                               response_state: "FAILURE" # One of: ["FAILURE", "REPROMPT"],
+    #                               agent_id: "String"
+    #                             }
+    #                           }]
+    #                         }
+    #                       }
+    #                     }
+    #                   },
+    #                   observation: {
+    #                     trace_id: "TraceId",
+    #                     type: "ACTION_GROUP" # One of: ["ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"],
+    #                     action_group_invocation_output: {
+    #                       text: "ActionGroupOutputString",
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     agent_collaborator_invocation_output: {
+    #                       agent_collaborator_name: "String",
+    #                       agent_collaborator_alias_arn: "AgentAliasArn",
+    #                       output: {
+    #                         type: "TEXT" # One of: ["TEXT", "RETURN_CONTROL"],
+    #                         text: "AgentCollaboratorPayloadString",
+    #                         return_control_payload: {
+    #                           invocation_inputs: [{
+    #                             # One of:
+    #                             api_invocation_input: {
+    #                               action_group: "String", # required
+    #                               http_method: "String",
+    #                               api_path: "ApiPath",
+    #                               parameters: [
+    #                                 {
+    #                                   name: "String",
+    #                                   type: "String",
+    #                                   value: "String"
+    #                                 }
+    #                               ],
+    #                               request_body: {
+    #                                 content: {
+    #                                   "String" => {
+    #                                     properties: [
+    #                                       {
+    #                                         name: "String",
+    #                                         type: "String",
+    #                                         value: "String"
+    #                                       }
+    #                                     ]
+    #                                   }
+    #                                 }
+    #                               },
+    #                               action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                               agent_id: "String",
+    #                               collaborator_name: "Name"
+    #                             },
+    #                             function_invocation_input: {
+    #                               action_group: "String", # required
+    #                               parameters: [
+    #                                 {
+    #                                   name: "String",
+    #                                   type: "String",
+    #                                   value: "String"
+    #                                 }
+    #                               ],
+    #                               function: "String",
+    #                               action_invocation_type: "RESULT" # One of: ["RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"],
+    #                               agent_id: "String",
+    #                               collaborator_name: "Name"
+    #                             }
+    #                           }],
+    #                           invocation_id: "String"
+    #                         }
+    #                       },
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     knowledge_base_lookup_output: {
+    #                       retrieved_references: [
+    #                         {
+    #                           content: {
+    #                             type: "TEXT" # One of: ["TEXT", "IMAGE", "ROW"],
+    #                             text: "String",
+    #                             byte_content: "String",
+    #                             row: [
+    #                               {
+    #                                 column_name: "String",
+    #                                 column_value: "String",
+    #                                 type: "BLOB" # One of: ["BLOB", "BOOLEAN", "DOUBLE", "NULL", "LONG", "STRING"]
+    #                               }
+    #                             ]
+    #                           },
+    #                           location: {
+    #                             type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "KENDRA", "SQL"], # required
+    #                             s3_location: {
+    #                               uri: "String"
+    #                             },
+    #                             web_location: {
+    #                               url: "String"
+    #                             },
+    #                             confluence_location: {
+    #                               url: "String"
+    #                             },
+    #                             salesforce_location: {
+    #                               url: "String"
+    #                             },
+    #                             share_point_location: {
+    #                               url: "String"
+    #                             },
+    #                             custom_document_location: {
+    #                               id: "String"
+    #                             },
+    #                             kendra_document_location: {
+    #                               uri: "String"
+    #                             },
+    #                             sql_location: {
+    #                               query: "String"
+    #                             }
+    #                           },
+    #                           metadata: {
+    #                             "RetrievalResultMetadataKey" => ""null""
+    #                           }
+    #                         }
+    #                       ],
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     final_response: {
+    #                       text: "FinalResponseString",
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     },
+    #                     reprompt_response: {
+    #                       text: "String",
+    #                       source: "ACTION_GROUP" # One of: ["ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"]
+    #                     },
+    #                     code_interpreter_invocation_output: {
+    #                       execution_output: "String",
+    #                       execution_error: "String",
+    #                       files: ["String"],
+    #                       execution_timeout: false,
+    #                       metadata: {
+    #                         start_time: Time.now,
+    #                         end_time: Time.now,
+    #                         total_time_ms: 1,
+    #                         operation_total_time_ms: 1,
+    #                         client_request_id: "String",
+    #                         usage: {
+    #                           input_tokens: 1,
+    #                           output_tokens: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   },
+    #                   model_invocation_input: {
+    #                     trace_id: "TraceId",
+    #                     text: "PromptText",
+    #                     type: "PRE_PROCESSING" # One of: ["PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"],
+    #                     override_lambda: "LambdaArn",
+    #                     prompt_creation_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     inference_configuration: {
+    #                       temperature: 1.0,
+    #                       top_p: 1.0,
+    #                       top_k: 1,
+    #                       maximum_length: 1,
+    #                       stop_sequences: ["String"]
+    #                     },
+    #                     parser_mode: "DEFAULT" # One of: ["DEFAULT", "OVERRIDDEN"],
+    #                     foundation_model: "ModelIdentifier"
+    #                   },
+    #                   model_invocation_output: {
+    #                     trace_id: "TraceId",
+    #                     raw_response: {
+    #                       content: "String"
+    #                     },
+    #                     metadata: {
+    #                       start_time: Time.now,
+    #                       end_time: Time.now,
+    #                       total_time_ms: 1,
+    #                       operation_total_time_ms: 1,
+    #                       client_request_id: "String",
+    #                       usage: {
+    #                         input_tokens: 1,
+    #                         output_tokens: 1
+    #                       }
+    #                     }
+    #                   }
+    #                 },
+    #                 failure_trace: {
+    #                   trace_id: "TraceId",
+    #                   failure_reason: "FailureReasonString",
+    #                   failure_code: 1,
+    #                   metadata: {
+    #                     start_time: Time.now,
+    #                     end_time: Time.now,
+    #                     total_time_ms: 1,
+    #                     operation_total_time_ms: 1,
+    #                     client_request_id: "String",
+    #                     usage: {
+    #                       input_tokens: 1,
+    #                       output_tokens: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 custom_orchestration_trace: {
+    #                   trace_id: "TraceId",
+    #                   event: {
+    #                     text: "String"
+    #                   }
+    #                 }
+    #               },
+    #               caller_chain: [{
+    #                 # One of:
+    #                 agent_alias_arn: "AgentAliasArn"
+    #               }],
+    #               event_time: Time.now,
+    #               collaborator_name: "Name",
+    #               agent_id: "AgentId",
+    #               agent_alias_id: "AgentAliasId",
+    #               agent_version: "AgentVersion"
+    #             }
+    #           ]
+    #         }
     #       }
     #     }],
     #     next_token: "NextToken"

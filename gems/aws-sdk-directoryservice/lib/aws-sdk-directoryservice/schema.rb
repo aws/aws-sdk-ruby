@@ -72,6 +72,8 @@ module Aws::DirectoryService
     CertificatesInfo = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#CertificatesInfo', name: 'CertificatesInfo')
     CidrIp = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#CidrIp', name: 'CidrIp', traits: {"smithy.api#pattern" => "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([1-9]|[1-2][0-9]|3[0-2]))$"})
     CidrIps = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#CidrIps', name: 'CidrIps')
+    CidrIpv6 = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#CidrIpv6', name: 'CidrIpv6', traits: {"smithy.api#pattern" => "^((([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})|(([0-9a-fA-F]{1,4}:){1,7}:)|(([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4})|(([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2})|(([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3})|(([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4})|(([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5})|([0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6}))|(:((:[0-9a-fA-F]{1,4}){1,7}|:)))\\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$"})
+    CidrIpv6s = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#CidrIpv6s', name: 'CidrIpv6s')
     ClientAuthenticationSettingInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#ClientAuthenticationSettingInfo', name: 'ClientAuthenticationSettingInfo')
     ClientAuthenticationSettingsInfo = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#ClientAuthenticationSettingsInfo', name: 'ClientAuthenticationSettingsInfo')
     ClientAuthenticationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#ClientAuthenticationStatus', name: 'ClientAuthenticationStatus')
@@ -193,6 +195,7 @@ module Aws::DirectoryService
     DirectoryNotSharedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DirectoryNotSharedException', name: 'DirectoryNotSharedException', traits: {"smithy.api#error" => "client"})
     DirectoryShortName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#DirectoryShortName', name: 'DirectoryShortName', traits: {"smithy.api#pattern" => "^[^\\\\/:*?\"<>|.]+[^\\\\/:*?\"<>|]*$"})
     DirectorySize = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#DirectorySize', name: 'DirectorySize')
+    DirectorySizeUpdateSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DirectorySizeUpdateSettings', name: 'DirectorySizeUpdateSettings')
     DirectoryStage = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#DirectoryStage', name: 'DirectoryStage')
     DirectoryType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#DirectoryType', name: 'DirectoryType')
     DirectoryUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DirectoryUnavailableException', name: 'DirectoryUnavailableException', traits: {"smithy.api#error" => "client"})
@@ -212,6 +215,7 @@ module Aws::DirectoryService
     DisableSsoRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableSsoRequest', name: 'DisableSsoRequest')
     DisableSsoResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DisableSsoResult', name: 'DisableSsoResult')
     DnsIpAddrs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#DnsIpAddrs', name: 'DnsIpAddrs')
+    DnsIpv6Addrs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#DnsIpv6Addrs', name: 'DnsIpv6Addrs')
     DomainController = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#DomainController', name: 'DomainController')
     DomainControllerId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#DomainControllerId', name: 'DomainControllerId', traits: {"smithy.api#pattern" => "^dc-[0-9a-f]{10}$"})
     DomainControllerIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#DomainControllerIds', name: 'DomainControllerIds')
@@ -269,6 +273,8 @@ module Aws::DirectoryService
     IpRouteStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#IpRouteStatusReason', name: 'IpRouteStatusReason')
     IpRoutes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#IpRoutes', name: 'IpRoutes')
     IpRoutesInfo = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#IpRoutesInfo', name: 'IpRoutesInfo')
+    IpV6Addrs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#IpV6Addrs', name: 'IpV6Addrs')
+    Ipv6Addr = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#Ipv6Addr', name: 'Ipv6Addr', traits: {"smithy.api#pattern" => "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$"})
     LDAPSSettingInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#LDAPSSettingInfo', name: 'LDAPSSettingInfo')
     LDAPSSettingsInfo = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#LDAPSSettingsInfo', name: 'LDAPSSettingsInfo')
     LDAPSStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#LDAPSStatus', name: 'LDAPSStatus')
@@ -295,6 +301,8 @@ module Aws::DirectoryService
     LogSubscription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#LogSubscription', name: 'LogSubscription')
     LogSubscriptions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.directoryservice#LogSubscriptions', name: 'LogSubscriptions')
     ManualSnapshotsLimitReached = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.directoryservice#ManualSnapshotsLimitReached', name: 'ManualSnapshotsLimitReached', traits: {"smithy.api#default" => false})
+    NetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.directoryservice#NetworkType', name: 'NetworkType')
+    NetworkUpdateSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#NetworkUpdateSettings', name: 'NetworkUpdateSettings')
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#NextToken', name: 'NextToken')
     NoAvailableCertificateException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.directoryservice#NoAvailableCertificateException', name: 'NoAvailableCertificateException', traits: {"smithy.api#error" => "client"})
     Notes = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.directoryservice#Notes', name: 'Notes', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#sensitive" => {}})
@@ -569,6 +577,7 @@ module Aws::DirectoryService
     CertificateType.add_member(:client_ldaps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CLIENT_LDAPS', traits: {"smithy.api#enumValue" => "ClientLDAPS"}))
     CertificatesInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateInfo)
     CidrIps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIp)
+    CidrIpv6s.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6)
     ClientAuthenticationSettingInfo.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: 'Type'))
     ClientAuthenticationSettingInfo.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientAuthenticationStatus, location_name: 'Status'))
     ClientAuthenticationSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: 'LastUpdatedDateTime'))
@@ -589,6 +598,7 @@ module Aws::DirectoryService
     Computer.type = Types::Computer
     ConditionalForwarder.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: 'RemoteDomainName'))
     ConditionalForwarder.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs'))
+    ConditionalForwarder.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'DnsIpv6Addrs'))
     ConditionalForwarder.add_member(:replication_scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationScope, location_name: 'ReplicationScope'))
     ConditionalForwarder.type = Types::ConditionalForwarder
     ConditionalForwarders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConditionalForwarder)
@@ -599,6 +609,7 @@ module Aws::DirectoryService
     ConnectDirectoryRequest.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: 'Size', traits: {"smithy.api#required" => {}}))
     ConnectDirectoryRequest.add_member(:connect_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryConnectSettings, location_name: 'ConnectSettings', traits: {"smithy.api#required" => {}}))
     ConnectDirectoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: 'Tags'))
+    ConnectDirectoryRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     ConnectDirectoryRequest.type = Types::ConnectDirectoryRequest
     ConnectDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     ConnectDirectoryResult.type = Types::ConnectDirectoryResult
@@ -618,7 +629,8 @@ module Aws::DirectoryService
     CreateComputerResult.type = Types::CreateComputerResult
     CreateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     CreateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: 'RemoteDomainName', traits: {"smithy.api#required" => {}}))
-    CreateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs', traits: {"smithy.api#required" => {}}))
+    CreateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    CreateConditionalForwarderRequest.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'DnsIpv6Addrs'))
     CreateConditionalForwarderRequest.type = Types::CreateConditionalForwarderRequest
     CreateConditionalForwarderResult.type = Types::CreateConditionalForwarderResult
     CreateDirectoryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: 'Name', traits: {"smithy.api#required" => {}}))
@@ -628,6 +640,7 @@ module Aws::DirectoryService
     CreateDirectoryRequest.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: 'Size', traits: {"smithy.api#required" => {}}))
     CreateDirectoryRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: 'VpcSettings'))
     CreateDirectoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: 'Tags'))
+    CreateDirectoryRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     CreateDirectoryRequest.type = Types::CreateDirectoryRequest
     CreateDirectoryResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     CreateDirectoryResult.type = Types::CreateDirectoryResult
@@ -648,6 +661,7 @@ module Aws::DirectoryService
     CreateMicrosoftADRequest.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: 'VpcSettings', traits: {"smithy.api#required" => {}}))
     CreateMicrosoftADRequest.add_member(:edition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: 'Edition'))
     CreateMicrosoftADRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: 'Tags'))
+    CreateMicrosoftADRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     CreateMicrosoftADRequest.type = Types::CreateMicrosoftADRequest
     CreateMicrosoftADResult.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     CreateMicrosoftADResult.type = Types::CreateMicrosoftADResult
@@ -662,6 +676,7 @@ module Aws::DirectoryService
     CreateTrustRequest.add_member(:trust_direction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustDirection, location_name: 'TrustDirection', traits: {"smithy.api#required" => {}}))
     CreateTrustRequest.add_member(:trust_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustType, location_name: 'TrustType'))
     CreateTrustRequest.add_member(:conditional_forwarder_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'ConditionalForwarderIpAddrs'))
+    CreateTrustRequest.add_member(:conditional_forwarder_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'ConditionalForwarderIpv6Addrs'))
     CreateTrustRequest.add_member(:selective_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: 'SelectiveAuth'))
     CreateTrustRequest.type = Types::CreateTrustRequest
     CreateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: 'TrustId'))
@@ -836,7 +851,8 @@ module Aws::DirectoryService
     DirectoryConfigurationStatus.add_member(:default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEFAULT', traits: {"smithy.api#enumValue" => "Default"}))
     DirectoryConnectSettings.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: 'VpcId', traits: {"smithy.api#required" => {}}))
     DirectoryConnectSettings.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: 'SubnetIds', traits: {"smithy.api#required" => {}}))
-    DirectoryConnectSettings.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'CustomerDnsIps', traits: {"smithy.api#required" => {}}))
+    DirectoryConnectSettings.add_member(:customer_dns_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'CustomerDnsIps', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    DirectoryConnectSettings.add_member(:customer_dns_ips_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'CustomerDnsIpsV6'))
     DirectoryConnectSettings.add_member(:customer_user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserName, location_name: 'CustomerUserName', traits: {"smithy.api#required" => {}}))
     DirectoryConnectSettings.type = Types::DirectoryConnectSettings
     DirectoryConnectSettingsDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: 'VpcId'))
@@ -845,6 +861,7 @@ module Aws::DirectoryService
     DirectoryConnectSettingsDescription.add_member(:security_group_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: 'SecurityGroupId'))
     DirectoryConnectSettingsDescription.add_member(:availability_zones, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: 'AvailabilityZones'))
     DirectoryConnectSettingsDescription.add_member(:connect_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddrs, location_name: 'ConnectIps'))
+    DirectoryConnectSettingsDescription.add_member(:connect_ips_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpV6Addrs, location_name: 'ConnectIpsV6'))
     DirectoryConnectSettingsDescription.type = Types::DirectoryConnectSettingsDescription
     DirectoryDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     DirectoryDescription.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryName, location_name: 'Name'))
@@ -855,6 +872,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:access_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessUrl, location_name: 'AccessUrl'))
     DirectoryDescription.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'Description'))
     DirectoryDescription.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs'))
+    DirectoryDescription.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'DnsIpv6Addrs'))
     DirectoryDescription.add_member(:stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryStage, location_name: 'Stage'))
     DirectoryDescription.add_member(:share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: 'ShareStatus'))
     DirectoryDescription.add_member(:share_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareMethod, location_name: 'ShareMethod'))
@@ -873,6 +891,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:regions_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionsInfo, location_name: 'RegionsInfo'))
     DirectoryDescription.add_member(:os_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSVersion, location_name: 'OsVersion'))
     DirectoryDescription.add_member(:hybrid_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HybridSettingsDescription, location_name: 'HybridSettings'))
+    DirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     DirectoryDescription.type = Types::DirectoryDescription
     DirectoryDescriptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryDescription)
     DirectoryDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))
@@ -880,6 +899,7 @@ module Aws::DirectoryService
     DirectoryDoesNotExistException.type = Types::DirectoryDoesNotExistException
     DirectoryEdition.add_member(:enterprise, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENTERPRISE', traits: {"smithy.api#enumValue" => "Enterprise"}))
     DirectoryEdition.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STANDARD', traits: {"smithy.api#enumValue" => "Standard"}))
+    DirectoryEdition.add_member(:hybrid, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HYBRID', traits: {"smithy.api#enumValue" => "Hybrid"}))
     DirectoryIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId)
     DirectoryInDesiredStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))
     DirectoryInDesiredStateException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: 'RequestId'))
@@ -902,6 +922,8 @@ module Aws::DirectoryService
     DirectoryNotSharedException.type = Types::DirectoryNotSharedException
     DirectorySize.add_member(:small, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SMALL', traits: {"smithy.api#enumValue" => "Small"}))
     DirectorySize.add_member(:large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LARGE', traits: {"smithy.api#enumValue" => "Large"}))
+    DirectorySizeUpdateSettings.add_member(:directory_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySize, location_name: 'DirectorySize'))
+    DirectorySizeUpdateSettings.type = Types::DirectorySizeUpdateSettings
     DirectoryStage.add_member(:requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REQUESTED', traits: {"smithy.api#enumValue" => "Requested"}))
     DirectoryStage.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "Creating"}))
     DirectoryStage.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATED', traits: {"smithy.api#enumValue" => "Created"}))
@@ -955,9 +977,11 @@ module Aws::DirectoryService
     DisableSsoRequest.type = Types::DisableSsoRequest
     DisableSsoResult.type = Types::DisableSsoResult
     DnsIpAddrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr)
+    DnsIpv6Addrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6Addr)
     DomainController.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     DomainController.add_member(:domain_controller_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainControllerId, location_name: 'DomainControllerId'))
     DomainController.add_member(:dns_ip_addr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr, location_name: 'DnsIpAddr'))
+    DomainController.add_member(:dns_ipv6_addr, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6Addr, location_name: 'DnsIpv6Addr'))
     DomainController.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcId, location_name: 'VpcId'))
     DomainController.add_member(:subnet_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId, location_name: 'SubnetId'))
     DomainController.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: 'AvailabilityZone'))
@@ -1081,10 +1105,12 @@ module Aws::DirectoryService
     InvalidTargetException.type = Types::InvalidTargetException
     IpAddrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddr)
     IpRoute.add_member(:cidr_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIp, location_name: 'CidrIp'))
+    IpRoute.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6, location_name: 'CidrIpv6'))
     IpRoute.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'Description'))
     IpRoute.type = Types::IpRoute
     IpRouteInfo.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     IpRouteInfo.add_member(:cidr_ip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIp, location_name: 'CidrIp'))
+    IpRouteInfo.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6, location_name: 'CidrIpv6'))
     IpRouteInfo.add_member(:ip_route_status_msg, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteStatusMsg, location_name: 'IpRouteStatusMsg'))
     IpRouteInfo.add_member(:added_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddedDateTime, location_name: 'AddedDateTime'))
     IpRouteInfo.add_member(:ip_route_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteStatusReason, location_name: 'IpRouteStatusReason'))
@@ -1101,6 +1127,7 @@ module Aws::DirectoryService
     IpRouteStatusMsg.add_member(:remove_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REMOVE_FAILED', traits: {"smithy.api#enumValue" => "RemoveFailed"}))
     IpRoutes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRoute)
     IpRoutesInfo.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpRouteInfo)
+    IpV6Addrs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6Addr)
     LDAPSSettingInfo.add_member(:ldaps_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSStatus, location_name: 'LDAPSStatus'))
     LDAPSSettingInfo.add_member(:ldaps_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LDAPSStatusReason, location_name: 'LDAPSStatusReason'))
     LDAPSSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: 'LastUpdatedDateTime'))
@@ -1158,6 +1185,12 @@ module Aws::DirectoryService
     LogSubscription.add_member(:subscription_created_date_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionCreatedDateTime, location_name: 'SubscriptionCreatedDateTime'))
     LogSubscription.type = Types::LogSubscription
     LogSubscriptions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogSubscription)
+    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DUAL_STACK', traits: {"smithy.api#enumValue" => "Dual-stack"}))
+    NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4_ONLY', traits: {"smithy.api#enumValue" => "IPv4"}))
+    NetworkType.add_member(:ipv6_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV6_ONLY', traits: {"smithy.api#enumValue" => "IPv6"}))
+    NetworkUpdateSettings.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
+    NetworkUpdateSettings.add_member(:customer_dns_ips_v6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'CustomerDnsIpsV6'))
+    NetworkUpdateSettings.type = Types::NetworkUpdateSettings
     NoAvailableCertificateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))
     NoAvailableCertificateException.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestId, location_name: 'RequestId'))
     NoAvailableCertificateException.type = Types::NoAvailableCertificateException
@@ -1171,15 +1204,18 @@ module Aws::DirectoryService
     OwnerDirectoryDescription.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId'))
     OwnerDirectoryDescription.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomerId, location_name: 'AccountId'))
     OwnerDirectoryDescription.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs'))
+    OwnerDirectoryDescription.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'DnsIpv6Addrs'))
     OwnerDirectoryDescription.add_member(:vpc_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryVpcSettingsDescription, location_name: 'VpcSettings'))
     OwnerDirectoryDescription.add_member(:radius_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusSettings, location_name: 'RadiusSettings'))
     OwnerDirectoryDescription.add_member(:radius_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusStatus, location_name: 'RadiusStatus'))
+    OwnerDirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     OwnerDirectoryDescription.type = Types::OwnerDirectoryDescription
     RadiusAuthenticationProtocol.add_member(:pap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PAP', traits: {"smithy.api#enumValue" => "PAP"}))
     RadiusAuthenticationProtocol.add_member(:chap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CHAP', traits: {"smithy.api#enumValue" => "CHAP"}))
     RadiusAuthenticationProtocol.add_member(:mschapv1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MSCHAPV1', traits: {"smithy.api#enumValue" => "MS-CHAPv1"}))
     RadiusAuthenticationProtocol.add_member(:mschapv2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MSCHAPV2', traits: {"smithy.api#enumValue" => "MS-CHAPv2"}))
     RadiusSettings.add_member(:radius_servers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Servers, location_name: 'RadiusServers'))
+    RadiusSettings.add_member(:radius_servers_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Servers, location_name: 'RadiusServersIpv6'))
     RadiusSettings.add_member(:radius_port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PortNumber, location_name: 'RadiusPort'))
     RadiusSettings.add_member(:radius_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusTimeout, location_name: 'RadiusTimeout'))
     RadiusSettings.add_member(:radius_retries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RadiusRetries, location_name: 'RadiusRetries', traits: {"smithy.api#default" => 0}))
@@ -1227,7 +1263,8 @@ module Aws::DirectoryService
     RejectSharedDirectoryResult.type = Types::RejectSharedDirectoryResult
     RemoteDomainNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName)
     RemoveIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
-    RemoveIpRoutesRequest.add_member(:cidr_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIps, location_name: 'CidrIps', traits: {"smithy.api#required" => {}}))
+    RemoveIpRoutesRequest.add_member(:cidr_ips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIps, location_name: 'CidrIps', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    RemoveIpRoutesRequest.add_member(:cidr_ipv6s, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CidrIpv6s, location_name: 'CidrIpv6s'))
     RemoveIpRoutesRequest.type = Types::RemoveIpRoutesRequest
     RemoveIpRoutesResult.type = Types::RemoveIpRoutesResult
     RemoveRegionRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
@@ -1418,12 +1455,15 @@ module Aws::DirectoryService
     UpdateActivities.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateInfoEntry)
     UpdateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     UpdateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: 'RemoteDomainName', traits: {"smithy.api#required" => {}}))
-    UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs', traits: {"smithy.api#required" => {}}))
+    UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: 'DnsIpAddrs', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    UpdateConditionalForwarderRequest.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: 'DnsIpv6Addrs'))
     UpdateConditionalForwarderRequest.type = Types::UpdateConditionalForwarderRequest
     UpdateConditionalForwarderResult.type = Types::UpdateConditionalForwarderResult
     UpdateDirectorySetupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'DirectoryId', traits: {"smithy.api#required" => {}}))
     UpdateDirectorySetupRequest.add_member(:update_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateType, location_name: 'UpdateType', traits: {"smithy.api#required" => {}}))
     UpdateDirectorySetupRequest.add_member(:os_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSUpdateSettings, location_name: 'OSUpdateSettings'))
+    UpdateDirectorySetupRequest.add_member(:directory_size_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectorySizeUpdateSettings, location_name: 'DirectorySizeUpdateSettings'))
+    UpdateDirectorySetupRequest.add_member(:network_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkUpdateSettings, location_name: 'NetworkUpdateSettings'))
     UpdateDirectorySetupRequest.add_member(:create_snapshot_before_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSnapshotBeforeUpdate, location_name: 'CreateSnapshotBeforeUpdate', traits: {"smithy.api#default" => nil}))
     UpdateDirectorySetupRequest.type = Types::UpdateDirectorySetupRequest
     UpdateDirectorySetupResult.type = Types::UpdateDirectorySetupResult
@@ -1466,6 +1506,8 @@ module Aws::DirectoryService
     UpdateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrustId, location_name: 'TrustId'))
     UpdateTrustResult.type = Types::UpdateTrustResult
     UpdateType.add_member(:os, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OS', traits: {"smithy.api#enumValue" => "OS"}))
+    UpdateType.add_member(:network, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NETWORK', traits: {"smithy.api#enumValue" => "NETWORK"}))
+    UpdateType.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SIZE', traits: {"smithy.api#enumValue" => "SIZE"}))
     UpdateValue.add_member(:os_update_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSUpdateSettings, location_name: 'OSUpdateSettings'))
     UpdateValue.type = Types::UpdateValue
     UserDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))

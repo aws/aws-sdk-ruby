@@ -147,6 +147,7 @@ module Aws::ChimeSDKMessaging
     MessagingSessionEndpoint: StructureShape
     Metadata: StringShape
     MinimumMembershipPercentage: IntegerShape
+    NetworkType: EnumShape
     NextToken: StringShape
     NonEmptyContent: StringShape
     NonEmptyResourceName: StringShape

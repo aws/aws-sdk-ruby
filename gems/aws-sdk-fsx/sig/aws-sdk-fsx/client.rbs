@@ -7,6 +7,7 @@ module Aws::FSx
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -330,7 +331,8 @@ module Aws::FSx
         throughput_capacity: Integer,
         weekly_maintenance_start_time: String,
         ha_pairs: Integer,
-        throughput_capacity_per_ha_pair: Integer
+        throughput_capacity_per_ha_pair: Integer,
+        endpoint_ipv6_address_range: String
       },
       ?file_system_type_version: String,
       ?open_zfs_configuration: {
@@ -1148,7 +1150,8 @@ module Aws::FSx
         add_route_table_ids: Array[String],
         remove_route_table_ids: untyped,
         throughput_capacity_per_ha_pair: Integer,
-        ha_pairs: Integer
+        ha_pairs: Integer,
+        endpoint_ipv6_address_range: String
       },
       ?open_zfs_configuration: {
         automatic_backup_retention_days: Integer,

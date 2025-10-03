@@ -1980,6 +1980,54 @@ module Aws::DataZone
       attr_accessor description: String?
     end
 
+    class CreateEnvironmentBlueprintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?provisioning_properties: Types::ProvisioningProperties,
+        ?user_parameters: Array[Types::CustomParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provisioning_properties: Types::ProvisioningProperties?
+      attr_accessor user_parameters: Array[Types::CustomParameter]?
+    end
+
+    class CreateEnvironmentBlueprintOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?provider: String,
+        ?provisioning_properties: Types::ProvisioningProperties,
+        ?deployment_properties: Types::DeploymentProperties,
+        ?user_parameters: Array[Types::CustomParameter],
+        ?glossary_terms: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provider: String?
+      attr_accessor provisioning_properties: Types::ProvisioningProperties?
+      attr_accessor deployment_properties: Types::DeploymentProperties?
+      attr_accessor user_parameters: Array[Types::CustomParameter]?
+      attr_accessor glossary_terms: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class CreateEnvironmentInput
       include Smithy::Schema::Structure
 
@@ -2820,6 +2868,7 @@ module Aws::DataZone
         ?default_value: String,
         ?is_editable: bool,
         ?is_optional: bool,
+        ?is_update_supported: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2829,6 +2878,7 @@ module Aws::DataZone
       attr_accessor default_value: String?
       attr_accessor is_editable: bool?
       attr_accessor is_optional: bool?
+      attr_accessor is_update_supported: bool?
     end
 
     module DataAssetActivityStatus
@@ -3496,6 +3546,19 @@ module Aws::DataZone
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DeleteEnvironmentBlueprintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
     end
 
     class DeleteEnvironmentInput
@@ -6684,10 +6747,12 @@ module Aws::DataZone
 
       def initialize: (
         ?arn: String,
+        ?principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor principal_id: String?
     end
 
     class Import
@@ -8272,6 +8337,19 @@ module Aws::DataZone
       attr_accessor glossary_terms: Array[Types::DetailedGlossaryTerm]?
     end
 
+    class ManagedEndpointCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor token: String?
+    end
+
     module ManagedPolicyType
       CREATE_DOMAIN_UNIT: String
       OVERRIDE_DOMAIN_UNIT_OWNERS: String
@@ -9190,6 +9268,7 @@ module Aws::DataZone
         ?environment_role_permission_boundary: String,
         ?enabled_regions: Array[String],
         ?regional_parameters: Hash[String, Hash[String, String]],
+        ?global_parameters: Hash[String, String],
         ?provisioning_configurations: Array[Types::ProvisioningConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -9201,6 +9280,7 @@ module Aws::DataZone
       attr_accessor environment_role_permission_boundary: String?
       attr_accessor enabled_regions: Array[String]?
       attr_accessor regional_parameters: Hash[String, Hash[String, String]]?
+      attr_accessor global_parameters: Hash[String, String]?
       attr_accessor provisioning_configurations: Array[Types::ProvisioningConfiguration]?
     end
 
@@ -10469,6 +10549,7 @@ module Aws::DataZone
         ?python_virtual_env: String,
         ?runtime_role: String,
         ?trusted_certificates_s3_uri: String,
+        ?managed_endpoint_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10479,6 +10560,7 @@ module Aws::DataZone
       attr_accessor python_virtual_env: String?
       attr_accessor runtime_role: String?
       attr_accessor trusted_certificates_s3_uri: String?
+      attr_accessor managed_endpoint_arn: String?
     end
 
     class SparkEmrPropertiesOutput
@@ -10496,6 +10578,9 @@ module Aws::DataZone
         ?python_virtual_env: String,
         ?runtime_role: String,
         ?trusted_certificates_s3_uri: String,
+        ?certificate_data: String,
+        ?managed_endpoint_arn: String,
+        ?managed_endpoint_credentials: Types::ManagedEndpointCredentials,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10510,6 +10595,9 @@ module Aws::DataZone
       attr_accessor python_virtual_env: String?
       attr_accessor runtime_role: String?
       attr_accessor trusted_certificates_s3_uri: String?
+      attr_accessor certificate_data: String?
+      attr_accessor managed_endpoint_arn: String?
+      attr_accessor managed_endpoint_credentials: Types::ManagedEndpointCredentials?
     end
 
     class SparkEmrPropertiesPatch
@@ -10523,6 +10611,7 @@ module Aws::DataZone
         ?python_virtual_env: String,
         ?runtime_role: String,
         ?trusted_certificates_s3_uri: String,
+        ?managed_endpoint_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10533,6 +10622,7 @@ module Aws::DataZone
       attr_accessor python_virtual_env: String?
       attr_accessor runtime_role: String?
       attr_accessor trusted_certificates_s3_uri: String?
+      attr_accessor managed_endpoint_arn: String?
     end
 
     class SparkGlueArgs
@@ -11710,6 +11800,54 @@ module Aws::DataZone
       attr_accessor name: String?
       attr_accessor parameters: Types::ActionParameters?
       attr_accessor description: String?
+    end
+
+    class UpdateEnvironmentBlueprintInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+        ?description: String,
+        ?provisioning_properties: Types::ProvisioningProperties,
+        ?user_parameters: Array[Types::CustomParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor provisioning_properties: Types::ProvisioningProperties?
+      attr_accessor user_parameters: Array[Types::CustomParameter]?
+    end
+
+    class UpdateEnvironmentBlueprintOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?provider: String,
+        ?provisioning_properties: Types::ProvisioningProperties,
+        ?deployment_properties: Types::DeploymentProperties,
+        ?user_parameters: Array[Types::CustomParameter],
+        ?glossary_terms: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provider: String?
+      attr_accessor provisioning_properties: Types::ProvisioningProperties?
+      attr_accessor deployment_properties: Types::DeploymentProperties?
+      attr_accessor user_parameters: Array[Types::CustomParameter]?
+      attr_accessor glossary_terms: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class UpdateEnvironmentInput

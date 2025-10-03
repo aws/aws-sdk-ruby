@@ -12,7 +12,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor message: String?
     end
 
-    class Agent
+    class AgentRuntime
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -35,7 +35,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor status: String?
     end
 
-    class AgentArtifact
+    class AgentRuntimeArtifact
       include Smithy::Schema::Union
 
       def initialize: (
@@ -45,13 +45,13 @@ module Aws::BedrockAgentCoreControl
 
       attr_accessor container_configuration: Types::ContainerConfiguration?
 
-      class ContainerConfiguration < AgentArtifact
+      class ContainerConfiguration < AgentRuntimeArtifact
       end
-      class Unknown < AgentArtifact
+      class Unknown < AgentRuntimeArtifact
       end
     end
 
-    class AgentEndpoint
+    class AgentRuntimeEndpoint
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -80,7 +80,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor last_updated_at: Time?
     end
 
-    module AgentEndpointStatus
+    module AgentRuntimeEndpointStatus
       CREATING: String
       CREATE_FAILED: String
       UPDATING: String
@@ -89,7 +89,7 @@ module Aws::BedrockAgentCoreControl
       DELETING: String
     end
 
-    module AgentStatus
+    module AgentRuntimeStatus
       CREATING: String
       CREATE_FAILED: String
       UPDATING: String
@@ -165,14 +165,17 @@ module Aws::BedrockAgentCoreControl
 
       def initialize: (
         ?network_mode: String,
+        ?vpc_config: Types::VpcConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor network_mode: String?
+      attr_accessor vpc_config: Types::VpcConfig?
     end
 
     module BrowserNetworkMode
       PUBLIC: String
+      VPC: String
     end
 
     module BrowserStatus
@@ -212,15 +215,18 @@ module Aws::BedrockAgentCoreControl
 
       def initialize: (
         ?network_mode: String,
+        ?vpc_config: Types::VpcConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor network_mode: String?
+      attr_accessor vpc_config: Types::VpcConfig?
     end
 
     module CodeInterpreterNetworkMode
       PUBLIC: String
       SANDBOX: String
+      VPC: String
     end
 
     module CodeInterpreterStatus
@@ -313,6 +319,7 @@ module Aws::BedrockAgentCoreControl
         ?agent_runtime_version: String,
         ?description: String,
         ?client_token: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -321,6 +328,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_version: String?
       attr_accessor description: String?
       attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateAgentRuntimeEndpointResponse
@@ -348,25 +356,29 @@ module Aws::BedrockAgentCoreControl
       def initialize: (
         ?agent_runtime_name: String,
         ?description: String,
-        ?agent_runtime_artifact: Types::AgentArtifact,
+        ?agent_runtime_artifact: Types::AgentRuntimeArtifact,
         ?role_arn: String,
         ?network_configuration: Types::NetworkConfiguration,
         ?protocol_configuration: Types::ProtocolConfiguration,
         ?client_token: String,
         ?environment_variables: Hash[String, String],
         ?authorizer_configuration: Types::AuthorizerConfiguration,
+        ?request_header_configuration: Types::RequestHeaderConfiguration,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor agent_runtime_name: String?
       attr_accessor description: String?
-      attr_accessor agent_runtime_artifact: Types::AgentArtifact?
+      attr_accessor agent_runtime_artifact: Types::AgentRuntimeArtifact?
       attr_accessor role_arn: String?
       attr_accessor network_configuration: Types::NetworkConfiguration?
       attr_accessor protocol_configuration: Types::ProtocolConfiguration?
       attr_accessor client_token: String?
       attr_accessor environment_variables: Hash[String, String]?
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
+      attr_accessor request_header_configuration: Types::RequestHeaderConfiguration?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateAgentRuntimeResponse
@@ -428,6 +440,7 @@ module Aws::BedrockAgentCoreControl
         ?network_configuration: Types::BrowserNetworkConfiguration,
         ?recording: Types::RecordingConfig,
         ?client_token: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -437,6 +450,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor network_configuration: Types::BrowserNetworkConfiguration?
       attr_accessor recording: Types::RecordingConfig?
       attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateBrowserResponse
@@ -465,6 +479,7 @@ module Aws::BedrockAgentCoreControl
         ?execution_role_arn: String,
         ?network_configuration: Types::CodeInterpreterNetworkConfiguration,
         ?client_token: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -473,6 +488,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor execution_role_arn: String?
       attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration?
       attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateCodeInterpreterResponse
@@ -506,6 +522,7 @@ module Aws::BedrockAgentCoreControl
         ?authorizer_configuration: Types::AuthorizerConfiguration,
         ?kms_key_arn: String,
         ?exception_level: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -519,6 +536,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
       attr_accessor kms_key_arn: String?
       attr_accessor exception_level: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateGatewayResponse
@@ -1364,11 +1382,12 @@ module Aws::BedrockAgentCoreControl
         ?created_at: Time,
         ?last_updated_at: Time,
         ?role_arn: String,
-        ?agent_runtime_artifact: Types::AgentArtifact,
+        ?agent_runtime_artifact: Types::AgentRuntimeArtifact,
         ?network_configuration: Types::NetworkConfiguration,
         ?protocol_configuration: Types::ProtocolConfiguration,
         ?environment_variables: Hash[String, String],
         ?authorizer_configuration: Types::AuthorizerConfiguration,
+        ?request_header_configuration: Types::RequestHeaderConfiguration,
         ?status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1382,11 +1401,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor role_arn: String?
-      attr_accessor agent_runtime_artifact: Types::AgentArtifact?
+      attr_accessor agent_runtime_artifact: Types::AgentRuntimeArtifact?
       attr_accessor network_configuration: Types::NetworkConfiguration?
       attr_accessor protocol_configuration: Types::ProtocolConfiguration?
       attr_accessor environment_variables: Hash[String, String]?
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
+      attr_accessor request_header_configuration: Types::RequestHeaderConfiguration?
       attr_accessor status: String?
     end
 
@@ -1443,6 +1463,7 @@ module Aws::BedrockAgentCoreControl
         ?network_configuration: Types::BrowserNetworkConfiguration,
         ?recording: Types::RecordingConfig,
         ?status: String,
+        ?failure_reason: String,
         ?created_at: Time,
         ?last_updated_at: Time,
       ) -> void
@@ -1456,6 +1477,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor network_configuration: Types::BrowserNetworkConfiguration?
       attr_accessor recording: Types::RecordingConfig?
       attr_accessor status: String?
+      attr_accessor failure_reason: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
     end
@@ -1482,6 +1504,7 @@ module Aws::BedrockAgentCoreControl
         ?execution_role_arn: String,
         ?network_configuration: Types::CodeInterpreterNetworkConfiguration,
         ?status: String,
+        ?failure_reason: String,
         ?created_at: Time,
         ?last_updated_at: Time,
       ) -> void
@@ -1494,6 +1517,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor execution_role_arn: String?
       attr_accessor network_configuration: Types::CodeInterpreterNetworkConfiguration?
       attr_accessor status: String?
+      attr_accessor failure_reason: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
     end
@@ -1802,12 +1826,12 @@ module Aws::BedrockAgentCoreControl
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?runtime_endpoints: Array[Types::AgentEndpoint],
+        ?runtime_endpoints: Array[Types::AgentRuntimeEndpoint],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor runtime_endpoints: Array[Types::AgentEndpoint]?
+      attr_accessor runtime_endpoints: Array[Types::AgentRuntimeEndpoint]?
       attr_accessor next_token: String?
     end
 
@@ -1830,12 +1854,12 @@ module Aws::BedrockAgentCoreControl
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?agent_runtimes: Array[Types::Agent],
+        ?agent_runtimes: Array[Types::AgentRuntime],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor agent_runtimes: Array[Types::Agent]?
+      attr_accessor agent_runtimes: Array[Types::AgentRuntime]?
       attr_accessor next_token: String?
     end
 
@@ -1856,12 +1880,12 @@ module Aws::BedrockAgentCoreControl
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?agent_runtimes: Array[Types::Agent],
+        ?agent_runtimes: Array[Types::AgentRuntime],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor agent_runtimes: Array[Types::Agent]?
+      attr_accessor agent_runtimes: Array[Types::AgentRuntime]?
       attr_accessor next_token: String?
     end
 
@@ -2051,6 +2075,28 @@ module Aws::BedrockAgentCoreControl
 
       attr_accessor credential_providers: Array[Types::Oauth2CredentialProviderItem]?
       attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
     end
 
     class ListWorkloadIdentitiesRequest
@@ -2365,14 +2411,17 @@ module Aws::BedrockAgentCoreControl
 
       def initialize: (
         ?network_mode: String,
+        ?network_mode_config: Types::VpcConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor network_mode: String?
+      attr_accessor network_mode_config: Types::VpcConfig?
     end
 
     module NetworkMode
       PUBLIC: String
+      VPC: String
     end
 
     class OAuthCredentialProvider
@@ -2546,6 +2595,22 @@ module Aws::BedrockAgentCoreControl
 
       attr_accessor enabled: bool?
       attr_accessor s3_location: Types::S3Location?
+    end
+
+    class RequestHeaderConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?request_header_allowlist: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_header_allowlist: Array[String]?
+
+      class RequestHeaderAllowlist < RequestHeaderConfiguration
+      end
+      class Unknown < RequestHeaderConfiguration
+      end
     end
 
     class ResourceLimitExceededException
@@ -2894,6 +2959,28 @@ module Aws::BedrockAgentCoreControl
       attr_accessor model_id: String?
     end
 
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class TargetConfiguration
       include Smithy::Schema::Union
 
@@ -3010,6 +3097,28 @@ module Aws::BedrockAgentCoreControl
       attr_accessor message: String?
     end
 
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class UpdateAgentRuntimeEndpointRequest
       include Smithy::Schema::Structure
 
@@ -3058,25 +3167,27 @@ module Aws::BedrockAgentCoreControl
       def initialize: (
         ?agent_runtime_id: String,
         ?description: String,
-        ?agent_runtime_artifact: Types::AgentArtifact,
+        ?agent_runtime_artifact: Types::AgentRuntimeArtifact,
         ?role_arn: String,
         ?network_configuration: Types::NetworkConfiguration,
         ?protocol_configuration: Types::ProtocolConfiguration,
         ?client_token: String,
         ?environment_variables: Hash[String, String],
         ?authorizer_configuration: Types::AuthorizerConfiguration,
+        ?request_header_configuration: Types::RequestHeaderConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor agent_runtime_id: String?
       attr_accessor description: String?
-      attr_accessor agent_runtime_artifact: Types::AgentArtifact?
+      attr_accessor agent_runtime_artifact: Types::AgentRuntimeArtifact?
       attr_accessor role_arn: String?
       attr_accessor network_configuration: Types::NetworkConfiguration?
       attr_accessor protocol_configuration: Types::ProtocolConfiguration?
       attr_accessor client_token: String?
       attr_accessor environment_variables: Hash[String, String]?
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
+      attr_accessor request_header_configuration: Types::RequestHeaderConfiguration?
     end
 
     class UpdateAgentRuntimeResponse
@@ -3472,6 +3583,19 @@ module Aws::BedrockAgentCoreControl
       IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION: String
       ROOT_EVENT_IN_OTHER_SESSION: String
       RESOURCE_CONFLICT: String
+    end
+
+    class VpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[String],
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[String]?
+      attr_accessor subnets: Array[String]?
     end
 
     class WorkloadIdentityDetails

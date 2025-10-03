@@ -77,6 +77,17 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for a scraper component.</p>
+    # @!attribute options
+    #   <p>Configuration options for the scraper component.</p>
+    #   @return [Hash<String, String>]
+    class ComponentConfig < Struct.new(
+      :options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request would cause an inconsistent state.</p>
     # @!attribute message
     #   <p>Description of the error.</p>
@@ -423,6 +434,20 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute scraper_id
+    #   <p>The ID of the scraper whose logging configuration will be deleted.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the request is processed exactly once.</p>
+    #   @return [String]
+    class DeleteScraperLoggingConfigurationRequest < Struct.new(
+      :scraper_id,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the input of a <code>DeleteScraper</code> operation.</p>
     # @!attribute scraper_id
     #   <p>The ID of the scraper to delete.</p>
@@ -581,6 +606,42 @@ module Aws::Amp
     #   @return [Types::RuleGroupsNamespaceDescription]
     class DescribeRuleGroupsNamespaceOutput < Struct.new(
       :rule_groups_namespace,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scraper_id
+    #   <p>The ID of the scraper whose logging configuration will be described.</p>
+    #   @return [String]
+    class DescribeScraperLoggingConfigurationRequest < Struct.new(
+      :scraper_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The status of the scraper logging configuration.</p>
+    #   @return [Types::ScraperLoggingConfigurationStatus]
+    # @!attribute scraper_id
+    #   <p>The ID of the scraper.</p>
+    #   @return [String]
+    # @!attribute logging_destination
+    #   <p>The destination where scraper logs are sent.</p>
+    #   @return [Types::ScraperLoggingDestination]
+    # @!attribute scraper_components
+    #   <p>The list of scraper components configured for logging.</p>
+    #   @return [Array<Types::ScraperComponent>]
+    # @!attribute modified_at
+    #   <p>The date and time when the logging configuration was last modified.</p>
+    #   @return [Time]
+    class DescribeScraperLoggingConfigurationResponse < Struct.new(
+      :status,
+      :scraper_id,
+      :logging_destination,
+      :scraper_components,
+      :modified_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1221,6 +1282,21 @@ module Aws::Amp
       class Unknown < ScrapeConfiguration; end
     end
 
+    # <p>A component of a Amazon Managed Service for Prometheus scraper that can be configured for logging.</p>
+    # @!attribute type
+    #   <p>The type of the scraper component.</p>
+    #   @return [String]
+    # @!attribute config
+    #   <p>The configuration settings for the scraper component.</p>
+    #   @return [Types::ComponentConfig]
+    class ScraperComponent < Struct.new(
+      :type,
+      :config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The <code>ScraperDescription</code> structure contains the full details about one scraper in your account.</p>
     # @!attribute alias
     #   <p>(Optional) A name associated with the scraper.</p>
@@ -1278,6 +1354,36 @@ module Aws::Amp
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The status of a scraper logging configuration.</p>
+    # @!attribute status_code
+    #   <p>The status code of the scraper logging configuration.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason for the current status of the scraper logging configuration.</p>
+    #   @return [String]
+    class ScraperLoggingConfigurationStatus < Struct.new(
+      :status_code,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The destination where scraper logs are sent.</p>
+    # @!attribute cloud_watch_logs
+    #   <p>The CloudWatch Logs configuration for the scraper logging destination.</p>
+    #   @return [Types::CloudWatchLogDestination]
+    class ScraperLoggingDestination < Struct.new(
+      :cloud_watch_logs,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CloudWatchLogs < ScraperLoggingDestination; end
+      class Unknown < ScraperLoggingDestination; end
     end
 
     # <p>The <code>ScraperStatus</code> structure contains status information about the scraper.</p>
@@ -1503,6 +1609,34 @@ module Aws::Amp
     #   <p>The current status of the query logging configuration.</p>
     #   @return [Types::QueryLoggingConfigurationStatus]
     class UpdateQueryLoggingConfigurationResponse < Struct.new(
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scraper_id
+    #   <p>The ID of the scraper whose logging configuration will be updated.</p>
+    #   @return [String]
+    # @!attribute logging_destination
+    #   <p>The destination where scraper logs will be sent.</p>
+    #   @return [Types::ScraperLoggingDestination]
+    # @!attribute scraper_components
+    #   <p>The list of scraper components to configure for logging.</p>
+    #   @return [Array<Types::ScraperComponent>]
+    class UpdateScraperLoggingConfigurationRequest < Struct.new(
+      :scraper_id,
+      :logging_destination,
+      :scraper_components,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The status of the updated scraper logging configuration.</p>
+    #   @return [Types::ScraperLoggingConfigurationStatus]
+    class UpdateScraperLoggingConfigurationResponse < Struct.new(
       :status,
       keyword_init: true
     )

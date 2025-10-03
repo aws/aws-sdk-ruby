@@ -23,6 +23,7 @@ module Aws::Budgets
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {BillingViewHealthStatusException}
   # * {CreationLimitExceededException}
   # * {DuplicateRecordException}
   # * {ExpiredNextTokenException}
@@ -43,6 +44,21 @@ module Aws::Budgets
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>
+    #       The billing view status must be HEALTHY to perform this action. Try again when the status is HEALTHY.
+    #     </p>
+    class BillingViewHealthStatusException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Budgets::Types::BillingViewHealthStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Organizations
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Organizations
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Organizations
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Organizations::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Organizations::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -455,8 +460,8 @@ module Aws::Organizations
     #                <li>
     #                   <p>You can close only 10% of member accounts, between 10 and 1000, within a
     #                         rolling 30 day period. This quota is not bound by a calendar month, but
-    #                         starts when you close an account. After you reach this limit, you can't close
-    #                         additional accounts. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing a member
+    #                         starts when you close an account. After you reach this limit, you can't
+    #                         close additional accounts. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing a member
     #                             account in your organization</a> and <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html">Quotas for
     #                             Organizations</a> in the <i>Organizations User Guide</i>. </p>
     #                </li>
@@ -530,10 +535,10 @@ module Aws::Organizations
     #                <li>
     #                   <p>When you create an account in an organization using the Organizations console,
     #                         API, or CLI commands, the information required for the account to operate
-    #                         as a standalone account, such as a payment method is <i>not</i> automatically
-    #                         collected. If you must remove an account from your organization later, you
-    #                         can do so only after you provide the missing information. For more
-    #                         information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a>
+    #                         as a standalone account, such as a payment method is
+    #                             <i>not</i> automatically collected. If you must remove an
+    #                         account from your organization later, you can do so only after you provide
+    #                         the missing information. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html">Considerations before removing an account from an organization</a>
     #                         in the <i>Organizations User Guide</i>.</p>
     #                </li>
     #                <li>
@@ -546,9 +551,10 @@ module Aws::Organizations
     #                         If the error persists, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
     #                </li>
     #                <li>
-    #                   <p>It isn't recommended to use <code>CreateAccount</code> to create multiple temporary accounts, and using 
-    #                         the <code>CreateAccount</code> API to close accounts is subject to a 30-day usage quota. For information on the requirements
-    #                         and process for closing an account, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing a member
+    #                   <p>It isn't recommended to use <code>CreateAccount</code> to create multiple
+    #                         temporary accounts, and using the <code>CreateAccount</code> API to close
+    #                         accounts is subject to a 30-day usage quota. For information on the
+    #                         requirements and process for closing an account, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing a member
     #                             account in your organization</a> in the
     #                             <i>Organizations User Guide</i>.</p>
     #                </li>
@@ -1570,6 +1576,7 @@ module Aws::Organizations
     #       email: "Email",
     #       name: "AccountName",
     #       status: "ACTIVE" # One of: ["ACTIVE", "SUSPENDED", "PENDING_CLOSURE"],
+    #       state: "PENDING_ACTIVATION" # One of: ["PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"],
     #       joined_method: "INVITED" # One of: ["INVITED", "CREATED"],
     #       joined_timestamp: Time.now
     #     }
@@ -1635,8 +1642,8 @@ module Aws::Organizations
     #             The effective policy is the aggregation of any policies of the specified type that the
     #             account inherits, plus any policy of that type that is directly attached to the
     #             account.</p>
-    #          <p>This operation applies only to management policies. It does not apply to authorization policies: service
-    #             control policies (SCPs) and resource control policies (RCPs).</p>
+    #          <p>This operation applies only to management policies. It does not apply to authorization
+    #             policies: service control policies (SCPs) and resource control policies (RCPs).</p>
     #          <p>For more information about policy inheritance, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html">Understanding
     #                 management policy inheritance</a> in the
     #             <i>Organizations User Guide</i>.</p>
@@ -2153,7 +2160,7 @@ module Aws::Organizations
     #             root, and then use this operation.</p>
     #          <p>This operation can be called only from the organization's
     # management account or by a member account that is a delegated administrator.</p>
-    #          <p> To view the status of available policy types in the organization, use <a>DescribeOrganization</a>.</p>
+    #          <p> To view the status of available policy types in the organization, use <a>ListRoots</a>.</p>
     # @param [Hash, Types::DisablePolicyTypeRequest] params
     # @option params [String] :root_id
     #   <p>The unique identifier (ID) of the root in which you want to disable a policy type. You
@@ -2252,11 +2259,11 @@ module Aws::Organizations
     end
 
     # <p>Provides an Amazon Web Services service (the service that is specified by
-    #             <code>ServicePrincipal</code>) with permissions to view the structure of an organization, 
-    #         create a <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">service-linked role</a> in all the accounts in the organization,
-    #             and allow the service to perform operations
-    #         on behalf of the organization and its accounts. Establishing these permissions can be a first step
-    #         in enabling the integration of an Amazon Web Services service with Organizations.</p>
+    #                 <code>ServicePrincipal</code>) with permissions to view the structure of an
+    #             organization, create a <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">service-linked role</a> in
+    #             all the accounts in the organization, and allow the service to perform operations on
+    #             behalf of the organization and its accounts. Establishing these permissions can be a
+    #             first step in enabling the integration of an Amazon Web Services service with Organizations.</p>
     #          <important>
     #             <p>We recommend that you enable integration between Organizations and the specified Amazon Web Services
     #                 service by using the console or commands that are provided by the specified service.
@@ -2392,7 +2399,7 @@ module Aws::Organizations
     # management account or by a member account that is a delegated administrator.</p>
     #          <p>You can enable a policy type in a root only if that policy type is available in the
     #             organization. To view the status of available policy types in the organization, use
-    #                 <a>DescribeOrganization</a>.</p>
+    #                 <a>ListRoots</a>.</p>
     # @param [Hash, Types::EnablePolicyTypeRequest] params
     # @option params [String] :root_id
     #   <p>The unique identifier (ID) of the root in which you want to enable a policy type. You
@@ -2499,10 +2506,11 @@ module Aws::Organizations
     #             other account's owner. The invitation is implemented as a <a>Handshake</a>
     #             whose details are in the response.</p>
     #          <important>
-    #             <p>If you receive an exception that indicates that you exceeded your account
-    #                         limits for the organization or that the operation failed because your
-    #                         organization is still initializing, wait one hour and then try again. If the
-    #                         error persists after an hour, contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services Support</a>.</p>
+    #             <p>If you receive an exception that indicates that you exceeded your account limits
+    #                 for the organization or that the operation failed because your organization is still
+    #                 initializing, wait one hour and then try again. If the error persists after an hour,
+    #                 contact <a href="https://console.aws.amazon.com/support/home#/">Amazon Web Services
+    #                 Support</a>.</p>
     #          </important>
     #          <p>If the request includes tags, then the requester must have the
     #                 <code>organizations:TagResource</code> permission.</p>
@@ -2709,8 +2717,8 @@ module Aws::Organizations
     #                </li>
     #                <li>
     #                   <p>A newly created account has a waiting period before it can be removed from
-    #                         its organization.
-    #                         You must wait until at least seven days after the account was created. Invited accounts aren't subject to this waiting period.</p>
+    #                         its organization. You must wait until at least seven days after the account
+    #                         was created. Invited accounts aren't subject to this waiting period.</p>
     #                </li>
     #                <li>
     #                   <p>If you are using an organization principal to call
@@ -2833,6 +2841,7 @@ module Aws::Organizations
     #         email: "Email",
     #         name: "AccountName",
     #         status: "ACTIVE" # One of: ["ACTIVE", "SUSPENDED", "PENDING_CLOSURE"],
+    #         state: "PENDING_ACTIVATION" # One of: ["PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"],
     #         joined_method: "INVITED" # One of: ["INVITED", "CREATED"],
     #         joined_timestamp: Time.now
     #       }
@@ -2927,6 +2936,7 @@ module Aws::Organizations
     #         email: "Email",
     #         name: "AccountName",
     #         status: "ACTIVE" # One of: ["ACTIVE", "SUSPENDED", "PENDING_CLOSURE"],
+    #         state: "PENDING_ACTIVATION" # One of: ["PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"],
     #         joined_method: "INVITED" # One of: ["INVITED", "CREATED"],
     #         joined_timestamp: Time.now
     #       }
@@ -2939,8 +2949,10 @@ module Aws::Organizations
       request.send_request(options)
     end
 
-    # <p>Lists all the accounts in an organization that have invalid effective policies.
-    #             An <i>invalid effective policy</i> is an <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html">effective policy</a> that fails validation checks, resulting in the effective policy not being fully enforced on all the intended accounts within an organization.</p>
+    # <p>Lists all the accounts in an organization that have invalid effective policies. An
+    #                 <i>invalid effective policy</i> is an <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html">effective
+    #                 policy</a> that fails validation checks, resulting in the effective policy not
+    #             being fully enforced on all the intended accounts within an organization.</p>
     #          <p>This operation can be called only from the organization's
     # management account or by a member account that is a delegated administrator.</p>
     # @param [Hash, Types::ListAccountsWithInvalidEffectivePolicyRequest] params
@@ -3044,6 +3056,7 @@ module Aws::Organizations
     #         email: "Email",
     #         name: "AccountName",
     #         status: "ACTIVE" # One of: ["ACTIVE", "SUSPENDED", "PENDING_CLOSURE"],
+    #         state: "PENDING_ACTIVATION" # One of: ["PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"],
     #         joined_method: "INVITED" # One of: ["INVITED", "CREATED"],
     #         joined_timestamp: Time.now
     #       }
@@ -3360,12 +3373,14 @@ module Aws::Organizations
       request.send_request(options)
     end
 
-    # <p>Lists all the validation errors on an <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html">effective policy</a> for a specified account and policy type.</p>
+    # <p>Lists all the validation errors on an <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html">effective
+    #                 policy</a> for a specified account and policy type.</p>
     #          <p>This operation can be called only from the organization's
     # management account or by a member account that is a delegated administrator.</p>
     # @param [Hash, Types::ListEffectivePolicyValidationErrorsRequest] params
     # @option params [String] :account_id
-    #   <p>The ID of the account that you want details about. Specifying an organization root or organizational unit (OU) as the target is not supported.</p>
+    #   <p>The ID of the account that you want details about. Specifying an organization root or
+    #               organizational unit (OU) as the target is not supported.</p>
     # @option params [String] :policy_type
     #   <p>The type of policy that you want information about. You can specify one of the
     #               following values:</p>

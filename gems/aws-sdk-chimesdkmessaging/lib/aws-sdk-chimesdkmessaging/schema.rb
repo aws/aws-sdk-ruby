@@ -151,6 +151,7 @@ module Aws::ChimeSDKMessaging
     MessagingSessionEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkmessaging#MessagingSessionEndpoint', name: 'MessagingSessionEndpoint')
     Metadata = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkmessaging#Metadata', name: 'Metadata', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => ".*", "smithy.api#sensitive" => {}})
     MinimumMembershipPercentage = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.chimesdkmessaging#MinimumMembershipPercentage', name: 'MinimumMembershipPercentage', traits: {"smithy.api#range" => {"min" => 1, "max" => 40}})
+    NetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.chimesdkmessaging#NetworkType', name: 'NetworkType')
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkmessaging#NextToken', name: 'NextToken', traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => ".*", "smithy.api#sensitive" => {}})
     NonEmptyContent = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkmessaging#NonEmptyContent', name: 'NonEmptyContent', traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^[\\s\\S]*$", "smithy.api#sensitive" => {}})
     NonEmptyResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkmessaging#NonEmptyResourceName', name: 'NonEmptyResourceName', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$", "smithy.api#sensitive" => {}})
@@ -564,6 +565,7 @@ module Aws::ChimeSDKMessaging
     GetChannelMessageStatusRequest.type = Types::GetChannelMessageStatusRequest
     GetChannelMessageStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelMessageStatusStructure, location_name: 'Status'))
     GetChannelMessageStatusResponse.type = Types::GetChannelMessageStatusResponse
+    GetMessagingSessionEndpointRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType', traits: {"smithy.api#httpQuery" => "network-type"}))
     GetMessagingSessionEndpointRequest.type = Types::GetMessagingSessionEndpointRequest
     GetMessagingSessionEndpointResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessagingSessionEndpoint, location_name: 'Endpoint'))
     GetMessagingSessionEndpointResponse.type = Types::GetMessagingSessionEndpointResponse
@@ -684,6 +686,8 @@ module Aws::ChimeSDKMessaging
     MessagingDataType.add_member(:channel_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ChannelMessage', traits: {"smithy.api#enumValue" => "ChannelMessage"}))
     MessagingSessionEndpoint.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UrlType, location_name: 'Url'))
     MessagingSessionEndpoint.type = Types::MessagingSessionEndpoint
+    NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4_ONLY', traits: {"smithy.api#enumValue" => "IPV4_ONLY"}))
+    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DUAL_STACK', traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
     NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: 'Code'))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message'))
     NotFoundException.type = Types::NotFoundException

@@ -48,8 +48,7 @@ module Aws::VPCLattice
       end
     end
 
-    # <p>The request conflicts with the current state of the resource. Updating or deleting a
-    #    resource can cause an inconsistent state.</p>
+    # <p>The request conflicts with the current state of the resource. Updating or deleting a resource can cause an inconsistent state.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VPCLattice::Types::ConflictException] data
@@ -186,8 +185,7 @@ module Aws::VPCLattice
       end
     end
 
-    # <p>The input does not satisfy the constraints specified by an Amazon Web Services
-    #    service.</p>
+    # <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VPCLattice::Types::ValidationException] data

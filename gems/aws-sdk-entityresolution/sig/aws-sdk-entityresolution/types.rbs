@@ -105,6 +105,7 @@ module Aws::EntityResolution
         ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
         ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
         ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?incremental_run_config: Types::IdMappingIncrementalRunConfig,
         ?role_arn: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -115,6 +116,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
       attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig?
       attr_accessor role_arn: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -129,6 +131,7 @@ module Aws::EntityResolution
         ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
         ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
         ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?incremental_run_config: Types::IdMappingIncrementalRunConfig,
         ?role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -139,6 +142,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
       attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig?
       attr_accessor role_arn: String?
     end
 
@@ -521,6 +525,7 @@ module Aws::EntityResolution
         ?metrics: Types::IdMappingJobMetrics,
         ?error_details: Types::ErrorDetails,
         ?output_source_config: Array[Types::IdMappingJobOutputSource],
+        ?job_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -531,6 +536,7 @@ module Aws::EntityResolution
       attr_accessor metrics: Types::IdMappingJobMetrics?
       attr_accessor error_details: Types::ErrorDetails?
       attr_accessor output_source_config: Array[Types::IdMappingJobOutputSource]?
+      attr_accessor job_type: String?
     end
 
     class GetIdMappingWorkflowInput
@@ -556,6 +562,7 @@ module Aws::EntityResolution
         ?id_mapping_techniques: Types::IdMappingTechniques,
         ?created_at: Time,
         ?updated_at: Time,
+        ?incremental_run_config: Types::IdMappingIncrementalRunConfig,
         ?role_arn: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -569,6 +576,7 @@ module Aws::EntityResolution
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig?
       attr_accessor role_arn: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -829,6 +837,21 @@ module Aws::EntityResolution
       attr_accessor has_workflows: bool?
     end
 
+    class IdMappingIncrementalRunConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?incremental_run_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor incremental_run_type: String?
+    end
+
+    module IdMappingIncrementalRunType
+      ON_DEMAND: String
+    end
+
     class IdMappingJobMetrics
       include Smithy::Schema::Structure
 
@@ -836,20 +859,36 @@ module Aws::EntityResolution
         ?input_records: Integer,
         ?total_records_processed: Integer,
         ?records_not_processed: Integer,
+        ?delete_records_processed: Integer,
         ?total_mapped_records: Integer,
         ?total_mapped_source_records: Integer,
         ?total_mapped_target_records: Integer,
         ?unique_records_loaded: Integer,
+        ?new_mapped_records: Integer,
+        ?new_mapped_source_records: Integer,
+        ?new_mapped_target_records: Integer,
+        ?new_unique_records_loaded: Integer,
+        ?mapped_records_removed: Integer,
+        ?mapped_source_records_removed: Integer,
+        ?mapped_target_records_removed: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor input_records: Integer?
       attr_accessor total_records_processed: Integer?
       attr_accessor records_not_processed: Integer?
+      attr_accessor delete_records_processed: Integer?
       attr_accessor total_mapped_records: Integer?
       attr_accessor total_mapped_source_records: Integer?
       attr_accessor total_mapped_target_records: Integer?
       attr_accessor unique_records_loaded: Integer?
+      attr_accessor new_mapped_records: Integer?
+      attr_accessor new_mapped_source_records: Integer?
+      attr_accessor new_mapped_target_records: Integer?
+      attr_accessor new_unique_records_loaded: Integer?
+      attr_accessor mapped_records_removed: Integer?
+      attr_accessor mapped_source_records_removed: Integer?
+      attr_accessor mapped_target_records_removed: Integer?
     end
 
     class IdMappingJobOutputSource
@@ -1080,6 +1119,7 @@ module Aws::EntityResolution
         ?input_records: Integer,
         ?total_records_processed: Integer,
         ?records_not_processed: Integer,
+        ?delete_records_processed: Integer,
         ?match_i_ds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1087,6 +1127,7 @@ module Aws::EntityResolution
       attr_accessor input_records: Integer?
       attr_accessor total_records_processed: Integer?
       attr_accessor records_not_processed: Integer?
+      attr_accessor delete_records_processed: Integer?
       attr_accessor match_i_ds: Integer?
     end
 
@@ -1127,6 +1168,12 @@ module Aws::EntityResolution
       attr_accessor status: String?
       attr_accessor start_time: Time?
       attr_accessor end_time: Time?
+    end
+
+    module JobType
+      BATCH: String
+      INCREMENTAL: String
+      DELETE_ONLY: String
     end
 
     class ListIdMappingJobsInput
@@ -1795,11 +1842,13 @@ module Aws::EntityResolution
       def initialize: (
         ?workflow_name: String,
         ?output_source_config: Array[Types::IdMappingJobOutputSource],
+        ?job_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor workflow_name: String?
       attr_accessor output_source_config: Array[Types::IdMappingJobOutputSource]?
+      attr_accessor job_type: String?
     end
 
     class StartIdMappingJobOutput
@@ -1808,11 +1857,13 @@ module Aws::EntityResolution
       def initialize: (
         ?job_id: String,
         ?output_source_config: Array[Types::IdMappingJobOutputSource],
+        ?job_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_id: String?
       attr_accessor output_source_config: Array[Types::IdMappingJobOutputSource]?
+      attr_accessor job_type: String?
     end
 
     class StartMatchingJobInput
@@ -1906,6 +1957,7 @@ module Aws::EntityResolution
         ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
         ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
         ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?incremental_run_config: Types::IdMappingIncrementalRunConfig,
         ?role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1915,6 +1967,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
       attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig?
       attr_accessor role_arn: String?
     end
 
@@ -1928,6 +1981,7 @@ module Aws::EntityResolution
         ?input_source_config: Array[Types::IdMappingWorkflowInputSource],
         ?output_source_config: Array[Types::IdMappingWorkflowOutputSource],
         ?id_mapping_techniques: Types::IdMappingTechniques,
+        ?incremental_run_config: Types::IdMappingIncrementalRunConfig,
         ?role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1938,6 +1992,7 @@ module Aws::EntityResolution
       attr_accessor input_source_config: Array[Types::IdMappingWorkflowInputSource]?
       attr_accessor output_source_config: Array[Types::IdMappingWorkflowOutputSource]?
       attr_accessor id_mapping_techniques: Types::IdMappingTechniques?
+      attr_accessor incremental_run_config: Types::IdMappingIncrementalRunConfig?
       attr_accessor role_arn: String?
     end
 

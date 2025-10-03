@@ -13041,6 +13041,9 @@ module Aws::SageMaker
     # @!attribute unified_studio_settings
     #   <p>The settings that apply to an SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.</p>
     #   @return [Types::UnifiedStudioSettings]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the domain. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks. If not specified, defaults to <code>ipv4</code>.</p>
+    #   @return [String]
     class DomainSettings < Struct.new(
       :security_group_ids,
       :r_studio_server_pro_domain_settings,
@@ -13049,6 +13052,7 @@ module Aws::SageMaker
       :docker_settings,
       :amazon_q_settings,
       :unified_studio_settings,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13076,6 +13080,9 @@ module Aws::SageMaker
     # @!attribute unified_studio_settings
     #   <p>The settings that apply to an SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.</p>
     #   @return [Types::UnifiedStudioSettings]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the domain. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. When you specify <code>dualstack</code>, the subnet must support IPv6 CIDR blocks.</p>
+    #   @return [String]
     class DomainSettingsForUpdate < Struct.new(
       :r_studio_server_pro_domain_settings_for_update,
       :execution_role_identity_config,
@@ -13084,6 +13091,7 @@ module Aws::SageMaker
       :docker_settings,
       :amazon_q_settings,
       :unified_studio_settings,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

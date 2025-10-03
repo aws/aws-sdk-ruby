@@ -436,6 +436,7 @@ module Aws::QuickSight
     CustomActionURLOperation: StructureShape
     CustomColor: StructureShape
     CustomColorsList: ListShape
+    CustomConnectionParameters: StructureShape
     CustomContentConfiguration: StructureShape
     CustomContentImageScalingConfiguration: EnumShape
     CustomContentType: EnumShape
@@ -536,6 +537,7 @@ module Aws::QuickSight
     DataSourceSummaryList: ListShape
     DataSourceType: EnumShape
     DataStoriesConfigurations: StructureShape
+    DataStoriesSharingOption: StructureShape
     Database: StringShape
     DatabaseAccessControlRole: StringShape
     DatabaseGroup: StringShape
@@ -600,6 +602,8 @@ module Aws::QuickSight
     DefaultSliderControlOptions: StructureShape
     DefaultTextAreaControlOptions: StructureShape
     DefaultTextFieldControlOptions: StructureShape
+    DeleteAccountCustomPermissionRequest: StructureShape
+    DeleteAccountCustomPermissionResponse: StructureShape
     DeleteAccountCustomizationRequest: StructureShape
     DeleteAccountCustomizationResponse: StructureShape
     DeleteAccountSubscriptionRequest: StructureShape
@@ -663,6 +667,8 @@ module Aws::QuickSight
     DeleteVPCConnectionRequest: StructureShape
     DeleteVPCConnectionResponse: StructureShape
     Delimiter: StringShape
+    DescribeAccountCustomPermissionRequest: StructureShape
+    DescribeAccountCustomPermissionResponse: StructureShape
     DescribeAccountCustomizationRequest: StructureShape
     DescribeAccountCustomizationResponse: StructureShape
     DescribeAccountSettingsRequest: StructureShape
@@ -797,6 +803,7 @@ module Aws::QuickSight
     ExceptionResourceType: EnumShape
     ExcludePeriodConfiguration: StructureShape
     ExecutiveSummaryConfigurations: StructureShape
+    ExecutiveSummaryOption: StructureShape
     ExplicitHierarchy: StructureShape
     ExplicitHierarchyColumnList: ListShape
     ExportHiddenFieldsOption: StructureShape
@@ -1296,6 +1303,7 @@ module Aws::QuickSight
     NonEmptyString: StringShape
     NonRepeatingVisualsList: ListShape
     NullFilterOption: EnumShape
+    NullFilterType: EnumShape
     NullString: StringShape
     NullValueFormatConfiguration: StructureShape
     NullableBoolean: BooleanShape
@@ -1450,6 +1458,8 @@ module Aws::QuickSight
     QAResults: ListShape
     QAUrl: StringShape
     QBusinessInsightsStatus: EnumShape
+    QDataKey: StructureShape
+    QDataKeyType: EnumShape
     QSearchStatus: EnumShape
     Query: StringShape
     QueryExecutionMode: EnumShape
@@ -1913,6 +1923,7 @@ module Aws::QuickSight
     TopicId: StringShape
     TopicNamedEntities: ListShape
     TopicNamedEntity: StructureShape
+    TopicNullFilter: StructureShape
     TopicNumericEqualityFilter: StructureShape
     TopicNumericRangeFilter: StructureShape
     TopicNumericSeparatorSymbol: EnumShape
@@ -1980,6 +1991,8 @@ module Aws::QuickSight
     UntagColumnOperation: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateAccountCustomPermissionRequest: StructureShape
+    UpdateAccountCustomPermissionResponse: StructureShape
     UpdateAccountCustomizationRequest: StructureShape
     UpdateAccountCustomizationResponse: StructureShape
     UpdateAccountSettingsRequest: StructureShape

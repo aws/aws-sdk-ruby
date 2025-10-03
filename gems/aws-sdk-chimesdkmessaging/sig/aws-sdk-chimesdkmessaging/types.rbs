@@ -1152,9 +1152,11 @@ module Aws::ChimeSDKMessaging
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor network_type: String?
     end
 
     class GetMessagingSessionEndpointResponse
@@ -1589,6 +1591,11 @@ module Aws::ChimeSDKMessaging
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor url: String?
+    end
+
+    module NetworkType
+      IPV4_ONLY: String
+      DUAL_STACK: String
     end
 
     class NotFoundException

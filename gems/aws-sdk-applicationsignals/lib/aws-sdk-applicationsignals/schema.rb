@@ -11,9 +11,22 @@ module Aws::ApplicationSignals
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#AmazonResourceName', name: 'AmazonResourceName', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     Attainment = ::Smithy::Schema::Shapes::FloatShape.new(id: 'com.amazonaws.applicationsignals#Attainment', name: 'Attainment')
     AttainmentGoal = ::Smithy::Schema::Shapes::FloatShape.new(id: 'com.amazonaws.applicationsignals#AttainmentGoal', name: 'AttainmentGoal')
+    AttributeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#AttributeFilter', name: 'AttributeFilter')
+    AttributeFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#AttributeFilterName', name: 'AttributeFilterName', traits: {"smithy.api#pattern" => "^[A-Za-z0-9 :/-]+$"})
+    AttributeFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#AttributeFilterValue', name: 'AttributeFilterValue', traits: {"smithy.api#pattern" => "^[A-Za-z0-9 :/-]+$"})
+    AttributeFilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#AttributeFilterValues', name: 'AttributeFilterValues', traits: {"smithy.api#length" => {"max" => 20}})
+    AttributeFilters = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#AttributeFilters', name: 'AttributeFilters', traits: {"smithy.api#length" => {"max" => 20}})
     AttributeMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.applicationsignals#AttributeMap', name: 'AttributeMap')
     AttributeMaps = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#AttributeMaps', name: 'AttributeMaps')
     Attributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.applicationsignals#Attributes', name: 'Attributes', traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    AuditFinding = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#AuditFinding', name: 'AuditFinding')
+    AuditFindings = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#AuditFindings', name: 'AuditFindings', traits: {"smithy.api#length" => {"max" => 10}})
+    AuditTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#AuditTarget', name: 'AuditTarget')
+    AuditTargetEntity = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.applicationsignals#AuditTargetEntity', name: 'AuditTargetEntity')
+    AuditTargets = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#AuditTargets', name: 'AuditTargets', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    AuditorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#AuditorResult', name: 'AuditorResult')
+    AuditorResults = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#AuditorResults', name: 'AuditorResults', traits: {"smithy.api#length" => {"max" => 5}})
+    Auditors = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#Auditors', name: 'Auditors')
     AwsAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#AwsAccountId', name: 'AwsAccountId', traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     BatchGetServiceLevelObjectiveBudgetReportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#BatchGetServiceLevelObjectiveBudgetReportInput', name: 'BatchGetServiceLevelObjectiveBudgetReportInput')
     BatchGetServiceLevelObjectiveBudgetReportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#BatchGetServiceLevelObjectiveBudgetReportOutput', name: 'BatchGetServiceLevelObjectiveBudgetReportOutput')
@@ -28,17 +41,24 @@ module Aws::ApplicationSignals
     BurnRateLookBackWindowMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#BurnRateLookBackWindowMinutes', name: 'BurnRateLookBackWindowMinutes', traits: {"smithy.api#range" => {"min" => 1, "max" => 10080}})
     CalendarInterval = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#CalendarInterval', name: 'CalendarInterval')
     CalendarIntervalDuration = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#CalendarIntervalDuration', name: 'CalendarIntervalDuration', traits: {"smithy.api#range" => {"min" => 1}})
+    ChangeEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ChangeEvent', name: 'ChangeEvent')
+    ChangeEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#ChangeEventType', name: 'ChangeEventType')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#ConnectionType', name: 'ConnectionType')
     CreateServiceLevelObjectiveInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#CreateServiceLevelObjectiveInput', name: 'CreateServiceLevelObjectiveInput')
     CreateServiceLevelObjectiveOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#CreateServiceLevelObjectiveOutput', name: 'CreateServiceLevelObjectiveOutput')
+    DeleteGroupingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#DeleteGroupingConfigurationOutput', name: 'DeleteGroupingConfigurationOutput')
     DeleteServiceLevelObjectiveInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#DeleteServiceLevelObjectiveInput', name: 'DeleteServiceLevelObjectiveInput')
     DeleteServiceLevelObjectiveOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#DeleteServiceLevelObjectiveOutput', name: 'DeleteServiceLevelObjectiveOutput')
     DependencyConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#DependencyConfig', name: 'DependencyConfig')
+    DependencyGraph = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#DependencyGraph', name: 'DependencyGraph')
     Dimension = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#Dimension', name: 'Dimension')
     DimensionName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#DimensionName', name: 'DimensionName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     DimensionValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#DimensionValue', name: 'DimensionValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     Dimensions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#Dimensions', name: 'Dimensions', traits: {"smithy.api#length" => {"max" => 30}})
     DurationUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#DurationUnit', name: 'DurationUnit')
+    Edge = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#Edge', name: 'Edge')
+    Edges = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#Edges', name: 'Edges')
     EvaluationType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#EvaluationType', name: 'EvaluationType')
     ExclusionDuration = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#ExclusionDuration', name: 'ExclusionDuration', traits: {"smithy.api#range" => {"min" => 1}})
     ExclusionReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#ExclusionReason', name: 'ExclusionReason', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
@@ -53,9 +73,24 @@ module Aws::ApplicationSignals
     GetServiceLevelObjectiveOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#GetServiceLevelObjectiveOutput', name: 'GetServiceLevelObjectiveOutput')
     GetServiceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#GetServiceOutput', name: 'GetServiceOutput')
     Goal = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#Goal', name: 'Goal')
+    GroupIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#GroupIdentifier', name: 'GroupIdentifier', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    GroupName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#GroupName', name: 'GroupName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    GroupSource = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#GroupSource', name: 'GroupSource', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    GroupValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#GroupValue', name: 'GroupValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    GroupingAttributeDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#GroupingAttributeDefinition', name: 'GroupingAttributeDefinition')
+    GroupingAttributeDefinitions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#GroupingAttributeDefinitions', name: 'GroupingAttributeDefinitions')
+    GroupingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#GroupingConfiguration', name: 'GroupingConfiguration')
+    GroupingSourceKeyStringList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#GroupingSourceKeyStringList', name: 'GroupingSourceKeyStringList')
+    GroupingString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#GroupingString', name: 'GroupingString', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s+\\-=\\._:/@]*$"})
     Interval = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.applicationsignals#Interval', name: 'Interval')
     KeyAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#KeyAttributeName', name: 'KeyAttributeName', traits: {"smithy.api#pattern" => "^[a-zA-Z]{1,50}$"})
     KeyAttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#KeyAttributeValue', name: 'KeyAttributeValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[ -~]*[!-~]+[ -~]*$"})
+    LatestChangeEvents = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#LatestChangeEvents', name: 'LatestChangeEvents', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    ListAuditFindingMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#ListAuditFindingMaxResults', name: 'ListAuditFindingMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 10}})
+    ListAuditFindingsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListAuditFindingsInput', name: 'ListAuditFindingsInput')
+    ListAuditFindingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListAuditFindingsOutput', name: 'ListAuditFindingsOutput')
+    ListGroupingAttributeDefinitionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListGroupingAttributeDefinitionsInput', name: 'ListGroupingAttributeDefinitionsInput')
+    ListGroupingAttributeDefinitionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListGroupingAttributeDefinitionsOutput', name: 'ListGroupingAttributeDefinitionsOutput')
     ListServiceDependenciesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServiceDependenciesInput', name: 'ListServiceDependenciesInput')
     ListServiceDependenciesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#ListServiceDependenciesMaxResults', name: 'ListServiceDependenciesMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ListServiceDependenciesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServiceDependenciesOutput', name: 'ListServiceDependenciesOutput')
@@ -71,6 +106,9 @@ module Aws::ApplicationSignals
     ListServiceOperationMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#ListServiceOperationMaxResults', name: 'ListServiceOperationMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ListServiceOperationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServiceOperationsInput', name: 'ListServiceOperationsInput')
     ListServiceOperationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServiceOperationsOutput', name: 'ListServiceOperationsOutput')
+    ListServiceStatesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServiceStatesInput', name: 'ListServiceStatesInput')
+    ListServiceStatesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#ListServiceStatesMaxResults', name: 'ListServiceStatesMaxResults', traits: {"smithy.api#range" => {"max" => 250}})
+    ListServiceStatesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServiceStatesOutput', name: 'ListServiceStatesOutput')
     ListServicesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServicesInput', name: 'ListServicesInput')
     ListServicesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#ListServicesMaxResults', name: 'ListServicesMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ListServicesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ListServicesOutput', name: 'ListServicesOutput')
@@ -81,6 +119,7 @@ module Aws::ApplicationSignals
     MetricDataQueries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#MetricDataQueries', name: 'MetricDataQueries')
     MetricDataQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#MetricDataQuery', name: 'MetricDataQuery')
     MetricExpression = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#MetricExpression', name: 'MetricExpression', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    MetricGraph = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#MetricGraph', name: 'MetricGraph')
     MetricId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#MetricId', name: 'MetricId', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     MetricLabel = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#MetricLabel', name: 'MetricLabel')
     MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#MetricName', name: 'MetricName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -93,8 +132,12 @@ module Aws::ApplicationSignals
     MonitoredRequestCountMetricDataQueries = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.applicationsignals#MonitoredRequestCountMetricDataQueries', name: 'MonitoredRequestCountMetricDataQueries')
     Namespace = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#Namespace', name: 'Namespace', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "[^:].*"})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#NextToken', name: 'NextToken')
+    Node = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#Node', name: 'Node')
+    Nodes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#Nodes', name: 'Nodes', traits: {"smithy.api#length" => {"max" => 4}})
     OperationName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#OperationName', name: 'OperationName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     Period = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.applicationsignals#Period', name: 'Period', traits: {"smithy.api#range" => {"min" => 1}})
+    PutGroupingConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#PutGroupingConfigurationInput', name: 'PutGroupingConfigurationInput')
+    PutGroupingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#PutGroupingConfigurationOutput', name: 'PutGroupingConfigurationOutput')
     RecurrenceRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#RecurrenceRule', name: 'RecurrenceRule')
     RequestBasedServiceLevelIndicator = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#RequestBasedServiceLevelIndicator', name: 'RequestBasedServiceLevelIndicator')
     RequestBasedServiceLevelIndicatorConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#RequestBasedServiceLevelIndicatorConfig', name: 'RequestBasedServiceLevelIndicatorConfig')
@@ -112,7 +155,10 @@ module Aws::ApplicationSignals
     ServiceDependency = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceDependency', name: 'ServiceDependency')
     ServiceDependent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceDependent', name: 'ServiceDependent')
     ServiceDependents = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceDependents', name: 'ServiceDependents', traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    ServiceEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceEntity', name: 'ServiceEntity')
     ServiceErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#ServiceErrorMessage', name: 'ServiceErrorMessage')
+    ServiceGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceGroup', name: 'ServiceGroup')
+    ServiceGroups = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceGroups', name: 'ServiceGroups')
     ServiceLevelIndicator = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelIndicator', name: 'ServiceLevelIndicator')
     ServiceLevelIndicatorComparisonOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelIndicatorComparisonOperator', name: 'ServiceLevelIndicatorComparisonOperator')
     ServiceLevelIndicatorConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelIndicatorConfig', name: 'ServiceLevelIndicatorConfig')
@@ -131,16 +177,21 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveBudgetReports = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveBudgetReports', name: 'ServiceLevelObjectiveBudgetReports', traits: {"smithy.api#length" => {"max" => 50}})
     ServiceLevelObjectiveBudgetStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveBudgetStatus', name: 'ServiceLevelObjectiveBudgetStatus')
     ServiceLevelObjectiveDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveDescription', name: 'ServiceLevelObjectiveDescription', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    ServiceLevelObjectiveEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveEntity', name: 'ServiceLevelObjectiveEntity')
     ServiceLevelObjectiveId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveId', name: 'ServiceLevelObjectiveId', traits: {"smithy.api#pattern" => "^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$|^arn:aws:application-signals:[^:]*:[^:]*:slo/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"})
     ServiceLevelObjectiveIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveIds', name: 'ServiceLevelObjectiveIds', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     ServiceLevelObjectiveName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveName', name: 'ServiceLevelObjectiveName', traits: {"smithy.api#pattern" => "^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"})
     ServiceLevelObjectiveSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveSummaries', name: 'ServiceLevelObjectiveSummaries')
     ServiceLevelObjectiveSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceLevelObjectiveSummary', name: 'ServiceLevelObjectiveSummary')
     ServiceOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceOperation', name: 'ServiceOperation')
+    ServiceOperationEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceOperationEntity', name: 'ServiceOperationEntity')
     ServiceOperations = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceOperations', name: 'ServiceOperations', traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    ServiceState = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceState', name: 'ServiceState')
+    ServiceStates = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceStates', name: 'ServiceStates', traits: {"smithy.api#length" => {"max" => 250}})
     ServiceSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.applicationsignals#ServiceSummaries', name: 'ServiceSummaries')
     ServiceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#ServiceSummary', name: 'ServiceSummary')
+    Severity = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#Severity', name: 'Severity')
     StandardUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.applicationsignals#StandardUnit', name: 'StandardUnit')
     StartDiscoveryInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#StartDiscoveryInput', name: 'StartDiscoveryInput')
     StartDiscoveryOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.applicationsignals#StartDiscoveryOutput', name: 'StartDiscoveryOutput')
@@ -166,11 +217,39 @@ module Aws::ApplicationSignals
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: 'Message'))
     AccessDeniedException.type = Types::AccessDeniedException
+    AttributeFilter.add_member(:attribute_filter_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeFilterName, location_name: 'AttributeFilterName', traits: {"smithy.api#required" => {}}))
+    AttributeFilter.add_member(:attribute_filter_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeFilterValues, location_name: 'AttributeFilterValues', traits: {"smithy.api#required" => {}}))
+    AttributeFilter.type = Types::AttributeFilter
+    AttributeFilterValues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeFilterValue)
+    AttributeFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeFilter)
     AttributeMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     AttributeMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     AttributeMaps.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMap)
     Attributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributeName)
     Attributes.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyAttributeValue)
+    AuditFinding.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'KeyAttributes', traits: {"smithy.api#required" => {}}))
+    AuditFinding.add_member(:auditor_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditorResults, location_name: 'AuditorResults'))
+    AuditFinding.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Operation'))
+    AuditFinding.add_member(:metric_graph, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricGraph, location_name: 'MetricGraph'))
+    AuditFinding.add_member(:dependency_graph, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyGraph, location_name: 'DependencyGraph'))
+    AuditFinding.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Type'))
+    AuditFinding.type = Types::AuditFinding
+    AuditFindings.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditFinding)
+    AuditTarget.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Type', traits: {"smithy.api#required" => {}}))
+    AuditTarget.add_member(:data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditTargetEntity, location_name: 'Data', traits: {"smithy.api#required" => {}}))
+    AuditTarget.type = Types::AuditTarget
+    AuditTargetEntity.add_member(:service, Types::AuditTargetEntity::Service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceEntity, location_name: 'Service'))
+    AuditTargetEntity.add_member(:slo, Types::AuditTargetEntity::Slo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveEntity, location_name: 'Slo'))
+    AuditTargetEntity.add_member(:service_operation, Types::AuditTargetEntity::ServiceOperation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceOperationEntity, location_name: 'ServiceOperation'))
+    AuditTargetEntity.add_member(:unknown, Types::AuditTargetEntity::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AuditTargetEntity.type = Types::AuditTargetEntity
+    AuditTargets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditTarget)
+    AuditorResult.add_member(:auditor, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Auditor'))
+    AuditorResult.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Description', traits: {"smithy.api#length" => {"max" => 10240}}))
+    AuditorResult.add_member(:severity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Severity, location_name: 'Severity'))
+    AuditorResult.type = Types::AuditorResult
+    AuditorResults.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditorResult)
+    Auditors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     BatchGetServiceLevelObjectiveBudgetReportInput.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'Timestamp', traits: {"smithy.api#required" => {}}))
     BatchGetServiceLevelObjectiveBudgetReportInput.add_member(:slo_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveIds, location_name: 'SloIds', traits: {"smithy.api#required" => {}}))
     BatchGetServiceLevelObjectiveBudgetReportInput.type = Types::BatchGetServiceLevelObjectiveBudgetReportInput
@@ -197,8 +276,20 @@ module Aws::ApplicationSignals
     CalendarInterval.add_member(:duration_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DurationUnit, location_name: 'DurationUnit', traits: {"smithy.api#required" => {}}))
     CalendarInterval.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CalendarIntervalDuration, location_name: 'Duration', traits: {"smithy.api#required" => {}}))
     CalendarInterval.type = Types::CalendarInterval
+    ChangeEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'Timestamp', traits: {"smithy.api#required" => {}}))
+    ChangeEvent.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AccountId', traits: {"smithy.api#required" => {}}))
+    ChangeEvent.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Region', traits: {"smithy.api#required" => {}}))
+    ChangeEvent.add_member(:entity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'Entity', traits: {"smithy.api#required" => {}}))
+    ChangeEvent.add_member(:change_event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeEventType, location_name: 'ChangeEventType', traits: {"smithy.api#required" => {}}))
+    ChangeEvent.add_member(:event_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'EventId', traits: {"smithy.api#required" => {}}))
+    ChangeEvent.add_member(:user_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'UserName'))
+    ChangeEvent.add_member(:event_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'EventName'))
+    ChangeEvent.type = Types::ChangeEvent
+    ChangeEventType.add_member(:deployment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DEPLOYMENT', traits: {"smithy.api#enumValue" => "DEPLOYMENT"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message', traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
+    ConnectionType.add_member(:indirect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INDIRECT', traits: {"smithy.api#enumValue" => "INDIRECT"}))
+    ConnectionType.add_member(:direct, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DIRECT', traits: {"smithy.api#enumValue" => "DIRECT"}))
     CreateServiceLevelObjectiveInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveName, location_name: 'Name', traits: {"smithy.api#required" => {}}))
     CreateServiceLevelObjectiveInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveDescription, location_name: 'Description'))
     CreateServiceLevelObjectiveInput.add_member(:sli_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelIndicatorConfig, location_name: 'SliConfig'))
@@ -209,12 +300,16 @@ module Aws::ApplicationSignals
     CreateServiceLevelObjectiveInput.type = Types::CreateServiceLevelObjectiveInput
     CreateServiceLevelObjectiveOutput.add_member(:slo, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjective, location_name: 'Slo', traits: {"smithy.api#required" => {}}))
     CreateServiceLevelObjectiveOutput.type = Types::CreateServiceLevelObjectiveOutput
+    DeleteGroupingConfigurationOutput.type = Types::DeleteGroupingConfigurationOutput
     DeleteServiceLevelObjectiveInput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveId, location_name: 'Id', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteServiceLevelObjectiveInput.type = Types::DeleteServiceLevelObjectiveInput
     DeleteServiceLevelObjectiveOutput.type = Types::DeleteServiceLevelObjectiveOutput
     DependencyConfig.add_member(:dependency_key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'DependencyKeyAttributes', traits: {"smithy.api#required" => {}}))
     DependencyConfig.add_member(:dependency_operation_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationName, location_name: 'DependencyOperationName', traits: {"smithy.api#required" => {}}))
     DependencyConfig.type = Types::DependencyConfig
+    DependencyGraph.add_member(:nodes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Nodes, location_name: 'Nodes'))
+    DependencyGraph.add_member(:edges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Edges, location_name: 'Edges'))
+    DependencyGraph.type = Types::DependencyGraph
     Dimension.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionName, location_name: 'Name', traits: {"smithy.api#required" => {}}))
     Dimension.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionValue, location_name: 'Value', traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
@@ -223,6 +318,12 @@ module Aws::ApplicationSignals
     DurationUnit.add_member(:hour, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HOUR', traits: {"smithy.api#enumValue" => "HOUR"}))
     DurationUnit.add_member(:day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DAY', traits: {"smithy.api#enumValue" => "DAY"}))
     DurationUnit.add_member(:month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MONTH', traits: {"smithy.api#enumValue" => "MONTH"}))
+    Edge.add_member(:source_node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'SourceNodeId'))
+    Edge.add_member(:destination_node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'DestinationNodeId'))
+    Edge.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: 'Duration'))
+    Edge.add_member(:connection_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionType, location_name: 'ConnectionType'))
+    Edge.type = Types::Edge
+    Edges.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Edge)
     EvaluationType.add_member(:period_based, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PERIOD_BASED', traits: {"smithy.api#enumValue" => "PeriodBased"}))
     EvaluationType.add_member(:request_based, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REQUEST_BASED', traits: {"smithy.api#enumValue" => "RequestBased"}))
     ExclusionWindow.add_member(:window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Window, location_name: 'Window', traits: {"smithy.api#required" => {}}))
@@ -248,10 +349,36 @@ module Aws::ApplicationSignals
     Goal.add_member(:attainment_goal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttainmentGoal, location_name: 'AttainmentGoal'))
     Goal.add_member(:warning_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WarningThreshold, location_name: 'WarningThreshold'))
     Goal.type = Types::Goal
+    GroupingAttributeDefinition.add_member(:grouping_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingString, location_name: 'GroupingName', traits: {"smithy.api#required" => {}}))
+    GroupingAttributeDefinition.add_member(:grouping_source_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingSourceKeyStringList, location_name: 'GroupingSourceKeys'))
+    GroupingAttributeDefinition.add_member(:default_grouping_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingString, location_name: 'DefaultGroupingValue'))
+    GroupingAttributeDefinition.type = Types::GroupingAttributeDefinition
+    GroupingAttributeDefinitions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingAttributeDefinition)
+    GroupingConfiguration.add_member(:grouping_attribute_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, location_name: 'GroupingAttributeDefinitions', traits: {"smithy.api#required" => {}}))
+    GroupingConfiguration.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'UpdatedAt', traits: {"smithy.api#required" => {}}))
+    GroupingConfiguration.type = Types::GroupingConfiguration
+    GroupingSourceKeyStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingString)
     Interval.add_member(:rolling_interval, Types::Interval::RollingInterval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RollingInterval, location_name: 'RollingInterval'))
     Interval.add_member(:calendar_interval, Types::Interval::CalendarInterval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CalendarInterval, location_name: 'CalendarInterval'))
     Interval.add_member(:unknown, Types::Interval::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     Interval.type = Types::Interval
+    LatestChangeEvents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeEvent)
+    ListAuditFindingsInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime', traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#required" => {}}))
+    ListAuditFindingsInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime', traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#required" => {}}))
+    ListAuditFindingsInput.add_member(:auditors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Auditors, location_name: 'Auditors'))
+    ListAuditFindingsInput.add_member(:audit_targets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditTargets, location_name: 'AuditTargets', traits: {"smithy.api#required" => {}}))
+    ListAuditFindingsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListAuditFindingsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAuditFindingMaxResults, location_name: 'MaxResults'))
+    ListAuditFindingsInput.type = Types::ListAuditFindingsInput
+    ListAuditFindingsOutput.add_member(:audit_findings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuditFindings, location_name: 'AuditFindings', traits: {"smithy.api#required" => {}}))
+    ListAuditFindingsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListAuditFindingsOutput.type = Types::ListAuditFindingsOutput
+    ListGroupingAttributeDefinitionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListGroupingAttributeDefinitionsInput.type = Types::ListGroupingAttributeDefinitionsInput
+    ListGroupingAttributeDefinitionsOutput.add_member(:grouping_attribute_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, location_name: 'GroupingAttributeDefinitions', traits: {"smithy.api#required" => {}}))
+    ListGroupingAttributeDefinitionsOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'UpdatedAt'))
+    ListGroupingAttributeDefinitionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListGroupingAttributeDefinitionsOutput.type = Types::ListGroupingAttributeDefinitionsOutput
     ListServiceDependenciesInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime', traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#required" => {}}))
     ListServiceDependenciesInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime', traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#required" => {}}))
     ListServiceDependenciesInput.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'KeyAttributes', traits: {"smithy.api#required" => {}}))
@@ -286,9 +413,9 @@ module Aws::ApplicationSignals
     ListServiceLevelObjectivesInput.add_member(:dependency_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyConfig, location_name: 'DependencyConfig'))
     ListServiceLevelObjectivesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceLevelObjectivesMaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "MaxResults"}))
     ListServiceLevelObjectivesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListServiceLevelObjectivesInput.add_member(:metric_source_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricSourceTypes, location_name: 'MetricSourceTypes'))
     ListServiceLevelObjectivesInput.add_member(:include_linked_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'IncludeLinkedAccounts', traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "IncludeLinkedAccounts"}))
     ListServiceLevelObjectivesInput.add_member(:slo_owner_aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'SloOwnerAwsAccountId', traits: {"smithy.api#httpQuery" => "SloOwnerAwsAccountId"}))
+    ListServiceLevelObjectivesInput.add_member(:metric_source_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricSourceTypes, location_name: 'MetricSourceTypes'))
     ListServiceLevelObjectivesInput.type = Types::ListServiceLevelObjectivesInput
     ListServiceLevelObjectivesOutput.add_member(:slo_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveSummaries, location_name: 'SloSummaries'))
     ListServiceLevelObjectivesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
@@ -304,6 +431,19 @@ module Aws::ApplicationSignals
     ListServiceOperationsOutput.add_member(:service_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceOperations, location_name: 'ServiceOperations', traits: {"smithy.api#required" => {}}))
     ListServiceOperationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     ListServiceOperationsOutput.type = Types::ListServiceOperationsOutput
+    ListServiceStatesInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime', traits: {"smithy.api#required" => {}}))
+    ListServiceStatesInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime', traits: {"smithy.api#required" => {}}))
+    ListServiceStatesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceStatesMaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => 20}))
+    ListServiceStatesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListServiceStatesInput.add_member(:include_linked_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'IncludeLinkedAccounts', traits: {"smithy.api#default" => false}))
+    ListServiceStatesInput.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId'))
+    ListServiceStatesInput.add_member(:attribute_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeFilters, location_name: 'AttributeFilters'))
+    ListServiceStatesInput.type = Types::ListServiceStatesInput
+    ListServiceStatesOutput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime', traits: {"smithy.api#required" => {}}))
+    ListServiceStatesOutput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime', traits: {"smithy.api#required" => {}}))
+    ListServiceStatesOutput.add_member(:service_states, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceStates, location_name: 'ServiceStates', traits: {"smithy.api#required" => {}}))
+    ListServiceStatesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListServiceStatesOutput.type = Types::ListServiceStatesOutput
     ListServicesInput.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime', traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#required" => {}}))
     ListServicesInput.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime', traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#required" => {}}))
     ListServicesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServicesMaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => 50, "smithy.api#httpQuery" => "MaxResults"}))
@@ -334,6 +474,10 @@ module Aws::ApplicationSignals
     MetricDataQuery.add_member(:period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Period, location_name: 'Period', traits: {"smithy.api#default" => nil}))
     MetricDataQuery.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     MetricDataQuery.type = Types::MetricDataQuery
+    MetricGraph.add_member(:metric_data_queries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: 'MetricDataQueries'))
+    MetricGraph.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime'))
+    MetricGraph.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime'))
+    MetricGraph.type = Types::MetricGraph
     MetricReference.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: 'Namespace', traits: {"smithy.api#required" => {}}))
     MetricReference.add_member(:metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricType, location_name: 'MetricType', traits: {"smithy.api#required" => {}}))
     MetricReference.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimensions, location_name: 'Dimensions'))
@@ -354,6 +498,19 @@ module Aws::ApplicationSignals
     MonitoredRequestCountMetricDataQueries.add_member(:bad_count_metric, Types::MonitoredRequestCountMetricDataQueries::BadCountMetric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: 'BadCountMetric'))
     MonitoredRequestCountMetricDataQueries.add_member(:unknown, Types::MonitoredRequestCountMetricDataQueries::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     MonitoredRequestCountMetricDataQueries.type = Types::MonitoredRequestCountMetricDataQueries
+    Node.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'KeyAttributes', traits: {"smithy.api#required" => {}}))
+    Node.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Name', traits: {"smithy.api#required" => {}}))
+    Node.add_member(:node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'NodeId', traits: {"smithy.api#required" => {}}))
+    Node.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Operation'))
+    Node.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Type'))
+    Node.add_member(:duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: 'Duration'))
+    Node.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Status'))
+    Node.type = Types::Node
+    Nodes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Node)
+    PutGroupingConfigurationInput.add_member(:grouping_attribute_definitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, location_name: 'GroupingAttributeDefinitions', traits: {"smithy.api#required" => {}}))
+    PutGroupingConfigurationInput.type = Types::PutGroupingConfigurationInput
+    PutGroupingConfigurationOutput.add_member(:grouping_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: 'GroupingConfiguration', traits: {"smithy.api#required" => {}}))
+    PutGroupingConfigurationOutput.type = Types::PutGroupingConfigurationOutput
     RecurrenceRule.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: 'Expression', traits: {"smithy.api#required" => {}}))
     RecurrenceRule.type = Types::RecurrenceRule
     RequestBasedServiceLevelIndicator.add_member(:request_based_sli_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestBasedServiceLevelIndicatorMetric, location_name: 'RequestBasedSliMetric', traits: {"smithy.api#required" => {}}))
@@ -387,6 +544,7 @@ module Aws::ApplicationSignals
     RollingInterval.type = Types::RollingInterval
     Service.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'KeyAttributes', traits: {"smithy.api#required" => {}}))
     Service.add_member(:attribute_maps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMaps, location_name: 'AttributeMaps'))
+    Service.add_member(:service_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceGroups, location_name: 'ServiceGroups'))
     Service.add_member(:metric_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricReferences, location_name: 'MetricReferences', traits: {"smithy.api#required" => {}}))
     Service.add_member(:log_group_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupReferences, location_name: 'LogGroupReferences'))
     Service.type = Types::Service
@@ -402,6 +560,17 @@ module Aws::ApplicationSignals
     ServiceDependent.add_member(:metric_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricReferences, location_name: 'MetricReferences', traits: {"smithy.api#required" => {}}))
     ServiceDependent.type = Types::ServiceDependent
     ServiceDependents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceDependent)
+    ServiceEntity.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Type'))
+    ServiceEntity.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Name'))
+    ServiceEntity.add_member(:environment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Environment'))
+    ServiceEntity.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'AwsAccountId'))
+    ServiceEntity.type = Types::ServiceEntity
+    ServiceGroup.add_member(:group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupName, location_name: 'GroupName', traits: {"smithy.api#required" => {}}))
+    ServiceGroup.add_member(:group_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupValue, location_name: 'GroupValue', traits: {"smithy.api#required" => {}}))
+    ServiceGroup.add_member(:group_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupSource, location_name: 'GroupSource', traits: {"smithy.api#required" => {}}))
+    ServiceGroup.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: 'GroupIdentifier', traits: {"smithy.api#required" => {}}))
+    ServiceGroup.type = Types::ServiceGroup
+    ServiceGroups.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceGroup)
     ServiceLevelIndicator.add_member(:sli_metric, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetric, location_name: 'SliMetric', traits: {"smithy.api#required" => {}}))
     ServiceLevelIndicator.add_member(:metric_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetricThreshold, location_name: 'MetricThreshold', traits: {"smithy.api#required" => {}}))
     ServiceLevelIndicator.add_member(:comparison_operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelIndicatorComparisonOperator, location_name: 'ComparisonOperator', traits: {"smithy.api#required" => {}}))
@@ -423,6 +592,7 @@ module Aws::ApplicationSignals
     ServiceLevelIndicatorMetricConfig.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'KeyAttributes'))
     ServiceLevelIndicatorMetricConfig.add_member(:operation_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationName, location_name: 'OperationName'))
     ServiceLevelIndicatorMetricConfig.add_member(:metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetricType, location_name: 'MetricType'))
+    ServiceLevelIndicatorMetricConfig.add_member(:metric_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricName, location_name: 'MetricName'))
     ServiceLevelIndicatorMetricConfig.add_member(:statistic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelIndicatorStatistic, location_name: 'Statistic'))
     ServiceLevelIndicatorMetricConfig.add_member(:period_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SLIPeriodSeconds, location_name: 'PeriodSeconds'))
     ServiceLevelIndicatorMetricConfig.add_member(:metric_data_queries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: 'MetricDataQueries'))
@@ -466,6 +636,9 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveBudgetStatus.add_member(:warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WARNING', traits: {"smithy.api#enumValue" => "WARNING"}))
     ServiceLevelObjectiveBudgetStatus.add_member(:breached, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BREACHED', traits: {"smithy.api#enumValue" => "BREACHED"}))
     ServiceLevelObjectiveBudgetStatus.add_member(:insufficient_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INSUFFICIENT_DATA', traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
+    ServiceLevelObjectiveEntity.add_member(:slo_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'SloName'))
+    ServiceLevelObjectiveEntity.add_member(:slo_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'SloArn'))
+    ServiceLevelObjectiveEntity.type = Types::ServiceLevelObjectiveEntity
     ServiceLevelObjectiveIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     ServiceLevelObjectiveSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveSummary)
     ServiceLevelObjectiveSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLevelObjectiveArn, location_name: 'Arn', traits: {"smithy.api#required" => {}}))
@@ -480,14 +653,29 @@ module Aws::ApplicationSignals
     ServiceOperation.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationName, location_name: 'Name', traits: {"smithy.api#required" => {}}))
     ServiceOperation.add_member(:metric_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricReferences, location_name: 'MetricReferences', traits: {"smithy.api#required" => {}}))
     ServiceOperation.type = Types::ServiceOperation
+    ServiceOperationEntity.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceEntity, location_name: 'Service'))
+    ServiceOperationEntity.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Operation'))
+    ServiceOperationEntity.add_member(:metric_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'MetricType'))
+    ServiceOperationEntity.type = Types::ServiceOperationEntity
     ServiceOperations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceOperation)
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message', traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    ServiceState.add_member(:attribute_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeFilters, location_name: 'AttributeFilters'))
+    ServiceState.add_member(:service, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'Service', traits: {"smithy.api#required" => {}}))
+    ServiceState.add_member(:latest_change_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LatestChangeEvents, location_name: 'LatestChangeEvents', traits: {"smithy.api#required" => {}}))
+    ServiceState.type = Types::ServiceState
+    ServiceStates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceState)
     ServiceSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceSummary)
     ServiceSummary.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'KeyAttributes', traits: {"smithy.api#required" => {}}))
     ServiceSummary.add_member(:attribute_maps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeMaps, location_name: 'AttributeMaps'))
     ServiceSummary.add_member(:metric_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricReferences, location_name: 'MetricReferences', traits: {"smithy.api#required" => {}}))
+    ServiceSummary.add_member(:service_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceGroups, location_name: 'ServiceGroups'))
     ServiceSummary.type = Types::ServiceSummary
+    Severity.add_member(:critical, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CRITICAL', traits: {"smithy.api#enumValue" => "CRITICAL"}))
+    Severity.add_member(:high, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HIGH', traits: {"smithy.api#enumValue" => "HIGH"}))
+    Severity.add_member(:medium, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MEDIUM', traits: {"smithy.api#enumValue" => "MEDIUM"}))
+    Severity.add_member(:low, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LOW', traits: {"smithy.api#enumValue" => "LOW"}))
+    Severity.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
     StandardUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MICROSECONDS', traits: {"smithy.api#enumValue" => "Microseconds"}))
     StandardUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MILLISECONDS', traits: {"smithy.api#enumValue" => "Milliseconds"}))
     StandardUnit.add_member(:seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SECONDS', traits: {"smithy.api#enumValue" => "Seconds"}))
@@ -583,6 +771,16 @@ module Aws::ApplicationSignals
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/slo", "code" => 200}}
       end)
+      service.add_operation(:delete_grouping_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.applicationsignals#DeleteGroupingConfiguration"
+        operation.name = "DeleteGroupingConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGroupingConfigurationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/grouping-configuration", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_service_level_objective, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationsignals#DeleteServiceLevelObjective"
         operation.name = "DeleteServiceLevelObjective"
@@ -611,6 +809,25 @@ module Aws::ApplicationSignals
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slo/{Id}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_audit_findings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.applicationsignals#ListAuditFindings"
+        operation.name = "ListAuditFindings"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAuditFindingsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListAuditFindingsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/auditFindings", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_grouping_attribute_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.applicationsignals#ListGroupingAttributeDefinitions"
+        operation.name = "ListGroupingAttributeDefinitions"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupingAttributeDefinitionsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListGroupingAttributeDefinitionsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/grouping-attribute-definitions", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_service_dependencies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationsignals#ListServiceDependencies"
@@ -663,6 +880,16 @@ module Aws::ApplicationSignals
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/service-operations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServiceOperations.new
       end)
+      service.add_operation(:list_service_states, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.applicationsignals#ListServiceStates"
+        operation.name = "ListServiceStates"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceStatesInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListServiceStatesOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/service/states", "code" => 200}}
+        operation[:paginator] = Paginators::ListServiceStates.new
+      end)
       service.add_operation(:list_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationsignals#ListServices"
         operation.name = "ListServices"
@@ -681,6 +908,16 @@ module Aws::ApplicationSignals
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:put_grouping_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.applicationsignals#PutGroupingConfiguration"
+        operation.name = "PutGroupingConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutGroupingConfigurationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutGroupingConfigurationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/grouping-configuration", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_discovery, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.applicationsignals#StartDiscovery"

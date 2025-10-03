@@ -16060,6 +16060,7 @@ module Aws::SecurityHub
       INVALID_INPUT: String
       ACCESS_DENIED: String
       NOT_FOUND: String
+      RESOURCE_NOT_FOUND: String
       LIMIT_EXCEEDED: String
     end
 

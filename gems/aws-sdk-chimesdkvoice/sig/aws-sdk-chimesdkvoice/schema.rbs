@@ -165,6 +165,7 @@ module Aws::ChimeSDKVoice
     ListVoiceProfilesResponse: StructureShape
     LoggingConfiguration: StructureShape
     MediaInsightsConfiguration: StructureShape
+    NetworkType: EnumShape
     NextTokenString: StringShape
     NonEmptyString: StringShape
     NonEmptyString128: StringShape

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Evs
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Evs
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Evs
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Evs::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Evs::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,6 +193,55 @@ module Aws::Evs
       super
     end
 
+    # <p>Associates an Elastic IP address with a public HCX VLAN. This operation is only allowed for public HCX VLANs at this time.</p>
+    # @param [Hash, Types::AssociateEipToVlanRequest] params
+    # @option params [String] :client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    # @option params [String] :environment_id
+    #   <p>A unique ID for the environment containing the VLAN that the Elastic IP address associates with.</p>
+    # @option params [String] :vlan_name
+    #   <p>The name of the VLAN. <code>hcx</code> is the only accepted VLAN name at this time.</p>
+    # @option params [String] :allocation_id
+    #   <p>The Elastic IP address allocation ID.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     environment_id: "EnvironmentId", # required
+    #     vlan_name: "String", # required
+    #     allocation_id: "AllocationId", # required
+    #   }
+    #   options = {}
+    #   response = client.associate_eip_to_vlan(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     vlan: {
+    #       vlan_id: 1,
+    #       cidr: "Cidr",
+    #       availability_zone: "String",
+    #       function_name: "String",
+    #       subnet_id: "SubnetId",
+    #       created_at: Time.now,
+    #       modified_at: Time.now,
+    #       vlan_state: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"],
+    #       state_details: "StateDetails",
+    #       eip_associations: [
+    #         {
+    #           association_id: "AssociationId",
+    #           allocation_id: "AllocationId",
+    #           ip_address: "IpAddress"
+    #         }
+    #       ],
+    #       is_public: false,
+    #       network_acl_id: "NetworkAclId"
+    #     }
+    #   }
+    # @return [Types::AssociateEipToVlanResponse]
+    def associate_eip_to_vlan(params = {}, options = {})
+      request = build_request(:associate_eip_to_vlan, params)
+      request.send_request(options)
+    end
+
     # <p>Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager, NSX Manager, and vCenter Server.</p> <p>During environment creation, Amazon EVS performs validations on DNS settings, provisions VLAN subnets and hosts, and deploys the supplied version of VCF.</p> <p>It can take several hours to create an environment. After the deployment completes, you can configure VCF in the vSphere user interface according to your needs.</p> <note> <p>You cannot use the <code>dedicatedHostId</code> and <code>placementGroupId</code> parameters together in the same <code>CreateEnvironment</code> action. This results in a <code>ValidationException</code> response.</p> </note>
     # @param [Hash, Types::CreateEnvironmentRequest] params
     # @option params [String] :client_token
@@ -271,7 +325,9 @@ module Aws::Evs
     #       },
     #       expansion_vlan2: { # required
     #         cidr: "Cidr", # required
-    #       }
+    #       },
+    #       is_hcx_public: false,
+    #       hcx_network_acl_id: "NetworkAclId"
     #     },
     #     hosts: [ # required
     #       {
@@ -549,6 +605,55 @@ module Aws::Evs
       request.send_request(options)
     end
 
+    # <p>Disassociates an Elastic IP address from a public HCX VLAN. This operation is only allowed for public HCX VLANs at this time.</p>
+    # @param [Hash, Types::DisassociateEipFromVlanRequest] params
+    # @option params [String] :client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    # @option params [String] :environment_id
+    #   <p>A unique ID for the environment containing the VLAN that the Elastic IP address disassociates from.</p>
+    # @option params [String] :vlan_name
+    #   <p>The name of the VLAN. <code>hcx</code> is the only accepted VLAN name at this time.</p>
+    # @option params [String] :association_id
+    #   <p> A unique ID for the Elastic IP address association.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     environment_id: "EnvironmentId", # required
+    #     vlan_name: "String", # required
+    #     association_id: "AssociationId", # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_eip_from_vlan(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     vlan: {
+    #       vlan_id: 1,
+    #       cidr: "Cidr",
+    #       availability_zone: "String",
+    #       function_name: "String",
+    #       subnet_id: "SubnetId",
+    #       created_at: Time.now,
+    #       modified_at: Time.now,
+    #       vlan_state: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"],
+    #       state_details: "StateDetails",
+    #       eip_associations: [
+    #         {
+    #           association_id: "AssociationId",
+    #           allocation_id: "AllocationId",
+    #           ip_address: "IpAddress"
+    #         }
+    #       ],
+    #       is_public: false,
+    #       network_acl_id: "NetworkAclId"
+    #     }
+    #   }
+    # @return [Types::DisassociateEipFromVlanResponse]
+    def disassociate_eip_from_vlan(params = {}, options = {})
+      request = build_request(:disassociate_eip_from_vlan, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a description of the specified environment.</p>
     # @param [Hash, Types::GetEnvironmentRequest] params
     # @option params [String] :environment_id
@@ -697,7 +802,16 @@ module Aws::Evs
     #         created_at: Time.now,
     #         modified_at: Time.now,
     #         vlan_state: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"],
-    #         state_details: "StateDetails"
+    #         state_details: "StateDetails",
+    #         eip_associations: [
+    #           {
+    #             association_id: "AssociationId",
+    #             allocation_id: "AllocationId",
+    #             ip_address: "IpAddress"
+    #           }
+    #         ],
+    #         is_public: false,
+    #         network_acl_id: "NetworkAclId"
     #       }
     #     ]
     #   }

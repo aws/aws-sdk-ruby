@@ -145,6 +145,8 @@ module Aws::DataZone
     CreateDomainUnitPolicyGrantDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateDomainUnitPolicyGrantDetail', name: 'CreateDomainUnitPolicyGrantDetail')
     CreateEnvironmentActionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentActionInput', name: 'CreateEnvironmentActionInput')
     CreateEnvironmentActionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentActionOutput', name: 'CreateEnvironmentActionOutput')
+    CreateEnvironmentBlueprintInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentBlueprintInput', name: 'CreateEnvironmentBlueprintInput')
+    CreateEnvironmentBlueprintOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentBlueprintOutput', name: 'CreateEnvironmentBlueprintOutput')
     CreateEnvironmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentInput', name: 'CreateEnvironmentInput')
     CreateEnvironmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentOutput', name: 'CreateEnvironmentOutput')
     CreateEnvironmentProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#CreateEnvironmentProfileInput', name: 'CreateEnvironmentProfileInput')
@@ -243,6 +245,7 @@ module Aws::DataZone
     DeleteEnvironmentActionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteEnvironmentActionInput', name: 'DeleteEnvironmentActionInput')
     DeleteEnvironmentBlueprintConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteEnvironmentBlueprintConfigurationInput', name: 'DeleteEnvironmentBlueprintConfigurationInput')
     DeleteEnvironmentBlueprintConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteEnvironmentBlueprintConfigurationOutput', name: 'DeleteEnvironmentBlueprintConfigurationOutput')
+    DeleteEnvironmentBlueprintInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteEnvironmentBlueprintInput', name: 'DeleteEnvironmentBlueprintInput')
     DeleteEnvironmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteEnvironmentInput', name: 'DeleteEnvironmentInput')
     DeleteEnvironmentProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteEnvironmentProfileInput', name: 'DeleteEnvironmentProfileInput')
     DeleteFormTypeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DeleteFormTypeInput', name: 'DeleteFormTypeInput')
@@ -449,6 +452,7 @@ module Aws::DataZone
     GetTimeSeriesDataPointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GetTimeSeriesDataPointOutput', name: 'GetTimeSeriesDataPointOutput')
     GetUserProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GetUserProfileInput', name: 'GetUserProfileInput')
     GetUserProfileOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GetUserProfileOutput', name: 'GetUserProfileOutput')
+    GlobalParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.datazone#GlobalParameterMap', name: 'GlobalParameterMap')
     GlossaryDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#GlossaryDescription', name: 'GlossaryDescription', traits: {"smithy.api#length" => {"max" => 4096}, "smithy.api#sensitive" => {}})
     GlossaryId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#GlossaryId', name: 'GlossaryId', traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     GlossaryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GlossaryItem', name: 'GlossaryItem')
@@ -619,6 +623,7 @@ module Aws::DataZone
     ListingSummaryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#ListingSummaryItem', name: 'ListingSummaryItem')
     ListingSummaryItems = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.datazone#ListingSummaryItems', name: 'ListingSummaryItems')
     LongDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#LongDescription', name: 'LongDescription', traits: {"smithy.api#length" => {"max" => 4096}, "smithy.api#sensitive" => {}})
+    ManagedEndpointCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#ManagedEndpointCredentials', name: 'ManagedEndpointCredentials', traits: {"smithy.api#sensitive" => {}})
     ManagedPolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.datazone#ManagedPolicyType', name: 'ManagedPolicyType')
     MatchCriteria = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.datazone#MatchCriteria', name: 'MatchCriteria', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     MatchOffset = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#MatchOffset', name: 'MatchOffset')
@@ -922,6 +927,8 @@ module Aws::DataZone
     UpdateDomainUnitOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateDomainUnitOutput', name: 'UpdateDomainUnitOutput')
     UpdateEnvironmentActionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentActionInput', name: 'UpdateEnvironmentActionInput')
     UpdateEnvironmentActionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentActionOutput', name: 'UpdateEnvironmentActionOutput')
+    UpdateEnvironmentBlueprintInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentBlueprintInput', name: 'UpdateEnvironmentBlueprintInput')
+    UpdateEnvironmentBlueprintOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentBlueprintOutput', name: 'UpdateEnvironmentBlueprintOutput')
     UpdateEnvironmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentInput', name: 'UpdateEnvironmentInput')
     UpdateEnvironmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentOutput', name: 'UpdateEnvironmentOutput')
     UpdateEnvironmentProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#UpdateEnvironmentProfileInput', name: 'UpdateEnvironmentProfileInput')
@@ -1634,6 +1641,23 @@ module Aws::DataZone
     CreateEnvironmentActionOutput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameters, location_name: 'parameters', traits: {"smithy.api#required" => {}}))
     CreateEnvironmentActionOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'description'))
     CreateEnvironmentActionOutput.type = Types::CreateEnvironmentActionOutput
+    CreateEnvironmentBlueprintInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintName, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description'))
+    CreateEnvironmentBlueprintInput.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: 'provisioningProperties', traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintInput.add_member(:user_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomParameterList, location_name: 'userParameters'))
+    CreateEnvironmentBlueprintInput.type = Types::CreateEnvironmentBlueprintInput
+    CreateEnvironmentBlueprintOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintName, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description'))
+    CreateEnvironmentBlueprintOutput.add_member(:provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'provider', traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintOutput.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: 'provisioningProperties', traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentBlueprintOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: 'deploymentProperties'))
+    CreateEnvironmentBlueprintOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomParameterList, location_name: 'userParameters'))
+    CreateEnvironmentBlueprintOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: 'glossaryTerms'))
+    CreateEnvironmentBlueprintOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createdAt', traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CreateEnvironmentBlueprintOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updatedAt', traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CreateEnvironmentBlueprintOutput.type = Types::CreateEnvironmentBlueprintOutput
     CreateEnvironmentInput.add_member(:project_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'projectIdentifier', traits: {"smithy.api#required" => {}}))
     CreateEnvironmentInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateEnvironmentInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'description'))
@@ -1931,6 +1955,7 @@ module Aws::DataZone
     CustomParameter.add_member(:default_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'defaultValue'))
     CustomParameter.add_member(:is_editable, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isEditable'))
     CustomParameter.add_member(:is_optional, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isOptional'))
+    CustomParameter.add_member(:is_update_supported, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isUpdateSupported'))
     CustomParameter.type = Types::CustomParameter
     CustomParameterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomParameter)
     DataAssetActivityStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -2151,6 +2176,9 @@ module Aws::DataZone
     DeleteEnvironmentBlueprintConfigurationInput.add_member(:environment_blueprint_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, location_name: 'environmentBlueprintIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEnvironmentBlueprintConfigurationInput.type = Types::DeleteEnvironmentBlueprintConfigurationInput
     DeleteEnvironmentBlueprintConfigurationOutput.type = Types::DeleteEnvironmentBlueprintConfigurationOutput
+    DeleteEnvironmentBlueprintInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentBlueprintInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, location_name: 'identifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentBlueprintInput.type = Types::DeleteEnvironmentBlueprintInput
     DeleteEnvironmentInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEnvironmentInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: 'identifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEnvironmentInput.type = Types::DeleteEnvironmentInput
@@ -3047,6 +3075,8 @@ module Aws::DataZone
     GetUserProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserProfileStatus, location_name: 'status'))
     GetUserProfileOutput.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserProfileDetails, location_name: 'details'))
     GetUserProfileOutput.type = Types::GetUserProfileOutput
+    GlobalParameterMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
+    GlobalParameterMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     GlossaryItem.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
     GlossaryItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryId, location_name: 'id', traits: {"smithy.api#required" => {}}))
     GlossaryItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryName, location_name: 'name', traits: {"smithy.api#required" => {}}))
@@ -3208,6 +3238,7 @@ module Aws::DataZone
     IamPropertiesPatch.add_member(:glue_lineage_sync_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'glueLineageSyncEnabled'))
     IamPropertiesPatch.type = Types::IamPropertiesPatch
     IamUserProfileDetails.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'arn'))
+    IamUserProfileDetails.add_member(:principal_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'principalId'))
     IamUserProfileDetails.type = Types::IamUserProfileDetails
     Import.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormTypeName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     Import.add_member(:revision, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Revision, location_name: 'revision', traits: {"smithy.api#required" => {}}))
@@ -3689,6 +3720,9 @@ module Aws::DataZone
     ListingSummaryItem.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: 'glossaryTerms'))
     ListingSummaryItem.type = Types::ListingSummaryItem
     ListingSummaryItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListingSummaryItem)
+    ManagedEndpointCredentials.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'id', traits: {"smithy.api#length" => {"max" => 64}}))
+    ManagedEndpointCredentials.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'token'))
+    ManagedEndpointCredentials.type = Types::ManagedEndpointCredentials
     ManagedPolicyType.add_member(:create_domain_unit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_DOMAIN_UNIT', traits: {"smithy.api#enumValue" => "CREATE_DOMAIN_UNIT"}))
     ManagedPolicyType.add_member(:override_domain_unit_owners, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OVERRIDE_DOMAIN_UNIT_OWNERS', traits: {"smithy.api#enumValue" => "OVERRIDE_DOMAIN_UNIT_OWNERS"}))
     ManagedPolicyType.add_member(:add_to_project_member_pool, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADD_TO_PROJECT_MEMBER_POOL', traits: {"smithy.api#enumValue" => "ADD_TO_PROJECT_MEMBER_POOL"}))
@@ -3987,6 +4021,7 @@ module Aws::DataZone
     PutEnvironmentBlueprintConfigurationInput.add_member(:environment_role_permission_boundary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyArn, location_name: 'environmentRolePermissionBoundary'))
     PutEnvironmentBlueprintConfigurationInput.add_member(:enabled_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnabledRegionList, location_name: 'enabledRegions', traits: {"smithy.api#required" => {}}))
     PutEnvironmentBlueprintConfigurationInput.add_member(:regional_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionalParameterMap, location_name: 'regionalParameters'))
+    PutEnvironmentBlueprintConfigurationInput.add_member(:global_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalParameterMap, location_name: 'globalParameters', traits: {"smithy.api#notProperty" => {}}))
     PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningConfigurationList, location_name: 'provisioningConfigurations', traits: {"smithy.api#notProperty" => {}}))
     PutEnvironmentBlueprintConfigurationInput.type = Types::PutEnvironmentBlueprintConfigurationInput
     PutEnvironmentBlueprintConfigurationOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
@@ -4360,13 +4395,14 @@ module Aws::DataZone
     SortKey.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATED_AT', traits: {"smithy.api#enumValue" => "UPDATED_AT"}))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ASCENDING', traits: {"smithy.api#enumValue" => "ASCENDING"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DESCENDING', traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    SparkEmrPropertiesInput.add_member(:compute_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'computeArn', traits: {"smithy.api#length" => {"max" => 256}}))
+    SparkEmrPropertiesInput.add_member(:compute_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'computeArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"}))
     SparkEmrPropertiesInput.add_member(:instance_profile_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'instanceProfileArn', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesInput.add_member(:java_virtual_env, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'javaVirtualEnv', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesInput.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'logUri', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesInput.add_member(:python_virtual_env, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'pythonVirtualEnv', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesInput.add_member(:runtime_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'runtimeRole', traits: {"smithy.api#pattern" => "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"}))
     SparkEmrPropertiesInput.add_member(:trusted_certificates_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'trustedCertificatesS3Uri', traits: {"smithy.api#length" => {"max" => 256}}))
+    SparkEmrPropertiesInput.add_member(:managed_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'managedEndpointArn', traits: {"smithy.api#length" => {"max" => 2048}}))
     SparkEmrPropertiesInput.type = Types::SparkEmrPropertiesInput
     SparkEmrPropertiesOutput.add_member(:compute_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'computeArn'))
     SparkEmrPropertiesOutput.add_member(:credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UsernamePassword, location_name: 'credentials'))
@@ -4379,14 +4415,18 @@ module Aws::DataZone
     SparkEmrPropertiesOutput.add_member(:python_virtual_env, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'pythonVirtualEnv'))
     SparkEmrPropertiesOutput.add_member(:runtime_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'runtimeRole'))
     SparkEmrPropertiesOutput.add_member(:trusted_certificates_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'trustedCertificatesS3Uri'))
+    SparkEmrPropertiesOutput.add_member(:certificate_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'certificateData'))
+    SparkEmrPropertiesOutput.add_member(:managed_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'managedEndpointArn', traits: {"smithy.api#length" => {"max" => 2048}}))
+    SparkEmrPropertiesOutput.add_member(:managed_endpoint_credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedEndpointCredentials, location_name: 'managedEndpointCredentials'))
     SparkEmrPropertiesOutput.type = Types::SparkEmrPropertiesOutput
-    SparkEmrPropertiesPatch.add_member(:compute_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'computeArn', traits: {"smithy.api#length" => {"max" => 256}}))
+    SparkEmrPropertiesPatch.add_member(:compute_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'computeArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"}))
     SparkEmrPropertiesPatch.add_member(:instance_profile_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'instanceProfileArn', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesPatch.add_member(:java_virtual_env, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'javaVirtualEnv', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesPatch.add_member(:log_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'logUri', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesPatch.add_member(:python_virtual_env, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'pythonVirtualEnv', traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesPatch.add_member(:runtime_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'runtimeRole', traits: {"smithy.api#pattern" => "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"}))
     SparkEmrPropertiesPatch.add_member(:trusted_certificates_s3_uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'trustedCertificatesS3Uri', traits: {"smithy.api#length" => {"max" => 256}}))
+    SparkEmrPropertiesPatch.add_member(:managed_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'managedEndpointArn', traits: {"smithy.api#length" => {"max" => 2048}}))
     SparkEmrPropertiesPatch.type = Types::SparkEmrPropertiesPatch
     SparkGlueArgs.add_member(:connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'connection'))
     SparkGlueArgs.type = Types::SparkGlueArgs
@@ -4854,6 +4894,23 @@ module Aws::DataZone
     UpdateEnvironmentActionOutput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionParameters, location_name: 'parameters', traits: {"smithy.api#required" => {}}))
     UpdateEnvironmentActionOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'description'))
     UpdateEnvironmentActionOutput.type = Types::UpdateEnvironmentActionOutput
+    UpdateEnvironmentBlueprintInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentBlueprintInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, location_name: 'identifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentBlueprintInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'description'))
+    UpdateEnvironmentBlueprintInput.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: 'provisioningProperties'))
+    UpdateEnvironmentBlueprintInput.add_member(:user_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomParameterList, location_name: 'userParameters'))
+    UpdateEnvironmentBlueprintInput.type = Types::UpdateEnvironmentBlueprintInput
+    UpdateEnvironmentBlueprintOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentBlueprintOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentBlueprintName, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentBlueprintOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description'))
+    UpdateEnvironmentBlueprintOutput.add_member(:provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'provider', traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentBlueprintOutput.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: 'provisioningProperties', traits: {"smithy.api#required" => {}}))
+    UpdateEnvironmentBlueprintOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: 'deploymentProperties'))
+    UpdateEnvironmentBlueprintOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomParameterList, location_name: 'userParameters'))
+    UpdateEnvironmentBlueprintOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: 'glossaryTerms'))
+    UpdateEnvironmentBlueprintOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createdAt', traits: {"smithy.api#timestampFormat" => "date-time"}))
+    UpdateEnvironmentBlueprintOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updatedAt', traits: {"smithy.api#timestampFormat" => "date-time"}))
+    UpdateEnvironmentBlueprintOutput.type = Types::UpdateEnvironmentBlueprintOutput
     UpdateEnvironmentInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateEnvironmentInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentId, location_name: 'identifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateEnvironmentInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'name'))
@@ -5442,6 +5499,21 @@ module Aws::DataZone
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions"}}
       end)
+      service.add_operation(:create_environment_blueprint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#CreateEnvironmentBlueprint"
+        operation.name = "CreateEnvironmentBlueprint"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentBlueprintInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateEnvironmentBlueprintOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/environment-blueprints"}}
+      end)
       service.add_operation(:create_environment_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#CreateEnvironmentProfile"
         operation.name = "CreateEnvironmentProfile"
@@ -5792,6 +5864,20 @@ module Aws::DataZone
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions/{identifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_environment_blueprint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#DeleteEnvironmentBlueprint"
+        operation.name = "DeleteEnvironmentBlueprint"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteEnvironmentBlueprintInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/environment-blueprints/{identifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment_blueprint_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#DeleteEnvironmentBlueprintConfiguration"
@@ -7278,6 +7364,21 @@ module Aws::DataZone
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/actions/{identifier}"}}
+      end)
+      service.add_operation(:update_environment_blueprint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#UpdateEnvironmentBlueprint"
+        operation.name = "UpdateEnvironmentBlueprint"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentBlueprintInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateEnvironmentBlueprintOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/environment-blueprints/{identifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_environment_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#UpdateEnvironmentProfile"

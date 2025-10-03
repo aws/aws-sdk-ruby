@@ -48,6 +48,7 @@ module Aws::FSx
       DOMAIN_NOT_FOUND: String
       INCOMPATIBLE_DOMAIN_MODE: String
       WRONG_VPC: String
+      INVALID_NETWORK_TYPE: String
       INVALID_DOMAIN_STAGE: String
     end
 
@@ -806,6 +807,7 @@ module Aws::FSx
         ?weekly_maintenance_start_time: String,
         ?ha_pairs: Integer,
         ?throughput_capacity_per_ha_pair: Integer,
+        ?endpoint_ipv6_address_range: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -821,6 +823,7 @@ module Aws::FSx
       attr_accessor weekly_maintenance_start_time: String?
       attr_accessor ha_pairs: Integer?
       attr_accessor throughput_capacity_per_ha_pair: Integer?
+      attr_accessor endpoint_ipv6_address_range: String?
     end
 
     class CreateFileSystemOpenZFSConfiguration
@@ -2402,11 +2405,13 @@ module Aws::FSx
       def initialize: (
         ?dns_name: String,
         ?ip_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dns_name: String?
       attr_accessor ip_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
     end
 
     class FileSystemEndpoints
@@ -2919,6 +2924,7 @@ module Aws::FSx
         ?fsx_admin_password: String,
         ?ha_pairs: Integer,
         ?throughput_capacity_per_ha_pair: Integer,
+        ?endpoint_ipv6_address_range: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2935,6 +2941,7 @@ module Aws::FSx
       attr_accessor fsx_admin_password: String?
       attr_accessor ha_pairs: Integer?
       attr_accessor throughput_capacity_per_ha_pair: Integer?
+      attr_accessor endpoint_ipv6_address_range: String?
     end
 
     class OntapVolumeConfiguration
@@ -3832,11 +3839,13 @@ module Aws::FSx
       def initialize: (
         ?dns_name: String,
         ?ip_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dns_name: String?
       attr_accessor ip_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
     end
 
     class SvmEndpoints
@@ -4084,6 +4093,7 @@ module Aws::FSx
         ?remove_route_table_ids: Array[String],
         ?throughput_capacity_per_ha_pair: Integer,
         ?ha_pairs: Integer,
+        ?endpoint_ipv6_address_range: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4097,6 +4107,7 @@ module Aws::FSx
       attr_accessor remove_route_table_ids: Array[String]?
       attr_accessor throughput_capacity_per_ha_pair: Integer?
       attr_accessor ha_pairs: Integer?
+      attr_accessor endpoint_ipv6_address_range: String?
     end
 
     class UpdateFileSystemOpenZFSConfiguration
@@ -4533,6 +4544,7 @@ module Aws::FSx
         ?aliases: Array[Types::Alias],
         ?audit_log_configuration: Types::WindowsAuditLogConfiguration,
         ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?preferred_file_server_ipv6: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4551,6 +4563,7 @@ module Aws::FSx
       attr_accessor aliases: Array[Types::Alias]?
       attr_accessor audit_log_configuration: Types::WindowsAuditLogConfiguration?
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor preferred_file_server_ipv6: String?
     end
   end
 end

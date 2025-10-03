@@ -7,6 +7,7 @@ module Aws::Connect
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -94,6 +95,15 @@ module Aws::Connect
       },
       ?client_token: String
     ) -> _AssociateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateBotResponse
+
+    interface _AssociateContactWithUserResponse
+      include Smithy::Client::_Response[Types::AssociateContactWithUserResponse]
+    end
+    def associate_contact_with_user: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?user_id: String
+    ) -> _AssociateContactWithUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateContactWithUserResponse
 
     interface _AssociateDefaultVocabularyResponse
       include Smithy::Client::_Response[Types::AssociateDefaultVocabularyResponse]
@@ -200,6 +210,14 @@ module Aws::Connect
           },
           priority: Integer,
           delay: Integer
+        }
+      ],
+      ?manual_assignment_queue_configs: Array[
+        {
+          queue_reference: {
+            queue_id: String,
+            channel: String
+          }
         }
       ]
     ) -> _AssociateRoutingProfileQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateRoutingProfileQueuesResponse
@@ -378,10 +396,22 @@ module Aws::Connect
             {
               value_string: untyped,
               value_map: untyped,
-              value_integer: Integer
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
             }
           ],
-          value_integer: untyped
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
         }
       ],
       ?previous_contact_id: String
@@ -638,6 +668,10 @@ module Aws::Connect
       ?name: String,
       ?values: {
         string_list: Array[String]
+      },
+      ?purposes: Array[String],
+      ?attribute_configuration: {
+        enable_value_validation_on_association: bool
       }
     ) -> _CreatePredefinedAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePredefinedAttributeResponse
 
@@ -738,6 +772,14 @@ module Aws::Connect
           },
           priority: Integer,
           delay: Integer
+        }
+      ],
+      ?manual_assignment_queue_configs: Array[
+        {
+          queue_reference: {
+            queue_id: String,
+            channel: String
+          }
         }
       ],
       ?media_concurrencies: Array[
@@ -965,7 +1007,8 @@ module Aws::Connect
         phone_type: String,
         auto_accept: bool,
         after_contact_work_time_limit: Integer,
-        desk_phone_number: String
+        desk_phone_number: String,
+        persistent_connection: bool
       },
       ?directory_user_id: String,
       ?security_profile_ids: Array[String],
@@ -1613,6 +1656,12 @@ module Aws::Connect
       ?instance_id: String,
       ?routing_profile_id: String,
       ?queue_references: Array[
+        {
+          queue_id: String,
+          channel: String
+        }
+      ],
+      ?manual_assignment_queue_references: Array[
         {
           queue_id: String,
           channel: String
@@ -2313,6 +2362,20 @@ module Aws::Connect
       ?segment_types: Array[String]
     ) -> _ListRealtimeContactAnalysisSegmentsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRealtimeContactAnalysisSegmentsV2Response
 
+    interface _ListRoutingProfileManualAssignmentQueuesResponse
+      include Smithy::Client::_Response[Types::ListRoutingProfileManualAssignmentQueuesResponse]
+      def next_token: () -> String?
+      def routing_profile_manual_assignment_queue_config_summary_list: () -> Array[Types::RoutingProfileManualAssignmentQueueConfigSummary]?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_routing_profile_manual_assignment_queues: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRoutingProfileManualAssignmentQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoutingProfileManualAssignmentQueuesResponse
+
     interface _ListRoutingProfileQueuesResponse
       include Smithy::Client::_Response[Types::ListRoutingProfileQueuesResponse]
       def next_token: () -> String?
@@ -2771,6 +2834,10 @@ module Aws::Connect
         end_time: untyped
       },
       ?search_criteria: {
+        name: {
+          search_text: Array[String],
+          match_type: String
+        },
         agent_ids: Array[String],
         agent_hierarchy_groups: {
           l1_ids: Array[String],
@@ -2785,8 +2852,8 @@ module Aws::Connect
             criteria: Array[
               {
                 participant_role: String,
-                search_text: Array[String],
-                match_type: String
+                search_text: untyped,
+                match_type: untyped
               }
             ],
             match_type: untyped
@@ -2794,6 +2861,32 @@ module Aws::Connect
         },
         initiation_methods: Array[String],
         queue_ids: Array[String],
+        routing_criteria: {
+          steps: Array[
+            {
+              agent_criteria: {
+                agent_ids: untyped,
+                match_type: untyped
+              }
+            }
+          ]
+        },
+        additional_time_range: {
+          criteria: Array[
+            {
+              time_range: {
+                type: String,
+                start_time: Time,
+                end_time: untyped
+              },
+              timestamp_condition: {
+                type: untyped,
+                condition_type: String
+              }
+            }
+          ],
+          match_type: untyped
+        },
         searchable_contact_attributes: {
           criteria: Array[
             {
@@ -3544,10 +3637,22 @@ module Aws::Connect
             {
               value_string: untyped,
               value_map: untyped,
-              value_integer: Integer
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
             }
           ],
-          value_integer: untyped
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
         }
       ],
       ?customer_id: String
@@ -3647,10 +3752,22 @@ module Aws::Connect
             {
               value_string: untyped,
               value_map: untyped,
-              value_integer: Integer
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
             }
           ],
-          value_integer: untyped
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
         }
       ],
       ?client_token: String
@@ -3677,10 +3794,22 @@ module Aws::Connect
             {
               value_string: untyped,
               value_map: untyped,
-              value_integer: Integer
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
             }
           ],
-          value_integer: untyped
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
         }
       ],
       ?attributes: Hash[String, String],
@@ -3813,10 +3942,22 @@ module Aws::Connect
             {
               value_string: untyped,
               value_map: untyped,
-              value_integer: Integer
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
             }
           ],
-          value_integer: untyped
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
         }
       ]
     ) -> _StartTaskContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTaskContactResponse
@@ -4018,10 +4159,22 @@ module Aws::Connect
             {
               value_string: untyped,
               value_map: untyped,
-              value_integer: Integer
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
             }
           ],
-          value_integer: untyped
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
         }
       ],
       ?queue_info: {
@@ -4421,6 +4574,10 @@ module Aws::Connect
       ?name: String,
       ?values: {
         string_list: Array[String]
+      },
+      ?purposes: Array[String],
+      ?attribute_configuration: {
+        enable_value_validation_on_association: bool
       }
     ) -> _UpdatePredefinedAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePredefinedAttributeResponse
 
@@ -4851,7 +5008,8 @@ module Aws::Connect
         phone_type: String,
         auto_accept: bool,
         after_contact_work_time_limit: Integer,
-        desk_phone_number: String
+        desk_phone_number: String,
+        persistent_connection: bool
       },
       ?user_id: String,
       ?instance_id: String

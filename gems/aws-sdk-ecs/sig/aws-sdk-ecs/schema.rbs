@@ -2,9 +2,19 @@ module Aws::ECS
   module Schema
     include Smithy::Schema::Shapes
 
+    AcceleratorCountRequest: StructureShape
+    AcceleratorManufacturer: EnumShape
+    AcceleratorManufacturerSet: ListShape
+    AcceleratorName: EnumShape
+    AcceleratorNameSet: ListShape
+    AcceleratorTotalMemoryMiBRequest: StructureShape
+    AcceleratorType: EnumShape
+    AcceleratorTypeSet: ListShape
     AccessDeniedException: StructureShape
     AdvancedConfiguration: StructureShape
     AgentUpdateStatus: EnumShape
+    AllowedInstanceType: StringShape
+    AllowedInstanceTypeSet: ListShape
     ApplicationProtocol: EnumShape
     AssignPublicIp: EnumShape
     Attachment: StructureShape
@@ -19,10 +29,14 @@ module Aws::ECS
     AutoScalingGroupProviderUpdate: StructureShape
     AvailabilityZoneRebalancing: EnumShape
     AwsVpcConfiguration: StructureShape
+    BareMetal: EnumShape
+    BaselineEbsBandwidthMbpsRequest: StructureShape
     BlockedException: StructureShape
     Boolean: BooleanShape
     BoxedBoolean: BooleanShape
+    BoxedDouble: FloatShape
     BoxedInteger: IntegerShape
+    BurstablePerformance: EnumShape
     CPUArchitecture: EnumShape
     CapacityProvider: StructureShape
     CapacityProviderField: EnumShape
@@ -32,11 +46,13 @@ module Aws::ECS
     CapacityProviderStrategyItem: StructureShape
     CapacityProviderStrategyItemBase: IntegerShape
     CapacityProviderStrategyItemWeight: IntegerShape
+    CapacityProviderType: EnumShape
     CapacityProviderUpdateStatus: EnumShape
     CapacityProviders: ListShape
     ClientException: StructureShape
     Cluster: StructureShape
     ClusterConfiguration: StructureShape
+    ClusterContainsCapacityProviderException: StructureShape
     ClusterContainsContainerInstancesException: StructureShape
     ClusterContainsServicesException: StructureShape
     ClusterContainsTasksException: StructureShape
@@ -73,10 +89,13 @@ module Aws::ECS
     ContainerStateChange: StructureShape
     ContainerStateChanges: ListShape
     Containers: ListShape
+    CpuManufacturer: EnumShape
+    CpuManufacturerSet: ListShape
     CreateCapacityProviderRequest: StructureShape
     CreateCapacityProviderResponse: StructureShape
     CreateClusterRequest: StructureShape
     CreateClusterResponse: StructureShape
+    CreateManagedInstancesProviderConfiguration: StructureShape
     CreateServiceRequest: StructureShape
     CreateServiceResponse: StructureShape
     CreateTaskSetRequest: StructureShape
@@ -159,6 +178,8 @@ module Aws::ECS
     EnvironmentFiles: ListShape
     EnvironmentVariables: ListShape
     EphemeralStorage: StructureShape
+    ExcludedInstanceType: StringShape
+    ExcludedInstanceTypeSet: ListShape
     ExecuteCommandConfiguration: StructureShape
     ExecuteCommandLogConfiguration: StructureShape
     ExecuteCommandLogging: EnumShape
@@ -176,6 +197,7 @@ module Aws::ECS
     GpuIds: ListShape
     HealthCheck: StructureShape
     HealthStatus: EnumShape
+    HookDetails: DocumentShape
     HostEntry: StructureShape
     HostEntryList: ListShape
     HostVolumeProperties: StructureShape
@@ -184,10 +206,15 @@ module Aws::ECS
     InferenceAcceleratorOverride: StructureShape
     InferenceAcceleratorOverrides: ListShape
     InferenceAccelerators: ListShape
+    InstanceGeneration: EnumShape
+    InstanceGenerationSet: ListShape
     InstanceHealthCheckResult: StructureShape
     InstanceHealthCheckResultList: ListShape
     InstanceHealthCheckState: EnumShape
     InstanceHealthCheckType: EnumShape
+    InstanceLaunchTemplate: StructureShape
+    InstanceLaunchTemplateUpdate: StructureShape
+    InstanceRequirementsRequest: StructureShape
     Integer: IntegerShape
     IntegerList: ListShape
     InvalidParameterException: StructureShape
@@ -221,6 +248,9 @@ module Aws::ECS
     ListTasksResponse: StructureShape
     LoadBalancer: StructureShape
     LoadBalancers: ListShape
+    LocalStorage: EnumShape
+    LocalStorageType: EnumShape
+    LocalStorageTypeSet: ListShape
     LogConfiguration: StructureShape
     LogConfigurationOptionsMap: MapShape
     LogDriver: EnumShape
@@ -231,6 +261,10 @@ module Aws::ECS
     ManagedAgentStateChanges: ListShape
     ManagedAgents: ListShape
     ManagedDraining: EnumShape
+    ManagedInstancesMonitoringOptions: EnumShape
+    ManagedInstancesNetworkConfiguration: StructureShape
+    ManagedInstancesProvider: StructureShape
+    ManagedInstancesStorageConfiguration: StructureShape
     ManagedScaling: StructureShape
     ManagedScalingInstanceWarmupPeriod: IntegerShape
     ManagedScalingStatus: EnumShape
@@ -238,14 +272,18 @@ module Aws::ECS
     ManagedScalingTargetCapacity: IntegerShape
     ManagedStorageConfiguration: StructureShape
     ManagedTerminationProtection: EnumShape
+    MemoryGiBPerVCpuRequest: StructureShape
+    MemoryMiBRequest: StructureShape
     MissingVersionException: StructureShape
     MountPoint: StructureShape
     MountPointList: ListShape
     NamespaceNotFoundException: StructureShape
+    NetworkBandwidthGbpsRequest: StructureShape
     NetworkBinding: StructureShape
     NetworkBindings: ListShape
     NetworkConfiguration: StructureShape
     NetworkInterface: StructureShape
+    NetworkInterfaceCountRequest: StructureShape
     NetworkInterfaces: ListShape
     NetworkMode: EnumShape
     NoUpdateAvailableException: StructureShape
@@ -265,6 +303,7 @@ module Aws::ECS
     PortMapping: StructureShape
     PortMappingList: ListShape
     PortNumber: IntegerShape
+    PropagateMITags: EnumShape
     PropagateTags: EnumShape
     ProtectedTask: StructureShape
     ProtectedTasks: ListShape
@@ -409,11 +448,13 @@ module Aws::ECS
     TaskStopCode: EnumShape
     TaskVolumeConfiguration: StructureShape
     TaskVolumeConfigurations: ListShape
+    TaskVolumeStorageGiB: IntegerShape
     Tasks: ListShape
     TimeoutConfiguration: StructureShape
     Timestamp: TimestampShape
     Tmpfs: StructureShape
     TmpfsList: ListShape
+    TotalLocalStorageGBRequest: StructureShape
     TransportProtocol: EnumShape
     Ulimit: StructureShape
     UlimitList: ListShape
@@ -432,6 +473,7 @@ module Aws::ECS
     UpdateContainerInstancesStateRequest: StructureShape
     UpdateContainerInstancesStateResponse: StructureShape
     UpdateInProgressException: StructureShape
+    UpdateManagedInstancesProviderConfiguration: StructureShape
     UpdateServicePrimaryTaskSetRequest: StructureShape
     UpdateServicePrimaryTaskSetResponse: StructureShape
     UpdateServiceRequest: StructureShape
@@ -440,6 +482,7 @@ module Aws::ECS
     UpdateTaskProtectionResponse: StructureShape
     UpdateTaskSetRequest: StructureShape
     UpdateTaskSetResponse: StructureShape
+    VCpuCountRangeRequest: StructureShape
     VersionConsistency: EnumShape
     VersionInfo: StructureShape
     Volume: StructureShape

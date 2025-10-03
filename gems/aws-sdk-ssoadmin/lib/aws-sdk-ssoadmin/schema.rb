@@ -14,6 +14,7 @@ module Aws::SSOAdmin
     AccessControlAttributeValueSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssoadmin#AccessControlAttributeValueSourceList', name: 'AccessControlAttributeValueSourceList', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessDeniedExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#AccessDeniedExceptionMessage', name: 'AccessDeniedExceptionMessage')
+    AccessDeniedExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#AccessDeniedExceptionReason', name: 'AccessDeniedExceptionReason')
     AccountAssignment = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#AccountAssignment', name: 'AccountAssignment')
     AccountAssignmentForPrincipal = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#AccountAssignmentForPrincipal', name: 'AccountAssignmentForPrincipal')
     AccountAssignmentList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssoadmin#AccountAssignmentList', name: 'AccountAssignmentList')
@@ -121,6 +122,8 @@ module Aws::SSOAdmin
     DetachManagedPolicyFromPermissionSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#DetachManagedPolicyFromPermissionSetResponse', name: 'DetachManagedPolicyFromPermissionSetResponse')
     DisplayData = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#DisplayData', name: 'DisplayData')
     Duration = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#Duration', name: 'Duration', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"})
+    EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#EncryptionConfiguration', name: 'EncryptionConfiguration')
+    EncryptionConfigurationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#EncryptionConfigurationDetails', name: 'EncryptionConfigurationDetails')
     FederationProtocol = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#FederationProtocol', name: 'FederationProtocol')
     GetApplicationAccessScopeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#GetApplicationAccessScopeRequest', name: 'GetApplicationAccessScopeRequest')
     GetApplicationAccessScopeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#GetApplicationAccessScopeResponse', name: 'GetApplicationAccessScopeResponse')
@@ -155,6 +158,9 @@ module Aws::SSOAdmin
     JMESPath = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#JMESPath', name: 'JMESPath', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^\\p{L}+(?:\\.\\p{L}+){0,2}$"})
     JwksRetrievalOption = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#JwksRetrievalOption', name: 'JwksRetrievalOption')
     JwtBearerGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#JwtBearerGrant', name: 'JwtBearerGrant')
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#KmsKeyArn', name: 'KmsKeyArn', traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-[bcd]):kms:([a-z]{2,}(-[a-z0-9]+)+){1}:[0-9]{12}:key/(mrk-[a-f0-9]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"})
+    KmsKeyStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#KmsKeyStatus', name: 'KmsKeyStatus')
+    KmsKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#KmsKeyType', name: 'KmsKeyType')
     ListAccountAssignmentCreationStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ListAccountAssignmentCreationStatusRequest', name: 'ListAccountAssignmentCreationStatusRequest')
     ListAccountAssignmentCreationStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ListAccountAssignmentCreationStatusResponse', name: 'ListAccountAssignmentCreationStatusResponse')
     ListAccountAssignmentDeletionStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ListAccountAssignmentDeletionStatusRequest', name: 'ListAccountAssignmentDeletionStatusRequest')
@@ -240,6 +246,7 @@ module Aws::SSOAdmin
     RefreshTokenGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#RefreshTokenGrant', name: 'RefreshTokenGrant')
     RelayState = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#RelayState', name: 'RelayState', traits: {"smithy.api#length" => {"min" => 1, "max" => 240}, "smithy.api#pattern" => "^[a-zA-Z0-9&$@#\\\\\\/%?=~\\-_'\"|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceNotFoundExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#ResourceNotFoundExceptionReason', name: 'ResourceNotFoundExceptionReason')
     ResourceNotFoundMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#ResourceNotFoundMessage', name: 'ResourceNotFoundMessage')
     ResourceServerConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ResourceServerConfig', name: 'ResourceServerConfig')
     ResourceServerScope = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#ResourceServerScope', name: 'ResourceServerScope', traits: {"smithy.api#length" => {"min" => 1, "max" => 80}, "smithy.api#pattern" => "^[^:=\\-\\.\\s][0-9a-zA-Z_:\\-\\.]+$"})
@@ -267,6 +274,7 @@ module Aws::SSOAdmin
     TargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#TargetType', name: 'TargetType')
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     ThrottlingExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#ThrottlingExceptionMessage', name: 'ThrottlingExceptionMessage')
+    ThrottlingExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#ThrottlingExceptionReason', name: 'ThrottlingExceptionReason')
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#Token', name: 'Token', traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[-a-zA-Z0-9+=/_]*$"})
     TokenExchangeGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#TokenExchangeGrant', name: 'TokenExchangeGrant')
     TokenIssuerAudience = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#TokenIssuerAudience', name: 'TokenIssuerAudience', traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
@@ -297,6 +305,7 @@ module Aws::SSOAdmin
     UserBackgroundSessionApplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#UserBackgroundSessionApplicationStatus', name: 'UserBackgroundSessionApplicationStatus')
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssoadmin#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssoadmin#ValidationExceptionMessage', name: 'ValidationExceptionMessage')
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssoadmin#ValidationExceptionReason', name: 'ValidationExceptionReason')
 
     AccessControlAttribute.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlAttributeKey, location_name: 'Key', traits: {"smithy.api#required" => {}}))
     AccessControlAttribute.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlAttributeValue, location_name: 'Value', traits: {"smithy.api#required" => {}}))
@@ -306,7 +315,9 @@ module Aws::SSOAdmin
     AccessControlAttributeValue.type = Types::AccessControlAttributeValue
     AccessControlAttributeValueSourceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlAttributeValueSource)
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedExceptionMessage, location_name: 'Message'))
+    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: 'Reason'))
     AccessDeniedException.type = Types::AccessDeniedException
+    AccessDeniedExceptionReason.add_member(:kms_access_denied_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_ACCESS_DENIED_EXCEPTION', traits: {"smithy.api#enumValue" => "KMS_AccessDeniedException"}))
     AccountAssignment.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     AccountAssignment.add_member(:permission_set_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: 'PermissionSetArn'))
     AccountAssignment.add_member(:principal_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrincipalType, location_name: 'PrincipalType'))
@@ -551,6 +562,8 @@ module Aws::SSOAdmin
     DescribeInstanceResponse.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: 'Name'))
     DescribeInstanceResponse.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: 'CreatedDate'))
     DescribeInstanceResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceStatus, location_name: 'Status'))
+    DescribeInstanceResponse.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reason, location_name: 'StatusReason'))
+    DescribeInstanceResponse.add_member(:encryption_configuration_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfigurationDetails, location_name: 'EncryptionConfigurationDetails'))
     DescribeInstanceResponse.type = Types::DescribeInstanceResponse
     DescribePermissionSetProvisioningStatusRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceArn, location_name: 'InstanceArn', traits: {"smithy.api#required" => {}}))
     DescribePermissionSetProvisioningStatusRequest.add_member(:provision_permission_set_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUId, location_name: 'ProvisionPermissionSetRequestId', traits: {"smithy.api#required" => {}}))
@@ -583,6 +596,14 @@ module Aws::SSOAdmin
     DisplayData.add_member(:icon_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IconUrl, location_name: 'IconUrl'))
     DisplayData.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'Description'))
     DisplayData.type = Types::DisplayData
+    EncryptionConfiguration.add_member(:key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyType, location_name: 'KeyType', traits: {"smithy.api#required" => {}}))
+    EncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: 'KmsKeyArn'))
+    EncryptionConfiguration.type = Types::EncryptionConfiguration
+    EncryptionConfigurationDetails.add_member(:key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyType, location_name: 'KeyType'))
+    EncryptionConfigurationDetails.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: 'KmsKeyArn'))
+    EncryptionConfigurationDetails.add_member(:encryption_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyStatus, location_name: 'EncryptionStatus'))
+    EncryptionConfigurationDetails.add_member(:encryption_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reason, location_name: 'EncryptionStatusReason'))
+    EncryptionConfigurationDetails.type = Types::EncryptionConfigurationDetails
     FederationProtocol.add_member(:saml, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SAML', traits: {"smithy.api#enumValue" => "SAML"}))
     FederationProtocol.add_member(:oauth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OAUTH', traits: {"smithy.api#enumValue" => "OAUTH"}))
     GetApplicationAccessScopeRequest.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: 'ApplicationArn', traits: {"smithy.api#required" => {}}))
@@ -647,8 +668,10 @@ module Aws::SSOAdmin
     InstanceMetadata.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: 'Name'))
     InstanceMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: 'CreatedDate'))
     InstanceMetadata.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceStatus, location_name: 'Status'))
+    InstanceMetadata.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Reason, location_name: 'StatusReason'))
     InstanceMetadata.type = Types::InstanceMetadata
     InstanceStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_IN_PROGRESS', traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    InstanceStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     InstanceStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETE_IN_PROGRESS', traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
     InstanceStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureMessage, location_name: 'Message'))
@@ -656,6 +679,11 @@ module Aws::SSOAdmin
     JwksRetrievalOption.add_member(:open_id_discovery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OPEN_ID_DISCOVERY', traits: {"smithy.api#enumValue" => "OPEN_ID_DISCOVERY"}))
     JwtBearerGrant.add_member(:authorized_token_issuers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizedTokenIssuers, location_name: 'AuthorizedTokenIssuers'))
     JwtBearerGrant.type = Types::JwtBearerGrant
+    KmsKeyStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
+    KmsKeyStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
+    KmsKeyStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATE_FAILED', traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    KmsKeyType.add_member(:aws_owned_kms_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_OWNED_KMS_KEY', traits: {"smithy.api#enumValue" => "AWS_OWNED_KMS_KEY"}))
+    KmsKeyType.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CUSTOMER_MANAGED_KEY', traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_KEY"}))
     ListAccountAssignmentCreationStatusRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceArn, location_name: 'InstanceArn', traits: {"smithy.api#required" => {}}))
     ListAccountAssignmentCreationStatusRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults'))
     ListAccountAssignmentCreationStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: 'NextToken'))
@@ -900,7 +928,9 @@ module Aws::SSOAdmin
     RedirectUris.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: URI)
     RefreshTokenGrant.type = Types::RefreshTokenGrant
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundMessage, location_name: 'Message'))
+    ResourceNotFoundException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundExceptionReason, location_name: 'Reason'))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourceNotFoundExceptionReason.add_member(:kms_not_found_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_NOT_FOUND_EXCEPTION', traits: {"smithy.api#enumValue" => "KMS_NotFoundException"}))
     ResourceServerConfig.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceServerScopes, location_name: 'Scopes'))
     ResourceServerConfig.type = Types::ResourceServerConfig
     ResourceServerScopeDetails.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'LongDescription'))
@@ -935,7 +965,9 @@ module Aws::SSOAdmin
     TagResourceResponse.type = Types::TagResourceResponse
     TargetType.add_member(:aws_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_ACCOUNT', traits: {"smithy.api#enumValue" => "AWS_ACCOUNT"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingExceptionMessage, location_name: 'Message'))
+    ThrottlingException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingExceptionReason, location_name: 'Reason'))
     ThrottlingException.type = Types::ThrottlingException
+    ThrottlingExceptionReason.add_member(:kms_throttling_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_THROTTLING_EXCEPTION', traits: {"smithy.api#enumValue" => "KMS_ThrottlingException"}))
     TokenExchangeGrant.type = Types::TokenExchangeGrant
     TokenIssuerAudiences.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TokenIssuerAudience)
     TrustedTokenIssuerConfiguration.add_member(:oidc_jwt_configuration, Types::TrustedTokenIssuerConfiguration::OidcJwtConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OidcJwtConfiguration, location_name: 'OidcJwtConfiguration'))
@@ -968,8 +1000,9 @@ module Aws::SSOAdmin
     UpdateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_access_control_attribute_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, location_name: 'InstanceAccessControlAttributeConfiguration', traits: {"smithy.api#required" => {}}))
     UpdateInstanceAccessControlAttributeConfigurationRequest.type = Types::UpdateInstanceAccessControlAttributeConfigurationRequest
     UpdateInstanceAccessControlAttributeConfigurationResponse.type = Types::UpdateInstanceAccessControlAttributeConfigurationResponse
-    UpdateInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: 'Name', traits: {"smithy.api#required" => {}}))
+    UpdateInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameType, location_name: 'Name'))
     UpdateInstanceRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceArn, location_name: 'InstanceArn', traits: {"smithy.api#required" => {}}))
+    UpdateInstanceRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: 'EncryptionConfiguration'))
     UpdateInstanceRequest.type = Types::UpdateInstanceRequest
     UpdateInstanceResponse.type = Types::UpdateInstanceResponse
     UpdatePermissionSetRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceArn, location_name: 'InstanceArn', traits: {"smithy.api#required" => {}}))
@@ -987,7 +1020,11 @@ module Aws::SSOAdmin
     UserBackgroundSessionApplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
     UserBackgroundSessionApplicationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: 'Message'))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: 'Reason'))
     ValidationException.type = Types::ValidationException
+    ValidationExceptionReason.add_member(:kms_invalid_key_usage_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_INVALID_KEY_USAGE_EXCEPTION', traits: {"smithy.api#enumValue" => "KMS_InvalidKeyUsageException"}))
+    ValidationExceptionReason.add_member(:kms_invalid_state_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_INVALID_STATE_EXCEPTION', traits: {"smithy.api#enumValue" => "KMS_InvalidStateException"}))
+    ValidationExceptionReason.add_member(:kms_disabled_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_DISABLED_EXCEPTION', traits: {"smithy.api#enumValue" => "KMS_DisabledException"}))
 
     SWBExternalService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ssoadmin#SWBExternalService"
@@ -1910,6 +1947,7 @@ module Aws::SSOAdmin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {}

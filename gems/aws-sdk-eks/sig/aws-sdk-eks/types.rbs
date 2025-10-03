@@ -2625,10 +2625,37 @@ module Aws::EKS
 
       def initialize: (
         ?enabled: bool,
+        ?max_unhealthy_node_threshold_count: Integer,
+        ?max_unhealthy_node_threshold_percentage: Integer,
+        ?max_parallel_nodes_repaired_count: Integer,
+        ?max_parallel_nodes_repaired_percentage: Integer,
+        ?node_repair_config_overrides: Array[Types::NodeRepairConfigOverrides],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
+      attr_accessor max_unhealthy_node_threshold_count: Integer?
+      attr_accessor max_unhealthy_node_threshold_percentage: Integer?
+      attr_accessor max_parallel_nodes_repaired_count: Integer?
+      attr_accessor max_parallel_nodes_repaired_percentage: Integer?
+      attr_accessor node_repair_config_overrides: Array[Types::NodeRepairConfigOverrides]?
+    end
+
+    class NodeRepairConfigOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_monitoring_condition: String,
+        ?node_unhealthy_reason: String,
+        ?min_repair_wait_time_mins: Integer,
+        ?repair_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_monitoring_condition: String?
+      attr_accessor node_unhealthy_reason: String?
+      attr_accessor min_repair_wait_time_mins: Integer?
+      attr_accessor repair_action: String?
     end
 
     class Nodegroup
@@ -3060,6 +3087,12 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cidrs: Array[String]?
+    end
+
+    module RepairAction
+      Replace: String
+      Reboot: String
+      NoAction: String
     end
 
     module ResolveConflicts
@@ -3640,6 +3673,7 @@ module Aws::EKS
       KUBERNETES_NETWORK_CONFIG: String
       REMOTE_NETWORK_CONFIG: String
       DELETION_PROTECTION: String
+      NODE_REPAIR_CONFIG: String
     end
 
     class UpdatePodIdentityAssociationRequest

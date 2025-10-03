@@ -141,6 +141,8 @@ module Aws::DataZone
     CreateDomainUnitPolicyGrantDetail: StructureShape
     CreateEnvironmentActionInput: StructureShape
     CreateEnvironmentActionOutput: StructureShape
+    CreateEnvironmentBlueprintInput: StructureShape
+    CreateEnvironmentBlueprintOutput: StructureShape
     CreateEnvironmentInput: StructureShape
     CreateEnvironmentOutput: StructureShape
     CreateEnvironmentProfileInput: StructureShape
@@ -239,6 +241,7 @@ module Aws::DataZone
     DeleteEnvironmentActionInput: StructureShape
     DeleteEnvironmentBlueprintConfigurationInput: StructureShape
     DeleteEnvironmentBlueprintConfigurationOutput: StructureShape
+    DeleteEnvironmentBlueprintInput: StructureShape
     DeleteEnvironmentInput: StructureShape
     DeleteEnvironmentProfileInput: StructureShape
     DeleteFormTypeInput: StructureShape
@@ -445,6 +448,7 @@ module Aws::DataZone
     GetTimeSeriesDataPointOutput: StructureShape
     GetUserProfileInput: StructureShape
     GetUserProfileOutput: StructureShape
+    GlobalParameterMap: MapShape
     GlossaryDescription: StringShape
     GlossaryId: StringShape
     GlossaryItem: StructureShape
@@ -615,6 +619,7 @@ module Aws::DataZone
     ListingSummaryItem: StructureShape
     ListingSummaryItems: ListShape
     LongDescription: StringShape
+    ManagedEndpointCredentials: StructureShape
     ManagedPolicyType: EnumShape
     MatchCriteria: ListShape
     MatchOffset: StructureShape
@@ -918,6 +923,8 @@ module Aws::DataZone
     UpdateDomainUnitOutput: StructureShape
     UpdateEnvironmentActionInput: StructureShape
     UpdateEnvironmentActionOutput: StructureShape
+    UpdateEnvironmentBlueprintInput: StructureShape
+    UpdateEnvironmentBlueprintOutput: StructureShape
     UpdateEnvironmentInput: StructureShape
     UpdateEnvironmentOutput: StructureShape
     UpdateEnvironmentProfileInput: StructureShape

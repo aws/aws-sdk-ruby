@@ -6,10 +6,10 @@ module Aws::Drs
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [Hash]
+    # @return [Array<Smithy::Client::AuthOption>]
     def resolve(parameters)
       options = []
-      options << { scheme_id: 'aws.auth#sigv4' }
+      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       options
     end
   end

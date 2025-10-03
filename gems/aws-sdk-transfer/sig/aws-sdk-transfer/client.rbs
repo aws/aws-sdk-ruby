@@ -7,6 +7,7 @@ module Aws::Transfer
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -1059,7 +1060,8 @@ module Aws::Transfer
       ?s3_storage_options: {
         directory_listing_optimization: String
       },
-      ?ip_address_type: String
+      ?ip_address_type: String,
+      ?identity_provider_type: String
     ) -> _UpdateServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServerResponse
 
     interface _UpdateUserResponse

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::SSOAdmin
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::SSOAdmin
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::SSOAdmin
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::SSOAdmin::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::SSOAdmin::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -989,7 +994,14 @@ module Aws::SSOAdmin
     #     owner_account_id: "AccountId",
     #     name: "NameType",
     #     created_date: Time.now,
-    #     status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "ACTIVE"]
+    #     status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"],
+    #     status_reason: "Reason",
+    #     encryption_configuration_details: {
+    #       key_type: "AWS_OWNED_KMS_KEY" # One of: ["AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KEY"],
+    #       kms_key_arn: "KmsKeyArn",
+    #       encryption_status: "UPDATING" # One of: ["UPDATING", "ENABLED", "UPDATE_FAILED"],
+    #       encryption_status_reason: "Reason"
+    #     }
     #   }
     # @return [Types::DescribeInstanceResponse]
     def describe_instance(params = {}, options = {})
@@ -1914,7 +1926,8 @@ module Aws::SSOAdmin
     #         owner_account_id: "AccountId",
     #         name: "NameType",
     #         created_date: Time.now,
-    #         status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "ACTIVE"]
+    #         status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"],
+    #         status_reason: "Reason"
     #       }
     #     ],
     #     next_token: "Token"
@@ -2460,10 +2473,16 @@ module Aws::SSOAdmin
     #   <p>Updates the instance name.</p>
     # @option params [String] :instance_arn
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys (CMK) or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     name: "NameType", # required
+    #     name: "NameType",
     #     instance_arn: "InstanceArn", # required
+    #     encryption_configuration: {
+    #       key_type: "AWS_OWNED_KMS_KEY" # One of: ["AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KEY"], # required
+    #       kms_key_arn: "KmsKeyArn"
+    #     }
     #   }
     #   options = {}
     #   response = client.update_instance(params, options)

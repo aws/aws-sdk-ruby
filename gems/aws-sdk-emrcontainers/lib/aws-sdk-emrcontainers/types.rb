@@ -290,6 +290,9 @@ module Aws::EMRcontainers
     # @!attribute name
     #   <p>The name of the security configuration.</p>
     #   @return [String]
+    # @!attribute container_provider
+    #   <p>The container provider associated with the security configuration.</p>
+    #   @return [Types::ContainerProvider]
     # @!attribute security_configuration_data
     #   <p>Security configuration input for the request.</p>
     #   @return [Types::SecurityConfigurationData]
@@ -299,6 +302,7 @@ module Aws::EMRcontainers
     class CreateSecurityConfigurationRequest < Struct.new(
       :client_token,
       :name,
+      :container_provider,
       :security_configuration_data,
       :tags,
       keyword_init: true
@@ -573,8 +577,12 @@ module Aws::EMRcontainers
     # @!attribute namespace
     #   <p>The namespaces of the Amazon EKS cluster.</p>
     #   @return [String]
+    # @!attribute node_label
+    #   <p>The nodeLabel of the nodes where the resources of this virtual cluster can get scheduled. It requires relevant scaling and policy engine addons.</p>
+    #   @return [String]
     class EksInfo < Struct.new(
       :namespace,
+      :node_label,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

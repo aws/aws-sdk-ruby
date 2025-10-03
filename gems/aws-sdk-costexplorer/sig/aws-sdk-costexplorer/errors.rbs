@@ -9,6 +9,9 @@ module Aws::CostExplorer
     class BillExpirationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class BillingViewHealthStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class DataUnavailableException < Smithy::Client::ServiceError
       def message: () -> String?
     end

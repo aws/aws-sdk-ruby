@@ -7,6 +7,7 @@ module Aws::ChimeSDKMessaging
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -368,7 +369,9 @@ module Aws::ChimeSDKMessaging
       include Smithy::Client::_Response[Types::GetMessagingSessionEndpointResponse]
       def endpoint: () -> Types::MessagingSessionEndpoint?
     end
-    def get_messaging_session_endpoint: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMessagingSessionEndpointResponse
+    def get_messaging_session_endpoint: (
+      ?network_type: String
+    ) -> _GetMessagingSessionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMessagingSessionEndpointResponse
 
     interface _GetMessagingStreamingConfigurationsResponse
       include Smithy::Client::_Response[Types::GetMessagingStreamingConfigurationsResponse]

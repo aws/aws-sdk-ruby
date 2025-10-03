@@ -3073,6 +3073,7 @@ module Aws::Transfer
         ?structured_log_destinations: Array[String],
         ?s3_storage_options: Types::S3StorageOptions,
         ?ip_address_type: String,
+        ?identity_provider_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3092,6 +3093,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: Array[String]?
       attr_accessor s3_storage_options: Types::S3StorageOptions?
       attr_accessor ip_address_type: String?
+      attr_accessor identity_provider_type: String?
     end
 
     class UpdateServerResponse

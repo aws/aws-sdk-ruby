@@ -7,6 +7,7 @@ module Aws::MediaLive
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -681,7 +682,10 @@ module Aws::MediaLive
                 ts_file_mode: String
               },
               media_package_group_settings: {
-                destination: untyped
+                destination: untyped,
+                mediapackage_v2_group_settings: {
+                  caption_language_mappings: untyped
+                }
               },
               ms_smooth_group_settings: {
                 acquisition_point_id: untyped,
@@ -876,6 +880,12 @@ module Aws::MediaLive
                     segment_modifier: untyped
                   },
                   media_package_output_settings: {
+                    media_package_v2_destination_settings: {
+                      audio_group_id: untyped,
+                      audio_rendition_sets: untyped,
+                      hls_auto_select: String,
+                      hls_default: String
+                    }
                   },
                   ms_smooth_output_settings: {
                     h265_packaging_type: String,
@@ -1011,7 +1021,8 @@ module Aws::MediaLive
                 temporal_aq: String,
                 timecode_insertion: String,
                 timecode_burnin_settings: untyped,
-                min_qp: Integer
+                min_qp: Integer,
+                min_bitrate: untyped
               },
               h265_settings: {
                 adaptive_quantization: String,
@@ -1064,7 +1075,11 @@ module Aws::MediaLive
                 tile_width: Integer,
                 treeblock_size: String,
                 min_qp: untyped,
-                deblocking: String
+                deblocking: String,
+                gop_b_reference: String,
+                gop_num_b_frames: Integer,
+                min_bitrate: Integer,
+                subgop_length: String
               },
               mpeg2_settings: {
                 adaptive_quantization: String,
@@ -1111,7 +1126,8 @@ module Aws::MediaLive
                 scene_change_detect: String,
                 timecode_burnin_settings: untyped,
                 bitrate: untyped,
-                rate_control_mode: String
+                rate_control_mode: String,
+                min_bitrate: Integer
               }
             },
             height: untyped,
@@ -3251,7 +3267,10 @@ module Aws::MediaLive
                 ts_file_mode: String
               },
               media_package_group_settings: {
-                destination: untyped
+                destination: untyped,
+                mediapackage_v2_group_settings: {
+                  caption_language_mappings: untyped
+                }
               },
               ms_smooth_group_settings: {
                 acquisition_point_id: untyped,
@@ -3446,6 +3465,12 @@ module Aws::MediaLive
                     segment_modifier: untyped
                   },
                   media_package_output_settings: {
+                    media_package_v2_destination_settings: {
+                      audio_group_id: untyped,
+                      audio_rendition_sets: untyped,
+                      hls_auto_select: String,
+                      hls_default: String
+                    }
                   },
                   ms_smooth_output_settings: {
                     h265_packaging_type: String,
@@ -3581,7 +3606,8 @@ module Aws::MediaLive
                 temporal_aq: String,
                 timecode_insertion: String,
                 timecode_burnin_settings: untyped,
-                min_qp: Integer
+                min_qp: Integer,
+                min_bitrate: untyped
               },
               h265_settings: {
                 adaptive_quantization: String,
@@ -3634,7 +3660,11 @@ module Aws::MediaLive
                 tile_width: Integer,
                 treeblock_size: String,
                 min_qp: untyped,
-                deblocking: String
+                deblocking: String,
+                gop_b_reference: String,
+                gop_num_b_frames: Integer,
+                min_bitrate: Integer,
+                subgop_length: String
               },
               mpeg2_settings: {
                 adaptive_quantization: String,
@@ -3681,7 +3711,8 @@ module Aws::MediaLive
                 scene_change_detect: String,
                 timecode_burnin_settings: untyped,
                 bitrate: untyped,
-                rate_control_mode: String
+                rate_control_mode: String,
+                min_bitrate: Integer
               }
             },
             height: untyped,

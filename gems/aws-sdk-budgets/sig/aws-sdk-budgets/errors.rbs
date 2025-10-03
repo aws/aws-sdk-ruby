@@ -3,6 +3,9 @@ module Aws::Budgets
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class BillingViewHealthStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class CreationLimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end

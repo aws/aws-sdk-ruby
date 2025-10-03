@@ -475,12 +475,14 @@ module Aws::DirectoryService
       def initialize: (
         ?remote_domain_name: String,
         ?dns_ip_addrs: Array[String],
+        ?dns_ipv6_addrs: Array[String],
         ?replication_scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor remote_domain_name: String?
       attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor dns_ipv6_addrs: Array[String]?
       attr_accessor replication_scope: String?
     end
 
@@ -495,6 +497,7 @@ module Aws::DirectoryService
         ?size: String,
         ?connect_settings: Types::DirectoryConnectSettings,
         ?tags: Array[Types::Tag],
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -505,6 +508,7 @@ module Aws::DirectoryService
       attr_accessor size: String?
       attr_accessor connect_settings: Types::DirectoryConnectSettings?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor network_type: String?
     end
 
     class ConnectDirectoryResult
@@ -581,12 +585,14 @@ module Aws::DirectoryService
         ?directory_id: String,
         ?remote_domain_name: String,
         ?dns_ip_addrs: Array[String],
+        ?dns_ipv6_addrs: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor directory_id: String?
       attr_accessor remote_domain_name: String?
       attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor dns_ipv6_addrs: Array[String]?
     end
 
     class CreateConditionalForwarderResult
@@ -609,6 +615,7 @@ module Aws::DirectoryService
         ?size: String,
         ?vpc_settings: Types::DirectoryVpcSettings,
         ?tags: Array[Types::Tag],
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -619,6 +626,7 @@ module Aws::DirectoryService
       attr_accessor size: String?
       attr_accessor vpc_settings: Types::DirectoryVpcSettings?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor network_type: String?
     end
 
     class CreateDirectoryResult
@@ -691,6 +699,7 @@ module Aws::DirectoryService
         ?vpc_settings: Types::DirectoryVpcSettings,
         ?edition: String,
         ?tags: Array[Types::Tag],
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -701,6 +710,7 @@ module Aws::DirectoryService
       attr_accessor vpc_settings: Types::DirectoryVpcSettings?
       attr_accessor edition: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor network_type: String?
     end
 
     class CreateMicrosoftADResult
@@ -748,6 +758,7 @@ module Aws::DirectoryService
         ?trust_direction: String,
         ?trust_type: String,
         ?conditional_forwarder_ip_addrs: Array[String],
+        ?conditional_forwarder_ipv6_addrs: Array[String],
         ?selective_auth: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -758,6 +769,7 @@ module Aws::DirectoryService
       attr_accessor trust_direction: String?
       attr_accessor trust_type: String?
       attr_accessor conditional_forwarder_ip_addrs: Array[String]?
+      attr_accessor conditional_forwarder_ipv6_addrs: Array[String]?
       attr_accessor selective_auth: String?
     end
 
@@ -1469,6 +1481,7 @@ module Aws::DirectoryService
         ?vpc_id: String,
         ?subnet_ids: Array[String],
         ?customer_dns_ips: Array[String],
+        ?customer_dns_ips_v6: Array[String],
         ?customer_user_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1476,6 +1489,7 @@ module Aws::DirectoryService
       attr_accessor vpc_id: String?
       attr_accessor subnet_ids: Array[String]?
       attr_accessor customer_dns_ips: Array[String]?
+      attr_accessor customer_dns_ips_v6: Array[String]?
       attr_accessor customer_user_name: String?
     end
 
@@ -1489,6 +1503,7 @@ module Aws::DirectoryService
         ?security_group_id: String,
         ?availability_zones: Array[String],
         ?connect_ips: Array[String],
+        ?connect_ips_v6: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1498,6 +1513,7 @@ module Aws::DirectoryService
       attr_accessor security_group_id: String?
       attr_accessor availability_zones: Array[String]?
       attr_accessor connect_ips: Array[String]?
+      attr_accessor connect_ips_v6: Array[String]?
     end
 
     class DirectoryDescription
@@ -1513,6 +1529,7 @@ module Aws::DirectoryService
         ?access_url: String,
         ?description: String,
         ?dns_ip_addrs: Array[String],
+        ?dns_ipv6_addrs: Array[String],
         ?stage: String,
         ?share_status: String,
         ?share_method: String,
@@ -1531,6 +1548,7 @@ module Aws::DirectoryService
         ?regions_info: Types::RegionsInfo,
         ?os_version: String,
         ?hybrid_settings: Types::HybridSettingsDescription,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1543,6 +1561,7 @@ module Aws::DirectoryService
       attr_accessor access_url: String?
       attr_accessor description: String?
       attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor dns_ipv6_addrs: Array[String]?
       attr_accessor stage: String?
       attr_accessor share_status: String?
       attr_accessor share_method: String?
@@ -1561,6 +1580,7 @@ module Aws::DirectoryService
       attr_accessor regions_info: Types::RegionsInfo?
       attr_accessor os_version: String?
       attr_accessor hybrid_settings: Types::HybridSettingsDescription?
+      attr_accessor network_type: String?
     end
 
     class DirectoryDoesNotExistException
@@ -1579,6 +1599,7 @@ module Aws::DirectoryService
     module DirectoryEdition
       ENTERPRISE: String
       STANDARD: String
+      HYBRID: String
     end
 
     class DirectoryInDesiredStateException
@@ -1650,6 +1671,17 @@ module Aws::DirectoryService
     module DirectorySize
       SMALL: String
       LARGE: String
+    end
+
+    class DirectorySizeUpdateSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_size: String?
     end
 
     module DirectoryStage
@@ -1865,6 +1897,7 @@ module Aws::DirectoryService
         ?directory_id: String,
         ?domain_controller_id: String,
         ?dns_ip_addr: String,
+        ?dns_ipv6_addr: String,
         ?vpc_id: String,
         ?subnet_id: String,
         ?availability_zone: String,
@@ -1878,6 +1911,7 @@ module Aws::DirectoryService
       attr_accessor directory_id: String?
       attr_accessor domain_controller_id: String?
       attr_accessor dns_ip_addr: String?
+      attr_accessor dns_ipv6_addr: String?
       attr_accessor vpc_id: String?
       attr_accessor subnet_id: String?
       attr_accessor availability_zone: String?
@@ -2358,11 +2392,13 @@ module Aws::DirectoryService
 
       def initialize: (
         ?cidr_ip: String,
+        ?cidr_ipv6: String,
         ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cidr_ip: String?
+      attr_accessor cidr_ipv6: String?
       attr_accessor description: String?
     end
 
@@ -2372,6 +2408,7 @@ module Aws::DirectoryService
       def initialize: (
         ?directory_id: String,
         ?cidr_ip: String,
+        ?cidr_ipv6: String,
         ?ip_route_status_msg: String,
         ?added_date_time: Time,
         ?ip_route_status_reason: String,
@@ -2381,6 +2418,7 @@ module Aws::DirectoryService
 
       attr_accessor directory_id: String?
       attr_accessor cidr_ip: String?
+      attr_accessor cidr_ipv6: String?
       attr_accessor ip_route_status_msg: String?
       attr_accessor added_date_time: Time?
       attr_accessor ip_route_status_reason: String?
@@ -2618,6 +2656,25 @@ module Aws::DirectoryService
       attr_accessor subscription_created_date_time: Time?
     end
 
+    module NetworkType
+      DUAL_STACK: String
+      IPV4_ONLY: String
+      IPV6_ONLY: String
+    end
+
+    class NetworkUpdateSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_type: String,
+        ?customer_dns_ips_v6: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_type: String?
+      attr_accessor customer_dns_ips_v6: Array[String]?
+    end
+
     class NoAvailableCertificateException
       include Smithy::Schema::Structure
 
@@ -2667,18 +2724,22 @@ module Aws::DirectoryService
         ?directory_id: String,
         ?account_id: String,
         ?dns_ip_addrs: Array[String],
+        ?dns_ipv6_addrs: Array[String],
         ?vpc_settings: Types::DirectoryVpcSettingsDescription,
         ?radius_settings: Types::RadiusSettings,
         ?radius_status: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor directory_id: String?
       attr_accessor account_id: String?
       attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor dns_ipv6_addrs: Array[String]?
       attr_accessor vpc_settings: Types::DirectoryVpcSettingsDescription?
       attr_accessor radius_settings: Types::RadiusSettings?
       attr_accessor radius_status: String?
+      attr_accessor network_type: String?
     end
 
     module RadiusAuthenticationProtocol
@@ -2693,6 +2754,7 @@ module Aws::DirectoryService
 
       def initialize: (
         ?radius_servers: Array[String],
+        ?radius_servers_ipv6: Array[String],
         ?radius_port: Integer,
         ?radius_timeout: Integer,
         ?radius_retries: Integer,
@@ -2704,6 +2766,7 @@ module Aws::DirectoryService
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor radius_servers: Array[String]?
+      attr_accessor radius_servers_ipv6: Array[String]?
       attr_accessor radius_port: Integer?
       attr_accessor radius_timeout: Integer?
       attr_accessor radius_retries: Integer?
@@ -2855,11 +2918,13 @@ module Aws::DirectoryService
       def initialize: (
         ?directory_id: String,
         ?cidr_ips: Array[String],
+        ?cidr_ipv6s: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor directory_id: String?
       attr_accessor cidr_ips: Array[String]?
+      attr_accessor cidr_ipv6s: Array[String]?
     end
 
     class RemoveIpRoutesResult
@@ -3431,12 +3496,14 @@ module Aws::DirectoryService
         ?directory_id: String,
         ?remote_domain_name: String,
         ?dns_ip_addrs: Array[String],
+        ?dns_ipv6_addrs: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor directory_id: String?
       attr_accessor remote_domain_name: String?
       attr_accessor dns_ip_addrs: Array[String]?
+      attr_accessor dns_ipv6_addrs: Array[String]?
     end
 
     class UpdateConditionalForwarderResult
@@ -3455,6 +3522,8 @@ module Aws::DirectoryService
         ?directory_id: String,
         ?update_type: String,
         ?os_update_settings: Types::OSUpdateSettings,
+        ?directory_size_update_settings: Types::DirectorySizeUpdateSettings,
+        ?network_update_settings: Types::NetworkUpdateSettings,
         ?create_snapshot_before_update: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3462,6 +3531,8 @@ module Aws::DirectoryService
       attr_accessor directory_id: String?
       attr_accessor update_type: String?
       attr_accessor os_update_settings: Types::OSUpdateSettings?
+      attr_accessor directory_size_update_settings: Types::DirectorySizeUpdateSettings?
+      attr_accessor network_update_settings: Types::NetworkUpdateSettings?
       attr_accessor create_snapshot_before_update: bool?
     end
 
@@ -3629,6 +3700,8 @@ module Aws::DirectoryService
 
     module UpdateType
       OS: String
+      NETWORK: String
+      SIZE: String
     end
 
     class UpdateValue

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Billing
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Billing
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Billing
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Billing::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Billing::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,6 +193,45 @@ module Aws::Billing
       super
     end
 
+    # <p> Associates one or more source billing views with an existing billing view. This allows creating aggregate billing views that combine data from multiple sources. </p>
+    # @param [Hash, Types::AssociateSourceViewsRequest] params
+    # @option params [String] :arn
+    #   <p> The Amazon Resource Name (ARN) of the billing view to associate source views with. </p>
+    # @option params [Array<String>] :source_views
+    #   <p> A list of ARNs of the source billing views to associate. </p>
+    # @example Invoke AssociateSourceViews
+    #   # Example operation for associate_source_views
+    #   params = {
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+    #     source_views: [
+    #       "arn:aws:billing::123456789012:billingview/primary",
+    #       "arn:aws:billing::123456789012:billingview/custom-d3f9c7e4-8b2f-4a6e-9d3b-2f7c8a1e5f6d"
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.associate_source_views(params, options)
+    #   response.to_h #=>
+    #   {
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "BillingViewArn", # required
+    #     source_views: ["BillingViewArn"], # required
+    #   }
+    #   options = {}
+    #   response = client.associate_source_views(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "BillingViewArn", # required
+    #   }
+    # @return [Types::AssociateSourceViewsResponse]
+    def associate_source_views(params = {}, options = {})
+      request = build_request(:associate_source_views, params)
+      request.send_request(options)
+    end
+
     # <p> Creates a billing view with the specified billing view attributes. </p>
     # @param [Hash, Types::CreateBillingViewRequest] params
     # @option params [String] :name
@@ -239,6 +283,10 @@ module Aws::Billing
     #       tags: {
     #         key: "TagKey", # required
     #         values: ["Value"], # required
+    #       },
+    #       time_range: {
+    #         begin_date_inclusive: Time.now,
+    #         end_date_inclusive: Time.now
     #       }
     #     },
     #     client_token: "ClientToken",
@@ -267,6 +315,8 @@ module Aws::Billing
     # @param [Hash, Types::DeleteBillingViewRequest] params
     # @option params [String] :arn
     #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
+    # @option params [Boolean] :force
+    #   <p> If set to true, forces deletion of the billing view even if it has derived resources (e.g. other billing views or budgets). Use with caution as this may break dependent resources. </p>
     # @example Invoke DeleteBillingView
     #   # Example operation for delete_billing_view
     #   params = {
@@ -281,6 +331,7 @@ module Aws::Billing
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "BillingViewArn", # required
+    #     force: false
     #   }
     #   options = {}
     #   response = client.delete_billing_view(params, options)
@@ -292,6 +343,45 @@ module Aws::Billing
     # @return [Types::DeleteBillingViewResponse]
     def delete_billing_view(params = {}, options = {})
       request = build_request(:delete_billing_view, params)
+      request.send_request(options)
+    end
+
+    # <p> Removes the association between one or more source billing views and an existing billing view. This allows modifying the composition of aggregate billing views. </p>
+    # @param [Hash, Types::DisassociateSourceViewsRequest] params
+    # @option params [String] :arn
+    #   <p> The Amazon Resource Name (ARN) of the billing view to disassociate source views from. </p>
+    # @option params [Array<String>] :source_views
+    #   <p> A list of ARNs of the source billing views to disassociate. </p>
+    # @example Invoke DisassociateSourceViews
+    #   # Example operation for disassociate_source_views
+    #   params = {
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899",
+    #     source_views: [
+    #       "arn:aws:billing::123456789012:billingview/primary",
+    #       "arn:aws:billing::123456789012:billingview/custom-d3f9c7e4-8b2f-4a6e-9d3b-2f7c8a1e5f6d"
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.disassociate_source_views(params, options)
+    #   response.to_h #=>
+    #   {
+    #     arn: "arn:aws:billing::123456789012:billingview/custom-46f47cb2-a11d-43f3-983d-470b5708a899"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "BillingViewArn", # required
+    #     source_views: ["BillingViewArn"], # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_source_views(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "BillingViewArn", # required
+    #   }
+    # @return [Types::DisassociateSourceViewsResponse]
+    def disassociate_source_views(params = {}, options = {})
+      request = build_request(:disassociate_source_views, params)
       request.send_request(options)
     end
 
@@ -339,6 +429,7 @@ module Aws::Billing
     #       description: "BillingViewDescription",
     #       billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"],
     #       owner_account_id: "AccountId",
+    #       source_account_id: "AccountId",
     #       data_filter_expression: {
     #         dimensions: {
     #           key: "LINKED_ACCOUNT" # One of: ["LINKED_ACCOUNT"], # required
@@ -347,10 +438,21 @@ module Aws::Billing
     #         tags: {
     #           key: "TagKey", # required
     #           values: ["Value"], # required
+    #         },
+    #         time_range: {
+    #           begin_date_inclusive: Time.now,
+    #           end_date_inclusive: Time.now
     #         }
     #       },
     #       created_at: Time.now,
-    #       updated_at: Time.now
+    #       updated_at: Time.now,
+    #       derived_view_count: 1,
+    #       source_view_count: 1,
+    #       view_definition_last_updated_at: Time.now,
+    #       health_status: {
+    #         status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY", "CREATING", "UPDATING"],
+    #         status_reasons: ["SOURCE_VIEW_UNHEALTHY" # One of: ["SOURCE_VIEW_UNHEALTHY", "SOURCE_VIEW_UPDATING", "SOURCE_VIEW_ACCESS_DENIED", "SOURCE_VIEW_NOT_FOUND", "CYCLIC_DEPENDENCY", "SOURCE_VIEW_DEPTH_EXCEEDED", "AGGREGATE_SOURCE", "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"]]
+    #       }
     #     }
     #   }
     # @return [Types::GetBillingViewResponse]
@@ -403,6 +505,8 @@ module Aws::Billing
     #   <p>The type of billing view.</p>
     # @option params [String] :owner_account_id
     #   <p> The list of owners of the billing view. </p>
+    # @option params [String] :source_account_id
+    #   <p> Filters the results to include only billing views that use the specified account as a source. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of billing views to retrieve. Default is 100. </p>
     # @option params [String] :next_token
@@ -456,6 +560,7 @@ module Aws::Billing
     #     arns: ["BillingViewArn"],
     #     billing_view_types: ["PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"]],
     #     owner_account_id: "AccountId",
+    #     source_account_id: "AccountId",
     #     max_results: 1,
     #     next_token: "PageToken"
     #   }
@@ -470,7 +575,12 @@ module Aws::Billing
     #         name: "BillingViewName",
     #         description: "BillingViewDescription",
     #         owner_account_id: "AccountId",
-    #         billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"]
+    #         source_account_id: "AccountId",
+    #         billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"],
+    #         health_status: {
+    #           status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY", "CREATING", "UPDATING"],
+    #           status_reasons: ["SOURCE_VIEW_UNHEALTHY" # One of: ["SOURCE_VIEW_UNHEALTHY", "SOURCE_VIEW_UPDATING", "SOURCE_VIEW_ACCESS_DENIED", "SOURCE_VIEW_NOT_FOUND", "CYCLIC_DEPENDENCY", "SOURCE_VIEW_DEPTH_EXCEEDED", "AGGREGATE_SOURCE", "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"]]
+    #         }
     #       }
     #     ],
     #     next_token: "PageToken"
@@ -685,6 +795,10 @@ module Aws::Billing
     #       tags: {
     #         key: "TagKey", # required
     #         values: ["Value"], # required
+    #       },
+    #       time_range: {
+    #         begin_date_inclusive: Time.now,
+    #         end_date_inclusive: Time.now
     #       }
     #     }
     #   }

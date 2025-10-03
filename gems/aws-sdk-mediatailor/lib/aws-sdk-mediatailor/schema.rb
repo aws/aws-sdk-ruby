@@ -166,6 +166,7 @@ module Aws::MediaTailor
     TimeShiftConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediatailor#TimeShiftConfiguration', name: 'TimeShiftConfiguration')
     TimeSignalMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediatailor#TimeSignalMessage', name: 'TimeSignalMessage')
     TrafficShapingRetrievalWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediatailor#TrafficShapingRetrievalWindow', name: 'TrafficShapingRetrievalWindow')
+    TrafficShapingTpsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediatailor#TrafficShapingTpsConfiguration', name: 'TrafficShapingTpsConfiguration')
     TrafficShapingType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediatailor#TrafficShapingType', name: 'TrafficShapingType')
     Transition = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediatailor#Transition', name: 'Transition')
     Type = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediatailor#Type', name: 'Type')
@@ -792,6 +793,7 @@ module Aws::MediaTailor
     PrefetchRetrieval.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestampunix, location_name: 'StartTime'))
     PrefetchRetrieval.add_member(:traffic_shaping_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficShapingType, location_name: 'TrafficShapingType'))
     PrefetchRetrieval.add_member(:traffic_shaping_retrieval_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficShapingRetrievalWindow, location_name: 'TrafficShapingRetrievalWindow'))
+    PrefetchRetrieval.add_member(:traffic_shaping_tps_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficShapingTpsConfiguration, location_name: 'TrafficShapingTpsConfiguration'))
     PrefetchRetrieval.type = Types::PrefetchRetrieval
     PrefetchSchedule.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Arn', traits: {"smithy.api#required" => {}}))
     PrefetchSchedule.add_member(:consumption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrefetchConsumption, location_name: 'Consumption'))
@@ -859,6 +861,7 @@ module Aws::MediaTailor
     RecurringRetrieval.add_member(:delay_after_avail_end_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'DelayAfterAvailEndSeconds'))
     RecurringRetrieval.add_member(:traffic_shaping_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficShapingType, location_name: 'TrafficShapingType'))
     RecurringRetrieval.add_member(:traffic_shaping_retrieval_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficShapingRetrievalWindow, location_name: 'TrafficShapingRetrievalWindow'))
+    RecurringRetrieval.add_member(:traffic_shaping_tps_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrafficShapingTpsConfiguration, location_name: 'TrafficShapingTpsConfiguration'))
     RecurringRetrieval.type = Types::RecurringRetrieval
     RelativePosition.add_member(:before_program, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BEFORE_PROGRAM', traits: {"smithy.api#enumValue" => "BEFORE_PROGRAM"}))
     RelativePosition.add_member(:after_program, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AFTER_PROGRAM', traits: {"smithy.api#enumValue" => "AFTER_PROGRAM"}))
@@ -952,7 +955,11 @@ module Aws::MediaTailor
     TimeSignalMessage.type = Types::TimeSignalMessage
     TrafficShapingRetrievalWindow.add_member(:retrieval_window_duration_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'RetrievalWindowDurationSeconds'))
     TrafficShapingRetrievalWindow.type = Types::TrafficShapingRetrievalWindow
+    TrafficShapingTpsConfiguration.add_member(:peak_tps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'PeakTps'))
+    TrafficShapingTpsConfiguration.add_member(:peak_concurrent_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'PeakConcurrentUsers'))
+    TrafficShapingTpsConfiguration.type = Types::TrafficShapingTpsConfiguration
     TrafficShapingType.add_member(:retrieval_window, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'RETRIEVAL_WINDOW', traits: {"smithy.api#enumValue" => "RETRIEVAL_WINDOW"}))
+    TrafficShapingType.add_member(:tps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TPS', traits: {"smithy.api#enumValue" => "TPS"}))
     Transition.add_member(:duration_millis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'DurationMillis'))
     Transition.add_member(:relative_position, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelativePosition, location_name: 'RelativePosition', traits: {"smithy.api#required" => {}}))
     Transition.add_member(:relative_program, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RelativeProgram'))

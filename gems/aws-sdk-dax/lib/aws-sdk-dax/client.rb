@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::DAX
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::DAX
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::DAX
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::DAX::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::DAX::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -191,21 +196,20 @@ module Aws::DAX
     # <p>Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.</p>
     # @param [Hash, Types::CreateClusterRequest] params
     # @option params [String] :cluster_name
-    #   <p>The cluster identifier. This parameter is stored as a lowercase
-    #               string.</p>
-    #           <p>
+    #   <p>The cluster identifier. This parameter is stored as a lowercase string.</p>
+    #            <p>
     #               <b>Constraints:</b>
-    #           </p>
-    #           <ul>
+    #            </p>
+    #            <ul>
     #               <li>
-    #                   <p>A name must contain from 1 to 20 alphanumeric characters or
+    #                  <p>A name must contain from 1 to 20 alphanumeric characters or
     #                       hyphens.</p>
     #               </li>
     #               <li>
-    #                   <p>The first character must be a letter.</p>
+    #                  <p>The first character must be a letter.</p>
     #               </li>
     #               <li>
-    #                   <p>A name cannot end with a hyphen or contain two consecutive
+    #                  <p>A name cannot end with a hyphen or contain two consecutive
     #                       hyphens.</p>
     #               </li>
     #            </ul>
@@ -214,106 +218,138 @@ module Aws::DAX
     # @option params [String] :description
     #   <p>A description of the cluster.</p>
     # @option params [Integer] :replication_factor
-    #   <p>The number of nodes in the DAX cluster. A replication factor of 1 will
-    #               create a single-node cluster, without any read replicas. For additional fault tolerance,
-    #               you can create a multiple node cluster with one or more read replicas. To do this, set
-    #                   <code>ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). 
-    #                    <code>If the AvailabilityZones</code> parameter is provided, its length must equal the <code>ReplicationFactor</code>.</p>
-    #           <note>
-    #               <p>AWS recommends that you have at least two read replicas per cluster.</p>
+    #   <p>The number of nodes in the DAX cluster. A replication factor of 1
+    #               will create a single-node cluster, without any read replicas. For additional fault
+    #               tolerance, you can create a multiple node cluster with one or more read replicas. To do
+    #               this, set <code>ReplicationFactor</code> to a number between 3 (one primary and two read
+    #               replicas) and 10 (one primary and nine read replicas). <code>If the
+    #                   AvailabilityZones</code> parameter is provided, its length must equal the
+    #                   <code>ReplicationFactor</code>.</p>
+    #            <note>
+    #               <p>Amazon Web Services recommends that you have at least two read replicas per
+    #                   cluster.</p>
     #            </note>
     # @option params [Array<String>] :availability_zones
-    #   <p>The Availability Zones (AZs) in which the cluster nodes will reside after the cluster
-    #            has been created or updated. If provided, the length of this list must equal the <code>ReplicationFactor</code> parameter.
-    #            If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.</p>
+    #   <p>The Availability Zones (AZs) in which the cluster nodes will reside after the
+    #               cluster has been created or updated. If provided, the length of this list must equal the
+    #                   <code>ReplicationFactor</code> parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest
+    #               availability.</p>
     # @option params [String] :subnet_group_name
     #   <p>The name of the subnet group to be used for the replication group.</p>
-    #           <important>
-    #               <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets
-    #                   that you specify in a subnet group must exist in the same VPC.</p>
-    #           </important>
+    #            <important>
+    #               <p>DAX clusters can only run in an Amazon VPC environment.
+    #                   All of the subnets that you specify in a subnet group must exist in the same
+    #                   VPC.</p>
+    #            </important>
     # @option params [Array<String>] :security_group_ids
-    #   <p>A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the 
-    #                security group ID is system-generated.)</p>
-    #           <p>If this parameter is not specified, DAX assigns the default VPC security group to
-    #               each node.</p>
+    #   <p>A list of security group IDs to be assigned to each node in the DAX
+    #               cluster. (Each of the security group ID is system-generated.)</p>
+    #            <p>If this parameter is not specified, DAX assigns the default VPC
+    #               security group to each node.</p>
     # @option params [String] :preferred_maintenance_window
     #   <p>Specifies the weekly time range during which maintenance on the DAX cluster is
     #               performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock
     #               UTC). The minimum maintenance window is a 60 minute period. Valid values for
     #                   <code>ddd</code> are:</p>
-    #           <ul>
+    #            <ul>
     #               <li>
-    #                   <p>
-    #                       <code>sun</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>sun</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>mon</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>mon</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>tue</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>tue</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>wed</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>wed</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>thu</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>thu</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>fri</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>fri</code>
+    #                  </p>
     #               </li>
     #               <li>
-    #                   <p>
-    #                       <code>sat</code>
-    #                   </p>
+    #                  <p>
+    #                     <code>sat</code>
+    #                  </p>
     #               </li>
     #            </ul>
-    #           <p>Example: <code>sun:05:00-sun:09:00</code>
-    #           </p>
-    #           <note>
+    #            <p>Example: <code>sun:05:00-sun:09:00</code>
+    #            </p>
+    #            <note>
     #               <p>If you don't specify a preferred maintenance window when you create or modify a
-    #                   cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected day
-    #                   of the week.</p>
+    #                   cache cluster, DAX assigns a 60-minute maintenance window on a
+    #                   randomly selected day of the week.</p>
     #            </note>
     # @option params [String] :notification_topic_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will
-    #               be sent.</p>
-    #           <note>
-    #               <p>The Amazon SNS topic owner must be same as the DAX cluster owner.</p>
-    #           </note>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which
+    #               notifications will be sent.</p>
+    #            <note>
+    #               <p>The Amazon SNS topic owner must be same as the DAX
+    #                   cluster owner.</p>
+    #            </note>
     # @option params [String] :iam_role_arn
-    #   <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX
-    #               will assume this role and use the role's permissions to access DynamoDB on your
-    #               behalf.</p>
+    #   <p>A valid Amazon Resource Name (ARN) that identifies an IAM role. At
+    #               runtime, DAX will assume this role and use the role's permissions to
+    #               access DynamoDB on your behalf.</p>
     # @option params [String] :parameter_group_name
     #   <p>The parameter group to be associated with the DAX cluster.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>A set of tags to associate with the DAX cluster.  </p>
+    #   <p>A set of tags to associate with the DAX cluster.
+    #               </p>
     # @option params [Types::SSESpecification] :sse_specification
-    #   <p>Represents the settings used to enable server-side encryption on the cluster.</p>
+    #   <p>Represents the settings used to enable server-side encryption on the
+    #               cluster.</p>
     # @option params [String] :cluster_endpoint_encryption_type
     #   <p>The type of encryption the cluster's endpoint should support. Values are:</p>
-    #           <ul>
+    #            <ul>
     #               <li>
-    #                   <p>
+    #                  <p>
     #                     <code>NONE</code> for no encryption</p>
     #               </li>
     #               <li>
-    #                   <p>
+    #                  <p>
     #                     <code>TLS</code> for Transport Layer Security</p>
     #               </li>
     #            </ul>
+    # @option params [String] :network_type
+    #   <p>Specifies the IP protocol(s) the cluster uses for network communications. Values
+    #               are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv4</code> - The cluster is accessible only through IPv4
+    #                       addresses</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv6</code> - The cluster is accessible only through IPv6
+    #                       addresses</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>dual_stack</code> - The cluster is accessible through both IPv4 and
+    #                       IPv6 addresses.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>If no explicit <code>NetworkType</code> is provided, the network type is
+    #                   derived based on the subnet group's configuration.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_name: "String", # required
@@ -336,7 +372,8 @@ module Aws::DAX
     #     sse_specification: {
     #       enabled: false, # required
     #     },
-    #     cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #     cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #     network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #   }
     #   options = {}
     #   response = client.create_cluster(params, options)
@@ -392,7 +429,8 @@ module Aws::DAX
     #       sse_description: {
     #         status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #       },
-    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #       network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #     }
     #   }
     # @return [Types::CreateClusterResponse]
@@ -456,9 +494,11 @@ module Aws::DAX
     #       subnets: [
     #         {
     #           subnet_identifier: "String",
-    #           subnet_availability_zone: "String"
+    #           subnet_availability_zone: "String",
+    #           supported_network_types: ["ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]]
     #         }
-    #       ]
+    #       ],
+    #       supported_network_types: ["ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]]
     #     }
     #   }
     # @return [Types::CreateSubnetGroupResponse]
@@ -468,12 +508,15 @@ module Aws::DAX
     end
 
     # <p>Removes one or more nodes from a DAX cluster.</p>
-    #         <note>
-    #             <p>You cannot use <code>DecreaseReplicationFactor</code> to remove the last node in a DAX cluster. If you need to do this, use <code>DeleteCluster</code> instead.</p>
+    #          <note>
+    #             <p>You cannot use <code>DecreaseReplicationFactor</code> to remove the last node
+    #                 in a DAX cluster. If you need to do this, use
+    #                     <code>DeleteCluster</code> instead.</p>
     #          </note>
     # @param [Hash, Types::DecreaseReplicationFactorRequest] params
     # @option params [String] :cluster_name
-    #   <p>The name of the DAX cluster from which you want to remove nodes.</p>
+    #   <p>The name of the DAX cluster from which you want to remove
+    #               nodes.</p>
     # @option params [Integer] :new_replication_factor
     #   <p>The new number of nodes for the DAX cluster.</p>
     # @option params [Array<String>] :availability_zones
@@ -541,7 +584,8 @@ module Aws::DAX
     #       sse_description: {
     #         status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #       },
-    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #       network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #     }
     #   }
     # @return [Types::DecreaseReplicationFactorResponse]
@@ -551,10 +595,10 @@ module Aws::DAX
     end
 
     # <p>Deletes a previously provisioned DAX cluster.
-    #                 <i>DeleteCluster</i> deletes all associated nodes, node endpoints
-    #             and the DAX cluster itself. When you receive a successful response from this action,
-    #             DAX immediately begins deleting the cluster; you cannot cancel or revert this
-    #             action.</p>
+    #                 <i>DeleteCluster</i> deletes all associated nodes, node endpoints and
+    #             the DAX cluster itself. When you receive a successful response from this
+    #             action, DAX immediately begins deleting the cluster; you cannot cancel or
+    #             revert this action.</p>
     # @param [Hash, Types::DeleteClusterRequest] params
     # @option params [String] :cluster_name
     #   <p>The name of the cluster to be deleted.</p>
@@ -616,7 +660,8 @@ module Aws::DAX
     #       sse_description: {
     #         status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #       },
-    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #       network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #     }
     #   }
     # @return [Types::DeleteClusterResponse]
@@ -648,10 +693,10 @@ module Aws::DAX
     end
 
     # <p>Deletes a subnet group.</p>
-    #         <note>
+    #          <note>
     #             <p>You cannot delete a subnet group if it is associated with any DAX
     #                 clusters.</p>
-    #         </note>
+    #          </note>
     # @param [Hash, Types::DeleteSubnetGroupRequest] params
     # @option params [String] :subnet_group_name
     #   <p>The name of the subnet group to delete.</p>
@@ -672,19 +717,19 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>Returns information about all provisioned DAX clusters if no cluster identifier
-    #             is specified, or about a specific DAX cluster if a cluster identifier is
+    # <p>Returns information about all provisioned DAX clusters if no cluster identifier is
+    #             specified, or about a specific DAX cluster if a cluster identifier is
     #             supplied.</p>
-    #         <p>If the cluster is in the CREATING state, only cluster level information will be
+    #          <p>If the cluster is in the CREATING state, only cluster level information will be
     #             displayed until all of the nodes are successfully provisioned.</p>
-    #         <p>If the cluster is in the DELETING state, only cluster level information will be
+    #          <p>If the cluster is in the DELETING state, only cluster level information will be
     #             displayed.</p>
-    #         <p>If nodes are currently being added to the DAX cluster, node endpoint information
+    #          <p>If nodes are currently being added to the DAX cluster, node endpoint information
     #             and creation time for the additional nodes will not be displayed until they are
-    #             completely provisioned. When the DAX cluster state is <i>available</i>,
-    #             the cluster is ready for use.</p>
-    #         <p>If nodes are currently being removed from the DAX cluster, no endpoint
-    #             information for the removed nodes is displayed.</p>
+    #             completely provisioned. When the DAX cluster state is
+    #                 <i>available</i>, the cluster is ready for use.</p>
+    #          <p>If nodes are currently being removed from the DAX cluster, no
+    #             endpoint information for the removed nodes is displayed.</p>
     # @param [Hash, Types::DescribeClustersRequest] params
     # @option params [Array<String>] :cluster_names
     #   <p>The names of the DAX clusters being described.</p>
@@ -692,7 +737,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     # @option params [String] :next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
     #               results from this action. If this parameter is specified, the response includes only
@@ -760,7 +805,8 @@ module Aws::DAX
     #         sse_description: {
     #           status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #         },
-    #         cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #         cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #         network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #       }
     #     ]
     #   }
@@ -777,7 +823,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     # @option params [String] :next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
     #               results from this action. If this parameter is specified, the response includes only
@@ -820,11 +866,11 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>Returns events related to DAX clusters and parameter groups. You can obtain
-    #             events specific to a particular DAX cluster or parameter group by providing the name
-    #             as a parameter.</p>
-    #         <p>By default, only the events occurring within the last 24 hours are returned; however,
-    #             you can retrieve up to 14 days' worth of events if necessary.</p>
+    # <p>Returns events related to DAX clusters and parameter groups. You can
+    #             obtain events specific to a particular DAX cluster or parameter group by
+    #             providing the name as a parameter.</p>
+    #          <p>By default, only the events occurring within the last 24 hours are returned;
+    #             however, you can retrieve up to 14 days' worth of events if necessary.</p>
     # @param [Hash, Types::DescribeEventsRequest] params
     # @option params [String] :source_name
     #   <p>The identifier of the event source for which events will be returned. If not
@@ -844,7 +890,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     # @option params [String] :next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
     #               results from this action. If this parameter is specified, the response includes only
@@ -890,7 +936,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     # @option params [String] :next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
     #               results from this action. If this parameter is specified, the response includes only
@@ -932,7 +978,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #           <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     # @option params [String] :next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
     #               results from this action. If this parameter is specified, the response includes only
@@ -986,7 +1032,7 @@ module Aws::DAX
     #   <p>The maximum number of results to include in the response. If more results exist
     #               than the specified <code>MaxResults</code> value, a token is included in the response so
     #               that the remaining results can be retrieved.</p>
-    #               <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
+    #            <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>
     # @option params [String] :next_token
     #   <p>An optional token returned from a prior request. Use this token for pagination of
     #               results from this action. If this parameter is specified, the response includes only
@@ -1012,9 +1058,11 @@ module Aws::DAX
     #         subnets: [
     #           {
     #             subnet_identifier: "String",
-    #             subnet_availability_zone: "String"
+    #             subnet_availability_zone: "String",
+    #             supported_network_types: ["ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]]
     #           }
-    #         ]
+    #         ],
+    #         supported_network_types: ["ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]]
     #       }
     #     ]
     #   }
@@ -1032,8 +1080,8 @@ module Aws::DAX
     #   <p>The new number of nodes for the DAX cluster.</p>
     # @option params [Array<String>] :availability_zones
     #   <p>The Availability Zones (AZs) in which the cluster nodes will be created. All nodes
-    #               belonging to the cluster are placed in these Availability Zones. Use this parameter if you want
-    #               to distribute the nodes across multiple AZs.</p>
+    #               belonging to the cluster are placed in these Availability Zones. Use this parameter if
+    #               you want to distribute the nodes across multiple AZs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_name: "String", # required
@@ -1094,7 +1142,8 @@ module Aws::DAX
     #       sse_description: {
     #         status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #       },
-    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #       network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #     }
     #   }
     # @return [Types::IncreaseReplicationFactorResponse]
@@ -1103,8 +1152,8 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>List all of the tags for a DAX cluster. You can call <code>ListTags</code> up to
-    #             10 times per second, per account.</p>
+    # <p>List all of the tags for a DAX cluster. You can call
+    #                 <code>ListTags</code> up to 10 times per second, per account.</p>
     # @param [Hash, Types::ListTagsRequest] params
     # @option params [String] :resource_name
     #   <p>The name of the DAX resource to which the tags belong.</p>
@@ -1136,16 +1185,18 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>Reboots a single node of a DAX cluster. The reboot action takes place
-    #             as soon as possible. During the
-    #             reboot, the node status is set to REBOOTING.</p>
-    #         <note>
+    # <p>Reboots a single node of a DAX cluster. The reboot action takes
+    #             place as soon as possible. During the reboot, the node status is set to
+    #             REBOOTING.</p>
+    #          <note>
     #             <p>
-    #                <code>RebootNode</code> restarts the DAX engine process and does not remove the contents of the cache.  </p>
-    #         </note>
+    #                <code>RebootNode</code> restarts the DAX engine process and does not remove the
+    #                 contents of the cache.</p>
+    #          </note>
     # @param [Hash, Types::RebootNodeRequest] params
     # @option params [String] :cluster_name
-    #   <p>The name of the DAX cluster containing the node to be rebooted.</p>
+    #   <p>The name of the DAX cluster containing the node to be
+    #               rebooted.</p>
     # @option params [String] :node_id
     #   <p>The system-assigned ID of the node to be rebooted.</p>
     # @example Request syntax with placeholder values
@@ -1207,7 +1258,8 @@ module Aws::DAX
     #       sse_description: {
     #         status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #       },
-    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #       network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #     }
     #   }
     # @return [Types::RebootNodeResponse]
@@ -1216,11 +1268,13 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>Associates a set of tags with a DAX resource.  You can call <code>TagResource</code> up to 5 times per second, per
-    #             account. </p>
+    # <p>Associates a set of tags with a DAX resource.
+    #              You can call <code>TagResource</code> up to
+    #             5 times per second, per account. </p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_name
-    #   <p>The name of the DAX resource to which tags should be added.</p>
+    #   <p>The name of the DAX resource to which tags should be
+    #               added.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be assigned to the DAX resource. </p>
     # @example Request syntax with placeholder values
@@ -1252,12 +1306,14 @@ module Aws::DAX
     end
 
     # <p>Removes the association of tags from a DAX resource. You can call
-    #             <code>UntagResource</code> up to 5 times per second, per account. </p>
+    #                 <code>UntagResource</code> up to 5 times per second, per account. </p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_name
-    #   <p>The name of the DAX resource from which the tags should be removed.</p>
+    #   <p>The name of the DAX resource from which the tags should be
+    #               removed.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>A list of tag keys. If the DAX cluster has any tags with these keys, then the tags are removed from the cluster.</p>
+    #   <p>A list of tag keys. If the DAX cluster has any tags with these keys,
+    #               then the tags are removed from the cluster.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_name: "String", # required
@@ -1281,9 +1337,9 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>Modifies the settings for a DAX cluster. You can use this action to change one or
-    #             more cluster configuration parameters by specifying the parameters and the new
-    #             values.</p>
+    # <p>Modifies the settings for a DAX cluster. You can use this action to
+    #             change one or more cluster configuration parameters by specifying the parameters and the
+    #             new values.</p>
     # @param [Hash, Types::UpdateClusterRequest] params
     # @option params [String] :cluster_name
     #   <p>The name of the DAX cluster to be modified.</p>
@@ -1297,13 +1353,14 @@ module Aws::DAX
     #   <p>The Amazon Resource Name (ARN) that identifies the topic.</p>
     # @option params [String] :notification_topic_status
     #   <p>The current state of the topic. A value of “active” means that notifications will
-    #           be sent to the topic. A value of “inactive” means that notifications will not be sent to the
-    #           topic.</p>
+    #               be sent to the topic. A value of “inactive” means that notifications will not be sent to
+    #               the topic.</p>
     # @option params [String] :parameter_group_name
     #   <p>The name of a parameter group for this cluster.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>A list of user-specified security group IDs to be assigned to each node in the DAX cluster.  If this parameter is not 
-    #               specified, DAX assigns the default VPC security group to each node.</p>
+    #   <p>A list of user-specified security group IDs to be assigned to each node in the DAX
+    #               cluster. If this parameter is not specified, DAX assigns the default VPC security group
+    #               to each node.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_name: "String", # required
@@ -1368,7 +1425,8 @@ module Aws::DAX
     #       sse_description: {
     #         status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED"]
     #       },
-    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"]
+    #       cluster_endpoint_encryption_type: "NONE" # One of: ["NONE", "TLS"],
+    #       network_type: "ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]
     #     }
     #   }
     # @return [Types::UpdateClusterResponse]
@@ -1377,19 +1435,19 @@ module Aws::DAX
       request.send_request(options)
     end
 
-    # <p>Modifies the parameters of a parameter group. You can modify up to 20
-    #             parameters in a single request by submitting a list parameter name and value
-    #             pairs.</p>
+    # <p>Modifies the parameters of a parameter group. You can modify up to 20 parameters in
+    #             a single request by submitting a list parameter name and value pairs.</p>
     # @param [Hash, Types::UpdateParameterGroupRequest] params
     # @option params [String] :parameter_group_name
     #   <p>The name of the parameter group.</p>
     # @option params [Array<Types::ParameterNameValue>] :parameter_name_values
     #   <p>An array of name-value pairs for the parameters in the group. Each element in the
     #               array represents a single parameter.</p>
-    #               <note>
+    #            <note>
     #               <p>
-    #                  <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p>
-    #           </note>
+    #                  <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only
+    #                   supported parameter names. For more details, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl">Configuring TTL Settings</a>.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     parameter_group_name: "String", # required
@@ -1442,9 +1500,11 @@ module Aws::DAX
     #       subnets: [
     #         {
     #           subnet_identifier: "String",
-    #           subnet_availability_zone: "String"
+    #           subnet_availability_zone: "String",
+    #           supported_network_types: ["ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]]
     #         }
-    #       ]
+    #       ],
+    #       supported_network_types: ["ipv4" # One of: ["ipv4", "ipv6", "dual_stack"]]
     #     }
     #   }
     # @return [Types::UpdateSubnetGroupResponse]

@@ -35,9 +35,7 @@ module Aws::MediaPackageV2
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>Access is denied because either you don't have permissions to perform the requested operation or MediaPackage is getting throttling errors with CDN authorization. The user or role that is making the request must have at least 
-    #          one IAM permissions policy attached that grants the required permissions. For more information, see Access Management in the IAM User Guide. Or, if you're using CDN authorization, you will receive this exception
-    #          if MediaPackage receives a throttling error from Secrets Manager.</p>
+    # <p>Access is denied because either you don't have permissions to perform the requested operation or MediaPackage is getting throttling errors with CDN authorization. The user or role that is making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see Access Management in the IAM User Guide. Or, if you're using CDN authorization, you will receive this exception if MediaPackage receives a throttling error from Secrets Manager.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaPackageV2::Types::AccessDeniedException] data

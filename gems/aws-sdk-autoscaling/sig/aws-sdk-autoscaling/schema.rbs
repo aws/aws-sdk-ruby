@@ -64,6 +64,7 @@ module Aws::AutoScaling
     BlockDeviceEbsVolumeType: StringShape
     BlockDeviceMapping: StructureShape
     BlockDeviceMappings: ListShape
+    BooleanType: BooleanShape
     BurstablePerformance: EnumShape
     CancelInstanceRefreshInput: StructureShape
     CancelInstanceRefreshOutput: StructureShape

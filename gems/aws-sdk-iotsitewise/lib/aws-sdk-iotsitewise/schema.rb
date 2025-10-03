@@ -184,6 +184,7 @@ module Aws::IoTSiteWise
     ComputationModelSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.iotsitewise#ComputationModelSummaries', name: 'ComputationModelSummaries')
     ComputationModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.iotsitewise#ComputationModelSummary', name: 'ComputationModelSummary')
     ComputationModelType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.iotsitewise#ComputationModelType', name: 'ComputationModelType')
+    ComputationModelVersionFilter = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.iotsitewise#ComputationModelVersionFilter', name: 'ComputationModelVersionFilter', traits: {"smithy.api#pattern" => "^(LATEST|ACTIVE|[1-9]{1}\\d{0,9})$"})
     ComputeLocation = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.iotsitewise#ComputeLocation', name: 'ComputeLocation')
     ConfigurationErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.iotsitewise#ConfigurationErrorDetails', name: 'ConfigurationErrorDetails')
     ConfigurationState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.iotsitewise#ConfigurationState', name: 'ConfigurationState')
@@ -1531,6 +1532,7 @@ module Aws::IoTSiteWise
     DescribeComputationModelExecutionSummaryResponse.add_member(:computation_model_execution_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputationModelExecutionSummary, location_name: 'computationModelExecutionSummary', traits: {"smithy.api#required" => {}}))
     DescribeComputationModelExecutionSummaryResponse.type = Types::DescribeComputationModelExecutionSummaryResponse
     DescribeComputationModelRequest.add_member(:computation_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: 'computationModelId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeComputationModelRequest.add_member(:computation_model_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputationModelVersionFilter, location_name: 'computationModelVersion', traits: {"smithy.api#httpQuery" => "computationModelVersion"}))
     DescribeComputationModelRequest.type = Types::DescribeComputationModelRequest
     DescribeComputationModelResponse.add_member(:computation_model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: 'computationModelId', traits: {"smithy.api#required" => {}}))
     DescribeComputationModelResponse.add_member(:computation_model_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'computationModelArn', traits: {"smithy.api#required" => {}}))

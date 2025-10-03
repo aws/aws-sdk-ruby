@@ -4100,8 +4100,70 @@ module Aws::EKS
     #   <p>Specifies whether to enable node auto repair for the node group. Node auto repair is
     #               disabled by default.</p>
     #   @return [Boolean]
+    # @!attribute max_unhealthy_node_threshold_count
+    #   <p>Specify a count threshold of unhealthy nodes, above which node auto 
+    #               repair actions will stop. When using this, you cannot also set 
+    #               <code>maxUnhealthyNodeThresholdPercentage</code> at the same time.</p>
+    #   @return [Integer]
+    # @!attribute max_unhealthy_node_threshold_percentage
+    #   <p>Specify a percentage threshold of unhealthy nodes, above which node auto 
+    #               repair actions will stop. When using this, you cannot also set 
+    #               <code>maxUnhealthyNodeThresholdCount</code> at the same time.</p>
+    #   @return [Integer]
+    # @!attribute max_parallel_nodes_repaired_count
+    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, 
+    #               expressed as a count of unhealthy nodes. This gives you finer-grained control over the 
+    #               pace of node replacements. When using this, you cannot also set 
+    #               <code>maxParallelNodesRepairedPercentage</code> at the same time.</p>
+    #   @return [Integer]
+    # @!attribute max_parallel_nodes_repaired_percentage
+    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, 
+    #               expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the 
+    #               pace of node replacements. When using this, you cannot also set 
+    #               <code>maxParallelNodesRepairedCount</code> at the same time.</p>
+    #   @return [Integer]
+    # @!attribute node_repair_config_overrides
+    #   <p>Specify granular overrides for specific repair actions. These overrides control the 
+    #               repair action and the repair delay time before a node is considered eligible for repair.
+    #               If you use this, you must specify all the values.</p>
+    #   @return [Array<Types::NodeRepairConfigOverrides>]
     class NodeRepairConfig < Struct.new(
       :enabled,
+      :max_unhealthy_node_threshold_count,
+      :max_unhealthy_node_threshold_percentage,
+      :max_parallel_nodes_repaired_count,
+      :max_parallel_nodes_repaired_percentage,
+      :node_repair_config_overrides,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specify granular overrides for specific repair actions. These overrides control the 
+    #             repair action and the repair delay time before a node is considered eligible for repair.
+    #             If you use this, you must specify all the values.</p>
+    # @!attribute node_monitoring_condition
+    #   <p>Specify an unhealthy condition reported by the node monitoring agent that this
+    #               override would apply to.</p>
+    #   @return [String]
+    # @!attribute node_unhealthy_reason
+    #   <p>Specify a reason reported by the node monitoring agent that this
+    #               override would apply to.</p>
+    #   @return [String]
+    # @!attribute min_repair_wait_time_mins
+    #   <p>Specify the minimum time in minutes to wait before attempting to repair a node 
+    #               with this specific <code>nodeMonitoringCondition</code> and
+    #               <code>nodeUnhealthyReason</code>.</p>
+    #   @return [Integer]
+    # @!attribute repair_action
+    #   <p>Specify the repair action to take for nodes when all of the specified conditions are
+    #               met.</p>
+    #   @return [String]
+    class NodeRepairConfigOverrides < Struct.new(
+      :node_monitoring_condition,
+      :node_unhealthy_reason,
+      :min_repair_wait_time_mins,
+      :repair_action,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

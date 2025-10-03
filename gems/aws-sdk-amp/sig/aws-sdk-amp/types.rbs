@@ -64,6 +64,17 @@ module Aws::Amp
       attr_accessor log_group_arn: String?
     end
 
+    class ComponentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Hash[String, String]?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -338,6 +349,19 @@ module Aws::Amp
       attr_accessor client_token: String?
     end
 
+    class DeleteScraperLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor client_token: String?
+    end
+
     class DeleteScraperRequest
       include Smithy::Schema::Structure
 
@@ -491,6 +515,36 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_groups_namespace: Types::RuleGroupsNamespaceDescription?
+    end
+
+    class DescribeScraperLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+    end
+
+    class DescribeScraperLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::ScraperLoggingConfigurationStatus,
+        ?scraper_id: String,
+        ?logging_destination: Types::ScraperLoggingDestination,
+        ?scraper_components: Array[Types::ScraperComponent],
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::ScraperLoggingConfigurationStatus?
+      attr_accessor scraper_id: String?
+      attr_accessor logging_destination: Types::ScraperLoggingDestination?
+      attr_accessor scraper_components: Array[Types::ScraperComponent]?
+      attr_accessor modified_at: Time?
     end
 
     class DescribeScraperRequest
@@ -1034,6 +1088,19 @@ module Aws::Amp
       end
     end
 
+    class ScraperComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?config: Types::ComponentConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor config: Types::ComponentConfig?
+    end
+
     class ScraperDescription
       include Smithy::Schema::Structure
 
@@ -1067,6 +1134,35 @@ module Aws::Amp
       attr_accessor source: Types::Source?
       attr_accessor destination: Types::Destination?
       attr_accessor role_configuration: Types::RoleConfiguration?
+    end
+
+    class ScraperLoggingConfigurationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    class ScraperLoggingDestination
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogDestination?
+
+      class CloudWatchLogs < ScraperLoggingDestination
+      end
+      class Unknown < ScraperLoggingDestination
+      end
     end
 
     class ScraperStatus
@@ -1259,6 +1355,32 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: Types::QueryLoggingConfigurationStatus?
+    end
+
+    class UpdateScraperLoggingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scraper_id: String,
+        ?logging_destination: Types::ScraperLoggingDestination,
+        ?scraper_components: Array[Types::ScraperComponent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scraper_id: String?
+      attr_accessor logging_destination: Types::ScraperLoggingDestination?
+      attr_accessor scraper_components: Array[Types::ScraperComponent]?
+    end
+
+    class UpdateScraperLoggingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::ScraperLoggingConfigurationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::ScraperLoggingConfigurationStatus?
     end
 
     class UpdateScraperRequest

@@ -21,25 +21,25 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The directory ID for an Active Directory identity provider.</p>
     #   @return [String]
     # @!attribute active_directory_settings
-    #   <p>The <code>ActiveDirectorySettings</code> resource contains details about 
-    #   			the Active Directory, including network access details such as domain name and IP 
-    #   			addresses, and the credential provider for user administration.</p>
+    #   <p>The <code>ActiveDirectorySettings</code> resource contains details about the Active Directory, including network access details such as domain name and IP addresses, and the credential provider for user administration.</p>
     #   @return [Types::ActiveDirectorySettings]
     # @!attribute active_directory_type
-    #   <p>The type of Active Directory – either a self-managed Active Directory or an 
-    #   			Amazon Web Services Managed Active Directory.</p>
+    #   <p>The type of Active Directory – either a self-managed Active Directory or an Amazon Web Services Managed Active Directory.</p>
     #   @return [String]
+    # @!attribute is_shared_active_directory
+    #   <p>Whether this directory is shared from an Amazon Web Services Managed Active Directory. The default value is false.</p>
+    #   @return [Boolean]
     class ActiveDirectoryIdentityProvider < Struct.new(
       :directory_id,
       :active_directory_settings,
       :active_directory_type,
+      :is_shared_active_directory,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains network access and credential details that are needed for 
-    # 			user administration in the Active Directory.</p>
+    # <p>Contains network access and credential details that are needed for user administration in the Active Directory.</p>
     # @!attribute domain_name
     #   <p>The domain name for the Active Directory.</p>
     #   @return [String]
@@ -47,12 +47,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>A list of domain IPv4 addresses that are used for the Active Directory.</p>
     #   @return [Array<String>]
     # @!attribute domain_credentials_provider
-    #   <p>Points to the <code>CredentialsProvider</code> resource that contains 
-    #   			information about the credential provider for user administration.</p>
+    #   <p>Points to the <code>CredentialsProvider</code> resource that contains information about the credential provider for user administration.</p>
     #   @return [Types::CredentialsProvider]
     # @!attribute domain_network_settings
-    #   <p>The <code>DomainNetworkSettings</code> resource contains an array of 
-    #   			subnets that apply for the Active Directory.</p>
+    #   <p>The <code>DomainNetworkSettings</code> resource contains an array of subnets that apply for the Active Directory.</p>
     #   @return [Types::DomainNetworkSettings]
     class ActiveDirectorySettings < Struct.new(
       :domain_name,
@@ -74,7 +72,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The identity provider for the user.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute domain
-    #   <p>The domain name of the  Active Directory that contains information for the user to associate.</p>
+    #   <p>The domain name of the Active Directory that contains information for the user to associate.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags that apply for the user association.</p>
@@ -100,8 +98,7 @@ module Aws::LicenseManagerUserSubscriptions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request couldn't be completed because it conflicted with the current state of the
-    # 			resource.</p>
+    # <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
@@ -112,15 +109,10 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute identity_provider_arn
-    #   <p>The Amazon Resource Name (ARN) that identifies the <code>IdentityProvider</code> resource that contains details 
-    #   			about a registered identity provider. In the case of Active Directory, that can be 
-    #   			a self-managed Active Directory or an Amazon Web Services Managed Active Directory that contains user identity details.</p>
+    #   <p>The Amazon Resource Name (ARN) that identifies the <code>IdentityProvider</code> resource that contains details about a registered identity provider. In the case of Active Directory, that can be a self-managed Active Directory or an Amazon Web Services Managed Active Directory that contains user identity details.</p>
     #   @return [String]
     # @!attribute license_server_settings
-    #   <p>The <code>LicenseServerSettings</code> resource to create for the endpoint. The 
-    #   			settings include the type of license server and the Secrets Manager secret that 
-    #   			enables administrators to add or remove users associated with the 
-    #   			license server.</p>
+    #   <p>The <code>LicenseServerSettings</code> resource to create for the endpoint. The settings include the type of license server and the Secrets Manager secret that enables administrators to add or remove users associated with the license server.</p>
     #   @return [Types::LicenseServerSettings]
     # @!attribute tags
     #   <p>The tags that apply for the license server endpoint.</p>
@@ -148,11 +140,9 @@ module Aws::LicenseManagerUserSubscriptions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the credential provider for user 
-    # 			administration.</p>
+    # <p>Contains information about the credential provider for user administration.</p>
     # @!attribute secrets_manager_credentials_provider
-    #   <p>Identifies the Secrets Manager secret that contains credentials needed for 
-    #   			user administration in the Active Directory.</p>
+    #   <p>Identifies the Secrets Manager secret that contains credentials needed for user administration in the Active Directory.</p>
     #   @return [Types::SecretsManagerCredentialsProvider]
     class CredentialsProvider < Struct.new(
       :secrets_manager_credentials_provider,
@@ -166,8 +156,7 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute license_server_endpoint_arn
-    #   <p>The Amazon Resource Name (ARN) that identifies the <code>LicenseServerEndpoint</code> 
-    #   			resource to delete.</p>
+    #   <p>The Amazon Resource Name (ARN) that identifies the <code>LicenseServerEndpoint</code> resource to delete.</p>
     #   @return [String]
     # @!attribute server_type
     #   <p>The type of License Server that the delete request refers to.</p>
@@ -194,10 +183,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the Active Directory identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) that identifies the identity provider to deregister.</p>
@@ -234,7 +220,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The Amazon Resource Name (ARN) of the user to disassociate from the EC2 instance.</p>
     #   @return [String]
     # @!attribute domain
-    #   <p>The domain name of the  Active Directory that contains information for the user to disassociate.</p>
+    #   <p>The domain name of the Active Directory that contains information for the user to disassociate.</p>
     #   @return [String]
     class DisassociateUserRequest < Struct.new(
       :username,
@@ -268,9 +254,7 @@ module Aws::LicenseManagerUserSubscriptions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter name and value pair that is used to return more specific results from a describe
-    # 			or list operation. You can use filters can be used to match a set of resources by specific 
-    # 			criteria, such as tags, attributes, or IDs.</p>
+    # <p>A filter name and value pair that is used to return more specific results from a describe or list operation. You can use filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.</p>
     # @!attribute attribute
     #   <p>The name of an attribute to use as a filter.</p>
     #   @return [String]
@@ -291,8 +275,7 @@ module Aws::LicenseManagerUserSubscriptions
 
     # <p>Refers to an identity provider.</p>
     # @!attribute active_directory_identity_provider
-    #   <p>The <code>ActiveDirectoryIdentityProvider</code> resource contains settings 
-    #   			and other details about a specific Active Directory identity provider.</p>
+    #   <p>The <code>ActiveDirectoryIdentityProvider</code> resource contains settings and other details about a specific Active Directory identity provider.</p>
     #   @return [Types::ActiveDirectoryIdentityProvider]
     class IdentityProvider < Struct.new(
       :active_directory_identity_provider,
@@ -307,13 +290,10 @@ module Aws::LicenseManagerUserSubscriptions
 
     # <p>Describes an identity provider.</p>
     # @!attribute identity_provider
-    #   <p>The <code>IdentityProvider</code> resource contains information about 
-    #   			an identity provider.</p>
+    #   <p>The <code>IdentityProvider</code> resource contains information about an identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute settings
-    #   <p>The <code>Settings</code> resource contains details about the registered 
-    #   			identity provider’s product related configuration settings, such as the 
-    #   			subnets to provision VPC endpoints.</p>
+    #   <p>The <code>Settings</code> resource contains details about the registered identity provider’s product related configuration settings, such as the subnets to provision VPC endpoints.</p>
     #   @return [Types::Settings]
     # @!attribute product
     #   <p>The name of the user-based subscription product.</p>
@@ -327,6 +307,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute failure_message
     #   <p>The failure message associated with an identity provider.</p>
     #   @return [String]
+    # @!attribute owner_account_id
+    #   <p>The AWS Account ID of the owner of this resource.</p>
+    #   @return [String]
     class IdentityProviderSummary < Struct.new(
       :identity_provider,
       :settings,
@@ -334,6 +317,7 @@ module Aws::LicenseManagerUserSubscriptions
       :status,
       :identity_provider_arn,
       :failure_message,
+      :owner_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -355,12 +339,20 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute status_message
     #   <p>The status message for an EC2 instance.</p>
     #   @return [String]
+    # @!attribute owner_account_id
+    #   <p>The AWS Account ID of the owner of this resource.</p>
+    #   @return [String]
+    # @!attribute identity_provider
+    #   <p>The <code>IdentityProvider</code> resource specifies details about the identity provider.</p>
+    #   @return [Types::IdentityProvider]
     class InstanceSummary < Struct.new(
       :instance_id,
       :status,
       :products,
       :last_status_check_date,
       :status_message,
+      :owner_account_id,
+      :identity_provider,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -374,8 +366,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The ID of the EC2 instance that provides user-based subscriptions.</p>
     #   @return [String]
     # @!attribute identity_provider
-    #   <p>The <code>IdentityProvider</code> resource specifies details 
-    #   			about the identity provider.</p>
+    #   <p>The <code>IdentityProvider</code> resource specifies details about the identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute status
     #   <p>The status of a user associated with an EC2 instance.</p>
@@ -387,7 +378,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The status message for users of an EC2 instance.</p>
     #   @return [String]
     # @!attribute domain
-    #   <p>The domain name of the  Active Directory that contains the user information for the product subscription.</p>
+    #   <p>The domain name of the Active Directory that contains the user information for the product subscription.</p>
     #   @return [String]
     # @!attribute association_date
     #   <p>The date a user was associated with an EC2 instance.</p>
@@ -422,15 +413,13 @@ module Aws::LicenseManagerUserSubscriptions
 
     # <p>Information about a Remote Desktop Services (RDS) license server.</p>
     # @!attribute provisioning_status
-    #   <p>The current state of the provisioning process for the RDS 
-    #   			license server.</p>
+    #   <p>The current state of the provisioning process for the RDS license server.</p>
     #   @return [String]
     # @!attribute health_status
     #   <p>The health status of the RDS license server.</p>
     #   @return [String]
     # @!attribute ipv4_address
-    #   <p>A list of domain IPv4 addresses that are used for the RDS 
-    #   			license server.</p>
+    #   <p>A list of domain IPv4 addresses that are used for the RDS license server.</p>
     #   @return [String]
     class LicenseServer < Struct.new(
       :provisioning_status,
@@ -441,18 +430,15 @@ module Aws::LicenseManagerUserSubscriptions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains details about a network endpoint for a Remote Desktop Services (RDS) 
-    # 			license server.</p>
+    # <p>Contains details about a network endpoint for a Remote Desktop Services (RDS) license server.</p>
     # @!attribute identity_provider_arn
-    #   <p>The Amazon Resource Name (ARN) of the identity provider that's associated with 
-    #   			the RDS license server endpoint.</p>
+    #   <p>The Amazon Resource Name (ARN) of the identity provider that's associated with the RDS license server endpoint.</p>
     #   @return [String]
     # @!attribute server_type
     #   <p>The type of license server.</p>
     #   @return [String]
     # @!attribute server_endpoint
-    #   <p>The <code>ServerEndpoint</code> resource contains the network 
-    #   			address of the RDS license server endpoint.</p>
+    #   <p>The <code>ServerEndpoint</code> resource contains the network address of the RDS license server endpoint.</p>
     #   @return [Types::ServerEndpoint]
     # @!attribute status_message
     #   <p>The message associated with the provisioning status, if there is one.</p>
@@ -461,16 +447,13 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The ID of the license server endpoint.</p>
     #   @return [String]
     # @!attribute license_server_endpoint_arn
-    #   <p>The ARN of the <code>ServerEndpoint</code> resource for the RDS 
-    #   			license server.</p>
+    #   <p>The ARN of the <code>ServerEndpoint</code> resource for the RDS license server.</p>
     #   @return [String]
     # @!attribute license_server_endpoint_provisioning_status
-    #   <p>The current state of the provisioning process for the RDS license 
-    #   			server endpoint</p>
+    #   <p>The current state of the provisioning process for the RDS license server endpoint</p>
     #   @return [String]
     # @!attribute license_servers
-    #   <p>An array of <code>LicenseServer</code> resources that represent the 
-    #   			license servers that are accessed through this endpoint.</p>
+    #   <p>An array of <code>LicenseServer</code> resources that represent the license servers that are accessed through this endpoint.</p>
     #   @return [Array<Types::LicenseServer>]
     # @!attribute creation_time
     #   <p>The timestamp when License Manager created the license server endpoint.</p>
@@ -495,8 +478,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The type of license server.</p>
     #   @return [String]
     # @!attribute server_settings
-    #   <p>The <code>ServerSettings</code> resource contains the settings for your 
-    #   			server.</p>
+    #   <p>The <code>ServerSettings</code> resource contains the settings for your server.</p>
     #   @return [Types::ServerSettings]
     class LicenseServerSettings < Struct.new(
       :server_type,
@@ -510,19 +492,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The maximum number of results to return from a single request.</p>
     #   @return [Integer]
     # @!attribute filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Product</p>
-    #               </li>
-    #               <li>
-    #                  <p>DirectoryId</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Product</p> </li> <li> <p>DirectoryId</p> </li> </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListIdentityProvidersRequest < Struct.new(
       :max_results,
@@ -534,13 +507,10 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute identity_provider_summaries
-    #   <p>An array of <code>IdentityProviderSummary</code> resources that contain 
-    #   			details about the Active Directory identity providers that meet the request criteria.</p>
+    #   <p>An array of <code>IdentityProviderSummary</code> resources that contain details about the Active Directory identity providers that meet the request criteria.</p>
     #   @return [Array<Types::IdentityProviderSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty, 
-    #   	there are additional elements that the service hasn't included in this request. Use this token 
-    #   		with the next request to retrieve additional objects.</p>
+    #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListIdentityProvidersResponse < Struct.new(
       :identity_provider_summaries,
@@ -554,19 +524,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The maximum number of results to return from a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Status</p>
-    #               </li>
-    #               <li>
-    #                  <p>InstanceId</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>InstanceId</p> </li> </ul>
     #   @return [Array<Types::Filter>]
     class ListInstancesRequest < Struct.new(
       :max_results,
@@ -578,14 +539,10 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute instance_summaries
-    #   <p>An array of <code>InstanceSummary</code> resources that contain details 
-    #   			about the instances that provide user-based subscriptions and also meet the 
-    #   			request criteria.</p>
+    #   <p>An array of <code>InstanceSummary</code> resources that contain details about the instances that provide user-based subscriptions and also meet the request criteria.</p>
     #   @return [Array<Types::InstanceSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty, 
-    #   	there are additional elements that the service hasn't included in this request. Use this token 
-    #   		with the next request to retrieve additional objects.</p>
+    #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListInstancesResponse < Struct.new(
       :instance_summaries,
@@ -599,16 +556,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The maximum number of results to return from a single request.</p>
     #   @return [Integer]
     # @!attribute filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>IdentityProviderArn</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>IdentityProviderArn</p> </li> </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListLicenseServerEndpointsRequest < Struct.new(
       :max_results,
@@ -620,14 +571,10 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute license_server_endpoints
-    #   <p>An array of <code>LicenseServerEndpoint</code> resources that 
-    #   			contain detailed information about the RDS License Servers that meet 
-    #   			the request criteria.</p>
+    #   <p>An array of <code>LicenseServerEndpoint</code> resources that contain detailed information about the RDS License Servers that meet the request criteria.</p>
     #   @return [Array<Types::LicenseServerEndpoint>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty, 
-    #   	there are additional elements that the service hasn't included in this request. Use this token 
-    #   		with the next request to retrieve additional objects.</p>
+    #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLicenseServerEndpointsResponse < Struct.new(
       :license_server_endpoints,
@@ -638,10 +585,7 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
@@ -650,22 +594,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The maximum number of results to return from a single request.</p>
     #   @return [Integer]
     # @!attribute filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Status</p>
-    #               </li>
-    #               <li>
-    #                  <p>Username</p>
-    #               </li>
-    #               <li>
-    #                  <p>Domain</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>Username</p> </li> <li> <p>Domain</p> </li> </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListProductSubscriptionsRequest < Struct.new(
       :product,
@@ -682,9 +614,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the list product subscriptions operation.</p>
     #   @return [Array<Types::ProductUserSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty, 
-    #   	there are additional elements that the service hasn't included in this request. Use this token 
-    #   		with the next request to retrieve additional objects.</p>
+    #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListProductSubscriptionsResponse < Struct.new(
       :product_user_summaries,
@@ -724,22 +654,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The maximum number of results to return from a single request.</p>
     #   @return [Integer]
     # @!attribute filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Status</p>
-    #               </li>
-    #               <li>
-    #                  <p>Username</p>
-    #               </li>
-    #               <li>
-    #                  <p>Domain</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>Username</p> </li> <li> <p>Domain</p> </li> </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     #   @return [String]
     class ListUserAssociationsRequest < Struct.new(
       :instance_id,
@@ -756,9 +674,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Metadata that describes the list user association operation.</p>
     #   @return [Array<Types::InstanceUserSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty, 
-    #   	there are additional elements that the service hasn't included in this request. Use this token 
-    #   		with the next request to retrieve additional objects.</p>
+    #   <p>The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListUserAssociationsResponse < Struct.new(
       :instance_user_summaries,
@@ -788,7 +704,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>The status message for a product for this user.</p>
     #   @return [String]
     # @!attribute domain
-    #   <p>The domain name of the  Active Directory that contains the user information for the product subscription.</p>
+    #   <p>The domain name of the Active Directory that contains the user information for the product subscription.</p>
     #   @return [String]
     # @!attribute subscription_start_date
     #   <p>The start date of a subscription.</p>
@@ -813,8 +729,7 @@ module Aws::LicenseManagerUserSubscriptions
 
     # <p>Server settings that are specific to a Remote Desktop Services (RDS) license server.</p>
     # @!attribute rds_sal_credentials_provider
-    #   <p>The <code>CredentialsProvider</code> resource contains a reference to 
-    #   			the credentials provider that's used for RDS license server user administration.</p>
+    #   <p>The <code>CredentialsProvider</code> resource contains a reference to the credentials provider that's used for RDS license server user administration.</p>
     #   @return [Types::CredentialsProvider]
     class RdsSalSettings < Struct.new(
       :rds_sal_credentials_provider,
@@ -827,14 +742,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the identity provider to register.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute settings
-    #   <p>The registered identity provider’s product related configuration 
-    #   			settings such as the subnets to provision VPC endpoints.</p>
+    #   <p>The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.</p>
     #   @return [Types::Settings]
     # @!attribute tags
     #   <p>The tags that apply to the identity provider's registration.</p>
@@ -893,8 +804,7 @@ module Aws::LicenseManagerUserSubscriptions
 
     # <p>Contains settings for a specific server.</p>
     # @!attribute rds_sal_settings
-    #   <p>The <code>RdsSalSettings</code> resource contains settings to configure 
-    #   			a specific Remote Desktop Services (RDS) license server.</p>
+    #   <p>The <code>RdsSalSettings</code> resource contains settings to configure a specific Remote Desktop Services (RDS) license server.</p>
     #   @return [Types::RdsSalSettings]
     class ServerSettings < Struct.new(
       :rds_sal_settings,
@@ -917,16 +827,12 @@ module Aws::LicenseManagerUserSubscriptions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The registered identity provider’s product related configuration settings such as the
-    # 			subnets to provision VPC endpoints, and the security group ID that is associated with the VPC
-    # 			endpoints. The security group should permit inbound TCP port 1688 communication from resources
-    # 			in the VPC.</p>
+    # <p>The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints, and the security group ID that is associated with the VPC endpoints. The security group should permit inbound TCP port 1688 communication from resources in the VPC.</p>
     # @!attribute subnets
     #   <p>The subnets defined for the registered identity provider.</p>
     #   @return [Array<String>]
     # @!attribute security_group_id
-    #   <p>A security group ID that allows inbound TCP port 1688 communication between resources in
-    #   			your VPC and the VPC endpoint for activation servers.</p>
+    #   <p>A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoint for activation servers.</p>
     #   @return [String]
     class Settings < Struct.new(
       :subnets,
@@ -943,14 +849,10 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute domain
-    #   <p>The domain name of the  Active Directory that contains the user for whom to start the product 
-    #   			subscription.</p>
+    #   <p>The domain name of the Active Directory that contains the user for whom to start the product subscription.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags that apply to the product subscription.</p>
@@ -983,17 +885,13 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute product_user_arn
     #   <p>The Amazon Resource Name (ARN) of the product user.</p>
     #   @return [String]
     # @!attribute domain
-    #   <p>The domain name of the  Active Directory that contains the user for whom to stop the product 
-    #   			subscription.</p>
+    #   <p>The domain name of the Active Directory that contains the user for whom to stop the product subscription.</p>
     #   @return [String]
     class StopProductSubscriptionRequest < Struct.new(
       :username,
@@ -1070,28 +968,13 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Refers to an identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) of the identity provider to update.</p>
     #   @return [String]
     # @!attribute update_settings
-    #   <p>Updates the registered identity provider’s product related configuration settings. You can
-    #   			update any combination of settings in a single operation such as the:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Subnets which you want to add to provision VPC endpoints.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Subnets which you want to remove the VPC endpoints from.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Security group ID which permits traffic to the VPC endpoints.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Updates the registered identity provider’s product related configuration settings. You can update any combination of settings in a single operation such as the:</p> <ul> <li> <p>Subnets which you want to add to provision VPC endpoints.</p> </li> <li> <p>Subnets which you want to remove the VPC endpoints from.</p> </li> <li> <p>Security group ID which permits traffic to the VPC endpoints.</p> </li> </ul>
     #   @return [Types::UpdateSettings]
     class UpdateIdentityProviderSettingsRequest < Struct.new(
       :identity_provider,
@@ -1113,18 +996,15 @@ module Aws::LicenseManagerUserSubscriptions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Updates the registered identity provider’s product related configuration settings such as
-    # 			the subnets to provision VPC endpoints.</p>
+    # <p>Updates the registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.</p>
     # @!attribute add_subnets
-    #   <p>The ID of one or more subnets in which License Manager will create a VPC endpoint for products that
-    #   			require connectivity to activation servers.</p>
+    #   <p>The ID of one or more subnets in which License Manager will create a VPC endpoint for products that require connectivity to activation servers.</p>
     #   @return [Array<String>]
     # @!attribute remove_subnets
     #   <p>The ID of one or more subnets to remove.</p>
     #   @return [Array<String>]
     # @!attribute security_group_id
-    #   <p>A security group ID that allows inbound TCP port 1688 communication between resources in
-    #   			your VPC and the VPC endpoints for activation servers.</p>
+    #   <p>A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoints for activation servers.</p>
     #   @return [String]
     class UpdateSettings < Struct.new(
       :add_subnets,

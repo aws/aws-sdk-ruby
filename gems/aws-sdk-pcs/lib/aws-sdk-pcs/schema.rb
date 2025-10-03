@@ -77,6 +77,8 @@ module Aws::PCS
     QueueIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pcs#QueueIdentifier', name: 'QueueIdentifier', traits: {"smithy.api#pattern" => "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{2,25})$"})
     QueueList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.pcs#QueueList', name: 'QueueList')
     QueueName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pcs#QueueName', name: 'QueueName', traits: {"smithy.api#length" => {"min" => 3, "max" => 25}, "smithy.api#pattern" => "^(?!pcs_)^[A-Za-z][A-Za-z0-9-]+$"})
+    QueueSlurmConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#QueueSlurmConfiguration', name: 'QueueSlurmConfiguration')
+    QueueSlurmConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#QueueSlurmConfigurationRequest', name: 'QueueSlurmConfigurationRequest')
     QueueStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.pcs#QueueStatus', name: 'QueueStatus')
     QueueSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#QueueSummary', name: 'QueueSummary')
     RegisterComputeNodeGroupInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#RegisterComputeNodeGroupInstanceRequest', name: 'RegisterComputeNodeGroupInstanceRequest')
@@ -109,11 +111,16 @@ module Aws::PCS
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pcs#TagValue', name: 'TagValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {}})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UntagResourceRequest', name: 'UntagResourceRequest', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.pcs#ClusterResource", "ids" => {"clusterIdentifier" => "resourceArn"}}, {"resource" => "com.amazonaws.pcs#QueueResource", "ids" => {"clusterIdentifier" => "resourceArn", "queueIdentifier" => "resourceArn"}}, {"resource" => "com.amazonaws.pcs#ComputeNodeGroupResource", "ids" => {"clusterIdentifier" => "resourceArn", "computeNodeGroupIdentifier" => "resourceArn"}}]})
+    UpdateAccountingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateAccountingRequest', name: 'UpdateAccountingRequest')
+    UpdateClusterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateClusterRequest', name: 'UpdateClusterRequest')
+    UpdateClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateClusterResponse', name: 'UpdateClusterResponse')
+    UpdateClusterSlurmConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateClusterSlurmConfigurationRequest', name: 'UpdateClusterSlurmConfigurationRequest')
     UpdateComputeNodeGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateComputeNodeGroupRequest', name: 'UpdateComputeNodeGroupRequest')
     UpdateComputeNodeGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateComputeNodeGroupResponse', name: 'UpdateComputeNodeGroupResponse')
     UpdateComputeNodeGroupSlurmConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateComputeNodeGroupSlurmConfigurationRequest', name: 'UpdateComputeNodeGroupSlurmConfigurationRequest')
     UpdateQueueRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateQueueRequest', name: 'UpdateQueueRequest')
     UpdateQueueResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateQueueResponse', name: 'UpdateQueueResponse')
+    UpdateQueueSlurmConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#UpdateQueueSlurmConfigurationRequest', name: 'UpdateQueueSlurmConfigurationRequest')
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#ValidationExceptionField', name: 'ValidationExceptionField')
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.pcs#ValidationExceptionFieldList', name: 'ValidationExceptionFieldList')
@@ -121,13 +128,13 @@ module Aws::PCS
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    Accounting.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountingMode, location_name: 'mode', traits: {"smithy.api#required" => {}}))
     Accounting.add_member(:default_purge_time_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'defaultPurgeTimeInDays', traits: {"smithy.api#range" => {"min" => -1, "max" => 10000}}))
+    Accounting.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountingMode, location_name: 'mode', traits: {"smithy.api#required" => {}}))
     Accounting.type = Types::Accounting
     AccountingMode.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STANDARD', traits: {"smithy.api#enumValue" => "STANDARD"}))
     AccountingMode.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
-    AccountingRequest.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountingMode, location_name: 'mode', traits: {"smithy.api#required" => {}}))
     AccountingRequest.add_member(:default_purge_time_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'defaultPurgeTimeInDays', traits: {"smithy.api#range" => {"min" => -1, "max" => 10000}}))
+    AccountingRequest.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountingMode, location_name: 'mode', traits: {"smithy.api#required" => {}}))
     AccountingRequest.type = Types::AccountingRequest
     Cluster.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'name', traits: {"smithy.api#required" => {}}))
     Cluster.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'id', traits: {"smithy.api#required" => {}}))
@@ -245,6 +252,7 @@ module Aws::PCS
     CreateQueueRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterIdentifier, location_name: 'clusterIdentifier', traits: {"smithy.api#required" => {}}))
     CreateQueueRequest.add_member(:queue_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueName, location_name: 'queueName', traits: {"aws.iam#conditionKeyValue" => "pcs:ResourceName", "smithy.api#required" => {}}))
     CreateQueueRequest.add_member(:compute_node_group_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeNodeGroupConfigurationList, location_name: 'computeNodeGroupConfigurations'))
+    CreateQueueRequest.add_member(:slurm_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueSlurmConfigurationRequest, location_name: 'slurmConfiguration'))
     CreateQueueRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SBClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     CreateQueueRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestTagMap, location_name: 'tags'))
     CreateQueueRequest.type = Types::CreateQueueRequest
@@ -335,6 +343,7 @@ module Aws::PCS
     NetworkingRequest.type = Types::NetworkingRequest
     PurchaseOption.add_member(:ondemand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ONDEMAND', traits: {"smithy.api#enumValue" => "ONDEMAND"}))
     PurchaseOption.add_member(:spot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SPOT', traits: {"smithy.api#enumValue" => "SPOT"}))
+    PurchaseOption.add_member(:capacity_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CAPACITY_BLOCK', traits: {"smithy.api#enumValue" => "CAPACITY_BLOCK"}))
     Queue.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     Queue.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'id', traits: {"smithy.api#required" => {}}))
     Queue.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'arn', traits: {"smithy.api#required" => {}}))
@@ -343,9 +352,14 @@ module Aws::PCS
     Queue.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'modifiedAt', traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     Queue.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     Queue.add_member(:compute_node_group_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeNodeGroupConfigurationList, location_name: 'computeNodeGroupConfigurations', traits: {"smithy.api#required" => {}}))
+    Queue.add_member(:slurm_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueSlurmConfiguration, location_name: 'slurmConfiguration'))
     Queue.add_member(:error_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorInfoList, location_name: 'errorInfo'))
     Queue.type = Types::Queue
     QueueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueSummary)
+    QueueSlurmConfiguration.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: 'slurmCustomSettings'))
+    QueueSlurmConfiguration.type = Types::QueueSlurmConfiguration
+    QueueSlurmConfigurationRequest.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: 'slurmCustomSettings'))
+    QueueSlurmConfigurationRequest.type = Types::QueueSlurmConfigurationRequest
     QueueStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
     QueueStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
     QueueStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -425,6 +439,19 @@ module Aws::PCS
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'resourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeys, location_name: 'tagKeys', traits: {"aws.iam#conditionKeyValue" => "aws:TagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
+    UpdateAccountingRequest.add_member(:default_purge_time_in_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'defaultPurgeTimeInDays', traits: {"smithy.api#range" => {"min" => -1, "max" => 10000}}))
+    UpdateAccountingRequest.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountingMode, location_name: 'mode'))
+    UpdateAccountingRequest.type = Types::UpdateAccountingRequest
+    UpdateClusterRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterIdentifier, location_name: 'clusterIdentifier', traits: {"smithy.api#required" => {}}))
+    UpdateClusterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SBClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateClusterRequest.add_member(:slurm_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateClusterSlurmConfigurationRequest, location_name: 'slurmConfiguration'))
+    UpdateClusterRequest.type = Types::UpdateClusterRequest
+    UpdateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, location_name: 'cluster'))
+    UpdateClusterResponse.type = Types::UpdateClusterResponse
+    UpdateClusterSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'scaleDownIdleTimeInSeconds', traits: {"smithy.api#range" => {"min" => 1}}))
+    UpdateClusterSlurmConfigurationRequest.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: 'slurmCustomSettings'))
+    UpdateClusterSlurmConfigurationRequest.add_member(:accounting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAccountingRequest, location_name: 'accounting'))
+    UpdateClusterSlurmConfigurationRequest.type = Types::UpdateClusterSlurmConfigurationRequest
     UpdateComputeNodeGroupRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterIdentifier, location_name: 'clusterIdentifier', traits: {"smithy.api#required" => {}}))
     UpdateComputeNodeGroupRequest.add_member(:compute_node_group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeNodeGroupIdentifier, location_name: 'computeNodeGroupIdentifier', traits: {"smithy.api#required" => {}}))
     UpdateComputeNodeGroupRequest.add_member(:ami_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmiId, location_name: 'amiId'))
@@ -444,10 +471,13 @@ module Aws::PCS
     UpdateQueueRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterIdentifier, location_name: 'clusterIdentifier', traits: {"smithy.api#required" => {}}))
     UpdateQueueRequest.add_member(:queue_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueIdentifier, location_name: 'queueIdentifier', traits: {"smithy.api#required" => {}}))
     UpdateQueueRequest.add_member(:compute_node_group_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComputeNodeGroupConfigurationList, location_name: 'computeNodeGroupConfigurations'))
+    UpdateQueueRequest.add_member(:slurm_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateQueueSlurmConfigurationRequest, location_name: 'slurmConfiguration'))
     UpdateQueueRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SBClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateQueueRequest.type = Types::UpdateQueueRequest
     UpdateQueueResponse.add_member(:queue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Queue, location_name: 'queue'))
     UpdateQueueResponse.type = Types::UpdateQueueResponse
+    UpdateQueueSlurmConfigurationRequest.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: 'slurmCustomSettings'))
+    UpdateQueueSlurmConfigurationRequest.type = Types::UpdateQueueSlurmConfigurationRequest
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: 'reason', traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: 'fieldList'))
@@ -660,6 +690,19 @@ module Aws::PCS
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "aws:TagKeys"], "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pcs#UpdateCluster"
+        operation.name = "UpdateCluster"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateClusterRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateClusterResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#idempotent" => {}, "smithy.api#tags" => ["Cluster"], "smithy.test#smokeTests" => [{"id" => "UpdateCluster_AccessDeniedException", "params" => {"clusterIdentifier" => "pcs_donotexist"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.pcs#AccessDeniedException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:update_compute_node_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pcs#UpdateComputeNodeGroup"

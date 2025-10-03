@@ -1,6 +1,86 @@
 module Aws::CleanRooms
   module Types
 
+    class AccessBudget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?details: Array[Types::AccessBudgetDetails],
+        ?aggregate_remaining_budget: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor details: Array[Types::AccessBudgetDetails]?
+      attr_accessor aggregate_remaining_budget: Integer?
+    end
+
+    class AccessBudgetDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?remaining_budget: Integer,
+        ?budget: Integer,
+        ?budget_type: String,
+        ?auto_refresh: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor remaining_budget: Integer?
+      attr_accessor budget: Integer?
+      attr_accessor budget_type: String?
+      attr_accessor auto_refresh: String?
+    end
+
+    module AccessBudgetType
+      CALENDAR_DAY: String
+      CALENDAR_MONTH: String
+      CALENDAR_WEEK: String
+      LIFETIME: String
+    end
+
+    class AccessBudgetsPrivacyTemplateParametersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_parameters: Array[Types::BudgetParameter],
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_parameters: Array[Types::BudgetParameter]?
+      attr_accessor resource_arn: String?
+    end
+
+    class AccessBudgetsPrivacyTemplateParametersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_parameters: Array[Types::BudgetParameter],
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_parameters: Array[Types::BudgetParameter]?
+      attr_accessor resource_arn: String?
+    end
+
+    class AccessBudgetsPrivacyTemplateUpdateParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?budget_parameters: Array[Types::BudgetParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor budget_parameters: Array[Types::BudgetParameter]?
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -451,6 +531,11 @@ module Aws::CleanRooms
       ADD_MEMBER: String
     end
 
+    module AutoRefreshMode
+      ENABLED: String
+      DISABLED: String
+    end
+
     class BatchGetCollaborationAnalysisTemplateError
       include Smithy::Schema::Structure
 
@@ -596,6 +681,21 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor units: Float?
+    end
+
+    class BudgetParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?budget: Integer,
+        ?auto_refresh: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor budget: Integer?
+      attr_accessor auto_refresh: String?
     end
 
     class Change
@@ -3206,6 +3306,12 @@ module Aws::CleanRooms
       attr_accessor is_responsible: bool?
     end
 
+    module JobType
+      BATCH: String
+      INCREMENTAL: String
+      DELETE_ONLY: String
+    end
+
     class ListAnalysisTemplatesOperationInput
       include Smithy::Schema::Structure
 
@@ -3384,6 +3490,7 @@ module Aws::CleanRooms
         ?privacy_budget_type: String,
         ?max_results: Integer,
         ?next_token: String,
+        ?access_budget_resource_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3391,6 +3498,7 @@ module Aws::CleanRooms
       attr_accessor privacy_budget_type: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor access_budget_resource_arn: String?
     end
 
     class ListCollaborationPrivacyBudgetsOutput
@@ -3664,6 +3772,7 @@ module Aws::CleanRooms
         ?privacy_budget_type: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?access_budget_resource_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3671,6 +3780,7 @@ module Aws::CleanRooms
       attr_accessor privacy_budget_type: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor access_budget_resource_arn: String?
     end
 
     class ListPrivacyBudgetsOutput
@@ -4183,11 +4293,13 @@ module Aws::CleanRooms
       def initialize: (
         ?id_mapping_table_identifier: String,
         ?membership_identifier: String,
+        ?job_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id_mapping_table_identifier: String?
       attr_accessor membership_identifier: String?
+      attr_accessor job_type: String?
     end
 
     class PopulateIdMappingTableOutput
@@ -4246,12 +4358,16 @@ module Aws::CleanRooms
 
       def initialize: (
         ?differential_privacy: Types::DifferentialPrivacyPrivacyBudget,
+        ?access_budget: Types::AccessBudget,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor differential_privacy: Types::DifferentialPrivacyPrivacyBudget?
+      attr_accessor access_budget: Types::AccessBudget?
 
       class DifferentialPrivacy < PrivacyBudget
+      end
+      class AccessBudget < PrivacyBudget
       end
       class Unknown < PrivacyBudget
       end
@@ -4329,12 +4445,16 @@ module Aws::CleanRooms
 
       def initialize: (
         ?differential_privacy: Types::DifferentialPrivacyTemplateParametersInput,
+        ?access_budget: Types::AccessBudgetsPrivacyTemplateParametersInput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersInput?
+      attr_accessor access_budget: Types::AccessBudgetsPrivacyTemplateParametersInput?
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput
+      end
+      class AccessBudget < PrivacyBudgetTemplateParametersInput
       end
       class Unknown < PrivacyBudgetTemplateParametersInput
       end
@@ -4345,12 +4465,16 @@ module Aws::CleanRooms
 
       def initialize: (
         ?differential_privacy: Types::DifferentialPrivacyTemplateParametersOutput,
+        ?access_budget: Types::AccessBudgetsPrivacyTemplateParametersOutput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersOutput?
+      attr_accessor access_budget: Types::AccessBudgetsPrivacyTemplateParametersOutput?
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput
+      end
+      class AccessBudget < PrivacyBudgetTemplateParametersOutput
       end
       class Unknown < PrivacyBudgetTemplateParametersOutput
       end
@@ -4388,12 +4512,16 @@ module Aws::CleanRooms
 
       def initialize: (
         ?differential_privacy: Types::DifferentialPrivacyTemplateUpdateParameters,
+        ?access_budget: Types::AccessBudgetsPrivacyTemplateUpdateParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateUpdateParameters?
+      attr_accessor access_budget: Types::AccessBudgetsPrivacyTemplateUpdateParameters?
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters
+      end
+      class AccessBudget < PrivacyBudgetTemplateUpdateParameters
       end
       class Unknown < PrivacyBudgetTemplateUpdateParameters
       end
@@ -4401,6 +4529,7 @@ module Aws::CleanRooms
 
     module PrivacyBudgetType
       DIFFERENTIAL_PRIVACY: String
+      ACCESS_BUDGET: String
     end
 
     class PrivacyImpact
@@ -5114,6 +5243,7 @@ module Aws::CleanRooms
         ?update_time: Time,
         ?type: String,
         ?schema_status_details: Array[Types::SchemaStatusDetail],
+        ?resource_arn: String,
         ?schema_type_properties: Types::SchemaTypeProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -5132,6 +5262,7 @@ module Aws::CleanRooms
       attr_accessor update_time: Time?
       attr_accessor type: String?
       attr_accessor schema_status_details: Array[Types::SchemaStatusDetail]?
+      attr_accessor resource_arn: String?
       attr_accessor schema_type_properties: Types::SchemaTypeProperties?
     end
 
@@ -5216,6 +5347,7 @@ module Aws::CleanRooms
         ?collaboration_arn: String,
         ?analysis_rule_types: Array[String],
         ?analysis_method: String,
+        ?resource_arn: String,
         ?selected_analysis_methods: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -5229,6 +5361,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: String?
       attr_accessor analysis_rule_types: Array[String]?
       attr_accessor analysis_method: String?
+      attr_accessor resource_arn: String?
       attr_accessor selected_analysis_methods: Array[String]?
     end
 

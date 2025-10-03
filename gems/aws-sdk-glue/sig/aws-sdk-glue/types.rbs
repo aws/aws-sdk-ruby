@@ -311,12 +311,14 @@ module Aws::Glue
       def initialize: (
         ?authentication_type: String,
         ?secret_arn: String,
+        ?kms_key_arn: String,
         ?o_auth2_properties: Types::OAuth2Properties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor authentication_type: String?
       attr_accessor secret_arn: String?
+      attr_accessor kms_key_arn: String?
       attr_accessor o_auth2_properties: Types::OAuth2Properties?
     end
 
@@ -2399,10 +2401,73 @@ module Aws::Glue
       ZOHOCRM: String
       SALESFORCEPARDOT: String
       SALESFORCEMARKETINGCLOUD: String
+      ADOBEANALYTICS: String
       SLACK: String
+      LINKEDIN: String
+      MIXPANEL: String
+      ASANA: String
       STRIPE: String
+      SMARTSHEET: String
+      DATADOG: String
+      WOOCOMMERCE: String
       INTERCOM: String
       SNAPCHATADS: String
+      PAYPAL: String
+      QUICKBOOKS: String
+      FACEBOOKPAGEINSIGHTS: String
+      FRESHDESK: String
+      TWILIO: String
+      DOCUSIGNMONITOR: String
+      FRESHSALES: String
+      ZOOM: String
+      GOOGLESEARCHCONSOLE: String
+      SALESFORCECOMMERCECLOUD: String
+      SAPCONCUR: String
+      DYNATRACE: String
+      MICROSOFTDYNAMIC365FINANCEANDOPS: String
+      MICROSOFTTEAMS: String
+      BLACKBAUDRAISEREDGENXT: String
+      MAILCHIMP: String
+      GITLAB: String
+      PENDO: String
+      PRODUCTBOARD: String
+      CIRCLECI: String
+      PIPEDIVE: String
+      SENDGRID: String
+      AZURECOSMOS: String
+      AZURESQL: String
+      BIGQUERY: String
+      BLACKBAUD: String
+      CLOUDERAHIVE: String
+      CLOUDERAIMPALA: String
+      CLOUDWATCH: String
+      CLOUDWATCHMETRICS: String
+      CMDB: String
+      DATALAKEGEN2: String
+      DB2: String
+      DB2AS400: String
+      DOCUMENTDB: String
+      DOMO: String
+      DYNAMODB: String
+      GOOGLECLOUDSTORAGE: String
+      HBASE: String
+      KUSTOMER: String
+      MICROSOFTDYNAMICS365CRM: String
+      MONDAY: String
+      MYSQL: String
+      OKTA: String
+      OPENSEARCH: String
+      ORACLE: String
+      PIPEDRIVE: String
+      POSTGRESQL: String
+      SAPHANA: String
+      SQLSERVER: String
+      SYNAPSE: String
+      TERADATA: String
+      TERADATANOS: String
+      TIMESTREAM: String
+      TPCDS: String
+      VERTICA: String
     end
 
     class ConnectionTypeBrief

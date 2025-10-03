@@ -455,6 +455,7 @@ module Aws::IVSRealTime
     GridConfiguration.add_member(:video_aspect_ratio, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoAspectRatio, location_name: 'videoAspectRatio'))
     GridConfiguration.add_member(:video_fill_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoFillMode, location_name: 'videoFillMode'))
     GridConfiguration.add_member(:grid_gap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GridGap, location_name: 'gridGap', traits: {"smithy.api#default" => 0}))
+    GridConfiguration.add_member(:participant_order_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeKey, location_name: 'participantOrderAttribute'))
     GridConfiguration.type = Types::GridConfiguration
     ImportPublicKeyRequest.add_member(:public_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicKeyMaterial, location_name: 'publicKeyMaterial', traits: {"smithy.api#required" => {}}))
     ImportPublicKeyRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicKeyName, location_name: 'name'))
@@ -674,6 +675,7 @@ module Aws::IVSRealTime
     PipConfiguration.add_member(:pip_position, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipPosition, location_name: 'pipPosition'))
     PipConfiguration.add_member(:pip_width, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipWidth, location_name: 'pipWidth'))
     PipConfiguration.add_member(:pip_height, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipHeight, location_name: 'pipHeight'))
+    PipConfiguration.add_member(:participant_order_attribute, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeKey, location_name: 'participantOrderAttribute'))
     PipConfiguration.type = Types::PipConfiguration
     PipPosition.add_member(:top_left, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TOP_LEFT', traits: {"smithy.api#enumValue" => "TOP_LEFT"}))
     PipPosition.add_member(:top_right, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TOP_RIGHT', traits: {"smithy.api#enumValue" => "TOP_RIGHT"}))
@@ -1086,7 +1088,7 @@ module Aws::IVSRealTime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingVerification)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ImportPublicKey"}, "smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ImportPublicKey"}}
       end)
       service.add_operation(:list_compositions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivsrealtime#ListCompositions"

@@ -465,10 +465,12 @@ module Aws::AutoScaling
 
       def initialize: (
         ?auto_scaling_group_name: String,
+        ?wait_for_transitioning_instances: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor auto_scaling_group_name: String?
+      attr_accessor wait_for_transitioning_instances: bool?
     end
 
     class CancelInstanceRefreshOutput

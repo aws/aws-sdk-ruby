@@ -1002,9 +1002,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
-    #            DMS uses your default encryption key.</p>
-    #            <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a
-    #            different default encryption key for each Amazon Web Services Region.</p>
+    #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Specifies the accessibility options for the instance profile. A value of
@@ -5360,9 +5358,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
-    #            DMS uses your default encryption key.</p>
-    #            <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account 
-    #            has a different default encryption key for each Amazon Web Services Region.</p>
+    #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Specifies the accessibility options for the instance profile. A value of
@@ -6549,9 +6545,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
-    #            DMS uses your default encryption key.</p>
-    #            <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a
-    #            different default encryption key for each Amazon Web Services Region.</p>
+    #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Specifies the accessibility options for the instance profile. A value of

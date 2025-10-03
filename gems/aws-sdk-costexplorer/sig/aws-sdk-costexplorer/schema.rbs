@@ -33,6 +33,7 @@ module Aws::CostExplorer
     BackfillLimitExceededException: StructureShape
     BillExpirationException: StructureShape
     BillingViewArn: StringShape
+    BillingViewHealthStatusException: StructureShape
     CommitmentPurchaseAnalysisConfiguration: StructureShape
     ComparisonMetricValue: StructureShape
     ComparisonMetrics: MapShape

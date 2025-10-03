@@ -71,6 +71,7 @@ module Aws::Organizations
         ?email: String,
         ?name: String,
         ?status: String,
+        ?state: String,
         ?joined_method: String,
         ?joined_timestamp: Time,
       ) -> void
@@ -81,6 +82,7 @@ module Aws::Organizations
       attr_accessor email: String?
       attr_accessor name: String?
       attr_accessor status: String?
+      attr_accessor state: String?
       attr_accessor joined_method: String?
       attr_accessor joined_timestamp: Time?
     end
@@ -143,6 +145,14 @@ module Aws::Organizations
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module AccountState
+      PENDING_ACTIVATION: String
+      ACTIVE: String
+      SUSPENDED: String
+      PENDING_CLOSURE: String
+      CLOSED: String
     end
 
     module AccountStatus

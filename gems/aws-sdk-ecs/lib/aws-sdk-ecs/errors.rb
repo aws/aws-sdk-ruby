@@ -26,6 +26,7 @@ module Aws::ECS
   # * {AttributeLimitExceededException}
   # * {BlockedException}
   # * {ClientException}
+  # * {ClusterContainsCapacityProviderException}
   # * {ClusterContainsContainerInstancesException}
   # * {ClusterContainsServicesException}
   # * {ClusterContainsTasksException}
@@ -106,6 +107,20 @@ module Aws::ECS
     class ClientException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClientException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p> Message that describes the cause of the exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The cluster contains one or more capacity providers that prevent the requested operation. This exception occurs when you try to delete a cluster that still has active capacity providers, including Amazon ECS Managed Instances capacity providers. You must first delete all capacity providers from the cluster before you can delete the cluster itself.</p>
+    class ClusterContainsCapacityProviderException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECS::Types::ClusterContainsCapacityProviderException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

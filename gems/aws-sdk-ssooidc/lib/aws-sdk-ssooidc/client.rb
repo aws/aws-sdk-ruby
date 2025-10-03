@@ -225,9 +225,7 @@ module Aws::SSOOIDC
     #         implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center
     #           OIDC API Reference</a>.</p>
     # @option params [Array<String>] :scope
-    #   <p>The list of scopes for which authorization is requested. The access token that is issued
-    #         is limited to the scopes that are granted. If this value is not specified, IAM Identity Center authorizes
-    #         all scopes that are configured for the client during the call to <a>RegisterClient</a>.</p>
+    #   <p>The list of scopes for which authorization is requested. This parameter has no effect; the access token will always include all scopes configured during client registration.</p>
     # @option params [String] :redirect_uri
     #   <p>Used only when calling this API for the Authorization Code grant type. This value
     #         specifies the location of the client or application that has registered to receive the
@@ -302,10 +300,14 @@ module Aws::SSOOIDC
       request.send_request(options)
     end
 
-    # <p>Creates and returns access and refresh tokens for clients and applications that are
-    #       authenticated using IAM entities. The access token can be used to fetch short-lived
-    #       credentials for the assigned Amazon Web Services accounts or to access application APIs using
-    #         <code>bearer</code> authentication.</p>
+    # <p>Creates and returns access and refresh tokens for authorized client applications that are
+    #       authenticated using any IAM entity, such as a service
+    #       role or user. These tokens might contain defined scopes that specify permissions such as <code>read:profile</code> or <code>write:data</code>. Through downscoping, you can use the scopes parameter to request tokens with reduced permissions compared to the original client application's permissions or, if applicable, the refresh token's scopes. The access token can be used to fetch short-lived credentials for the assigned
+    #       Amazon Web Services accounts or to access application APIs using <code>bearer</code> authentication.</p>
+    #          <note>
+    #             <p>This API is used with Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature
+    #           Version 4 for API Requests</a>.</p>
+    #          </note>
     # @param [Hash, Types::CreateTokenWithIAMRequest] params
     # @option params [String] :client_id
     #   <p>The unique identifier string for the client or application. This value is an application

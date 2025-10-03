@@ -17,30 +17,30 @@ module Aws::PCS
     end
 
     # <p>The accounting configuration includes configurable settings for Slurm accounting. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>
-    # @!attribute mode
-    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
-    #   @return [String]
     # @!attribute default_purge_time_in_days
     #   <p>The default value for all purge settings for <code>slurmdbd.conf</code>. For more information, see the <a href="https://slurm.schedmd.com/slurmdbd.conf.html">slurmdbd.conf documentation at SchedMD</a>.</p> <p>The default value for <code>defaultPurgeTimeInDays</code> is <code>-1</code>.</p> <p>A value of <code>-1</code> means there is no purge time and records persist as long as the cluster exists.</p> <important> <p> <code>0</code> isn't a valid value.</p> </important>
     #   @return [Integer]
+    # @!attribute mode
+    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
+    #   @return [String]
     class Accounting < Struct.new(
-      :mode,
       :default_purge_time_in_days,
+      :mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The accounting configuration includes configurable settings for Slurm accounting. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>
-    # @!attribute mode
-    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
-    #   @return [String]
     # @!attribute default_purge_time_in_days
     #   <p>The default value for all purge settings for <code>slurmdbd.conf</code>. For more information, see the <a href="https://slurm.schedmd.com/slurmdbd.conf.html">slurmdbd.conf documentation at SchedMD</a>.</p> <p>The default value for <code>defaultPurgeTimeInDays</code> is <code>-1</code>.</p> <p>A value of <code>-1</code> means there is no purge time and records persist as long as the cluster exists.</p> <important> <p> <code>0</code> isn't a valid value.</p> </important>
     #   @return [Integer]
+    # @!attribute mode
+    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
+    #   @return [String]
     class AccountingRequest < Struct.new(
-      :mode,
       :default_purge_time_in_days,
+      :mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -203,7 +203,7 @@ module Aws::PCS
     #   <p>The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.</p>
     #   @return [Array<String>]
     # @!attribute purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
@@ -215,7 +215,7 @@ module Aws::PCS
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
     #   @return [Types::ScalingConfiguration]
     # @!attribute instance_configs
-    #   <p>A list of EC2 instance configurations that Amazon Web Services PCS can provision in the compute node group.</p>
+    #   <p>A list of EC2 instance configurations that PCS can provision in the compute node group.</p>
     #   @return [Array<Types::InstanceConfig>]
     # @!attribute spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
@@ -392,7 +392,7 @@ module Aws::PCS
     #   <p>The list of subnet IDs where the compute node group launches instances. Subnets must be in the same VPC as the cluster.</p>
     #   @return [Array<String>]
     # @!attribute purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
@@ -404,7 +404,7 @@ module Aws::PCS
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
     #   @return [Types::ScalingConfigurationRequest]
     # @!attribute instance_configs
-    #   <p>A list of EC2 instance configurations that Amazon Web Services PCS can provision in the compute node group.</p>
+    #   <p>A list of EC2 instance configurations that PCS can provision in the compute node group.</p>
     #   @return [Array<Types::InstanceConfig>]
     # @!attribute spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
@@ -456,6 +456,9 @@ module Aws::PCS
     # @!attribute compute_node_group_configurations
     #   <p>The list of compute node group configurations to associate with the queue. Queues assign jobs to associated compute node groups.</p>
     #   @return [Array<Types::ComputeNodeGroupConfiguration>]
+    # @!attribute slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
+    #   @return [Types::QueueSlurmConfigurationRequest]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
@@ -466,6 +469,7 @@ module Aws::PCS
       :cluster_identifier,
       :queue_name,
       :compute_node_group_configurations,
+      :slurm_configuration,
       :client_token,
       :tags,
       keyword_init: true
@@ -609,7 +613,7 @@ module Aws::PCS
     end
 
     # @!attribute cluster_identifier
-    #   <p>The name or ID of the cluster of the queue.</p>
+    #   <p>The name or ID of the cluster.</p>
     #   @return [String]
     class GetClusterRequest < Struct.new(
       :cluster_identifier,
@@ -830,7 +834,7 @@ module Aws::PCS
 
     # <p>The networking configuration for the cluster's control plane.</p>
     # @!attribute subnet_ids
-    #   <p>The list of subnet IDs where Amazon Web Services PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and Amazon Web Services PCS resources. Subnet IDs have the form <code>subnet-0123456789abcdef0</code>.</p> <p>Subnets can't be in Outposts, Wavelength or an Amazon Web Services Local Zone.</p> <note> <p>Amazon Web Services PCS currently supports only 1 subnet in this list.</p> </note>
+    #   <p>The list of subnet IDs where PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and PCS resources. Subnet IDs have the form <code>subnet-0123456789abcdef0</code>.</p> <p>Subnets can't be in Outposts, Wavelength or an Amazon Web Services Local Zone.</p> <note> <p>PCS currently supports only 1 subnet in this list.</p> </note>
     #   @return [Array<String>]
     # @!attribute security_group_ids
     #   <p>A list of security group IDs associated with the Elastic Network Interface (ENI) created in subnets.</p>
@@ -872,6 +876,9 @@ module Aws::PCS
     # @!attribute compute_node_group_configurations
     #   <p>The list of compute node group configurations associated with the queue. Queues assign jobs to associated compute node groups.</p>
     #   @return [Array<Types::ComputeNodeGroupConfiguration>]
+    # @!attribute slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
+    #   @return [Types::QueueSlurmConfiguration]
     # @!attribute error_info
     #   <p>The list of errors that occurred during queue provisioning.</p>
     #   @return [Array<Types::ErrorInfo>]
@@ -884,7 +891,30 @@ module Aws::PCS
       :modified_at,
       :status,
       :compute_node_group_configurations,
+      :slurm_configuration,
       :error_info,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute slurm_custom_settings
+    #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
+    #   @return [Array<Types::SlurmCustomSetting>]
+    class QueueSlurmConfiguration < Struct.new(
+      :slurm_custom_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute slurm_custom_settings
+    #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
+    #   @return [Array<Types::SlurmCustomSetting>]
+    class QueueSlurmConfigurationRequest < Struct.new(
+      :slurm_custom_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1075,7 +1105,7 @@ module Aws::PCS
 
     # <p>The shared Slurm key for authentication, also known as the <b>cluster secret</b>.</p>
     # @!attribute secret_arn
-    #   <p>The Amazon Resource Name (ARN) of the the shared Slurm key.</p>
+    #   <p>The Amazon Resource Name (ARN) of the shared Slurm key.</p>
     #   @return [String]
     # @!attribute secret_version
     #   <p>The version of the shared Slurm key.</p>
@@ -1088,9 +1118,9 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Additional settings that directly map to Slurm settings.</p>
+    # <p>Additional settings that directly map to Slurm settings.</p> <important> <p>PCS supports a subset of Slurm settings. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-custom-settings.html">Configuring custom Slurm settings in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
     # @!attribute parameter_name
-    #   <p>PCS supports configuration of the following Slurm parameters:</p> <ul> <li> <p>For <b>clusters</b> </p> <ul> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1"> <code>Prolog</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1"> <code>Epilog</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters"> <code>SelectTypeParameters</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce"> <code>AccountingStorageEnforce</code> </a> </p> <important> <p>PCS supports a subset of the options for <code>AccountingStorageEnforce</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-accounting.html">Slurm accounting in PCS</a> in the <i>PCS User Guide</i>.</p> </important> </li> </ul> </li> <li> <p>For <b>compute node groups</b> </p> <ul> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Weight"> <code>Weight</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Weight"> <code>RealMemory</code> </a> </p> </li> </ul> </li> </ul>
+    #   <p>PCS supports custom Slurm settings for clusters, compute node groups, and queues. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-custom-settings.html">Configuring custom Slurm settings in PCS</a> in the <i>PCS User Guide</i>.</p>
     #   @return [String]
     # @!attribute parameter_value
     #   <p>The values for the configured Slurm settings.</p>
@@ -1105,7 +1135,7 @@ module Aws::PCS
 
     # <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
     # @!attribute allocation_strategy
-    #   <p>The Amazon EC2 allocation strategy Amazon Web Services PCS uses to provision EC2 instances. Amazon Web Services PCS supports <b>lowest price</b>, <b>capacity optimized</b>, and <b>price capacity optimized</b>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html">Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to <b>price capacity optimized</b>.</p>
+    #   <p>The Amazon EC2 allocation strategy PCS uses to provision EC2 instances. PCS supports <b>lowest price</b>, <b>capacity optimized</b>, and <b>price capacity optimized</b>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html">Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to <b>price capacity optimized</b>.</p>
     #   @return [String]
     class SpotOptions < Struct.new(
       :allocation_strategy,
@@ -1156,6 +1186,68 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
+    # @!attribute default_purge_time_in_days
+    #   <p>The default value for all purge settings for <code>slurmdbd.conf</code>. For more information, see the <a href="https://slurm.schedmd.com/slurmdbd.conf.html">slurmdbd.conf documentation at SchedMD</a>.</p> <p>The default value for <code>defaultPurgeTimeInDays</code> is <code>-1</code>.</p> <p>A value of <code>-1</code> means there is no purge time and records persist as long as the cluster exists.</p> <important> <p> <code>0</code> isn't a valid value.</p> </important>
+    #   @return [Integer]
+    # @!attribute mode
+    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
+    #   @return [String]
+    class UpdateAccountingRequest < Struct.new(
+      :default_purge_time_in_days,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_identifier
+    #   <p>The name or ID of the cluster to update.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
+    #   @return [String]
+    # @!attribute slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
+    #   @return [Types::UpdateClusterSlurmConfigurationRequest]
+    class UpdateClusterRequest < Struct.new(
+      :cluster_identifier,
+      :client_token,
+      :slurm_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster
+    #   <p>The cluster resource and configuration.</p>
+    #   @return [Types::Cluster]
+    class UpdateClusterResponse < Struct.new(
+      :cluster,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute scale_down_idle_time_in_seconds
+    #   <p>The time (in seconds) before an idle node is scaled down.</p> <p>Default: <code>600</code> </p>
+    #   @return [Integer]
+    # @!attribute slurm_custom_settings
+    #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
+    #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute accounting
+    #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
+    #   @return [Types::UpdateAccountingRequest]
+    class UpdateClusterSlurmConfigurationRequest < Struct.new(
+      :scale_down_idle_time_in_seconds,
+      :slurm_custom_settings,
+      :accounting,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cluster_identifier
     #   <p>The name or ID of the cluster of the compute node group.</p>
     #   @return [String]
@@ -1172,7 +1264,7 @@ module Aws::PCS
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     #   @return [Types::CustomLaunchTemplate]
     # @!attribute purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
@@ -1236,6 +1328,9 @@ module Aws::PCS
     # @!attribute compute_node_group_configurations
     #   <p>The list of compute node group configurations to associate with the queue. Queues assign jobs to associated compute node groups.</p>
     #   @return [Array<Types::ComputeNodeGroupConfiguration>]
+    # @!attribute slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
+    #   @return [Types::UpdateQueueSlurmConfigurationRequest]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
@@ -1243,6 +1338,7 @@ module Aws::PCS
       :cluster_identifier,
       :queue_identifier,
       :compute_node_group_configurations,
+      :slurm_configuration,
       :client_token,
       keyword_init: true
     )
@@ -1254,6 +1350,17 @@ module Aws::PCS
     #   @return [Types::Queue]
     class UpdateQueueResponse < Struct.new(
       :queue,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute slurm_custom_settings
+    #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
+    #   @return [Array<Types::SlurmCustomSetting>]
+    class UpdateQueueSlurmConfigurationRequest < Struct.new(
+      :slurm_custom_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

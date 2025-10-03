@@ -180,6 +180,7 @@ module Aws::IoTSiteWise
     ComputationModelSummaries: ListShape
     ComputationModelSummary: StructureShape
     ComputationModelType: EnumShape
+    ComputationModelVersionFilter: StringShape
     ComputeLocation: EnumShape
     ConfigurationErrorDetails: StructureShape
     ConfigurationState: EnumShape

@@ -46,6 +46,11 @@ module Aws::SSOAdmin
       def message
         @data[:message]
       end
+
+      # <p>The reason for the access denied exception.</p>
+      def reason
+        @data[:reason]
+      end
     end
 
     # <p>Occurs when a conflict with a previous successful write is detected. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.</p>
@@ -85,6 +90,11 @@ module Aws::SSOAdmin
       def message
         @data[:message]
       end
+
+      # <p>The reason for the resource not found exception.</p>
+      def reason
+        @data[:reason]
+      end
     end
 
     # <p>Indicates that the principal has crossed the permitted number of resources that can be created.</p>
@@ -111,6 +121,11 @@ module Aws::SSOAdmin
       def message
         @data[:message]
       end
+
+      # <p>The reason for the throttling exception.</p>
+      def reason
+        @data[:reason]
+      end
     end
 
     # <p>The request failed because it contains a syntax error.</p>
@@ -123,6 +138,11 @@ module Aws::SSOAdmin
 
       def message
         @data[:message]
+      end
+
+      # <p>The reason for the validation exception.</p>
+      def reason
+        @data[:reason]
       end
     end
   end

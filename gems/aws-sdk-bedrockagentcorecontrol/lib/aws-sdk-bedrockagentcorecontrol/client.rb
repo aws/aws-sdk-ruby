@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::BedrockAgentCoreControl
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::BedrockAgentCoreControl
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::BedrockAgentCoreControl
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::BedrockAgentCoreControl::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::BedrockAgentCoreControl::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,26 +193,30 @@ module Aws::BedrockAgentCoreControl
       super
     end
 
-    # <p>Creates an Amazon Secure Agent.</p>
+    # <p>Creates an Amazon Bedrock AgentCore Runtime.</p>
     # @param [Hash, Types::CreateAgentRuntimeRequest] params
     # @option params [String] :agent_runtime_name
-    #   <p>The name of the secure agent.</p>
+    #   <p>The name of the AgentCore Runtime.</p>
     # @option params [String] :description
-    #   <p>The description of the agent runtime.</p>
-    # @option params [Types::AgentArtifact] :agent_runtime_artifact
-    #   <p>The artifact of the agent.</p>
+    #   <p>The description of the AgentCore Runtime.</p>
+    # @option params [Types::AgentRuntimeArtifact] :agent_runtime_artifact
+    #   <p>The artifact of the AgentCore Runtime.</p>
     # @option params [String] :role_arn
-    #   <p>The IAM role ARN that provides permissions for the agent runtime.</p>
+    #   <p>The IAM role ARN that provides permissions for the AgentCore Runtime.</p>
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   <p>The network configuration for the agent runtime.</p>
+    #   <p>The network configuration for the AgentCore Runtime.</p>
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
     #   <p>The protocol configuration for an agent runtime. This structure defines how the agent runtime communicates with clients.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @option params [Hash<String, String>] :environment_variables
-    #   <p>Environment variables to set in the agent runtime environment.</p>
+    #   <p>Environment variables to set in the AgentCore Runtime environment.</p>
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   <p>The authorizer configuration for the agent runtime.</p>
+    #   <p>The authorizer configuration for the AgentCore Runtime.</p>
+    # @option params [Types::RequestHeaderConfiguration] :request_header_configuration
+    #   <p>Configuration for HTTP request headers that will be passed through to the runtime.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of tag keys and values to assign to the agent runtime. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     agent_runtime_name: "AgentRuntimeName", # required
@@ -220,7 +229,11 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     role_arn: "RoleArn", # required
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       network_mode_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP" # One of: ["MCP", "HTTP"], # required
@@ -236,6 +249,13 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"]
     #       }
+    #     },
+    #     request_header_configuration: {
+    #       # One of:
+    #       request_header_allowlist: ["HeaderName"]
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
     #     }
     #   }
     #   options = {}
@@ -258,25 +278,30 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon Secure AgentEndpoint.</p>
+    # <p>Creates an AgentCore Runtime endpoint.</p>
     # @param [Hash, Types::CreateAgentRuntimeEndpointRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime to create an endpoint for.</p>
+    #   <p>The unique identifier of the AgentCore Runtime to create an endpoint for.</p>
     # @option params [String] :name
-    #   <p>The name of the agent runtime endpoint.</p>
+    #   <p>The name of the AgentCore Runtime endpoint.</p>
     # @option params [String] :agent_runtime_version
-    #   <p>The version of the agent runtime to use for the endpoint.</p>
+    #   <p>The version of the AgentCore Runtime to use for the endpoint.</p>
     # @option params [String] :description
-    #   <p>The description of the agent runtime endpoint.</p>
+    #   <p>The description of the AgentCore Runtime endpoint.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of tag keys and values to assign to the agent runtime endpoint. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     agent_runtime_id: "AgentRuntimeId", # required
     #     name: "EndpointName", # required
     #     agent_runtime_version: "AgentRuntimeVersion",
     #     description: "AgentEndpointDescription",
-    #     client_token: "ClientToken"
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_agent_runtime_endpoint(params, options)
@@ -337,13 +362,19 @@ module Aws::BedrockAgentCoreControl
     #   <p>The recording configuration for the browser. When enabled, browser sessions are recorded and stored in the specified Amazon S3 location.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of tag keys and values to assign to the browser. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "SandboxName", # required
     #     description: "Description",
     #     execution_role_arn: "RoleArn",
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       vpc_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
     #     recording: {
     #       enabled: false,
@@ -352,7 +383,10 @@ module Aws::BedrockAgentCoreControl
     #         prefix: "String", # required
     #       }
     #     },
-    #     client_token: "ClientToken"
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_browser(params, options)
@@ -382,15 +416,24 @@ module Aws::BedrockAgentCoreControl
     #   <p>The network configuration for the code interpreter. This configuration specifies the network mode for the code interpreter.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of tag keys and values to assign to the code interpreter. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "SandboxName", # required
     #     description: "Description",
     #     execution_role_arn: "RoleArn",
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "SANDBOX"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "SANDBOX", "VPC"], # required
+    #       vpc_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
-    #     client_token: "ClientToken"
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_code_interpreter(params, options)
@@ -415,21 +458,23 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :description
     #   <p>The description of the gateway.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
+    #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the gateway to access Amazon Web Services services.</p>
     # @option params [String] :protocol_type
-    #   <p>The protocol type for the gateway. Currently supports MCP (Model Context Protocol).</p>
+    #   <p>The protocol type for the gateway.</p>
     # @option params [Types::GatewayProtocolConfiguration] :protocol_configuration
-    #   <p>The configuration settings for the protocol specified in the protocolType parameter.</p>
+    #   <p>The configuration settings for the protocol specified in the <code>protocolType</code> parameter.</p>
     # @option params [String] :authorizer_type
     #   <p>The type of authorizer to use for the gateway.</p>
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   <p>The authorizer configuration for the Gateway.</p>
+    #   <p>The authorizer configuration for the gateway.</p>
     # @option params [String] :kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated with the gateway.</p>
     # @option params [String] :exception_level
-    #   <p>The verbosity of exception messages. Use DEBUG mode to see granular exception messages from a Gateway. If this parameter is not set, exception messages are by default sanitized for presentation to end users.</p>
+    #   <p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of key-value pairs to associate with the gateway as metadata tags.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "GatewayName", # required
@@ -455,7 +500,10 @@ module Aws::BedrockAgentCoreControl
     #       }
     #     },
     #     kms_key_arn: "KmsKeyArn",
-    #     exception_level: "DEBUG" # One of: ["DEBUG"]
+    #     exception_level: "DEBUG" # One of: ["DEBUG"],
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_gateway(params, options)
@@ -502,16 +550,16 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Creates a target for a gateway. A target defines an endpoint that the gateway can connect to.</p> <p>To create a target, you must specify the gateway identifier and target configuration.</p>
+    # <p>Creates a target for a gateway. A target defines an endpoint that the gateway can connect to.</p>
     # @param [Hash, Types::CreateGatewayTargetRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The identifier of the gateway to create a target for. This can be either the gateway ID or the gateway ARN.</p>
+    #   <p>The identifier of the gateway to create a target for.</p>
     # @option params [String] :name
     #   <p>The name of the gateway target. The name must be unique within the gateway.</p>
     # @option params [String] :description
     #   <p>The description of the gateway target.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
+    #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Types::TargetConfiguration] :target_configuration
     #   <p>The configuration settings for the target, including endpoint information and schema definitions.</p>
     # @option params [Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
@@ -713,7 +761,7 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Creates a new memory.</p>
+    # <p>Creates a new Amazon Bedrock AgentCore Memory resource.</p>
     # @param [Hash, Types::CreateMemoryInput] params
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
@@ -955,10 +1003,10 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Deletes an Amazon Secure Agent.</p>
+    # <p>Deletes an Amazon Bedrock AgentCore Runtime.</p>
     # @param [Hash, Types::DeleteAgentRuntimeRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime to delete.</p>
+    #   <p>The unique identifier of the AgentCore Runtime to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     agent_runtime_id: "AgentRuntimeId", # required
@@ -976,12 +1024,12 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Deletes an Amazon Secure AgentEndpoint.</p>
+    # <p>Deletes an AAgentCore Runtime endpoint.</p>
     # @param [Hash, Types::DeleteAgentRuntimeEndpointRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime associated with the endpoint.</p>
+    #   <p>The unique identifier of the AgentCore Runtime associated with the endpoint.</p>
     # @option params [String] :endpoint_name
-    #   <p>The name of the agent runtime endpoint to delete.</p>
+    #   <p>The name of the AgentCore Runtime endpoint to delete.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -1074,10 +1122,10 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Deletes a Gateway.</p>
+    # <p>Deletes a gateway.</p>
     # @param [Hash, Types::DeleteGatewayRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The identifier of the gateway to delete. This can be either the gateway ID or the gateway ARN.</p>
+    #   <p>The identifier of the gateway to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_identifier: "GatewayIdentifier", # required
@@ -1097,12 +1145,12 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Deletes a Gateway Target.</p>
+    # <p>Deletes a gateway target.</p>
     # @param [Hash, Types::DeleteGatewayTargetRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The unique identifier of the Gateway associated with the target.</p>
+    #   <p>The unique identifier of the gateway associated with the target.</p>
     # @option params [String] :target_id
-    #   <p>The unique identifier of the Gateway Target to delete.</p>
+    #   <p>The unique identifier of the gateway target to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_identifier: "GatewayIdentifier", # required
@@ -1124,7 +1172,7 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Deletes a memory.</p>
+    # <p>Deletes an Amazon Bedrock AgentCore Memory resource.</p>
     # @param [Hash, Types::DeleteMemoryInput] params
     # @option params [String] :client_token
     #   <p>A client token is used for keeping track of idempotent requests. It can contain a session id which can be around 250 chars, combined with a unique AWS identifier.</p>
@@ -1187,12 +1235,12 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Gets an Amazon Secure Agent.</p>
+    # <p>Gets an Amazon Bedrock AgentCore Runtime.</p>
     # @param [Hash, Types::GetAgentRuntimeRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime to retrieve.</p>
+    #   <p>The unique identifier of the AgentCore Runtime to retrieve.</p>
     # @option params [String] :agent_runtime_version
-    #   <p>The version of the agent runtime to retrieve.</p>
+    #   <p>The version of the AgentCore Runtime to retrieve.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     agent_runtime_id: "AgentRuntimeId", # required
@@ -1221,7 +1269,11 @@ module Aws::BedrockAgentCoreControl
     #       }
     #     },
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       network_mode_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP" # One of: ["MCP", "HTTP"], # required
@@ -1237,6 +1289,10 @@ module Aws::BedrockAgentCoreControl
     #         allowed_clients: ["AllowedClient"]
     #       }
     #     },
+    #     request_header_configuration: {
+    #       # One of:
+    #       request_header_allowlist: ["HeaderName"]
+    #     },
     #     status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"], # required
     #   }
     # @return [Types::GetAgentRuntimeResponse]
@@ -1248,9 +1304,9 @@ module Aws::BedrockAgentCoreControl
     # <p>Gets information about an Amazon Secure AgentEndpoint.</p>
     # @param [Hash, Types::GetAgentRuntimeEndpointRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime associated with the endpoint.</p>
+    #   <p>The unique identifier of the AgentCore Runtime associated with the endpoint.</p>
     # @option params [String] :endpoint_name
-    #   <p>The name of the agent runtime endpoint to retrieve.</p>
+    #   <p>The name of the AgentCore Runtime endpoint to retrieve.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     agent_runtime_id: "AgentRuntimeId", # required
@@ -1325,7 +1381,11 @@ module Aws::BedrockAgentCoreControl
     #     description: "Description",
     #     execution_role_arn: "RoleArn",
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       vpc_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
     #     recording: {
     #       enabled: false,
@@ -1335,6 +1395,7 @@ module Aws::BedrockAgentCoreControl
     #       }
     #     },
     #     status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"], # required
+    #     failure_reason: "String",
     #     created_at: Time.now, # required
     #     last_updated_at: Time.now, # required
     #   }
@@ -1363,9 +1424,14 @@ module Aws::BedrockAgentCoreControl
     #     description: "Description",
     #     execution_role_arn: "RoleArn",
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "SANDBOX"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "SANDBOX", "VPC"], # required
+    #       vpc_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
     #     status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"], # required
+    #     failure_reason: "String",
     #     created_at: Time.now, # required
     #     last_updated_at: Time.now, # required
     #   }
@@ -1378,7 +1444,7 @@ module Aws::BedrockAgentCoreControl
     # <p>Retrieves information about a specific Gateway.</p>
     # @param [Hash, Types::GetGatewayRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The identifier of the gateway to retrieve. This can be either the gateway ID or the gateway ARN.</p>
+    #   <p>The identifier of the gateway to retrieve.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_identifier: "GatewayIdentifier", # required
@@ -1428,10 +1494,10 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Retrieves information about a specific Gateway Target.</p>
+    # <p>Retrieves information about a specific gateway target.</p>
     # @param [Hash, Types::GetGatewayTargetRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The identifier of the gateway that contains the target. This can be either the gateway ID or the gateway ARN.</p>
+    #   <p>The identifier of the gateway that contains the target.</p>
     # @option params [String] :target_id
     #   <p>The unique identifier of the target to retrieve.</p>
     # @example Request syntax with placeholder values
@@ -1544,7 +1610,7 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Retrieve an existing memory.</p>
+    # <p>Retrieve an existing Amazon Bedrock AgentCore Memory resource.</p>
     # @param [Hash, Types::GetMemoryInput] params
     # @option params [String] :memory_id
     #   <p>The unique identifier of the memory to retrieve.</p>
@@ -1781,7 +1847,7 @@ module Aws::BedrockAgentCoreControl
     # <p>Lists all endpoints for a specific Amazon Secure Agent.</p>
     # @param [Hash, Types::ListAgentRuntimeEndpointsRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime to list endpoints for.</p>
+    #   <p>The unique identifier of the AgentCore Runtime to list endpoints for.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in the response.</p>
     # @option params [String] :next_token
@@ -1822,7 +1888,7 @@ module Aws::BedrockAgentCoreControl
     # <p>Lists all versions of a specific Amazon Secure Agent.</p>
     # @param [Hash, Types::ListAgentRuntimeVersionsRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime to list versions for.</p>
+    #   <p>The unique identifier of the AgentCore Runtime to list versions for.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in the response.</p>
     # @option params [String] :next_token
@@ -2000,14 +2066,14 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Lists all targets for a specific Gateway.</p>
+    # <p>Lists all targets for a specific gateway.</p>
     # @param [Hash, Types::ListGatewayTargetsRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The identifier of the gateway to list targets for. This can be either the gateway ID or the gateway ARN.</p>
+    #   <p>The identifier of the gateway to list targets for.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call. The default value is 10. The maximum value is 50.</p>
+    #   <p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
+    #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_identifier: "GatewayIdentifier", # required
@@ -2037,12 +2103,12 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Lists all Gateways in the account.</p>
+    # <p>Lists all gateways in the account.</p>
     # @param [Hash, Types::ListGatewaysRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call. The default value is 10. The maximum value is 50.</p>
+    #   <p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
+    #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -2073,7 +2139,7 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Lists the memory present.</p>
+    # <p>Lists the available Amazon Bedrock AgentCore Memory resources in the current Amazon Web Services Region.</p>
     # @param [Hash, Types::ListMemoriesInput] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in a single call. The default value is 10. The maximum value is 50.</p>
@@ -2139,6 +2205,29 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
+    # <p>Lists the tags associated with the specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Code Interpreter tool, and Gateway.</p> </note>
+    # @param [Hash, Types::ListTagsForResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource for which you want to list tags.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "TaggableResourcesArn", # required
+    #   }
+    #   options = {}
+    #   response = client.list_tags_for_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::ListTagsForResourceResponse]
+    def list_tags_for_resource(params = {}, options = {})
+      request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
     # <p>Lists all workload identities in your account.</p>
     # @param [Hash, Types::ListWorkloadIdentitiesRequest] params
     # @option params [String] :next_token
@@ -2201,26 +2290,74 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
+    # <p>Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Code Interpreter tool, and Gateway.</p> </note>
+    # @param [Hash, Types::TagResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource that you want to tag.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to add to the resource. A tag is a key-value pair.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "TaggableResourcesArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.tag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::TagResourceResponse]
+    def tag_resource(params = {}, options = {})
+      request = build_request(:tag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes the specified tags from the specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Code Interpreter tool, and Gateway.</p> </note>
+    # @param [Hash, Types::UntagResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource that you want to untag.</p>
+    # @option params [Array<String>] :tag_keys
+    #   <p>The tag keys of the tags to remove from the resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "TaggableResourcesArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   }
+    #   options = {}
+    #   response = client.untag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UntagResourceResponse]
+    def untag_resource(params = {}, options = {})
+      request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
     # <p>Updates an existing Amazon Secure Agent.</p>
     # @param [Hash, Types::UpdateAgentRuntimeRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime to update.</p>
+    #   <p>The unique identifier of the AgentCore Runtime to update.</p>
     # @option params [String] :description
-    #   <p>The updated description of the agent runtime.</p>
-    # @option params [Types::AgentArtifact] :agent_runtime_artifact
-    #   <p>The updated artifact of the agent runtime.</p>
+    #   <p>The updated description of the AgentCore Runtime.</p>
+    # @option params [Types::AgentRuntimeArtifact] :agent_runtime_artifact
+    #   <p>The updated artifact of the AgentCore Runtime.</p>
     # @option params [String] :role_arn
-    #   <p>The updated IAM role ARN that provides permissions for the agent runtime.</p>
+    #   <p>The updated IAM role ARN that provides permissions for the AgentCore Runtime.</p>
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   <p>The updated network configuration for the agent runtime.</p>
+    #   <p>The updated network configuration for the AgentCore Runtime.</p>
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
     #   <p>The protocol configuration for an agent runtime. This structure defines how the agent runtime communicates with clients.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @option params [Hash<String, String>] :environment_variables
-    #   <p>Updated environment variables to set in the agent runtime environment.</p>
+    #   <p>Updated environment variables to set in the AgentCore Runtime environment.</p>
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   <p>The updated authorizer configuration for the agent runtime.</p>
+    #   <p>The updated authorizer configuration for the AgentCore Runtime.</p>
+    # @option params [Types::RequestHeaderConfiguration] :request_header_configuration
+    #   <p>The updated configuration for HTTP request headers that will be passed through to the runtime.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     agent_runtime_id: "AgentRuntimeId", # required
@@ -2233,7 +2370,11 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     role_arn: "RoleArn", # required
     #     network_configuration: { # required
-    #       network_mode: "PUBLIC" # One of: ["PUBLIC"], # required
+    #       network_mode: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       network_mode_config: {
+    #         security_groups: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP" # One of: ["MCP", "HTTP"], # required
@@ -2249,6 +2390,10 @@ module Aws::BedrockAgentCoreControl
     #         allowed_audience: ["AllowedAudience"],
     #         allowed_clients: ["AllowedClient"]
     #       }
+    #     },
+    #     request_header_configuration: {
+    #       # One of:
+    #       request_header_allowlist: ["HeaderName"]
     #     }
     #   }
     #   options = {}
@@ -2272,16 +2417,16 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Updates an existing Amazon Secure AgentEndpoint.</p>
+    # <p>Updates an existing Amazon Bedrock AgentCore Runtime endpoint.</p>
     # @param [Hash, Types::UpdateAgentRuntimeEndpointRequest] params
     # @option params [String] :agent_runtime_id
-    #   <p>The unique identifier of the agent runtime associated with the endpoint.</p>
+    #   <p>The unique identifier of the AgentCore Runtime associated with the endpoint.</p>
     # @option params [String] :endpoint_name
-    #   <p>The name of the agent runtime endpoint to update.</p>
+    #   <p>The name of the AgentCore Runtime endpoint to update.</p>
     # @option params [String] :agent_runtime_version
-    #   <p>The updated version of the agent runtime for the endpoint.</p>
+    #   <p>The updated version of the AgentCore Runtime for the endpoint.</p>
     # @option params [String] :description
-    #   <p>The updated description of the agent runtime endpoint.</p>
+    #   <p>The updated description of the AgentCore Runtime endpoint.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -2341,28 +2486,28 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Updates an existing Gateway.</p>
+    # <p>Updates an existing gateway.</p>
     # @param [Hash, Types::UpdateGatewayRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The identifier of the gateway to update. This can be either the gateway ID or the gateway ARN.</p>
+    #   <p>The identifier of the gateway to update.</p>
     # @option params [String] :name
-    #   <p>The updated name for the Gateway.</p>
+    #   <p>The name of the gateway. This name must be the same as the one when the gateway was created.</p>
     # @option params [String] :description
-    #   <p>The updated description for the Gateway.</p>
+    #   <p>The updated description for the gateway.</p>
     # @option params [String] :role_arn
-    #   <p>The updated IAM role ARN that provides permissions for the Gateway.</p>
+    #   <p>The updated IAM role ARN that provides permissions for the gateway.</p>
     # @option params [String] :protocol_type
-    #   <p>The updated protocol type for the Gateway.</p>
+    #   <p>The updated protocol type for the gateway.</p>
     # @option params [Types::GatewayProtocolConfiguration] :protocol_configuration
     #   <p>The configuration for a gateway protocol. This structure defines how the gateway communicates with external services.</p>
     # @option params [String] :authorizer_type
-    #   <p>The updated authorizer type for the Gateway.</p>
+    #   <p>The updated authorizer type for the gateway.</p>
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   <p>The updated authorizer configuration for the Gateway.</p>
+    #   <p>The updated authorizer configuration for the gateway.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The updated ARN of the KMS key used to encrypt the Gateway.</p>
+    #   <p>The updated ARN of the KMS key used to encrypt the gateway.</p>
     # @option params [String] :exception_level
-    #   <p>The verbosity of exception messages. Use DEBUG mode to see granular exception messages from a Gateway. If this parameter is not set, exception messages are by default sanitized for presentation to end users.</p>
+    #   <p>The level of detail in error messages returned when invoking the gateway.</p> <ul> <li> <p>If the value is <code>DEBUG</code>, granular exception messages are returned to help a user debug the gateway.</p> </li> <li> <p>If the value is omitted, a generic error message is returned to the end user.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_identifier: "GatewayIdentifier", # required
@@ -2435,20 +2580,20 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Updates an existing Gateway Target.</p>
+    # <p>Updates an existing gateway target.</p>
     # @param [Hash, Types::UpdateGatewayTargetRequest] params
     # @option params [String] :gateway_identifier
-    #   <p>The unique identifier of the Gateway associated with the target.</p>
+    #   <p>The unique identifier of the gateway associated with the target.</p>
     # @option params [String] :target_id
-    #   <p>The unique identifier of the Gateway Target to update.</p>
+    #   <p>The unique identifier of the gateway target to update.</p>
     # @option params [String] :name
-    #   <p>The updated name for the Gateway Target.</p>
+    #   <p>The updated name for the gateway target.</p>
     # @option params [String] :description
-    #   <p>The updated description for the Gateway Target.</p>
+    #   <p>The updated description for the gateway target.</p>
     # @option params [Types::TargetConfiguration] :target_configuration
     #   <p>The configuration for a gateway target. This structure defines how the gateway connects to and interacts with the target endpoint.</p>
     # @option params [Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
-    #   <p>The updated credential provider configurations for the Gateway Target.</p>
+    #   <p>The updated credential provider configurations for the gateway target.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_identifier: "GatewayIdentifier", # required
@@ -2646,18 +2791,18 @@ module Aws::BedrockAgentCoreControl
       request.send_request(options)
     end
 
-    # <p>Update memory.</p>
+    # <p>Update an Amazon Bedrock AgentCore Memory resource memory.</p>
     # @param [Hash, Types::UpdateMemoryInput] params
     # @option params [String] :client_token
     #   <p>A client token is used for keeping track of idempotent requests. It can contain a session id which can be around 250 chars, combined with a unique AWS identifier.</p>
     # @option params [String] :memory_id
     #   <p>The unique identifier of the memory to update.</p>
     # @option params [String] :description
-    #   <p>The updated description of the memory.</p>
+    #   <p>The updated description of the AgentCore Memory resource.</p>
     # @option params [Integer] :event_expiry_duration
     #   <p>The number of days after which memory events will expire, between 7 and 365 days.</p>
     # @option params [String] :memory_execution_role_arn
-    #   <p>The ARN of the IAM role that provides permissions for the memory.</p>
+    #   <p>The ARN of the IAM role that provides permissions for the AgentCore Memory resource.</p>
     # @option params [Types::ModifyMemoryStrategies] :memory_strategies
     #   <p>The memory strategies to add, modify, or delete.</p>
     # @example Request syntax with placeholder values

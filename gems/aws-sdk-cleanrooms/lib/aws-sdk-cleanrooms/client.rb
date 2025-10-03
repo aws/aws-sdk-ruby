@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::CleanRooms
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::CleanRooms
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::CleanRooms
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::CleanRooms::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::CleanRooms::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -345,6 +350,7 @@ module Aws::CleanRooms
     #             analysis_type: "DIRECT_ANALYSIS" # One of: ["DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"], # required
     #           }
     #         ],
+    #         resource_arn: "SchemaResourceArn",
     #         schema_type_properties: {
     #           # One of:
     #           id_mapping_table: {
@@ -1558,13 +1564,23 @@ module Aws::CleanRooms
     # @example Request syntax with placeholder values
     #   params = {
     #     membership_identifier: "MembershipIdentifier", # required
-    #     auto_refresh: "CALENDAR_MONTH" # One of: ["CALENDAR_MONTH", "NONE"], # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #     auto_refresh: "CALENDAR_MONTH" # One of: ["CALENDAR_MONTH", "NONE"],
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #     parameters: { # required
     #       # One of:
     #       differential_privacy: {
     #         epsilon: 1, # required
     #         users_noise_per_query: 1, # required
+    #       },
+    #       access_budget: {
+    #         budget_parameters: [ # required
+    #           {
+    #             type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #             budget: 1, # required
+    #             auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         ],
+    #         resource_arn: "BudgetedResourceArn", # required
     #       }
     #     },
     #     tags: {
@@ -1585,13 +1601,23 @@ module Aws::CleanRooms
     #       collaboration_arn: "CollaborationArn", # required
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
-    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #       auto_refresh: "CALENDAR_MONTH" # One of: ["CALENDAR_MONTH", "NONE"], # required
     #       parameters: { # required
     #         # One of:
     #         differential_privacy: {
     #           epsilon: 1, # required
     #           users_noise_per_query: 1, # required
+    #         },
+    #         access_budget: {
+    #           budget_parameters: [ # required
+    #             {
+    #               type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #               budget: 1, # required
+    #               auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           ],
+    #           resource_arn: "BudgetedResourceArn", # required
     #         }
     #       }
     #     }
@@ -2239,13 +2265,23 @@ module Aws::CleanRooms
     #       creator_account_id: "AccountId", # required
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
-    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #       auto_refresh: "CALENDAR_MONTH" # One of: ["CALENDAR_MONTH", "NONE"], # required
     #       parameters: { # required
     #         # One of:
     #         differential_privacy: {
     #           epsilon: 1, # required
     #           users_noise_per_query: 1, # required
+    #         },
+    #         access_budget: {
+    #           budget_parameters: [ # required
+    #             {
+    #               type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #               budget: 1, # required
+    #               auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           ],
+    #           resource_arn: "BudgetedResourceArn", # required
     #         }
     #       }
     #     }
@@ -2714,13 +2750,23 @@ module Aws::CleanRooms
     #       collaboration_arn: "CollaborationArn", # required
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
-    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #       auto_refresh: "CALENDAR_MONTH" # One of: ["CALENDAR_MONTH", "NONE"], # required
     #       parameters: { # required
     #         # One of:
     #         differential_privacy: {
     #           epsilon: 1, # required
     #           users_noise_per_query: 1, # required
+    #         },
+    #         access_budget: {
+    #           budget_parameters: [ # required
+    #             {
+    #               type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #               budget: 1, # required
+    #               auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           ],
+    #           resource_arn: "BudgetedResourceArn", # required
     #         }
     #       }
     #     }
@@ -2976,6 +3022,7 @@ module Aws::CleanRooms
     #           analysis_type: "DIRECT_ANALYSIS" # One of: ["DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"], # required
     #         }
     #       ],
+    #       resource_arn: "SchemaResourceArn",
     #       schema_type_properties: {
     #         # One of:
     #         id_mapping_table: {
@@ -3403,7 +3450,7 @@ module Aws::CleanRooms
     #         collaboration_id: "UUID", # required
     #         collaboration_arn: "CollaborationArn", # required
     #         creator_account_id: "AccountId", # required
-    #         privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #         privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #       }
@@ -3425,12 +3472,15 @@ module Aws::CleanRooms
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     # @option params [String] :next_token
     #   <p>The pagination token that's used to fetch the next set of results.</p>
+    # @option params [String] :access_budget_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Configured Table Association (ConfiguredTableAssociation) used to filter privacy budgets.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     collaboration_identifier: "CollaborationIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #     max_results: 1,
-    #     next_token: "PaginationToken"
+    #     next_token: "PaginationToken",
+    #     access_budget_resource_arn: "BudgetedResourceArn"
     #   }
     #   options = {}
     #   response = client.list_collaboration_privacy_budgets(params, options)
@@ -3445,7 +3495,7 @@ module Aws::CleanRooms
     #         collaboration_id: "UUID", # required
     #         collaboration_arn: "CollaborationArn", # required
     #         creator_account_id: "AccountId", # required
-    #         type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #         type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #         budget: { # required
@@ -3459,6 +3509,20 @@ module Aws::CleanRooms
     #               }
     #             ],
     #             epsilon: 1, # required
+    #           },
+    #           access_budget: {
+    #             resource_arn: "BudgetedResourceArn", # required
+    #             details: [ # required
+    #               {
+    #                 start_time: Time.now, # required
+    #                 end_time: Time.now,
+    #                 remaining_budget: 1, # required
+    #                 budget: 1, # required
+    #                 budget_type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #                 auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               }
+    #             ],
+    #             aggregate_remaining_budget: 1, # required
     #           }
     #         }
     #       }
@@ -3871,7 +3935,7 @@ module Aws::CleanRooms
     #         membership_arn: "MembershipArn", # required
     #         collaboration_id: "UUID", # required
     #         collaboration_arn: "CollaborationArn", # required
-    #         privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #         privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #       }
@@ -3893,12 +3957,15 @@ module Aws::CleanRooms
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
+    # @option params [String] :access_budget_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the access budget resource to filter privacy budgets by.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     membership_identifier: "MembershipIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #     next_token: "PaginationToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     access_budget_resource_arn: "BudgetedResourceArn"
     #   }
     #   options = {}
     #   response = client.list_privacy_budgets(params, options)
@@ -3914,7 +3981,7 @@ module Aws::CleanRooms
     #         membership_arn: "MembershipArn", # required
     #         collaboration_id: "UUID", # required
     #         collaboration_arn: "CollaborationArn", # required
-    #         type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #         type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #         budget: { # required
@@ -3928,6 +3995,20 @@ module Aws::CleanRooms
     #               }
     #             ],
     #             epsilon: 1, # required
+    #           },
+    #           access_budget: {
+    #             resource_arn: "BudgetedResourceArn", # required
+    #             details: [ # required
+    #               {
+    #                 start_time: Time.now, # required
+    #                 end_time: Time.now,
+    #                 remaining_budget: 1, # required
+    #                 budget: 1, # required
+    #                 budget_type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #                 auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               }
+    #             ],
+    #             aggregate_remaining_budget: 1, # required
     #           }
     #         }
     #       }
@@ -4073,6 +4154,7 @@ module Aws::CleanRooms
     #         collaboration_arn: "CollaborationArn", # required
     #         analysis_rule_types: ["AGGREGATION" # One of: ["AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"]], # required
     #         analysis_method: "DIRECT_QUERY" # One of: ["DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"],
+    #         resource_arn: "SchemaResourceArn",
     #         selected_analysis_methods: ["DIRECT_QUERY" # One of: ["DIRECT_QUERY", "DIRECT_JOB"]]
     #       }
     #     ],
@@ -4113,10 +4195,13 @@ module Aws::CleanRooms
     #   <p>The unique identifier of the ID mapping table that you want to populate.</p>
     # @option params [String] :membership_identifier
     #   <p>The unique identifier of the membership that contains the ID mapping table that you want to populate.</p>
+    # @option params [String] :job_type
+    #   <p>The job type of the rule-based ID mapping job. Valid values include:</p> <p> <code>INCREMENTAL</code>: Processes only new or changed data since the last job run. This is the default job type if the ID mapping workflow was created in Entity Resolution with <code>incrementalRunConfig</code> specified.</p> <p> <code>BATCH</code>: Processes all data from the input source, regardless of previous job runs. This is the default job type if the ID mapping workflow was created in Entity Resolution but <code>incrementalRunConfig</code> wasn't specified.</p> <p> <code>DELETE_ONLY</code>: Processes only deletion requests from <code>BatchDeleteUniqueId</code>, which is set in Entity Resolution.</p> <p>For more information about <code>incrementalRunConfig</code> and <code>BatchDeleteUniqueId</code>, see the <a href="https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html">Entity Resolution API Reference</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id_mapping_table_identifier: "UUID", # required
     #     membership_identifier: "MembershipIdentifier", # required
+    #     job_type: "BATCH" # One of: ["BATCH", "INCREMENTAL", "DELETE_ONLY"]
     #   }
     #   options = {}
     #   response = client.populate_id_mapping_table(params, options)
@@ -5251,12 +5336,21 @@ module Aws::CleanRooms
     #   params = {
     #     membership_identifier: "MembershipIdentifier", # required
     #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #     parameters: {
     #       # One of:
     #       differential_privacy: {
     #         epsilon: 1,
     #         users_noise_per_query: 1
+    #       },
+    #       access_budget: {
+    #         budget_parameters: [ # required
+    #           {
+    #             type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #             budget: 1, # required
+    #             auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         ]
     #       }
     #     }
     #   }
@@ -5274,13 +5368,23 @@ module Aws::CleanRooms
     #       collaboration_arn: "CollaborationArn", # required
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
-    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY"], # required
+    #       privacy_budget_type: "DIFFERENTIAL_PRIVACY" # One of: ["DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"], # required
     #       auto_refresh: "CALENDAR_MONTH" # One of: ["CALENDAR_MONTH", "NONE"], # required
     #       parameters: { # required
     #         # One of:
     #         differential_privacy: {
     #           epsilon: 1, # required
     #           users_noise_per_query: 1, # required
+    #         },
+    #         access_budget: {
+    #           budget_parameters: [ # required
+    #             {
+    #               type: "CALENDAR_DAY" # One of: ["CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"], # required
+    #               budget: 1, # required
+    #               auto_refresh: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           ],
+    #           resource_arn: "BudgetedResourceArn", # required
     #         }
     #       }
     #     }

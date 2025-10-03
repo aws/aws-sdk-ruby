@@ -224,7 +224,7 @@ module Aws::Lightsail
     #               <li>
     #                  <p>
     #                     <code>Unknown</code> - The reason that synchronization failed is unknown. Contact
-    #               Amazon Web ServicesSupport for more information.</p>
+    #               Amazon Web Services Support for more information.</p>
     #               </li>
     #            </ul>
     #   @return [String]

@@ -1,6 +1,61 @@
 module Aws::ECS
   module Types
 
+    class AcceleratorCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    module AcceleratorManufacturer
+      AMAZON_WEB_SERVICES: String
+      AMD: String
+      NVIDIA: String
+      XILINX: String
+      HABANA: String
+    end
+
+    module AcceleratorName
+      A100: String
+      INFERENTIA: String
+      K520: String
+      K80: String
+      M60: String
+      RADEON_PRO_V520: String
+      T4: String
+      VU9P: String
+      V100: String
+      A10G: String
+      H100: String
+      T4G: String
+    end
+
+    class AcceleratorTotalMemoryMiBRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    module AcceleratorType
+      GPU: String
+      FPGA: String
+      INFERENCE: String
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -159,6 +214,25 @@ module Aws::ECS
       attr_accessor assign_public_ip: String?
     end
 
+    module BareMetal
+      INCLUDED: String
+      REQUIRED: String
+      EXCLUDED: String
+    end
+
+    class BaselineEbsBandwidthMbpsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
     class BlockedException
       include Smithy::Schema::Structure
 
@@ -168,6 +242,12 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module BurstablePerformance
+      INCLUDED: String
+      REQUIRED: String
+      EXCLUDED: String
     end
 
     module CPUArchitecture
@@ -181,21 +261,27 @@ module Aws::ECS
       def initialize: (
         ?capacity_provider_arn: String,
         ?name: String,
+        ?cluster: String,
         ?status: String,
         ?auto_scaling_group_provider: Types::AutoScalingGroupProvider,
+        ?managed_instances_provider: Types::ManagedInstancesProvider,
         ?update_status: String,
         ?update_status_reason: String,
         ?tags: Array[Types::Tag],
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor capacity_provider_arn: String?
       attr_accessor name: String?
+      attr_accessor cluster: String?
       attr_accessor status: String?
       attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProvider?
+      attr_accessor managed_instances_provider: Types::ManagedInstancesProvider?
       attr_accessor update_status: String?
       attr_accessor update_status_reason: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor type: String?
     end
 
     module CapacityProviderField
@@ -203,7 +289,9 @@ module Aws::ECS
     end
 
     module CapacityProviderStatus
+      PROVISIONING: String
       ACTIVE: String
+      DEPROVISIONING: String
       INACTIVE: String
     end
 
@@ -222,7 +310,17 @@ module Aws::ECS
       attr_accessor base: Integer?
     end
 
+    module CapacityProviderType
+      EC2_AUTOSCALING: String
+      MANAGED_INSTANCES: String
+      FARGATE: String
+      FARGATE_SPOT: String
+    end
+
     module CapacityProviderUpdateStatus
+      CREATE_IN_PROGRESS: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
       DELETE_IN_PROGRESS: String
       DELETE_COMPLETE: String
       DELETE_FAILED: String
@@ -294,6 +392,17 @@ module Aws::ECS
 
       attr_accessor execute_command_configuration: Types::ExecuteCommandConfiguration?
       attr_accessor managed_storage_configuration: Types::ManagedStorageConfiguration?
+    end
+
+    class ClusterContainsCapacityProviderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class ClusterContainsContainerInstancesException
@@ -391,6 +500,7 @@ module Aws::ECS
       EC2: String
       FARGATE: String
       EXTERNAL: String
+      MANAGED_INSTANCES: String
     end
 
     class ConflictException
@@ -716,18 +826,28 @@ module Aws::ECS
       attr_accessor status: String?
     end
 
+    module CpuManufacturer
+      INTEL: String
+      AMD: String
+      AMAZON_WEB_SERVICES: String
+    end
+
     class CreateCapacityProviderRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?name: String,
+        ?cluster: String,
         ?auto_scaling_group_provider: Types::AutoScalingGroupProvider,
+        ?managed_instances_provider: Types::CreateManagedInstancesProviderConfiguration,
         ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+      attr_accessor cluster: String?
       attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProvider?
+      attr_accessor managed_instances_provider: Types::CreateManagedInstancesProviderConfiguration?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -774,6 +894,21 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster: Types::Cluster?
+    end
+
+    class CreateManagedInstancesProviderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?infrastructure_role_arn: String,
+        ?instance_launch_template: Types::InstanceLaunchTemplate,
+        ?propagate_tags: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplate?
+      attr_accessor propagate_tags: String?
     end
 
     class CreateServiceRequest
@@ -960,10 +1095,12 @@ module Aws::ECS
 
       def initialize: (
         ?capacity_provider: String,
+        ?cluster: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor capacity_provider: String?
+      attr_accessor cluster: String?
     end
 
     class DeleteCapacityProviderResponse
@@ -1214,12 +1351,14 @@ module Aws::ECS
         ?hook_target_arn: String,
         ?role_arn: String,
         ?lifecycle_stages: Array[String],
+        ?hook_details: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor hook_target_arn: String?
       attr_accessor role_arn: String?
       attr_accessor lifecycle_stages: Array[String]?
+      attr_accessor hook_details: Smithy::Schema::document?
     end
 
     module DeploymentLifecycleHookStage
@@ -1296,6 +1435,7 @@ module Aws::ECS
 
       def initialize: (
         ?capacity_providers: Array[String],
+        ?cluster: String,
         ?include: Array[String],
         ?max_results: Integer,
         ?next_token: String,
@@ -1303,6 +1443,7 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor capacity_providers: Array[String]?
+      attr_accessor cluster: String?
       attr_accessor include: Array[String]?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
@@ -1942,6 +2083,11 @@ module Aws::ECS
       attr_accessor device_type: String?
     end
 
+    module InstanceGeneration
+      CURRENT: String
+      PREVIOUS: String
+    end
+
     class InstanceHealthCheckResult
       include Smithy::Schema::Structure
 
@@ -1968,6 +2114,101 @@ module Aws::ECS
 
     module InstanceHealthCheckType
       CONTAINER_RUNTIME: String
+    end
+
+    class InstanceLaunchTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_profile_arn: String,
+        ?network_configuration: Types::ManagedInstancesNetworkConfiguration,
+        ?storage_configuration: Types::ManagedInstancesStorageConfiguration,
+        ?monitoring: String,
+        ?instance_requirements: Types::InstanceRequirementsRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_profile_arn: String?
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration?
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration?
+      attr_accessor monitoring: String?
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest?
+    end
+
+    class InstanceLaunchTemplateUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_profile_arn: String,
+        ?network_configuration: Types::ManagedInstancesNetworkConfiguration,
+        ?storage_configuration: Types::ManagedInstancesStorageConfiguration,
+        ?monitoring: String,
+        ?instance_requirements: Types::InstanceRequirementsRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_profile_arn: String?
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration?
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration?
+      attr_accessor monitoring: String?
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest?
+    end
+
+    class InstanceRequirementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v_cpu_count: Types::VCpuCountRangeRequest,
+        ?memory_mi_b: Types::MemoryMiBRequest,
+        ?cpu_manufacturers: Array[String],
+        ?memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest,
+        ?excluded_instance_types: Array[String],
+        ?instance_generations: Array[String],
+        ?spot_max_price_percentage_over_lowest_price: Integer,
+        ?on_demand_max_price_percentage_over_lowest_price: Integer,
+        ?bare_metal: String,
+        ?burstable_performance: String,
+        ?require_hibernate_support: bool,
+        ?network_interface_count: Types::NetworkInterfaceCountRequest,
+        ?local_storage: String,
+        ?local_storage_types: Array[String],
+        ?total_local_storage_gb: Types::TotalLocalStorageGBRequest,
+        ?baseline_ebs_bandwidth_mbps: Types::BaselineEbsBandwidthMbpsRequest,
+        ?accelerator_types: Array[String],
+        ?accelerator_count: Types::AcceleratorCountRequest,
+        ?accelerator_manufacturers: Array[String],
+        ?accelerator_names: Array[String],
+        ?accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest,
+        ?network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest,
+        ?allowed_instance_types: Array[String],
+        ?max_spot_price_as_percentage_of_optimal_on_demand_price: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v_cpu_count: Types::VCpuCountRangeRequest?
+      attr_accessor memory_mi_b: Types::MemoryMiBRequest?
+      attr_accessor cpu_manufacturers: Array[String]?
+      attr_accessor memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest?
+      attr_accessor excluded_instance_types: Array[String]?
+      attr_accessor instance_generations: Array[String]?
+      attr_accessor spot_max_price_percentage_over_lowest_price: Integer?
+      attr_accessor on_demand_max_price_percentage_over_lowest_price: Integer?
+      attr_accessor bare_metal: String?
+      attr_accessor burstable_performance: String?
+      attr_accessor require_hibernate_support: bool?
+      attr_accessor network_interface_count: Types::NetworkInterfaceCountRequest?
+      attr_accessor local_storage: String?
+      attr_accessor local_storage_types: Array[String]?
+      attr_accessor total_local_storage_gb: Types::TotalLocalStorageGBRequest?
+      attr_accessor baseline_ebs_bandwidth_mbps: Types::BaselineEbsBandwidthMbpsRequest?
+      attr_accessor accelerator_types: Array[String]?
+      attr_accessor accelerator_count: Types::AcceleratorCountRequest?
+      attr_accessor accelerator_manufacturers: Array[String]?
+      attr_accessor accelerator_names: Array[String]?
+      attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest?
+      attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest?
+      attr_accessor allowed_instance_types: Array[String]?
+      attr_accessor max_spot_price_as_percentage_of_optimal_on_demand_price: Integer?
     end
 
     class InvalidParameterException
@@ -2017,6 +2258,7 @@ module Aws::ECS
       EC2: String
       FARGATE: String
       EXTERNAL: String
+      MANAGED_INSTANCES: String
     end
 
     class LimitExceededException
@@ -2416,6 +2658,17 @@ module Aws::ECS
       attr_accessor advanced_configuration: Types::AdvancedConfiguration?
     end
 
+    module LocalStorage
+      INCLUDED: String
+      REQUIRED: String
+      EXCLUDED: String
+    end
+
+    module LocalStorageType
+      HDD: String
+      SSD: String
+    end
+
     class LogConfiguration
       include Smithy::Schema::Structure
 
@@ -2485,6 +2738,50 @@ module Aws::ECS
       DISABLED: String
     end
 
+    module ManagedInstancesMonitoringOptions
+      BASIC: String
+      DETAILED: String
+    end
+
+    class ManagedInstancesNetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class ManagedInstancesProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?infrastructure_role_arn: String,
+        ?instance_launch_template: Types::InstanceLaunchTemplate,
+        ?propagate_tags: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplate?
+      attr_accessor propagate_tags: String?
+    end
+
+    class ManagedInstancesStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_size_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_size_gi_b: Integer?
+    end
+
     class ManagedScaling
       include Smithy::Schema::Structure
 
@@ -2527,6 +2824,32 @@ module Aws::ECS
       DISABLED: String
     end
 
+    class MemoryGiBPerVCpuRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
+    class MemoryMiBRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
     class MissingVersionException
       include Smithy::Schema::Structure
 
@@ -2562,6 +2885,19 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class NetworkBandwidthGbpsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
     end
 
     class NetworkBinding
@@ -2609,6 +2945,19 @@ module Aws::ECS
       attr_accessor attachment_id: String?
       attr_accessor private_ipv4_address: String?
       attr_accessor ipv6_address: String?
+    end
+
+    class NetworkInterfaceCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
     end
 
     module NetworkMode
@@ -2742,6 +3091,11 @@ module Aws::ECS
       attr_accessor name: String?
       attr_accessor app_protocol: String?
       attr_accessor container_port_range: String?
+    end
+
+    module PropagateMITags
+      CAPACITY_PROVIDER: String
+      NONE: String
     end
 
     module PropagateTags
@@ -4451,6 +4805,19 @@ module Aws::ECS
       attr_accessor mount_options: Array[String]?
     end
 
+    class TotalLocalStorageGBRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Float,
+        ?max: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Float?
+      attr_accessor max: Float?
+    end
+
     module TransportProtocol
       TCP: String
       UDP: String
@@ -4527,12 +4894,16 @@ module Aws::ECS
 
       def initialize: (
         ?name: String,
+        ?cluster: String,
         ?auto_scaling_group_provider: Types::AutoScalingGroupProviderUpdate,
+        ?managed_instances_provider: Types::UpdateManagedInstancesProviderConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+      attr_accessor cluster: String?
       attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProviderUpdate?
+      attr_accessor managed_instances_provider: Types::UpdateManagedInstancesProviderConfiguration?
     end
 
     class UpdateCapacityProviderResponse
@@ -4659,6 +5030,21 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class UpdateManagedInstancesProviderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?infrastructure_role_arn: String,
+        ?instance_launch_template: Types::InstanceLaunchTemplateUpdate,
+        ?propagate_tags: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplateUpdate?
+      attr_accessor propagate_tags: String?
     end
 
     class UpdateServicePrimaryTaskSetRequest
@@ -4807,6 +5193,19 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor task_set: Types::TaskSet?
+    end
+
+    class VCpuCountRangeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
     end
 
     module VersionConsistency

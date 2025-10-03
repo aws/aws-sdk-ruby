@@ -7,6 +7,7 @@ module Aws::Billing
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -46,6 +47,15 @@ module Aws::Billing
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AssociateSourceViewsResponse
+      include Smithy::Client::_Response[Types::AssociateSourceViewsResponse]
+      def arn: () -> String?
+    end
+    def associate_source_views: (
+      ?arn: String,
+      ?source_views: Array[String]
+    ) -> _AssociateSourceViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceViewsResponse
+
     interface _CreateBillingViewResponse
       include Smithy::Client::_Response[Types::CreateBillingViewResponse]
       def arn: () -> String?
@@ -63,6 +73,10 @@ module Aws::Billing
         tags: {
           key: String,
           values: untyped
+        },
+        time_range: {
+          begin_date_inclusive: Time,
+          end_date_inclusive: untyped
         }
       },
       ?client_token: String,
@@ -79,8 +93,18 @@ module Aws::Billing
       def arn: () -> String?
     end
     def delete_billing_view: (
-      ?arn: String
+      ?arn: String,
+      ?force: bool
     ) -> _DeleteBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBillingViewResponse
+
+    interface _DisassociateSourceViewsResponse
+      include Smithy::Client::_Response[Types::DisassociateSourceViewsResponse]
+      def arn: () -> String?
+    end
+    def disassociate_source_views: (
+      ?arn: String,
+      ?source_views: Array[String]
+    ) -> _DisassociateSourceViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSourceViewsResponse
 
     interface _GetBillingViewResponse
       include Smithy::Client::_Response[Types::GetBillingViewResponse]
@@ -112,6 +136,7 @@ module Aws::Billing
       ?arns: Array[String],
       ?billing_view_types: Array[String],
       ?owner_account_id: String,
+      ?source_account_id: String,
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListBillingViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingViewsResponse
@@ -173,6 +198,10 @@ module Aws::Billing
         tags: {
           key: String,
           values: untyped
+        },
+        time_range: {
+          begin_date_inclusive: Time,
+          end_date_inclusive: untyped
         }
       }
     ) -> _UpdateBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillingViewResponse

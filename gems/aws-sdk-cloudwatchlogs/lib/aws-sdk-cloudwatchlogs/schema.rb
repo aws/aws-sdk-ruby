@@ -154,6 +154,7 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatchlogs#DisassociateKmsKeyRequest', name: 'DisassociateKmsKeyRequest')
     Distribution = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatchlogs#Distribution', name: 'Distribution')
     DynamicTokenPosition = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cloudwatchlogs#DynamicTokenPosition', name: 'DynamicTokenPosition', traits: {"smithy.api#default" => 0})
+    EmitSystemFields = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatchlogs#EmitSystemFields', name: 'EmitSystemFields')
     EncryptionKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatchlogs#EncryptionKey', name: 'EncryptionKey', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     Entity = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatchlogs#Entity', name: 'Entity')
     EntityAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.cloudwatchlogs#EntityAttributes', name: 'EntityAttributes', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
@@ -189,6 +190,7 @@ module Aws::CloudWatchLogs
     FieldIndex = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatchlogs#FieldIndex', name: 'FieldIndex')
     FieldIndexName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatchlogs#FieldIndexName', name: 'FieldIndexName', traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\.\\-_/#A-Za-z0-9]+$"})
     FieldIndexes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatchlogs#FieldIndexes', name: 'FieldIndexes')
+    FieldSelectionCriteria = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatchlogs#FieldSelectionCriteria', name: 'FieldSelectionCriteria', traits: {"smithy.api#length" => {"min" => 0, "max" => 2000}})
     FieldsData = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatchlogs#FieldsData', name: 'FieldsData')
     FilterCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cloudwatchlogs#FilterCount', name: 'FilterCount')
     FilterLogEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatchlogs#FilterLogEventsRequest', name: 'FilterLogEventsRequest')
@@ -489,6 +491,7 @@ module Aws::CloudWatchLogs
     SuppressionState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatchlogs#SuppressionState', name: 'SuppressionState')
     SuppressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatchlogs#SuppressionType', name: 'SuppressionType')
     SuppressionUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatchlogs#SuppressionUnit', name: 'SuppressionUnit')
+    SystemField = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatchlogs#SystemField', name: 'SystemField')
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatchlogs#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatchlogs#TagKeyList', name: 'TagKeyList', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatchlogs#TagList', name: 'TagList', traits: {"smithy.api#length" => {"min" => 1}})
@@ -918,6 +921,7 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest.type = Types::DisassociateKmsKeyRequest
     Distribution.add_member(:random, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Random', traits: {"smithy.api#enumValue" => "Random"}))
     Distribution.add_member(:by_log_stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ByLogStream', traits: {"smithy.api#enumValue" => "ByLogStream"}))
+    EmitSystemFields.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SystemField)
     Entity.add_member(:key_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityKeyAttributes, location_name: 'keyAttributes'))
     Entity.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityAttributes, location_name: 'attributes'))
     Entity.type = Types::Entity
@@ -1268,6 +1272,8 @@ module Aws::CloudWatchLogs
     MetricFilter.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'creationTime'))
     MetricFilter.add_member(:log_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupName, location_name: 'logGroupName'))
     MetricFilter.add_member(:apply_on_transformed_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: 'applyOnTransformedLogs', traits: {"smithy.api#default" => false}))
+    MetricFilter.add_member(:field_selection_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: 'fieldSelectionCriteria'))
+    MetricFilter.add_member(:emit_system_field_dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: 'emitSystemFieldDimensions'))
     MetricFilter.type = Types::MetricFilter
     MetricFilterMatchRecord.add_member(:event_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventNumber, location_name: 'eventNumber', traits: {"smithy.api#default" => 0}))
     MetricFilterMatchRecord.add_member(:event_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventMessage, location_name: 'eventMessage'))
@@ -1493,6 +1499,8 @@ module Aws::CloudWatchLogs
     PutMetricFilterRequest.add_member(:filter_pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterPattern, location_name: 'filterPattern', traits: {"smithy.api#required" => {}}))
     PutMetricFilterRequest.add_member(:metric_transformations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricTransformations, location_name: 'metricTransformations', traits: {"smithy.api#required" => {}}))
     PutMetricFilterRequest.add_member(:apply_on_transformed_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: 'applyOnTransformedLogs', traits: {"smithy.api#default" => false}))
+    PutMetricFilterRequest.add_member(:field_selection_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: 'fieldSelectionCriteria'))
+    PutMetricFilterRequest.add_member(:emit_system_field_dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: 'emitSystemFieldDimensions'))
     PutMetricFilterRequest.type = Types::PutMetricFilterRequest
     PutQueryDefinitionRequest.add_member(:query_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLanguage, location_name: 'queryLanguage'))
     PutQueryDefinitionRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryDefinitionName, location_name: 'name', traits: {"smithy.api#required" => {}}))
@@ -1521,6 +1529,8 @@ module Aws::CloudWatchLogs
     PutSubscriptionFilterRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn'))
     PutSubscriptionFilterRequest.add_member(:distribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Distribution, location_name: 'distribution'))
     PutSubscriptionFilterRequest.add_member(:apply_on_transformed_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: 'applyOnTransformedLogs', traits: {"smithy.api#default" => false}))
+    PutSubscriptionFilterRequest.add_member(:field_selection_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: 'fieldSelectionCriteria'))
+    PutSubscriptionFilterRequest.add_member(:emit_system_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: 'emitSystemFields'))
     PutSubscriptionFilterRequest.type = Types::PutSubscriptionFilterRequest
     PutTransformerRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupIdentifier, location_name: 'logGroupIdentifier', traits: {"smithy.api#required" => {}}))
     PutTransformerRequest.add_member(:transformer_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Processors, location_name: 'transformerConfig', traits: {"smithy.api#required" => {}}))
@@ -1692,6 +1702,8 @@ module Aws::CloudWatchLogs
     SubscriptionFilter.add_member(:distribution, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Distribution, location_name: 'distribution'))
     SubscriptionFilter.add_member(:apply_on_transformed_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplyOnTransformedLogs, location_name: 'applyOnTransformedLogs', traits: {"smithy.api#default" => false}))
     SubscriptionFilter.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'creationTime'))
+    SubscriptionFilter.add_member(:field_selection_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldSelectionCriteria, location_name: 'fieldSelectionCriteria'))
+    SubscriptionFilter.add_member(:emit_system_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmitSystemFields, location_name: 'emitSystemFields'))
     SubscriptionFilter.type = Types::SubscriptionFilter
     SubscriptionFilters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubscriptionFilter)
     SubstituteString.add_member(:entries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubstituteStringEntries, location_name: 'entries', traits: {"smithy.api#required" => {}}))

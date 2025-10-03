@@ -18,6 +18,7 @@ module Aws::Organizations
     AccountNotFoundException: StructureShape
     AccountNotRegisteredException: StructureShape
     AccountOwnerNotVerifiedException: StructureShape
+    AccountState: EnumShape
     AccountStatus: EnumShape
     Accounts: ListShape
     ActionType: EnumShape

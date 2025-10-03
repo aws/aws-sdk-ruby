@@ -365,6 +365,39 @@ module Aws::ConnectCases
       attr_accessor message: String?
     end
 
+    class ConnectCaseContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class ConnectCaseFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
+    class ConnectCaseInputContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+    end
+
     class Contact
       include Smithy::Schema::Structure
 
@@ -616,6 +649,67 @@ module Aws::ConnectCases
 
       attr_accessor template_id: String?
       attr_accessor template_arn: String?
+    end
+
+    class CustomContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::FieldValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::FieldValue]?
+    end
+
+    class CustomFieldsFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?field: Types::FieldFilter,
+        ?not: Types::CustomFieldsFilter,
+        ?and_all: Array[Types::CustomFieldsFilter],
+        ?or_all: Array[Types::CustomFieldsFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: Types::FieldFilter?
+      attr_accessor not: Types::CustomFieldsFilter?
+      attr_accessor and_all: Array[Types::CustomFieldsFilter]?
+      attr_accessor or_all: Array[Types::CustomFieldsFilter]?
+
+      class Field < CustomFieldsFilter
+      end
+      class Not < CustomFieldsFilter
+      end
+      class AndAll < CustomFieldsFilter
+      end
+      class OrAll < CustomFieldsFilter
+      end
+      class Unknown < CustomFieldsFilter
+      end
+    end
+
+    class CustomFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Types::CustomFieldsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Types::CustomFieldsFilter?
+    end
+
+    class CustomInputContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::FieldValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::FieldValue]?
     end
 
     class DeleteCaseRequest
@@ -1655,6 +1749,8 @@ module Aws::ConnectCases
         ?comment: Types::CommentContent,
         ?file: Types::FileContent,
         ?sla: Types::SlaContent,
+        ?connect_case: Types::ConnectCaseContent,
+        ?custom: Types::CustomContent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1662,6 +1758,8 @@ module Aws::ConnectCases
       attr_accessor comment: Types::CommentContent?
       attr_accessor file: Types::FileContent?
       attr_accessor sla: Types::SlaContent?
+      attr_accessor connect_case: Types::ConnectCaseContent?
+      attr_accessor custom: Types::CustomContent?
 
       class Contact < RelatedItemContent
       end
@@ -1670,6 +1768,10 @@ module Aws::ConnectCases
       class File < RelatedItemContent
       end
       class Sla < RelatedItemContent
+      end
+      class ConnectCase < RelatedItemContent
+      end
+      class Custom < RelatedItemContent
       end
       class Unknown < RelatedItemContent
       end
@@ -1694,6 +1796,8 @@ module Aws::ConnectCases
         ?comment: Types::CommentContent,
         ?file: Types::FileContent,
         ?sla: Types::SlaInputContent,
+        ?connect_case: Types::ConnectCaseInputContent,
+        ?custom: Types::CustomInputContent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1701,6 +1805,8 @@ module Aws::ConnectCases
       attr_accessor comment: Types::CommentContent?
       attr_accessor file: Types::FileContent?
       attr_accessor sla: Types::SlaInputContent?
+      attr_accessor connect_case: Types::ConnectCaseInputContent?
+      attr_accessor custom: Types::CustomInputContent?
 
       class Contact < RelatedItemInputContent
       end
@@ -1709,6 +1815,10 @@ module Aws::ConnectCases
       class File < RelatedItemInputContent
       end
       class Sla < RelatedItemInputContent
+      end
+      class ConnectCase < RelatedItemInputContent
+      end
+      class Custom < RelatedItemInputContent
       end
       class Unknown < RelatedItemInputContent
       end
@@ -1722,6 +1832,8 @@ module Aws::ConnectCases
         ?comment: Types::CommentFilter,
         ?file: Types::FileFilter,
         ?sla: Types::SlaFilter,
+        ?connect_case: Types::ConnectCaseFilter,
+        ?custom: Types::CustomFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1729,6 +1841,8 @@ module Aws::ConnectCases
       attr_accessor comment: Types::CommentFilter?
       attr_accessor file: Types::FileFilter?
       attr_accessor sla: Types::SlaFilter?
+      attr_accessor connect_case: Types::ConnectCaseFilter?
+      attr_accessor custom: Types::CustomFilter?
 
       class Contact < RelatedItemTypeFilter
       end
@@ -1737,6 +1851,10 @@ module Aws::ConnectCases
       class File < RelatedItemTypeFilter
       end
       class Sla < RelatedItemTypeFilter
+      end
+      class ConnectCase < RelatedItemTypeFilter
+      end
+      class Custom < RelatedItemTypeFilter
       end
       class Unknown < RelatedItemTypeFilter
       end
@@ -1779,6 +1897,74 @@ module Aws::ConnectCases
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    class SearchAllRelatedItemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RelatedItemTypeFilter],
+        ?sorts: Array[Types::SearchAllRelatedItemsSort],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RelatedItemTypeFilter]?
+      attr_accessor sorts: Array[Types::SearchAllRelatedItemsSort]?
+    end
+
+    class SearchAllRelatedItemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?related_items: Array[Types::SearchAllRelatedItemsResponseItem?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor related_items: Array[Types::SearchAllRelatedItemsResponseItem?]?
+    end
+
+    class SearchAllRelatedItemsResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_item_id: String,
+        ?case_id: String,
+        ?type: String,
+        ?association_time: Time,
+        ?content: Types::RelatedItemContent,
+        ?performed_by: Types::UserUnion,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_item_id: String?
+      attr_accessor case_id: String?
+      attr_accessor type: String?
+      attr_accessor association_time: Time?
+      attr_accessor content: Types::RelatedItemContent?
+      attr_accessor performed_by: Types::UserUnion?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class SearchAllRelatedItemsSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_property: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_property: String?
+      attr_accessor sort_order: String?
     end
 
     class SearchCasesInput

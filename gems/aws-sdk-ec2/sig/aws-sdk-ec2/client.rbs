@@ -7,6 +7,7 @@ module Aws::EC2
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -11751,7 +11752,15 @@ module Aws::EC2
     def replace_image_criteria_in_allowed_images_settings: (
       ?image_criteria: Array[
         {
-          image_providers: Array[String]
+          image_providers: Array[String],
+          marketplace_product_codes: Array[String],
+          image_names: Array[String],
+          deprecation_time_condition: {
+            maximum_days_since_deprecated: Integer
+          },
+          creation_date_condition: {
+            maximum_days_since_created: Integer
+          }
         }
       ],
       ?dry_run: bool

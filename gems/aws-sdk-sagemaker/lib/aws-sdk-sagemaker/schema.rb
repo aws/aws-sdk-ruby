@@ -2904,6 +2904,7 @@ module Aws::SageMaker
     AppInstanceType.add_member(:ml_trn1_n_32_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_TRN1N_32XLARGE', traits: {"smithy.api#enumValue" => "ml.trn1n.32xlarge"}))
     AppInstanceType.add_member(:ml_p5_48_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_P5_48XLARGE', traits: {"smithy.api#enumValue" => "ml.p5.48xlarge"}))
     AppInstanceType.add_member(:ml_p5_en_48_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_P5EN_48XLARGE', traits: {"smithy.api#enumValue" => "ml.p5en.48xlarge"}))
+    AppInstanceType.add_member(:ml_p6_b200_48_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_P6_B200_48XLARGE', traits: {"smithy.api#enumValue" => "ml.p6-b200.48xlarge"}))
     AppInstanceType.add_member(:ml_m6_i_large, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_M6I_LARGE', traits: {"smithy.api#enumValue" => "ml.m6i.large"}))
     AppInstanceType.add_member(:ml_m6_i_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_M6I_XLARGE', traits: {"smithy.api#enumValue" => "ml.m6i.xlarge"}))
     AppInstanceType.add_member(:ml_m6_i_2_xlarge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ML_M6I_2XLARGE', traits: {"smithy.api#enumValue" => "ml.m6i.2xlarge"}))
@@ -6365,6 +6366,7 @@ module Aws::SageMaker
     DomainSettings.add_member(:docker_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DockerSettings, location_name: 'DockerSettings'))
     DomainSettings.add_member(:amazon_q_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: 'AmazonQSettings'))
     DomainSettings.add_member(:unified_studio_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnifiedStudioSettings, location_name: 'UnifiedStudioSettings'))
+    DomainSettings.add_member(:ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IPAddressType, location_name: 'IpAddressType'))
     DomainSettings.type = Types::DomainSettings
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: 'RStudioServerProDomainSettingsForUpdate'))
     DomainSettingsForUpdate.add_member(:execution_role_identity_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: 'ExecutionRoleIdentityConfig'))
@@ -6373,6 +6375,7 @@ module Aws::SageMaker
     DomainSettingsForUpdate.add_member(:docker_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DockerSettings, location_name: 'DockerSettings'))
     DomainSettingsForUpdate.add_member(:amazon_q_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: 'AmazonQSettings'))
     DomainSettingsForUpdate.add_member(:unified_studio_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnifiedStudioSettings, location_name: 'UnifiedStudioSettings'))
+    DomainSettingsForUpdate.add_member(:ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IPAddressType, location_name: 'IpAddressType'))
     DomainSettingsForUpdate.type = Types::DomainSettingsForUpdate
     DomainStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Deleting', traits: {"smithy.api#enumValue" => "Deleting"}))
     DomainStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Failed', traits: {"smithy.api#enumValue" => "Failed"}))

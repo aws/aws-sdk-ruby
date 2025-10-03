@@ -7,6 +7,7 @@ module Aws::ECS
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -52,6 +53,7 @@ module Aws::ECS
     end
     def create_capacity_provider: (
       ?name: String,
+      ?cluster: String,
       ?auto_scaling_group_provider: {
         auto_scaling_group_arn: String,
         managed_scaling: {
@@ -63,6 +65,74 @@ module Aws::ECS
         },
         managed_termination_protection: String,
         managed_draining: String
+      },
+      ?managed_instances_provider: {
+        infrastructure_role_arn: String,
+        instance_launch_template: {
+          ec2_instance_profile_arn: untyped,
+          network_configuration: {
+            subnets: Array[String],
+            security_groups: untyped
+          },
+          storage_configuration: {
+            storage_size_gi_b: Integer
+          },
+          monitoring: String,
+          instance_requirements: {
+            v_cpu_count: {
+              min: Integer,
+              max: untyped
+            },
+            memory_mi_b: {
+              min: untyped,
+              max: untyped
+            },
+            cpu_manufacturers: Array[String],
+            memory_gi_b_per_v_cpu: {
+              min: Float,
+              max: untyped
+            },
+            excluded_instance_types: Array[String],
+            instance_generations: Array[String],
+            spot_max_price_percentage_over_lowest_price: untyped,
+            on_demand_max_price_percentage_over_lowest_price: untyped,
+            bare_metal: String,
+            burstable_performance: String,
+            require_hibernate_support: bool,
+            network_interface_count: {
+              min: untyped,
+              max: untyped
+            },
+            local_storage: String,
+            local_storage_types: Array[String],
+            total_local_storage_gb: {
+              min: untyped,
+              max: untyped
+            },
+            baseline_ebs_bandwidth_mbps: {
+              min: untyped,
+              max: untyped
+            },
+            accelerator_types: Array[String],
+            accelerator_count: {
+              min: untyped,
+              max: untyped
+            },
+            accelerator_manufacturers: Array[String],
+            accelerator_names: Array[String],
+            accelerator_total_memory_mi_b: {
+              min: untyped,
+              max: untyped
+            },
+            network_bandwidth_gbps: {
+              min: untyped,
+              max: untyped
+            },
+            allowed_instance_types: Array[String],
+            max_spot_price_as_percentage_of_optimal_on_demand_price: untyped
+          }
+        },
+        propagate_tags: String
       },
       ?tags: Array[
         {
@@ -181,7 +251,8 @@ module Aws::ECS
           {
             hook_target_arn: String,
             role_arn: String,
-            lifecycle_stages: Array[String]
+            lifecycle_stages: Array[String],
+            hook_details: Smithy::Schema::document
           }
         ]
       },
@@ -392,7 +463,8 @@ module Aws::ECS
       def capacity_provider: () -> Types::CapacityProvider?
     end
     def delete_capacity_provider: (
-      ?capacity_provider: String
+      ?capacity_provider: String,
+      ?cluster: String
     ) -> _DeleteCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapacityProviderResponse
 
     interface _DeleteClusterResponse
@@ -459,6 +531,7 @@ module Aws::ECS
     end
     def describe_capacity_providers: (
       ?capacity_providers: Array[String],
+      ?cluster: String,
       ?include: Array[String],
       ?max_results: Integer,
       ?next_token: String
@@ -1422,6 +1495,7 @@ module Aws::ECS
     end
     def update_capacity_provider: (
       ?name: String,
+      ?cluster: String,
       ?auto_scaling_group_provider: {
         managed_scaling: {
           status: String,
@@ -1432,6 +1506,74 @@ module Aws::ECS
         },
         managed_termination_protection: String,
         managed_draining: String
+      },
+      ?managed_instances_provider: {
+        infrastructure_role_arn: String,
+        instance_launch_template: {
+          ec2_instance_profile_arn: untyped,
+          network_configuration: {
+            subnets: Array[String],
+            security_groups: untyped
+          },
+          storage_configuration: {
+            storage_size_gi_b: Integer
+          },
+          monitoring: String,
+          instance_requirements: {
+            v_cpu_count: {
+              min: Integer,
+              max: untyped
+            },
+            memory_mi_b: {
+              min: untyped,
+              max: untyped
+            },
+            cpu_manufacturers: Array[String],
+            memory_gi_b_per_v_cpu: {
+              min: Float,
+              max: untyped
+            },
+            excluded_instance_types: Array[String],
+            instance_generations: Array[String],
+            spot_max_price_percentage_over_lowest_price: untyped,
+            on_demand_max_price_percentage_over_lowest_price: untyped,
+            bare_metal: String,
+            burstable_performance: String,
+            require_hibernate_support: bool,
+            network_interface_count: {
+              min: untyped,
+              max: untyped
+            },
+            local_storage: String,
+            local_storage_types: Array[String],
+            total_local_storage_gb: {
+              min: untyped,
+              max: untyped
+            },
+            baseline_ebs_bandwidth_mbps: {
+              min: untyped,
+              max: untyped
+            },
+            accelerator_types: Array[String],
+            accelerator_count: {
+              min: untyped,
+              max: untyped
+            },
+            accelerator_manufacturers: Array[String],
+            accelerator_names: Array[String],
+            accelerator_total_memory_mi_b: {
+              min: untyped,
+              max: untyped
+            },
+            network_bandwidth_gbps: {
+              min: untyped,
+              max: untyped
+            },
+            allowed_instance_types: Array[String],
+            max_spot_price_as_percentage_of_optimal_on_demand_price: untyped
+          }
+        },
+        propagate_tags: String
       }
     ) -> _UpdateCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityProviderResponse
 
@@ -1537,7 +1679,8 @@ module Aws::ECS
           {
             hook_target_arn: String,
             role_arn: String,
-            lifecycle_stages: Array[String]
+            lifecycle_stages: Array[String],
+            hook_details: Smithy::Schema::document
           }
         ]
       },

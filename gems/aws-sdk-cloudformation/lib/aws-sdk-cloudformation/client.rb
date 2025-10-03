@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::CloudFormation
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::CloudFormation
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::CloudFormation
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::CloudFormation::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::CloudFormation::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -235,7 +240,7 @@ module Aws::CloudFormation
     #            <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>,
     #           <code>Type</code>, and <code>PublisherId</code>.</p>
     # @option params [String] :type_name_alias
-    #   <p>An alias to assign to the public extension, in this account and Region. If you specify an
+    #   <p>An alias to assign to the public extension in this account and Region. If you specify an
     #         alias for the extension, CloudFormation treats the alias as the extension type name within this
     #         account and Region. You must use the alias to refer to the extension in your templates, API
     #         calls, and CloudFormation console.</p>
@@ -809,7 +814,7 @@ module Aws::CloudFormation
     # @param [Hash, Types::CreateGeneratedTemplateInput] params
     # @option params [Array<Types::ResourceDefinition>] :resources
     #   <p>An optional list of resources to be included in the generated template.</p>
-    #            <p> If no resources are specified,the template will be created without any resources.
+    #            <p>If no resources are specified,the template will be created without any resources.
     #         Resources can be added to the template using the <code>UpdateGeneratedTemplate</code> API
     #         action.</p>
     # @option params [String] :generated_template_name
@@ -1608,7 +1613,7 @@ module Aws::CloudFormation
     # <p>Deactivates a public third-party extension, such as a resource or module, or a CloudFormation
     #       Hook when you no longer use it.</p>
     #          <p>Deactivating an extension deletes the configuration details that are associated with it.
-    #       To temporary disable a CloudFormation Hook instead, you can use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a>.</p>
+    #       To temporarily disable a CloudFormation Hook instead, you can use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a>.</p>
     #          <p>Once deactivated, an extension can't be used in any CloudFormation operation. This includes
     #       stack update operations where the stack template includes the extension, even if no updates
     #       are being made to the extension. In addition, deactivated extensions aren't automatically
@@ -1616,7 +1621,7 @@ module Aws::CloudFormation
     #          <p>To see which extensions are currently activated, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html">ListTypes</a>.</p>
     # @param [Hash, Types::DeactivateTypeInput] params
     # @option params [String] :type_name
-    #   <p>The type name of the extension, in this account and Region. If you specified a type name
+    #   <p>The type name of the extension in this account and Region. If you specified a type name
     #         alias when enabling the extension, use the type name alias.</p>
     #            <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and
     #           <code>Type</code>.</p>
@@ -1625,7 +1630,7 @@ module Aws::CloudFormation
     #            <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and
     #           <code>Type</code>.</p>
     # @option params [String] :arn
-    #   <p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p>
+    #   <p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>
     #            <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and
     #           <code>Type</code>.</p>
     # @example Request syntax with placeholder values
@@ -2191,7 +2196,7 @@ module Aws::CloudFormation
     #         resource_status_reason: "ResourceStatusReason",
     #         warnings: [
     #           {
-    #             type: "MUTUALLY_EXCLUSIVE_PROPERTIES" # One of: ["MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES", "EXCLUDED_PROPERTIES"],
+    #             type: "MUTUALLY_EXCLUSIVE_PROPERTIES" # One of: ["MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES", "EXCLUDED_PROPERTIES", "EXCLUDED_RESOURCES"],
     #             properties: [
     #               {
     #                 property_path: "PropertyPath",
@@ -3071,6 +3076,9 @@ module Aws::CloudFormation
     #          <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information
     #       about that specific extension version. Otherwise, it returns information about the default
     #       extension version.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html">Edit configuration
+    #         data for extensions in your account</a> in the
+    #       <i>CloudFormation User Guide</i>.</p>
     # @param [Hash, Types::DescribeTypeInput] params
     # @option params [String] :type
     #   <p>The kind of extension.</p>
@@ -3906,7 +3914,7 @@ module Aws::CloudFormation
     # @option params [String] :next_token
     #   <p>A string that identifies the next page of resource scan results.</p>
     # @option params [Integer] :max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. By default the <code>ListGeneratedTemplates</code> API action
     #         will return at most 50 results in each response. The maximum value is 100.</p>
@@ -3939,8 +3947,8 @@ module Aws::CloudFormation
       request.send_request(options)
     end
 
-    # <p>Returns summaries of invoked Hooks. For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html">View CloudFormation Hooks
-    #         invocations</a> in the <i>CloudFormation Hooks User Guide</i>.</p>
+    # <p>Returns summaries of invoked Hooks. For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-view-invocations.html">View invocation
+    #         summaries for CloudFormation Hooks</a> in the <i>CloudFormation Hooks User Guide</i>.</p>
     #          <p>This operation supports the following parameter combinations:</p>
     #          <ul>
     #             <li>
@@ -4083,7 +4091,7 @@ module Aws::CloudFormation
     # @option params [String] :next_token
     #   <p>A string that identifies the next page of resource scan results.</p>
     # @option params [Integer] :max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. By default the <code>ListResourceScanRelatedResources</code> API
     #         action will return up to 100 results in each response. The maximum value is 100.</p>
@@ -4199,7 +4207,7 @@ module Aws::CloudFormation
     # @option params [String] :next_token
     #   <p>A string that identifies the next page of resource scan results.</p>
     # @option params [Integer] :max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. By default the <code>ListResourceScanResources</code> API action
     #         will return at most 100 results in each response. The maximum value is 100.</p>
@@ -4297,7 +4305,7 @@ module Aws::CloudFormation
     # @option params [String] :next_token
     #   <p>A string that identifies the next page of resource scan results.</p>
     # @option params [Integer] :max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. The default value is 10. The maximum value is 100.</p>
     # @option params [String] :scan_type_filter
@@ -5207,8 +5215,8 @@ module Aws::CloudFormation
     #               <li>
     #                  <p>
     #                     <code>PUBLIC</code>: Extensions that are publicly visible and available to be
-    #             activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to
-    #             third-party publishers.</p>
+    #             activated within any Amazon Web Services account. This includes extensions from Amazon Web Services and third-party
+    #             publishers.</p>
     #               </li>
     #            </ul>
     #            <p>The default is <code>PRIVATE</code>.</p>
@@ -5690,34 +5698,34 @@ module Aws::CloudFormation
       request.send_request(options)
     end
 
-    # <p>Specifies the configuration data for a registered CloudFormation extension, in the given
-    #       account and Region.</p>
-    #          <p>To view the current configuration data for an extension, refer to the
-    #         <code>ConfigurationSchema</code> element of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>. For
-    #       more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html">Edit configuration
+    # <p>Specifies the configuration data for a CloudFormation extension, such as a resource or Hook,
+    #       in the given account and Region.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html">Edit configuration
     #         data for extensions in your account</a> in the
     #       <i>CloudFormation User Guide</i>.</p>
+    #          <p>To view the current configuration data for an extension, refer to the
+    #         <code>ConfigurationSchema</code> element of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.</p>
     #          <important>
     #             <p>It's strongly recommended that you use dynamic references to restrict sensitive
-    #         configuration definitions, such as third-party credentials. For more details on dynamic
-    #         references, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html">Specify values stored in
-    #           other services using dynamic references</a> in the
+    #         configuration definitions, such as third-party credentials. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html">Specify values stored in other services using dynamic references</a> in the
     #           <i>CloudFormation User Guide</i>.</p>
     #          </important>
+    #          <p>For more information about setting the configuration data for resource types, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration">Defining the account-level configuration of an extension</a> in the
+    #         <i>CloudFormation Command Line Interface (CLI) User Guide</i>. For more information about setting the configuration
+    #       data for Hooks, see the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation
+    #         Hooks User Guide</a>.</p>
     # @param [Hash, Types::SetTypeConfigurationInput] params
     # @option params [String] :type_arn
-    #   <p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p>
+    #   <p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>
     #            <p>For public extensions, this will be the ARN assigned when you call the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html">ActivateType</a> API operation in this account and Region. For private extensions, this
     #         will be the ARN assigned when you call the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html">RegisterType</a> API
     #         operation in this account and Region.</p>
     #            <p>Do not include the extension versions suffix at the end of the ARN. You can set the
     #         configuration for an extension, but not for a specific extension version.</p>
     # @option params [String] :configuration
-    #   <p>The configuration data for the extension, in this account and Region.</p>
-    #            <p>The configuration data must be formatted as JSON, and validate against the schema returned
-    #         in the <code>ConfigurationSchema</code> response element of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>. For
-    #         more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration">Defining the account-level configuration of an extension</a> in the
-    #           <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
+    #   <p>The configuration data for the extension in this account and Region.</p>
+    #            <p>The configuration data must be formatted as JSON and validate against the extension's
+    #         schema returned in the <code>Schema</code> response element of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.</p>
     # @option params [String] :configuration_alias
     #   <p>An alias by which to refer to this extension configuration data.</p>
     #            <p>Conditional: Specifying a configuration alias is required when setting a configuration for

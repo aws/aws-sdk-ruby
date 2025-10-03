@@ -30,10 +30,16 @@ module Aws::SSOAdmin
 
       def initialize: (
         ?message: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionReason
+      KMS_ACCESS_DENIED_EXCEPTION: String
     end
 
     class AccountAssignment
@@ -974,6 +980,8 @@ module Aws::SSOAdmin
         ?name: String,
         ?created_date: Time,
         ?status: String,
+        ?status_reason: String,
+        ?encryption_configuration_details: Types::EncryptionConfigurationDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -983,6 +991,8 @@ module Aws::SSOAdmin
       attr_accessor name: String?
       attr_accessor created_date: Time?
       attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor encryption_configuration_details: Types::EncryptionConfigurationDetails?
     end
 
     class DescribePermissionSetProvisioningStatusRequest
@@ -1122,6 +1132,36 @@ module Aws::SSOAdmin
       attr_accessor display_name: String?
       attr_accessor icon_url: String?
       attr_accessor description: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_type: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_type: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class EncryptionConfigurationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_type: String,
+        ?kms_key_arn: String,
+        ?encryption_status: String,
+        ?encryption_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor encryption_status: String?
+      attr_accessor encryption_status_reason: String?
     end
 
     module FederationProtocol
@@ -1381,6 +1421,7 @@ module Aws::SSOAdmin
         ?name: String,
         ?created_date: Time,
         ?status: String,
+        ?status_reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1390,10 +1431,12 @@ module Aws::SSOAdmin
       attr_accessor name: String?
       attr_accessor created_date: Time?
       attr_accessor status: String?
+      attr_accessor status_reason: String?
     end
 
     module InstanceStatus
       CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
       DELETE_IN_PROGRESS: String
       ACTIVE: String
     end
@@ -1422,6 +1465,17 @@ module Aws::SSOAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor authorized_token_issuers: Array[Types::AuthorizedTokenIssuer]?
+    end
+
+    module KmsKeyStatus
+      UPDATING: String
+      ENABLED: String
+      UPDATE_FAILED: String
+    end
+
+    module KmsKeyType
+      AWS_OWNED_KMS_KEY: String
+      CUSTOMER_MANAGED_KEY: String
     end
 
     class ListAccountAssignmentCreationStatusRequest
@@ -2367,10 +2421,16 @@ module Aws::SSOAdmin
 
       def initialize: (
         ?message: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ResourceNotFoundExceptionReason
+      KMS_NOT_FOUND_EXCEPTION: String
     end
 
     class ResourceServerConfig
@@ -2491,10 +2551,16 @@ module Aws::SSOAdmin
 
       def initialize: (
         ?message: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ThrottlingExceptionReason
+      KMS_THROTTLING_EXCEPTION: String
     end
 
     class TokenExchangeGrant
@@ -2648,11 +2714,13 @@ module Aws::SSOAdmin
       def initialize: (
         ?name: String,
         ?instance_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor instance_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class UpdateInstanceResponse
@@ -2726,10 +2794,18 @@ module Aws::SSOAdmin
 
       def initialize: (
         ?message: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      KMS_INVALID_KEY_USAGE_EXCEPTION: String
+      KMS_INVALID_STATE_EXCEPTION: String
+      KMS_DISABLED_EXCEPTION: String
     end
   end
 end

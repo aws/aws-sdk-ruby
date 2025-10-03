@@ -253,6 +253,7 @@ module Aws::VPCLattice
         ?subnet_ids: Array[String],
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
+        ?ipv4_addresses_per_eni: Integer,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -263,6 +264,7 @@ module Aws::VPCLattice
       attr_accessor subnet_ids: Array[String]?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
+      attr_accessor ipv4_addresses_per_eni: Integer?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -278,6 +280,7 @@ module Aws::VPCLattice
         ?subnet_ids: Array[String],
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
+        ?ipv4_addresses_per_eni: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -289,6 +292,7 @@ module Aws::VPCLattice
       attr_accessor subnet_ids: Array[String]?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
+      attr_accessor ipv4_addresses_per_eni: Integer?
     end
 
     class CreateRuleInput
@@ -1162,6 +1166,7 @@ module Aws::VPCLattice
         ?subnet_ids: Array[String],
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
+        ?ipv4_addresses_per_eni: Integer,
         ?created_at: Time,
         ?last_updated_at: Time,
       ) -> void
@@ -1175,6 +1180,7 @@ module Aws::VPCLattice
       attr_accessor subnet_ids: Array[String]?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
+      attr_accessor ipv4_addresses_per_eni: Integer?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
     end
@@ -1808,6 +1814,7 @@ module Aws::VPCLattice
         ?resource_configuration_identifier: String,
         ?max_results: Integer,
         ?next_token: String,
+        ?include_children: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1815,6 +1822,7 @@ module Aws::VPCLattice
       attr_accessor resource_configuration_identifier: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor include_children: bool?
     end
 
     class ListServiceNetworkResourceAssociationsResponse
@@ -2290,6 +2298,7 @@ module Aws::VPCLattice
         ?subnet_ids: Array[String],
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
+        ?ipv4_addresses_per_eni: Integer,
         ?created_at: Time,
         ?last_updated_at: Time,
       ) -> void
@@ -2303,6 +2312,7 @@ module Aws::VPCLattice
       attr_accessor subnet_ids: Array[String]?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
+      attr_accessor ipv4_addresses_per_eni: Integer?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
     end

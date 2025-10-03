@@ -107,6 +107,7 @@ module Aws::NetworkFirewall
     DisassociateSubnetsResponse: StructureShape
     Domain: StringShape
     EnableMonitoringDashboard: BooleanShape
+    EnableTLSSessionHolding: BooleanShape
     EnabledAnalysisType: EnumShape
     EnabledAnalysisTypes: ListShape
     EncryptionConfiguration: StructureShape

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::MediaPackageV2
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::MediaPackageV2
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::MediaPackageV2
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::MediaPackageV2::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::MediaPackageV2::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -240,18 +245,7 @@ module Aws::MediaPackageV2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>
     # @option params [String] :input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p>
-    #            <p>The allowed values are:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p>
-    #               </li>
-    #            </ul>
+    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
     # @option params [String] :description
     #   <p>Enter any descriptive text that helps you to identify the channel.</p>
     # @option params [Types::InputSwitchConfiguration] :input_switch_configuration
@@ -259,13 +253,7 @@ module Aws::MediaPackageV2
     # @option params [Types::OutputHeaderConfiguration] :output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p>
-    #            <p>
-    #               <code>"Key1": "Value1",</code>
-    #            </p>
-    #            <p>
-    #               <code>"Key2": "Value2"</code>
-    #            </p>
+    #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     # @example Creating a Channel
     #   # Example operation for create_channel
     #   params = {
@@ -368,13 +356,7 @@ module Aws::MediaPackageV2
     # @option params [String] :description
     #   <p>Enter any descriptive text that helps you to identify the channel group.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p>
-    #            <p>
-    #               <code>"Key1": "Value1",</code>
-    #            </p>
-    #            <p>
-    #               <code>"Key2": "Value2"</code>
-    #            </p>
+    #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     # @example Creating a Channel Group
     #   # Example operation for create_channel_group
     #   params = {
@@ -656,13 +638,7 @@ module Aws::MediaPackageV2
     # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p>
-    #            <p>
-    #               <code>"Key1": "Value1",</code>
-    #            </p>
-    #            <p>
-    #               <code>"Key2": "Value2"</code>
-    #            </p>
+    #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     # @example Creating an OriginEndpoint with container type TS, and encryption enabled
     #   # Example operation for create_origin_endpoint
     #   params = {
@@ -1419,7 +1395,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -1442,7 +1418,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -1594,7 +1570,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
@@ -1618,7 +1594,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
@@ -2431,7 +2407,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
@@ -2455,7 +2431,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
@@ -3402,9 +3378,7 @@ module Aws::MediaPackageV2
     # @option params [String] :policy
     #   <p>The policy to attach to the specified origin endpoint.</p>
     # @option params [Types::CdnAuthConfiguration] :cdn_auth_configuration
-    #   <p>The settings for using authorization headers between the MediaPackage endpoint and your CDN. </p>
-    #            <p>For information about CDN authorization, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html">CDN authorization
-    #               in Elemental MediaPackage</a>  in the MediaPackage user guide. </p>
+    #   <p>The settings for using authorization headers between the MediaPackage endpoint and your CDN. </p> <p>For information about CDN authorization, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/cdn-auth.html">CDN authorization in Elemental MediaPackage</a> in the MediaPackage user guide. </p>
     # @example Creating an Origin Endpoint Policy
     #   # Example operation for put_origin_endpoint_policy
     #   params = {
@@ -3439,8 +3413,7 @@ module Aws::MediaPackageV2
       request.send_request(options)
     end
 
-    # <p>Resetting the channel can help to clear errors from misconfigurations in the encoder. A reset refreshes the ingest stream and removes previous content. </p>
-    #          <p> Be sure to stop the encoder before you reset the channel, and wait at least 30 seconds before you restart the encoder. </p>
+    # <p>Resetting the channel can help to clear errors from misconfigurations in the encoder. A reset refreshes the ingest stream and removes previous content. </p> <p> Be sure to stop the encoder before you reset the channel, and wait at least 30 seconds before you restart the encoder. </p>
     # @param [Hash, Types::ResetChannelStateRequest] params
     # @option params [String] :channel_group_name
     #   <p>The name of the channel group that contains the channel that you are resetting.</p>
@@ -3482,8 +3455,7 @@ module Aws::MediaPackageV2
       request.send_request(options)
     end
 
-    # <p>Resetting the origin endpoint can help to resolve unexpected behavior and other content packaging issues. It also helps to preserve special events when you don't want the previous content to be available for viewing. A reset clears out all previous content from the origin endpoint.</p>
-    #          <p>MediaPackage might return old content from this endpoint in the first 30 seconds after the endpoint reset. For best results, when possible, wait 30 seconds from endpoint reset to send playback requests to this endpoint. </p>
+    # <p>Resetting the origin endpoint can help to resolve unexpected behavior and other content packaging issues. It also helps to preserve special events when you don't want the previous content to be available for viewing. A reset clears out all previous content from the origin endpoint.</p> <p>MediaPackage might return old content from this endpoint in the first 30 seconds after the endpoint reset. For best results, when possible, wait 30 seconds from endpoint reset to send playback requests to this endpoint. </p>
     # @param [Hash, Types::ResetOriginEndpointStateRequest] params
     # @option params [String] :channel_group_name
     #   <p>The name of the channel group that contains the channel with the origin endpoint that you are resetting.</p>
@@ -3531,12 +3503,7 @@ module Aws::MediaPackageV2
       request.send_request(options)
     end
 
-    # <p>Assigns one of more tags (key-value pairs) to the specified MediaPackage resource.</p>
-    #          <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-    #          permissions, by granting a user permission to access or change only resources with certain tag values.
-    #          You can use the TagResource operation with a resource that already has tags. If you specify a new tag
-    #          key for the resource, this tag is appended to the list of tags associated with the resource. If you
-    #          specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>
+    # <p>Assigns one of more tags (key-value pairs) to the specified MediaPackage resource.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the MediaPackage resource that you're adding tags to.</p>
@@ -3608,8 +3575,7 @@ module Aws::MediaPackageV2
       request.send_request(options)
     end
 
-    # <p>Update the specified channel. You can edit if MediaPackage sends ingest or egress access logs to the CloudWatch log group, if content will be encrypted, the description on a channel, and your channel's policy settings. You can't edit the name of the channel or CloudFront distribution details.</p>
-    #          <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
+    # <p>Update the specified channel. You can edit if MediaPackage sends ingest or egress access logs to the CloudWatch log group, if content will be encrypted, the description on a channel, and your channel's policy settings. You can't edit the name of the channel or CloudFront distribution details.</p> <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
     # @param [Hash, Types::UpdateChannelRequest] params
     # @option params [String] :channel_group_name
     #   <p>The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.</p>
@@ -3707,8 +3673,7 @@ module Aws::MediaPackageV2
       request.send_request(options)
     end
 
-    # <p>Update the specified channel group. You can edit the description on a channel group for easier identification later from the AWS Elemental MediaPackage console. You can't edit the name of the channel group.</p>
-    #          <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
+    # <p>Update the specified channel group. You can edit the description on a channel group for easier identification later from the AWS Elemental MediaPackage console. You can't edit the name of the channel group.</p> <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
     # @param [Hash, Types::UpdateChannelGroupRequest] params
     # @option params [String] :channel_group_name
     #   <p>The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.</p>
@@ -3766,8 +3731,7 @@ module Aws::MediaPackageV2
       request.send_request(options)
     end
 
-    # <p>Update the specified origin endpoint. Edit the packaging preferences on an endpoint to optimize the viewing experience. You can't edit the name of the endpoint.</p>
-    #          <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
+    # <p>Update the specified origin endpoint. Edit the packaging preferences on an endpoint to optimize the viewing experience. You can't edit the name of the endpoint.</p> <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
     # @param [Hash, Types::UpdateOriginEndpointRequest] params
     # @option params [String] :channel_group_name
     #   <p>The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.</p>
@@ -4142,7 +4106,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -4165,7 +4129,7 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -4315,7 +4279,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
@@ -4339,7 +4303,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",

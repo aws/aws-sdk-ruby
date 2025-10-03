@@ -158,6 +158,7 @@ module Aws::Synthetics
         ?s3_version: String,
         ?zip_file: String,
         ?handler: String,
+        ?blueprint_types: Array[String],
         ?dependencies: Array[Types::Dependency],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -167,6 +168,7 @@ module Aws::Synthetics
       attr_accessor s3_version: String?
       attr_accessor zip_file: String?
       attr_accessor handler: String?
+      attr_accessor blueprint_types: Array[String]?
       attr_accessor dependencies: Array[Types::Dependency]?
     end
 
@@ -176,12 +178,14 @@ module Aws::Synthetics
       def initialize: (
         ?source_location_arn: String,
         ?handler: String,
+        ?blueprint_types: Array[String],
         ?dependencies: Array[Types::Dependency],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor source_location_arn: String?
       attr_accessor handler: String?
+      attr_accessor blueprint_types: Array[String]?
       attr_accessor dependencies: Array[Types::Dependency]?
     end
 

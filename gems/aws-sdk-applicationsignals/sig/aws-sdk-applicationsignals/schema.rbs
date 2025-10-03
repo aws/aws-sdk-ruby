@@ -7,9 +7,22 @@ module Aws::ApplicationSignals
     AmazonResourceName: StringShape
     Attainment: FloatShape
     AttainmentGoal: FloatShape
+    AttributeFilter: StructureShape
+    AttributeFilterName: StringShape
+    AttributeFilterValue: StringShape
+    AttributeFilterValues: ListShape
+    AttributeFilters: ListShape
     AttributeMap: MapShape
     AttributeMaps: ListShape
     Attributes: MapShape
+    AuditFinding: StructureShape
+    AuditFindings: ListShape
+    AuditTarget: StructureShape
+    AuditTargetEntity: UnionShape
+    AuditTargets: ListShape
+    AuditorResult: StructureShape
+    AuditorResults: ListShape
+    Auditors: ListShape
     AwsAccountId: StringShape
     BatchGetServiceLevelObjectiveBudgetReportInput: StructureShape
     BatchGetServiceLevelObjectiveBudgetReportOutput: StructureShape
@@ -24,17 +37,24 @@ module Aws::ApplicationSignals
     BurnRateLookBackWindowMinutes: IntegerShape
     CalendarInterval: StructureShape
     CalendarIntervalDuration: IntegerShape
+    ChangeEvent: StructureShape
+    ChangeEventType: EnumShape
     ConflictException: StructureShape
+    ConnectionType: EnumShape
     CreateServiceLevelObjectiveInput: StructureShape
     CreateServiceLevelObjectiveOutput: StructureShape
+    DeleteGroupingConfigurationOutput: StructureShape
     DeleteServiceLevelObjectiveInput: StructureShape
     DeleteServiceLevelObjectiveOutput: StructureShape
     DependencyConfig: StructureShape
+    DependencyGraph: StructureShape
     Dimension: StructureShape
     DimensionName: StringShape
     DimensionValue: StringShape
     Dimensions: ListShape
     DurationUnit: EnumShape
+    Edge: StructureShape
+    Edges: ListShape
     EvaluationType: EnumShape
     ExclusionDuration: IntegerShape
     ExclusionReason: StringShape
@@ -49,9 +69,24 @@ module Aws::ApplicationSignals
     GetServiceLevelObjectiveOutput: StructureShape
     GetServiceOutput: StructureShape
     Goal: StructureShape
+    GroupIdentifier: StringShape
+    GroupName: StringShape
+    GroupSource: StringShape
+    GroupValue: StringShape
+    GroupingAttributeDefinition: StructureShape
+    GroupingAttributeDefinitions: ListShape
+    GroupingConfiguration: StructureShape
+    GroupingSourceKeyStringList: ListShape
+    GroupingString: StringShape
     Interval: UnionShape
     KeyAttributeName: StringShape
     KeyAttributeValue: StringShape
+    LatestChangeEvents: ListShape
+    ListAuditFindingMaxResults: IntegerShape
+    ListAuditFindingsInput: StructureShape
+    ListAuditFindingsOutput: StructureShape
+    ListGroupingAttributeDefinitionsInput: StructureShape
+    ListGroupingAttributeDefinitionsOutput: StructureShape
     ListServiceDependenciesInput: StructureShape
     ListServiceDependenciesMaxResults: IntegerShape
     ListServiceDependenciesOutput: StructureShape
@@ -67,6 +102,9 @@ module Aws::ApplicationSignals
     ListServiceOperationMaxResults: IntegerShape
     ListServiceOperationsInput: StructureShape
     ListServiceOperationsOutput: StructureShape
+    ListServiceStatesInput: StructureShape
+    ListServiceStatesMaxResults: IntegerShape
+    ListServiceStatesOutput: StructureShape
     ListServicesInput: StructureShape
     ListServicesMaxResults: IntegerShape
     ListServicesOutput: StructureShape
@@ -77,6 +115,7 @@ module Aws::ApplicationSignals
     MetricDataQueries: ListShape
     MetricDataQuery: StructureShape
     MetricExpression: StringShape
+    MetricGraph: StructureShape
     MetricId: StringShape
     MetricLabel: StringShape
     MetricName: StringShape
@@ -89,8 +128,12 @@ module Aws::ApplicationSignals
     MonitoredRequestCountMetricDataQueries: UnionShape
     Namespace: StringShape
     NextToken: StringShape
+    Node: StructureShape
+    Nodes: ListShape
     OperationName: StringShape
     Period: IntegerShape
+    PutGroupingConfigurationInput: StructureShape
+    PutGroupingConfigurationOutput: StructureShape
     RecurrenceRule: StructureShape
     RequestBasedServiceLevelIndicator: StructureShape
     RequestBasedServiceLevelIndicatorConfig: StructureShape
@@ -108,7 +151,10 @@ module Aws::ApplicationSignals
     ServiceDependency: StructureShape
     ServiceDependent: StructureShape
     ServiceDependents: ListShape
+    ServiceEntity: StructureShape
     ServiceErrorMessage: StringShape
+    ServiceGroup: StructureShape
+    ServiceGroups: ListShape
     ServiceLevelIndicator: StructureShape
     ServiceLevelIndicatorComparisonOperator: EnumShape
     ServiceLevelIndicatorConfig: StructureShape
@@ -127,16 +173,21 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveBudgetReports: ListShape
     ServiceLevelObjectiveBudgetStatus: EnumShape
     ServiceLevelObjectiveDescription: StringShape
+    ServiceLevelObjectiveEntity: StructureShape
     ServiceLevelObjectiveId: StringShape
     ServiceLevelObjectiveIds: ListShape
     ServiceLevelObjectiveName: StringShape
     ServiceLevelObjectiveSummaries: ListShape
     ServiceLevelObjectiveSummary: StructureShape
     ServiceOperation: StructureShape
+    ServiceOperationEntity: StructureShape
     ServiceOperations: ListShape
     ServiceQuotaExceededException: StructureShape
+    ServiceState: StructureShape
+    ServiceStates: ListShape
     ServiceSummaries: ListShape
     ServiceSummary: StructureShape
+    Severity: EnumShape
     StandardUnit: EnumShape
     StartDiscoveryInput: StructureShape
     StartDiscoveryOutput: StructureShape

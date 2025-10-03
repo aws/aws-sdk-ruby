@@ -12,6 +12,30 @@ module Aws::PaymentCryptography
       attr_accessor message: String?
     end
 
+    class AddKeyReplicationRegionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor replication_regions: Array[String]?
+    end
+
+    class AddKeyReplicationRegionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
     class Alias
       include Smithy::Schema::Structure
 
@@ -23,6 +47,29 @@ module Aws::PaymentCryptography
 
       attr_accessor alias_name: String?
       attr_accessor key_arn: String?
+    end
+
+    class CertificateSubjectType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?common_name: String,
+        ?organization_unit: String,
+        ?organization: String,
+        ?city: String,
+        ?country: String,
+        ?state_or_province: String,
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor common_name: String?
+      attr_accessor organization_unit: String?
+      attr_accessor organization: String?
+      attr_accessor city: String?
+      attr_accessor country: String?
+      attr_accessor state_or_province: String?
+      attr_accessor email_address: String?
     end
 
     class ConflictException
@@ -70,6 +117,7 @@ module Aws::PaymentCryptography
         ?enabled: bool,
         ?tags: Array[Types::Tag],
         ?derive_key_usage: String,
+        ?replication_regions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -79,6 +127,7 @@ module Aws::PaymentCryptography
       attr_accessor enabled: bool?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor derive_key_usage: String?
+      attr_accessor replication_regions: Array[String]?
     end
 
     class CreateKeyOutput
@@ -150,6 +199,50 @@ module Aws::PaymentCryptography
       end
       class Unknown < DiffieHellmanDerivationData
       end
+    end
+
+    class DisableDefaultKeyReplicationRegionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_regions: Array[String]?
+    end
+
+    class DisableDefaultKeyReplicationRegionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_replication_regions: Array[String]?
+    end
+
+    class EnableDefaultKeyReplicationRegionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_regions: Array[String]?
+    end
+
+    class EnableDefaultKeyReplicationRegionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_replication_regions: Array[String]?
     end
 
     class ExportAttributes
@@ -290,6 +383,8 @@ module Aws::PaymentCryptography
         ?certificate_authority_public_key_identifier: String,
         ?wrapping_key_certificate: String,
         ?export_token: String,
+        ?signing_key_identifier: String,
+        ?signing_key_certificate: String,
         ?key_block_format: String,
         ?random_nonce: String,
         ?key_block_headers: Types::KeyBlockHeaders,
@@ -299,6 +394,8 @@ module Aws::PaymentCryptography
       attr_accessor certificate_authority_public_key_identifier: String?
       attr_accessor wrapping_key_certificate: String?
       attr_accessor export_token: String?
+      attr_accessor signing_key_identifier: String?
+      attr_accessor signing_key_certificate: String?
       attr_accessor key_block_format: String?
       attr_accessor random_nonce: String?
       attr_accessor key_block_headers: Types::KeyBlockHeaders?
@@ -324,6 +421,52 @@ module Aws::PaymentCryptography
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor alias: Types::Alias?
+    end
+
+    class GetCertificateSigningRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?signing_algorithm: String,
+        ?certificate_subject: Types::CertificateSubjectType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor certificate_subject: Types::CertificateSubjectType?
+    end
+
+    class GetCertificateSigningRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_signing_request: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_signing_request: String?
+    end
+
+    class GetDefaultKeyReplicationRegionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDefaultKeyReplicationRegionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_replication_regions: Array[String]?
     end
 
     class GetKeyInput
@@ -488,6 +631,7 @@ module Aws::PaymentCryptography
         ?key_check_value_algorithm: String,
         ?enabled: bool,
         ?tags: Array[Types::Tag],
+        ?replication_regions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -495,6 +639,7 @@ module Aws::PaymentCryptography
       attr_accessor key_check_value_algorithm: String?
       attr_accessor enabled: bool?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor replication_regions: Array[String]?
     end
 
     class ImportKeyMaterial
@@ -564,6 +709,8 @@ module Aws::PaymentCryptography
         ?certificate_authority_public_key_identifier: String,
         ?signing_key_certificate: String,
         ?import_token: String,
+        ?wrapping_key_identifier: String,
+        ?wrapping_key_certificate: String,
         ?wrapped_key_block: String,
         ?key_block_format: String,
         ?random_nonce: String,
@@ -573,6 +720,8 @@ module Aws::PaymentCryptography
       attr_accessor certificate_authority_public_key_identifier: String?
       attr_accessor signing_key_certificate: String?
       attr_accessor import_token: String?
+      attr_accessor wrapping_key_identifier: String?
+      attr_accessor wrapping_key_certificate: String?
       attr_accessor wrapped_key_block: String?
       attr_accessor key_block_format: String?
       attr_accessor random_nonce: String?
@@ -607,6 +756,10 @@ module Aws::PaymentCryptography
         ?delete_pending_timestamp: Time,
         ?delete_timestamp: Time,
         ?derive_key_usage: String,
+        ?multi_region_key_type: String,
+        ?primary_region: String,
+        ?replication_status: Hash[String, Types::ReplicationStatusType],
+        ?using_default_replication_regions: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -624,6 +777,10 @@ module Aws::PaymentCryptography
       attr_accessor delete_pending_timestamp: Time?
       attr_accessor delete_timestamp: Time?
       attr_accessor derive_key_usage: String?
+      attr_accessor multi_region_key_type: String?
+      attr_accessor primary_region: String?
+      attr_accessor replication_status: Hash[String, Types::ReplicationStatusType]?
+      attr_accessor using_default_replication_regions: bool?
     end
 
     class KeyAttributes
@@ -708,6 +865,8 @@ module Aws::PaymentCryptography
         ?key_check_value: String,
         ?exportable: bool,
         ?enabled: bool,
+        ?multi_region_key_type: String,
+        ?primary_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -717,6 +876,8 @@ module Aws::PaymentCryptography
       attr_accessor key_check_value: String?
       attr_accessor exportable: bool?
       attr_accessor enabled: bool?
+      attr_accessor multi_region_key_type: String?
+      attr_accessor primary_region: String?
     end
 
     class ListAliasesInput
@@ -801,6 +962,43 @@ module Aws::PaymentCryptography
 
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor next_token: String?
+    end
+
+    class RemoveKeyReplicationRegionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?replication_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor replication_regions: Array[String]?
+    end
+
+    class RemoveKeyReplicationRegionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::Key,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::Key?
+    end
+
+    class ReplicationStatusType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
     end
 
     class ResourceNotFoundException

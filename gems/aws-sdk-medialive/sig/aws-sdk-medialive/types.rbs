@@ -675,6 +675,7 @@ module Aws::MediaLive
         ?timecode_burnin_settings: Types::TimecodeBurninSettings,
         ?bitrate: Integer,
         ?rate_control_mode: String,
+        ?min_bitrate: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -697,6 +698,7 @@ module Aws::MediaLive
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings?
       attr_accessor bitrate: Integer?
       attr_accessor rate_control_mode: String?
+      attr_accessor min_bitrate: Integer?
     end
 
     class AvailBlanking
@@ -5100,6 +5102,7 @@ module Aws::MediaLive
         ?timecode_insertion: String,
         ?timecode_burnin_settings: Types::TimecodeBurninSettings,
         ?min_qp: Integer,
+        ?min_bitrate: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5146,6 +5149,7 @@ module Aws::MediaLive
       attr_accessor timecode_insertion: String?
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings?
       attr_accessor min_qp: Integer?
+      attr_accessor min_bitrate: Integer?
     end
 
     module H264SpatialAq
@@ -5231,6 +5235,11 @@ module Aws::MediaLive
     end
 
     module H265FlickerAq
+      DISABLED: String
+      ENABLED: String
+    end
+
+    module H265GopBReference
       DISABLED: String
       ENABLED: String
     end
@@ -5336,6 +5345,10 @@ module Aws::MediaLive
         ?treeblock_size: String,
         ?min_qp: Integer,
         ?deblocking: String,
+        ?gop_b_reference: String,
+        ?gop_num_b_frames: Integer,
+        ?min_bitrate: Integer,
+        ?subgop_length: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5377,6 +5390,15 @@ module Aws::MediaLive
       attr_accessor treeblock_size: String?
       attr_accessor min_qp: Integer?
       attr_accessor deblocking: String?
+      attr_accessor gop_b_reference: String?
+      attr_accessor gop_num_b_frames: Integer?
+      attr_accessor min_bitrate: Integer?
+      attr_accessor subgop_length: String?
+    end
+
+    module H265SubGopLength
+      DYNAMIC: String
+      FIXED: String
     end
 
     module H265Tier
@@ -5446,6 +5468,12 @@ module Aws::MediaLive
       attr_accessor token: String?
     end
 
+    module HlsAutoSelect
+      NO: String
+      OMIT: String
+      YES: String
+    end
+
     class HlsBasicPutSettings
       include Smithy::Schema::Structure
 
@@ -5496,6 +5524,12 @@ module Aws::MediaLive
     module HlsCodecSpecification
       RFC_4281: String
       RFC_6381: String
+    end
+
+    module HlsDefault
+      NO: String
+      OMIT: String
+      YES: String
     end
 
     module HlsDirectoryStructure
@@ -7755,10 +7789,12 @@ module Aws::MediaLive
 
       def initialize: (
         ?destination: Types::OutputLocationRef,
+        ?mediapackage_v2_group_settings: Types::MediaPackageV2GroupSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor destination: Types::OutputLocationRef?
+      attr_accessor mediapackage_v2_group_settings: Types::MediaPackageV2GroupSettings?
     end
 
     class MediaPackageOutputDestinationSettings
@@ -7780,9 +7816,39 @@ module Aws::MediaLive
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?media_package_v2_destination_settings: Types::MediaPackageV2DestinationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor media_package_v2_destination_settings: Types::MediaPackageV2DestinationSettings?
+    end
+
+    class MediaPackageV2DestinationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_group_id: String,
+        ?audio_rendition_sets: String,
+        ?hls_auto_select: String,
+        ?hls_default: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_group_id: String?
+      attr_accessor audio_rendition_sets: String?
+      attr_accessor hls_auto_select: String?
+      attr_accessor hls_default: String?
+    end
+
+    class MediaPackageV2GroupSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caption_language_mappings: Array[Types::CaptionLanguageMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caption_language_mappings: Array[Types::CaptionLanguageMapping]?
     end
 
     class MediaResource

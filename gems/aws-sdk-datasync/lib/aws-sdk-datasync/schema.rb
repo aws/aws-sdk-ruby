@@ -660,6 +660,7 @@ module Aws::DataSync
     EndpointType.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PUBLIC', traits: {"smithy.api#enumValue" => "PUBLIC"}))
     EndpointType.add_member(:private_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PRIVATE_LINK', traits: {"smithy.api#enumValue" => "PRIVATE_LINK"}))
     EndpointType.add_member(:fips, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FIPS', traits: {"smithy.api#enumValue" => "FIPS"}))
+    EndpointType.add_member(:fips_private_link, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FIPS_PRIVATE_LINK', traits: {"smithy.api#enumValue" => "FIPS_PRIVATE_LINK"}))
     FilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterRule)
     FilterRule.add_member(:filter_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterType, location_name: 'FilterType'))
     FilterRule.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValue, location_name: 'Value'))

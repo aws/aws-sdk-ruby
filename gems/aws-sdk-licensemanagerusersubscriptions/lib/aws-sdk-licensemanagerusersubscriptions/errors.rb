@@ -48,8 +48,7 @@ module Aws::LicenseManagerUserSubscriptions
       end
     end
 
-    # <p>The request couldn't be completed because it conflicted with the current state of the
-    # 			resource.</p>
+    # <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LicenseManagerUserSubscriptions::Types::ConflictException] data

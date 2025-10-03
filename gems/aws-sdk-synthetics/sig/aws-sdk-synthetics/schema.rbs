@@ -13,6 +13,8 @@ module Aws::Synthetics
     BaseScreenshotIgnoreCoordinates: ListShape
     BaseScreenshots: ListShape
     Blob: BlobShape
+    BlueprintType: StringShape
+    BlueprintTypes: ListShape
     BrowserConfig: StructureShape
     BrowserConfigs: ListShape
     BrowserType: EnumShape

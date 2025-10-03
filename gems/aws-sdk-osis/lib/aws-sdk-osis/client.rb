@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::OSIS
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::OSIS
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::OSIS
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::OSIS::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::OSIS::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,11 +193,12 @@ module Aws::OSIS
       super
     end
 
-    # <p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html">Creating Amazon OpenSearch Ingestion pipelines</a>.</p>
+    # <p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html">Creating Amazon OpenSearch
+    #     Ingestion pipelines</a>.</p>
     # @param [Hash, Types::CreatePipelineRequest] params
     # @option params [String] :pipeline_name
-    #   <p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines
-    #      owned by an account within an Amazon Web Services Region.</p>
+    #   <p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the
+    #      pipelines owned by an account within an Amazon Web Services Region.</p>
     # @option params [Integer] :min_units
     #   <p>The minimum pipeline capacity, in Ingestion Compute Units (ICUs).</p>
     # @option params [Integer] :max_units
@@ -204,18 +210,18 @@ module Aws::OSIS
     # @option params [Types::LogPublishingOptions] :log_publishing_options
     #   <p>Key-value pairs to configure log publishing.</p>
     # @option params [Types::VpcOptions] :vpc_options
-    #   <p>Container for the values required to configure VPC access for the pipeline. If you don't specify
-    #      these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>
+    #   <p>Container for the values required to configure VPC access for the pipeline. If you don't
+    #      specify these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>
     # @option params [Types::BufferOptions] :buffer_options
     #   <p>Key-value pairs to configure persistent buffering for the pipeline.</p>
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
-    #   <p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>
+    #   <p>Key-value pairs to configure encryption for data that is written to a persistent
+    #      buffer.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>List of tags to add to the pipeline upon creation.</p>
     # @option params [String] :pipeline_role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role that provides
-    #      the required permissions for a pipeline to read from the source and write to the sink.
-    #      For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access
+    #       Amazon Web Services resources.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     pipeline_name: "PipelineName", # required
@@ -324,7 +330,40 @@ module Aws::OSIS
       request.send_request(options)
     end
 
-    # <p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html">Deleting Amazon OpenSearch Ingestion pipelines</a>.</p>
+    # <p>Creates a VPC endpoint for an OpenSearch Ingestion pipeline. Pipeline endpoints allow you to
+    #    ingest data from your VPC into pipelines that you have access to.</p>
+    # @param [Hash, Types::CreatePipelineEndpointRequest] params
+    # @option params [String] :pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline to create the endpoint for.</p>
+    # @option params [Types::PipelineEndpointVpcOptions] :vpc_options
+    #   <p>Container for the VPC configuration for the pipeline endpoint, including subnet IDs and
+    #      security group IDs.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     pipeline_arn: "PipelineArn", # required
+    #     vpc_options: { # required
+    #       subnet_ids: ["SubnetId"],
+    #       security_group_ids: ["SecurityGroupId"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_pipeline_endpoint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_arn: "PipelineArn",
+    #     endpoint_id: "PipelineEndpointId",
+    #     status: "CREATING" # One of: ["CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "REVOKING", "REVOKED"],
+    #     vpc_id: "String"
+    #   }
+    # @return [Types::CreatePipelineEndpointResponse]
+    def create_pipeline_endpoint(params = {}, options = {})
+      request = build_request(:create_pipeline_endpoint, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html">Deleting Amazon OpenSearch
+    #     Ingestion pipelines</a>.</p>
     # @param [Hash, Types::DeletePipelineRequest] params
     # @option params [String] :pipeline_name
     #   <p>The name of the pipeline to delete.</p>
@@ -340,6 +379,44 @@ module Aws::OSIS
     # @return [Types::DeletePipelineResponse]
     def delete_pipeline(params = {}, options = {})
       request = build_request(:delete_pipeline, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a VPC endpoint for an OpenSearch Ingestion pipeline.</p>
+    # @param [Hash, Types::DeletePipelineEndpointRequest] params
+    # @option params [String] :endpoint_id
+    #   <p>The unique identifier of the pipeline endpoint to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     endpoint_id: "PipelineEndpointId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_pipeline_endpoint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeletePipelineEndpointResponse]
+    def delete_pipeline_endpoint(params = {}, options = {})
+      request = build_request(:delete_pipeline_endpoint, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a resource-based policy from an OpenSearch Ingestion resource.</p>
+    # @param [Hash, Types::DeleteResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource from which to delete the policy.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "PipelineArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteResourcePolicyResponse]
+    def delete_resource_policy(params = {}, options = {})
+      request = build_request(:delete_resource_policy, params)
       request.send_request(options)
     end
 
@@ -497,8 +574,31 @@ module Aws::OSIS
       request.send_request(options)
     end
 
+    # <p>Retrieves the resource-based policy attached to an OpenSearch Ingestion resource.</p>
+    # @param [Hash, Types::GetResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "PipelineArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "PipelineArn",
+    #     policy: "ResourcePolicy"
+    #   }
+    # @return [Types::GetResourcePolicyResponse]
+    def get_resource_policy(params = {}, options = {})
+      request = build_request(:get_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves a list of all available blueprints for Data Prepper. For more information, see
-    #    <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint">Using blueprints to create a pipeline</a>.</p>
+    #     <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint">Using
+    #     blueprints to create a pipeline</a>.</p>
     # @param [Hash, Types::ListPipelineBlueprintsRequest] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -523,12 +623,87 @@ module Aws::OSIS
       request.send_request(options)
     end
 
-    # <p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For
-    #    more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html">Viewing Amazon OpenSearch Ingestion pipelines</a>.</p>
+    # <p>Lists the pipeline endpoints connected to pipelines in your account.</p>
+    # @param [Hash, Types::ListPipelineEndpointConnectionsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of pipeline endpoint connections to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>If your initial <code>ListPipelineEndpointConnections</code> operation returns a
+    #       <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent
+    #       <code>ListPipelineEndpointConnections</code> operations, which returns results in the next
+    #      page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_pipeline_endpoint_connections(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     pipeline_endpoint_connections: [
+    #       {
+    #         pipeline_arn: "PipelineArn",
+    #         endpoint_id: "PipelineEndpointId",
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "REVOKING", "REVOKED"],
+    #         vpc_endpoint_owner: "AwsAccountId"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListPipelineEndpointConnectionsResponse]
+    def list_pipeline_endpoint_connections(params = {}, options = {})
+      request = build_request(:list_pipeline_endpoint_connections, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all pipeline endpoints in your account.</p>
+    # @param [Hash, Types::ListPipelineEndpointsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of pipeline endpoints to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>If your initial <code>ListPipelineEndpoints</code> operation returns a
+    #       <code>NextToken</code>, you can include the returned <code>NextToken</code> in subsequent
+    #       <code>ListPipelineEndpoints</code> operations, which returns results in the next page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_pipeline_endpoints(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     pipeline_endpoints: [
+    #       {
+    #         pipeline_arn: "PipelineArn",
+    #         endpoint_id: "PipelineEndpointId",
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "REVOKING", "REVOKED"],
+    #         vpc_id: "String",
+    #         vpc_options: {
+    #           subnet_ids: ["SubnetId"],
+    #           security_group_ids: ["SecurityGroupId"]
+    #         },
+    #         ingest_endpoint_url: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListPipelineEndpointsResponse]
+    def list_pipeline_endpoints(params = {}, options = {})
+      request = build_request(:list_pipeline_endpoints, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region.
+    #    For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html">Viewing Amazon OpenSearch
+    #     Ingestion pipelines</a>.</p>
     # @param [Hash, Types::ListPipelinesRequest] params
     # @option params [Integer] :max_results
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use
-    #      <code>nextToken</code> to get the next page of results.</p>
+    #       <code>nextToken</code> to get the next page of results.</p>
     # @option params [String] :next_token
     #   <p>If your initial <code>ListPipelines</code> operation returns a <code>nextToken</code>, you
     #      can include the returned <code>nextToken</code> in subsequent <code>ListPipelines</code>
@@ -601,6 +776,57 @@ module Aws::OSIS
     # @return [Types::ListTagsForResourceResponse]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Attaches a resource-based policy to an OpenSearch Ingestion resource. Resource-based
+    #    policies grant permissions to principals to perform actions on the resource.</p>
+    # @param [Hash, Types::PutResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource to attach the policy to.</p>
+    # @option params [String] :policy
+    #   <p>The resource-based policy document in JSON format.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "PipelineArn", # required
+    #     policy: "ResourcePolicy", # required
+    #   }
+    #   options = {}
+    #   response = client.put_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "PipelineArn",
+    #     policy: "ResourcePolicy"
+    #   }
+    # @return [Types::PutResourcePolicyResponse]
+    def put_resource_policy(params = {}, options = {})
+      request = build_request(:put_resource_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Revokes pipeline endpoints from specified endpoint IDs.</p>
+    # @param [Hash, Types::RevokePipelineEndpointConnectionsRequest] params
+    # @option params [String] :pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline from which to revoke endpoint
+    #      connections.</p>
+    # @option params [Array<String>] :endpoint_ids
+    #   <p>A list of endpoint IDs for which to revoke access to the pipeline.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     pipeline_arn: "PipelineArn", # required
+    #     endpoint_ids: ["PipelineEndpointId"], # required
+    #   }
+    #   options = {}
+    #   response = client.revoke_pipeline_endpoint_connections(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_arn: "PipelineArn"
+    #   }
+    # @return [Types::RevokePipelineEndpointConnectionsResponse]
+    def revoke_pipeline_endpoint_connections(params = {}, options = {})
+      request = build_request(:revoke_pipeline_endpoint_connections, params)
       request.send_request(options)
     end
 
@@ -685,7 +911,8 @@ module Aws::OSIS
       request.send_request(options)
     end
 
-    # <p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop">Stopping an OpenSearch Ingestion pipeline</a>.</p>
+    # <p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop">Stopping
+    #     an OpenSearch Ingestion pipeline</a>.</p>
     # @param [Hash, Types::StopPipelineRequest] params
     # @option params [String] :pipeline_name
     #   <p>The name of the pipeline to stop.</p>
@@ -766,7 +993,8 @@ module Aws::OSIS
       request.send_request(options)
     end
 
-    # <p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>
+    # <p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging Amazon OpenSearch
+    #     Ingestion pipelines</a>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the pipeline to tag.</p>
@@ -793,8 +1021,8 @@ module Aws::OSIS
       request.send_request(options)
     end
 
-    # <p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging Amazon
-    #     OpenSearch Ingestion pipelines</a>.</p>
+    # <p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging
+    #     Amazon OpenSearch Ingestion pipelines</a>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the pipeline to remove tags from.</p>
@@ -816,7 +1044,8 @@ module Aws::OSIS
       request.send_request(options)
     end
 
-    # <p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html">Updating Amazon OpenSearch Ingestion pipelines</a>.</p>
+    # <p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html">Updating Amazon OpenSearch
+    #     Ingestion pipelines</a>.</p>
     # @param [Hash, Types::UpdatePipelineRequest] params
     # @option params [String] :pipeline_name
     #   <p>The name of the pipeline to update.</p>
@@ -833,11 +1062,11 @@ module Aws::OSIS
     # @option params [Types::BufferOptions] :buffer_options
     #   <p>Key-value pairs to configure persistent buffering for the pipeline.</p>
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
-    #   <p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>
+    #   <p>Key-value pairs to configure encryption for data that is written to a persistent
+    #      buffer.</p>
     # @option params [String] :pipeline_role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role that provides
-    #      the required permissions for a pipeline to read from the source and write to the sink.
-    #      For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access
+    #      Amazon Web Services resources.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     pipeline_name: "PipelineName", # required

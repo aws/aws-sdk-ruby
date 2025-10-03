@@ -8,10 +8,11 @@ module Aws::Appflow
     class Endpoint < Smithy::Client::Plugin
       option(
         :endpoint_provider,
-        doc_type: 'Aws::Appflow::EndpointProvider',
-        docstring: <<~DOCS) do |_config|
-          The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
-        DOCS
+        doc_type: '#resolve(parameters)',
+        doc_default: 'Aws::Appflow::EndpointProvider',
+        rbs_type: 'Aws::Appflow::EndpointProvider',
+        docstring: 'An object that provides an endpoint to use for the request.'
+      ) do |_config|
         EndpointProvider.new
       end
 
@@ -39,24 +40,27 @@ module Aws::Appflow
         docstring: 'Custom Endpoint'
       )
 
+      option(:endpoint_auth_schemes) do
+        {"bearer" => "smithy.api#httpBearerAuth", "none" => "smithy.api#noAuth", "sigv4a" => "aws.auth#sigv4a", "sigv4" => "aws.auth#sigv4"}
+      end
+
       # @api private
       class Handler < Smithy::Client::Handler
         def call(context)
           params = EndpointParameters.create(context)
-          endpoint = context.config.endpoint_provider.resolve(params)
-
-          context.http_request.endpoint = endpoint.uri
-          apply_endpoint_headers(context, endpoint.headers)
-
           context[:endpoint_params] = params
-          context[:endpoint_properties] = endpoint.properties
+          endpoint = context.config.endpoint_provider.resolve(params)
+          context[:resolved_endpoint] = endpoint
+
+          apply_endpoint(context, endpoint)
           @handler.call(context)
         end
 
         private
 
-        def apply_endpoint_headers(context, headers)
-          headers.each do |key, value|
+        def apply_endpoint(context, endpoint)
+          context.http_request.endpoint = endpoint.uri
+          endpoint.headers.each do |key, value|
             context.http_request.headers[key] = value
           end
         end

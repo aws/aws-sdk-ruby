@@ -54,6 +54,9 @@ module Aws::ConnectCases
     CommentContent: StructureShape
     CommentFilter: StructureShape
     ConflictException: StructureShape
+    ConnectCaseContent: StructureShape
+    ConnectCaseFilter: StructureShape
+    ConnectCaseInputContent: StructureShape
     ConnectedToSystemTime: TimestampShape
     Contact: StructureShape
     ContactArn: StringShape
@@ -74,7 +77,12 @@ module Aws::ConnectCases
     CreateTemplateInput: StructureShape
     CreateTemplateOutput: StructureShape
     CreatedTime: TimestampShape
+    CustomContent: StructureShape
     CustomEntity: StringShape
+    CustomFieldsFilter: UnionShape
+    CustomFieldsFilterList: ListShape
+    CustomFilter: StructureShape
+    CustomInputContent: StructureShape
     DeleteCaseRequest: StructureShape
     DeleteCaseResponse: StructureShape
     DeleteCaseRuleRequest: StructureShape
@@ -188,6 +196,13 @@ module Aws::ConnectCases
     RequiredFieldList: ListShape
     ResourceNotFoundException: StructureShape
     RuleType: StringShape
+    SearchAllRelatedItemsRequest: StructureShape
+    SearchAllRelatedItemsResponse: StructureShape
+    SearchAllRelatedItemsResponseItem: StructureShape
+    SearchAllRelatedItemsResponseItemList: ListShape
+    SearchAllRelatedItemsSort: StructureShape
+    SearchAllRelatedItemsSortList: ListShape
+    SearchAllRelatedItemsSortProperty: StringShape
     SearchCasesInput: StructureShape
     SearchCasesOutput: StructureShape
     SearchCasesResponseItem: StructureShape

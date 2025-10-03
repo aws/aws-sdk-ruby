@@ -7,6 +7,7 @@ module Aws::CleanRooms
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -448,6 +449,16 @@ module Aws::CleanRooms
         differential_privacy: {
           epsilon: Integer,
           users_noise_per_query: Integer
+        },
+        access_budget: {
+          budget_parameters: Array[
+            {
+              type: String,
+              budget: Integer,
+              auto_refresh: String
+            }
+          ],
+          resource_arn: String
         }
       },
       ?tags: Hash[String, String]
@@ -802,7 +813,8 @@ module Aws::CleanRooms
       ?collaboration_identifier: String,
       ?privacy_budget_type: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?access_budget_resource_arn: String
     ) -> _ListCollaborationPrivacyBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollaborationPrivacyBudgetsResponse
 
     interface _ListCollaborationsResponse
@@ -912,7 +924,8 @@ module Aws::CleanRooms
       ?membership_identifier: String,
       ?privacy_budget_type: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?access_budget_resource_arn: String
     ) -> _ListPrivacyBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrivacyBudgetsResponse
 
     interface _ListProtectedJobsResponse
@@ -965,7 +978,8 @@ module Aws::CleanRooms
     end
     def populate_id_mapping_table: (
       ?id_mapping_table_identifier: String,
-      ?membership_identifier: String
+      ?membership_identifier: String,
+      ?job_type: String
     ) -> _PopulateIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PopulateIdMappingTableResponse
 
     interface _PreviewPrivacyImpactResponse
@@ -1293,6 +1307,15 @@ module Aws::CleanRooms
         differential_privacy: {
           epsilon: Integer,
           users_noise_per_query: Integer
+        },
+        access_budget: {
+          budget_parameters: Array[
+            {
+              type: String,
+              budget: Integer,
+              auto_refresh: String
+            }
+          ]
         }
       }
     ) -> _UpdatePrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrivacyBudgetTemplateResponse

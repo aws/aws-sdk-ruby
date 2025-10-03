@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::ApplicationSignals
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::ApplicationSignals
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::ApplicationSignals
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::ApplicationSignals::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::ApplicationSignals::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -186,17 +191,7 @@ module Aws::ApplicationSignals
       super
     end
 
-    # <p>Use this operation to retrieve one or more <i>service level objective (SLO) budget reports</i>.</p>
-    #          <p>An <i>error budget</i> is the amount of time or requests in an unhealthy state that your service can 
-    #          accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be
-    #          unmet. For example, an SLO with a threshold of 99.95% and a monthly interval
-    #          translates to an error budget of 21.9 minutes of 
-    #          downtime in a 30-day month.</p>
-    #          <p>Budget reports include a health indicator, the attainment value, and 
-    #          remaining budget.</p>
-    #          <p>For more information about SLO error budgets, see 
-    #          <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-concepts">
-    #             SLO concepts</a>.</p>
+    # <p>Use this operation to retrieve one or more <i>service level objective (SLO) budget reports</i>.</p> <p>An <i>error budget</i> is the amount of time or requests in an unhealthy state that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month.</p> <p>Budget reports include a health indicator, the attainment value, and remaining budget.</p> <p>For more information about SLO error budgets, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-concepts"> SLO concepts</a>.</p>
     # @param [Hash, Types::BatchGetServiceLevelObjectiveBudgetReportInput] params
     # @option params [Time] :timestamp
     #   <p>The date and time that you want the report to be for. It is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.</p>
@@ -452,119 +447,22 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Creates a service level objective (SLO), which can help you ensure that your critical business operations are 
-    #       meeting customer expectations. Use SLOs to set and track specific target levels for the
-    #       reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to 
-    #       calculate whether the application is performing at the level that you want.</p>
-    #          <p>Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch
-    #       measures this target frequently you can find whether it has been breached. </p>
-    #          <p>The target performance quality that is defined for an SLO is the <i>attainment goal</i>.</p>
-    #          <p>You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. 
-    #         You can also set SLOs against any CloudWatch metric or math expression that produces a time series.</p>
-    #          <note>
-    #             <p>You can't create an SLO for a service operation that was discovered by Application Signals until after that operation has reported standard
-    #      metrics to Application Signals.</p>
-    #          </note>
-    #          <p>When you create an SLO, you specify whether it is a <i>period-based SLO</i>
-    #        or a <i>request-based SLO</i>. Each type of SLO has a different way of evaluating 
-    #     your application's performance against its attainment goal.</p>
-    #          <ul>
-    #             <li>
-    #                <p>A <i>period-based SLO</i> uses defined <i>periods</i> of time within 
-    #         a specified total time interval. For each period of time, Application Signals determines whether the 
-    #         application met its goal. The attainment rate is calculated as the <code>number of good periods/number of total periods</code>.</p>
-    #                <p>For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its
-    #               performance goal during at least 99.9% of the 
-    #               time periods.</p>
-    #             </li>
-    #             <li>
-    #                <p>A <i>request-based SLO</i> doesn't use pre-defined periods of time. Instead, 
-    #            the SLO measures <code>number of good requests/number of total requests</code> during the interval. At any time, you can find the ratio of 
-    #            good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.</p>
-    #             </li>
-    #          </ul>
-    #          <p>After you have created an SLO, you can retrieve error budget reports for it. 
-    #       An <i>error budget</i> is the amount of time or amount of requests that your application can be non-compliant
-    #        with the SLO's goal, and still have your application meet the goal.</p>
-    #          <ul>
-    #             <li>
-    #                <p>For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, 
-    #            while still meeting the overall goal. The <i>remaining error budget</i> decreases with every failed period
-    #         that is recorded. The error budget within one interval can never increase.</p>
-    #                <p>For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month 
-    #               translates to an error budget of 21.9 minutes of downtime per month.</p>
-    #             </li>
-    #             <li>
-    #                <p>For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on 
-    #            the ratio of good requests to total requests.</p>
-    #             </li>
-    #          </ul>
-    #          <p>For more information about SLOs, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html">
-    #       Service level objectives (SLOs)</a>.
-    #     </p>
-    #          <p>When you perform a <code>CreateServiceLevelObjective</code> operation, Application Signals creates the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role, 
-    #         if it doesn't already exist in your account. This service-
-    #         linked role has the following permissions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>xray:GetServiceGraph</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>logs:StartQuery</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>logs:GetQueryResults</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>cloudwatch:GetMetricData</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>cloudwatch:ListMetrics</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>tag:GetResources</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>autoscaling:DescribeAutoScalingGroups</code>
-    #                </p>
-    #             </li>
-    #          </ul>
+    # <p>Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want.</p> <p>Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached. </p> <p>The target performance quality that is defined for an SLO is the <i>attainment goal</i>.</p> <p>You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series.</p> <note> <p>You can't create an SLO for a service operation that was discovered by Application Signals until after that operation has reported standard metrics to Application Signals.</p> </note> <p>When you create an SLO, you specify whether it is a <i>period-based SLO</i> or a <i>request-based SLO</i>. Each type of SLO has a different way of evaluating your application's performance against its attainment goal.</p> <ul> <li> <p>A <i>period-based SLO</i> uses defined <i>periods</i> of time within a specified total time interval. For each period of time, Application Signals determines whether the application met its goal. The attainment rate is calculated as the <code>number of good periods/number of total periods</code>.</p> <p>For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its performance goal during at least 99.9% of the time periods.</p> </li> <li> <p>A <i>request-based SLO</i> doesn't use pre-defined periods of time. Instead, the SLO measures <code>number of good requests/number of total requests</code> during the interval. At any time, you can find the ratio of good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.</p> </li> </ul> <p>After you have created an SLO, you can retrieve error budget reports for it. An <i>error budget</i> is the amount of time or amount of requests that your application can be non-compliant with the SLO's goal, and still have your application meet the goal.</p> <ul> <li> <p>For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, while still meeting the overall goal. The <i>remaining error budget</i> decreases with every failed period that is recorded. The error budget within one interval can never increase.</p> <p>For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month.</p> </li> <li> <p>For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on the ratio of good requests to total requests.</p> </li> </ul> <p>For more information about SLOs, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html"> Service level objectives (SLOs)</a>. </p> <p>When you perform a <code>CreateServiceLevelObjective</code> operation, Application Signals creates the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul>
     # @param [Hash, Types::CreateServiceLevelObjectiveInput] params
     # @option params [String] :name
     #   <p>A name for this SLO.</p>
     # @option params [String] :description
     #   <p>An optional description for this SLO.</p>
     # @option params [Types::ServiceLevelIndicatorConfig] :sli_config
-    #   <p>If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p>
-    #            <p>You can't specify both <code>RequestBasedSliConfig</code> and <code>SliConfig</code> in the same operation.</p>
+    #   <p>If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p> <p>You can't specify both <code>RequestBasedSliConfig</code> and <code>SliConfig</code> in the same operation.</p>
     # @option params [Types::RequestBasedServiceLevelIndicatorConfig] :request_based_sli_config
-    #   <p>If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p>
-    #            <p>You can't specify both <code>RequestBasedSliConfig</code> and <code>SliConfig</code> in the same operation.</p>
+    #   <p>If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p> <p>You can't specify both <code>RequestBasedSliConfig</code> and <code>SliConfig</code> in the same operation.</p>
     # @option params [Types::Goal] :goal
     #   <p>This structure contains the attributes that determine the goal of the SLO.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>A list of key-value pairs to associate with the SLO. You can associate as many as 50 tags with an SLO.
-    #         To be able to associate tags with the SLO when you create the SLO, you must
-    #         have the <code>cloudwatch:TagResource</code> permission.</p>
-    #            <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-    #         permissions by granting a user
-    #         permission to access or change only resources with certain tag values.</p>
+    #   <p>A list of key-value pairs to associate with the SLO. You can associate as many as 50 tags with an SLO. To be able to associate tags with the SLO when you create the SLO, you must have the <code>cloudwatch:TagResource</code> permission.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p>
     # @option params [Array<Types::BurnRateConfiguration>] :burn_rate_configurations
-    #   <p>Use this array to create <i>burn rates</i> for this SLO. Each 
-    #            burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
+    #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ServiceLevelObjectiveName", # required
@@ -576,6 +474,7 @@ module Aws::ApplicationSignals
     #         },
     #         operation_name: "OperationName",
     #         metric_type: "LATENCY" # One of: ["LATENCY", "AVAILABILITY"],
+    #         metric_name: "MetricName",
     #         statistic: "ServiceLevelIndicatorStatistic",
     #         period_seconds: 1,
     #         metric_data_queries: [
@@ -915,6 +814,21 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
+    # <p>Deletes the grouping configuration for this account. This removes all custom grouping attribute definitions that were previously configured.</p>
+    # @param [Hash, Smithy::Schema::EmptyStructure] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.delete_grouping_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteGroupingConfigurationOutput]
+    def delete_grouping_configuration(params = {}, options = {})
+      request = build_request(:delete_grouping_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified service level objective.</p>
     # @param [Hash, Types::DeleteServiceLevelObjectiveInput] params
     # @option params [String] :id
@@ -937,46 +851,11 @@ module Aws::ApplicationSignals
     # <p>Returns information about a service discovered by Application Signals.</p>
     # @param [Hash, Types::GetServiceInput] params
     # @option params [Time] :start_time
-    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Time] :end_time
-    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Hash<String, String>] :key_attributes
-    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, 
-    #            <code>Name</code>, and <code>Environment</code> attributes.</p>
-    #            <p>This is a string-to-string map. It can 
-    #            include the following fields.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Type</code> designates the type of object this is.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ResourceType</code> specifies the type of the resource. This field is used only
-    #               when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field
-    #               is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Identifier</code> identifies the resource objects of this resource. 
-    #               This is used only if the value of the <code>Type</code> field
-    #               is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, <code>Name</code>, and <code>Environment</code> attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     start_time: Time.now, # required
@@ -997,6 +876,14 @@ module Aws::ApplicationSignals
     #       attribute_maps: [
     #         {
     #           "String" => "String"
+    #         }
+    #       ],
+    #       service_groups: [
+    #         {
+    #           group_name: "GroupName", # required
+    #           group_value: "GroupValue", # required
+    #           group_source: "GroupSource", # required
+    #           group_identifier: "GroupIdentifier", # required
     #         }
     #       ],
     #       metric_references: [ # required
@@ -1036,9 +923,7 @@ module Aws::ApplicationSignals
     # <p>Returns information about one SLO created in the account. </p>
     # @param [Hash, Types::GetServiceLevelObjectiveInput] params
     # @option params [String] :id
-    #   <p>The ARN or name of the SLO that you want to retrieve information about. You can find the ARNs 
-    #            of SLOs by using the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListServiceLevelObjectives.html">ListServiceLevelObjectives</a>
-    #            operation.</p>
+    #   <p>The ARN or name of the SLO that you want to retrieve information about. You can find the ARNs of SLOs by using the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListServiceLevelObjectives.html">ListServiceLevelObjectives</a> operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "ServiceLevelObjectiveId", # required
@@ -1222,55 +1107,176 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Returns a list of service dependencies of the service that you specify. A dependency is an infrastructure 
-    #          component that an operation of this service connects with. Dependencies can include Amazon Web Services 
-    #          services, Amazon Web Services resources, and third-party services.
-    #       </p>
+    # <p>Returns a list of audit findings that provide automated analysis of service behavior and root cause analysis. These findings help identify the most significant observations about your services, including performance issues, anomalies, and potential problems. The findings are generated using heuristic algorithms based on established troubleshooting patterns.</p>
+    # @param [Hash, Types::ListAuditFindingsInput] params
+    # @option params [Time] :start_time
+    #   <p>The start of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>
+    # @option params [Time] :end_time
+    #   <p>The end of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>
+    # @option params [Array<String>] :auditors
+    #   <p>A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.</p> <p>The following auditors are available for configuration:</p> <ul> <li> <p> <code>slo</code> - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.</p> </li> <li> <p> <code>operation_metric</code> - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase</p> </li> <li> <p> <code>service_quota</code> - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase</p> </li> <li> <p> <code>trace</code> - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase</p> </li> <li> <p> <code>dependency_metric</code> - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>top_contributor</code> - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>log</code> - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase</p> </li> </ul> <note> <p> <code>InitAuditor</code> and <code>Summarizer</code> auditors are not configurable as they are automatically triggered during the audit process.</p> </note>
+    # @option params [Array<Types::AuditTarget>] :audit_targets
+    #   <p>A list of audit targets to filter the findings by. You can specify services, SLOs, or service operations to limit the audit findings to specific entities.</p>
+    # @option params [String] :next_token
+    #   <p>Include this value, if it was returned by the previous operation, to get the next set of audit findings.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of audit findings to return in one operation. If you omit this parameter, the default of 10 is used.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     auditors: ["String"],
+    #     audit_targets: [ # required
+    #       {
+    #         type: "String", # required
+    #         data: { # required
+    #           # One of:
+    #           service: {
+    #             type: "String",
+    #             name: "String",
+    #             environment: "String",
+    #             aws_account_id: "String"
+    #           },
+    #           slo: {
+    #             slo_name: "String",
+    #             slo_arn: "String"
+    #           },
+    #           service_operation: {
+    #             service: {
+    #               type: "String",
+    #               name: "String",
+    #               environment: "String",
+    #               aws_account_id: "String"
+    #             },
+    #             operation: "String",
+    #             metric_type: "String"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_audit_findings(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     audit_findings: [ # required
+    #       {
+    #         key_attributes: { # required
+    #           "KeyAttributeName" => "KeyAttributeValue"
+    #         },
+    #         auditor_results: [
+    #           {
+    #             auditor: "String",
+    #             description: "String",
+    #             severity: "CRITICAL" # One of: ["CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"]
+    #           }
+    #         ],
+    #         operation: "String",
+    #         metric_graph: {
+    #           metric_data_queries: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Microseconds" # One of: ["Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"]
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId"
+    #             }
+    #           ],
+    #           start_time: Time.now,
+    #           end_time: Time.now
+    #         },
+    #         dependency_graph: {
+    #           nodes: [
+    #             {
+    #               key_attributes: { # required
+    #                 "KeyAttributeName" => "KeyAttributeValue"
+    #               },
+    #               name: "String", # required
+    #               node_id: "String", # required
+    #               operation: "String",
+    #               type: "String",
+    #               duration: 1.0,
+    #               status: "String"
+    #             }
+    #           ],
+    #           edges: [
+    #             {
+    #               source_node_id: "String",
+    #               destination_node_id: "String",
+    #               duration: 1.0,
+    #               connection_type: "INDIRECT" # One of: ["INDIRECT", "DIRECT"]
+    #             }
+    #           ]
+    #         },
+    #         type: "String"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAuditFindingsOutput]
+    def list_audit_findings(params = {}, options = {})
+      request = build_request(:list_audit_findings, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured. These definitions determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings.</p>
+    # @param [Hash, Types::ListGroupingAttributeDefinitionsInput] params
+    # @option params [String] :next_token
+    #   <p>Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_grouping_attribute_definitions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     grouping_attribute_definitions: [ # required
+    #       {
+    #         grouping_name: "GroupingString", # required
+    #         grouping_source_keys: ["GroupingString"],
+    #         default_grouping_value: "GroupingString"
+    #       }
+    #     ],
+    #     updated_at: Time.now,
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListGroupingAttributeDefinitionsOutput]
+    def list_grouping_attribute_definitions(params = {}, options = {})
+      request = build_request(:list_grouping_attribute_definitions, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of service dependencies of the service that you specify. A dependency is an infrastructure component that an operation of this service connects with. Dependencies can include Amazon Web Services services, Amazon Web Services resources, and third-party services. </p>
     # @param [Hash, Types::ListServiceDependenciesInput] params
     # @option params [Time] :start_time
-    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Time] :end_time
-    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested end time will be rounded to the nearest hour.</p>
+    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested end time will be rounded to the nearest hour.</p>
     # @option params [Hash<String, String>] :key_attributes
-    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, 
-    #            <code>Name</code>, and <code>Environment</code> attributes.</p>
-    #            <p>This is a string-to-string map. It can 
-    #            include the following fields.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Type</code> designates the type of object this is.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ResourceType</code> specifies the type of the resource. This field is used only
-    #               when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field
-    #               is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Identifier</code> identifies the resource objects of this resource. 
-    #               This is used only if the value of the <code>Type</code> field
-    #               is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, <code>Name</code>, and <code>Environment</code> attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. If you omit this
-    #            parameter, the default of 50 is used.</p>
+    #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.</p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service dependencies.</p>
     # @example Request syntax with placeholder values
@@ -1321,53 +1327,16 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Returns the list of dependents that invoked the specified service during the provided time range. Dependents include 
-    #          other services, CloudWatch Synthetics canaries, and clients that are instrumented with CloudWatch RUM app monitors.</p>
+    # <p>Returns the list of dependents that invoked the specified service during the provided time range. Dependents include other services, CloudWatch Synthetics canaries, and clients that are instrumented with CloudWatch RUM app monitors.</p>
     # @param [Hash, Types::ListServiceDependentsInput] params
     # @option params [Time] :start_time
-    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Time] :end_time
-    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Hash<String, String>] :key_attributes
-    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, 
-    #            <code>Name</code>, and <code>Environment</code> attributes.</p>
-    #            <p>This is a string-to-string map. It can 
-    #            include the following fields.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Type</code> designates the type of object this is.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ResourceType</code> specifies the type of the resource. This field is used only
-    #               when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field
-    #               is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Identifier</code> identifies the resource objects of this resource. 
-    #               This is used only if the value of the <code>Type</code> field
-    #               is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, <code>Name</code>, and <code>Environment</code> attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. If you omit this
-    #            parameter, the default of 50 is used.</p>
+    #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.</p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service dependents.</p>
     # @example Request syntax with placeholder values
@@ -1423,13 +1392,9 @@ module Aws::ApplicationSignals
     # @option params [String] :id
     #   <p>The ID of the SLO to list exclusion windows for.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
-    #            
-    #         </p>
+    #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used. </p>
     # @option params [String] :next_token
-    #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
-    #            
-    #         </p>
+    #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "ServiceLevelObjectiveId", # required
@@ -1465,66 +1430,21 @@ module Aws::ApplicationSignals
     # <p>Returns a list of SLOs created in this account.</p>
     # @param [Hash, Types::ListServiceLevelObjectivesInput] params
     # @option params [Hash<String, String>] :key_attributes
-    #   <p>You can use this optional field to specify which services you want to retrieve SLO information for.</p>
-    #            <p>This is a string-to-string map. It can 
-    #               include the following fields.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Type</code> designates the type of object this is.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ResourceType</code> specifies the type of the resource. This field is used only
-    #                  when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field
-    #                  is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Identifier</code> identifies the resource objects of this resource. 
-    #                  This is used only if the value of the <code>Type</code> field
-    #                  is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use this optional field to specify which services you want to retrieve SLO information for.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> </ul>
     # @option params [String] :operation_name
     #   <p>The name of the operation that this SLO is associated with.</p>
     # @option params [Types::DependencyConfig] :dependency_config
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. If you omit this
-    #            parameter, the default of 50 is used.</p>
+    #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.</p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.</p>
-    # @option params [Array<String>] :metric_source_types
-    #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Service operation</p>
-    #               </li>
-    #               <li>
-    #                  <p>Service dependency</p>
-    #               </li>
-    #               <li>
-    #                  <p>CloudWatch metric</p>
-    #               </li>
-    #            </ul>
     # @option params [Boolean] :include_linked_accounts
-    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include SLO from source accounts in the returned data.
-    #            
-    #         </p>
-    #            <p>When you are monitoring an account, you can use Amazon Web Services account ID in <code>KeyAttribute</code> filter for service source account and <code>SloOwnerawsaccountID</code> for SLO source account with <code>IncludeLinkedAccounts</code> to filter the returned data to only a single source account.
-    #            
-    #         </p>
+    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include SLO from source accounts in the returned data. </p> <p>When you are monitoring an account, you can use Amazon Web Services account ID in <code>KeyAttribute</code> filter for service source account and <code>SloOwnerawsaccountID</code> for SLO source account with <code>IncludeLinkedAccounts</code> to filter the returned data to only a single source account. </p>
     # @option params [String] :slo_owner_aws_account_id
     #   <p>SLO's Amazon Web Services account ID.</p>
+    # @option params [Array<String>] :metric_source_types
+    #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     key_attributes: {
@@ -1539,9 +1459,9 @@ module Aws::ApplicationSignals
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     metric_source_types: ["ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]],
     #     include_linked_accounts: false,
-    #     slo_owner_aws_account_id: "AwsAccountId"
+    #     slo_owner_aws_account_id: "AwsAccountId",
+    #     metric_source_types: ["ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]]
     #   }
     #   options = {}
     #   response = client.list_service_level_objectives(params, options)
@@ -1575,53 +1495,16 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Returns a list of the <i>operations</i> of this service that have been discovered by Application Signals.
-    #       Only the operations that were invoked during the specified time range are returned.</p>
+    # <p>Returns a list of the <i>operations</i> of this service that have been discovered by Application Signals. Only the operations that were invoked during the specified time range are returned.</p>
     # @param [Hash, Types::ListServiceOperationsInput] params
     # @option params [Time] :start_time
-    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Time] :end_time
-    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested end time will be rounded to the nearest hour.</p>
+    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested end time will be rounded to the nearest hour.</p>
     # @option params [Hash<String, String>] :key_attributes
-    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, 
-    #            <code>Name</code>, and <code>Environment</code> attributes.</p>
-    #            <p>This is a string-to-string map. It can 
-    #            include the following fields.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Type</code> designates the type of object this is.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ResourceType</code> specifies the type of the resource. This field is used only
-    #               when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field
-    #               is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Identifier</code> identifies the resource objects of this resource. 
-    #               This is used only if the value of the <code>Type</code> field
-    #               is <code>Resource</code> or <code>AWS::Resource</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Use this field to specify which service you want to retrieve information for. You must specify at least the <code>Type</code>, <code>Name</code>, and <code>Environment</code> attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. If you omit this
-    #            parameter, the default of 50 is used.</p>
+    #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.</p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service operations.</p>
     # @example Request syntax with placeholder values
@@ -1668,35 +1551,91 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Returns a list of services that have been discovered by Application Signals. 
-    #          A service represents a minimum logical and transactional unit that completes a business function. Services
-    #          are discovered through Application Signals instrumentation.</p>
+    # <p>Returns information about the last deployment and other change states of services. This API provides visibility into recent changes that may have affected service performance, helping with troubleshooting and change correlation.</p>
+    # @param [Hash, Types::ListServiceStatesInput] params
+    # @option params [Time] :start_time
+    #   <p>The start of the time period to retrieve service state information for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code>.</p>
+    # @option params [Time] :end_time
+    #   <p>The end of the time period to retrieve service state information for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code>.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of service states to return in one operation. If you omit this parameter, the default of 20 is used.</p>
+    # @option params [String] :next_token
+    #   <p>Include this value, if it was returned by the previous operation, to get the next set of service states.</p>
+    # @option params [Boolean] :include_linked_accounts
+    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include service states from source accounts in the returned data.</p>
+    # @option params [String] :aws_account_id
+    #   <p>The Amazon Web Services account ID to filter service states by. Use this to limit results to services from a specific account.</p>
+    # @option params [Array<Types::AttributeFilter>] :attribute_filters
+    #   <p>A list of attribute filters to narrow down the services. You can filter by platform, environment, or other service attributes.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     include_linked_accounts: false,
+    #     aws_account_id: "AwsAccountId",
+    #     attribute_filters: [
+    #       {
+    #         attribute_filter_name: "AttributeFilterName", # required
+    #         attribute_filter_values: ["AttributeFilterValue"], # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.list_service_states(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     service_states: [ # required
+    #       {
+    #         attribute_filters: [
+    #           {
+    #             attribute_filter_name: "AttributeFilterName", # required
+    #             attribute_filter_values: ["AttributeFilterValue"], # required
+    #           }
+    #         ],
+    #         service: { # required
+    #           "KeyAttributeName" => "KeyAttributeValue"
+    #         },
+    #         latest_change_events: [ # required
+    #           {
+    #             timestamp: Time.now, # required
+    #             account_id: "AwsAccountId", # required
+    #             region: "String", # required
+    #             entity: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             change_event_type: "DEPLOYMENT" # One of: ["DEPLOYMENT"], # required
+    #             event_id: "String", # required
+    #             user_name: "String",
+    #             event_name: "String"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListServiceStatesOutput]
+    def list_service_states(params = {}, options = {})
+      request = build_request(:list_service_states, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of services that have been discovered by Application Signals. A service represents a minimum logical and transactional unit that completes a business function. Services are discovered through Application Signals instrumentation.</p>
     # @param [Hash, Types::ListServicesInput] params
     # @option params [Time] :start_time
-    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Time] :end_time
-    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as 
-    #            be epoch time in seconds. For example: <code>1698778057</code>
-    #            </p>
-    #            <p>Your requested start time will be rounded to the nearest hour.</p>
+    #   <p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: <code>1698778057</code> </p> <p>Your requested start time will be rounded to the nearest hour.</p>
     # @option params [Integer] :max_results
-    #   <p>
-    #            The maximum number 
-    #            of results 
-    #            to return 
-    #            in one operation. 
-    #            If you omit this parameter, 
-    #            the default of 50 is used.
-    #         </p>
+    #   <p> The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used. </p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of services.</p>
     # @option params [Boolean] :include_linked_accounts
-    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include services from source accounts in the returned data.
-    #            
-    #         </p>
+    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include services from source accounts in the returned data. </p>
     # @option params [String] :aws_account_id
     #   <p>Amazon Web Services Account ID.</p>
     # @example Request syntax with placeholder values
@@ -1738,6 +1677,14 @@ module Aws::ApplicationSignals
     #             metric_name: "MetricName", # required
     #             account_id: "AwsAccountId"
     #           }
+    #         ],
+    #         service_groups: [
+    #           {
+    #             group_name: "GroupName", # required
+    #             group_value: "GroupValue", # required
+    #             group_source: "GroupSource", # required
+    #             group_identifier: "GroupIdentifier", # required
+    #           }
     #         ]
     #       }
     #     ],
@@ -1752,14 +1699,7 @@ module Aws::ApplicationSignals
     # <p>Displays the tags associated with a CloudWatch resource. Tags can be assigned to service level objectives.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.</p>
-    #            <p>The ARN format of an Application Signals SLO is 
-    #            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i>
-    #               </code>
-    #            </p>
-    #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource
-    #            Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General
-    #               Reference</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.</p> <p>The ARN format of an Application Signals SLO is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i> </code> </p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -1782,50 +1722,43 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Enables this Amazon Web Services account to be able to use CloudWatch Application Signals 
-    #          by creating the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role. This service-
-    #          linked role has the following permissions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>xray:GetServiceGraph</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>logs:StartQuery</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>logs:GetQueryResults</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>cloudwatch:GetMetricData</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>cloudwatch:ListMetrics</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>tag:GetResources</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>autoscaling:DescribeAutoScalingGroups</code>
-    #                </p>
-    #             </li>
-    #          </ul>
-    #          <p>After completing this step, you still need to instrument your Java and Python applications to send data 
-    #          to Application Signals. For more information, see 
-    #          <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html">
-    #             Enabling Application Signals</a>.</p>
+    # <p>Creates or updates the grouping configuration for this account. This operation allows you to define custom grouping attributes that determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings. These grouping attributes can then be used to organize and filter services in the Application Signals console and APIs.</p>
+    # @param [Hash, Types::PutGroupingConfigurationInput] params
+    # @option params [Array<Types::GroupingAttributeDefinition>] :grouping_attribute_definitions
+    #   <p>An array of grouping attribute definitions that specify how services should be grouped. Each definition includes a friendly name, source keys to derive the grouping value from, and an optional default value.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     grouping_attribute_definitions: [ # required
+    #       {
+    #         grouping_name: "GroupingString", # required
+    #         grouping_source_keys: ["GroupingString"],
+    #         default_grouping_value: "GroupingString"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.put_grouping_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     grouping_configuration: { # required
+    #       grouping_attribute_definitions: [ # required
+    #         {
+    #           grouping_name: "GroupingString", # required
+    #           grouping_source_keys: ["GroupingString"],
+    #           default_grouping_value: "GroupingString"
+    #         }
+    #       ],
+    #       updated_at: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::PutGroupingConfigurationOutput]
+    def put_grouping_configuration(params = {}, options = {})
+      request = build_request(:put_grouping_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul> <p>After completing this step, you still need to instrument your Java and Python applications to send data to Application Signals. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html"> Enabling Application Signals</a>.</p>
     # @param [Hash, Types::StartDiscoveryInput] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -1840,26 +1773,10 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource, such as a service level objective.</p>
-    #          <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-    #          permissions by granting a user
-    #          permission to access or change only resources with certain tag values.</p>
-    #          <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>
-    #          <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, 
-    #          this tag is appended to the list of tags associated
-    #          with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces
-    #          the previous value for that tag.</p>
-    #          <p>You can associate as many as 50 tags with a CloudWatch resource.</p>
+    # <p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource, such as a service level objective.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a CloudWatch resource.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to set tags for.</p>
-    #            <p>The ARN format of an Application Signals SLO is 
-    #            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i>
-    #               </code>
-    #            </p>
-    #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource
-    #            Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General
-    #               Reference</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to set tags for.</p> <p>The ARN format of an Application Signals SLO is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i> </code> </p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The list of key-value pairs to associate with the alarm.</p>
     # @example Request syntax with placeholder values
@@ -1886,14 +1803,7 @@ module Aws::ApplicationSignals
     # <p>Removes one or more tags from the specified resource.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.</p>
-    #            <p>The ARN format of an Application Signals SLO is 
-    #            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i>
-    #               </code>
-    #            </p>
-    #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource
-    #            Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General
-    #               Reference</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.</p> <p>The ARN format of an Application Signals SLO is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i> </code> </p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>
     # @option params [Array<String>] :tag_keys
     #   <p>The list of tag keys to remove from the resource.</p>
     # @example Request syntax with placeholder values
@@ -1912,10 +1822,7 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Updates an existing service level objective (SLO). If you omit parameters, the previous values
-    #          of those parameters are retained. </p>
-    #          <p>You cannot change from a period-based SLO to a request-based SLO, 
-    #          or change from a request-based SLO to a period-based SLO.</p>
+    # <p>Updates an existing service level objective (SLO). If you omit parameters, the previous values of those parameters are retained. </p> <p>You cannot change from a period-based SLO to a request-based SLO, or change from a request-based SLO to a period-based SLO.</p>
     # @param [Hash, Types::UpdateServiceLevelObjectiveInput] params
     # @option params [String] :id
     #   <p>The Amazon Resource Name (ARN) or name of the service level objective that you want to update.</p>
@@ -1924,14 +1831,11 @@ module Aws::ApplicationSignals
     # @option params [Types::ServiceLevelIndicatorConfig] :sli_config
     #   <p>If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p>
     # @option params [Types::RequestBasedServiceLevelIndicatorConfig] :request_based_sli_config
-    #   <p>If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p>
-    #            <p>You can't specify both <code>SliConfig</code> and <code>RequestBasedSliConfig</code> in the same operation.</p>
+    #   <p>If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.</p> <p>You can't specify both <code>SliConfig</code> and <code>RequestBasedSliConfig</code> in the same operation.</p>
     # @option params [Types::Goal] :goal
-    #   <p>A structure that contains the attributes that determine the goal of the SLO. This includes
-    #            the time period for evaluation and the attainment threshold.</p>
+    #   <p>A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.</p>
     # @option params [Array<Types::BurnRateConfiguration>] :burn_rate_configurations
-    #   <p>Use this array to create <i>burn rates</i> for this SLO. Each 
-    #            burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
+    #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "ServiceLevelObjectiveId", # required
@@ -1943,6 +1847,7 @@ module Aws::ApplicationSignals
     #         },
     #         operation_name: "OperationName",
     #         metric_type: "LATENCY" # One of: ["LATENCY", "AVAILABILITY"],
+    #         metric_name: "MetricName",
     #         statistic: "ServiceLevelIndicatorStatistic",
     #         period_seconds: 1,
     #         metric_data_queries: [

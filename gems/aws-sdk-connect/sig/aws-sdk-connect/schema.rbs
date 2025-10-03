@@ -70,6 +70,8 @@ module Aws::Connect
     AssociateAnalyticsDataSetResponse: StructureShape
     AssociateApprovedOriginRequest: StructureShape
     AssociateBotRequest: StructureShape
+    AssociateContactWithUserRequest: StructureShape
+    AssociateContactWithUserResponse: StructureShape
     AssociateDefaultVocabularyRequest: StructureShape
     AssociateDefaultVocabularyResponse: StructureShape
     AssociateFlowRequest: StructureShape
@@ -497,6 +499,7 @@ module Aws::Connect
     EmailRecipientsList: ListShape
     EmailReference: StructureShape
     EmptyFieldValue: StructureShape
+    EnableValueValidationOnAssociation: BooleanShape
     EncryptionConfig: StructureShape
     EncryptionType: EnumShape
     EndAssociatedTasksActionDefinition: StructureShape
@@ -696,6 +699,7 @@ module Aws::Connect
     Index: IntegerShape
     InitiateAs: EnumShape
     InitiationMethodList: ListShape
+    InputPredefinedAttributeConfiguration: StructureShape
     Instance: StructureShape
     InstanceArn: StringShape
     InstanceAttributeType: EnumShape
@@ -728,6 +732,7 @@ module Aws::Connect
     InvisibleTaskTemplateFields: ListShape
     IpCidr: StringShape
     IpCidrList: ListShape
+    IsReadOnly: BooleanShape
     IvrRecordingTrack: EnumShape
     JoinToken: StringShape
     KeyId: StringShape
@@ -812,6 +817,8 @@ module Aws::Connect
     ListQuickConnectsResponse: StructureShape
     ListRealtimeContactAnalysisSegmentsV2Request: StructureShape
     ListRealtimeContactAnalysisSegmentsV2Response: StructureShape
+    ListRoutingProfileManualAssignmentQueuesRequest: StructureShape
+    ListRoutingProfileManualAssignmentQueuesResponse: StructureShape
     ListRoutingProfileQueuesRequest: StructureShape
     ListRoutingProfileQueuesResponse: StructureShape
     ListRoutingProfilesRequest: StructureShape
@@ -888,6 +895,7 @@ module Aws::Connect
     MonitorContactResponse: StructureShape
     Name: StringShape
     Name128: StringShape
+    NameCriteria: StructureShape
     Namespace: StringShape
     NewChatCreated: BooleanShape
     NewSessionDetails: StructureShape
@@ -947,6 +955,7 @@ module Aws::Connect
     Permission: StringShape
     PermissionsList: ListShape
     PersistentChat: StructureShape
+    PersistentConnection: BooleanShape
     PhoneNumber: StringShape
     PhoneNumberCountryCode: EnumShape
     PhoneNumberCountryCodes: ListShape
@@ -969,7 +978,10 @@ module Aws::Connect
     PotentialDisconnectIssue: StringShape
     PreSignedAttachmentUrl: StringShape
     PredefinedAttribute: StructureShape
+    PredefinedAttributeConfiguration: StructureShape
     PredefinedAttributeName: StringShape
+    PredefinedAttributePurposeName: StringShape
+    PredefinedAttributePurposeNameList: ListShape
     PredefinedAttributeSearchConditionList: ListShape
     PredefinedAttributeSearchCriteria: StructureShape
     PredefinedAttributeSearchSummaryList: ListShape
@@ -1138,6 +1150,10 @@ module Aws::Connect
     RoutingProfileDescription: StringShape
     RoutingProfileId: StringShape
     RoutingProfileList: ListShape
+    RoutingProfileManualAssignmentQueueConfig: StructureShape
+    RoutingProfileManualAssignmentQueueConfigList: ListShape
+    RoutingProfileManualAssignmentQueueConfigSummary: StructureShape
+    RoutingProfileManualAssignmentQueueConfigSummaryList: ListShape
     RoutingProfileName: StringShape
     RoutingProfileQueueConfig: StructureShape
     RoutingProfileQueueConfigList: ListShape
@@ -1173,11 +1189,16 @@ module Aws::Connect
     SearchContactFlowModulesResponse: StructureShape
     SearchContactFlowsRequest: StructureShape
     SearchContactFlowsResponse: StructureShape
+    SearchContactsAdditionalTimeRange: StructureShape
+    SearchContactsAdditionalTimeRangeCriteria: StructureShape
+    SearchContactsAdditionalTimeRangeCriteriaList: ListShape
     SearchContactsMatchType: EnumShape
     SearchContactsRequest: StructureShape
     SearchContactsResponse: StructureShape
     SearchContactsTimeRange: StructureShape
+    SearchContactsTimeRangeConditionType: EnumShape
     SearchContactsTimeRangeType: EnumShape
+    SearchContactsTimestampCondition: StructureShape
     SearchCriteria: StructureShape
     SearchEmailAddressesRequest: StructureShape
     SearchEmailAddressesResponse: StructureShape
@@ -1207,6 +1228,7 @@ module Aws::Connect
     SearchUsersResponse: StructureShape
     SearchVocabulariesRequest: StructureShape
     SearchVocabulariesResponse: StructureShape
+    SearchableAgentCriteriaStep: StructureShape
     SearchableContactAttributeKey: StringShape
     SearchableContactAttributeValue: StringShape
     SearchableContactAttributeValueList: ListShape
@@ -1214,6 +1236,9 @@ module Aws::Connect
     SearchableContactAttributesCriteria: StructureShape
     SearchableContactAttributesCriteriaList: ListShape
     SearchableQueueType: EnumShape
+    SearchableRoutingCriteria: StructureShape
+    SearchableRoutingCriteriaStep: StructureShape
+    SearchableRoutingCriteriaStepList: ListShape
     SearchableSegmentAttributeKey: StringShape
     SearchableSegmentAttributeValue: StringShape
     SearchableSegmentAttributeValueList: ListShape
@@ -1241,6 +1266,7 @@ module Aws::Connect
     SegmentAttributeName: StringShape
     SegmentAttributeValue: StructureShape
     SegmentAttributeValueInteger: IntegerShape
+    SegmentAttributeValueList: ListShape
     SegmentAttributeValueMap: MapShape
     SegmentAttributeValueString: StringShape
     SegmentAttributes: MapShape

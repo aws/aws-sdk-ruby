@@ -6,6 +6,38 @@ module Aws::Evs
   # This module contains the types returned by client operations.
   module Types
 
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment containing the VLAN that the Elastic IP address associates with.</p>
+    #   @return [String]
+    # @!attribute vlan_name
+    #   <p>The name of the VLAN. <code>hcx</code> is the only accepted VLAN name at this time.</p>
+    #   @return [String]
+    # @!attribute allocation_id
+    #   <p>The Elastic IP address allocation ID.</p>
+    #   @return [String]
+    class AssociateEipToVlanRequest < Struct.new(
+      :client_token,
+      :environment_id,
+      :vlan_name,
+      :allocation_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vlan
+    #   <p>The VLANs that Amazon EVS creates during environment creation.</p>
+    #   @return [Types::Vlan]
+    class AssociateEipToVlanResponse < Struct.new(
+      :vlan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A check on the environment to identify environment health and validate VMware VCF licensing compliance.</p>
     # @!attribute type
     #   <p>The check type. Amazon EVS performs the following checks.</p> <ul> <li> <p> <code>KEY_REUSE</code>: checks that the VCF license key is not used by another Amazon EVS environment. This check fails if a used license is added to the environment.</p> </li> <li> <p> <code>KEY_COVERAGE</code>: checks that your VCF license key allocates sufficient vCPU cores for all deployed hosts. The check fails when any assigned hosts in the EVS environment are not covered by license keys, or when any unassigned hosts cannot be covered by available vCPU cores in keys.</p> </li> <li> <p> <code>REACHABILITY</code>: checks that the Amazon EVS control plane has a persistent connection to SDDC Manager. If Amazon EVS cannot reach the environment, this check fails.</p> </li> <li> <p> <code>HOST_COUNT</code>: Checks that your environment has a minimum of 4 hosts, which is a requirement for VCF 5.2.1.</p> <p>If this check fails, you will need to add hosts so that your environment meets this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.</p> </li> </ul>
@@ -195,6 +227,57 @@ module Aws::Evs
     #   @return [Types::Environment]
     class DeleteEnvironmentResponse < Struct.new(
       :environment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment containing the VLAN that the Elastic IP address disassociates from.</p>
+    #   @return [String]
+    # @!attribute vlan_name
+    #   <p>The name of the VLAN. <code>hcx</code> is the only accepted VLAN name at this time.</p>
+    #   @return [String]
+    # @!attribute association_id
+    #   <p> A unique ID for the Elastic IP address association.</p>
+    #   @return [String]
+    class DisassociateEipFromVlanRequest < Struct.new(
+      :client_token,
+      :environment_id,
+      :vlan_name,
+      :association_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vlan
+    #   <p>The VLANs that Amazon EVS creates during environment creation.</p>
+    #   @return [Types::Vlan]
+    class DisassociateEipFromVlanResponse < Struct.new(
+      :vlan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An Elastic IP address association with the elastic network interface in the VLAN subnet.</p>
+    # @!attribute association_id
+    #   <p>A unique ID for the elastic IP address association with the VLAN subnet.</p>
+    #   @return [String]
+    # @!attribute allocation_id
+    #   <p>The Elastic IP address allocation ID.</p>
+    #   @return [String]
+    # @!attribute ip_address
+    #   <p>The Elastic IP address.</p>
+    #   @return [String]
+    class EipAssociation < Struct.new(
+      :association_id,
+      :allocation_id,
+      :ip_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -462,7 +545,7 @@ module Aws::Evs
     #   <p> The NSX uplink VLAN subnet. This VLAN subnet allows connectivity to the NSX overlay network.</p>
     #   @return [Types::InitialVlanInfo]
     # @!attribute hcx
-    #   <p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p>
+    #   <p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p> <p>If you plan to use a public HCX VLAN subnet, the following requirements must be met:</p> <ul> <li> <p>Must have a /28 netmask and be allocated from the IPAM public pool. Required for HCX internet access configuration.</p> </li> <li> <p>The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR block.</p> </li> <li> <p>Must have at least three Elastic IP addresses to be allocated from the public IPAM pool for HCX components.</p> </li> </ul>
     #   @return [Types::InitialVlanInfo]
     # @!attribute expansion_vlan1
     #   <p>An additional VLAN subnet that can be used to extend VCF capabilities once configured. For example, you can configure an expansion VLAN subnet to use NSX Federation for centralized management and synchronization of multiple NSX deployments across different locations.</p>
@@ -470,6 +553,12 @@ module Aws::Evs
     # @!attribute expansion_vlan2
     #   <p>An additional VLAN subnet that can be used to extend VCF capabilities once configured. For example, you can configure an expansion VLAN subnet to use NSX Federation for centralized management and synchronization of multiple NSX deployments across different locations.</p>
     #   @return [Types::InitialVlanInfo]
+    # @!attribute is_hcx_public
+    #   <p>Determines if the HCX VLAN that Amazon EVS provisions is public or private.</p>
+    #   @return [Boolean]
+    # @!attribute hcx_network_acl_id
+    #   <p>A unique ID for a network access control list that the HCX VLAN uses. Required when <code>isHcxPublic</code> is set to <code>true</code>.</p>
+    #   @return [String]
     class InitialVlans < Struct.new(
       :vmk_management,
       :vm_management,
@@ -481,9 +570,16 @@ module Aws::Evs
       :hcx,
       :expansion_vlan1,
       :expansion_vlan2,
+      :is_hcx_public,
+      :hcx_network_acl_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_hcx_public] = false unless options.key?(:is_hcx_public)
+        super
+      end
     end
 
     # <p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.</p>
@@ -711,7 +807,7 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The <code>CreateEnvironmentHost</code> operation couldn't be performed because the service is throttling requests. This exception is thrown when the <code>CreateEnvironmentHost</code> request exceeds concurrency of 1 transaction per second (TPS).</p>
+    # <p>The operation couldn't be performed because the service is throttling requests. This exception is thrown when there are too many requests accepted concurrently from the service endpoint.</p>
     # @!attribute message
     #   <p>Describes the error encountered.</p>
     #   @return [String]
@@ -862,6 +958,15 @@ module Aws::Evs
     # @!attribute state_details
     #   <p>The state details of the VLAN.</p>
     #   @return [String]
+    # @!attribute eip_associations
+    #   <p>An array of Elastic IP address associations.</p>
+    #   @return [Array<Types::EipAssociation>]
+    # @!attribute is_public
+    #   <p>Determines if the VLAN that Amazon EVS provisions is public or private.</p>
+    #   @return [Boolean]
+    # @!attribute network_acl_id
+    #   <p>A unique ID for a network access control list.</p>
+    #   @return [String]
     class Vlan < Struct.new(
       :vlan_id,
       :cidr,
@@ -872,6 +977,9 @@ module Aws::Evs
       :modified_at,
       :vlan_state,
       :state_details,
+      :eip_associations,
+      :is_public,
+      :network_acl_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

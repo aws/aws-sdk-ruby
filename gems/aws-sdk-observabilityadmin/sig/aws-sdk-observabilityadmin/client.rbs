@@ -7,6 +7,7 @@ module Aws::ObservabilityAdmin
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -45,6 +46,40 @@ module Aws::ObservabilityAdmin
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCentralizationRuleForOrganizationResponse
+      include Smithy::Client::_Response[Types::CreateCentralizationRuleForOrganizationOutput]
+      def rule_arn: () -> String?
+    end
+    def create_centralization_rule_for_organization: (
+      ?rule_name: String,
+      ?rule: {
+        source: {
+          regions: Array[String],
+          scope: String,
+          source_logs_configuration: {
+            log_group_selection_criteria: String,
+            encrypted_log_group_strategy: String
+          }
+        },
+        destination: {
+          region: String,
+          account: String,
+          destination_logs_configuration: {
+            logs_encryption_configuration: {
+              encryption_strategy: String,
+              kms_key_arn: String,
+              encryption_conflict_resolution_strategy: String
+            },
+            backup_configuration: {
+              region: untyped,
+              kms_key_arn: untyped
+            }
+          }
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCentralizationRuleForOrganizationResponse
 
     interface _CreateTelemetryRuleResponse
       include Smithy::Client::_Response[Types::CreateTelemetryRuleOutput]
@@ -96,6 +131,13 @@ module Aws::ObservabilityAdmin
       ?tags: Hash[String, String]
     ) -> _CreateTelemetryRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTelemetryRuleForOrganizationResponse
 
+    interface _DeleteCentralizationRuleForOrganizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_centralization_rule_for_organization: (
+      ?rule_identifier: String
+    ) -> _DeleteCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCentralizationRuleForOrganizationResponse
+
     interface _DeleteTelemetryRuleResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -109,6 +151,22 @@ module Aws::ObservabilityAdmin
     def delete_telemetry_rule_for_organization: (
       ?rule_identifier: String
     ) -> _DeleteTelemetryRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTelemetryRuleForOrganizationResponse
+
+    interface _GetCentralizationRuleForOrganizationResponse
+      include Smithy::Client::_Response[Types::GetCentralizationRuleForOrganizationOutput]
+      def rule_name: () -> String?
+      def rule_arn: () -> String?
+      def creator_account_id: () -> String?
+      def created_time_stamp: () -> Integer?
+      def created_region: () -> String?
+      def last_update_time_stamp: () -> Integer?
+      def rule_health: () -> String?
+      def failure_reason: () -> String?
+      def centralization_rule: () -> Types::CentralizationRule?
+    end
+    def get_centralization_rule_for_organization: (
+      ?rule_identifier: String
+    ) -> _GetCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCentralizationRuleForOrganizationResponse
 
     interface _GetTelemetryEvaluationStatusResponse
       include Smithy::Client::_Response[Types::GetTelemetryEvaluationStatusOutput]
@@ -147,6 +205,18 @@ module Aws::ObservabilityAdmin
     def get_telemetry_rule_for_organization: (
       ?rule_identifier: String
     ) -> _GetTelemetryRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryRuleForOrganizationResponse
+
+    interface _ListCentralizationRulesForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListCentralizationRulesForOrganizationOutput]
+      def centralization_rule_summaries: () -> Array[Types::CentralizationRuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_centralization_rules_for_organization: (
+      ?rule_name_prefix: String,
+      ?all_regions: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCentralizationRulesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCentralizationRulesForOrganizationResponse
 
     interface _ListResourceTelemetryResponse
       include Smithy::Client::_Response[Types::ListResourceTelemetryOutput]
@@ -244,6 +314,39 @@ module Aws::ObservabilityAdmin
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCentralizationRuleForOrganizationResponse
+      include Smithy::Client::_Response[Types::UpdateCentralizationRuleForOrganizationOutput]
+      def rule_arn: () -> String?
+    end
+    def update_centralization_rule_for_organization: (
+      ?rule_identifier: String,
+      ?rule: {
+        source: {
+          regions: Array[String],
+          scope: String,
+          source_logs_configuration: {
+            log_group_selection_criteria: String,
+            encrypted_log_group_strategy: String
+          }
+        },
+        destination: {
+          region: String,
+          account: String,
+          destination_logs_configuration: {
+            logs_encryption_configuration: {
+              encryption_strategy: String,
+              kms_key_arn: String,
+              encryption_conflict_resolution_strategy: String
+            },
+            backup_configuration: {
+              region: untyped,
+              kms_key_arn: untyped
+            }
+          }
+        }
+      }
+    ) -> _UpdateCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCentralizationRuleForOrganizationResponse
 
     interface _UpdateTelemetryRuleResponse
       include Smithy::Client::_Response[Types::UpdateTelemetryRuleOutput]

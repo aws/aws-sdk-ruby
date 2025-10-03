@@ -63,6 +63,7 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAnnotationStatus: EnumShape
     AutomatedReasoningPolicyArn: StringShape
     AutomatedReasoningPolicyArnList: ListShape
+    AutomatedReasoningPolicyBuildDocumentBlob: BlobShape
     AutomatedReasoningPolicyBuildDocumentContentType: EnumShape
     AutomatedReasoningPolicyBuildDocumentDescription: StringShape
     AutomatedReasoningPolicyBuildDocumentName: StringShape
@@ -355,6 +356,7 @@ module Aws::Bedrock
     GetEvaluationJobResponse: StructureShape
     GetFoundationModelAvailabilityRequest: StructureShape
     GetFoundationModelAvailabilityResponse: StructureShape
+    GetFoundationModelIdentifier: StringShape
     GetFoundationModelRequest: StructureShape
     GetFoundationModelResponse: StructureShape
     GetGuardrailRequest: StructureShape

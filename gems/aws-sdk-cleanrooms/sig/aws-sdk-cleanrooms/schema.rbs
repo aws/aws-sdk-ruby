@@ -2,6 +2,13 @@ module Aws::CleanRooms
   module Schema
     include Smithy::Schema::Shapes
 
+    AccessBudget: StructureShape
+    AccessBudgetDetails: StructureShape
+    AccessBudgetDetailsList: ListShape
+    AccessBudgetType: EnumShape
+    AccessBudgetsPrivacyTemplateParametersInput: StructureShape
+    AccessBudgetsPrivacyTemplateParametersOutput: StructureShape
+    AccessBudgetsPrivacyTemplateUpdateParameters: StructureShape
     AccessDeniedException: StructureShape
     AccessDeniedExceptionReason: StringShape
     AccountId: StringShape
@@ -64,6 +71,7 @@ module Aws::CleanRooms
     AthenaWorkGroup: StringShape
     AutoApprovedChangeType: EnumShape
     AutoApprovedChangeTypeList: ListShape
+    AutoRefreshMode: EnumShape
     BatchGetCollaborationAnalysisTemplateError: StructureShape
     BatchGetCollaborationAnalysisTemplateErrorList: ListShape
     BatchGetCollaborationAnalysisTemplateOperationInput: StructureShape
@@ -78,6 +86,10 @@ module Aws::CleanRooms
     BatchGetSchemaOperationOutput: StructureShape
     BilledJobResourceUtilization: StructureShape
     BilledResourceUtilization: StructureShape
+    Budget: IntegerShape
+    BudgetParameter: StructureShape
+    BudgetParameters: ListShape
+    BudgetedResourceArn: StringShape
     Change: StructureShape
     ChangeInput: StructureShape
     ChangeInputList: ListShape
@@ -304,6 +316,7 @@ module Aws::CleanRooms
     IdNamespaceType: EnumShape
     InternalServerException: StructureShape
     JobComputePaymentConfig: StructureShape
+    JobType: EnumShape
     JoinOperator: StringShape
     JoinOperatorsList: ListShape
     JoinRequiredOption: StringShape
@@ -468,6 +481,7 @@ module Aws::CleanRooms
     ReceiverAccountIds: ListShape
     ReceiverConfiguration: StructureShape
     ReceiverConfigurationsList: ListShape
+    RemainingBudget: IntegerShape
     ResourceAlias: StringShape
     ResourceDescription: StringShape
     ResourceNotFoundException: StructureShape
@@ -484,6 +498,7 @@ module Aws::CleanRooms
     SchemaConfiguration: EnumShape
     SchemaConfigurationList: ListShape
     SchemaList: ListShape
+    SchemaResourceArn: StringShape
     SchemaStatus: EnumShape
     SchemaStatusDetail: StructureShape
     SchemaStatusDetailList: ListShape

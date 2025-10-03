@@ -6,12 +6,18 @@ module Aws::SSOOIDC
 
       def initialize: (
         ?error: String,
+        ?reason: String,
         ?error_description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error: String?
+      attr_accessor reason: String?
       attr_accessor error_description: String?
+    end
+
+    module AccessDeniedExceptionReason
+      KMS_ACCESS_DENIED: String
     end
 
     class AuthorizationPendingException
@@ -223,12 +229,21 @@ module Aws::SSOOIDC
 
       def initialize: (
         ?error: String,
+        ?reason: String,
         ?error_description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error: String?
+      attr_accessor reason: String?
       attr_accessor error_description: String?
+    end
+
+    module InvalidRequestExceptionReason
+      KMS_KEY_NOT_FOUND: String
+      KMS_INVALID_KEY_USAGE: String
+      KMS_INVALID_STATE: String
+      KMS_DISABLED_KEY: String
     end
 
     class InvalidRequestRegionException

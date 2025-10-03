@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::LicenseManagerUserSubscriptions
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::LicenseManagerUserSubscriptions
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::LicenseManagerUserSubscriptions
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::LicenseManagerUserSubscriptions::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::LicenseManagerUserSubscriptions::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,12 +193,7 @@ module Aws::LicenseManagerUserSubscriptions
       super
     end
 
-    # <p>Associates the user to an EC2 instance to utilize user-based subscriptions.</p>
-    #          <note>
-    #             <p>Your estimated bill for charges on the number of users and related costs will take 48
-    # 			hours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html">Viewing your
-    # 				monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>
-    #          </note>
+    # <p>Associates the user to an EC2 instance to utilize user-based subscriptions.</p> <note> <p>Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html">Viewing your monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p> </note>
     # @param [Hash, Types::AssociateUserRequest] params
     # @option params [String] :username
     #   <p>The user name from the identity provider.</p>
@@ -202,7 +202,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>The identity provider for the user.</p>
     # @option params [String] :domain
-    #   <p>The domain name of the  Active Directory that contains information for the user to associate.</p>
+    #   <p>The domain name of the Active Directory that contains information for the user to associate.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags that apply for the user association.</p>
     # @example Request syntax with placeholder values
@@ -226,7 +226,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     domain: "String",
@@ -259,7 +260,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       status: "String", # required
@@ -279,14 +281,9 @@ module Aws::LicenseManagerUserSubscriptions
     # <p>Creates a network endpoint for the Remote Desktop Services (RDS) license server.</p>
     # @param [Hash, Types::CreateLicenseServerEndpointRequest] params
     # @option params [String] :identity_provider_arn
-    #   <p>The Amazon Resource Name (ARN) that identifies the <code>IdentityProvider</code> resource that contains details 
-    #   			about a registered identity provider. In the case of Active Directory, that can be 
-    #   			a self-managed Active Directory or an Amazon Web Services Managed Active Directory that contains user identity details.</p>
+    #   <p>The Amazon Resource Name (ARN) that identifies the <code>IdentityProvider</code> resource that contains details about a registered identity provider. In the case of Active Directory, that can be a self-managed Active Directory or an Amazon Web Services Managed Active Directory that contains user identity details.</p>
     # @option params [Types::LicenseServerSettings] :license_server_settings
-    #   <p>The <code>LicenseServerSettings</code> resource to create for the endpoint. The 
-    #   			settings include the type of license server and the Secrets Manager secret that 
-    #   			enables administrators to add or remove users associated with the 
-    #   			license server.</p>
+    #   <p>The <code>LicenseServerSettings</code> resource to create for the endpoint. The settings include the type of license server and the Secrets Manager secret that enables administrators to add or remove users associated with the license server.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags that apply for the license server endpoint.</p>
     # @example Request syntax with placeholder values
@@ -327,8 +324,7 @@ module Aws::LicenseManagerUserSubscriptions
     # <p>Deletes a <code>LicenseServerEndpoint</code> resource.</p>
     # @param [Hash, Types::DeleteLicenseServerEndpointRequest] params
     # @option params [String] :license_server_endpoint_arn
-    #   <p>The Amazon Resource Name (ARN) that identifies the <code>LicenseServerEndpoint</code> 
-    #   			resource to delete.</p>
+    #   <p>The Amazon Resource Name (ARN) that identifies the <code>LicenseServerEndpoint</code> resource to delete.</p>
     # @option params [String] :server_type
     #   <p>The type of License Server that the delete request refers to.</p>
     # @example Request syntax with placeholder values
@@ -372,10 +368,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the Active Directory identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) that identifies the identity provider to deregister.</p>
     # @example Request syntax with placeholder values
@@ -397,7 +390,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     product: "String",
@@ -426,7 +420,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       settings: { # required
@@ -436,7 +431,8 @@ module Aws::LicenseManagerUserSubscriptions
     #       product: "String", # required
     #       status: "String", # required
     #       identity_provider_arn: "Arn",
-    #       failure_message: "String"
+    #       failure_message: "String",
+    #       owner_account_id: "String"
     #     }
     #   }
     # @return [Types::DeregisterIdentityProviderResponse]
@@ -456,7 +452,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [String] :instance_user_arn
     #   <p>The Amazon Resource Name (ARN) of the user to disassociate from the EC2 instance.</p>
     # @option params [String] :domain
-    #   <p>The domain name of the  Active Directory that contains information for the user to disassociate.</p>
+    #   <p>The domain name of the Active Directory that contains information for the user to disassociate.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     username: "String",
@@ -478,7 +474,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     instance_user_arn: "Arn",
@@ -509,7 +506,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       status: "String", # required
@@ -531,18 +529,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return from a single request.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Product</p>
-    #               </li>
-    #               <li>
-    #                  <p>DirectoryId</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Product</p> </li> <li> <p>DirectoryId</p> </li> </ul>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -579,7 +568,8 @@ module Aws::LicenseManagerUserSubscriptions
     #                 subnets: ["Subnet"], # required
     #               }
     #             },
-    #             active_directory_type: "ActiveDirectoryType"
+    #             active_directory_type: "ActiveDirectoryType",
+    #             is_shared_active_directory: false
     #           }
     #         },
     #         settings: { # required
@@ -589,7 +579,8 @@ module Aws::LicenseManagerUserSubscriptions
     #         product: "String", # required
     #         status: "String", # required
     #         identity_provider_arn: "Arn",
-    #         failure_message: "String"
+    #         failure_message: "String",
+    #         owner_account_id: "String"
     #       }
     #     ],
     #     next_token: "String"
@@ -605,18 +596,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return from a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Status</p>
-    #               </li>
-    #               <li>
-    #                  <p>InstanceId</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>InstanceId</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -640,7 +622,29 @@ module Aws::LicenseManagerUserSubscriptions
     #         status: "String", # required
     #         products: ["String"], # required
     #         last_status_check_date: "String",
-    #         status_message: "String"
+    #         status_message: "String",
+    #         owner_account_id: "String",
+    #         identity_provider: {
+    #           # One of:
+    #           active_directory_identity_provider: {
+    #             directory_id: "Directory",
+    #             active_directory_settings: {
+    #               domain_name: "String",
+    #               domain_ipv4_list: ["IpV4"],
+    #               domain_credentials_provider: {
+    #                 # One of:
+    #                 secrets_manager_credentials_provider: {
+    #                   secret_id: "String"
+    #                 }
+    #               },
+    #               domain_network_settings: {
+    #                 subnets: ["Subnet"], # required
+    #               }
+    #             },
+    #             active_directory_type: "ActiveDirectoryType",
+    #             is_shared_active_directory: false
+    #           }
+    #         }
     #       }
     #     ],
     #     next_token: "String"
@@ -656,15 +660,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return from a single request.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>IdentityProviderArn</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>IdentityProviderArn</p> </li> </ul>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -714,30 +712,15 @@ module Aws::LicenseManagerUserSubscriptions
     # <p>Lists the user-based subscription products available from an identity provider.</p>
     # @param [Hash, Types::ListProductSubscriptionsRequest] params
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return from a single request.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Status</p>
-    #               </li>
-    #               <li>
-    #                  <p>Username</p>
-    #               </li>
-    #               <li>
-    #                  <p>Domain</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>Username</p> </li> <li> <p>Domain</p> </li> </ul>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     product: "String",
@@ -758,7 +741,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     max_results: 1,
@@ -797,7 +781,8 @@ module Aws::LicenseManagerUserSubscriptions
     #                 subnets: ["Subnet"], # required
     #               }
     #             },
-    #             active_directory_type: "ActiveDirectoryType"
+    #             active_directory_type: "ActiveDirectoryType",
+    #             is_shared_active_directory: false
     #           }
     #         },
     #         status: "String", # required
@@ -848,21 +833,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return from a single request.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>You can use the following filters to streamline results:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Status</p>
-    #               </li>
-    #               <li>
-    #                  <p>Username</p>
-    #               </li>
-    #               <li>
-    #                  <p>Domain</p>
-    #               </li>
-    #            </ul>
+    #   <p>You can use the following filters to streamline results:</p> <ul> <li> <p>Status</p> </li> <li> <p>Username</p> </li> <li> <p>Domain</p> </li> </ul>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. This is the nextToken 
-    #   	from a previously truncated response.</p>
+    #   <p>A token to specify where to start paginating. This is the nextToken from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "String", # required
@@ -883,7 +856,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     max_results: 1,
@@ -922,7 +896,8 @@ module Aws::LicenseManagerUserSubscriptions
     #                 subnets: ["Subnet"], # required
     #               }
     #             },
-    #             active_directory_type: "ActiveDirectoryType"
+    #             active_directory_type: "ActiveDirectoryType",
+    #             is_shared_active_directory: false
     #           }
     #         },
     #         status: "String", # required
@@ -946,13 +921,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider to register.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [Types::Settings] :settings
-    #   <p>The registered identity provider’s product related configuration 
-    #   			settings such as the subnets to provision VPC endpoints.</p>
+    #   <p>The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags that apply to the identity provider's registration.</p>
     # @example Request syntax with placeholder values
@@ -974,7 +945,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     product: "String", # required
@@ -1009,7 +981,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       settings: { # required
@@ -1019,7 +992,8 @@ module Aws::LicenseManagerUserSubscriptions
     #       product: "String", # required
     #       status: "String", # required
     #       identity_provider_arn: "Arn",
-    #       failure_message: "String"
+    #       failure_message: "String",
+    #       owner_account_id: "String"
     #     }
     #   }
     # @return [Types::RegisterIdentityProviderResponse]
@@ -1028,25 +1002,16 @@ module Aws::LicenseManagerUserSubscriptions
       request.send_request(options)
     end
 
-    # <p>Starts a product subscription for a user with the specified identity provider.</p>
-    #          <note>
-    #             <p>Your estimated bill for charges on the number of users and related costs will take 48
-    # 			hours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html">Viewing your
-    # 				monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>
-    #          </note>
+    # <p>Starts a product subscription for a user with the specified identity provider.</p> <note> <p>Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html">Viewing your monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p> </note>
     # @param [Hash, Types::StartProductSubscriptionRequest] params
     # @option params [String] :username
     #   <p>The user name from the identity provider of the user.</p>
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :domain
-    #   <p>The domain name of the  Active Directory that contains the user for whom to start the product 
-    #   			subscription.</p>
+    #   <p>The domain name of the Active Directory that contains the user for whom to start the product subscription.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags that apply to the product subscription.</p>
     # @example Request syntax with placeholder values
@@ -1069,7 +1034,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     product: "String", # required
@@ -1103,7 +1069,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       status: "String", # required
@@ -1127,15 +1094,11 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :product_user_arn
     #   <p>The Amazon Resource Name (ARN) of the product user.</p>
     # @option params [String] :domain
-    #   <p>The domain name of the  Active Directory that contains the user for whom to stop the product 
-    #   			subscription.</p>
+    #   <p>The domain name of the Active Directory that contains the user for whom to stop the product subscription.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     username: "String",
@@ -1156,7 +1119,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     product: "String",
@@ -1188,7 +1152,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       status: "String", # required
@@ -1251,32 +1216,16 @@ module Aws::LicenseManagerUserSubscriptions
       request.send_request(options)
     end
 
-    # <p>Updates additional product configuration settings for the registered identity
-    # 			provider.</p>
+    # <p>Updates additional product configuration settings for the registered identity provider.</p>
     # @param [Hash, Types::UpdateIdentityProviderSettingsRequest] params
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>Refers to an identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p>
-    #            <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | 
-    #   <code>REMOTE_DESKTOP_SERVICES</code>
-    #            </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) of the identity provider to update.</p>
     # @option params [Types::UpdateSettings] :update_settings
-    #   <p>Updates the registered identity provider’s product related configuration settings. You can
-    #   			update any combination of settings in a single operation such as the:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Subnets which you want to add to provision VPC endpoints.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Subnets which you want to remove the VPC endpoints from.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Security group ID which permits traffic to the VPC endpoints.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Updates the registered identity provider’s product related configuration settings. You can update any combination of settings in a single operation such as the:</p> <ul> <li> <p>Subnets which you want to add to provision VPC endpoints.</p> </li> <li> <p>Subnets which you want to remove the VPC endpoints from.</p> </li> <li> <p>Security group ID which permits traffic to the VPC endpoints.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_provider: {
@@ -1296,7 +1245,8 @@ module Aws::LicenseManagerUserSubscriptions
     #             subnets: ["Subnet"], # required
     #           }
     #         },
-    #         active_directory_type: "ActiveDirectoryType"
+    #         active_directory_type: "ActiveDirectoryType",
+    #         is_shared_active_directory: false
     #       }
     #     },
     #     product: "String",
@@ -1330,7 +1280,8 @@ module Aws::LicenseManagerUserSubscriptions
     #               subnets: ["Subnet"], # required
     #             }
     #           },
-    #           active_directory_type: "ActiveDirectoryType"
+    #           active_directory_type: "ActiveDirectoryType",
+    #           is_shared_active_directory: false
     #         }
     #       },
     #       settings: { # required
@@ -1340,7 +1291,8 @@ module Aws::LicenseManagerUserSubscriptions
     #       product: "String", # required
     #       status: "String", # required
     #       identity_provider_arn: "Arn",
-    #       failure_message: "String"
+    #       failure_message: "String",
+    #       owner_account_id: "String"
     #     }
     #   }
     # @return [Types::UpdateIdentityProviderSettingsResponse]

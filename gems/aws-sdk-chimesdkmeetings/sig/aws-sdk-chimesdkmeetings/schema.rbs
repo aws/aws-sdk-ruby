@@ -52,6 +52,7 @@ module Aws::ChimeSDKMeetings
     ListTagsForResourceResponse: StructureShape
     MediaCapabilities: EnumShape
     MediaPlacement: StructureShape
+    MediaPlacementNetworkType: EnumShape
     MediaRegion: StringShape
     Meeting: StructureShape
     MeetingFeatureStatus: EnumShape

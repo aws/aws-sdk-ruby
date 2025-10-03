@@ -17,6 +17,8 @@ module Aws::Synthetics
     BaseScreenshotIgnoreCoordinates = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BaseScreenshotIgnoreCoordinates', name: 'BaseScreenshotIgnoreCoordinates', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     BaseScreenshots = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BaseScreenshots', name: 'BaseScreenshots')
     Blob = ::Smithy::Schema::Shapes::BlobShape.new(id: 'com.amazonaws.synthetics#Blob', name: 'Blob', traits: {"smithy.api#length" => {"min" => 1, "max" => 10000000}})
+    BlueprintType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#BlueprintType', name: 'BlueprintType', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[0-9a-zA-Z_\\-\\.]+$"})
+    BlueprintTypes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BlueprintTypes', name: 'BlueprintTypes', traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     BrowserConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#BrowserConfig', name: 'BrowserConfig')
     BrowserConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BrowserConfigs', name: 'BrowserConfigs', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     BrowserType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.synthetics#BrowserType', name: 'BrowserType')
@@ -44,7 +46,7 @@ module Aws::Synthetics
     CanaryStateReasonCode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.synthetics#CanaryStateReasonCode', name: 'CanaryStateReasonCode')
     CanaryStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#CanaryStatus', name: 'CanaryStatus')
     CanaryTimeline = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#CanaryTimeline', name: 'CanaryTimeline')
-    CodeHandler = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#CodeHandler', name: 'CodeHandler', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([0-9a-zA-Z_-]+(\\/|\\.))*[0-9A-Za-z_\\\\-]+(\\.|::)[A-Za-z_][A-Za-z0-9_]*$"})
+    CodeHandler = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#CodeHandler', name: 'CodeHandler', traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^(([0-9a-zA-Z_-]+(\\/|\\.))*[0-9A-Za-z_\\\\-]+(\\.|::)[A-Za-z_][A-Za-z0-9_]*)?$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateCanaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#CreateCanaryRequest', name: 'CreateCanaryRequest')
     CreateCanaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#CreateCanaryResponse', name: 'CreateCanaryResponse')
@@ -179,6 +181,7 @@ module Aws::Synthetics
     BaseScreenshot.type = Types::BaseScreenshot
     BaseScreenshotIgnoreCoordinates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshotConfigIgnoreCoordinate)
     BaseScreenshots.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshot)
+    BlueprintTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintType)
     BrowserConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
     BrowserConfig.type = Types::BrowserConfig
     BrowserConfigs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfig)
@@ -213,11 +216,13 @@ module Aws::Synthetics
     CanaryCodeInput.add_member(:s3_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'S3Key'))
     CanaryCodeInput.add_member(:s3_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'S3Version'))
     CanaryCodeInput.add_member(:zip_file, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Blob, location_name: 'ZipFile'))
-    CanaryCodeInput.add_member(:handler, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHandler, location_name: 'Handler', traits: {"smithy.api#required" => {}}))
+    CanaryCodeInput.add_member(:handler, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeHandler, location_name: 'Handler', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    CanaryCodeInput.add_member(:blueprint_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintTypes, location_name: 'BlueprintTypes'))
     CanaryCodeInput.add_member(:dependencies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dependencies, location_name: 'Dependencies'))
     CanaryCodeInput.type = Types::CanaryCodeInput
     CanaryCodeOutput.add_member(:source_location_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceLocationArn'))
     CanaryCodeOutput.add_member(:handler, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Handler'))
+    CanaryCodeOutput.add_member(:blueprint_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BlueprintTypes, location_name: 'BlueprintTypes'))
     CanaryCodeOutput.add_member(:dependencies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dependencies, location_name: 'Dependencies'))
     CanaryCodeOutput.type = Types::CanaryCodeOutput
     CanaryDryRunConfigOutput.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'DryRunId'))

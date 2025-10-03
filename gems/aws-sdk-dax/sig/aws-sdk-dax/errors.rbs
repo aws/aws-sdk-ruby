@@ -71,6 +71,9 @@ module Aws::DAX
     class SubnetInUse < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class SubnetNotAllowedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class SubnetQuotaExceededFault < Smithy::Client::ServiceError
       def message: () -> String?
     end

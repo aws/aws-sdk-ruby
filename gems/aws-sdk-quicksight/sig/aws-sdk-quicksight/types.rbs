@@ -2407,6 +2407,8 @@ module Aws::QuickSight
         ?export_to_csv_in_scheduled_reports: String,
         ?export_to_excel_in_scheduled_reports: String,
         ?include_content_in_scheduled_reports_email: String,
+        ?dashboard: String,
+        ?analysis: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2433,6 +2435,8 @@ module Aws::QuickSight
       attr_accessor export_to_csv_in_scheduled_reports: String?
       attr_accessor export_to_excel_in_scheduled_reports: String?
       attr_accessor include_content_in_scheduled_reports_email: String?
+      attr_accessor dashboard: String?
+      attr_accessor analysis: String?
     end
 
     module CapabilityState
@@ -4463,6 +4467,17 @@ module Aws::QuickSight
       attr_accessor special_value: String?
     end
 
+    class CustomConnectionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_type: String?
+    end
+
     class CustomContentConfiguration
       include Smithy::Schema::Structure
 
@@ -4732,6 +4747,8 @@ module Aws::QuickSight
         ?data_point_menu_label_option: Types::DataPointMenuLabelOption,
         ?data_point_tooltip_option: Types::DataPointTooltipOption,
         ?data_qa_enabled_option: Types::DataQAEnabledOption,
+        ?executive_summary_option: Types::ExecutiveSummaryOption,
+        ?data_stories_sharing_option: Types::DataStoriesSharingOption,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4747,6 +4764,8 @@ module Aws::QuickSight
       attr_accessor data_point_menu_label_option: Types::DataPointMenuLabelOption?
       attr_accessor data_point_tooltip_option: Types::DataPointTooltipOption?
       attr_accessor data_qa_enabled_option: Types::DataQAEnabledOption?
+      attr_accessor executive_summary_option: Types::ExecutiveSummaryOption?
+      attr_accessor data_stories_sharing_option: Types::DataStoriesSharingOption?
     end
 
     class DashboardSearchFilter
@@ -5513,6 +5532,7 @@ module Aws::QuickSight
         ?trino_parameters: Types::TrinoParameters,
         ?big_query_parameters: Types::BigQueryParameters,
         ?impala_parameters: Types::ImpalaParameters,
+        ?custom_connection_parameters: Types::CustomConnectionParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5543,6 +5563,7 @@ module Aws::QuickSight
       attr_accessor trino_parameters: Types::TrinoParameters?
       attr_accessor big_query_parameters: Types::BigQueryParameters?
       attr_accessor impala_parameters: Types::ImpalaParameters?
+      attr_accessor custom_connection_parameters: Types::CustomConnectionParameters?
 
       class AmazonElasticsearchParameters < DataSourceParameters
       end
@@ -5597,6 +5618,8 @@ module Aws::QuickSight
       class BigQueryParameters < DataSourceParameters
       end
       class ImpalaParameters < DataSourceParameters
+      end
+      class CustomConnectionParameters < DataSourceParameters
       end
       class Unknown < DataSourceParameters
       end
@@ -5668,6 +5691,7 @@ module Aws::QuickSight
       STARBURST: String
       TRINO: String
       BIGQUERY: String
+      GOOGLESHEETS: String
     end
 
     class DataStoriesConfigurations
@@ -5679,6 +5703,17 @@ module Aws::QuickSight
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
+    end
+
+    class DataStoriesSharingOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_status: String?
     end
 
     class DatabricksParameters
@@ -6287,6 +6322,30 @@ module Aws::QuickSight
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor display_options: Types::TextFieldControlDisplayOptions?
+    end
+
+    class DeleteAccountCustomPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+    end
+
+    class DeleteAccountCustomPermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?status: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor status: Integer?
     end
 
     class DeleteAccountCustomizationRequest
@@ -7193,6 +7252,32 @@ module Aws::QuickSight
       attr_accessor vpc_connection_id: String?
       attr_accessor deletion_status: String?
       attr_accessor availability_status: String?
+      attr_accessor request_id: String?
+      attr_accessor status: Integer?
+    end
+
+    class DescribeAccountCustomPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+    end
+
+    class DescribeAccountCustomPermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_permissions_name: String,
+        ?request_id: String,
+        ?status: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_permissions_name: String?
       attr_accessor request_id: String?
       attr_accessor status: Integer?
     end
@@ -8288,6 +8373,7 @@ module Aws::QuickSight
       def initialize: (
         ?aws_account_id: String,
         ?key_registration: Array[Types::RegisteredCustomerManagedKey],
+        ?q_data_key: Types::QDataKey,
         ?request_id: String,
         ?status: Integer,
       ) -> void
@@ -8295,6 +8381,7 @@ module Aws::QuickSight
 
       attr_accessor aws_account_id: String?
       attr_accessor key_registration: Array[Types::RegisteredCustomerManagedKey]?
+      attr_accessor q_data_key: Types::QDataKey?
       attr_accessor request_id: String?
       attr_accessor status: Integer?
     end
@@ -9124,6 +9211,17 @@ module Aws::QuickSight
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
+    end
+
+    class ExecutiveSummaryOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_status: String?
     end
 
     class ExplicitHierarchy
@@ -14453,6 +14551,7 @@ module Aws::QuickSight
       NUMERIC_RANGE_FILTER: String
       DATE_RANGE_FILTER: String
       RELATIVE_DATE_FILTER: String
+      NULL_FILTER: String
     end
 
     class NamespaceError
@@ -14615,6 +14714,12 @@ module Aws::QuickSight
     end
 
     module NullFilterOption
+      ALL_VALUES: String
+      NON_NULLS_ONLY: String
+      NULLS_ONLY: String
+    end
+
+    module NullFilterType
       ALL_VALUES: String
       NON_NULLS_ONLY: String
       NULLS_ONLY: String
@@ -16129,6 +16234,24 @@ module Aws::QuickSight
     module QBusinessInsightsStatus
       ENABLED: String
       DISABLED: String
+    end
+
+    class QDataKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?q_data_key_arn: String,
+        ?q_data_key_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor q_data_key_arn: String?
+      attr_accessor q_data_key_type: String?
+    end
+
+    module QDataKeyType
+      AWS_OWNED: String
+      CMK: String
     end
 
     module QSearchStatus
@@ -20484,6 +20607,7 @@ module Aws::QuickSight
         ?numeric_range_filter: Types::TopicNumericRangeFilter,
         ?date_range_filter: Types::TopicDateRangeFilter,
         ?relative_date_filter: Types::TopicRelativeDateFilter,
+        ?null_filter: Types::TopicNullFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -20498,6 +20622,7 @@ module Aws::QuickSight
       attr_accessor numeric_range_filter: Types::TopicNumericRangeFilter?
       attr_accessor date_range_filter: Types::TopicDateRangeFilter?
       attr_accessor relative_date_filter: Types::TopicRelativeDateFilter?
+      attr_accessor null_filter: Types::TopicNullFilter?
     end
 
     module TopicFilterAttribute
@@ -20703,6 +20828,21 @@ module Aws::QuickSight
       attr_accessor entity_synonyms: Array[String]?
       attr_accessor semantic_entity_type: Types::SemanticEntityType?
       attr_accessor definition: Array[Types::NamedEntityDefinition]?
+    end
+
+    class TopicNullFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?null_filter_type: String,
+        ?constant: Types::TopicSingularFilterConstant,
+        ?inverse: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor null_filter_type: String?
+      attr_accessor constant: Types::TopicSingularFilterConstant?
+      attr_accessor inverse: bool?
     end
 
     class TopicNumericEqualityFilter
@@ -21385,6 +21525,32 @@ module Aws::QuickSight
     end
 
     class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?status: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor status: Integer?
+    end
+
+    class UpdateAccountCustomPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_permissions_name: String,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_permissions_name: String?
+      attr_accessor aws_account_id: String?
+    end
+
+    class UpdateAccountCustomPermissionResponse
       include Smithy::Schema::Structure
 
       def initialize: (

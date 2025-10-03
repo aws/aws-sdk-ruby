@@ -197,11 +197,15 @@ module Aws::MedicalImaging
     # @!attribute kms_key_arn
     #   <p>The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.</p>
     #   @return [String]
+    # @!attribute lambda_authorizer_arn
+    #   <p>The ARN of the authorizer's Lambda function.</p>
+    #   @return [String]
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
       :client_token,
       :tags,
       :kms_key_arn,
+      :lambda_authorizer_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -427,6 +431,9 @@ module Aws::MedicalImaging
     # @!attribute kms_key_arn
     #   <p>The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.</p>
     #   @return [String]
+    # @!attribute lambda_authorizer_arn
+    #   <p>The ARN of the authorizer's Lambda function.</p>
+    #   @return [String]
     # @!attribute datastore_arn
     #   <p>The Amazon Resource Name (ARN) for the data store.</p>
     #   @return [String]
@@ -441,6 +448,7 @@ module Aws::MedicalImaging
       :datastore_name,
       :datastore_status,
       :kms_key_arn,
+      :lambda_authorizer_arn,
       :datastore_arn,
       :created_at,
       :updated_at,

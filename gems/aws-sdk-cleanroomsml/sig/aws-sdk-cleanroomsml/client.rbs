@@ -7,6 +7,7 @@ module Aws::CleanRoomsML
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -428,6 +429,7 @@ module Aws::CleanRoomsML
       def status_details: () -> Types::StatusDetails?
       def retention_in_days: () -> Integer?
       def number_of_records: () -> Integer?
+      def privacy_budgets: () -> Types::PrivacyBudgets?
       def description: () -> String?
       def create_time: () -> Time?
       def update_time: () -> Time?
@@ -555,6 +557,7 @@ module Aws::CleanRoomsML
       def status_details: () -> Types::StatusDetails?
       def retention_in_days: () -> Integer?
       def number_of_records: () -> Integer?
+      def privacy_budgets: () -> Types::PrivacyBudgets?
       def description: () -> String?
       def create_time: () -> Time?
       def update_time: () -> Time?

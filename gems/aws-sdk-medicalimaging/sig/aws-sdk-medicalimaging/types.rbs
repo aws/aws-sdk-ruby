@@ -150,6 +150,7 @@ module Aws::MedicalImaging
         ?client_token: String,
         ?tags: Hash[String, String],
         ?kms_key_arn: String,
+        ?lambda_authorizer_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -157,6 +158,7 @@ module Aws::MedicalImaging
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor kms_key_arn: String?
+      attr_accessor lambda_authorizer_arn: String?
     end
 
     class CreateDatastoreResponse
@@ -301,6 +303,7 @@ module Aws::MedicalImaging
         ?datastore_name: String,
         ?datastore_status: String,
         ?kms_key_arn: String,
+        ?lambda_authorizer_arn: String,
         ?datastore_arn: String,
         ?created_at: Time,
         ?updated_at: Time,
@@ -311,6 +314,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_name: String?
       attr_accessor datastore_status: String?
       attr_accessor kms_key_arn: String?
+      attr_accessor lambda_authorizer_arn: String?
       attr_accessor datastore_arn: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
@@ -608,6 +612,9 @@ module Aws::MedicalImaging
       UPDATE_FAILED: String
       DELETING: String
       DELETED: String
+      IMPORTING: String
+      IMPORTED: String
+      IMPORT_FAILED: String
     end
 
     class ImageSetsMetadataSummary

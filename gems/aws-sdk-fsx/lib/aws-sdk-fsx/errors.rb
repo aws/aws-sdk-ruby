@@ -579,7 +579,7 @@ module Aws::FSx
     end
 
     # <p>An error indicating that a particular service limit was exceeded. You can increase
-    #             some service limits by contacting Amazon Web ServicesSupport.</p>
+    #             some service limits by contacting Amazon Web Services Support.</p>
     class ServiceLimitExceeded < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::FSx::Types::ServiceLimitExceeded] data

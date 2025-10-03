@@ -67,6 +67,8 @@ module Aws::EntityResolution
     GetSchemaMappingInput: StructureShape
     GetSchemaMappingOutput: StructureShape
     HeaderSafeUniqueId: StringShape
+    IdMappingIncrementalRunConfig: StructureShape
+    IdMappingIncrementalRunType: EnumShape
     IdMappingJobMetrics: StructureShape
     IdMappingJobOutputSource: StructureShape
     IdMappingJobOutputSourceConfig: ListShape
@@ -96,6 +98,7 @@ module Aws::EntityResolution
     IncrementalRunConfig: StructureShape
     IncrementalRunType: EnumShape
     InputSource: StructureShape
+    InputSourceARN: StringShape
     InputSourceConfig: ListShape
     IntermediateSourceConfiguration: StructureShape
     InternalServerException: StructureShape
@@ -106,6 +109,7 @@ module Aws::EntityResolution
     JobOutputSourceConfig: ListShape
     JobStatus: EnumShape
     JobSummary: StructureShape
+    JobType: EnumShape
     KMSArn: StringShape
     ListIdMappingJobsInput: StructureShape
     ListIdMappingJobsOutput: StructureShape

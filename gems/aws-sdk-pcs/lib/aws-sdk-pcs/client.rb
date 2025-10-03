@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::PCS
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::PCS
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::PCS
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::PCS::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::PCS::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -226,8 +231,8 @@ module Aws::PCS
     #         }
     #       ],
     #       accounting: {
+    #         default_purge_time_in_days: 1,
     #         mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
-    #         default_purge_time_in_days: 1
     #       }
     #     },
     #     client_token: "SBClientToken",
@@ -265,8 +270,8 @@ module Aws::PCS
     #           secret_version: "String", # required
     #         },
     #         accounting: {
+    #           default_purge_time_in_days: 1,
     #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
-    #           default_purge_time_in_days: 1
     #         }
     #       },
     #       networking: { # required
@@ -308,7 +313,7 @@ module Aws::PCS
     # @option params [Array<String>] :subnet_ids
     #   <p>The list of subnet IDs where the compute node group launches instances. Subnets must be in the same VPC as the cluster.</p>
     # @option params [String] :purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @option params [String] :iam_instance_profile_arn
@@ -316,7 +321,7 @@ module Aws::PCS
     # @option params [Types::ScalingConfigurationRequest] :scaling_configuration
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
     # @option params [Array<Types::InstanceConfig>] :instance_configs
-    #   <p>A list of EC2 instance configurations that Amazon Web Services PCS can provision in the compute node group.</p>
+    #   <p>A list of EC2 instance configurations that PCS can provision in the compute node group.</p>
     # @option params [Types::SpotOptions] :spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
     # @option params [Types::ComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
@@ -331,7 +336,7 @@ module Aws::PCS
     #     compute_node_group_name: "ComputeNodeGroupName", # required
     #     ami_id: "AmiId",
     #     subnet_ids: ["String"], # required
-    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT"],
+    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
     #     custom_launch_template: { # required
     #       id: "String", # required
     #       version: "String", # required
@@ -377,7 +382,7 @@ module Aws::PCS
     #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
     #       ami_id: "AmiId",
     #       subnet_ids: ["SubnetId"], # required
-    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT"],
+    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
     #       custom_launch_template: { # required
     #         id: "String", # required
     #         version: "String", # required
@@ -425,6 +430,8 @@ module Aws::PCS
     #   <p>A name to identify the queue.</p>
     # @option params [Array<Types::ComputeNodeGroupConfiguration>] :compute_node_group_configurations
     #   <p>The list of compute node group configurations to associate with the queue. Queues assign jobs to associated compute node groups.</p>
+    # @option params [Types::QueueSlurmConfigurationRequest] :slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     # @option params [Hash<String, String>] :tags
@@ -438,6 +445,14 @@ module Aws::PCS
     #         compute_node_group_id: "String"
     #       }
     #     ],
+    #     slurm_configuration: {
+    #       slurm_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ]
+    #     },
     #     client_token: "SBClientToken",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -461,6 +476,14 @@ module Aws::PCS
     #           compute_node_group_id: "String"
     #         }
     #       ],
+    #       slurm_configuration: {
+    #         slurm_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ]
+    #       },
     #       error_info: [
     #         {
     #           code: "String",
@@ -550,7 +573,7 @@ module Aws::PCS
     # <p>Returns detailed information about a running cluster in your account. This API action provides networking information, endpoint information for communication with the scheduler, and provisioning status.</p>
     # @param [Hash, Types::GetClusterRequest] params
     # @option params [String] :cluster_identifier
-    #   <p>The name or ID of the cluster of the queue.</p>
+    #   <p>The name or ID of the cluster.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_identifier: "ClusterIdentifier", # required
@@ -585,8 +608,8 @@ module Aws::PCS
     #           secret_version: "String", # required
     #         },
     #         accounting: {
+    #           default_purge_time_in_days: 1,
     #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
-    #           default_purge_time_in_days: 1
     #         }
     #       },
     #       networking: { # required
@@ -643,7 +666,7 @@ module Aws::PCS
     #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
     #       ami_id: "AmiId",
     #       subnet_ids: ["SubnetId"], # required
-    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT"],
+    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
     #       custom_launch_template: { # required
     #         id: "String", # required
     #         version: "String", # required
@@ -712,6 +735,14 @@ module Aws::PCS
     #           compute_node_group_id: "String"
     #         }
     #       ],
+    #       slurm_configuration: {
+    #         slurm_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ]
+    #       },
     #       error_info: [
     #         {
     #           code: "String",
@@ -939,6 +970,94 @@ module Aws::PCS
       request.send_request(options)
     end
 
+    # <p>Updates a cluster configuration. You can modify Slurm scheduler settings, accounting configuration, and security groups for an existing cluster. </p> <note> <p>You can only update clusters that are in <code>ACTIVE</code>, <code>UPDATE_FAILED</code>, or <code>SUSPENDED</code> state. All associated resources (queues and compute node groups) must be in <code>ACTIVE</code> state before you can update the cluster.</p> </note>
+    # @param [Hash, Types::UpdateClusterRequest] params
+    # @option params [String] :cluster_identifier
+    #   <p>The name or ID of the cluster to update.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
+    # @option params [Types::UpdateClusterSlurmConfigurationRequest] :slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_identifier: "ClusterIdentifier", # required
+    #     client_token: "SBClientToken",
+    #     slurm_configuration: {
+    #       scale_down_idle_time_in_seconds: 1,
+    #       slurm_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ],
+    #       accounting: {
+    #         default_purge_time_in_days: 1,
+    #         mode: "STANDARD" # One of: ["STANDARD", "NONE"]
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_cluster(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cluster: {
+    #       name: "String", # required
+    #       id: "String", # required
+    #       arn: "String", # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       created_at: Time.now, # required
+    #       modified_at: Time.now, # required
+    #       scheduler: { # required
+    #         type: "SLURM" # One of: ["SLURM"], # required
+    #         version: "String", # required
+    #       },
+    #       size: "SMALL" # One of: ["SMALL", "MEDIUM", "LARGE"], # required
+    #       slurm_configuration: {
+    #         scale_down_idle_time_in_seconds: 1,
+    #         slurm_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
+    #         auth_key: {
+    #           secret_arn: "String", # required
+    #           secret_version: "String", # required
+    #         },
+    #         accounting: {
+    #           default_purge_time_in_days: 1,
+    #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
+    #         }
+    #       },
+    #       networking: { # required
+    #         subnet_ids: ["SubnetId"],
+    #         security_group_ids: ["SecurityGroupId"],
+    #         network_type: "IPV4" # One of: ["IPV4", "IPV6"]
+    #       },
+    #       endpoints: [
+    #         {
+    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD"], # required
+    #           private_ip_address: "String", # required
+    #           public_ip_address: "String",
+    #           ipv6_address: "String",
+    #           port: "String", # required
+    #         }
+    #       ],
+    #       error_info: [
+    #         {
+    #           code: "String",
+    #           message: "String"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::UpdateClusterResponse]
+    def update_cluster(params = {}, options = {})
+      request = build_request(:update_cluster, params)
+      request.send_request(options)
+    end
+
     # <p>Updates a compute node group. You can update many of the fields related to your compute node group including the configurations for networking, compute nodes, and settings specific to your scheduler (such as Slurm).</p>
     # @param [Hash, Types::UpdateComputeNodeGroupRequest] params
     # @option params [String] :cluster_identifier
@@ -952,7 +1071,7 @@ module Aws::PCS
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @option params [String] :purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     # @option params [Types::SpotOptions] :spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
     # @option params [Types::ScalingConfigurationRequest] :scaling_configuration
@@ -973,7 +1092,7 @@ module Aws::PCS
     #       id: "String", # required
     #       version: "String", # required
     #     },
-    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT"],
+    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
     #     spot_options: {
     #       allocation_strategy: "lowest-price" # One of: ["lowest-price", "capacity-optimized", "price-capacity-optimized"]
     #     },
@@ -1007,7 +1126,7 @@ module Aws::PCS
     #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
     #       ami_id: "AmiId",
     #       subnet_ids: ["SubnetId"], # required
-    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT"],
+    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
     #       custom_launch_template: { # required
     #         id: "String", # required
     #         version: "String", # required
@@ -1055,6 +1174,8 @@ module Aws::PCS
     #   <p>The name or ID of the queue.</p>
     # @option params [Array<Types::ComputeNodeGroupConfiguration>] :compute_node_group_configurations
     #   <p>The list of compute node group configurations to associate with the queue. Queues assign jobs to associated compute node groups.</p>
+    # @option params [Types::UpdateQueueSlurmConfigurationRequest] :slurm_configuration
+    #   <p>Additional options related to the Slurm scheduler.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     # @example Request syntax with placeholder values
@@ -1066,6 +1187,14 @@ module Aws::PCS
     #         compute_node_group_id: "String"
     #       }
     #     ],
+    #     slurm_configuration: {
+    #       slurm_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ]
+    #     },
     #     client_token: "SBClientToken"
     #   }
     #   options = {}
@@ -1086,6 +1215,14 @@ module Aws::PCS
     #           compute_node_group_id: "String"
     #         }
     #       ],
+    #       slurm_configuration: {
+    #         slurm_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ]
+    #       },
     #       error_info: [
     #         {
     #           code: "String",

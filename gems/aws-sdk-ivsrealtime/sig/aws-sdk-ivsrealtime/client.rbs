@@ -7,6 +7,7 @@ module Aws::IVSRealTime
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -390,7 +391,8 @@ module Aws::IVSRealTime
           omit_stopped_video: bool,
           video_aspect_ratio: String,
           video_fill_mode: String,
-          grid_gap: Integer
+          grid_gap: Integer,
+          participant_order_attribute: untyped
         },
         pip: {
           featured_participant_attribute: untyped,
@@ -402,7 +404,8 @@ module Aws::IVSRealTime
           pip_offset: Integer,
           pip_position: String,
           pip_width: Integer,
-          pip_height: Integer
+          pip_height: Integer,
+          participant_order_attribute: untyped
         }
       },
       ?destinations: Array[

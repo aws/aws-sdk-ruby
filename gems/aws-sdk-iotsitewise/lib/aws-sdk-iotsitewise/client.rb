@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::IoTSiteWise
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::IoTSiteWise
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::IoTSiteWise
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::IoTSiteWise::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::IoTSiteWise::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -663,6 +668,9 @@ module Aws::IoTSiteWise
 
     # <p>Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or
     #       IAM user) access to the specified IoT SiteWise Monitor portal or project resource.</p>
+    #          <note>
+    #             <p>Support for access policies that use an SSO Group as the identity is not supported at this time.</p>
+    #          </note>
     # @param [Hash, Types::CreateAccessPolicyRequest] params
     # @option params [Types::Identity] :access_policy_identity
     #   <p>The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.</p>
@@ -3142,9 +3150,12 @@ module Aws::IoTSiteWise
     # @param [Hash, Types::DescribeComputationModelRequest] params
     # @option params [String] :computation_model_id
     #   <p>The ID of the computation model.</p>
+    # @option params [String] :computation_model_version
+    #   <p>The version of the computation model.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     computation_model_id: "ID", # required
+    #     computation_model_version: "ComputationModelVersionFilter"
     #   }
     #   options = {}
     #   response = client.describe_computation_model(params, options)
@@ -3799,7 +3810,7 @@ module Aws::IoTSiteWise
     #                  <p>Maximum is 20000</p>
     #               </li>
     #               <li>
-    #                  <p>Default is 250</p>
+    #                  <p>Default is 20000</p>
     #               </li>
     #            </ul>
     # @option params [String] :client_token

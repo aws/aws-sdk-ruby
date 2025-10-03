@@ -7,6 +7,7 @@ module Aws::EntityResolution
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -82,6 +83,7 @@ module Aws::EntityResolution
       def input_source_config: () -> Array[Types::IdMappingWorkflowInputSource]?
       def output_source_config: () -> Array[Types::IdMappingWorkflowOutputSource]?
       def id_mapping_techniques: () -> Types::IdMappingTechniques?
+      def incremental_run_config: () -> Types::IdMappingIncrementalRunConfig?
       def role_arn: () -> String?
     end
     def create_id_mapping_workflow: (
@@ -120,6 +122,9 @@ module Aws::EntityResolution
             intermediate_s3_path: String
           }
         }
+      },
+      ?incremental_run_config: {
+        incremental_run_type: String
       },
       ?role_arn: String,
       ?tags: Hash[String, String]
@@ -333,6 +338,7 @@ module Aws::EntityResolution
       def metrics: () -> Types::IdMappingJobMetrics?
       def error_details: () -> Types::ErrorDetails?
       def output_source_config: () -> Array[Types::IdMappingJobOutputSource]?
+      def job_type: () -> String?
     end
     def get_id_mapping_job: (
       ?workflow_name: String,
@@ -349,6 +355,7 @@ module Aws::EntityResolution
       def id_mapping_techniques: () -> Types::IdMappingTechniques?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def incremental_run_config: () -> Types::IdMappingIncrementalRunConfig?
       def role_arn: () -> String?
       def tags: () -> Hash[String, String]?
     end
@@ -560,6 +567,7 @@ module Aws::EntityResolution
       include Smithy::Client::_Response[Types::StartIdMappingJobOutput]
       def job_id: () -> String?
       def output_source_config: () -> Array[Types::IdMappingJobOutputSource]?
+      def job_type: () -> String?
     end
     def start_id_mapping_job: (
       ?workflow_name: String,
@@ -569,7 +577,8 @@ module Aws::EntityResolution
           output_s3_path: String,
           kms_arn: String
         }
-      ]
+      ],
+      ?job_type: String
     ) -> _StartIdMappingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartIdMappingJobResponse
 
     interface _StartMatchingJobResponse
@@ -604,6 +613,7 @@ module Aws::EntityResolution
       def input_source_config: () -> Array[Types::IdMappingWorkflowInputSource]?
       def output_source_config: () -> Array[Types::IdMappingWorkflowOutputSource]?
       def id_mapping_techniques: () -> Types::IdMappingTechniques?
+      def incremental_run_config: () -> Types::IdMappingIncrementalRunConfig?
       def role_arn: () -> String?
     end
     def update_id_mapping_workflow: (
@@ -642,6 +652,9 @@ module Aws::EntityResolution
             intermediate_s3_path: String
           }
         }
+      },
+      ?incremental_run_config: {
+        incremental_run_type: String
       },
       ?role_arn: String
     ) -> _UpdateIdMappingWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdMappingWorkflowResponse

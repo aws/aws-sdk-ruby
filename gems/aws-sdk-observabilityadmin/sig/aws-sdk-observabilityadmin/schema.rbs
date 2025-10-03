@@ -5,15 +5,30 @@ module Aws::ObservabilityAdmin
     AccessDeniedException: StructureShape
     AccountIdentifier: StringShape
     AccountIdentifiers: ListShape
+    CentralizationFailureReason: EnumShape
+    CentralizationRule: StructureShape
+    CentralizationRuleDestination: StructureShape
+    CentralizationRuleSource: StructureShape
+    CentralizationRuleSummaries: ListShape
+    CentralizationRuleSummary: StructureShape
     ConflictException: StructureShape
+    CreateCentralizationRuleForOrganizationInput: StructureShape
+    CreateCentralizationRuleForOrganizationOutput: StructureShape
     CreateTelemetryRuleForOrganizationInput: StructureShape
     CreateTelemetryRuleForOrganizationOutput: StructureShape
     CreateTelemetryRuleInput: StructureShape
     CreateTelemetryRuleOutput: StructureShape
+    DeleteCentralizationRuleForOrganizationInput: StructureShape
     DeleteTelemetryRuleForOrganizationInput: StructureShape
     DeleteTelemetryRuleInput: StructureShape
+    DestinationLogsConfiguration: StructureShape
     DestinationType: EnumShape
+    EncryptedLogGroupStrategy: EnumShape
+    EncryptionConflictResolutionStrategy: EnumShape
+    EncryptionStrategy: EnumShape
     FailureReason: StringShape
+    GetCentralizationRuleForOrganizationInput: StructureShape
+    GetCentralizationRuleForOrganizationOutput: StructureShape
     GetTelemetryEvaluationStatusForOrganizationOutput: StructureShape
     GetTelemetryEvaluationStatusOutput: StructureShape
     GetTelemetryRuleForOrganizationInput: StructureShape
@@ -21,6 +36,9 @@ module Aws::ObservabilityAdmin
     GetTelemetryRuleInput: StructureShape
     GetTelemetryRuleOutput: StructureShape
     InternalServerException: StructureShape
+    ListCentralizationRulesForOrganizationInput: StructureShape
+    ListCentralizationRulesForOrganizationMaxResults: IntegerShape
+    ListCentralizationRulesForOrganizationOutput: StructureShape
     ListResourceTelemetryForOrganizationInput: StructureShape
     ListResourceTelemetryForOrganizationMaxResults: IntegerShape
     ListResourceTelemetryForOrganizationOutput: StructureShape
@@ -35,9 +53,14 @@ module Aws::ObservabilityAdmin
     ListTelemetryRulesInput: StructureShape
     ListTelemetryRulesMaxResults: IntegerShape
     ListTelemetryRulesOutput: StructureShape
+    LogsBackupConfiguration: StructureShape
+    LogsEncryptionConfiguration: StructureShape
+    LogsFilterString: StringShape
     NextToken: StringShape
     OrganizationUnitIdentifier: StringShape
     OrganizationUnitIdentifiers: ListShape
+    Region: StringShape
+    Regions: ListShape
     ResourceArn: StringShape
     ResourceIdentifier: StringShape
     ResourceIdentifierPrefix: StringShape
@@ -45,9 +68,12 @@ module Aws::ObservabilityAdmin
     ResourceType: EnumShape
     ResourceTypes: ListShape
     RetentionPeriodInDays: IntegerShape
+    RuleHealth: EnumShape
     RuleIdentifier: StringShape
     RuleName: StringShape
     ServiceQuotaExceededException: StructureShape
+    SourceFilterString: StringShape
+    SourceLogsConfiguration: StructureShape
     Status: EnumShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -66,6 +92,8 @@ module Aws::ObservabilityAdmin
     TelemetryType: EnumShape
     TooManyRequestsException: StructureShape
     UntagResourceInput: StructureShape
+    UpdateCentralizationRuleForOrganizationInput: StructureShape
+    UpdateCentralizationRuleForOrganizationOutput: StructureShape
     UpdateTelemetryRuleForOrganizationInput: StructureShape
     UpdateTelemetryRuleForOrganizationOutput: StructureShape
     UpdateTelemetryRuleInput: StructureShape

@@ -20,6 +20,7 @@ module Aws::Budgets
     AutoAdjustData: StructureShape
     AutoAdjustType: EnumShape
     BillingViewArn: StringShape
+    BillingViewHealthStatusException: StructureShape
     Budget: StructureShape
     BudgetName: StringShape
     BudgetNotificationsForAccount: StructureShape

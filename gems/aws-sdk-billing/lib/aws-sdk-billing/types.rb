@@ -31,6 +31,30 @@ module Aws::Billing
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) of the billing view to associate source views with. </p>
+    #   @return [String]
+    # @!attribute source_views
+    #   <p> A list of ARNs of the source billing views to associate. </p>
+    #   @return [Array<String>]
+    class AssociateSourceViewsRequest < Struct.new(
+      :arn,
+      :source_views,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p> The ARN of the billing view that the source views were associated with. </p>
+    #   @return [String]
+    class AssociateSourceViewsResponse < Struct.new(
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The metadata associated to the billing view. </p>
     # @!attribute arn
     #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
@@ -47,6 +71,9 @@ module Aws::Billing
     # @!attribute owner_account_id
     #   <p>The account owner of the billing view. </p>
     #   @return [String]
+    # @!attribute source_account_id
+    #   <p> The Amazon Web Services account ID that owns the source billing view, if this is a derived billing view. </p>
+    #   @return [String]
     # @!attribute data_filter_expression
     #   <p> See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
     #   @return [Types::Expression]
@@ -56,15 +83,57 @@ module Aws::Billing
     # @!attribute updated_at
     #   <p>The time when the billing view was last updated. </p>
     #   @return [Time]
+    # @!attribute derived_view_count
+    #   <p> The number of billing views that use this billing view as a source. </p>
+    #   @return [Integer]
+    # @!attribute source_view_count
+    #   <p> The number of source views associated with this billing view. </p>
+    #   @return [Integer]
+    # @!attribute view_definition_last_updated_at
+    #   <p> The timestamp of when the billing view definition was last updated. </p>
+    #   @return [Time]
+    # @!attribute health_status
+    #   <p> The current health status of the billing view. </p>
+    #   @return [Types::BillingViewHealthStatus]
     class BillingViewElement < Struct.new(
       :arn,
       :name,
       :description,
       :billing_view_type,
       :owner_account_id,
+      :source_account_id,
       :data_filter_expression,
       :created_at,
       :updated_at,
+      :derived_view_count,
+      :source_view_count,
+      :view_definition_last_updated_at,
+      :health_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Represents the health status of a billing view, including a status code and optional reasons for the status. </p>
+    # @!attribute status_code
+    #   <p>The current health status code of the billing view.</p>
+    #   @return [String]
+    # @!attribute status_reasons
+    #   <p>A list of reasons explaining the current health status, if applicable.</p>
+    #   @return [Array<String>]
+    class BillingViewHealthStatus < Struct.new(
+      :status_code,
+      :status_reasons,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Exception thrown when a billing view's health status prevents an operation from being performed. This may occur if the billing view is in a state other than <code>HEALTHY</code>.</p>
+    # @!attribute message
+    #   @return [String]
+    class BillingViewHealthStatusException < Struct.new(
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -83,15 +152,23 @@ module Aws::Billing
     # @!attribute owner_account_id
     #   <p> The list of owners of the Billing view. </p>
     #   @return [String]
+    # @!attribute source_account_id
+    #   <p> The Amazon Web Services account ID that owns the source billing view, if this is a derived billing view. </p>
+    #   @return [String]
     # @!attribute billing_view_type
     #   <p>The type of billing view.</p>
     #   @return [String]
+    # @!attribute health_status
+    #   <p> The current health status of the billing view. </p>
+    #   @return [Types::BillingViewHealthStatus]
     class BillingViewListElement < Struct.new(
       :arn,
       :name,
       :description,
       :owner_account_id,
+      :source_account_id,
       :billing_view_type,
+      :health_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -162,8 +239,12 @@ module Aws::Billing
     # @!attribute arn
     #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     #   @return [String]
+    # @!attribute force
+    #   <p> If set to true, forces deletion of the billing view even if it has derived resources (e.g. other billing views or budgets). Use with caution as this may break dependent resources. </p>
+    #   @return [Boolean]
     class DeleteBillingViewRequest < Struct.new(
       :arn,
+      :force,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -194,6 +275,30 @@ module Aws::Billing
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) of the billing view to disassociate source views from. </p>
+    #   @return [String]
+    # @!attribute source_views
+    #   <p> A list of ARNs of the source billing views to disassociate. </p>
+    #   @return [Array<String>]
+    class DisassociateSourceViewsRequest < Struct.new(
+      :arn,
+      :source_views,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p> The ARN of the billing view that the source views were disassociated from. </p>
+    #   @return [String]
+    class DisassociateSourceViewsResponse < Struct.new(
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
     # @!attribute dimensions
     #   <p> The specific <code>Dimension</code> to use for <code>Expression</code>. </p>
@@ -201,9 +306,13 @@ module Aws::Billing
     # @!attribute tags
     #   <p> The specific <code>Tag</code> to use for <code>Expression</code>. </p>
     #   @return [Types::TagValues]
+    # @!attribute time_range
+    #   <p> Specifies a time range filter for the billing view data. </p>
+    #   @return [Types::TimeRange]
     class Expression < Struct.new(
       :dimensions,
       :tags,
+      :time_range,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -275,6 +384,9 @@ module Aws::Billing
     # @!attribute owner_account_id
     #   <p> The list of owners of the billing view. </p>
     #   @return [String]
+    # @!attribute source_account_id
+    #   <p> Filters the results to include only billing views that use the specified account as a source. </p>
+    #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of billing views to retrieve. Default is 100. </p>
     #   @return [Integer]
@@ -286,6 +398,7 @@ module Aws::Billing
       :arns,
       :billing_view_types,
       :owner_account_id,
+      :source_account_id,
       :max_results,
       :next_token,
       keyword_init: true
@@ -458,6 +571,21 @@ module Aws::Billing
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Specifies a time range with inclusive begin and end dates. </p>
+    # @!attribute begin_date_inclusive
+    #   <p> The inclusive start date of the time range. </p>
+    #   @return [Time]
+    # @!attribute end_date_inclusive
+    #   <p> The inclusive end date of the time range. </p>
+    #   @return [Time]
+    class TimeRange < Struct.new(
+      :begin_date_inclusive,
+      :end_date_inclusive,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

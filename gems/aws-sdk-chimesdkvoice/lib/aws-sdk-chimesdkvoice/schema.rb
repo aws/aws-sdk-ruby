@@ -169,6 +169,7 @@ module Aws::ChimeSDKVoice
     ListVoiceProfilesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkvoice#ListVoiceProfilesResponse', name: 'ListVoiceProfilesResponse')
     LoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkvoice#LoggingConfiguration', name: 'LoggingConfiguration')
     MediaInsightsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkvoice#MediaInsightsConfiguration', name: 'MediaInsightsConfiguration')
+    NetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.chimesdkvoice#NetworkType', name: 'NetworkType')
     NextTokenString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkvoice#NextTokenString', name: 'NextTokenString', traits: {"smithy.api#length" => {"min" => 0, "max" => 65535}})
     NonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkvoice#NonEmptyString', name: 'NonEmptyString', traits: {"smithy.api#pattern" => "\\S"})
     NonEmptyString128 = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkvoice#NonEmptyString128', name: 'NonEmptyString128', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "\\S"})
@@ -467,6 +468,7 @@ module Aws::ChimeSDKVoice
     CreateVoiceConnectorRequest.add_member(:require_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'RequireEncryption', traits: {"smithy.api#required" => {}}))
     CreateVoiceConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
     CreateVoiceConnectorRequest.add_member(:integration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceConnectorIntegrationType, location_name: 'IntegrationType'))
+    CreateVoiceConnectorRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     CreateVoiceConnectorRequest.type = Types::CreateVoiceConnectorRequest
     CreateVoiceConnectorResponse.add_member(:voice_connector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceConnector, location_name: 'VoiceConnector'))
     CreateVoiceConnectorResponse.type = Types::CreateVoiceConnectorResponse
@@ -742,6 +744,8 @@ module Aws::ChimeSDKVoice
     MediaInsightsConfiguration.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Disabled'))
     MediaInsightsConfiguration.add_member(:configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'ConfigurationArn'))
     MediaInsightsConfiguration.type = Types::MediaInsightsConfiguration
+    NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4_ONLY', traits: {"smithy.api#enumValue" => "IPV4_ONLY"}))
+    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DUAL_STACK', traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
     NonEmptyStringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
     NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: 'Code'))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message'))
@@ -1169,6 +1173,7 @@ module Aws::ChimeSDKVoice
     VoiceConnector.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: 'UpdatedTimestamp'))
     VoiceConnector.add_member(:voice_connector_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'VoiceConnectorArn'))
     VoiceConnector.add_member(:integration_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VoiceConnectorIntegrationType, location_name: 'IntegrationType'))
+    VoiceConnector.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     VoiceConnector.type = Types::VoiceConnector
     VoiceConnectorAwsRegion.add_member(:us_east_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'US_EAST_1', traits: {"smithy.api#enumValue" => "us-east-1"}))
     VoiceConnectorAwsRegion.add_member(:us_west_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'US_WEST_2', traits: {"smithy.api#enumValue" => "us-west-2"}))

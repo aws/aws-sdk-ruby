@@ -376,6 +376,7 @@ module Aws::MediaLive
     H265Deblocking: EnumShape
     H265FilterSettings: StructureShape
     H265FlickerAq: EnumShape
+    H265GopBReference: EnumShape
     H265GopSizeUnits: EnumShape
     H265Level: EnumShape
     H265LookAheadRateControl: EnumShape
@@ -386,6 +387,7 @@ module Aws::MediaLive
     H265ScanType: EnumShape
     H265SceneChangeDetect: EnumShape
     H265Settings: StructureShape
+    H265SubGopLength: EnumShape
     H265Tier: EnumShape
     H265TilePadding: EnumShape
     H265TimecodeInsertionBehavior: EnumShape
@@ -394,11 +396,13 @@ module Aws::MediaLive
     HlsAdMarkers: EnumShape
     HlsAkamaiHttpTransferMode: EnumShape
     HlsAkamaiSettings: StructureShape
+    HlsAutoSelect: EnumShape
     HlsBasicPutSettings: StructureShape
     HlsCaptionLanguageSetting: EnumShape
     HlsCdnSettings: StructureShape
     HlsClientCache: EnumShape
     HlsCodecSpecification: EnumShape
+    HlsDefault: EnumShape
     HlsDirectoryStructure: EnumShape
     HlsDiscontinuityTags: EnumShape
     HlsEncryptionType: EnumShape
@@ -591,6 +595,8 @@ module Aws::MediaLive
     MediaPackageGroupSettings: StructureShape
     MediaPackageOutputDestinationSettings: StructureShape
     MediaPackageOutputSettings: StructureShape
+    MediaPackageV2DestinationSettings: StructureShape
+    MediaPackageV2GroupSettings: StructureShape
     MediaResource: StructureShape
     MediaResourceMap: MapShape
     MediaResourceNeighbor: StructureShape
@@ -919,14 +925,17 @@ module Aws::MediaLive
     Integermin0max15: IntegerShape
     Integermin0max2000: IntegerShape
     Integermin0max255: IntegerShape
+    Integermin0max3: IntegerShape
     Integermin0max30: IntegerShape
     Integermin0max32768: IntegerShape
     Integermin0max3600: IntegerShape
+    Integermin0max40000000: IntegerShape
     Integermin0max500: IntegerShape
     Integermin0max600: IntegerShape
     Integermin0max65535: IntegerShape
     Integermin0max65536: IntegerShape
     Integermin0max7: IntegerShape
+    Integermin0max8000000: IntegerShape
     Integermin0max8191: IntegerShape
     Integermin1: IntegerShape
     Integermin100: IntegerShape

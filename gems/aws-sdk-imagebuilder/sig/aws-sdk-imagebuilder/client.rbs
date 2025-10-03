@@ -7,6 +7,7 @@ module Aws::Imagebuilder
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -256,7 +257,10 @@ module Aws::Imagebuilder
           on_failure: String
         }
       ],
-      ?execution_role: String
+      ?execution_role: String,
+      ?logging_configuration: {
+        log_group_name: String
+      }
     ) -> _CreateImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageResponse
 
     interface _CreateImagePipelineResponse
@@ -280,7 +284,10 @@ module Aws::Imagebuilder
       ?schedule: {
         schedule_expression: String,
         timezone: String,
-        pipeline_execution_start_condition: String
+        pipeline_execution_start_condition: String,
+        auto_disable_policy: {
+          failure_count: Integer
+        }
       },
       ?status: String,
       ?tags: Hash[String, String],
@@ -305,7 +312,11 @@ module Aws::Imagebuilder
           on_failure: String
         }
       ],
-      ?execution_role: String
+      ?execution_role: String,
+      ?logging_configuration: {
+        image_log_group_name: String,
+        pipeline_log_group_name: untyped
+      }
     ) -> _CreateImagePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImagePipelineResponse
 
     interface _CreateImageRecipeResponse
@@ -355,6 +366,7 @@ module Aws::Imagebuilder
         },
         user_data_override: String
       },
+      ?ami_tags: Hash[String, String],
       ?client_token: String
     ) -> _CreateImageRecipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageRecipeResponse
 
@@ -762,6 +774,9 @@ module Aws::Imagebuilder
       ?execution_role: String,
       ?infrastructure_configuration_arn: String,
       ?uri: String,
+      ?logging_configuration: {
+        log_group_name: String
+      },
       ?tags: Hash[String, String],
       ?client_token: String
     ) -> _ImportDiskImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportDiskImageResponse
@@ -779,6 +794,9 @@ module Aws::Imagebuilder
       ?platform: String,
       ?os_version: String,
       ?vm_import_task_id: String,
+      ?logging_configuration: {
+        log_group_name: String
+      },
       ?tags: Hash[String, String],
       ?client_token: String
     ) -> _ImportVmImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportVmImageResponse
@@ -1181,7 +1199,8 @@ module Aws::Imagebuilder
     end
     def start_image_pipeline_execution: (
       ?image_pipeline_arn: String,
-      ?client_token: String
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _StartImagePipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImagePipelineExecutionResponse
 
     interface _StartResourceStateUpdateResponse
@@ -1327,7 +1346,10 @@ module Aws::Imagebuilder
       ?schedule: {
         schedule_expression: String,
         timezone: String,
-        pipeline_execution_start_condition: String
+        pipeline_execution_start_condition: String,
+        auto_disable_policy: {
+          failure_count: Integer
+        }
       },
       ?status: String,
       ?client_token: String,
@@ -1351,6 +1373,10 @@ module Aws::Imagebuilder
           on_failure: String
         }
       ],
+      ?logging_configuration: {
+        image_log_group_name: String,
+        pipeline_log_group_name: untyped
+      },
       ?execution_role: String
     ) -> _UpdateImagePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImagePipelineResponse
 

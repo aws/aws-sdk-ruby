@@ -27,6 +27,7 @@ module Aws::BedrockAgentRuntime
     AgentCollaboratorOutputPayload: StructureShape
     AgentCollaboratorPayloadString: StringShape
     AgentId: StringShape
+    AgentTraces: ListShape
     AgentVersion: StringShape
     AnalyzePromptEvent: StructureShape
     ApiContentMap: MapShape
@@ -113,6 +114,7 @@ module Aws::BedrockAgentRuntime
     FlowAliasIdentifier: StringShape
     FlowCompletionEvent: StructureShape
     FlowCompletionReason: EnumShape
+    FlowControlNodeType: EnumShape
     FlowErrorCode: EnumShape
     FlowExecutionContent: UnionShape
     FlowExecutionError: StructureShape
@@ -139,6 +141,11 @@ module Aws::BedrockAgentRuntime
     FlowInputs: ListShape
     FlowMultiTurnInputContent: UnionShape
     FlowMultiTurnInputRequestEvent: StructureShape
+    FlowNodeIODataType: EnumShape
+    FlowNodeInputCategory: EnumShape
+    FlowNodeInputExpression: StringShape
+    FlowNodeInputName: StringShape
+    FlowNodeOutputName: StringShape
     FlowOutputContent: UnionShape
     FlowOutputEvent: StructureShape
     FlowOutputField: StructureShape
@@ -148,16 +155,22 @@ module Aws::BedrockAgentRuntime
     FlowTraceCondition: StructureShape
     FlowTraceConditionNodeResultEvent: StructureShape
     FlowTraceConditions: ListShape
+    FlowTraceDependencyEvent: StructureShape
     FlowTraceEvent: StructureShape
     FlowTraceNodeActionEvent: StructureShape
     FlowTraceNodeInputContent: UnionShape
     FlowTraceNodeInputEvent: StructureShape
+    FlowTraceNodeInputExecutionChain: ListShape
+    FlowTraceNodeInputExecutionChainItem: StructureShape
     FlowTraceNodeInputField: StructureShape
     FlowTraceNodeInputFields: ListShape
+    FlowTraceNodeInputSource: StructureShape
     FlowTraceNodeOutputContent: UnionShape
     FlowTraceNodeOutputEvent: StructureShape
     FlowTraceNodeOutputField: StructureShape
     FlowTraceNodeOutputFields: ListShape
+    FlowTraceNodeOutputNext: StructureShape
+    FlowTraceNodeOutputNextList: ListShape
     Function: StringShape
     FunctionDefinition: StructureShape
     FunctionDescription: StringShape
@@ -314,18 +327,26 @@ module Aws::BedrockAgentRuntime
     ModelPerformanceConfiguration: StructureShape
     Name: StringShape
     NextToken: StringShape
+    NodeActionEvent: StructureShape
+    NodeDependencyEvent: StructureShape
     NodeErrorCode: EnumShape
     NodeExecutionContent: UnionShape
     NodeFailureEvent: StructureShape
     NodeInputEvent: StructureShape
+    NodeInputExecutionChain: ListShape
+    NodeInputExecutionChainItem: StructureShape
     NodeInputField: StructureShape
     NodeInputFields: ListShape
     NodeInputName: StringShape
+    NodeInputSource: StructureShape
     NodeName: StringShape
     NodeOutputEvent: StructureShape
     NodeOutputField: StructureShape
     NodeOutputFields: ListShape
     NodeOutputName: StringShape
+    NodeOutputNext: StructureShape
+    NodeOutputNextList: ListShape
+    NodeTraceElements: UnionShape
     NodeType: EnumShape
     NonBlankString: StringShape
     Observation: StructureShape
@@ -502,6 +523,7 @@ module Aws::BedrockAgentRuntime
     TopK: IntegerShape
     TopP: FloatShape
     Trace: UnionShape
+    TraceElements: UnionShape
     TraceId: StringShape
     TraceKnowledgeBaseId: StringShape
     TracePart: StructureShape

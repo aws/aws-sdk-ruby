@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::ECS
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::ECS
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::ECS
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::ECS::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::ECS::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,21 +193,19 @@ module Aws::ECS
       super
     end
 
-    # <p>Creates a new capacity provider. Capacity providers are associated with an Amazon ECS
-    # 			cluster and are used in capacity provider strategies to facilitate cluster auto
-    # 			scaling.</p>
-    #          <p>Only capacity providers that use an Auto Scaling group can be created. Amazon ECS tasks on
-    # 			Fargate use the <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers.
-    # 			These providers are available to all accounts in the Amazon Web Services Regions that Fargate
-    # 			supports.</p>
+    # <p>Creates a capacity provider. Capacity providers are associated with a cluster and are used in capacity provider strategies to facilitate cluster auto scaling. You can create capacity providers for Amazon ECS Managed Instances and EC2 instances. Fargate has the predefined <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers.</p>
     # @param [Hash, Types::CreateCapacityProviderRequest] params
     # @option params [String] :name
     #   <p>The name of the capacity provider. Up to 255 characters are allowed. They include
     #   			letters (both upper and lowercase letters), numbers, underscores (_), and hyphens (-).
     #   			The name can't be prefixed with "<code>aws</code>", "<code>ecs</code>", or
     #   				"<code>fargate</code>".</p>
+    # @option params [String] :cluster
+    #   <p>The name of the cluster to associate with the capacity provider. When you create a capacity provider with Amazon ECS Managed Instances, it becomes available only within the specified cluster.</p>
     # @option params [Types::AutoScalingGroupProvider] :auto_scaling_group_provider
     #   <p>The details of the Auto Scaling group for the capacity provider.</p>
+    # @option params [Types::CreateManagedInstancesProviderConfiguration] :managed_instances_provider
+    #   <p>The configuration for the Amazon ECS Managed Instances provider. This configuration specifies how Amazon ECS manages Amazon EC2 instances on your behalf, including the infrastructure role, instance launch template, and tag propagation settings.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The metadata that you apply to the capacity provider to categorize and organize them
     #   			more conveniently. Each tag consists of a key and an optional value. You define both of
@@ -277,7 +280,8 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "String", # required
-    #     auto_scaling_group_provider: { # required
+    #     cluster: "String",
+    #     auto_scaling_group_provider: {
     #       auto_scaling_group_arn: "String", # required
     #       managed_scaling: {
     #         status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
@@ -288,6 +292,74 @@ module Aws::ECS
     #       },
     #       managed_termination_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       managed_draining: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #     },
+    #     managed_instances_provider: {
+    #       infrastructure_role_arn: "String", # required
+    #       instance_launch_template: { # required
+    #         ec2_instance_profile_arn: "String", # required
+    #         network_configuration: { # required
+    #           subnets: ["String"],
+    #           security_groups: ["String"]
+    #         },
+    #         storage_configuration: {
+    #           storage_size_gi_b: 1
+    #         },
+    #         monitoring: "BASIC" # One of: ["BASIC", "DETAILED"],
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1
+    #           },
+    #           cpu_manufacturers: ["intel" # One of: ["intel", "amd", "amazon-web-services"]],
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current" # One of: ["current", "previous"]],
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included" # One of: ["included", "required", "excluded"],
+    #           burstable_performance: "included" # One of: ["included", "required", "excluded"],
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           local_storage: "included" # One of: ["included", "required", "excluded"],
+    #           local_storage_types: ["hdd" # One of: ["hdd", "ssd"]],
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           accelerator_types: ["gpu" # One of: ["gpu", "fpga", "inference"]],
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           accelerator_manufacturers: ["amazon-web-services" # One of: ["amazon-web-services", "amd", "nvidia", "xilinx", "habana"]],
+    #           accelerator_names: ["a100" # One of: ["a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"]],
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
+    #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1
+    #         }
+    #       },
+    #       propagate_tags: "CAPACITY_PROVIDER" # One of: ["CAPACITY_PROVIDER", "NONE"]
     #     },
     #     tags: [
     #       {
@@ -304,7 +376,8 @@ module Aws::ECS
     #     capacity_provider: {
     #       capacity_provider_arn: "String",
     #       name: "String",
-    #       status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"],
+    #       cluster: "String",
+    #       status: "PROVISIONING" # One of: ["PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"],
     #       auto_scaling_group_provider: {
     #         auto_scaling_group_arn: "String", # required
     #         managed_scaling: {
@@ -317,14 +390,83 @@ module Aws::ECS
     #         managed_termination_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         managed_draining: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #       },
-    #       update_status: "DELETE_IN_PROGRESS" # One of: ["DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
+    #       managed_instances_provider: {
+    #         infrastructure_role_arn: "String",
+    #         instance_launch_template: {
+    #           ec2_instance_profile_arn: "String", # required
+    #           network_configuration: { # required
+    #             subnets: ["String"],
+    #             security_groups: ["String"]
+    #           },
+    #           storage_configuration: {
+    #             storage_size_gi_b: 1
+    #           },
+    #           monitoring: "BASIC" # One of: ["BASIC", "DETAILED"],
+    #           instance_requirements: {
+    #             v_cpu_count: { # required
+    #               min: 1, # required
+    #               max: 1
+    #             },
+    #             memory_mi_b: { # required
+    #               min: 1, # required
+    #               max: 1
+    #             },
+    #             cpu_manufacturers: ["intel" # One of: ["intel", "amd", "amazon-web-services"]],
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current" # One of: ["current", "previous"]],
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included" # One of: ["included", "required", "excluded"],
+    #             burstable_performance: "included" # One of: ["included", "required", "excluded"],
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             local_storage: "included" # One of: ["included", "required", "excluded"],
+    #             local_storage_types: ["hdd" # One of: ["hdd", "ssd"]],
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             accelerator_types: ["gpu" # One of: ["gpu", "fpga", "inference"]],
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             accelerator_manufacturers: ["amazon-web-services" # One of: ["amazon-web-services", "amd", "nvidia", "xilinx", "habana"]],
+    #             accelerator_names: ["a100" # One of: ["a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"]],
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
+    #             max_spot_price_as_percentage_of_optimal_on_demand_price: 1
+    #           }
+    #         },
+    #         propagate_tags: "CAPACITY_PROVIDER" # One of: ["CAPACITY_PROVIDER", "NONE"]
+    #       },
+    #       update_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
     #       update_status_reason: "String",
     #       tags: [
     #         {
     #           key: "TagKey",
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       type: "EC2_AUTOSCALING" # One of: ["EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"]
     #     }
     #   }
     # @return [Types::CreateCapacityProviderResponse]
@@ -749,7 +891,7 @@ module Aws::ECS
     #            <p>The default behavior of <code>AvailabilityZoneRebalancing</code> differs between create and update requests:</p>
     #            <ul>
     #               <li>
-    #                  <p>For create service requests, when when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to to <code>ENABLED</code>.</p>
+    #                  <p>For create service requests, when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to <code>ENABLED</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For update service requests, when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults to the existing service’s <code>AvailabilityZoneRebalancing</code> value. If the service never had an <code>AvailabilityZoneRebalancing</code> value set, Amazon ECS treats this as <code>DISABLED</code>.</p>
@@ -876,7 +1018,8 @@ module Aws::ECS
     #   			see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task networking</a>
     #   			in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     # @option params [Integer] :health_check_grace_period_seconds
-    #   <p>The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then <code>healthCheckGracePeriodSeconds</code> is unused.</p>
+    #   <p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then <code>healthCheckGracePeriodSeconds</code> is unused.</p>
+    #            <p>If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.</p>
     # @option params [String] :scheduling_strategy
     #   <p>The scheduling strategy to use for the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">Services</a>.</p>
     #            <p>There are two service scheduler strategies available:</p>
@@ -1117,7 +1260,7 @@ module Aws::ECS
     #     ],
     #     desired_count: 1,
     #     client_token: "String",
-    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #     capacity_provider_strategy: [
     #       {
     #         capacity_provider: "String", # required
@@ -1145,7 +1288,8 @@ module Aws::ECS
     #         {
     #           hook_target_arn: "String",
     #           role_arn: "IAMRoleArn",
-    #           lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #           lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #           hook_details: ""null""
     #         }
     #       ]
     #     },
@@ -1302,7 +1446,7 @@ module Aws::ECS
     #       desired_count: 1,
     #       running_count: 1,
     #       pending_count: 1,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required
@@ -1331,7 +1475,8 @@ module Aws::ECS
     #           {
     #             hook_target_arn: "String",
     #             role_arn: "IAMRoleArn",
-    #             lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #             lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #             hook_details: ""null""
     #           }
     #         ]
     #       },
@@ -1350,7 +1495,7 @@ module Aws::ECS
     #           running_count: 1,
     #           created_at: Time.now,
     #           updated_at: Time.now,
-    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #           capacity_provider_strategy: [
     #             {
     #               capacity_provider: "String", # required
@@ -1424,7 +1569,7 @@ module Aws::ECS
     #               base: 1
     #             }
     #           ],
-    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #           platform_version: "String",
     #           platform_family: "String",
     #           network_configuration: {
@@ -1775,7 +1920,7 @@ module Aws::ECS
     #         container_port: 1
     #       }
     #     ],
-    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #     capacity_provider_strategy: [
     #       {
     #         capacity_provider: "String", # required
@@ -1815,7 +1960,7 @@ module Aws::ECS
     #       running_count: 1,
     #       created_at: Time.now,
     #       updated_at: Time.now,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required
@@ -2029,6 +2174,8 @@ module Aws::ECS
     # @param [Hash, Types::DeleteCapacityProviderRequest] params
     # @option params [String] :capacity_provider
     #   <p>The short name or full Amazon Resource Name (ARN) of the capacity provider to delete.</p>
+    # @option params [String] :cluster
+    #   <p>The name of the cluster that contains the capacity provider to delete. Managed instances capacity providers are cluster-scoped and can only be deleted from their associated cluster.</p>
     # @example To delete a specified capacity provider
     #   # This example deletes a specified capacity provider. 
     #   params = {
@@ -2060,6 +2207,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #   params = {
     #     capacity_provider: "String", # required
+    #     cluster: "String"
     #   }
     #   options = {}
     #   response = client.delete_capacity_provider(params, options)
@@ -2069,7 +2217,8 @@ module Aws::ECS
     #     capacity_provider: {
     #       capacity_provider_arn: "String",
     #       name: "String",
-    #       status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"],
+    #       cluster: "String",
+    #       status: "PROVISIONING" # One of: ["PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"],
     #       auto_scaling_group_provider: {
     #         auto_scaling_group_arn: "String", # required
     #         managed_scaling: {
@@ -2082,14 +2231,83 @@ module Aws::ECS
     #         managed_termination_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         managed_draining: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #       },
-    #       update_status: "DELETE_IN_PROGRESS" # One of: ["DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
+    #       managed_instances_provider: {
+    #         infrastructure_role_arn: "String",
+    #         instance_launch_template: {
+    #           ec2_instance_profile_arn: "String", # required
+    #           network_configuration: { # required
+    #             subnets: ["String"],
+    #             security_groups: ["String"]
+    #           },
+    #           storage_configuration: {
+    #             storage_size_gi_b: 1
+    #           },
+    #           monitoring: "BASIC" # One of: ["BASIC", "DETAILED"],
+    #           instance_requirements: {
+    #             v_cpu_count: { # required
+    #               min: 1, # required
+    #               max: 1
+    #             },
+    #             memory_mi_b: { # required
+    #               min: 1, # required
+    #               max: 1
+    #             },
+    #             cpu_manufacturers: ["intel" # One of: ["intel", "amd", "amazon-web-services"]],
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current" # One of: ["current", "previous"]],
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included" # One of: ["included", "required", "excluded"],
+    #             burstable_performance: "included" # One of: ["included", "required", "excluded"],
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             local_storage: "included" # One of: ["included", "required", "excluded"],
+    #             local_storage_types: ["hdd" # One of: ["hdd", "ssd"]],
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             accelerator_types: ["gpu" # One of: ["gpu", "fpga", "inference"]],
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             accelerator_manufacturers: ["amazon-web-services" # One of: ["amazon-web-services", "amd", "nvidia", "xilinx", "habana"]],
+    #             accelerator_names: ["a100" # One of: ["a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"]],
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
+    #             max_spot_price_as_percentage_of_optimal_on_demand_price: 1
+    #           }
+    #         },
+    #         propagate_tags: "CAPACITY_PROVIDER" # One of: ["CAPACITY_PROVIDER", "NONE"]
+    #       },
+    #       update_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
     #       update_status_reason: "String",
     #       tags: [
     #         {
     #           key: "TagKey",
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       type: "EC2_AUTOSCALING" # One of: ["EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"]
     #     }
     #   }
     # @return [Types::DeleteCapacityProviderResponse]
@@ -2292,7 +2510,7 @@ module Aws::ECS
     #       desired_count: 1,
     #       running_count: 1,
     #       pending_count: 1,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required
@@ -2321,7 +2539,8 @@ module Aws::ECS
     #           {
     #             hook_target_arn: "String",
     #             role_arn: "IAMRoleArn",
-    #             lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #             lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #             hook_details: ""null""
     #           }
     #         ]
     #       },
@@ -2340,7 +2559,7 @@ module Aws::ECS
     #           running_count: 1,
     #           created_at: Time.now,
     #           updated_at: Time.now,
-    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #           capacity_provider_strategy: [
     #             {
     #               capacity_provider: "String", # required
@@ -2414,7 +2633,7 @@ module Aws::ECS
     #               base: 1
     #             }
     #           ],
-    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #           platform_version: "String",
     #           platform_family: "String",
     #           network_configuration: {
@@ -2877,12 +3096,12 @@ module Aws::ECS
     #             expression: "String"
     #           }
     #         ],
-    #         compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #         compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #         runtime_platform: {
     #           cpu_architecture: "X86_64" # One of: ["X86_64", "ARM64"],
     #           operating_system_family: "WINDOWS_SERVER_2019_FULL" # One of: ["WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"]
     #         },
-    #         requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #         requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #         cpu: "String",
     #         memory: "String",
     #         inference_accelerators: [
@@ -3012,7 +3231,7 @@ module Aws::ECS
     #       running_count: 1,
     #       created_at: Time.now,
     #       updated_at: Time.now,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required
@@ -3496,12 +3715,12 @@ module Aws::ECS
     #           expression: "String"
     #         }
     #       ],
-    #       compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #       compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #       runtime_platform: {
     #         cpu_architecture: "X86_64" # One of: ["X86_64", "ARM64"],
     #         operating_system_family: "WINDOWS_SERVER_2019_FULL" # One of: ["WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"]
     #       },
-    #       requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #       requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #       cpu: "String",
     #       memory: "String",
     #       inference_accelerators: [
@@ -3542,6 +3761,8 @@ module Aws::ECS
     # @option params [Array<String>] :capacity_providers
     #   <p>The short name or full Amazon Resource Name (ARN) of one or more capacity providers. Up to
     #   				<code>100</code> capacity providers can be described in an action.</p>
+    # @option params [String] :cluster
+    #   <p>The name of the cluster to describe capacity providers for. When specified, only capacity providers associated with this cluster are returned, including Amazon ECS Managed Instances capacity providers.</p>
     # @option params [Array<String>] :include
     #   <p>Specifies whether or not you want to see the resource tags for the capacity provider.
     #   			If <code>TAGS</code> is specified, the tags are included in the response. If this field
@@ -3649,6 +3870,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #   params = {
     #     capacity_providers: ["String"],
+    #     cluster: "String",
     #     include: ["TAGS" # One of: ["TAGS"]],
     #     max_results: 1,
     #     next_token: "String"
@@ -3662,7 +3884,8 @@ module Aws::ECS
     #       {
     #         capacity_provider_arn: "String",
     #         name: "String",
-    #         status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"],
+    #         cluster: "String",
+    #         status: "PROVISIONING" # One of: ["PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"],
     #         auto_scaling_group_provider: {
     #           auto_scaling_group_arn: "String", # required
     #           managed_scaling: {
@@ -3675,14 +3898,83 @@ module Aws::ECS
     #           managed_termination_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #           managed_draining: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #         },
-    #         update_status: "DELETE_IN_PROGRESS" # One of: ["DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
+    #         managed_instances_provider: {
+    #           infrastructure_role_arn: "String",
+    #           instance_launch_template: {
+    #             ec2_instance_profile_arn: "String", # required
+    #             network_configuration: { # required
+    #               subnets: ["String"],
+    #               security_groups: ["String"]
+    #             },
+    #             storage_configuration: {
+    #               storage_size_gi_b: 1
+    #             },
+    #             monitoring: "BASIC" # One of: ["BASIC", "DETAILED"],
+    #             instance_requirements: {
+    #               v_cpu_count: { # required
+    #                 min: 1, # required
+    #                 max: 1
+    #               },
+    #               memory_mi_b: { # required
+    #                 min: 1, # required
+    #                 max: 1
+    #               },
+    #               cpu_manufacturers: ["intel" # One of: ["intel", "amd", "amazon-web-services"]],
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current" # One of: ["current", "previous"]],
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included" # One of: ["included", "required", "excluded"],
+    #               burstable_performance: "included" # One of: ["included", "required", "excluded"],
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1
+    #               },
+    #               local_storage: "included" # One of: ["included", "required", "excluded"],
+    #               local_storage_types: ["hdd" # One of: ["hdd", "ssd"]],
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1
+    #               },
+    #               accelerator_types: ["gpu" # One of: ["gpu", "fpga", "inference"]],
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1
+    #               },
+    #               accelerator_manufacturers: ["amazon-web-services" # One of: ["amazon-web-services", "amd", "nvidia", "xilinx", "habana"]],
+    #               accelerator_names: ["a100" # One of: ["a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"]],
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1
+    #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1
+    #             }
+    #           },
+    #           propagate_tags: "CAPACITY_PROVIDER" # One of: ["CAPACITY_PROVIDER", "NONE"]
+    #         },
+    #         update_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
     #         update_status_reason: "String",
     #         tags: [
     #           {
     #             key: "TagKey",
     #             value: "TagValue"
     #           }
-    #         ]
+    #         ],
+    #         type: "EC2_AUTOSCALING" # One of: ["EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"]
     #       }
     #     ],
     #     failures: [
@@ -4099,7 +4391,8 @@ module Aws::ECS
     #             {
     #               hook_target_arn: "String",
     #               role_arn: "IAMRoleArn",
-    #               lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #               lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #               hook_details: ""null""
     #             }
     #           ]
     #         },
@@ -4166,7 +4459,7 @@ module Aws::ECS
     #             base: 1
     #           }
     #         ],
-    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #         platform_version: "String",
     #         platform_family: "String",
     #         load_balancers: [
@@ -4425,7 +4718,7 @@ module Aws::ECS
     #         desired_count: 1,
     #         running_count: 1,
     #         pending_count: 1,
-    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #         capacity_provider_strategy: [
     #           {
     #             capacity_provider: "String", # required
@@ -4454,7 +4747,8 @@ module Aws::ECS
     #             {
     #               hook_target_arn: "String",
     #               role_arn: "IAMRoleArn",
-    #               lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #               lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #               hook_details: ""null""
     #             }
     #           ]
     #         },
@@ -4473,7 +4767,7 @@ module Aws::ECS
     #             running_count: 1,
     #             created_at: Time.now,
     #             updated_at: Time.now,
-    #             launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #             launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #             capacity_provider_strategy: [
     #               {
     #                 capacity_provider: "String", # required
@@ -4547,7 +4841,7 @@ module Aws::ECS
     #                 base: 1
     #               }
     #             ],
-    #             launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #             launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #             platform_version: "String",
     #             platform_family: "String",
     #             network_configuration: {
@@ -5022,12 +5316,12 @@ module Aws::ECS
     #           expression: "String"
     #         }
     #       ],
-    #       compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #       compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #       runtime_platform: {
     #         cpu_architecture: "X86_64" # One of: ["X86_64", "ARM64"],
     #         operating_system_family: "WINDOWS_SERVER_2019_FULL" # One of: ["WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"]
     #       },
-    #       requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #       requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #       cpu: "String",
     #       memory: "String",
     #       inference_accelerators: [
@@ -5164,7 +5458,7 @@ module Aws::ECS
     #         running_count: 1,
     #         created_at: Time.now,
     #         updated_at: Time.now,
-    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #         capacity_provider_strategy: [
     #           {
     #             capacity_provider: "String", # required
@@ -5393,7 +5687,7 @@ module Aws::ECS
     #           }
     #         ],
     #         last_status: "String",
-    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #         memory: "String",
     #         overrides: {
     #           container_overrides: [
@@ -6123,7 +6417,7 @@ module Aws::ECS
     #     cluster: "String",
     #     next_token: "String",
     #     max_results: 1,
-    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #     scheduling_strategy: "REPLICA" # One of: ["REPLICA", "DAEMON"]
     #   }
     #   options = {}
@@ -6522,7 +6816,7 @@ module Aws::ECS
     #     started_by: "String",
     #     service_name: "String",
     #     desired_status: "RUNNING" # One of: ["RUNNING", "PENDING", "STOPPED"],
-    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]
+    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]
     #   }
     #   options = {}
     #   response = client.list_tasks(params, options)
@@ -7027,6 +7321,7 @@ module Aws::ECS
     # 			We recommend that you define a default capacity provider strategy for your cluster.
     # 			However, you must specify an empty array (<code>[]</code>) to bypass defining a default
     # 			strategy.</p>
+    #          <p>Amazon ECS Managed Instances doesn't support this, because when you create a capacity provider with Amazon ECS Managed Instances, it becomes available only within the specified cluster.</p>
     # @param [Hash, Types::PutClusterCapacityProvidersRequest] params
     # @option params [String] :cluster
     #   <p>The short name or full Amazon Resource Name (ARN) of the cluster to modify the capacity provider
@@ -8104,7 +8399,7 @@ module Aws::ECS
     #         expression: "String"
     #       }
     #     ],
-    #     requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #     requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #     cpu: "String",
     #     memory: "String",
     #     tags: [
@@ -8365,12 +8660,12 @@ module Aws::ECS
     #           expression: "String"
     #         }
     #       ],
-    #       compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #       compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #       runtime_platform: {
     #         cpu_architecture: "X86_64" # One of: ["X86_64", "ARM64"],
     #         operating_system_family: "WINDOWS_SERVER_2019_FULL" # One of: ["WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"]
     #       },
-    #       requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"]],
+    #       requires_compatibilities: ["EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"]],
     #       cpu: "String",
     #       memory: "String",
     #       inference_accelerators: [
@@ -8618,7 +8913,7 @@ module Aws::ECS
     #   			characters in the range of 33-126, inclusive. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html">Ensuring idempotency</a>.</p>
     # @option params [Array<Types::TaskVolumeConfiguration>] :volume_configurations
     #   <p>The details of the volume that was <code>configuredAtLaunch</code>. You can configure
-    #   			the size, volumeType, IOPS, throughput, snapshot and encryption in in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html">TaskManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume must
+    #   			the size, volumeType, IOPS, throughput, snapshot and encryption in <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html">TaskManagedEBSVolumeConfiguration</a>. The <code>name</code> of the volume must
     #   			match the <code>name</code> from the task definition.</p>
     # @example To run a task on your default cluster
     #   # This example runs the specified task definition on your default cluster.
@@ -8669,7 +8964,7 @@ module Aws::ECS
     #     enable_ecs_managed_tags: false,
     #     enable_execute_command: false,
     #     group: "String",
-    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #     launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #     network_configuration: {
     #       awsvpc_configuration: {
     #         subnets: ["String"], # required
@@ -8867,7 +9162,7 @@ module Aws::ECS
     #           }
     #         ],
     #         last_status: "String",
-    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #         memory: "String",
     #         overrides: {
     #           container_overrides: [
@@ -9295,7 +9590,7 @@ module Aws::ECS
     #           }
     #         ],
     #         last_status: "String",
-    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #         launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #         memory: "String",
     #         overrides: {
     #           container_overrides: [
@@ -9612,7 +9907,7 @@ module Aws::ECS
     #         }
     #       ],
     #       last_status: "String",
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       memory: "String",
     #       overrides: {
     #         container_overrides: [
@@ -9986,12 +10281,17 @@ module Aws::ECS
     end
 
     # <p>Modifies the parameters for a capacity provider.</p>
+    #          <p>These changes only apply to new Amazon ECS Managed Instances, or EC2 instances, not existing ones.</p>
     # @param [Hash, Types::UpdateCapacityProviderRequest] params
     # @option params [String] :name
     #   <p>The name of the capacity provider to update.</p>
+    # @option params [String] :cluster
+    #   <p>The name of the cluster that contains the capacity provider to update. Managed instances capacity providers are cluster-scoped and can only be updated within their associated cluster.</p>
     # @option params [Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
     #   <p>An object that represent the parameters to update for the Auto Scaling group capacity
     #   			provider.</p>
+    # @option params [Types::UpdateManagedInstancesProviderConfiguration] :managed_instances_provider
+    #   <p>The updated configuration for the Amazon ECS Managed Instances provider. You can modify the infrastructure role, instance launch template, and tag propagation settings. Changes take effect for new instances launched after the update.</p>
     # @example To update a capacity provider's parameters
     #   # This example updates the targetCapacity and instanceWarmupPeriod parameters for the capacity provider MyCapacityProvider to 90 and 150 respectively.
     #   params = {
@@ -10031,7 +10331,8 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "String", # required
-    #     auto_scaling_group_provider: { # required
+    #     cluster: "String",
+    #     auto_scaling_group_provider: {
     #       managed_scaling: {
     #         status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         target_capacity: 1,
@@ -10041,6 +10342,74 @@ module Aws::ECS
     #       },
     #       managed_termination_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       managed_draining: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #     },
+    #     managed_instances_provider: {
+    #       infrastructure_role_arn: "String", # required
+    #       instance_launch_template: { # required
+    #         ec2_instance_profile_arn: "String",
+    #         network_configuration: {
+    #           subnets: ["String"],
+    #           security_groups: ["String"]
+    #         },
+    #         storage_configuration: {
+    #           storage_size_gi_b: 1
+    #         },
+    #         monitoring: "BASIC" # One of: ["BASIC", "DETAILED"],
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1
+    #           },
+    #           cpu_manufacturers: ["intel" # One of: ["intel", "amd", "amazon-web-services"]],
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current" # One of: ["current", "previous"]],
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included" # One of: ["included", "required", "excluded"],
+    #           burstable_performance: "included" # One of: ["included", "required", "excluded"],
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           local_storage: "included" # One of: ["included", "required", "excluded"],
+    #           local_storage_types: ["hdd" # One of: ["hdd", "ssd"]],
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           accelerator_types: ["gpu" # One of: ["gpu", "fpga", "inference"]],
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           accelerator_manufacturers: ["amazon-web-services" # One of: ["amazon-web-services", "amd", "nvidia", "xilinx", "habana"]],
+    #           accelerator_names: ["a100" # One of: ["a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"]],
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1
+    #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
+    #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1
+    #         }
+    #       },
+    #       propagate_tags: "CAPACITY_PROVIDER" # One of: ["CAPACITY_PROVIDER", "NONE"]
     #     }
     #   }
     #   options = {}
@@ -10051,7 +10420,8 @@ module Aws::ECS
     #     capacity_provider: {
     #       capacity_provider_arn: "String",
     #       name: "String",
-    #       status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"],
+    #       cluster: "String",
+    #       status: "PROVISIONING" # One of: ["PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"],
     #       auto_scaling_group_provider: {
     #         auto_scaling_group_arn: "String", # required
     #         managed_scaling: {
@@ -10064,14 +10434,83 @@ module Aws::ECS
     #         managed_termination_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         managed_draining: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #       },
-    #       update_status: "DELETE_IN_PROGRESS" # One of: ["DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
+    #       managed_instances_provider: {
+    #         infrastructure_role_arn: "String",
+    #         instance_launch_template: {
+    #           ec2_instance_profile_arn: "String", # required
+    #           network_configuration: { # required
+    #             subnets: ["String"],
+    #             security_groups: ["String"]
+    #           },
+    #           storage_configuration: {
+    #             storage_size_gi_b: 1
+    #           },
+    #           monitoring: "BASIC" # One of: ["BASIC", "DETAILED"],
+    #           instance_requirements: {
+    #             v_cpu_count: { # required
+    #               min: 1, # required
+    #               max: 1
+    #             },
+    #             memory_mi_b: { # required
+    #               min: 1, # required
+    #               max: 1
+    #             },
+    #             cpu_manufacturers: ["intel" # One of: ["intel", "amd", "amazon-web-services"]],
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current" # One of: ["current", "previous"]],
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included" # One of: ["included", "required", "excluded"],
+    #             burstable_performance: "included" # One of: ["included", "required", "excluded"],
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             local_storage: "included" # One of: ["included", "required", "excluded"],
+    #             local_storage_types: ["hdd" # One of: ["hdd", "ssd"]],
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             accelerator_types: ["gpu" # One of: ["gpu", "fpga", "inference"]],
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             accelerator_manufacturers: ["amazon-web-services" # One of: ["amazon-web-services", "amd", "nvidia", "xilinx", "habana"]],
+    #             accelerator_names: ["a100" # One of: ["a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"]],
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1
+    #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
+    #             max_spot_price_as_percentage_of_optimal_on_demand_price: 1
+    #           }
+    #         },
+    #         propagate_tags: "CAPACITY_PROVIDER" # One of: ["CAPACITY_PROVIDER", "NONE"]
+    #       },
+    #       update_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"],
     #       update_status_reason: "String",
     #       tags: [
     #         {
     #           key: "TagKey",
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       type: "EC2_AUTOSCALING" # One of: ["EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"]
     #     }
     #   }
     # @return [Types::UpdateCapacityProviderResponse]
@@ -11191,7 +11630,7 @@ module Aws::ECS
     #            <p>The default behavior of <code>AvailabilityZoneRebalancing</code> differs between create and update requests:</p>
     #            <ul>
     #               <li>
-    #                  <p>For create service requests, when when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to to <code>ENABLED</code>.</p>
+    #                  <p>For create service requests, when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults the value to <code>ENABLED</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For update service requests, when no value is specified for <code>AvailabilityZoneRebalancing</code>, Amazon ECS defaults to the existing service’s <code>AvailabilityZoneRebalancing</code> value. If the service never had an <code>AvailabilityZoneRebalancing</code> value set, Amazon ECS treats this as <code>DISABLED</code>.</p>
@@ -11241,6 +11680,7 @@ module Aws::ECS
     #   			During that time, the Amazon ECS service scheduler ignores health check status. This grace
     #   			period can prevent the service scheduler from marking tasks as unhealthy and stopping
     #   			them before they have time to come up.</p>
+    #            <p>If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.</p>
     #            <p>This parameter doesn't trigger a new service deployment.</p>
     # @option params [Types::DeploymentController] :deployment_controller
     #   <p>The deployment controller to use for the service. </p>
@@ -11380,7 +11820,8 @@ module Aws::ECS
     #         {
     #           hook_target_arn: "String",
     #           role_arn: "IAMRoleArn",
-    #           lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #           lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #           hook_details: ""null""
     #         }
     #       ]
     #     },
@@ -11555,7 +11996,7 @@ module Aws::ECS
     #       desired_count: 1,
     #       running_count: 1,
     #       pending_count: 1,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required
@@ -11584,7 +12025,8 @@ module Aws::ECS
     #           {
     #             hook_target_arn: "String",
     #             role_arn: "IAMRoleArn",
-    #             lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]]
+    #             lifecycle_stages: ["RECONCILE_SERVICE" # One of: ["RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"]],
+    #             hook_details: ""null""
     #           }
     #         ]
     #       },
@@ -11603,7 +12045,7 @@ module Aws::ECS
     #           running_count: 1,
     #           created_at: Time.now,
     #           updated_at: Time.now,
-    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #           capacity_provider_strategy: [
     #             {
     #               capacity_provider: "String", # required
@@ -11677,7 +12119,7 @@ module Aws::ECS
     #               base: 1
     #             }
     #           ],
-    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #           launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #           platform_version: "String",
     #           platform_family: "String",
     #           network_configuration: {
@@ -11920,7 +12362,7 @@ module Aws::ECS
     #       running_count: 1,
     #       created_at: Time.now,
     #       updated_at: Time.now,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required
@@ -12220,7 +12662,7 @@ module Aws::ECS
     #       running_count: 1,
     #       created_at: Time.now,
     #       updated_at: Time.now,
-    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL"],
+    #       launch_type: "EC2" # One of: ["EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"],
     #       capacity_provider_strategy: [
     #         {
     #           capacity_provider: "String", # required

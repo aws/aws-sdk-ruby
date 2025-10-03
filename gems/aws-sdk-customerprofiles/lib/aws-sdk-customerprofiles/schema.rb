@@ -7,6 +7,7 @@ module Aws::CustomerProfiles
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    ActionType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.customerprofiles#ActionType', name: 'ActionType')
     AddProfileKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#AddProfileKeyRequest', name: 'AddProfileKeyRequest')
     AddProfileKeyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#AddProfileKeyResponse', name: 'AddProfileKeyResponse')
     AdditionalSearchKey = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#AdditionalSearchKey', name: 'AdditionalSearchKey')
@@ -187,6 +188,8 @@ module Aws::CustomerProfiles
     GetIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetIntegrationResponse', name: 'GetIntegrationResponse')
     GetMatchesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetMatchesRequest', name: 'GetMatchesRequest')
     GetMatchesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetMatchesResponse', name: 'GetMatchesResponse')
+    GetProfileHistoryRecordRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetProfileHistoryRecordRequest', name: 'GetProfileHistoryRecordRequest')
+    GetProfileHistoryRecordResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetProfileHistoryRecordResponse', name: 'GetProfileHistoryRecordResponse')
     GetProfileObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetProfileObjectTypeRequest', name: 'GetProfileObjectTypeRequest')
     GetProfileObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetProfileObjectTypeResponse', name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateRequest', name: 'GetProfileObjectTypeTemplateRequest')
@@ -257,6 +260,8 @@ module Aws::CustomerProfiles
     ListObjectTypeAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.customerprofiles#ListObjectTypeAttributesList', name: 'ListObjectTypeAttributesList')
     ListObjectTypeAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListObjectTypeAttributesRequest', name: 'ListObjectTypeAttributesRequest')
     ListObjectTypeAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListObjectTypeAttributesResponse', name: 'ListObjectTypeAttributesResponse')
+    ListProfileHistoryRecordsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListProfileHistoryRecordsRequest', name: 'ListProfileHistoryRecordsRequest')
+    ListProfileHistoryRecordsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListProfileHistoryRecordsResponse', name: 'ListProfileHistoryRecordsResponse')
     ListProfileObjectTypeItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListProfileObjectTypeItem', name: 'ListProfileObjectTypeItem')
     ListProfileObjectTypeTemplateItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListProfileObjectTypeTemplateItem', name: 'ListProfileObjectTypeTemplateItem')
     ListProfileObjectTypeTemplatesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ListProfileObjectTypeTemplatesRequest', name: 'ListProfileObjectTypeTemplatesRequest')
@@ -318,6 +323,8 @@ module Aws::CustomerProfiles
     ProfileAttributeValuesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ProfileAttributeValuesResponse', name: 'ProfileAttributeValuesResponse')
     ProfileAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ProfileAttributes', name: 'ProfileAttributes', traits: {"smithy.api#sensitive" => {}})
     ProfileDimension = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ProfileDimension', name: 'ProfileDimension')
+    ProfileHistoryRecord = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.customerprofiles#ProfileHistoryRecord', name: 'ProfileHistoryRecord')
+    ProfileHistoryRecords = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.customerprofiles#ProfileHistoryRecords', name: 'ProfileHistoryRecords')
     ProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.customerprofiles#ProfileId', name: 'ProfileId')
     ProfileIdList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.customerprofiles#ProfileIdList', name: 'ProfileIdList')
     ProfileIdToBeMergedList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.customerprofiles#ProfileIdToBeMergedList', name: 'ProfileIdToBeMergedList', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
@@ -486,6 +493,15 @@ module Aws::CustomerProfiles
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: 'Message'))
     AccessDeniedException.type = Types::AccessDeniedException
+    ActionType.add_member(:added_profile_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADDED_PROFILE_KEY', traits: {"smithy.api#enumValue" => "ADDED_PROFILE_KEY"}))
+    ActionType.add_member(:deleted_profile_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETED_PROFILE_KEY', traits: {"smithy.api#enumValue" => "DELETED_PROFILE_KEY"}))
+    ActionType.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATED', traits: {"smithy.api#enumValue" => "CREATED"}))
+    ActionType.add_member(:updated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATED', traits: {"smithy.api#enumValue" => "UPDATED"}))
+    ActionType.add_member(:ingested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INGESTED', traits: {"smithy.api#enumValue" => "INGESTED"}))
+    ActionType.add_member(:deleted_by_customer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETED_BY_CUSTOMER', traits: {"smithy.api#enumValue" => "DELETED_BY_CUSTOMER"}))
+    ActionType.add_member(:expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXPIRED', traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    ActionType.add_member(:merged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MERGED', traits: {"smithy.api#enumValue" => "MERGED"}))
+    ActionType.add_member(:deleted_by_merge, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETED_BY_MERGE', traits: {"smithy.api#enumValue" => "DELETED_BY_MERGE"}))
     AddProfileKeyRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'ProfileId', traits: {"smithy.api#required" => {}}))
     AddProfileKeyRequest.add_member(:key_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'KeyName', traits: {"smithy.api#required" => {}}))
     AddProfileKeyRequest.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestValueList, location_name: 'Values', traits: {"smithy.api#required" => {}}))
@@ -1201,6 +1217,19 @@ module Aws::CustomerProfiles
     GetMatchesResponse.add_member(:potential_matches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchesNumber, location_name: 'PotentialMatches'))
     GetMatchesResponse.add_member(:matches, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchesList, location_name: 'Matches'))
     GetMatchesResponse.type = Types::GetMatchesResponse
+    GetProfileHistoryRecordRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'DomainName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileHistoryRecordRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'ProfileId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileHistoryRecordRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'Id', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileHistoryRecordRequest.type = Types::GetProfileHistoryRecordRequest
+    GetProfileHistoryRecordResponse.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'Id', traits: {"smithy.api#required" => {}}))
+    GetProfileHistoryRecordResponse.add_member(:object_type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: 'ObjectTypeName', traits: {"smithy.api#required" => {}}))
+    GetProfileHistoryRecordResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'CreatedAt', traits: {"smithy.api#required" => {}}))
+    GetProfileHistoryRecordResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastUpdatedAt'))
+    GetProfileHistoryRecordResponse.add_member(:action_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionType, location_name: 'ActionType', traits: {"smithy.api#required" => {}}))
+    GetProfileHistoryRecordResponse.add_member(:profile_object_unique_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1To255, location_name: 'ProfileObjectUniqueKey'))
+    GetProfileHistoryRecordResponse.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringifiedJson, location_name: 'Content'))
+    GetProfileHistoryRecordResponse.add_member(:performed_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1To255, location_name: 'PerformedBy'))
+    GetProfileHistoryRecordResponse.type = Types::GetProfileHistoryRecordResponse
     GetProfileObjectTypeRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'DomainName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProfileObjectTypeRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: 'ObjectTypeName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProfileObjectTypeRequest.type = Types::GetProfileObjectTypeRequest
@@ -1499,6 +1528,17 @@ module Aws::CustomerProfiles
     ListObjectTypeAttributesResponse.add_member(:items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectTypeAttributesList, location_name: 'Items'))
     ListObjectTypeAttributesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: 'NextToken'))
     ListObjectTypeAttributesResponse.type = Types::ListObjectTypeAttributesResponse
+    ListProfileHistoryRecordsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'DomainName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListProfileHistoryRecordsRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'ProfileId', traits: {"smithy.api#required" => {}}))
+    ListProfileHistoryRecordsRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: 'ObjectTypeName'))
+    ListProfileHistoryRecordsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListProfileHistoryRecordsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListProfileHistoryRecordsRequest.add_member(:action_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionType, location_name: 'ActionType'))
+    ListProfileHistoryRecordsRequest.add_member(:performed_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1To255, location_name: 'PerformedBy'))
+    ListProfileHistoryRecordsRequest.type = Types::ListProfileHistoryRecordsRequest
+    ListProfileHistoryRecordsResponse.add_member(:profile_history_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileHistoryRecords, location_name: 'ProfileHistoryRecords'))
+    ListProfileHistoryRecordsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: 'NextToken'))
+    ListProfileHistoryRecordsResponse.type = Types::ListProfileHistoryRecordsResponse
     ListProfileObjectTypeItem.add_member(:object_type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: 'ObjectTypeName', traits: {"smithy.api#required" => {}}))
     ListProfileObjectTypeItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Text, location_name: 'Description', traits: {"smithy.api#required" => {}}))
     ListProfileObjectTypeItem.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'CreatedAt'))
@@ -1745,6 +1785,15 @@ module Aws::CustomerProfiles
     ProfileDimension.add_member(:dimension_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringDimensionType, location_name: 'DimensionType', traits: {"smithy.api#jsonName" => "DimensionType", "smithy.api#required" => {}}))
     ProfileDimension.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Values, location_name: 'Values', traits: {"smithy.api#jsonName" => "Values", "smithy.api#required" => {}}))
     ProfileDimension.type = Types::ProfileDimension
+    ProfileHistoryRecord.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'Id', traits: {"smithy.api#required" => {}}))
+    ProfileHistoryRecord.add_member(:object_type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TypeName, location_name: 'ObjectTypeName', traits: {"smithy.api#required" => {}}))
+    ProfileHistoryRecord.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'CreatedAt', traits: {"smithy.api#required" => {}}))
+    ProfileHistoryRecord.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastUpdatedAt'))
+    ProfileHistoryRecord.add_member(:action_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActionType, location_name: 'ActionType', traits: {"smithy.api#required" => {}}))
+    ProfileHistoryRecord.add_member(:profile_object_unique_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1To255, location_name: 'ProfileObjectUniqueKey'))
+    ProfileHistoryRecord.add_member(:performed_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1To255, location_name: 'PerformedBy'))
+    ProfileHistoryRecord.type = Types::ProfileHistoryRecord
+    ProfileHistoryRecords.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProfileHistoryRecord)
     ProfileIdList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid)
     ProfileIdToBeMergedList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid)
     ProfileIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid)
@@ -2714,6 +2763,18 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/matches", "code" => 200}}
       end)
+      service.add_operation(:get_profile_history_record, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetProfileHistoryRecord"
+        operation.name = "GetProfileHistoryRecord"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProfileHistoryRecordRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetProfileHistoryRecordResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/profiles/{ProfileId}/history-records/{Id}", "code" => 200}}
+      end)
       service.add_operation(:get_profile_object_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetProfileObjectType"
         operation.name = "GetProfileObjectType"
@@ -2748,7 +2809,7 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_segment_estimate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetSegmentEstimate"
@@ -2809,7 +2870,7 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/upload-jobs/{JobId}", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/upload-jobs/{JobId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_upload_job_path, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetUploadJobPath"
@@ -2821,7 +2882,7 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/upload-jobs/{JobId}/path", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/upload-jobs/{JobId}/path", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_workflow, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetWorkflow"
@@ -2983,6 +3044,18 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/profile-attributes/{AttributeName}/values", "code" => 200}}
       end)
+      service.add_operation(:list_profile_history_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListProfileHistoryRecords"
+        operation.name = "ListProfileHistoryRecords"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfileHistoryRecordsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListProfileHistoryRecordsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles/history-records", "code" => 200}}
+      end)
       service.add_operation(:list_profile_object_type_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplates"
         operation.name = "ListProfileObjectTypeTemplates"
@@ -3042,7 +3115,7 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSegmentDefinitions.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -3065,7 +3138,7 @@ module Aws::CustomerProfiles
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/upload-jobs", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/upload-jobs", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListUploadJobs.new
       end)
       service.add_operation(:list_workflows, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

@@ -1187,6 +1187,8 @@ module Aws::Redshift
     CreateRedshiftIdcApplicationMessage.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'IamRoleArn', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateRedshiftIdcApplicationMessage.add_member(:authorized_token_issuer_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: 'AuthorizedTokenIssuerList'))
     CreateRedshiftIdcApplicationMessage.add_member(:service_integrations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: 'ServiceIntegrations'))
+    CreateRedshiftIdcApplicationMessage.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CreateRedshiftIdcApplicationMessage.add_member(:sso_tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'SsoTagKeys'))
     CreateRedshiftIdcApplicationMessage.type = Types::CreateRedshiftIdcApplicationMessage
     CreateRedshiftIdcApplicationResult.add_member(:redshift_idc_application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftIdcApplication, location_name: 'RedshiftIdcApplication'))
     CreateRedshiftIdcApplicationResult.type = Types::CreateRedshiftIdcApplicationResult
@@ -2428,6 +2430,8 @@ module Aws::Redshift
     RedshiftIdcApplication.add_member(:idc_onboard_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'IdcOnboardStatus'))
     RedshiftIdcApplication.add_member(:authorized_token_issuer_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizedTokenIssuerList, location_name: 'AuthorizedTokenIssuerList'))
     RedshiftIdcApplication.add_member(:service_integrations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: 'ServiceIntegrations'))
+    RedshiftIdcApplication.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    RedshiftIdcApplication.add_member(:sso_tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'SsoTagKeys'))
     RedshiftIdcApplication.type = Types::RedshiftIdcApplication
     RedshiftIdcApplicationAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     RedshiftIdcApplicationAlreadyExistsFault.type = Types::RedshiftIdcApplicationAlreadyExistsFault
@@ -3283,8 +3287,10 @@ module Aws::Redshift
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateRedshiftIdcApplicationResult)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependentServiceAccessDeniedFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidTagFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftIdcApplicationAlreadyExistsFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedshiftIdcApplicationQuotaExceededFault)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagLimitExceededFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         operation.traits = {}
       end)

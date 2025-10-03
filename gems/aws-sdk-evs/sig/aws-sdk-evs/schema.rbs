@@ -2,7 +2,11 @@ module Aws::Evs
   module Schema
     include Smithy::Schema::Shapes
 
+    AllocationId: StringShape
     Arn: StringShape
+    AssociateEipToVlanRequest: StructureShape
+    AssociateEipToVlanResponse: StructureShape
+    AssociationId: StringShape
     Check: StructureShape
     CheckResult: EnumShape
     CheckType: EnumShape
@@ -19,6 +23,10 @@ module Aws::Evs
     DeleteEnvironmentHostResponse: StructureShape
     DeleteEnvironmentRequest: StructureShape
     DeleteEnvironmentResponse: StructureShape
+    DisassociateEipFromVlanRequest: StructureShape
+    DisassociateEipFromVlanResponse: StructureShape
+    EipAssociation: StructureShape
+    EipAssociationList: ListShape
     Environment: StructureShape
     EnvironmentId: StringShape
     EnvironmentName: StringShape
@@ -50,6 +58,7 @@ module Aws::Evs
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     MaxResults: IntegerShape
+    NetworkAclId: StringShape
     NetworkInterface: StructureShape
     NetworkInterfaceId: StringShape
     NetworkInterfaceList: ListShape

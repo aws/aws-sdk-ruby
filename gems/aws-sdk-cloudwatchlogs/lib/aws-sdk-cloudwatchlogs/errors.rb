@@ -97,7 +97,9 @@ module Aws::CloudWatchLogs
       end
     end
 
-    # <p>An internal error occurred during the streaming of log data. This exception is thrown when there's an issue with the internal streaming mechanism used by the GetLogObject operation.</p>
+    # <p>An internal error occurred during the streaming of log data. This exception is thrown when
+    #       there's an issue with the internal streaming mechanism used by the GetLogObject
+    #       operation.</p>
     class InternalStreamingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CloudWatchLogs::Types::InternalStreamingException] data

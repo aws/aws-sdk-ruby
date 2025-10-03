@@ -1323,7 +1323,7 @@ module Aws::Lightsail
     CreateRelationalDatabaseSnapshotResult.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationList, location_name: 'operations'))
     CreateRelationalDatabaseSnapshotResult.type = Types::CreateRelationalDatabaseSnapshotResult
     Currency.add_member(:usd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'USD', traits: {"smithy.api#enumValue" => "USD"}))
-    DeleteAlarmRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'alarmName', traits: {"smithy.api#required" => {}}))
+    DeleteAlarmRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'alarmName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAlarmRequest.type = Types::DeleteAlarmRequest
     DeleteAlarmResult.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationList, location_name: 'operations'))
     DeleteAlarmResult.type = Types::DeleteAlarmResult
@@ -1604,9 +1604,9 @@ module Aws::Lightsail
     GetActiveNamesResult.add_member(:active_names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'activeNames'))
     GetActiveNamesResult.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'nextPageToken'))
     GetActiveNamesResult.type = Types::GetActiveNamesResult
-    GetAlarmsRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'alarmName'))
-    GetAlarmsRequest.add_member(:page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'pageToken'))
-    GetAlarmsRequest.add_member(:monitored_resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'monitoredResourceName'))
+    GetAlarmsRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'alarmName', traits: {"smithy.api#httpQuery" => "alarmName"}))
+    GetAlarmsRequest.add_member(:page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'pageToken', traits: {"smithy.api#httpQuery" => "pageToken"}))
+    GetAlarmsRequest.add_member(:monitored_resource_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'monitoredResourceName', traits: {"smithy.api#httpQuery" => "monitoredResourceName"}))
     GetAlarmsRequest.type = Types::GetAlarmsRequest
     GetAlarmsResult.add_member(:alarms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmsList, location_name: 'alarms'))
     GetAlarmsResult.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'nextPageToken'))
@@ -1671,7 +1671,7 @@ module Aws::Lightsail
     GetCloudFormationStackRecordsResult.add_member(:cloud_formation_stack_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudFormationStackRecordList, location_name: 'cloudFormationStackRecords'))
     GetCloudFormationStackRecordsResult.add_member(:next_page_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'nextPageToken'))
     GetCloudFormationStackRecordsResult.type = Types::GetCloudFormationStackRecordsResult
-    GetContactMethodsRequest.add_member(:protocols, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactProtocolsList, location_name: 'protocols'))
+    GetContactMethodsRequest.add_member(:protocols, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactProtocolsList, location_name: 'protocols', traits: {"smithy.api#httpQuery" => "protocols"}))
     GetContactMethodsRequest.type = Types::GetContactMethodsRequest
     GetContactMethodsResult.add_member(:contact_methods, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactMethodsList, location_name: 'contactMethods'))
     GetContactMethodsResult.type = Types::GetContactMethodsResult
@@ -2953,8 +2953,8 @@ module Aws::Lightsail
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResult.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationList, location_name: 'operations'))
     TagResourceResult.type = Types::TagResourceResult
-    TestAlarmRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'alarmName', traits: {"smithy.api#required" => {}}))
-    TestAlarmRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmState, location_name: 'state', traits: {"smithy.api#required" => {}}))
+    TestAlarmRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'alarmName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TestAlarmRequest.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmState, location_name: 'state', traits: {"smithy.api#httpQuery" => "state", "smithy.api#required" => {}}))
     TestAlarmRequest.type = Types::TestAlarmRequest
     TestAlarmResult.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationList, location_name: 'operations'))
     TestAlarmResult.type = Types::TestAlarmResult
@@ -3540,7 +3540,7 @@ module Aws::Lightsail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthenticatedException)
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/ls/api/2016-11-28/DeleteAlarm", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/ls/api/2016-11-28/DeleteAlarm/{alarmName}", "code" => 200}}
       end)
       service.add_operation(:delete_auto_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lightsail#DeleteAutoSnapshot"
@@ -5203,7 +5203,7 @@ module Aws::Lightsail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthenticatedException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/ls/api/2016-11-28/TestAlarm", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/ls/api/2016-11-28/TestAlarm/{alarmName}", "code" => 200}}
       end)
       service.add_operation(:unpeer_vpc, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lightsail#UnpeerVpc"

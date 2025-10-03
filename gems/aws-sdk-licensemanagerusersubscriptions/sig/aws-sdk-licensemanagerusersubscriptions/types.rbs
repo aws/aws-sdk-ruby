@@ -19,12 +19,14 @@ module Aws::LicenseManagerUserSubscriptions
         ?directory_id: String,
         ?active_directory_settings: Types::ActiveDirectorySettings,
         ?active_directory_type: String,
+        ?is_shared_active_directory: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor directory_id: String?
       attr_accessor active_directory_settings: Types::ActiveDirectorySettings?
       attr_accessor active_directory_type: String?
+      attr_accessor is_shared_active_directory: bool?
     end
 
     class ActiveDirectorySettings
@@ -261,6 +263,7 @@ module Aws::LicenseManagerUserSubscriptions
         ?status: String,
         ?identity_provider_arn: String,
         ?failure_message: String,
+        ?owner_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -270,6 +273,7 @@ module Aws::LicenseManagerUserSubscriptions
       attr_accessor status: String?
       attr_accessor identity_provider_arn: String?
       attr_accessor failure_message: String?
+      attr_accessor owner_account_id: String?
     end
 
     class InstanceSummary
@@ -281,6 +285,8 @@ module Aws::LicenseManagerUserSubscriptions
         ?products: Array[String],
         ?last_status_check_date: String,
         ?status_message: String,
+        ?owner_account_id: String,
+        ?identity_provider: Types::IdentityProvider,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -289,6 +295,8 @@ module Aws::LicenseManagerUserSubscriptions
       attr_accessor products: Array[String]?
       attr_accessor last_status_check_date: String?
       attr_accessor status_message: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor identity_provider: Types::IdentityProvider?
     end
 
     class InstanceUserSummary

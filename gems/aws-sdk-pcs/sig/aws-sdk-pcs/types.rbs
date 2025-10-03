@@ -16,13 +16,13 @@ module Aws::PCS
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?mode: String,
         ?default_purge_time_in_days: Integer,
+        ?mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor mode: String?
       attr_accessor default_purge_time_in_days: Integer?
+      attr_accessor mode: String?
     end
 
     module AccountingMode
@@ -34,13 +34,13 @@ module Aws::PCS
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?mode: String,
         ?default_purge_time_in_days: Integer,
+        ?mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor mode: String?
       attr_accessor default_purge_time_in_days: Integer?
+      attr_accessor mode: String?
     end
 
     class Cluster
@@ -355,6 +355,7 @@ module Aws::PCS
         ?cluster_identifier: String,
         ?queue_name: String,
         ?compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration],
+        ?slurm_configuration: Types::QueueSlurmConfigurationRequest,
         ?client_token: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -363,6 +364,7 @@ module Aws::PCS
       attr_accessor cluster_identifier: String?
       attr_accessor queue_name: String?
       attr_accessor compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration]?
+      attr_accessor slurm_configuration: Types::QueueSlurmConfigurationRequest?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -732,6 +734,7 @@ module Aws::PCS
     module PurchaseOption
       ONDEMAND: String
       SPOT: String
+      CAPACITY_BLOCK: String
     end
 
     class Queue
@@ -746,6 +749,7 @@ module Aws::PCS
         ?modified_at: Time,
         ?status: String,
         ?compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration],
+        ?slurm_configuration: Types::QueueSlurmConfiguration,
         ?error_info: Array[Types::ErrorInfo],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -758,7 +762,30 @@ module Aws::PCS
       attr_accessor modified_at: Time?
       attr_accessor status: String?
       attr_accessor compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration]?
+      attr_accessor slurm_configuration: Types::QueueSlurmConfiguration?
       attr_accessor error_info: Array[Types::ErrorInfo]?
+    end
+
+    class QueueSlurmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+    end
+
+    class QueueSlurmConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
     end
 
     module QueueStatus
@@ -1002,6 +1029,60 @@ module Aws::PCS
       attr_accessor tag_keys: Array[String]?
     end
 
+    class UpdateAccountingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_purge_time_in_days: Integer,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_purge_time_in_days: Integer?
+      attr_accessor mode: String?
+    end
+
+    class UpdateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?client_token: String,
+        ?slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest?
+    end
+
+    class UpdateClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class UpdateClusterSlurmConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_down_idle_time_in_seconds: Integer,
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?accounting: Types::UpdateAccountingRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_down_idle_time_in_seconds: Integer?
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor accounting: Types::UpdateAccountingRequest?
+    end
+
     class UpdateComputeNodeGroupRequest
       include Smithy::Schema::Structure
 
@@ -1062,6 +1143,7 @@ module Aws::PCS
         ?cluster_identifier: String,
         ?queue_identifier: String,
         ?compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration],
+        ?slurm_configuration: Types::UpdateQueueSlurmConfigurationRequest,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1069,6 +1151,7 @@ module Aws::PCS
       attr_accessor cluster_identifier: String?
       attr_accessor queue_identifier: String?
       attr_accessor compute_node_group_configurations: Array[Types::ComputeNodeGroupConfiguration]?
+      attr_accessor slurm_configuration: Types::UpdateQueueSlurmConfigurationRequest?
       attr_accessor client_token: String?
     end
 
@@ -1081,6 +1164,17 @@ module Aws::PCS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor queue: Types::Queue?
+    end
+
+    class UpdateQueueSlurmConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
     end
 
     class ValidationException

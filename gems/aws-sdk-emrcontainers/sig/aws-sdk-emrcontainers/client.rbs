@@ -7,6 +7,7 @@ module Aws::EMRcontainers
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -165,6 +166,16 @@ module Aws::EMRcontainers
     def create_security_configuration: (
       ?client_token: String,
       ?name: String,
+      ?container_provider: {
+        type: String,
+        id: String,
+        info: {
+          eks_info: {
+            namespace: String,
+            node_label: String
+          }
+        }
+      },
       ?security_configuration_data: {
         authorization_configuration: {
           lake_formation_configuration: {
@@ -202,7 +213,8 @@ module Aws::EMRcontainers
         id: String,
         info: {
           eks_info: {
-            namespace: String
+            namespace: String,
+            node_label: String
           }
         }
       },

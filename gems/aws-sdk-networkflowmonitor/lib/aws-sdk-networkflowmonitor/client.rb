@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::NetworkFlowMonitor
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::NetworkFlowMonitor
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::NetworkFlowMonitor
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::NetworkFlowMonitor::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::NetworkFlowMonitor::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -186,14 +191,14 @@ module Aws::NetworkFlowMonitor
       super
     end
 
-    # <p>Create a monitor for specific network flows between local and remote resources, so that you can monitor network performance for one or several of your workloads. For each monitor, Network Flow Monitor publishes detailed end-to-end performance metrics and a network health indicators (NHI) that informs you whether there were Amazon Web Services network issues for one or more of the network flows tracked by a monitor, during a time period that you choose. </p>
+    # <p>Create a monitor for specific network flows between local and remote resources, so that you can monitor network performance for one or several of your workloads. For each monitor, Network Flow Monitor publishes detailed end-to-end performance metrics and a network health indicator (NHI) that informs you whether there were Amazon Web Services network issues for one or more of the network flows tracked by a monitor, during a time period that you choose. </p>
     # @param [Hash, Types::CreateMonitorInput] params
     # @option params [String] :monitor_name
     #   <p>The name of the monitor. </p>
     # @option params [Array<Types::MonitorLocalResource>] :local_resources
-    #   <p>The local resources to monitor. A local resource, in a bi-directional flow of a workload, is the host where the agent is installed. For example, if a workload consists of an interaction between a web service and a backend database (for example, Amazon Relational Database Service (RDS)), the EC2 instance hosting the web service, which also runs the agent, is the local resource.</p>
+    #   <p>The local resources to monitor. A local resource in a workload is the location of the host, or hosts, where the Network Flow Monitor agent is installed. For example, if a workload consists of an interaction between a web service and a backend database (for example, Amazon Dynamo DB), the subnet with the EC2 instance that hosts the web service, which also runs the agent, is the local resource.</p> <p>Be aware that all local resources must belong to the current Region.</p>
     # @option params [Array<Types::MonitorRemoteResource>] :remote_resources
-    #   <p>The remote resources to monitor. A remote resource is the other endpoint in the bi-directional flow of a workload, with a local resource. For example, Amazon Relational Database Service (RDS) can be a remote resource.</p>
+    #   <p>The remote resources to monitor. A remote resource is the other endpoint in the bi-directional flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource.</p> <p>When you specify remote resources, be aware that specific combinations of resources are allowed and others are not, including the following constraints:</p> <ul> <li> <p>All remote resources that you specify must all belong to a single Region.</p> </li> <li> <p>If you specify Amazon Web Services services as remote resources, any other remote resources that you specify must be in the current Region.</p> </li> <li> <p>When you specify a remote resource for another Region, you can only specify the <code>Region</code> resource type. You cannot specify a subnet, VPC, or Availability Zone in another Region.</p> </li> <li> <p>If you leave the <code>RemoteResources</code> parameter empty, the monitor will include all network flows that terminate in the current Region.</p> </li> </ul>
     # @option params [String] :scope_arn
     #   <p>The Amazon Resource Name (ARN) of the scope for the monitor.</p>
     # @option params [String] :client_token
@@ -205,13 +210,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     remote_resources: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -231,13 +236,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_status: "PENDING" # One of: ["PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"], # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     remote_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -253,10 +258,10 @@ module Aws::NetworkFlowMonitor
       request.send_request(options)
     end
 
-    # <p>Create a scope of resources that you want to be available for Network Flow Monitor to generate metrics for, when you have active agents on those resources sending metrics reports to the Network Flow Monitor backend. This call returns a scope ID to identify the scope.</p> <p>When you create a scope, you enable permissions for Network Flow Monitor. The scope is set to the resources for the Amazon Web Services that enables the feature.</p>
+    # <p>In Network Flow Monitor, you specify a scope for the service to generate metrics for. By using the scope, Network Flow Monitor can generate a topology of all the resources to measure performance metrics for. When you create a scope, you enable permissions for Network Flow Monitor.</p> <p>A scope is a Region-account pair or multiple Region-account pairs. Network Flow Monitor uses your scope to determine all the resources (the topology) where Network Flow Monitor will gather network flow performance metrics for you. To provide performance metrics, Network Flow Monitor uses the data that is sent by the Network Flow Monitor agents you install on the resources.</p> <p>To define the Region-account pairs for your scope, the Network Flow Monitor API uses the following constucts, which allow for future flexibility in defining scopes:</p> <ul> <li> <p> <i>Targets</i>, which are arrays of targetResources.</p> </li> <li> <p> <i>Target resources</i>, which are Region-targetIdentifier pairs.</p> </li> <li> <p> <i>Target identifiers</i>, made up of a targetID (currently always an account ID) and a targetType (currently always an account). </p> </li> </ul>
     # @param [Hash, Types::CreateScopeInput] params
     # @option params [Array<Types::TargetResource>] :targets
-    #   <p>The targets to define the scope to be monitored. Currently, a target is an Amazon Web Services account.</p>
+    #   <p>The targets to define the scope to be monitored. A target is an array of targetResources, which are currently Region-account pairs, defined by targetResource constructs.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request. Don't reuse the same client token for other API requests.</p>
     # @option params [Hash<String, String>] :tags
@@ -354,13 +359,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_status: "PENDING" # One of: ["PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"], # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     remote_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -409,7 +414,7 @@ module Aws::NetworkFlowMonitor
     #         local_az: "AvailabilityZone",
     #         local_subnet_id: "SubnetId",
     #         target_port: 1,
-    #         destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB"],
+    #         destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION"],
     #         remote_vpc_id: "VpcId",
     #         remote_region: "AwsRegion",
     #         remote_az: "AvailabilityZone",
@@ -734,13 +739,13 @@ module Aws::NetworkFlowMonitor
     # @option params [String] :monitor_name
     #   <p>The name of the monitor.</p>
     # @option params [Time] :start_time
-    #   <p>The timestamp that is the date and time beginning of the period that you want to retrieve results for with your query.</p>
+    #   <p>The timestamp that is the date and time that is the beginning of the period that you want to retrieve results for with your query.</p>
     # @option params [Time] :end_time
     #   <p>The timestamp that is the date and time end of the period that you want to retrieve results for with your query.</p>
     # @option params [String] :metric_name
     #   <p>The metric that you want to query top contributors for. That is, you can specify a metric with this call and return the top contributor network flows, for that type of metric, for a monitor and (optionally) within a specific category, such as network flows between Availability Zones.</p>
     # @option params [String] :destination_category
-    #   <p>The category that you want to query top contributors for, for a specific monitor. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AMAZON_S3</code>: Top contributor network flows to or from Amazon S3</p> </li> <li> <p> <code>AMAZON_DYNAMODB</code>: Top contributor network flows to or from Amazon Dynamo DB</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
+    #   <p>The category that you want to query top contributors for, for a specific monitor. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AMAZON_S3</code>: Top contributor network flows to or from Amazon S3</p> </li> <li> <p> <code>AMAZON_DYNAMODB</code>: Top contributor network flows to or from Amazon Dynamo DB</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
     # @option params [Integer] :limit
     #   <p>The maximum number of top contributors to return.</p>
     # @example Request syntax with placeholder values
@@ -749,7 +754,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "ROUND_TRIP_TIME" # One of: ["ROUND_TRIP_TIME", "TIMEOUTS", "RETRANSMISSIONS", "DATA_TRANSFERRED"], # required
-    #     destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB"], # required
+    #     destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION"], # required
     #     limit: 1
     #   }
     #   options = {}
@@ -770,13 +775,13 @@ module Aws::NetworkFlowMonitor
     # @option params [String] :scope_id
     #   <p>The identifier for the scope that includes the resources you want to get data results for. A scope ID is an internally-generated identifier that includes all the resources for a specific root account. A scope ID is returned from a <code>CreateScope</code> API call.</p>
     # @option params [Time] :start_time
-    #   <p>The timestamp that is the date and time beginning of the period that you want to retrieve results for with your query.</p>
+    #   <p>The timestamp that is the date and time that is the beginning of the period that you want to retrieve results for with your query.</p>
     # @option params [Time] :end_time
     #   <p>The timestamp that is the date and time end of the period that you want to retrieve results for with your query.</p>
     # @option params [String] :metric_name
     #   <p>The metric that you want to query top contributors for. That is, you can specify this metric to return the top contributor network flows, for this type of metric, for a monitor and (optionally) within a specific category, such as network flows between Availability Zones.</p>
     # @option params [String] :destination_category
-    #   <p>The destination category for a top contributors row. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
+    #   <p>The destination category for a top contributors row. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
     # @option params [Integer] :limit
     #   <p>The maximum number of top contributors to return.</p>
     # @example Request syntax with placeholder values
@@ -785,7 +790,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "TIMEOUTS" # One of: ["TIMEOUTS", "RETRANSMISSIONS", "DATA_TRANSFERRED"], # required
-    #     destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB"], # required
+    #     destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION"], # required
     #     limit: 1
     #   }
     #   options = {}
@@ -806,20 +811,20 @@ module Aws::NetworkFlowMonitor
     # @option params [String] :scope_id
     #   <p>The identifier for the scope that includes the resources you want to get data results for. A scope ID is an internally-generated identifier that includes all the resources for a specific root account.</p>
     # @option params [Time] :start_time
-    #   <p>The timestamp that is the date and time beginning of the period that you want to retrieve results for with your query.</p>
+    #   <p>The timestamp that is the date and time that is the beginning of the period that you want to retrieve results for with your query.</p>
     # @option params [Time] :end_time
     #   <p>The timestamp that is the date and time end of the period that you want to retrieve results for with your query.</p>
     # @option params [String] :metric_name
     #   <p>The metric that you want to query top contributors for. That is, you can specify this metric to return the top contributor network flows, for this type of metric, for a monitor and (optionally) within a specific category, such as network flows between Availability Zones.</p>
     # @option params [String] :destination_category
-    #   <p>The destination category for a top contributors. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
+    #   <p>The destination category for a top contributors. Destination categories can be one of the following: </p> <ul> <li> <p> <code>INTRA_AZ</code>: Top contributor network flows within a single Availability Zone</p> </li> <li> <p> <code>INTER_AZ</code>: Top contributor network flows between Availability Zones</p> </li> <li> <p> <code>INTER_REGION</code>: Top contributor network flows between Regions (to the edge of another Region)</p> </li> <li> <p> <code>INTER_VPC</code>: Top contributor network flows between VPCs</p> </li> <li> <p> <code>AWS_SERVICES</code>: Top contributor network flows to or from Amazon Web Services services</p> </li> <li> <p> <code>UNCLASSIFIED</code>: Top contributor network flows that do not have a bucket classification</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     scope_id: "ScopeId", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "TIMEOUTS" # One of: ["TIMEOUTS", "RETRANSMISSIONS", "DATA_TRANSFERRED"], # required
-    #     destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB"], # required
+    #     destination_category: "INTRA_AZ" # One of: ["INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION"], # required
     #   }
     #   options = {}
     #   response = client.start_query_workload_insights_top_contributors_data(params, options)
@@ -951,13 +956,13 @@ module Aws::NetworkFlowMonitor
     # @option params [String] :monitor_name
     #   <p>The name of the monitor.</p>
     # @option params [Array<Types::MonitorLocalResource>] :local_resources_to_add
-    #   <p>The local resources to add, as an array of resources with identifiers and types.</p>
+    #   <p>Additional local resources to specify network flows for a monitor, as an array of resources with identifiers and types. A local resource in a workload is the location of hosts where the Network Flow Monitor agent is installed. </p>
     # @option params [Array<Types::MonitorLocalResource>] :local_resources_to_remove
     #   <p>The local resources to remove, as an array of resources with identifiers and types.</p>
     # @option params [Array<Types::MonitorRemoteResource>] :remote_resources_to_add
-    #   <p>The remove resources to add, as an array of resources with identifiers and types.</p>
+    #   <p>The remote resources to add, as an array of resources with identifiers and types.</p> <p>A remote resource is the other endpoint in the flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource. </p>
     # @option params [Array<Types::MonitorRemoteResource>] :remote_resources_to_remove
-    #   <p>The remove resources to remove, as an array of resources with identifiers and types.</p>
+    #   <p>The remote resources to remove, as an array of resources with identifiers and types.</p> <p>A remote resource is the other endpoint specified for the network flow of a workload, with a local resource. For example, Amazon Dynamo DB can be a remote resource. </p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request. Don't reuse the same client token for other API requests.</p>
     # @example Request syntax with placeholder values
@@ -965,25 +970,25 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources_to_add: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     local_resources_to_remove: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     remote_resources_to_add: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     remote_resources_to_remove: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -999,13 +1004,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_status: "PENDING" # One of: ["PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"], # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     remote_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::AWSService", "AWS::Region"], # required
     #         identifier: "String", # required
     #       }
     #     ],

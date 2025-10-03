@@ -440,6 +440,7 @@ module Aws::QuickSight
     CustomActionURLOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#CustomActionURLOperation', name: 'CustomActionURLOperation')
     CustomColor = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#CustomColor', name: 'CustomColor')
     CustomColorsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.quicksight#CustomColorsList', name: 'CustomColorsList', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    CustomConnectionParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#CustomConnectionParameters', name: 'CustomConnectionParameters')
     CustomContentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#CustomContentConfiguration', name: 'CustomContentConfiguration')
     CustomContentImageScalingConfiguration = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#CustomContentImageScalingConfiguration', name: 'CustomContentImageScalingConfiguration')
     CustomContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#CustomContentType', name: 'CustomContentType')
@@ -540,6 +541,7 @@ module Aws::QuickSight
     DataSourceSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.quicksight#DataSourceSummaryList', name: 'DataSourceSummaryList')
     DataSourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#DataSourceType', name: 'DataSourceType')
     DataStoriesConfigurations = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DataStoriesConfigurations', name: 'DataStoriesConfigurations')
+    DataStoriesSharingOption = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DataStoriesSharingOption', name: 'DataStoriesSharingOption')
     Database = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#Database', name: 'Database', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     DatabaseAccessControlRole = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#DatabaseAccessControlRole', name: 'DatabaseAccessControlRole', traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
     DatabaseGroup = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#DatabaseGroup', name: 'DatabaseGroup', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
@@ -604,6 +606,8 @@ module Aws::QuickSight
     DefaultSliderControlOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DefaultSliderControlOptions', name: 'DefaultSliderControlOptions')
     DefaultTextAreaControlOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DefaultTextAreaControlOptions', name: 'DefaultTextAreaControlOptions')
     DefaultTextFieldControlOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DefaultTextFieldControlOptions', name: 'DefaultTextFieldControlOptions')
+    DeleteAccountCustomPermissionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteAccountCustomPermissionRequest', name: 'DeleteAccountCustomPermissionRequest')
+    DeleteAccountCustomPermissionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteAccountCustomPermissionResponse', name: 'DeleteAccountCustomPermissionResponse')
     DeleteAccountCustomizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteAccountCustomizationRequest', name: 'DeleteAccountCustomizationRequest')
     DeleteAccountCustomizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteAccountCustomizationResponse', name: 'DeleteAccountCustomizationResponse')
     DeleteAccountSubscriptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteAccountSubscriptionRequest', name: 'DeleteAccountSubscriptionRequest')
@@ -667,6 +671,8 @@ module Aws::QuickSight
     DeleteVPCConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteVPCConnectionRequest', name: 'DeleteVPCConnectionRequest')
     DeleteVPCConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DeleteVPCConnectionResponse', name: 'DeleteVPCConnectionResponse')
     Delimiter = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#Delimiter', name: 'Delimiter', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    DescribeAccountCustomPermissionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DescribeAccountCustomPermissionRequest', name: 'DescribeAccountCustomPermissionRequest')
+    DescribeAccountCustomPermissionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DescribeAccountCustomPermissionResponse', name: 'DescribeAccountCustomPermissionResponse')
     DescribeAccountCustomizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DescribeAccountCustomizationRequest', name: 'DescribeAccountCustomizationRequest')
     DescribeAccountCustomizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DescribeAccountCustomizationResponse', name: 'DescribeAccountCustomizationResponse')
     DescribeAccountSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#DescribeAccountSettingsRequest', name: 'DescribeAccountSettingsRequest')
@@ -801,6 +807,7 @@ module Aws::QuickSight
     ExceptionResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#ExceptionResourceType', name: 'ExceptionResourceType')
     ExcludePeriodConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#ExcludePeriodConfiguration', name: 'ExcludePeriodConfiguration')
     ExecutiveSummaryConfigurations = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#ExecutiveSummaryConfigurations', name: 'ExecutiveSummaryConfigurations')
+    ExecutiveSummaryOption = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#ExecutiveSummaryOption', name: 'ExecutiveSummaryOption')
     ExplicitHierarchy = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#ExplicitHierarchy', name: 'ExplicitHierarchy')
     ExplicitHierarchyColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.quicksight#ExplicitHierarchyColumnList', name: 'ExplicitHierarchyColumnList', traits: {"smithy.api#length" => {"min" => 2, "max" => 10}})
     ExportHiddenFieldsOption = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#ExportHiddenFieldsOption', name: 'ExportHiddenFieldsOption')
@@ -1300,6 +1307,7 @@ module Aws::QuickSight
     NonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#NonEmptyString', name: 'NonEmptyString', traits: {"smithy.api#pattern" => "\\S"})
     NonRepeatingVisualsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.quicksight#NonRepeatingVisualsList', name: 'NonRepeatingVisualsList', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     NullFilterOption = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#NullFilterOption', name: 'NullFilterOption')
+    NullFilterType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#NullFilterType', name: 'NullFilterType')
     NullString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#NullString', name: 'NullString', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#sensitive" => {}})
     NullValueFormatConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#NullValueFormatConfiguration', name: 'NullValueFormatConfiguration')
     NullableBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.quicksight#NullableBoolean', name: 'NullableBoolean')
@@ -1454,6 +1462,8 @@ module Aws::QuickSight
     QAResults = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.quicksight#QAResults', name: 'QAResults')
     QAUrl = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#QAUrl', name: 'QAUrl')
     QBusinessInsightsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#QBusinessInsightsStatus', name: 'QBusinessInsightsStatus')
+    QDataKey = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#QDataKey', name: 'QDataKey')
+    QDataKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#QDataKeyType', name: 'QDataKeyType')
     QSearchStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#QSearchStatus', name: 'QSearchStatus')
     Query = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#Query', name: 'Query', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     QueryExecutionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#QueryExecutionMode', name: 'QueryExecutionMode')
@@ -1917,6 +1927,7 @@ module Aws::QuickSight
     TopicId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.quicksight#TopicId', name: 'TopicId', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9-_.\\\\+]*$"})
     TopicNamedEntities = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.quicksight#TopicNamedEntities', name: 'TopicNamedEntities')
     TopicNamedEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#TopicNamedEntity', name: 'TopicNamedEntity')
+    TopicNullFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#TopicNullFilter', name: 'TopicNullFilter')
     TopicNumericEqualityFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#TopicNumericEqualityFilter', name: 'TopicNumericEqualityFilter')
     TopicNumericRangeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#TopicNumericRangeFilter', name: 'TopicNumericRangeFilter')
     TopicNumericSeparatorSymbol = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.quicksight#TopicNumericSeparatorSymbol', name: 'TopicNumericSeparatorSymbol')
@@ -1984,6 +1995,8 @@ module Aws::QuickSight
     UntagColumnOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UntagColumnOperation', name: 'UntagColumnOperation')
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UntagResourceRequest', name: 'UntagResourceRequest')
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UntagResourceResponse', name: 'UntagResourceResponse')
+    UpdateAccountCustomPermissionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UpdateAccountCustomPermissionRequest', name: 'UpdateAccountCustomPermissionRequest')
+    UpdateAccountCustomPermissionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UpdateAccountCustomPermissionResponse', name: 'UpdateAccountCustomPermissionResponse')
     UpdateAccountCustomizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UpdateAccountCustomizationRequest', name: 'UpdateAccountCustomizationRequest')
     UpdateAccountCustomizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UpdateAccountCustomizationResponse', name: 'UpdateAccountCustomizationResponse')
     UpdateAccountSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.quicksight#UpdateAccountSettingsRequest', name: 'UpdateAccountSettingsRequest')
@@ -2964,6 +2977,8 @@ module Aws::QuickSight
     Capabilities.add_member(:export_to_csv_in_scheduled_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapabilityState, location_name: 'ExportToCsvInScheduledReports'))
     Capabilities.add_member(:export_to_excel_in_scheduled_reports, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapabilityState, location_name: 'ExportToExcelInScheduledReports'))
     Capabilities.add_member(:include_content_in_scheduled_reports_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapabilityState, location_name: 'IncludeContentInScheduledReportsEmail'))
+    Capabilities.add_member(:dashboard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapabilityState, location_name: 'Dashboard'))
+    Capabilities.add_member(:analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CapabilityState, location_name: 'Analysis'))
     Capabilities.type = Types::Capabilities
     CapabilityState.add_member(:deny, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DENY', traits: {"smithy.api#enumValue" => "DENY"}))
     CascadingControlConfiguration.add_member(:source_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CascadingControlSourceList, location_name: 'SourceControls'))
@@ -3624,6 +3639,8 @@ module Aws::QuickSight
     CustomColor.add_member(:special_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SpecialValue, location_name: 'SpecialValue'))
     CustomColor.type = Types::CustomColor
     CustomColorsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomColor)
+    CustomConnectionParameters.add_member(:connection_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ConnectionType'))
+    CustomConnectionParameters.type = Types::CustomConnectionParameters
     CustomContentConfiguration.add_member(:content_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URLOperationTemplate, location_name: 'ContentUrl'))
     CustomContentConfiguration.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomContentType, location_name: 'ContentType'))
     CustomContentConfiguration.add_member(:image_scaling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomContentImageScalingConfiguration, location_name: 'ImageScaling'))
@@ -3724,6 +3741,8 @@ module Aws::QuickSight
     DashboardPublishOptions.add_member(:data_point_menu_label_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataPointMenuLabelOption, location_name: 'DataPointMenuLabelOption'))
     DashboardPublishOptions.add_member(:data_point_tooltip_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataPointTooltipOption, location_name: 'DataPointTooltipOption'))
     DashboardPublishOptions.add_member(:data_qa_enabled_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataQAEnabledOption, location_name: 'DataQAEnabledOption'))
+    DashboardPublishOptions.add_member(:executive_summary_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExecutiveSummaryOption, location_name: 'ExecutiveSummaryOption'))
+    DashboardPublishOptions.add_member(:data_stories_sharing_option, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataStoriesSharingOption, location_name: 'DataStoriesSharingOption'))
     DashboardPublishOptions.type = Types::DashboardPublishOptions
     DashboardSearchFilter.add_member(:operator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterOperator, location_name: 'Operator', traits: {"smithy.api#required" => {}}))
     DashboardSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardFilterAttribute, location_name: 'Name'))
@@ -3998,6 +4017,7 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:trino_parameters, Types::DataSourceParameters::TrinoParameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TrinoParameters, location_name: 'TrinoParameters'))
     DataSourceParameters.add_member(:big_query_parameters, Types::DataSourceParameters::BigQueryParameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BigQueryParameters, location_name: 'BigQueryParameters'))
     DataSourceParameters.add_member(:impala_parameters, Types::DataSourceParameters::ImpalaParameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImpalaParameters, location_name: 'ImpalaParameters'))
+    DataSourceParameters.add_member(:custom_connection_parameters, Types::DataSourceParameters::CustomConnectionParameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomConnectionParameters, location_name: 'CustomConnectionParameters'))
     DataSourceParameters.add_member(:unknown, Types::DataSourceParameters::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     DataSourceParameters.type = Types::DataSourceParameters
     DataSourceParametersList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSourceParameters)
@@ -4043,8 +4063,11 @@ module Aws::QuickSight
     DataSourceType.add_member(:starburst, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STARBURST', traits: {"smithy.api#enumValue" => "STARBURST"}))
     DataSourceType.add_member(:trino, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TRINO', traits: {"smithy.api#enumValue" => "TRINO"}))
     DataSourceType.add_member(:bigquery, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BIGQUERY', traits: {"smithy.api#enumValue" => "BIGQUERY"}))
+    DataSourceType.add_member(:googlesheets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'GOOGLESHEETS', traits: {"smithy.api#enumValue" => "GOOGLESHEETS"}))
     DataStoriesConfigurations.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Enabled', traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     DataStoriesConfigurations.type = Types::DataStoriesConfigurations
+    DataStoriesSharingOption.add_member(:availability_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: 'AvailabilityStatus'))
+    DataStoriesSharingOption.type = Types::DataStoriesSharingOption
     DatabaseGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseGroup)
     DatabricksParameters.add_member(:host, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Host, location_name: 'Host', traits: {"smithy.api#required" => {}}))
     DatabricksParameters.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Port, location_name: 'Port', traits: {"smithy.api#required" => {}}))
@@ -4233,6 +4256,11 @@ module Aws::QuickSight
     DefaultTextAreaControlOptions.type = Types::DefaultTextAreaControlOptions
     DefaultTextFieldControlOptions.add_member(:display_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextFieldControlDisplayOptions, location_name: 'DisplayOptions'))
     DefaultTextFieldControlOptions.type = Types::DefaultTextFieldControlOptions
+    DeleteAccountCustomPermissionRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAccountCustomPermissionRequest.type = Types::DeleteAccountCustomPermissionRequest
+    DeleteAccountCustomPermissionResponse.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RequestId'))
+    DeleteAccountCustomPermissionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: 'Status', traits: {"smithy.api#default" => 0}))
+    DeleteAccountCustomPermissionResponse.type = Types::DeleteAccountCustomPermissionResponse
     DeleteAccountCustomizationRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAccountCustomizationRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: 'Namespace', traits: {"smithy.api#httpQuery" => "namespace"}))
     DeleteAccountCustomizationRequest.type = Types::DeleteAccountCustomizationRequest
@@ -4470,6 +4498,12 @@ module Aws::QuickSight
     DeleteVPCConnectionResponse.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RequestId'))
     DeleteVPCConnectionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: 'Status', traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}}))
     DeleteVPCConnectionResponse.type = Types::DeleteVPCConnectionResponse
+    DescribeAccountCustomPermissionRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAccountCustomPermissionRequest.type = Types::DescribeAccountCustomPermissionRequest
+    DescribeAccountCustomPermissionResponse.add_member(:custom_permissions_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPermissionsName, location_name: 'CustomPermissionsName'))
+    DescribeAccountCustomPermissionResponse.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RequestId'))
+    DescribeAccountCustomPermissionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: 'Status', traits: {"smithy.api#default" => 0}))
+    DescribeAccountCustomPermissionResponse.type = Types::DescribeAccountCustomPermissionResponse
     DescribeAccountCustomizationRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAccountCustomizationRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: 'Namespace', traits: {"smithy.api#httpQuery" => "namespace"}))
     DescribeAccountCustomizationRequest.add_member(:resolved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Resolved', traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "resolved"}))
@@ -4787,6 +4821,7 @@ module Aws::QuickSight
     DescribeKeyRegistrationRequest.type = Types::DescribeKeyRegistrationRequest
     DescribeKeyRegistrationResponse.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId'))
     DescribeKeyRegistrationResponse.add_member(:key_registration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyRegistration, location_name: 'KeyRegistration'))
+    DescribeKeyRegistrationResponse.add_member(:q_data_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QDataKey, location_name: 'QDataKey'))
     DescribeKeyRegistrationResponse.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'RequestId'))
     DescribeKeyRegistrationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: 'Status', traits: {"smithy.api#default" => 0}))
     DescribeKeyRegistrationResponse.type = Types::DescribeKeyRegistrationResponse
@@ -5034,6 +5069,8 @@ module Aws::QuickSight
     ExcludePeriodConfiguration.type = Types::ExcludePeriodConfiguration
     ExecutiveSummaryConfigurations.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Enabled', traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ExecutiveSummaryConfigurations.type = Types::ExecutiveSummaryConfigurations
+    ExecutiveSummaryOption.add_member(:availability_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: 'AvailabilityStatus'))
+    ExecutiveSummaryOption.type = Types::ExecutiveSummaryOption
     ExplicitHierarchy.add_member(:hierarchy_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HierarchyId, location_name: 'HierarchyId', traits: {"smithy.api#required" => {}}))
     ExplicitHierarchy.add_member(:columns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExplicitHierarchyColumnList, location_name: 'Columns', traits: {"smithy.api#required" => {}}))
     ExplicitHierarchy.add_member(:drill_down_filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DrillDownFilterList, location_name: 'DrillDownFilters'))
@@ -6709,6 +6746,7 @@ module Aws::QuickSight
     NamedFilterType.add_member(:numeric_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NUMERIC_RANGE_FILTER', traits: {"smithy.api#enumValue" => "NUMERIC_RANGE_FILTER"}))
     NamedFilterType.add_member(:date_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DATE_RANGE_FILTER', traits: {"smithy.api#enumValue" => "DATE_RANGE_FILTER"}))
     NamedFilterType.add_member(:relative_date_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'RELATIVE_DATE_FILTER', traits: {"smithy.api#enumValue" => "RELATIVE_DATE_FILTER"}))
+    NamedFilterType.add_member(:null_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NULL_FILTER', traits: {"smithy.api#enumValue" => "NULL_FILTER"}))
     NamespaceError.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceErrorType, location_name: 'Type'))
     NamespaceError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message'))
     NamespaceError.type = Types::NamespaceError
@@ -6770,6 +6808,9 @@ module Aws::QuickSight
     NullFilterOption.add_member(:all_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALL_VALUES', traits: {"smithy.api#enumValue" => "ALL_VALUES"}))
     NullFilterOption.add_member(:non_nulls_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NON_NULLS_ONLY', traits: {"smithy.api#enumValue" => "NON_NULLS_ONLY"}))
     NullFilterOption.add_member(:nulls_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NULLS_ONLY', traits: {"smithy.api#enumValue" => "NULLS_ONLY"}))
+    NullFilterType.add_member(:all_values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALL_VALUES', traits: {"smithy.api#enumValue" => "ALL_VALUES"}))
+    NullFilterType.add_member(:non_nulls_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NON_NULLS_ONLY', traits: {"smithy.api#enumValue" => "NON_NULLS_ONLY"}))
+    NullFilterType.add_member(:nulls_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NULLS_ONLY', traits: {"smithy.api#enumValue" => "NULLS_ONLY"}))
     NullValueFormatConfiguration.add_member(:null_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullString, location_name: 'NullString', traits: {"smithy.api#required" => {}}))
     NullValueFormatConfiguration.type = Types::NullValueFormatConfiguration
     NumberDisplayFormatConfiguration.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: 'Prefix'))
@@ -7251,6 +7292,11 @@ module Aws::QuickSight
     QAResults.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QAResult)
     QBusinessInsightsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
     QBusinessInsightsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
+    QDataKey.add_member(:q_data_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'QDataKeyArn'))
+    QDataKey.add_member(:q_data_key_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QDataKeyType, location_name: 'QDataKeyType'))
+    QDataKey.type = Types::QDataKey
+    QDataKeyType.add_member(:aws_owned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_OWNED', traits: {"smithy.api#enumValue" => "AWS_OWNED"}))
+    QDataKeyType.add_member(:cmk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CMK', traits: {"smithy.api#enumValue" => "CMK"}))
     QSearchStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
     QSearchStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     QueryExecutionMode.add_member(:auto, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AUTO', traits: {"smithy.api#enumValue" => "AUTO"}))
@@ -8604,6 +8650,7 @@ module Aws::QuickSight
     TopicFilter.add_member(:numeric_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicNumericRangeFilter, location_name: 'NumericRangeFilter'))
     TopicFilter.add_member(:date_range_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicDateRangeFilter, location_name: 'DateRangeFilter'))
     TopicFilter.add_member(:relative_date_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicRelativeDateFilter, location_name: 'RelativeDateFilter'))
+    TopicFilter.add_member(:null_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicNullFilter, location_name: 'NullFilter'))
     TopicFilter.type = Types::TopicFilter
     TopicFilterAttribute.add_member(:quicksight_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'QUICKSIGHT_USER', traits: {"smithy.api#enumValue" => "QUICKSIGHT_USER"}))
     TopicFilterAttribute.add_member(:quicksight_viewer_or_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'QUICKSIGHT_VIEWER_OR_OWNER', traits: {"smithy.api#enumValue" => "QUICKSIGHT_VIEWER_OR_OWNER"}))
@@ -8697,6 +8744,10 @@ module Aws::QuickSight
     TopicNamedEntity.add_member(:semantic_entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SemanticEntityType, location_name: 'SemanticEntityType'))
     TopicNamedEntity.add_member(:definition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamedEntityDefinitions, location_name: 'Definition'))
     TopicNamedEntity.type = Types::TopicNamedEntity
+    TopicNullFilter.add_member(:null_filter_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullFilterType, location_name: 'NullFilterType'))
+    TopicNullFilter.add_member(:constant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicSingularFilterConstant, location_name: 'Constant'))
+    TopicNullFilter.add_member(:inverse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'Inverse', traits: {"smithy.api#default" => false}))
+    TopicNullFilter.type = Types::TopicNullFilter
     TopicNumericEqualityFilter.add_member(:constant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicSingularFilterConstant, location_name: 'Constant'))
     TopicNumericEqualityFilter.add_member(:aggregation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamedFilterAggType, location_name: 'Aggregation'))
     TopicNumericEqualityFilter.type = Types::TopicNumericEqualityFilter
@@ -8919,6 +8970,12 @@ module Aws::QuickSight
     UntagResourceResponse.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RequestId'))
     UntagResourceResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: 'Status', traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}}))
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateAccountCustomPermissionRequest.add_member(:custom_permissions_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomPermissionsName, location_name: 'CustomPermissionsName', traits: {"smithy.api#required" => {}}))
+    UpdateAccountCustomPermissionRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAccountCustomPermissionRequest.type = Types::UpdateAccountCustomPermissionRequest
+    UpdateAccountCustomPermissionResponse.add_member(:request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'RequestId'))
+    UpdateAccountCustomPermissionResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusCode, location_name: 'Status', traits: {"smithy.api#default" => 0}))
+    UpdateAccountCustomPermissionResponse.type = Types::UpdateAccountCustomPermissionResponse
     UpdateAccountCustomizationRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'AwsAccountId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAccountCustomizationRequest.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace, location_name: 'Namespace', traits: {"smithy.api#httpQuery" => "namespace"}))
     UpdateAccountCustomizationRequest.add_member(:account_customization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountCustomization, location_name: 'AccountCustomization', traits: {"smithy.api#required" => {}}))
@@ -10029,6 +10086,18 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/accounts/{AwsAccountId}/vpc-connections", "code" => 200}}
       end)
+      service.add_operation(:delete_account_custom_permission, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.quicksight#DeleteAccountCustomPermission"
+        operation.name = "DeleteAccountCustomPermission"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAccountCustomPermissionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAccountCustomPermissionResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/accounts/{AwsAccountId}/custom-permission", "code" => 200}}
+      end)
       service.add_operation(:delete_account_customization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.quicksight#DeleteAccountCustomization"
         operation.name = "DeleteAccountCustomization"
@@ -10452,6 +10521,18 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/accounts/{AwsAccountId}/vpc-connections/{VPCConnectionId}", "code" => 200}}
       end)
+      service.add_operation(:describe_account_custom_permission, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.quicksight#DescribeAccountCustomPermission"
+        operation.name = "DescribeAccountCustomPermission"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAccountCustomPermissionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAccountCustomPermissionResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/custom-permission", "code" => 200}}
+      end)
       service.add_operation(:describe_account_customization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.quicksight#DescribeAccountCustomization"
         operation.name = "DescribeAccountCustomization"
@@ -10562,7 +10643,7 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brands/{BrandId}", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brands/{BrandId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_brand_assignment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.quicksight#DescribeBrandAssignment"
@@ -10575,7 +10656,7 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brandassignments", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brandassignments", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_brand_published_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.quicksight#DescribeBrandPublishedVersion"
@@ -10588,7 +10669,7 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brands/{BrandId}/publishedversion", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brands/{BrandId}/publishedversion", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_custom_permissions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.quicksight#DescribeCustomPermissions"
@@ -11244,7 +11325,7 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brands", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/accounts/{AwsAccountId}/brands", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListBrands.new
       end)
       service.add_operation(:list_custom_permissions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -11916,6 +11997,18 @@ module Aws::QuickSight
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/resources/{ResourceArn}/tags", "code" => 200}}
+      end)
+      service.add_operation(:update_account_custom_permission, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.quicksight#UpdateAccountCustomPermission"
+        operation.name = "UpdateAccountCustomPermission"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAccountCustomPermissionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateAccountCustomPermissionResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalFailureException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/accounts/{AwsAccountId}/custom-permission", "code" => 200}}
       end)
       service.add_operation(:update_account_customization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.quicksight#UpdateAccountCustomization"

@@ -762,6 +762,7 @@ module Aws::IVSRealTime
         ?video_aspect_ratio: String,
         ?video_fill_mode: String,
         ?grid_gap: Integer,
+        ?participant_order_attribute: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -770,6 +771,7 @@ module Aws::IVSRealTime
       attr_accessor video_aspect_ratio: String?
       attr_accessor video_fill_mode: String?
       attr_accessor grid_gap: Integer?
+      attr_accessor participant_order_attribute: String?
     end
 
     class ImportPublicKeyRequest
@@ -1433,6 +1435,7 @@ module Aws::IVSRealTime
         ?pip_position: String,
         ?pip_width: Integer,
         ?pip_height: Integer,
+        ?participant_order_attribute: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1446,6 +1449,7 @@ module Aws::IVSRealTime
       attr_accessor pip_position: String?
       attr_accessor pip_width: Integer?
       attr_accessor pip_height: Integer?
+      attr_accessor participant_order_attribute: String?
     end
 
     module PipPosition

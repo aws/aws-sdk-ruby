@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::ChimeSDKMessaging
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::ChimeSDKMessaging
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::ChimeSDKMessaging
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::ChimeSDKMessaging::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::ChimeSDKMessaging::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -373,7 +378,7 @@ module Aws::ChimeSDKMessaging
     # @option params [String] :chime_bearer
     #   <p>The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.</p>
     # @option params [String] :channel_id
-    #   <p>The ID of the channel in the request.</p>
+    #   <p>An ID for the channel being created. If you do not specify an ID, a UUID will be created for the channel.</p>
     # @option params [Array<String>] :member_arns
     #   <p>The ARNs of the channel members in the request.</p>
     # @option params [Array<String>] :moderator_arns
@@ -482,7 +487,7 @@ module Aws::ChimeSDKMessaging
     #          </ol>
     #          <note>
     #             <p>Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK messaging, refer to 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types">Message types</a> in the <i>Amazon Chime developer guide</i>.</p>
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/using-the-messaging-sdk.html#msg-types">Message types</a> in the <i>Amazon Chime developer guide</i>.</p>
     #          </note>
     # @param [Hash, Types::CreateChannelFlowRequest] params
     # @option params [String] :app_instance_arn
@@ -1422,8 +1427,12 @@ module Aws::ChimeSDKMessaging
 
     # <p>The details of the endpoint for the messaging session.</p>
     # @param [Hash, Types::GetMessagingSessionEndpointRequest] params
+    # @option params [String] :network_type
+    #   <p>The type of network for the messaging session endpoint. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     # @example Request syntax with placeholder values
-    #   params = {}
+    #   params = {
+    #     network_type: "IPV4_ONLY" # One of: ["IPV4_ONLY", "DUAL_STACK"]
+    #   }
     #   options = {}
     #   response = client.get_messaging_session_endpoint(params, options)
     # @example Response structure with placeholder values
@@ -1564,7 +1573,7 @@ module Aws::ChimeSDKMessaging
     #             the header.</p>
     #          </note>
     #          <p>If you want to list the channels to which a specific app instance user belongs, see the 
-    #          <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html">ListChannelMembershipsForAppInstanceUser</a> API.</p>
+    #          <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html">ListChannelMembershipsForAppInstanceUser</a> API.</p>
     # @param [Hash, Types::ListChannelMembershipsRequest] params
     # @option params [String] :channel_arn
     #   <p>The maximum number of channel memberships that you want returned.</p>
@@ -2161,7 +2170,7 @@ module Aws::ChimeSDKMessaging
       request.send_request(options)
     end
 
-    # <p>Redacts message content, but not metadata. The message exists in the back end, but the
+    # <p>Redacts message content and metadata. The message exists in the back end, but the
     #          action returns null content, and the state shows as redacted.</p>
     #          <note>
     #             <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the
@@ -2206,6 +2215,9 @@ module Aws::ChimeSDKMessaging
     #          <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the
     #          ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in
     #          the header.</p>
+    #          <note>
+    #             <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>
+    #          </note>
     # @param [Hash, Types::SearchChannelsRequest] params
     # @option params [String] :chime_bearer
     #   <p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>

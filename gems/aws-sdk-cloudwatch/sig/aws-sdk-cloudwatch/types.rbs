@@ -7,25 +7,46 @@ module Aws::CloudWatch
       Alarm: String
     end
 
+    class AlarmContributor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contributor_id: String,
+        ?contributor_attributes: Hash[String, String],
+        ?state_reason: String,
+        ?state_transitioned_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contributor_id: String?
+      attr_accessor contributor_attributes: Hash[String, String]?
+      attr_accessor state_reason: String?
+      attr_accessor state_transitioned_timestamp: Time?
+    end
+
     class AlarmHistoryItem
       include Smithy::Schema::Structure
 
       def initialize: (
         ?alarm_name: String,
+        ?alarm_contributor_id: String,
         ?alarm_type: String,
         ?timestamp: Time,
         ?history_item_type: String,
         ?history_summary: String,
         ?history_data: String,
+        ?alarm_contributor_attributes: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor alarm_name: String?
+      attr_accessor alarm_contributor_id: String?
       attr_accessor alarm_type: String?
       attr_accessor timestamp: Time?
       attr_accessor history_item_type: String?
       attr_accessor history_summary: String?
       attr_accessor history_data: String?
+      attr_accessor alarm_contributor_attributes: Hash[String, String]?
     end
 
     module AlarmType
@@ -345,11 +366,38 @@ module Aws::CloudWatch
 
     end
 
+    class DescribeAlarmContributorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAlarmContributorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_contributors: Array[Types::AlarmContributor],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_contributors: Array[Types::AlarmContributor]?
+      attr_accessor next_token: String?
+    end
+
     class DescribeAlarmHistoryInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?alarm_name: String,
+        ?alarm_contributor_id: String,
         ?alarm_types: Array[String],
         ?history_item_type: String,
         ?start_date: Time,
@@ -361,6 +409,7 @@ module Aws::CloudWatch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor alarm_name: String?
+      attr_accessor alarm_contributor_id: String?
       attr_accessor alarm_types: Array[String]?
       attr_accessor history_item_type: String?
       attr_accessor start_date: Time?
@@ -861,6 +910,8 @@ module Aws::CloudWatch
       ConfigurationUpdate: String
       StateUpdate: String
       Action: String
+      AlarmContributorStateUpdate: String
+      AlarmContributorAction: String
     end
 
     class InsightRule

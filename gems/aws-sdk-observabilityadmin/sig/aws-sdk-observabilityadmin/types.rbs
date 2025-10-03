@@ -14,6 +14,84 @@ module Aws::ObservabilityAdmin
       attr_accessor amzn_error_type: String?
     end
 
+    module CentralizationFailureReason
+      TRUSTED_ACCESS_NOT_ENABLED: String
+      DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class CentralizationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::CentralizationRuleSource,
+        ?destination: Types::CentralizationRuleDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::CentralizationRuleSource?
+      attr_accessor destination: Types::CentralizationRuleDestination?
+    end
+
+    class CentralizationRuleDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?account: String,
+        ?destination_logs_configuration: Types::DestinationLogsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor account: String?
+      attr_accessor destination_logs_configuration: Types::DestinationLogsConfiguration?
+    end
+
+    class CentralizationRuleSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+        ?scope: String,
+        ?source_logs_configuration: Types::SourceLogsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+      attr_accessor scope: String?
+      attr_accessor source_logs_configuration: Types::SourceLogsConfiguration?
+    end
+
+    class CentralizationRuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?creator_account_id: String,
+        ?created_time_stamp: Integer,
+        ?created_region: String,
+        ?last_update_time_stamp: Integer,
+        ?rule_health: String,
+        ?failure_reason: String,
+        ?destination_account_id: String,
+        ?destination_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor created_region: String?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor rule_health: String?
+      attr_accessor failure_reason: String?
+      attr_accessor destination_account_id: String?
+      attr_accessor destination_region: String?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -23,6 +101,32 @@ module Aws::ObservabilityAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class CreateCentralizationRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule: Types::CentralizationRule,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule: Types::CentralizationRule?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCentralizationRuleForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
     end
 
     class CreateTelemetryRuleForOrganizationInput
@@ -77,6 +181,17 @@ module Aws::ObservabilityAdmin
       attr_accessor rule_arn: String?
     end
 
+    class DeleteCentralizationRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
     class DeleteTelemetryRuleForOrganizationInput
       include Smithy::Schema::Structure
 
@@ -99,8 +214,74 @@ module Aws::ObservabilityAdmin
       attr_accessor rule_identifier: String?
     end
 
+    class DestinationLogsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logs_encryption_configuration: Types::LogsEncryptionConfiguration,
+        ?backup_configuration: Types::LogsBackupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logs_encryption_configuration: Types::LogsEncryptionConfiguration?
+      attr_accessor backup_configuration: Types::LogsBackupConfiguration?
+    end
+
     module DestinationType
       CLOUDWATCH_LOGS: String
+    end
+
+    module EncryptedLogGroupStrategy
+      ALLOW: String
+      SKIP: String
+    end
+
+    module EncryptionConflictResolutionStrategy
+      ALLOW: String
+      SKIP: String
+    end
+
+    module EncryptionStrategy
+      CUSTOMER_MANAGED: String
+      AWS_OWNED: String
+    end
+
+    class GetCentralizationRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class GetCentralizationRuleForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?creator_account_id: String,
+        ?created_time_stamp: Integer,
+        ?created_region: String,
+        ?last_update_time_stamp: Integer,
+        ?rule_health: String,
+        ?failure_reason: String,
+        ?centralization_rule: Types::CentralizationRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor creator_account_id: String?
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor created_region: String?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor rule_health: String?
+      attr_accessor failure_reason: String?
+      attr_accessor centralization_rule: Types::CentralizationRule?
     end
 
     class GetTelemetryEvaluationStatusForOrganizationOutput
@@ -200,6 +381,36 @@ module Aws::ObservabilityAdmin
 
       attr_accessor message: String?
       attr_accessor amzn_error_type: String?
+    end
+
+    class ListCentralizationRulesForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name_prefix: String,
+        ?all_regions: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name_prefix: String?
+      attr_accessor all_regions: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCentralizationRulesForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?centralization_rule_summaries: Array[Types::CentralizationRuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor centralization_rule_summaries: Array[Types::CentralizationRuleSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListResourceTelemetryForOrganizationInput
@@ -354,6 +565,34 @@ module Aws::ObservabilityAdmin
       attr_accessor next_token: String?
     end
 
+    class LogsBackupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class LogsEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_strategy: String,
+        ?kms_key_arn: String,
+        ?encryption_conflict_resolution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_strategy: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor encryption_conflict_resolution_strategy: String?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -371,6 +610,12 @@ module Aws::ObservabilityAdmin
       AWS_LAMDBA_FUNCTION: String
     end
 
+    module RuleHealth
+      HEALTHY: String
+      UNHEALTHY: String
+      PROVISIONING: String
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -382,6 +627,19 @@ module Aws::ObservabilityAdmin
 
       attr_accessor message: String?
       attr_accessor amzn_error_type: String?
+    end
+
+    class SourceLogsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_selection_criteria: String,
+        ?encrypted_log_group_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_selection_criteria: String?
+      attr_accessor encrypted_log_group_strategy: String?
     end
 
     module Status
@@ -519,6 +777,30 @@ module Aws::ObservabilityAdmin
 
       attr_accessor resource_arn: String?
       attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateCentralizationRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?rule: Types::CentralizationRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor rule: Types::CentralizationRule?
+    end
+
+    class UpdateCentralizationRuleForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
     end
 
     class UpdateTelemetryRuleForOrganizationInput

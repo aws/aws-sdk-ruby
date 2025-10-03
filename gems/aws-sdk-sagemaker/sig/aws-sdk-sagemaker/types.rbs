@@ -503,6 +503,7 @@ module Aws::SageMaker
       ML_TRN1N_32XLARGE: String
       ML_P5_48XLARGE: String
       ML_P5EN_48XLARGE: String
+      ML_P6_B200_48XLARGE: String
       ML_M6I_LARGE: String
       ML_M6I_XLARGE: String
       ML_M6I_2XLARGE: String
@@ -10581,6 +10582,7 @@ module Aws::SageMaker
         ?docker_settings: Types::DockerSettings,
         ?amazon_q_settings: Types::AmazonQSettings,
         ?unified_studio_settings: Types::UnifiedStudioSettings,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10591,6 +10593,7 @@ module Aws::SageMaker
       attr_accessor docker_settings: Types::DockerSettings?
       attr_accessor amazon_q_settings: Types::AmazonQSettings?
       attr_accessor unified_studio_settings: Types::UnifiedStudioSettings?
+      attr_accessor ip_address_type: String?
     end
 
     class DomainSettingsForUpdate
@@ -10604,6 +10607,7 @@ module Aws::SageMaker
         ?docker_settings: Types::DockerSettings,
         ?amazon_q_settings: Types::AmazonQSettings,
         ?unified_studio_settings: Types::UnifiedStudioSettings,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10614,6 +10618,7 @@ module Aws::SageMaker
       attr_accessor docker_settings: Types::DockerSettings?
       attr_accessor amazon_q_settings: Types::AmazonQSettings?
       attr_accessor unified_studio_settings: Types::UnifiedStudioSettings?
+      attr_accessor ip_address_type: String?
     end
 
     module DomainStatus

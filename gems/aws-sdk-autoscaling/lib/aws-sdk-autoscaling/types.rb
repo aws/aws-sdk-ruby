@@ -650,8 +650,15 @@ module Aws::AutoScaling
     # @!attribute auto_scaling_group_name
     #   <p>The name of the Auto Scaling group.</p>
     #   @return [String]
+    # @!attribute wait_for_transitioning_instances
+    #   <p>When cancelling an instance refresh, this indicates whether to wait for in-flight launches 
+    #               and terminations to complete. The default is true.</p>
+    #            <p>When set to false, Amazon EC2 Auto Scaling cancels the instance refresh 
+    #               without waiting for any pending launches or terminations to complete.</p>
+    #   @return [Boolean]
     class CancelInstanceRefreshInput < Struct.new(
       :auto_scaling_group_name,
+      :wait_for_transitioning_instances,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

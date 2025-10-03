@@ -133,6 +133,17 @@ module Aws::Budgets
       FORECAST: String
     end
 
+    class BillingViewHealthStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class Budget
       include Smithy::Schema::Structure
 
@@ -1009,6 +1020,7 @@ module Aws::Budgets
       BILLING_VIEW_NO_ACCESS: String
       BILLING_VIEW_UNHEALTHY: String
       FILTER_INVALID: String
+      MULTI_YEAR_HISTORICAL_DATA_DISABLED: String
     end
 
     module HealthStatusValue
@@ -1341,6 +1353,7 @@ module Aws::Budgets
       MONTHLY: String
       QUARTERLY: String
       ANNUALLY: String
+      CUSTOM: String
     end
 
     class UntagResourceRequest

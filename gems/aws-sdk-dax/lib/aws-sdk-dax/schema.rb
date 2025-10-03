@@ -62,6 +62,8 @@ module Aws::DAX
     KeyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.dax#KeyList', name: 'KeyList')
     ListTagsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#ListTagsRequest', name: 'ListTagsRequest')
     ListTagsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#ListTagsResponse', name: 'ListTagsResponse')
+    NetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.dax#NetworkType', name: 'NetworkType')
+    NetworkTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.dax#NetworkTypeList', name: 'NetworkTypeList')
     Node = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#Node', name: 'Node')
     NodeIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.dax#NodeIdentifierList', name: 'NodeIdentifierList')
     NodeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.dax#NodeList', name: 'NodeList')
@@ -107,6 +109,7 @@ module Aws::DAX
     SubnetIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.dax#SubnetIdentifierList', name: 'SubnetIdentifierList')
     SubnetInUse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#SubnetInUse', name: 'SubnetInUse', traits: {"aws.protocols#awsQueryError" => {"code" => "SubnetInUse", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     SubnetList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.dax#SubnetList', name: 'SubnetList')
+    SubnetNotAllowedFault = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#SubnetNotAllowedFault', name: 'SubnetNotAllowedFault', traits: {"aws.protocols#awsQueryError" => {"code" => "SubnetNotAllowedFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     SubnetQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#SubnetQuotaExceededFault', name: 'SubnetQuotaExceededFault', traits: {"aws.protocols#awsQueryError" => {"code" => "SubnetQuotaExceededFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     TStamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.dax#TStamp', name: 'TStamp')
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.dax#Tag', name: 'Tag')
@@ -145,6 +148,7 @@ module Aws::DAX
     Cluster.add_member(:parameter_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParameterGroupStatus, location_name: 'ParameterGroup'))
     Cluster.add_member(:sse_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEDescription, location_name: 'SSEDescription'))
     Cluster.add_member(:cluster_endpoint_encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterEndpointEncryptionType, location_name: 'ClusterEndpointEncryptionType'))
+    Cluster.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     Cluster.type = Types::Cluster
     ClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     ClusterAlreadyExistsFault.type = Types::ClusterAlreadyExistsFault
@@ -170,6 +174,7 @@ module Aws::DAX
     CreateClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
     CreateClusterRequest.add_member(:sse_specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSESpecification, location_name: 'SSESpecification'))
     CreateClusterRequest.add_member(:cluster_endpoint_encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClusterEndpointEncryptionType, location_name: 'ClusterEndpointEncryptionType'))
+    CreateClusterRequest.add_member(:network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType, location_name: 'NetworkType'))
     CreateClusterRequest.type = Types::CreateClusterRequest
     CreateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Cluster, location_name: 'Cluster'))
     CreateClusterResponse.type = Types::CreateClusterResponse
@@ -291,6 +296,10 @@ module Aws::DAX
     ListTagsResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
     ListTagsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NextToken'))
     ListTagsResponse.type = Types::ListTagsResponse
+    NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4', traits: {"smithy.api#enumValue" => "ipv4"}))
+    NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV6', traits: {"smithy.api#enumValue" => "ipv6"}))
+    NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DUAL_STACK', traits: {"smithy.api#enumValue" => "dual_stack"}))
+    NetworkTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkType)
     Node.add_member(:node_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'NodeId'))
     Node.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Endpoint, location_name: 'Endpoint'))
     Node.add_member(:node_create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: 'NodeCreateTime'))
@@ -372,11 +381,13 @@ module Aws::DAX
     SourceType.add_member(:subnet_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUBNET_GROUP', traits: {"smithy.api#enumValue" => "SUBNET_GROUP"}))
     Subnet.add_member(:subnet_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SubnetIdentifier'))
     Subnet.add_member(:subnet_availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SubnetAvailabilityZone'))
+    Subnet.add_member(:supported_network_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: 'SupportedNetworkTypes'))
     Subnet.type = Types::Subnet
     SubnetGroup.add_member(:subnet_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SubnetGroupName'))
     SubnetGroup.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Description'))
     SubnetGroup.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'VpcId'))
     SubnetGroup.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetList, location_name: 'Subnets'))
+    SubnetGroup.add_member(:supported_network_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: 'SupportedNetworkTypes'))
     SubnetGroup.type = Types::SubnetGroup
     SubnetGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     SubnetGroupAlreadyExistsFault.type = Types::SubnetGroupAlreadyExistsFault
@@ -392,6 +403,8 @@ module Aws::DAX
     SubnetInUse.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     SubnetInUse.type = Types::SubnetInUse
     SubnetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subnet)
+    SubnetNotAllowedFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
+    SubnetNotAllowedFault.type = Types::SubnetNotAllowedFault
     SubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     SubnetQuotaExceededFault.type = Types::SubnetQuotaExceededFault
     Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Key'))
@@ -483,6 +496,7 @@ module Aws::DAX
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupAlreadyExistsFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupQuotaExceededFault)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
         operation.traits = {}
       end)
@@ -700,6 +714,7 @@ module Aws::DAX
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetInUse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
         operation.traits = {}
       end)

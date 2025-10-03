@@ -3,6 +3,7 @@ module Aws::CustomerProfiles
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    ActionType: EnumShape
     AddProfileKeyRequest: StructureShape
     AddProfileKeyResponse: StructureShape
     AdditionalSearchKey: StructureShape
@@ -183,6 +184,8 @@ module Aws::CustomerProfiles
     GetIntegrationResponse: StructureShape
     GetMatchesRequest: StructureShape
     GetMatchesResponse: StructureShape
+    GetProfileHistoryRecordRequest: StructureShape
+    GetProfileHistoryRecordResponse: StructureShape
     GetProfileObjectTypeRequest: StructureShape
     GetProfileObjectTypeResponse: StructureShape
     GetProfileObjectTypeTemplateRequest: StructureShape
@@ -253,6 +256,8 @@ module Aws::CustomerProfiles
     ListObjectTypeAttributesList: ListShape
     ListObjectTypeAttributesRequest: StructureShape
     ListObjectTypeAttributesResponse: StructureShape
+    ListProfileHistoryRecordsRequest: StructureShape
+    ListProfileHistoryRecordsResponse: StructureShape
     ListProfileObjectTypeItem: StructureShape
     ListProfileObjectTypeTemplateItem: StructureShape
     ListProfileObjectTypeTemplatesRequest: StructureShape
@@ -314,6 +319,8 @@ module Aws::CustomerProfiles
     ProfileAttributeValuesResponse: StructureShape
     ProfileAttributes: StructureShape
     ProfileDimension: StructureShape
+    ProfileHistoryRecord: StructureShape
+    ProfileHistoryRecords: ListShape
     ProfileId: StringShape
     ProfileIdList: ListShape
     ProfileIdToBeMergedList: ListShape

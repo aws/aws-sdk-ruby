@@ -13,7 +13,7 @@ Aws.const_set('ChimeSDKMeetings', Module.new) unless Aws.const_defined?('ChimeSD
 # @title Amazon Chime SDK Meetings
 # <p>The Amazon Chime SDK meetings APIs in this section allow software developers to create Amazon Chime SDK meetings, set the Amazon Web Services Regions for meetings, create and manage users, and send and 
 #             receive meeting notifications. For more information about the meeting APIs, see 
-#             <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html">Amazon Chime SDK meetings</a>.</p>
+#             <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html">Amazon Chime SDK meetings</a>.</p>
 module Aws::ChimeSDKMeetings
   VERSION = '2.0.0.pre0'
 end

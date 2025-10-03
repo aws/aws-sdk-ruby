@@ -98,8 +98,7 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request conflicts with the current state of the resource. Updating or deleting a
-    #    resource can cause an inconsistent state.</p>
+    # <p>The request conflicts with the current state of the resource. Updating or deleting a resource can cause an inconsistent state.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute resource_id
@@ -118,17 +117,13 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute resource_identifier
     #   <p>The ID or ARN of the service network or service.</p>
     #   @return [String]
     # @!attribute destination_arn
-    #   <p>The Amazon Resource Name (ARN) of the destination. The supported destination types are
-    #      CloudWatch Log groups, Kinesis Data Firehose delivery streams, and Amazon S3 buckets.</p>
+    #   <p>The Amazon Resource Name (ARN) of the destination. The supported destination types are CloudWatch Log groups, Kinesis Data Firehose delivery streams, and Amazon S3 buckets.</p>
     #   @return [String]
     # @!attribute service_network_log_type
     #   <p>The type of log that monitors your Amazon VPC Lattice service networks.</p>
@@ -181,25 +176,19 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the listener. A listener name must be unique within a service. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the listener. A listener name must be unique within a service. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     #   @return [String]
     # @!attribute protocol
     #   <p>The listener protocol.</p>
     #   @return [String]
     # @!attribute port
-    #   <p>The listener port. You can specify a value from 1 to 65535. For HTTP, the default is 80. For
-    #      HTTPS, the default is 443.</p>
+    #   <p>The listener port. You can specify a value from 1 to 65535. For HTTP, the default is 80. For HTTPS, the default is 443.</p>
     #   @return [Integer]
     # @!attribute default_action
-    #   <p>The action for the default rule. Each listener has a default rule. The default rule is used
-    #      if no other rules match.</p>
+    #   <p>The action for the default rule. Each listener has a default rule. The default rule is used if no other rules match.</p>
     #   @return [Types::RuleAction]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the listener.</p>
@@ -256,59 +245,31 @@ module Aws::VPCLattice
     end
 
     # @!attribute name
-    #   <p>The name of the resource configuration. The name must be unique within the account. The
-    #      valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last
-    #      character, or immediately after another hyphen.</p>
+    #   <p>The name of the resource configuration. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of resource configuration.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>SINGLE</code> - A single resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GROUP</code> - A group of resources. You must create a group resource
-    #        configuration before you create a child resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ARN</code> - An Amazon Web Services resource.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>
     #   @return [String]
     # @!attribute port_ranges
-    #   <p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration 
-    #      (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>
+    #   <p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>
     #   @return [Array<String>]
     # @!attribute protocol
     #   <p>(SINGLE, GROUP) The protocol accepted by the resource configuration.</p>
     #   @return [String]
     # @!attribute resource_gateway_identifier
-    #   <p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration.
-    #      For a child resource configuration, this value is inherited from the parent resource configuration.</p>
+    #   <p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_group_identifier
-    #   <p>(CHILD) The ID or ARN of the parent resource configuration (type is <code>GROUP</code>). 
-    #      This is used to associate a child resource configuration with a group resource configuration.</p>
+    #   <p>(CHILD) The ID or ARN of the parent resource configuration of type <code>GROUP</code>. This is used to associate a child resource configuration with a group resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_definition
-    #   <p>(SINGLE, CHILD, ARN) The resource configuration.</p>
+    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>
     #   @return [Types::ResourceConfigurationDefinition]
     # @!attribute allow_association_to_shareable_service_network
-    #   <p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with 
-    #      a sharable service network. The default is false.</p>
+    #   <p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with a sharable service network. The default is false.</p>
     #   @return [Boolean]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the resource configuration.</p>
@@ -342,10 +303,10 @@ module Aws::VPCLattice
     #   <p>The ID of the resource gateway associated with the resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_group_id
-    #   <p>The ID of the parent resource configuration (type is GROUP).</p>
+    #   <p>The ID of the parent resource configuration of type <code>GROUP</code>.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of resource configuration.</p>
+    #   <p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>
     #   @return [String]
     # @!attribute port_ranges
     #   <p>The port range.</p>
@@ -357,11 +318,10 @@ module Aws::VPCLattice
     #   <p>The current status of the resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_definition
-    #   <p>The resource configuration.</p>
+    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>
     #   @return [Types::ResourceConfigurationDefinition]
     # @!attribute allow_association_to_shareable_service_network
-    #   <p>Specifies whether the resource configuration can be associated with a sharable service
-    #      network.</p>
+    #   <p>Specifies whether the resource configuration can be associated with a sharable service network.</p>
     #   @return [Boolean]
     # @!attribute created_at
     #   <p>The date and time that the resource configuration was created, in ISO-8601 format.</p>
@@ -389,10 +349,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the resource gateway.</p>
@@ -404,12 +361,14 @@ module Aws::VPCLattice
     #   <p>The IDs of the VPC subnets in which to create the resource gateway.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>The IDs of the security groups to apply to the resource gateway. The security groups must be
-    #      in the same VPC.</p>
+    #   <p>The IDs of the security groups to apply to the resource gateway. The security groups must be in the same VPC.</p>
     #   @return [Array<String>]
     # @!attribute ip_address_type
-    #   <p>The type of IP address used by the resource gateway.</p>
+    #   <p>A resource gateway can have IPv4, IPv6 or dualstack addresses. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource, as described here: </p> <ul> <li> <p> <b>IPv4</b>Assign IPv4 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have IPv4 address ranges, and the resource also has an IPv4 address.</p> </li> <li> <p> <b>IPv6</b>Assign IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets are IPv6 only subnets, and the resource also has an IPv6 address.</p> </li> <li> <p> <b>Dualstack</b>Assign both IPv4 and IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have both IPv4 and IPv6 address ranges, and the resource either has an IPv4 or IPv6 address.</p> </li> </ul> <p>The IP address type of the resource gateway is independent of the IP address type of the client or the VPC endpoint through which the resource is accessed.</p>
     #   @return [String]
+    # @!attribute ipv4_addresses_per_eni
+    #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
+    #   @return [Integer]
     # @!attribute tags
     #   <p>The tags for the resource gateway.</p>
     #   @return [Hash<String, String>]
@@ -420,6 +379,7 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
+      :ipv4_addresses_per_eni,
       :tags,
       keyword_init: true
     )
@@ -450,6 +410,9 @@ module Aws::VPCLattice
     # @!attribute ip_address_type
     #   <p>The type of IP address for the resource gateway.</p>
     #   @return [String]
+    # @!attribute ipv4_addresses_per_eni
+    #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
+    #   @return [Integer]
     class CreateResourceGatewayResponse < Struct.new(
       :name,
       :id,
@@ -459,6 +422,7 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
+      :ipv4_addresses_per_eni,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -471,24 +435,19 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the listener.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     #   @return [String]
     # @!attribute match
     #   <p>The rule match.</p>
     #   @return [Types::RuleMatch]
     # @!attribute priority
-    #   <p>The priority assigned to the rule. Each rule for a specific listener must have a unique
-    #      priority. The lower the priority number the higher the priority.</p>
+    #   <p>The priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.</p>
     #   @return [Integer]
     # @!attribute action
     #   <p>The action for the default rule.</p>
     #   @return [Types::RuleAction]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the rule.</p>
@@ -517,13 +476,10 @@ module Aws::VPCLattice
     #   <p>The name of the rule.</p>
     #   @return [String]
     # @!attribute match
-    #   <p>The rule match. The <code>RuleMatch</code> must be an <code>HttpMatch</code>. This means
-    #      that the rule should be an exact match on HTTP constraints which are made up of the HTTP method,
-    #      path, and header.</p>
+    #   <p>The rule match. The <code>RuleMatch</code> must be an <code>HttpMatch</code>. This means that the rule should be an exact match on HTTP constraints which are made up of the HTTP method, path, and header.</p>
     #   @return [Types::RuleMatch]
     # @!attribute priority
-    #   <p>The priority assigned to the rule. The lower the priority number the higher the
-    #      priority.</p>
+    #   <p>The priority assigned to the rule. The lower the priority number the higher the priority.</p>
     #   @return [Integer]
     # @!attribute action
     #   <p>The rule action.</p>
@@ -541,14 +497,10 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the service.</p>
@@ -560,17 +512,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     #   @return [String]
     # @!attribute auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     class CreateServiceInput < Struct.new(
       :client_token,
@@ -585,27 +527,13 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the service network. The name must be unique to the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the service network. The name must be unique to the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     #   @return [String]
     # @!attribute auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the service network.</p>
@@ -651,10 +579,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute resource_configuration_identifier
     #   <p>The ID of the resource configuration to associate with the service network.</p>
@@ -663,7 +588,7 @@ module Aws::VPCLattice
     #   <p>The ID of the service network to associate with the resource configuration.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>The tags for the association.</p>
+    #   <p>A key-value pair to associate with a resource.</p>
     #   @return [Hash<String, String>]
     class CreateServiceNetworkResourceAssociationRequest < Struct.new(
       :client_token,
@@ -698,10 +623,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute service_identifier
     #   <p>The ID or ARN of the service.</p>
@@ -753,10 +675,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute service_network_identifier
     #   <p>The ID or ARN of the service network. You must use an ARN if the resources are in different accounts.</p>
@@ -765,11 +684,7 @@ module Aws::VPCLattice
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>The IDs of the security groups. Security groups aren't added by default. You can add a
-    #      security group to apply network level controls to control which resources in a VPC are allowed to
-    #      access the service network and its services. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Control traffic to
-    #       resources using security groups</a> in the <i>Amazon VPC User
-    #      Guide</i>.</p>
+    #   <p>The IDs of the security groups. Security groups aren't added by default. You can add a security group to apply network level controls to control which resources in a VPC are allowed to access the service network and its services. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Control traffic to resources using security groups</a> in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>The tags for the association.</p>
@@ -827,8 +742,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. If the status is <code>CREATE_FAILED</code>, you must delete and recreate the
-    #      service.</p>
+    #   <p>The status. If the status is <code>CREATE_FAILED</code>, you must delete and recreate the service.</p>
     #   @return [String]
     # @!attribute auth_type
     #   <p>The type of IAM policy.</p>
@@ -851,8 +765,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute name
-    #   <p>The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     #   @return [String]
     # @!attribute type
     #   <p>The type of target group.</p>
@@ -861,10 +774,7 @@ module Aws::VPCLattice
     #   <p>The target group configuration.</p>
     #   @return [Types::TargetGroupConfig]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the target group.</p>
@@ -896,9 +806,7 @@ module Aws::VPCLattice
     #   <p>The target group configuration.</p>
     #   @return [Types::TargetGroupConfig]
     # @!attribute status
-    #   <p>The status. You can retry the operation if the status is <code>CREATE_FAILED</code>.
-    #      However, if you retry it while the status is <code>CREATE_IN_PROGRESS</code>, there is no change
-    #      in the status.</p>
+    #   <p>The status. You can retry the operation if the status is <code>CREATE_FAILED</code>. However, if you retry it while the status is <code>CREATE_IN_PROGRESS</code>, there is no change in the status.</p>
     #   @return [String]
     class CreateTargetGroupOutput < Struct.new(
       :id,
@@ -1000,8 +908,7 @@ module Aws::VPCLattice
     #   <p>The ID of the resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource configuration associated with the VPC
-    #      endpoint of type resource.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource configuration associated with the VPC endpoint of type resource.</p>
     #   @return [String]
     # @!attribute vpc_endpoint_id
     #   <p>The ID of the resource VPC endpoint that is associated with the resource configuration.</p>
@@ -1157,9 +1064,7 @@ module Aws::VPCLattice
     #   <p>The ID of the association.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.
-    #      However, if you retry it when the status is <code>DELETE_IN_PROGRESS</code>, there is no change
-    #      in the status.</p>
+    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it when the status is <code>DELETE_IN_PROGRESS</code>, there is no change in the status.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
@@ -1187,9 +1092,7 @@ module Aws::VPCLattice
     #   <p>The ID of the association.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.
-    #      However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change
-    #      in the status.</p>
+    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change in the status.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
@@ -1213,9 +1116,7 @@ module Aws::VPCLattice
     #   <p>The name of the service.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.
-    #      However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't
-    #      change.</p>
+    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't change.</p>
     #   @return [String]
     class DeleteServiceOutput < Struct.new(
       :id,
@@ -1244,9 +1145,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the target group.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.
-    #      However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't
-    #      change.</p>
+    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, the status doesn't change.</p>
     #   @return [String]
     class DeleteTargetGroupOutput < Struct.new(
       :id,
@@ -1305,7 +1204,7 @@ module Aws::VPCLattice
     #   <p>The domain name of the resource.</p>
     #   @return [String]
     # @!attribute ip_address_type
-    #   <p>The type of IP address.</p>
+    #   <p>The type of IP address. Dualstack is currently not supported.</p>
     #   @return [String]
     class DnsResource < Struct.new(
       :domain_name,
@@ -1317,7 +1216,7 @@ module Aws::VPCLattice
 
     # <p>Describes an action that returns a custom HTTP response.</p>
     # @!attribute status_code
-    #   <p>The HTTP response code.</p>
+    #   <p>The HTTP response code. Only <code>404</code> and <code>500</code> status codes are supported.</p>
     #   @return [Integer]
     class FixedResponseAction < Struct.new(
       :status_code,
@@ -1326,17 +1225,9 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a forward action. You can use forward actions to route requests to one or more
-    #    target groups.
-    #    </p>
+    # <p>Describes a forward action. You can use forward actions to route requests to one or more target groups. </p>
     # @!attribute target_groups
-    #   <p>The target groups. Traffic matching the rule is forwarded to the specified target groups.
-    #      With forward actions, you can assign a weight that controls the prioritization and selection of
-    #      each target group. This means that requests are distributed to individual target groups based on
-    #      their weights. For example, if two target groups have the same weight, each target group receives
-    #      half of the traffic.</p>
-    #            <p>The default value is 1. This means that if only one target group is provided, there is no
-    #      need to set the weight; 100% of the traffic goes to that target group.</p>
+    #   <p>The target groups. Traffic matching the rule is forwarded to the specified target groups. With forward actions, you can assign a weight that controls the prioritization and selection of each target group. This means that requests are distributed to individual target groups based on their weights. For example, if two target groups have the same weight, each target group receives half of the traffic.</p> <p>The default value is 1. This means that if only one target group is provided, there is no need to set the weight; 100% of the traffic goes to that target group.</p>
     #   @return [Array<Types::WeightedTargetGroup>]
     class ForwardAction < Struct.new(
       :target_groups,
@@ -1407,10 +1298,7 @@ module Aws::VPCLattice
     #   <p>The auth policy.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>The state of the auth policy. The auth policy is only active when the auth type is set to
-    #       <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions
-    #      are made based on this policy and the client's IAM policy. If the auth type is <code>NONE</code>,
-    #      then any auth policy that you provide remains inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
+    #   <p>The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the auth type is <code>NONE</code>, then any auth policy that you provide remains inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     #   @return [String]
     # @!attribute created_at
     #   <p>The date and time that the auth policy was created, in ISO-8601 format.</p>
@@ -1514,29 +1402,10 @@ module Aws::VPCLattice
     #   <p>The ID of the group resource configuration.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of resource configuration.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>SINGLE</code> - A single resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GROUP</code> - A group of resources.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ARN</code> - An Amazon Web Services resource.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>
     #   @return [String]
     # @!attribute allow_association_to_shareable_service_network
-    #   <p>Specifies whether the resource configuration is associated with a sharable service
-    #      network.</p>
+    #   <p>Specifies whether the resource configuration is associated with a sharable service network.</p>
     #   @return [Boolean]
     # @!attribute port_ranges
     #   <p>The TCP port ranges that a consumer can use to access a resource configuration. You can separate port ranges with a comma. Example: 1-65535 or 1,2,22-30</p>
@@ -1621,6 +1490,9 @@ module Aws::VPCLattice
     # @!attribute ip_address_type
     #   <p>The type of IP address for the resource gateway.</p>
     #   @return [String]
+    # @!attribute ipv4_addresses_per_eni
+    #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
+    #   @return [Integer]
     # @!attribute created_at
     #   <p>The date and time that the resource gateway was created, in ISO-8601 format.</p>
     #   @return [Time]
@@ -1636,6 +1508,7 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
+      :ipv4_addresses_per_eni,
       :created_at,
       :last_updated_at,
       keyword_init: true
@@ -2127,8 +2000,7 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the constraints for a header match. Matches incoming requests with rule based on
-    #    request header value before applying rule action.</p>
+    # <p>Describes the constraints for a header match. Matches incoming requests with rule based on request header value before applying rule action.</p>
     # @!attribute name
     #   <p>The name of the header.</p>
     #   @return [String]
@@ -2172,45 +2044,33 @@ module Aws::VPCLattice
       class Unknown < HeaderMatchType; end
     end
 
-    # <p>Describes the health check configuration of a target group. Health check configurations
-    #    aren't used for target groups of type <code>LAMBDA</code> or <code>ALB</code>.</p>
+    # <p>Describes the health check configuration of a target group. Health check configurations aren't used for target groups of type <code>LAMBDA</code> or <code>ALB</code>.</p>
     # @!attribute enabled
     #   <p>Indicates whether health checking is enabled.</p>
     #   @return [Boolean]
     # @!attribute protocol
-    #   <p>The protocol used when performing health checks on targets. The possible protocols are
-    #       <code>HTTP</code> and <code>HTTPS</code>. The default is <code>HTTP</code>.</p>
+    #   <p>The protocol used when performing health checks on targets. The possible protocols are <code>HTTP</code> and <code>HTTPS</code>. The default is <code>HTTP</code>.</p>
     #   @return [String]
     # @!attribute protocol_version
-    #   <p>The protocol version used when performing health checks on targets. The possible protocol
-    #      versions are <code>HTTP1</code> and <code>HTTP2</code>.</p>
+    #   <p>The protocol version used when performing health checks on targets. The possible protocol versions are <code>HTTP1</code> and <code>HTTP2</code>.</p>
     #   @return [String]
     # @!attribute port
-    #   <p>The port used when performing health checks on targets. The default setting is the port that
-    #      a target receives traffic on.</p>
+    #   <p>The port used when performing health checks on targets. The default setting is the port that a target receives traffic on.</p>
     #   @return [Integer]
     # @!attribute path
-    #   <p>The destination for health checks on the targets. If the protocol version is
-    #       <code>HTTP/1.1</code> or <code>HTTP/2</code>, specify a valid URI (for example,
-    #       <code>/path?query</code>). The default path is <code>/</code>. Health checks are not supported
-    #      if the protocol version is <code>gRPC</code>, however, you can choose <code>HTTP/1.1</code> or
-    #       <code>HTTP/2</code> and specify a valid URI.</p>
+    #   <p>The destination for health checks on the targets. If the protocol version is <code>HTTP/1.1</code> or <code>HTTP/2</code>, specify a valid URI (for example, <code>/path?query</code>). The default path is <code>/</code>. Health checks are not supported if the protocol version is <code>gRPC</code>, however, you can choose <code>HTTP/1.1</code> or <code>HTTP/2</code> and specify a valid URI.</p>
     #   @return [String]
     # @!attribute health_check_interval_seconds
-    #   <p>The approximate amount of time, in seconds, between health checks of an individual target.
-    #      The range is 5–300 seconds. The default is 30 seconds.</p>
+    #   <p>The approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.</p>
     #   @return [Integer]
     # @!attribute health_check_timeout_seconds
-    #   <p>The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is
-    #      1–120 seconds. The default is 5 seconds.</p>
+    #   <p>The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.</p>
     #   @return [Integer]
     # @!attribute healthy_threshold_count
-    #   <p>The number of consecutive successful health checks required before considering an unhealthy
-    #      target healthy. The range is 2–10. The default is 5.</p>
+    #   <p>The number of consecutive successful health checks required before considering an unhealthy target healthy. The range is 2–10. The default is 5.</p>
     #   @return [Integer]
     # @!attribute unhealthy_threshold_count
-    #   <p>The number of consecutive failed health checks required before considering a target
-    #      unhealthy. The range is 2–10. The default is 2.</p>
+    #   <p>The number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.</p>
     #   @return [Integer]
     # @!attribute matcher
     #   <p>The codes to use when checking for a successful response from a target.</p>
@@ -2239,8 +2099,7 @@ module Aws::VPCLattice
     #   <p>The path match.</p>
     #   @return [Types::PathMatch]
     # @!attribute header_matches
-    #   <p>The header matches. Matches incoming requests with rule based on request header value before
-    #      applying rule action.</p>
+    #   <p>The header matches. Matches incoming requests with rule based on request header value before applying rule action.</p>
     #   @return [Array<Types::HeaderMatch>]
     class HttpMatch < Struct.new(
       :method,
@@ -2344,7 +2203,7 @@ module Aws::VPCLattice
     #   <p>The ID of the resource gateway for the resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_group_identifier
-    #   <p>The ID of the group resource configuration.</p>
+    #   <p>The ID of the resource configuration of type <code>Group</code>.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum page size.</p>
@@ -2488,7 +2347,7 @@ module Aws::VPCLattice
     #   <p>The ID of the service network.</p>
     #   @return [String]
     # @!attribute resource_configuration_identifier
-    #   <p>The ID of the resource configurationk.</p>
+    #   <p>The ID of the resource configuration.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum page size.</p>
@@ -2496,11 +2355,15 @@ module Aws::VPCLattice
     # @!attribute next_token
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
     #   @return [String]
+    # @!attribute include_children
+    #   <p>Include service network resource associations of the child resource configuration with the grouped resource configuration.</p> <p>The type is boolean and the default value is false.</p>
+    #   @return [Boolean]
     class ListServiceNetworkResourceAssociationsRequest < Struct.new(
       :service_network_identifier,
       :resource_configuration_identifier,
       :max_results,
       :next_token,
+      :include_children,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2807,8 +2670,7 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the codes to use when checking for a successful response from a target for health
-    #    checks.</p>
+    # <p>Describes the codes to use when checking for a successful response from a target for health checks.</p>
     # @!attribute http_code
     #   <p>The HTTP code to use when checking for a successful response from a target.</p>
     #   @return [String]
@@ -2823,8 +2685,7 @@ module Aws::VPCLattice
       class Unknown < Matcher; end
     end
 
-    # <p>Describes the conditions that can be applied when matching a path for incoming
-    #    requests.</p>
+    # <p>Describes the conditions that can be applied when matching a path for incoming requests.</p>
     # @!attribute match
     #   <p>The type of path match.</p>
     #   @return [Types::PathMatchType]
@@ -2839,8 +2700,7 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a path match type. Each rule can include only one of the following types of
-    #    paths.</p>
+    # <p>Describes a path match type. Each rule can include only one of the following types of paths.</p>
     # @!attribute exact
     #   <p>An exact match of the path.</p>
     #   @return [String]
@@ -2861,8 +2721,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute resource_identifier
-    #   <p>The ID or ARN of the service network or service for which the policy
-    #      is created.</p>
+    #   <p>The ID or ARN of the service network or service for which the policy is created.</p>
     #   @return [String]
     # @!attribute policy
     #   <p>The auth policy. The policy string in JSON must not contain newlines or blank lines.</p>
@@ -2879,10 +2738,7 @@ module Aws::VPCLattice
     #   <p>The auth policy. The policy string in JSON must not contain newlines or blank lines.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>The state of the auth policy. The auth policy is only active when the auth type is set to
-    #       <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions
-    #      are made based on this policy and the client's IAM policy. If the Auth type is <code>NONE</code>,
-    #      then, any auth policy that you provide remains inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
+    #   <p>The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is <code>NONE</code>, then, any auth policy that you provide remains inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     #   @return [String]
     class PutAuthPolicyOutput < Struct.new(
       :policy,
@@ -2893,12 +2749,10 @@ module Aws::VPCLattice
     end
 
     # @!attribute resource_arn
-    #   <p>The ID or ARN of the service network or service for which the policy
-    #      is created.</p>
+    #   <p>The ID or ARN of the service network or service for which the policy is created.</p>
     #   @return [String]
     # @!attribute policy
-    #   <p>An IAM policy. The policy string in JSON must not contain newlines or blank
-    #      lines.</p>
+    #   <p>An IAM policy. The policy string in JSON must not contain newlines or blank lines.</p>
     #   @return [String]
     class PutResourcePolicyInput < Struct.new(
       :resource_arn,
@@ -2984,25 +2838,7 @@ module Aws::VPCLattice
     #   <p>The ID of the group resource configuration.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of resource configuration.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>SINGLE</code> - A single resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GROUP</code> - A group of resources.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ARN</code> - An Amazon Web Services resource.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the resource configuration.</p>
@@ -3100,6 +2936,9 @@ module Aws::VPCLattice
     # @!attribute ip_address_type
     #   <p>The type of IP address used by the resource gateway.</p>
     #   @return [String]
+    # @!attribute ipv4_addresses_per_eni
+    #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
+    #   @return [Integer]
     # @!attribute created_at
     #   <p>The date and time that the VPC endpoint association was created, in ISO-8601 format.</p>
     #   @return [Time]
@@ -3115,6 +2954,7 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
+      :ipv4_addresses_per_eni,
       :created_at,
       :last_updated_at,
       keyword_init: true
@@ -3142,8 +2982,7 @@ module Aws::VPCLattice
 
     # <p>Describes the action for a rule.</p>
     # @!attribute forward
-    #   <p>The forward action. Traffic that matches the rule is forwarded to the specified target
-    #      groups.</p>
+    #   <p>The forward action. Traffic that matches the rule is forwarded to the specified target groups.</p>
     #   @return [Types::ForwardAction]
     # @!attribute fixed_response
     #   <p>The fixed response action. The rule returns a custom HTTP response.</p>
@@ -3331,7 +3170,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the service network associated with the resource configuration.</p>
+    #   <p>The status of the service network’s association with the resource configuration. If the deletion fails, try to delete again. </p>
     #   @return [String]
     # @!attribute created_by
     #   <p>The account that created the association.</p>
@@ -3395,7 +3234,7 @@ module Aws::VPCLattice
     #   <p>The ID of the association.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. If the deletion fails, try to delete again.</p>
+    #   <p>The status of the service network’s association with the service. If the deletion fails, try to delete again.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
@@ -3633,14 +3472,10 @@ module Aws::VPCLattice
 
     # <p>Describes a target.</p>
     # @!attribute id
-    #   <p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance
-    #      ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type
-    #      is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is
-    #       <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>
+    #   <p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>
     #   @return [String]
     # @!attribute port
-    #   <p>The port on which the target is listening. For HTTP, the default is 80. For HTTPS, the
-    #      default is 443.</p>
+    #   <p>The port on which the target is listening. For HTTP, the default is 80. For HTTPS, the default is 443.</p>
     #   @return [Integer]
     class Target < Struct.new(
       :id,
@@ -3652,14 +3487,10 @@ module Aws::VPCLattice
 
     # <p>Describes a target failure.</p>
     # @!attribute id
-    #   <p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance
-    #      ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type
-    #      is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is
-    #       <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>
+    #   <p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target group type is <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>
     #   @return [String]
     # @!attribute port
-    #   <p>The port on which the target is listening. This parameter doesn't apply if the target is a
-    #      Lambda function.</p>
+    #   <p>The port on which the target is listening. This parameter doesn't apply if the target is a Lambda function.</p>
     #   @return [Integer]
     # @!attribute failure_code
     #   <p>The failure code.</p>
@@ -3677,35 +3508,27 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the configuration of a target group.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html">Target groups</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Describes the configuration of a target group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html">Target groups</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @!attribute port
-    #   <p>The port on which the targets are listening. For HTTP, the default is 80. For HTTPS, the
-    #      default is 443. Not supported if the target group type is <code>LAMBDA</code>.</p>
+    #   <p>The port on which the targets are listening. For HTTP, the default is 80. For HTTPS, the default is 443. Not supported if the target group type is <code>LAMBDA</code>.</p>
     #   @return [Integer]
     # @!attribute protocol
-    #   <p>The protocol to use for routing traffic to the targets. The default is the protocol of the
-    #      target group. Not supported if the target group type is <code>LAMBDA</code>.</p>
+    #   <p>The protocol to use for routing traffic to the targets. The default is the protocol of the target group. Not supported if the target group type is <code>LAMBDA</code>.</p>
     #   @return [String]
     # @!attribute protocol_version
-    #   <p>The protocol version. The default is <code>HTTP1</code>. Not supported if the target group
-    #      type is <code>LAMBDA</code>.</p>
+    #   <p>The protocol version. The default is <code>HTTP1</code>. Not supported if the target group type is <code>LAMBDA</code>.</p>
     #   @return [String]
     # @!attribute ip_address_type
-    #   <p>The type of IP address used for the target group. Supported only if the target group type is
-    #       <code>IP</code>. The default is <code>IPV4</code>.</p>
+    #   <p>The type of IP address used for the target group. Supported only if the target group type is <code>IP</code>. The default is <code>IPV4</code>.</p>
     #   @return [String]
     # @!attribute vpc_identifier
     #   <p>The ID of the VPC. Not supported if the target group type is <code>LAMBDA</code>.</p>
     #   @return [String]
     # @!attribute health_check
-    #   <p>The health check configuration. Not supported if the target group type is
-    #       <code>LAMBDA</code> or <code>ALB</code>.</p>
+    #   <p>The health check configuration. Not supported if the target group type is <code>LAMBDA</code> or <code>ALB</code>.</p>
     #   @return [Types::HealthCheckConfig]
     # @!attribute lambda_event_structure_version
-    #   <p>The version of the event structure that your Lambda function receives. Supported only if the
-    #      target group type is <code>LAMBDA</code>. The default is <code>V1</code>.</p>
+    #   <p>The version of the event structure that your Lambda function receives. Supported only if the target group type is <code>LAMBDA</code>. The default is <code>V1</code>.</p>
     #   @return [String]
     class TargetGroupConfig < Struct.new(
       :port,
@@ -3720,9 +3543,7 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Summary information about a target group.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html">Target groups</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Summary information about a target group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html">Target groups</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @!attribute id
     #   <p>The ID of the target group.</p>
     #   @return [String]
@@ -3745,9 +3566,7 @@ module Aws::VPCLattice
     #   <p>The protocol of the target group.</p>
     #   @return [String]
     # @!attribute ip_address_type
-    #   <p>The type of IP address used for the target group. The possible values are <code>IPV4</code>
-    #      and <code>IPV6</code>. This is an optional parameter. If not specified, the default is
-    #       <code>IPV4</code>.</p>
+    #   <p>The type of IP address used for the target group. The possible values are <code>IPV4</code> and <code>IPV6</code>. This is an optional parameter. If not specified, the default is <code>IPV4</code>.</p>
     #   @return [String]
     # @!attribute vpc_identifier
     #   <p>The ID of the VPC of the target group.</p>
@@ -3762,8 +3581,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Names (ARNs) of the service.</p>
     #   @return [Array<String>]
     # @!attribute lambda_event_structure_version
-    #   <p>The version of the event structure that your Lambda function receives. Supported only if the
-    #      target group type is <code>LAMBDA</code>.</p>
+    #   <p>The version of the event structure that your Lambda function receives. Supported only if the target group type is <code>LAMBDA</code>.</p>
     #   @return [String]
     class TargetGroupSummary < Struct.new(
       :id,
@@ -3786,44 +3604,13 @@ module Aws::VPCLattice
 
     # <p>Summary information about a target.</p>
     # @!attribute id
-    #   <p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance
-    #      ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type
-    #      is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target type is
-    #       <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>
+    #   <p>The ID of the target. If the target group type is <code>INSTANCE</code>, this is an instance ID. If the target group type is <code>IP</code>, this is an IP address. If the target group type is <code>LAMBDA</code>, this is the ARN of a Lambda function. If the target type is <code>ALB</code>, this is the ARN of an Application Load Balancer.</p>
     #   @return [String]
     # @!attribute port
     #   <p>The port on which the target is listening.</p>
     #   @return [Integer]
     # @!attribute status
-    #   <p>The status of the target.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>DRAINING</code>: The target is being deregistered. No new connections are sent to
-    #        this target while current connections are being drained. The default draining time is 5
-    #        minutes.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>UNAVAILABLE</code>: Health checks are unavailable for the target group.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>HEALTHY</code>: The target is healthy.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>UNHEALTHY</code>: The target is unhealthy.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INITIAL</code>: Initial health checks on the target are being performed.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>UNUSED</code>: Target group is not used in a service.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The status of the target.</p> <ul> <li> <p> <code>DRAINING</code>: The target is being deregistered. No new connections are sent to this target while current connections are being drained. The default draining time is 5 minutes.</p> </li> <li> <p> <code>UNAVAILABLE</code>: Health checks are unavailable for the target group.</p> </li> <li> <p> <code>HEALTHY</code>: The target is healthy.</p> </li> <li> <p> <code>UNHEALTHY</code>: The target is unhealthy.</p> </li> <li> <p> <code>INITIAL</code>: Initial health checks on the target are being performed.</p> </li> <li> <p> <code>UNUSED</code>: Target group is not used in a service.</p> </li> </ul>
     #   @return [String]
     # @!attribute reason_code
     #   <p>The code for why the target status is what it is.</p>
@@ -3980,7 +3767,7 @@ module Aws::VPCLattice
     #   <p>The ID of the resource configuration.</p>
     #   @return [String]
     # @!attribute resource_configuration_definition
-    #   <p>The resource configuration.</p>
+    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>
     #   @return [Types::ResourceConfigurationDefinition]
     # @!attribute allow_association_to_shareable_service_network
     #   <p>Indicates whether to add the resource configuration to service networks that are shared with other accounts.</p>
@@ -4014,25 +3801,7 @@ module Aws::VPCLattice
     #   <p>The ID of the group resource configuration.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of resource configuration.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>SINGLE</code> - A single resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GROUP</code> - A group of resources.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ARN</code> - An Amazon Web Services resource.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>
     #   @return [String]
     # @!attribute port_ranges
     #   <p>The TCP port ranges that a consumer can use to access a resource configuration. You can separate port ranges with a comma. Example: 1-65535 or 1,2,22-30</p>
@@ -4189,17 +3958,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     #   @return [String]
     # @!attribute auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     class UpdateServiceInput < Struct.new(
       :service_identifier,
@@ -4214,17 +3973,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service network.</p>
     #   @return [String]
     # @!attribute auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     #   @return [String]
     class UpdateServiceNetworkInput < Struct.new(
       :service_network_identifier,
@@ -4277,9 +4026,7 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the association.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>.
-    #      However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change
-    #      in the status.</p>
+    #   <p>The status. You can retry the operation if the status is <code>DELETE_FAILED</code>. However, if you retry it while the status is <code>DELETE_IN_PROGRESS</code>, there is no change in the status.</p>
     #   @return [String]
     # @!attribute created_by
     #   <p>The account that created the association.</p>
@@ -4372,8 +4119,7 @@ module Aws::VPCLattice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The input does not satisfy the constraints specified by an Amazon Web Services
-    #    service.</p>
+    # <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute reason
@@ -4411,12 +4157,7 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the target group.</p>
     #   @return [String]
     # @!attribute weight
-    #   <p>Only required if you specify multiple target groups for a forward action. The weight
-    #      determines how requests are distributed to the target group. For example, if you specify two
-    #      target groups, each with a weight of 10, each target group receives half the requests. If you
-    #      specify two target groups, one with a weight of 10 and the other with a weight of 20, the target
-    #      group with a weight of 20 receives twice as many requests as the other target group. If there's
-    #      only one target group specified, then the default value is 100.</p>
+    #   <p>Only required if you specify multiple target groups for a forward action. The weight determines how requests are distributed to the target group. For example, if you specify two target groups, each with a weight of 10, each target group receives half the requests. If you specify two target groups, one with a weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. If there's only one target group specified, then the default value is 100.</p>
     #   @return [Integer]
     class WeightedTargetGroup < Struct.new(
       :target_group_identifier,

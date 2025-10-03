@@ -9,15 +9,30 @@ module Aws::ObservabilityAdmin
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     AccountIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#AccountIdentifier', name: 'AccountIdentifier', traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[0-9]{12}$"})
     AccountIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.observabilityadmin#AccountIdentifiers', name: 'AccountIdentifiers', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
+    CentralizationFailureReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#CentralizationFailureReason', name: 'CentralizationFailureReason')
+    CentralizationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CentralizationRule', name: 'CentralizationRule')
+    CentralizationRuleDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CentralizationRuleDestination', name: 'CentralizationRuleDestination')
+    CentralizationRuleSource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CentralizationRuleSource', name: 'CentralizationRuleSource')
+    CentralizationRuleSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.observabilityadmin#CentralizationRuleSummaries', name: 'CentralizationRuleSummaries')
+    CentralizationRuleSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CentralizationRuleSummary', name: 'CentralizationRuleSummary')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    CreateCentralizationRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganizationInput', name: 'CreateCentralizationRuleForOrganizationInput')
+    CreateCentralizationRuleForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganizationOutput', name: 'CreateCentralizationRuleForOrganizationOutput')
     CreateTelemetryRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CreateTelemetryRuleForOrganizationInput', name: 'CreateTelemetryRuleForOrganizationInput')
     CreateTelemetryRuleForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CreateTelemetryRuleForOrganizationOutput', name: 'CreateTelemetryRuleForOrganizationOutput')
     CreateTelemetryRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CreateTelemetryRuleInput', name: 'CreateTelemetryRuleInput')
     CreateTelemetryRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#CreateTelemetryRuleOutput', name: 'CreateTelemetryRuleOutput')
+    DeleteCentralizationRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganizationInput', name: 'DeleteCentralizationRuleForOrganizationInput')
     DeleteTelemetryRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#DeleteTelemetryRuleForOrganizationInput', name: 'DeleteTelemetryRuleForOrganizationInput')
     DeleteTelemetryRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#DeleteTelemetryRuleInput', name: 'DeleteTelemetryRuleInput')
+    DestinationLogsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#DestinationLogsConfiguration', name: 'DestinationLogsConfiguration')
     DestinationType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#DestinationType', name: 'DestinationType')
+    EncryptedLogGroupStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#EncryptedLogGroupStrategy', name: 'EncryptedLogGroupStrategy')
+    EncryptionConflictResolutionStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#EncryptionConflictResolutionStrategy', name: 'EncryptionConflictResolutionStrategy')
+    EncryptionStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#EncryptionStrategy', name: 'EncryptionStrategy')
     FailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#FailureReason', name: 'FailureReason')
+    GetCentralizationRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganizationInput', name: 'GetCentralizationRuleForOrganizationInput')
+    GetCentralizationRuleForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganizationOutput', name: 'GetCentralizationRuleForOrganizationOutput')
     GetTelemetryEvaluationStatusForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusForOrganizationOutput', name: 'GetTelemetryEvaluationStatusForOrganizationOutput')
     GetTelemetryEvaluationStatusOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusOutput', name: 'GetTelemetryEvaluationStatusOutput')
     GetTelemetryRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetTelemetryRuleForOrganizationInput', name: 'GetTelemetryRuleForOrganizationInput')
@@ -25,6 +40,9 @@ module Aws::ObservabilityAdmin
     GetTelemetryRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetTelemetryRuleInput', name: 'GetTelemetryRuleInput')
     GetTelemetryRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#GetTelemetryRuleOutput', name: 'GetTelemetryRuleOutput')
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    ListCentralizationRulesForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationInput', name: 'ListCentralizationRulesForOrganizationInput')
+    ListCentralizationRulesForOrganizationMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationMaxResults', name: 'ListCentralizationRulesForOrganizationMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListCentralizationRulesForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganizationOutput', name: 'ListCentralizationRulesForOrganizationOutput')
     ListResourceTelemetryForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationInput', name: 'ListResourceTelemetryForOrganizationInput')
     ListResourceTelemetryForOrganizationMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationMaxResults', name: 'ListResourceTelemetryForOrganizationMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     ListResourceTelemetryForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationOutput', name: 'ListResourceTelemetryForOrganizationOutput')
@@ -39,19 +57,27 @@ module Aws::ObservabilityAdmin
     ListTelemetryRulesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ListTelemetryRulesInput', name: 'ListTelemetryRulesInput')
     ListTelemetryRulesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.observabilityadmin#ListTelemetryRulesMaxResults', name: 'ListTelemetryRulesMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ListTelemetryRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ListTelemetryRulesOutput', name: 'ListTelemetryRulesOutput')
+    LogsBackupConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#LogsBackupConfiguration', name: 'LogsBackupConfiguration')
+    LogsEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#LogsEncryptionConfiguration', name: 'LogsEncryptionConfiguration')
+    LogsFilterString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#LogsFilterString', name: 'LogsFilterString', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#NextToken', name: 'NextToken')
     OrganizationUnitIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#OrganizationUnitIdentifier', name: 'OrganizationUnitIdentifier', traits: {"smithy.api#pattern" => "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$"})
     OrganizationUnitIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.observabilityadmin#OrganizationUnitIdentifiers', name: 'OrganizationUnitIdentifiers', traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#uniqueItems" => {}})
-    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#ResourceArn', name: 'ResourceArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^arn:aws:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"})
+    Region = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#Region', name: 'Region', traits: {"smithy.api#length" => {"min" => 1}})
+    Regions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.observabilityadmin#Regions', name: 'Regions', traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#uniqueItems" => {}})
+    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#ResourceArn', name: 'ResourceArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"})
     ResourceIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#ResourceIdentifier', name: 'ResourceIdentifier')
     ResourceIdentifierPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#ResourceIdentifierPrefix', name: 'ResourceIdentifierPrefix', traits: {"smithy.api#length" => {"min" => 3, "max" => 768}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#ResourceType', name: 'ResourceType')
     ResourceTypes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.observabilityadmin#ResourceTypes', name: 'ResourceTypes', traits: {"smithy.api#length" => {"min" => 1, "max" => 9}, "smithy.api#uniqueItems" => {}})
     RetentionPeriodInDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.observabilityadmin#RetentionPeriodInDays', name: 'RetentionPeriodInDays', traits: {"smithy.api#range" => {"min" => 1, "max" => 3653}})
+    RuleHealth = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#RuleHealth', name: 'RuleHealth')
     RuleIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#RuleIdentifier', name: 'RuleIdentifier', traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}})
-    RuleName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#RuleName', name: 'RuleName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9A-Za-z-]+$"})
+    RuleName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#RuleName', name: 'RuleName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9A-Za-z-_.#/]+$"})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    SourceFilterString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#SourceFilterString', name: 'SourceFilterString', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
+    SourceLogsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#SourceLogsConfiguration', name: 'SourceLogsConfiguration')
     Status = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#Status', name: 'Status')
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.observabilityadmin#TagKey', name: 'TagKey', traits: {"aws.api#data" => "tagging", "smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.observabilityadmin#TagKeyList', name: 'TagKeyList', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
@@ -70,6 +96,8 @@ module Aws::ObservabilityAdmin
     TelemetryType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.observabilityadmin#TelemetryType', name: 'TelemetryType')
     TooManyRequestsException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#TooManyRequestsException', name: 'TooManyRequestsException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#UntagResourceInput', name: 'UntagResourceInput')
+    UpdateCentralizationRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganizationInput', name: 'UpdateCentralizationRuleForOrganizationInput')
+    UpdateCentralizationRuleForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganizationOutput', name: 'UpdateCentralizationRuleForOrganizationOutput')
     UpdateTelemetryRuleForOrganizationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#UpdateTelemetryRuleForOrganizationInput', name: 'UpdateTelemetryRuleForOrganizationInput')
     UpdateTelemetryRuleForOrganizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#UpdateTelemetryRuleForOrganizationOutput', name: 'UpdateTelemetryRuleForOrganizationOutput')
     UpdateTelemetryRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.observabilityadmin#UpdateTelemetryRuleInput', name: 'UpdateTelemetryRuleInput')
@@ -81,8 +109,40 @@ module Aws::ObservabilityAdmin
     AccessDeniedException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'amznErrorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     AccessDeniedException.type = Types::AccessDeniedException
     AccountIdentifiers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdentifier)
+    CentralizationFailureReason.add_member(:trusted_access_not_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TRUSTED_ACCESS_NOT_ENABLED', traits: {"smithy.api#enumValue" => "TRUSTED_ACCESS_NOT_ENABLED"}))
+    CentralizationFailureReason.add_member(:destination_account_not_in_organization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION', traits: {"smithy.api#enumValue" => "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION"}))
+    CentralizationFailureReason.add_member(:internal_server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INTERNAL_SERVER_ERROR', traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
+    CentralizationRule.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRuleSource, location_name: 'Source', traits: {"smithy.api#required" => {}}))
+    CentralizationRule.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRuleDestination, location_name: 'Destination', traits: {"smithy.api#required" => {}}))
+    CentralizationRule.type = Types::CentralizationRule
+    CentralizationRuleDestination.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'Region', traits: {"smithy.api#required" => {}}))
+    CentralizationRuleDestination.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdentifier, location_name: 'Account'))
+    CentralizationRuleDestination.add_member(:destination_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationLogsConfiguration, location_name: 'DestinationLogsConfiguration'))
+    CentralizationRuleDestination.type = Types::CentralizationRuleDestination
+    CentralizationRuleSource.add_member(:regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Regions, location_name: 'Regions', traits: {"smithy.api#required" => {}}))
+    CentralizationRuleSource.add_member(:scope, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceFilterString, location_name: 'Scope'))
+    CentralizationRuleSource.add_member(:source_logs_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceLogsConfiguration, location_name: 'SourceLogsConfiguration'))
+    CentralizationRuleSource.type = Types::CentralizationRuleSource
+    CentralizationRuleSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRuleSummary)
+    CentralizationRuleSummary.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: 'RuleName'))
+    CentralizationRuleSummary.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'RuleArn'))
+    CentralizationRuleSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'CreatorAccountId'))
+    CentralizationRuleSummary.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: 'CreatedTimeStamp'))
+    CentralizationRuleSummary.add_member(:created_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'CreatedRegion'))
+    CentralizationRuleSummary.add_member(:last_update_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: 'LastUpdateTimeStamp'))
+    CentralizationRuleSummary.add_member(:rule_health, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleHealth, location_name: 'RuleHealth'))
+    CentralizationRuleSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationFailureReason, location_name: 'FailureReason'))
+    CentralizationRuleSummary.add_member(:destination_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'DestinationAccountId'))
+    CentralizationRuleSummary.add_member(:destination_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'DestinationRegion'))
+    CentralizationRuleSummary.type = Types::CentralizationRuleSummary
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     ConflictException.type = Types::ConflictException
+    CreateCentralizationRuleForOrganizationInput.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: 'RuleName', traits: {"smithy.api#required" => {}}))
+    CreateCentralizationRuleForOrganizationInput.add_member(:rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRule, location_name: 'Rule', traits: {"smithy.api#required" => {}}))
+    CreateCentralizationRuleForOrganizationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapInput, location_name: 'Tags'))
+    CreateCentralizationRuleForOrganizationInput.type = Types::CreateCentralizationRuleForOrganizationInput
+    CreateCentralizationRuleForOrganizationOutput.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'RuleArn'))
+    CreateCentralizationRuleForOrganizationOutput.type = Types::CreateCentralizationRuleForOrganizationOutput
     CreateTelemetryRuleForOrganizationInput.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: 'RuleName', traits: {"smithy.api#required" => {}}))
     CreateTelemetryRuleForOrganizationInput.add_member(:rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelemetryRule, location_name: 'Rule', traits: {"smithy.api#required" => {}}))
     CreateTelemetryRuleForOrganizationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMapInput, location_name: 'Tags'))
@@ -95,11 +155,34 @@ module Aws::ObservabilityAdmin
     CreateTelemetryRuleInput.type = Types::CreateTelemetryRuleInput
     CreateTelemetryRuleOutput.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'RuleArn'))
     CreateTelemetryRuleOutput.type = Types::CreateTelemetryRuleOutput
+    DeleteCentralizationRuleForOrganizationInput.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: 'RuleIdentifier', traits: {"smithy.api#required" => {}}))
+    DeleteCentralizationRuleForOrganizationInput.type = Types::DeleteCentralizationRuleForOrganizationInput
     DeleteTelemetryRuleForOrganizationInput.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: 'RuleIdentifier', traits: {"smithy.api#required" => {}}))
     DeleteTelemetryRuleForOrganizationInput.type = Types::DeleteTelemetryRuleForOrganizationInput
     DeleteTelemetryRuleInput.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: 'RuleIdentifier', traits: {"smithy.api#required" => {}}))
     DeleteTelemetryRuleInput.type = Types::DeleteTelemetryRuleInput
+    DestinationLogsConfiguration.add_member(:logs_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogsEncryptionConfiguration, location_name: 'LogsEncryptionConfiguration'))
+    DestinationLogsConfiguration.add_member(:backup_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogsBackupConfiguration, location_name: 'BackupConfiguration'))
+    DestinationLogsConfiguration.type = Types::DestinationLogsConfiguration
     DestinationType.add_member(:cloudwatch_logs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CLOUDWATCH_LOGS', traits: {"smithy.api#enumValue" => "cloud-watch-logs"}))
+    EncryptedLogGroupStrategy.add_member(:allow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALLOW', traits: {"smithy.api#enumValue" => "ALLOW"}))
+    EncryptedLogGroupStrategy.add_member(:skip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SKIP', traits: {"smithy.api#enumValue" => "SKIP"}))
+    EncryptionConflictResolutionStrategy.add_member(:allow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALLOW', traits: {"smithy.api#enumValue" => "ALLOW"}))
+    EncryptionConflictResolutionStrategy.add_member(:skip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SKIP', traits: {"smithy.api#enumValue" => "SKIP"}))
+    EncryptionStrategy.add_member(:customer_managed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CUSTOMER_MANAGED', traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED"}))
+    EncryptionStrategy.add_member(:aws_owned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_OWNED', traits: {"smithy.api#enumValue" => "AWS_OWNED"}))
+    GetCentralizationRuleForOrganizationInput.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: 'RuleIdentifier', traits: {"smithy.api#required" => {}}))
+    GetCentralizationRuleForOrganizationInput.type = Types::GetCentralizationRuleForOrganizationInput
+    GetCentralizationRuleForOrganizationOutput.add_member(:rule_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleName, location_name: 'RuleName'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'RuleArn'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:creator_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'CreatorAccountId'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: 'CreatedTimeStamp'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:created_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'CreatedRegion'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:last_update_time_stamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Long, location_name: 'LastUpdateTimeStamp'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:rule_health, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleHealth, location_name: 'RuleHealth'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationFailureReason, location_name: 'FailureReason'))
+    GetCentralizationRuleForOrganizationOutput.add_member(:centralization_rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRule, location_name: 'CentralizationRule'))
+    GetCentralizationRuleForOrganizationOutput.type = Types::GetCentralizationRuleForOrganizationOutput
     GetTelemetryEvaluationStatusForOrganizationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Status, location_name: 'Status'))
     GetTelemetryEvaluationStatusForOrganizationOutput.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailureReason, location_name: 'FailureReason'))
     GetTelemetryEvaluationStatusForOrganizationOutput.type = Types::GetTelemetryEvaluationStatusForOrganizationOutput
@@ -125,6 +208,14 @@ module Aws::ObservabilityAdmin
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     InternalServerException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'amznErrorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InternalServerException.type = Types::InternalServerException
+    ListCentralizationRulesForOrganizationInput.add_member(:rule_name_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'RuleNamePrefix', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
+    ListCentralizationRulesForOrganizationInput.add_member(:all_regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'AllRegions'))
+    ListCentralizationRulesForOrganizationInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCentralizationRulesForOrganizationMaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => nil}))
+    ListCentralizationRulesForOrganizationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListCentralizationRulesForOrganizationInput.type = Types::ListCentralizationRulesForOrganizationInput
+    ListCentralizationRulesForOrganizationOutput.add_member(:centralization_rule_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRuleSummaries, location_name: 'CentralizationRuleSummaries'))
+    ListCentralizationRulesForOrganizationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListCentralizationRulesForOrganizationOutput.type = Types::ListCentralizationRulesForOrganizationOutput
     ListResourceTelemetryForOrganizationInput.add_member(:account_identifiers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountIdentifiers, location_name: 'AccountIdentifiers'))
     ListResourceTelemetryForOrganizationInput.add_member(:resource_identifier_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceIdentifierPrefix, location_name: 'ResourceIdentifierPrefix'))
     ListResourceTelemetryForOrganizationInput.add_member(:resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypes, location_name: 'ResourceTypes'))
@@ -166,16 +257,30 @@ module Aws::ObservabilityAdmin
     ListTelemetryRulesOutput.add_member(:telemetry_rule_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelemetryRuleSummaries, location_name: 'TelemetryRuleSummaries'))
     ListTelemetryRulesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     ListTelemetryRulesOutput.type = Types::ListTelemetryRulesOutput
+    LogsBackupConfiguration.add_member(:region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'Region', traits: {"smithy.api#required" => {}}))
+    LogsBackupConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'KmsKeyArn'))
+    LogsBackupConfiguration.type = Types::LogsBackupConfiguration
+    LogsEncryptionConfiguration.add_member(:encryption_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionStrategy, location_name: 'EncryptionStrategy', traits: {"smithy.api#required" => {}}))
+    LogsEncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'KmsKeyArn'))
+    LogsEncryptionConfiguration.add_member(:encryption_conflict_resolution_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConflictResolutionStrategy, location_name: 'EncryptionConflictResolutionStrategy'))
+    LogsEncryptionConfiguration.type = Types::LogsEncryptionConfiguration
     OrganizationUnitIdentifiers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationUnitIdentifier)
+    Regions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceType.add_member(:aws_ec2_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_EC2_INSTANCE', traits: {"smithy.api#enumValue" => "AWS::EC2::Instance"}))
     ResourceType.add_member(:aws_ec2_vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_EC2_VPC', traits: {"smithy.api#enumValue" => "AWS::EC2::VPC"}))
     ResourceType.add_member(:aws_lamdba_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_LAMDBA_FUNCTION', traits: {"smithy.api#enumValue" => "AWS::Lambda::Function"}))
     ResourceTypes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceType)
+    RuleHealth.add_member(:healthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HEALTHY', traits: {"smithy.api#enumValue" => "Healthy"}))
+    RuleHealth.add_member(:unhealthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNHEALTHY', traits: {"smithy.api#enumValue" => "Unhealthy"}))
+    RuleHealth.add_member(:provisioning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PROVISIONING', traits: {"smithy.api#enumValue" => "Provisioning"}))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     ServiceQuotaExceededException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'amznErrorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    SourceLogsConfiguration.add_member(:log_group_selection_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogsFilterString, location_name: 'LogGroupSelectionCriteria', traits: {"smithy.api#required" => {}}))
+    SourceLogsConfiguration.add_member(:encrypted_log_group_strategy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedLogGroupStrategy, location_name: 'EncryptedLogGroupStrategy', traits: {"smithy.api#required" => {}}))
+    SourceLogsConfiguration.type = Types::SourceLogsConfiguration
     Status.add_member(:not_started, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NOT_STARTED', traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
     Status.add_member(:starting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STARTING', traits: {"smithy.api#enumValue" => "STARTING"}))
     Status.add_member(:failed_start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED_START', traits: {"smithy.api#enumValue" => "FAILED_START"}))
@@ -231,6 +336,11 @@ module Aws::ObservabilityAdmin
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'ResourceARN', traits: {"smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'TagKeys', traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
+    UpdateCentralizationRuleForOrganizationInput.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: 'RuleIdentifier', traits: {"smithy.api#required" => {}}))
+    UpdateCentralizationRuleForOrganizationInput.add_member(:rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CentralizationRule, location_name: 'Rule', traits: {"smithy.api#required" => {}}))
+    UpdateCentralizationRuleForOrganizationInput.type = Types::UpdateCentralizationRuleForOrganizationInput
+    UpdateCentralizationRuleForOrganizationOutput.add_member(:rule_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'RuleArn'))
+    UpdateCentralizationRuleForOrganizationOutput.type = Types::UpdateCentralizationRuleForOrganizationOutput
     UpdateTelemetryRuleForOrganizationInput.add_member(:rule_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleIdentifier, location_name: 'RuleIdentifier', traits: {"smithy.api#required" => {}}))
     UpdateTelemetryRuleForOrganizationInput.add_member(:rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TelemetryRule, location_name: 'Rule', traits: {"smithy.api#required" => {}}))
     UpdateTelemetryRuleForOrganizationInput.type = Types::UpdateTelemetryRuleForOrganizationInput
@@ -253,6 +363,19 @@ module Aws::ObservabilityAdmin
       service.name = "ObservabilityAdmin"
       service.version = "2018-05-10"
       service.traits = {"aws.api#service" => {"sdkId" => "ObservabilityAdmin", "arnNamespace" => "observabilityadmin"}, "aws.auth#sigv4" => {"name" => "observabilityadmin"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "CloudWatch Observability Admin Service"}
+      service.add_operation(:create_centralization_rule_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganization"
+        operation.name = "CreateCentralizationRuleForOrganization"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCentralizationRuleForOrganizationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCentralizationRuleForOrganizationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateCentralizationRuleForOrganization"}}
+      end)
       service.add_operation(:create_telemetry_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.observabilityadmin#CreateTelemetryRule"
         operation.name = "CreateTelemetryRule"
@@ -279,6 +402,18 @@ module Aws::ObservabilityAdmin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateTelemetryRuleForOrganization"}}
       end)
+      service.add_operation(:delete_centralization_rule_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganization"
+        operation.name = "DeleteCentralizationRuleForOrganization"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteCentralizationRuleForOrganizationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteCentralizationRuleForOrganization"}}
+      end)
       service.add_operation(:delete_telemetry_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.observabilityadmin#DeleteTelemetryRule"
         operation.name = "DeleteTelemetryRule"
@@ -302,6 +437,18 @@ module Aws::ObservabilityAdmin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteTelemetryRuleForOrganization"}}
+      end)
+      service.add_operation(:get_centralization_rule_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganization"
+        operation.name = "GetCentralizationRuleForOrganization"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCentralizationRuleForOrganizationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCentralizationRuleForOrganizationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetCentralizationRuleForOrganization"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_telemetry_evaluation_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatus"
@@ -348,6 +495,18 @@ module Aws::ObservabilityAdmin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetTelemetryRuleForOrganization"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:list_centralization_rules_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganization"
+        operation.name = "ListCentralizationRulesForOrganization"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCentralizationRulesForOrganizationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCentralizationRulesForOrganizationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListCentralizationRulesForOrganization"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListCentralizationRulesForOrganization.new
+      end)
       service.add_operation(:list_resource_telemetry, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.observabilityadmin#ListResourceTelemetry"
         operation.name = "ListResourceTelemetry"
@@ -382,7 +541,7 @@ module Aws::ObservabilityAdmin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListTagsForResource"}}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListTagsForResource"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_telemetry_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.observabilityadmin#ListTelemetryRules"
@@ -476,6 +635,19 @@ module Aws::ObservabilityAdmin
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UntagResource"}}
+      end)
+      service.add_operation(:update_centralization_rule_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganization"
+        operation.name = "UpdateCentralizationRuleForOrganization"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCentralizationRuleForOrganizationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateCentralizationRuleForOrganizationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateCentralizationRuleForOrganization"}}
       end)
       service.add_operation(:update_telemetry_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.observabilityadmin#UpdateTelemetryRule"

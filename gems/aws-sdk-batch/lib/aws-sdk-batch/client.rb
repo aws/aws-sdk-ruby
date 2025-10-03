@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Batch
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Batch
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Batch
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Batch::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Batch::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -247,9 +252,6 @@ module Aws::Batch
     #       your managed compute environment. You can optionally set a maximum price so that Spot
     #       Instances only launch when the Spot Instance price is less than a specified percentage of the
     #       On-Demand price.</p>
-    #          <note>
-    #             <p>Multi-node parallel jobs aren't supported on Spot Instances.</p>
-    #          </note>
     #          <p>In an unmanaged compute environment, you can manage your own EC2 compute resources and
     #       have flexibility with how you configure your compute resources. For example, you can use
     #       custom AMIs. However, you must verify that each of your AMIs meet the Amazon ECS container instance
@@ -260,75 +262,8 @@ module Aws::Batch
     #       cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html">Launching an Amazon ECS container
     #         instance</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #          <note>
-    #             <p>To create a compute environment that uses EKS resources, the caller must have
-    #         permissions to call <code>eks:DescribeCluster</code>.</p>
-    #          </note>
-    #          <note>
     #             <p>Batch doesn't automatically upgrade the AMIs in a compute environment after it's
-    #         created. For example, it also doesn't update the AMIs in your compute environment when a
-    #         newer version of the Amazon ECS optimized AMI is available. You're responsible for the management
-    #         of the guest operating system. This includes any updates and security patches. You're also
-    #         responsible for any additional application software or utilities that you install on the
-    #         compute resources. There are two ways to use a new AMI for your Batch jobs. The original
-    #         method is to complete these steps:</p>
-    #             <ol>
-    #                <li>
-    #                   <p>Create a new compute environment with the new AMI.</p>
-    #                </li>
-    #                <li>
-    #                   <p>Add the compute environment to an existing job queue.</p>
-    #                </li>
-    #                <li>
-    #                   <p>Remove the earlier compute environment from your job queue.</p>
-    #                </li>
-    #                <li>
-    #                   <p>Delete the earlier compute environment.</p>
-    #                </li>
-    #             </ol>
-    #             <p>In April 2022, Batch added enhanced support for updating compute environments. For
-    #         more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a>.
-    #         To use the enhanced updating of compute environments to update AMIs, follow these
-    #         rules:</p>
-    #             <ul>
-    #                <li>
-    #                   <p>Either don't set the service role (<code>serviceRole</code>) parameter or set it to
-    #             the <b>AWSBatchServiceRole</b> service-linked role.</p>
-    #                </li>
-    #                <li>
-    #                   <p>Set the allocation strategy (<code>allocationStrategy</code>) parameter to
-    #               <code>BEST_FIT_PROGRESSIVE</code>, <code>SPOT_CAPACITY_OPTIMIZED</code>, or
-    #               <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code>.</p>
-    #                </li>
-    #                <li>
-    #                   <p>Set the update to latest image version (<code>updateToLatestImageVersion</code>)
-    #             parameter to <code>true</code>. The <code>updateToLatestImageVersion</code> parameter 
-    #             is used when you update a compute environment. This parameter is ignored when you create 
-    #             a compute environment.</p>
-    #                </li>
-    #                <li>
-    #                   <p>Don't specify an AMI ID in <code>imageId</code>, <code>imageIdOverride</code> (in
-    #               <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html">
-    #                         <code>ec2Configuration</code>
-    #                      </a>), or in the launch template
-    #               (<code>launchTemplate</code>). In that case, Batch selects the latest Amazon ECS
-    #             optimized AMI that's supported by Batch at the time the infrastructure update is
-    #             initiated. Alternatively, you can specify the AMI ID in the <code>imageId</code> or
-    #               <code>imageIdOverride</code> parameters, or the launch template identified by the
-    #               <code>LaunchTemplate</code> properties. Changing any of these properties starts an
-    #             infrastructure update. If the AMI ID is specified in the launch template, it can't be
-    #             replaced by specifying an AMI ID in either the <code>imageId</code> or
-    #               <code>imageIdOverride</code> parameters. It can only be replaced by specifying a
-    #             different launch template, or if the launch template version is set to
-    #               <code>$Default</code> or <code>$Latest</code>, by setting either a new default version
-    #             for the launch template (if <code>$Default</code>) or by adding a new version to the
-    #             launch template (if <code>$Latest</code>).</p>
-    #                </li>
-    #             </ul>
-    #             <p>If these rules are followed, any update that starts an infrastructure update causes the
-    #         AMI ID to be re-selected. If the <code>version</code> setting in the launch template
-    #           (<code>launchTemplate</code>) is set to <code>$Latest</code> or <code>$Default</code>, the
-    #         latest or default version of the launch template is evaluated up at the time of the
-    #         infrastructure update, even if the <code>launchTemplate</code> wasn't updated.</p>
+    #       created. For more information on how to update a compute environment's AMI, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a> in the <i>Batch User Guide</i>.</p>
     #          </note>
     # @param [Hash, Types::CreateComputeEnvironmentRequest] params
     # @option params [String] :compute_environment_name
@@ -402,6 +337,10 @@ module Aws::Batch
     #         resources.</p>
     # @option params [Types::EksConfiguration] :eks_configuration
     #   <p>The details for the Amazon EKS cluster that supports the compute environment.</p>
+    #            <note>
+    #               <p>To create a compute environment that uses EKS resources, the caller must have
+    #           permissions to call <code>eks:DescribeCluster</code>.</p>
+    #            </note>
     # @option params [String] :context
     #   <p>Reserved.</p>
     # @example To create a managed EC2 compute environment
@@ -5295,9 +5234,9 @@ module Aws::Batch
     # @option params [String] :service_job_type
     #   <p>The type of service job. For SageMaker Training jobs, specify <code>SAGEMAKER_TRAINING</code>.</p>
     # @option params [String] :share_identifier
-    #   <p>The share identifier for the service job. Don't specify this parameter if the job queue doesn't have a fair-
-    #              share scheduling policy. If the job queue has a fair-share scheduling policy, then this parameter
-    #              must be specified.</p>
+    #   <p>The share identifier for the service job. Don't specify this parameter if the job
+    #               queue doesn't have a fair-share scheduling policy. If the job queue has a fair-share
+    #               scheduling policy, then this parameter must be specified.</p>
     # @option params [Types::ServiceJobTimeout] :timeout_config
     #   <p>The timeout configuration for the service job. If none is specified, Batch defers to the default timeout of the underlying service handling the job.</p>
     # @option params [Hash<String, String>] :tags

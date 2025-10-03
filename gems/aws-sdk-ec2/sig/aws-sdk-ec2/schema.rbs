@@ -652,6 +652,8 @@ module Aws::EC2
     CreateVpnConnectionRouteRequest: StructureShape
     CreateVpnGatewayRequest: StructureShape
     CreateVpnGatewayResult: StructureShape
+    CreationDateCondition: StructureShape
+    CreationDateConditionRequest: StructureShape
     CreditSpecification: StructureShape
     CreditSpecificationRequest: StructureShape
     CurrencyCodeValues: EnumShape
@@ -844,6 +846,8 @@ module Aws::EC2
     DeleteVpnConnectionRequest: StructureShape
     DeleteVpnConnectionRouteRequest: StructureShape
     DeleteVpnGatewayRequest: StructureShape
+    DeprecationTimeCondition: StructureShape
+    DeprecationTimeConditionRequest: StructureShape
     DeprovisionByoipCidrRequest: StructureShape
     DeprovisionByoipCidrResult: StructureShape
     DeprovisionIpamByoasnRequest: StructureShape
@@ -1819,6 +1823,10 @@ module Aws::EC2
     ImageIdStringList: ListShape
     ImageList: ListShape
     ImageMetadata: StructureShape
+    ImageName: StringShape
+    ImageNameList: ListShape
+    ImageNameRequest: StringShape
+    ImageNameRequestList: ListShape
     ImageProvider: StringShape
     ImageProviderList: ListShape
     ImageProviderRequest: StringShape
@@ -2324,6 +2332,10 @@ module Aws::EC2
     ManagedPrefixList: StructureShape
     ManagedPrefixListSet: ListShape
     MarketType: EnumShape
+    MarketplaceProductCode: StringShape
+    MarketplaceProductCodeList: ListShape
+    MarketplaceProductCodeRequest: StringShape
+    MarketplaceProductCodeRequestList: ListShape
     MaxIpv4AddrPerInterface: IntegerShape
     MaxIpv6AddrPerInterface: IntegerShape
     MaxNetworkInterfaces: IntegerShape
@@ -2331,6 +2343,8 @@ module Aws::EC2
     MaxResults2: IntegerShape
     MaxResultsParam: IntegerShape
     MaximumBandwidthInMbps: IntegerShape
+    MaximumDaysSinceCreatedValue: IntegerShape
+    MaximumDaysSinceDeprecatedValue: IntegerShape
     MaximumEbsAttachments: IntegerShape
     MaximumEfaInterfaces: IntegerShape
     MaximumEnaQueueCount: IntegerShape

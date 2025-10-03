@@ -1316,6 +1316,7 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:structured_log_destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: 'StructuredLogDestinations'))
     UpdateServerRequest.add_member(:s3_storage_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: 'S3StorageOptions'))
     UpdateServerRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressType, location_name: 'IpAddressType'))
+    UpdateServerRequest.add_member(:identity_provider_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: 'IdentityProviderType'))
     UpdateServerRequest.type = Types::UpdateServerRequest
     UpdateServerResponse.add_member(:server_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerId, location_name: 'ServerId', traits: {"smithy.api#required" => {}}))
     UpdateServerResponse.type = Types::UpdateServerResponse

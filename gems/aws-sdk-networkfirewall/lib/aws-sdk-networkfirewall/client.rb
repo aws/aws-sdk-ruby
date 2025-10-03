@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::NetworkFirewall
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::NetworkFirewall
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::NetworkFirewall
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::NetworkFirewall::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::NetworkFirewall::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -402,7 +407,7 @@ module Aws::NetworkFirewall
     #            </important>
     #            <p>For information about creating firewalls, see <a>CreateFirewall</a>. For specific guidance about transit gateway-attached firewalls, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html">Considerations for transit gateway-attached firewalls</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @option params [Array<Types::AvailabilityZoneMapping>] :availability_zone_mappings
-    #   <p>Required. The Availability Zones where you want to create firewall endpoints for a transit gateway-attached firewall. You must specify at least one Availability Zone. Consider enabling the firewall in every Availability Zone where you have workloads to maintain Availability Zone independence.</p>
+    #   <p>Required. The Availability Zones where you want to create firewall endpoints for a transit gateway-attached firewall. You must specify at least one Availability Zone. Consider enabling the firewall in every Availability Zone where you have workloads to maintain Availability Zone isolation.</p>
     #            <p>You can modify Availability Zones later using <a>AssociateAvailabilityZones</a> or <a>DisassociateAvailabilityZones</a>, but this may briefly disrupt traffic. The <code>AvailabilityZoneChangeProtection</code> setting controls whether you can make these modifications.</p>
     # @option params [Boolean] :availability_zone_change_protection
     #   <p>Optional. A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you cannot add or remove Availability Zones without first disabling this protection using <a>UpdateAvailabilityZoneChangeProtection</a>.</p>
@@ -600,7 +605,8 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"], # required
     #           }
     #         }
-    #       }
+    #       },
+    #       enable_tls_session_holding: false
     #     },
     #     description: "Description",
     #     tags: [
@@ -777,7 +783,7 @@ module Aws::NetworkFirewall
     #         rules_source_list: {
     #           targets: ["CollectionMember_String"], # required
     #           target_types: ["TLS_SNI" # One of: ["TLS_SNI", "HTTP_HOST"]], # required
-    #           generated_rules_type: "ALLOWLIST" # One of: ["ALLOWLIST", "DENYLIST"], # required
+    #           generated_rules_type: "ALLOWLIST" # One of: ["ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"], # required
     #         },
     #         stateful_rules: [
     #           {
@@ -1288,7 +1294,7 @@ module Aws::NetworkFirewall
 
     # <p>Deletes a transit gateway attachment from a Network Firewall. Either the firewall owner or the transit gateway owner can delete the attachment.</p>
     #          <important>
-    #             <p>After you delete a transit gateway attachment, raffic will no longer flow through the firewall endpoints.</p>
+    #             <p>After you delete a transit gateway attachment, traffic will no longer flow through the firewall endpoints.</p>
     #          </important>
     #          <p>After you initiate the delete operation, use <a>DescribeFirewall</a> to monitor the deletion status.</p>
     # @param [Hash, Types::DeleteNetworkFirewallTransitGatewayAttachmentRequest] params
@@ -1732,7 +1738,8 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"], # required
     #           }
     #         }
-    #       }
+    #       },
+    #       enable_tls_session_holding: false
     #     }
     #   }
     # @return [Types::DescribeFirewallPolicyResponse]
@@ -1912,7 +1919,7 @@ module Aws::NetworkFirewall
     #         rules_source_list: {
     #           targets: ["CollectionMember_String"], # required
     #           target_types: ["TLS_SNI" # One of: ["TLS_SNI", "HTTP_HOST"]], # required
-    #           generated_rules_type: "ALLOWLIST" # One of: ["ALLOWLIST", "DENYLIST"], # required
+    #           generated_rules_type: "ALLOWLIST" # One of: ["ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"], # required
     #         },
     #         stateful_rules: [
     #           {
@@ -2916,7 +2923,7 @@ module Aws::NetworkFirewall
     end
 
     # <p>Rejects a transit gateway attachment request for Network Firewall. When you reject the attachment request, Network Firewall cancels the creation of routing components between the transit gateway and firewall endpoints.</p>
-    #          <p>Only the firewall owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>
+    #          <p>Only the transit gateway owner can reject the attachment. After rejection, no traffic will flow through the firewall endpoints for this attachment.</p>
     #          <p>Use <a>DescribeFirewall</a> to monitor the rejection status. To accept the attachment instead of rejecting it, use <a>AcceptNetworkFirewallTransitGatewayAttachment</a>.</p>
     #          <note>
     #             <p>Once rejected, you cannot reverse this action. To establish connectivity, you must create a new transit gateway-attached firewall.</p>
@@ -3430,7 +3437,8 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"], # required
     #           }
     #         }
-    #       }
+    #       },
+    #       enable_tls_session_holding: false
     #     },
     #     description: "Description",
     #     dry_run: false,
@@ -3684,7 +3692,7 @@ module Aws::NetworkFirewall
     #         rules_source_list: {
     #           targets: ["CollectionMember_String"], # required
     #           target_types: ["TLS_SNI" # One of: ["TLS_SNI", "HTTP_HOST"]], # required
-    #           generated_rules_type: "ALLOWLIST" # One of: ["ALLOWLIST", "DENYLIST"], # required
+    #           generated_rules_type: "ALLOWLIST" # One of: ["ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"], # required
     #         },
     #         stateful_rules: [
     #           {

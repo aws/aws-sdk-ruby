@@ -237,6 +237,7 @@ module Aws::EMRcontainers
       def initialize: (
         ?client_token: String,
         ?name: String,
+        ?container_provider: Types::ContainerProvider,
         ?security_configuration_data: Types::SecurityConfigurationData,
         ?tags: Hash[String, String],
       ) -> void
@@ -244,6 +245,7 @@ module Aws::EMRcontainers
 
       attr_accessor client_token: String?
       attr_accessor name: String?
+      attr_accessor container_provider: Types::ContainerProvider?
       attr_accessor security_configuration_data: Types::SecurityConfigurationData?
       attr_accessor tags: Hash[String, String]?
     end
@@ -513,10 +515,12 @@ module Aws::EMRcontainers
 
       def initialize: (
         ?namespace: String,
+        ?node_label: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor namespace: String?
+      attr_accessor node_label: String?
     end
 
     class EncryptionConfiguration

@@ -910,7 +910,7 @@ module Aws::ChimeSDKMessaging
     #   <p>The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.</p>
     #   @return [String]
     # @!attribute channel_id
-    #   <p>The ID of the channel in the request.</p>
+    #   <p>An ID for the channel being created. If you do not specify an ID, a UUID will be created for the channel.</p>
     #   @return [String]
     # @!attribute member_arns
     #   <p>The ARNs of the channel members in the request.</p>
@@ -1447,7 +1447,11 @@ module Aws::ChimeSDKMessaging
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute network_type
+    #   <p>The type of network for the messaging session endpoint. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
+    #   @return [String]
     class GetMessagingSessionEndpointRequest < Struct.new(
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2264,6 +2268,9 @@ module Aws::ChimeSDKMessaging
     end
 
     # <p>A <code>Field</code> of the channel that you want to search.</p>
+    #          <note>
+    #             <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>
+    #          </note>
     # @!attribute key
     #   <p>An <code>enum</code> value that indicates the key to search the channel on. <code>MEMBERS</code> allows you to search channels based on memberships. You can use it with the <code>EQUALS</code> 
     #            operator to get channels whose memberships are equal to the specified values, and with the <code>INCLUDES</code>  operator to get channels whose memberships include the specified values.</p>
@@ -2271,7 +2278,7 @@ module Aws::ChimeSDKMessaging
     # @!attribute values
     #   <p>The values that you want to search for, a list of strings. The values must be <code>AppInstanceUserArns</code> specified as a list of strings.</p>
     #            <note>
-    #               <p>This operation isn't supported for <code>AppInstanceUsers</code> with large number of memberships.</p>
+    #               <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>
     #            </note>
     #   @return [Array<String>]
     # @!attribute operator

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::RDS
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::RDS
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::RDS
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::RDS::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::RDS::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -878,18 +883,18 @@ module Aws::RDS
     # @param [Hash, Types::CopyDBClusterSnapshotMessage] params
     # @option params [String] :source_db_cluster_snapshot_identifier
     #   <p>The identifier of the DB cluster snapshot to copy. This parameter isn't case-sensitive.</p>
-    #            <p>You can't copy an encrypted, shared DB cluster snapshot from one Amazon Web Services Region to another.</p>
     #            <p>Constraints:</p>
     #            <ul>
     #               <li>
-    #                  <p>Must specify a valid system snapshot in the "available" state.</p>
+    #                  <p>Must specify a valid source snapshot in the "available" state.</p>
     #               </li>
     #               <li>
     #                  <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid DB snapshot identifier.</p>
     #               </li>
     #               <li>
     #                  <p>If the source snapshot is in a different Amazon Web Services Region than the copy,
-    #                 specify a valid DB cluster snapshot ARN. For more information, go to
+    #                       specify a valid DB cluster snapshot ARN. You can also specify an ARN of a snapshot that is in a different account and a different Amazon Web Services Region.
+    #                       For more information, go to
     #                 <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html#USER_CopySnapshot.AcrossRegions">
     #                     Copying Snapshots Across Amazon Web Services Regions</a> in the <i>Amazon Aurora User Guide</i>.</p>
     #               </li>
@@ -1024,7 +1029,7 @@ module Aws::RDS
     #     source_db_cluster_snapshot_identifier: "String", # required
     #     target_db_cluster_snapshot_identifier: "String", # required
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     copy_tags: false,
     #     tags: [
     #       {
@@ -1066,10 +1071,10 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_system_id: "String",
     #       storage_type: "String",
+    #       storage_throughput: 1,
     #       db_cluster_resource_id: "String",
-    #       storage_throughput: 1
+    #       db_system_id: "String"
     #     }
     #   }
     # @return [Types::CopyDBClusterSnapshotResult]
@@ -1184,16 +1189,15 @@ module Aws::RDS
     #            <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid DB
     #               snapshot identifier. For example, you might specify
     #                   <code>rds:mysql-instance1-snapshot-20130805</code>.</p>
-    #            <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid DB
-    #               snapshot ARN. For example, you might specify
-    #                   <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805</code>.</p>
     #            <p>If you are copying from a shared manual DB snapshot, 
-    #             this parameter must be the Amazon Resource Name (ARN) of the shared DB snapshot.</p>
-    #            <p>If you are copying an encrypted snapshot this parameter must be in the ARN format for the source Amazon Web Services Region.</p>
+    #               this parameter must be the Amazon Resource Name (ARN) of the shared DB snapshot.</p>
+    #            <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid DB
+    #               snapshot ARN. You can also specify an ARN of a snapshot that is in a different account and a different Amazon Web Services Region. For example, you might specify
+    #                   <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805</code>.</p>
     #            <p>Constraints:</p>
     #            <ul>
     #               <li>
-    #                  <p>Must specify a valid system snapshot in the "available" state.</p>
+    #                  <p>Must specify a valid source snapshot in the "available" state.</p>
     #               </li>
     #            </ul>
     #            <p>Example: <code>rds:mydb-2012-04-02-00-01</code>
@@ -1308,12 +1312,6 @@ module Aws::RDS
     # @option params [String] :target_custom_availability_zone
     #   <p>The external custom Availability Zone (CAZ) identifier for the target CAZ.</p>
     #            <p>Example: <code>rds-caz-aiqhTgQv</code>.</p>
-    # @option params [Boolean] :copy_option_group
-    #   <p>Specifies whether to copy the DB option group associated with the source DB snapshot to the target 
-    #               Amazon Web Services account and associate with the target DB snapshot. The associated option group can be copied only with 
-    #               cross-account snapshot copy calls.</p>
-    # @option params [String] :snapshot_availability_zone
-    #   <p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>
     # @option params [String] :snapshot_target
     #   <p>Configures the location where RDS will store copied snapshots.</p>
     #            <p>Valid Values:</p>
@@ -1331,6 +1329,12 @@ module Aws::RDS
     #                     <code>region</code> (Amazon Web Services Region)</p>
     #               </li>
     #            </ul>
+    # @option params [Boolean] :copy_option_group
+    #   <p>Specifies whether to copy the DB option group associated with the source DB snapshot to the target 
+    #               Amazon Web Services account and associate with the target DB snapshot. The associated option group can be copied only with 
+    #               cross-account snapshot copy calls.</p>
+    # @option params [String] :snapshot_availability_zone
+    #   <p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>
     # @example To copy a DB snapshot
     #   # The following example creates a copy of a DB snapshot.
     #   params = {
@@ -1382,12 +1386,12 @@ module Aws::RDS
     #       }
     #     ],
     #     copy_tags: false,
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
+    #     snapshot_target: "String",
     #     copy_option_group: false,
-    #     snapshot_availability_zone: "String",
-    #     snapshot_target: "String"
+    #     snapshot_availability_zone: "String"
     #   }
     #   options = {}
     #   response = client.copy_db_snapshot(params, options)
@@ -1410,6 +1414,7 @@ module Aws::RDS
     #       license_model: "String",
     #       snapshot_type: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       percent_progress: 1,
     #       source_region: "String",
@@ -1434,13 +1439,12 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
+    #       snapshot_target: "String",
     #       original_snapshot_create_time: Time.now,
     #       snapshot_database_time: Time.now,
-    #       snapshot_target: "String",
-    #       storage_throughput: 1,
     #       db_system_id: "String",
-    #       dedicated_log_volume: false,
     #       multi_tenant: false,
+    #       dedicated_log_volume: false,
     #       snapshot_availability_zone: "String"
     #     }
     #   }
@@ -1542,7 +1546,7 @@ module Aws::RDS
     #           option_settings: [
     #             {
     #               name: "String",
-    #               value: "String",
+    #               value: "PotentiallySensitiveOptionSettingValue",
     #               default_value: "String",
     #               description: "String",
     #               apply_type: "String",
@@ -1764,6 +1768,15 @@ module Aws::RDS
     #                   Creating a symmetric encryption KMS key</a> in the <i>Amazon Web Services Key Management Service
     #                       Developer Guide</i>.</p>
     #            <p>You can choose the same symmetric encryption key when you create a CEV and a DB instance, or choose different keys.</p>
+    # @option params [String] :source_custom_db_engine_version_identifier
+    #   <p>The ARN of a CEV to use as a source for creating a new CEV. You can specify a different
+    #               Amazon Machine Imagine (AMI) by using either <code>Source</code> or
+    #                   <code>UseAwsProvidedLatestImage</code>. You can't specify a different JSON manifest
+    #               when you specify <code>SourceCustomDbEngineVersionIdentifier</code>.</p>
+    # @option params [Boolean] :use_aws_provided_latest_image
+    #   <p>Specifies whether to use the latest service-provided Amazon Machine Image (AMI) for
+    #               the CEV. If you specify <code>UseAwsProvidedLatestImage</code>, you can't also specify
+    #                   <code>ImageId</code>.</p>
     # @option params [String] :description
     #   <p>An optional description of your CEV.</p>
     # @option params [String] :manifest
@@ -1802,15 +1815,6 @@ module Aws::RDS
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or 
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
     #               </p>
-    # @option params [String] :source_custom_db_engine_version_identifier
-    #   <p>The ARN of a CEV to use as a source for creating a new CEV. You can specify a different
-    #               Amazon Machine Imagine (AMI) by using either <code>Source</code> or
-    #                   <code>UseAwsProvidedLatestImage</code>. You can't specify a different JSON manifest
-    #               when you specify <code>SourceCustomDbEngineVersionIdentifier</code>.</p>
-    # @option params [Boolean] :use_aws_provided_latest_image
-    #   <p>Specifies whether to use the latest service-provided Amazon Machine Image (AMI) for
-    #               the CEV. If you specify <code>UseAwsProvidedLatestImage</code>, you can't also specify
-    #                   <code>ImageId</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     engine: "CustomEngineName", # required
@@ -1819,6 +1823,8 @@ module Aws::RDS
     #     database_installation_files_s3_prefix: "String255",
     #     image_id: "String255",
     #     kms_key_id: "KmsKeyIdOrArn",
+    #     source_custom_db_engine_version_identifier: "String255",
+    #     use_aws_provided_latest_image: false,
     #     description: "Description",
     #     manifest: "CustomDBEngineVersionManifest",
     #     tags: [
@@ -1826,9 +1832,7 @@ module Aws::RDS
     #         key: "String",
     #         value: "String"
     #       }
-    #     ],
-    #     source_custom_db_engine_version_identifier: "String255",
-    #     use_aws_provided_latest_image: false
+    #     ]
     #   }
     #   options = {}
     #   response = client.create_custom_db_engine_version(params, options)
@@ -1836,9 +1840,14 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     engine: "String",
+    #     major_engine_version: "String",
     #     engine_version: "String",
+    #     database_installation_files_s3_bucket_name: "String",
+    #     database_installation_files_s3_prefix: "String",
+    #     custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #     db_parameter_group_family: "String",
     #     db_engine_description: "String",
+    #     db_engine_version_arn: "String",
     #     db_engine_version_description: "String",
     #     default_character_set: {
     #       character_set_name: "String",
@@ -1849,6 +1858,8 @@ module Aws::RDS
     #       status: "String"
     #     },
     #     db_engine_media_type: "String",
+    #     kms_key_id: "String",
+    #     create_time: Time.now,
     #     supported_character_sets: [
     #       {
     #         character_set_name: "String",
@@ -1890,12 +1901,6 @@ module Aws::RDS
     #     status: "String",
     #     supports_parallel_query: false,
     #     supports_global_databases: false,
-    #     major_engine_version: "String",
-    #     database_installation_files_s3_bucket_name: "String",
-    #     database_installation_files_s3_prefix: "String",
-    #     db_engine_version_arn: "String",
-    #     kms_key_id: "String",
-    #     create_time: Time.now,
     #     tag_list: [
     #       {
     #         key: "String",
@@ -1903,7 +1908,6 @@ module Aws::RDS
     #       }
     #     ],
     #     supports_babelfish: false,
-    #     custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #     supports_limitless_database: false,
     #     supports_certificate_rotation_without_restart: false,
     #     supported_ca_certificate_identifiers: ["String"],
@@ -2333,46 +2337,6 @@ module Aws::RDS
     #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   <p>Reserved for future use.</p>
-    # @option params [Boolean] :deletion_protection
-    #   <p>Specifies whether the DB cluster has deletion protection enabled. 
-    #               The database can't be deleted when deletion protection is enabled. By default, 
-    #               deletion protection isn't enabled.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
-    # @option params [String] :global_cluster_identifier
-    #   <p>The global cluster ID of an Aurora cluster that becomes the primary cluster
-    #               in the new global database cluster.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
-    # @option params [Boolean] :enable_http_endpoint
-    #   <p>Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint 
-    #               isn't enabled.</p>
-    #            <p>When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running
-    #               SQL queries on the DB cluster. You can also query your database
-    #               from inside the RDS console with the RDS query editor.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using RDS Data API</a> in the 
-    #               <i>Amazon Aurora User Guide</i>.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
-    # @option params [Boolean] :copy_tags_to_snapshot
-    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. 
-    #               The default is not to copy them.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
-    # @option params [String] :domain
-    #   <p>The Active Directory directory ID to create the DB cluster in.</p>
-    #            <p>For Amazon Aurora DB clusters, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB cluster.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html">Kerberos authentication</a>
-    #               in the <i>Amazon Aurora User Guide</i>.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
-    # @option params [String] :domain_iam_role_name
-    #   <p>The name of the IAM role to use when making API calls to the Directory Service.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
-    # @option params [Boolean] :enable_global_write_forwarding
-    #   <p>Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster
-    #         (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that
-    #         are secondary clusters in an Aurora global database.</p>
-    #            <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter
-    #         enabled, a secondary cluster can forward writes to the current primary cluster, and the resulting changes are replicated back to
-    #         this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the
-    #           primary is demoted by a global cluster API operation, but it does nothing until then.</p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
     # @option params [String] :db_cluster_instance_class
     #   <p>The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example <code>db.m6gd.xlarge</code>.
     #               Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>
@@ -2461,6 +2425,62 @@ module Aws::RDS
     #               By default, minor engine upgrades are applied automatically.</p>
     #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.</p>
     #            <p>For more information about automatic minor version upgrades, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades">Automatically upgrading the minor engine version</a>.</p>
+    # @option params [Boolean] :deletion_protection
+    #   <p>Specifies whether the DB cluster has deletion protection enabled. 
+    #               The database can't be deleted when deletion protection is enabled. By default, 
+    #               deletion protection isn't enabled.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
+    # @option params [String] :global_cluster_identifier
+    #   <p>The global cluster ID of an Aurora cluster that becomes the primary cluster
+    #               in the new global database cluster.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    # @option params [Boolean] :enable_http_endpoint
+    #   <p>Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint 
+    #               isn't enabled.</p>
+    #            <p>When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running
+    #               SQL queries on the DB cluster. You can also query your database
+    #               from inside the RDS console with the RDS query editor.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using RDS Data API</a> in the 
+    #               <i>Amazon Aurora User Guide</i>.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. 
+    #               The default is not to copy them.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
+    # @option params [String] :domain
+    #   <p>The Active Directory directory ID to create the DB cluster in.</p>
+    #            <p>For Amazon Aurora DB clusters, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB cluster.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html">Kerberos authentication</a>
+    #               in the <i>Amazon Aurora User Guide</i>.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    # @option params [String] :domain_iam_role_name
+    #   <p>The name of the IAM role to use when making API calls to the Directory Service.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    # @option params [Boolean] :enable_global_write_forwarding
+    #   <p>Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster
+    #         (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that
+    #         are secondary clusters in an Aurora global database.</p>
+    #            <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter
+    #         enabled, a secondary cluster can forward writes to the current primary cluster, and the resulting changes are replicated back to
+    #         this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the
+    #           primary is demoted by a global cluster API operation, but it does nothing until then.</p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. 
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 
+    #               protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html">
+    #               Working with a DB instance in a VPC</a> in the 
+    #               <i>Amazon Aurora User Guide.</i>
+    #            </p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    #            <p>Valid Values: <code>IPV4 | DUAL</code>
+    #            </p>
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
+    #               <i>Amazon Aurora User Guide</i>.</p>
     # @option params [Integer] :monitoring_interval
     #   <p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off 
     #               collecting Enhanced Monitoring metrics, specify <code>0</code>.</p>
@@ -2524,22 +2544,6 @@ module Aws::RDS
     #            <note>
     #               <p>This setting is no longer used. Instead use the <code>ClusterScalabilityType</code> setting.</p>
     #            </note>
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
-    #               <i>Amazon Aurora User Guide</i>.</p>
-    # @option params [String] :network_type
-    #   <p>The network type of the DB cluster.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. 
-    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 
-    #               protocols (<code>DUAL</code>).</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html">
-    #               Working with a DB instance in a VPC</a> in the 
-    #               <i>Amazon Aurora User Guide.</i>
-    #            </p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
-    #            <p>Valid Values: <code>IPV4 | DUAL</code>
-    #            </p>
     # @option params [String] :cluster_scalability_type
     #   <p>Specifies the scalability mode of the Aurora DB cluster. When set to <code>limitless</code>, the cluster operates as an Aurora Limitless Database.
     #               When set to <code>standard</code> (the default), the cluster uses normal DB instance creation.</p>
@@ -2563,6 +2567,10 @@ module Aws::RDS
     #                       is specified.</p>
     #               </li>
     #            </ul>
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   <p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By
+    #               default, write operations aren't allowed on reader DB instances.</p>
+    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and 
     #               managed in Amazon Web Services Secrets Manager.</p>
@@ -2577,10 +2585,6 @@ module Aws::RDS
     #            <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account
     #               has a different default KMS key for each Amazon Web Services Region.</p>
     #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
-    # @option params [Boolean] :enable_local_write_forwarding
-    #   <p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By
-    #               default, write operations aren't allowed on reader DB instances.</p>
-    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :ca_certificate_identifier
     #   <p>The CA certificate identifier to use for the DB cluster's server certificate.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB 
@@ -2762,7 +2766,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     port: 1,
     #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -2775,7 +2779,7 @@ module Aws::RDS
     #     ],
     #     storage_encrypted: false,
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
@@ -2793,19 +2797,25 @@ module Aws::RDS
     #       transit_gateway_multicast_domain_id: "String",
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #     },
-    #     deletion_protection: false,
-    #     global_cluster_identifier: "String",
-    #     enable_http_endpoint: false,
-    #     copy_tags_to_snapshot: false,
-    #     domain: "String",
-    #     domain_iam_role_name: "String",
-    #     enable_global_write_forwarding: false,
     #     db_cluster_instance_class: "String",
     #     allocated_storage: 1,
     #     storage_type: "String",
     #     iops: 1,
     #     publicly_accessible: false,
     #     auto_minor_version_upgrade: false,
+    #     deletion_protection: false,
+    #     global_cluster_identifier: "GlobalClusterIdentifier",
+    #     enable_http_endpoint: false,
+    #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
+    #     enable_global_write_forwarding: false,
+    #     network_type: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1
+    #     },
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
     #     database_insights_mode: "standard" # One of: ["standard", "advanced"],
@@ -2813,17 +2823,11 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     enable_limitless_database: false,
-    #     serverless_v2_scaling_configuration: {
-    #       min_capacity: 1.0,
-    #       max_capacity: 1.0,
-    #       seconds_until_auto_pause: 1
-    #     },
-    #     network_type: "String",
-    #     cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #     cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #     db_system_id: "String",
     #     manage_master_user_password: false,
-    #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
+    #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
     #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
@@ -2843,7 +2847,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -2907,6 +2910,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -2921,6 +2947,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -2949,62 +2982,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -3370,10 +3374,10 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_system_id: "String",
     #       storage_type: "String",
+    #       storage_throughput: 1,
     #       db_cluster_resource_id: "String",
-    #       storage_throughput: 1
+    #       db_system_id: "String"
     #     }
     #   }
     # @return [Types::CreateDBClusterSnapshotResult]
@@ -4138,6 +4142,10 @@ module Aws::RDS
     #                  <p>For RDS for SQL Server - Must be a multiple between 1 and 50 of the storage amount for the DB instance.</p>
     #               </li>
     #            </ul>
+    # @option params [Integer] :storage_throughput
+    #   <p>The storage throughput value, in mebibyte per second (MiBps), for the DB instance.</p>
+    #            <p>This setting applies only to the <code>gp3</code> storage type.</p>
+    #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
     # @option params [String] :option_group_name
     #   <p>The option group to associate the DB instance with.</p>
     #            <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed 
@@ -4453,25 +4461,17 @@ module Aws::RDS
     #               in the <i>Amazon RDS User Guide</i>.</p>
     #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
     #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
-    # @option params [String] :custom_iam_instance_profile
-    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
-    #               RDS Custom DB instance.</p>
-    #            <p>This setting is required for RDS Custom.</p>
-    #            <p>Constraints:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>The profile must exist in your account.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
-    #               </li>
-    #            </ul>
-    #            <p>For the list of permissions required for the IAM role, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
-    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB instance.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. 
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 
+    #               protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html">
+    #               Working with a DB instance in a VPC</a> in the 
+    #               <i>Amazon RDS User Guide.</i>
+    #            </p>
+    #            <p>Valid Values: <code>IPV4 | DUAL</code>
+    #            </p>
     # @option params [String] :backup_target
     #   <p>The location for storing automated backups and manual snapshots.</p>
     #            <p>Valid Values:</p>
@@ -4493,21 +4493,38 @@ module Aws::RDS
     #            </p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working 
     #               with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>
-    # @option params [String] :network_type
-    #   <p>The network type of the DB instance.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. 
-    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 
-    #               protocols (<code>DUAL</code>).</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html">
-    #               Working with a DB instance in a VPC</a> in the 
-    #               <i>Amazon RDS User Guide.</i>
-    #            </p>
-    #            <p>Valid Values: <code>IPV4 | DUAL</code>
-    #            </p>
-    # @option params [Integer] :storage_throughput
-    #   <p>The storage throughput value, in mebibyte per second (MiBps), for the DB instance.</p>
-    #            <p>This setting applies only to the <code>gp3</code> storage type.</p>
-    #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
+    # @option params [String] :custom_iam_instance_profile
+    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
+    #               RDS Custom DB instance.</p>
+    #            <p>This setting is required for RDS Custom.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The profile must exist in your account.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For the list of permissions required for the IAM role, see 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
+    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
+    # @option params [String] :db_system_id
+    #   <p>The Oracle system identifier (SID), which is the name of the Oracle database instance that 
+    #               manages your database files. In this context, the term "Oracle database instance" refers exclusively 
+    #               to the system global area (SGA) and Oracle background processes. If you don't specify a SID, 
+    #               the value defaults to <code>RDSCDB</code>. The Oracle SID is also the name of your CDB.</p>
+    # @option params [String] :ca_certificate_identifier
+    #   <p>The CA certificate identifier to use for the DB instance's server certificate.</p>
+    #            <p>This setting doesn't apply to RDS Custom DB instances.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB 
+    #               instance</a> in the <i>Amazon RDS User Guide</i> and 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html">
+    #               Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora 
+    #               User Guide</i>.</p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html">Password management with Amazon Web Services Secrets Manager</a> 
@@ -4533,21 +4550,6 @@ module Aws::RDS
     #               managed KMS key.</p>
     #            <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account
     #               has a different default KMS key for each Amazon Web Services Region.</p>
-    # @option params [String] :ca_certificate_identifier
-    #   <p>The CA certificate identifier to use for the DB instance's server certificate.</p>
-    #            <p>This setting doesn't apply to RDS Custom DB instances.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB 
-    #               instance</a> in the <i>Amazon RDS User Guide</i> and 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html">
-    #               Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora 
-    #               User Guide</i>.</p>
-    # @option params [String] :db_system_id
-    #   <p>The Oracle system identifier (SID), which is the name of the Oracle database instance that 
-    #               manages your database files. In this context, the term "Oracle database instance" refers exclusively 
-    #               to the system global area (SGA) and Oracle background processes. If you don't specify a SID, 
-    #               the value defaults to <code>RDSCDB</code>. The Oracle SID is also the name of your CDB.</p>
-    # @option params [Boolean] :dedicated_log_volume
-    #   <p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>
     # @option params [Boolean] :multi_tenant
     #   <p>Specifies whether to use the multi-tenant configuration or the single-tenant
     #               configuration (default). This parameter only applies to RDS for Oracle container
@@ -4564,6 +4566,8 @@ module Aws::RDS
     #                       you can't later modify this DB instance to use the single-tenant configuration.</p>
     #               </li>
     #            </ul>
+    # @option params [Boolean] :dedicated_log_volume
+    #   <p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>
     # @option params [String] :engine_lifecycle_support
     #   <p>The life cycle type for this DB instance.</p>
     #            <note>
@@ -4707,7 +4711,7 @@ module Aws::RDS
     #     db_instance_class: "String", # required
     #     engine: "String", # required
     #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     db_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     availability_zone: "String",
@@ -4722,6 +4726,7 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     license_model: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     character_set_name: "String",
     #     nchar_character_set_name: "String",
@@ -4735,7 +4740,7 @@ module Aws::RDS
     #     db_cluster_identifier: "String",
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     domain: "String",
@@ -4764,16 +4769,15 @@ module Aws::RDS
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
+    #     db_system_id: "String",
+    #     ca_certificate_identifier: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     ca_certificate_identifier: "String",
-    #     db_system_id: "String",
-    #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
     #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
     #   }
@@ -4787,7 +4791,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -4842,13 +4845,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -4863,13 +4867,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -4881,6 +4884,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -4957,40 +4961,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -5096,6 +5100,9 @@ module Aws::RDS
     #            <p>For more information about automatic minor version upgrades, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades">Automatically upgrading the minor engine version</a>.</p>
     # @option params [Integer] :iops
     #   <p>The amount of Provisioned IOPS (input/output operations per second) to initially allocate for the DB instance.</p>
+    # @option params [Integer] :storage_throughput
+    #   <p>Specifies the storage throughput value for the read replica.</p>
+    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora DB instances.</p>
     # @option params [String] :option_group_name
     #   <p>The option group to associate the DB instance with. If not specified, RDS uses the option group
     #               associated with the source DB instance or cluster.</p>
@@ -5436,30 +5443,17 @@ module Aws::RDS
     #                           creation, you can manage the open mode manually.</p>
     #               </dd>
     #            </dl>
-    # @option params [Integer] :max_allocated_storage
-    #   <p>The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the DB instance.</p>
-    #            <p>For more information about this setting, including limitations that apply to it, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
-    #                   Managing capacity automatically with Amazon RDS storage autoscaling</a> 
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   <p>Specifies whether to enable a customer-owned IP address (CoIP) for an RDS
+    #               on Outposts read replica.</p>
+    #            <p>A <i>CoIP</i> provides local or external connectivity to resources in
+    #               your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+    #               provide lower latency for connections to the read replica from outside of its virtual
+    #               private cloud (VPC) on your local network.</p>
+    #            <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on Amazon Web Services Outposts</a> 
     #               in the <i>Amazon RDS User Guide</i>.</p>
-    # @option params [String] :custom_iam_instance_profile
-    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
-    #               RDS Custom DB instance. The instance profile must meet the following requirements:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>The profile must exist in your account.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
-    #               </li>
-    #            </ul>
-    #            <p>For the list of permissions required for the IAM role, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
-    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
-    #            <p>This setting is required for RDS Custom DB instances.</p>
+    #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
+    #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB instance.</p>
     #            <p>Valid Values:</p>
@@ -5482,20 +5476,12 @@ module Aws::RDS
     #               Working with a DB instance in a VPC</a> in the 
     #               <i>Amazon RDS User Guide.</i>
     #            </p>
-    # @option params [Integer] :storage_throughput
-    #   <p>Specifies the storage throughput value for the read replica.</p>
-    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora DB instances.</p>
-    # @option params [Boolean] :enable_customer_owned_ip
-    #   <p>Specifies whether to enable a customer-owned IP address (CoIP) for an RDS
-    #               on Outposts read replica.</p>
-    #            <p>A <i>CoIP</i> provides local or external connectivity to resources in
-    #               your Outpost subnets through your on-premises network. For some use cases, a CoIP can
-    #               provide lower latency for connections to the read replica from outside of its virtual
-    #               private cloud (VPC) on your local network.</p>
-    #            <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on Amazon Web Services Outposts</a> 
+    # @option params [Integer] :max_allocated_storage
+    #   <p>The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the DB instance.</p>
+    #            <p>For more information about this setting, including limitations that apply to it, see 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
+    #                   Managing capacity automatically with Amazon RDS storage autoscaling</a> 
     #               in the <i>Amazon RDS User Guide</i>.</p>
-    #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
-    #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
     # @option params [String] :backup_target
     #   <p>The location where RDS stores automated backups and manual snapshots.</p>
     #            <p>Valid Values:</p>
@@ -5509,6 +5495,24 @@ module Aws::RDS
     #                     <code>region</code> for Amazon Web Services Region</p>
     #               </li>
     #            </ul>
+    # @option params [String] :custom_iam_instance_profile
+    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
+    #               RDS Custom DB instance. The instance profile must meet the following requirements:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The profile must exist in your account.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For the list of permissions required for the IAM role, see 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
+    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
+    #            <p>This setting is required for RDS Custom DB instances.</p>
     # @option params [Integer] :allocated_storage
     #   <p>The amount of storage (in gibibytes) to allocate initially for the read replica.
     #               Follow the allocation rules specified in <code>CreateDBInstance</code>.</p>
@@ -5579,6 +5583,7 @@ module Aws::RDS
     #     multi_az: false,
     #     auto_minor_version_upgrade: false,
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     db_parameter_group_name: "String",
     #     publicly_accessible: false,
@@ -5595,7 +5600,7 @@ module Aws::RDS
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     enable_iam_database_authentication: false,
     #     database_insights_mode: "standard" # One of: ["standard", "advanced"],
     #     enable_performance_insights: false,
@@ -5617,12 +5622,11 @@ module Aws::RDS
     #     domain_auth_secret_arn: "String",
     #     domain_dns_ips: ["String"],
     #     replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
-    #     max_allocated_storage: 1,
-    #     custom_iam_instance_profile: "String",
-    #     network_type: "String",
-    #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
+    #     network_type: "String",
+    #     max_allocated_storage: 1,
     #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
@@ -5639,7 +5643,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -5694,13 +5697,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -5715,13 +5719,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -5733,6 +5736,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -5809,40 +5813,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -6027,6 +6031,12 @@ module Aws::RDS
     #           network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify <code>MYSQL</code>. 
     #           For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>. For RDS for Microsoft SQL Server, specify 
     #           <code>SQLSERVER</code>.</p>
+    # @option params [String] :default_auth_scheme
+    #   <p>The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database. 
+    #               Valid values are <code>NONE</code> and <code>IAM_AUTH</code>. 
+    #               When set to <code>IAM_AUTH</code>, the proxy uses end-to-end IAM authentication to connect to the database. 
+    #               If you don't specify <code>DefaultAuthScheme</code> or specify this parameter 
+    #               as <code>NONE</code>, you must specify the <code>Auth</code> option.</p>
     # @option params [Array<Types::UserAuthConfig>] :auth
     #   <p>The authorization mechanism that the proxy uses.</p>
     # @option params [String] :role_arn
@@ -6103,19 +6113,20 @@ module Aws::RDS
     #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
+    #     db_proxy_name: "DBProxyName", # required
     #     engine_family: "MYSQL" # One of: ["MYSQL", "POSTGRESQL", "SQLSERVER"], # required
-    #     auth: [ # required
+    #     default_auth_scheme: "IAM_AUTH" # One of: ["IAM_AUTH", "NONE"],
+    #     auth: [
     #       {
-    #         description: "String",
-    #         user_name: "String",
+    #         description: "Description",
+    #         user_name: "AuthUserName",
     #         auth_scheme: "SECRETS" # One of: ["SECRETS"],
-    #         secret_arn: "String",
+    #         secret_arn: "Arn",
     #         iam_auth: "DISABLED" # One of: ["DISABLED", "REQUIRED", "ENABLED"],
     #         client_password_auth_type: "MYSQL_NATIVE_PASSWORD" # One of: ["MYSQL_NATIVE_PASSWORD", "MYSQL_CACHING_SHA2_PASSWORD", "POSTGRES_SCRAM_SHA_256", "POSTGRES_MD5", "SQL_SERVER_AUTHENTICATION"]
     #       }
     #     ],
-    #     role_arn: "String", # required
+    #     role_arn: "Arn", # required
     #     vpc_subnet_ids: ["String"], # required
     #     vpc_security_group_ids: ["String"],
     #     require_tls: false,
@@ -6143,6 +6154,7 @@ module Aws::RDS
     #       vpc_id: "String",
     #       vpc_security_group_ids: ["String"],
     #       vpc_subnet_ids: ["String"],
+    #       default_auth_scheme: "String",
     #       auth: [
     #         {
     #           description: "String",
@@ -6559,6 +6571,7 @@ module Aws::RDS
     #       license_model: "String",
     #       snapshot_type: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       percent_progress: 1,
     #       source_region: "String",
@@ -6583,13 +6596,12 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
+    #       snapshot_target: "String",
     #       original_snapshot_create_time: Time.now,
     #       snapshot_database_time: Time.now,
-    #       snapshot_target: "String",
-    #       storage_throughput: 1,
     #       db_system_id: "String",
-    #       dedicated_log_volume: false,
     #       multi_tenant: false,
+    #       dedicated_log_volume: false,
     #       snapshot_availability_zone: "String"
     #     }
     #   }
@@ -6993,7 +7005,7 @@ module Aws::RDS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     global_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
     #     source_db_cluster_identifier: "String",
     #     engine: "String",
     #     engine_version: "String",
@@ -7014,7 +7026,7 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     global_cluster: {
-    #       global_cluster_identifier: "String",
+    #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_cluster_resource_id: "String",
     #       global_cluster_arn: "String",
     #       status: "String",
@@ -7146,15 +7158,15 @@ module Aws::RDS
     #         value: "String"
     #       }
     #     ],
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
     #     create_time: Time.now,
     #     errors: [
     #       {
     #         error_code: "String", # required
     #         error_message: "String"
     #       }
-    #     ],
-    #     data_filter: "DataFilter",
-    #     description: "IntegrationDescription"
+    #     ]
     #   }
     # @return [Types::CreateIntegrationOutput]
     def create_integration(params = {}, options = {})
@@ -7314,7 +7326,7 @@ module Aws::RDS
     #           option_settings: [
     #             {
     #               name: "String",
-    #               value: "String",
+    #               value: "PotentiallySensitiveOptionSettingValue",
     #               default_value: "String",
     #               description: "String",
     #               apply_type: "String",
@@ -7616,9 +7628,14 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     engine: "String",
+    #     major_engine_version: "String",
     #     engine_version: "String",
+    #     database_installation_files_s3_bucket_name: "String",
+    #     database_installation_files_s3_prefix: "String",
+    #     custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #     db_parameter_group_family: "String",
     #     db_engine_description: "String",
+    #     db_engine_version_arn: "String",
     #     db_engine_version_description: "String",
     #     default_character_set: {
     #       character_set_name: "String",
@@ -7629,6 +7646,8 @@ module Aws::RDS
     #       status: "String"
     #     },
     #     db_engine_media_type: "String",
+    #     kms_key_id: "String",
+    #     create_time: Time.now,
     #     supported_character_sets: [
     #       {
     #         character_set_name: "String",
@@ -7670,12 +7689,6 @@ module Aws::RDS
     #     status: "String",
     #     supports_parallel_query: false,
     #     supports_global_databases: false,
-    #     major_engine_version: "String",
-    #     database_installation_files_s3_bucket_name: "String",
-    #     database_installation_files_s3_prefix: "String",
-    #     db_engine_version_arn: "String",
-    #     kms_key_id: "String",
-    #     create_time: Time.now,
     #     tag_list: [
     #       {
     #         key: "String",
@@ -7683,7 +7696,6 @@ module Aws::RDS
     #       }
     #     ],
     #     supports_babelfish: false,
-    #     custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #     supports_limitless_database: false,
     #     supports_certificate_rotation_without_restart: false,
     #     supported_ca_certificate_identifiers: ["String"],
@@ -7802,7 +7814,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -7866,6 +7877,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -7880,6 +7914,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -7908,62 +7949,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -8018,8 +8030,8 @@ module Aws::RDS
     #       kms_key_id: "String",
     #       storage_type: "String",
     #       iops: 1,
-    #       aws_backup_recovery_point_arn: "String",
-    #       storage_throughput: 1
+    #       storage_throughput: 1,
+    #       aws_backup_recovery_point_arn: "String"
     #     }
     #   }
     # @return [Types::DeleteDBClusterAutomatedBackupResult]
@@ -8219,10 +8231,10 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_system_id: "String",
     #       storage_type: "String",
+    #       storage_throughput: 1,
     #       db_cluster_resource_id: "String",
-    #       storage_throughput: 1
+    #       db_system_id: "String"
     #     }
     #   }
     # @return [Types::DeleteDBClusterSnapshotResult]
@@ -8334,7 +8346,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -8389,13 +8400,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -8410,13 +8422,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -8428,6 +8439,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -8504,40 +8516,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -8619,6 +8631,7 @@ module Aws::RDS
     #       engine_version: "String",
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       tde_credential_arn: "String",
     #       encrypted: false,
@@ -8634,10 +8647,9 @@ module Aws::RDS
     #         }
     #       ],
     #       backup_target: "String",
-    #       storage_throughput: 1,
+    #       multi_tenant: false,
     #       aws_backup_recovery_point_arn: "String",
-    #       dedicated_log_volume: false,
-    #       multi_tenant: false
+    #       dedicated_log_volume: false
     #     }
     #   }
     # @return [Types::DeleteDBInstanceAutomatedBackupResult]
@@ -8692,7 +8704,7 @@ module Aws::RDS
     #   <p>The name of the DB proxy to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
+    #     db_proxy_name: "DBProxyName", # required
     #   }
     #   options = {}
     #   response = client.delete_db_proxy(params, options)
@@ -8707,6 +8719,7 @@ module Aws::RDS
     #       vpc_id: "String",
     #       vpc_security_group_ids: ["String"],
     #       vpc_subnet_ids: ["String"],
+    #       default_auth_scheme: "String",
     #       auth: [
     #         {
     #           description: "String",
@@ -8931,6 +8944,7 @@ module Aws::RDS
     #       license_model: "String",
     #       snapshot_type: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       percent_progress: 1,
     #       source_region: "String",
@@ -8955,13 +8969,12 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
+    #       snapshot_target: "String",
     #       original_snapshot_create_time: Time.now,
     #       snapshot_database_time: Time.now,
-    #       snapshot_target: "String",
-    #       storage_throughput: 1,
     #       db_system_id: "String",
-    #       dedicated_log_volume: false,
     #       multi_tenant: false,
+    #       dedicated_log_volume: false,
     #       snapshot_availability_zone: "String"
     #     }
     #   }
@@ -9099,7 +9112,7 @@ module Aws::RDS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     global_cluster_identifier: "String", # required
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
     #   }
     #   options = {}
     #   response = client.delete_global_cluster(params, options)
@@ -9107,7 +9120,7 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     global_cluster: {
-    #       global_cluster_identifier: "String",
+    #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_cluster_resource_id: "String",
     #       global_cluster_arn: "String",
     #       status: "String",
@@ -9194,15 +9207,15 @@ module Aws::RDS
     #         value: "String"
     #       }
     #     ],
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
     #     create_time: Time.now,
     #     errors: [
     #       {
     #         error_code: "String", # required
     #         error_message: "String"
     #       }
-    #     ],
-    #     data_filter: "DataFilter",
-    #     description: "IntegrationDescription"
+    #     ]
     #   }
     # @return [Types::DeleteIntegrationOutput]
     def delete_integration(params = {}, options = {})
@@ -9326,8 +9339,8 @@ module Aws::RDS
     #   <p>One or more DB cluster identifiers.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     db_instance_identifiers: ["String"],
     #     db_cluster_identifiers: ["String"]
     #   }
@@ -9731,8 +9744,8 @@ module Aws::RDS
     #         kms_key_id: "String",
     #         storage_type: "String",
     #         iops: 1,
-    #         aws_backup_recovery_point_arn: "String",
-    #         storage_throughput: 1
+    #         storage_throughput: 1,
+    #         aws_backup_recovery_point_arn: "String"
     #       }
     #     ]
     #   }
@@ -10233,7 +10246,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -10532,10 +10545,10 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         db_system_id: "String",
     #         storage_type: "String",
+    #         storage_throughput: 1,
     #         db_cluster_resource_id: "String",
-    #         storage_throughput: 1
+    #         db_system_id: "String"
     #       }
     #     ]
     #   }
@@ -10738,7 +10751,6 @@ module Aws::RDS
     #         db_cluster_parameter_group: "String",
     #         db_subnet_group: "String",
     #         status: "String",
-    #         automatic_restart_time: Time.now,
     #         percent_progress: "String",
     #         earliest_restorable_time: Time.now,
     #         endpoint: "String",
@@ -10802,6 +10814,29 @@ module Aws::RDS
     #         backtrack_consumed_change_records: 1,
     #         enabled_cloudwatch_logs_exports: ["String"],
     #         capacity: 1,
+    #         pending_modified_values: {
+    #           pending_cloudwatch_logs_exports: {
+    #             log_types_to_enable: ["String"],
+    #             log_types_to_disable: ["String"]
+    #           },
+    #           db_cluster_identifier: "String",
+    #           master_user_password: "SensitiveString",
+    #           iam_database_authentication_enabled: false,
+    #           engine_version: "String",
+    #           backup_retention_period: 1,
+    #           storage_type: "String",
+    #           allocated_storage: 1,
+    #           rds_custom_cluster_configuration: {
+    #             interconnect_subnet_id: "String",
+    #             transit_gateway_multicast_domain_id: "String",
+    #             replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #           },
+    #           iops: 1,
+    #           certificate_details: {
+    #             ca_identifier: "String",
+    #             valid_till: Time.now
+    #           }
+    #         },
     #         engine_mode: "String",
     #         scaling_configuration_info: {
     #           min_capacity: 1,
@@ -10816,6 +10851,13 @@ module Aws::RDS
     #           transit_gateway_multicast_domain_id: "String",
     #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #         },
+    #         db_cluster_instance_class: "String",
+    #         storage_type: "String",
+    #         iops: 1,
+    #         storage_throughput: 1,
+    #         io_optimized_next_allowed_modification_time: Time.now,
+    #         publicly_accessible: false,
+    #         auto_minor_version_upgrade: false,
     #         deletion_protection: false,
     #         http_endpoint_enabled: false,
     #         activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -10844,62 +10886,33 @@ module Aws::RDS
     #         global_cluster_identifier: "GlobalClusterIdentifier",
     #         global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #         global_write_forwarding_requested: false,
-    #         pending_modified_values: {
-    #           pending_cloudwatch_logs_exports: {
-    #             log_types_to_enable: ["String"],
-    #             log_types_to_disable: ["String"]
-    #           },
-    #           db_cluster_identifier: "String",
-    #           master_user_password: "String",
-    #           iam_database_authentication_enabled: false,
-    #           engine_version: "String",
-    #           backup_retention_period: 1,
-    #           allocated_storage: 1,
-    #           rds_custom_cluster_configuration: {
-    #             interconnect_subnet_id: "String",
-    #             transit_gateway_multicast_domain_id: "String",
-    #             replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #           },
-    #           iops: 1,
-    #           storage_type: "String",
-    #           certificate_details: {
-    #             ca_identifier: "String",
-    #             valid_till: Time.now
-    #           }
-    #         },
-    #         db_cluster_instance_class: "String",
-    #         storage_type: "String",
-    #         iops: 1,
-    #         publicly_accessible: false,
-    #         auto_minor_version_upgrade: false,
-    #         monitoring_interval: 1,
-    #         monitoring_role_arn: "String",
-    #         database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #         performance_insights_enabled: false,
-    #         performance_insights_kms_key_id: "String",
-    #         performance_insights_retention_period: 1,
+    #         network_type: "String",
+    #         automatic_restart_time: Time.now,
     #         serverless_v2_scaling_configuration: {
     #           min_capacity: 1.0,
     #           max_capacity: 1.0,
     #           seconds_until_auto_pause: 1
     #         },
     #         serverless_v2_platform_version: "String",
-    #         network_type: "String",
+    #         monitoring_interval: 1,
+    #         monitoring_role_arn: "String",
+    #         database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #         performance_insights_enabled: false,
+    #         performance_insights_kms_key_id: "String",
+    #         performance_insights_retention_period: 1,
     #         db_system_id: "String",
     #         master_user_secret: {
     #           secret_arn: "String",
     #           secret_status: "String",
     #           kms_key_id: "String"
     #         },
-    #         io_optimized_next_allowed_modification_time: Time.now,
     #         local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #         aws_backup_recovery_point_arn: "String",
     #         limitless_database: {
     #           status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #           min_required_acu: 1.0
     #         },
-    #         storage_throughput: 1,
-    #         cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #         cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #         certificate_details: {
     #           ca_identifier: "String",
     #           valid_till: Time.now
@@ -11192,9 +11205,14 @@ module Aws::RDS
     #     db_engine_versions: [
     #       {
     #         engine: "String",
+    #         major_engine_version: "String",
     #         engine_version: "String",
+    #         database_installation_files_s3_bucket_name: "String",
+    #         database_installation_files_s3_prefix: "String",
+    #         custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #         db_parameter_group_family: "String",
     #         db_engine_description: "String",
+    #         db_engine_version_arn: "String",
     #         db_engine_version_description: "String",
     #         default_character_set: {
     #           character_set_name: "String",
@@ -11205,6 +11223,8 @@ module Aws::RDS
     #           status: "String"
     #         },
     #         db_engine_media_type: "String",
+    #         kms_key_id: "String",
+    #         create_time: Time.now,
     #         supported_character_sets: [
     #           {
     #             character_set_name: "String",
@@ -11246,12 +11266,6 @@ module Aws::RDS
     #         status: "String",
     #         supports_parallel_query: false,
     #         supports_global_databases: false,
-    #         major_engine_version: "String",
-    #         database_installation_files_s3_bucket_name: "String",
-    #         database_installation_files_s3_prefix: "String",
-    #         db_engine_version_arn: "String",
-    #         kms_key_id: "String",
-    #         create_time: Time.now,
     #         tag_list: [
     #           {
     #             key: "String",
@@ -11259,7 +11273,6 @@ module Aws::RDS
     #           }
     #         ],
     #         supports_babelfish: false,
-    #         custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #         supports_limitless_database: false,
     #         supports_certificate_rotation_without_restart: false,
     #         supported_ca_certificate_identifiers: ["String"],
@@ -11416,6 +11429,7 @@ module Aws::RDS
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         option_group_name: "String",
     #         tde_credential_arn: "String",
     #         encrypted: false,
@@ -11431,10 +11445,9 @@ module Aws::RDS
     #           }
     #         ],
     #         backup_target: "String",
-    #         storage_throughput: 1,
+    #         multi_tenant: false,
     #         aws_backup_recovery_point_arn: "String",
-    #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         dedicated_log_volume: false
     #       }
     #     ]
     #   }
@@ -11551,7 +11564,6 @@ module Aws::RDS
     #         db_instance_class: "String",
     #         engine: "String",
     #         db_instance_status: "String",
-    #         automatic_restart_time: Time.now,
     #         master_username: "String",
     #         db_name: "String",
     #         endpoint: {
@@ -11606,13 +11618,14 @@ module Aws::RDS
     #         pending_modified_values: {
     #           db_instance_class: "String",
     #           allocated_storage: 1,
-    #           master_user_password: "String",
+    #           master_user_password: "SensitiveString",
     #           port: 1,
     #           backup_retention_period: 1,
     #           multi_az: false,
     #           engine_version: "String",
     #           license_model: "String",
     #           iops: 1,
+    #           storage_throughput: 1,
     #           db_instance_identifier: "String",
     #           storage_type: "String",
     #           ca_certificate_identifier: "String",
@@ -11627,13 +11640,12 @@ module Aws::RDS
     #               value: "String"
     #             }
     #           ],
-    #           iam_database_authentication_enabled: false,
     #           automation_mode: "full" # One of: ["full", "all-paused"],
     #           resume_full_automation_mode_time: Time.now,
-    #           storage_throughput: 1,
-    #           engine: "String",
+    #           multi_tenant: false,
+    #           iam_database_authentication_enabled: false,
     #           dedicated_log_volume: false,
-    #           multi_tenant: false
+    #           engine: "String"
     #         },
     #         latest_restorable_time: Time.now,
     #         multi_az: false,
@@ -11645,6 +11657,7 @@ module Aws::RDS
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         option_group_memberships: [
     #           {
     #             option_group_name: "String",
@@ -11721,40 +11734,40 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         db_instance_automated_backups_replications: [
-    #           {
-    #             db_instance_automated_backups_arn: "String"
-    #           }
-    #         ],
+    #         automation_mode: "full" # One of: ["full", "all-paused"],
+    #         resume_full_automation_mode_time: Time.now,
     #         customer_owned_ip_enabled: false,
-    #         aws_backup_recovery_point_arn: "String",
+    #         network_type: "String",
     #         activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #         activity_stream_kms_key_id: "String",
     #         activity_stream_kinesis_stream_name: "String",
     #         activity_stream_mode: "sync" # One of: ["sync", "async"],
     #         activity_stream_engine_native_audit_fields_included: false,
-    #         automation_mode: "full" # One of: ["full", "all-paused"],
-    #         resume_full_automation_mode_time: Time.now,
-    #         custom_iam_instance_profile: "String",
+    #         aws_backup_recovery_point_arn: "String",
+    #         db_instance_automated_backups_replications: [
+    #           {
+    #             db_instance_automated_backups_arn: "String"
+    #           }
+    #         ],
     #         backup_target: "String",
-    #         network_type: "String",
+    #         automatic_restart_time: Time.now,
+    #         custom_iam_instance_profile: "String",
     #         activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #         storage_throughput: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         },
     #         db_system_id: "String",
     #         master_user_secret: {
     #           secret_arn: "String",
     #           secret_status: "String",
     #           kms_key_id: "String"
     #         },
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         },
     #         read_replica_source_db_cluster_identifier: "String",
     #         percent_progress: "String",
+    #         multi_tenant: false,
     #         dedicated_log_volume: false,
     #         is_storage_config_upgrade_available: false,
-    #         multi_tenant: false,
     #         engine_lifecycle_support: "String"
     #       }
     #     ]
@@ -12185,7 +12198,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -12225,7 +12238,7 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String",
+    #     db_proxy_name: "DBProxyName",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -12249,6 +12262,7 @@ module Aws::RDS
     #         vpc_id: "String",
     #         vpc_security_group_ids: ["String"],
     #         vpc_subnet_ids: ["String"],
+    #         default_auth_scheme: "String",
     #         auth: [
     #           {
     #             description: "String",
@@ -12363,8 +12377,8 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -12426,8 +12440,8 @@ module Aws::RDS
     #            <p>Constraints: Minimum 20, maximum 100.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -12452,8 +12466,8 @@ module Aws::RDS
     #         type: "RDS_INSTANCE" # One of: ["RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"],
     #         role: "READ_WRITE" # One of: ["READ_WRITE", "READ_ONLY", "UNKNOWN"],
     #         target_health: {
-    #           state: "REGISTERING" # One of: ["REGISTERING", "AVAILABLE", "UNAVAILABLE"],
-    #           reason: "UNREACHABLE" # One of: ["UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE"],
+    #           state: "REGISTERING" # One of: ["REGISTERING", "AVAILABLE", "UNAVAILABLE", "UNUSED"],
+    #           reason: "UNREACHABLE" # One of: ["UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE", "PROMOTED"],
     #           description: "String"
     #         }
     #       }
@@ -13332,6 +13346,7 @@ module Aws::RDS
     #         license_model: "String",
     #         snapshot_type: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         option_group_name: "String",
     #         percent_progress: 1,
     #         source_region: "String",
@@ -13356,13 +13371,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
+    #         snapshot_target: "String",
     #         original_snapshot_create_time: Time.now,
     #         snapshot_database_time: Time.now,
-    #         snapshot_target: "String",
-    #         storage_throughput: 1,
     #         db_system_id: "String",
-    #         dedicated_log_volume: false,
     #         multi_tenant: false,
+    #         dedicated_log_volume: false,
     #         snapshot_availability_zone: "String"
     #       }
     #     ]
@@ -13556,7 +13570,7 @@ module Aws::RDS
     #       parameters: [
     #         {
     #           parameter_name: "String",
-    #           parameter_value: "String",
+    #           parameter_value: "PotentiallySensitiveParameterValue",
     #           description: "String",
     #           source: "String",
     #           apply_type: "String",
@@ -13889,7 +13903,7 @@ module Aws::RDS
     #       parameters: [
     #         {
     #           parameter_name: "String",
-    #           parameter_value: "String",
+    #           parameter_value: "PotentiallySensitiveParameterValue",
     #           description: "String",
     #           source: "String",
     #           apply_type: "String",
@@ -14215,7 +14229,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #   params = {
     #     source_identifier: "String",
-    #     source_type: "db-instance" # One of: ["db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment"],
+    #     source_type: "db-instance" # One of: ["db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment", "db-shard-group", "zero-etl"],
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,
@@ -14238,7 +14252,7 @@ module Aws::RDS
     #     events: [
     #       {
     #         source_identifier: "String",
-    #         source_type: "db-instance" # One of: ["db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment"],
+    #         source_type: "db-instance" # One of: ["db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment", "db-shard-group", "zero-etl"],
     #         message: "String",
     #         event_categories: ["String"],
     #         date: Time.now,
@@ -14462,7 +14476,7 @@ module Aws::RDS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     global_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -14480,7 +14494,7 @@ module Aws::RDS
     #     marker: "String",
     #     global_clusters: [
     #       {
-    #         global_cluster_identifier: "String",
+    #         global_cluster_identifier: "GlobalClusterIdentifier",
     #         global_cluster_resource_id: "String",
     #         global_cluster_arn: "String",
     #         status: "String",
@@ -14595,15 +14609,15 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
+    #         data_filter: "DataFilter",
+    #         description: "IntegrationDescription",
     #         create_time: Time.now,
     #         errors: [
     #           {
     #             error_code: "String", # required
     #             error_message: "String"
     #           }
-    #         ],
-    #         data_filter: "DataFilter",
-    #         description: "IntegrationDescription"
+    #         ]
     #       }
     #     ]
     #   }
@@ -14967,7 +14981,7 @@ module Aws::RDS
     #             option_settings: [
     #               {
     #                 name: "String",
-    #                 value: "String",
+    #                 value: "PotentiallySensitiveOptionSettingValue",
     #                 default_value: "String",
     #                 description: "String",
     #                 apply_type: "String",
@@ -15223,6 +15237,7 @@ module Aws::RDS
     #         supports_storage_encryption: false,
     #         storage_type: "String",
     #         supports_iops: false,
+    #         supports_storage_throughput: false,
     #         supports_enhanced_monitoring: false,
     #         supports_iam_database_authentication: false,
     #         supports_performance_insights: false,
@@ -15232,6 +15247,10 @@ module Aws::RDS
     #         max_iops_per_db_instance: 1,
     #         min_iops_per_gib: 1.0,
     #         max_iops_per_gib: 1.0,
+    #         min_storage_throughput_per_db_instance: 1,
+    #         max_storage_throughput_per_db_instance: 1,
+    #         min_storage_throughput_per_iops: 1.0,
+    #         max_storage_throughput_per_iops: 1.0,
     #         available_processor_features: [
     #           {
     #             name: "String",
@@ -15245,13 +15264,8 @@ module Aws::RDS
     #         outpost_capable: false,
     #         supported_activity_stream_modes: ["String"],
     #         supports_global_databases: false,
-    #         supports_clusters: false,
     #         supported_network_types: ["String"],
-    #         supports_storage_throughput: false,
-    #         min_storage_throughput_per_db_instance: 1,
-    #         max_storage_throughput_per_db_instance: 1,
-    #         min_storage_throughput_per_iops: 1.0,
-    #         max_storage_throughput_per_iops: 1.0,
+    #         supports_clusters: false,
     #         supports_dedicated_log_volume: false,
     #         supports_http_endpoint: false
     #       }
@@ -15970,7 +15984,6 @@ module Aws::RDS
     #               to: 1.0
     #             }
     #           ],
-    #           supports_storage_autoscaling: false,
     #           provisioned_storage_throughput: [
     #             {
     #               from: 1,
@@ -15983,7 +15996,8 @@ module Aws::RDS
     #               from: 1.0,
     #               to: 1.0
     #             }
-    #           ]
+    #           ],
+    #           supports_storage_autoscaling: false
     #         }
     #       ],
     #       valid_processor_features: [
@@ -16098,7 +16112,7 @@ module Aws::RDS
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     log_file_data: "String",
+    #     log_file_data: "SensitiveString",
     #     marker: "String",
     #     additional_data_pending: false
     #   }
@@ -16206,7 +16220,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -16270,6 +16283,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -16284,6 +16320,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -16312,62 +16355,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -16461,7 +16475,7 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     global_cluster: {
-    #       global_cluster_identifier: "String",
+    #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_cluster_resource_id: "String",
     #       global_cluster_arn: "String",
     #       status: "String",
@@ -16840,9 +16854,14 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     engine: "String",
+    #     major_engine_version: "String",
     #     engine_version: "String",
+    #     database_installation_files_s3_bucket_name: "String",
+    #     database_installation_files_s3_prefix: "String",
+    #     custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #     db_parameter_group_family: "String",
     #     db_engine_description: "String",
+    #     db_engine_version_arn: "String",
     #     db_engine_version_description: "String",
     #     default_character_set: {
     #       character_set_name: "String",
@@ -16853,6 +16872,8 @@ module Aws::RDS
     #       status: "String"
     #     },
     #     db_engine_media_type: "String",
+    #     kms_key_id: "String",
+    #     create_time: Time.now,
     #     supported_character_sets: [
     #       {
     #         character_set_name: "String",
@@ -16894,12 +16915,6 @@ module Aws::RDS
     #     status: "String",
     #     supports_parallel_query: false,
     #     supports_global_databases: false,
-    #     major_engine_version: "String",
-    #     database_installation_files_s3_bucket_name: "String",
-    #     database_installation_files_s3_prefix: "String",
-    #     db_engine_version_arn: "String",
-    #     kms_key_id: "String",
-    #     create_time: Time.now,
     #     tag_list: [
     #       {
     #         key: "String",
@@ -16907,7 +16922,6 @@ module Aws::RDS
     #       }
     #     ],
     #     supports_babelfish: false,
-    #     custom_db_engine_version_manifest: "CustomDBEngineVersionManifest",
     #     supports_limitless_database: false,
     #     supports_certificate_rotation_without_restart: false,
     #     supported_ca_certificate_identifiers: ["String"],
@@ -17258,6 +17272,22 @@ module Aws::RDS
     #               By default, minor engine upgrades are applied automatically.</p>
     #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters.</p>
     #            <p>For more information about automatic minor version upgrades, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades">Automatically upgrading the minor engine version</a>.</p>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. 
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 
+    #               protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html">
+    #               Working with a DB instance in a VPC</a> in the 
+    #               <i>Amazon Aurora User Guide.</i>
+    #            </p>
+    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
+    #            <p>Valid Values: <code>IPV4 | DUAL</code>
+    #            </p>
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
+    #               <i>Amazon Aurora User Guide</i>.</p>
     # @option params [Integer] :monitoring_interval
     #   <p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. 
     #               To turn off collecting Enhanced Monitoring metrics, specify <code>0</code>.</p>
@@ -17318,22 +17348,6 @@ module Aws::RDS
     #            </ul>
     #            <p>Default: <code>7</code> days</p>
     #            <p>If you specify a retention period that isn't valid, such as <code>94</code>,  Amazon RDS issues an error.</p>
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
-    #               <i>Amazon Aurora User Guide</i>.</p>
-    # @option params [String] :network_type
-    #   <p>The network type of the DB cluster.</p>
-    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. 
-    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 
-    #               protocols (<code>DUAL</code>).</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html">
-    #               Working with a DB instance in a VPC</a> in the 
-    #               <i>Amazon Aurora User Guide.</i>
-    #            </p>
-    #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
-    #            <p>Valid Values: <code>IPV4 | DUAL</code>
-    #            </p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>
     #            <p>If the DB cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn 
@@ -17363,6 +17377,10 @@ module Aws::RDS
     #                  <p>You must apply the change immediately when rotating the master user password.</p>
     #               </li>
     #            </ul>
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   <p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By
+    #               default, write operations aren't allowed on reader DB instances.</p>
+    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and 
     #               managed in Amazon Web Services Secrets Manager.</p>
@@ -17407,10 +17425,6 @@ module Aws::RDS
     #               from the DB cluster's current engine mode.</p>
     #               </li>
     #            </ul>
-    # @option params [Boolean] :enable_local_write_forwarding
-    #   <p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By
-    #               default, write operations aren't allowed on reader DB instances.</p>
-    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :aws_backup_recovery_point_arn
     #   <p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>
     # @option params [Boolean] :enable_limitless_database
@@ -17518,7 +17532,7 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     vpc_security_group_ids: ["String"],
     #     port: 1,
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -17550,24 +17564,24 @@ module Aws::RDS
     #     storage_type: "String",
     #     iops: 1,
     #     auto_minor_version_upgrade: false,
+    #     network_type: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1
+    #     },
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
     #     database_insights_mode: "standard" # One of: ["standard", "advanced"],
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
-    #     serverless_v2_scaling_configuration: {
-    #       min_capacity: 1.0,
-    #       max_capacity: 1.0,
-    #       seconds_until_auto_pause: 1
-    #     },
-    #     network_type: "String",
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
+    #     enable_local_write_forwarding: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
-    #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     enable_limitless_database: false,
     #     ca_certificate_identifier: "String",
@@ -17588,7 +17602,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -17652,6 +17665,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -17666,6 +17702,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -17694,62 +17737,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -17907,7 +17921,7 @@ module Aws::RDS
     #     parameters: [ # required
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -18413,6 +18427,10 @@ module Aws::RDS
     #               </li>
     #            </ul>
     #            <p>Default: Uses existing setting</p>
+    # @option params [Integer] :storage_throughput
+    #   <p>The storage throughput value for the DB instance.</p>
+    #            <p>This setting applies only to the <code>gp3</code> storage type.</p>
+    #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
     # @option params [String] :option_group_name
     #   <p>The option group to associate the DB instance with.</p>
     #            <p>Changing this parameter doesn't result in an outage, with one exception. If the parameter change results 
@@ -18522,6 +18540,8 @@ module Aws::RDS
     #            </ul>
     #            <p>Example: <code>123.124.125.126,234.235.236.237</code>
     #            </p>
+    # @option params [Boolean] :disable_domain
+    #   <p>Specifies whether to remove the DB instance from the Active Directory domain.</p>
     # @option params [Boolean] :copy_tags_to_snapshot
     #   <p>Specifies whether to copy all tags from the DB instance to snapshots of the DB instance. By default, tags aren't copied.</p>
     #            <p>This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this
@@ -18609,8 +18629,6 @@ module Aws::RDS
     # @option params [String] :domain_iam_role_name
     #   <p>The name of the IAM role to use when making API calls to the Directory Service.</p>
     #            <p>This setting doesn't apply to RDS Custom DB instances.</p>
-    # @option params [Boolean] :disable_domain
-    #   <p>Specifies whether to remove the DB instance from the Active Directory domain.</p>
     # @option params [Integer] :promotion_tier
     #   <p>The order of priority in which an Aurora Replica is promoted to the primary instance 
     #             after a failure of the existing primary instance. For more information, 
@@ -18778,19 +18796,6 @@ module Aws::RDS
     #                           creation, you can manage the open mode manually.</p>
     #               </dd>
     #            </dl>
-    # @option params [Boolean] :enable_customer_owned_ip
-    #   <p>Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>
-    #            <p>A <i>CoIP</i> provides local or external connectivity to resources in
-    #               your Outpost subnets through your on-premises network. For some use cases, a CoIP can
-    #               provide lower latency for connections to the DB instance from outside of its virtual
-    #               private cloud (VPC) on your local network.</p>
-    #            <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on Amazon Web Services Outposts</a> 
-    #               in the <i>Amazon RDS User Guide</i>.</p>
-    #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
-    #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
-    # @option params [String] :aws_backup_recovery_point_arn
-    #   <p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>
-    #            <p>This setting doesn't apply to RDS Custom DB instances.</p>
     # @option params [String] :automation_mode
     #   <p>The automation mode of the RDS Custom DB instance. 
     #               If <code>full</code>, the DB instance automates monitoring and instance recovery. If 
@@ -18810,6 +18815,16 @@ module Aws::RDS
     #                  <p>Must be no more than 1,440.</p>
     #               </li>
     #            </ul>
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   <p>Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>
+    #            <p>A <i>CoIP</i> provides local or external connectivity to resources in
+    #               your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+    #               provide lower latency for connections to the DB instance from outside of its virtual
+    #               private cloud (VPC) on your local network.</p>
+    #            <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on Amazon Web Services Outposts</a> 
+    #               in the <i>Amazon RDS User Guide</i>.</p>
+    #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
+    #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB instance.</p>
     #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. 
@@ -18821,10 +18836,9 @@ module Aws::RDS
     #            </p>
     #            <p>Valid Values: <code>IPV4 | DUAL</code>
     #            </p>
-    # @option params [Integer] :storage_throughput
-    #   <p>The storage throughput value for the DB instance.</p>
-    #            <p>This setting applies only to the <code>gp3</code> storage type.</p>
-    #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
+    # @option params [String] :aws_backup_recovery_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>
+    #            <p>This setting doesn't apply to RDS Custom DB instances.</p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>
     #            <p>If the DB instance doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn 
@@ -18889,6 +18903,22 @@ module Aws::RDS
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
     #            <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account
     #               has a different default KMS key for each Amazon Web Services Region.</p>
+    # @option params [Boolean] :multi_tenant
+    #   <p>Specifies whether the to convert your DB instance from the single-tenant conﬁguration
+    #               to the multi-tenant conﬁguration. This parameter is supported only for RDS for Oracle
+    #               CDB instances.</p>
+    #            <p>During the conversion, RDS creates an initial tenant database and associates the DB
+    #               name, master user name, character set, and national character set metadata with this
+    #               database. The tags associated with the instance also propagate to the initial tenant
+    #               database. You can add more tenant databases to your DB instance by using the
+    #                   <code>CreateTenantDatabase</code> operation.</p>
+    #            <important>
+    #               <p>The conversion to the multi-tenant configuration is permanent and irreversible, so
+    #                   you can't later convert back to the single-tenant configuration. When you specify
+    #                   this parameter, you must also specify <code>ApplyImmediately</code>.</p>
+    #            </important>
+    # @option params [Boolean] :dedicated_log_volume
+    #   <p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>
     # @option params [String] :engine
     #   <p>The target Oracle DB engine when you convert a non-CDB to a CDB. This intermediate step is necessary to upgrade an Oracle Database 19c non-CDB
     #              to an Oracle Database 21c CDB.</p>
@@ -18922,22 +18952,6 @@ module Aws::RDS
     #                          <code>--option-group-name</code>.</p>
     #               </li>
     #            </ul>
-    # @option params [Boolean] :dedicated_log_volume
-    #   <p>Indicates whether the DB instance has a dedicated log volume (DLV) enabled.</p>
-    # @option params [Boolean] :multi_tenant
-    #   <p>Specifies whether the to convert your DB instance from the single-tenant conﬁguration
-    #               to the multi-tenant conﬁguration. This parameter is supported only for RDS for Oracle
-    #               CDB instances.</p>
-    #            <p>During the conversion, RDS creates an initial tenant database and associates the DB
-    #               name, master user name, character set, and national character set metadata with this
-    #               database. The tags associated with the instance also propagate to the initial tenant
-    #               database. You can add more tenant databases to your DB instance by using the
-    #                   <code>CreateTenantDatabase</code> operation.</p>
-    #            <important>
-    #               <p>The conversion to the multi-tenant configuration is permanent and irreversible, so
-    #                   you can't later convert back to the single-tenant configuration. When you specify
-    #                   this parameter, you must also specify <code>ApplyImmediately</code>.</p>
-    #            </important>
     # @option params [String] :master_user_authentication_type
     #   <p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>
     #            <p>You can specify one of the following values:</p>
@@ -19007,7 +19021,7 @@ module Aws::RDS
     #     db_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     apply_immediately: false,
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     db_parameter_group_name: "String",
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
@@ -19018,24 +19032,25 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     license_model: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     new_db_instance_identifier: "String",
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     ca_certificate_identifier: "String",
     #     domain: "String",
     #     domain_fqdn: "String",
     #     domain_ou: "String",
     #     domain_auth_secret_arn: "String",
     #     domain_dns_ips: ["String"],
+    #     disable_domain: false,
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
     #     db_port_number: 1,
     #     publicly_accessible: false,
     #     monitoring_role_arn: "String",
     #     domain_iam_role_name: "String",
-    #     disable_domain: false,
     #     promotion_tier: 1,
     #     enable_iam_database_authentication: false,
     #     database_insights_mode: "standard" # One of: ["standard", "advanced"],
@@ -19057,18 +19072,17 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
-    #     enable_customer_owned_ip: false,
-    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     automation_mode: "full" # One of: ["full", "all-paused"],
     #     resume_full_automation_mode_minutes: 1,
+    #     enable_customer_owned_ip: false,
     #     network_type: "String",
-    #     storage_throughput: 1,
+    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     engine: "String",
-    #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     dedicated_log_volume: false,
+    #     engine: "String",
     #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
     #   }
     #   options = {}
@@ -19081,7 +19095,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -19136,13 +19149,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -19157,13 +19171,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -19175,6 +19188,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -19251,40 +19265,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -19357,7 +19371,7 @@ module Aws::RDS
     #     parameters: [ # required
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -19389,6 +19403,10 @@ module Aws::RDS
     #   <p>The identifier for the <code>DBProxy</code> to modify.</p>
     # @option params [String] :new_db_proxy_name
     #   <p>The new identifier for the <code>DBProxy</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>
+    # @option params [String] :default_auth_scheme
+    #   <p>The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database. 
+    #               Valid values are <code>NONE</code> and <code>IAM_AUTH</code>. 
+    #               When set to <code>IAM_AUTH</code>, the proxy uses end-to-end IAM authentication to connect to the database.</p>
     # @option params [Array<Types::UserAuthConfig>] :auth
     #   <p>The new authentication settings for the <code>DBProxy</code>.</p>
     # @option params [Boolean] :require_tls
@@ -19410,14 +19428,15 @@ module Aws::RDS
     #   <p>The new list of security groups for the <code>DBProxy</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
-    #     new_db_proxy_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     new_db_proxy_name: "DBProxyName",
+    #     default_auth_scheme: "IAM_AUTH" # One of: ["IAM_AUTH", "NONE"],
     #     auth: [
     #       {
-    #         description: "String",
-    #         user_name: "String",
+    #         description: "Description",
+    #         user_name: "AuthUserName",
     #         auth_scheme: "SECRETS" # One of: ["SECRETS"],
-    #         secret_arn: "String",
+    #         secret_arn: "Arn",
     #         iam_auth: "DISABLED" # One of: ["DISABLED", "REQUIRED", "ENABLED"],
     #         client_password_auth_type: "MYSQL_NATIVE_PASSWORD" # One of: ["MYSQL_NATIVE_PASSWORD", "MYSQL_CACHING_SHA2_PASSWORD", "POSTGRES_SCRAM_SHA_256", "POSTGRES_MD5", "SQL_SERVER_AUTHENTICATION"]
     #       }
@@ -19425,7 +19444,7 @@ module Aws::RDS
     #     require_tls: false,
     #     idle_client_timeout: 1,
     #     debug_logging: false,
-    #     role_arn: "String",
+    #     role_arn: "Arn",
     #     security_groups: ["String"]
     #   }
     #   options = {}
@@ -19441,6 +19460,7 @@ module Aws::RDS
     #       vpc_id: "String",
     #       vpc_security_group_ids: ["String"],
     #       vpc_subnet_ids: ["String"],
+    #       default_auth_scheme: "String",
     #       auth: [
     #         {
     #           description: "String",
@@ -19525,8 +19545,8 @@ module Aws::RDS
     #            <p>You can't rename the <code>default</code> target group.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     target_group_name: "String", # required
-    #     db_proxy_name: "String", # required
+    #     target_group_name: "DBProxyTargetGroupName", # required
+    #     db_proxy_name: "DBProxyName", # required
     #     connection_pool_config: {
     #       max_connections_percent: 1,
     #       max_idle_connections_percent: 1,
@@ -19915,6 +19935,7 @@ module Aws::RDS
     #       license_model: "String",
     #       snapshot_type: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       percent_progress: 1,
     #       source_region: "String",
@@ -19939,13 +19960,12 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
+    #       snapshot_target: "String",
     #       original_snapshot_create_time: Time.now,
     #       snapshot_database_time: Time.now,
-    #       snapshot_target: "String",
-    #       storage_throughput: 1,
     #       db_system_id: "String",
-    #       dedicated_log_volume: false,
     #       multi_tenant: false,
+    #       dedicated_log_volume: false,
     #       snapshot_availability_zone: "String"
     #     }
     #   }
@@ -20340,8 +20360,8 @@ module Aws::RDS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     global_cluster_identifier: "String",
-    #     new_global_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     new_global_cluster_identifier: "GlobalClusterIdentifier",
     #     deletion_protection: false,
     #     engine_version: "String",
     #     allow_major_version_upgrade: false
@@ -20352,7 +20372,7 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     global_cluster: {
-    #       global_cluster_identifier: "String",
+    #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_cluster_resource_id: "String",
     #       global_cluster_arn: "String",
     #       status: "String",
@@ -20452,15 +20472,15 @@ module Aws::RDS
     #         value: "String"
     #       }
     #     ],
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
     #     create_time: Time.now,
     #     errors: [
     #       {
     #         error_code: "String", # required
     #         error_message: "String"
     #       }
-    #     ],
-    #     data_filter: "DataFilter",
-    #     description: "IntegrationDescription"
+    #     ]
     #   }
     # @return [Types::ModifyIntegrationOutput]
     def modify_integration(params = {}, options = {})
@@ -20513,7 +20533,7 @@ module Aws::RDS
     #         option_settings: [
     #           {
     #             name: "String",
-    #             value: "String",
+    #             value: "PotentiallySensitiveOptionSettingValue",
     #             default_value: "String",
     #             description: "String",
     #             apply_type: "String",
@@ -20549,7 +20569,7 @@ module Aws::RDS
     #           option_settings: [
     #             {
     #               name: "String",
-    #               value: "String",
+    #               value: "PotentiallySensitiveOptionSettingValue",
     #               default_value: "String",
     #               description: "String",
     #               apply_type: "String",
@@ -20864,7 +20884,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -20919,13 +20938,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -20940,13 +20960,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -20958,6 +20977,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -21034,40 +21054,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -21109,7 +21129,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -21173,6 +21192,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -21187,6 +21229,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -21215,62 +21264,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -21421,7 +21441,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -21485,6 +21504,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -21499,6 +21541,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -21527,62 +21576,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -21655,7 +21675,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -21710,13 +21729,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -21731,13 +21751,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -21749,6 +21768,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -21825,40 +21845,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -21918,8 +21938,8 @@ module Aws::RDS
     #   <p>One or more DB cluster identifiers.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     db_instance_identifiers: ["String"],
     #     db_cluster_identifiers: ["String"]
     #   }
@@ -21938,8 +21958,8 @@ module Aws::RDS
     #         type: "RDS_INSTANCE" # One of: ["RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"],
     #         role: "READ_WRITE" # One of: ["READ_WRITE", "READ_ONLY", "UNKNOWN"],
     #         target_health: {
-    #           state: "REGISTERING" # One of: ["REGISTERING", "AVAILABLE", "UNAVAILABLE"],
-    #           reason: "UNREACHABLE" # One of: ["UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE"],
+    #           state: "REGISTERING" # One of: ["REGISTERING", "AVAILABLE", "UNAVAILABLE", "UNUSED"],
+    #           reason: "UNREACHABLE" # One of: ["UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE", "PROMOTED"],
     #           description: "String"
     #         }
     #       }
@@ -22001,8 +22021,8 @@ module Aws::RDS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     global_cluster_identifier: "String",
-    #     db_cluster_identifier: "String"
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     db_cluster_identifier: "String", # required
     #   }
     #   options = {}
     #   response = client.remove_from_global_cluster(params, options)
@@ -22010,7 +22030,7 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     global_cluster: {
-    #       global_cluster_identifier: "String",
+    #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_cluster_resource_id: "String",
     #       global_cluster_arn: "String",
     #       status: "String",
@@ -22273,7 +22293,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -22365,7 +22385,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -22622,10 +22642,13 @@ module Aws::RDS
     #           in the <i>Amazon Aurora User Guide</i>.</p>
     # @option params [String] :domain_iam_role_name
     #   <p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
-    #               <i>Amazon Aurora User Guide</i>.</p>
+    # @option params [String] :storage_type
+    #   <p>Specifies the storage type to be associated with the DB cluster.</p>
+    #            <p>Valid Values: <code>aurora</code>, <code>aurora-iopt1</code>
+    #            </p>
+    #            <p>Default: <code>aurora</code>
+    #            </p>
+    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB cluster.</p>
     #            <p>Valid Values:</p>
@@ -22648,6 +22671,10 @@ module Aws::RDS
     #               Working with a DB instance in a VPC</a> in the 
     #               <i>Amazon Aurora User Guide.</i>
     #            </p>
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
+    #               <i>Amazon Aurora User Guide</i>.</p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html">Password management with Amazon Web Services Secrets Manager</a> 
@@ -22674,13 +22701,6 @@ module Aws::RDS
     #               managed KMS key.</p>
     #            <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account
     #               has a different default KMS key for each Amazon Web Services Region.</p>
-    # @option params [String] :storage_type
-    #   <p>Specifies the storage type to be associated with the DB cluster.</p>
-    #            <p>Valid Values: <code>aurora</code>, <code>aurora-iopt1</code>
-    #            </p>
-    #            <p>Default: <code>aurora</code>
-    #            </p>
-    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :engine_lifecycle_support
     #   <p>The life cycle type for this DB cluster.</p>
     #            <note>
@@ -22784,7 +22804,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     port: 1,
     #     master_username: "String", # required
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -22808,15 +22828,15 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     storage_type: "String",
+    #     network_type: "String",
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #       seconds_until_auto_pause: 1
     #     },
-    #     network_type: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     storage_type: "String",
     #     engine_lifecycle_support: "String"
     #   }
     #   options = {}
@@ -22834,7 +22854,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -22898,6 +22917,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -22912,6 +22954,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -22940,62 +22989,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -23294,10 +23314,6 @@ module Aws::RDS
     #               </li>
     #            </ul>
     #            <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
-    #               <i>Amazon Aurora User Guide</i>.</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB cluster.</p>
     #            <p>Valid Values:</p>
@@ -23321,6 +23337,10 @@ module Aws::RDS
     #               <i>Amazon Aurora User Guide.</i>
     #            </p>
     #            <p>Valid for: Aurora DB clusters only</p>
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
+    #               <i>Amazon Aurora User Guide</i>.</p>
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   <p>Reserved for future use.</p>
     # @option params [Integer] :monitoring_interval
@@ -23490,12 +23510,12 @@ module Aws::RDS
     #     storage_type: "String",
     #     iops: 1,
     #     publicly_accessible: false,
+    #     network_type: "String",
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #       seconds_until_auto_pause: 1
     #     },
-    #     network_type: "String",
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
@@ -23523,7 +23543,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -23587,6 +23606,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -23601,6 +23643,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -23629,62 +23678,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -23914,17 +23934,6 @@ module Aws::RDS
     # @option params [String] :domain_iam_role_name
     #   <p>The name of the IAM role to be used when making API calls to the Directory Service.</p>
     #            <p>Valid for: Aurora DB clusters only</p>
-    # @option params [Types::ScalingConfiguration] :scaling_configuration
-    #   <p>For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.</p>
-    #            <p>Valid for: Aurora DB clusters only</p>
-    # @option params [String] :engine_mode
-    #   <p>The engine mode of the new cluster. Specify <code>provisioned</code> or <code>serverless</code>,
-    #         depending on the type of the cluster you are creating. You can create an Aurora Serverless v1 clone
-    #         from a provisioned cluster, or a provisioned clone from an Aurora Serverless v1 cluster. To create a clone
-    #         that is an Aurora Serverless v1 cluster, the original cluster must be an Aurora Serverless v1 cluster or
-    #         an encrypted provisioned cluster. To create a full copy that is an Aurora Serverless v1 cluster, specify 
-    #         the engine mode <code>serverless</code>.</p>
-    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :db_cluster_instance_class
     #   <p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster,
     #               for example db.m6gd.xlarge. Not all DB instance classes are available in all Amazon Web Services
@@ -23975,10 +23984,6 @@ module Aws::RDS
     #               in the <i>Amazon RDS User Guide</i>.</p>
     #            <p>Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB instance.</p>
     #            <p>Valid for: Multi-AZ DB clusters only</p>
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
-    #               <i>Amazon Aurora User Guide</i>.</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB cluster.</p>
     #            <p>Valid Values:</p>
@@ -24004,6 +24009,21 @@ module Aws::RDS
     #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [String] :source_db_cluster_resource_id
     #   <p>The resource ID of the source DB cluster from which to restore.</p>
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html">Using Amazon Aurora Serverless v2</a> in the
+    #               <i>Amazon Aurora User Guide</i>.</p>
+    # @option params [Types::ScalingConfiguration] :scaling_configuration
+    #   <p>For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.</p>
+    #            <p>Valid for: Aurora DB clusters only</p>
+    # @option params [String] :engine_mode
+    #   <p>The engine mode of the new cluster. Specify <code>provisioned</code> or <code>serverless</code>,
+    #         depending on the type of the cluster you are creating. You can create an Aurora Serverless v1 clone
+    #         from a provisioned cluster, or a provisioned clone from an Aurora Serverless v1 cluster. To create a clone
+    #         that is an Aurora Serverless v1 cluster, the original cluster must be an Aurora Serverless v1 cluster or
+    #         an encrypted provisioned cluster. To create a full copy that is an Aurora Serverless v1 cluster, specify 
+    #         the engine mode <code>serverless</code>.</p>
+    #            <p>Valid for: Aurora DB clusters only</p>
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   <p>Reserved for future use.</p>
     # @option params [Integer] :monitoring_interval
@@ -24158,6 +24178,17 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     db_cluster_instance_class: "String",
+    #     storage_type: "String",
+    #     publicly_accessible: false,
+    #     iops: 1,
+    #     network_type: "String",
+    #     source_db_cluster_resource_id: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1
+    #     },
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -24167,17 +24198,6 @@ module Aws::RDS
     #       seconds_before_timeout: 1
     #     },
     #     engine_mode: "String",
-    #     db_cluster_instance_class: "String",
-    #     storage_type: "String",
-    #     publicly_accessible: false,
-    #     iops: 1,
-    #     serverless_v2_scaling_configuration: {
-    #       min_capacity: 1.0,
-    #       max_capacity: 1.0,
-    #       seconds_until_auto_pause: 1
-    #     },
-    #     network_type: "String",
-    #     source_db_cluster_resource_id: "String",
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
@@ -24205,7 +24225,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -24269,6 +24288,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -24283,6 +24325,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -24311,62 +24360,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -24605,6 +24625,9 @@ module Aws::RDS
     #             in the <i>Amazon RDS User Guide.</i>
     #            </p>
     #            <p>Constraints: Must be an integer greater than 1000.</p>
+    # @option params [Integer] :storage_throughput
+    #   <p>Specifies the storage throughput value for the DB instance.</p>
+    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>
     # @option params [String] :option_group_name
     #   <p>The name of the option group to be used for the restored DB instance.</p>
     #            <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option 
@@ -24751,29 +24774,6 @@ module Aws::RDS
     #               in the <i>Amazon RDS User Guide</i>.</p>
     #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
     #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
-    # @option params [String] :custom_iam_instance_profile
-    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
-    #               RDS Custom DB instance. The instance profile must meet the following requirements:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>The profile must exist in your account.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
-    #               </li>
-    #            </ul>
-    #            <p>For the list of permissions required for the IAM role, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
-    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
-    #            <p>This setting is required for RDS Custom.</p>
-    # @option params [String] :backup_target
-    #   <p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>
-    #            <p>Possible values are <code>local</code> (Dedicated Local Zone), <code>outposts</code> (Amazon Web Services Outposts), and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working 
-    #               with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB instance.</p>
     #            <p>Valid Values:</p>
@@ -24796,9 +24796,37 @@ module Aws::RDS
     #               Working with a DB instance in a VPC</a> in the 
     #               <i>Amazon RDS User Guide.</i>
     #            </p>
-    # @option params [Integer] :storage_throughput
-    #   <p>Specifies the storage throughput value for the DB instance.</p>
-    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>
+    # @option params [String] :backup_target
+    #   <p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>
+    #            <p>Possible values are <code>local</code> (Dedicated Local Zone), <code>outposts</code> (Amazon Web Services Outposts), and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working 
+    #               with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>
+    # @option params [String] :custom_iam_instance_profile
+    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
+    #               RDS Custom DB instance. The instance profile must meet the following requirements:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The profile must exist in your account.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For the list of permissions required for the IAM role, see 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
+    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
+    #            <p>This setting is required for RDS Custom.</p>
+    # @option params [Integer] :allocated_storage
+    #   <p>The amount of storage (in gibibytes) to allocate initially for the DB instance. Follow the allocation rules specified in
+    #               CreateDBInstance.</p>
+    #            <p>This setting isn't valid for RDS for SQL Server.</p>
+    #            <note>
+    #               <p>Be sure to allocate enough storage for your new DB instance so that the restore operation can succeed. You can also
+    #                   allocate additional storage for future growth.</p>
+    #            </note>
     # @option params [String] :db_cluster_snapshot_identifier
     #   <p>The identifier for the Multi-AZ DB cluster snapshot to restore from.</p>
     #            <p>For more information on Multi-AZ DB clusters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html"> Multi-AZ DB
@@ -24823,14 +24851,6 @@ module Aws::RDS
     #                  <p>Can't be the identifier of an Aurora DB cluster snapshot.</p>
     #               </li>
     #            </ul>
-    # @option params [Integer] :allocated_storage
-    #   <p>The amount of storage (in gibibytes) to allocate initially for the DB instance. Follow the allocation rules specified in
-    #               CreateDBInstance.</p>
-    #            <p>This setting isn't valid for RDS for SQL Server.</p>
-    #            <note>
-    #               <p>Be sure to allocate enough storage for your new DB instance so that the restore operation can succeed. You can also
-    #                   allocate additional storage for future growth.</p>
-    #            </note>
     # @option params [Boolean] :dedicated_log_volume
     #   <p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>
     # @option params [String] :ca_certificate_identifier
@@ -24927,6 +24947,7 @@ module Aws::RDS
     #     db_name: "String",
     #     engine: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     tags: [
     #       {
@@ -24936,7 +24957,7 @@ module Aws::RDS
     #     ],
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_fqdn: "String",
@@ -24957,12 +24978,11 @@ module Aws::RDS
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
-    #     db_cluster_snapshot_identifier: "String",
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
+    #     db_cluster_snapshot_identifier: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -24979,7 +24999,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -25034,13 +25053,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -25055,13 +25075,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -25073,6 +25092,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -25149,40 +25169,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -25389,6 +25409,9 @@ module Aws::RDS
     #               see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS">Amazon RDS Provisioned IOPS storage</a> 
     #               in the <i>Amazon RDS User Guide.</i>
     #            </p>
+    # @option params [Integer] :storage_throughput
+    #   <p>Specifies the storage throughput value for the DB instance.</p>
+    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>
     # @option params [String] :option_group_name
     #   <p>The name of the option group to associate with this DB instance. 
     #               If this argument is omitted, the default option group for the specified engine is used.</p>
@@ -25562,9 +25585,6 @@ module Aws::RDS
     #               Working with a DB instance in a VPC</a> in the 
     #               <i>Amazon RDS User Guide.</i>
     #            </p>
-    # @option params [Integer] :storage_throughput
-    #   <p>Specifies the storage throughput value for the DB instance.</p>
-    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html">Password management with Amazon Web Services Secrets Manager</a> 
@@ -25622,7 +25642,7 @@ module Aws::RDS
     #     db_instance_class: "String", # required
     #     engine: "String", # required
     #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     db_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     availability_zone: "String",
@@ -25637,6 +25657,7 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     license_model: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     publicly_accessible: false,
     #     tags: [
@@ -25672,7 +25693,6 @@ module Aws::RDS
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
     #     network_type: "String",
-    #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     dedicated_log_volume: false,
@@ -25689,7 +25709,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -25744,13 +25763,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -25765,13 +25785,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -25783,6 +25802,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -25859,40 +25879,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -26165,6 +26185,9 @@ module Aws::RDS
     #                  <p>Must be an integer greater than 1000.</p>
     #               </li>
     #            </ul>
+    # @option params [Integer] :storage_throughput
+    #   <p>The storage throughput value for the DB instance.</p>
+    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>
     # @option params [String] :option_group_name
     #   <p>The name of the option group to use for the restored DB instance.</p>
     #            <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an 
@@ -26307,10 +26330,6 @@ module Aws::RDS
     #                 Managing capacity automatically with Amazon RDS storage autoscaling</a> 
     #             in the <i>Amazon RDS User Guide</i>.</p>
     #            <p>This setting doesn't apply to RDS Custom.</p>
-    # @option params [String] :source_db_instance_automated_backups_arn
-    #   <p>The Amazon Resource Name (ARN) of the replicated automated backups from which to restore, for example, 
-    #               <code>arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.</p>
-    #            <p>This setting doesn't apply to RDS Custom.</p>
     # @option params [Boolean] :enable_customer_owned_ip
     #   <p>Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>
     #            <p>A <i>CoIP</i> provides local or external connectivity to resources in
@@ -26322,45 +26341,6 @@ module Aws::RDS
     #               in the <i>Amazon RDS User Guide</i>.</p>
     #            <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing">Customer-owned IP addresses</a> 
     #               in the <i>Amazon Web Services Outposts User Guide</i>.</p>
-    # @option params [String] :custom_iam_instance_profile
-    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
-    #               RDS Custom DB instance. The instance profile must meet the following requirements:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>The profile must exist in your account.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
-    #               </li>
-    #            </ul>
-    #            <p>For the list of permissions required for the IAM role, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
-    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
-    #            <p>This setting is required for RDS Custom.</p>
-    # @option params [String] :backup_target
-    #   <p>The location for storing automated backups and manual snapshots for the restored DB instance.</p>
-    #            <p>Valid Values:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>local</code> (Dedicated Local Zone)</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>outposts</code> (Amazon Web Services Outposts)</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>region</code> (Amazon Web Services Region)</p>
-    #               </li>
-    #            </ul>
-    #            <p>Default: <code>region</code>
-    #            </p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working 
-    #               with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>
     # @option params [String] :network_type
     #   <p>The network type of the DB instance.</p>
     #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. 
@@ -26383,9 +26363,49 @@ module Aws::RDS
     #                  </p>
     #               </li>
     #            </ul>
-    # @option params [Integer] :storage_throughput
-    #   <p>The storage throughput value for the DB instance.</p>
-    #            <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>
+    # @option params [String] :source_db_instance_automated_backups_arn
+    #   <p>The Amazon Resource Name (ARN) of the replicated automated backups from which to restore, for example, 
+    #               <code>arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.</p>
+    #            <p>This setting doesn't apply to RDS Custom.</p>
+    # @option params [String] :backup_target
+    #   <p>The location for storing automated backups and manual snapshots for the restored DB instance.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>local</code> (Dedicated Local Zone)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>outposts</code> (Amazon Web Services Outposts)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>region</code> (Amazon Web Services Region)</p>
+    #               </li>
+    #            </ul>
+    #            <p>Default: <code>region</code>
+    #            </p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working 
+    #               with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>
+    # @option params [String] :custom_iam_instance_profile
+    #   <p>The instance profile associated with the underlying Amazon EC2 instance of an 
+    #               RDS Custom DB instance. The instance profile must meet the following requirements:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The profile must exist in your account.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For the list of permissions required for the IAM role, see 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc">
+    #                   Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>
+    #            <p>This setting is required for RDS Custom.</p>
     # @option params [Integer] :allocated_storage
     #   <p>The amount of storage (in gibibytes) to allocate initially for the DB instance.
     #               Follow the allocation rules specified in <code>CreateDBInstance</code>.</p>
@@ -26552,6 +26572,7 @@ module Aws::RDS
     #     db_name: "String",
     #     engine: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     copy_tags_to_snapshot: false,
     #     tags: [
@@ -26562,7 +26583,7 @@ module Aws::RDS
     #     ],
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_iam_role_name: "String",
@@ -26583,12 +26604,11 @@ module Aws::RDS
     #     deletion_protection: false,
     #     source_dbi_resource_id: "String",
     #     max_allocated_storage: 1,
-    #     source_db_instance_automated_backups_arn: "String",
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
+    #     source_db_instance_automated_backups_arn: "String",
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
@@ -26606,7 +26626,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -26661,13 +26680,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -26682,13 +26702,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -26700,6 +26719,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -26776,40 +26796,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -26965,8 +26985,8 @@ module Aws::RDS
     #     kinesis_stream_name: "String",
     #     status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #     mode: "sync" # One of: ["sync", "async"],
-    #     apply_immediately: false,
-    #     engine_native_audit_fields_included: false
+    #     engine_native_audit_fields_included: false,
+    #     apply_immediately: false
     #   }
     # @return [Types::StartActivityStreamResponse]
     def start_activity_stream(params = {}, options = {})
@@ -27026,7 +27046,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -27090,6 +27109,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -27104,6 +27146,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -27132,62 +27181,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -27241,7 +27261,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -27296,13 +27315,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -27317,13 +27337,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -27335,6 +27354,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -27411,40 +27431,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -27527,7 +27547,7 @@ module Aws::RDS
     #     source_db_instance_arn: "String", # required
     #     backup_retention_period: 1,
     #     kms_key_id: "String",
-    #     pre_signed_url: "String"
+    #     pre_signed_url: "SensitiveString"
     #   }
     #   options = {}
     #   response = client.start_db_instance_automated_backups_replication(params, options)
@@ -27554,6 +27574,7 @@ module Aws::RDS
     #       engine_version: "String",
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       tde_credential_arn: "String",
     #       encrypted: false,
@@ -27569,10 +27590,9 @@ module Aws::RDS
     #         }
     #       ],
     #       backup_target: "String",
-    #       storage_throughput: 1,
+    #       multi_tenant: false,
     #       aws_backup_recovery_point_arn: "String",
-    #       dedicated_log_volume: false,
-    #       multi_tenant: false
+    #       dedicated_log_volume: false
     #     }
     #   }
     # @return [Types::StartDBInstanceAutomatedBackupsReplicationResult]
@@ -27846,7 +27866,6 @@ module Aws::RDS
     #       db_cluster_parameter_group: "String",
     #       db_subnet_group: "String",
     #       status: "String",
-    #       automatic_restart_time: Time.now,
     #       percent_progress: "String",
     #       earliest_restorable_time: Time.now,
     #       endpoint: "String",
@@ -27910,6 +27929,29 @@ module Aws::RDS
     #       backtrack_consumed_change_records: 1,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       capacity: 1,
+    #       pending_modified_values: {
+    #         pending_cloudwatch_logs_exports: {
+    #           log_types_to_enable: ["String"],
+    #           log_types_to_disable: ["String"]
+    #         },
+    #         db_cluster_identifier: "String",
+    #         master_user_password: "SensitiveString",
+    #         iam_database_authentication_enabled: false,
+    #         engine_version: "String",
+    #         backup_retention_period: 1,
+    #         storage_type: "String",
+    #         allocated_storage: 1,
+    #         rds_custom_cluster_configuration: {
+    #           interconnect_subnet_id: "String",
+    #           transit_gateway_multicast_domain_id: "String",
+    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
+    #         },
+    #         iops: 1,
+    #         certificate_details: {
+    #           ca_identifier: "String",
+    #           valid_till: Time.now
+    #         }
+    #       },
     #       engine_mode: "String",
     #       scaling_configuration_info: {
     #         min_capacity: 1,
@@ -27924,6 +27966,13 @@ module Aws::RDS
     #         transit_gateway_multicast_domain_id: "String",
     #         replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
     #       },
+    #       db_cluster_instance_class: "String",
+    #       storage_type: "String",
+    #       iops: 1,
+    #       storage_throughput: 1,
+    #       io_optimized_next_allowed_modification_time: Time.now,
+    #       publicly_accessible: false,
+    #       auto_minor_version_upgrade: false,
     #       deletion_protection: false,
     #       http_endpoint_enabled: false,
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
@@ -27952,62 +28001,33 @@ module Aws::RDS
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "unknown"],
     #       global_write_forwarding_requested: false,
-    #       pending_modified_values: {
-    #         pending_cloudwatch_logs_exports: {
-    #           log_types_to_enable: ["String"],
-    #           log_types_to_disable: ["String"]
-    #         },
-    #         db_cluster_identifier: "String",
-    #         master_user_password: "String",
-    #         iam_database_authentication_enabled: false,
-    #         engine_version: "String",
-    #         backup_retention_period: 1,
-    #         allocated_storage: 1,
-    #         rds_custom_cluster_configuration: {
-    #           interconnect_subnet_id: "String",
-    #           transit_gateway_multicast_domain_id: "String",
-    #           replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"]
-    #         },
-    #         iops: 1,
-    #         storage_type: "String",
-    #         certificate_details: {
-    #           ca_identifier: "String",
-    #           valid_till: Time.now
-    #         }
-    #       },
-    #       db_cluster_instance_class: "String",
-    #       storage_type: "String",
-    #       iops: 1,
-    #       publicly_accessible: false,
-    #       auto_minor_version_upgrade: false,
-    #       monitoring_interval: 1,
-    #       monitoring_role_arn: "String",
-    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
-    #       performance_insights_enabled: false,
-    #       performance_insights_kms_key_id: "String",
-    #       performance_insights_retention_period: 1,
+    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
     #         max_capacity: 1.0,
     #         seconds_until_auto_pause: 1
     #       },
     #       serverless_v2_platform_version: "String",
-    #       network_type: "String",
+    #       monitoring_interval: 1,
+    #       monitoring_role_arn: "String",
+    #       database_insights_mode: "standard" # One of: ["standard", "advanced"],
+    #       performance_insights_enabled: false,
+    #       performance_insights_kms_key_id: "String",
+    #       performance_insights_retention_period: 1,
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       io_optimized_next_allowed_modification_time: Time.now,
     #       local_write_forwarding_status: "enabled" # One of: ["enabled", "disabled", "enabling", "disabling", "requested"],
     #       aws_backup_recovery_point_arn: "String",
     #       limitless_database: {
     #         status: "active" # One of: ["active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"],
     #         min_required_acu: 1.0
     #       },
-    #       storage_throughput: 1,
-    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless"],
+    #       cluster_scalability_type: "standard" # One of: ["standard", "limitless", "scaleout"],
     #       certificate_details: {
     #         ca_identifier: "String",
     #         valid_till: Time.now
@@ -28067,7 +28087,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -28122,13 +28141,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -28143,13 +28163,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -28161,6 +28180,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -28237,40 +28257,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }
@@ -28353,6 +28373,7 @@ module Aws::RDS
     #       engine_version: "String",
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_name: "String",
     #       tde_credential_arn: "String",
     #       encrypted: false,
@@ -28368,10 +28389,9 @@ module Aws::RDS
     #         }
     #       ],
     #       backup_target: "String",
-    #       storage_throughput: 1,
+    #       multi_tenant: false,
     #       aws_backup_recovery_point_arn: "String",
-    #       dedicated_log_volume: false,
-    #       multi_tenant: false
+    #       dedicated_log_volume: false
     #     }
     #   }
     # @return [Types::StopDBInstanceAutomatedBackupsReplicationResult]
@@ -28482,7 +28502,7 @@ module Aws::RDS
     #   response.to_h #=>
     #   {
     #     global_cluster: {
-    #       global_cluster_identifier: "String",
+    #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       global_cluster_resource_id: "String",
     #       global_cluster_arn: "String",
     #       status: "String",
@@ -28547,7 +28567,6 @@ module Aws::RDS
     #       db_instance_class: "String",
     #       engine: "String",
     #       db_instance_status: "String",
-    #       automatic_restart_time: Time.now,
     #       master_username: "String",
     #       db_name: "String",
     #       endpoint: {
@@ -28602,13 +28621,14 @@ module Aws::RDS
     #       pending_modified_values: {
     #         db_instance_class: "String",
     #         allocated_storage: 1,
-    #         master_user_password: "String",
+    #         master_user_password: "SensitiveString",
     #         port: 1,
     #         backup_retention_period: 1,
     #         multi_az: false,
     #         engine_version: "String",
     #         license_model: "String",
     #         iops: 1,
+    #         storage_throughput: 1,
     #         db_instance_identifier: "String",
     #         storage_type: "String",
     #         ca_certificate_identifier: "String",
@@ -28623,13 +28643,12 @@ module Aws::RDS
     #             value: "String"
     #           }
     #         ],
-    #         iam_database_authentication_enabled: false,
     #         automation_mode: "full" # One of: ["full", "all-paused"],
     #         resume_full_automation_mode_time: Time.now,
-    #         storage_throughput: 1,
-    #         engine: "String",
+    #         multi_tenant: false,
+    #         iam_database_authentication_enabled: false,
     #         dedicated_log_volume: false,
-    #         multi_tenant: false
+    #         engine: "String"
     #       },
     #       latest_restorable_time: Time.now,
     #       multi_az: false,
@@ -28641,6 +28660,7 @@ module Aws::RDS
     #       replica_mode: "open-read-only" # One of: ["open-read-only", "mounted"],
     #       license_model: "String",
     #       iops: 1,
+    #       storage_throughput: 1,
     #       option_group_memberships: [
     #         {
     #           option_group_name: "String",
@@ -28717,40 +28737,40 @@ module Aws::RDS
     #           value: "String"
     #         }
     #       ],
-    #       db_instance_automated_backups_replications: [
-    #         {
-    #           db_instance_automated_backups_arn: "String"
-    #         }
-    #       ],
+    #       automation_mode: "full" # One of: ["full", "all-paused"],
+    #       resume_full_automation_mode_time: Time.now,
     #       customer_owned_ip_enabled: false,
-    #       aws_backup_recovery_point_arn: "String",
+    #       network_type: "String",
     #       activity_stream_status: "stopped" # One of: ["stopped", "starting", "started", "stopping"],
     #       activity_stream_kms_key_id: "String",
     #       activity_stream_kinesis_stream_name: "String",
     #       activity_stream_mode: "sync" # One of: ["sync", "async"],
     #       activity_stream_engine_native_audit_fields_included: false,
-    #       automation_mode: "full" # One of: ["full", "all-paused"],
-    #       resume_full_automation_mode_time: Time.now,
-    #       custom_iam_instance_profile: "String",
+    #       aws_backup_recovery_point_arn: "String",
+    #       db_instance_automated_backups_replications: [
+    #         {
+    #           db_instance_automated_backups_arn: "String"
+    #         }
+    #       ],
     #       backup_target: "String",
-    #       network_type: "String",
+    #       automatic_restart_time: Time.now,
+    #       custom_iam_instance_profile: "String",
     #       activity_stream_policy_status: "locked" # One of: ["locked", "unlocked", "locking-policy", "unlocking-policy"],
-    #       storage_throughput: 1,
+    #       certificate_details: {
+    #         ca_identifier: "String",
+    #         valid_till: Time.now
+    #       },
     #       db_system_id: "String",
     #       master_user_secret: {
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
     #       },
-    #       certificate_details: {
-    #         ca_identifier: "String",
-    #         valid_till: Time.now
-    #       },
     #       read_replica_source_db_cluster_identifier: "String",
     #       percent_progress: "String",
+    #       multi_tenant: false,
     #       dedicated_log_volume: false,
     #       is_storage_config_upgrade_available: false,
-    #       multi_tenant: false,
     #       engine_lifecycle_support: "String"
     #     }
     #   }

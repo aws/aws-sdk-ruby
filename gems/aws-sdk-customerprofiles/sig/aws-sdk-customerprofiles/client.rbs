@@ -7,6 +7,7 @@ module Aws::CustomerProfiles
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -998,6 +999,23 @@ module Aws::CustomerProfiles
       ?domain_name: String
     ) -> _GetMatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMatchesResponse
 
+    interface _GetProfileHistoryRecordResponse
+      include Smithy::Client::_Response[Types::GetProfileHistoryRecordResponse]
+      def id: () -> String?
+      def object_type_name: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def action_type: () -> String?
+      def profile_object_unique_key: () -> String?
+      def content: () -> String?
+      def performed_by: () -> String?
+    end
+    def get_profile_history_record: (
+      ?domain_name: String,
+      ?profile_id: String,
+      ?id: String
+    ) -> _GetProfileHistoryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileHistoryRecordResponse
+
     interface _GetProfileObjectTypeResponse
       include Smithy::Client::_Response[Types::GetProfileObjectTypeResponse]
       def object_type_name: () -> String?
@@ -1292,6 +1310,21 @@ module Aws::CustomerProfiles
       ?domain_name: String,
       ?attribute_name: String
     ) -> _ListProfileAttributeValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileAttributeValuesResponse
+
+    interface _ListProfileHistoryRecordsResponse
+      include Smithy::Client::_Response[Types::ListProfileHistoryRecordsResponse]
+      def profile_history_records: () -> Array[Types::ProfileHistoryRecord]?
+      def next_token: () -> String?
+    end
+    def list_profile_history_records: (
+      ?domain_name: String,
+      ?profile_id: String,
+      ?object_type_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?action_type: String,
+      ?performed_by: String
+    ) -> _ListProfileHistoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileHistoryRecordsResponse
 
     interface _ListProfileObjectTypeTemplatesResponse
       include Smithy::Client::_Response[Types::ListProfileObjectTypeTemplatesResponse]

@@ -7,6 +7,7 @@ module Aws::QuickSight
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -3189,7 +3190,9 @@ module Aws::QuickSight
         export_to_pdf_in_scheduled_reports: untyped,
         export_to_csv_in_scheduled_reports: untyped,
         export_to_excel_in_scheduled_reports: untyped,
-        include_content_in_scheduled_reports_email: untyped
+        include_content_in_scheduled_reports_email: untyped,
+        dashboard: untyped,
+        analysis: untyped
       },
       ?tags: Array[
         {
@@ -3299,6 +3302,12 @@ module Aws::QuickSight
           availability_status: untyped
         },
         data_qa_enabled_option: {
+          availability_status: untyped
+        },
+        executive_summary_option: {
+          availability_status: untyped
+        },
+        data_stories_sharing_option: {
           availability_status: untyped
         }
       },
@@ -6415,6 +6424,9 @@ module Aws::QuickSight
           port: untyped,
           database: untyped,
           sql_endpoint_path: untyped
+        },
+        custom_connection_parameters: {
+          connection_type: String
         }
       },
       ?credentials: {
@@ -6570,6 +6582,9 @@ module Aws::QuickSight
                 port: untyped,
                 database: untyped,
                 sql_endpoint_path: untyped
+              },
+              custom_connection_parameters: {
+                connection_type: String
               }
             }
           ]
@@ -9709,6 +9724,11 @@ module Aws::QuickSight
                   time_granularity: untyped,
                   relative_date_filter_function: String,
                   constant: untyped
+                },
+                null_filter: {
+                  null_filter_type: String,
+                  constant: untyped,
+                  inverse: untyped
                 }
               }
             ],
@@ -9879,6 +9899,15 @@ module Aws::QuickSight
         }
       ]
     ) -> _CreateVPCConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVPCConnectionResponse
+
+    interface _DeleteAccountCustomPermissionResponse
+      include Smithy::Client::_Response[Types::DeleteAccountCustomPermissionResponse]
+      def request_id: () -> String?
+      def status: () -> Integer?
+    end
+    def delete_account_custom_permission: (
+      ?aws_account_id: String
+    ) -> _DeleteAccountCustomPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountCustomPermissionResponse
 
     interface _DeleteAccountCustomizationResponse
       include Smithy::Client::_Response[Types::DeleteAccountCustomizationResponse]
@@ -10240,6 +10269,16 @@ module Aws::QuickSight
       ?aws_account_id: String,
       ?vpc_connection_id: String
     ) -> _DeleteVPCConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVPCConnectionResponse
+
+    interface _DescribeAccountCustomPermissionResponse
+      include Smithy::Client::_Response[Types::DescribeAccountCustomPermissionResponse]
+      def custom_permissions_name: () -> String?
+      def request_id: () -> String?
+      def status: () -> Integer?
+    end
+    def describe_account_custom_permission: (
+      ?aws_account_id: String
+    ) -> _DescribeAccountCustomPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountCustomPermissionResponse
 
     interface _DescribeAccountCustomizationResponse
       include Smithy::Client::_Response[Types::DescribeAccountCustomizationResponse]
@@ -10685,6 +10724,7 @@ module Aws::QuickSight
       include Smithy::Client::_Response[Types::DescribeKeyRegistrationResponse]
       def aws_account_id: () -> String?
       def key_registration: () -> Array[Types::RegisteredCustomerManagedKey]?
+      def q_data_key: () -> Types::QDataKey?
       def request_id: () -> String?
       def status: () -> Integer?
     end
@@ -12095,6 +12135,9 @@ module Aws::QuickSight
                 port: untyped,
                 database: untyped,
                 sql_endpoint_path: untyped
+              },
+              custom_connection_parameters: {
+                connection_type: untyped
               }
             },
             vpc_connection_properties: untyped,
@@ -12372,6 +12415,16 @@ module Aws::QuickSight
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountCustomPermissionResponse
+      include Smithy::Client::_Response[Types::UpdateAccountCustomPermissionResponse]
+      def request_id: () -> String?
+      def status: () -> Integer?
+    end
+    def update_account_custom_permission: (
+      ?custom_permissions_name: String,
+      ?aws_account_id: String
+    ) -> _UpdateAccountCustomPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountCustomPermissionResponse
 
     interface _UpdateAccountCustomizationResponse
       include Smithy::Client::_Response[Types::UpdateAccountCustomizationResponse]
@@ -15309,7 +15362,9 @@ module Aws::QuickSight
         export_to_pdf_in_scheduled_reports: untyped,
         export_to_csv_in_scheduled_reports: untyped,
         export_to_excel_in_scheduled_reports: untyped,
-        include_content_in_scheduled_reports_email: untyped
+        include_content_in_scheduled_reports_email: untyped,
+        dashboard: untyped,
+        analysis: untyped
       }
     ) -> _UpdateCustomPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomPermissionsResponse
 
@@ -15401,6 +15456,12 @@ module Aws::QuickSight
           availability_status: untyped
         },
         data_qa_enabled_option: {
+          availability_status: untyped
+        },
+        executive_summary_option: {
+          availability_status: untyped
+        },
+        data_stories_sharing_option: {
           availability_status: untyped
         }
       },
@@ -18591,6 +18652,9 @@ module Aws::QuickSight
           port: untyped,
           database: untyped,
           sql_endpoint_path: untyped
+        },
+        custom_connection_parameters: {
+          connection_type: String
         }
       },
       ?credentials: {
@@ -18746,6 +18810,9 @@ module Aws::QuickSight
                 port: untyped,
                 database: untyped,
                 sql_endpoint_path: untyped
+              },
+              custom_connection_parameters: {
+                connection_type: String
               }
             }
           ]
@@ -21963,6 +22030,11 @@ module Aws::QuickSight
                   time_granularity: untyped,
                   relative_date_filter_function: String,
                   constant: untyped
+                },
+                null_filter: {
+                  null_filter_type: String,
+                  constant: untyped,
+                  inverse: untyped
                 }
               }
             ],

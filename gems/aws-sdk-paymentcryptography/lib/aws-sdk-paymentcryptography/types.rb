@@ -6,11 +6,37 @@ module Aws::PaymentCryptography
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>You do not have sufficient access to perform this action.</p>
+    # <p>You do not have sufficient access to perform this action.</p> <p>This exception is thrown when the caller lacks the necessary IAM permissions to perform the requested operation. Verify that your IAM policy includes the required permissions for the specific Amazon Web Services Payment Cryptography action you're attempting.</p>
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input parameters for adding replication regions to a specific key.</p>
+    # @!attribute key_identifier
+    #   <p>The key identifier (ARN or alias) of the key for which to add replication regions.</p> <p>This key must exist and be in a valid state for replication operations.</p>
+    #   @return [String]
+    # @!attribute replication_regions
+    #   <p>The list of Amazon Web Services Regions to add to the key's replication configuration.</p> <p>Each region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available. The key will be replicated to these regions, allowing cryptographic operations to be performed closer to your applications.</p>
+    #   @return [Array<String>]
+    class AddKeyReplicationRegionsInput < Struct.new(
+      :key_identifier,
+      :replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output from adding replication regions to a key.</p>
+    # @!attribute key
+    #   <p>The updated key metadata after adding the replication regions.</p> <p>This includes the current state of the key and its replication configuration.</p>
+    #   @return [Types::Key]
+    class AddKeyReplicationRegionsOutput < Struct.new(
+      :key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31,7 +57,42 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This request can cause an inconsistent state for the resource.</p>
+    # Metadata used in generating the CSR
+    # @!attribute common_name
+    #   Common Name to be used in the certificate signing request
+    #   @return [String]
+    # @!attribute organization_unit
+    #   Organization Unit to be used in the certificate signing request
+    #   @return [String]
+    # @!attribute organization
+    #   Organization to be used in the certificate signing request
+    #   @return [String]
+    # @!attribute city
+    #   City to be used in the certificate signing request
+    #   @return [String]
+    # @!attribute country
+    #   Country to be used in the certificate signing request
+    #   @return [String]
+    # @!attribute state_or_province
+    #   State Or Province to be used in the certificate signing request
+    #   @return [String]
+    # @!attribute email_address
+    #   Email to be used in the certificate signing request
+    #   @return [String]
+    class CertificateSubjectType < Struct.new(
+      :common_name,
+      :organization_unit,
+      :organization,
+      :city,
+      :country,
+      :state_or_province,
+      :email_address,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This request can cause an inconsistent state for the resource.</p> <p>The requested operation conflicts with the current state of the resource. For example, attempting to delete a key that is currently being used, or trying to create a resource that already exists.</p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
@@ -83,6 +144,9 @@ module Aws::PaymentCryptography
     # @!attribute derive_key_usage
     #   <p>The intended cryptographic usage of keys derived from the ECC key pair to be created.</p> <p>After creating an ECC key pair, you cannot change the intended cryptographic usage of keys derived from it using ECDH.</p>
     #   @return [String]
+    # @!attribute replication_regions
+    #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
+    #   @return [Array<String>]
     class CreateKeyInput < Struct.new(
       :key_attributes,
       :key_check_value_algorithm,
@@ -90,6 +154,7 @@ module Aws::PaymentCryptography
       :enabled,
       :tags,
       :derive_key_usage,
+      :replication_regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -158,6 +223,50 @@ module Aws::PaymentCryptography
 
       class SharedInformation < DiffieHellmanDerivationData; end
       class Unknown < DiffieHellmanDerivationData; end
+    end
+
+    # <p>Input parameters for disabling default key replication regions for the account.</p>
+    # @!attribute replication_regions
+    #   <p>The list of Amazon Web Services Regions to remove from the account's default replication regions.</p> <p>New keys created after this operation will not automatically be replicated to these regions, though existing keys with replication to these regions will be unaffected.</p>
+    #   @return [Array<String>]
+    class DisableDefaultKeyReplicationRegionsInput < Struct.new(
+      :replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output from disabling default key replication regions for the account.</p>
+    # @!attribute enabled_replication_regions
+    #   <p>The remaining list of regions where default key replication is still enabled for the account.</p> <p>This reflects the account's default replication configuration after removing the specified regions.</p>
+    #   @return [Array<String>]
+    class DisableDefaultKeyReplicationRegionsOutput < Struct.new(
+      :enabled_replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input parameters for enabling default key replication regions for the account.</p>
+    # @!attribute replication_regions
+    #   <p>The list of Amazon Web Services Regions to enable as default replication regions for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>
+    #   @return [Array<String>]
+    class EnableDefaultKeyReplicationRegionsInput < Struct.new(
+      :replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output from enabling default key replication regions for the account.</p>
+    # @!attribute enabled_replication_regions
+    #   <p>The complete list of regions where default key replication is now enabled for the account.</p> <p>This includes both previously enabled regions and the newly added regions from this operation.</p>
+    #   @return [Array<String>]
+    class EnableDefaultKeyReplicationRegionsOutput < Struct.new(
+      :enabled_replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes for IPEK generation during export.</p>
@@ -327,6 +436,12 @@ module Aws::PaymentCryptography
     # @!attribute export_token
     #   <p>The export token to initiate key export from Amazon Web Services Payment Cryptography. It also contains the signing key certificate that will sign the wrapped key during TR-34 key block generation. Call <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html">GetParametersForExport</a> to receive an export token. It expires after 30 days. You can use the same export token to export multiple keys from the same service account.</p>
     #   @return [String]
+    # @!attribute signing_key_identifier
+    #   Key Identifier used for signing the export key
+    #   @return [String]
+    # @!attribute signing_key_certificate
+    #   Certificate used for signing the export key
+    #   @return [String]
     # @!attribute key_block_format
     #   <p>The format of key block that Amazon Web Services Payment Cryptography will use during key export.</p>
     #   @return [String]
@@ -340,12 +455,19 @@ module Aws::PaymentCryptography
       :certificate_authority_public_key_identifier,
       :wrapping_key_certificate,
       :export_token,
+      :signing_key_identifier,
+      :signing_key_certificate,
       :key_block_format,
       :random_nonce,
       :key_block_headers,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:export_token] = '' unless options.key?(:export_token)
+        super
+      end
     end
 
     # @!attribute alias_name
@@ -369,6 +491,52 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute key_identifier
+    #   Asymmetric key used for generating the certificate signing request
+    #   @return [String]
+    # @!attribute signing_algorithm
+    #   Algorithm used to generate the certificate signing request
+    #   @return [String]
+    # @!attribute certificate_subject
+    #   Certificate subject data
+    #   @return [Types::CertificateSubjectType]
+    class GetCertificateSigningRequestInput < Struct.new(
+      :key_identifier,
+      :signing_algorithm,
+      :certificate_subject,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute certificate_signing_request
+    #   Certificate signing request
+    #   @return [String]
+    class GetCertificateSigningRequestOutput < Struct.new(
+      :certificate_signing_request,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input parameters for retrieving the account's default key replication regions. This operation requires no input parameters.</p>
+    class GetDefaultKeyReplicationRegionsInput < Struct.new(
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output containing the account's current default key replication configuration.</p>
+    # @!attribute enabled_replication_regions
+    #   <p>The list of regions where default key replication is currently enabled for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly configured otherwise during key creation.</p>
+    #   @return [Array<String>]
+    class GetDefaultKeyReplicationRegionsOutput < Struct.new(
+      :enabled_replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute key_identifier
     #   <p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key.</p>
     #   @return [String]
     class GetKeyInput < Struct.new(
@@ -379,7 +547,7 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute key
-    #   <p>The key material, including the immutable and mutable data for the key.</p>
+    #   <p>Contains the key metadata, including both immutable and mutable attributes for the key, but does not include actual cryptographic key material.</p>
     #   @return [Types::Key]
     class GetKeyOutput < Struct.new(
       :key,
@@ -570,11 +738,15 @@ module Aws::PaymentCryptography
     # @!attribute tags
     #   <p>Assigns one or more tags to the Amazon Web Services Payment Cryptography key. Use this parameter to tag a key when it is imported. To tag an existing Amazon Web Services Payment Cryptography key, use the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p> <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the specified one.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important> <note> <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p> </note>
     #   @return [Array<Types::Tag>]
+    # @!attribute replication_regions
+    #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
+    #   @return [Array<String>]
     class ImportKeyInput < Struct.new(
       :key_material,
       :key_check_value_algorithm,
       :enabled,
       :tags,
+      :replication_regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -655,6 +827,12 @@ module Aws::PaymentCryptography
     # @!attribute import_token
     #   <p>The import token that initiates key import using the asymmetric TR-34 key exchange method into Amazon Web Services Payment Cryptography. It expires after 30 days. You can use the same import token to import multiple keys to the same service account.</p>
     #   @return [String]
+    # @!attribute wrapping_key_identifier
+    #   Key Identifier used for unwrapping the import key
+    #   @return [String]
+    # @!attribute wrapping_key_certificate
+    #   Key Identifier used for unwrapping the import key
+    #   @return [String]
     # @!attribute wrapped_key_block
     #   <p>The TR-34 wrapped key block to import.</p>
     #   @return [String]
@@ -668,15 +846,22 @@ module Aws::PaymentCryptography
       :certificate_authority_public_key_identifier,
       :signing_key_certificate,
       :import_token,
+      :wrapping_key_identifier,
+      :wrapping_key_certificate,
       :wrapped_key_block,
       :key_block_format,
       :random_nonce,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:import_token] = '' unless options.key?(:import_token)
+        super
+      end
     end
 
-    # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
+    # <p>The request processing has failed because of an unknown error, exception, or failure.</p> <p>This indicates a server-side error within the Amazon Web Services Payment Cryptography service. If this error persists, contact support for assistance.</p>
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
@@ -729,6 +914,18 @@ module Aws::PaymentCryptography
     # @!attribute derive_key_usage
     #   <p>The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of the TR-31 spec.</p>
     #   @return [String]
+    # @!attribute multi_region_key_type
+    #   <p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>
+    #   @return [String]
+    # @!attribute primary_region
+    #   <p>An Amazon Web Services Region identifier in the standard format (e.g., <code>us-east-1</code>, <code>eu-west-1</code>).</p> <p>Used to specify regions for key replication operations. The region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available.</p>
+    #   @return [String]
+    # @!attribute replication_status
+    #   <p>Information about the replication status of the key across different regions.</p> <p>This field provides details about the current state of key replication, including any status messages or operational information. It helps track the progress and health of key replication operations.</p>
+    #   @return [Hash<String, Types::ReplicationStatusType>]
+    # @!attribute using_default_replication_regions
+    #   <p>Indicates whether this key is using the account's default replication regions configuration.</p> <p>When set to <code>true</code>, the key automatically replicates to the regions specified in the account's default replication settings. When set to <code>false</code>, the key has a custom replication configuration that overrides the account defaults.</p>
+    #   @return [Boolean]
     class Key < Struct.new(
       :key_arn,
       :key_attributes,
@@ -744,6 +941,10 @@ module Aws::PaymentCryptography
       :delete_pending_timestamp,
       :delete_timestamp,
       :derive_key_usage,
+      :multi_region_key_type,
+      :primary_region,
+      :replication_status,
+      :using_default_replication_regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -870,6 +1071,12 @@ module Aws::PaymentCryptography
     # @!attribute enabled
     #   <p>Specifies whether the key is enabled. </p>
     #   @return [Boolean]
+    # @!attribute multi_region_key_type
+    #   <p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>
+    #   @return [String]
+    # @!attribute primary_region
+    #   <p>An Amazon Web Services Region identifier in the standard format (e.g., <code>us-east-1</code>, <code>eu-west-1</code>).</p> <p>Used to specify regions for key replication operations. The region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available.</p>
+    #   @return [String]
     class KeySummary < Struct.new(
       :key_arn,
       :key_state,
@@ -877,6 +1084,8 @@ module Aws::PaymentCryptography
       :key_check_value,
       :exportable,
       :enabled,
+      :multi_region_key_type,
+      :primary_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -978,9 +1187,50 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was denied due to an invalid resource error.</p>
+    # <p>Input parameters for removing replication regions from a specific key.</p>
+    # @!attribute key_identifier
+    #   <p>The key identifier (ARN or alias) of the key from which to remove replication regions.</p> <p>This key must exist and have replication enabled in the specified regions.</p>
+    #   @return [String]
+    # @!attribute replication_regions
+    #   <p>The list of Amazon Web Services Regions to remove from the key's replication configuration.</p> <p>The key will no longer be available for cryptographic operations in these regions after removal. Ensure no active operations depend on the key in these regions before removal.</p>
+    #   @return [Array<String>]
+    class RemoveKeyReplicationRegionsInput < Struct.new(
+      :key_identifier,
+      :replication_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output from removing replication regions from a key.</p>
+    # @!attribute key
+    #   <p>The updated key metadata after removing the replication regions.</p> <p>This reflects the current state of the key and its updated replication configuration.</p>
+    #   @return [Types::Key]
+    class RemoveKeyReplicationRegionsOutput < Struct.new(
+      :key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the replication status information for a key in a replication region.</p> <p>This structure contains details about the current state of key replication, including any status messages and operational information about the replication process.</p>
+    # @!attribute status
+    #   <p>The current status of key replication in this region.</p> <p>This field indicates whether the key replication is in progress, completed successfully, or has encountered an error. Possible values include states such as SYNCRHONIZED, IN_PROGRESS, DELETE_IN_PROGRESS, or FAILED. This provides visibility into the replication process for monitoring and troubleshooting purposes.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A message that provides additional information about the current replication status of the key.</p> <p>This field contains details about any issues or progress updates related to key replication operations. It may include information about replication failures, synchronization status, or other operational details.</p>
+    #   @return [String]
+    class ReplicationStatusType < Struct.new(
+      :status,
+      :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request was denied due to resource not found.</p> <p>The specified key, alias, or other resource does not exist in your account or region. Verify that the resource identifier is correct and that the resource exists in the expected region.</p>
     # @!attribute resource_id
-    #   <p>The string for the exception.</p>
+    #   <p>The identifier of the resource that was not found.</p> <p>This field contains the specific resource identifier (such as a key ARN or alias name) that could not be located.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :resource_id,
@@ -1024,7 +1274,7 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This request would cause a service quota to be exceeded.</p>
+    # <p>This request would cause a service quota to be exceeded.</p> <p>You have reached the maximum number of keys, aliases, or other resources allowed in your account. Review your current usage and consider deleting unused resources or requesting a quota increase.</p>
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
@@ -1034,7 +1284,7 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The service cannot complete the request.</p>
+    # <p>The service cannot complete the request.</p> <p>The Amazon Web Services Payment Cryptography service is temporarily unavailable. This is typically a temporary condition - retry your request after a brief delay.</p>
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
@@ -1119,7 +1369,7 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was denied due to request throttling.</p>
+    # <p>The request was denied due to request throttling.</p> <p>You have exceeded the rate limits for Amazon Web Services Payment Cryptography API calls. Implement exponential backoff and retry logic in your application to handle throttling gracefully.</p>
     # @!attribute message
     #   @return [String]
     class ThrottlingException < Struct.new(
@@ -1192,7 +1442,7 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was denied due to an invalid request error.</p>
+    # <p>The request was denied due to an invalid request error.</p> <p>One or more parameters in your request are invalid. Check the parameter values, formats, and constraints specified in the API documentation.</p>
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(

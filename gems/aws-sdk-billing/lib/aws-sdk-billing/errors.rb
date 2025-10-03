@@ -23,6 +23,7 @@ module Aws::Billing
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {BillingViewHealthStatusException}
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
@@ -39,6 +40,19 @@ module Aws::Billing
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p> Exception thrown when a billing view's health status prevents an operation from being performed. This may occur if the billing view is in a state other than <code>HEALTHY</code>.</p>
+    class BillingViewHealthStatusException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Billing::Types::BillingViewHealthStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

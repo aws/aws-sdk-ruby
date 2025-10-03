@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::CustomerProfiles
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::CustomerProfiles
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::CustomerProfiles
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::CustomerProfiles::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::CustomerProfiles::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -2723,6 +2728,40 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Returns a history record for a specific profile, for a specific domain.</p>
+    # @param [Hash, Types::GetProfileHistoryRecordRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain for which to return a profile history record.</p>
+    # @option params [String] :profile_id
+    #   <p>The unique identifier of the profile for which to return a history record.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the profile history record to return.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     profile_id: "uuid", # required
+    #     id: "uuid", # required
+    #   }
+    #   options = {}
+    #   response = client.get_profile_history_record(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "uuid", # required
+    #     object_type_name: "typeName", # required
+    #     created_at: Time.now, # required
+    #     last_updated_at: Time.now,
+    #     action_type: "ADDED_PROFILE_KEY" # One of: ["ADDED_PROFILE_KEY", "DELETED_PROFILE_KEY", "CREATED", "UPDATED", "INGESTED", "DELETED_BY_CUSTOMER", "EXPIRED", "MERGED", "DELETED_BY_MERGE"], # required
+    #     profile_object_unique_key: "string1To255",
+    #     content: "stringifiedJson",
+    #     performed_by: "string1To255"
+    #   }
+    # @return [Types::GetProfileHistoryRecordResponse]
+    def get_profile_history_record(params = {}, options = {})
+      request = build_request(:get_profile_history_record, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the object types for a specific domain.</p>
     # @param [Hash, Types::GetProfileObjectTypeRequest] params
     # @option params [String] :domain_name
@@ -3917,6 +3956,57 @@ module Aws::CustomerProfiles
     # @return [Types::ProfileAttributeValuesResponse]
     def list_profile_attribute_values(params = {}, options = {})
       request = build_request(:list_profile_attribute_values, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of history records for a specific profile, for a specific domain.</p>
+    # @param [Hash, Types::ListProfileHistoryRecordsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain for which to return profile history records.</p>
+    # @option params [String] :profile_id
+    #   <p>The identifier of the profile to be taken.</p>
+    # @option params [String] :object_type_name
+    #   <p>Applies a filter to include profile history records only with the specified <code>ObjectTypeName</code> value in the response.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   response in the next request to retrieve the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page.</p>
+    # @option params [String] :action_type
+    #   <p>Applies a filter to include profile history records only with the specified <code>ActionType</code> value in the response.</p>
+    # @option params [String] :performed_by
+    #   <p>Applies a filter to include profile history records only with the specified <code>PerformedBy</code> value in the response. The <code>PerformedBy</code> value can be the Amazon Resource Name (ARN) of the person or service principal who performed the action.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     profile_id: "uuid", # required
+    #     object_type_name: "typeName",
+    #     next_token: "token",
+    #     max_results: 1,
+    #     action_type: "ADDED_PROFILE_KEY" # One of: ["ADDED_PROFILE_KEY", "DELETED_PROFILE_KEY", "CREATED", "UPDATED", "INGESTED", "DELETED_BY_CUSTOMER", "EXPIRED", "MERGED", "DELETED_BY_MERGE"],
+    #     performed_by: "string1To255"
+    #   }
+    #   options = {}
+    #   response = client.list_profile_history_records(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     profile_history_records: [
+    #       {
+    #         id: "uuid", # required
+    #         object_type_name: "typeName", # required
+    #         created_at: Time.now, # required
+    #         last_updated_at: Time.now,
+    #         action_type: "ADDED_PROFILE_KEY" # One of: ["ADDED_PROFILE_KEY", "DELETED_PROFILE_KEY", "CREATED", "UPDATED", "INGESTED", "DELETED_BY_CUSTOMER", "EXPIRED", "MERGED", "DELETED_BY_MERGE"], # required
+    #         profile_object_unique_key: "string1To255",
+    #         performed_by: "string1To255"
+    #       }
+    #     ],
+    #     next_token: "token"
+    #   }
+    # @return [Types::ListProfileHistoryRecordsResponse]
+    def list_profile_history_records(params = {}, options = {})
+      request = build_request(:list_profile_history_records, params)
       request.send_request(options)
     end
 

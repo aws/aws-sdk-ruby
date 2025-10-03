@@ -58,6 +58,9 @@ module Aws::ConnectCases
     CommentContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CommentContent', name: 'CommentContent')
     CommentFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CommentFilter', name: 'CommentFilter')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ConnectCaseContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#ConnectCaseContent', name: 'ConnectCaseContent')
+    ConnectCaseFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#ConnectCaseFilter', name: 'ConnectCaseFilter')
+    ConnectCaseInputContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#ConnectCaseInputContent', name: 'ConnectCaseInputContent')
     ConnectedToSystemTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.connectcases#ConnectedToSystemTime', name: 'ConnectedToSystemTime', traits: {"smithy.api#timestampFormat" => "date-time"})
     Contact = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#Contact', name: 'Contact')
     ContactArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#ContactArn', name: 'ContactArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
@@ -78,7 +81,12 @@ module Aws::ConnectCases
     CreateTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CreateTemplateInput', name: 'CreateTemplateInput')
     CreateTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CreateTemplateOutput', name: 'CreateTemplateOutput')
     CreatedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.connectcases#CreatedTime', name: 'CreatedTime', traits: {"smithy.api#timestampFormat" => "date-time"})
+    CustomContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CustomContent', name: 'CustomContent')
     CustomEntity = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#CustomEntity', name: 'CustomEntity', traits: {"smithy.api#length" => {"min" => 1, "max" => 500}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-\\.@:/ ]*[a-zA-Z0-9_\\-\\.@:/]$", "smithy.api#sensitive" => {}})
+    CustomFieldsFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.connectcases#CustomFieldsFilter', name: 'CustomFieldsFilter')
+    CustomFieldsFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectcases#CustomFieldsFilterList', name: 'CustomFieldsFilterList')
+    CustomFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CustomFilter', name: 'CustomFilter')
+    CustomInputContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#CustomInputContent', name: 'CustomInputContent')
     DeleteCaseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#DeleteCaseRequest', name: 'DeleteCaseRequest')
     DeleteCaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#DeleteCaseResponse', name: 'DeleteCaseResponse')
     DeleteCaseRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#DeleteCaseRuleRequest', name: 'DeleteCaseRuleRequest')
@@ -185,13 +193,20 @@ module Aws::ConnectCases
     RelatedItemFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectcases#RelatedItemFilterList', name: 'RelatedItemFilterList')
     RelatedItemId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#RelatedItemId', name: 'RelatedItemId', traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     RelatedItemInputContent = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.connectcases#RelatedItemInputContent', name: 'RelatedItemInputContent')
-    RelatedItemType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#RelatedItemType', name: 'RelatedItemType', traits: {"smithy.api#enum" => [{"value" => "Contact", "name" => "CONTACT"}, {"value" => "Comment", "name" => "COMMENT"}, {"value" => "File", "name" => "FILE"}, {"value" => "Sla", "name" => "SLA"}]})
+    RelatedItemType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#RelatedItemType', name: 'RelatedItemType', traits: {"smithy.api#enum" => [{"value" => "Contact", "name" => "CONTACT"}, {"value" => "Comment", "name" => "COMMENT"}, {"value" => "File", "name" => "FILE"}, {"value" => "Sla", "name" => "SLA"}, {"value" => "ConnectCase", "name" => "CONNECT_CASE"}, {"value" => "Custom", "name" => "CUSTOM"}]})
     RelatedItemTypeFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.connectcases#RelatedItemTypeFilter', name: 'RelatedItemTypeFilter')
     RequiredCaseRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#RequiredCaseRule', name: 'RequiredCaseRule')
     RequiredField = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#RequiredField', name: 'RequiredField')
     RequiredFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectcases#RequiredFieldList', name: 'RequiredFieldList', traits: {"smithy.api#length" => {"max" => 100}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RuleType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#RuleType', name: 'RuleType', traits: {"smithy.api#enum" => [{"name" => "REQUIRED", "value" => "Required"}]})
+    SearchAllRelatedItemsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsRequest', name: 'SearchAllRelatedItemsRequest')
+    SearchAllRelatedItemsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsResponse', name: 'SearchAllRelatedItemsResponse')
+    SearchAllRelatedItemsResponseItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsResponseItem', name: 'SearchAllRelatedItemsResponseItem')
+    SearchAllRelatedItemsResponseItemList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsResponseItemList', name: 'SearchAllRelatedItemsResponseItemList', traits: {"smithy.api#sparse" => {}})
+    SearchAllRelatedItemsSort = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsSort', name: 'SearchAllRelatedItemsSort')
+    SearchAllRelatedItemsSortList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsSortList', name: 'SearchAllRelatedItemsSortList', traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    SearchAllRelatedItemsSortProperty = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connectcases#SearchAllRelatedItemsSortProperty', name: 'SearchAllRelatedItemsSortProperty', traits: {"smithy.api#enum" => [{"value" => "AssociationTime", "name" => "ASSOCIATION_TIME"}, {"value" => "CaseId", "name" => "CASE_ID"}]})
     SearchCasesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchCasesInput', name: 'SearchCasesInput')
     SearchCasesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchCasesOutput', name: 'SearchCasesOutput')
     SearchCasesResponseItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connectcases#SearchCasesResponseItem', name: 'SearchCasesResponseItem')
@@ -346,6 +361,12 @@ module Aws::ConnectCases
     CommentFilter.type = Types::CommentFilter
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
+    ConnectCaseContent.add_member(:case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseId, location_name: 'caseId', traits: {"smithy.api#required" => {}}))
+    ConnectCaseContent.type = Types::ConnectCaseContent
+    ConnectCaseFilter.add_member(:case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseId, location_name: 'caseId'))
+    ConnectCaseFilter.type = Types::ConnectCaseFilter
+    ConnectCaseInputContent.add_member(:case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseId, location_name: 'caseId', traits: {"smithy.api#required" => {}}))
+    ConnectCaseInputContent.type = Types::ConnectCaseInputContent
     Contact.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactArn, location_name: 'contactArn', traits: {"smithy.api#required" => {}}))
     Contact.type = Types::Contact
     ContactContent.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactArn, location_name: 'contactArn', traits: {"smithy.api#required" => {}}))
@@ -413,6 +434,19 @@ module Aws::ConnectCases
     CreateTemplateOutput.add_member(:template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateId, location_name: 'templateId', traits: {"smithy.api#required" => {}}))
     CreateTemplateOutput.add_member(:template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateArn, location_name: 'templateArn', traits: {"smithy.api#required" => {}}))
     CreateTemplateOutput.type = Types::CreateTemplateOutput
+    CustomContent.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldValueList, location_name: 'fields', traits: {"smithy.api#required" => {}}))
+    CustomContent.type = Types::CustomContent
+    CustomFieldsFilter.add_member(:field, Types::CustomFieldsFilter::Field, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldFilter, location_name: 'field'))
+    CustomFieldsFilter.add_member(:not, Types::CustomFieldsFilter::Not, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomFieldsFilter, location_name: 'not'))
+    CustomFieldsFilter.add_member(:and_all, Types::CustomFieldsFilter::AndAll, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomFieldsFilterList, location_name: 'andAll', traits: {"smithy.api#length" => {"max" => 10}}))
+    CustomFieldsFilter.add_member(:or_all, Types::CustomFieldsFilter::OrAll, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomFieldsFilterList, location_name: 'orAll', traits: {"smithy.api#length" => {"max" => 10}}))
+    CustomFieldsFilter.add_member(:unknown, Types::CustomFieldsFilter::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CustomFieldsFilter.type = Types::CustomFieldsFilter
+    CustomFieldsFilterList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomFieldsFilter)
+    CustomFilter.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomFieldsFilter, location_name: 'fields'))
+    CustomFilter.type = Types::CustomFilter
+    CustomInputContent.add_member(:fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldValueList, location_name: 'fields', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#required" => {}}))
+    CustomInputContent.type = Types::CustomInputContent
     DeleteCaseRequest.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCaseRequest.add_member(:case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseId, location_name: 'caseId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCaseRequest.type = Types::DeleteCaseRequest
@@ -675,6 +709,8 @@ module Aws::ConnectCases
     RelatedItemContent.add_member(:comment, Types::RelatedItemContent::Comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContent, location_name: 'comment'))
     RelatedItemContent.add_member(:file, Types::RelatedItemContent::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContent, location_name: 'file'))
     RelatedItemContent.add_member(:sla, Types::RelatedItemContent::Sla, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlaContent, location_name: 'sla'))
+    RelatedItemContent.add_member(:connect_case, Types::RelatedItemContent::ConnectCase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectCaseContent, location_name: 'connectCase'))
+    RelatedItemContent.add_member(:custom, Types::RelatedItemContent::Custom, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomContent, location_name: 'custom'))
     RelatedItemContent.add_member(:unknown, Types::RelatedItemContent::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     RelatedItemContent.type = Types::RelatedItemContent
     RelatedItemEventIncludedData.add_member(:include_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'includeContent', traits: {"smithy.api#required" => {}}))
@@ -684,12 +720,16 @@ module Aws::ConnectCases
     RelatedItemInputContent.add_member(:comment, Types::RelatedItemInputContent::Comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentContent, location_name: 'comment'))
     RelatedItemInputContent.add_member(:file, Types::RelatedItemInputContent::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileContent, location_name: 'file'))
     RelatedItemInputContent.add_member(:sla, Types::RelatedItemInputContent::Sla, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlaInputContent, location_name: 'sla'))
+    RelatedItemInputContent.add_member(:connect_case, Types::RelatedItemInputContent::ConnectCase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectCaseInputContent, location_name: 'connectCase'))
+    RelatedItemInputContent.add_member(:custom, Types::RelatedItemInputContent::Custom, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomInputContent, location_name: 'custom'))
     RelatedItemInputContent.add_member(:unknown, Types::RelatedItemInputContent::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     RelatedItemInputContent.type = Types::RelatedItemInputContent
     RelatedItemTypeFilter.add_member(:contact, Types::RelatedItemTypeFilter::Contact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactFilter, location_name: 'contact'))
     RelatedItemTypeFilter.add_member(:comment, Types::RelatedItemTypeFilter::Comment, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommentFilter, location_name: 'comment'))
     RelatedItemTypeFilter.add_member(:file, Types::RelatedItemTypeFilter::File, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileFilter, location_name: 'file'))
     RelatedItemTypeFilter.add_member(:sla, Types::RelatedItemTypeFilter::Sla, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlaFilter, location_name: 'sla'))
+    RelatedItemTypeFilter.add_member(:connect_case, Types::RelatedItemTypeFilter::ConnectCase, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectCaseFilter, location_name: 'connectCase'))
+    RelatedItemTypeFilter.add_member(:custom, Types::RelatedItemTypeFilter::Custom, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomFilter, location_name: 'custom'))
     RelatedItemTypeFilter.add_member(:unknown, Types::RelatedItemTypeFilter::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     RelatedItemTypeFilter.type = Types::RelatedItemTypeFilter
     RequiredCaseRule.add_member(:default_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'defaultValue', traits: {"smithy.api#required" => {}}))
@@ -702,6 +742,28 @@ module Aws::ConnectCases
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceId', traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceType', traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    SearchAllRelatedItemsRequest.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SearchAllRelatedItemsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 25}}))
+    SearchAllRelatedItemsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
+    SearchAllRelatedItemsRequest.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemFilterList, location_name: 'filters', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}}))
+    SearchAllRelatedItemsRequest.add_member(:sorts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsSortList, location_name: 'sorts', traits: {"smithy.api#length" => {"min" => 0, "max" => 2}}))
+    SearchAllRelatedItemsRequest.type = Types::SearchAllRelatedItemsRequest
+    SearchAllRelatedItemsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
+    SearchAllRelatedItemsResponse.add_member(:related_items, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsResponseItemList, location_name: 'relatedItems', traits: {"smithy.api#length" => {"max" => 25}, "smithy.api#required" => {}}))
+    SearchAllRelatedItemsResponse.type = Types::SearchAllRelatedItemsResponse
+    SearchAllRelatedItemsResponseItem.add_member(:related_item_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemId, location_name: 'relatedItemId', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsResponseItem.add_member(:case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CaseId, location_name: 'caseId', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsResponseItem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemType, location_name: 'type', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsResponseItem.add_member(:association_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationTime, location_name: 'associationTime', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsResponseItem.add_member(:content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RelatedItemContent, location_name: 'content', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsResponseItem.add_member(:performed_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserUnion, location_name: 'performedBy'))
+    SearchAllRelatedItemsResponseItem.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: 'tags'))
+    SearchAllRelatedItemsResponseItem.type = Types::SearchAllRelatedItemsResponseItem
+    SearchAllRelatedItemsResponseItemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsResponseItem)
+    SearchAllRelatedItemsSort.add_member(:sort_property, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsSortProperty, location_name: 'sortProperty', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsSort.add_member(:sort_order, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Order, location_name: 'sortOrder', traits: {"smithy.api#required" => {}}))
+    SearchAllRelatedItemsSort.type = Types::SearchAllRelatedItemsSort
+    SearchAllRelatedItemsSortList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsSort)
     SearchCasesInput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SearchCasesInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     SearchCasesInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
@@ -1248,6 +1310,19 @@ module Aws::ConnectCases
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/case-event-configuration", "method" => "PUT"}}
+      end)
+      service.add_operation(:search_all_related_items, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.connectcases#SearchAllRelatedItems"
+        operation.name = "SearchAllRelatedItems"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchAllRelatedItemsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/related-items-search", "method" => "POST"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::SearchAllRelatedItems.new
       end)
       service.add_operation(:search_cases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcases#SearchCases"

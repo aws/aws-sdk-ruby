@@ -3,20 +3,20 @@ module Aws::BedrockAgentCoreControl
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
-    Agent: StructureShape
-    AgentArtifact: UnionShape
-    AgentEndpoint: StructureShape
     AgentEndpointDescription: StringShape
-    AgentEndpointStatus: EnumShape
-    AgentEndpoints: ListShape
+    AgentRuntime: StructureShape
     AgentRuntimeArn: StringShape
+    AgentRuntimeArtifact: UnionShape
+    AgentRuntimeEndpoint: StructureShape
     AgentRuntimeEndpointArn: StringShape
     AgentRuntimeEndpointId: StringShape
+    AgentRuntimeEndpointStatus: EnumShape
+    AgentRuntimeEndpoints: ListShape
     AgentRuntimeId: StringShape
     AgentRuntimeName: StringShape
+    AgentRuntimeStatus: EnumShape
     AgentRuntimeVersion: StringShape
-    AgentStatus: EnumShape
-    Agents: ListShape
+    AgentRuntimes: ListShape
     AllowedAudience: StringShape
     AllowedAudienceList: ListShape
     AllowedClient: StringShape
@@ -166,6 +166,7 @@ module Aws::BedrockAgentCoreControl
     GithubOauth2ProviderConfigOutput: StructureShape
     GoogleOauth2ProviderConfigInput: StructureShape
     GoogleOauth2ProviderConfigOutput: StructureShape
+    HeaderName: StringShape
     InlinePayload: StringShape
     InternalServerException: StructureShape
     IssuerUrlType: StringShape
@@ -193,6 +194,8 @@ module Aws::BedrockAgentCoreControl
     ListMemoriesOutput: StructureShape
     ListOauth2CredentialProvidersRequest: StructureShape
     ListOauth2CredentialProvidersResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
     ListWorkloadIdentitiesRequest: StructureShape
     ListWorkloadIdentitiesResponse: StructureShape
     MCPGatewayConfiguration: StructureShape
@@ -248,6 +251,8 @@ module Aws::BedrockAgentCoreControl
     Prompt: StringShape
     ProtocolConfiguration: StructureShape
     RecordingConfig: StructureShape
+    RequestHeaderAllowlist: ListShape
+    RequestHeaderConfiguration: UnionShape
     RequiredProperties: ListShape
     ResourceLimitExceededException: StructureShape
     ResourceNotFoundException: StructureShape
@@ -270,6 +275,8 @@ module Aws::BedrockAgentCoreControl
     SearchType: EnumShape
     Secret: StructureShape
     SecretArn: StringShape
+    SecurityGroupId: StringShape
+    SecurityGroups: ListShape
     SemanticConsolidationOverride: StructureShape
     SemanticExtractionOverride: StructureShape
     SemanticMemoryStrategyInput: StructureShape
@@ -286,10 +293,19 @@ module Aws::BedrockAgentCoreControl
     StatusReason: StringShape
     StatusReasons: ListShape
     StrategyConfiguration: StructureShape
+    SubnetId: StringShape
+    Subnets: ListShape
     SummaryConsolidationOverride: StructureShape
     SummaryMemoryStrategyInput: StructureShape
     SummaryOverrideConfigurationInput: StructureShape
     SummaryOverrideConsolidationConfigurationInput: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    TaggableResourcesArn: StringShape
+    TagsMap: MapShape
     TargetConfiguration: UnionShape
     TargetDescription: StringShape
     TargetId: StringShape
@@ -307,6 +323,8 @@ module Aws::BedrockAgentCoreControl
     ToolDefinitions: ListShape
     ToolSchema: UnionShape
     UnauthorizedException: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
     UpdateAgentRuntimeEndpointRequest: StructureShape
     UpdateAgentRuntimeEndpointResponse: StructureShape
     UpdateAgentRuntimeRequest: StructureShape
@@ -333,6 +351,7 @@ module Aws::BedrockAgentCoreControl
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
+    VpcConfig: StructureShape
     WorkloadIdentityArn: StringShape
     WorkloadIdentityArnType: StringShape
     WorkloadIdentityDetails: StructureShape

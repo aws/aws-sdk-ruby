@@ -235,6 +235,8 @@ module Aws::EKS
     Logging: StructureShape
     MarketplaceInformation: StructureShape
     NodeRepairConfig: StructureShape
+    NodeRepairConfigOverrides: StructureShape
+    NodeRepairConfigOverridesList: ListShape
     Nodegroup: StructureShape
     NodegroupHealth: StructureShape
     NodegroupIssueCode: EnumShape
@@ -264,6 +266,7 @@ module Aws::EKS
     RemoteNodeNetworkList: ListShape
     RemotePodNetwork: StructureShape
     RemotePodNetworkList: ListShape
+    RepairAction: EnumShape
     ResolveConflicts: EnumShape
     ResourceInUseException: StructureShape
     ResourceLimitExceededException: StructureShape

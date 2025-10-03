@@ -2,6 +2,11 @@ module Aws::CleanRoomsML
   module Schema
     include Smithy::Schema::Shapes
 
+    AccessBudget: StructureShape
+    AccessBudgetDetails: StructureShape
+    AccessBudgetDetailsList: ListShape
+    AccessBudgetType: EnumShape
+    AccessBudgets: ListShape
     AccessDeniedException: StructureShape
     AccountId: StringShape
     AccountIdList: ListShape
@@ -26,6 +31,9 @@ module Aws::CleanRoomsML
     AudienceSizeConfig: StructureShape
     AudienceSizeType: EnumShape
     AudienceSizeValue: IntegerShape
+    AutoRefreshMode: EnumShape
+    Budget: IntegerShape
+    BudgetedResourceArn: StringShape
     CancelTrainedModelInferenceJobRequest: StructureShape
     CancelTrainedModelRequest: StructureShape
     CollaborationConfiguredModelAlgorithmAssociationList: ListShape
@@ -213,6 +221,7 @@ module Aws::CleanRoomsML
     ParameterMap: MapShape
     ParameterValue: StringShape
     PolicyExistenceCondition: EnumShape
+    PrivacyBudgets: UnionShape
     PrivacyConfiguration: StructureShape
     PrivacyConfigurationPolicies: StructureShape
     ProtectedQueryInputParameters: StructureShape

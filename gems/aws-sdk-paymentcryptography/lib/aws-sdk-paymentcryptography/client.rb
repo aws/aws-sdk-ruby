@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::PaymentCryptography
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::PaymentCryptography
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::PaymentCryptography
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::PaymentCryptography::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::PaymentCryptography::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,6 +193,69 @@ module Aws::PaymentCryptography
       super
     end
 
+    # <p>Adds replication Amazon Web Services Regions to an existing Amazon Web Services Payment Cryptography key, enabling the key to be used for cryptographic operations in additional Amazon Web Services Regions.</p> <p>Multi-region keys allow you to use the same key material across multiple Amazon Web Services Regions, providing lower latency for applications distributed across regions. When you add Replication Regions, Amazon Web Services Payment Cryptography securely replicates the key material to the specified Amazon Web Services Regions.</p> <p>The key must be in an active state to add Replication Regions. You can add multiple regions in a single operation, and the key will be available for use in those regions once replication is complete.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RemoveKeyReplicationRegions.html">RemoveKeyReplicationRegions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::AddKeyReplicationRegionsInput] params
+    # @option params [String] :key_identifier
+    #   <p>The key identifier (ARN or alias) of the key for which to add replication regions.</p> <p>This key must exist and be in a valid state for replication operations.</p>
+    # @option params [Array<String>] :replication_regions
+    #   <p>The list of Amazon Web Services Regions to add to the key's replication configuration.</p> <p>Each region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available. The key will be replicated to these regions, allowing cryptographic operations to be performed closer to your applications.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     replication_regions: ["Region"], # required
+    #   }
+    #   options = {}
+    #   response = client.add_key_replication_regions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     key: { # required
+    #       key_arn: "KeyArn", # required
+    #       key_attributes: { # required
+    #         key_usage: "KeyUsage", # required
+    #         key_class: "KeyClass", # required
+    #         key_algorithm: "KeyAlgorithm", # required
+    #         key_modes_of_use: { # required
+    #           encrypt: false,
+    #           decrypt: false,
+    #           wrap: false,
+    #           unwrap: false,
+    #           generate: false,
+    #           sign: false,
+    #           verify: false,
+    #           derive_key: false,
+    #           no_restrictions: false
+    #         }
+    #       },
+    #       key_check_value: "KeyCheckValue", # required
+    #       key_check_value_algorithm: "KeyCheckValueAlgorithm", # required
+    #       enabled: false, # required
+    #       exportable: false, # required
+    #       key_state: "KeyState", # required
+    #       key_origin: "KeyOrigin", # required
+    #       create_timestamp: Time.now, # required
+    #       usage_start_timestamp: Time.now,
+    #       usage_stop_timestamp: Time.now,
+    #       delete_pending_timestamp: Time.now,
+    #       delete_timestamp: Time.now,
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
+    #     }
+    #   }
+    # @return [Types::AddKeyReplicationRegionsOutput]
+    def add_key_replication_regions(params = {}, options = {})
+      request = build_request(:add_key_replication_regions, params)
+      request.send_request(options)
+    end
+
     # <p>Creates an <i>alias</i>, or a friendly name, for an Amazon Web Services Payment Cryptography key. You can use an alias to identify a key in the console and when you call cryptographic operations such as <a href="https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html">EncryptData</a> or <a href="https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html">DecryptData</a>.</p> <p>You can associate the alias with any key in the same Amazon Web Services Region. Each alias is associated with only one key at a time, but a key can have multiple aliases. You can't create an alias without a key. The alias must be unique in the account and Amazon Web Services Region, but you can create another alias with the same name in a different Amazon Web Services Region.</p> <p>To change the key that's associated with the alias, call <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html">UpdateAlias</a>. To delete the alias, call <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html">DeleteAlias</a>. These operations don't affect the underlying key. To get the alias that you created, call <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html">ListAliases</a>.</p> <p> <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html">DeleteAlias</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html">GetAlias</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html">ListAliases</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html">UpdateAlias</a> </p> </li> </ul>
     # @param [Hash, Types::CreateAliasInput] params
     # @option params [String] :alias_name
@@ -229,6 +297,8 @@ module Aws::PaymentCryptography
     #   <p>Assigns one or more tags to the Amazon Web Services Payment Cryptography key. Use this parameter to tag a key when it is created. To tag an existing Amazon Web Services Payment Cryptography key, use the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p> <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. </p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important> <note> <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p> </note>
     # @option params [String] :derive_key_usage
     #   <p>The intended cryptographic usage of keys derived from the ECC key pair to be created.</p> <p>After creating an ECC key pair, you cannot change the intended cryptographic usage of keys derived from it using ECDH.</p>
+    # @option params [Array<String>] :replication_regions
+    #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     key_attributes: { # required
@@ -256,7 +326,8 @@ module Aws::PaymentCryptography
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     derive_key_usage: "DeriveKeyUsage"
+    #     derive_key_usage: "DeriveKeyUsage",
+    #     replication_regions: ["Region"]
     #   }
     #   options = {}
     #   response = client.create_key(params, options)
@@ -292,7 +363,16 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::CreateKeyOutput]
@@ -365,12 +445,63 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::DeleteKeyOutput]
     def delete_key(params = {}, options = {})
       request = build_request(:delete_key, params)
+      request.send_request(options)
+    end
+
+    # <p>Disables multi-region key replication settings for the specified Amazon Web Services Regions in your account, preventing new keys from being automatically replicated to those regions.</p> <p>After disabling default replication for specific regions, new keys created in your account will not be automatically replicated to those regions. You can still manually add replication to those regions for individual keys using the AddKeyReplicationRegions operation.</p> <p>This operation does not affect existing keys or their current replication configuration.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::DisableDefaultKeyReplicationRegionsInput] params
+    # @option params [Array<String>] :replication_regions
+    #   <p>The list of Amazon Web Services Regions to remove from the account's default replication regions.</p> <p>New keys created after this operation will not automatically be replicated to these regions, though existing keys with replication to these regions will be unaffected.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     replication_regions: ["Region"], # required
+    #   }
+    #   options = {}
+    #   response = client.disable_default_key_replication_regions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     enabled_replication_regions: ["Region"], # required
+    #   }
+    # @return [Types::DisableDefaultKeyReplicationRegionsOutput]
+    def disable_default_key_replication_regions(params = {}, options = {})
+      request = build_request(:disable_default_key_replication_regions, params)
+      request.send_request(options)
+    end
+
+    # <p>Enables multi-region key replication settings for your account, causing new keys to be automatically replicated to the specified Amazon Web Services Regions when created.</p> <p>When default Replication Regions are enabled, any new keys created in your account will automatically be replicated to these regions unless you explicitly override this behavior during key creation. This simplifies key management for applications that operate across multiple regions.</p> <p>Existing keys are not affected by this operation - only keys created after enabling default replication will be automatically replicated.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html">DisableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html">GetDefaultKeyReplicationRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::EnableDefaultKeyReplicationRegionsInput] params
+    # @option params [Array<String>] :replication_regions
+    #   <p>The list of Amazon Web Services Regions to enable as default replication regions for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     replication_regions: ["Region"], # required
+    #   }
+    #   options = {}
+    #   response = client.enable_default_key_replication_regions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     enabled_replication_regions: ["Region"], # required
+    #   }
+    # @return [Types::EnableDefaultKeyReplicationRegionsOutput]
+    def enable_default_key_replication_regions(params = {}, options = {})
+      request = build_request(:enable_default_key_replication_regions, params)
       request.send_request(options)
     end
 
@@ -410,7 +541,9 @@ module Aws::PaymentCryptography
     #       tr34_key_block: {
     #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #         wrapping_key_certificate: "CertificateType", # required
-    #         export_token: "ExportTokenId", # required
+    #         export_token: "ExportTokenId",
+    #         signing_key_identifier: "KeyArnOrKeyAliasType",
+    #         signing_key_certificate: "CertificateType",
     #         key_block_format: "Tr34KeyBlockFormat", # required
     #         random_nonce: "EvenHexLengthBetween16And32",
     #         key_block_headers: {
@@ -519,7 +652,59 @@ module Aws::PaymentCryptography
       request.send_request(options)
     end
 
-    # <p>Gets the key material for an Amazon Web Services Payment Cryptography key, including the immutable and mutable data specified when the key was created.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html">CreateKey</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html">DeleteKey</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html">ListKeys</a> </p> </li> </ul>
+    # Used to retrieve the public key for a keypair.
+    # @param [Hash, Types::GetCertificateSigningRequestInput] params
+    # @option params [String] :key_identifier
+    #   Asymmetric key used for generating the certificate signing request
+    # @option params [String] :signing_algorithm
+    #   Algorithm used to generate the certificate signing request
+    # @option params [Types::CertificateSubjectType] :certificate_subject
+    #   Certificate subject data
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     signing_algorithm: "SigningAlgorithmType", # required
+    #     certificate_subject: { # required
+    #       common_name: "String", # required
+    #       organization_unit: "String",
+    #       organization: "String",
+    #       city: "String",
+    #       country: "String",
+    #       state_or_province: "String",
+    #       email_address: "String"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.get_certificate_signing_request(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     certificate_signing_request: "CertificateSigningRequestType", # required
+    #   }
+    # @return [Types::GetCertificateSigningRequestOutput]
+    def get_certificate_signing_request(params = {}, options = {})
+      request = build_request(:get_certificate_signing_request, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the list of regions where default key replication is currently enabled for your account.</p> <p>This operation returns the current configuration of default Replication Regions. New keys created in your account will be automatically replicated to these regions unless explicitly overridden during key creation.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html">EnableDefaultKeyReplicationRegions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html">DisableDefaultKeyReplicationRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::GetDefaultKeyReplicationRegionsInput] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_default_key_replication_regions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     enabled_replication_regions: ["Region"], # required
+    #   }
+    # @return [Types::GetDefaultKeyReplicationRegionsOutput]
+    def get_default_key_replication_regions(params = {}, options = {})
+      request = build_request(:get_default_key_replication_regions, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the key metadata for an Amazon Web Services Payment Cryptography key, including the immutable and mutable attributes specified when the key was created. Returns key metadata including attributes, state, and timestamps, but does not return the actual cryptographic key material.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html">CreateKey</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html">DeleteKey</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html">ListKeys</a> </p> </li> </ul>
     # @param [Hash, Types::GetKeyInput] params
     # @option params [String] :key_identifier
     #   <p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key.</p>
@@ -561,7 +746,16 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::GetKeyOutput]
@@ -658,6 +852,8 @@ module Aws::PaymentCryptography
     #   <p>Specifies whether import key is enabled.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Assigns one or more tags to the Amazon Web Services Payment Cryptography key. Use this parameter to tag a key when it is imported. To tag an existing Amazon Web Services Payment Cryptography key, use the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p> <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the specified one.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important> <note> <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p> </note>
+    # @option params [Array<String>] :replication_regions
+    #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     key_material: { # required
@@ -708,7 +904,9 @@ module Aws::PaymentCryptography
     #       tr34_key_block: {
     #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
     #         signing_key_certificate: "CertificateType", # required
-    #         import_token: "ImportTokenId", # required
+    #         import_token: "ImportTokenId",
+    #         wrapping_key_identifier: "KeyArnOrKeyAliasType",
+    #         wrapping_key_certificate: "CertificateType",
     #         wrapped_key_block: "Tr34WrappedKeyBlock", # required
     #         key_block_format: "Tr34KeyBlockFormat", # required
     #         random_nonce: "EvenHexLengthBetween16And32"
@@ -756,7 +954,8 @@ module Aws::PaymentCryptography
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     replication_regions: ["Region"]
     #   }
     #   options = {}
     #   response = client.import_key(params, options)
@@ -792,7 +991,16 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::ImportKeyOutput]
@@ -876,6 +1084,8 @@ module Aws::PaymentCryptography
     #         key_check_value: "KeyCheckValue", # required
     #         exportable: false, # required
     #         enabled: false, # required
+    #         multi_region_key_type: "MultiRegionKeyType",
+    #         primary_region: "Region"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -916,6 +1126,69 @@ module Aws::PaymentCryptography
     # @return [Types::ListTagsForResourceOutput]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes Replication Regions from an existing Amazon Web Services Payment Cryptography key, disabling the key's availability for cryptographic operations in the specified Amazon Web Services Regions.</p> <p>When you remove Replication Regions, the key material is securely deleted from those regions and can no longer be used for cryptographic operations there. This operation is irreversible for the specified Amazon Web Services Regions.</p> <p>Ensure that no active cryptographic operations or applications depend on the key in the regions you're removing before performing this operation.</p> <p> <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html">AddKeyReplicationRegions</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html">DisableDefaultKeyReplicationRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::RemoveKeyReplicationRegionsInput] params
+    # @option params [String] :key_identifier
+    #   <p>The key identifier (ARN or alias) of the key from which to remove replication regions.</p> <p>This key must exist and have replication enabled in the specified regions.</p>
+    # @option params [Array<String>] :replication_regions
+    #   <p>The list of Amazon Web Services Regions to remove from the key's replication configuration.</p> <p>The key will no longer be available for cryptographic operations in these regions after removal. Ensure no active operations depend on the key in these regions before removal.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     replication_regions: ["Region"], # required
+    #   }
+    #   options = {}
+    #   response = client.remove_key_replication_regions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     key: { # required
+    #       key_arn: "KeyArn", # required
+    #       key_attributes: { # required
+    #         key_usage: "KeyUsage", # required
+    #         key_class: "KeyClass", # required
+    #         key_algorithm: "KeyAlgorithm", # required
+    #         key_modes_of_use: { # required
+    #           encrypt: false,
+    #           decrypt: false,
+    #           wrap: false,
+    #           unwrap: false,
+    #           generate: false,
+    #           sign: false,
+    #           verify: false,
+    #           derive_key: false,
+    #           no_restrictions: false
+    #         }
+    #       },
+    #       key_check_value: "KeyCheckValue", # required
+    #       key_check_value_algorithm: "KeyCheckValueAlgorithm", # required
+    #       enabled: false, # required
+    #       exportable: false, # required
+    #       key_state: "KeyState", # required
+    #       key_origin: "KeyOrigin", # required
+    #       create_timestamp: Time.now, # required
+    #       usage_start_timestamp: Time.now,
+    #       usage_stop_timestamp: Time.now,
+    #       delete_pending_timestamp: Time.now,
+    #       delete_timestamp: Time.now,
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
+    #     }
+    #   }
+    # @return [Types::RemoveKeyReplicationRegionsOutput]
+    def remove_key_replication_regions(params = {}, options = {})
+      request = build_request(:remove_key_replication_regions, params)
       request.send_request(options)
     end
 
@@ -961,7 +1234,16 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::RestoreKeyOutput]
@@ -1012,7 +1294,16 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::StartKeyUsageOutput]
@@ -1063,7 +1354,16 @@ module Aws::PaymentCryptography
     #       usage_stop_timestamp: Time.now,
     #       delete_pending_timestamp: Time.now,
     #       delete_timestamp: Time.now,
-    #       derive_key_usage: "DeriveKeyUsage"
+    #       derive_key_usage: "DeriveKeyUsage",
+    #       multi_region_key_type: "MultiRegionKeyType",
+    #       primary_region: "Region",
+    #       replication_status: {
+    #         "Region" => {
+    #           status: "KeyReplicationState", # required
+    #           status_message: "String"
+    #         }
+    #       },
+    #       using_default_replication_regions: false
     #     }
     #   }
     # @return [Types::StopKeyUsageOutput]

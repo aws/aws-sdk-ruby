@@ -35,8 +35,12 @@ module Aws::SSOAdmin
     # <p>You do not have sufficient access to perform this action.</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the access denied exception.</p>
+    #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1092,6 +1096,12 @@ module Aws::SSOAdmin
     # @!attribute status
     #   <p>The status of the instance. </p>
     #   @return [String]
+    # @!attribute status_reason
+    #   <p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance fails to create or update, this field contains information about the cause, which may include issues with KMS key configuration, permission problems with the specified KMS key, or service-related errors. </p>
+    #   @return [String]
+    # @!attribute encryption_configuration_details
+    #   <p>Contains the encryption configuration for your IAM Identity Center instance, including the encryption status, KMS key type, and KMS key ARN.</p>
+    #   @return [Types::EncryptionConfigurationDetails]
     class DescribeInstanceResponse < Struct.new(
       :instance_arn,
       :identity_store_id,
@@ -1099,6 +1109,8 @@ module Aws::SSOAdmin
       :name,
       :created_date,
       :status,
+      :status_reason,
+      :encryption_configuration_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1246,6 +1258,44 @@ module Aws::SSOAdmin
       :display_name,
       :icon_url,
       :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> A structure that specifies the KMS key type and KMS key ARN used to encrypt data in your IAM Identity Center instance.</p>
+    # @!attribute key_type
+    #   <p>The type of KMS key used for encryption.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of the KMS key used to encrypt data. Required when KeyType is CUSTOMER_MANAGED_KEY. Cannot be specified when KeyType is AWS_OWNED_KMS_KEY.</p>
+    #   @return [String]
+    class EncryptionConfiguration < Struct.new(
+      :key_type,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The encryption configuration of your IAM Identity Center instance, including the key type, KMS key ARN, and current encryption status. </p>
+    # @!attribute key_type
+    #   <p>The type of KMS key used for encryption.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of the KMS key currently used to encrypt data in your IAM Identity Center instance. </p>
+    #   @return [String]
+    # @!attribute encryption_status
+    #   <p>The current status of encryption configuration.</p>
+    #   @return [String]
+    # @!attribute encryption_status_reason
+    #   <p>Provides additional context about the current encryption status. This field is particularly useful when the encryption status is UPDATE_FAILED. When encryption configuration update fails, this field contains information about the cause, which may include KMS key access issues, key not found errors, invalid key configuration, key in an invalid state, or a disabled key. </p>
+    #   @return [String]
+    class EncryptionConfigurationDetails < Struct.new(
+      :key_type,
+      :kms_key_arn,
+      :encryption_status,
+      :encryption_status_reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1506,6 +1556,9 @@ module Aws::SSOAdmin
     # @!attribute status
     #   <p>The current status of this Identity Center instance.</p>
     #   @return [String]
+    # @!attribute status_reason
+    #   <p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance creation fails, this field contains information about the cause, which may include issues with KMS key configuration or insufficient permissions. </p>
+    #   @return [String]
     class InstanceMetadata < Struct.new(
       :instance_arn,
       :identity_store_id,
@@ -1513,6 +1566,7 @@ module Aws::SSOAdmin
       :name,
       :created_date,
       :status,
+      :status_reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2625,8 +2679,12 @@ module Aws::SSOAdmin
     # <p>Indicates that a requested resource is not found.</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the resource not found exception.</p>
+    #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2740,8 +2798,12 @@ module Aws::SSOAdmin
     # <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the throttling exception.</p>
+    #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2896,9 +2958,13 @@ module Aws::SSOAdmin
     # @!attribute instance_arn
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys (CMK) or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
+    #   @return [Types::EncryptionConfiguration]
     class UpdateInstanceRequest < Struct.new(
       :name,
       :instance_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2969,8 +3035,12 @@ module Aws::SSOAdmin
     # <p>The request failed because it contains a syntax error.</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute reason
+    #   <p>The reason for the validation exception.</p>
+    #   @return [String]
     class ValidationException < Struct.new(
       :message,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

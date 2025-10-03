@@ -24,9 +24,24 @@ module Aws::BedrockDataAutomation
     # @!attribute types
     #   List of Audio Extraction Category Type
     #   @return [Array<String>]
+    # @!attribute type_configuration
+    #   Configuration for different audio extraction category types
+    #   @return [Types::AudioExtractionCategoryTypeConfiguration]
     class AudioExtractionCategory < Struct.new(
       :state,
       :types,
+      :type_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Configuration for different audio extraction category types
+    # @!attribute transcript
+    #   Configuration for transcript related features
+    #   @return [Types::TranscriptConfiguration]
+    class AudioExtractionCategoryTypeConfiguration < Struct.new(
+      :transcript,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -195,6 +210,17 @@ module Aws::BedrockDataAutomation
       :blueprint_name,
       :creation_time,
       :last_modified_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Channel labeling configuration
+    # @!attribute state
+    #   State
+    #   @return [String]
+    class ChannelLabelingConfiguration < Struct.new(
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -971,6 +997,17 @@ module Aws::BedrockDataAutomation
       include ::Smithy::Schema::Structure
     end
 
+    # Speaker labeling configuration
+    # @!attribute state
+    #   State
+    #   @return [String]
+    class SpeakerLabelingConfiguration < Struct.new(
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Configuration of Splitter
     # @!attribute state
     #   State
@@ -1046,6 +1083,21 @@ module Aws::BedrockDataAutomation
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Configuration for transcript related features
+    # @!attribute speaker_labeling
+    #   Speaker labeling configuration
+    #   @return [Types::SpeakerLabelingConfiguration]
+    # @!attribute channel_labeling
+    #   Channel labeling configuration
+    #   @return [Types::ChannelLabelingConfiguration]
+    class TranscriptConfiguration < Struct.new(
+      :speaker_labeling,
+      :channel_labeling,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

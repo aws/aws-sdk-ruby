@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::ChimeSDKMeetings
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::ChimeSDKMeetings
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::ChimeSDKMeetings
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::ChimeSDKMeetings::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::ChimeSDKMeetings::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -189,7 +194,7 @@ module Aws::ChimeSDKMeetings
     end
 
     # <p>Creates up to 100 attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see 
-    #             <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>
+    #             <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>
     # @param [Hash, Types::BatchCreateAttendeeRequest] params
     # @option params [String] :meeting_id
     #   <p>The Amazon Chime SDK ID of the meeting to which you're adding attendees.</p>
@@ -261,6 +266,15 @@ module Aws::ChimeSDKMeetings
     #                     to receive and you set your <code>content</code> capability to not receive.</p>
     #             </li>
     #             <li>
+    #                <p>If meeting features is defined as <code>Video:MaxResolution:None</code> but
+    #                     <code>Content:MaxResolution</code> is defined as something other than
+    #                     <code>None</code> and attendee capabilities are not defined in the API
+    #                     request, then the default attendee video capability is set to
+    #                     <code>Receive</code> and attendee content capability is set to
+    #                     <code>SendReceive</code>. This is because content <code>SendReceive</code>
+    #                     requires video to be at least <code>Receive</code>.</p>
+    #             </li>
+    #             <li>
     #                <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , 
     #                     and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p>
     #             </li>
@@ -303,7 +317,7 @@ module Aws::ChimeSDKMeetings
 
     # <p>
     #            Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
     #            in the 
     #            <i>Amazon Chime Developer Guide</i>.
     #        </p>
@@ -337,6 +351,15 @@ module Aws::ChimeSDKMeetings
     #                  <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> 
     #                       or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability 
     #                       to receive and you set your <code>content</code> capability to not receive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If meeting features is defined as <code>Video:MaxResolution:None</code> but
+    #                           <code>Content:MaxResolution</code> is defined as something other than
+    #                           <code>None</code> and attendee capabilities are not defined in the API
+    #                           request, then the default attendee video capability is set to
+    #                           <code>Receive</code> and attendee content capability is set to
+    #                           <code>SendReceive</code>. This is because content <code>SendReceive</code>
+    #                           requires video to be at least <code>Receive</code>.</p>
     #               </li>
     #               <li>
     #                  <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , 
@@ -380,12 +403,25 @@ module Aws::ChimeSDKMeetings
     end
 
     # <p>Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a>
-    #            in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions">Available Regions</a> and 
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Using meeting Regions</a>, both 
+    #            in the <i>Amazon Chime SDK Developer Guide</i>. For more information about the Amazon Chime SDK, see 
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
     #            in the 
-    #            <i>Amazon Chime Developer Guide</i>.
+    #            <i>Amazon Chime SDK Developer Guide</i>.
     #        </p>
+    #          <note>
+    #             <p>If you use this API in conjuction with the  and  APIs, and you don't specify the 
+    #        <code>MeetingFeatures.Content.MaxResolution</code> or <code>MeetingFeatures.Video.MaxResolution</code> parameters, the following defaults are used:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>Content.MaxResolution: FHD</p>
+    #                </li>
+    #                <li>
+    #                   <p>Video.MaxResolution: HD</p>
+    #                </li>
+    #             </ul>
+    #          </note>
     # @param [Hash, Types::CreateMeetingRequest] params
     # @option params [String] :client_request_token
     #   <p>The unique identifier for the client request. Use a different token for different meetings.</p>
@@ -468,6 +504,8 @@ module Aws::ChimeSDKMeetings
     #               <p>Some services might have specific requirements for tagging some resources. For example, to tag an Amazon S3 bucket, you must also have the <code>s3:GetBucketTagging</code> permission. 
     #                   If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information.</p>
     #            </note>
+    # @option params [String] :media_placement_network_type
+    #   <p>The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_request_token: "ClientRequestToken", # required
@@ -500,7 +538,8 @@ module Aws::ChimeSDKMeetings
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     media_placement_network_type: "Ipv4Only" # One of: ["Ipv4Only", "DualStack"]
     #   }
     #   options = {}
     #   response = client.create_meeting(params, options)
@@ -549,11 +588,25 @@ module Aws::ChimeSDKMeetings
 
     # <p>
     #            Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a>
-    #            in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
-    #            in the <i>Amazon Chime Developer Guide</i>.
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions">Available Regions</a> and 
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Using meeting Regions</a>, both 
+    #            in the <i>Amazon Chime SDK Developer Guide</i>. For more information about the Amazon Chime SDK, see 
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #            in the 
+    #            <i>Amazon Chime SDK Developer Guide</i>.
     #        </p>
+    #          <note>
+    #             <p>If you use this API in conjuction with the  and  APIs, and you don't specify the 
+    #            <code>MeetingFeatures.Content.MaxResolution</code> or <code>MeetingFeatures.Video.MaxResolution</code> parameters, the following defaults are used:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>Content.MaxResolution: FHD</p>
+    #                </li>
+    #                <li>
+    #                   <p>Video.MaxResolution: HD</p>
+    #                </li>
+    #             </ul>
+    #          </note>
     # @param [Hash, Types::CreateMeetingWithAttendeesRequest] params
     # @option params [String] :client_request_token
     #   <p>The unique identifier for the client request. Use a different token for different meetings.</p>
@@ -601,6 +654,8 @@ module Aws::ChimeSDKMeetings
     #   <p>A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags in the request.</p>
+    # @option params [String] :media_placement_network_type
+    #   <p>The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_request_token: "ClientRequestToken", # required
@@ -643,7 +698,8 @@ module Aws::ChimeSDKMeetings
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     media_placement_network_type: "Ipv4Only" # One of: ["Ipv4Only", "DualStack"]
     #   }
     #   options = {}
     #   response = client.create_meeting_with_attendees(params, options)
@@ -711,7 +767,7 @@ module Aws::ChimeSDKMeetings
 
     # <p>Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their 
     #            <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
     #            in the <i>Amazon Chime Developer Guide</i>.</p>
     # @param [Hash, Types::DeleteAttendeeRequest] params
     # @option params [String] :meeting_id
@@ -736,7 +792,7 @@ module Aws::ChimeSDKMeetings
 
     # <p>Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from 
     #            joining the meeting. For more information about the Amazon Chime SDK, see 
-    #            <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the 
+    #            <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the 
     #            <i>Amazon Chime Developer Guide</i>.</p>
     # @param [Hash, Types::DeleteMeetingRequest] params
     # @option params [String] :meeting_id
@@ -758,7 +814,7 @@ module Aws::ChimeSDKMeetings
 
     # <p>
     #             Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see 
-    #             <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #             <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
     #             in the <i>Amazon Chime Developer Guide</i>.
     #         </p>
     # @param [Hash, Types::GetAttendeeRequest] params
@@ -794,7 +850,7 @@ module Aws::ChimeSDKMeetings
     end
 
     # <p>Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see 
-    #             <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #             <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
     #             in the <i>Amazon Chime Developer Guide</i>.</p>
     # @param [Hash, Types::GetMeetingRequest] params
     # @option params [String] :meeting_id
@@ -850,7 +906,7 @@ module Aws::ChimeSDKMeetings
 
     # <p>
     #             Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see 
-    #             <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+    #             <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
     #             in the <i>Amazon Chime Developer Guide</i>.
     #         </p>
     # @param [Hash, Types::ListAttendeesRequest] params
@@ -1099,6 +1155,15 @@ module Aws::ChimeSDKMeetings
     #                <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> 
     #                     or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your <code>video</code> capability 
     #                     to receive and you set your <code>content</code> capability to not receive.</p>
+    #             </li>
+    #             <li>
+    #                <p>If meeting features is defined as <code>Video:MaxResolution:None</code> but
+    #                     <code>Content:MaxResolution</code> is defined as something other than
+    #                     <code>None</code> and attendee capabilities are not defined in the API
+    #                     request, then the default attendee video capability is set to
+    #                     <code>Receive</code> and attendee content capability is set to
+    #                     <code>SendReceive</code>. This is because content <code>SendReceive</code>
+    #                     requires video to be at least <code>Receive</code>.</p>
     #             </li>
     #             <li>
     #                <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , 

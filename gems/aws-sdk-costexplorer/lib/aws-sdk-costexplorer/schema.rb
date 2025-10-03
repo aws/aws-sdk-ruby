@@ -37,6 +37,7 @@ module Aws::CostExplorer
     BackfillLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costexplorer#BackfillLimitExceededException', name: 'BackfillLimitExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     BillExpirationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costexplorer#BillExpirationException', name: 'BillExpirationException', traits: {"smithy.api#error" => "client"})
     BillingViewArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.costexplorer#BillingViewArn', name: 'BillingViewArn', traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[-a-zA-Z0-9/:_+=.-@]{1,43}$"})
+    BillingViewHealthStatusException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costexplorer#BillingViewHealthStatusException', name: 'BillingViewHealthStatusException', traits: {"smithy.api#error" => "client"})
     CommitmentPurchaseAnalysisConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration', name: 'CommitmentPurchaseAnalysisConfiguration')
     ComparisonMetricValue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.costexplorer#ComparisonMetricValue', name: 'ComparisonMetricValue')
     ComparisonMetrics = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.costexplorer#ComparisonMetrics', name: 'ComparisonMetrics')
@@ -464,6 +465,8 @@ module Aws::CostExplorer
     BackfillLimitExceededException.type = Types::BackfillLimitExceededException
     BillExpirationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     BillExpirationException.type = Types::BillExpirationException
+    BillingViewHealthStatusException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
+    BillingViewHealthStatusException.type = Types::BillingViewHealthStatusException
     CommitmentPurchaseAnalysisConfiguration.add_member(:savings_plans_purchase_analysis_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SavingsPlansPurchaseAnalysisConfiguration, location_name: 'SavingsPlansPurchaseAnalysisConfiguration'))
     CommitmentPurchaseAnalysisConfiguration.type = Types::CommitmentPurchaseAnalysisConfiguration
     ComparisonMetricValue.add_member(:baseline_time_period_amount, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: 'BaselineTimePeriodAmount'))
@@ -657,6 +660,7 @@ module Aws::CostExplorer
     Dimension.add_member(:az, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AZ', traits: {"smithy.api#enumValue" => "AZ"}))
     Dimension.add_member(:instance_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INSTANCE_TYPE', traits: {"smithy.api#enumValue" => "INSTANCE_TYPE"}))
     Dimension.add_member(:linked_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LINKED_ACCOUNT', traits: {"smithy.api#enumValue" => "LINKED_ACCOUNT"}))
+    Dimension.add_member(:payer_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PAYER_ACCOUNT', traits: {"smithy.api#enumValue" => "PAYER_ACCOUNT"}))
     Dimension.add_member(:linked_account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LINKED_ACCOUNT_NAME', traits: {"smithy.api#enumValue" => "LINKED_ACCOUNT_NAME"}))
     Dimension.add_member(:operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OPERATION', traits: {"smithy.api#enumValue" => "OPERATION"}))
     Dimension.add_member(:purchase_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PURCHASE_TYPE', traits: {"smithy.api#enumValue" => "PURCHASE_TYPE"}))
@@ -1757,6 +1761,7 @@ module Aws::CostExplorer
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostAndUsageRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostAndUsageResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillExpirationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1769,6 +1774,7 @@ module Aws::CostExplorer
         operation.name = "GetCostAndUsageComparisons"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostAndUsageComparisonsRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostAndUsageComparisonsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1782,6 +1788,7 @@ module Aws::CostExplorer
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostAndUsageWithResourcesRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostAndUsageWithResourcesResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillExpirationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1795,6 +1802,7 @@ module Aws::CostExplorer
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostCategoriesRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostCategoriesResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillExpirationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1807,6 +1815,7 @@ module Aws::CostExplorer
         operation.name = "GetCostComparisonDrivers"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostComparisonDriversRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostComparisonDriversResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1819,6 +1828,7 @@ module Aws::CostExplorer
         operation.name = "GetCostForecast"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostForecastRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCostForecastResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1830,6 +1840,7 @@ module Aws::CostExplorer
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDimensionValuesRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetDimensionValuesResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillExpirationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1931,6 +1942,7 @@ module Aws::CostExplorer
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTagsRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetTagsResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillExpirationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1943,6 +1955,7 @@ module Aws::CostExplorer
         operation.name = "GetUsageForecast"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUsageForecastRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetUsageForecastResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataUnavailableException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)

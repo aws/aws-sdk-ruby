@@ -22,6 +22,7 @@ module Aws::Organizations
     AccountNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.organizations#AccountNotFoundException', name: 'AccountNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     AccountNotRegisteredException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.organizations#AccountNotRegisteredException', name: 'AccountNotRegisteredException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     AccountOwnerNotVerifiedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.organizations#AccountOwnerNotVerifiedException', name: 'AccountOwnerNotVerifiedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccountState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.organizations#AccountState', name: 'AccountState')
     AccountStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.organizations#AccountStatus', name: 'AccountStatus')
     Accounts = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.organizations#Accounts', name: 'Accounts')
     ActionType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.organizations#ActionType', name: 'ActionType')
@@ -274,6 +275,7 @@ module Aws::Organizations
     Account.add_member(:email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Email, location_name: 'Email'))
     Account.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountName, location_name: 'Name'))
     Account.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountStatus, location_name: 'Status'))
+    Account.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountState, location_name: 'State'))
     Account.add_member(:joined_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountJoinedMethod, location_name: 'JoinedMethod'))
     Account.add_member(:joined_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'JoinedTimestamp'))
     Account.type = Types::Account
@@ -289,6 +291,11 @@ module Aws::Organizations
     AccountNotRegisteredException.type = Types::AccountNotRegisteredException
     AccountOwnerNotVerifiedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'Message'))
     AccountOwnerNotVerifiedException.type = Types::AccountOwnerNotVerifiedException
+    AccountState.add_member(:pending_activation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING_ACTIVATION', traits: {"smithy.api#enumValue" => "PENDING_ACTIVATION"}))
+    AccountState.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    AccountState.add_member(:suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUSPENDED', traits: {"smithy.api#enumValue" => "SUSPENDED"}))
+    AccountState.add_member(:pending_closure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING_CLOSURE', traits: {"smithy.api#enumValue" => "PENDING_CLOSURE"}))
+    AccountState.add_member(:closed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CLOSED', traits: {"smithy.api#enumValue" => "CLOSED"}))
     AccountStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AccountStatus.add_member(:suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SUSPENDED', traits: {"smithy.api#enumValue" => "SUSPENDED"}))
     AccountStatus.add_member(:pending_closure, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING_CLOSURE', traits: {"smithy.api#enumValue" => "PENDING_CLOSURE"}))

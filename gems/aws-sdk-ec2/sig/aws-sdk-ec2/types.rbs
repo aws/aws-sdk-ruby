@@ -7962,6 +7962,28 @@ module Aws::EC2
       attr_accessor vpn_gateway: Types::VpnGateway?
     end
 
+    class CreationDateCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_days_since_created: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_days_since_created: Integer?
+    end
+
+    class CreationDateConditionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_days_since_created: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_days_since_created: Integer?
+    end
+
     class CreditSpecification
       include Smithy::Schema::Structure
 
@@ -10061,6 +10083,28 @@ module Aws::EC2
 
       attr_accessor vpn_gateway_id: String?
       attr_accessor dry_run: bool?
+    end
+
+    class DeprecationTimeCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_days_since_deprecated: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_days_since_deprecated: Integer?
+    end
+
+    class DeprecationTimeConditionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_days_since_deprecated: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_days_since_deprecated: Integer?
     end
 
     class DeprovisionByoipCidrRequest
@@ -21694,10 +21738,18 @@ module Aws::EC2
 
       def initialize: (
         ?image_providers: Array[String],
+        ?marketplace_product_codes: Array[String],
+        ?image_names: Array[String],
+        ?deprecation_time_condition: Types::DeprecationTimeCondition,
+        ?creation_date_condition: Types::CreationDateCondition,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_providers: Array[String]?
+      attr_accessor marketplace_product_codes: Array[String]?
+      attr_accessor image_names: Array[String]?
+      attr_accessor deprecation_time_condition: Types::DeprecationTimeCondition?
+      attr_accessor creation_date_condition: Types::CreationDateCondition?
     end
 
     class ImageCriterionRequest
@@ -21705,10 +21757,18 @@ module Aws::EC2
 
       def initialize: (
         ?image_providers: Array[String],
+        ?marketplace_product_codes: Array[String],
+        ?image_names: Array[String],
+        ?deprecation_time_condition: Types::DeprecationTimeConditionRequest,
+        ?creation_date_condition: Types::CreationDateConditionRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_providers: Array[String]?
+      attr_accessor marketplace_product_codes: Array[String]?
+      attr_accessor image_names: Array[String]?
+      attr_accessor deprecation_time_condition: Types::DeprecationTimeConditionRequest?
+      attr_accessor creation_date_condition: Types::CreationDateConditionRequest?
     end
 
     class ImageDiskContainer
@@ -24626,6 +24686,20 @@ module Aws::EC2
       i8ge_48xlarge: String
       i8ge_metal_24xl: String
       i8ge_metal_48xl: String
+      mac_m4_metal: String
+      mac_m4pro_metal: String
+      r8gn_medium: String
+      r8gn_large: String
+      r8gn_xlarge: String
+      r8gn_2xlarge: String
+      r8gn_4xlarge: String
+      r8gn_8xlarge: String
+      r8gn_12xlarge: String
+      r8gn_16xlarge: String
+      r8gn_24xlarge: String
+      r8gn_48xlarge: String
+      r8gn_metal_24xl: String
+      r8gn_metal_48xl: String
     end
 
     module InstanceTypeHypervisor

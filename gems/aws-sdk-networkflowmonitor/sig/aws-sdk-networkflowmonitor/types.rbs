@@ -148,6 +148,7 @@ module Aws::NetworkFlowMonitor
       UNCLASSIFIED: String
       AMAZON_S3: String
       AMAZON_DYNAMODB: String
+      INTER_REGION: String
     end
 
     class GetMonitorInput
@@ -537,6 +538,7 @@ module Aws::NetworkFlowMonitor
       AWS_VPC: String
       AWS_AZ: String
       AWS_SUBNET: String
+      AWS_REGION: String
     end
 
     module MonitorMetric
@@ -564,6 +566,7 @@ module Aws::NetworkFlowMonitor
       AWS_AZ: String
       AWS_SUBNET: String
       AWS_SERVICE: String
+      AWS_REGION: String
     end
 
     module MonitorStatus

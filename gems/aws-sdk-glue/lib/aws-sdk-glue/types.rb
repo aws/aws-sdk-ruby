@@ -415,12 +415,17 @@ module Aws::Glue
     # @!attribute secret_arn
     #   <p>The secret manager ARN to store credentials.</p>
     #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive authentication information. This key is used to protect credentials 
+    #         and other sensitive data stored within the authentication configuration.</p>
+    #   @return [String]
     # @!attribute o_auth2_properties
     #   <p>The properties for OAuth2 authentication.</p>
     #   @return [Types::OAuth2Properties]
     class AuthenticationConfiguration < Struct.new(
       :authentication_type,
       :secret_arn,
+      :kms_key_arn,
       :o_auth2_properties,
       keyword_init: true
     )
@@ -3024,7 +3029,7 @@ module Aws::Glue
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure
+    #                     <code>JDBC_ENFORCE_SSL</code> - A case-insensitive Boolean string (true, false) specifying whether Secure
     #             Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the
     #             client. The default is false.</p>
     #               </li>

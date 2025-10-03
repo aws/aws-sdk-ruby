@@ -10,12 +10,16 @@ module Aws::SSOOIDC
     # @!attribute error
     #   <p>Single error code. For this exception the value will be <code>access_denied</code>.</p>
     #   @return [String]
+    # @!attribute reason
+    #   <p>A string that uniquely identifies a reason for the error.</p>
+    #   @return [String]
     # @!attribute error_description
     #   <p>Human-readable text providing additional information, used to assist the client developer
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :error,
+      :reason,
       :error_description,
       keyword_init: true
     )
@@ -40,12 +44,13 @@ module Aws::SSOOIDC
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This structure contains Amazon Web Services-specific parameter extensions for the token endpoint
-    #       responses and includes the identity context.</p>
+    # <p>This structure contains Amazon Web Services-specific parameter extensions and the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html">identity context</a>.</p>
     # @!attribute identity_context
-    #   <p>STS context assertion that carries a user identifier to the Amazon Web Services service that it calls
-    #         and can be used to obtain an identity-enhanced IAM role session. This value corresponds to
-    #         the <code>sts:identity_context</code> claim in the ID token.</p>
+    #   <p>The trusted context assertion is signed and encrypted by STS. It provides access to
+    #           <code>sts:identity_context</code> claim in the <code>idToken</code> without JWT
+    #         parsing</p>
+    #            <p>Identity context comprises information that Amazon Web Services services use to make authorization
+    #         decisions when they receive requests.</p>
     #   @return [String]
     class AwsAdditionalDetails < Struct.new(
       :identity_context,
@@ -88,9 +93,7 @@ module Aws::SSOOIDC
     #           OIDC API Reference</a>.</p>
     #   @return [String]
     # @!attribute scope
-    #   <p>The list of scopes for which authorization is requested. The access token that is issued
-    #         is limited to the scopes that are granted. If this value is not specified, IAM Identity Center authorizes
-    #         all scopes that are configured for the client during the call to <a>RegisterClient</a>.</p>
+    #   <p>The list of scopes for which authorization is requested. This parameter has no effect; the access token will always include all scopes configured during client registration.</p>
     #   @return [Array<String>]
     # @!attribute redirect_uri
     #   <p>Used only when calling this API for the Authorization Code grant type. This value
@@ -280,10 +283,8 @@ module Aws::SSOOIDC
     #         limited to the scopes that are granted.</p>
     #   @return [Array<String>]
     # @!attribute aws_additional_details
-    #   <p>A structure containing information from the <code>idToken</code>. Only the
-    #           <code>identityContext</code> is in it, which is a value extracted from the
-    #           <code>idToken</code>. This provides direct access to identity information without requiring
-    #         JWT parsing.</p>
+    #   <p>A structure containing information from IAM Identity Center managed user and group
+    #         information.</p>
     #   @return [Types::AwsAdditionalDetails]
     class CreateTokenWithIAMResponse < Struct.new(
       :access_token,
@@ -415,12 +416,16 @@ module Aws::SSOOIDC
     #   <p>Single error code. For this exception the value will be
     #         <code>invalid_request</code>.</p>
     #   @return [String]
+    # @!attribute reason
+    #   <p>A string that uniquely identifies a reason for the error.</p>
+    #   @return [String]
     # @!attribute error_description
     #   <p>Human-readable text providing additional information, used to assist the client developer
     #         in understanding the error that occurred.</p>
     #   @return [String]
     class InvalidRequestException < Struct.new(
       :error,
+      :reason,
       :error_description,
       keyword_init: true
     )

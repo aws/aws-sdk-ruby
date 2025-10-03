@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::MediaLive
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::MediaLive
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::MediaLive
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::MediaLive::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::MediaLive::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -1351,6 +1356,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -1556,6 +1570,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -1825,7 +1845,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -1891,7 +1912,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -1955,7 +1980,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -2611,6 +2637,15 @@ module Aws::MediaLive
     #               media_package_group_settings: {
     #                 destination: { # required
     #                   destination_ref_id: "__string"
+    #                 },
+    #                 mediapackage_v2_group_settings: {
+    #                   caption_language_mappings: [
+    #                     {
+    #                       caption_channel: 1, # required
+    #                       language_code: "__stringMin3Max3", # required
+    #                       language_description: "__stringMin1", # required
+    #                     }
+    #                   ]
     #                 }
     #               },
     #               ms_smooth_group_settings: {
@@ -2816,6 +2851,12 @@ module Aws::MediaLive
     #                     segment_modifier: "__string"
     #                   },
     #                   media_package_output_settings: {
+    #                     media_package_v2_destination_settings: {
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     }
     #                   },
     #                   ms_smooth_output_settings: {
     #                     h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -3085,7 +3126,8 @@ module Aws::MediaLive
     #                   position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                   prefix: "__stringMax255"
     #                 },
-    #                 min_qp: 1
+    #                 min_qp: 1,
+    #                 min_bitrate: 1
     #               },
     #               h265_settings: {
     #                 adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -3151,7 +3193,11 @@ module Aws::MediaLive
     #                 tile_width: 1,
     #                 treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                 min_qp: 1,
-    #                 deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 gop_num_b_frames: 1,
+    #                 min_bitrate: 1,
+    #                 subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #               },
     #               mpeg2_settings: {
     #                 adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -3215,7 +3261,8 @@ module Aws::MediaLive
     #                   prefix: "__stringMax255"
     #                 },
     #                 bitrate: 1,
-    #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #                 min_bitrate: 1
     #               }
     #             },
     #             height: 1,
@@ -5130,6 +5177,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -5335,6 +5391,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -5604,7 +5666,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -5670,7 +5733,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -5734,7 +5801,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -6952,6 +7020,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -7157,6 +7234,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -7426,7 +7509,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -7492,7 +7576,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -7556,7 +7644,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -10693,6 +10782,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -10898,6 +10996,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -11167,7 +11271,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -11233,7 +11338,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -11297,7 +11406,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -11984,6 +12094,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -12189,6 +12308,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -12458,7 +12583,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -12524,7 +12650,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -12588,7 +12718,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -13613,6 +13744,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -13818,6 +13958,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -14087,7 +14233,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -14153,7 +14300,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -14217,7 +14368,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -15029,6 +15181,15 @@ module Aws::MediaLive
     #             media_package_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string"
+    #               },
+    #               mediapackage_v2_group_settings: {
+    #                 caption_language_mappings: [
+    #                   {
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
+    #                   }
+    #                 ]
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -15234,6 +15395,12 @@ module Aws::MediaLive
     #                   segment_modifier: "__string"
     #                 },
     #                 media_package_output_settings: {
+    #                   media_package_v2_destination_settings: {
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                   }
     #                 },
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -15503,7 +15670,8 @@ module Aws::MediaLive
     #                 position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                 prefix: "__stringMax255"
     #               },
-    #               min_qp: 1
+    #               min_qp: 1,
+    #               min_bitrate: 1
     #             },
     #             h265_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -15569,7 +15737,11 @@ module Aws::MediaLive
     #               tile_width: 1,
     #               treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               min_qp: 1,
-    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               gop_num_b_frames: 1,
+    #               min_bitrate: 1,
+    #               subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #             },
     #             mpeg2_settings: {
     #               adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -15633,7 +15805,8 @@ module Aws::MediaLive
     #                 prefix: "__stringMax255"
     #               },
     #               bitrate: 1,
-    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #               min_bitrate: 1
     #             }
     #           },
     #           height: 1,
@@ -16280,6 +16453,15 @@ module Aws::MediaLive
     #               media_package_group_settings: {
     #                 destination: { # required
     #                   destination_ref_id: "__string"
+    #                 },
+    #                 mediapackage_v2_group_settings: {
+    #                   caption_language_mappings: [
+    #                     {
+    #                       caption_channel: 1, # required
+    #                       language_code: "__stringMin3Max3", # required
+    #                       language_description: "__stringMin1", # required
+    #                     }
+    #                   ]
     #                 }
     #               },
     #               ms_smooth_group_settings: {
@@ -16485,6 +16667,12 @@ module Aws::MediaLive
     #                     segment_modifier: "__string"
     #                   },
     #                   media_package_output_settings: {
+    #                     media_package_v2_destination_settings: {
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     }
     #                   },
     #                   ms_smooth_output_settings: {
     #                     h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -16754,7 +16942,8 @@ module Aws::MediaLive
     #                   position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                   prefix: "__stringMax255"
     #                 },
-    #                 min_qp: 1
+    #                 min_qp: 1,
+    #                 min_bitrate: 1
     #               },
     #               h265_settings: {
     #                 adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -16820,7 +17009,11 @@ module Aws::MediaLive
     #                 tile_width: 1,
     #                 treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                 min_qp: 1,
-    #                 deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 gop_num_b_frames: 1,
+    #                 min_bitrate: 1,
+    #                 subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #               },
     #               mpeg2_settings: {
     #                 adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -16884,7 +17077,8 @@ module Aws::MediaLive
     #                   prefix: "__stringMax255"
     #                 },
     #                 bitrate: 1,
-    #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #                 min_bitrate: 1
     #               }
     #             },
     #             height: 1,
@@ -17609,6 +17803,15 @@ module Aws::MediaLive
     #               media_package_group_settings: {
     #                 destination: { # required
     #                   destination_ref_id: "__string"
+    #                 },
+    #                 mediapackage_v2_group_settings: {
+    #                   caption_language_mappings: [
+    #                     {
+    #                       caption_channel: 1, # required
+    #                       language_code: "__stringMin3Max3", # required
+    #                       language_description: "__stringMin1", # required
+    #                     }
+    #                   ]
     #                 }
     #               },
     #               ms_smooth_group_settings: {
@@ -17814,6 +18017,12 @@ module Aws::MediaLive
     #                     segment_modifier: "__string"
     #                   },
     #                   media_package_output_settings: {
+    #                     media_package_v2_destination_settings: {
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     }
     #                   },
     #                   ms_smooth_output_settings: {
     #                     h265_packaging_type: "HEV1" # One of: ["HEV1", "HVC1"],
@@ -18083,7 +18292,8 @@ module Aws::MediaLive
     #                   position: "BOTTOM_CENTER" # One of: ["BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"], # required
     #                   prefix: "__stringMax255"
     #                 },
-    #                 min_qp: 1
+    #                 min_qp: 1,
+    #                 min_bitrate: 1
     #               },
     #               h265_settings: {
     #                 adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"],
@@ -18149,7 +18359,11 @@ module Aws::MediaLive
     #                 tile_width: 1,
     #                 treeblock_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                 min_qp: 1,
-    #                 deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 deblocking: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 gop_num_b_frames: 1,
+    #                 min_bitrate: 1,
+    #                 subgop_length: "DYNAMIC" # One of: ["DYNAMIC", "FIXED"]
     #               },
     #               mpeg2_settings: {
     #                 adaptive_quantization: "AUTO" # One of: ["AUTO", "HIGH", "LOW", "MEDIUM", "OFF"],
@@ -18213,7 +18427,8 @@ module Aws::MediaLive
     #                   prefix: "__stringMax255"
     #                 },
     #                 bitrate: 1,
-    #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"]
+    #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
+    #                 min_bitrate: 1
     #               }
     #             },
     #             height: 1,

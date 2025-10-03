@@ -508,12 +508,16 @@ module Aws::ChimeSDKVoice
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The type of network for the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
+    #   @return [String]
     class CreateVoiceConnectorRequest < Struct.new(
       :name,
       :aws_region,
       :require_encryption,
       :tags,
       :integration_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3403,6 +3407,9 @@ module Aws::ChimeSDKVoice
     # @!attribute integration_type
     #   <p>The connectors for use with Amazon Connect.</p>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The type of network of the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
+    #   @return [String]
     class VoiceConnector < Struct.new(
       :voice_connector_id,
       :aws_region,
@@ -3413,6 +3420,7 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :voice_connector_arn,
       :integration_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

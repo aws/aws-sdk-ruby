@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Imagebuilder
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Imagebuilder
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Imagebuilder
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Imagebuilder::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Imagebuilder::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -298,7 +303,8 @@ module Aws::Imagebuilder
     #            <p>Alternatively, you can specify the YAML document inline, using the component
     #   				<code>data</code> property. You cannot specify both properties.</p>
     # @option params [String] :kms_key_id
-    #   <p>The ID of the KMS key that is used to encrypt this component.</p>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
+    #   			in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags that apply to the component.</p>
     # @option params [String] :client_token
@@ -385,7 +391,9 @@ module Aws::Imagebuilder
     # @option params [Types::TargetContainerRepository] :target_repository
     #   <p>The destination repository for the container image.</p>
     # @option params [String] :kms_key_id
-    #   <p>Identifies which KMS key is used to encrypt the Dockerfile template.</p>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the Dockerfile 
+    #   			template. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
+    #   			in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier you provide to ensure
     #          idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a> 
@@ -597,6 +605,8 @@ module Aws::Imagebuilder
     # @option params [String] :execution_role
     #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
+    # @option params [Types::ImageLoggingConfiguration] :logging_configuration
+    #   <p>Define logging configuration for the image build process.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     image_recipe_arn: "ImageRecipeArn",
@@ -632,7 +642,10 @@ module Aws::Imagebuilder
     #         on_failure: "CONTINUE" # One of: ["CONTINUE", "ABORT"]
     #       }
     #     ],
-    #     execution_role: "RoleNameOrArn"
+    #     execution_role: "RoleNameOrArn",
+    #     logging_configuration: {
+    #       log_group_name: "LogGroupName"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_image(params, options)
@@ -691,6 +704,8 @@ module Aws::Imagebuilder
     # @option params [String] :execution_role
     #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
+    # @option params [Types::PipelineLoggingConfiguration] :logging_configuration
+    #   <p>Define logging configuration for the image build process.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ResourceName", # required
@@ -707,7 +722,10 @@ module Aws::Imagebuilder
     #     schedule: {
     #       schedule_expression: "NonEmptyString",
     #       timezone: "Timezone",
-    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"]
+    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"],
+    #       auto_disable_policy: {
+    #         failure_count: 1, # required
+    #       }
     #     },
     #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #     tags: {
@@ -734,7 +752,11 @@ module Aws::Imagebuilder
     #         on_failure: "CONTINUE" # One of: ["CONTINUE", "ABORT"]
     #       }
     #     ],
-    #     execution_role: "RoleNameOrArn"
+    #     execution_role: "RoleNameOrArn",
+    #     logging_configuration: {
+    #       image_log_group_name: "LogGroupName",
+    #       pipeline_log_group_name: "LogGroupName"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_image_pipeline(params, options)
@@ -803,6 +825,9 @@ module Aws::Imagebuilder
     #   <p>The working directory used during build and test workflows.</p>
     # @option params [Types::AdditionalInstanceConfiguration] :additional_instance_configuration
     #   <p>Specify additional settings and launch scripts for your build instances.</p>
+    # @option params [Hash<String, String>] :ami_tags
+    #   <p>Tags that are applied to the AMI that Image Builder creates during the Build phase 
+    #   			prior to image distribution.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier you provide to ensure
     #          idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a> 
@@ -850,6 +875,9 @@ module Aws::Imagebuilder
     #         uninstall_after_build: false
     #       },
     #       user_data_override: "UserDataOverride"
+    #     },
+    #     ami_tags: {
+    #       "TagKey" => "TagValue"
     #     },
     #     client_token: "ClientToken", # required
     #   }
@@ -1101,7 +1129,9 @@ module Aws::Imagebuilder
     #            <p>Alternatively, you can specify the YAML document inline, using the component
     #   			<code>data</code> property. You cannot specify both properties.</p>
     # @option params [String] :kms_key_id
-    #   <p>The ID of the KMS key that is used to encrypt this workflow resource.</p>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this workflow resource. 
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
+    #   			in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags that apply to the workflow resource.</p>
     # @option params [String] :client_token
@@ -1707,6 +1737,9 @@ module Aws::Imagebuilder
     #             uninstall_after_build: false
     #           },
     #           user_data_override: "UserDataOverride"
+    #         },
+    #         ami_tags: {
+    #           "TagKey" => "TagValue"
     #         }
     #       },
     #       container_recipe: {
@@ -1932,7 +1965,10 @@ module Aws::Imagebuilder
     #           parallel_group: "ParallelGroup",
     #           on_failure: "CONTINUE" # One of: ["CONTINUE", "ABORT"]
     #         }
-    #       ]
+    #       ],
+    #       logging_configuration: {
+    #         log_group_name: "LogGroupName"
+    #       }
     #     }
     #   }
     # @return [Types::GetImageResponse]
@@ -1972,12 +2008,16 @@ module Aws::Imagebuilder
     #       schedule: {
     #         schedule_expression: "NonEmptyString",
     #         timezone: "Timezone",
-    #         pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"]
+    #         pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"],
+    #         auto_disable_policy: {
+    #           failure_count: 1, # required
+    #         }
     #       },
     #       status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #       date_created: "DateTime",
     #       date_updated: "DateTime",
     #       date_last_run: "DateTime",
+    #       last_run_status: "PENDING" # One of: ["PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"],
     #       date_next_run: "DateTime",
     #       tags: {
     #         "TagKey" => "TagValue"
@@ -2002,7 +2042,12 @@ module Aws::Imagebuilder
     #           parallel_group: "ParallelGroup",
     #           on_failure: "CONTINUE" # One of: ["CONTINUE", "ABORT"]
     #         }
-    #       ]
+    #       ],
+    #       logging_configuration: {
+    #         image_log_group_name: "LogGroupName",
+    #         pipeline_log_group_name: "LogGroupName"
+    #       },
+    #       consecutive_failures: 1
     #     }
     #   }
     # @return [Types::GetImagePipelineResponse]
@@ -2094,6 +2139,9 @@ module Aws::Imagebuilder
     #           uninstall_after_build: false
     #         },
     #         user_data_override: "UserDataOverride"
+    #       },
+    #       ami_tags: {
+    #         "TagKey" => "TagValue"
     #       }
     #     }
     #   }
@@ -2488,7 +2536,8 @@ module Aws::Imagebuilder
     #   			service quota. Either <code>data</code> or <code>uri</code> can be used to specify the
     #   			data within the component.</p>
     # @option params [String] :kms_key_id
-    #   <p>The ID of the KMS key that should be used to encrypt this component.</p>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
+    #   			in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags of the component.</p>
     # @option params [String] :client_token
@@ -2556,6 +2605,8 @@ module Aws::Imagebuilder
     #   			launching the EC2 instance on which the ISO image is built.</p>
     # @option params [String] :uri
     #   <p>The <code>uri</code> of the ISO disk file that's stored in Amazon S3.</p>
+    # @option params [Types::ImageLoggingConfiguration] :logging_configuration
+    #   <p>Define logging configuration for the image build process.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags that are attached to image resources created from the import.</p>
     # @option params [String] :client_token
@@ -2572,6 +2623,9 @@ module Aws::Imagebuilder
     #     execution_role: "RoleNameOrArn",
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     uri: "Uri", # required
+    #     logging_configuration: {
+    #       log_group_name: "LogGroupName"
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
@@ -2627,6 +2681,8 @@ module Aws::Imagebuilder
     #   <p>The <code>importTaskId</code> (API) or <code>ImportTaskId</code> (CLI) from the
     #   			Amazon EC2 VM import process. Image Builder retrieves information from the import process to pull in
     #   			the AMI that is created from the VM source as the base image for your recipe.</p>
+    # @option params [Types::ImageLoggingConfiguration] :logging_configuration
+    #   <p>Define logging configuration for the image build process.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags that are attached to the import resources.</p>
     # @option params [String] :client_token
@@ -2641,6 +2697,9 @@ module Aws::Imagebuilder
     #     platform: "Windows" # One of: ["Windows", "Linux", "macOS"], # required
     #     os_version: "OsVersion",
     #     vm_import_task_id: "NonEmptyString", # required
+    #     logging_configuration: {
+    #       log_group_name: "LogGroupName"
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
@@ -2668,13 +2727,13 @@ module Aws::Imagebuilder
     #   <p>The component version Amazon Resource Name (ARN) whose versions you want to
     #   			list.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     component_version_arn: "ComponentVersionArn", # required
+    #     component_version_arn: "ComponentVersionArn",
     #     max_results: 1,
     #     next_token: "PaginationToken"
     #   }
@@ -2770,7 +2829,7 @@ module Aws::Imagebuilder
     # @option params [Boolean] :by_name
     #   <p>Returns the list of components for the specified name.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -2852,7 +2911,7 @@ module Aws::Imagebuilder
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -2883,6 +2942,7 @@ module Aws::Imagebuilder
     #         owner: "NonEmptyString",
     #         parent_image: "NonEmptyString",
     #         date_created: "DateTime",
+    #         instance_image: "NonEmptyString",
     #         tags: {
     #           "TagKey" => "TagValue"
     #         }
@@ -2901,7 +2961,7 @@ module Aws::Imagebuilder
     # @option params [Array<Types::Filter>] :filters
     #   <p>You can filter on <code>name</code> to streamline results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -2978,13 +3038,13 @@ module Aws::Imagebuilder
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     image_version_arn: "ImageVersionArn", # required
+    #     image_version_arn: "ImageVersionArn",
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -3041,7 +3101,10 @@ module Aws::Imagebuilder
     #         build_type: "USER_INITIATED" # One of: ["USER_INITIATED", "SCHEDULED", "IMPORT", "IMPORT_ISO"],
     #         image_source: "AMAZON_MANAGED" # One of: ["AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"],
     #         deprecation_time: Time.now,
-    #         lifecycle_execution_id: "LifecycleExecutionId"
+    #         lifecycle_execution_id: "LifecycleExecutionId",
+    #         logging_configuration: {
+    #           log_group_name: "LogGroupName"
+    #         }
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3058,7 +3121,7 @@ module Aws::Imagebuilder
     # @option params [String] :image_build_version_arn
     #   <p>Filter results for the ListImagePackages request by the Image Build Version ARN</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3108,7 +3171,7 @@ module Aws::Imagebuilder
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3171,7 +3234,10 @@ module Aws::Imagebuilder
     #         build_type: "USER_INITIATED" # One of: ["USER_INITIATED", "SCHEDULED", "IMPORT", "IMPORT_ISO"],
     #         image_source: "AMAZON_MANAGED" # One of: ["AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"],
     #         deprecation_time: Time.now,
-    #         lifecycle_execution_id: "LifecycleExecutionId"
+    #         lifecycle_execution_id: "LifecycleExecutionId",
+    #         logging_configuration: {
+    #           log_group_name: "LogGroupName"
+    #         }
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3219,7 +3285,7 @@ module Aws::Imagebuilder
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3258,12 +3324,16 @@ module Aws::Imagebuilder
     #         schedule: {
     #           schedule_expression: "NonEmptyString",
     #           timezone: "Timezone",
-    #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"]
+    #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"],
+    #           auto_disable_policy: {
+    #             failure_count: 1, # required
+    #           }
     #         },
     #         status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #         date_created: "DateTime",
     #         date_updated: "DateTime",
     #         date_last_run: "DateTime",
+    #         last_run_status: "PENDING" # One of: ["PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"],
     #         date_next_run: "DateTime",
     #         tags: {
     #           "TagKey" => "TagValue"
@@ -3288,7 +3358,12 @@ module Aws::Imagebuilder
     #             parallel_group: "ParallelGroup",
     #             on_failure: "CONTINUE" # One of: ["CONTINUE", "ABORT"]
     #           }
-    #         ]
+    #         ],
+    #         logging_configuration: {
+    #           image_log_group_name: "LogGroupName",
+    #           pipeline_log_group_name: "LogGroupName"
+    #         },
+    #         consecutive_failures: 1
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3302,10 +3377,9 @@ module Aws::Imagebuilder
     # <p>Returns a list of image recipes.</p>
     # @param [Hash, Types::ListImageRecipesRequest] params
     # @option params [String] :owner
-    #   <p>The owner defines which image recipes you want to list. By default, this request will
-    #   			only show image recipes owned by your account. You can use this field to specify if you
-    #   			want to view image recipes owned by yourself, by Amazon, or those image recipes that
-    #   			have been shared with you by other customers.</p>
+    #   <p>You can specify the recipe owner to filter results by that owner. By default, this request will
+    #   			only show image recipes owned by your account. To filter by a different owner, specify one of the 
+    #   			<code>Valid Values</code> that are listed for this parameter.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Use the following filters to streamline results:</p>
     #            <ul>
@@ -3326,7 +3400,7 @@ module Aws::Imagebuilder
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3497,7 +3571,7 @@ module Aws::Imagebuilder
     #            </ul>
     #            <p>If you don't request a filter, then all findings in your account are listed.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3634,7 +3708,7 @@ module Aws::Imagebuilder
     # @option params [Boolean] :by_name
     #   <p>Requests a list of images with a specific recipe name.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3687,7 +3761,7 @@ module Aws::Imagebuilder
     # @option params [Array<Types::Filter>] :filters
     #   <p>You can filter on <code>name</code> to streamline results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3749,7 +3823,7 @@ module Aws::Imagebuilder
     #   			its Amazon Resource Name (ARN). Associated resources are produced from your image and distributed when you run a build, such as 
     #   			AMIs or container images stored in ECR repositories.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3808,7 +3882,7 @@ module Aws::Imagebuilder
     # <p>Get the lifecycle runtime history for the specified resource.</p>
     # @param [Hash, Types::ListLifecycleExecutionsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3854,7 +3928,7 @@ module Aws::Imagebuilder
     #   <p>Streamline results based on one of the following values: <code>Name</code>, 
     #   			<code>Status</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3925,7 +3999,7 @@ module Aws::Imagebuilder
     # 			in your Amazon Web Services account.</p>
     # @param [Hash, Types::ListWaitingWorkflowStepsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -3963,13 +4037,13 @@ module Aws::Imagebuilder
     # @option params [String] :workflow_version_arn
     #   <p>The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     workflow_version_arn: "WorkflowWildcardVersionArn", # required
+    #     workflow_version_arn: "WorkflowWildcardVersionArn",
     #     max_results: 1,
     #     next_token: "PaginationToken"
     #   }
@@ -4009,7 +4083,7 @@ module Aws::Imagebuilder
     # 			version.</p>
     # @param [Hash, Types::ListWorkflowExecutionsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -4058,7 +4132,7 @@ module Aws::Imagebuilder
     # 			that you specify in the request.</p>
     # @param [Hash, Types::ListWorkflowStepExecutionsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -4113,7 +4187,7 @@ module Aws::Imagebuilder
     # @option params [Boolean] :by_name
     #   <p>Specify all or part of the workflow name to streamline results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum items to return in a request.</p>
+    #   <p>Specify the maximum number of items to return in a request.</p>
     # @option params [String] :next_token
     #   <p>A token to specify where to start paginating. This is the nextToken 
     #   	from a previously truncated response.</p>
@@ -4319,10 +4393,16 @@ module Aws::Imagebuilder
     #   <p>Unique, case-sensitive identifier you provide to ensure
     #          idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a> 
     #          in the <i>Amazon EC2 API Reference</i>.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Specify tags for Image Builder to apply to the image resource that's created 
+    #   			When it starts pipeline execution.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     image_pipeline_arn: "ImagePipelineArn", # required
     #     client_token: "ClientToken", # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.start_image_pipeline_execution(params, options)
@@ -4590,6 +4670,9 @@ module Aws::Imagebuilder
     #   <p>Contains settings for vulnerability scans.</p>
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
     #   <p>Contains the workflows to run for the pipeline.</p>
+    # @option params [Types::PipelineLoggingConfiguration] :logging_configuration
+    #   <p>Update logging configuration for the output image that's created when 
+    #   			the pipeline runs.</p>
     # @option params [String] :execution_role
     #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
@@ -4609,7 +4692,10 @@ module Aws::Imagebuilder
     #     schedule: {
     #       schedule_expression: "NonEmptyString",
     #       timezone: "Timezone",
-    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"]
+    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY" # One of: ["EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"],
+    #       auto_disable_policy: {
+    #         failure_count: 1, # required
+    #       }
     #     },
     #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #     client_token: "ClientToken", # required
@@ -4633,6 +4719,10 @@ module Aws::Imagebuilder
     #         on_failure: "CONTINUE" # One of: ["CONTINUE", "ABORT"]
     #       }
     #     ],
+    #     logging_configuration: {
+    #       image_log_group_name: "LogGroupName",
+    #       pipeline_log_group_name: "LogGroupName"
+    #     },
     #     execution_role: "RoleNameOrArn"
     #   }
     #   options = {}

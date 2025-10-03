@@ -96,6 +96,7 @@ module Aws::LicenseManagerUserSubscriptions
     ActiveDirectoryIdentityProvider.add_member(:directory_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Directory, location_name: 'DirectoryId'))
     ActiveDirectoryIdentityProvider.add_member(:active_directory_settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectorySettings, location_name: 'ActiveDirectorySettings'))
     ActiveDirectoryIdentityProvider.add_member(:active_directory_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ActiveDirectoryType, location_name: 'ActiveDirectoryType'))
+    ActiveDirectoryIdentityProvider.add_member(:is_shared_active_directory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'IsSharedActiveDirectory'))
     ActiveDirectoryIdentityProvider.type = Types::ActiveDirectoryIdentityProvider
     ActiveDirectorySettings.add_member(:domain_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'DomainName'))
     ActiveDirectorySettings.add_member(:domain_ipv4_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpV4List, location_name: 'DomainIpv4List', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}}))
@@ -157,6 +158,7 @@ module Aws::LicenseManagerUserSubscriptions
     IdentityProviderSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Status', traits: {"smithy.api#required" => {}}))
     IdentityProviderSummary.add_member(:identity_provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'IdentityProviderArn'))
     IdentityProviderSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'FailureMessage'))
+    IdentityProviderSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'OwnerAccountId'))
     IdentityProviderSummary.type = Types::IdentityProviderSummary
     IdentityProviderSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProviderSummary)
     InstanceSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'InstanceId', traits: {"smithy.api#required" => {}}))
@@ -164,6 +166,8 @@ module Aws::LicenseManagerUserSubscriptions
     InstanceSummary.add_member(:products, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'Products', traits: {"smithy.api#required" => {}}))
     InstanceSummary.add_member(:last_status_check_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'LastStatusCheckDate'))
     InstanceSummary.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'StatusMessage'))
+    InstanceSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'OwnerAccountId'))
+    InstanceSummary.add_member(:identity_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityProvider, location_name: 'IdentityProvider'))
     InstanceSummary.type = Types::InstanceSummary
     InstanceSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceSummary)
     InstanceUserSummary.add_member(:username, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Username', traits: {"smithy.api#required" => {}}))

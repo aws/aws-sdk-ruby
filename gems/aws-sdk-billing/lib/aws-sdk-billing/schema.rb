@@ -9,14 +9,21 @@ module Aws::Billing
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#AccessDeniedException', name: 'AccessDeniedException', traits: {"aws.protocols#awsQueryError" => {"code" => "BillingAccessDenied", "httpResponseCode" => 403}, "smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#AccountId', name: 'AccountId', traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     ActiveTimeRange = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#ActiveTimeRange', name: 'ActiveTimeRange')
-    BillingViewArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#BillingViewArn', name: 'BillingViewArn', traits: {"smithy.api#pattern" => "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,59}[a-zA-Z0-9]$"})
+    AssociateSourceViewsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#AssociateSourceViewsRequest', name: 'AssociateSourceViewsRequest')
+    AssociateSourceViewsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#AssociateSourceViewsResponse', name: 'AssociateSourceViewsResponse')
+    BillingViewArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#BillingViewArn', name: 'BillingViewArn', traits: {"smithy.api#pattern" => "^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,75}[a-zA-Z0-9]$"})
     BillingViewArnList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.billing#BillingViewArnList', name: 'BillingViewArnList', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     BillingViewDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#BillingViewDescription', name: 'BillingViewDescription', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^([ a-zA-Z0-9_\\+=\\.\\-@]+)?$", "smithy.api#sensitive" => {}})
     BillingViewElement = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#BillingViewElement', name: 'BillingViewElement')
+    BillingViewHealthStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#BillingViewHealthStatus', name: 'BillingViewHealthStatus')
+    BillingViewHealthStatusException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#BillingViewHealthStatusException', name: 'BillingViewHealthStatusException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     BillingViewList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.billing#BillingViewList', name: 'BillingViewList')
     BillingViewListElement = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#BillingViewListElement', name: 'BillingViewListElement')
     BillingViewName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#BillingViewName', name: 'BillingViewName', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[ a-zA-Z0-9_\\+=\\.\\-@]+$", "smithy.api#sensitive" => {}})
-    BillingViewSourceViewsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.billing#BillingViewSourceViewsList', name: 'BillingViewSourceViewsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    BillingViewSourceViewsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.billing#BillingViewSourceViewsList', name: 'BillingViewSourceViewsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    BillingViewStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.billing#BillingViewStatus', name: 'BillingViewStatus')
+    BillingViewStatusReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.billing#BillingViewStatusReason', name: 'BillingViewStatusReason')
+    BillingViewStatusReasons = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.billing#BillingViewStatusReasons', name: 'BillingViewStatusReasons')
     BillingViewType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.billing#BillingViewType', name: 'BillingViewType')
     BillingViewTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.billing#BillingViewTypeList', name: 'BillingViewTypeList')
     BillingViewsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.billing#BillingViewsMaxResults', name: 'BillingViewsMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
@@ -28,6 +35,8 @@ module Aws::Billing
     DeleteBillingViewResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#DeleteBillingViewResponse', name: 'DeleteBillingViewResponse')
     Dimension = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.billing#Dimension', name: 'Dimension')
     DimensionValues = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#DimensionValues', name: 'DimensionValues')
+    DisassociateSourceViewsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#DisassociateSourceViewsRequest', name: 'DisassociateSourceViewsRequest')
+    DisassociateSourceViewsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#DisassociateSourceViewsResponse', name: 'DisassociateSourceViewsResponse')
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#ErrorMessage', name: 'ErrorMessage', traits: {"smithy.api#length" => {"max" => 1024}})
     Expression = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#Expression', name: 'Expression')
     FieldName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.billing#FieldName', name: 'FieldName', traits: {"smithy.api#length" => {"max" => 100}})
@@ -61,6 +70,7 @@ module Aws::Billing
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#TagResourceResponse', name: 'TagResourceResponse')
     TagValues = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#TagValues', name: 'TagValues')
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#ThrottlingException', name: 'ThrottlingException', traits: {"aws.protocols#awsQueryError" => {"code" => "BillingThrottling", "httpResponseCode" => 429}, "smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TimeRange = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#TimeRange', name: 'TimeRange')
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#UntagResourceRequest', name: 'UntagResourceRequest')
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#UntagResourceResponse', name: 'UntagResourceResponse')
     UpdateBillingViewRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.billing#UpdateBillingViewRequest', name: 'UpdateBillingViewRequest')
@@ -77,24 +87,54 @@ module Aws::Billing
     ActiveTimeRange.add_member(:active_after_inclusive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'activeAfterInclusive', traits: {"smithy.api#required" => {}}))
     ActiveTimeRange.add_member(:active_before_inclusive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'activeBeforeInclusive', traits: {"smithy.api#required" => {}}))
     ActiveTimeRange.type = Types::ActiveTimeRange
+    AssociateSourceViewsRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    AssociateSourceViewsRequest.add_member(:source_views, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, location_name: 'sourceViews', traits: {"smithy.api#required" => {}}))
+    AssociateSourceViewsRequest.type = Types::AssociateSourceViewsRequest
+    AssociateSourceViewsResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    AssociateSourceViewsResponse.type = Types::AssociateSourceViewsResponse
     BillingViewArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn)
     BillingViewElement.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn'))
     BillingViewElement.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewName, location_name: 'name'))
     BillingViewElement.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewDescription, location_name: 'description'))
     BillingViewElement.add_member(:billing_view_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewType, location_name: 'billingViewType'))
     BillingViewElement.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'ownerAccountId'))
+    BillingViewElement.add_member(:source_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'sourceAccountId'))
     BillingViewElement.add_member(:data_filter_expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: 'dataFilterExpression'))
     BillingViewElement.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createdAt'))
     BillingViewElement.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updatedAt'))
+    BillingViewElement.add_member(:derived_view_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'derivedViewCount'))
+    BillingViewElement.add_member(:source_view_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'sourceViewCount'))
+    BillingViewElement.add_member(:view_definition_last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'viewDefinitionLastUpdatedAt'))
+    BillingViewElement.add_member(:health_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatus, location_name: 'healthStatus'))
     BillingViewElement.type = Types::BillingViewElement
+    BillingViewHealthStatus.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewStatus, location_name: 'statusCode'))
+    BillingViewHealthStatus.add_member(:status_reasons, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewStatusReasons, location_name: 'statusReasons'))
+    BillingViewHealthStatus.type = Types::BillingViewHealthStatus
+    BillingViewHealthStatusException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    BillingViewHealthStatusException.type = Types::BillingViewHealthStatusException
     BillingViewList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewListElement)
     BillingViewListElement.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn'))
     BillingViewListElement.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewName, location_name: 'name'))
     BillingViewListElement.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewDescription, location_name: 'description'))
     BillingViewListElement.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'ownerAccountId'))
+    BillingViewListElement.add_member(:source_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'sourceAccountId'))
     BillingViewListElement.add_member(:billing_view_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewType, location_name: 'billingViewType'))
+    BillingViewListElement.add_member(:health_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatus, location_name: 'healthStatus'))
     BillingViewListElement.type = Types::BillingViewListElement
     BillingViewSourceViewsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn)
+    BillingViewStatus.add_member(:healthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HEALTHY', traits: {"smithy.api#enumValue" => "HEALTHY"}))
+    BillingViewStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNHEALTHY', traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
+    BillingViewStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
+    BillingViewStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
+    BillingViewStatusReason.add_member(:source_view_unhealthy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SOURCE_VIEW_UNHEALTHY', traits: {"smithy.api#enumValue" => "SOURCE_VIEW_UNHEALTHY"}))
+    BillingViewStatusReason.add_member(:source_view_updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SOURCE_VIEW_UPDATING', traits: {"smithy.api#enumValue" => "SOURCE_VIEW_UPDATING"}))
+    BillingViewStatusReason.add_member(:source_view_access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SOURCE_VIEW_ACCESS_DENIED', traits: {"smithy.api#enumValue" => "SOURCE_VIEW_ACCESS_DENIED"}))
+    BillingViewStatusReason.add_member(:source_view_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SOURCE_VIEW_NOT_FOUND', traits: {"smithy.api#enumValue" => "SOURCE_VIEW_NOT_FOUND"}))
+    BillingViewStatusReason.add_member(:cyclic_dependency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CYCLIC_DEPENDENCY', traits: {"smithy.api#enumValue" => "CYCLIC_DEPENDENCY"}))
+    BillingViewStatusReason.add_member(:source_view_depth_exceeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SOURCE_VIEW_DEPTH_EXCEEDED', traits: {"smithy.api#enumValue" => "SOURCE_VIEW_DEPTH_EXCEEDED"}))
+    BillingViewStatusReason.add_member(:aggregate_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AGGREGATE_SOURCE', traits: {"smithy.api#enumValue" => "AGGREGATE_SOURCE"}))
+    BillingViewStatusReason.add_member(:view_owner_not_management_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT', traits: {"smithy.api#enumValue" => "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"}))
+    BillingViewStatusReasons.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewStatusReason)
     BillingViewType.add_member(:primary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PRIMARY', traits: {"smithy.api#enumValue" => "PRIMARY"}))
     BillingViewType.add_member(:billing_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BILLING_GROUP', traits: {"smithy.api#enumValue" => "BILLING_GROUP"}))
     BillingViewType.add_member(:custom, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CUSTOM', traits: {"smithy.api#enumValue" => "CUSTOM"}))
@@ -114,6 +154,7 @@ module Aws::Billing
     CreateBillingViewResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createdAt'))
     CreateBillingViewResponse.type = Types::CreateBillingViewResponse
     DeleteBillingViewRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    DeleteBillingViewRequest.add_member(:force, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'force', traits: {"smithy.api#default" => false}))
     DeleteBillingViewRequest.type = Types::DeleteBillingViewRequest
     DeleteBillingViewResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
     DeleteBillingViewResponse.type = Types::DeleteBillingViewResponse
@@ -121,8 +162,14 @@ module Aws::Billing
     DimensionValues.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Dimension, location_name: 'key', traits: {"smithy.api#required" => {}}))
     DimensionValues.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Values, location_name: 'values', traits: {"smithy.api#required" => {}}))
     DimensionValues.type = Types::DimensionValues
+    DisassociateSourceViewsRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    DisassociateSourceViewsRequest.add_member(:source_views, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, location_name: 'sourceViews', traits: {"smithy.api#required" => {}}))
+    DisassociateSourceViewsRequest.type = Types::DisassociateSourceViewsRequest
+    DisassociateSourceViewsResponse.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    DisassociateSourceViewsResponse.type = Types::DisassociateSourceViewsResponse
     Expression.add_member(:dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DimensionValues, location_name: 'dimensions'))
     Expression.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValues, location_name: 'tags'))
+    Expression.add_member(:time_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeRange, location_name: 'timeRange'))
     Expression.type = Types::Expression
     GetBillingViewRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
     GetBillingViewRequest.type = Types::GetBillingViewRequest
@@ -139,6 +186,7 @@ module Aws::Billing
     ListBillingViewsRequest.add_member(:arns, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewArnList, location_name: 'arns'))
     ListBillingViewsRequest.add_member(:billing_view_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewTypeList, location_name: 'billingViewTypes'))
     ListBillingViewsRequest.add_member(:owner_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'ownerAccountId'))
+    ListBillingViewsRequest.add_member(:source_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'sourceAccountId'))
     ListBillingViewsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewsMaxResults, location_name: 'maxResults'))
     ListBillingViewsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PageToken, location_name: 'nextToken'))
     ListBillingViewsRequest.type = Types::ListBillingViewsRequest
@@ -180,6 +228,9 @@ module Aws::Billing
     TagValues.type = Types::TagValues
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
+    TimeRange.add_member(:begin_date_inclusive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'beginDateInclusive'))
+    TimeRange.add_member(:end_date_inclusive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'endDateInclusive'))
+    TimeRange.type = Types::TimeRange
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceArn, location_name: 'resourceArn', traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:resource_tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTagKeyList, location_name: 'resourceTagKeys', traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -211,14 +262,31 @@ module Aws::Billing
       service.name = "AWSBilling"
       service.version = "2023-09-07"
       service.traits = {"aws.api#service" => {"sdkId" => "Billing", "endpointPrefix" => "billing", "arnNamespace" => "billing", "cloudTrailEventSource" => "billing.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "billing"}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix", "partitionEndpointSpecialCases" => {"aws" => [{"endpoint" => "https://billing.us-east-1.api.aws", "region" => "us-east-1", "dualStack" => true}, {"endpoint" => "https://billing.us-east-1.api.aws", "region" => "us-east-1", "dualStack" => false}]}}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Billing"}
+      service.add_operation(:associate_source_views, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.billing#AssociateSourceViews"
+        operation.name = "AssociateSourceViews"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateSourceViewsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateSourceViewsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_billing_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.billing#CreateBillingView"
         operation.name = "CreateBillingView"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBillingViewRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBillingViewResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
@@ -232,6 +300,20 @@ module Aws::Billing
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:disassociate_source_views, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.billing#DisassociateSourceViews"
+        operation.name = "DisassociateSourceViews"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateSourceViewsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateSourceViewsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#idempotent" => {}}
@@ -327,6 +409,7 @@ module Aws::Billing
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBillingViewRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBillingViewResponse)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)

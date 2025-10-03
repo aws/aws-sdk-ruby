@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::MedicalImaging
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::MedicalImaging
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::MedicalImaging
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::MedicalImaging::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::MedicalImaging::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -229,7 +234,7 @@ module Aws::MedicalImaging
     #       image_set_id: "ImageSetId", # required
     #       latest_version_id: "ImageSetExternalVersionId", # required
     #       image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"],
-    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"],
+    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #       created_at: Time.now,
     #       updated_at: Time.now,
     #       image_set_arn: "Arn"
@@ -238,7 +243,7 @@ module Aws::MedicalImaging
     #       image_set_id: "ImageSetId", # required
     #       latest_version_id: "ImageSetExternalVersionId", # required
     #       image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"],
-    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"],
+    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #       created_at: Time.now,
     #       updated_at: Time.now,
     #       image_set_arn: "Arn"
@@ -260,6 +265,8 @@ module Aws::MedicalImaging
     #   <p>The tags provided when creating a data store.</p>
     # @option params [String] :kms_key_arn
     #   <p>The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.</p>
+    # @option params [String] :lambda_authorizer_arn
+    #   <p>The ARN of the authorizer's Lambda function.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_name: "DatastoreName",
@@ -267,7 +274,8 @@ module Aws::MedicalImaging
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     kms_key_arn: "KmsKeyArn"
+    #     kms_key_arn: "KmsKeyArn",
+    #     lambda_authorizer_arn: "LambdaArn"
     #   }
     #   options = {}
     #   response = client.create_datastore(params, options)
@@ -324,7 +332,7 @@ module Aws::MedicalImaging
     #     datastore_id: "DatastoreId", # required
     #     image_set_id: "ImageSetId", # required
     #     image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"], # required
+    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"], # required
     #   }
     # @return [Types::DeleteImageSetResponse]
     def delete_image_set(params = {}, options = {})
@@ -385,6 +393,7 @@ module Aws::MedicalImaging
     #       datastore_name: "DatastoreName", # required
     #       datastore_status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED"], # required
     #       kms_key_arn: "KmsKeyArn",
+    #       lambda_authorizer_arn: "LambdaArn",
     #       datastore_arn: "Arn",
     #       created_at: Time.now,
     #       updated_at: Time.now
@@ -449,7 +458,7 @@ module Aws::MedicalImaging
     #     image_set_id: "ImageSetId", # required
     #     version_id: "ImageSetExternalVersionId", # required
     #     image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"],
+    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #     created_at: Time.now,
     #     updated_at: Time.now,
     #     deleted_at: Time.now,
@@ -601,7 +610,7 @@ module Aws::MedicalImaging
     #         image_set_id: "ImageSetId", # required
     #         version_id: "ImageSetExternalVersionId", # required
     #         image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #         image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"],
+    #         image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #         created_at: Time.now,
     #         updated_at: Time.now,
     #         deleted_at: Time.now,
@@ -853,7 +862,7 @@ module Aws::MedicalImaging
     #     image_set_id: "ImageSetId", # required
     #     latest_version_id: "ImageSetExternalVersionId", # required
     #     image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED"],
+    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #     created_at: Time.now,
     #     updated_at: Time.now,
     #     message: "Message"

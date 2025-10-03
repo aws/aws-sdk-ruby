@@ -2842,6 +2842,9 @@ module Aws::SSM
     #   <p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
     #      association. Use this action to create an association in multiple Regions and multiple
     #      accounts.</p>
+    #            <note>
+    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #            </note>
     #   @return [Array<Types::TargetLocation>]
     # @!attribute schedule_offset
     #   <p>Number of days to wait after the scheduled day to run an association. For example, if you
@@ -3449,9 +3452,21 @@ module Aws::SSM
     #                  <p>
     #                     <b>All OSs</b>: Packages in the rejected patches list, and
     #         packages that include them as dependencies, aren't installed by Patch Manager under any
-    #         circumstances. If a package was installed before it was added to the rejected patches list, or
-    #         is installed outside of Patch Manager afterward, it's considered noncompliant with the patch
-    #         baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #         circumstances. </p>
+    #                  <p>State value assignment for patch compliance:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>If a package was installed before it was added to the rejected patches list, or is
+    #           installed outside of Patch Manager afterward, it's considered noncompliant with the patch
+    #           baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>If an update attempts to install a dependency package that is now rejected by the
+    #           baseline, when previous versions of the package were not rejected, the package being updated
+    #           is reported as <code>MISSING</code> for <code>SCAN</code> operations and as
+    #            <code>FAILED</code> for <code>INSTALL</code> operations.</p>
+    #                     </li>
+    #                  </ul>
     #               </dd>
     #            </dl>
     #   @return [String]
@@ -6892,10 +6907,18 @@ module Aws::SSM
     # @!attribute baseline_override
     #   <p>Defines the basic information about a patch baseline override.</p>
     #   @return [Types::BaselineOverride]
+    # @!attribute use_s3_dual_stack_endpoint
+    #   <p>Specifies whether to use S3 dualstack endpoints
+    #      for the patch snapshot download URL. Set to <code>true</code> to receive a presigned URL that
+    #      supports both IPv4 and IPv6 connectivity. Set to <code>false</code> to use standard IPv4-only
+    #      endpoints. Default is <code>false</code>. This parameter is required for managed nodes in
+    #      IPv6-only environments. </p>
+    #   @return [Boolean]
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
       :instance_id,
       :snapshot_id,
       :baseline_override,
+      :use_s3_dual_stack_endpoint,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15890,11 +15913,12 @@ module Aws::SSM
     #   @return [Array<String>]
     # @!attribute target_location_max_concurrency
     #   <p>The maximum number of Amazon Web Services Regions and Amazon Web Services accounts allowed to run the Automation
-    #      concurrently.</p>
+    #      concurrently. <code>TargetLocationMaxConcurrency</code> has a default value of 1.</p>
     #   @return [String]
     # @!attribute target_location_max_errors
     #   <p>The maximum number of errors allowed before the system stops queueing additional Automation
-    #      executions for the currently running Automation.</p>
+    #      executions for the currently running Automation. <code>TargetLocationMaxErrors</code> has a
+    #      default value of 0.</p>
     #   @return [String]
     # @!attribute execution_role_name
     #   <p>The Automation execution role used by the currently running Automation. If not specified,
@@ -15907,6 +15931,9 @@ module Aws::SSM
     # @!attribute include_child_organization_units
     #   <p>Indicates whether to include child organizational units (OUs) that are children of the
     #      targeted OUs. The default is <code>false</code>.</p>
+    #            <note>
+    #               <p>This parameter is not supported by State Manager.</p>
+    #            </note>
     #   @return [Boolean]
     # @!attribute exclude_accounts
     #   <p>Amazon Web Services accounts or organizational units to exclude as expanded targets.</p>
@@ -16306,6 +16333,9 @@ module Aws::SSM
     #   <p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
     #      association. Use this action to update an association in multiple Regions and multiple
     #      accounts.</p>
+    #            <note>
+    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #            </note>
     #   @return [Array<Types::TargetLocation>]
     # @!attribute schedule_offset
     #   <p>Number of days to wait after the scheduled day to run an association. For example, if you
@@ -17208,9 +17238,21 @@ module Aws::SSM
     #                  <p>
     #                     <b>All OSs</b>: Packages in the rejected patches list, and
     #         packages that include them as dependencies, aren't installed by Patch Manager under any
-    #         circumstances. If a package was installed before it was added to the rejected patches list, or
-    #         is installed outside of Patch Manager afterward, it's considered noncompliant with the patch
-    #         baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #         circumstances. </p>
+    #                  <p>State value assignment for patch compliance:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>If a package was installed before it was added to the rejected patches list, or is
+    #           installed outside of Patch Manager afterward, it's considered noncompliant with the patch
+    #           baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>If an update attempts to install a dependency package that is now rejected by the
+    #           baseline, when previous versions of the package were not rejected, the package being updated
+    #           is reported as <code>MISSING</code> for <code>SCAN</code> operations and as
+    #            <code>FAILED</code> for <code>INSTALL</code> operations.</p>
+    #                     </li>
+    #                  </ul>
     #               </dd>
     #            </dl>
     #   @return [String]

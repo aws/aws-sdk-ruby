@@ -12,6 +12,8 @@ module Aws::CloudWatch
     ActionsSuppressedBy = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatch#ActionsSuppressedBy', name: 'ActionsSuppressedBy')
     ActionsSuppressedReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#ActionsSuppressedReason', name: 'ActionsSuppressedReason', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     AlarmArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#AlarmArn', name: 'AlarmArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}})
+    AlarmContributor = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#AlarmContributor', name: 'AlarmContributor')
+    AlarmContributors = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#AlarmContributors', name: 'AlarmContributors')
     AlarmDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#AlarmDescription', name: 'AlarmDescription', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     AlarmHistoryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#AlarmHistoryItem', name: 'AlarmHistoryItem')
     AlarmHistoryItems = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#AlarmHistoryItems', name: 'AlarmHistoryItems')
@@ -31,6 +33,8 @@ module Aws::CloudWatch
     AnomalyDetectorType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatch#AnomalyDetectorType', name: 'AnomalyDetectorType')
     AnomalyDetectorTypes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#AnomalyDetectorTypes', name: 'AnomalyDetectorTypes', traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
     AnomalyDetectors = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#AnomalyDetectors', name: 'AnomalyDetectors')
+    AttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#AttributeName', name: 'AttributeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#AttributeValue', name: 'AttributeValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     AwsQueryErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#AwsQueryErrorMessage', name: 'AwsQueryErrorMessage')
     BatchFailures = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#BatchFailures', name: 'BatchFailures')
     ComparisonOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudwatch#ComparisonOperator', name: 'ComparisonOperator')
@@ -38,6 +42,8 @@ module Aws::CloudWatch
     CompositeAlarms = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#CompositeAlarms', name: 'CompositeAlarms')
     ConcurrentModificationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#ConcurrentModificationException', name: 'ConcurrentModificationException', traits: {"aws.protocols#awsQueryError" => {"code" => "ConcurrentModificationException", "httpResponseCode" => 429}, "smithy.api#error" => "client", "smithy.api#httpError" => 429})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ContributorAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.cloudwatch#ContributorAttributes', name: 'ContributorAttributes', traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
+    ContributorId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#ContributorId', name: 'ContributorId', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     Counts = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cloudwatch#Counts', name: 'Counts')
     DashboardArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#DashboardArn', name: 'DashboardArn')
     DashboardBody = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudwatch#DashboardBody', name: 'DashboardBody')
@@ -67,6 +73,8 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DeleteInsightRulesOutput', name: 'DeleteInsightRulesOutput')
     DeleteMetricStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DeleteMetricStreamInput', name: 'DeleteMetricStreamInput')
     DeleteMetricStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DeleteMetricStreamOutput', name: 'DeleteMetricStreamOutput')
+    DescribeAlarmContributorsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DescribeAlarmContributorsInput', name: 'DescribeAlarmContributorsInput')
+    DescribeAlarmContributorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DescribeAlarmContributorsOutput', name: 'DescribeAlarmContributorsOutput')
     DescribeAlarmHistoryInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DescribeAlarmHistoryInput', name: 'DescribeAlarmHistoryInput')
     DescribeAlarmHistoryOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DescribeAlarmHistoryOutput', name: 'DescribeAlarmHistoryOutput')
     DescribeAlarmsForMetricInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudwatch#DescribeAlarmsForMetricInput', name: 'DescribeAlarmsForMetricInput')
@@ -290,12 +298,20 @@ module Aws::CloudWatch
     ActionsSuppressedBy.add_member(:wait_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WaitPeriod', traits: {"smithy.api#enumValue" => "WaitPeriod"}))
     ActionsSuppressedBy.add_member(:extension_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ExtensionPeriod', traits: {"smithy.api#enumValue" => "ExtensionPeriod"}))
     ActionsSuppressedBy.add_member(:alarm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Alarm', traits: {"smithy.api#enumValue" => "Alarm"}))
+    AlarmContributor.add_member(:contributor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContributorId, location_name: 'ContributorId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AlarmContributor.add_member(:contributor_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContributorAttributes, location_name: 'ContributorAttributes', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AlarmContributor.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateReason, location_name: 'StateReason', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AlarmContributor.add_member(:state_transitioned_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'StateTransitionedTimestamp'))
+    AlarmContributor.type = Types::AlarmContributor
+    AlarmContributors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmContributor)
     AlarmHistoryItem.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmName, location_name: 'AlarmName'))
+    AlarmHistoryItem.add_member(:alarm_contributor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContributorId, location_name: 'AlarmContributorId'))
     AlarmHistoryItem.add_member(:alarm_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmType, location_name: 'AlarmType'))
     AlarmHistoryItem.add_member(:timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'Timestamp'))
     AlarmHistoryItem.add_member(:history_item_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoryItemType, location_name: 'HistoryItemType'))
     AlarmHistoryItem.add_member(:history_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistorySummary, location_name: 'HistorySummary'))
     AlarmHistoryItem.add_member(:history_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoryData, location_name: 'HistoryData'))
+    AlarmHistoryItem.add_member(:alarm_contributor_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContributorAttributes, location_name: 'AlarmContributorAttributes'))
     AlarmHistoryItem.type = Types::AlarmHistoryItem
     AlarmHistoryItems.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmHistoryItem)
     AlarmNames.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmName)
@@ -356,6 +372,8 @@ module Aws::CloudWatch
     ConcurrentModificationException.type = Types::ConcurrentModificationException
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     ConflictException.type = Types::ConflictException
+    ContributorAttributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeName)
+    ContributorAttributes.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AttributeValue)
     Counts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatapointValue)
     DashboardEntries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardEntry)
     DashboardEntry.add_member(:dashboard_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardName, location_name: 'DashboardName'))
@@ -406,7 +424,14 @@ module Aws::CloudWatch
     DeleteMetricStreamInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricStreamName, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteMetricStreamInput.type = Types::DeleteMetricStreamInput
     DeleteMetricStreamOutput.type = Types::DeleteMetricStreamOutput
+    DescribeAlarmContributorsInput.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmName, location_name: 'AlarmName', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAlarmContributorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    DescribeAlarmContributorsInput.type = Types::DescribeAlarmContributorsInput
+    DescribeAlarmContributorsOutput.add_member(:alarm_contributors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmContributors, location_name: 'AlarmContributors', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAlarmContributorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    DescribeAlarmContributorsOutput.type = Types::DescribeAlarmContributorsOutput
     DescribeAlarmHistoryInput.add_member(:alarm_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmName, location_name: 'AlarmName'))
+    DescribeAlarmHistoryInput.add_member(:alarm_contributor_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContributorId, location_name: 'AlarmContributorId'))
     DescribeAlarmHistoryInput.add_member(:alarm_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlarmTypes, location_name: 'AlarmTypes'))
     DescribeAlarmHistoryInput.add_member(:history_item_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HistoryItemType, location_name: 'HistoryItemType'))
     DescribeAlarmHistoryInput.add_member(:start_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'StartDate'))
@@ -560,6 +585,8 @@ module Aws::CloudWatch
     HistoryItemType.add_member(:configuration_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ConfigurationUpdate', traits: {"smithy.api#enumValue" => "ConfigurationUpdate"}))
     HistoryItemType.add_member(:state_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'StateUpdate', traits: {"smithy.api#enumValue" => "StateUpdate"}))
     HistoryItemType.add_member(:action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Action', traits: {"smithy.api#enumValue" => "Action"}))
+    HistoryItemType.add_member(:alarm_contributor_state_update, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AlarmContributorStateUpdate', traits: {"smithy.api#enumValue" => "AlarmContributorStateUpdate"}))
+    HistoryItemType.add_member(:alarm_contributor_action, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AlarmContributorAction', traits: {"smithy.api#enumValue" => "AlarmContributorAction"}))
     InsightRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightRuleName, location_name: 'Name', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightRule.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightRuleState, location_name: 'State', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightRule.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InsightRuleSchema, location_name: 'Schema', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -989,6 +1016,15 @@ module Aws::CloudWatch
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceFault)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_alarm_contributors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#DescribeAlarmContributors"
+        operation.name = "DescribeAlarmContributors"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAlarmContributorsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeAlarmContributorsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidNextToken)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {}
       end)
       service.add_operation(:describe_alarm_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

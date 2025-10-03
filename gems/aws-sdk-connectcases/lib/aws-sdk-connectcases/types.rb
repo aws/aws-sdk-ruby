@@ -414,6 +414,39 @@ module Aws::ConnectCases
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents the content of a <code>ConnectCase</code> type related item.</p>
+    # @!attribute case_id
+    #   <p>A unique identifier of the case.</p>
+    #   @return [String]
+    class ConnectCaseContent < Struct.new(
+      :case_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for related items of type <code>ConnectCase</code>.</p>
+    # @!attribute case_id
+    #   <p>A unique identifier of the case.</p>
+    #   @return [String]
+    class ConnectCaseFilter < Struct.new(
+      :case_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the content of a <code>ConnectCase</code> related item.</p>
+    # @!attribute case_id
+    #   <p>A unique identifier of the case.</p>
+    #   @return [String]
+    class ConnectCaseInputContent < Struct.new(
+      :case_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that represents an Amazon Connect contact object. </p>
     # @!attribute contact_arn
     #   <p>A unique identifier of a contact in Amazon Connect.</p>
@@ -714,6 +747,69 @@ module Aws::ConnectCases
     class CreateTemplateOutput < Struct.new(
       :template_id,
       :template_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the content of a <code>Custom</code> type related item.</p>
+    # @!attribute fields
+    #   <p>List of field values for the <code>Custom</code> related item.</p>
+    #   @return [Array<Types::FieldValue>]
+    class CustomContent < Struct.new(
+      :fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for fields in <code>Custom</code> type related items. Only one value can be provided.</p>
+    # @!attribute field
+    #   <p>A filter for fields. Only one value can be provided.</p>
+    #   @return [Types::FieldFilter]
+    # @!attribute not
+    #   <p>Excludes items matching the filter.</p>
+    #   @return [Types::CustomFieldsFilter]
+    # @!attribute and_all
+    #   <p>Provides "and all" filtering.</p>
+    #   @return [Array<Types::CustomFieldsFilter>]
+    # @!attribute or_all
+    #   <p>Provides "or all" filtering.</p>
+    #   @return [Array<Types::CustomFieldsFilter>]
+    class CustomFieldsFilter < Struct.new(
+      :field,
+      :not,
+      :and_all,
+      :or_all,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Field < CustomFieldsFilter; end
+      class Not < CustomFieldsFilter; end
+      class AndAll < CustomFieldsFilter; end
+      class OrAll < CustomFieldsFilter; end
+      class Unknown < CustomFieldsFilter; end
+    end
+
+    # <p>A filter for related items of type <code>Custom</code>.</p>
+    # @!attribute fields
+    #   <p>Filter conditions for custom fields.</p>
+    #   @return [Types::CustomFieldsFilter]
+    class CustomFilter < Struct.new(
+      :fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the content of a <code>Custom</code> related item.</p>
+    # @!attribute fields
+    #   <p>List of field values for the <code>Custom</code> related item.</p>
+    #   @return [Array<Types::FieldValue>]
+    class CustomInputContent < Struct.new(
+      :fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1162,7 +1258,7 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the Cases domain.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of audit events to return. The current maximum supported value is 25. This is also the default when no other value is provided.</p>
+    #   <p>The maximum number of audit events to return. When no value is provided, 25 is the default.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
@@ -1929,11 +2025,19 @@ module Aws::ConnectCases
     # @!attribute sla
     #   <p>Represents the content of an SLA to be returned to agents.</p>
     #   @return [Types::SlaContent]
+    # @!attribute connect_case
+    #   <p>Represents the Amazon Connect case to be created as a related item.</p>
+    #   @return [Types::ConnectCaseContent]
+    # @!attribute custom
+    #   <p>Represents the content of a <code>Custom</code> type related item.</p>
+    #   @return [Types::CustomContent]
     class RelatedItemContent < Struct.new(
       :contact,
       :comment,
       :file,
       :sla,
+      :connect_case,
+      :custom,
       :unknown,
       keyword_init: true
     )
@@ -1943,6 +2047,8 @@ module Aws::ConnectCases
       class Comment < RelatedItemContent; end
       class File < RelatedItemContent; end
       class Sla < RelatedItemContent; end
+      class ConnectCase < RelatedItemContent; end
+      class Custom < RelatedItemContent; end
       class Unknown < RelatedItemContent; end
     end
 
@@ -1970,11 +2076,19 @@ module Aws::ConnectCases
     # @!attribute sla
     #   <p>Represents the content of an SLA to be created.</p>
     #   @return [Types::SlaInputContent]
+    # @!attribute connect_case
+    #   <p>Represents the Amazon Connect case to be created as a related item.</p>
+    #   @return [Types::ConnectCaseInputContent]
+    # @!attribute custom
+    #   <p>Represents the content of a <code>Custom</code> type related item.</p>
+    #   @return [Types::CustomInputContent]
     class RelatedItemInputContent < Struct.new(
       :contact,
       :comment,
       :file,
       :sla,
+      :connect_case,
+      :custom,
       :unknown,
       keyword_init: true
     )
@@ -1984,6 +2098,8 @@ module Aws::ConnectCases
       class Comment < RelatedItemInputContent; end
       class File < RelatedItemInputContent; end
       class Sla < RelatedItemInputContent; end
+      class ConnectCase < RelatedItemInputContent; end
+      class Custom < RelatedItemInputContent; end
       class Unknown < RelatedItemInputContent; end
     end
 
@@ -2000,11 +2116,19 @@ module Aws::ConnectCases
     # @!attribute sla
     #   <p> Filter for related items of type <code>SLA</code>.</p>
     #   @return [Types::SlaFilter]
+    # @!attribute connect_case
+    #   <p>Represents the Amazon Connect case to be created as a related item.</p>
+    #   @return [Types::ConnectCaseFilter]
+    # @!attribute custom
+    #   <p>Represents the content of a <code>Custom</code> type related item.</p>
+    #   @return [Types::CustomFilter]
     class RelatedItemTypeFilter < Struct.new(
       :contact,
       :comment,
       :file,
       :sla,
+      :connect_case,
+      :custom,
       :unknown,
       keyword_init: true
     )
@@ -2014,6 +2138,8 @@ module Aws::ConnectCases
       class Comment < RelatedItemTypeFilter; end
       class File < RelatedItemTypeFilter; end
       class Sla < RelatedItemTypeFilter; end
+      class ConnectCase < RelatedItemTypeFilter; end
+      class Custom < RelatedItemTypeFilter; end
       class Unknown < RelatedItemTypeFilter; end
     end
 
@@ -2065,7 +2191,97 @@ module Aws::ConnectCases
     #   <p>The unique identifier of the Cases domain. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of cases to return. The current maximum supported value is 25. This is also the default value when no other value is provided.</p>
+    #   <p>The maximum number of results to return per page.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The list of types of related items and their parameters to use for filtering. The filters work as an OR condition: caller gets back related items that match any of the specified filter types.</p>
+    #   @return [Array<Types::RelatedItemTypeFilter>]
+    # @!attribute sorts
+    #   <p>A structured set of sort terms to specify the order in which related items should be returned. Supports sorting by association time or case ID. The sorts work in the order specified: first sort term takes precedence over subsequent terms.</p>
+    #   @return [Array<Types::SearchAllRelatedItemsSort>]
+    class SearchAllRelatedItemsRequest < Struct.new(
+      :domain_id,
+      :max_results,
+      :next_token,
+      :filters,
+      :sorts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next set of results. This is null if there are no more results to return.</p>
+    #   @return [String]
+    # @!attribute related_items
+    #   <p>A list of items related to a case.</p>
+    #   @return [Array<Types::SearchAllRelatedItemsResponseItem>]
+    class SearchAllRelatedItemsResponse < Struct.new(
+      :next_token,
+      :related_items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A list of items that represent RelatedItems. This data type is similar to <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItemsResponseItem.html">SearchRelatedItemsResponseItem</a> except Search<b>All</b>RelatedItemsResponseItem has a caseId field.</p>
+    # @!attribute related_item_id
+    #   <p>Unique identifier of a related item.</p>
+    #   @return [String]
+    # @!attribute case_id
+    #   <p>A unique identifier of the case.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>Type of a related item.</p>
+    #   @return [String]
+    # @!attribute association_time
+    #   <p>Time at which a related item was associated with a case.</p>
+    #   @return [Time]
+    # @!attribute content
+    #   <p>Represents the content of a particular type of related item.</p>
+    #   @return [Types::RelatedItemContent]
+    # @!attribute performed_by
+    #   <p>Represents the entity that performed the action.</p>
+    #   @return [Types::UserUnion]
+    # @!attribute tags
+    #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class SearchAllRelatedItemsResponseItem < Struct.new(
+      :related_item_id,
+      :case_id,
+      :type,
+      :association_time,
+      :content,
+      :performed_by,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The order in which all returned related items should be sorted.</p>
+    # @!attribute sort_property
+    #   <p>Whether related items should be sorted in ascending or descending order. </p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>Whether related items should be sorted by association time or case ID. </p>
+    #   @return [String]
+    class SearchAllRelatedItemsSort < Struct.new(
+      :sort_property,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_id
+    #   <p>The unique identifier of the Cases domain. </p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of cases to return. When no value is provided, 25 is the default.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>

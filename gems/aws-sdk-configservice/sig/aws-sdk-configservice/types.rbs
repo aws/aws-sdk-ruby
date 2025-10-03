@@ -4461,6 +4461,7 @@ module Aws::ConfigService
       IN_PROGRESS: String
       SUCCEEDED: String
       FAILED: String
+      UNKNOWN: String
     end
 
     class RemediationExecutionStatus
@@ -4505,6 +4506,9 @@ module Aws::ConfigService
       SUCCEEDED: String
       PENDING: String
       FAILED: String
+      IN_PROGRESS: String
+      EXITED: String
+      UNKNOWN: String
     end
 
     class RemediationInProgressException

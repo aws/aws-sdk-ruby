@@ -978,10 +978,12 @@ module Aws::CloudWatchLogs
     #   <p>The name of the policy to be revoked. This parameter is required.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The ARN of the CloudWatch Logs resource for which the resource policy needs to be deleted</p>
+    #   <p>The ARN of the CloudWatch Logs resource for which the resource policy needs to be
+    #         deleted</p>
     #   @return [String]
     # @!attribute expected_revision_id
-    #   <p>The expected revision ID of the resource policy. Required when deleting a resource-scoped policy to prevent concurrent modifications.</p>
+    #   <p>The expected revision ID of the resource policy. Required when deleting a resource-scoped
+    #         policy to prevent concurrent modifications.</p>
     #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       :policy_name,
@@ -1047,7 +1049,7 @@ module Aws::CloudWatchLogs
     #   <p>The ARN of the delivery destination that is associated with this delivery.</p>
     #   @return [String]
     # @!attribute delivery_destination_type
-    #   <p>Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, Firehose,  or X-Ray.</p>
+    #   <p>Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, Firehose, or X-Ray.</p>
     #   @return [String]
     # @!attribute record_fields
     #   <p>The record fields used in this delivery.</p>
@@ -1080,8 +1082,8 @@ module Aws::CloudWatchLogs
 
     # <p>This structure contains information about one <i>delivery destination</i> in
     #       your account. A delivery destination is an Amazon Web Services resource that represents an
-    #       Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, Firehose, and X-Ray
-    #       are supported as delivery destinations.</p>
+    #         Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3,
+    #         Firehose, and X-Ray are supported as delivery destinations.</p>
     #          <p>To configure logs delivery between a supported Amazon Web Services service and a
     #       destination, you must do the following:</p>
     #          <ul>
@@ -1112,7 +1114,8 @@ module Aws::CloudWatchLogs
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.</p>
     #   @return [String]
     # @!attribute delivery_destination_type
-    #   <p>Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Firehose, or X-Ray.</p>
+    #   <p>Displays whether this delivery destination is CloudWatch Logs, Amazon S3,
+    #           Firehose, or X-Ray.</p>
     #   @return [String]
     # @!attribute output_format
     #   <p>The format of the logs that are sent to this delivery destination. </p>
@@ -1872,7 +1875,8 @@ module Aws::CloudWatchLogs
     #   <p>The ARN of the CloudWatch Logs resource for which to query the resource policy.</p>
     #   @return [String]
     # @!attribute policy_scope
-    #   <p>Specifies the scope of the resource policy. Valid values are <code>ACCOUNT</code> or <code>RESOURCE</code>. When not specified, defaults to <code>ACCOUNT</code>.</p>
+    #   <p>Specifies the scope of the resource policy. Valid values are <code>ACCOUNT</code> or
+    #           <code>RESOURCE</code>. When not specified, defaults to <code>ACCOUNT</code>.</p>
     #   @return [String]
     class DescribeResourcePoliciesRequest < Struct.new(
       :next_token,
@@ -2152,9 +2156,12 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure containing the extracted fields from a log event. These fields are extracted based on the log format and can be used for structured querying and analysis.</p>
+    # <p>A structure containing the extracted fields from a log event. These fields are extracted
+    #       based on the log format and can be used for structured querying and analysis.</p>
     # @!attribute data
-    #   <p>The actual log data content returned in the streaming response. This contains the fields and values of the log event in a structured format that can be parsed and processed by the client.</p>
+    #   <p>The actual log data content returned in the streaming response. This contains the fields
+    #         and values of the log event in a structured format that can be parsed and processed by the
+    #         client.</p>
     #   @return [String]
     class FieldsData < Struct.new(
       :data,
@@ -2649,10 +2656,14 @@ module Aws::CloudWatchLogs
 
     # <p>The parameters for the GetLogObject operation.</p>
     # @!attribute unmask
-    #   <p>A boolean flag that indicates whether to unmask sensitive log data. When set to true, any masked or redacted data in the log object will be displayed in its original form. Default is false.</p>
+    #   <p>A boolean flag that indicates whether to unmask sensitive log data. When set to true, any
+    #         masked or redacted data in the log object will be displayed in its original form. Default is
+    #         false.</p>
     #   @return [Boolean]
     # @!attribute log_object_pointer
-    #   <p>A pointer to the specific log object to retrieve. This is a required parameter that uniquely identifies the log object within CloudWatch Logs. The pointer is typically obtained from a previous query or filter operation.</p>
+    #   <p>A pointer to the specific log object to retrieve. This is a required parameter that
+    #         uniquely identifies the log object within CloudWatch Logs. The pointer is typically obtained
+    #         from a previous query or filter operation.</p>
     #   @return [String]
     class GetLogObjectRequest < Struct.new(
       :unmask,
@@ -2664,7 +2675,8 @@ module Aws::CloudWatchLogs
 
     # <p>The response from the GetLogObject operation.</p>
     # @!attribute field_stream
-    #   <p>A stream of structured log data returned by the GetLogObject operation. This stream contains log events with their associated metadata and extracted fields.</p>
+    #   <p>A stream of structured log data returned by the GetLogObject operation. This stream
+    #         contains log events with their associated metadata and extracted fields.</p>
     #   @return [Types::GetLogObjectResponseStream]
     class GetLogObjectResponse < Struct.new(
       :field_stream,
@@ -2673,12 +2685,16 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A stream of structured log data returned by the GetLogObject operation. This stream contains log events with their associated metadata and extracted fields.</p>
+    # <p>A stream of structured log data returned by the GetLogObject operation. This stream
+    #       contains log events with their associated metadata and extracted fields.</p>
     # @!attribute fields
-    #   <p>A structure containing the extracted fields from a log event. These fields are extracted based on the log format and can be used for structured querying and analysis.</p>
+    #   <p>A structure containing the extracted fields from a log event. These fields are extracted
+    #         based on the log format and can be used for structured querying and analysis.</p>
     #   @return [Types::FieldsData]
     # @!attribute internal_streaming_exception
-    #   <p>An internal error occurred during the streaming of log data. This exception is thrown when there's an issue with the internal streaming mechanism used by the GetLogObject operation.</p>
+    #   <p>An internal error occurred during the streaming of log data. This exception is thrown when
+    #         there's an issue with the internal streaming mechanism used by the GetLogObject
+    #         operation.</p>
     #   @return [Types::InternalStreamingException]
     class GetLogObjectResponseStream < Struct.new(
       :fields,
@@ -2811,14 +2827,14 @@ module Aws::CloudWatchLogs
 
     # <p>This processor uses pattern matching to parse and structure unstructured data. This
     #       processor can also extract fields from log messages.</p>
-    #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Grok"> grok</a> in the <i>CloudWatch Logs User Guide</i>.</p>
+    #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-Grok">grok</a> in the <i>CloudWatch Logs User Guide</i>.</p>
     # @!attribute source
     #   <p>The path to the field in the log event that you want to parse. If you omit this value, the
     #         whole log message is parsed.</p>
     #   @return [String]
     # @!attribute match
     #   <p>The grok pattern to match against the log event. For a list of supported grok patterns,
-    #         see <a href="https://docs.aws.amazon.com/mazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns">Supported grok patterns</a>.</p>
+    #         see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns">Supported grok patterns</a>.</p>
     #   @return [String]
     class Grok < Struct.new(
       :source,
@@ -2913,7 +2929,9 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An internal error occurred during the streaming of log data. This exception is thrown when there's an issue with the internal streaming mechanism used by the GetLogObject operation.</p>
+    # <p>An internal error occurred during the streaming of log data. This exception is thrown when
+    #       there's an issue with the internal streaming mechanism used by the GetLogObject
+    #       operation.</p>
     # @!attribute message
     #   @return [String]
     class InternalStreamingException < Struct.new(
@@ -3676,6 +3694,12 @@ module Aws::CloudWatchLogs
     #            <p>If this value is <code>true</code>, the metric filter is applied on the transformed
     #         version of the log events instead of the original ingested log events.</p>
     #   @return [Boolean]
+    # @!attribute field_selection_criteria
+    #   <p>The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was specified when the metric filter was created.</p>
+    #   @return [String]
+    # @!attribute emit_system_field_dimensions
+    #   <p>The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the <code>emitSystemFieldDimensions</code> value if it was specified when the metric filter was created.</p>
+    #   @return [Array<String>]
     class MetricFilter < Struct.new(
       :filter_name,
       :filter_pattern,
@@ -3683,6 +3707,8 @@ module Aws::CloudWatchLogs
       :creation_time,
       :log_group_name,
       :apply_on_transformed_logs,
+      :field_selection_criteria,
+      :emit_system_field_dimensions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4744,11 +4770,16 @@ module Aws::CloudWatchLogs
     #         logs.</p>
     #            <note>
     #               <p>
-    #                  <code>deliveryDestinationConfiguration</code> is required for CloudWatch Logs, Amazon S3, Firehose log delivery destinations and not required for X-Ray trace delivery destinations. <code>deliveryDestinationType</code> is needed for X-Ray trace delivery destinations but not required for other logs delivery destinations.</p>
+    #                  <code>deliveryDestinationConfiguration</code> is required for CloudWatch Logs,
+    #             Amazon S3, Firehose log delivery destinations and not required for
+    #             X-Ray trace delivery destinations. <code>deliveryDestinationType</code> is
+    #           needed for X-Ray trace delivery destinations but not required for other logs
+    #           delivery destinations.</p>
     #            </note>
     #   @return [Types::DeliveryDestinationConfiguration]
     # @!attribute delivery_destination_type
-    #   <p>The type of delivery destination. This parameter specifies the target service where log data will be delivered. Valid values include:</p>
+    #   <p>The type of delivery destination. This parameter specifies the target service where log
+    #         data will be delivered. Valid values include:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -4764,10 +4795,12 @@ module Aws::CloudWatchLogs
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>XRAY</code> - Amazon Web Services X-Ray for distributed tracing and application monitoring</p>
+    #                     <code>XRAY</code> - Amazon Web Services
+    #             X-Ray for distributed tracing and application monitoring</p>
     #               </li>
     #            </ul>
-    #            <p>The delivery destination type determines the format and configuration options available for log delivery.</p>
+    #            <p>The delivery destination type determines the format and configuration options available
+    #         for log delivery.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>An optional list of key-value pairs to associate with the resource.</p>
@@ -4810,7 +4843,8 @@ module Aws::CloudWatchLogs
     #   <p>Defines the type of log that the source is sending.</p>
     #            <ul>
     #               <li>
-    #                  <p>For Amazon Bedrock, the valid value is <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
+    #                  <p>For Amazon Bedrock, the valid value is <code>APPLICATION_LOGS</code> and
+    #               <code>TRACES</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>
@@ -5098,12 +5132,20 @@ module Aws::CloudWatchLogs
     #         specify <code>true</code>, the metric filter will be applied on the transformed version of the
     #         log events instead of the original ingested log events.</p>
     #   @return [Boolean]
+    # @!attribute field_selection_criteria
+    #   <p>A filter expression that specifies which log events should be processed by this metric filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region = "us-east-1"</code> or <code>@aws.account IN ["123456789012", "987654321098"]</code>. Maximum length: 2000 characters.</p>
+    #   @return [String]
+    # @!attribute emit_system_field_dimensions
+    #   <p>A list of system fields to emit as additional dimensions in the generated metrics. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help identify the source of centralized log data and count toward the total dimension limit for metric filters.</p>
+    #   @return [Array<String>]
     class PutMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
       :filter_pattern,
       :metric_transformations,
       :apply_on_transformed_logs,
+      :field_selection_criteria,
+      :emit_system_field_dimensions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5190,10 +5232,13 @@ module Aws::CloudWatchLogs
     #            </p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The ARN of the CloudWatch Logs resource to which the resource policy needs to be added or attached. Currently only supports LogGroup ARN.</p>
+    #   <p>The ARN of the CloudWatch Logs resource to which the resource policy needs to be added
+    #         or attached. Currently only supports LogGroup ARN.</p>
     #   @return [String]
     # @!attribute expected_revision_id
-    #   <p>The expected revision ID of the resource policy. Required when <code>resourceArn</code> is provided to prevent concurrent modifications. Use <code>null</code> when creating a resource policy for the first time.</p>
+    #   <p>The expected revision ID of the resource policy. Required when <code>resourceArn</code> is
+    #         provided to prevent concurrent modifications. Use <code>null</code> when creating a resource
+    #         policy for the first time.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
       :policy_name,
@@ -5209,7 +5254,8 @@ module Aws::CloudWatchLogs
     #   <p>The new policy.</p>
     #   @return [Types::ResourcePolicy]
     # @!attribute revision_id
-    #   <p>The revision ID of the created or updated resource policy. Only returned for resource-scoped policies.</p>
+    #   <p>The revision ID of the created or updated resource policy. Only returned for
+    #         resource-scoped policies.</p>
     #   @return [String]
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy,
@@ -5290,6 +5336,12 @@ module Aws::CloudWatchLogs
     #         specify <code>true</code>, the subscription filter will be applied on the transformed version
     #         of the log events instead of the original ingested log events.</p>
     #   @return [Boolean]
+    # @!attribute field_selection_criteria
+    #   <p>A filter expression that specifies which log events should be processed by this subscription filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region NOT IN ["cn-north-1"]</code> or <code>@aws.account = "123456789012" AND @aws.region = "us-east-1"</code>. Maximum length: 2000 characters.</p>
+    #   @return [String]
+    # @!attribute emit_system_fields
+    #   <p>A list of system fields to include in the log events sent to the subscription destination. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide source information for centralized log data in the forwarded payload.</p>
+    #   @return [Array<String>]
     class PutSubscriptionFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
@@ -5298,6 +5350,8 @@ module Aws::CloudWatchLogs
       :role_arn,
       :distribution,
       :apply_on_transformed_logs,
+      :field_selection_criteria,
+      :emit_system_fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5613,10 +5667,12 @@ module Aws::CloudWatchLogs
     #   <p>Specifies scope of the resource policy. Valid values are ACCOUNT or RESOURCE.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The ARN of the CloudWatch Logs resource to which the resource policy is attached. Only populated for resource-scoped policies.</p>
+    #   <p>The ARN of the CloudWatch Logs resource to which the resource policy is attached. Only
+    #         populated for resource-scoped policies.</p>
     #   @return [String]
     # @!attribute revision_id
-    #   <p>The revision ID of the resource policy. Only populated for resource-scoped policies.</p>
+    #   <p>The revision ID of the resource policy. Only populated for resource-scoped
+    #         policies.</p>
     #   @return [String]
     class ResourcePolicy < Struct.new(
       :policy_name,
@@ -5986,6 +6042,12 @@ module Aws::CloudWatchLogs
     #   <p>The creation time of the subscription filter, expressed as the number of milliseconds
     #         after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
     #   @return [Integer]
+    # @!attribute field_selection_criteria
+    #   <p>The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was specified when the subscription filter was created.</p>
+    #   @return [String]
+    # @!attribute emit_system_fields
+    #   <p>The list of system fields that are included in the log events sent to the subscription destination. Returns the <code>emitSystemFields</code> value if it was specified when the subscription filter was created.</p>
+    #   @return [Array<String>]
     class SubscriptionFilter < Struct.new(
       :filter_name,
       :log_group_name,
@@ -5995,6 +6057,8 @@ module Aws::CloudWatchLogs
       :distribution,
       :apply_on_transformed_logs,
       :creation_time,
+      :field_selection_criteria,
+      :emit_system_fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

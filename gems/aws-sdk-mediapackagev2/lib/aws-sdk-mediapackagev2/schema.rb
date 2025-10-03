@@ -190,6 +190,7 @@ module Aws::MediaPackageV2
     AdMarkerDash.add_member(:binary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BINARY', traits: {"smithy.api#enumValue" => "BINARY"}))
     AdMarkerDash.add_member(:xml, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'XML', traits: {"smithy.api#enumValue" => "XML"}))
     AdMarkerHls.add_member(:daterange, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DATERANGE', traits: {"smithy.api#enumValue" => "DATERANGE"}))
+    AdMarkerHls.add_member(:scte35_enhanced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SCTE35_ENHANCED', traits: {"smithy.api#enumValue" => "SCTE35_ENHANCED"}))
     CancelHarvestJobRequest.add_member(:channel_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'ChannelGroupName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelHarvestJobRequest.add_member(:channel_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'ChannelName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelHarvestJobRequest.add_member(:origin_endpoint_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceName, location_name: 'OriginEndpointName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

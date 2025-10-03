@@ -21,6 +21,7 @@ module Aws::RDS
     AttributeValueList: ListShape
     AuditPolicyState: EnumShape
     AuthScheme: EnumShape
+    AuthUserName: StringShape
     AuthorizationAlreadyExistsFault: StructureShape
     AuthorizationNotFoundFault: StructureShape
     AuthorizationQuotaExceededFault: StructureShape
@@ -225,6 +226,7 @@ module Aws::RDS
     DBProxyTarget: StructureShape
     DBProxyTargetAlreadyRegisteredFault: StructureShape
     DBProxyTargetGroup: StructureShape
+    DBProxyTargetGroupName: StringShape
     DBProxyTargetGroupNotFoundFault: StructureShape
     DBProxyTargetNotFoundFault: StructureShape
     DBRecommendation: StructureShape
@@ -271,6 +273,7 @@ module Aws::RDS
     DataFilter: StringShape
     DatabaseArn: StringShape
     DatabaseInsightsMode: EnumShape
+    DefaultAuthScheme: EnumShape
     DeleteBlueGreenDeploymentRequest: StructureShape
     DeleteBlueGreenDeploymentResponse: StructureShape
     DeleteCustomDBEngineVersionMessage: StructureShape
@@ -605,6 +608,8 @@ module Aws::RDS
     PerformanceInsightsMetricQuery: StructureShape
     PerformanceIssueDetails: StructureShape
     PointInTimeRestoreNotEnabledFault: StructureShape
+    PotentiallySensitiveOptionSettingValue: StringShape
+    PotentiallySensitiveParameterValue: StringShape
     ProcessorFeature: StructureShape
     ProcessorFeatureList: ListShape
     PromoteReadReplicaDBClusterMessage: StructureShape

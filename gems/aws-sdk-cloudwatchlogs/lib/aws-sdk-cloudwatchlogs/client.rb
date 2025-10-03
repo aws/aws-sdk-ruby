@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::CloudWatchLogs
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::CloudWatchLogs
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::CloudWatchLogs
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::CloudWatchLogs::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::CloudWatchLogs::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -1048,9 +1053,11 @@ module Aws::CloudWatchLogs
     # @option params [String] :policy_name
     #   <p>The name of the policy to be revoked. This parameter is required.</p>
     # @option params [String] :resource_arn
-    #   <p>The ARN of the CloudWatch Logs resource for which the resource policy needs to be deleted</p>
+    #   <p>The ARN of the CloudWatch Logs resource for which the resource policy needs to be
+    #         deleted</p>
     # @option params [String] :expected_revision_id
-    #   <p>The expected revision ID of the resource policy. Required when deleting a resource-scoped policy to prevent concurrent modifications.</p>
+    #   <p>The expected revision ID of the resource policy. Required when deleting a resource-scoped
+    #         policy to prevent concurrent modifications.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     policy_name: "PolicyName",
@@ -1285,8 +1292,8 @@ module Aws::CloudWatchLogs
     #                <i>delivery destination</i>
     #             </a>.</p>
     #          <p>A delivery source represents an Amazon Web Services resource that sends logs to an logs
-    #       delivery destination. The destination can be CloudWatch Logs, Amazon S3, Firehose or X-Ray. Only some Amazon Web Services services support being configured as a delivery
-    #       source. These services are listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html">Enable logging from
+    #       delivery destination. The destination can be CloudWatch Logs, Amazon S3, Firehose or X-Ray. Only some Amazon Web Services services support being
+    #       configured as a delivery source. These services are listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html">Enable logging from
     #           Amazon Web Services services.</a>
     #          </p>
     # @param [Hash, Types::DescribeDeliveriesRequest] params
@@ -1505,8 +1512,8 @@ module Aws::CloudWatchLogs
       request.send_request(options)
     end
 
-    # <p>Returns a list of field indexes listed in the field index policies of one or more log
-    #       groups. For more information about field index policies, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html">PutIndexPolicy</a>.</p>
+    # <p>Returns a list of custom and default field indexes which are discovered in log data. For
+    #       more information about field index policies, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html">PutIndexPolicy</a>.</p>
     # @param [Hash, Types::DescribeFieldIndexesRequest] params
     # @option params [Array<String>] :log_group_identifiers
     #   <p>An array containing the names or ARNs of the log groups that you want to retrieve field
@@ -1541,7 +1548,7 @@ module Aws::CloudWatchLogs
       request.send_request(options)
     end
 
-    # <p>Returns the field index policies of one or more log groups. For more information about
+    # <p>Returns the field index policies of the specified log group. For more information about
     #       field index policies, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html">PutIndexPolicy</a>.</p>
     #          <p>If a specified log group has a log-group level index policy, that policy is returned by
     #       this operation.</p>
@@ -1844,7 +1851,9 @@ module Aws::CloudWatchLogs
     #         ],
     #         creation_time: 1,
     #         log_group_name: "LogGroupName",
-    #         apply_on_transformed_logs: false
+    #         apply_on_transformed_logs: false,
+    #         field_selection_criteria: "FieldSelectionCriteria",
+    #         emit_system_field_dimensions: ["SystemField"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1963,7 +1972,8 @@ module Aws::CloudWatchLogs
     # @option params [String] :resource_arn
     #   <p>The ARN of the CloudWatch Logs resource for which to query the resource policy.</p>
     # @option params [String] :policy_scope
-    #   <p>Specifies the scope of the resource policy. Valid values are <code>ACCOUNT</code> or <code>RESOURCE</code>. When not specified, defaults to <code>ACCOUNT</code>.</p>
+    #   <p>Specifies the scope of the resource policy. Valid values are <code>ACCOUNT</code> or
+    #           <code>RESOURCE</code>. When not specified, defaults to <code>ACCOUNT</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
@@ -2030,7 +2040,9 @@ module Aws::CloudWatchLogs
     #         role_arn: "RoleArn",
     #         distribution: "Random" # One of: ["Random", "ByLogStream"],
     #         apply_on_transformed_logs: false,
-    #         creation_time: 1
+    #         creation_time: 1,
+    #         field_selection_criteria: "FieldSelectionCriteria",
+    #         emit_system_fields: ["SystemField"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2123,7 +2135,7 @@ module Aws::CloudWatchLogs
     #                <p>A time range</p>
     #             </li>
     #             <li>
-    #                <p>The log stream name, or a log stream name prefix that matches mutltiple log
+    #                <p>The log stream name, or a log stream name prefix that matches multiple log
     #           streams</p>
     #             </li>
     #          </ul>
@@ -2702,15 +2714,26 @@ module Aws::CloudWatchLogs
       request.send_request(options)
     end
 
-    # <p>Retrieves a large logging object (LLO) and streams it back. This API is used to fetch the content of large portions of log events that have been ingested through the PutOpenTelemetryLogs API. 
-    #       When log events contain fields that would cause the total event size to exceed 1MB, CloudWatch Logs automatically processes up to 10 fields, starting with the largest fields. Each field is truncated as needed to keep 
-    #       the total event size as close to 1MB as possible. The excess portions are stored as Large Log Objects (LLOs) and these fields are processed separately and LLO reference system fields (in the format <code>@ptr.$[path.to.field]</code>) are 
-    #       added. The path in the reference field reflects the original JSON structure where the large field was located. For example, this could be <code>@ptr.$['input']['message']</code>, <code>@ptr.$['AAA']['BBB']['CCC']['DDD']</code>, <code>@ptr.$['AAA']</code>, or any other path matching your log structure.</p>
+    # <p>Retrieves a large logging object (LLO) and streams it back. This API is used to fetch the
+    #       content of large portions of log events that have been ingested through the
+    #       PutOpenTelemetryLogs API. When log events contain fields that would cause the total event size
+    #       to exceed 1MB, CloudWatch Logs automatically processes up to 10 fields, starting with the
+    #       largest fields. Each field is truncated as needed to keep the total event size as close to 1MB
+    #       as possible. The excess portions are stored as Large Log Objects (LLOs) and these fields are
+    #       processed separately and LLO reference system fields (in the format
+    #         <code>@ptr.$[path.to.field]</code>) are added. The path in the reference field reflects the
+    #       original JSON structure where the large field was located. For example, this could be
+    #         <code>@ptr.$['input']['message']</code>, <code>@ptr.$['AAA']['BBB']['CCC']['DDD']</code>,
+    #         <code>@ptr.$['AAA']</code>, or any other path matching your log structure.</p>
     # @param [Hash, Types::GetLogObjectRequest] params
     # @option params [Boolean] :unmask
-    #   <p>A boolean flag that indicates whether to unmask sensitive log data. When set to true, any masked or redacted data in the log object will be displayed in its original form. Default is false.</p>
+    #   <p>A boolean flag that indicates whether to unmask sensitive log data. When set to true, any
+    #         masked or redacted data in the log object will be displayed in its original form. Default is
+    #         false.</p>
     # @option params [String] :log_object_pointer
-    #   <p>A pointer to the specific log object to retrieve. This is a required parameter that uniquely identifies the log object within CloudWatch Logs. The pointer is typically obtained from a previous query or filter operation.</p>
+    #   <p>A pointer to the specific log object to retrieve. This is a required parameter that
+    #         uniquely identifies the log object within CloudWatch Logs. The pointer is typically obtained
+    #         from a previous query or filter operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     unmask: false,
@@ -3351,8 +3374,8 @@ module Aws::CloudWatchLogs
     #             </li>
     #             <li>
     #                <p>To create a metric extraction policy, you must have the
-    #             <code>logs:PutMetricExtractionPolicy</code> and
-    #             <code>logs:PutAccountPolicy</code> permissions.</p>
+    #             <code>logs:PutMetricExtractionPolicy</code> and <code>logs:PutAccountPolicy</code>
+    #           permissions.</p>
     #             </li>
     #          </ul>
     #          <p>
@@ -3447,6 +3470,32 @@ module Aws::CloudWatchLogs
     #       use the same or overlapping log group name prefixes. For example, if you have one policy
     #       filtered to log groups that start with <code>my-log</code>, you can't have another field index
     #       policy filtered to <code>my-logpprod</code> or <code>my-logging</code>.</p>
+    #          <p>CloudWatch Logs provides default field indexes for all log groups in the Standard log
+    #       class. Default field indexes are automatically available for the following fields: </p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>@aws.region</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>@aws.account</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>@source.log</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>traceId</code>
+    #                </p>
+    #             </li>
+    #          </ul>
+    #          <p>Default field indexes are in addition to any custom field indexes you define within your
+    #       policy. Default field indexes are not counted towards your field index quota. </p>
     #          <p>You can also set up a transformer at the log-group level. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html">PutTransformer</a>. If there is both a log-group level transformer created with
     #         <code>PutTransformer</code> and an account-level transformer that could apply to the same
     #       log group, the log group uses only the log-group level transformer. It ignores the
@@ -3498,15 +3547,16 @@ module Aws::CloudWatchLogs
     #          <important>
     #             <p>Creating a policy disables metrics for AWS features that use EMF to create metrics, such
     #         as CloudWatch Container Insights and CloudWatch Application Signals. To prevent turning off
-    #         those features by accident, we recommend that you exclude the underlying log-groups through a
-    #         selection-criteria such as <code>LogGroupNamePrefix NOT IN ["/aws/containerinsights",
-    #         "/aws/ecs/containerinsights", "/aws/application-signals/data"]</code>.</p>
+    #         those features by accident, we recommend that you exclude the underlying log-groups through
+    #         a selection-criteria such as <code>LogGroupNamePrefix NOT IN ["/aws/containerinsights",
+    #           "/aws/ecs/containerinsights", "/aws/application-signals/data"]</code>.</p>
     #          </important>
     #          <p>Each account can have either one account-level metric extraction policy that applies to
     #       all log groups, or up to 5 policies that are each scoped to a subset of log groups with the
-    #       <code>selectionCriteria</code> parameter. The selection criteria supports filtering by <code>LogGroupName</code> and
-    #       <code>LogGroupNamePrefix</code> using the operators <code>IN</code> and <code>NOT IN</code>. You can specify up to 50 values in each
-    #       <code>IN</code> or <code>NOT IN</code> list.</p>
+    #         <code>selectionCriteria</code> parameter. The selection criteria supports filtering by
+    #         <code>LogGroupName</code> and <code>LogGroupNamePrefix</code> using the operators
+    #         <code>IN</code> and <code>NOT IN</code>. You can specify up to 50 values in each
+    #         <code>IN</code> or <code>NOT IN</code> list.</p>
     #          <p>The selection criteria can be specified in these formats:</p>
     #          <p>
     #             <code>LogGroupName IN ["log-group-1", "log-group-2"]</code>
@@ -3516,25 +3566,31 @@ module Aws::CloudWatchLogs
     #          </p>
     #          <p>If you have multiple account-level metric extraction policies with selection criteria, no
     #       two of them can have overlapping criteria. For example, if you have one policy with selection
-    #       criteria <code>LogGroupNamePrefix IN ["my-log"]</code>, you can't have another metric extraction policy
-    #       with selection criteria <code>LogGroupNamePrefix IN ["/my-log-prod"]</code> or <code>LogGroupNamePrefix IN
-    #       ["/my-logging"]</code>, as the set of log groups matching these prefixes would be a subset of the log
-    #       groups matching the first policy's prefix, creating an overlap.</p>
-    #          <p>When using <code>NOT IN</code>, only one policy with this operator is allowed per account.</p>
-    #          <p>When combining policies with <code>IN</code> and <code>NOT IN</code> operators, the overlap check ensures that
-    #       policies don't have conflicting effects. Two policies with <code>IN</code> and <code>NOT IN</code> operators do not
-    #       overlap if and only if every value in the <code>IN </code>policy is completely contained within some value
-    #       in the <code>NOT IN</code> policy. For example:</p>
+    #       criteria <code>LogGroupNamePrefix IN ["my-log"]</code>, you can't have another metric
+    #       extraction policy with selection criteria <code>LogGroupNamePrefix IN ["/my-log-prod"]</code>
+    #       or <code>LogGroupNamePrefix IN ["/my-logging"]</code>, as the set of log groups matching these
+    #       prefixes would be a subset of the log groups matching the first policy's prefix, creating an
+    #       overlap.</p>
+    #          <p>When using <code>NOT IN</code>, only one policy with this operator is allowed per
+    #       account.</p>
+    #          <p>When combining policies with <code>IN</code> and <code>NOT IN</code> operators, the
+    #       overlap check ensures that policies don't have conflicting effects. Two policies with
+    #         <code>IN</code> and <code>NOT IN</code> operators do not overlap if and only if every value
+    #       in the <code>IN </code>policy is completely contained within some value in the <code>NOT
+    #         IN</code> policy. For example:</p>
     #          <ul>
     #             <li>
-    #                <p>If you have a <code>NOT IN</code> policy for prefix <code>"/aws/lambda"</code>, you can create an <code>IN</code> policy for
-    #           the exact log group name <code>"/aws/lambda/function1"</code> because the set of log groups matching
-    #           <code>"/aws/lambda/function1"</code> is a subset of the log groups matching <code>"/aws/lambda"</code>.</p>
+    #                <p>If you have a <code>NOT IN</code> policy for prefix <code>"/aws/lambda"</code>, you
+    #           can create an <code>IN</code> policy for the exact log group name
+    #             <code>"/aws/lambda/function1"</code> because the set of log groups matching
+    #             <code>"/aws/lambda/function1"</code> is a subset of the log groups matching
+    #             <code>"/aws/lambda"</code>.</p>
     #             </li>
     #             <li>
-    #                <p>If you have a <code>NOT IN</code> policy for prefix <code>"/aws/lambda"</code>, you cannot create an <code>IN</code> policy
-    #           for prefix <code>"/aws"</code> because the set of log groups matching <code>"/aws"</code> is not a subset of the log
-    #           groups matching <code>"/aws/lambda"</code>.</p>
+    #                <p>If you have a <code>NOT IN</code> policy for prefix <code>"/aws/lambda"</code>, you
+    #           cannot create an <code>IN</code> policy for prefix <code>"/aws"</code> because the set of
+    #           log groups matching <code>"/aws"</code> is not a subset of the log groups matching
+    #             <code>"/aws/lambda"</code>.</p>
     #             </li>
     #          </ul>
     # @param [Hash, Types::PutAccountPolicyRequest] params
@@ -3789,7 +3845,8 @@ module Aws::CloudWatchLogs
     # <p>Creates or updates a logical <i>delivery destination</i>. A delivery
     #       destination is an Amazon Web Services resource that represents an Amazon Web Services service
     #       that logs can be sent to. CloudWatch Logs, Amazon S3, and Firehose are
-    #       supported as logs delivery destinations  and X-Ray as the trace delivery destination.</p>
+    #       supported as logs delivery destinations and X-Ray as the trace delivery
+    #       destination.</p>
     #          <p>To configure logs delivery between a supported Amazon Web Services service and a
     #       destination, you must do the following:</p>
     #          <ul>
@@ -3834,10 +3891,15 @@ module Aws::CloudWatchLogs
     #         logs.</p>
     #            <note>
     #               <p>
-    #                  <code>deliveryDestinationConfiguration</code> is required for CloudWatch Logs, Amazon S3, Firehose log delivery destinations and not required for X-Ray trace delivery destinations. <code>deliveryDestinationType</code> is needed for X-Ray trace delivery destinations but not required for other logs delivery destinations.</p>
+    #                  <code>deliveryDestinationConfiguration</code> is required for CloudWatch Logs,
+    #             Amazon S3, Firehose log delivery destinations and not required for
+    #             X-Ray trace delivery destinations. <code>deliveryDestinationType</code> is
+    #           needed for X-Ray trace delivery destinations but not required for other logs
+    #           delivery destinations.</p>
     #            </note>
     # @option params [String] :delivery_destination_type
-    #   <p>The type of delivery destination. This parameter specifies the target service where log data will be delivered. Valid values include:</p>
+    #   <p>The type of delivery destination. This parameter specifies the target service where log
+    #         data will be delivered. Valid values include:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -3853,10 +3915,12 @@ module Aws::CloudWatchLogs
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>XRAY</code> - Amazon Web Services X-Ray for distributed tracing and application monitoring</p>
+    #                     <code>XRAY</code> - Amazon Web Services
+    #             X-Ray for distributed tracing and application monitoring</p>
     #               </li>
     #            </ul>
-    #            <p>The delivery destination type determines the format and configuration options available for log delivery.</p>
+    #            <p>The delivery destination type determines the format and configuration options available
+    #         for log delivery.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>An optional list of key-value pairs to associate with the resource.</p>
     #            <p>For more information about tagging, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
@@ -3998,7 +4062,8 @@ module Aws::CloudWatchLogs
     #   <p>Defines the type of log that the source is sending.</p>
     #            <ul>
     #               <li>
-    #                  <p>For Amazon Bedrock, the valid value is <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
+    #                  <p>For Amazon Bedrock, the valid value is <code>APPLICATION_LOGS</code> and
+    #               <code>TRACES</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>
@@ -4186,6 +4251,32 @@ module Aws::CloudWatchLogs
     #             </code> or <code>requestId IN [<i>value</i>,
     #           <i>value</i>, ...]</code> will process fewer log events to reduce costs, and
     #       have improved performance.</p>
+    #          <p>CloudWatch Logs provides default field indexes for all log groups in the Standard log
+    #       class. Default field indexes are automatically available for the following fields: </p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>@aws.region</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>@aws.account</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>@source.log</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>traceId</code>
+    #                </p>
+    #             </li>
+    #          </ul>
+    #          <p>Default field indexes are in addition to any custom field indexes you define within your
+    #       policy. Default field indexes are not counted towards your field index quota. </p>
     #          <p>Each index policy has the following quotas and restrictions:</p>
     #          <ul>
     #             <li>
@@ -4438,6 +4529,10 @@ module Aws::CloudWatchLogs
     #            <p>If the log group uses either a log-group level or account-level transformer, and you
     #         specify <code>true</code>, the metric filter will be applied on the transformed version of the
     #         log events instead of the original ingested log events.</p>
+    # @option params [String] :field_selection_criteria
+    #   <p>A filter expression that specifies which log events should be processed by this metric filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region = "us-east-1"</code> or <code>@aws.account IN ["123456789012", "987654321098"]</code>. Maximum length: 2000 characters.</p>
+    # @option params [Array<String>] :emit_system_field_dimensions
+    #   <p>A list of system fields to emit as additional dimensions in the generated metrics. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help identify the source of centralized log data and count toward the total dimension limit for metric filters.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     log_group_name: "LogGroupName", # required
@@ -4455,7 +4550,9 @@ module Aws::CloudWatchLogs
     #         unit: "Seconds" # One of: ["Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"]
     #       }
     #     ],
-    #     apply_on_transformed_logs: false
+    #     apply_on_transformed_logs: false,
+    #     field_selection_criteria: "FieldSelectionCriteria",
+    #     emit_system_field_dimensions: ["SystemField"]
     #   }
     #   options = {}
     #   response = client.put_metric_filter(params, options)
@@ -4557,9 +4654,12 @@ module Aws::CloudWatchLogs
     #           }</code>
     #            </p>
     # @option params [String] :resource_arn
-    #   <p>The ARN of the CloudWatch Logs resource to which the resource policy needs to be added or attached. Currently only supports LogGroup ARN.</p>
+    #   <p>The ARN of the CloudWatch Logs resource to which the resource policy needs to be added
+    #         or attached. Currently only supports LogGroup ARN.</p>
     # @option params [String] :expected_revision_id
-    #   <p>The expected revision ID of the resource policy. Required when <code>resourceArn</code> is provided to prevent concurrent modifications. Use <code>null</code> when creating a resource policy for the first time.</p>
+    #   <p>The expected revision ID of the resource policy. Required when <code>resourceArn</code> is
+    #         provided to prevent concurrent modifications. Use <code>null</code> when creating a resource
+    #         policy for the first time.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     policy_name: "PolicyName",
@@ -4715,6 +4815,10 @@ module Aws::CloudWatchLogs
     #            <p>If the log group uses either a log-group level or account-level transformer, and you
     #         specify <code>true</code>, the subscription filter will be applied on the transformed version
     #         of the log events instead of the original ingested log events.</p>
+    # @option params [String] :field_selection_criteria
+    #   <p>A filter expression that specifies which log events should be processed by this subscription filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region NOT IN ["cn-north-1"]</code> or <code>@aws.account = "123456789012" AND @aws.region = "us-east-1"</code>. Maximum length: 2000 characters.</p>
+    # @option params [Array<String>] :emit_system_fields
+    #   <p>A list of system fields to include in the log events sent to the subscription destination. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide source information for centralized log data in the forwarded payload.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     log_group_name: "LogGroupName", # required
@@ -4723,7 +4827,9 @@ module Aws::CloudWatchLogs
     #     destination_arn: "DestinationArn", # required
     #     role_arn: "RoleArn",
     #     distribution: "Random" # One of: ["Random", "ByLogStream"],
-    #     apply_on_transformed_logs: false
+    #     apply_on_transformed_logs: false,
+    #     field_selection_criteria: "FieldSelectionCriteria",
+    #     emit_system_fields: ["SystemField"]
     #   }
     #   options = {}
     #   response = client.put_subscription_filter(params, options)
@@ -5484,8 +5590,8 @@ module Aws::CloudWatchLogs
     #          <p>Removes the specified tags from the specified log group.</p>
     #          <p>To list the tags for a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html">ListTagsForResource</a>. To add tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
     #          <p>When using IAM policies to control tag management for CloudWatch Logs log groups, the
-    #       condition keys <code>aws:Resource/key-name</code> and <code>aws:TagKeys</code> cannot be used to restrict which tags
-    #       users can assign. </p>
+    #       condition keys <code>aws:Resource/key-name</code> and <code>aws:TagKeys</code> cannot be used
+    #       to restrict which tags users can assign. </p>
     # @param [Hash, Types::UntagLogGroupRequest] params
     # @option params [String] :log_group_name
     #   <p>The name of the log group.</p>

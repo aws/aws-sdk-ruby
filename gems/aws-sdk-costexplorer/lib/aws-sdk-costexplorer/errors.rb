@@ -25,6 +25,7 @@ module Aws::CostExplorer
   # * {AnalysisNotFoundException}
   # * {BackfillLimitExceededException}
   # * {BillExpirationException}
+  # * {BillingViewHealthStatusException}
   # * {DataUnavailableException}
   # * {GenerationExistsException}
   # * {InvalidNextTokenException}
@@ -74,6 +75,21 @@ module Aws::CostExplorer
     class BillExpirationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CostExplorer::Types::BillExpirationException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>
+    #             The billing view status must be <code>HEALTHY</code> to perform this action. Try again when the status is <code>HEALTHY</code>.
+    #         </p>
+    class BillingViewHealthStatusException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CostExplorer::Types::BillingViewHealthStatusException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

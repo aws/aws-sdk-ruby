@@ -7,6 +7,7 @@ module Aws::ApplicationSignals
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -103,6 +104,7 @@ module Aws::ApplicationSignals
           key_attributes: Hash[String, String],
           operation_name: String,
           metric_type: String,
+          metric_name: String,
           statistic: String,
           period_seconds: Integer,
           metric_data_queries: Array[
@@ -111,7 +113,7 @@ module Aws::ApplicationSignals
               metric_stat: {
                 metric: {
                   namespace: String,
-                  metric_name: String,
+                  metric_name: untyped,
                   dimensions: Array[
                     {
                       name: String,
@@ -208,6 +210,11 @@ module Aws::ApplicationSignals
       ]
     ) -> _CreateServiceLevelObjectiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceLevelObjectiveResponse
 
+    interface _DeleteGroupingConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteGroupingConfigurationOutput]
+    end
+    def delete_grouping_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupingConfigurationResponse
+
     interface _DeleteServiceLevelObjectiveResponse
       include Smithy::Client::_Response[Types::DeleteServiceLevelObjectiveOutput]
     end
@@ -235,6 +242,51 @@ module Aws::ApplicationSignals
     def get_service_level_objective: (
       ?id: String
     ) -> _GetServiceLevelObjectiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceLevelObjectiveResponse
+
+    interface _ListAuditFindingsResponse
+      include Smithy::Client::_Response[Types::ListAuditFindingsOutput]
+      def audit_findings: () -> Array[Types::AuditFinding]?
+      def next_token: () -> String?
+    end
+    def list_audit_findings: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?auditors: Array[String],
+      ?audit_targets: Array[
+        {
+          type: String,
+          data: {
+            service: {
+              type: untyped,
+              name: untyped,
+              environment: untyped,
+              aws_account_id: untyped
+            },
+            slo: {
+              slo_name: untyped,
+              slo_arn: untyped
+            },
+            service_operation: {
+              service: untyped,
+              operation: untyped,
+              metric_type: untyped
+            }
+          }
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAuditFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAuditFindingsResponse
+
+    interface _ListGroupingAttributeDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListGroupingAttributeDefinitionsOutput]
+      def grouping_attribute_definitions: () -> Array[Types::GroupingAttributeDefinition]?
+      def updated_at: () -> Time?
+      def next_token: () -> String?
+    end
+    def list_grouping_attribute_definitions: (
+      ?next_token: String
+    ) -> _ListGroupingAttributeDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupingAttributeDefinitionsResponse
 
     interface _ListServiceDependenciesResponse
       include Smithy::Client::_Response[Types::ListServiceDependenciesOutput]
@@ -291,9 +343,9 @@ module Aws::ApplicationSignals
       },
       ?max_results: Integer,
       ?next_token: String,
-      ?metric_source_types: Array[String],
       ?include_linked_accounts: bool,
-      ?slo_owner_aws_account_id: String
+      ?slo_owner_aws_account_id: String,
+      ?metric_source_types: Array[String]
     ) -> _ListServiceLevelObjectivesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceLevelObjectivesResponse
 
     interface _ListServiceOperationsResponse
@@ -310,6 +362,28 @@ module Aws::ApplicationSignals
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListServiceOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceOperationsResponse
+
+    interface _ListServiceStatesResponse
+      include Smithy::Client::_Response[Types::ListServiceStatesOutput]
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def service_states: () -> Array[Types::ServiceState]?
+      def next_token: () -> String?
+    end
+    def list_service_states: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?include_linked_accounts: bool,
+      ?aws_account_id: String,
+      ?attribute_filters: Array[
+        {
+          attribute_filter_name: String,
+          attribute_filter_values: Array[String]
+        }
+      ]
+    ) -> _ListServiceStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceStatesResponse
 
     interface _ListServicesResponse
       include Smithy::Client::_Response[Types::ListServicesOutput]
@@ -334,6 +408,20 @@ module Aws::ApplicationSignals
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutGroupingConfigurationResponse
+      include Smithy::Client::_Response[Types::PutGroupingConfigurationOutput]
+      def grouping_configuration: () -> Types::GroupingConfiguration?
+    end
+    def put_grouping_configuration: (
+      ?grouping_attribute_definitions: Array[
+        {
+          grouping_name: String,
+          grouping_source_keys: Array[String],
+          default_grouping_value: untyped
+        }
+      ]
+    ) -> _PutGroupingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutGroupingConfigurationResponse
 
     interface _StartDiscoveryResponse
       include Smithy::Client::_Response[Types::StartDiscoveryOutput]
@@ -373,6 +461,7 @@ module Aws::ApplicationSignals
           key_attributes: Hash[String, String],
           operation_name: String,
           metric_type: String,
+          metric_name: String,
           statistic: String,
           period_seconds: Integer,
           metric_data_queries: Array[
@@ -381,7 +470,7 @@ module Aws::ApplicationSignals
               metric_stat: {
                 metric: {
                   namespace: String,
-                  metric_name: String,
+                  metric_name: untyped,
                   dimensions: Array[
                     {
                       name: String,

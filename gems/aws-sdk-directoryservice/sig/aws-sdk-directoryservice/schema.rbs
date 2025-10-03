@@ -68,6 +68,8 @@ module Aws::DirectoryService
     CertificatesInfo: ListShape
     CidrIp: StringShape
     CidrIps: ListShape
+    CidrIpv6: StringShape
+    CidrIpv6s: ListShape
     ClientAuthenticationSettingInfo: StructureShape
     ClientAuthenticationSettingsInfo: ListShape
     ClientAuthenticationStatus: EnumShape
@@ -189,6 +191,7 @@ module Aws::DirectoryService
     DirectoryNotSharedException: StructureShape
     DirectoryShortName: StringShape
     DirectorySize: EnumShape
+    DirectorySizeUpdateSettings: StructureShape
     DirectoryStage: EnumShape
     DirectoryType: EnumShape
     DirectoryUnavailableException: StructureShape
@@ -208,6 +211,7 @@ module Aws::DirectoryService
     DisableSsoRequest: StructureShape
     DisableSsoResult: StructureShape
     DnsIpAddrs: ListShape
+    DnsIpv6Addrs: ListShape
     DomainController: StructureShape
     DomainControllerId: StringShape
     DomainControllerIds: ListShape
@@ -265,6 +269,8 @@ module Aws::DirectoryService
     IpRouteStatusReason: StringShape
     IpRoutes: ListShape
     IpRoutesInfo: ListShape
+    IpV6Addrs: ListShape
+    Ipv6Addr: StringShape
     LDAPSSettingInfo: StructureShape
     LDAPSSettingsInfo: ListShape
     LDAPSStatus: EnumShape
@@ -291,6 +297,8 @@ module Aws::DirectoryService
     LogSubscription: StructureShape
     LogSubscriptions: ListShape
     ManualSnapshotsLimitReached: BooleanShape
+    NetworkType: EnumShape
+    NetworkUpdateSettings: StructureShape
     NextToken: StringShape
     NoAvailableCertificateException: StructureShape
     Notes: StringShape

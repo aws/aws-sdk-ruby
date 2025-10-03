@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Amp
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Amp
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Amp
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Amp::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Amp::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -631,6 +636,28 @@ module Aws::Amp
       request.send_request(options)
     end
 
+    # <p>Deletes the logging configuration for a Amazon Managed Service for Prometheus scraper.</p>
+    # @param [Hash, Types::DeleteScraperLoggingConfigurationRequest] params
+    # @option params [String] :scraper_id
+    #   <p>The ID of the scraper whose logging configuration will be deleted.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the request is processed exactly once.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     scraper_id: "ScraperId", # required
+    #     client_token: "IdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.delete_scraper_logging_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_scraper_logging_configuration(params = {}, options = {})
+      request = build_request(:delete_scraper_logging_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes an existing workspace. </p> <note> <p>When you delete a workspace, the data that has been ingested into it is not immediately deleted. It will be permanently deleted within one month.</p> </note>
     # @param [Hash, Types::DeleteWorkspaceInput] params
     # @option params [String] :workspace_id
@@ -904,6 +931,48 @@ module Aws::Amp
     # @return [Types::DescribeScraperResponse]
     def describe_scraper(params = {}, options = {})
       request = build_request(:describe_scraper, params)
+      request.send_request(options)
+    end
+
+    # <p>Describes the logging configuration for a Amazon Managed Service for Prometheus scraper.</p>
+    # @param [Hash, Types::DescribeScraperLoggingConfigurationRequest] params
+    # @option params [String] :scraper_id
+    #   <p>The ID of the scraper whose logging configuration will be described.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     scraper_id: "ScraperId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_scraper_logging_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: { # required
+    #       status_code: "ScraperLoggingConfigurationStatusCode", # required
+    #       status_reason: "String"
+    #     },
+    #     scraper_id: "ScraperId", # required
+    #     logging_destination: { # required
+    #       # One of:
+    #       cloud_watch_logs: {
+    #         log_group_arn: "LogGroupArn", # required
+    #       }
+    #     },
+    #     scraper_components: [ # required
+    #       {
+    #         type: "ScraperComponentType", # required
+    #         config: {
+    #           options: {
+    #             "String" => "String"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     modified_at: Time.now, # required
+    #   }
+    # @return [Types::DescribeScraperLoggingConfigurationResponse]
+    def describe_scraper_logging_configuration(params = {}, options = {})
+      request = build_request(:describe_scraper_logging_configuration, params)
       request.send_request(options)
     end
 
@@ -1584,6 +1653,50 @@ module Aws::Amp
     # @return [Types::UpdateScraperResponse]
     def update_scraper(params = {}, options = {})
       request = build_request(:update_scraper, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the logging configuration for a Amazon Managed Service for Prometheus scraper.</p>
+    # @param [Hash, Types::UpdateScraperLoggingConfigurationRequest] params
+    # @option params [String] :scraper_id
+    #   <p>The ID of the scraper whose logging configuration will be updated.</p>
+    # @option params [Types::ScraperLoggingDestination] :logging_destination
+    #   <p>The destination where scraper logs will be sent.</p>
+    # @option params [Array<Types::ScraperComponent>] :scraper_components
+    #   <p>The list of scraper components to configure for logging.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     scraper_id: "ScraperId", # required
+    #     logging_destination: { # required
+    #       # One of:
+    #       cloud_watch_logs: {
+    #         log_group_arn: "LogGroupArn", # required
+    #       }
+    #     },
+    #     scraper_components: [
+    #       {
+    #         type: "ScraperComponentType", # required
+    #         config: {
+    #           options: {
+    #             "String" => "String"
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_scraper_logging_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: { # required
+    #       status_code: "ScraperLoggingConfigurationStatusCode", # required
+    #       status_reason: "String"
+    #     }
+    #   }
+    # @return [Types::UpdateScraperLoggingConfigurationResponse]
+    def update_scraper_logging_configuration(params = {}, options = {})
+      request = build_request(:update_scraper_logging_configuration, params)
       request.send_request(options)
     end
 

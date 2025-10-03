@@ -3,6 +3,7 @@ module Aws::OSIS
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AwsAccountId: StringShape
     BlueprintFormat: StringShape
     Boolean: BooleanShape
     BufferOptions: StructureShape
@@ -15,10 +16,16 @@ module Aws::OSIS
     CidrBlock: StringShape
     CloudWatchLogDestination: StructureShape
     ConflictException: StructureShape
+    CreatePipelineEndpointRequest: StructureShape
+    CreatePipelineEndpointResponse: StructureShape
     CreatePipelineRequest: StructureShape
     CreatePipelineResponse: StructureShape
+    DeletePipelineEndpointRequest: StructureShape
+    DeletePipelineEndpointResponse: StructureShape
     DeletePipelineRequest: StructureShape
     DeletePipelineResponse: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
+    DeleteResourcePolicyResponse: StructureShape
     DisabledOperationException: StructureShape
     EncryptionAtRestOptions: StructureShape
     ErrorMessage: StringShape
@@ -28,6 +35,8 @@ module Aws::OSIS
     GetPipelineChangeProgressResponse: StructureShape
     GetPipelineRequest: StructureShape
     GetPipelineResponse: StructureShape
+    GetResourcePolicyRequest: StructureShape
+    GetResourcePolicyResponse: StructureShape
     IngestEndpointUrlsList: ListShape
     Integer: IntegerShape
     InternalException: StructureShape
@@ -36,6 +45,10 @@ module Aws::OSIS
     LimitExceededException: StructureShape
     ListPipelineBlueprintsRequest: StructureShape
     ListPipelineBlueprintsResponse: StructureShape
+    ListPipelineEndpointConnectionsRequest: StructureShape
+    ListPipelineEndpointConnectionsResponse: StructureShape
+    ListPipelineEndpointsRequest: StructureShape
+    ListPipelineEndpointsResponse: StructureShape
     ListPipelinesRequest: StructureShape
     ListPipelinesResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
@@ -52,6 +65,14 @@ module Aws::OSIS
     PipelineConfigurationBody: StringShape
     PipelineDestination: StructureShape
     PipelineDestinationList: ListShape
+    PipelineEndpoint: StructureShape
+    PipelineEndpointConnection: StructureShape
+    PipelineEndpointConnectionsSummaryList: ListShape
+    PipelineEndpointId: StringShape
+    PipelineEndpointIdsList: ListShape
+    PipelineEndpointStatus: EnumShape
+    PipelineEndpointVpcOptions: StructureShape
+    PipelineEndpointsSummaryList: ListShape
     PipelineName: StringShape
     PipelineRoleArn: StringShape
     PipelineStatus: EnumShape
@@ -59,8 +80,13 @@ module Aws::OSIS
     PipelineSummary: StructureShape
     PipelineSummaryList: ListShape
     PipelineUnits: IntegerShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResponse: StructureShape
     ResourceAlreadyExistsException: StructureShape
     ResourceNotFoundException: StructureShape
+    ResourcePolicy: StringShape
+    RevokePipelineEndpointConnectionsRequest: StructureShape
+    RevokePipelineEndpointConnectionsResponse: StructureShape
     SecurityGroupId: StringShape
     SecurityGroupIds: ListShape
     ServiceVpcEndpoint: StructureShape

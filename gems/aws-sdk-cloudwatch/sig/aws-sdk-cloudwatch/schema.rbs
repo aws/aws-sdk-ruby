@@ -8,6 +8,8 @@ module Aws::CloudWatch
     ActionsSuppressedBy: EnumShape
     ActionsSuppressedReason: StringShape
     AlarmArn: StringShape
+    AlarmContributor: StructureShape
+    AlarmContributors: ListShape
     AlarmDescription: StringShape
     AlarmHistoryItem: StructureShape
     AlarmHistoryItems: ListShape
@@ -27,6 +29,8 @@ module Aws::CloudWatch
     AnomalyDetectorType: EnumShape
     AnomalyDetectorTypes: ListShape
     AnomalyDetectors: ListShape
+    AttributeName: StringShape
+    AttributeValue: StringShape
     AwsQueryErrorMessage: StringShape
     BatchFailures: ListShape
     ComparisonOperator: EnumShape
@@ -34,6 +38,8 @@ module Aws::CloudWatch
     CompositeAlarms: ListShape
     ConcurrentModificationException: StructureShape
     ConflictException: StructureShape
+    ContributorAttributes: MapShape
+    ContributorId: StringShape
     Counts: ListShape
     DashboardArn: StringShape
     DashboardBody: StringShape
@@ -63,6 +69,8 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput: StructureShape
     DeleteMetricStreamInput: StructureShape
     DeleteMetricStreamOutput: StructureShape
+    DescribeAlarmContributorsInput: StructureShape
+    DescribeAlarmContributorsOutput: StructureShape
     DescribeAlarmHistoryInput: StructureShape
     DescribeAlarmHistoryOutput: StructureShape
     DescribeAlarmsForMetricInput: StructureShape

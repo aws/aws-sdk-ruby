@@ -1,6 +1,34 @@
 module Aws::Evs
   module Types
 
+    class AssociateEipToVlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?environment_id: String,
+        ?vlan_name: String,
+        ?allocation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor environment_id: String?
+      attr_accessor vlan_name: String?
+      attr_accessor allocation_id: String?
+    end
+
+    class AssociateEipToVlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vlan: Types::Vlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vlan: Types::Vlan?
+    end
+
     class Check
       include Smithy::Schema::Structure
 
@@ -168,6 +196,49 @@ module Aws::Evs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor environment: Types::Environment?
+    end
+
+    class DisassociateEipFromVlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?environment_id: String,
+        ?vlan_name: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor environment_id: String?
+      attr_accessor vlan_name: String?
+      attr_accessor association_id: String?
+    end
+
+    class DisassociateEipFromVlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vlan: Types::Vlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vlan: Types::Vlan?
+    end
+
+    class EipAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?allocation_id: String,
+        ?ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor allocation_id: String?
+      attr_accessor ip_address: String?
     end
 
     class Environment
@@ -361,6 +432,8 @@ module Aws::Evs
         ?hcx: Types::InitialVlanInfo,
         ?expansion_vlan1: Types::InitialVlanInfo,
         ?expansion_vlan2: Types::InitialVlanInfo,
+        ?is_hcx_public: bool,
+        ?hcx_network_acl_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -374,6 +447,8 @@ module Aws::Evs
       attr_accessor hcx: Types::InitialVlanInfo?
       attr_accessor expansion_vlan1: Types::InitialVlanInfo?
       attr_accessor expansion_vlan2: Types::InitialVlanInfo?
+      attr_accessor is_hcx_public: bool?
+      attr_accessor hcx_network_acl_id: String?
     end
 
     module InstanceType
@@ -716,6 +791,9 @@ module Aws::Evs
         ?modified_at: Time,
         ?vlan_state: String,
         ?state_details: String,
+        ?eip_associations: Array[Types::EipAssociation],
+        ?is_public: bool,
+        ?network_acl_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -728,6 +806,9 @@ module Aws::Evs
       attr_accessor modified_at: Time?
       attr_accessor vlan_state: String?
       attr_accessor state_details: String?
+      attr_accessor eip_associations: Array[Types::EipAssociation]?
+      attr_accessor is_public: bool?
+      attr_accessor network_acl_id: String?
     end
 
     module VlanState

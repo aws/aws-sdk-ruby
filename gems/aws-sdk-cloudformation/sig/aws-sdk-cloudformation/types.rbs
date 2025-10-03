@@ -5144,6 +5144,7 @@ module Aws::CloudFormation
       UNSUPPORTED_PROPERTIES: String
       MUTUALLY_EXCLUSIVE_TYPES: String
       EXCLUDED_PROPERTIES: String
+      EXCLUDED_RESOURCES: String
     end
 
     class Warnings

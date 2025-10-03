@@ -69,6 +69,17 @@ module Aws::Imagebuilder
       attr_accessor launch_permission: Types::LaunchPermissionConfiguration?
     end
 
+    class AutoDisablePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_count: Integer?
+    end
+
     module BuildType
       USER_INITIATED: String
       SCHEDULED: String
@@ -418,6 +429,7 @@ module Aws::Imagebuilder
         ?owner: String,
         ?parent_image: String,
         ?date_created: String,
+        ?instance_image: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -429,6 +441,7 @@ module Aws::Imagebuilder
       attr_accessor owner: String?
       attr_accessor parent_image: String?
       attr_accessor date_created: String?
+      attr_accessor instance_image: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -595,6 +608,7 @@ module Aws::Imagebuilder
         ?image_scanning_configuration: Types::ImageScanningConfiguration,
         ?workflows: Array[Types::WorkflowConfiguration],
         ?execution_role: String,
+        ?logging_configuration: Types::PipelineLoggingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -613,6 +627,7 @@ module Aws::Imagebuilder
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration?
       attr_accessor workflows: Array[Types::WorkflowConfiguration]?
       attr_accessor execution_role: String?
+      attr_accessor logging_configuration: Types::PipelineLoggingConfiguration?
     end
 
     class CreateImagePipelineResponse
@@ -643,6 +658,7 @@ module Aws::Imagebuilder
         ?tags: Hash[String, String],
         ?working_directory: String,
         ?additional_instance_configuration: Types::AdditionalInstanceConfiguration,
+        ?ami_tags: Hash[String, String],
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -656,6 +672,7 @@ module Aws::Imagebuilder
       attr_accessor tags: Hash[String, String]?
       attr_accessor working_directory: String?
       attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration?
+      attr_accessor ami_tags: Hash[String, String]?
       attr_accessor client_token: String?
     end
 
@@ -689,6 +706,7 @@ module Aws::Imagebuilder
         ?image_scanning_configuration: Types::ImageScanningConfiguration,
         ?workflows: Array[Types::WorkflowConfiguration],
         ?execution_role: String,
+        ?logging_configuration: Types::ImageLoggingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -703,6 +721,7 @@ module Aws::Imagebuilder
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration?
       attr_accessor workflows: Array[Types::WorkflowConfiguration]?
       attr_accessor execution_role: String?
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration?
     end
 
     class CreateImageResponse
@@ -1818,6 +1837,7 @@ module Aws::Imagebuilder
         ?lifecycle_execution_id: String,
         ?execution_role: String,
         ?workflows: Array[Types::WorkflowConfiguration],
+        ?logging_configuration: Types::ImageLoggingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1847,6 +1867,7 @@ module Aws::Imagebuilder
       attr_accessor lifecycle_execution_id: String?
       attr_accessor execution_role: String?
       attr_accessor workflows: Array[Types::WorkflowConfiguration]?
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration?
     end
 
     class ImageAggregation
@@ -1860,6 +1881,17 @@ module Aws::Imagebuilder
 
       attr_accessor image_build_version_arn: String?
       attr_accessor severity_counts: Types::SeverityCounts?
+    end
+
+    class ImageLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
     end
 
     class ImagePackage
@@ -1894,11 +1926,14 @@ module Aws::Imagebuilder
         ?date_created: String,
         ?date_updated: String,
         ?date_last_run: String,
+        ?last_run_status: String,
         ?date_next_run: String,
         ?tags: Hash[String, String],
         ?image_scanning_configuration: Types::ImageScanningConfiguration,
         ?execution_role: String,
         ?workflows: Array[Types::WorkflowConfiguration],
+        ?logging_configuration: Types::PipelineLoggingConfiguration,
+        ?consecutive_failures: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1917,11 +1952,14 @@ module Aws::Imagebuilder
       attr_accessor date_created: String?
       attr_accessor date_updated: String?
       attr_accessor date_last_run: String?
+      attr_accessor last_run_status: String?
       attr_accessor date_next_run: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration?
       attr_accessor execution_role: String?
       attr_accessor workflows: Array[Types::WorkflowConfiguration]?
+      attr_accessor logging_configuration: Types::PipelineLoggingConfiguration?
+      attr_accessor consecutive_failures: Integer?
     end
 
     class ImagePipelineAggregation
@@ -1955,6 +1993,7 @@ module Aws::Imagebuilder
         ?tags: Hash[String, String],
         ?working_directory: String,
         ?additional_instance_configuration: Types::AdditionalInstanceConfiguration,
+        ?ami_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1972,6 +2011,7 @@ module Aws::Imagebuilder
       attr_accessor tags: Hash[String, String]?
       attr_accessor working_directory: String?
       attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration?
+      attr_accessor ami_tags: Hash[String, String]?
     end
 
     class ImageRecipeSummary
@@ -2154,6 +2194,7 @@ module Aws::Imagebuilder
         ?image_source: String,
         ?deprecation_time: Time,
         ?lifecycle_execution_id: String,
+        ?logging_configuration: Types::ImageLoggingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2172,6 +2213,7 @@ module Aws::Imagebuilder
       attr_accessor image_source: String?
       attr_accessor deprecation_time: Time?
       attr_accessor lifecycle_execution_id: String?
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration?
     end
 
     class ImageTestsConfiguration
@@ -2281,6 +2323,7 @@ module Aws::Imagebuilder
         ?execution_role: String,
         ?infrastructure_configuration_arn: String,
         ?uri: String,
+        ?logging_configuration: Types::ImageLoggingConfiguration,
         ?tags: Hash[String, String],
         ?client_token: String,
       ) -> void
@@ -2294,6 +2337,7 @@ module Aws::Imagebuilder
       attr_accessor execution_role: String?
       attr_accessor infrastructure_configuration_arn: String?
       attr_accessor uri: String?
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration?
       attr_accessor tags: Hash[String, String]?
       attr_accessor client_token: String?
     end
@@ -2321,6 +2365,7 @@ module Aws::Imagebuilder
         ?platform: String,
         ?os_version: String,
         ?vm_import_task_id: String,
+        ?logging_configuration: Types::ImageLoggingConfiguration,
         ?tags: Hash[String, String],
         ?client_token: String,
       ) -> void
@@ -2332,6 +2377,7 @@ module Aws::Imagebuilder
       attr_accessor platform: String?
       attr_accessor os_version: String?
       attr_accessor vm_import_task_id: String?
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration?
       attr_accessor tags: Hash[String, String]?
       attr_accessor client_token: String?
     end
@@ -3684,6 +3730,19 @@ module Aws::Imagebuilder
       EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE: String
     end
 
+    class PipelineLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_log_group_name: String,
+        ?pipeline_log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_log_group_name: String?
+      attr_accessor pipeline_log_group_name: String?
+    end
+
     module PipelineStatus
       DISABLED: String
       ENABLED: String
@@ -3982,12 +4041,14 @@ module Aws::Imagebuilder
         ?schedule_expression: String,
         ?timezone: String,
         ?pipeline_execution_start_condition: String,
+        ?auto_disable_policy: Types::AutoDisablePolicy,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor schedule_expression: String?
       attr_accessor timezone: String?
       attr_accessor pipeline_execution_start_condition: String?
+      attr_accessor auto_disable_policy: Types::AutoDisablePolicy?
     end
 
     class SendWorkflowStepActionRequest
@@ -4100,11 +4161,13 @@ module Aws::Imagebuilder
       def initialize: (
         ?image_pipeline_arn: String,
         ?client_token: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_pipeline_arn: String?
       attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class StartImagePipelineExecutionResponse
@@ -4281,6 +4344,7 @@ module Aws::Imagebuilder
         ?client_token: String,
         ?image_scanning_configuration: Types::ImageScanningConfiguration,
         ?workflows: Array[Types::WorkflowConfiguration],
+        ?logging_configuration: Types::PipelineLoggingConfiguration,
         ?execution_role: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4298,6 +4362,7 @@ module Aws::Imagebuilder
       attr_accessor client_token: String?
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration?
       attr_accessor workflows: Array[Types::WorkflowConfiguration]?
+      attr_accessor logging_configuration: Types::PipelineLoggingConfiguration?
       attr_accessor execution_role: String?
     end
 

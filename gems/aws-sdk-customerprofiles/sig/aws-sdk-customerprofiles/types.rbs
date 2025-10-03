@@ -12,6 +12,18 @@ module Aws::CustomerProfiles
       attr_accessor message: String?
     end
 
+    module ActionType
+      ADDED_PROFILE_KEY: String
+      DELETED_PROFILE_KEY: String
+      CREATED: String
+      UPDATED: String
+      INGESTED: String
+      DELETED_BY_CUSTOMER: String
+      EXPIRED: String
+      MERGED: String
+      DELETED_BY_MERGE: String
+    end
+
     class AddProfileKeyRequest
       include Smithy::Schema::Structure
 
@@ -2177,6 +2189,46 @@ module Aws::CustomerProfiles
       attr_accessor matches: Array[Types::MatchItem]?
     end
 
+    class GetProfileHistoryRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?profile_id: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor profile_id: String?
+      attr_accessor id: String?
+    end
+
+    class GetProfileHistoryRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?object_type_name: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?action_type: String,
+        ?profile_object_unique_key: String,
+        ?content: String,
+        ?performed_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor object_type_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor action_type: String?
+      attr_accessor profile_object_unique_key: String?
+      attr_accessor content: String?
+      attr_accessor performed_by: String?
+    end
+
     class GetProfileObjectTypeRequest
       include Smithy::Schema::Structure
 
@@ -3138,6 +3190,42 @@ module Aws::CustomerProfiles
       attr_accessor next_token: String?
     end
 
+    class ListProfileHistoryRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?profile_id: String,
+        ?object_type_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?action_type: String,
+        ?performed_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor profile_id: String?
+      attr_accessor object_type_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor action_type: String?
+      attr_accessor performed_by: String?
+    end
+
+    class ListProfileHistoryRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_history_records: Array[Types::ProfileHistoryRecord],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_history_records: Array[Types::ProfileHistoryRecord]?
+      attr_accessor next_token: String?
+    end
+
     class ListProfileObjectTypeItem
       include Smithy::Schema::Structure
 
@@ -3834,6 +3922,29 @@ module Aws::CustomerProfiles
 
       attr_accessor dimension_type: String?
       attr_accessor values: Array[String]?
+    end
+
+    class ProfileHistoryRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?object_type_name: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?action_type: String,
+        ?profile_object_unique_key: String,
+        ?performed_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor object_type_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor action_type: String?
+      attr_accessor profile_object_unique_key: String?
+      attr_accessor performed_by: String?
     end
 
     class ProfileQueryFailures

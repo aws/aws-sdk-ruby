@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::DirectoryService
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::DirectoryService
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::DirectoryService
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::DirectoryService::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::DirectoryService::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -241,57 +246,71 @@ module Aws::DirectoryService
     #            <p>Inbound:</p>
     #            <ul>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
-    #                  Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: Managed Microsoft AD VPC
+    #                  IPv4 CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
-    #                  Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: Managed Microsoft AD VPC
+    #                  IPv4 CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
     #                  <p>Type: LDAP, Protocol: TCP, Range: 389, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: All ICMP, Protocol: All, Range: N/A, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: All ICMP, Protocol: All, Range: N/A, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #            </ul>
     #            <p></p>
@@ -324,6 +343,7 @@ module Aws::DirectoryService
     #     ip_routes: [ # required
     #       {
     #         cidr_ip: "CidrIp",
+    #         cidr_ipv6: "CidrIpv6",
     #         description: "Description"
     #       }
     #     ],
@@ -470,6 +490,9 @@ module Aws::DirectoryService
     #         for the operation.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be assigned to AD Connector.</p>
+    # @option params [String] :network_type
+    #   <p>The network type for your directory. The default value is <code>IPv4</code> or
+    #           <code>IPv6</code> based on the provided subnet capabilities.</p>
     # @example To connect to an on-premises directory
     #   # The following example creates an AD Connector to connect to an on-premises directory.
     #   params = {
@@ -506,7 +529,8 @@ module Aws::DirectoryService
     #     connect_settings: { # required
     #       vpc_id: "VpcId", # required
     #       subnet_ids: ["SubnetId"], # required
-    #       customer_dns_ips: ["IpAddr"], # required
+    #       customer_dns_ips: ["IpAddr"],
+    #       customer_dns_ips_v6: ["Ipv6Addr"],
     #       customer_user_name: "UserName", # required
     #     },
     #     tags: [
@@ -514,7 +538,8 @@ module Aws::DirectoryService
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     network_type: "Dual-stack" # One of: ["Dual-stack", "IPv4", "IPv6"]
     #   }
     #   options = {}
     #   response = client.connect_directory(params, options)
@@ -667,6 +692,8 @@ module Aws::DirectoryService
     #         a trust relationship.</p>
     # @option params [Array<String>] :dns_ip_addrs
     #   <p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>
+    # @option params [Array<String>] :dns_ipv6_addrs
+    #   <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
     # @example To create a conditional forwarder
     #   # The following example creates a conditional forwarder associated with your AWS directory.
     #   params = {
@@ -684,7 +711,8 @@ module Aws::DirectoryService
     #   params = {
     #     directory_id: "DirectoryId", # required
     #     remote_domain_name: "RemoteDomainName", # required
-    #     dns_ip_addrs: ["IpAddr"], # required
+    #     dns_ip_addrs: ["IpAddr"],
+    #     dns_ipv6_addrs: ["Ipv6Addr"]
     #   }
     #   options = {}
     #   response = client.create_conditional_forwarder(params, options)
@@ -745,6 +773,8 @@ module Aws::DirectoryService
     #         the operation.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be assigned to the Simple AD directory.</p>
+    # @option params [String] :network_type
+    #   <p>The network type for your directory. Simple AD supports IPv4 and Dual-stack only.</p>
     # @example To create a Simple AD directory
     #   # The following example creates a Simple AD directory.
     #   params = {
@@ -783,7 +813,8 @@ module Aws::DirectoryService
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     network_type: "Dual-stack" # One of: ["Dual-stack", "IPv4", "IPv6"]
     #   }
     #   options = {}
     #   response = client.create_directory(params, options)
@@ -895,6 +926,10 @@ module Aws::DirectoryService
     #           <code>Enterprise</code>. <code>Enterprise</code> is the default.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be assigned to the Managed Microsoft AD directory.</p>
+    # @option params [String] :network_type
+    #   <p>
+    #         The network type for your domain. The default value is <code>IPv4</code> or <code>IPv6</code>
+    #         based on the provided subnet capabilities.</p>
     # @example To create a Microsoft AD directory
     #   # The following example creates a Microsoft AD directory in the AWS cloud.
     #   params = {
@@ -926,13 +961,14 @@ module Aws::DirectoryService
     #       vpc_id: "VpcId", # required
     #       subnet_ids: ["SubnetId"], # required
     #     },
-    #     edition: "Enterprise" # One of: ["Enterprise", "Standard"],
+    #     edition: "Enterprise" # One of: ["Enterprise", "Standard", "Hybrid"],
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     network_type: "Dual-stack" # One of: ["Dual-stack", "IPv4", "IPv6"]
     #   }
     #   options = {}
     #   response = client.create_microsoft_ad(params, options)
@@ -1009,6 +1045,8 @@ module Aws::DirectoryService
     #   <p>The trust relationship type. <code>Forest</code> is the default.</p>
     # @option params [Array<String>] :conditional_forwarder_ip_addrs
     #   <p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>
+    # @option params [Array<String>] :conditional_forwarder_ipv6_addrs
+    #   <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
     # @option params [String] :selective_auth
     #   <p>Optional parameter to enable selective authentication for the trust.</p>
     # @example To create a trust
@@ -1037,6 +1075,7 @@ module Aws::DirectoryService
     #     trust_direction: "One-Way: Outgoing" # One of: ["One-Way: Outgoing", "One-Way: Incoming", "Two-Way"], # required
     #     trust_type: "Forest" # One of: ["Forest", "External"],
     #     conditional_forwarder_ip_addrs: ["IpAddr"],
+    #     conditional_forwarder_ipv6_addrs: ["Ipv6Addr"],
     #     selective_auth: "Enabled" # One of: ["Enabled", "Disabled"]
     #   }
     #   options = {}
@@ -1495,6 +1534,7 @@ module Aws::DirectoryService
     #       {
     #         remote_domain_name: "RemoteDomainName",
     #         dns_ip_addrs: ["IpAddr"],
+    #         dns_ipv6_addrs: ["Ipv6Addr"],
     #         replication_scope: "Domain" # One of: ["Domain"]
     #       }
     #     ]
@@ -1585,11 +1625,12 @@ module Aws::DirectoryService
     #         name: "DirectoryName",
     #         short_name: "DirectoryShortName",
     #         size: "Small" # One of: ["Small", "Large"],
-    #         edition: "Enterprise" # One of: ["Enterprise", "Standard"],
+    #         edition: "Enterprise" # One of: ["Enterprise", "Standard", "Hybrid"],
     #         alias: "AliasName",
     #         access_url: "AccessUrl",
     #         description: "Description",
     #         dns_ip_addrs: ["IpAddr"],
+    #         dns_ipv6_addrs: ["Ipv6Addr"],
     #         stage: "Requested" # One of: ["Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed", "Updating"],
     #         share_status: "Shared" # One of: ["Shared", "PendingAcceptance", "Rejected", "Rejecting", "RejectFailed", "Sharing", "ShareFailed", "Deleted", "Deleting"],
     #         share_method: "ORGANIZATIONS" # One of: ["ORGANIZATIONS", "HANDSHAKE"],
@@ -1609,10 +1650,12 @@ module Aws::DirectoryService
     #           customer_user_name: "UserName",
     #           security_group_id: "SecurityGroupId",
     #           availability_zones: ["AvailabilityZone"],
-    #           connect_ips: ["IpAddr"]
+    #           connect_ips: ["IpAddr"],
+    #           connect_ips_v6: ["Ipv6Addr"]
     #         },
     #         radius_settings: {
     #           radius_servers: ["Server"],
+    #           radius_servers_ipv6: ["Server"],
     #           radius_port: 1,
     #           radius_timeout: 1,
     #           radius_retries: 1,
@@ -1629,6 +1672,7 @@ module Aws::DirectoryService
     #           directory_id: "DirectoryId",
     #           account_id: "CustomerId",
     #           dns_ip_addrs: ["IpAddr"],
+    #           dns_ipv6_addrs: ["Ipv6Addr"],
     #           vpc_settings: {
     #             vpc_id: "VpcId",
     #             subnet_ids: ["SubnetId"],
@@ -1637,6 +1681,7 @@ module Aws::DirectoryService
     #           },
     #           radius_settings: {
     #             radius_servers: ["Server"],
+    #             radius_servers_ipv6: ["Server"],
     #             radius_port: 1,
     #             radius_timeout: 1,
     #             radius_retries: 1,
@@ -1645,7 +1690,8 @@ module Aws::DirectoryService
     #             display_label: "RadiusDisplayLabel",
     #             use_same_username: false
     #           },
-    #           radius_status: "Creating" # One of: ["Creating", "Completed", "Failed"]
+    #           radius_status: "Creating" # One of: ["Creating", "Completed", "Failed"],
+    #           network_type: "Dual-stack" # One of: ["Dual-stack", "IPv4", "IPv6"]
     #         },
     #         regions_info: {
     #           primary_region: "RegionName",
@@ -1655,7 +1701,8 @@ module Aws::DirectoryService
     #         hybrid_settings: {
     #           self_managed_dns_ip_addrs: ["IpAddr"],
     #           self_managed_instance_ids: ["AssessmentInstanceId"]
-    #         }
+    #         },
+    #         network_type: "Dual-stack" # One of: ["Dual-stack", "IPv4", "IPv6"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1719,6 +1766,7 @@ module Aws::DirectoryService
     #         directory_id: "DirectoryId",
     #         domain_controller_id: "DomainControllerId",
     #         dns_ip_addr: "IpAddr",
+    #         dns_ipv6_addr: "Ipv6Addr",
     #         vpc_id: "VpcId",
     #         subnet_id: "SubnetId",
     #         availability_zone: "AvailabilityZone",
@@ -2203,7 +2251,7 @@ module Aws::DirectoryService
     # @example Request syntax with placeholder values
     #   params = {
     #     directory_id: "DirectoryId", # required
-    #     update_type: "OS" # One of: ["OS"], # required
+    #     update_type: "OS" # One of: ["OS", "NETWORK", "SIZE"], # required
     #     region_name: "RegionName",
     #     next_token: "NextToken"
     #   }
@@ -2288,8 +2336,7 @@ module Aws::DirectoryService
       request.send_request(options)
     end
 
-    # <p>Deactivates access to directory data via the Directory Service Data API for the specified
-    #       directory. For
+    # <p>Deactivates access to directory data via the Directory Service Data API for the specified directory. For
     #       more information, see <a href="https://docs.aws.amazon.com/directoryservicedata/latest/DirectoryServiceDataAPIReference/Welcome.html">Directory Service Data API Reference</a>.</p>
     # @param [Hash, Types::DisableDirectoryDataAccessRequest] params
     # @option params [String] :directory_id
@@ -2332,8 +2379,8 @@ module Aws::DirectoryService
       request.send_request(options)
     end
 
-    # <p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In
-    #          User Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>
+    # <p>Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User
+    #          Service (RADIUS) server for an AD Connector or Microsoft AD directory.</p>
     # @param [Hash, Types::DisableRadiusRequest] params
     # @option params [String] :directory_id
     #   <p>The identifier of the directory for which to disable MFA.</p>
@@ -2543,6 +2590,7 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     radius_settings: { # required
     #       radius_servers: ["Server"],
+    #       radius_servers_ipv6: ["Server"],
     #       radius_port: 1,
     #       radius_timeout: 1,
     #       radius_retries: 1,
@@ -2782,13 +2830,12 @@ module Aws::DirectoryService
     # <p>Lists the address blocks that you have added to a directory.</p>
     # @param [Hash, Types::ListIpRoutesRequest] params
     # @option params [String] :directory_id
-    #   <p>Identifier (ID) of the directory for which you want to retrieve the IP
-    #            addresses.</p>
+    #   <p>Identifier (ID) of the directory for which you want to retrieve the IP addresses.</p>
     # @option params [String] :next_token
     #   <p>The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.</p>
     # @option params [Integer] :limit
-    #   <p>Maximum number of items to return. If this value is zero, the maximum number of items
-    #            is specified by the limitations of the operation.</p>
+    #   <p>Maximum number of items to return. If this value is zero, the maximum number of items is
+    #            specified by the limitations of the operation.</p>
     # @example To list IP routes
     #   # The following example lists the address blocks that have been added to a specified directory.
     #   params = {
@@ -2824,6 +2871,7 @@ module Aws::DirectoryService
     #       {
     #         directory_id: "DirectoryId",
     #         cidr_ip: "CidrIp",
+    #         cidr_ipv6: "CidrIpv6",
     #         ip_route_status_msg: "Adding" # One of: ["Adding", "Added", "Removing", "Removed", "AddFailed", "RemoveFailed"],
     #         added_date_time: Time.now,
     #         ip_route_status_reason: "IpRouteStatusReason",
@@ -3084,10 +3132,11 @@ module Aws::DirectoryService
     # <p>Removes IP address blocks from a directory.</p>
     # @param [Hash, Types::RemoveIpRoutesRequest] params
     # @option params [String] :directory_id
-    #   <p>Identifier (ID) of the directory from which you want to remove the IP
-    #            addresses.</p>
+    #   <p>Identifier (ID) of the directory from which you want to remove the IP addresses.</p>
     # @option params [Array<String>] :cidr_ips
     #   <p>IP address blocks that you want to remove.</p>
+    # @option params [Array<String>] :cidr_ipv6s
+    #   <p>IPv6 address blocks that you want to remove.</p>
     # @example To remove IP routes
     #   # The following example removes IP address blocks from a specified directory.
     #   params = {
@@ -3103,7 +3152,8 @@ module Aws::DirectoryService
     # @example Request syntax with placeholder values
     #   params = {
     #     directory_id: "DirectoryId", # required
-    #     cidr_ips: ["CidrIp"], # required
+    #     cidr_ips: ["CidrIp"],
+    #     cidr_ipv6s: ["CidrIpv6"]
     #   }
     #   options = {}
     #   response = client.remove_ip_routes(params, options)
@@ -3439,6 +3489,9 @@ module Aws::DirectoryService
     # @option params [Array<String>] :dns_ip_addrs
     #   <p>The updated IP addresses of the remote DNS server associated with the conditional
     #         forwarder.</p>
+    # @option params [Array<String>] :dns_ipv6_addrs
+    #   <p>The updated IPv6 addresses of the remote DNS server associated with the conditional
+    #         forwarder.</p>
     # @example To update a conditional forwarder
     #   # The following example updates a conditional forwarder for a specified directory.
     #   params = {
@@ -3456,7 +3509,8 @@ module Aws::DirectoryService
     #   params = {
     #     directory_id: "DirectoryId", # required
     #     remote_domain_name: "RemoteDomainName", # required
-    #     dns_ip_addrs: ["IpAddr"], # required
+    #     dns_ip_addrs: ["IpAddr"],
+    #     dns_ipv6_addrs: ["Ipv6Addr"]
     #   }
     #   options = {}
     #   response = client.update_conditional_forwarder(params, options)
@@ -3469,23 +3523,33 @@ module Aws::DirectoryService
       request.send_request(options)
     end
 
-    # <p> Updates the directory for a particular update type. </p>
+    # <p>Updates directory configuration for the specified update type.</p>
     # @param [Hash, Types::UpdateDirectorySetupRequest] params
     # @option params [String] :directory_id
-    #   <p> The identifier of the directory on which you want to perform the update. </p>
+    #   <p>The identifier of the directory to update.</p>
     # @option params [String] :update_type
-    #   <p> The type of update that needs to be performed on the directory. For example, OS. </p>
+    #   <p>The type of update to perform on the directory.</p>
     # @option params [Types::OSUpdateSettings] :os_update_settings
-    #   <p> The settings for the OS update that needs to be performed on the directory. </p>
+    #   <p>Operating system configuration to apply during the directory update operation.</p>
+    # @option params [Types::DirectorySizeUpdateSettings] :directory_size_update_settings
+    #   <p>Directory size configuration to apply during the update operation.</p>
+    # @option params [Types::NetworkUpdateSettings] :network_update_settings
+    #   <p>Network configuration to apply during the directory update operation.</p>
     # @option params [Boolean] :create_snapshot_before_update
-    #   <p> The boolean that specifies if a snapshot for the directory needs to be taken before
-    #         updating the directory. </p>
+    #   <p>Specifies whether to create a directory snapshot before performing the update.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     directory_id: "DirectoryId", # required
-    #     update_type: "OS" # One of: ["OS"], # required
+    #     update_type: "OS" # One of: ["OS", "NETWORK", "SIZE"], # required
     #     os_update_settings: {
     #       os_version: "SERVER_2012" # One of: ["SERVER_2012", "SERVER_2019"]
+    #     },
+    #     directory_size_update_settings: {
+    #       directory_size: "Small" # One of: ["Small", "Large"]
+    #     },
+    #     network_update_settings: {
+    #       network_type: "Dual-stack" # One of: ["Dual-stack", "IPv4", "IPv6"],
+    #       customer_dns_ips_v6: ["Ipv6Addr"]
     #     },
     #     create_snapshot_before_update: false
     #   }
@@ -3581,8 +3645,8 @@ module Aws::DirectoryService
       request.send_request(options)
     end
 
-    # <p>Updates the Remote Authentication Dial In User Service (RADIUS) server information
-    #          for an AD Connector or Microsoft AD directory.</p>
+    # <p>Updates the Remote Authentication Dial In User Service (RADIUS) server information for
+    #          an AD Connector or Microsoft AD directory.</p>
     # @param [Hash, Types::UpdateRadiusRequest] params
     # @option params [String] :directory_id
     #   <p>The identifier of the directory for which to update the RADIUS server
@@ -3616,6 +3680,7 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     radius_settings: { # required
     #       radius_servers: ["Server"],
+    #       radius_servers_ipv6: ["Server"],
     #       radius_port: 1,
     #       radius_timeout: 1,
     #       radius_retries: 1,

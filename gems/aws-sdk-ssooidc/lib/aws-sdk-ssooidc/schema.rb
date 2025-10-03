@@ -7,6 +7,7 @@ module Aws::SSOOIDC
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssooidc#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    AccessDeniedExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssooidc#AccessDeniedExceptionReason', name: 'AccessDeniedExceptionReason')
     AccessToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssooidc#AccessToken', name: 'AccessToken', traits: {"smithy.api#sensitive" => {}})
     ArnType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssooidc#ArnType', name: 'ArnType')
     Assertion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssooidc#Assertion', name: 'Assertion', traits: {"smithy.api#sensitive" => {}})
@@ -38,6 +39,7 @@ module Aws::SSOOIDC
     InvalidGrantException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssooidc#InvalidGrantException', name: 'InvalidGrantException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidRedirectUriException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssooidc#InvalidRedirectUriException', name: 'InvalidRedirectUriException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssooidc#InvalidRequestException', name: 'InvalidRequestException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    InvalidRequestExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssooidc#InvalidRequestExceptionReason', name: 'InvalidRequestExceptionReason')
     InvalidRequestRegionException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssooidc#InvalidRequestRegionException', name: 'InvalidRequestRegionException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidScopeException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssooidc#InvalidScopeException', name: 'InvalidScopeException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Location = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssooidc#Location', name: 'Location')
@@ -61,8 +63,10 @@ module Aws::SSOOIDC
     UserCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssooidc#UserCode', name: 'UserCode')
 
     AccessDeniedException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Error, location_name: 'error'))
+    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: 'reason'))
     AccessDeniedException.add_member(:error_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: 'error_description'))
     AccessDeniedException.type = Types::AccessDeniedException
+    AccessDeniedExceptionReason.add_member(:kms_access_denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_ACCESS_DENIED', traits: {"smithy.api#enumValue" => "KMS_AccessDeniedException"}))
     AuthorizationPendingException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Error, location_name: 'error'))
     AuthorizationPendingException.add_member(:error_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: 'error_description'))
     AuthorizationPendingException.type = Types::AuthorizationPendingException
@@ -125,8 +129,13 @@ module Aws::SSOOIDC
     InvalidRedirectUriException.add_member(:error_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: 'error_description'))
     InvalidRedirectUriException.type = Types::InvalidRedirectUriException
     InvalidRequestException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Error, location_name: 'error'))
+    InvalidRequestException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestExceptionReason, location_name: 'reason'))
     InvalidRequestException.add_member(:error_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: 'error_description'))
     InvalidRequestException.type = Types::InvalidRequestException
+    InvalidRequestExceptionReason.add_member(:kms_key_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_KEY_NOT_FOUND', traits: {"smithy.api#enumValue" => "KMS_NotFoundException"}))
+    InvalidRequestExceptionReason.add_member(:kms_invalid_key_usage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_INVALID_KEY_USAGE', traits: {"smithy.api#enumValue" => "KMS_InvalidKeyUsageException"}))
+    InvalidRequestExceptionReason.add_member(:kms_invalid_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_INVALID_STATE', traits: {"smithy.api#enumValue" => "KMS_InvalidStateException"}))
+    InvalidRequestExceptionReason.add_member(:kms_disabled_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KMS_DISABLED_KEY', traits: {"smithy.api#enumValue" => "KMS_DisabledException"}))
     InvalidRequestRegionException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Error, location_name: 'error'))
     InvalidRequestRegionException.add_member(:error_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDescription, location_name: 'error_description'))
     InvalidRequestRegionException.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: 'endpoint'))
@@ -225,6 +234,7 @@ module Aws::SSOOIDC
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRedirectUriException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidScopeException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: SlowDownException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedGrantTypeException)
         operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/client/register", "code" => 200}, "smithy.api#optionalAuth" => {}}
       end)

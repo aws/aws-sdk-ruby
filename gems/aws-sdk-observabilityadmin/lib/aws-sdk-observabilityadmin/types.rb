@@ -24,6 +24,106 @@ module Aws::ObservabilityAdmin
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines how telemetry data should be centralized across an Amazon Web Services Organization, including source and destination configurations.</p>
+    # @!attribute source
+    #   <p>Configuration determining the source of the telemetry data to be centralized.</p>
+    #   @return [Types::CentralizationRuleSource]
+    # @!attribute destination
+    #   <p>Configuration determining where the telemetry data should be centralized, backed up, as well as encryption configuration for the primary and backup destinations.</p>
+    #   @return [Types::CentralizationRuleDestination]
+    class CentralizationRule < Struct.new(
+      :source,
+      :destination,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration specifying the primary destination for centralized telemetry data.</p>
+    # @!attribute region
+    #   <p>The primary destination region to which telemetry data should be centralized.</p>
+    #   @return [String]
+    # @!attribute account
+    #   <p>The destination account (within the organization) to which the telemetry data should be centralized.</p>
+    #   @return [String]
+    # @!attribute destination_logs_configuration
+    #   <p>Log specific configuration for centralization destination log groups.</p>
+    #   @return [Types::DestinationLogsConfiguration]
+    class CentralizationRuleDestination < Struct.new(
+      :region,
+      :account,
+      :destination_logs_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration specifying the source of telemetry data to be centralized.</p>
+    # @!attribute regions
+    #   <p>The list of source regions from which telemetry data should be centralized.</p>
+    #   @return [Array<String>]
+    # @!attribute scope
+    #   <p>The organizational scope from which telemetry data should be centralized, specified using organization id, accounts or organizational unit ids.</p>
+    #   @return [String]
+    # @!attribute source_logs_configuration
+    #   <p>Log specific configuration for centralization source log groups.</p>
+    #   @return [Types::SourceLogsConfiguration]
+    class CentralizationRuleSource < Struct.new(
+      :regions,
+      :scope,
+      :source_logs_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a centralization rule's key properties and status.</p>
+    # @!attribute rule_name
+    #   <p>The name of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute rule_arn
+    #   <p>The Amazon Resource Name (ARN) of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute creator_account_id
+    #   <p>The Amazon Web Services Account that created the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute created_time_stamp
+    #   <p>The timestamp when the organization centralization rule was created.</p>
+    #   @return [Integer]
+    # @!attribute created_region
+    #   <p>The Amazon Web Services region where the organization centralization rule was created.</p>
+    #   @return [String]
+    # @!attribute last_update_time_stamp
+    #   <p>The timestamp when the organization centralization rule was last updated.</p>
+    #   @return [Integer]
+    # @!attribute rule_health
+    #   <p>The health status of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>The reason why an organization centralization rule is marked UNHEALTHY.</p>
+    #   @return [String]
+    # @!attribute destination_account_id
+    #   <p>The primary destination account of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute destination_region
+    #   <p>The primary destination region of the organization centralization rule.</p>
+    #   @return [String]
+    class CentralizationRuleSummary < Struct.new(
+      :rule_name,
+      :rule_arn,
+      :creator_account_id,
+      :created_time_stamp,
+      :created_region,
+      :last_update_time_stamp,
+      :rule_health,
+      :failure_reason,
+      :destination_account_id,
+      :destination_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>
     #       The requested operation conflicts with the current state of the specified resource or with another request.
     #     </p>
@@ -31,6 +131,34 @@ module Aws::ObservabilityAdmin
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_name
+    #   <p>A unique name for the organization-wide centralization rule being created.</p>
+    #   @return [String]
+    # @!attribute rule
+    #   <p>The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.</p>
+    #   @return [Types::CentralizationRule]
+    # @!attribute tags
+    #   <p>The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.</p>
+    #   @return [Hash<String, String>]
+    class CreateCentralizationRuleForOrganizationInput < Struct.new(
+      :rule_name,
+      :rule,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_arn
+    #   <p>The Amazon Resource Name (ARN) of the created organization centralization rule.</p>
+    #   @return [String]
+    class CreateCentralizationRuleForOrganizationOutput < Struct.new(
+      :rule_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -109,6 +237,16 @@ module Aws::ObservabilityAdmin
     end
 
     # @!attribute rule_identifier
+    #   <p>The identifier (name or ARN) of the organization centralization rule to delete.</p>
+    #   @return [String]
+    class DeleteCentralizationRuleForOrganizationInput < Struct.new(
+      :rule_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_identifier
     #   <p>
     #         The identifier (name or ARN) of the organization telemetry rule to delete.
     #       </p>
@@ -127,6 +265,73 @@ module Aws::ObservabilityAdmin
     #   @return [String]
     class DeleteTelemetryRuleInput < Struct.new(
       :rule_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for centralization destination log groups, including encryption and backup settings.</p>
+    # @!attribute logs_encryption_configuration
+    #   <p>The encryption configuration for centralization destination log groups.</p>
+    #   @return [Types::LogsEncryptionConfiguration]
+    # @!attribute backup_configuration
+    #   <p>Configuration defining the backup region and an optional KMS key for the backup destination.</p>
+    #   @return [Types::LogsBackupConfiguration]
+    class DestinationLogsConfiguration < Struct.new(
+      :logs_encryption_configuration,
+      :backup_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_identifier
+    #   <p>The identifier (name or ARN) of the organization centralization rule to retrieve.</p>
+    #   @return [String]
+    class GetCentralizationRuleForOrganizationInput < Struct.new(
+      :rule_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_name
+    #   <p>The name of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute rule_arn
+    #   <p>The Amazon Resource Name (ARN) of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute creator_account_id
+    #   <p>The Amazon Web Services Account that created the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute created_time_stamp
+    #   <p>The timestamp when the organization centralization rule was created.</p>
+    #   @return [Integer]
+    # @!attribute created_region
+    #   <p>The Amazon Web Services region where the organization centralization rule was created.</p>
+    #   @return [String]
+    # @!attribute last_update_time_stamp
+    #   <p>The timestamp when the organization centralization rule was last updated.</p>
+    #   @return [Integer]
+    # @!attribute rule_health
+    #   <p>The health status of the organization centralization rule.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>The reason why an organization centralization rule is marked UNHEALTHY.</p>
+    #   @return [String]
+    # @!attribute centralization_rule
+    #   <p>The configuration details for the organization centralization rule.</p>
+    #   @return [Types::CentralizationRule]
+    class GetCentralizationRuleForOrganizationOutput < Struct.new(
+      :rule_name,
+      :rule_arn,
+      :creator_account_id,
+      :created_time_stamp,
+      :created_region,
+      :last_update_time_stamp,
+      :rule_health,
+      :failure_reason,
+      :centralization_rule,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -277,6 +482,42 @@ module Aws::ObservabilityAdmin
     class InternalServerException < Struct.new(
       :message,
       :amzn_error_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_name_prefix
+    #   <p>A string to filter organization centralization rules whose names begin with the specified prefix.</p>
+    #   @return [String]
+    # @!attribute all_regions
+    #   <p>A flag determining whether to return organization centralization rules from all regions or only the current region.</p>
+    #   @return [Boolean]
+    # @!attribute max_results
+    #   <p>The maximum number of organization centralization rules to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results. A previous call generates this token.</p>
+    #   @return [String]
+    class ListCentralizationRulesForOrganizationInput < Struct.new(
+      :rule_name_prefix,
+      :all_regions,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute centralization_rule_summaries
+    #   <p>A list of centralization rule summaries.</p>
+    #   @return [Array<Types::CentralizationRuleSummary>]
+    # @!attribute next_token
+    #   <p>A token to resume pagination of results.</p>
+    #   @return [String]
+    class ListCentralizationRulesForOrganizationOutput < Struct.new(
+      :centralization_rule_summaries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -528,6 +769,40 @@ module Aws::ObservabilityAdmin
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for backing up centralized log data to a secondary region.</p>
+    # @!attribute region
+    #   <p>Logs specific backup destination region within the primary destination account to which log data should be centralized.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>KMS Key arn belonging to the primary destination account and backup region, to encrypt newly created central log groups in the backup destination.</p>
+    #   @return [String]
+    class LogsBackupConfiguration < Struct.new(
+      :region,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for encrypting centralized log groups. This configuration is only applied to destination log groups for which the corresponding source log groups are encrypted using Customer Managed KMS Keys.</p>
+    # @!attribute encryption_strategy
+    #   <p>Configuration that determines the encryption strategy of the destination log groups. CUSTOMER_MANAGED uses the configured KmsKeyArn to encrypt newly created destination log groups.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>KMS Key arn belonging to the primary destination account and region, to encrypt newly created central log groups in the primary destination.</p>
+    #   @return [String]
+    # @!attribute encryption_conflict_resolution_strategy
+    #   <p>Conflict resolution strategy for centralization if the encryption strategy is set to CUSTOMER_MANAGED and the destination log group is encrypted with an AWS_OWNED KMS Key. ALLOW lets centralization go through while SKIP prevents centralization into the destination log group.</p>
+    #   @return [String]
+    class LogsEncryptionConfiguration < Struct.new(
+      :encryption_strategy,
+      :kms_key_arn,
+      :encryption_conflict_resolution_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>
     #       The specified resource (such as a telemetry rule) could not be found.
     #     </p>
@@ -553,6 +828,21 @@ module Aws::ObservabilityAdmin
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :amzn_error_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for selecting and handling source log groups for centralization.</p>
+    # @!attribute log_group_selection_criteria
+    #   <p>The selection criteria that specifies which source log groups to centralize. The selection criteria uses the same format as OAM link filters.</p>
+    #   @return [String]
+    # @!attribute encrypted_log_group_strategy
+    #   <p>A strategy determining whether to centralize source log groups that are encrypted with customer managed KMS keys (CMK). ALLOW will consider CMK encrypted source log groups for centralization while SKIP will skip CMK encrypted source log groups from centralization.</p>
+    #   @return [String]
+    class SourceLogsConfiguration < Struct.new(
+      :log_group_selection_criteria,
+      :encrypted_log_group_strategy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -763,6 +1053,30 @@ module Aws::ObservabilityAdmin
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_identifier
+    #   <p>The identifier (name or ARN) of the organization centralization rule to update.</p>
+    #   @return [String]
+    # @!attribute rule
+    #   <p>The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.</p>
+    #   @return [Types::CentralizationRule]
+    class UpdateCentralizationRuleForOrganizationInput < Struct.new(
+      :rule_identifier,
+      :rule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_arn
+    #   <p>The Amazon Resource Name (ARN) of the updated organization centralization rule.</p>
+    #   @return [String]
+    class UpdateCentralizationRuleForOrganizationOutput < Struct.new(
+      :rule_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -446,6 +446,18 @@ module Aws::CostExplorer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>
+    #             The billing view status must be <code>HEALTHY</code> to perform this action. Try again when the status is <code>HEALTHY</code>.
+    #         </p>
+    # @!attribute message
+    #   @return [String]
+    class BillingViewHealthStatusException < Struct.new(
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for the commitment purchase analysis.</p>
     # @!attribute savings_plans_purchase_analysis_configuration
     #   <p>The configuration for the Savings Plans purchase analysis.</p>
@@ -1117,8 +1129,8 @@ module Aws::CostExplorer
     #   <p>The category or classification of the cost driver.</p>
     #            <p>Values include: BUNDLED_DISCOUNT, CREDIT, OUT_OF_CYCLE_CHARGE, REFUND,
     #               RECURRING_RESERVATION_FEE, RESERVATION_USAGE, RI_VOLUME_DISCOUNT, SAVINGS_PLAN_USAGE,
-    #               SAVINGS_PLAN_NEGATION, SAVINGS_PLAN_RECURRING_FEE, SUPPORT_FEE, TAX,
-    #               UPFRONT_RESERVATION_FEE, USAGE_CHANGE, COMMITMENT</p>
+    #               SAVINGS_PLAN_RECURRING_FEE, SUPPORT_FEE, TAX, UPFRONT_RESERVATION_FEE, USAGE_CHANGE,
+    #               COMMITMENT</p>
     #   @return [String]
     # @!attribute name
     #   <p>The specific identifier of the cost driver.</p>

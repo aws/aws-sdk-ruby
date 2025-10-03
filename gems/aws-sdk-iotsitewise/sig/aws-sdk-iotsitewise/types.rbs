@@ -2839,10 +2839,12 @@ module Aws::IoTSiteWise
 
       def initialize: (
         ?computation_model_id: String,
+        ?computation_model_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor computation_model_id: String?
+      attr_accessor computation_model_version: String?
     end
 
     class DescribeComputationModelResponse

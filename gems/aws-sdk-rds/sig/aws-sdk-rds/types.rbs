@@ -522,10 +522,10 @@ module Aws::RDS
         ?iam_database_authentication_enabled: bool,
         ?engine_version: String,
         ?backup_retention_period: Integer,
+        ?storage_type: String,
         ?allocated_storage: Integer,
         ?rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration,
         ?iops: Integer,
-        ?storage_type: String,
         ?certificate_details: Types::CertificateDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -536,16 +536,17 @@ module Aws::RDS
       attr_accessor iam_database_authentication_enabled: bool?
       attr_accessor engine_version: String?
       attr_accessor backup_retention_period: Integer?
+      attr_accessor storage_type: String?
       attr_accessor allocated_storage: Integer?
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration?
       attr_accessor iops: Integer?
-      attr_accessor storage_type: String?
       attr_accessor certificate_details: Types::CertificateDetails?
     end
 
     module ClusterScalabilityType
       STANDARD: String
       LIMITLESS: String
+      SCALEOUT: String
     end
 
     class ConnectionPoolConfiguration
@@ -699,9 +700,9 @@ module Aws::RDS
         ?pre_signed_url: String,
         ?option_group_name: String,
         ?target_custom_availability_zone: String,
+        ?snapshot_target: String,
         ?copy_option_group: bool,
         ?snapshot_availability_zone: String,
-        ?snapshot_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -713,9 +714,9 @@ module Aws::RDS
       attr_accessor pre_signed_url: String?
       attr_accessor option_group_name: String?
       attr_accessor target_custom_availability_zone: String?
+      attr_accessor snapshot_target: String?
       attr_accessor copy_option_group: bool?
       attr_accessor snapshot_availability_zone: String?
-      attr_accessor snapshot_target: String?
     end
 
     class CopyDBSnapshotResult
@@ -822,11 +823,11 @@ module Aws::RDS
         ?database_installation_files_s3_prefix: String,
         ?image_id: String,
         ?kms_key_id: String,
+        ?source_custom_db_engine_version_identifier: String,
+        ?use_aws_provided_latest_image: bool,
         ?description: String,
         ?manifest: String,
         ?tags: Array[Types::Tag],
-        ?source_custom_db_engine_version_identifier: String,
-        ?use_aws_provided_latest_image: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -836,11 +837,11 @@ module Aws::RDS
       attr_accessor database_installation_files_s3_prefix: String?
       attr_accessor image_id: String?
       attr_accessor kms_key_id: String?
+      attr_accessor source_custom_db_engine_version_identifier: String?
+      attr_accessor use_aws_provided_latest_image: bool?
       attr_accessor description: String?
       attr_accessor manifest: String?
       attr_accessor tags: Array[Types::Tag]?
-      attr_accessor source_custom_db_engine_version_identifier: String?
-      attr_accessor use_aws_provided_latest_image: bool?
     end
 
     class CreateCustomDBEngineVersionOutput
@@ -848,13 +849,20 @@ module Aws::RDS
 
       def initialize: (
         ?engine: String,
+        ?major_engine_version: String,
         ?engine_version: String,
+        ?database_installation_files_s3_bucket_name: String,
+        ?database_installation_files_s3_prefix: String,
+        ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
+        ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
+        ?kms_key_id: String,
+        ?create_time: Time,
         ?supported_character_sets: Array[Types::CharacterSet],
         ?supported_nchar_character_sets: Array[Types::CharacterSet],
         ?valid_upgrade_target: Array[Types::UpgradeTarget],
@@ -867,15 +875,8 @@ module Aws::RDS
         ?status: String,
         ?supports_parallel_query: bool,
         ?supports_global_databases: bool,
-        ?major_engine_version: String,
-        ?database_installation_files_s3_bucket_name: String,
-        ?database_installation_files_s3_prefix: String,
-        ?db_engine_version_arn: String,
-        ?kms_key_id: String,
-        ?create_time: Time,
         ?tag_list: Array[Types::Tag],
         ?supports_babelfish: bool,
-        ?custom_db_engine_version_manifest: String,
         ?supports_limitless_database: bool,
         ?supports_certificate_rotation_without_restart: bool,
         ?supported_ca_certificate_identifiers: Array[String],
@@ -886,13 +887,20 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
       attr_accessor engine_version: String?
+      attr_accessor database_installation_files_s3_bucket_name: String?
+      attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
+      attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor create_time: Time?
       attr_accessor supported_character_sets: Array[Types::CharacterSet]?
       attr_accessor supported_nchar_character_sets: Array[Types::CharacterSet]?
       attr_accessor valid_upgrade_target: Array[Types::UpgradeTarget]?
@@ -905,15 +913,8 @@ module Aws::RDS
       attr_accessor status: String?
       attr_accessor supports_parallel_query: bool?
       attr_accessor supports_global_databases: bool?
-      attr_accessor major_engine_version: String?
-      attr_accessor database_installation_files_s3_bucket_name: String?
-      attr_accessor database_installation_files_s3_prefix: String?
-      attr_accessor db_engine_version_arn: String?
-      attr_accessor kms_key_id: String?
-      attr_accessor create_time: Time?
       attr_accessor tag_list: Array[Types::Tag]?
       attr_accessor supports_babelfish: bool?
-      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor supports_limitless_database: bool?
       attr_accessor supports_certificate_rotation_without_restart: bool?
       attr_accessor supported_ca_certificate_identifiers: Array[String]?
@@ -1003,6 +1004,12 @@ module Aws::RDS
         ?engine_mode: String,
         ?scaling_configuration: Types::ScalingConfiguration,
         ?rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration,
+        ?db_cluster_instance_class: String,
+        ?allocated_storage: Integer,
+        ?storage_type: String,
+        ?iops: Integer,
+        ?publicly_accessible: bool,
+        ?auto_minor_version_upgrade: bool,
         ?deletion_protection: bool,
         ?global_cluster_identifier: String,
         ?enable_http_endpoint: bool,
@@ -1010,12 +1017,8 @@ module Aws::RDS
         ?domain: String,
         ?domain_iam_role_name: String,
         ?enable_global_write_forwarding: bool,
-        ?db_cluster_instance_class: String,
-        ?allocated_storage: Integer,
-        ?storage_type: String,
-        ?iops: Integer,
-        ?publicly_accessible: bool,
-        ?auto_minor_version_upgrade: bool,
+        ?network_type: String,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?monitoring_interval: Integer,
         ?monitoring_role_arn: String,
         ?database_insights_mode: String,
@@ -1023,13 +1026,11 @@ module Aws::RDS
         ?performance_insights_kms_key_id: String,
         ?performance_insights_retention_period: Integer,
         ?enable_limitless_database: bool,
-        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
-        ?network_type: String,
         ?cluster_scalability_type: String,
         ?db_system_id: String,
         ?manage_master_user_password: bool,
-        ?master_user_secret_kms_key_id: String,
         ?enable_local_write_forwarding: bool,
+        ?master_user_secret_kms_key_id: String,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
         ?master_user_authentication_type: String,
@@ -1063,6 +1064,12 @@ module Aws::RDS
       attr_accessor engine_mode: String?
       attr_accessor scaling_configuration: Types::ScalingConfiguration?
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration?
+      attr_accessor db_cluster_instance_class: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor storage_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor auto_minor_version_upgrade: bool?
       attr_accessor deletion_protection: bool?
       attr_accessor global_cluster_identifier: String?
       attr_accessor enable_http_endpoint: bool?
@@ -1070,12 +1077,8 @@ module Aws::RDS
       attr_accessor domain: String?
       attr_accessor domain_iam_role_name: String?
       attr_accessor enable_global_write_forwarding: bool?
-      attr_accessor db_cluster_instance_class: String?
-      attr_accessor allocated_storage: Integer?
-      attr_accessor storage_type: String?
-      attr_accessor iops: Integer?
-      attr_accessor publicly_accessible: bool?
-      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor network_type: String?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor monitoring_interval: Integer?
       attr_accessor monitoring_role_arn: String?
       attr_accessor database_insights_mode: String?
@@ -1083,13 +1086,11 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: String?
       attr_accessor performance_insights_retention_period: Integer?
       attr_accessor enable_limitless_database: bool?
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
-      attr_accessor network_type: String?
       attr_accessor cluster_scalability_type: String?
       attr_accessor db_system_id: String?
       attr_accessor manage_master_user_password: bool?
-      attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor enable_local_write_forwarding: bool?
+      attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
       attr_accessor master_user_authentication_type: String?
@@ -1185,6 +1186,7 @@ module Aws::RDS
         ?auto_minor_version_upgrade: bool,
         ?license_model: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?character_set_name: String,
         ?nchar_character_set_name: String,
@@ -1217,16 +1219,15 @@ module Aws::RDS
         ?deletion_protection: bool,
         ?max_allocated_storage: Integer,
         ?enable_customer_owned_ip: bool,
-        ?custom_iam_instance_profile: String,
-        ?backup_target: String,
         ?network_type: String,
-        ?storage_throughput: Integer,
+        ?backup_target: String,
+        ?custom_iam_instance_profile: String,
+        ?db_system_id: String,
+        ?ca_certificate_identifier: String,
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
-        ?ca_certificate_identifier: String,
-        ?db_system_id: String,
-        ?dedicated_log_volume: bool,
         ?multi_tenant: bool,
+        ?dedicated_log_volume: bool,
         ?engine_lifecycle_support: String,
         ?master_user_authentication_type: String,
       ) -> void
@@ -1253,6 +1254,7 @@ module Aws::RDS
       attr_accessor auto_minor_version_upgrade: bool?
       attr_accessor license_model: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor character_set_name: String?
       attr_accessor nchar_character_set_name: String?
@@ -1285,16 +1287,15 @@ module Aws::RDS
       attr_accessor deletion_protection: bool?
       attr_accessor max_allocated_storage: Integer?
       attr_accessor enable_customer_owned_ip: bool?
-      attr_accessor custom_iam_instance_profile: String?
-      attr_accessor backup_target: String?
       attr_accessor network_type: String?
-      attr_accessor storage_throughput: Integer?
+      attr_accessor backup_target: String?
+      attr_accessor custom_iam_instance_profile: String?
+      attr_accessor db_system_id: String?
+      attr_accessor ca_certificate_identifier: String?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
-      attr_accessor ca_certificate_identifier: String?
-      attr_accessor db_system_id: String?
-      attr_accessor dedicated_log_volume: bool?
       attr_accessor multi_tenant: bool?
+      attr_accessor dedicated_log_volume: bool?
       attr_accessor engine_lifecycle_support: String?
       attr_accessor master_user_authentication_type: String?
     end
@@ -1311,6 +1312,7 @@ module Aws::RDS
         ?multi_az: bool,
         ?auto_minor_version_upgrade: bool,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?db_parameter_group_name: String,
         ?publicly_accessible: bool,
@@ -1339,12 +1341,11 @@ module Aws::RDS
         ?domain_auth_secret_arn: String,
         ?domain_dns_ips: Array[String],
         ?replica_mode: String,
-        ?max_allocated_storage: Integer,
-        ?custom_iam_instance_profile: String,
-        ?network_type: String,
-        ?storage_throughput: Integer,
         ?enable_customer_owned_ip: bool,
+        ?network_type: String,
+        ?max_allocated_storage: Integer,
         ?backup_target: String,
+        ?custom_iam_instance_profile: String,
         ?allocated_storage: Integer,
         ?source_db_cluster_identifier: String,
         ?dedicated_log_volume: bool,
@@ -1361,6 +1362,7 @@ module Aws::RDS
       attr_accessor multi_az: bool?
       attr_accessor auto_minor_version_upgrade: bool?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor db_parameter_group_name: String?
       attr_accessor publicly_accessible: bool?
@@ -1389,12 +1391,11 @@ module Aws::RDS
       attr_accessor domain_auth_secret_arn: String?
       attr_accessor domain_dns_ips: Array[String]?
       attr_accessor replica_mode: String?
-      attr_accessor max_allocated_storage: Integer?
-      attr_accessor custom_iam_instance_profile: String?
-      attr_accessor network_type: String?
-      attr_accessor storage_throughput: Integer?
       attr_accessor enable_customer_owned_ip: bool?
+      attr_accessor network_type: String?
+      attr_accessor max_allocated_storage: Integer?
       attr_accessor backup_target: String?
+      attr_accessor custom_iam_instance_profile: String?
       attr_accessor allocated_storage: Integer?
       attr_accessor source_db_cluster_identifier: String?
       attr_accessor dedicated_log_volume: bool?
@@ -1492,6 +1493,7 @@ module Aws::RDS
       def initialize: (
         ?db_proxy_name: String,
         ?engine_family: String,
+        ?default_auth_scheme: String,
         ?auth: Array[Types::UserAuthConfig],
         ?role_arn: String,
         ?vpc_subnet_ids: Array[String],
@@ -1507,6 +1509,7 @@ module Aws::RDS
 
       attr_accessor db_proxy_name: String?
       attr_accessor engine_family: String?
+      attr_accessor default_auth_scheme: String?
       attr_accessor auth: Array[Types::UserAuthConfig]?
       attr_accessor role_arn: String?
       attr_accessor vpc_subnet_ids: Array[String]?
@@ -1773,10 +1776,10 @@ module Aws::RDS
         ?additional_encryption_context: Hash[String, String],
         ?status: String,
         ?tags: Array[Types::Tag],
-        ?create_time: Time,
-        ?errors: Array[Types::IntegrationError],
         ?data_filter: String,
         ?description: String,
+        ?create_time: Time,
+        ?errors: Array[Types::IntegrationError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1788,10 +1791,10 @@ module Aws::RDS
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor status: String?
       attr_accessor tags: Array[Types::Tag]?
-      attr_accessor create_time: Time?
-      attr_accessor errors: Array[Types::IntegrationError]?
       attr_accessor data_filter: String?
       attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor errors: Array[Types::IntegrationError]?
     end
 
     class CreateOptionGroupMessage
@@ -1938,7 +1941,6 @@ module Aws::RDS
         ?db_cluster_parameter_group: String,
         ?db_subnet_group: String,
         ?status: String,
-        ?automatic_restart_time: Time,
         ?percent_progress: String,
         ?earliest_restorable_time: Time,
         ?endpoint: String,
@@ -1972,9 +1974,17 @@ module Aws::RDS
         ?backtrack_consumed_change_records: Integer,
         ?enabled_cloudwatch_logs_exports: Array[String],
         ?capacity: Integer,
+        ?pending_modified_values: Types::ClusterPendingModifiedValues,
         ?engine_mode: String,
         ?scaling_configuration_info: Types::ScalingConfigurationInfo,
         ?rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration,
+        ?db_cluster_instance_class: String,
+        ?storage_type: String,
+        ?iops: Integer,
+        ?storage_throughput: Integer,
+        ?io_optimized_next_allowed_modification_time: Time,
+        ?publicly_accessible: bool,
+        ?auto_minor_version_upgrade: bool,
         ?deletion_protection: bool,
         ?http_endpoint_enabled: bool,
         ?activity_stream_mode: String,
@@ -1988,28 +1998,21 @@ module Aws::RDS
         ?global_cluster_identifier: String,
         ?global_write_forwarding_status: String,
         ?global_write_forwarding_requested: bool,
-        ?pending_modified_values: Types::ClusterPendingModifiedValues,
-        ?db_cluster_instance_class: String,
-        ?storage_type: String,
-        ?iops: Integer,
-        ?publicly_accessible: bool,
-        ?auto_minor_version_upgrade: bool,
+        ?network_type: String,
+        ?automatic_restart_time: Time,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo,
+        ?serverless_v2_platform_version: String,
         ?monitoring_interval: Integer,
         ?monitoring_role_arn: String,
         ?database_insights_mode: String,
         ?performance_insights_enabled: bool,
         ?performance_insights_kms_key_id: String,
         ?performance_insights_retention_period: Integer,
-        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo,
-        ?serverless_v2_platform_version: String,
-        ?network_type: String,
         ?db_system_id: String,
         ?master_user_secret: Types::MasterUserSecret,
-        ?io_optimized_next_allowed_modification_time: Time,
         ?local_write_forwarding_status: String,
         ?aws_backup_recovery_point_arn: String,
         ?limitless_database: Types::LimitlessDatabase,
-        ?storage_throughput: Integer,
         ?cluster_scalability_type: String,
         ?certificate_details: Types::CertificateDetails,
         ?engine_lifecycle_support: String,
@@ -2025,7 +2028,6 @@ module Aws::RDS
       attr_accessor db_cluster_parameter_group: String?
       attr_accessor db_subnet_group: String?
       attr_accessor status: String?
-      attr_accessor automatic_restart_time: Time?
       attr_accessor percent_progress: String?
       attr_accessor earliest_restorable_time: Time?
       attr_accessor endpoint: String?
@@ -2059,9 +2061,17 @@ module Aws::RDS
       attr_accessor backtrack_consumed_change_records: Integer?
       attr_accessor enabled_cloudwatch_logs_exports: Array[String]?
       attr_accessor capacity: Integer?
+      attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues?
       attr_accessor engine_mode: String?
       attr_accessor scaling_configuration_info: Types::ScalingConfigurationInfo?
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration?
+      attr_accessor db_cluster_instance_class: String?
+      attr_accessor storage_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
+      attr_accessor io_optimized_next_allowed_modification_time: Time?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor auto_minor_version_upgrade: bool?
       attr_accessor deletion_protection: bool?
       attr_accessor http_endpoint_enabled: bool?
       attr_accessor activity_stream_mode: String?
@@ -2075,28 +2085,21 @@ module Aws::RDS
       attr_accessor global_cluster_identifier: String?
       attr_accessor global_write_forwarding_status: String?
       attr_accessor global_write_forwarding_requested: bool?
-      attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues?
-      attr_accessor db_cluster_instance_class: String?
-      attr_accessor storage_type: String?
-      attr_accessor iops: Integer?
-      attr_accessor publicly_accessible: bool?
-      attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor network_type: String?
+      attr_accessor automatic_restart_time: Time?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo?
+      attr_accessor serverless_v2_platform_version: String?
       attr_accessor monitoring_interval: Integer?
       attr_accessor monitoring_role_arn: String?
       attr_accessor database_insights_mode: String?
       attr_accessor performance_insights_enabled: bool?
       attr_accessor performance_insights_kms_key_id: String?
       attr_accessor performance_insights_retention_period: Integer?
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo?
-      attr_accessor serverless_v2_platform_version: String?
-      attr_accessor network_type: String?
       attr_accessor db_system_id: String?
       attr_accessor master_user_secret: Types::MasterUserSecret?
-      attr_accessor io_optimized_next_allowed_modification_time: Time?
       attr_accessor local_write_forwarding_status: String?
       attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor limitless_database: Types::LimitlessDatabase?
-      attr_accessor storage_throughput: Integer?
       attr_accessor cluster_scalability_type: String?
       attr_accessor certificate_details: Types::CertificateDetails?
       attr_accessor engine_lifecycle_support: String?
@@ -2140,8 +2143,8 @@ module Aws::RDS
         ?kms_key_id: String,
         ?storage_type: String,
         ?iops: Integer,
-        ?aws_backup_recovery_point_arn: String,
         ?storage_throughput: Integer,
+        ?aws_backup_recovery_point_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2168,8 +2171,8 @@ module Aws::RDS
       attr_accessor kms_key_id: String?
       attr_accessor storage_type: String?
       attr_accessor iops: Integer?
-      attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor storage_throughput: Integer?
+      attr_accessor aws_backup_recovery_point_arn: String?
     end
 
     class DBClusterAutomatedBackupMessage
@@ -2507,10 +2510,10 @@ module Aws::RDS
         ?source_db_cluster_snapshot_arn: String,
         ?iam_database_authentication_enabled: bool,
         ?tag_list: Array[Types::Tag],
-        ?db_system_id: String,
         ?storage_type: String,
-        ?db_cluster_resource_id: String,
         ?storage_throughput: Integer,
+        ?db_cluster_resource_id: String,
+        ?db_system_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2536,10 +2539,10 @@ module Aws::RDS
       attr_accessor source_db_cluster_snapshot_arn: String?
       attr_accessor iam_database_authentication_enabled: bool?
       attr_accessor tag_list: Array[Types::Tag]?
-      attr_accessor db_system_id: String?
       attr_accessor storage_type: String?
-      attr_accessor db_cluster_resource_id: String?
       attr_accessor storage_throughput: Integer?
+      attr_accessor db_cluster_resource_id: String?
+      attr_accessor db_system_id: String?
     end
 
     class DBClusterSnapshotAlreadyExistsFault
@@ -2625,13 +2628,20 @@ module Aws::RDS
 
       def initialize: (
         ?engine: String,
+        ?major_engine_version: String,
         ?engine_version: String,
+        ?database_installation_files_s3_bucket_name: String,
+        ?database_installation_files_s3_prefix: String,
+        ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
+        ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
+        ?kms_key_id: String,
+        ?create_time: Time,
         ?supported_character_sets: Array[Types::CharacterSet],
         ?supported_nchar_character_sets: Array[Types::CharacterSet],
         ?valid_upgrade_target: Array[Types::UpgradeTarget],
@@ -2644,15 +2654,8 @@ module Aws::RDS
         ?status: String,
         ?supports_parallel_query: bool,
         ?supports_global_databases: bool,
-        ?major_engine_version: String,
-        ?database_installation_files_s3_bucket_name: String,
-        ?database_installation_files_s3_prefix: String,
-        ?db_engine_version_arn: String,
-        ?kms_key_id: String,
-        ?create_time: Time,
         ?tag_list: Array[Types::Tag],
         ?supports_babelfish: bool,
-        ?custom_db_engine_version_manifest: String,
         ?supports_limitless_database: bool,
         ?supports_certificate_rotation_without_restart: bool,
         ?supported_ca_certificate_identifiers: Array[String],
@@ -2663,13 +2666,20 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
       attr_accessor engine_version: String?
+      attr_accessor database_installation_files_s3_bucket_name: String?
+      attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
+      attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor create_time: Time?
       attr_accessor supported_character_sets: Array[Types::CharacterSet]?
       attr_accessor supported_nchar_character_sets: Array[Types::CharacterSet]?
       attr_accessor valid_upgrade_target: Array[Types::UpgradeTarget]?
@@ -2682,15 +2692,8 @@ module Aws::RDS
       attr_accessor status: String?
       attr_accessor supports_parallel_query: bool?
       attr_accessor supports_global_databases: bool?
-      attr_accessor major_engine_version: String?
-      attr_accessor database_installation_files_s3_bucket_name: String?
-      attr_accessor database_installation_files_s3_prefix: String?
-      attr_accessor db_engine_version_arn: String?
-      attr_accessor kms_key_id: String?
-      attr_accessor create_time: Time?
       attr_accessor tag_list: Array[Types::Tag]?
       attr_accessor supports_babelfish: bool?
-      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor supports_limitless_database: bool?
       attr_accessor supports_certificate_rotation_without_restart: bool?
       attr_accessor supported_ca_certificate_identifiers: Array[String]?
@@ -2720,7 +2723,6 @@ module Aws::RDS
         ?db_instance_class: String,
         ?engine: String,
         ?db_instance_status: String,
-        ?automatic_restart_time: Time,
         ?master_username: String,
         ?db_name: String,
         ?endpoint: Types::Endpoint,
@@ -2745,6 +2747,7 @@ module Aws::RDS
         ?replica_mode: String,
         ?license_model: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_memberships: Array[Types::OptionGroupMembership],
         ?character_set_name: String,
         ?nchar_character_set_name: String,
@@ -2779,29 +2782,29 @@ module Aws::RDS
         ?listener_endpoint: Types::Endpoint,
         ?max_allocated_storage: Integer,
         ?tag_list: Array[Types::Tag],
-        ?db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication],
+        ?automation_mode: String,
+        ?resume_full_automation_mode_time: Time,
         ?customer_owned_ip_enabled: bool,
-        ?aws_backup_recovery_point_arn: String,
+        ?network_type: String,
         ?activity_stream_status: String,
         ?activity_stream_kms_key_id: String,
         ?activity_stream_kinesis_stream_name: String,
         ?activity_stream_mode: String,
         ?activity_stream_engine_native_audit_fields_included: bool,
-        ?automation_mode: String,
-        ?resume_full_automation_mode_time: Time,
-        ?custom_iam_instance_profile: String,
+        ?aws_backup_recovery_point_arn: String,
+        ?db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication],
         ?backup_target: String,
-        ?network_type: String,
+        ?automatic_restart_time: Time,
+        ?custom_iam_instance_profile: String,
         ?activity_stream_policy_status: String,
-        ?storage_throughput: Integer,
+        ?certificate_details: Types::CertificateDetails,
         ?db_system_id: String,
         ?master_user_secret: Types::MasterUserSecret,
-        ?certificate_details: Types::CertificateDetails,
         ?read_replica_source_db_cluster_identifier: String,
         ?percent_progress: String,
+        ?multi_tenant: bool,
         ?dedicated_log_volume: bool,
         ?is_storage_config_upgrade_available: bool,
-        ?multi_tenant: bool,
         ?engine_lifecycle_support: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2810,7 +2813,6 @@ module Aws::RDS
       attr_accessor db_instance_class: String?
       attr_accessor engine: String?
       attr_accessor db_instance_status: String?
-      attr_accessor automatic_restart_time: Time?
       attr_accessor master_username: String?
       attr_accessor db_name: String?
       attr_accessor endpoint: Types::Endpoint?
@@ -2835,6 +2837,7 @@ module Aws::RDS
       attr_accessor replica_mode: String?
       attr_accessor license_model: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_memberships: Array[Types::OptionGroupMembership]?
       attr_accessor character_set_name: String?
       attr_accessor nchar_character_set_name: String?
@@ -2869,29 +2872,29 @@ module Aws::RDS
       attr_accessor listener_endpoint: Types::Endpoint?
       attr_accessor max_allocated_storage: Integer?
       attr_accessor tag_list: Array[Types::Tag]?
-      attr_accessor db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication]?
+      attr_accessor automation_mode: String?
+      attr_accessor resume_full_automation_mode_time: Time?
       attr_accessor customer_owned_ip_enabled: bool?
-      attr_accessor aws_backup_recovery_point_arn: String?
+      attr_accessor network_type: String?
       attr_accessor activity_stream_status: String?
       attr_accessor activity_stream_kms_key_id: String?
       attr_accessor activity_stream_kinesis_stream_name: String?
       attr_accessor activity_stream_mode: String?
       attr_accessor activity_stream_engine_native_audit_fields_included: bool?
-      attr_accessor automation_mode: String?
-      attr_accessor resume_full_automation_mode_time: Time?
-      attr_accessor custom_iam_instance_profile: String?
+      attr_accessor aws_backup_recovery_point_arn: String?
+      attr_accessor db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication]?
       attr_accessor backup_target: String?
-      attr_accessor network_type: String?
+      attr_accessor automatic_restart_time: Time?
+      attr_accessor custom_iam_instance_profile: String?
       attr_accessor activity_stream_policy_status: String?
-      attr_accessor storage_throughput: Integer?
+      attr_accessor certificate_details: Types::CertificateDetails?
       attr_accessor db_system_id: String?
       attr_accessor master_user_secret: Types::MasterUserSecret?
-      attr_accessor certificate_details: Types::CertificateDetails?
       attr_accessor read_replica_source_db_cluster_identifier: String?
       attr_accessor percent_progress: String?
+      attr_accessor multi_tenant: bool?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor is_storage_config_upgrade_available: bool?
-      attr_accessor multi_tenant: bool?
       attr_accessor engine_lifecycle_support: String?
     end
 
@@ -2926,6 +2929,7 @@ module Aws::RDS
         ?engine_version: String,
         ?license_model: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?tde_credential_arn: String,
         ?encrypted: bool,
@@ -2937,10 +2941,9 @@ module Aws::RDS
         ?db_instance_automated_backups_arn: String,
         ?db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication],
         ?backup_target: String,
-        ?storage_throughput: Integer,
+        ?multi_tenant: bool,
         ?aws_backup_recovery_point_arn: String,
         ?dedicated_log_volume: bool,
-        ?multi_tenant: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2960,6 +2963,7 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor license_model: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor tde_credential_arn: String?
       attr_accessor encrypted: bool?
@@ -2971,10 +2975,9 @@ module Aws::RDS
       attr_accessor db_instance_automated_backups_arn: String?
       attr_accessor db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication]?
       attr_accessor backup_target: String?
-      attr_accessor storage_throughput: Integer?
+      attr_accessor multi_tenant: bool?
       attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor dedicated_log_volume: bool?
-      attr_accessor multi_tenant: bool?
     end
 
     class DBInstanceAutomatedBackupMessage
@@ -3236,6 +3239,7 @@ module Aws::RDS
         ?vpc_id: String,
         ?vpc_security_group_ids: Array[String],
         ?vpc_subnet_ids: Array[String],
+        ?default_auth_scheme: String,
         ?auth: Array[Types::UserAuthConfigInfo],
         ?role_arn: String,
         ?endpoint: String,
@@ -3256,6 +3260,7 @@ module Aws::RDS
       attr_accessor vpc_id: String?
       attr_accessor vpc_security_group_ids: Array[String]?
       attr_accessor vpc_subnet_ids: Array[String]?
+      attr_accessor default_auth_scheme: String?
       attr_accessor auth: Array[Types::UserAuthConfigInfo]?
       attr_accessor role_arn: String?
       attr_accessor endpoint: String?
@@ -3714,6 +3719,7 @@ module Aws::RDS
         ?license_model: String,
         ?snapshot_type: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?percent_progress: Integer,
         ?source_region: String,
@@ -3728,13 +3734,12 @@ module Aws::RDS
         ?processor_features: Array[Types::ProcessorFeature],
         ?dbi_resource_id: String,
         ?tag_list: Array[Types::Tag],
+        ?snapshot_target: String,
         ?original_snapshot_create_time: Time,
         ?snapshot_database_time: Time,
-        ?snapshot_target: String,
-        ?storage_throughput: Integer,
         ?db_system_id: String,
-        ?dedicated_log_volume: bool,
         ?multi_tenant: bool,
+        ?dedicated_log_volume: bool,
         ?snapshot_availability_zone: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3754,6 +3759,7 @@ module Aws::RDS
       attr_accessor license_model: String?
       attr_accessor snapshot_type: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor percent_progress: Integer?
       attr_accessor source_region: String?
@@ -3768,13 +3774,12 @@ module Aws::RDS
       attr_accessor processor_features: Array[Types::ProcessorFeature]?
       attr_accessor dbi_resource_id: String?
       attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor snapshot_target: String?
       attr_accessor original_snapshot_create_time: Time?
       attr_accessor snapshot_database_time: Time?
-      attr_accessor snapshot_target: String?
-      attr_accessor storage_throughput: Integer?
       attr_accessor db_system_id: String?
-      attr_accessor dedicated_log_volume: bool?
       attr_accessor multi_tenant: bool?
+      attr_accessor dedicated_log_volume: bool?
       attr_accessor snapshot_availability_zone: String?
     end
 
@@ -4016,6 +4021,11 @@ module Aws::RDS
       ADVANCED: String
     end
 
+    module DefaultAuthScheme
+      IAM_AUTH: String
+      NONE: String
+    end
+
     class DeleteBlueGreenDeploymentRequest
       include Smithy::Schema::Structure
 
@@ -4058,13 +4068,20 @@ module Aws::RDS
 
       def initialize: (
         ?engine: String,
+        ?major_engine_version: String,
         ?engine_version: String,
+        ?database_installation_files_s3_bucket_name: String,
+        ?database_installation_files_s3_prefix: String,
+        ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
+        ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
+        ?kms_key_id: String,
+        ?create_time: Time,
         ?supported_character_sets: Array[Types::CharacterSet],
         ?supported_nchar_character_sets: Array[Types::CharacterSet],
         ?valid_upgrade_target: Array[Types::UpgradeTarget],
@@ -4077,15 +4094,8 @@ module Aws::RDS
         ?status: String,
         ?supports_parallel_query: bool,
         ?supports_global_databases: bool,
-        ?major_engine_version: String,
-        ?database_installation_files_s3_bucket_name: String,
-        ?database_installation_files_s3_prefix: String,
-        ?db_engine_version_arn: String,
-        ?kms_key_id: String,
-        ?create_time: Time,
         ?tag_list: Array[Types::Tag],
         ?supports_babelfish: bool,
-        ?custom_db_engine_version_manifest: String,
         ?supports_limitless_database: bool,
         ?supports_certificate_rotation_without_restart: bool,
         ?supported_ca_certificate_identifiers: Array[String],
@@ -4096,13 +4106,20 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
       attr_accessor engine_version: String?
+      attr_accessor database_installation_files_s3_bucket_name: String?
+      attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
+      attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor create_time: Time?
       attr_accessor supported_character_sets: Array[Types::CharacterSet]?
       attr_accessor supported_nchar_character_sets: Array[Types::CharacterSet]?
       attr_accessor valid_upgrade_target: Array[Types::UpgradeTarget]?
@@ -4115,15 +4132,8 @@ module Aws::RDS
       attr_accessor status: String?
       attr_accessor supports_parallel_query: bool?
       attr_accessor supports_global_databases: bool?
-      attr_accessor major_engine_version: String?
-      attr_accessor database_installation_files_s3_bucket_name: String?
-      attr_accessor database_installation_files_s3_prefix: String?
-      attr_accessor db_engine_version_arn: String?
-      attr_accessor kms_key_id: String?
-      attr_accessor create_time: Time?
       attr_accessor tag_list: Array[Types::Tag]?
       attr_accessor supports_babelfish: bool?
-      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor supports_limitless_database: bool?
       attr_accessor supports_certificate_rotation_without_restart: bool?
       attr_accessor supported_ca_certificate_identifiers: Array[String]?
@@ -4515,10 +4525,10 @@ module Aws::RDS
         ?additional_encryption_context: Hash[String, String],
         ?status: String,
         ?tags: Array[Types::Tag],
-        ?create_time: Time,
-        ?errors: Array[Types::IntegrationError],
         ?data_filter: String,
         ?description: String,
+        ?create_time: Time,
+        ?errors: Array[Types::IntegrationError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4530,10 +4540,10 @@ module Aws::RDS
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor status: String?
       attr_accessor tags: Array[Types::Tag]?
-      attr_accessor create_time: Time?
-      attr_accessor errors: Array[Types::IntegrationError]?
       attr_accessor data_filter: String?
       attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor errors: Array[Types::IntegrationError]?
     end
 
     class DeleteOptionGroupMessage
@@ -6410,10 +6420,10 @@ module Aws::RDS
         ?additional_encryption_context: Hash[String, String],
         ?status: String,
         ?tags: Array[Types::Tag],
-        ?create_time: Time,
-        ?errors: Array[Types::IntegrationError],
         ?data_filter: String,
         ?description: String,
+        ?create_time: Time,
+        ?errors: Array[Types::IntegrationError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6425,10 +6435,10 @@ module Aws::RDS
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor status: String?
       attr_accessor tags: Array[Types::Tag]?
-      attr_accessor create_time: Time?
-      attr_accessor errors: Array[Types::IntegrationError]?
       attr_accessor data_filter: String?
       attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor errors: Array[Types::IntegrationError]?
     end
 
     class IntegrationAlreadyExistsFault
@@ -7101,13 +7111,20 @@ module Aws::RDS
 
       def initialize: (
         ?engine: String,
+        ?major_engine_version: String,
         ?engine_version: String,
+        ?database_installation_files_s3_bucket_name: String,
+        ?database_installation_files_s3_prefix: String,
+        ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
+        ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
+        ?kms_key_id: String,
+        ?create_time: Time,
         ?supported_character_sets: Array[Types::CharacterSet],
         ?supported_nchar_character_sets: Array[Types::CharacterSet],
         ?valid_upgrade_target: Array[Types::UpgradeTarget],
@@ -7120,15 +7137,8 @@ module Aws::RDS
         ?status: String,
         ?supports_parallel_query: bool,
         ?supports_global_databases: bool,
-        ?major_engine_version: String,
-        ?database_installation_files_s3_bucket_name: String,
-        ?database_installation_files_s3_prefix: String,
-        ?db_engine_version_arn: String,
-        ?kms_key_id: String,
-        ?create_time: Time,
         ?tag_list: Array[Types::Tag],
         ?supports_babelfish: bool,
-        ?custom_db_engine_version_manifest: String,
         ?supports_limitless_database: bool,
         ?supports_certificate_rotation_without_restart: bool,
         ?supported_ca_certificate_identifiers: Array[String],
@@ -7139,13 +7149,20 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor engine: String?
+      attr_accessor major_engine_version: String?
       attr_accessor engine_version: String?
+      attr_accessor database_installation_files_s3_bucket_name: String?
+      attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
+      attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor create_time: Time?
       attr_accessor supported_character_sets: Array[Types::CharacterSet]?
       attr_accessor supported_nchar_character_sets: Array[Types::CharacterSet]?
       attr_accessor valid_upgrade_target: Array[Types::UpgradeTarget]?
@@ -7158,15 +7175,8 @@ module Aws::RDS
       attr_accessor status: String?
       attr_accessor supports_parallel_query: bool?
       attr_accessor supports_global_databases: bool?
-      attr_accessor major_engine_version: String?
-      attr_accessor database_installation_files_s3_bucket_name: String?
-      attr_accessor database_installation_files_s3_prefix: String?
-      attr_accessor db_engine_version_arn: String?
-      attr_accessor kms_key_id: String?
-      attr_accessor create_time: Time?
       attr_accessor tag_list: Array[Types::Tag]?
       attr_accessor supports_babelfish: bool?
-      attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor supports_limitless_database: bool?
       attr_accessor supports_certificate_rotation_without_restart: bool?
       attr_accessor supported_ca_certificate_identifiers: Array[String]?
@@ -7254,20 +7264,20 @@ module Aws::RDS
         ?storage_type: String,
         ?iops: Integer,
         ?auto_minor_version_upgrade: bool,
+        ?network_type: String,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?monitoring_interval: Integer,
         ?monitoring_role_arn: String,
         ?database_insights_mode: String,
         ?enable_performance_insights: bool,
         ?performance_insights_kms_key_id: String,
         ?performance_insights_retention_period: Integer,
-        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
-        ?network_type: String,
         ?manage_master_user_password: bool,
         ?rotate_master_user_password: bool,
+        ?enable_local_write_forwarding: bool,
         ?master_user_secret_kms_key_id: String,
         ?engine_mode: String,
         ?allow_engine_mode_change: bool,
-        ?enable_local_write_forwarding: bool,
         ?aws_backup_recovery_point_arn: String,
         ?enable_limitless_database: bool,
         ?ca_certificate_identifier: String,
@@ -7304,20 +7314,20 @@ module Aws::RDS
       attr_accessor storage_type: String?
       attr_accessor iops: Integer?
       attr_accessor auto_minor_version_upgrade: bool?
+      attr_accessor network_type: String?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor monitoring_interval: Integer?
       attr_accessor monitoring_role_arn: String?
       attr_accessor database_insights_mode: String?
       attr_accessor enable_performance_insights: bool?
       attr_accessor performance_insights_kms_key_id: String?
       attr_accessor performance_insights_retention_period: Integer?
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
-      attr_accessor network_type: String?
       attr_accessor manage_master_user_password: bool?
       attr_accessor rotate_master_user_password: bool?
+      attr_accessor enable_local_write_forwarding: bool?
       attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor engine_mode: String?
       attr_accessor allow_engine_mode_change: bool?
-      attr_accessor enable_local_write_forwarding: bool?
       attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor enable_limitless_database: bool?
       attr_accessor ca_certificate_identifier: String?
@@ -7409,6 +7419,7 @@ module Aws::RDS
         ?auto_minor_version_upgrade: bool,
         ?license_model: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?new_db_instance_identifier: String,
         ?storage_type: String,
@@ -7420,13 +7431,13 @@ module Aws::RDS
         ?domain_ou: String,
         ?domain_auth_secret_arn: String,
         ?domain_dns_ips: Array[String],
+        ?disable_domain: bool,
         ?copy_tags_to_snapshot: bool,
         ?monitoring_interval: Integer,
         ?db_port_number: Integer,
         ?publicly_accessible: bool,
         ?monitoring_role_arn: String,
         ?domain_iam_role_name: String,
-        ?disable_domain: bool,
         ?promotion_tier: Integer,
         ?enable_iam_database_authentication: bool,
         ?database_insights_mode: String,
@@ -7440,18 +7451,17 @@ module Aws::RDS
         ?max_allocated_storage: Integer,
         ?certificate_rotation_restart: bool,
         ?replica_mode: String,
-        ?enable_customer_owned_ip: bool,
-        ?aws_backup_recovery_point_arn: String,
         ?automation_mode: String,
         ?resume_full_automation_mode_minutes: Integer,
+        ?enable_customer_owned_ip: bool,
         ?network_type: String,
-        ?storage_throughput: Integer,
+        ?aws_backup_recovery_point_arn: String,
         ?manage_master_user_password: bool,
         ?rotate_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
-        ?engine: String,
-        ?dedicated_log_volume: bool,
         ?multi_tenant: bool,
+        ?dedicated_log_volume: bool,
+        ?engine: String,
         ?master_user_authentication_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -7474,6 +7484,7 @@ module Aws::RDS
       attr_accessor auto_minor_version_upgrade: bool?
       attr_accessor license_model: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor new_db_instance_identifier: String?
       attr_accessor storage_type: String?
@@ -7485,13 +7496,13 @@ module Aws::RDS
       attr_accessor domain_ou: String?
       attr_accessor domain_auth_secret_arn: String?
       attr_accessor domain_dns_ips: Array[String]?
+      attr_accessor disable_domain: bool?
       attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor monitoring_interval: Integer?
       attr_accessor db_port_number: Integer?
       attr_accessor publicly_accessible: bool?
       attr_accessor monitoring_role_arn: String?
       attr_accessor domain_iam_role_name: String?
-      attr_accessor disable_domain: bool?
       attr_accessor promotion_tier: Integer?
       attr_accessor enable_iam_database_authentication: bool?
       attr_accessor database_insights_mode: String?
@@ -7505,18 +7516,17 @@ module Aws::RDS
       attr_accessor max_allocated_storage: Integer?
       attr_accessor certificate_rotation_restart: bool?
       attr_accessor replica_mode: String?
-      attr_accessor enable_customer_owned_ip: bool?
-      attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor automation_mode: String?
       attr_accessor resume_full_automation_mode_minutes: Integer?
+      attr_accessor enable_customer_owned_ip: bool?
       attr_accessor network_type: String?
-      attr_accessor storage_throughput: Integer?
+      attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor manage_master_user_password: bool?
       attr_accessor rotate_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
-      attr_accessor engine: String?
-      attr_accessor dedicated_log_volume: bool?
       attr_accessor multi_tenant: bool?
+      attr_accessor dedicated_log_volume: bool?
+      attr_accessor engine: String?
       attr_accessor master_user_authentication_type: String?
     end
 
@@ -7587,6 +7597,7 @@ module Aws::RDS
       def initialize: (
         ?db_proxy_name: String,
         ?new_db_proxy_name: String,
+        ?default_auth_scheme: String,
         ?auth: Array[Types::UserAuthConfig],
         ?require_tls: bool,
         ?idle_client_timeout: Integer,
@@ -7598,6 +7609,7 @@ module Aws::RDS
 
       attr_accessor db_proxy_name: String?
       attr_accessor new_db_proxy_name: String?
+      attr_accessor default_auth_scheme: String?
       attr_accessor auth: Array[Types::UserAuthConfig]?
       attr_accessor require_tls: bool?
       attr_accessor idle_client_timeout: Integer?
@@ -7879,10 +7891,10 @@ module Aws::RDS
         ?additional_encryption_context: Hash[String, String],
         ?status: String,
         ?tags: Array[Types::Tag],
-        ?create_time: Time,
-        ?errors: Array[Types::IntegrationError],
         ?data_filter: String,
         ?description: String,
+        ?create_time: Time,
+        ?errors: Array[Types::IntegrationError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7894,10 +7906,10 @@ module Aws::RDS
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor status: String?
       attr_accessor tags: Array[Types::Tag]?
-      attr_accessor create_time: Time?
-      attr_accessor errors: Array[Types::IntegrationError]?
       attr_accessor data_filter: String?
       attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor errors: Array[Types::IntegrationError]?
     end
 
     class ModifyOptionGroupMessage
@@ -8235,6 +8247,7 @@ module Aws::RDS
         ?supports_storage_encryption: bool,
         ?storage_type: String,
         ?supports_iops: bool,
+        ?supports_storage_throughput: bool,
         ?supports_enhanced_monitoring: bool,
         ?supports_iam_database_authentication: bool,
         ?supports_performance_insights: bool,
@@ -8244,6 +8257,10 @@ module Aws::RDS
         ?max_iops_per_db_instance: Integer,
         ?min_iops_per_gib: Float,
         ?max_iops_per_gib: Float,
+        ?min_storage_throughput_per_db_instance: Integer,
+        ?max_storage_throughput_per_db_instance: Integer,
+        ?min_storage_throughput_per_iops: Float,
+        ?max_storage_throughput_per_iops: Float,
         ?available_processor_features: Array[Types::AvailableProcessorFeature],
         ?supported_engine_modes: Array[String],
         ?supports_storage_autoscaling: bool,
@@ -8251,13 +8268,8 @@ module Aws::RDS
         ?outpost_capable: bool,
         ?supported_activity_stream_modes: Array[String],
         ?supports_global_databases: bool,
-        ?supports_clusters: bool,
         ?supported_network_types: Array[String],
-        ?supports_storage_throughput: bool,
-        ?min_storage_throughput_per_db_instance: Integer,
-        ?max_storage_throughput_per_db_instance: Integer,
-        ?min_storage_throughput_per_iops: Float,
-        ?max_storage_throughput_per_iops: Float,
+        ?supports_clusters: bool,
         ?supports_dedicated_log_volume: bool,
         ?supports_http_endpoint: bool,
       ) -> void
@@ -8275,6 +8287,7 @@ module Aws::RDS
       attr_accessor supports_storage_encryption: bool?
       attr_accessor storage_type: String?
       attr_accessor supports_iops: bool?
+      attr_accessor supports_storage_throughput: bool?
       attr_accessor supports_enhanced_monitoring: bool?
       attr_accessor supports_iam_database_authentication: bool?
       attr_accessor supports_performance_insights: bool?
@@ -8284,6 +8297,10 @@ module Aws::RDS
       attr_accessor max_iops_per_db_instance: Integer?
       attr_accessor min_iops_per_gib: Float?
       attr_accessor max_iops_per_gib: Float?
+      attr_accessor min_storage_throughput_per_db_instance: Integer?
+      attr_accessor max_storage_throughput_per_db_instance: Integer?
+      attr_accessor min_storage_throughput_per_iops: Float?
+      attr_accessor max_storage_throughput_per_iops: Float?
       attr_accessor available_processor_features: Array[Types::AvailableProcessorFeature]?
       attr_accessor supported_engine_modes: Array[String]?
       attr_accessor supports_storage_autoscaling: bool?
@@ -8291,13 +8308,8 @@ module Aws::RDS
       attr_accessor outpost_capable: bool?
       attr_accessor supported_activity_stream_modes: Array[String]?
       attr_accessor supports_global_databases: bool?
-      attr_accessor supports_clusters: bool?
       attr_accessor supported_network_types: Array[String]?
-      attr_accessor supports_storage_throughput: bool?
-      attr_accessor min_storage_throughput_per_db_instance: Integer?
-      attr_accessor max_storage_throughput_per_db_instance: Integer?
-      attr_accessor min_storage_throughput_per_iops: Float?
-      attr_accessor max_storage_throughput_per_iops: Float?
+      attr_accessor supports_clusters: bool?
       attr_accessor supports_dedicated_log_volume: bool?
       attr_accessor supports_http_endpoint: bool?
     end
@@ -8417,19 +8429,19 @@ module Aws::RDS
         ?engine_version: String,
         ?license_model: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?db_instance_identifier: String,
         ?storage_type: String,
         ?ca_certificate_identifier: String,
         ?db_subnet_group_name: String,
         ?pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports,
         ?processor_features: Array[Types::ProcessorFeature],
-        ?iam_database_authentication_enabled: bool,
         ?automation_mode: String,
         ?resume_full_automation_mode_time: Time,
-        ?storage_throughput: Integer,
-        ?engine: String,
-        ?dedicated_log_volume: bool,
         ?multi_tenant: bool,
+        ?iam_database_authentication_enabled: bool,
+        ?dedicated_log_volume: bool,
+        ?engine: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8442,19 +8454,19 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor license_model: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor db_instance_identifier: String?
       attr_accessor storage_type: String?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor db_subnet_group_name: String?
       attr_accessor pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports?
       attr_accessor processor_features: Array[Types::ProcessorFeature]?
-      attr_accessor iam_database_authentication_enabled: bool?
       attr_accessor automation_mode: String?
       attr_accessor resume_full_automation_mode_time: Time?
-      attr_accessor storage_throughput: Integer?
-      attr_accessor engine: String?
-      attr_accessor dedicated_log_volume: bool?
       attr_accessor multi_tenant: bool?
+      attr_accessor iam_database_authentication_enabled: bool?
+      attr_accessor dedicated_log_volume: bool?
+      attr_accessor engine: String?
     end
 
     class PerformanceInsightsMetricDimensionGroup
@@ -9183,11 +9195,11 @@ module Aws::RDS
         ?copy_tags_to_snapshot: bool,
         ?domain: String,
         ?domain_iam_role_name: String,
-        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
+        ?storage_type: String,
         ?network_type: String,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
-        ?storage_type: String,
         ?engine_lifecycle_support: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -9223,11 +9235,11 @@ module Aws::RDS
       attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor domain: String?
       attr_accessor domain_iam_role_name: String?
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
+      attr_accessor storage_type: String?
       attr_accessor network_type: String?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
-      attr_accessor storage_type: String?
       attr_accessor engine_lifecycle_support: String?
     end
 
@@ -9272,8 +9284,8 @@ module Aws::RDS
         ?storage_type: String,
         ?iops: Integer,
         ?publicly_accessible: bool,
-        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?network_type: String,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration,
         ?monitoring_interval: Integer,
         ?monitoring_role_arn: String,
@@ -9310,8 +9322,8 @@ module Aws::RDS
       attr_accessor storage_type: String?
       attr_accessor iops: Integer?
       attr_accessor publicly_accessible: bool?
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor network_type: String?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration?
       attr_accessor monitoring_interval: Integer?
       attr_accessor monitoring_role_arn: String?
@@ -9355,15 +9367,15 @@ module Aws::RDS
         ?copy_tags_to_snapshot: bool,
         ?domain: String,
         ?domain_iam_role_name: String,
-        ?scaling_configuration: Types::ScalingConfiguration,
-        ?engine_mode: String,
         ?db_cluster_instance_class: String,
         ?storage_type: String,
         ?publicly_accessible: bool,
         ?iops: Integer,
-        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?network_type: String,
         ?source_db_cluster_resource_id: String,
+        ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
+        ?scaling_configuration: Types::ScalingConfiguration,
+        ?engine_mode: String,
         ?rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration,
         ?monitoring_interval: Integer,
         ?monitoring_role_arn: String,
@@ -9393,15 +9405,15 @@ module Aws::RDS
       attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor domain: String?
       attr_accessor domain_iam_role_name: String?
-      attr_accessor scaling_configuration: Types::ScalingConfiguration?
-      attr_accessor engine_mode: String?
       attr_accessor db_cluster_instance_class: String?
       attr_accessor storage_type: String?
       attr_accessor publicly_accessible: bool?
       attr_accessor iops: Integer?
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor network_type: String?
       attr_accessor source_db_cluster_resource_id: String?
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
+      attr_accessor scaling_configuration: Types::ScalingConfiguration?
+      attr_accessor engine_mode: String?
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration?
       attr_accessor monitoring_interval: Integer?
       attr_accessor monitoring_role_arn: String?
@@ -9439,6 +9451,7 @@ module Aws::RDS
         ?db_name: String,
         ?engine: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?tags: Array[Types::Tag],
         ?storage_type: String,
@@ -9459,12 +9472,11 @@ module Aws::RDS
         ?db_parameter_group_name: String,
         ?deletion_protection: bool,
         ?enable_customer_owned_ip: bool,
-        ?custom_iam_instance_profile: String,
-        ?backup_target: String,
         ?network_type: String,
-        ?storage_throughput: Integer,
-        ?db_cluster_snapshot_identifier: String,
+        ?backup_target: String,
+        ?custom_iam_instance_profile: String,
         ?allocated_storage: Integer,
+        ?db_cluster_snapshot_identifier: String,
         ?dedicated_log_volume: bool,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
@@ -9486,6 +9498,7 @@ module Aws::RDS
       attr_accessor db_name: String?
       attr_accessor engine: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor storage_type: String?
@@ -9506,12 +9519,11 @@ module Aws::RDS
       attr_accessor db_parameter_group_name: String?
       attr_accessor deletion_protection: bool?
       attr_accessor enable_customer_owned_ip: bool?
-      attr_accessor custom_iam_instance_profile: String?
-      attr_accessor backup_target: String?
       attr_accessor network_type: String?
-      attr_accessor storage_throughput: Integer?
-      attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor backup_target: String?
+      attr_accessor custom_iam_instance_profile: String?
       attr_accessor allocated_storage: Integer?
+      attr_accessor db_cluster_snapshot_identifier: String?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
@@ -9555,6 +9567,7 @@ module Aws::RDS
         ?auto_minor_version_upgrade: bool,
         ?license_model: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?publicly_accessible: bool,
         ?tags: Array[Types::Tag],
@@ -9580,7 +9593,6 @@ module Aws::RDS
         ?deletion_protection: bool,
         ?max_allocated_storage: Integer,
         ?network_type: String,
-        ?storage_throughput: Integer,
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
         ?dedicated_log_volume: bool,
@@ -9610,6 +9622,7 @@ module Aws::RDS
       attr_accessor auto_minor_version_upgrade: bool?
       attr_accessor license_model: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor publicly_accessible: bool?
       attr_accessor tags: Array[Types::Tag]?
@@ -9635,7 +9648,6 @@ module Aws::RDS
       attr_accessor deletion_protection: bool?
       attr_accessor max_allocated_storage: Integer?
       attr_accessor network_type: String?
-      attr_accessor storage_throughput: Integer?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor dedicated_log_volume: bool?
@@ -9673,6 +9685,7 @@ module Aws::RDS
         ?db_name: String,
         ?engine: String,
         ?iops: Integer,
+        ?storage_throughput: Integer,
         ?option_group_name: String,
         ?copy_tags_to_snapshot: bool,
         ?tags: Array[Types::Tag],
@@ -9694,12 +9707,11 @@ module Aws::RDS
         ?deletion_protection: bool,
         ?source_dbi_resource_id: String,
         ?max_allocated_storage: Integer,
-        ?source_db_instance_automated_backups_arn: String,
         ?enable_customer_owned_ip: bool,
-        ?custom_iam_instance_profile: String,
-        ?backup_target: String,
         ?network_type: String,
-        ?storage_throughput: Integer,
+        ?source_db_instance_automated_backups_arn: String,
+        ?backup_target: String,
+        ?custom_iam_instance_profile: String,
         ?allocated_storage: Integer,
         ?dedicated_log_volume: bool,
         ?ca_certificate_identifier: String,
@@ -9724,6 +9736,7 @@ module Aws::RDS
       attr_accessor db_name: String?
       attr_accessor engine: String?
       attr_accessor iops: Integer?
+      attr_accessor storage_throughput: Integer?
       attr_accessor option_group_name: String?
       attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor tags: Array[Types::Tag]?
@@ -9745,12 +9758,11 @@ module Aws::RDS
       attr_accessor deletion_protection: bool?
       attr_accessor source_dbi_resource_id: String?
       attr_accessor max_allocated_storage: Integer?
-      attr_accessor source_db_instance_automated_backups_arn: String?
       attr_accessor enable_customer_owned_ip: bool?
-      attr_accessor custom_iam_instance_profile: String?
-      attr_accessor backup_target: String?
       attr_accessor network_type: String?
-      attr_accessor storage_throughput: Integer?
+      attr_accessor source_db_instance_automated_backups_arn: String?
+      attr_accessor backup_target: String?
+      attr_accessor custom_iam_instance_profile: String?
       attr_accessor allocated_storage: Integer?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor ca_certificate_identifier: String?
@@ -10037,6 +10049,8 @@ module Aws::RDS
       custom_engine_version: String
       db_proxy: String
       blue_green_deployment: String
+      db_shard_group: String
+      zero_etl: String
     end
 
     class StartActivityStreamRequest
@@ -10066,8 +10080,8 @@ module Aws::RDS
         ?kinesis_stream_name: String,
         ?status: String,
         ?mode: String,
-        ?apply_immediately: bool,
         ?engine_native_audit_fields_included: bool,
+        ?apply_immediately: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10075,8 +10089,8 @@ module Aws::RDS
       attr_accessor kinesis_stream_name: String?
       attr_accessor status: String?
       attr_accessor mode: String?
-      attr_accessor apply_immediately: bool?
       attr_accessor engine_native_audit_fields_included: bool?
+      attr_accessor apply_immediately: bool?
     end
 
     class StartDBClusterMessage
@@ -10555,6 +10569,7 @@ module Aws::RDS
       AUTH_FAILURE: String
       PENDING_PROXY_CAPACITY: String
       INVALID_REPLICATION_STATE: String
+      PROMOTED: String
     end
 
     module TargetRole
@@ -10567,6 +10582,7 @@ module Aws::RDS
       registering: String
       available: String
       unavailable: String
+      unused: String
     end
 
     module TargetType
@@ -10791,9 +10807,9 @@ module Aws::RDS
         ?storage_size: Array[Types::Range],
         ?provisioned_iops: Array[Types::Range],
         ?iops_to_storage_ratio: Array[Types::DoubleRange],
-        ?supports_storage_autoscaling: bool,
         ?provisioned_storage_throughput: Array[Types::Range],
         ?storage_throughput_to_iops_ratio: Array[Types::DoubleRange],
+        ?supports_storage_autoscaling: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10801,9 +10817,9 @@ module Aws::RDS
       attr_accessor storage_size: Array[Types::Range]?
       attr_accessor provisioned_iops: Array[Types::Range]?
       attr_accessor iops_to_storage_ratio: Array[Types::DoubleRange]?
-      attr_accessor supports_storage_autoscaling: bool?
       attr_accessor provisioned_storage_throughput: Array[Types::Range]?
       attr_accessor storage_throughput_to_iops_ratio: Array[Types::DoubleRange]?
+      attr_accessor supports_storage_autoscaling: bool?
     end
 
     class VpcSecurityGroupMembership

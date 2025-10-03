@@ -7,6 +7,7 @@ module Aws::PCS
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -71,8 +72,8 @@ module Aws::PCS
           }
         ],
         accounting: {
-          mode: String,
-          default_purge_time_in_days: untyped
+          default_purge_time_in_days: untyped,
+          mode: String
         }
       },
       ?client_token: String,
@@ -130,6 +131,14 @@ module Aws::PCS
           compute_node_group_id: String
         }
       ],
+      ?slurm_configuration: {
+        slurm_custom_settings: Array[
+          {
+            parameter_name: String,
+            parameter_value: untyped
+          }
+        ]
+      },
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
@@ -253,6 +262,28 @@ module Aws::PCS
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
+    interface _UpdateClusterResponse
+      include Smithy::Client::_Response[Types::UpdateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def update_cluster: (
+      ?cluster_identifier: String,
+      ?client_token: String,
+      ?slurm_configuration: {
+        scale_down_idle_time_in_seconds: Integer,
+        slurm_custom_settings: Array[
+          {
+            parameter_name: String,
+            parameter_value: untyped
+          }
+        ],
+        accounting: {
+          default_purge_time_in_days: untyped,
+          mode: String
+        }
+      }
+    ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
+
     interface _UpdateComputeNodeGroupResponse
       include Smithy::Client::_Response[Types::UpdateComputeNodeGroupResponse]
       def compute_node_group: () -> Types::ComputeNodeGroup?
@@ -298,6 +329,14 @@ module Aws::PCS
           compute_node_group_id: String
         }
       ],
+      ?slurm_configuration: {
+        slurm_custom_settings: Array[
+          {
+            parameter_name: String,
+            parameter_value: untyped
+          }
+        ]
+      },
       ?client_token: String
     ) -> _UpdateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueResponse
   end

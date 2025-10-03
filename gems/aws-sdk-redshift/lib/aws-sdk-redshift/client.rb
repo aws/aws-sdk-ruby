@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Redshift
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Redshift
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Redshift
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Redshift::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Redshift::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -2177,6 +2182,12 @@ module Aws::Redshift
     #   <p>The token issuer list for the Amazon Redshift IAM Identity Center application instance.</p>
     # @option params [Array<Types::ServiceIntegrationsUnion>] :service_integrations
     #   <p>A collection of service integrations for the Redshift IAM Identity Center application.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>A list of tags.</p>
+    # @option params [Array<String>] :sso_tag_keys
+    #   <p>A list of tags keys that Redshift Identity Center applications copy to IAM Identity
+    #               Center. For each input key, the tag corresponding to the key-value pair is
+    #               propagated.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     idc_instance_arn: "String", # required
@@ -2204,7 +2215,14 @@ module Aws::Redshift
     #           authorization: "Enabled" # One of: ["Enabled", "Disabled"], # required
     #         }
     #       }]
-    #     }]
+    #     }],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String"
+    #       }
+    #     ],
+    #     sso_tag_keys: ["String"]
     #   }
     #   options = {}
     #   response = client.create_redshift_idc_application(params, options)
@@ -2240,7 +2258,14 @@ module Aws::Redshift
     #             authorization: "Enabled" # One of: ["Enabled", "Disabled"], # required
     #           }
     #         }]
-    #       }]
+    #       }],
+    #       tags: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ],
+    #       sso_tag_keys: ["String"]
     #     }
     #   }
     # @return [Types::CreateRedshiftIdcApplicationResult]
@@ -5665,7 +5690,14 @@ module Aws::Redshift
     #               authorization: "Enabled" # One of: ["Enabled", "Disabled"], # required
     #             }
     #           }]
-    #         }]
+    #         }],
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String"
+    #           }
+    #         ],
+    #         sso_tag_keys: ["String"]
     #       }
     #     ],
     #     marker: "String"
@@ -9334,7 +9366,14 @@ module Aws::Redshift
     #             authorization: "Enabled" # One of: ["Enabled", "Disabled"], # required
     #           }
     #         }]
-    #       }]
+    #       }],
+    #       tags: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ],
+    #       sso_tag_keys: ["String"]
     #     }
     #   }
     # @return [Types::ModifyRedshiftIdcApplicationResult]

@@ -2567,6 +2567,7 @@ module Aws::SSM
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#required" => {}}))
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: 'SnapshotId', traits: {"smithy.api#required" => {}}))
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:baseline_override, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaselineOverride, location_name: 'BaselineOverride'))
+    GetDeployablePatchSnapshotForInstanceRequest.add_member(:use_s3_dual_stack_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'UseS3DualStackEndpoint', traits: {"smithy.api#default" => false}))
     GetDeployablePatchSnapshotForInstanceRequest.type = Types::GetDeployablePatchSnapshotForInstanceRequest
     GetDeployablePatchSnapshotForInstanceResult.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId'))
     GetDeployablePatchSnapshotForInstanceResult.add_member(:snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: 'SnapshotId'))

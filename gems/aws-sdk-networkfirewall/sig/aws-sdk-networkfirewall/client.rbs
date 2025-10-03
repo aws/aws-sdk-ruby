@@ -7,6 +7,7 @@ module Aws::NetworkFirewall
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -200,7 +201,8 @@ module Aws::NetworkFirewall
               definition: Array[String]
             }
           ]
-        }
+        },
+        enable_tls_session_holding: bool
       },
       ?description: String,
       ?tags: Array[
@@ -1013,7 +1015,8 @@ module Aws::NetworkFirewall
               definition: Array[String]
             }
           ]
-        }
+        },
+        enable_tls_session_holding: bool
       },
       ?description: String,
       ?dry_run: bool,

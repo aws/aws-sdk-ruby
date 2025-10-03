@@ -68,6 +68,7 @@ module Aws::AutoScaling
     BlockDeviceEbsVolumeType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.autoscaling#BlockDeviceEbsVolumeType', name: 'BlockDeviceEbsVolumeType', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     BlockDeviceMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.autoscaling#BlockDeviceMapping', name: 'BlockDeviceMapping')
     BlockDeviceMappings = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.autoscaling#BlockDeviceMappings', name: 'BlockDeviceMappings')
+    BooleanType = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.autoscaling#BooleanType', name: 'BooleanType')
     BurstablePerformance = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.autoscaling#BurstablePerformance', name: 'BurstablePerformance')
     CancelInstanceRefreshInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.autoscaling#CancelInstanceRefreshInput', name: 'CancelInstanceRefreshInput')
     CancelInstanceRefreshOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.autoscaling#CancelInstanceRefreshOutput', name: 'CancelInstanceRefreshOutput')
@@ -566,6 +567,7 @@ module Aws::AutoScaling
     BurstablePerformance.add_member(:excluded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXCLUDED', traits: {"smithy.api#enumValue" => "excluded"}))
     BurstablePerformance.add_member(:required, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REQUIRED', traits: {"smithy.api#enumValue" => "required"}))
     CancelInstanceRefreshInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: 'AutoScalingGroupName', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CancelInstanceRefreshInput.add_member(:wait_for_transitioning_instances, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanType, location_name: 'WaitForTransitioningInstances'))
     CancelInstanceRefreshInput.type = Types::CancelInstanceRefreshInput
     CancelInstanceRefreshOutput.add_member(:instance_refresh_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: 'InstanceRefreshId'))
     CancelInstanceRefreshOutput.type = Types::CancelInstanceRefreshOutput

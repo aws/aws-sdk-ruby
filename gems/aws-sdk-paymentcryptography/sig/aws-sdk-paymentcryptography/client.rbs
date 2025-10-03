@@ -7,6 +7,7 @@ module Aws::PaymentCryptography
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -45,6 +46,15 @@ module Aws::PaymentCryptography
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddKeyReplicationRegionsResponse
+      include Smithy::Client::_Response[Types::AddKeyReplicationRegionsOutput]
+      def key: () -> Types::Key?
+    end
+    def add_key_replication_regions: (
+      ?key_identifier: String,
+      ?replication_regions: Array[String]
+    ) -> _AddKeyReplicationRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddKeyReplicationRegionsResponse
 
     interface _CreateAliasResponse
       include Smithy::Client::_Response[Types::CreateAliasOutput]
@@ -85,7 +95,8 @@ module Aws::PaymentCryptography
           value: String
         }
       ],
-      ?derive_key_usage: String
+      ?derive_key_usage: String,
+      ?replication_regions: Array[String]
     ) -> _CreateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyResponse
 
     interface _DeleteAliasResponse
@@ -103,6 +114,22 @@ module Aws::PaymentCryptography
       ?key_identifier: String,
       ?delete_key_in_days: Integer
     ) -> _DeleteKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyResponse
+
+    interface _DisableDefaultKeyReplicationRegionsResponse
+      include Smithy::Client::_Response[Types::DisableDefaultKeyReplicationRegionsOutput]
+      def enabled_replication_regions: () -> Array[String]?
+    end
+    def disable_default_key_replication_regions: (
+      ?replication_regions: Array[String]
+    ) -> _DisableDefaultKeyReplicationRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDefaultKeyReplicationRegionsResponse
+
+    interface _EnableDefaultKeyReplicationRegionsResponse
+      include Smithy::Client::_Response[Types::EnableDefaultKeyReplicationRegionsOutput]
+      def enabled_replication_regions: () -> Array[String]?
+    end
+    def enable_default_key_replication_regions: (
+      ?replication_regions: Array[String]
+    ) -> _EnableDefaultKeyReplicationRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDefaultKeyReplicationRegionsResponse
 
     interface _ExportKeyResponse
       include Smithy::Client::_Response[Types::ExportKeyOutput]
@@ -133,6 +160,8 @@ module Aws::PaymentCryptography
           certificate_authority_public_key_identifier: untyped,
           wrapping_key_certificate: String,
           export_token: String,
+          signing_key_identifier: untyped,
+          signing_key_certificate: untyped,
           key_block_format: String,
           random_nonce: String,
           key_block_headers: untyped
@@ -171,6 +200,30 @@ module Aws::PaymentCryptography
     def get_alias: (
       ?alias_name: String
     ) -> _GetAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAliasResponse
+
+    interface _GetCertificateSigningRequestResponse
+      include Smithy::Client::_Response[Types::GetCertificateSigningRequestOutput]
+      def certificate_signing_request: () -> String?
+    end
+    def get_certificate_signing_request: (
+      ?key_identifier: String,
+      ?signing_algorithm: String,
+      ?certificate_subject: {
+        common_name: String,
+        organization_unit: untyped,
+        organization: untyped,
+        city: untyped,
+        country: untyped,
+        state_or_province: untyped,
+        email_address: untyped
+      }
+    ) -> _GetCertificateSigningRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCertificateSigningRequestResponse
+
+    interface _GetDefaultKeyReplicationRegionsResponse
+      include Smithy::Client::_Response[Types::GetDefaultKeyReplicationRegionsOutput]
+      def enabled_replication_regions: () -> Array[String]?
+    end
+    def get_default_key_replication_regions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultKeyReplicationRegionsResponse
 
     interface _GetKeyResponse
       include Smithy::Client::_Response[Types::GetKeyOutput]
@@ -253,6 +306,8 @@ module Aws::PaymentCryptography
           certificate_authority_public_key_identifier: untyped,
           signing_key_certificate: untyped,
           import_token: String,
+          wrapping_key_identifier: untyped,
+          wrapping_key_certificate: untyped,
           wrapped_key_block: String,
           key_block_format: String,
           random_nonce: String
@@ -284,7 +339,8 @@ module Aws::PaymentCryptography
           key: String,
           value: String
         }
-      ]
+      ],
+      ?replication_regions: Array[String]
     ) -> _ImportKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportKeyResponse
 
     interface _ListAliasesResponse
@@ -319,6 +375,15 @@ module Aws::PaymentCryptography
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RemoveKeyReplicationRegionsResponse
+      include Smithy::Client::_Response[Types::RemoveKeyReplicationRegionsOutput]
+      def key: () -> Types::Key?
+    end
+    def remove_key_replication_regions: (
+      ?key_identifier: String,
+      ?replication_regions: Array[String]
+    ) -> _RemoveKeyReplicationRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveKeyReplicationRegionsResponse
 
     interface _RestoreKeyResponse
       include Smithy::Client::_Response[Types::RestoreKeyOutput]

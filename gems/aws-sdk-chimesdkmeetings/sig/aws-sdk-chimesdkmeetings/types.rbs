@@ -221,6 +221,7 @@ module Aws::ChimeSDKMeetings
         ?primary_meeting_id: String,
         ?tenant_ids: Array[String],
         ?tags: Array[Types::Tag],
+        ?media_placement_network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -233,6 +234,7 @@ module Aws::ChimeSDKMeetings
       attr_accessor primary_meeting_id: String?
       attr_accessor tenant_ids: Array[String]?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor media_placement_network_type: String?
     end
 
     class CreateMeetingResponse
@@ -260,6 +262,7 @@ module Aws::ChimeSDKMeetings
         ?primary_meeting_id: String,
         ?tenant_ids: Array[String],
         ?tags: Array[Types::Tag],
+        ?media_placement_network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -273,6 +276,7 @@ module Aws::ChimeSDKMeetings
       attr_accessor primary_meeting_id: String?
       attr_accessor tenant_ids: Array[String]?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor media_placement_network_type: String?
     end
 
     class CreateMeetingWithAttendeesResponse
@@ -532,6 +536,11 @@ module Aws::ChimeSDKMeetings
       attr_accessor screen_viewing_url: String?
       attr_accessor screen_sharing_url: String?
       attr_accessor event_ingestion_url: String?
+    end
+
+    module MediaPlacementNetworkType
+      IPV4_ONLY: String
+      DUAL_STACK: String
     end
 
     class Meeting

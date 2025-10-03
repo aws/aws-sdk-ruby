@@ -25,6 +25,30 @@ module Aws::Billing
       attr_accessor active_before_inclusive: Time?
     end
 
+    class AssociateSourceViewsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?source_views: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor source_views: Array[String]?
+    end
+
+    class AssociateSourceViewsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     class BillingViewElement
       include Smithy::Schema::Structure
 
@@ -34,9 +58,14 @@ module Aws::Billing
         ?description: String,
         ?billing_view_type: String,
         ?owner_account_id: String,
+        ?source_account_id: String,
         ?data_filter_expression: Types::Expression,
         ?created_at: Time,
         ?updated_at: Time,
+        ?derived_view_count: Integer,
+        ?source_view_count: Integer,
+        ?view_definition_last_updated_at: Time,
+        ?health_status: Types::BillingViewHealthStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -45,9 +74,38 @@ module Aws::Billing
       attr_accessor description: String?
       attr_accessor billing_view_type: String?
       attr_accessor owner_account_id: String?
+      attr_accessor source_account_id: String?
       attr_accessor data_filter_expression: Types::Expression?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor derived_view_count: Integer?
+      attr_accessor source_view_count: Integer?
+      attr_accessor view_definition_last_updated_at: Time?
+      attr_accessor health_status: Types::BillingViewHealthStatus?
+    end
+
+    class BillingViewHealthStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reasons: Array[String]?
+    end
+
+    class BillingViewHealthStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class BillingViewListElement
@@ -58,7 +116,9 @@ module Aws::Billing
         ?name: String,
         ?description: String,
         ?owner_account_id: String,
+        ?source_account_id: String,
         ?billing_view_type: String,
+        ?health_status: Types::BillingViewHealthStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -66,7 +126,27 @@ module Aws::Billing
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor owner_account_id: String?
+      attr_accessor source_account_id: String?
       attr_accessor billing_view_type: String?
+      attr_accessor health_status: Types::BillingViewHealthStatus?
+    end
+
+    module BillingViewStatus
+      HEALTHY: String
+      UNHEALTHY: String
+      CREATING: String
+      UPDATING: String
+    end
+
+    module BillingViewStatusReason
+      SOURCE_VIEW_UNHEALTHY: String
+      SOURCE_VIEW_UPDATING: String
+      SOURCE_VIEW_ACCESS_DENIED: String
+      SOURCE_VIEW_NOT_FOUND: String
+      CYCLIC_DEPENDENCY: String
+      SOURCE_VIEW_DEPTH_EXCEEDED: String
+      AGGREGATE_SOURCE: String
+      VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT: String
     end
 
     module BillingViewType
@@ -129,10 +209,12 @@ module Aws::Billing
 
       def initialize: (
         ?arn: String,
+        ?force: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor force: bool?
     end
 
     class DeleteBillingViewResponse
@@ -163,17 +245,43 @@ module Aws::Billing
       attr_accessor values: Array[String]?
     end
 
+    class DisassociateSourceViewsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?source_views: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor source_views: Array[String]?
+    end
+
+    class DisassociateSourceViewsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     class Expression
       include Smithy::Schema::Structure
 
       def initialize: (
         ?dimensions: Types::DimensionValues,
         ?tags: Types::TagValues,
+        ?time_range: Types::TimeRange,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dimensions: Types::DimensionValues?
       attr_accessor tags: Types::TagValues?
+      attr_accessor time_range: Types::TimeRange?
     end
 
     class GetBillingViewRequest
@@ -241,6 +349,7 @@ module Aws::Billing
         ?arns: Array[String],
         ?billing_view_types: Array[String],
         ?owner_account_id: String,
+        ?source_account_id: String,
         ?max_results: Integer,
         ?next_token: String,
       ) -> void
@@ -250,6 +359,7 @@ module Aws::Billing
       attr_accessor arns: Array[String]?
       attr_accessor billing_view_types: Array[String]?
       attr_accessor owner_account_id: String?
+      attr_accessor source_account_id: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
     end
@@ -408,6 +518,19 @@ module Aws::Billing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_date_inclusive: Time,
+        ?end_date_inclusive: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_date_inclusive: Time?
+      attr_accessor end_date_inclusive: Time?
     end
 
     class UntagResourceRequest

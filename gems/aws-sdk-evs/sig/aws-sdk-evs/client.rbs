@@ -7,6 +7,7 @@ module Aws::Evs
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -46,6 +47,17 @@ module Aws::Evs
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AssociateEipToVlanResponse
+      include Smithy::Client::_Response[Types::AssociateEipToVlanResponse]
+      def vlan: () -> Types::Vlan?
+    end
+    def associate_eip_to_vlan: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?vlan_name: String,
+      ?allocation_id: String
+    ) -> _AssociateEipToVlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEipToVlanResponse
+
     interface _CreateEnvironmentResponse
       include Smithy::Client::_Response[Types::CreateEnvironmentResponse]
       def environment: () -> Types::Environment?
@@ -80,7 +92,9 @@ module Aws::Evs
         nsx_uplink: untyped,
         hcx: untyped,
         expansion_vlan1: untyped,
-        expansion_vlan2: untyped
+        expansion_vlan2: untyped,
+        is_hcx_public: bool,
+        hcx_network_acl_id: String
       },
       ?hosts: Array[
         {
@@ -144,6 +158,17 @@ module Aws::Evs
       ?environment_id: String,
       ?host_name: String
     ) -> _DeleteEnvironmentHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentHostResponse
+
+    interface _DisassociateEipFromVlanResponse
+      include Smithy::Client::_Response[Types::DisassociateEipFromVlanResponse]
+      def vlan: () -> Types::Vlan?
+    end
+    def disassociate_eip_from_vlan: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?vlan_name: String,
+      ?association_id: String
+    ) -> _DisassociateEipFromVlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEipFromVlanResponse
 
     interface _GetEnvironmentResponse
       include Smithy::Client::_Response[Types::GetEnvironmentResponse]

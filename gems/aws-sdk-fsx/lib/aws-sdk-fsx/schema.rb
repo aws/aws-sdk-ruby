@@ -510,6 +510,7 @@ module Aws::FSx
     ActiveDirectoryErrorType.add_member(:domain_not_found, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DOMAIN_NOT_FOUND', traits: {"smithy.api#enumValue" => "DOMAIN_NOT_FOUND"}))
     ActiveDirectoryErrorType.add_member(:incompatible_domain_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INCOMPATIBLE_DOMAIN_MODE', traits: {"smithy.api#enumValue" => "INCOMPATIBLE_DOMAIN_MODE"}))
     ActiveDirectoryErrorType.add_member(:wrong_vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WRONG_VPC', traits: {"smithy.api#enumValue" => "WRONG_VPC"}))
+    ActiveDirectoryErrorType.add_member(:invalid_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INVALID_NETWORK_TYPE', traits: {"smithy.api#enumValue" => "INVALID_NETWORK_TYPE"}))
     ActiveDirectoryErrorType.add_member(:invalid_domain_stage, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INVALID_DOMAIN_STAGE', traits: {"smithy.api#enumValue" => "INVALID_DOMAIN_STAGE"}))
     AdministrativeAction.add_member(:administrative_action_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdministrativeActionType, location_name: 'AdministrativeActionType'))
     AdministrativeAction.add_member(:progress_percent, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressPercent, location_name: 'ProgressPercent'))
@@ -767,6 +768,7 @@ module Aws::FSx
     CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WeeklyTime, location_name: 'WeeklyMaintenanceStartTime'))
     CreateFileSystemOntapConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HAPairs, location_name: 'HAPairs'))
     CreateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: 'ThroughputCapacityPerHAPair'))
+    CreateFileSystemOntapConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: 'EndpointIpv6AddressRange'))
     CreateFileSystemOntapConfiguration.type = Types::CreateFileSystemOntapConfiguration
     CreateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: 'AutomaticBackupRetentionDays'))
     CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: 'CopyTagsToBackups'))
@@ -1260,6 +1262,7 @@ module Aws::FSx
     FileSystem.type = Types::FileSystem
     FileSystemEndpoint.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: 'DNSName'))
     FileSystemEndpoint.add_member(:ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: 'IpAddresses'))
+    FileSystemEndpoint.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: 'Ipv6Addresses'))
     FileSystemEndpoint.type = Types::FileSystemEndpoint
     FileSystemEndpoints.add_member(:intercluster, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: 'Intercluster'))
     FileSystemEndpoints.add_member(:management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: 'Management'))
@@ -1424,6 +1427,7 @@ module Aws::FSx
     OntapFileSystemConfiguration.add_member(:fsx_admin_password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AdminPassword, location_name: 'FsxAdminPassword'))
     OntapFileSystemConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HAPairs, location_name: 'HAPairs'))
     OntapFileSystemConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: 'ThroughputCapacityPerHAPair'))
+    OntapFileSystemConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: 'EndpointIpv6AddressRange'))
     OntapFileSystemConfiguration.type = Types::OntapFileSystemConfiguration
     OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlexCacheEndpointType, location_name: 'FlexCacheEndpointType'))
     OntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JunctionPath, location_name: 'JunctionPath'))
@@ -1752,6 +1756,7 @@ module Aws::FSx
     SvmActiveDirectoryConfiguration.type = Types::SvmActiveDirectoryConfiguration
     SvmEndpoint.add_member(:dns_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DNSName, location_name: 'DNSName'))
     SvmEndpoint.add_member(:ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: 'IpAddresses'))
+    SvmEndpoint.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: 'Ipv6Addresses'))
     SvmEndpoint.type = Types::SvmEndpoint
     SvmEndpoints.add_member(:iscsi, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: 'Iscsi'))
     SvmEndpoints.add_member(:management, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: 'Management'))
@@ -1825,6 +1830,7 @@ module Aws::FSx
     UpdateFileSystemOntapConfiguration.add_member(:remove_route_table_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RouteTableIds, location_name: 'RemoveRouteTableIds'))
     UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: 'ThroughputCapacityPerHAPair'))
     UpdateFileSystemOntapConfiguration.add_member(:ha_pairs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HAPairs, location_name: 'HAPairs'))
+    UpdateFileSystemOntapConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: 'EndpointIpv6AddressRange'))
     UpdateFileSystemOntapConfiguration.type = Types::UpdateFileSystemOntapConfiguration
     UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: 'AutomaticBackupRetentionDays'))
     UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Flag, location_name: 'CopyTagsToBackups'))
@@ -1981,6 +1987,7 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Aliases, location_name: 'Aliases'))
     WindowsFileSystemConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: 'AuditLogConfiguration'))
     WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: 'DiskIopsConfiguration'))
+    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddress, location_name: 'PreferredFileServerIpv6'))
     WindowsFileSystemConfiguration.type = Types::WindowsFileSystemConfiguration
 
     AWSSimbaAPIServiceV20180301 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

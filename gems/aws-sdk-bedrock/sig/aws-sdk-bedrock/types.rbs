@@ -6837,7 +6837,6 @@ module Aws::Bedrock
         ?last_updated_at: Time,
         ?expected_aggregated_findings_result: String,
         ?confidence_threshold: Float,
-        ?kms_key_arn: String,
         ?client_request_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -6849,7 +6848,6 @@ module Aws::Bedrock
       attr_accessor last_updated_at: Time?
       attr_accessor expected_aggregated_findings_result: String?
       attr_accessor confidence_threshold: Float?
-      attr_accessor kms_key_arn: String?
       attr_accessor client_request_token: String?
     end
 

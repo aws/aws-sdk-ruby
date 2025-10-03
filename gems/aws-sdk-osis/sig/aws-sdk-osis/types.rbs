@@ -93,6 +93,36 @@ module Aws::OSIS
       attr_accessor message: String?
     end
 
+    class CreatePipelineEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+        ?vpc_options: Types::PipelineEndpointVpcOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
+      attr_accessor vpc_options: Types::PipelineEndpointVpcOptions?
+    end
+
+    class CreatePipelineEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+        ?endpoint_id: String,
+        ?status: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor status: String?
+      attr_accessor vpc_id: String?
+    end
+
     class CreatePipelineRequest
       include Smithy::Schema::Structure
 
@@ -133,6 +163,26 @@ module Aws::OSIS
       attr_accessor pipeline: Types::Pipeline?
     end
 
+    class DeletePipelineEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+    end
+
+    class DeletePipelineEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeletePipelineRequest
       include Smithy::Schema::Structure
 
@@ -145,6 +195,26 @@ module Aws::OSIS
     end
 
     class DeletePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -245,6 +315,30 @@ module Aws::OSIS
       attr_accessor pipeline: Types::Pipeline?
     end
 
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
     class InternalException
       include Smithy::Schema::Structure
 
@@ -296,6 +390,58 @@ module Aws::OSIS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor blueprints: Array[Types::PipelineBlueprintSummary]?
+    end
+
+    class ListPipelineEndpointConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPipelineEndpointConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?pipeline_endpoint_connections: Array[Types::PipelineEndpointConnection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor pipeline_endpoint_connections: Array[Types::PipelineEndpointConnection]?
+    end
+
+    class ListPipelineEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPipelineEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?pipeline_endpoints: Array[Types::PipelineEndpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor pipeline_endpoints: Array[Types::PipelineEndpoint]?
     end
 
     class ListPipelinesRequest
@@ -459,6 +605,66 @@ module Aws::OSIS
       attr_accessor endpoint: String?
     end
 
+    class PipelineEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+        ?endpoint_id: String,
+        ?status: String,
+        ?vpc_id: String,
+        ?vpc_options: Types::PipelineEndpointVpcOptions,
+        ?ingest_endpoint_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor status: String?
+      attr_accessor vpc_id: String?
+      attr_accessor vpc_options: Types::PipelineEndpointVpcOptions?
+      attr_accessor ingest_endpoint_url: String?
+    end
+
+    class PipelineEndpointConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+        ?endpoint_id: String,
+        ?status: String,
+        ?vpc_endpoint_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor status: String?
+      attr_accessor vpc_endpoint_owner: String?
+    end
+
+    module PipelineEndpointStatus
+      CREATING: String
+      ACTIVE: String
+      CREATE_FAILED: String
+      DELETING: String
+      REVOKING: String
+      REVOKED: String
+    end
+
+    class PipelineEndpointVpcOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
     module PipelineStatus
       CREATING: String
       ACTIVE: String
@@ -512,6 +718,32 @@ module Aws::OSIS
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
     class ResourceAlreadyExistsException
       include Smithy::Schema::Structure
 
@@ -532,6 +764,30 @@ module Aws::OSIS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class RevokePipelineEndpointConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+        ?endpoint_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
+      attr_accessor endpoint_ids: Array[String]?
+    end
+
+    class RevokePipelineEndpointConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
     end
 
     class ServiceVpcEndpoint

@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::Connect
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::Connect
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::Connect
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Connect::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Connect::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -315,6 +320,75 @@ module Aws::Connect
     # @return [Smithy::Schema::EmptyStructure]
     def associate_bot(params = {}, options = {})
       request = build_request(:associate_bot, params)
+      request.send_request(options)
+    end
+
+    # <p>Associates a queued contact with an agent.</p>
+    #          <p>
+    #             <b>Use cases</b>
+    #          </p>
+    #          <p>Following are common uses cases for this API:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Custom contact routing. You can build custom contact routing mechanisms beyond the default
+    #      system routing in Amazon Connect. You can create tailored contact distribution logic that
+    #      offers queued contacts directly to specific agents.</p>
+    #             </li>
+    #             <li>
+    #                <p>Manual contact assignment. You can programmatically assign queued contacts to available users. This 
+    #      provides flexibility to contact centers that require manual oversight or specialized routing
+    #      workflows outside of standard queue management.</p>
+    #                <p>For information about how manual contact assignment works in the agent workspace, see the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html">Access the Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator
+    #         Guide</i>. </p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Important things to know</b>
+    #          </p>
+    #          <ul>
+    #             <li>
+    #                <p>Use this API chat/SMS, email, and task contacts. It does not support voice
+    #      contacts.</p>
+    #             </li>
+    #             <li>
+    #                <p>Use it to associate contacts with users regardless of their current state, including
+    #      custom states. Ensure your application logic accounts for user availability before making
+    #      associations.</p>
+    #             </li>
+    #             <li>
+    #                <p>It honors the IAM context key <code>connect:PreferredUserArn</code> to prevent
+    #      unauthorized contact associations.</p>
+    #             </li>
+    #             <li>
+    #                <p>It respects the IAM context key <code>connect:PreferredUserArn</code> to enforce
+    #      authorization controls and prevent unauthorized contact associations. Verify that your IAM
+    #      policies are properly configured to support your intended use cases.</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
+    # @param [Hash, Types::AssociateContactWithUserRequest] params
+    # @option params [String] :instance_id
+    #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+    # @option params [String] :contact_id
+    #   <p>The identifier of the contact in this instance of Amazon Connect. </p>
+    # @option params [String] :user_id
+    #   <p>The identifier for the user. This can be the ID or the ARN of the user.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     user_id: "AgentResourceId", # required
+    #   }
+    #   options = {}
+    #   response = client.associate_contact_with_user(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateContactWithUserResponse]
+    def associate_contact_with_user(params = {}, options = {})
+      request = build_request(:associate_contact_with_user, params)
       request.send_request(options)
     end
 
@@ -602,11 +676,13 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     # @option params [Array<Types::RoutingProfileQueueConfig>] :queue_configs
     #   <p>The queues to associate with this routing profile.</p>
+    # @option params [Array<Types::RoutingProfileManualAssignmentQueueConfig>] :manual_assignment_queue_configs
+    #   <p>The manual assignment queues to associate with this routing profile.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
     #     routing_profile_id: "RoutingProfileId", # required
-    #     queue_configs: [ # required
+    #     queue_configs: [
     #       {
     #         queue_reference: { # required
     #           queue_id: "QueueId", # required
@@ -614,6 +690,14 @@ module Aws::Connect
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
+    #       }
+    #     ],
+    #     manual_assignment_queue_configs: [
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"], # required
+    #         }
     #       }
     #     ]
     #   }
@@ -1242,7 +1326,13 @@ module Aws::Connect
     #             # recursive SegmentAttributeValue
     #           }
     #         },
-    #         value_integer: 1
+    #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           }
+    #         ],
+    #         value_arn: "SegmentAttributeValueString"
     #       }
     #     },
     #     previous_contact_id: "ContactId"
@@ -1936,10 +2026,30 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Creates a new predefined attribute for the specified Amazon Connect instance. <i>Predefined
-    #     attributes</i> are attributes in an Amazon Connect instance that can be used to route
-    #    contacts to an agent or pools of agents within a queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
-    #     predefined attributes for routing contacts to agents</a>.</p>
+    # <p>Creates a new predefined attribute for the specified Amazon Connect instance. A <i>predefined
+    #     attribute</i> is made up of a name and a value.</p>
+    #          <p>For the predefined attributes per instance quota, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas">Amazon Connect quotas</a>.</p>
+    #          <p>
+    #             <b>Use cases</b>
+    #          </p>
+    #          <p>Following are common uses cases for this API:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Create an attribute for routing proficiency (for example, agent certification) that has
+    #      predefined values (for example, a list of possible certifications). For more information, see
+    #       <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
+    #       predefined attributes for routing contacts to agents</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Create an attribute for business unit name that has a list of predefined business unit
+    #      names used in your organization. This is a use case where information for a contact varies
+    #      between transfers or conferences. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html">Use contact segment
+    #       attributes</a>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
     # @param [Hash, Types::CreatePredefinedAttributeRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource
@@ -1948,13 +2058,23 @@ module Aws::Connect
     #   <p> The name of the predefined attribute. </p>
     # @option params [Types::PredefinedAttributeValues] :values
     #   <p> The values of the predefined attribute. </p>
+    # @option params [Array<String>] :purposes
+    #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>
+    # @option params [Types::InputPredefinedAttributeConfiguration] :attribute_configuration
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
+    #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
     #     name: "PredefinedAttributeName", # required
-    #     values: { # required
+    #     values: {
     #       # One of:
     #       string_list: ["PredefinedAttributeStringValue"]
+    #     },
+    #     purposes: ["PredefinedAttributePurposeName"],
+    #     attribute_configuration: {
+    #       enable_value_validation_on_association: false
     #     }
     #   }
     #   options = {}
@@ -2198,6 +2318,13 @@ module Aws::Connect
     #      API request. It is different from the quota of 50 queues per routing profile per instance that is
     #      listed in <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect service
     #       quotas</a>. </p>
+    # @option params [Array<Types::RoutingProfileManualAssignmentQueueConfig>] :manual_assignment_queue_configs
+    #   <p>The manual assignment queues associated with the routing profile. If no queue is added,
+    #      agents and supervisors can't pick or assign any contacts from this routing profile. The limit of
+    #      10 array members applies to the maximum number of RoutingProfileManualAssignmentQueueConfig
+    #      objects that can be passed during a CreateRoutingProfile API request. It is different from the
+    #      quota of 50 queues per routing profile per instance that is listed in Amazon Connect service
+    #      quotas.</p>
     # @option params [Array<Types::MediaConcurrency>] :media_concurrencies
     #   <p>The channels that agents can handle in the Contact Control Panel (CCP) for this routing
     #      profile.</p>
@@ -2221,6 +2348,14 @@ module Aws::Connect
     #         },
     #         priority: 1, # required
     #         delay: 1, # required
+    #       }
+    #     ],
+    #     manual_assignment_queue_configs: [
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"], # required
+    #         }
     #       }
     #     ],
     #     media_concurrencies: [ # required
@@ -2696,7 +2831,8 @@ module Aws::Connect
     #       phone_type: "SOFT_PHONE" # One of: ["SOFT_PHONE", "DESK_PHONE"], # required
     #       auto_accept: false,
     #       after_contact_work_time_limit: 1,
-    #       desk_phone_number: "PhoneNumber"
+    #       desk_phone_number: "PhoneNumber",
+    #       persistent_connection: false
     #     },
     #     directory_user_id: "DirectoryUserId",
     #     security_profile_ids: ["SecurityProfileId"], # required
@@ -4006,7 +4142,13 @@ module Aws::Connect
     #               # recursive SegmentAttributeValue
     #             }
     #           },
-    #           value_integer: 1
+    #           value_integer: 1,
+    #           value_list: [
+    #             {
+    #               # recursive SegmentAttributeValue
+    #             }
+    #           ],
+    #           value_arn: "SegmentAttributeValueString"
     #         }
     #       },
     #       recordings: [
@@ -4711,10 +4853,25 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Describes a predefined attribute for the specified Amazon Connect instance. <i>Predefined
-    #     attributes</i> are attributes in an Amazon Connect instance that can be used to route
-    #    contacts to an agent or pools of agents within a queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
-    #     predefined attributes for routing contacts to agents</a>.</p>
+    # <p>Describes a predefined attribute for the specified Amazon Connect instance. A <i>predefined
+    #     attribute</i> is made up of a name and a value. You can use predefined attributes
+    #    for:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Routing proficiency (for example, agent certification) that has predefined values (for
+    #      example, a list of possible certifications). For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
+    #       predefined attributes for routing contacts to agents</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Contact information that varies between transfers or conferences, such as the name of the
+    #      business unit handling the contact. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html">Use contact segment
+    #       attributes</a>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For the predefined attributes per instance quota, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas">Amazon Connect quotas</a>.</p>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
     # @param [Hash, Types::DescribePredefinedAttributeRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource
@@ -4736,6 +4893,11 @@ module Aws::Connect
     #       values: {
     #         # One of:
     #         string_list: ["PredefinedAttributeStringValue"]
+    #       },
+    #       purposes: ["PredefinedAttributePurposeName"],
+    #       attribute_configuration: {
+    #         enable_value_validation_on_association: false,
+    #         is_read_only: false
     #       },
     #       last_modified_time: Time.now,
     #       last_modified_region: "RegionName"
@@ -4915,12 +5077,14 @@ module Aws::Connect
     #         "TagKey" => "TagValue"
     #       },
     #       number_of_associated_queues: 1,
+    #       number_of_associated_manual_assignment_queues: 1,
     #       number_of_associated_users: 1,
     #       agent_availability_timer: "TIME_SINCE_LAST_ACTIVITY" # One of: ["TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"],
     #       last_modified_time: Time.now,
     #       last_modified_region: "RegionName",
     #       is_default: false,
-    #       associated_queue_ids: ["QueueId"]
+    #       associated_queue_ids: ["QueueId"],
+    #       associated_manual_assignment_queue_ids: ["QueueId"]
     #     }
     #   }
     # @return [Types::DescribeRoutingProfileResponse]
@@ -5168,7 +5332,8 @@ module Aws::Connect
     #         phone_type: "SOFT_PHONE" # One of: ["SOFT_PHONE", "DESK_PHONE"], # required
     #         auto_accept: false,
     #         after_contact_work_time_limit: 1,
-    #         desk_phone_number: "PhoneNumber"
+    #         desk_phone_number: "PhoneNumber",
+    #         persistent_connection: false
     #       },
     #       directory_user_id: "DirectoryUserId",
     #       security_profile_ids: ["SecurityProfileId"],
@@ -5687,6 +5852,8 @@ module Aws::Connect
     end
 
     # <p>Disassociates a set of queues from a routing profile.</p>
+    #          <p>Up to 10 queue references can be disassociated in a single API call. More than 10 queue
+    #    references results in a single call results in an InvalidParameterException.</p>
     # @param [Hash, Types::DisassociateRoutingProfileQueuesRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
@@ -5694,11 +5861,19 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     # @option params [Array<Types::RoutingProfileQueueReference>] :queue_references
     #   <p>The queues to disassociate from this routing profile.</p>
+    # @option params [Array<Types::RoutingProfileQueueReference>] :manual_assignment_queue_references
+    #   <p>The manual assignment queues to disassociate with this routing profile.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
     #     routing_profile_id: "RoutingProfileId", # required
-    #     queue_references: [ # required
+    #     queue_references: [
+    #       {
+    #         queue_id: "QueueId", # required
+    #         channel: "VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"], # required
+    #       }
+    #     ],
+    #     manual_assignment_queue_references: [
     #       {
     #         queue_id: "QueueId", # required
     #         channel: "VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"], # required
@@ -5915,14 +6090,37 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Gets the real-time metrics of the specified contact.</p>
+    # <p>Retrieves the position of the contact in the queue.</p>
     #          <p>
     #             <b>Use cases</b>
     #          </p>
-    #          <p>Following are common uses cases for this API:</p>
+    #          <p>Following are common uses cases for position in queue:</p>
     #          <ul>
     #             <li>
-    #                <p>You can use this API to retrieve the position of the contact in the queue.</p>
+    #                <p>Understand the expected wait experience of a contact.</p>
+    #             </li>
+    #             <li>
+    #                <p>Inform customers of their position in queue and potentially offer a callback.</p>
+    #             </li>
+    #             <li>
+    #                <p>Make data-driven routing decisions between primary and alternative queues.</p>
+    #             </li>
+    #             <li>
+    #                <p>Enhance queue visibility and leverage agent proficiencies to streamline contact
+    #      routing.</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Important things to know</b>
+    #          </p>
+    #          <ul>
+    #             <li>
+    #                <p>The only way to retrieve the position of the contact in queue is by using this API. You
+    #      can't retrieve the position by using flows and attributes.</p>
+    #             </li>
+    #             <li>
+    #                <p>For more information, see the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html">Position in queue</a> metric in
+    #      the <i>Amazon Connect Administrator Guide</i>. </p>
     #             </li>
     #          </ul>
     #          <p>
@@ -7164,6 +7362,8 @@ module Aws::Connect
     #                  <p>Unit: Seconds</p>
     #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
     #         contact/segmentAttributes/connect:Subtype, Q in Connect</p>
+    #                  <p>Valid metric filter key: <code>INITIATION_METHOD</code>
+    #                  </p>
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-abandon-time">Average
     #          queue abandon time</a>
     #                  </p>
@@ -7503,9 +7703,20 @@ module Aws::Connect
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time">Average
     #          queue answer time</a>
     #                  </p>
+    #                  <p>Valid metric level filters: <code>INITIATION_METHOD</code>, <code>FEATURE</code>,
+    #          <code>DISCONNECT_REASON</code>
+    #                  </p>
     #                  <note>
     #                     <p>Feature is a valid filter but not a valid grouping.</p>
     #                  </note>
+    #               </dd>
+    #               <dt>AVG_QUEUE_ANSWER_TIME_CUSTOMER_FIRST_CALLBACK</dt>
+    #               <dd>
+    #                  <p>Unit: Seconds</p>
+    #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Feature,
+    #         contact/segmentAttributes/connect:Subtype, Q in Connect, Agent Hierarchy</p>
+    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback">Avg. queue answer time - customer first callback</a>
+    #                  </p>
     #               </dd>
     #               <dt>AVG_RESPONSE_TIME_AGENT</dt>
     #               <dd>
@@ -7576,6 +7787,14 @@ module Aws::Connect
     #                  <p>Unit: Seconds</p>
     #                  <p>Valid groupings and filters: Campaign</p>
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection">Average wait time after customer connection</a>
+    #                  </p>
+    #               </dd>
+    #               <dt>AVG_WAIT_TIME_AFTER_CUSTOMER_FIRST_CALLBACK_CONNECTION</dt>
+    #               <dd>
+    #                  <p>Unit: Seconds</p>
+    #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Feature,
+    #         contact/segmentAttributes/connect:Subtype, Q in Connect, Agent Hierarchy</p>
+    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback">Avg. wait time after customer connection - customer first callback</a>
     #                  </p>
     #               </dd>
     #               <dt>AVG_WEIGHTED_EVALUATION_SCORE</dt>
@@ -7702,7 +7921,7 @@ module Aws::Connect
     #                  </p>
     #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
     #         contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q in Connect</p>
-    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#api-contacts-handled">API contacts
+    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled">Contacts
     #          handled</a>
     #                  </p>
     #                  <note>
@@ -8151,7 +8370,8 @@ module Aws::Connect
     #                  <p>Unit: Seconds</p>
     #                  <p>Valid metric filter key: <code>INITIATION_METHOD</code>. This metric only supports the
     #         following filter keys as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |
-    #          <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>
+    #          <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code> |
+    #          <code>CALLBACK_CUSTOMER_FIRST_DIALED</code>
     #                  </p>
     #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time">Agent API
@@ -8168,9 +8388,9 @@ module Aws::Connect
     #                  <p>Metric filter: </p>
     #                  <ul>
     #                     <li>
-    #                        <p>Valid values: <code>API</code>| <code>Incoming</code> | <code>Outbound</code> |
-    #            <code>Transfer</code> | <code>Callback</code> | <code>Queue_Transfer</code>|
-    #            <code>Disconnect</code>
+    #                        <p>Valid values: <code>API</code>| <code>INCOMING</code> | <code>OUTBOUND</code> |
+    #            <code>TRANSFER</code> | <code>CALLBACK</code> | <code>QUEUE_TRANSFER</code>|
+    #            <code>Disconnect</code> | <code>CALLBACK_CUSTOMER_FIRST_DIALED</code>
     #                        </p>
     #                     </li>
     #                  </ul>
@@ -9785,10 +10005,25 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Lists predefined attributes for the specified Amazon Connect instance. <i>Predefined
-    #     attributes</i> are attributes in an Amazon Connect instance that can be used to route
-    #    contacts to an agent or pools of agents within a queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
-    #     predefined attributes for routing contacts to agents</a>.</p>
+    # <p>Lists predefined attributes for the specified Amazon Connect instance. A <i>predefined
+    #     attribute</i> is made up of a name and a value. You can use predefined attributes
+    #    for:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Routing proficiency (for example, agent certification) that has predefined values (for
+    #      example, a list of possible certifications). For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
+    #       predefined attributes for routing contacts to agents</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Contact information that varies between transfers or conferences, such as the name of the
+    #      business unit handling the contact. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html">Use contact segment
+    #       attributes</a>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For the predefined attributes per instance quota, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas">Amazon Connect quotas</a>.</p>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
     # @param [Hash, Types::ListPredefinedAttributesRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource
@@ -10130,6 +10365,73 @@ module Aws::Connect
     # @return [Types::ListRealtimeContactAnalysisSegmentsV2Response]
     def list_realtime_contact_analysis_segments_v2(params = {}, options = {})
       request = build_request(:list_realtime_contact_analysis_segments_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the manual assignment queues associated with a routing profile.</p>
+    #          <p>
+    #             <b>Use cases</b>
+    #          </p>
+    #          <p>Following are common uses cases for this API:</p>
+    #          <ul>
+    #             <li>
+    #                <p>This API returns list of queues where contacts can be manually assigned or picked. The
+    #      user can additionally filter on queues, if they have access to those queues (otherwise a
+    #      invalid request exception will be thrown).</p>
+    #                <p>For information about how manual contact assignment works in the agent workspace, see the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html">Access the Worklist app in the Amazon Connect agent workspace</a> in the <i>Amazon Connect Administrator
+    #         Guide</i>. </p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Important things to know</b>
+    #          </p>
+    #          <ul>
+    #             <li>
+    #                <p>This API only returns the manual assignment queues associated with a routing profile. Use
+    #      the ListRoutingProfileQueues API to list the auto assignment queues for the routing
+    #      profile.</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
+    # @param [Hash, Types::ListRoutingProfileManualAssignmentQueuesRequest] params
+    # @option params [String] :instance_id
+    #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+    # @option params [String] :routing_profile_id
+    #   <p>The identifier of the routing profile.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   response in the next request to retrieve the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_routing_profile_manual_assignment_queues(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     routing_profile_manual_assignment_queue_config_summary_list: [
+    #       {
+    #         queue_id: "QueueId", # required
+    #         queue_arn: "ARN", # required
+    #         queue_name: "QueueName", # required
+    #         channel: "VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"], # required
+    #       }
+    #     ],
+    #     last_modified_time: Time.now,
+    #     last_modified_region: "RegionName"
+    #   }
+    # @return [Types::ListRoutingProfileManualAssignmentQueuesResponse]
+    def list_routing_profile_manual_assignment_queues(params = {}, options = {})
+      request = build_request(:list_routing_profile_manual_assignment_queues, params)
       request.send_request(options)
     end
 
@@ -11418,11 +11720,15 @@ module Aws::Connect
     #   params = {
     #     instance_id: "InstanceId", # required
     #     time_range: { # required
-    #       type: "INITIATION_TIMESTAMP" # One of: ["INITIATION_TIMESTAMP", "SCHEDULED_TIMESTAMP", "CONNECTED_TO_AGENT_TIMESTAMP", "DISCONNECT_TIMESTAMP"], # required
+    #       type: "INITIATION_TIMESTAMP" # One of: ["INITIATION_TIMESTAMP", "SCHEDULED_TIMESTAMP", "CONNECTED_TO_AGENT_TIMESTAMP", "DISCONNECT_TIMESTAMP", "ENQUEUE_TIMESTAMP"], # required
     #       start_time: Time.now, # required
     #       end_time: Time.now, # required
     #     },
     #     search_criteria: {
+    #       name: {
+    #         search_text: ["SearchText"], # required
+    #         match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"], # required
+    #       },
     #       agent_ids: ["AgentResourceId"],
     #       agent_hierarchy_groups: {
     #         l1_ids: ["HierarchyGroupId"],
@@ -11438,14 +11744,40 @@ module Aws::Connect
     #             {
     #               participant_role: "AGENT" # One of: ["AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"], # required
     #               search_text: ["SearchText"], # required
-    #               match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY"], # required
+    #               match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"], # required
     #             }
     #           ],
-    #           match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY"]
+    #           match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"]
     #         }
     #       },
     #       initiation_methods: ["INBOUND" # One of: ["INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR", "EXTERNAL_OUTBOUND", "WEBRTC_API", "AGENT_REPLY", "FLOW"]],
     #       queue_ids: ["QueueId"],
+    #       routing_criteria: {
+    #         steps: [
+    #           {
+    #             agent_criteria: {
+    #               agent_ids: ["AgentResourceId"],
+    #               match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"]
+    #             }
+    #           }
+    #         ]
+    #       },
+    #       additional_time_range: {
+    #         criteria: [ # required
+    #           {
+    #             time_range: {
+    #               type: "INITIATION_TIMESTAMP" # One of: ["INITIATION_TIMESTAMP", "SCHEDULED_TIMESTAMP", "CONNECTED_TO_AGENT_TIMESTAMP", "DISCONNECT_TIMESTAMP", "ENQUEUE_TIMESTAMP"], # required
+    #               start_time: Time.now, # required
+    #               end_time: Time.now, # required
+    #             },
+    #             timestamp_condition: {
+    #               type: "INITIATION_TIMESTAMP" # One of: ["INITIATION_TIMESTAMP", "SCHEDULED_TIMESTAMP", "CONNECTED_TO_AGENT_TIMESTAMP", "DISCONNECT_TIMESTAMP", "ENQUEUE_TIMESTAMP"], # required
+    #               condition_type: "NOT_EXISTS" # One of: ["NOT_EXISTS"], # required
+    #             }
+    #           }
+    #         ],
+    #         match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"], # required
+    #       },
     #       searchable_contact_attributes: {
     #         criteria: [ # required
     #           {
@@ -11453,7 +11785,7 @@ module Aws::Connect
     #             values: ["SearchableContactAttributeValue"], # required
     #           }
     #         ],
-    #         match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY"]
+    #         match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"]
     #       },
     #       searchable_segment_attributes: {
     #         criteria: [ # required
@@ -11462,13 +11794,13 @@ module Aws::Connect
     #             values: ["SearchableSegmentAttributeValue"], # required
     #           }
     #         ],
-    #         match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY"]
+    #         match_type: "MATCH_ALL" # One of: ["MATCH_ALL", "MATCH_ANY", "MATCH_EXACT", "MATCH_NONE"]
     #       }
     #     },
     #     max_results: 1,
     #     next_token: "LargeNextToken",
     #     sort: {
-    #       field_name: "INITIATION_TIMESTAMP" # One of: ["INITIATION_TIMESTAMP", "SCHEDULED_TIMESTAMP", "CONNECTED_TO_AGENT_TIMESTAMP", "DISCONNECT_TIMESTAMP", "INITIATION_METHOD", "CHANNEL"], # required
+    #       field_name: "INITIATION_TIMESTAMP" # One of: ["INITIATION_TIMESTAMP", "SCHEDULED_TIMESTAMP", "CONNECTED_TO_AGENT_TIMESTAMP", "DISCONNECT_TIMESTAMP", "INITIATION_METHOD", "CHANNEL", "EXPIRY_TIMESTAMP"], # required
     #       order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"], # required
     #     }
     #   }
@@ -11498,8 +11830,79 @@ module Aws::Connect
     #         scheduled_timestamp: Time.now,
     #         segment_attributes: {
     #           "SegmentAttributeName" => {
-    #             value_string: "SegmentAttributeValueString"
+    #             value_string: "SegmentAttributeValueString",
+    #             value_map: {
+    #               "SegmentAttributeName" => {
+    #                 value_string: "SegmentAttributeValueString",
+    #                 value_map: {
+    #                   # recursive SegmentAttributeValueMap
+    #                 },
+    #                 value_integer: 1,
+    #                 value_list: [
+    #                   {
+    #                     # recursive SegmentAttributeValue
+    #                   }
+    #                 ],
+    #                 value_arn: "SegmentAttributeValueString"
+    #               }
+    #             }
     #           }
+    #         },
+    #         name: "Name",
+    #         routing_criteria: {
+    #           steps: [
+    #             {
+    #               expiry: {
+    #                 duration_in_seconds: 1,
+    #                 expiry_timestamp: Time.now
+    #               },
+    #               expression: {
+    #                 attribute_condition: {
+    #                   name: "PredefinedAttributeName",
+    #                   value: "ProficiencyValue",
+    #                   proficiency_level: 1.0,
+    #                   range: {
+    #                     min_proficiency_level: 1.0,
+    #                     max_proficiency_level: 1.0
+    #                   },
+    #                   match_criteria: {
+    #                     agents_criteria: {
+    #                       agent_ids: ["AgentId"]
+    #                     }
+    #                   },
+    #                   comparison_operator: "ComparisonOperator"
+    #                 },
+    #                 and_expression: [
+    #                   {
+    #                     # recursive Expression
+    #                   }
+    #                 ],
+    #                 or_expression: [
+    #                   {
+    #                     # recursive Expression
+    #                   }
+    #                 ],
+    #                 not_attribute_condition: {
+    #                   name: "PredefinedAttributeName",
+    #                   value: "ProficiencyValue",
+    #                   proficiency_level: 1.0,
+    #                   range: {
+    #                     min_proficiency_level: 1.0,
+    #                     max_proficiency_level: 1.0
+    #                   },
+    #                   match_criteria: {
+    #                     agents_criteria: {
+    #                       agent_ids: ["AgentId"]
+    #                     }
+    #                   },
+    #                   comparison_operator: "ComparisonOperator"
+    #                 }
+    #               },
+    #               status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE", "JOINED", "EXPIRED"]
+    #             }
+    #           ],
+    #           activation_timestamp: Time.now,
+    #           index: 1
     #         }
     #       }
     #     ],
@@ -11794,10 +12197,25 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Searches predefined attributes that meet certain criteria. <i>Predefined
-    #     attributes</i> are attributes in an Amazon Connect instance that can be used to route
-    #    contacts to an agent or pools of agents within a queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
-    #     predefined attributes for routing contacts to agents</a>.</p>
+    # <p>Searches predefined attributes that meet certain criteria. A <i>predefined
+    #     attribute</i> is made up of a name and a value. You can use predefined attributes
+    #    for:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Routing proficiency (for example, agent certification) that has predefined values (for
+    #      example, a list of possible certifications). For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
+    #       predefined attributes for routing contacts to agents</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Contact information that varies between transfers or conferences, such as the name of the
+    #      business unit handling the contact. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html">Use contact segment
+    #       attributes</a>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For the predefined attributes per instance quota, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas">Amazon Connect quotas</a>.</p>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
     # @param [Hash, Types::SearchPredefinedAttributesRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource
@@ -11843,6 +12261,11 @@ module Aws::Connect
     #         values: {
     #           # One of:
     #           string_list: ["PredefinedAttributeStringValue"]
+    #         },
+    #         purposes: ["PredefinedAttributePurposeName"],
+    #         attribute_configuration: {
+    #           enable_value_validation_on_association: false,
+    #           is_read_only: false
     #         },
     #         last_modified_time: Time.now,
     #         last_modified_region: "RegionName"
@@ -12322,12 +12745,14 @@ module Aws::Connect
     #           "TagKey" => "TagValue"
     #         },
     #         number_of_associated_queues: 1,
+    #         number_of_associated_manual_assignment_queues: 1,
     #         number_of_associated_users: 1,
     #         agent_availability_timer: "TIME_SINCE_LAST_ACTIVITY" # One of: ["TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"],
     #         last_modified_time: Time.now,
     #         last_modified_region: "RegionName",
     #         is_default: false,
-    #         associated_queue_ids: ["QueueId"]
+    #         associated_queue_ids: ["QueueId"],
+    #         associated_manual_assignment_queue_ids: ["QueueId"]
     #       }
     #     ],
     #     next_token: "NextToken2500",
@@ -12713,7 +13138,8 @@ module Aws::Connect
     #           phone_type: "SOFT_PHONE" # One of: ["SOFT_PHONE", "DESK_PHONE"], # required
     #           auto_accept: false,
     #           after_contact_work_time_limit: 1,
-    #           desk_phone_number: "PhoneNumber"
+    #           desk_phone_number: "PhoneNumber",
+    #           persistent_connection: false
     #         },
     #         routing_profile_id: "RoutingProfileId",
     #         security_profile_ids: ["SecurityProfileId"],
@@ -13151,7 +13577,13 @@ module Aws::Connect
     #             # recursive SegmentAttributeValue
     #           }
     #         },
-    #         value_integer: 1
+    #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           }
+    #         ],
+    #         value_arn: "SegmentAttributeValueString"
     #       }
     #     },
     #     customer_id: "CustomerIdNonEmpty"
@@ -13437,7 +13869,13 @@ module Aws::Connect
     #             # recursive SegmentAttributeValue
     #           }
     #         },
-    #         value_integer: 1
+    #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           }
+    #         ],
+    #         value_arn: "SegmentAttributeValueString"
     #       }
     #     },
     #     client_token: "ClientToken"
@@ -13597,7 +14035,13 @@ module Aws::Connect
     #             # recursive SegmentAttributeValue
     #           }
     #         },
-    #         value_integer: 1
+    #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           }
+    #         ],
+    #         value_arn: "SegmentAttributeValueString"
     #       }
     #     },
     #     attributes: {
@@ -14002,7 +14446,13 @@ module Aws::Connect
     #             # recursive SegmentAttributeValue
     #           }
     #         },
-    #         value_integer: 1
+    #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           }
+    #         ],
+    #         value_arn: "SegmentAttributeValueString"
     #       }
     #     }
     #   }
@@ -14609,8 +15059,8 @@ module Aws::Connect
     #      They can be accessed in flows.</p>
     #            <p>Attribute keys can include only alphanumeric, -, and _.</p>
     #            <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>
-    #            <p>Currently Contact Expiry is the only segment attribute which can be updated by using the
-    #      UpdateContact API.</p>
+    #            <p>Contact Expiry, and user-defined attributes (String - String) that are defined in predefined
+    #      attributes, can be updated by using the UpdateContact API.</p>
     # @option params [Types::QueueInfoInput] :queue_info
     #   <p> Information about the queue associated with a contact. This parameter can only be updated
     #      for external audio contacts. It is used when you integrate third-party systems with Contact Lens for
@@ -14656,7 +15106,13 @@ module Aws::Connect
     #             # recursive SegmentAttributeValue
     #           }
     #         },
-    #         value_integer: 1
+    #         value_integer: 1,
+    #         value_list: [
+    #           {
+    #             # recursive SegmentAttributeValue
+    #           }
+    #         ],
+    #         value_arn: "SegmentAttributeValueString"
     #       }
     #     },
     #     queue_info: {
@@ -15290,7 +15746,7 @@ module Aws::Connect
     # @option params [String] :effective_from
     #   <p>The date from when the hours of operation override would be effective.</p>
     # @option params [String] :effective_till
-    #   <p>The date till when the hours of operation override would be effective.</p>
+    #   <p>The date until the hours of operation override is effective.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
@@ -15609,10 +16065,29 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Updates a predefined attribute for the specified Amazon Connect instance. <i>Predefined
-    #     attributes</i> are attributes in an Amazon Connect instance that can be used to route
-    #    contacts to an agent or pools of agents within a queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
-    #     predefined attributes for routing contacts to agents</a>.</p>
+    # <p>Updates a predefined attribute for the specified Amazon Connect instance. A <i>predefined
+    #     attribute</i> is made up of a name and a value.</p>
+    #          <p>For the predefined attributes per instance quota, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas">Amazon Connect quotas</a>.</p>
+    #          <p>
+    #             <b>Use cases</b>
+    #          </p>
+    #          <p>Following are common uses cases for this API:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Update routing proficiency (for example, agent certification) that has predefined values
+    #      (for example, a list of possible certifications). For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html">Create
+    #       predefined attributes for routing contacts to agents</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Update an attribute for business unit name that has a list of predefined business unit
+    #      names used in your organization. This is a use case where information for a contact varies
+    #      between transfers or conferences. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html">Use contact segment
+    #       attributes</a>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and
+    #    quotas</a>.</p>
     # @param [Hash, Types::UpdatePredefinedAttributeRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource
@@ -15621,6 +16096,12 @@ module Aws::Connect
     #   <p>The name of the predefined attribute.</p>
     # @option params [Types::PredefinedAttributeValues] :values
     #   <p>The values of the predefined attribute.</p>
+    # @option params [Array<String>] :purposes
+    #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>
+    # @option params [Types::InputPredefinedAttributeConfiguration] :attribute_configuration
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
+    #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
@@ -15628,6 +16109,10 @@ module Aws::Connect
     #     values: {
     #       # One of:
     #       string_list: ["PredefinedAttributeStringValue"]
+    #     },
+    #     purposes: ["PredefinedAttributePurposeName"],
+    #     attribute_configuration: {
+    #       enable_value_validation_on_association: false
     #     }
     #   }
     #   options = {}
@@ -16616,7 +17101,8 @@ module Aws::Connect
     #       phone_type: "SOFT_PHONE" # One of: ["SOFT_PHONE", "DESK_PHONE"], # required
     #       auto_accept: false,
     #       after_contact_work_time_limit: 1,
-    #       desk_phone_number: "PhoneNumber"
+    #       desk_phone_number: "PhoneNumber",
+    #       persistent_connection: false
     #     },
     #     user_id: "UserId", # required
     #     instance_id: "InstanceId", # required

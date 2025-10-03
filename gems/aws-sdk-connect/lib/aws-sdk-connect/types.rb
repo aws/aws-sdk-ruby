@@ -641,6 +641,30 @@ module Aws::Connect
     # @!attribute instance_id
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
+    # @!attribute contact_id
+    #   <p>The identifier of the contact in this instance of Amazon Connect. </p>
+    #   @return [String]
+    # @!attribute user_id
+    #   <p>The identifier for the user. This can be the ID or the ARN of the user.</p>
+    #   @return [String]
+    class AssociateContactWithUserRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :user_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class AssociateContactWithUserResponse < Struct.new(
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instance_id
+    #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+    #   @return [String]
     # @!attribute language_code
     #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
@@ -846,10 +870,14 @@ module Aws::Connect
     # @!attribute queue_configs
     #   <p>The queues to associate with this routing profile.</p>
     #   @return [Array<Types::RoutingProfileQueueConfig>]
+    # @!attribute manual_assignment_queue_configs
+    #   <p>The manual assignment queues to associate with this routing profile.</p>
+    #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
     class AssociateRoutingProfileQueuesRequest < Struct.new(
       :instance_id,
       :routing_profile_id,
       :queue_configs,
+      :manual_assignment_queue_configs,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2629,8 +2657,7 @@ module Aws::Connect
       class Unknown < ContactMetricValue; end
     end
 
-    # <p>The contact with the specified ID is not active or does not exist. Applies to Voice calls
-    #    only, not to Chat or Task contacts.</p>
+    # <p>The contact with the specified ID is not active or does not exist.</p>
     # @!attribute message
     #   <p>The message.</p>
     #   @return [String]
@@ -2684,6 +2711,12 @@ module Aws::Connect
     # @!attribute segment_attributes
     #   <p>Set of segment attributes for a contact.</p>
     #   @return [Hash<String, Types::ContactSearchSummarySegmentAttributeValue>]
+    # @!attribute name
+    #   <p>Indicates name of the contact.</p>
+    #   @return [String]
+    # @!attribute routing_criteria
+    #   <p>Latest routing criteria on the contact.</p>
+    #   @return [Types::RoutingCriteria]
     class ContactSearchSummary < Struct.new(
       :arn,
       :id,
@@ -2697,6 +2730,8 @@ module Aws::Connect
       :disconnect_timestamp,
       :scheduled_timestamp,
       :segment_attributes,
+      :name,
+      :routing_criteria,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2738,8 +2773,12 @@ module Aws::Connect
     # @!attribute value_string
     #   <p>The value of a segment attribute represented as a string.</p>
     #   @return [String]
+    # @!attribute value_map
+    #   <p>The key and value of a segment attribute.</p>
+    #   @return [Hash<String, Types::SegmentAttributeValue>]
     class ContactSearchSummarySegmentAttributeValue < Struct.new(
       :value_string,
+      :value_map,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3663,10 +3702,20 @@ module Aws::Connect
     # @!attribute values
     #   <p> The values of the predefined attribute. </p>
     #   @return [Types::PredefinedAttributeValues]
+    # @!attribute purposes
+    #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>
+    #   @return [Array<String>]
+    # @!attribute attribute_configuration
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
+    #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
+    #   @return [Types::InputPredefinedAttributeConfiguration]
     class CreatePredefinedAttributeRequest < Struct.new(
       :instance_id,
       :name,
       :values,
+      :purposes,
+      :attribute_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3875,6 +3924,14 @@ module Aws::Connect
     #      listed in <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect service
     #       quotas</a>. </p>
     #   @return [Array<Types::RoutingProfileQueueConfig>]
+    # @!attribute manual_assignment_queue_configs
+    #   <p>The manual assignment queues associated with the routing profile. If no queue is added,
+    #      agents and supervisors can't pick or assign any contacts from this routing profile. The limit of
+    #      10 array members applies to the maximum number of RoutingProfileManualAssignmentQueueConfig
+    #      objects that can be passed during a CreateRoutingProfile API request. It is different from the
+    #      quota of 50 queues per routing profile per instance that is listed in Amazon Connect service
+    #      quotas.</p>
+    #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
     # @!attribute media_concurrencies
     #   <p>The channels that agents can handle in the Contact Control Panel (CCP) for this routing
     #      profile.</p>
@@ -3893,6 +3950,7 @@ module Aws::Connect
       :description,
       :default_outbound_queue_id,
       :queue_configs,
+      :manual_assignment_queue_configs,
       :media_concurrencies,
       :tags,
       :agent_availability_timer,
@@ -6167,10 +6225,14 @@ module Aws::Connect
     # @!attribute queue_references
     #   <p>The queues to disassociate from this routing profile.</p>
     #   @return [Array<Types::RoutingProfileQueueReference>]
+    # @!attribute manual_assignment_queue_references
+    #   <p>The manual assignment queues to disassociate with this routing profile.</p>
+    #   @return [Array<Types::RoutingProfileQueueReference>]
     class DisassociateRoutingProfileQueuesRequest < Struct.new(
       :instance_id,
       :routing_profile_id,
       :queue_references,
+      :manual_assignment_queue_references,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8581,6 +8643,8 @@ module Aws::Connect
     #                  <p>Unit: Seconds</p>
     #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
     #         contact/segmentAttributes/connect:Subtype, Q in Connect</p>
+    #                  <p>Valid metric filter key: <code>INITIATION_METHOD</code>
+    #                  </p>
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-abandon-time">Average
     #          queue abandon time</a>
     #                  </p>
@@ -8920,9 +8984,20 @@ module Aws::Connect
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time">Average
     #          queue answer time</a>
     #                  </p>
+    #                  <p>Valid metric level filters: <code>INITIATION_METHOD</code>, <code>FEATURE</code>,
+    #          <code>DISCONNECT_REASON</code>
+    #                  </p>
     #                  <note>
     #                     <p>Feature is a valid filter but not a valid grouping.</p>
     #                  </note>
+    #               </dd>
+    #               <dt>AVG_QUEUE_ANSWER_TIME_CUSTOMER_FIRST_CALLBACK</dt>
+    #               <dd>
+    #                  <p>Unit: Seconds</p>
+    #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Feature,
+    #         contact/segmentAttributes/connect:Subtype, Q in Connect, Agent Hierarchy</p>
+    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback">Avg. queue answer time - customer first callback</a>
+    #                  </p>
     #               </dd>
     #               <dt>AVG_RESPONSE_TIME_AGENT</dt>
     #               <dd>
@@ -8993,6 +9068,14 @@ module Aws::Connect
     #                  <p>Unit: Seconds</p>
     #                  <p>Valid groupings and filters: Campaign</p>
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection">Average wait time after customer connection</a>
+    #                  </p>
+    #               </dd>
+    #               <dt>AVG_WAIT_TIME_AFTER_CUSTOMER_FIRST_CALLBACK_CONNECTION</dt>
+    #               <dd>
+    #                  <p>Unit: Seconds</p>
+    #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Feature,
+    #         contact/segmentAttributes/connect:Subtype, Q in Connect, Agent Hierarchy</p>
+    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback">Avg. wait time after customer connection - customer first callback</a>
     #                  </p>
     #               </dd>
     #               <dt>AVG_WEIGHTED_EVALUATION_SCORE</dt>
@@ -9119,7 +9202,7 @@ module Aws::Connect
     #                  </p>
     #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
     #         contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q in Connect</p>
-    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#api-contacts-handled">API contacts
+    #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled">Contacts
     #          handled</a>
     #                  </p>
     #                  <note>
@@ -9568,7 +9651,8 @@ module Aws::Connect
     #                  <p>Unit: Seconds</p>
     #                  <p>Valid metric filter key: <code>INITIATION_METHOD</code>. This metric only supports the
     #         following filter keys as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |
-    #          <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>
+    #          <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code> |
+    #          <code>CALLBACK_CUSTOMER_FIRST_DIALED</code>
     #                  </p>
     #                  <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>
     #                  <p>UI name: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time">Agent API
@@ -9585,9 +9669,9 @@ module Aws::Connect
     #                  <p>Metric filter: </p>
     #                  <ul>
     #                     <li>
-    #                        <p>Valid values: <code>API</code>| <code>Incoming</code> | <code>Outbound</code> |
-    #            <code>Transfer</code> | <code>Callback</code> | <code>Queue_Transfer</code>|
-    #            <code>Disconnect</code>
+    #                        <p>Valid values: <code>API</code>| <code>INCOMING</code> | <code>OUTBOUND</code> |
+    #            <code>TRANSFER</code> | <code>CALLBACK</code> | <code>QUEUE_TRANSFER</code>|
+    #            <code>Disconnect</code> | <code>CALLBACK_CUSTOMER_FIRST_DIALED</code>
     #                        </p>
     #                     </li>
     #                  </ul>
@@ -10526,7 +10610,7 @@ module Aws::Connect
     #   <p>The date from which the hours of operation override would be effective.</p>
     #   @return [String]
     # @!attribute effective_till
-    #   <p>The date till which the hours of operation override would be effective.</p>
+    #   <p>The date until the hours of operation override is effective.</p>
     #   @return [String]
     class HoursOfOperationOverride < Struct.new(
       :hours_of_operation_override_id,
@@ -10795,6 +10879,25 @@ module Aws::Connect
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Custom metadata that is associated to predefined attributes to control behavior in upstream
+    #    services, such as controlling how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
+    # @!attribute enable_value_validation_on_association
+    #   <p>When this parameter is set to true, Amazon Connect enforces strict validation on the
+    #      specific values, if the values are predefined in attributes. The contact will store only valid
+    #      and predefined values for the predefined attribute key.</p>
+    #   @return [Boolean]
+    class InputPredefinedAttributeConfiguration < Struct.new(
+      :enable_value_validation_on_association,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enable_value_validation_on_association] = false unless options.key?(:enable_value_validation_on_association)
+        super
+      end
     end
 
     # <p>The Amazon Connect instance.</p>
@@ -12530,6 +12633,51 @@ module Aws::Connect
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
+    #   <p>The maximum number of results to return per page.</p>
+    #   @return [Integer]
+    class ListRoutingProfileManualAssignmentQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If there are additional results, this is the token for the next set of results.</p>
+    #   @return [String]
+    # @!attribute routing_profile_manual_assignment_queue_config_summary_list
+    #   <p>Information about the manual assignment queues associated with the routing profile.</p>
+    #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfigSummary>]
+    # @!attribute last_modified_time
+    #   <p>The timestamp when this resource was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_modified_region
+    #   <p>The Amazon Web Services Region where this resource was last modified.</p>
+    #   @return [String]
+    class ListRoutingProfileManualAssignmentQueuesResponse < Struct.new(
+      :next_token,
+      :routing_profile_manual_assignment_queue_config_summary_list,
+      :last_modified_time,
+      :last_modified_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instance_id
+    #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+    #   @return [String]
+    # @!attribute routing_profile_id
+    #   <p>The identifier of the routing profile.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   response in the next request to retrieve the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     class ListRoutingProfileQueuesRequest < Struct.new(
@@ -13472,6 +13620,22 @@ module Aws::Connect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The search criteria based on the contact name</p>
+    # @!attribute search_text
+    #   <p>The words or phrases used to match the contact name.</p>
+    #   @return [Array<String>]
+    # @!attribute match_type
+    #   <p>The match type combining name search criteria using multiple search texts in a name
+    #      criteria.</p>
+    #   @return [String]
+    class NameCriteria < Struct.new(
+      :search_text,
+      :match_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Payload of chat properties to apply when starting a new contact.</p>
     # @!attribute supported_messaging_content_types
     #   <p> The supported chat message content types. Supported types are <code>text/plain</code>,
@@ -14038,6 +14202,14 @@ module Aws::Connect
     # @!attribute values
     #   <p>The values of the predefined attribute.</p>
     #   @return [Types::PredefinedAttributeValues]
+    # @!attribute purposes
+    #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>
+    #   @return [Array<String>]
+    # @!attribute attribute_configuration
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
+    #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
+    #   @return [Types::PredefinedAttributeConfiguration]
     # @!attribute last_modified_time
     #   <p>Last modified time.</p>
     #   @return [Time]
@@ -14047,11 +14219,38 @@ module Aws::Connect
     class PredefinedAttribute < Struct.new(
       :name,
       :values,
+      :purposes,
+      :attribute_configuration,
       :last_modified_time,
       :last_modified_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Custom metadata that is associated to predefined attributes to control behavior in upstream
+    #    services, such as controlling how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
+    # @!attribute enable_value_validation_on_association
+    #   <p>When this parameter is set to true, Amazon Connect enforces strict validation on the
+    #      specific values, if the values are predefined in attributes. The contact will store only valid
+    #      and predefined values for teh predefined attribute key.</p>
+    #   @return [Boolean]
+    # @!attribute is_read_only
+    #   <p>A boolean flag used to indicate whether a predefined attribute should be displayed in the
+    #      Amazon Connect admin website.</p>
+    #   @return [Boolean]
+    class PredefinedAttributeConfiguration < Struct.new(
+      :enable_value_validation_on_association,
+      :is_read_only,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enable_value_validation_on_association] = false unless options.key?(:enable_value_validation_on_association)
+        options[:is_read_only] = false unless options.key?(:is_read_only)
+        super
+      end
     end
 
     # <p>The search criteria to be used to return predefined attributes.</p>
@@ -15530,6 +15729,9 @@ module Aws::Connect
     # @!attribute number_of_associated_queues
     #   <p>The number of associated queues in routing profile.</p>
     #   @return [Integer]
+    # @!attribute number_of_associated_manual_assignment_queues
+    #   <p>The number of associated manual assignment queues in routing profile.</p>
+    #   @return [Integer]
     # @!attribute number_of_associated_users
     #   <p>The number of associated users in routing profile.</p>
     #   @return [Integer]
@@ -15550,6 +15752,9 @@ module Aws::Connect
     # @!attribute associated_queue_ids
     #   <p>The IDs of the associated queue.</p>
     #   @return [Array<String>]
+    # @!attribute associated_manual_assignment_queue_ids
+    #   <p>The IDs of the associated manual assignment queues.</p>
+    #   @return [Array<String>]
     class RoutingProfile < Struct.new(
       :instance_id,
       :name,
@@ -15560,12 +15765,14 @@ module Aws::Connect
       :default_outbound_queue_id,
       :tags,
       :number_of_associated_queues,
+      :number_of_associated_manual_assignment_queues,
       :number_of_associated_users,
       :agent_availability_timer,
       :last_modified_time,
       :last_modified_region,
       :is_default,
       :associated_queue_ids,
+      :associated_manual_assignment_queue_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15574,6 +15781,41 @@ module Aws::Connect
         options[:is_default] = false unless options.key?(:is_default)
         super
       end
+    end
+
+    # <p>Contains information about the queue and channel for manual assignment behaviour can be
+    #    enabled.</p>
+    # @!attribute queue_reference
+    #   <p>Contains the channel and queue identifier for a routing profile.</p>
+    #   @return [Types::RoutingProfileQueueReference]
+    class RoutingProfileManualAssignmentQueueConfig < Struct.new(
+      :queue_reference,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a routing profile manual assignment queue.</p>
+    # @!attribute queue_id
+    #   <p>The identifier for the queue.</p>
+    #   @return [String]
+    # @!attribute queue_arn
+    #   <p>The Amazon Resource Name (ARN) of the queue.</p>
+    #   @return [String]
+    # @!attribute queue_name
+    #   <p>The name of the queue.</p>
+    #   @return [String]
+    # @!attribute channel
+    #   <p>The channels this queue supports. Valid Values: CHAT | TASK | EMAIL </p>
+    #   @return [String]
+    class RoutingProfileManualAssignmentQueueConfigSummary < Struct.new(
+      :queue_id,
+      :queue_arn,
+      :queue_name,
+      :channel,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the queue and channel for which priority and delay can be
@@ -16151,6 +16393,36 @@ module Aws::Connect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Time range that you additionally want to filter on.</p>
+    # @!attribute criteria
+    #   <p>List of criteria of the time range to additionally filter on.</p>
+    #   @return [Array<Types::SearchContactsAdditionalTimeRangeCriteria>]
+    # @!attribute match_type
+    #   <p>The match type combining multiple time range filters.</p>
+    #   @return [String]
+    class SearchContactsAdditionalTimeRange < Struct.new(
+      :criteria,
+      :match_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The criteria of the time range to additionally filter on.</p>
+    # @!attribute time_range
+    #   <p>A structure of time range that you want to search results.</p>
+    #   @return [Types::SearchContactsTimeRange]
+    # @!attribute timestamp_condition
+    #   <p>List of the timestamp conditions.</p>
+    #   @return [Types::SearchContactsTimestampCondition]
+    class SearchContactsAdditionalTimeRangeCriteria < Struct.new(
+      :time_range,
+      :timestamp_condition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute instance_id
     #   <p>The identifier of Amazon Connect instance. You can find the instance ID in the Amazon
     #      Resource Name (ARN) of the instance.</p>
@@ -16220,7 +16492,26 @@ module Aws::Connect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The timestamp condition indicating which timestamp should be used and how it should be
+    #    filtered.</p>
+    # @!attribute type
+    #   <p>Type of the timestamps to use for the filter.</p>
+    #   @return [String]
+    # @!attribute condition_type
+    #   <p>Condition of the timestamp on the contact.</p>
+    #   @return [String]
+    class SearchContactsTimestampCondition < Struct.new(
+      :type,
+      :condition_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure of search criteria to be used to return contacts.</p>
+    # @!attribute name
+    #   <p>Name of the contact.</p>
+    #   @return [Types::NameCriteria]
     # @!attribute agent_ids
     #   <p>The identifiers of agents who handled the contacts.</p>
     #   @return [Array<String>]
@@ -16239,6 +16530,12 @@ module Aws::Connect
     # @!attribute queue_ids
     #   <p>The list of queue IDs associated with contacts.</p>
     #   @return [Array<String>]
+    # @!attribute routing_criteria
+    #   <p>Routing criteria for the contact.</p>
+    #   @return [Types::SearchableRoutingCriteria]
+    # @!attribute additional_time_range
+    #   <p>Additional TimeRange used to filter contacts.</p>
+    #   @return [Types::SearchContactsAdditionalTimeRange]
     # @!attribute searchable_contact_attributes
     #   <p>The search criteria based on user-defined contact attributes that have been configured for
     #      contact search. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html">Search by custom contact
@@ -16253,12 +16550,15 @@ module Aws::Connect
     #   <p>The search criteria based on searchable segment attributes of a contact.</p>
     #   @return [Types::SearchableSegmentAttributes]
     class SearchCriteria < Struct.new(
+      :name,
       :agent_ids,
       :agent_hierarchy_groups,
       :channels,
       :contact_analysis,
       :initiation_methods,
       :queue_ids,
+      :routing_criteria,
+      :additional_time_range,
       :searchable_contact_attributes,
       :searchable_segment_attributes,
       keyword_init: true
@@ -16911,6 +17211,21 @@ module Aws::Connect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The agent criteria to search for preferred agents on the routing criteria.</p>
+    # @!attribute agent_ids
+    #   <p>The identifiers of agents used in preferred agents matching.</p>
+    #   @return [Array<String>]
+    # @!attribute match_type
+    #   <p>The match type combining multiple agent criteria steps.</p>
+    #   @return [String]
+    class SearchableAgentCriteriaStep < Struct.new(
+      :agent_ids,
+      :match_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that defines search criteria based on user-defined contact attributes that are
     #    configured for contact search.</p>
     # @!attribute criteria
@@ -16940,6 +17255,28 @@ module Aws::Connect
     class SearchableContactAttributesCriteria < Struct.new(
       :key,
       :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Routing criteria of the contact to match on.</p>
+    # @!attribute steps
+    #   <p>The list of Routing criteria steps of the contact routing.</p>
+    #   @return [Array<Types::SearchableRoutingCriteriaStep>]
+    class SearchableRoutingCriteria < Struct.new(
+      :steps,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Routing criteria of the contact to match on.</p>
+    # @!attribute agent_criteria
+    #   <p>Agent matching the routing step of the routing criteria</p>
+    #   @return [Types::SearchableAgentCriteriaStep]
+    class SearchableRoutingCriteriaStep < Struct.new(
+      :agent_criteria,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17167,10 +17504,20 @@ module Aws::Connect
     # @!attribute value_integer
     #   <p>The value of a segment attribute.</p>
     #   @return [Integer]
+    # @!attribute value_list
+    #   <p>The value of a segment attribute. This is only supported for system-defined attributes, not
+    #      for user-defined attributes.</p>
+    #   @return [Array<Types::SegmentAttributeValue>]
+    # @!attribute value_arn
+    #   <p>The value of a segment attribute that has to be a valid ARN. This is only supported for
+    #      system-defined attributes, not for user-defined attributes.</p>
+    #   @return [String]
     class SegmentAttributeValue < Struct.new(
       :value_string,
       :value_map,
       :value_integer,
+      :value_list,
+      :value_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19550,8 +19897,8 @@ module Aws::Connect
     #      They can be accessed in flows.</p>
     #            <p>Attribute keys can include only alphanumeric, -, and _.</p>
     #            <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>
-    #            <p>Currently Contact Expiry is the only segment attribute which can be updated by using the
-    #      UpdateContact API.</p>
+    #            <p>Contact Expiry, and user-defined attributes (String - String) that are defined in predefined
+    #      attributes, can be updated by using the UpdateContact API.</p>
     #   @return [Hash<String, Types::SegmentAttributeValue>]
     # @!attribute queue_info
     #   <p> Information about the queue associated with a contact. This parameter can only be updated
@@ -19796,7 +20143,7 @@ module Aws::Connect
     #   <p>The date from when the hours of operation override would be effective.</p>
     #   @return [String]
     # @!attribute effective_till
-    #   <p>The date till when the hours of operation override would be effective.</p>
+    #   <p>The date until the hours of operation override is effective.</p>
     #   @return [String]
     class UpdateHoursOfOperationOverrideRequest < Struct.new(
       :instance_id,
@@ -20049,10 +20396,20 @@ module Aws::Connect
     # @!attribute values
     #   <p>The values of the predefined attribute.</p>
     #   @return [Types::PredefinedAttributeValues]
+    # @!attribute purposes
+    #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Amazon Connect admin website.</p>
+    #   @return [Array<String>]
+    # @!attribute attribute_configuration
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
+    #   how a predefined attribute should be displayed in the Amazon Connect admin website.</p>
+    #   @return [Types::InputPredefinedAttributeConfiguration]
     class UpdatePredefinedAttributeRequest < Struct.new(
       :instance_id,
       :name,
       :values,
+      :purposes,
+      :attribute_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21117,11 +21474,15 @@ module Aws::Connect
     # @!attribute desk_phone_number
     #   <p>The phone number for the user's desk phone.</p>
     #   @return [String]
+    # @!attribute persistent_connection
+    #   <p>The persistent connection setting for the user.</p>
+    #   @return [Boolean]
     class UserPhoneConfig < Struct.new(
       :phone_type,
       :auto_accept,
       :after_contact_work_time_limit,
       :desk_phone_number,
+      :persistent_connection,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21129,6 +21490,7 @@ module Aws::Connect
       def initialize(options = {})
         options[:auto_accept] = false unless options.key?(:auto_accept)
         options[:after_contact_work_time_limit] = 0 unless options.key?(:after_contact_work_time_limit)
+        options[:persistent_connection] = nil unless options.key?(:persistent_connection)
         super
       end
     end

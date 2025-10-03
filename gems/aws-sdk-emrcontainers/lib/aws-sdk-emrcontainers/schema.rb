@@ -228,6 +228,7 @@ module Aws::EMRcontainers
     CreateManagedEndpointResponse.type = Types::CreateManagedEndpointResponse
     CreateSecurityConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateSecurityConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    CreateSecurityConfigurationRequest.add_member(:container_provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerProvider, location_name: 'containerProvider'))
     CreateSecurityConfigurationRequest.add_member(:security_configuration_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityConfigurationData, location_name: 'securityConfigurationData', traits: {"smithy.api#required" => {}}))
     CreateSecurityConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     CreateSecurityConfigurationRequest.type = Types::CreateSecurityConfigurationRequest
@@ -287,6 +288,7 @@ module Aws::EMRcontainers
     EKSRequestThrottledException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String1024, location_name: 'message'))
     EKSRequestThrottledException.type = Types::EKSRequestThrottledException
     EksInfo.add_member(:namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: 'namespace'))
+    EksInfo.add_member(:node_label, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNameString, location_name: 'nodeLabel'))
     EksInfo.type = Types::EksInfo
     EncryptionConfiguration.add_member(:in_transit_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InTransitEncryptionConfiguration, location_name: 'inTransitEncryptionConfiguration'))
     EncryptionConfiguration.type = Types::EncryptionConfiguration

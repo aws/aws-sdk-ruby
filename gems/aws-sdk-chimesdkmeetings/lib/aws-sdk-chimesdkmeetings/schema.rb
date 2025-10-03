@@ -56,6 +56,7 @@ module Aws::ChimeSDKMeetings
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkmeetings#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
     MediaCapabilities = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.chimesdkmeetings#MediaCapabilities', name: 'MediaCapabilities')
     MediaPlacement = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkmeetings#MediaPlacement', name: 'MediaPlacement')
+    MediaPlacementNetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.chimesdkmeetings#MediaPlacementNetworkType', name: 'MediaPlacementNetworkType')
     MediaRegion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.chimesdkmeetings#MediaRegion', name: 'MediaRegion', traits: {"smithy.api#length" => {"min" => 2, "max" => 64}})
     Meeting = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.chimesdkmeetings#Meeting', name: 'Meeting')
     MeetingFeatureStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.chimesdkmeetings#MeetingFeatureStatus', name: 'MeetingFeatureStatus')
@@ -171,6 +172,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingRequest.add_member(:primary_meeting_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: 'PrimaryMeetingId'))
     CreateMeetingRequest.add_member(:tenant_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TenantIdList, location_name: 'TenantIds'))
     CreateMeetingRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CreateMeetingRequest.add_member(:media_placement_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaPlacementNetworkType, location_name: 'MediaPlacementNetworkType'))
     CreateMeetingRequest.type = Types::CreateMeetingRequest
     CreateMeetingResponse.add_member(:meeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Meeting, location_name: 'Meeting'))
     CreateMeetingResponse.type = Types::CreateMeetingResponse
@@ -184,6 +186,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesRequest.add_member(:primary_meeting_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryMeetingId, location_name: 'PrimaryMeetingId'))
     CreateMeetingWithAttendeesRequest.add_member(:tenant_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TenantIdList, location_name: 'TenantIds'))
     CreateMeetingWithAttendeesRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CreateMeetingWithAttendeesRequest.add_member(:media_placement_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaPlacementNetworkType, location_name: 'MediaPlacementNetworkType'))
     CreateMeetingWithAttendeesRequest.type = Types::CreateMeetingWithAttendeesRequest
     CreateMeetingWithAttendeesRequestItemList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateAttendeeRequestItem)
     CreateMeetingWithAttendeesResponse.add_member(:meeting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Meeting, location_name: 'Meeting'))
@@ -260,6 +263,8 @@ module Aws::ChimeSDKMeetings
     MediaPlacement.add_member(:screen_sharing_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ScreenSharingUrl'))
     MediaPlacement.add_member(:event_ingestion_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'EventIngestionUrl'))
     MediaPlacement.type = Types::MediaPlacement
+    MediaPlacementNetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4_ONLY', traits: {"smithy.api#enumValue" => "Ipv4Only"}))
+    MediaPlacementNetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DUAL_STACK', traits: {"smithy.api#enumValue" => "DualStack"}))
     Meeting.add_member(:meeting_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuidString, location_name: 'MeetingId'))
     Meeting.add_member(:meeting_host_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExternalUserId, location_name: 'MeetingHostId'))
     Meeting.add_member(:external_meeting_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExternalMeetingId, location_name: 'ExternalMeetingId'))

@@ -2915,6 +2915,14 @@ module Aws::Redshift
     # @!attribute service_integrations
     #   <p>A collection of service integrations for the Redshift IAM Identity Center application.</p>
     #   @return [Array<Types::ServiceIntegrationsUnion>]
+    # @!attribute tags
+    #   <p>A list of tags.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute sso_tag_keys
+    #   <p>A list of tags keys that Redshift Identity Center applications copy to IAM Identity
+    #               Center. For each input key, the tag corresponding to the key-value pair is
+    #               propagated.</p>
+    #   @return [Array<String>]
     class CreateRedshiftIdcApplicationMessage < Struct.new(
       :idc_instance_arn,
       :redshift_idc_application_name,
@@ -2923,6 +2931,8 @@ module Aws::Redshift
       :iam_role_arn,
       :authorized_token_issuer_list,
       :service_integrations,
+      :tags,
+      :sso_tag_keys,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9633,6 +9643,14 @@ module Aws::Redshift
     # @!attribute service_integrations
     #   <p>A list of service integrations for the Redshift IAM Identity Center application.</p>
     #   @return [Array<Types::ServiceIntegrationsUnion>]
+    # @!attribute tags
+    #   <p>A list of tags.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute sso_tag_keys
+    #   <p>A list of tags keys that Redshift Identity Center applications copy to IAM Identity
+    #               Center. For each input key, the tag corresponding to the key-value pair is
+    #               propagated.</p>
+    #   @return [Array<String>]
     class RedshiftIdcApplication < Struct.new(
       :idc_instance_arn,
       :redshift_idc_application_name,
@@ -9644,6 +9662,8 @@ module Aws::Redshift
       :idc_onboard_status,
       :authorized_token_issuer_list,
       :service_integrations,
+      :tags,
+      :sso_tag_keys,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

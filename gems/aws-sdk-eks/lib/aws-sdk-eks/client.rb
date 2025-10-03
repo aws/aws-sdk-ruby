@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::EKS
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::EKS
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::EKS
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::EKS::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::EKS::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -272,7 +277,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -343,7 +348,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -1345,7 +1350,19 @@ module Aws::EKS
     #       update_strategy: "DEFAULT" # One of: ["DEFAULT", "MINIMAL"]
     #     },
     #     node_repair_config: {
-    #       enabled: false
+    #       enabled: false,
+    #       max_unhealthy_node_threshold_count: 1,
+    #       max_unhealthy_node_threshold_percentage: 1,
+    #       max_parallel_nodes_repaired_count: 1,
+    #       max_parallel_nodes_repaired_percentage: 1,
+    #       node_repair_config_overrides: [
+    #         {
+    #           node_monitoring_condition: "String",
+    #           node_unhealthy_reason: "String",
+    #           min_repair_wait_time_mins: 1,
+    #           repair_action: "Replace" # One of: ["Replace", "Reboot", "NoAction"]
+    #         }
+    #       ]
     #     },
     #     capacity_type: "ON_DEMAND" # One of: ["ON_DEMAND", "SPOT", "CAPACITY_BLOCK"],
     #     version: "String",
@@ -1413,7 +1430,19 @@ module Aws::EKS
     #         update_strategy: "DEFAULT" # One of: ["DEFAULT", "MINIMAL"]
     #       },
     #       node_repair_config: {
-    #         enabled: false
+    #         enabled: false,
+    #         max_unhealthy_node_threshold_count: 1,
+    #         max_unhealthy_node_threshold_percentage: 1,
+    #         max_parallel_nodes_repaired_count: 1,
+    #         max_parallel_nodes_repaired_percentage: 1,
+    #         node_repair_config_overrides: [
+    #           {
+    #             node_monitoring_condition: "String",
+    #             node_unhealthy_reason: "String",
+    #             min_repair_wait_time_mins: 1,
+    #             repair_action: "Replace" # One of: ["Replace", "Reboot", "NoAction"]
+    #           }
+    #         ]
     #       },
     #       launch_template: {
     #         name: "String",
@@ -1996,7 +2025,19 @@ module Aws::EKS
     #         update_strategy: "DEFAULT" # One of: ["DEFAULT", "MINIMAL"]
     #       },
     #       node_repair_config: {
-    #         enabled: false
+    #         enabled: false,
+    #         max_unhealthy_node_threshold_count: 1,
+    #         max_unhealthy_node_threshold_percentage: 1,
+    #         max_parallel_nodes_repaired_count: 1,
+    #         max_parallel_nodes_repaired_percentage: 1,
+    #         node_repair_config_overrides: [
+    #           {
+    #             node_monitoring_condition: "String",
+    #             node_unhealthy_reason: "String",
+    #             min_repair_wait_time_mins: 1,
+    #             repair_action: "Replace" # One of: ["Replace", "Reboot", "NoAction"]
+    #           }
+    #         ]
     #       },
     #       launch_template: {
     #         name: "String",
@@ -2951,7 +2992,19 @@ module Aws::EKS
     #         update_strategy: "DEFAULT" # One of: ["DEFAULT", "MINIMAL"]
     #       },
     #       node_repair_config: {
-    #         enabled: false
+    #         enabled: false,
+    #         max_unhealthy_node_threshold_count: 1,
+    #         max_unhealthy_node_threshold_percentage: 1,
+    #         max_parallel_nodes_repaired_count: 1,
+    #         max_parallel_nodes_repaired_percentage: 1,
+    #         node_repair_config_overrides: [
+    #           {
+    #             node_monitoring_condition: "String",
+    #             node_unhealthy_reason: "String",
+    #             min_repair_wait_time_mins: 1,
+    #             repair_action: "Replace" # One of: ["Replace", "Reboot", "NoAction"]
+    #           }
+    #         ]
     #       },
     #       launch_template: {
     #         name: "String",
@@ -3047,7 +3100,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -3125,7 +3178,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -4184,7 +4237,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -4386,7 +4439,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -4447,7 +4500,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -4583,7 +4636,19 @@ module Aws::EKS
     #       update_strategy: "DEFAULT" # One of: ["DEFAULT", "MINIMAL"]
     #     },
     #     node_repair_config: {
-    #       enabled: false
+    #       enabled: false,
+    #       max_unhealthy_node_threshold_count: 1,
+    #       max_unhealthy_node_threshold_percentage: 1,
+    #       max_parallel_nodes_repaired_count: 1,
+    #       max_parallel_nodes_repaired_percentage: 1,
+    #       node_repair_config_overrides: [
+    #         {
+    #           node_monitoring_condition: "String",
+    #           node_unhealthy_reason: "String",
+    #           min_repair_wait_time_mins: 1,
+    #           repair_action: "Replace" # One of: ["Replace", "Reboot", "NoAction"]
+    #         }
+    #       ]
     #     },
     #     client_request_token: "String"
     #   }
@@ -4598,7 +4663,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],
@@ -4699,7 +4764,7 @@ module Aws::EKS
     #       type: "VersionUpdate" # One of: ["VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate", "UpgradePolicyUpdate", "ZonalShiftConfigUpdate", "AutoModeUpdate", "RemoteNetworkConfigUpdate", "DeletionProtectionUpdate"],
     #       params: [
     #         {
-    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection"],
+    #           type: "Version" # One of: ["Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "NodeRepairEnabled", "UpdateStrategy", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations", "UpgradePolicy", "ZonalShiftConfig", "ComputeConfig", "StorageConfig", "KubernetesNetworkConfig", "RemoteNetworkConfig", "DeletionProtection", "NodeRepairConfig"],
     #           value: "String"
     #         }
     #       ],

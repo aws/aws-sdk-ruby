@@ -14,6 +14,7 @@ module Aws::Amp
     AmpConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#AmpConfiguration', name: 'AmpConfiguration')
     CloudWatchLogDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#CloudWatchLogDestination', name: 'CloudWatchLogDestination')
     ClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ClusterArn', name: 'ClusterArn', traits: {"aws.api#arnReference" => {"type" => "AWS::EKS::Cluster"}, "smithy.api#pattern" => "^arn:aws[-a-z]*:eks:[-a-z0-9]+:[0-9]{12}:cluster/.+$"})
+    ComponentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ComponentConfig', name: 'ComponentConfig')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#CreateAlertManagerDefinitionInput', name: 'CreateAlertManagerDefinitionInput')
     CreateAlertManagerDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#CreateAlertManagerDefinitionOutput', name: 'CreateAlertManagerDefinitionOutput')
@@ -32,6 +33,7 @@ module Aws::Amp
     DeleteQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteQueryLoggingConfigurationRequest', name: 'DeleteQueryLoggingConfigurationRequest')
     DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteResourcePolicyRequest', name: 'DeleteResourcePolicyRequest')
     DeleteRuleGroupsNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteRuleGroupsNamespaceInput', name: 'DeleteRuleGroupsNamespaceInput')
+    DeleteScraperLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteScraperLoggingConfigurationRequest', name: 'DeleteScraperLoggingConfigurationRequest')
     DeleteScraperRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteScraperRequest', name: 'DeleteScraperRequest')
     DeleteScraperResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteScraperResponse', name: 'DeleteScraperResponse')
     DeleteWorkspaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DeleteWorkspaceInput', name: 'DeleteWorkspaceInput')
@@ -45,6 +47,8 @@ module Aws::Amp
     DescribeResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeResourcePolicyResponse', name: 'DescribeResourcePolicyResponse')
     DescribeRuleGroupsNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeRuleGroupsNamespaceInput', name: 'DescribeRuleGroupsNamespaceInput')
     DescribeRuleGroupsNamespaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeRuleGroupsNamespaceOutput', name: 'DescribeRuleGroupsNamespaceOutput')
+    DescribeScraperLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeScraperLoggingConfigurationRequest', name: 'DescribeScraperLoggingConfigurationRequest')
+    DescribeScraperLoggingConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeScraperLoggingConfigurationResponse', name: 'DescribeScraperLoggingConfigurationResponse')
     DescribeScraperRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeScraperRequest', name: 'DescribeScraperRequest')
     DescribeScraperResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeScraperResponse', name: 'DescribeScraperResponse')
     DescribeWorkspaceConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#DescribeWorkspaceConfigurationRequest', name: 'DescribeWorkspaceConfigurationRequest')
@@ -98,7 +102,7 @@ module Aws::Amp
     RuleGroupsNamespaceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceArn', name: 'RuleGroupsNamespaceArn', traits: {"aws.api#arnReference" => {"type" => "AWS::APS::RuleGroupsNamespace", "service" => "ManagedPrometheusCP", "resource" => "RuleGroupsNamespace"}})
     RuleGroupsNamespaceData = ::Smithy::Schema::Shapes::BlobShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceData', name: 'RuleGroupsNamespaceData')
     RuleGroupsNamespaceDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceDescription', name: 'RuleGroupsNamespaceDescription')
-    RuleGroupsNamespaceName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceName', name: 'RuleGroupsNamespaceName', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[0-9A-Za-z][-.0-9A-Z_a-z]*"})
+    RuleGroupsNamespaceName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceName', name: 'RuleGroupsNamespaceName', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "[0-9A-Za-z][-.0-9A-Z_a-z]*"})
     RuleGroupsNamespaceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceStatus', name: 'RuleGroupsNamespaceStatus')
     RuleGroupsNamespaceStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceStatusCode', name: 'RuleGroupsNamespaceStatusCode', traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Namespace is being created. Update/Deletion is disallowed until namespace is ACTIVE and workspace status is ACTIVE."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Namespace has been created/updated. Update/Deletion is disallowed until namespace is ACTIVE and workspace status is ACTIVE."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Namespace is being updated. Update/Deletion is disallowed until namespace is ACTIVE and workspace status is ACTIVE."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Namespace is being deleting. Update/Deletion is disallowed until namespace is ACTIVE and workspace status is ACTIVE."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Namespace creation failed."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Namespace update failed."}]})
     RuleGroupsNamespaceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#RuleGroupsNamespaceSummary', name: 'RuleGroupsNamespaceSummary')
@@ -106,9 +110,15 @@ module Aws::Amp
     ScrapeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.amp#ScrapeConfiguration', name: 'ScrapeConfiguration')
     ScraperAlias = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ScraperAlias', name: 'ScraperAlias', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"})
     ScraperArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ScraperArn', name: 'ScraperArn', traits: {"aws.api#arnReference" => {"type" => "AWS::APS::Scraper", "service" => "ManagedPrometheusCP", "resource" => "Scraper"}})
+    ScraperComponent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ScraperComponent', name: 'ScraperComponent')
+    ScraperComponentType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ScraperComponentType', name: 'ScraperComponentType', traits: {"smithy.api#enum" => [{"name" => "SERVICE_DISCOVERY", "value" => "SERVICE_DISCOVERY", "documentation" => "Scraper service discoverer component"}, {"name" => "COLLECTOR", "value" => "COLLECTOR", "documentation" => "Scraper collector component"}, {"name" => "EXPORTER", "value" => "EXPORTER", "documentation" => "Scraper exporter component"}]})
+    ScraperComponents = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.amp#ScraperComponents', name: 'ScraperComponents', traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#uniqueItems" => {}})
     ScraperDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ScraperDescription', name: 'ScraperDescription', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.amp#Scraper"}]})
     ScraperFilters = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.amp#ScraperFilters', name: 'ScraperFilters', traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
     ScraperId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ScraperId', name: 'ScraperId', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"})
+    ScraperLoggingConfigurationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ScraperLoggingConfigurationStatus', name: 'ScraperLoggingConfigurationStatus')
+    ScraperLoggingConfigurationStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ScraperLoggingConfigurationStatusCode', name: 'ScraperLoggingConfigurationStatusCode', traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Scraper logging configuration is being created."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Scraper logging configuration is active."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Scraper logging configuration is being updated."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Scraper logging configuration is being deleted."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Scraper logging configuration creation failed."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Scraper logging configuration update failed."}]})
+    ScraperLoggingDestination = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.amp#ScraperLoggingDestination', name: 'ScraperLoggingDestination')
     ScraperStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ScraperStatus', name: 'ScraperStatus')
     ScraperStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#ScraperStatusCode', name: 'ScraperStatusCode', traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Scraper is being created. Deletion is disallowed until status is ACTIVE."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Scraper is being updated. Deletion is disallowed until status is ACTIVE."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Scraper has been created and is usable."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Scraper is being deleted. Deletions are allowed only when status is ACTIVE."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Scraper creation failed."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Scraper update failed."}, {"name" => "DELETION_FAILED", "value" => "DELETION_FAILED", "documentation" => "Scraper deletion failed."}]})
     ScraperSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ScraperSummary', name: 'ScraperSummary', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.amp#Scraper"}]})
@@ -118,6 +128,7 @@ module Aws::Amp
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     Source = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.amp#Source', name: 'Source')
     StatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#StatusReason', name: 'StatusReason', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    StringMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.amp#StringMap', name: 'StringMap')
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#SubnetId', name: 'SubnetId', traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^subnet-[0-9a-z]+$"})
     SubnetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.amp#SubnetIds', name: 'SubnetIds', traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.amp#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
@@ -133,6 +144,8 @@ module Aws::Amp
     UpdateLoggingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateLoggingConfigurationOutput', name: 'UpdateLoggingConfigurationOutput')
     UpdateQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateQueryLoggingConfigurationRequest', name: 'UpdateQueryLoggingConfigurationRequest')
     UpdateQueryLoggingConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateQueryLoggingConfigurationResponse', name: 'UpdateQueryLoggingConfigurationResponse')
+    UpdateScraperLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateScraperLoggingConfigurationRequest', name: 'UpdateScraperLoggingConfigurationRequest')
+    UpdateScraperLoggingConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateScraperLoggingConfigurationResponse', name: 'UpdateScraperLoggingConfigurationResponse')
     UpdateScraperRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateScraperRequest', name: 'UpdateScraperRequest')
     UpdateScraperResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateScraperResponse', name: 'UpdateScraperResponse')
     UpdateWorkspaceAliasInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.amp#UpdateWorkspaceAliasInput', name: 'UpdateWorkspaceAliasInput')
@@ -170,6 +183,8 @@ module Aws::Amp
     AmpConfiguration.type = Types::AmpConfiguration
     CloudWatchLogDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: 'logGroupArn', traits: {"smithy.api#required" => {}}))
     CloudWatchLogDestination.type = Types::CloudWatchLogDestination
+    ComponentConfig.add_member(:options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringMap, location_name: 'options'))
+    ComponentConfig.type = Types::ComponentConfig
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceId', traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'resourceType', traits: {"smithy.api#required" => {}}))
@@ -244,6 +259,9 @@ module Aws::Amp
     DeleteRuleGroupsNamespaceInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, location_name: 'name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRuleGroupsNamespaceInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteRuleGroupsNamespaceInput.type = Types::DeleteRuleGroupsNamespaceInput
+    DeleteScraperLoggingConfigurationRequest.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteScraperLoggingConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteScraperLoggingConfigurationRequest.type = Types::DeleteScraperLoggingConfigurationRequest
     DeleteScraperRequest.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteScraperRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteScraperRequest.type = Types::DeleteScraperRequest
@@ -276,6 +294,14 @@ module Aws::Amp
     DescribeRuleGroupsNamespaceInput.type = Types::DescribeRuleGroupsNamespaceInput
     DescribeRuleGroupsNamespaceOutput.add_member(:rule_groups_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleGroupsNamespaceDescription, location_name: 'ruleGroupsNamespace', traits: {"smithy.api#required" => {}}))
     DescribeRuleGroupsNamespaceOutput.type = Types::DescribeRuleGroupsNamespaceOutput
+    DescribeScraperLoggingConfigurationRequest.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeScraperLoggingConfigurationRequest.type = Types::DescribeScraperLoggingConfigurationRequest
+    DescribeScraperLoggingConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperLoggingConfigurationStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    DescribeScraperLoggingConfigurationResponse.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#required" => {}}))
+    DescribeScraperLoggingConfigurationResponse.add_member(:logging_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperLoggingDestination, location_name: 'loggingDestination', traits: {"smithy.api#required" => {}}))
+    DescribeScraperLoggingConfigurationResponse.add_member(:scraper_components, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperComponents, location_name: 'scraperComponents', traits: {"smithy.api#required" => {}}))
+    DescribeScraperLoggingConfigurationResponse.add_member(:modified_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'modifiedAt', traits: {"smithy.api#required" => {}}))
+    DescribeScraperLoggingConfigurationResponse.type = Types::DescribeScraperLoggingConfigurationResponse
     DescribeScraperRequest.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeScraperRequest.type = Types::DescribeScraperRequest
     DescribeScraperResponse.add_member(:scraper, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperDescription, location_name: 'scraper', traits: {"smithy.api#required" => {}}))
@@ -413,6 +439,10 @@ module Aws::Amp
     ScrapeConfiguration.add_member(:configuration_blob, Types::ScrapeConfiguration::ConfigurationBlob, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Blob, location_name: 'configurationBlob'))
     ScrapeConfiguration.add_member(:unknown, Types::ScrapeConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     ScrapeConfiguration.type = Types::ScrapeConfiguration
+    ScraperComponent.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperComponentType, location_name: 'type', traits: {"smithy.api#required" => {}}))
+    ScraperComponent.add_member(:config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComponentConfig, location_name: 'config'))
+    ScraperComponent.type = Types::ScraperComponent
+    ScraperComponents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperComponent)
     ScraperDescription.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperAlias, location_name: 'alias'))
     ScraperDescription.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#required" => {}}))
     ScraperDescription.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
@@ -429,6 +459,12 @@ module Aws::Amp
     ScraperDescription.type = Types::ScraperDescription
     ScraperFilters.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterKey)
     ScraperFilters.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterValues)
+    ScraperLoggingConfigurationStatus.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperLoggingConfigurationStatusCode, location_name: 'statusCode', traits: {"smithy.api#required" => {}}))
+    ScraperLoggingConfigurationStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'statusReason'))
+    ScraperLoggingConfigurationStatus.type = Types::ScraperLoggingConfigurationStatus
+    ScraperLoggingDestination.add_member(:cloud_watch_logs, Types::ScraperLoggingDestination::CloudWatchLogs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CloudWatchLogDestination, location_name: 'cloudWatchLogs'))
+    ScraperLoggingDestination.add_member(:unknown, Types::ScraperLoggingDestination::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ScraperLoggingDestination.type = Types::ScraperLoggingDestination
     ScraperStatus.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperStatusCode, location_name: 'statusCode', traits: {"smithy.api#required" => {}}))
     ScraperStatus.type = Types::ScraperStatus
     ScraperSummary.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperAlias, location_name: 'alias'))
@@ -455,6 +491,8 @@ module Aws::Amp
     Source.add_member(:eks_configuration, Types::Source::EksConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EksConfiguration, location_name: 'eksConfiguration'))
     Source.add_member(:unknown, Types::Source::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     Source.type = Types::Source
+    StringMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
+    StringMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
     TagKeys.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
     TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
@@ -484,6 +522,12 @@ module Aws::Amp
     UpdateQueryLoggingConfigurationRequest.type = Types::UpdateQueryLoggingConfigurationRequest
     UpdateQueryLoggingConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueryLoggingConfigurationStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     UpdateQueryLoggingConfigurationResponse.type = Types::UpdateQueryLoggingConfigurationResponse
+    UpdateScraperLoggingConfigurationRequest.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateScraperLoggingConfigurationRequest.add_member(:logging_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperLoggingDestination, location_name: 'loggingDestination', traits: {"smithy.api#required" => {}}))
+    UpdateScraperLoggingConfigurationRequest.add_member(:scraper_components, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperComponents, location_name: 'scraperComponents'))
+    UpdateScraperLoggingConfigurationRequest.type = Types::UpdateScraperLoggingConfigurationRequest
+    UpdateScraperLoggingConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperLoggingConfigurationStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    UpdateScraperLoggingConfigurationResponse.type = Types::UpdateScraperLoggingConfigurationResponse
     UpdateScraperRequest.add_member(:scraper_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperId, location_name: 'scraperId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateScraperRequest.add_member(:alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScraperAlias, location_name: 'alias'))
     UpdateScraperRequest.add_member(:scrape_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScrapeConfiguration, location_name: 'scrapeConfiguration'))
@@ -701,6 +745,18 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/scrapers/{scraperId}"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_scraper_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#DeleteScraperLoggingConfiguration"
+        operation.name = "DeleteScraperLoggingConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteScraperLoggingConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/scrapers/{scraperId}/logging-configuration"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_workspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#DeleteWorkspace"
         operation.name = "DeleteWorkspace"
@@ -783,6 +839,17 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/scrapers/{scraperId}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_scraper_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#DescribeScraperLoggingConfiguration"
+        operation.name = "DescribeScraperLoggingConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScraperLoggingConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeScraperLoggingConfigurationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/scrapers/{scraperId}/logging-configuration"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_workspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#DescribeWorkspace"
@@ -969,6 +1036,18 @@ module Aws::Amp
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/scrapers/{scraperId}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_scraper_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#UpdateScraperLoggingConfiguration"
+        operation.name = "UpdateScraperLoggingConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateScraperLoggingConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateScraperLoggingConfigurationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/scrapers/{scraperId}/logging-configuration"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_workspace_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#UpdateWorkspaceAlias"

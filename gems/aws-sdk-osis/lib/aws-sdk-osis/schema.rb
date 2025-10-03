@@ -7,6 +7,7 @@ module Aws::OSIS
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AwsAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#AwsAccountId', name: 'AwsAccountId', traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\\\d{12}$"})
     BlueprintFormat = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#BlueprintFormat', name: 'BlueprintFormat', traits: {"smithy.api#pattern" => "^(YAML|JSON)$"})
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.osis#Boolean', name: 'Boolean')
     BufferOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#BufferOptions', name: 'BufferOptions')
@@ -19,10 +20,16 @@ module Aws::OSIS
     CidrBlock = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#CidrBlock', name: 'CidrBlock', traits: {"smithy.api#pattern" => "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"})
     CloudWatchLogDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#CloudWatchLogDestination', name: 'CloudWatchLogDestination')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    CreatePipelineEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#CreatePipelineEndpointRequest', name: 'CreatePipelineEndpointRequest')
+    CreatePipelineEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#CreatePipelineEndpointResponse', name: 'CreatePipelineEndpointResponse')
     CreatePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#CreatePipelineRequest', name: 'CreatePipelineRequest')
     CreatePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#CreatePipelineResponse', name: 'CreatePipelineResponse')
+    DeletePipelineEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DeletePipelineEndpointRequest', name: 'DeletePipelineEndpointRequest')
+    DeletePipelineEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DeletePipelineEndpointResponse', name: 'DeletePipelineEndpointResponse')
     DeletePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DeletePipelineRequest', name: 'DeletePipelineRequest')
     DeletePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DeletePipelineResponse', name: 'DeletePipelineResponse')
+    DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DeleteResourcePolicyRequest', name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DeleteResourcePolicyResponse', name: 'DeleteResourcePolicyResponse')
     DisabledOperationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#DisabledOperationException', name: 'DisabledOperationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     EncryptionAtRestOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#EncryptionAtRestOptions', name: 'EncryptionAtRestOptions')
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#ErrorMessage', name: 'ErrorMessage')
@@ -32,6 +39,8 @@ module Aws::OSIS
     GetPipelineChangeProgressResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#GetPipelineChangeProgressResponse', name: 'GetPipelineChangeProgressResponse')
     GetPipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#GetPipelineRequest', name: 'GetPipelineRequest')
     GetPipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#GetPipelineResponse', name: 'GetPipelineResponse')
+    GetResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#GetResourcePolicyRequest', name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#GetResourcePolicyResponse', name: 'GetResourcePolicyResponse')
     IngestEndpointUrlsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#IngestEndpointUrlsList', name: 'IngestEndpointUrlsList')
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.osis#Integer', name: 'Integer', traits: {"smithy.api#default" => 0})
     InternalException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#InternalException', name: 'InternalException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
@@ -40,6 +49,10 @@ module Aws::OSIS
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#LimitExceededException', name: 'LimitExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ListPipelineBlueprintsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelineBlueprintsRequest', name: 'ListPipelineBlueprintsRequest')
     ListPipelineBlueprintsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelineBlueprintsResponse', name: 'ListPipelineBlueprintsResponse')
+    ListPipelineEndpointConnectionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelineEndpointConnectionsRequest', name: 'ListPipelineEndpointConnectionsRequest')
+    ListPipelineEndpointConnectionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelineEndpointConnectionsResponse', name: 'ListPipelineEndpointConnectionsResponse')
+    ListPipelineEndpointsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelineEndpointsRequest', name: 'ListPipelineEndpointsRequest')
+    ListPipelineEndpointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelineEndpointsResponse', name: 'ListPipelineEndpointsResponse')
     ListPipelinesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelinesRequest', name: 'ListPipelinesRequest')
     ListPipelinesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListPipelinesResponse', name: 'ListPipelinesResponse')
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
@@ -56,6 +69,14 @@ module Aws::OSIS
     PipelineConfigurationBody = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#PipelineConfigurationBody', name: 'PipelineConfigurationBody', traits: {"smithy.api#length" => {"min" => 1, "max" => 24000}})
     PipelineDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PipelineDestination', name: 'PipelineDestination')
     PipelineDestinationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#PipelineDestinationList', name: 'PipelineDestinationList')
+    PipelineEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PipelineEndpoint', name: 'PipelineEndpoint')
+    PipelineEndpointConnection = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PipelineEndpointConnection', name: 'PipelineEndpointConnection')
+    PipelineEndpointConnectionsSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#PipelineEndpointConnectionsSummaryList', name: 'PipelineEndpointConnectionsSummaryList')
+    PipelineEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#PipelineEndpointId', name: 'PipelineEndpointId', traits: {"smithy.api#length" => {"min" => 3, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9-_]+$"})
+    PipelineEndpointIdsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#PipelineEndpointIdsList', name: 'PipelineEndpointIdsList')
+    PipelineEndpointStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.osis#PipelineEndpointStatus', name: 'PipelineEndpointStatus')
+    PipelineEndpointVpcOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PipelineEndpointVpcOptions', name: 'PipelineEndpointVpcOptions')
+    PipelineEndpointsSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#PipelineEndpointsSummaryList', name: 'PipelineEndpointsSummaryList')
     PipelineName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#PipelineName', name: 'PipelineName', traits: {"smithy.api#length" => {"min" => 3, "max" => 28}, "smithy.api#pattern" => "^[a-z][a-z0-9\\-]+$"})
     PipelineRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#PipelineRoleArn', name: 'PipelineRoleArn', traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$"})
     PipelineStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.osis#PipelineStatus', name: 'PipelineStatus')
@@ -63,8 +84,13 @@ module Aws::OSIS
     PipelineSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PipelineSummary', name: 'PipelineSummary')
     PipelineSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#PipelineSummaryList', name: 'PipelineSummaryList')
     PipelineUnits = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.osis#PipelineUnits', name: 'PipelineUnits', traits: {"smithy.api#range" => {"min" => 1}})
+    PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PutResourcePolicyRequest', name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#PutResourcePolicyResponse', name: 'PutResourcePolicyResponse')
     ResourceAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ResourceAlreadyExistsException', name: 'ResourceAlreadyExistsException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourcePolicy = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#ResourcePolicy', name: 'ResourcePolicy', traits: {"smithy.api#length" => {"min" => 2, "max" => 204800}})
+    RevokePipelineEndpointConnectionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#RevokePipelineEndpointConnectionsRequest', name: 'RevokePipelineEndpointConnectionsRequest')
+    RevokePipelineEndpointConnectionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#RevokePipelineEndpointConnectionsResponse', name: 'RevokePipelineEndpointConnectionsResponse')
     SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.osis#SecurityGroupId', name: 'SecurityGroupId', traits: {"smithy.api#length" => {"min" => 11, "max" => 20}, "smithy.api#pattern" => "^sg-\\w{8}(\\w{9})?$"})
     SecurityGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.osis#SecurityGroupIds', name: 'SecurityGroupIds', traits: {"smithy.api#length" => {"min" => 1, "max" => 12}})
     ServiceVpcEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.osis#ServiceVpcEndpoint', name: 'ServiceVpcEndpoint')
@@ -128,6 +154,14 @@ module Aws::OSIS
     CloudWatchLogDestination.type = Types::CloudWatchLogDestination
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     ConflictException.type = Types::ConflictException
+    CreatePipelineEndpointRequest.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'PipelineArn', traits: {"smithy.api#required" => {}}))
+    CreatePipelineEndpointRequest.add_member(:vpc_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointVpcOptions, location_name: 'VpcOptions', traits: {"smithy.api#required" => {}}))
+    CreatePipelineEndpointRequest.type = Types::CreatePipelineEndpointRequest
+    CreatePipelineEndpointResponse.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'PipelineArn'))
+    CreatePipelineEndpointResponse.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: 'EndpointId'))
+    CreatePipelineEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointStatus, location_name: 'Status'))
+    CreatePipelineEndpointResponse.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'VpcId'))
+    CreatePipelineEndpointResponse.type = Types::CreatePipelineEndpointResponse
     CreatePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineName, location_name: 'PipelineName', traits: {"smithy.api#required" => {}}))
     CreatePipelineRequest.add_member(:min_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineUnits, location_name: 'MinUnits', traits: {"smithy.api#required" => {}}))
     CreatePipelineRequest.add_member(:max_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineUnits, location_name: 'MaxUnits', traits: {"smithy.api#required" => {}}))
@@ -141,9 +175,15 @@ module Aws::OSIS
     CreatePipelineRequest.type = Types::CreatePipelineRequest
     CreatePipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: 'Pipeline'))
     CreatePipelineResponse.type = Types::CreatePipelineResponse
+    DeletePipelineEndpointRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: 'EndpointId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePipelineEndpointRequest.type = Types::DeletePipelineEndpointRequest
+    DeletePipelineEndpointResponse.type = Types::DeletePipelineEndpointResponse
     DeletePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineName, location_name: 'PipelineName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePipelineRequest.type = Types::DeletePipelineRequest
     DeletePipelineResponse.type = Types::DeletePipelineResponse
+    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'ResourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
+    DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
     DisabledOperationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     DisabledOperationException.type = Types::DisabledOperationException
     EncryptionAtRestOptions.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: 'KmsKeyArn', traits: {"smithy.api#required" => {}}))
@@ -162,6 +202,11 @@ module Aws::OSIS
     GetPipelineRequest.type = Types::GetPipelineRequest
     GetPipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Pipeline, location_name: 'Pipeline'))
     GetPipelineResponse.type = Types::GetPipelineResponse
+    GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'ResourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
+    GetResourcePolicyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'ResourceArn'))
+    GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: 'Policy'))
+    GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
     IngestEndpointUrlsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
     InternalException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     InternalException.type = Types::InternalException
@@ -172,6 +217,18 @@ module Aws::OSIS
     ListPipelineBlueprintsRequest.type = Types::ListPipelineBlueprintsRequest
     ListPipelineBlueprintsResponse.add_member(:blueprints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineBlueprintsSummaryList, location_name: 'Blueprints'))
     ListPipelineBlueprintsResponse.type = Types::ListPipelineBlueprintsResponse
+    ListPipelineEndpointConnectionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListPipelineEndpointConnectionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListPipelineEndpointConnectionsRequest.type = Types::ListPipelineEndpointConnectionsRequest
+    ListPipelineEndpointConnectionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListPipelineEndpointConnectionsResponse.add_member(:pipeline_endpoint_connections, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointConnectionsSummaryList, location_name: 'PipelineEndpointConnections'))
+    ListPipelineEndpointConnectionsResponse.type = Types::ListPipelineEndpointConnectionsResponse
+    ListPipelineEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListPipelineEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListPipelineEndpointsRequest.type = Types::ListPipelineEndpointsRequest
+    ListPipelineEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListPipelineEndpointsResponse.add_member(:pipeline_endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointsSummaryList, location_name: 'PipelineEndpoints'))
+    ListPipelineEndpointsResponse.type = Types::ListPipelineEndpointsResponse
     ListPipelinesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListPipelinesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListPipelinesRequest.type = Types::ListPipelinesRequest
@@ -223,6 +280,30 @@ module Aws::OSIS
     PipelineDestination.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Endpoint'))
     PipelineDestination.type = Types::PipelineDestination
     PipelineDestinationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineDestination)
+    PipelineEndpoint.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'PipelineArn'))
+    PipelineEndpoint.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: 'EndpointId'))
+    PipelineEndpoint.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointStatus, location_name: 'Status'))
+    PipelineEndpoint.add_member(:vpc_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'VpcId'))
+    PipelineEndpoint.add_member(:vpc_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointVpcOptions, location_name: 'VpcOptions'))
+    PipelineEndpoint.add_member(:ingest_endpoint_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'IngestEndpointUrl'))
+    PipelineEndpoint.type = Types::PipelineEndpoint
+    PipelineEndpointConnection.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'PipelineArn'))
+    PipelineEndpointConnection.add_member(:endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointId, location_name: 'EndpointId'))
+    PipelineEndpointConnection.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointStatus, location_name: 'Status'))
+    PipelineEndpointConnection.add_member(:vpc_endpoint_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccountId, location_name: 'VpcEndpointOwner'))
+    PipelineEndpointConnection.type = Types::PipelineEndpointConnection
+    PipelineEndpointConnectionsSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointConnection)
+    PipelineEndpointIdsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointId)
+    PipelineEndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
+    PipelineEndpointStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    PipelineEndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    PipelineEndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETING', traits: {"smithy.api#enumValue" => "DELETING"}))
+    PipelineEndpointStatus.add_member(:revoking, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REVOKING', traits: {"smithy.api#enumValue" => "REVOKING"}))
+    PipelineEndpointStatus.add_member(:revoked, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REVOKED', traits: {"smithy.api#enumValue" => "REVOKED"}))
+    PipelineEndpointVpcOptions.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: 'SubnetIds'))
+    PipelineEndpointVpcOptions.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: 'SecurityGroupIds'))
+    PipelineEndpointVpcOptions.type = Types::PipelineEndpointVpcOptions
+    PipelineEndpointsSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpoint)
     PipelineStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
     PipelineStatus.add_member(:active, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACTIVE', traits: {"smithy.api#enumValue" => "ACTIVE"}))
     PipelineStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -247,10 +328,21 @@ module Aws::OSIS
     PipelineSummary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
     PipelineSummary.type = Types::PipelineSummary
     PipelineSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineSummary)
+    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'ResourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: 'Policy', traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
+    PutResourcePolicyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'ResourceArn'))
+    PutResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: 'Policy'))
+    PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message'))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    RevokePipelineEndpointConnectionsRequest.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'PipelineArn', traits: {"smithy.api#required" => {}}))
+    RevokePipelineEndpointConnectionsRequest.add_member(:endpoint_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineEndpointIdsList, location_name: 'EndpointIds', traits: {"smithy.api#required" => {}}))
+    RevokePipelineEndpointConnectionsRequest.type = Types::RevokePipelineEndpointConnectionsRequest
+    RevokePipelineEndpointConnectionsResponse.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PipelineArn, location_name: 'PipelineArn'))
+    RevokePipelineEndpointConnectionsResponse.type = Types::RevokePipelineEndpointConnectionsResponse
     SecurityGroupIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
     ServiceVpcEndpoint.add_member(:service_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: 'ServiceName'))
     ServiceVpcEndpoint.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'VpcEndpointId'))
@@ -335,6 +427,19 @@ module Aws::OSIS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2022-01-01/osis/createPipeline", "code" => 200}}
       end)
+      service.add_operation(:create_pipeline_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#CreatePipelineEndpoint"
+        operation.name = "CreatePipelineEndpoint"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePipelineEndpointRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatePipelineEndpointResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2022-01-01/osis/createPipelineEndpoint", "code" => 200}}
+      end)
       service.add_operation(:delete_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.osis#DeletePipeline"
         operation.name = "DeletePipeline"
@@ -347,6 +452,30 @@ module Aws::OSIS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2022-01-01/osis/deletePipeline/{PipelineName}", "code" => 200}}
+      end)
+      service.add_operation(:delete_pipeline_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#DeletePipelineEndpoint"
+        operation.name = "DeletePipelineEndpoint"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePipelineEndpointRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePipelineEndpointResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2022-01-01/osis/deletePipelineEndpoint/{EndpointId}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#DeleteResourcePolicy"
+        operation.name = "DeleteResourcePolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2022-01-01/osis/resourcePolicy/{ResourceArn}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.osis#GetPipeline"
@@ -384,6 +513,19 @@ module Aws::OSIS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2022-01-01/osis/getPipelineChangeProgress/{PipelineName}", "code" => 200}}
       end)
+      service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#GetResourcePolicy"
+        operation.name = "GetResourcePolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2022-01-01/osis/resourcePolicy/{ResourceArn}", "code" => 200}}
+      end)
       service.add_operation(:list_pipeline_blueprints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.osis#ListPipelineBlueprints"
         operation.name = "ListPipelineBlueprints"
@@ -395,6 +537,32 @@ module Aws::OSIS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2022-01-01/osis/listPipelineBlueprints", "code" => 200}}
+      end)
+      service.add_operation(:list_pipeline_endpoint_connections, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#ListPipelineEndpointConnections"
+        operation.name = "ListPipelineEndpointConnections"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelineEndpointConnectionsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelineEndpointConnectionsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2022-01-01/osis/listPipelineEndpointConnections", "code" => 200}}
+        operation[:paginator] = Paginators::ListPipelineEndpointConnections.new
+      end)
+      service.add_operation(:list_pipeline_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#ListPipelineEndpoints"
+        operation.name = "ListPipelineEndpoints"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelineEndpointsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPipelineEndpointsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2022-01-01/osis/listPipelineEndpoints", "code" => 200}}
+        operation[:paginator] = Paginators::ListPipelineEndpoints.new
       end)
       service.add_operation(:list_pipelines, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.osis#ListPipelines"
@@ -420,6 +588,31 @@ module Aws::OSIS
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2022-01-01/osis/listTagsForResource", "code" => 200}}
+      end)
+      service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#PutResourcePolicy"
+        operation.name = "PutResourcePolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2022-01-01/osis/resourcePolicy/{ResourceArn}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:revoke_pipeline_endpoint_connections, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.osis#RevokePipelineEndpointConnections"
+        operation.name = "RevokePipelineEndpointConnections"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevokePipelineEndpointConnectionsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RevokePipelineEndpointConnectionsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisabledOperationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: LimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2022-01-01/osis/revokePipelineEndpointConnections", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.osis#StartPipeline"

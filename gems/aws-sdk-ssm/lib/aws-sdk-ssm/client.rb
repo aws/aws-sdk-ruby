@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::SSM
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::SSM
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::SSM
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::SSM::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::SSM::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -612,6 +617,9 @@ module Aws::SSM
     #   <p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
     #      association. Use this action to create an association in multiple Regions and multiple
     #      accounts.</p>
+    #            <note>
+    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #            </note>
     # @option params [Integer] :schedule_offset
     #   <p>Number of days to wait after the scheduled day to run an association. For example, if you
     #      specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3
@@ -1729,9 +1737,21 @@ module Aws::SSM
     #                  <p>
     #                     <b>All OSs</b>: Packages in the rejected patches list, and
     #         packages that include them as dependencies, aren't installed by Patch Manager under any
-    #         circumstances. If a package was installed before it was added to the rejected patches list, or
-    #         is installed outside of Patch Manager afterward, it's considered noncompliant with the patch
-    #         baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #         circumstances. </p>
+    #                  <p>State value assignment for patch compliance:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>If a package was installed before it was added to the rejected patches list, or is
+    #           installed outside of Patch Manager afterward, it's considered noncompliant with the patch
+    #           baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>If an update attempts to install a dependency package that is now rejected by the
+    #           baseline, when previous versions of the package were not rejected, the package being updated
+    #           is reported as <code>MISSING</code> for <code>SCAN</code> operations and as
+    #            <code>FAILED</code> for <code>INSTALL</code> operations.</p>
+    #                     </li>
+    #                  </ul>
     #               </dd>
     #            </dl>
     # @option params [String] :description
@@ -5451,6 +5471,12 @@ module Aws::SSM
     #   <p>The snapshot ID provided by the user when running <code>AWS-RunPatchBaseline</code>.</p>
     # @option params [Types::BaselineOverride] :baseline_override
     #   <p>Defines the basic information about a patch baseline override.</p>
+    # @option params [Boolean] :use_s3_dual_stack_endpoint
+    #   <p>Specifies whether to use S3 dualstack endpoints
+    #      for the patch snapshot download URL. Set to <code>true</code> to receive a presigned URL that
+    #      supports both IPv4 and IPv6 connectivity. Set to <code>false</code> to use standard IPv4-only
+    #      endpoints. Default is <code>false</code>. This parameter is required for managed nodes in
+    #      IPv6-only environments. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
@@ -5496,7 +5522,8 @@ module Aws::SSM
     #         }
     #       ],
     #       available_security_updates_compliance_status: "COMPLIANT" # One of: ["COMPLIANT", "NON_COMPLIANT"]
-    #     }
+    #     },
+    #     use_s3_dual_stack_endpoint: false
     #   }
     #   options = {}
     #   response = client.get_deployable_patch_snapshot_for_instance(params, options)
@@ -9999,6 +10026,9 @@ module Aws::SSM
     #   <p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
     #      association. Use this action to update an association in multiple Regions and multiple
     #      accounts.</p>
+    #            <note>
+    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #            </note>
     # @option params [Integer] :schedule_offset
     #   <p>Number of days to wait after the scheduled day to run an association. For example, if you
     #      specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3
@@ -11287,9 +11317,21 @@ module Aws::SSM
     #                  <p>
     #                     <b>All OSs</b>: Packages in the rejected patches list, and
     #         packages that include them as dependencies, aren't installed by Patch Manager under any
-    #         circumstances. If a package was installed before it was added to the rejected patches list, or
-    #         is installed outside of Patch Manager afterward, it's considered noncompliant with the patch
-    #         baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #         circumstances. </p>
+    #                  <p>State value assignment for patch compliance:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>If a package was installed before it was added to the rejected patches list, or is
+    #           installed outside of Patch Manager afterward, it's considered noncompliant with the patch
+    #           baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>If an update attempts to install a dependency package that is now rejected by the
+    #           baseline, when previous versions of the package were not rejected, the package being updated
+    #           is reported as <code>MISSING</code> for <code>SCAN</code> operations and as
+    #            <code>FAILED</code> for <code>INSTALL</code> operations.</p>
+    #                     </li>
+    #                  </ul>
     #               </dd>
     #            </dl>
     # @option params [String] :description

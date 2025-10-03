@@ -12,6 +12,9 @@ module Aws::ECS
     class ClientException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ClusterContainsCapacityProviderException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ClusterContainsContainerInstancesException < Smithy::Client::ServiceError
       def message: () -> String?
     end

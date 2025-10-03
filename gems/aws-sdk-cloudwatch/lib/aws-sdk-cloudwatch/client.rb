@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::CloudWatch
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::CloudWatch
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::CloudWatch
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::CloudWatch::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::CloudWatch::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -434,6 +439,40 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Returns the information of the current alarm contributors that are in <code>ALARM</code> state. This operation returns details about the individual time series that contribute to the alarm's state.</p>
+    # @param [Hash, Types::DescribeAlarmContributorsInput] params
+    # @option params [String] :alarm_name
+    #   <p>The name of the alarm for which to retrieve contributor information.</p>
+    # @option params [String] :next_token
+    #   <p>The token returned by a previous call to indicate that there is more data available.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alarm_name: "AlarmName", # required
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.describe_alarm_contributors(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alarm_contributors: [ # required
+    #       {
+    #         contributor_id: "ContributorId", # required
+    #         contributor_attributes: { # required
+    #           "AttributeName" => "AttributeValue"
+    #         },
+    #         state_reason: "StateReason", # required
+    #         state_transitioned_timestamp: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeAlarmContributorsOutput]
+    def describe_alarm_contributors(params = {}, options = {})
+      request = build_request(:describe_alarm_contributors, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the history for the specified alarm. You can filter the results by date
     #             range or item type. If an alarm name is not specified, the histories for either all
     #             metric alarms or all composite alarms are returned.</p>
@@ -445,6 +484,8 @@ module Aws::CloudWatch
     # @param [Hash, Types::DescribeAlarmHistoryInput] params
     # @option params [String] :alarm_name
     #   <p>The name of the alarm.</p>
+    # @option params [String] :alarm_contributor_id
+    #   <p>The unique identifier of a specific alarm contributor to filter the alarm history results.</p>
     # @option params [Array<String>] :alarm_types
     #   <p>Use this parameter to specify whether you want the operation to return metric alarms
     #               or composite alarms. If you omit this parameter, only metric alarms are returned.</p>
@@ -467,8 +508,9 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #   params = {
     #     alarm_name: "AlarmName",
+    #     alarm_contributor_id: "ContributorId",
     #     alarm_types: ["CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm"]],
-    #     history_item_type: "ConfigurationUpdate" # One of: ["ConfigurationUpdate", "StateUpdate", "Action"],
+    #     history_item_type: "ConfigurationUpdate" # One of: ["ConfigurationUpdate", "StateUpdate", "Action", "AlarmContributorStateUpdate", "AlarmContributorAction"],
     #     start_date: Time.now,
     #     end_date: Time.now,
     #     max_records: 1,
@@ -483,11 +525,15 @@ module Aws::CloudWatch
     #     alarm_history_items: [
     #       {
     #         alarm_name: "AlarmName",
+    #         alarm_contributor_id: "ContributorId",
     #         alarm_type: "CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm"],
     #         timestamp: Time.now,
-    #         history_item_type: "ConfigurationUpdate" # One of: ["ConfigurationUpdate", "StateUpdate", "Action"],
+    #         history_item_type: "ConfigurationUpdate" # One of: ["ConfigurationUpdate", "StateUpdate", "Action", "AlarmContributorStateUpdate", "AlarmContributorAction"],
     #         history_summary: "HistorySummary",
-    #         history_data: "HistoryData"
+    #         history_data: "HistoryData",
+    #         alarm_contributor_attributes: {
+    #           "AttributeName" => "AttributeValue"
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2546,7 +2592,7 @@ module Aws::CloudWatch
     #               tags you specify in this parameter are ignored. To change the tags of an existing rule,
     #               use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
     # @option params [Boolean] :apply_on_transformed_logs
-    #   <p>Specify <code>true</code> to have this rule evalute log events after they have been transformed by  
+    #   <p>Specify <code>true</code> to have this rule evaluate log events after they have been transformed by  
     #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log transformation</a>. If you specify <code>true</code>, then the log events in log groups that have transformers will 
     #          be evaluated by Contributor Insights after being transformed. Log groups that don't have
     #           transformers will still have their original log events evaluated by Contributor Insights.</p>

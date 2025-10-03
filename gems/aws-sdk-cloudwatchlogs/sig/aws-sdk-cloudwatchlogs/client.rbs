@@ -7,6 +7,7 @@ module Aws::CloudWatchLogs
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -835,7 +836,9 @@ module Aws::CloudWatchLogs
           unit: String
         }
       ],
-      ?apply_on_transformed_logs: bool
+      ?apply_on_transformed_logs: bool,
+      ?field_selection_criteria: String,
+      ?emit_system_field_dimensions: Array[String]
     ) -> _PutMetricFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetricFilterResponse
 
     interface _PutQueryDefinitionResponse
@@ -881,7 +884,9 @@ module Aws::CloudWatchLogs
       ?destination_arn: String,
       ?role_arn: String,
       ?distribution: String,
-      ?apply_on_transformed_logs: bool
+      ?apply_on_transformed_logs: bool,
+      ?field_selection_criteria: String,
+      ?emit_system_fields: Array[String]
     ) -> _PutSubscriptionFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSubscriptionFilterResponse
 
     interface _PutTransformerResponse

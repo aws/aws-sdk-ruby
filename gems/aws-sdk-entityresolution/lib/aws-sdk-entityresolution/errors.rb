@@ -48,7 +48,7 @@ module Aws::EntityResolution
       end
     end
 
-    # <p>The request could not be processed because of conflict in the current state of the resource. Example: Workflow already exists, Schema already exists, Workflow is currently running, etc. </p>
+    # <p>The request couldn't be processed because of conflict in the current state of the resource. Example: Workflow already exists, Schema already exists, Workflow is currently running, etc. </p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ConflictException] data
@@ -101,7 +101,7 @@ module Aws::EntityResolution
       end
     end
 
-    # <p>The resource could not be found. </p>
+    # <p>The resource couldn't be found. </p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EntityResolution::Types::ResourceNotFoundException] data

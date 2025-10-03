@@ -3,6 +3,7 @@ module Aws::SSOOIDC
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AccessDeniedExceptionReason: EnumShape
     AccessToken: StringShape
     ArnType: StringShape
     Assertion: StringShape
@@ -34,6 +35,7 @@ module Aws::SSOOIDC
     InvalidGrantException: StructureShape
     InvalidRedirectUriException: StructureShape
     InvalidRequestException: StructureShape
+    InvalidRequestExceptionReason: EnumShape
     InvalidRequestRegionException: StructureShape
     InvalidScopeException: StructureShape
     Location: StringShape

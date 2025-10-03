@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::DataZone
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::DataZone
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::DataZone
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::DataZone::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::DataZone::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -548,7 +553,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Cancels the metadata generation run.</p>
+    # <p>Cancels the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>The run must exist and be in a cancelable status (e.g., SUBMITTED, IN_PROGRESS). </p> </li> <li> <p>Runs in SUCCEEDED status cannot be cancelled.</p> </li> <li> <p>User must have access to the run and cancel permissions.</p> </li> </ul>
     # @param [Hash, Types::CancelMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the metadata generation run is to be cancelled.</p>
@@ -726,7 +731,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates an asset in Amazon DataZone catalog.</p>
+    # <p>Creates an asset in Amazon DataZone catalog.</p> <p>Before creating assets, make sure that the following requirements are met:</p> <ul> <li> <p> <code>--domain-identifier</code> must refer to an existing domain.</p> </li> <li> <p> <code>--owning-project-identifier</code> must be a valid project within the domain.</p> </li> <li> <p>Asset type must be created beforehand using <code>create-asset-type</code>, or be a supported system-defined type. For more information, see <a href="https://docs.aws.amazon.com/cli/latest/reference/datazone/create-asset-type.html">create-asset-type</a>.</p> </li> <li> <p> <code>--type-revision</code> (if used) must match a valid revision of the asset type.</p> </li> <li> <p> <code>formsInput</code> is required when it is associated as required in the <code>asset-type</code>. For more information, see <a href="https://docs.aws.amazon.com/cli/latest/reference/datazone/create-form-type.html">create-form-type</a>.</p> </li> <li> <p>Form content must include all required fields as per the form schema (e.g., <code>bucketArn</code>).</p> </li> </ul> <p>You must invoke the following pre-requisite commands before invoking this API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html">CreateFormType</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateAssetType.html">CreateAssetType</a> </p> </li> </ul>
     # @param [Hash, Types::CreateAssetInput] params
     # @option params [String] :name
     #   <p>Asset name.</p>
@@ -837,7 +842,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a data asset filter.</p>
+    # <p>Creates a data asset filter.</p> <p>Asset filters provide a sophisticated way to create controlled views of data assets by selecting specific columns or applying row-level filters. This capability is crucial for organizations that need to share data while maintaining security and privacy controls. For example, your database might be filtered to show only non-PII fields to certain users, or sales data might be filtered by region for different regional teams. Asset filters enable fine-grained access control while maintaining a single source of truth.</p> <p>Prerequisites:</p> <ul> <li> <p>A valid domain (<code>--domain-identifier</code>) must exist. </p> </li> <li> <p>A data asset (<code>--asset-identifier</code>) must already be created under that domain.</p> </li> <li> <p>The asset must have the referenced columns available in its schema for column-based filtering.</p> </li> <li> <p>You cannot specify both (<code>columnConfiguration</code>, <code>rowConfiguration</code>)at the same time.</p> </li> </ul>
     # @param [Hash, Types::CreateAssetFilterInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain in which you want to create an asset filter.</p>
@@ -1015,7 +1020,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a revision of the asset.</p>
+    # <p>Creates a revision of the asset.</p> <p>Asset revisions represent new versions of existing assets, capturing changes to either the underlying data or its metadata. They maintain a historical record of how assets evolve over time, who made changes, and when those changes occurred. This versioning capability is crucial for governance and compliance, allowing organizations to track changes, understand their impact, and roll back if necessary.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must already exist in the domain with identifier. </p> </li> <li> <p> <code>formsInput</code> is required when asset has the form type. <code>typeRevision</code> should be the latest version of form type. </p> </li> <li> <p>The form content must include all required fields (e.g., <code>bucketArn</code> for <code>S3ObjectCollectionForm</code>).</p> </li> <li> <p>The owning project of the original asset must still exist and be active.</p> </li> <li> <p>User must have write access to the project and domain.</p> </li> </ul>
     # @param [Hash, Types::CreateAssetRevisionInput] params
     # @option params [String] :name
     #   <p>Te revised name of the asset.</p>
@@ -1120,7 +1125,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a custom asset type.</p>
+    # <p>Creates a custom asset type.</p> <p>Prerequisites:</p> <ul> <li> <p>The <code>formsInput</code> field is required, however, can be passed as empty (e.g. <code>-forms-input {})</code>. </p> </li> <li> <p>You must have <code>CreateAssetType</code> permissions.</p> </li> <li> <p>The domain-identifier and owning-project-identifier must be valid and active.</p> </li> <li> <p>The name of the asset type must be unique within the domain — duplicate names will cause failure.</p> </li> <li> <p>JSON input must be valid — incorrect formatting causes Invalid JSON errors.</p> </li> </ul>
     # @param [Hash, Types::CreateAssetTypeInput] params
     # @option params [String] :domain_identifier
     #   <p>The unique identifier of the Amazon DataZone domain where the custom asset type is being created.</p>
@@ -1308,7 +1313,8 @@ module Aws::DataZone
     #         log_uri: "String",
     #         python_virtual_env: "String",
     #         runtime_role: "String",
-    #         trusted_certificates_s3_uri: "String"
+    #         trusted_certificates_s3_uri: "String",
+    #         managed_endpoint_arn: "String"
     #       },
     #       spark_glue_properties: {
     #         additional_args: {
@@ -1472,7 +1478,13 @@ module Aws::DataZone
     #         log_uri: "String",
     #         python_virtual_env: "String",
     #         runtime_role: "String",
-    #         trusted_certificates_s3_uri: "String"
+    #         trusted_certificates_s3_uri: "String",
+    #         certificate_data: "String",
+    #         managed_endpoint_arn: "String",
+    #         managed_endpoint_credentials: {
+    #           id: "String",
+    #           token: "String"
+    #         }
     #       },
     #       spark_glue_properties: {
     #         additional_args: {
@@ -1501,7 +1513,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a data product.</p>
+    # <p>Creates a data product.</p> <p>A data product is a comprehensive package that combines data assets with their associated metadata, documentation, and access controls. It's designed to serve specific business needs or use cases, making it easier for users to find and consume data appropriately. Data products include important information about data quality, freshness, and usage guidelines, effectively bridging the gap between data producers and consumers while ensuring proper governance.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain must exist and be accessible. </p> </li> <li> <p>The owning project must be valid and active.</p> </li> <li> <p>The name must be unique within the domain (no existing data product with the same name).</p> </li> <li> <p>User must have create permissions for data products in the project.</p> </li> </ul>
     # @param [Hash, Types::CreateDataProductInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where the data product is created.</p>
@@ -1584,7 +1596,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a data product revision.</p>
+    # <p>Creates a data product revision.</p> <p>Prerequisites:</p> <ul> <li> <p>The original data product must exist in the given domain. </p> </li> <li> <p>User must have permissions on the data product.</p> </li> <li> <p>The domain must be valid and accessible.</p> </li> <li> <p>The new revision name must comply with naming constraints (if required).</p> </li> </ul>
     # @param [Hash, Types::CreateDataProductRevisionInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where the data product revision is created.</p>
@@ -2095,7 +2107,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ],
     #     last_deployment: {
@@ -2176,6 +2189,81 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Creates a Amazon DataZone blueprint.</p>
+    # @param [Hash, Types::CreateEnvironmentBlueprintInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the domain in which this blueprint is created.</p>
+    # @option params [String] :name
+    #   <p>The name of this Amazon DataZone blueprint.</p>
+    # @option params [String] :description
+    #   <p>The description of the Amazon DataZone blueprint.</p>
+    # @option params [Types::ProvisioningProperties] :provisioning_properties
+    #   <p>The provisioning properties of this Amazon DataZone blueprint.</p>
+    # @option params [Array<Types::CustomParameter>] :user_parameters
+    #   <p>The user parameters of this Amazon DataZone blueprint.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     name: "EnvironmentBlueprintName", # required
+    #     description: "Description",
+    #     provisioning_properties: { # required
+    #       # One of:
+    #       cloud_formation: {
+    #         template_url: "String", # required
+    #       }
+    #     },
+    #     user_parameters: [
+    #       {
+    #         key_name: "String", # required
+    #         description: "Description",
+    #         field_type: "String", # required
+    #         default_value: "String",
+    #         is_editable: false,
+    #         is_optional: false,
+    #         is_update_supported: false
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_environment_blueprint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "EnvironmentBlueprintId", # required
+    #     name: "EnvironmentBlueprintName", # required
+    #     description: "Description",
+    #     provider: "String", # required
+    #     provisioning_properties: { # required
+    #       # One of:
+    #       cloud_formation: {
+    #         template_url: "String", # required
+    #       }
+    #     },
+    #     deployment_properties: {
+    #       start_timeout_minutes: 1,
+    #       end_timeout_minutes: 1
+    #     },
+    #     user_parameters: [
+    #       {
+    #         key_name: "String", # required
+    #         description: "Description",
+    #         field_type: "String", # required
+    #         default_value: "String",
+    #         is_editable: false,
+    #         is_optional: false,
+    #         is_update_supported: false
+    #       }
+    #     ],
+    #     glossary_terms: ["GlossaryTermId"],
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::CreateEnvironmentBlueprintOutput]
+    def create_environment_blueprint(params = {}, options = {})
+      request = build_request(:create_environment_blueprint, params)
+      request.send_request(options)
+    end
+
     # <p>Creates an Amazon DataZone environment profile.</p>
     # @param [Hash, Types::CreateEnvironmentProfileInput] params
     # @option params [String] :domain_identifier
@@ -2233,7 +2321,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ]
     #   }
@@ -2243,7 +2332,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a metadata form type.</p>
+    # <p>Creates a metadata form type.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain must exist and be in an <code>ENABLED</code> state. </p> </li> <li> <p>The owning project must exist and be accessible.</p> </li> <li> <p>The name must be unique within the domain.</p> </li> </ul> <p>For custom form types, to indicate that a field should be searchable, annotate it with <code>@amazon.datazone#searchable</code>. By default, searchable fields are indexed for semantic search, where related query terms will match the attribute value even if they are not stemmed or keyword matches. To indicate that a field should be indexed for lexical search (which disables semantic search but supports stemmed and partial matches), annotate it with <code>@amazon.datazone#searchable(modes:["LEXICAL"])</code>. To indicate that a field should be indexed for technical identifier search (for more information on technical identifier search, see: <a href="https://aws.amazon.com/blogs/big-data/streamline-data-discovery-with-precise-technical-identifier-search-in-amazon-sagemaker-unified-studio/">https://aws.amazon.com/blogs/big-data/streamline-data-discovery-with-precise-technical-identifier-search-in-amazon-sagemaker-unified-studio/</a>), annotate it with <code>@amazon.datazone#searchable(modes:["TECHNICAL"])</code>.</p> <p>To denote that a field will store glossary term ids (which are filterable via the Search/SearchListings APIs), annotate it with <code>@amazon.datazone#glossaryterm("${GLOSSARY_ID}")</code>, where <code>${GLOSSARY_ID}</code> is the id of the glossary that the glossary terms stored in the field belong to. </p>
     # @param [Hash, Types::CreateFormTypeInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which this metadata form type is created.</p>
@@ -2288,7 +2377,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon DataZone business glossary.</p>
+    # <p>Creates an Amazon DataZone business glossary.</p> <p>Specifies that this is a create glossary policy.</p> <p>A glossary serves as the central repository for business terminology and definitions within an organization. It helps establish and maintain a common language across different departments and teams, reducing miscommunication and ensuring consistent interpretation of business concepts. Glossaries can include hierarchical relationships between terms, cross-references, and links to actual data assets, making them invaluable for both business users and technical teams trying to understand and use data correctly.</p> <p>Prerequisites:</p> <ul> <li> <p>Domain must exist and be in an active state. </p> </li> <li> <p>Owning project must exist and be accessible by the caller.</p> </li> <li> <p>The glossary name must be unique within the domain.</p> </li> </ul>
     # @param [Hash, Types::CreateGlossaryInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which this business glossary is created.</p>
@@ -2333,7 +2422,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a business glossary term.</p>
+    # <p>Creates a business glossary term.</p> <p>A glossary term represents an individual entry within the Amazon DataZone glossary, serving as a standardized definition for a specific business concept or data element. Each term can include rich metadata such as detailed definitions, synonyms, related terms, and usage examples. Glossary terms can be linked directly to data assets, providing business context to technical data elements. This linking capability helps users understand the business meaning of data fields and ensures consistent interpretation across different systems and teams. Terms can also have relationships with other terms, creating a semantic network that reflects the complexity of business concepts.</p> <p>Prerequisites:</p> <ul> <li> <p>Domain must exist. </p> </li> <li> <p>Glossary must exist.</p> </li> <li> <p>The term name must be unique within the glossary.</p> </li> <li> <p>Ensure term does not conflict with existing terms in hierarchy.</p> </li> </ul>
     # @param [Hash, Types::CreateGlossaryTermInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which this business glossary term is created.</p>
@@ -3120,7 +3209,8 @@ module Aws::DataZone
     #     details: {
     #       # One of:
     #       iam: {
-    #         arn: "String"
+    #         arn: "String",
+    #         principal_id: "String"
     #       },
     #       sso: {
     #         username: "UserProfileName",
@@ -3157,7 +3247,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes an asset in Amazon DataZone.</p>
+    # <p>Deletes an asset in Amazon DataZone.</p> <ul> <li> <p>--domain-identifier must refer to a valid and existing domain. </p> </li> <li> <p>--identifier must refer to an existing asset in the specified domain.</p> </li> <li> <p>Asset must not be referenced in any existing asset filters.</p> </li> <li> <p>Asset must not be linked to any draft or published data product.</p> </li> <li> <p>User must have delete permissions for the domain and project.</p> </li> </ul>
     # @param [Hash, Types::DeleteAssetInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the asset is deleted.</p>
@@ -3179,7 +3269,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes an asset filter.</p>
+    # <p>Deletes an asset filter.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset filter must exist. </p> </li> <li> <p>The domain and asset must not have been deleted.</p> </li> <li> <p>Ensure the --identifier refers to a valid filter ID.</p> </li> </ul>
     # @param [Hash, Types::DeleteAssetFilterInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to delete an asset filter.</p>
@@ -3204,7 +3294,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes an asset type in Amazon DataZone.</p>
+    # <p>Deletes an asset type in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset type must exist in the domain. </p> </li> <li> <p>You must have DeleteAssetType permission.</p> </li> <li> <p>The asset type must not be in use (e.g., assigned to any asset). If used, deletion will fail.</p> </li> <li> <p>You should retrieve the asset type using get-asset-type to confirm its presence before deletion.</p> </li> </ul>
     # @param [Hash, Types::DeleteAssetTypeInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the asset type is deleted.</p>
@@ -3250,7 +3340,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes a data product in Amazon DataZone.</p>
+    # <p>Deletes a data product in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product must exist and not be deleted or archived. </p> </li> <li> <p>The user must have delete permissions for the data product.</p> </li> <li> <p>Domain and project must be active.</p> </li> </ul>
     # @param [Hash, Types::DeleteDataProductInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the data product is deleted.</p>
@@ -3514,6 +3604,28 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Deletes a blueprint in Amazon DataZone.</p>
+    # @param [Hash, Types::DeleteEnvironmentBlueprintInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The ID of the Amazon DataZone domain in which the blueprint is deleted.</p>
+    # @option params [String] :identifier
+    #   <p>The ID of the blueprint that is deleted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "EnvironmentBlueprintId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_environment_blueprint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_environment_blueprint(params = {}, options = {})
+      request = build_request(:delete_environment_blueprint, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the blueprint configuration in Amazon DataZone.</p>
     # @param [Hash, Types::DeleteEnvironmentBlueprintConfigurationInput] params
     # @option params [String] :domain_identifier
@@ -3558,7 +3670,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Delets and metadata form type in Amazon DataZone.</p>
+    # <p>Deletes and metadata form type in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The form type must exist in the domain. </p> </li> <li> <p>The form type must not be in use by any asset types or assets.</p> </li> <li> <p>The domain must be valid and accessible.</p> </li> <li> <p>User must have delete permissions on the form type.</p> </li> <li> <p>Any dependencies (such as linked asset types) must be removed first.</p> </li> </ul>
     # @param [Hash, Types::DeleteFormTypeInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the metadata form type is deleted.</p>
@@ -3580,7 +3692,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes a business glossary in Amazon DataZone.</p>
+    # <p>Deletes a business glossary in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The glossary must be in DISABLED state. </p> </li> <li> <p>The glossary must not have any glossary terms associated with it.</p> </li> <li> <p>The glossary must exist in the specified domain.</p> </li> <li> <p>The caller must have the <code>datazone:DeleteGlossary</code> permission in the domain and glossary.</p> </li> <li> <p>Glossary should not be linked to any active metadata forms.</p> </li> </ul>
     # @param [Hash, Types::DeleteGlossaryInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the business glossary is deleted.</p>
@@ -3602,7 +3714,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes a business glossary term in Amazon DataZone.</p>
+    # <p>Deletes a business glossary term in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Glossary term must exist and be active. </p> </li> <li> <p>The term must not be linked to other assets or child terms.</p> </li> <li> <p>Caller must have delete permissions in the domain/glossary.</p> </li> <li> <p>Ensure all associations (such as to assets or parent terms) are removed before deletion.</p> </li> </ul>
     # @param [Hash, Types::DeleteGlossaryTermInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the business glossary term is deleted.</p>
@@ -3980,7 +4092,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets an Amazon DataZone asset.</p>
+    # <p>Gets an Amazon DataZone asset.</p> <p>An asset is the fundamental building block in Amazon DataZone, representing any data resource that needs to be cataloged and managed. It can take many forms, from Amazon S3 buckets and database tables to dashboards and machine learning models. Each asset contains comprehensive metadata about the resource, including its location, schema, ownership, and lineage information. Assets are essential for organizing and managing data resources across an organization, making them discoverable and usable while maintaining proper governance.</p> <p>Before using the Amazon DataZone GetAsset command, ensure the following prerequisites are met:</p> <ul> <li> <p>Domain identifier must exist and be valid</p> </li> <li> <p>Asset identifier must exist</p> </li> <li> <p>User must have the required permissions to perform the action</p> </li> </ul>
     # @param [Hash, Types::GetAssetInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain to which the asset belongs.</p>
@@ -4051,7 +4163,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets an asset filter.</p>
+    # <p>Gets an asset filter.</p> <p>Prerequisites:</p> <ul> <li> <p>Domain (<code>--domain-identifier</code>), asset (<code>--asset-identifier</code>), and filter (<code>--identifier</code>) must all exist. </p> </li> <li> <p>The asset filter should not have been deleted.</p> </li> <li> <p>The asset must still exist (since the filter is linked to it).</p> </li> </ul>
     # @param [Hash, Types::GetAssetFilterInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to get an asset filter.</p>
@@ -4154,7 +4266,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets an Amazon DataZone asset type.</p>
+    # <p>Gets an Amazon DataZone asset type.</p> <p>Asset types define the categories and characteristics of different kinds of data assets within Amazon DataZone.. They determine what metadata fields are required, what operations are possible, and how the asset integrates with other Amazon Web Services services. Asset types can range from built-in types like Amazon S3 buckets and Amazon Web Services Glue tables to custom types defined for specific organizational needs. Understanding asset types is crucial for properly organizing and managing different kinds of data resources.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset type with identifier must exist in the domain. ResourceNotFoundException.</p> </li> <li> <p>You must have the GetAssetType permission.</p> </li> <li> <p>Ensure the domain-identifier value is correct and accessible.</p> </li> </ul>
     # @param [Hash, Types::GetAssetTypeInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the asset type exists.</p>
@@ -4363,7 +4475,13 @@ module Aws::DataZone
     #         log_uri: "String",
     #         python_virtual_env: "String",
     #         runtime_role: "String",
-    #         trusted_certificates_s3_uri: "String"
+    #         trusted_certificates_s3_uri: "String",
+    #         certificate_data: "String",
+    #         managed_endpoint_arn: "String",
+    #         managed_endpoint_credentials: {
+    #           id: "String",
+    #           token: "String"
+    #         }
     #       },
     #       spark_glue_properties: {
     #         additional_args: {
@@ -4392,7 +4510,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets the data product.</p>
+    # <p>Gets the data product.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product ID must exist. </p> </li> <li> <p>The domain must be valid and accessible.</p> </li> <li> <p>User must have read or discovery permissions for the data product.</p> </li> </ul>
     # @param [Hash, Types::GetDataProductInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where the data product lives.</p>
@@ -4776,7 +4894,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ],
     #     last_deployment: {
@@ -4883,7 +5002,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ],
     #     glossary_terms: ["GlossaryTermId"],
@@ -5000,7 +5120,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ]
     #   }
@@ -5010,7 +5131,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets a metadata form type in Amazon DataZone.</p>
+    # <p>Gets a metadata form type in Amazon DataZone.</p> <p>Form types define the structure and validation rules for collecting metadata about assets in Amazon DataZone. They act as templates that ensure consistent metadata capture across similar types of assets, while allowing for customization to meet specific organizational needs. Form types can include required fields, validation rules, and dependencies, helping maintain high-quality metadata that makes data assets more discoverable and usable.</p> <ul> <li> <p>The form type with the specified identifier must exist in the given domain. </p> </li> <li> <p>The domain must be valid and active.</p> </li> <li> <p>User must have permission on the form type.</p> </li> <li> <p>The form type should not be deleted or in an invalid state.</p> </li> </ul> <p>One use case for this API is to determine whether a form field is indexed for search. </p> <p>A searchable field will be annotated with <code>@amazon.datazone#searchable</code>. By default, searchable fields are indexed for semantic search, where related query terms will match the attribute value even if they are not stemmed or keyword matches. If a field is indexed technical identifier search, it will be annotated with <code>@amazon.datazone#searchable(modes:["TECHNICAL"])</code>. If a field is indexed for lexical search (supports stemmed and prefix matches but not semantic matches), it will be annotated with <code>@amazon.datazone#searchable(modes:["LEXICAL"])</code>.</p> <p>A field storing glossary term IDs (which is filterable) will be annotated with <code>@amazon.datazone#glossaryterm("${glossaryId}")</code>. </p>
     # @param [Hash, Types::GetFormTypeInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which this metadata form type exists.</p>
@@ -5056,7 +5177,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets a business glossary in Amazon DataZone.</p>
+    # <p>Gets a business glossary in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The specified glossary ID must exist and be associated with the given domain. </p> </li> <li> <p>The caller must have the <code>datazone:GetGlossary</code> permission on the domain.</p> </li> </ul>
     # @param [Hash, Types::GetGlossaryInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which this business glossary exists.</p>
@@ -5090,7 +5211,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets a business glossary term in Amazon DataZone.</p>
+    # <p>Gets a business glossary term in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Glossary term with identifier must exist in the domain. </p> </li> <li> <p>User must have permission on the glossary term.</p> </li> <li> <p>Domain must be accessible and active.</p> </li> </ul>
     # @param [Hash, Types::GetGlossaryTermInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which this business glossary term exists.</p>
@@ -5408,7 +5529,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets a metadata generation run in Amazon DataZone.</p>
+    # <p>Gets a metadata generation run in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Valid domain and run identifier. </p> </li> <li> <p>The metadata generation run must exist.</p> </li> <li> <p>User must have read access to the metadata run.</p> </li> </ul>
     # @param [Hash, Types::GetMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to get.</p>
@@ -6007,7 +6128,8 @@ module Aws::DataZone
     #     details: {
     #       # One of:
     #       iam: {
-    #         arn: "String"
+    #         arn: "String",
+    #         principal_id: "String"
     #       },
     #       sso: {
     #         username: "UserProfileName",
@@ -6106,7 +6228,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Lists asset filters.</p>
+    # <p>Lists asset filters.</p> <p>Prerequisites:</p> <ul> <li> <p>A valid domain and asset must exist. </p> </li> <li> <p>The asset must have at least one filter created to return results. </p> </li> </ul>
     # @param [Hash, Types::ListAssetFiltersInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to list asset filters.</p>
@@ -6153,7 +6275,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Lists the revisions for the asset.</p>
+    # <p>Lists the revisions for the asset.</p> <p>Prerequisites:</p> <ul> <li> <p>The asset must exist in the domain. </p> </li> <li> <p>There must be at least one revision of the asset (which happens automatically after creation).</p> </li> <li> <p>The domain must be valid and active.</p> </li> <li> <p>User must have permissions on the asset and domain.</p> </li> </ul>
     # @param [Hash, Types::ListAssetRevisionsInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the domain.</p>
@@ -6369,7 +6491,13 @@ module Aws::DataZone
     #             log_uri: "String",
     #             python_virtual_env: "String",
     #             runtime_role: "String",
-    #             trusted_certificates_s3_uri: "String"
+    #             trusted_certificates_s3_uri: "String",
+    #             certificate_data: "String",
+    #             managed_endpoint_arn: "String",
+    #             managed_endpoint_credentials: {
+    #               id: "String",
+    #               token: "String"
+    #             }
     #           },
     #           spark_glue_properties: {
     #             additional_args: {
@@ -6401,7 +6529,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Lists data product revisions.</p>
+    # <p>Lists data product revisions.</p> <p>Prerequisites:</p> <ul> <li> <p>The data product ID must exist within the domain. </p> </li> <li> <p>User must have view permissions on the data product.</p> </li> <li> <p>The domain must be in a valid and accessible state.</p> </li> </ul>
     # @param [Hash, Types::ListDataProductRevisionsInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain of the data product revisions that you want to list.</p>
@@ -7199,7 +7327,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Lists all metadata generation runs.</p>
+    # <p>Lists all metadata generation runs.</p> <p>Metadata generation runs represent automated processes that leverage AI/ML capabilities to create or enhance asset metadata at scale. This feature helps organizations maintain comprehensive and consistent metadata across large numbers of assets without manual intervention. It can automatically generate business descriptions, tags, and other metadata elements, significantly reducing the time and effort required for metadata management while improving consistency and completeness.</p> <p>Prerequisites:</p> <ul> <li> <p>Valid domain identifier. </p> </li> <li> <p>User must have access to metadata generation runs in the domain.</p> </li> </ul>
     # @param [Hash, Types::ListMetadataGenerationRunsInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain where you want to list metadata generation runs.</p>
@@ -8228,6 +8356,8 @@ module Aws::DataZone
     #   <p>Specifies the enabled Amazon Web Services Regions.</p>
     # @option params [Hash<String, Hash<String, String>>] :regional_parameters
     #   <p>The regional parameters in the environment blueprint.</p>
+    # @option params [Hash<String, String>] :global_parameters
+    #   <p>Region-agnostic environment blueprint parameters. </p>
     # @option params [Array<Types::ProvisioningConfiguration>] :provisioning_configurations
     #   <p>The provisioning configuration of a blueprint.</p>
     # @example Request syntax with placeholder values
@@ -8242,6 +8372,9 @@ module Aws::DataZone
     #       "RegionName" => {
     #         "String" => "String"
     #       }
+    #     },
+    #     global_parameters: {
+    #       "String" => "String"
     #     },
     #     provisioning_configurations: [{
     #       # One of:
@@ -8629,7 +8762,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Searches for assets in Amazon DataZone.</p>
+    # <p>Searches for assets in Amazon DataZone.</p> <p>Search in Amazon DataZone is a powerful capability that enables users to discover and explore data assets, glossary terms, and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. Search can be scoped to specific types of resources (like assets, glossary terms, or data products) and can be filtered using various criteria such as creation date, owner, or status. The search functionality is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>Many search commands in Amazon DataZone are paginated, including <code>search</code> and <code>search-types</code>. When the result set is large, Amazon DataZone returns a <code>nextToken</code> in the response. This token can be used to retrieve the next page of results. </p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of: ASSET, GLOSSARY_TERM, DATA_PRODUCT, or GLOSSARY.</p> </li> <li> <p>The user must have search permissions in the specified domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is well-formed and that each filter includes valid attribute and value keys. </p> </li> <li> <p>For paginated results, be prepared to use --next-token to fetch additional pages.</p> </li> </ul>
     # @param [Hash, Types::SearchInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
@@ -8894,7 +9027,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Searches listings (records of an asset at a given time) in Amazon DataZone.</p>
+    # <p>Searches listings in Amazon DataZone.</p> <p>SearchListings is a powerful capability that enables users to discover and explore published assets and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. SearchListings also supports filtering using various criteria such as creation date, owner, or status. This API is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>SearchListings returns results in a paginated format. When the result set is large, the response will include a nextToken, which can be used to retrieve the next page of results.</p> <p>The SearchListings API gives users flexibility in specifying what kind of search is run.</p> <p>To run a free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href="https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (""). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the filters parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>
     # @param [Hash, Types::SearchListingsInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the domain in which to search listings.</p>
@@ -9081,7 +9214,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Searches for types in Amazon DataZone.</p>
+    # <p>Searches for types in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of the valid values including: ASSET_TYPE, GLOSSARY_TERM_TYPE, DATA_PRODUCT_TYPE.</p> </li> <li> <p>The --managed flag must be present without a value.</p> </li> <li> <p>The user must have permissions for form or asset types in the domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is valid.</p> </li> <li> <p>Filters contain correct structure (attribute, value, operator).</p> </li> </ul>
     # @param [Hash, Types::SearchTypesInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>SearchTypes</code> action.</p>
@@ -9242,7 +9375,8 @@ module Aws::DataZone
     #         details: {
     #           # One of:
     #           iam: {
-    #             arn: "String"
+    #             arn: "String",
+    #             principal_id: "String"
     #           },
     #           sso: {
     #             username: "UserProfileName",
@@ -9308,7 +9442,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Starts the metadata generation run.</p>
+    # <p>Starts the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must be created and belong to the specified domain and project. </p> </li> <li> <p>Asset type must be supported for metadata generation (e.g., Amazon Web Services Glue table).</p> </li> <li> <p>Asset must have a structured schema with valid rows and columns.</p> </li> <li> <p>Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES.</p> </li> <li> <p>The user must have permission to run metadata generation in the domain/project.</p> </li> </ul>
     # @param [Hash, Types::StartMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain where you want to start a metadata generation run.</p>
@@ -9469,7 +9603,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Updates an asset filter.</p>
+    # <p>Updates an asset filter.</p> <p>Prerequisites:</p> <ul> <li> <p>The domain, asset, and asset filter identifier must all exist. </p> </li> <li> <p>The asset must contain the columns being referenced in the update.</p> </li> <li> <p>If applying a row filter, ensure the column referenced in the expression exists in the asset schema.</p> </li> </ul>
     # @param [Hash, Types::UpdateAssetFilterInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to update an asset filter.</p>
@@ -9724,7 +9858,8 @@ module Aws::DataZone
     #         log_uri: "String",
     #         python_virtual_env: "String",
     #         runtime_role: "String",
-    #         trusted_certificates_s3_uri: "String"
+    #         trusted_certificates_s3_uri: "String",
+    #         managed_endpoint_arn: "String"
     #       },
     #       s3_properties: {
     #         s3_uri: "S3Uri", # required
@@ -9876,7 +10011,13 @@ module Aws::DataZone
     #         log_uri: "String",
     #         python_virtual_env: "String",
     #         runtime_role: "String",
-    #         trusted_certificates_s3_uri: "String"
+    #         trusted_certificates_s3_uri: "String",
+    #         certificate_data: "String",
+    #         managed_endpoint_arn: "String",
+    #         managed_endpoint_credentials: {
+    #           id: "String",
+    #           token: "String"
+    #         }
     #       },
     #       spark_glue_properties: {
     #         additional_args: {
@@ -10316,7 +10457,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ],
     #     last_deployment: {
@@ -10400,6 +10542,81 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Updates an environment blueprint in Amazon DataZone.</p>
+    # @param [Hash, Types::UpdateEnvironmentBlueprintInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon DataZone domain in which an environment blueprint is to be updated.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the environment blueprint to be updated.</p>
+    # @option params [String] :description
+    #   <p>The description to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    # @option params [Types::ProvisioningProperties] :provisioning_properties
+    #   <p>The provisioning properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    # @option params [Array<Types::CustomParameter>] :user_parameters
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "EnvironmentBlueprintId", # required
+    #     description: "String",
+    #     provisioning_properties: {
+    #       # One of:
+    #       cloud_formation: {
+    #         template_url: "String", # required
+    #       }
+    #     },
+    #     user_parameters: [
+    #       {
+    #         key_name: "String", # required
+    #         description: "Description",
+    #         field_type: "String", # required
+    #         default_value: "String",
+    #         is_editable: false,
+    #         is_optional: false,
+    #         is_update_supported: false
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_environment_blueprint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "EnvironmentBlueprintId", # required
+    #     name: "EnvironmentBlueprintName", # required
+    #     description: "Description",
+    #     provider: "String", # required
+    #     provisioning_properties: { # required
+    #       # One of:
+    #       cloud_formation: {
+    #         template_url: "String", # required
+    #       }
+    #     },
+    #     deployment_properties: {
+    #       start_timeout_minutes: 1,
+    #       end_timeout_minutes: 1
+    #     },
+    #     user_parameters: [
+    #       {
+    #         key_name: "String", # required
+    #         description: "Description",
+    #         field_type: "String", # required
+    #         default_value: "String",
+    #         is_editable: false,
+    #         is_optional: false,
+    #         is_update_supported: false
+    #       }
+    #     ],
+    #     glossary_terms: ["GlossaryTermId"],
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::UpdateEnvironmentBlueprintOutput]
+    def update_environment_blueprint(params = {}, options = {})
+      request = build_request(:update_environment_blueprint, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the specified environment profile in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateEnvironmentProfileInput] params
     # @option params [String] :domain_identifier
@@ -10454,7 +10671,8 @@ module Aws::DataZone
     #         field_type: "String", # required
     #         default_value: "String",
     #         is_editable: false,
-    #         is_optional: false
+    #         is_optional: false,
+    #         is_update_supported: false
     #       }
     #     ]
     #   }
@@ -10464,7 +10682,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Updates the business glossary in Amazon DataZone.</p>
+    # <p>Updates the business glossary in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>The glossary must exist in the given domain. </p> </li> <li> <p>The caller must have the <code>datazone:UpdateGlossary</code> permission to update it.</p> </li> <li> <p>When updating the name, the new name must be unique within the domain.</p> </li> <li> <p>The glossary must not be deleted or in a terminal state.</p> </li> </ul>
     # @param [Hash, Types::UpdateGlossaryInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be updated.</p>
@@ -10506,7 +10724,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Updates a business glossary term in Amazon DataZone.</p>
+    # <p>Updates a business glossary term in Amazon DataZone.</p> <p>Prerequisites:</p> <ul> <li> <p>Glossary term must exist in the specified domain. </p> </li> <li> <p>New name must not conflict with existing terms in the same glossary.</p> </li> <li> <p>User must have permissions on the term.</p> </li> <li> <p>The term must not be in DELETED status.</p> </li> </ul>
     # @param [Hash, Types::UpdateGlossaryTermInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be updated.</p>
@@ -11198,7 +11416,8 @@ module Aws::DataZone
     #     details: {
     #       # One of:
     #       iam: {
-    #         arn: "String"
+    #         arn: "String",
+    #         principal_id: "String"
     #       },
     #       sso: {
     #         username: "UserProfileName",

@@ -7,6 +7,7 @@ module Aws::CloudWatch
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -129,6 +130,16 @@ module Aws::CloudWatch
       ?name: String
     ) -> _DeleteMetricStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMetricStreamResponse
 
+    interface _DescribeAlarmContributorsResponse
+      include Smithy::Client::_Response[Types::DescribeAlarmContributorsOutput]
+      def alarm_contributors: () -> Array[Types::AlarmContributor]?
+      def next_token: () -> String?
+    end
+    def describe_alarm_contributors: (
+      ?alarm_name: String,
+      ?next_token: String
+    ) -> _DescribeAlarmContributorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlarmContributorsResponse
+
     interface _DescribeAlarmHistoryResponse
       include Smithy::Client::_Response[Types::DescribeAlarmHistoryOutput]
       def alarm_history_items: () -> Array[Types::AlarmHistoryItem]?
@@ -136,6 +147,7 @@ module Aws::CloudWatch
     end
     def describe_alarm_history: (
       ?alarm_name: String,
+      ?alarm_contributor_id: String,
       ?alarm_types: Array[String],
       ?history_item_type: String,
       ?start_date: Time,

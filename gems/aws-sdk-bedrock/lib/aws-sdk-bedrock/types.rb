@@ -7944,9 +7944,6 @@ module Aws::Bedrock
     # @!attribute confidence_threshold
     #   <p>The updated minimum confidence level for logic validation. If null is provided, the threshold will be removed.</p>
     #   @return [Float]
-    # @!attribute kms_key_arn
-    #   <p>The KMS key ARN for encrypting the test at rest. If not provided, the key will not be updated. Use <code>DISCARD</code> to remove the key.</p>
-    #   @return [String]
     # @!attribute client_request_token
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.</p>
     #   @return [String]
@@ -7958,7 +7955,6 @@ module Aws::Bedrock
       :last_updated_at,
       :expected_aggregated_findings_result,
       :confidence_threshold,
-      :kms_key_arn,
       :client_request_token,
       keyword_init: true
     )

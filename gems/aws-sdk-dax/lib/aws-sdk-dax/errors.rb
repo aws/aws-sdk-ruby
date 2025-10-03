@@ -46,6 +46,7 @@ module Aws::DAX
   # * {SubnetGroupNotFoundFault}
   # * {SubnetGroupQuotaExceededFault}
   # * {SubnetInUse}
+  # * {SubnetNotAllowedFault}
   # * {SubnetQuotaExceededFault}
   # * {TagNotFoundFault}
   # * {TagQuotaPerResourceExceeded}
@@ -68,7 +69,8 @@ module Aws::DAX
       end
     end
 
-    # <p>The requested cluster ID does not refer to an existing DAX cluster.</p>
+    # <p>The requested cluster ID does not refer to an existing DAX
+    #             cluster.</p>
     class ClusterNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ClusterNotFoundFault] data
@@ -81,8 +83,8 @@ module Aws::DAX
       end
     end
 
-    # <p>You have attempted to exceed the maximum number of DAX clusters for your AWS
-    #             account.</p>
+    # <p>You have attempted to exceed the maximum number of DAX clusters for
+    #             your Amazon Web Services account.</p>
     class ClusterQuotaForCustomerExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ClusterQuotaForCustomerExceededFault] data
@@ -122,8 +124,8 @@ module Aws::DAX
       end
     end
 
-    # <p>The requested DAX cluster is not in the <i>available</i>
-    #             state.</p>
+    # <p>The requested DAX cluster is not in the
+    #                 <i>available</i> state.</p>
     class InvalidClusterStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::InvalidClusterStateFault] data
@@ -228,8 +230,7 @@ module Aws::DAX
       end
     end
 
-    # <p>You have attempted to exceed the maximum number of nodes for your AWS
-    #             account.</p>
+    # <p>You have attempted to exceed the maximum number of nodes for your Amazon Web Services account.</p>
     class NodeQuotaForCustomerExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::NodeQuotaForCustomerExceededFault] data
@@ -295,8 +296,8 @@ module Aws::DAX
     end
 
     # <p>You have reached the maximum number of x509 certificates that can be created for
-    #             encrypted clusters in a 30 day period. Contact AWS customer support to discuss options
-    #             for continuing to create encrypted clusters.</p>
+    #             encrypted clusters in a 30 day period. Contact Amazon Web Services customer support to
+    #             discuss options for continuing to create encrypted clusters.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::ServiceQuotaExceededException] data
@@ -363,6 +364,23 @@ module Aws::DAX
     class SubnetInUse < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DAX::Types::SubnetInUse] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified subnet can't be used for the requested network type. This error
+    #             occurs when either there aren't enough subnets of the required network type to create
+    #             the cluster, or when you try to use a subnet that doesn't support the requested network
+    #             type (for example, trying to create a dual-stack cluster with a subnet that doesn't have
+    #             IPv6 CIDR). </p>
+    class SubnetNotAllowedFault < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::DAX::Types::SubnetNotAllowedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

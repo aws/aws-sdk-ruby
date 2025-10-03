@@ -7,6 +7,7 @@ module Aws::SSOAdmin
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -353,6 +354,8 @@ module Aws::SSOAdmin
       def name: () -> String?
       def created_date: () -> Time?
       def status: () -> String?
+      def status_reason: () -> String?
+      def encryption_configuration_details: () -> Types::EncryptionConfigurationDetails?
     end
     def describe_instance: (
       ?instance_arn: String
@@ -869,7 +872,11 @@ module Aws::SSOAdmin
     end
     def update_instance: (
       ?name: String,
-      ?instance_arn: String
+      ?instance_arn: String,
+      ?encryption_configuration: {
+        key_type: String,
+        kms_key_arn: String
+      }
     ) -> _UpdateInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceResponse
 
     interface _UpdateInstanceAccessControlAttributeConfigurationResponse

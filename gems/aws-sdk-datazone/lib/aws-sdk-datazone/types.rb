@@ -2682,6 +2682,78 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute domain_identifier
+    #   <p>The identifier of the domain in which this blueprint is created.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of this Amazon DataZone blueprint.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the Amazon DataZone blueprint.</p>
+    #   @return [String]
+    # @!attribute provisioning_properties
+    #   <p>The provisioning properties of this Amazon DataZone blueprint.</p>
+    #   @return [Types::ProvisioningProperties]
+    # @!attribute user_parameters
+    #   <p>The user parameters of this Amazon DataZone blueprint.</p>
+    #   @return [Array<Types::CustomParameter>]
+    class CreateEnvironmentBlueprintInput < Struct.new(
+      :domain_identifier,
+      :name,
+      :description,
+      :provisioning_properties,
+      :user_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The ID of this Amazon DataZone blueprint.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of this Amazon DataZone blueprint.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of this Amazon DataZone blueprint.</p>
+    #   @return [String]
+    # @!attribute provider
+    #   <p>The provider of this Amazon DataZone blueprint.</p>
+    #   @return [String]
+    # @!attribute provisioning_properties
+    #   <p>The provisioning properties of this Amazon DataZone blueprint.</p>
+    #   @return [Types::ProvisioningProperties]
+    # @!attribute deployment_properties
+    #   <p>The deployment properties of this Amazon DataZone blueprint.</p>
+    #   @return [Types::DeploymentProperties]
+    # @!attribute user_parameters
+    #   <p>The user parameters of this Amazon DataZone blueprint.</p>
+    #   @return [Array<Types::CustomParameter>]
+    # @!attribute glossary_terms
+    #   <p>The glossary terms attached to this Amazon DataZone blueprint.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at
+    #   <p>The timestamp at which the environment blueprint was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp of when this blueprint was updated.</p>
+    #   @return [Time]
+    class CreateEnvironmentBlueprintOutput < Struct.new(
+      :id,
+      :name,
+      :description,
+      :provider,
+      :provisioning_properties,
+      :deployment_properties,
+      :user_parameters,
+      :glossary_terms,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute project_identifier
     #   <p>The identifier of the Amazon DataZone project in which this environment is created.</p>
     #   @return [String]
@@ -3942,6 +4014,9 @@ module Aws::DataZone
     # @!attribute is_optional
     #   <p>Specifies whether the custom parameter is optional.</p>
     #   @return [Boolean]
+    # @!attribute is_update_supported
+    #   <p>Specifies whether a parameter value can be updated after creation. </p>
+    #   @return [Boolean]
     class CustomParameter < Struct.new(
       :key_name,
       :description,
@@ -3949,6 +4024,7 @@ module Aws::DataZone
       :default_value,
       :is_editable,
       :is_optional,
+      :is_update_supported,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4750,6 +4826,20 @@ module Aws::DataZone
     end
 
     class DeleteEnvironmentBlueprintConfigurationOutput < Struct.new(
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The ID of the Amazon DataZone domain in which the blueprint is deleted.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The ID of the blueprint that is deleted.</p>
+    #   @return [String]
+    class DeleteEnvironmentBlueprintInput < Struct.new(
+      :domain_identifier,
+      :identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8967,8 +9057,12 @@ module Aws::DataZone
     # @!attribute arn
     #   <p>The ARN of an IAM user profile in Amazon DataZone.</p>
     #   @return [String]
+    # @!attribute principal_id
+    #   <p>Principal ID of the IAM user.</p>
+    #   @return [String]
     class IamUserProfileDetails < Struct.new(
       :arn,
+      :principal_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10961,6 +11055,22 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The managed endpoint credentials of the EMR on EKS cluster.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute id
+    #   <p>The identifier of the managed endpoint credentials.</p>
+    #   @return [String]
+    # @!attribute token
+    #   <p>The ARN of the managed endpoint credentials.</p>
+    #   @return [String]
+    class ManagedEndpointCredentials < Struct.new(
+      :id,
+      :token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The offset of a matched term.</p>
     # @!attribute start_offset
     #   <p>The 0-indexed number indicating the start position (inclusive) of a matched term.</p>
@@ -11531,7 +11641,7 @@ module Aws::DataZone
     #   <p>Specifies whether to override project owners.</p>
     #   @return [Types::OverrideProjectOwnersPolicyGrantDetail]
     # @!attribute create_glossary
-    #   <p>Specifies that this is a create glossary policy.</p>
+    #   <p> Specifies that this is a create glossary policy.</p>
     #   @return [Types::CreateGlossaryPolicyGrantDetail]
     # @!attribute create_form_type
     #   <p>Specifies that this is a create form type policy.</p>
@@ -11965,6 +12075,9 @@ module Aws::DataZone
     # @!attribute regional_parameters
     #   <p>The regional parameters in the environment blueprint.</p>
     #   @return [Hash<String, Hash<String, String>>]
+    # @!attribute global_parameters
+    #   <p>Region-agnostic environment blueprint parameters. </p>
+    #   @return [Hash<String, String>]
     # @!attribute provisioning_configurations
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
@@ -11976,6 +12089,7 @@ module Aws::DataZone
       :environment_role_permission_boundary,
       :enabled_regions,
       :regional_parameters,
+      :global_parameters,
       :provisioning_configurations,
       keyword_init: true
     )
@@ -13507,6 +13621,9 @@ module Aws::DataZone
     # @!attribute trusted_certificates_s3_uri
     #   <p>The certificates S3 URI of the Spark EMR.</p>
     #   @return [String]
+    # @!attribute managed_endpoint_arn
+    #   <p>The managed endpoint ARN of the EMR on EKS cluster.</p>
+    #   @return [String]
     class SparkEmrPropertiesInput < Struct.new(
       :compute_arn,
       :instance_profile_arn,
@@ -13515,6 +13632,7 @@ module Aws::DataZone
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri,
+      :managed_endpoint_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13554,6 +13672,15 @@ module Aws::DataZone
     # @!attribute trusted_certificates_s3_uri
     #   <p>The trusted certificate S3 URL of the Spark EMR.</p>
     #   @return [String]
+    # @!attribute certificate_data
+    #   <p>The certificate data of the EMR on EKS cluster.</p>
+    #   @return [String]
+    # @!attribute managed_endpoint_arn
+    #   <p>The managed endpoint ARN of the EMR on EKS cluster.</p>
+    #   @return [String]
+    # @!attribute managed_endpoint_credentials
+    #   <p>The managed endpoint credentials of the EMR on EKS cluster.</p>
+    #   @return [Types::ManagedEndpointCredentials]
     class SparkEmrPropertiesOutput < Struct.new(
       :compute_arn,
       :credentials,
@@ -13566,6 +13693,9 @@ module Aws::DataZone
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri,
+      :certificate_data,
+      :managed_endpoint_arn,
+      :managed_endpoint_credentials,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13593,6 +13723,9 @@ module Aws::DataZone
     # @!attribute trusted_certificates_s3_uri
     #   <p>The trusted certificates S3 URI in the Spark EMR properties patch.</p>
     #   @return [String]
+    # @!attribute managed_endpoint_arn
+    #   <p>The managed endpoint ARN of the EMR on EKS cluster.</p>
+    #   @return [String]
     class SparkEmrPropertiesPatch < Struct.new(
       :compute_arn,
       :instance_profile_arn,
@@ -13601,6 +13734,7 @@ module Aws::DataZone
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri,
+      :managed_endpoint_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14090,7 +14224,7 @@ module Aws::DataZone
     #   <p>The timestamp of when a subscription grant was created.</p>
     #   @return [Time]
     # @!attribute updated_at
-    #   <p>The timestampf of when the subscription grant was updated.</p>
+    #   <p>The timestamp of when the subscription grant was updated.</p>
     #   @return [Time]
     # @!attribute subscription_target_id
     #   <p>The identifier of the target of the subscription grant.</p>
@@ -15106,6 +15240,78 @@ module Aws::DataZone
       :name,
       :parameters,
       :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon DataZone domain in which an environment blueprint is to be updated.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the environment blueprint to be updated.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [String]
+    # @!attribute provisioning_properties
+    #   <p>The provisioning properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [Types::ProvisioningProperties]
+    # @!attribute user_parameters
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [Array<Types::CustomParameter>]
+    class UpdateEnvironmentBlueprintInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :description,
+      :provisioning_properties,
+      :user_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the blueprint to be updated.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [String]
+    # @!attribute provider
+    #   <p>The provider of the blueprint to be udpated.</p>
+    #   @return [String]
+    # @!attribute provisioning_properties
+    #   <p>The provisioning properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [Types::ProvisioningProperties]
+    # @!attribute deployment_properties
+    #   <p>The deployment properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [Types::DeploymentProperties]
+    # @!attribute user_parameters
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [Array<Types::CustomParameter>]
+    # @!attribute glossary_terms
+    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at
+    #   <p>The timestamp of when the environment blueprint was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the blueprint was updated.</p>
+    #   @return [Time]
+    class UpdateEnvironmentBlueprintOutput < Struct.new(
+      :id,
+      :name,
+      :description,
+      :provider,
+      :provisioning_properties,
+      :deployment_properties,
+      :user_parameters,
+      :glossary_terms,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

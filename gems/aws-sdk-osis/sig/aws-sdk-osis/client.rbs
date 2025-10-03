@@ -7,6 +7,7 @@ module Aws::OSIS
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -85,12 +86,41 @@ module Aws::OSIS
       ?pipeline_role_arn: String
     ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
 
+    interface _CreatePipelineEndpointResponse
+      include Smithy::Client::_Response[Types::CreatePipelineEndpointResponse]
+      def pipeline_arn: () -> String?
+      def endpoint_id: () -> String?
+      def status: () -> String?
+      def vpc_id: () -> String?
+    end
+    def create_pipeline_endpoint: (
+      ?pipeline_arn: String,
+      ?vpc_options: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      }
+    ) -> _CreatePipelineEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineEndpointResponse
+
     interface _DeletePipelineResponse
       include Smithy::Client::_Response[Types::DeletePipelineResponse]
     end
     def delete_pipeline: (
       ?pipeline_name: String
     ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
+
+    interface _DeletePipelineEndpointResponse
+      include Smithy::Client::_Response[Types::DeletePipelineEndpointResponse]
+    end
+    def delete_pipeline_endpoint: (
+      ?endpoint_id: String
+    ) -> _DeletePipelineEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineEndpointResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
 
     interface _GetPipelineResponse
       include Smithy::Client::_Response[Types::GetPipelineResponse]
@@ -118,11 +148,40 @@ module Aws::OSIS
       ?pipeline_name: String
     ) -> _GetPipelineChangeProgressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPipelineChangeProgressResponse
 
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
     interface _ListPipelineBlueprintsResponse
       include Smithy::Client::_Response[Types::ListPipelineBlueprintsResponse]
       def blueprints: () -> Array[Types::PipelineBlueprintSummary]?
     end
     def list_pipeline_blueprints: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelineBlueprintsResponse
+
+    interface _ListPipelineEndpointConnectionsResponse
+      include Smithy::Client::_Response[Types::ListPipelineEndpointConnectionsResponse]
+      def next_token: () -> String?
+      def pipeline_endpoint_connections: () -> Array[Types::PipelineEndpointConnection]?
+    end
+    def list_pipeline_endpoint_connections: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPipelineEndpointConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelineEndpointConnectionsResponse
+
+    interface _ListPipelineEndpointsResponse
+      include Smithy::Client::_Response[Types::ListPipelineEndpointsResponse]
+      def next_token: () -> String?
+      def pipeline_endpoints: () -> Array[Types::PipelineEndpoint]?
+    end
+    def list_pipeline_endpoints: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPipelineEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelineEndpointsResponse
 
     interface _ListPipelinesResponse
       include Smithy::Client::_Response[Types::ListPipelinesResponse]
@@ -141,6 +200,25 @@ module Aws::OSIS
     def list_tags_for_resource: (
       ?arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RevokePipelineEndpointConnectionsResponse
+      include Smithy::Client::_Response[Types::RevokePipelineEndpointConnectionsResponse]
+      def pipeline_arn: () -> String?
+    end
+    def revoke_pipeline_endpoint_connections: (
+      ?pipeline_arn: String,
+      ?endpoint_ids: Array[String]
+    ) -> _RevokePipelineEndpointConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokePipelineEndpointConnectionsResponse
 
     interface _StartPipelineResponse
       include Smithy::Client::_Response[Types::StartPipelineResponse]

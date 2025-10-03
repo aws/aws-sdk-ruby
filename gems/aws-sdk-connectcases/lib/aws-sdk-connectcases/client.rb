@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::ConnectCases
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::ConnectCases
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::ConnectCases
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::ConnectCases::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::ConnectCases::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -642,6 +647,25 @@ module Aws::ConnectCases
     #           }],
     #           target_sla_minutes: 1, # required
     #         }
+    #       },
+    #       connect_case: {
+    #         case_id: "CaseId", # required
+    #       },
+    #       custom: {
+    #         fields: [ # required
+    #           {
+    #             id: "FieldId", # required
+    #             value: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               double_value: 1.0,
+    #               boolean_value: false,
+    #               empty_value: {
+    #               },
+    #               user_arn_value: "String"
+    #             }
+    #           }
+    #         ]
     #       }
     #     },
     #     performed_by: {
@@ -715,7 +739,7 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
-    # <p> The DeleteCase API permanently deletes a case and all its associated resources from the cases data store. After a successful deletion, you cannot:</p> <ul> <li> <p>Retrieve related items</p> </li> <li> <p>Access audit history</p> </li> <li> <p>Perform any operations that require the CaseID</p> </li> </ul> <important> <p>This action is irreversible. Once you delete a case, you cannot recover its data.</p> </important>
+    # <p> The DeleteCase API permanently deletes a case and all its associated resources from the cases data store. After a successful deletion, you cannot:</p> <ul> <li> <p>Retrieve related items</p> </li> <li> <p>Access audit history</p> </li> <li> <p>Perform any operations that require the CaseID</p> </li> </ul> <important> <p>This action is irreversible. After you delete a case, you cannot recover its data.</p> </important>
     # @param [Hash, Types::DeleteCaseRequest] params
     # @option params [String] :domain_id
     #   <p>A unique identifier of the Cases domain.</p>
@@ -928,7 +952,7 @@ module Aws::ConnectCases
     # @option params [String] :domain_id
     #   <p>The unique identifier of the Cases domain.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of audit events to return. The current maximum supported value is 25. This is also the default when no other value is provided.</p>
+    #   <p>The maximum number of audit events to return. When no value is provided, 25 is the default.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
@@ -1474,12 +1498,226 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
+    # <p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about "product defect" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with "Active" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case IDs, not complete case objects. To retrieve full case details, you must make additional calls to the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and quotas</a>.</p>
+    # @param [Hash, Types::SearchAllRelatedItemsRequest] params
+    # @option params [String] :domain_id
+    #   <p>The unique identifier of the Cases domain. </p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
+    # @option params [Array<Types::RelatedItemTypeFilter>] :filters
+    #   <p>The list of types of related items and their parameters to use for filtering. The filters work as an OR condition: caller gets back related items that match any of the specified filter types.</p>
+    # @option params [Array<Types::SearchAllRelatedItemsSort>] :sorts
+    #   <p>A structured set of sort terms to specify the order in which related items should be returned. Supports sorting by association time or case ID. The sorts work in the order specified: first sort term takes precedence over subsequent terms.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_id: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [{
+    #       # One of:
+    #       contact: {
+    #         channel: ["Channel"],
+    #         contact_arn: "ContactArn"
+    #       },
+    #       comment: {
+    #       },
+    #       file: {
+    #         file_arn: "FileArn"
+    #       },
+    #       sla: {
+    #         name: "SlaName",
+    #         status: "SlaStatus"
+    #       },
+    #       connect_case: {
+    #         case_id: "CaseId"
+    #       },
+    #       custom: {
+    #         fields: {
+    #           # One of:
+    #           field: {
+    #             # One of:
+    #             equal_to: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             contains: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             greater_than: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             greater_than_or_equal_to: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             less_than: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             less_than_or_equal_to: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             }
+    #           },
+    #           not: {
+    #             # recursive CustomFieldsFilter
+    #           },
+    #           and_all: [{
+    #             # recursive CustomFieldsFilter
+    #           }],
+    #           or_all: [{
+    #             # recursive CustomFieldsFilter
+    #           }]
+    #         }
+    #       }
+    #     }],
+    #     sorts: [
+    #       {
+    #         sort_property: "SearchAllRelatedItemsSortProperty", # required
+    #         sort_order: "Order", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.search_all_related_items(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     related_items: [ # required
+    #       {
+    #         related_item_id: "RelatedItemId", # required
+    #         case_id: "CaseId", # required
+    #         type: "RelatedItemType", # required
+    #         association_time: Time.now, # required
+    #         content: { # required
+    #           # One of:
+    #           contact: {
+    #             contact_arn: "ContactArn", # required
+    #             channel: "Channel", # required
+    #             connected_to_system_time: Time.now, # required
+    #           },
+    #           comment: {
+    #             body: "CommentBody", # required
+    #             content_type: "CommentBodyTextType", # required
+    #           },
+    #           file: {
+    #             file_arn: "FileArn", # required
+    #           },
+    #           sla: {
+    #             sla_configuration: { # required
+    #               name: "SlaName", # required
+    #               type: "SlaType", # required
+    #               status: "SlaStatus", # required
+    #               field_id: "FieldId",
+    #               target_field_values: [{
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }],
+    #               target_time: Time.now, # required
+    #               completion_time: Time.now
+    #             }
+    #           },
+    #           connect_case: {
+    #             case_id: "CaseId", # required
+    #           },
+    #           custom: {
+    #             fields: [ # required
+    #               {
+    #                 id: "FieldId", # required
+    #                 value: { # required
+    #                   # One of:
+    #                   string_value: "String",
+    #                   double_value: 1.0,
+    #                   boolean_value: false,
+    #                   empty_value: {
+    #                   },
+    #                   user_arn_value: "String"
+    #                 }
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         performed_by: {
+    #           # One of:
+    #           user_arn: "UserArn",
+    #           custom_entity: "CustomEntity"
+    #         },
+    #         tags: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::SearchAllRelatedItemsResponse]
+    def search_all_related_items(params = {}, options = {})
+      request = build_request(:search_all_related_items, params)
+      request.send_request(options)
+    end
+
     # <p>Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.</p> <note> <p>For <code>customer_id</code> you must provide the full customer profile ARN in this format: <code> arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID</code>. </p> </note>
     # @param [Hash, Types::SearchCasesInput] params
     # @option params [String] :domain_id
     #   <p>The unique identifier of the Cases domain. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of cases to return. The current maximum supported value is 25. This is also the default value when no other value is provided.</p>
+    #   <p>The maximum number of cases to return. When no value is provided, 25 is the default.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     # @option params [String] :search_term
@@ -1663,6 +1901,98 @@ module Aws::ConnectCases
     #       sla: {
     #         name: "SlaName",
     #         status: "SlaStatus"
+    #       },
+    #       connect_case: {
+    #         case_id: "CaseId"
+    #       },
+    #       custom: {
+    #         fields: {
+    #           # One of:
+    #           field: {
+    #             # One of:
+    #             equal_to: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             contains: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             greater_than: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             greater_than_or_equal_to: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             less_than: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             },
+    #             less_than_or_equal_to: {
+    #               id: "FieldId", # required
+    #               value: { # required
+    #                 # One of:
+    #                 string_value: "String",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #                 empty_value: {
+    #                 },
+    #                 user_arn_value: "String"
+    #               }
+    #             }
+    #           },
+    #           not: {
+    #             # recursive CustomFieldsFilter
+    #           },
+    #           and_all: [{
+    #             # recursive CustomFieldsFilter
+    #           }],
+    #           or_all: [{
+    #             # recursive CustomFieldsFilter
+    #           }]
+    #         }
     #       }
     #     }]
     #   }
@@ -1709,6 +2039,25 @@ module Aws::ConnectCases
     #               target_time: Time.now, # required
     #               completion_time: Time.now
     #             }
+    #           },
+    #           connect_case: {
+    #             case_id: "CaseId", # required
+    #           },
+    #           custom: {
+    #             fields: [ # required
+    #               {
+    #                 id: "FieldId", # required
+    #                 value: { # required
+    #                   # One of:
+    #                   string_value: "String",
+    #                   double_value: 1.0,
+    #                   boolean_value: false,
+    #                   empty_value: {
+    #                   },
+    #                   user_arn_value: "String"
+    #                 }
+    #               }
+    #             ]
     #           }
     #         },
     #         tags: {

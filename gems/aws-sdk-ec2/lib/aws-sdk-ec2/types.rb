@@ -6035,9 +6035,9 @@ module Aws::EC2
     #   @return [String]
     # @!attribute encrypted
     #   <p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, 
-    #         enable encryption using this parameter. Otherwise, omit this parameter. Encrypted snapshots 
-    #         are encrypted, even if you omit this parameter and encryption by default is not enabled. You 
-    #         cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the 
+    #         enable encryption using this parameter. Otherwise, omit this parameter. Copies of encrypted 
+    #         snapshots are encrypted, even if you omit this parameter and encryption by default is not 
+    #         enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute kms_key_id
@@ -7701,7 +7701,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute tag_specifications
     #   <p>The tags to apply to the report on creation. The <code>ResourceType</code> must be set to
-    #           <code>image-usage-report</code>; any other value will cause the report creation to
+    #         <code>image-usage-report</code>; any other value will cause the report creation to
     #         fail.</p>
     #            <p>To tag a report after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
     #   @return [Array<Types::TagSpecification>]
@@ -11718,7 +11718,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #                     <code>gp3</code>: 3,000 - 80,000 IOPS</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -11771,7 +11771,11 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp2</code> and <code>gp3</code>: 1 - 16,384 GiB</p>
+    #                     <code>gp2</code>: 1 - 16,384 GiB</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 1 - 65,536 GiB</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -11837,9 +11841,9 @@ module Aws::EC2
     #       		Amazon EBS Multi-Attach</a> in the <i>Amazon EBS User Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute throughput
-    #   <p>The throughput to provision for a volume, with a maximum of 1,000 MiB/s.</p>
+    #   <p>The throughput to provision for a volume, with a maximum of 2,000 MiB/s.</p>
     #            <p>This parameter is valid only for <code>gp3</code> volumes.</p>
-    #            <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>
+    #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency 
@@ -12411,6 +12415,30 @@ module Aws::EC2
     #   @return [Types::VpnGateway]
     class CreateVpnGatewayResult < Struct.new(
       :vpn_gateway,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The maximum age for allowed images.</p>
+    # @!attribute maximum_days_since_created
+    #   <p>The maximum number of days that have elapsed since the image was created. For example, a
+    #         value of <code>300</code> allows images that were created within the last 300 days.</p>
+    #   @return [Integer]
+    class CreationDateCondition < Struct.new(
+      :maximum_days_since_created,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The maximum age for allowed images.</p>
+    # @!attribute maximum_days_since_created
+    #   <p>The maximum number of days that have elapsed since the image was created. For example, a
+    #         value of <code>300</code> allows images that were created within the last 300 days.</p>
+    #   @return [Integer]
+    class CreationDateConditionRequest < Struct.new(
+      :maximum_days_since_created,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14928,6 +14956,30 @@ module Aws::EC2
     class DeleteVpnGatewayRequest < Struct.new(
       :vpn_gateway_id,
       :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The maximum period since deprecation for allowed images.</p>
+    # @!attribute maximum_days_since_deprecated
+    #   <p>The maximum number of days that have elapsed since the image was deprecated. When set to
+    #         <code>0</code>, no deprecated images are allowed.</p>
+    #   @return [Integer]
+    class DeprecationTimeCondition < Struct.new(
+      :maximum_days_since_deprecated,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The maximum period since deprecation for allowed images.</p>
+    # @!attribute maximum_days_since_deprecated
+    #   <p>The maximum number of days that have elapsed since the image was deprecated. Set to
+    #         <code>0</code> to exclude all deprecated images.</p>
+    #   @return [Integer]
+    class DeprecationTimeConditionRequest < Struct.new(
+      :maximum_days_since_deprecated,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18310,13 +18362,13 @@ module Aws::EC2
     # @!attribute include_all_resource_types
     #   <p>Specifies whether to check all supported Amazon Web Services resource types for image references. When
     #         specified, default values are applied for <code>ResourceTypeOptions</code>. For the default
-    #         values, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ami-references-works.html">How AMI reference checks
-    #           work</a> in the <i>Amazon EC2 User Guide</i>. If you also specify
-    #           <code>ResourceTypes</code> with <code>ResourceTypeOptions</code>, your specified values
-    #         override the default values.</p>
+    #         values, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html#how-ami-references-works">How AMI
+    #           reference checks work</a> in the <i>Amazon EC2 User Guide</i>. If you also
+    #         specify <code>ResourceTypes</code> with <code>ResourceTypeOptions</code>, your specified
+    #         values override the default values.</p>
     #            <p>Supported resource types: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code> |
-    #           <code>ssm:Parameter</code> | <code>imagebuilder:ImageRecipe</code> |
-    #           <code>imagebuilder:ContainerRecipe</code>
+    #         <code>ssm:Parameter</code> | <code>imagebuilder:ImageRecipe</code> |
+    #         <code>imagebuilder:ContainerRecipe</code>
     #            </p>
     #            <p>Either <code>IncludeAllResourceTypes</code> or <code>ResourceTypes</code> must be
     #         specified.</p>
@@ -18395,7 +18447,7 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>resource-type</code> - The resource type (<code>ec2:Instance</code> |
-    #               <code>ec2:LaunchTemplate</code>).</p>
+    #             <code>ec2:LaunchTemplate</code>).</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
@@ -18459,7 +18511,7 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>state</code> - The state of the report (<code>available</code> |
-    #               <code>pending</code> | <code>error</code>).</p>
+    #             <code>pending</code> | <code>error</code>).</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
@@ -20531,7 +20583,7 @@ module Aws::EC2
     #                  <p>
     #                     <code>platform-details</code> - The platform (<code>Linux/UNIX</code> |
     #                           <code>Red Hat BYOL Linux</code> | <code> Red Hat Enterprise Linux</code> |
-    #                           <code>Red Hat Enterprise Linux with HA</code> | <code>Red Hat Enterprise
+    #                       <code>Red Hat Enterprise Linux with HA</code> | <code>Red Hat Enterprise Linux with High Availability</code> | <code>Red Hat Enterprise
     #                           Linux with SQL Server Standard and HA</code> | <code>Red Hat Enterprise
     #                           Linux with SQL Server Enterprise and HA</code> | <code>Red Hat Enterprise
     #                           Linux with SQL Server Standard</code> | <code>Red Hat Enterprise Linux with
@@ -30212,7 +30264,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #                     <code>gp3</code>: 3,000 - 80,000 IOPS</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -30240,7 +30292,11 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp2</code> and <code>gp3</code>: 1 - 16,384 GiB</p>
+    #                     <code>gp2</code>: 1 - 16,384 GiB</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 1 - 65,536 GiB</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -30274,7 +30330,7 @@ module Aws::EC2
     # @!attribute throughput
     #   <p>The throughput that the volume supports, in MiB/s.</p>
     #            <p>This parameter is valid only for <code>gp3</code> volumes.</p>
-    #            <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>
+    #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute outpost_arn
     #   <p>The ARN of the Outpost on which the snapshot is stored.</p>
@@ -33062,7 +33118,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #                     <code>gp3</code>: 3,000 - 80,000 IOPS</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -33082,7 +33138,7 @@ module Aws::EC2
     # @!attribute throughput
     #   <p>The throughput that the volume supports, in MiB/s.</p>
     #            <p>This parameter is valid only for <code>gp3</code> volumes.</p>
-    #            <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>
+    #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute kms_key_id
     #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key 
@@ -33101,7 +33157,11 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp2</code> and <code>gp3</code>: 1 - 16,384 GiB</p>
+    #                     <code>gp2</code>: 1 - 16,384 GiB</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 1 - 65,536 GiB</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -37233,62 +37293,182 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable
-    #       in the account in the specified Amazon Web Services Region. Currently, the only criteria that can be
-    #       specified are AMI providers. </p>
-    #          <p>Up to 10 <code>imageCriteria</code> objects can be specified, and up to a total of 200
-    #       values for all <code>imageProviders</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration">JSON
-    #         configuration for the Allowed AMIs criteria</a> in the
-    #       <i>Amazon EC2 User Guide</i>.</p>
+    # <p>The criteria that are evaluated to determine which AMIs are discoverable and usable in
+    #       your account for the specified Amazon Web Services Region.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#how-allowed-amis-works">How Allowed AMIs
+    #         works</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @!attribute image_providers
-    #   <p>A list of AMI providers whose AMIs are discoverable and useable in the account. Up to a
-    #         total of 200 values can be specified.</p>
+    #   <p>The image providers whose images are allowed.</p>
     #            <p>Possible values:</p>
-    #            <p>
-    #               <code>amazon</code>: Allow AMIs created by Amazon Web Services.</p>
-    #            <p>
-    #               <code>aws-marketplace</code>: Allow AMIs created by verified providers in the Amazon Web Services
-    #         Marketplace.</p>
-    #            <p>
-    #               <code>aws-backup-vault</code>: Allow AMIs created by Amazon Web Services Backup. </p>
-    #            <p>12-digit account ID: Allow AMIs created by this account. One or more account IDs can be
-    #         specified.</p>
-    #            <p>
-    #               <code>none</code>: Allow AMIs created by your own account only.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>amazon</code>: Allow AMIs created by Amazon or verified providers.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-marketplace</code>: Allow AMIs created by verified providers in the Amazon Web Services
+    #             Marketplace.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-backup-vault</code>: Allow AMIs created by Amazon Web Services Backup. </p>
+    #               </li>
+    #               <li>
+    #                  <p>12-digit account ID: Allow AMIs created by this account. One or more account IDs can be
+    #             specified.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>none</code>: Allow AMIs created by your own account only.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Maximum: 200 values</p>
     #   @return [Array<String>]
+    # @!attribute marketplace_product_codes
+    #   <p>The Amazon Web Services Marketplace product codes for allowed images.</p>
+    #            <p>Length: 1-25 characters</p>
+    #            <p>Valid characters: Letters (<code>A–Z, a–z</code>) and numbers (<code>0–9</code>)</p>
+    #            <p>Maximum: 50 values</p>
+    #   @return [Array<String>]
+    # @!attribute image_names
+    #   <p>The names of allowed images. Names can include wildcards (<code>?</code> and
+    #           <code>*</code>).</p>
+    #            <p>Length: 1–128 characters. With <code>?</code>, the minimum is 3 characters.</p>
+    #            <p>Valid characters:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Letters: <code>A–Z, a–z</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Numbers: <code>0–9</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Special characters: <code>( ) [ ] . / - ' @ _ * ?</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Spaces</p>
+    #               </li>
+    #            </ul>
+    #            <p>Maximum: 50 values</p>
+    #   @return [Array<String>]
+    # @!attribute deprecation_time_condition
+    #   <p>The maximum period since deprecation for allowed images.</p>
+    #   @return [Types::DeprecationTimeCondition]
+    # @!attribute creation_date_condition
+    #   <p>The maximum age for allowed images.</p>
+    #   @return [Types::CreationDateCondition]
     class ImageCriterion < Struct.new(
       :image_providers,
+      :marketplace_product_codes,
+      :image_names,
+      :deprecation_time_condition,
+      :creation_date_condition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable
-    #       in the account in the specified Amazon Web Services Region. Currently, the only criteria that can be
-    #       specified are AMI providers. </p>
-    #          <p>Up to 10 <code>imageCriteria</code> objects can be specified, and up to a total of 200
-    #       values for all <code>imageProviders</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#allowed-amis-json-configuration">JSON
-    #         configuration for the Allowed AMIs criteria</a> in the
-    #       <i>Amazon EC2 User Guide</i>.</p>
+    # <p>The criteria that are evaluated to determine which AMIs are discoverable and usable in
+    #       your account for the specified Amazon Web Services Region.</p>
+    #          <p>The <code>ImageCriteria</code> can include up to:</p>
+    #          <ul>
+    #             <li>
+    #                <p>10 <code>ImageCriterion</code>
+    #                </p>
+    #             </li>
+    #          </ul>
+    #          <p>Each <code>ImageCriterion</code> can include up to:</p>
+    #          <ul>
+    #             <li>
+    #                <p>200 values for <code>ImageProviders</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>50 values for <code>ImageNames</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>50 values for <code>MarketplaceProductCodes</code>
+    #                </p>
+    #             </li>
+    #          </ul>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#how-allowed-amis-works">How Allowed AMIs
+    #         works</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @!attribute image_providers
-    #   <p>A list of image providers whose AMIs are discoverable and useable in the account. Up to a
-    #         total of 200 values can be specified.</p>
+    #   <p>The image providers whose images are allowed.</p>
     #            <p>Possible values:</p>
-    #            <p>
-    #               <code>amazon</code>: Allow AMIs created by Amazon Web Services.</p>
-    #            <p>
-    #               <code>aws-marketplace</code>: Allow AMIs created by verified providers in the Amazon Web Services
-    #         Marketplace.</p>
-    #            <p>
-    #               <code>aws-backup-vault</code>: Allow AMIs created by Amazon Web Services Backup. </p>
-    #            <p>12-digit account ID: Allow AMIs created by this account. One or more account IDs can be
-    #         specified.</p>
-    #            <p>
-    #               <code>none</code>: Allow AMIs created by your own account only. When <code>none</code> is
-    #         specified, no other values can be specified.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>amazon</code>: Allow AMIs created by Amazon or verified providers.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-marketplace</code>: Allow AMIs created by verified providers in the Amazon Web Services
+    #             Marketplace.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-backup-vault</code>: Allow AMIs created by Amazon Web Services Backup. </p>
+    #               </li>
+    #               <li>
+    #                  <p>12-digit account ID: Allow AMIs created by the specified accounts. One or more account IDs can be
+    #             specified.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>none</code>: Allow AMIs created by your own account only. When <code>none</code> is
+    #             specified, no other values can be specified.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Maximum: 200 values</p>
     #   @return [Array<String>]
+    # @!attribute marketplace_product_codes
+    #   <p>The Amazon Web Services Marketplace product codes for allowed images.</p>
+    #            <p>Length: 1-25 characters</p>
+    #            <p>Valid characters: Letters (<code>A–Z, a–z</code>) and numbers (<code>0–9</code>)</p>
+    #            <p>Maximum: 50 values</p>
+    #   @return [Array<String>]
+    # @!attribute image_names
+    #   <p>The names of allowed images. Names can include wildcards (<code>?</code> and
+    #           <code>*</code>).</p>
+    #            <p>Length: 1–128 characters. With <code>?</code>, the minimum is 3 characters.</p>
+    #            <p>Valid characters:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Letters: <code>A–Z, a–z</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Numbers: <code>0–9</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Special characters: <code>( ) [ ] . / - ' @ _ * ?</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Spaces</p>
+    #               </li>
+    #            </ul>
+    #            <p>Maximum: 50 values</p>
+    #   @return [Array<String>]
+    # @!attribute deprecation_time_condition
+    #   <p>The maximum period since deprecation for allowed images.</p>
+    #   @return [Types::DeprecationTimeConditionRequest]
+    # @!attribute creation_date_condition
+    #   <p>The maximum age for allowed images.</p>
+    #   @return [Types::CreationDateConditionRequest]
     class ImageCriterionRequest < Struct.new(
       :image_providers,
+      :marketplace_product_codes,
+      :image_names,
+      :deprecation_time_condition,
+      :creation_date_condition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -39263,7 +39443,7 @@ module Aws::EC2
     #   <p>Indicates whether access to instance tags from the instance metadata is enabled or
     #               disabled. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS">Work with
     #                   instance tags using the instance metadata</a> in the
-    #                   <i>Amazon EC2 User Guide</i>.</p>
+    #               <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute managed_by
     #   <p>The entity that manages the IMDS default settings. Possible values include:</p>
@@ -42975,7 +43155,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #                     <code>gp3</code>: 3,000 - 80,000 IOPS</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -43003,7 +43183,11 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp2</code> and <code>gp3</code>: 1 - 16,384 GiB</p>
+    #                     <code>gp2</code>: 1 - 16,384 GiB</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 1 - 65,536 GiB</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -43028,9 +43212,9 @@ module Aws::EC2
     #                   <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute throughput
-    #   <p>The throughput to provision for a <code>gp3</code> volume, with a maximum of 1,000
+    #   <p>The throughput to provision for a <code>gp3</code> volume, with a maximum of 2,000
     #               MiB/s.</p>
-    #            <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>
+    #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute volume_initialization_rate
     #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download 
@@ -43081,8 +43265,7 @@ module Aws::EC2
     #               eia1.large, and eia1.xlarge. </p>
     #   @return [String]
     # @!attribute count
-    #   <p> The number of elastic inference accelerators to attach to the instance. </p>
-    #            <p>Default: 1</p>
+    #   <p>The number of elastic inference accelerators to attach to the instance. </p>
     #   @return [Integer]
     class LaunchTemplateElasticInferenceAccelerator < Struct.new(
       :type,
@@ -43097,12 +43280,11 @@ module Aws::EC2
     #          </note>
     #          <p> Describes an elastic inference accelerator. </p>
     # @!attribute type
-    #   <p> The type of elastic inference accelerator. The possible values are eia1.medium,
+    #   <p>The type of elastic inference accelerator. The possible values are eia1.medium,
     #               eia1.large, and eia1.xlarge. </p>
     #   @return [String]
     # @!attribute count
-    #   <p> The number of elastic inference accelerators to attach to the instance. </p>
-    #            <p>Default: 1</p>
+    #   <p>The number of elastic inference accelerators to attach to the instance. </p>
     #   @return [Integer]
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
       :type,
@@ -43323,7 +43505,6 @@ module Aws::EC2
     # @!attribute http_put_response_hop_limit
     #   <p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the
     #               number, the further instance metadata requests can travel.</p>
-    #            <p>Default: 1</p>
     #            <p>Possible values: Integers from 1 to 64</p>
     #   @return [Integer]
     # @!attribute http_endpoint
@@ -46433,7 +46614,7 @@ module Aws::EC2
     #   <p>Enables or disables access to an instance's tags from the instance metadata. For more
     #               information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS">Work with
     #                   instance tags using the instance metadata</a> in the
-    #                   <i>Amazon EC2 User Guide</i>.</p>
+    #               <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute dry_run
     #   <p>Checks whether you have the required permissions for the operation, without actually making the 
@@ -48458,7 +48639,11 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp2</code> and <code>gp3</code>: 1 - 16,384 GiB</p>
+    #                     <code>gp2</code>: 1 - 16,384 GiB</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>gp3</code>: 1 - 65,536 GiB</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -48489,7 +48674,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>gp3</code>: 3,000 - 16,000 IOPS</p>
+    #                     <code>gp3</code>: 3,000 - 80,000 IOPS</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -48508,10 +48693,10 @@ module Aws::EC2
     #   @return [Integer]
     # @!attribute throughput
     #   <p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. 
-    #         The maximum value is 1,000.</p>
+    #         The maximum value is 2,000.</p>
     #            <p>Default: The existing value is retained if the source and target volume type is <code>gp3</code>.
     #         Otherwise, the default value is 125.</p>
-    #            <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>
+    #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute multi_attach_enabled
     #   <p>Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the 
@@ -54965,7 +55150,7 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>Valid values: <code>pending</code> | <code>running</code> | <code>shutting-down</code> |
-    #               <code>terminated</code> | <code>stopping</code> | <code>stopped</code>
+    #                 <code>terminated</code> | <code>stopping</code> | <code>stopped</code>
     #                        </p>
     #                     </li>
     #                     <li>
@@ -55003,7 +55188,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute resource_type_options
     #   <p>The options that affect the scope of the response. Valid only when
-    #           <code>ResourceType</code> is <code>ec2:Instance</code> or
+    #         <code>ResourceType</code> is <code>ec2:Instance</code> or
     #         <code>ec2:LaunchTemplate</code>.</p>
     #   @return [Array<Types::ResourceTypeOption>]
     class ResourceTypeRequest < Struct.new(
@@ -55716,6 +55901,10 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>EnableVgwRoutePropagation</code> - The route was propagated by route propagation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Advertisement</code> - The route was created dynamically by Amazon VPC Route Server.</p>
     #               </li>
     #            </ul>
     #   @return [String]

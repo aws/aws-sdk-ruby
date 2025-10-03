@@ -53,6 +53,15 @@ module Aws::ChimeSDKMeetings
     #                       to receive and you set your <code>content</code> capability to not receive.</p>
     #               </li>
     #               <li>
+    #                  <p>If meeting features is defined as <code>Video:MaxResolution:None</code> but
+    #                       <code>Content:MaxResolution</code> is defined as something other than
+    #                       <code>None</code> and attendee capabilities are not defined in the API
+    #                       request, then the default attendee video capability is set to
+    #                       <code>Receive</code> and attendee content capability is set to
+    #                       <code>SendReceive</code>. This is because content <code>SendReceive</code>
+    #                       requires video to be at least <code>Receive</code>.</p>
+    #               </li>
+    #               <li>
     #                  <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , 
     #                       and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p>
     #               </li>
@@ -91,6 +100,15 @@ module Aws::ChimeSDKMeetings
     #                <p>You can't set <code>content</code> capabilities to <code>SendReceive</code> or <code>Receive</code> unless you also set <code>video</code> capabilities to <code>SendReceive</code> 
     #                     or <code>Receive</code>. If you don't set the <code>video</code> capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your 
     #                     <code>video</code> capability to receive and you set your <code>content</code> capability to not receive.</p>
+    #             </li>
+    #             <li>
+    #                <p>If meeting features is defined as <code>Video:MaxResolution:None</code> but
+    #                     <code>Content:MaxResolution</code> is defined as something other than
+    #                     <code>None</code> and attendee capabilities are not defined in the API
+    #                     request, then the default attendee video capability is set to
+    #                     <code>Receive</code> and attendee content capability is set to
+    #                     <code>SendReceive</code>. This is because content <code>SendReceive</code>
+    #                     requires video to be at least <code>Receive</code>.</p>
     #             </li>
     #             <li>
     #                <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , 
@@ -311,6 +329,15 @@ module Aws::ChimeSDKMeetings
     #                       to receive and you set your <code>content</code> capability to not receive.</p>
     #               </li>
     #               <li>
+    #                  <p>If meeting features is defined as <code>Video:MaxResolution:None</code> but
+    #                           <code>Content:MaxResolution</code> is defined as something other than
+    #                           <code>None</code> and attendee capabilities are not defined in the API
+    #                           request, then the default attendee video capability is set to
+    #                           <code>Receive</code> and attendee content capability is set to
+    #                           <code>SendReceive</code>. This is because content <code>SendReceive</code>
+    #                           requires video to be at least <code>Receive</code>.</p>
+    #               </li>
+    #               <li>
     #                  <p>When you change an <code>audio</code> capability from <code>None</code> or <code>Receive</code> to <code>Send</code> or <code>SendReceive</code> , 
     #                       and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.</p>
     #               </li>
@@ -448,6 +475,9 @@ module Aws::ChimeSDKMeetings
     #                   If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
+    # @!attribute media_placement_network_type
+    #   <p>The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
+    #   @return [String]
     class CreateMeetingRequest < Struct.new(
       :client_request_token,
       :media_region,
@@ -458,6 +488,7 @@ module Aws::ChimeSDKMeetings
       :primary_meeting_id,
       :tenant_ids,
       :tags,
+      :media_placement_network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -530,6 +561,9 @@ module Aws::ChimeSDKMeetings
     # @!attribute tags
     #   <p>The tags in the request.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute media_placement_network_type
+    #   <p>The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>
+    #   @return [String]
     class CreateMeetingWithAttendeesRequest < Struct.new(
       :client_request_token,
       :media_region,
@@ -541,6 +575,7 @@ module Aws::ChimeSDKMeetings
       :primary_meeting_id,
       :tenant_ids,
       :tags,
+      :media_placement_network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

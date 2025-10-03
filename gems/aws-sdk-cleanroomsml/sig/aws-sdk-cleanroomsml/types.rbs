@@ -1,6 +1,49 @@
 module Aws::CleanRoomsML
   module Types
 
+    class AccessBudget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?details: Array[Types::AccessBudgetDetails],
+        ?aggregate_remaining_budget: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor details: Array[Types::AccessBudgetDetails]?
+      attr_accessor aggregate_remaining_budget: Integer?
+    end
+
+    class AccessBudgetDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?remaining_budget: Integer,
+        ?budget: Integer,
+        ?budget_type: String,
+        ?auto_refresh: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor remaining_budget: Integer?
+      attr_accessor budget: Integer?
+      attr_accessor budget_type: String?
+      attr_accessor auto_refresh: String?
+    end
+
+    module AccessBudgetType
+      CALENDAR_DAY: String
+      CALENDAR_MONTH: String
+      CALENDAR_WEEK: String
+      LIFETIME: String
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -186,6 +229,11 @@ module Aws::CleanRoomsML
     module AudienceSizeType
       ABSOLUTE: String
       PERCENTAGE: String
+    end
+
+    module AutoRefreshMode
+      ENABLED: String
+      DISABLED: String
     end
 
     class CancelTrainedModelInferenceJobRequest
@@ -1133,6 +1181,7 @@ module Aws::CleanRoomsML
         ?status_details: Types::StatusDetails,
         ?retention_in_days: Integer,
         ?number_of_records: Integer,
+        ?privacy_budgets: Types::PrivacyBudgets,
         ?description: String,
         ?create_time: Time,
         ?update_time: Time,
@@ -1149,6 +1198,7 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails?
       attr_accessor retention_in_days: Integer?
       attr_accessor number_of_records: Integer?
+      attr_accessor privacy_budgets: Types::PrivacyBudgets?
       attr_accessor description: String?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
@@ -1429,6 +1479,7 @@ module Aws::CleanRoomsML
         ?status_details: Types::StatusDetails,
         ?retention_in_days: Integer,
         ?number_of_records: Integer,
+        ?privacy_budgets: Types::PrivacyBudgets,
         ?description: String,
         ?create_time: Time,
         ?update_time: Time,
@@ -1450,6 +1501,7 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails?
       attr_accessor retention_in_days: Integer?
       attr_accessor number_of_records: Integer?
+      attr_accessor privacy_budgets: Types::PrivacyBudgets?
       attr_accessor description: String?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
@@ -2656,6 +2708,22 @@ module Aws::CleanRoomsML
     module PolicyExistenceCondition
       POLICY_MUST_EXIST: String
       POLICY_MUST_NOT_EXIST: String
+    end
+
+    class PrivacyBudgets
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?access_budgets: Array[Types::AccessBudget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_budgets: Array[Types::AccessBudget]?
+
+      class AccessBudgets < PrivacyBudgets
+      end
+      class Unknown < PrivacyBudgets
+      end
     end
 
     class PrivacyConfiguration

@@ -74,6 +74,8 @@ module Aws::Connect
     AssociateAnalyticsDataSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateAnalyticsDataSetResponse', name: 'AssociateAnalyticsDataSetResponse')
     AssociateApprovedOriginRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateApprovedOriginRequest', name: 'AssociateApprovedOriginRequest')
     AssociateBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateBotRequest', name: 'AssociateBotRequest')
+    AssociateContactWithUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateContactWithUserRequest', name: 'AssociateContactWithUserRequest')
+    AssociateContactWithUserResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateContactWithUserResponse', name: 'AssociateContactWithUserResponse')
     AssociateDefaultVocabularyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateDefaultVocabularyRequest', name: 'AssociateDefaultVocabularyRequest')
     AssociateDefaultVocabularyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateDefaultVocabularyResponse', name: 'AssociateDefaultVocabularyResponse')
     AssociateFlowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#AssociateFlowRequest', name: 'AssociateFlowRequest')
@@ -238,7 +240,7 @@ module Aws::Connect
     ContactSearchSummaryAgentInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ContactSearchSummaryAgentInfo', name: 'ContactSearchSummaryAgentInfo')
     ContactSearchSummaryQueueInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ContactSearchSummaryQueueInfo', name: 'ContactSearchSummaryQueueInfo')
     ContactSearchSummarySegmentAttributeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ContactSearchSummarySegmentAttributeValue', name: 'ContactSearchSummarySegmentAttributeValue')
-    ContactSearchSummarySegmentAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.connect#ContactSearchSummarySegmentAttributes', name: 'ContactSearchSummarySegmentAttributes')
+    ContactSearchSummarySegmentAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.connect#ContactSearchSummarySegmentAttributes', name: 'ContactSearchSummarySegmentAttributes', traits: {"smithy.api#sensitive" => {}})
     ContactState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#ContactState', name: 'ContactState')
     ContactStates = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#ContactStates', name: 'ContactStates', traits: {"smithy.api#length" => {"min" => 0, "max" => 9}})
     ContactTagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#ContactTagKey', name: 'ContactTagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[a-zA-Z+-=._:/]+$"})
@@ -501,6 +503,7 @@ module Aws::Connect
     EmailRecipientsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#EmailRecipientsList', name: 'EmailRecipientsList')
     EmailReference = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#EmailReference', name: 'EmailReference')
     EmptyFieldValue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#EmptyFieldValue', name: 'EmptyFieldValue')
+    EnableValueValidationOnAssociation = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.connect#EnableValueValidationOnAssociation', name: 'EnableValueValidationOnAssociation', traits: {"smithy.api#default" => false})
     EncryptionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#EncryptionConfig', name: 'EncryptionConfig')
     EncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#EncryptionType', name: 'EncryptionType')
     EndAssociatedTasksActionDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#EndAssociatedTasksActionDefinition', name: 'EndAssociatedTasksActionDefinition')
@@ -700,6 +703,7 @@ module Aws::Connect
     Index = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connect#Index', name: 'Index')
     InitiateAs = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#InitiateAs', name: 'InitiateAs')
     InitiationMethodList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#InitiationMethodList', name: 'InitiationMethodList')
+    InputPredefinedAttributeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#InputPredefinedAttributeConfiguration', name: 'InputPredefinedAttributeConfiguration')
     Instance = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#Instance', name: 'Instance')
     InstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#InstanceArn', name: 'InstanceArn', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9-]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     InstanceAttributeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#InstanceAttributeType', name: 'InstanceAttributeType')
@@ -732,6 +736,7 @@ module Aws::Connect
     InvisibleTaskTemplateFields = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#InvisibleTaskTemplateFields', name: 'InvisibleTaskTemplateFields')
     IpCidr = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#IpCidr', name: 'IpCidr', traits: {"smithy.api#length" => {"min" => 2, "max" => 50}, "smithy.api#pattern" => "^[A-Za-z0-9:/]*$"})
     IpCidrList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#IpCidrList', name: 'IpCidrList')
+    IsReadOnly = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.connect#IsReadOnly', name: 'IsReadOnly', traits: {"smithy.api#default" => false})
     IvrRecordingTrack = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#IvrRecordingTrack', name: 'IvrRecordingTrack')
     JoinToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#JoinToken', name: 'JoinToken', traits: {"smithy.api#sensitive" => {}})
     KeyId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#KeyId', name: 'KeyId', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -816,6 +821,8 @@ module Aws::Connect
     ListQuickConnectsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListQuickConnectsResponse', name: 'ListQuickConnectsResponse')
     ListRealtimeContactAnalysisSegmentsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRealtimeContactAnalysisSegmentsV2Request', name: 'ListRealtimeContactAnalysisSegmentsV2Request')
     ListRealtimeContactAnalysisSegmentsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRealtimeContactAnalysisSegmentsV2Response', name: 'ListRealtimeContactAnalysisSegmentsV2Response')
+    ListRoutingProfileManualAssignmentQueuesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRoutingProfileManualAssignmentQueuesRequest', name: 'ListRoutingProfileManualAssignmentQueuesRequest')
+    ListRoutingProfileManualAssignmentQueuesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRoutingProfileManualAssignmentQueuesResponse', name: 'ListRoutingProfileManualAssignmentQueuesResponse')
     ListRoutingProfileQueuesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRoutingProfileQueuesRequest', name: 'ListRoutingProfileQueuesRequest')
     ListRoutingProfileQueuesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRoutingProfileQueuesResponse', name: 'ListRoutingProfileQueuesResponse')
     ListRoutingProfilesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#ListRoutingProfilesRequest', name: 'ListRoutingProfilesRequest')
@@ -892,6 +899,7 @@ module Aws::Connect
     MonitorContactResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#MonitorContactResponse', name: 'MonitorContactResponse')
     Name = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#Name', name: 'Name', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#sensitive" => {}})
     Name128 = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#Name128', name: 'Name128', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(^[\\S].*[\\S]$)|(^[\\S]$)$"})
+    NameCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#NameCriteria', name: 'NameCriteria')
     Namespace = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#Namespace', name: 'Namespace', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     NewChatCreated = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.connect#NewChatCreated', name: 'NewChatCreated')
     NewSessionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#NewSessionDetails', name: 'NewSessionDetails')
@@ -951,6 +959,7 @@ module Aws::Connect
     Permission = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#Permission', name: 'Permission', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     PermissionsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PermissionsList', name: 'PermissionsList', traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
     PersistentChat = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#PersistentChat', name: 'PersistentChat')
+    PersistentConnection = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.connect#PersistentConnection', name: 'PersistentConnection', traits: {"smithy.api#default" => false})
     PhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PhoneNumber', name: 'PhoneNumber', traits: {"smithy.api#pattern" => "^\\\\+[1-9]\\\\d{1,14}$"})
     PhoneNumberCountryCode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#PhoneNumberCountryCode', name: 'PhoneNumberCountryCode')
     PhoneNumberCountryCodes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PhoneNumberCountryCodes', name: 'PhoneNumberCountryCodes', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
@@ -973,12 +982,15 @@ module Aws::Connect
     PotentialDisconnectIssue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PotentialDisconnectIssue', name: 'PotentialDisconnectIssue', traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
     PreSignedAttachmentUrl = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PreSignedAttachmentUrl', name: 'PreSignedAttachmentUrl', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
     PredefinedAttribute = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#PredefinedAttribute', name: 'PredefinedAttribute')
-    PredefinedAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PredefinedAttributeName', name: 'PredefinedAttributeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    PredefinedAttributeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#PredefinedAttributeConfiguration', name: 'PredefinedAttributeConfiguration')
+    PredefinedAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PredefinedAttributeName', name: 'PredefinedAttributeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    PredefinedAttributePurposeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PredefinedAttributePurposeName', name: 'PredefinedAttributePurposeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    PredefinedAttributePurposeNameList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PredefinedAttributePurposeNameList', name: 'PredefinedAttributePurposeNameList', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     PredefinedAttributeSearchConditionList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PredefinedAttributeSearchConditionList', name: 'PredefinedAttributeSearchConditionList')
     PredefinedAttributeSearchCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#PredefinedAttributeSearchCriteria', name: 'PredefinedAttributeSearchCriteria')
     PredefinedAttributeSearchSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PredefinedAttributeSearchSummaryList', name: 'PredefinedAttributeSearchSummaryList')
-    PredefinedAttributeStringValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PredefinedAttributeStringValue', name: 'PredefinedAttributeStringValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
-    PredefinedAttributeStringValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PredefinedAttributeStringValuesList', name: 'PredefinedAttributeStringValuesList', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    PredefinedAttributeStringValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#PredefinedAttributeStringValue', name: 'PredefinedAttributeStringValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    PredefinedAttributeStringValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PredefinedAttributeStringValuesList', name: 'PredefinedAttributeStringValuesList', traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
     PredefinedAttributeSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#PredefinedAttributeSummary', name: 'PredefinedAttributeSummary')
     PredefinedAttributeSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#PredefinedAttributeSummaryList', name: 'PredefinedAttributeSummaryList')
     PredefinedAttributeValues = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.connect#PredefinedAttributeValues', name: 'PredefinedAttributeValues')
@@ -1142,6 +1154,10 @@ module Aws::Connect
     RoutingProfileDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#RoutingProfileDescription', name: 'RoutingProfileDescription', traits: {"smithy.api#length" => {"min" => 1, "max" => 250}})
     RoutingProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#RoutingProfileId', name: 'RoutingProfileId')
     RoutingProfileList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#RoutingProfileList', name: 'RoutingProfileList')
+    RoutingProfileManualAssignmentQueueConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfig', name: 'RoutingProfileManualAssignmentQueueConfig')
+    RoutingProfileManualAssignmentQueueConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigList', name: 'RoutingProfileManualAssignmentQueueConfigList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    RoutingProfileManualAssignmentQueueConfigSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigSummary', name: 'RoutingProfileManualAssignmentQueueConfigSummary')
+    RoutingProfileManualAssignmentQueueConfigSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#RoutingProfileManualAssignmentQueueConfigSummaryList', name: 'RoutingProfileManualAssignmentQueueConfigSummaryList')
     RoutingProfileName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#RoutingProfileName', name: 'RoutingProfileName', traits: {"smithy.api#length" => {"min" => 1, "max" => 127}})
     RoutingProfileQueueConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#RoutingProfileQueueConfig', name: 'RoutingProfileQueueConfig')
     RoutingProfileQueueConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#RoutingProfileQueueConfigList', name: 'RoutingProfileQueueConfigList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -1177,11 +1193,16 @@ module Aws::Connect
     SearchContactFlowModulesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactFlowModulesResponse', name: 'SearchContactFlowModulesResponse')
     SearchContactFlowsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactFlowsRequest', name: 'SearchContactFlowsRequest')
     SearchContactFlowsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactFlowsResponse', name: 'SearchContactFlowsResponse')
+    SearchContactsAdditionalTimeRange = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactsAdditionalTimeRange', name: 'SearchContactsAdditionalTimeRange')
+    SearchContactsAdditionalTimeRangeCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteria', name: 'SearchContactsAdditionalTimeRangeCriteria')
+    SearchContactsAdditionalTimeRangeCriteriaList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#SearchContactsAdditionalTimeRangeCriteriaList', name: 'SearchContactsAdditionalTimeRangeCriteriaList')
     SearchContactsMatchType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#SearchContactsMatchType', name: 'SearchContactsMatchType')
     SearchContactsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactsRequest', name: 'SearchContactsRequest')
     SearchContactsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactsResponse', name: 'SearchContactsResponse')
     SearchContactsTimeRange = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactsTimeRange', name: 'SearchContactsTimeRange')
+    SearchContactsTimeRangeConditionType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#SearchContactsTimeRangeConditionType', name: 'SearchContactsTimeRangeConditionType')
     SearchContactsTimeRangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#SearchContactsTimeRangeType', name: 'SearchContactsTimeRangeType')
+    SearchContactsTimestampCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchContactsTimestampCondition', name: 'SearchContactsTimestampCondition')
     SearchCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchCriteria', name: 'SearchCriteria')
     SearchEmailAddressesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchEmailAddressesRequest', name: 'SearchEmailAddressesRequest')
     SearchEmailAddressesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchEmailAddressesResponse', name: 'SearchEmailAddressesResponse')
@@ -1211,6 +1232,7 @@ module Aws::Connect
     SearchUsersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchUsersResponse', name: 'SearchUsersResponse')
     SearchVocabulariesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchVocabulariesRequest', name: 'SearchVocabulariesRequest')
     SearchVocabulariesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchVocabulariesResponse', name: 'SearchVocabulariesResponse')
+    SearchableAgentCriteriaStep = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchableAgentCriteriaStep', name: 'SearchableAgentCriteriaStep')
     SearchableContactAttributeKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#SearchableContactAttributeKey', name: 'SearchableContactAttributeKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#sensitive" => {}})
     SearchableContactAttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#SearchableContactAttributeValue', name: 'SearchableContactAttributeValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#sensitive" => {}})
     SearchableContactAttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#SearchableContactAttributeValueList', name: 'SearchableContactAttributeValueList', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
@@ -1218,6 +1240,9 @@ module Aws::Connect
     SearchableContactAttributesCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchableContactAttributesCriteria', name: 'SearchableContactAttributesCriteria')
     SearchableContactAttributesCriteriaList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#SearchableContactAttributesCriteriaList', name: 'SearchableContactAttributesCriteriaList', traits: {"smithy.api#length" => {"min" => 0, "max" => 15}})
     SearchableQueueType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.connect#SearchableQueueType', name: 'SearchableQueueType')
+    SearchableRoutingCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchableRoutingCriteria', name: 'SearchableRoutingCriteria')
+    SearchableRoutingCriteriaStep = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SearchableRoutingCriteriaStep', name: 'SearchableRoutingCriteriaStep')
+    SearchableRoutingCriteriaStepList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#SearchableRoutingCriteriaStepList', name: 'SearchableRoutingCriteriaStepList')
     SearchableSegmentAttributeKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#SearchableSegmentAttributeKey', name: 'SearchableSegmentAttributeKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#sensitive" => {}})
     SearchableSegmentAttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#SearchableSegmentAttributeValue', name: 'SearchableSegmentAttributeValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#sensitive" => {}})
     SearchableSegmentAttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#SearchableSegmentAttributeValueList', name: 'SearchableSegmentAttributeValueList', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#sensitive" => {}})
@@ -1245,6 +1270,7 @@ module Aws::Connect
     SegmentAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#SegmentAttributeName', name: 'SegmentAttributeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     SegmentAttributeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.connect#SegmentAttributeValue', name: 'SegmentAttributeValue')
     SegmentAttributeValueInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.connect#SegmentAttributeValueInteger', name: 'SegmentAttributeValueInteger')
+    SegmentAttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.connect#SegmentAttributeValueList', name: 'SegmentAttributeValueList')
     SegmentAttributeValueMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.connect#SegmentAttributeValueMap', name: 'SegmentAttributeValueMap')
     SegmentAttributeValueString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.connect#SegmentAttributeValueString', name: 'SegmentAttributeValueString', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     SegmentAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.connect#SegmentAttributes', name: 'SegmentAttributes')
@@ -1731,6 +1757,11 @@ module Aws::Connect
     AssociateBotRequest.add_member(:lex_v2_bot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexV2Bot, location_name: 'LexV2Bot'))
     AssociateBotRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateBotRequest.type = Types::AssociateBotRequest
+    AssociateContactWithUserRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateContactWithUserRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactId, location_name: 'ContactId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateContactWithUserRequest.add_member(:user_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentResourceId, location_name: 'UserId', traits: {"smithy.api#required" => {}}))
+    AssociateContactWithUserRequest.type = Types::AssociateContactWithUserRequest
+    AssociateContactWithUserResponse.type = Types::AssociateContactWithUserResponse
     AssociateDefaultVocabularyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateDefaultVocabularyRequest.add_member(:language_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VocabularyLanguageCode, location_name: 'LanguageCode', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateDefaultVocabularyRequest.add_member(:vocabulary_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VocabularyId, location_name: 'VocabularyId'))
@@ -1767,7 +1798,8 @@ module Aws::Connect
     AssociateQueueQuickConnectsRequest.type = Types::AssociateQueueQuickConnectsRequest
     AssociateRoutingProfileQueuesRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateRoutingProfileQueuesRequest.add_member(:routing_profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: 'RoutingProfileId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    AssociateRoutingProfileQueuesRequest.add_member(:queue_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, location_name: 'QueueConfigs', traits: {"smithy.api#required" => {}}))
+    AssociateRoutingProfileQueuesRequest.add_member(:queue_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, location_name: 'QueueConfigs'))
+    AssociateRoutingProfileQueuesRequest.add_member(:manual_assignment_queue_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigList, location_name: 'ManualAssignmentQueueConfigs'))
     AssociateRoutingProfileQueuesRequest.type = Types::AssociateRoutingProfileQueuesRequest
     AssociateSecurityKeyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateSecurityKeyRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PEM, location_name: 'Key', traits: {"smithy.api#required" => {}}))
@@ -2195,6 +2227,8 @@ module Aws::Connect
     ContactSearchSummary.add_member(:disconnect_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'DisconnectTimestamp'))
     ContactSearchSummary.add_member(:scheduled_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'ScheduledTimestamp'))
     ContactSearchSummary.add_member(:segment_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactSearchSummarySegmentAttributes, location_name: 'SegmentAttributes'))
+    ContactSearchSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name'))
+    ContactSearchSummary.add_member(:routing_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingCriteria, location_name: 'RoutingCriteria'))
     ContactSearchSummary.type = Types::ContactSearchSummary
     ContactSearchSummaryAgentInfo.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentResourceId, location_name: 'Id'))
     ContactSearchSummaryAgentInfo.add_member(:connected_to_agent_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'ConnectedToAgentTimestamp'))
@@ -2203,6 +2237,7 @@ module Aws::Connect
     ContactSearchSummaryQueueInfo.add_member(:enqueue_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'EnqueueTimestamp'))
     ContactSearchSummaryQueueInfo.type = Types::ContactSearchSummaryQueueInfo
     ContactSearchSummarySegmentAttributeValue.add_member(:value_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: 'ValueString'))
+    ContactSearchSummarySegmentAttributeValue.add_member(:value_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueMap, location_name: 'ValueMap'))
     ContactSearchSummarySegmentAttributeValue.type = Types::ContactSearchSummarySegmentAttributeValue
     ContactSearchSummarySegmentAttributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeName)
     ContactSearchSummarySegmentAttributes.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactSearchSummarySegmentAttributeValue)
@@ -2377,7 +2412,9 @@ module Aws::Connect
     CreatePersistentContactAssociationResponse.type = Types::CreatePersistentContactAssociationResponse
     CreatePredefinedAttributeRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreatePredefinedAttributeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: 'Name', traits: {"smithy.api#required" => {}}))
-    CreatePredefinedAttributeRequest.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: 'Values', traits: {"smithy.api#required" => {}}))
+    CreatePredefinedAttributeRequest.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: 'Values'))
+    CreatePredefinedAttributeRequest.add_member(:purposes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributePurposeNameList, location_name: 'Purposes'))
+    CreatePredefinedAttributeRequest.add_member(:attribute_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputPredefinedAttributeConfiguration, location_name: 'AttributeConfiguration'))
     CreatePredefinedAttributeRequest.type = Types::CreatePredefinedAttributeRequest
     CreatePromptRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreatePromptRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: 'Name', traits: {"smithy.api#required" => {}}))
@@ -2424,6 +2461,7 @@ module Aws::Connect
     CreateRoutingProfileRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileDescription, location_name: 'Description', traits: {"smithy.api#required" => {}}))
     CreateRoutingProfileRequest.add_member(:default_outbound_queue_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueId, location_name: 'DefaultOutboundQueueId', traits: {"smithy.api#required" => {}}))
     CreateRoutingProfileRequest.add_member(:queue_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, location_name: 'QueueConfigs'))
+    CreateRoutingProfileRequest.add_member(:manual_assignment_queue_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigList, location_name: 'ManualAssignmentQueueConfigs'))
     CreateRoutingProfileRequest.add_member(:media_concurrencies, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MediaConcurrencies, location_name: 'MediaConcurrencies', traits: {"smithy.api#required" => {}}))
     CreateRoutingProfileRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags'))
     CreateRoutingProfileRequest.add_member(:agent_availability_timer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: 'AgentAvailabilityTimer'))
@@ -2917,7 +2955,8 @@ module Aws::Connect
     DisassociateQueueQuickConnectsRequest.type = Types::DisassociateQueueQuickConnectsRequest
     DisassociateRoutingProfileQueuesRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateRoutingProfileQueuesRequest.add_member(:routing_profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: 'RoutingProfileId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DisassociateRoutingProfileQueuesRequest.add_member(:queue_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueReferenceList, location_name: 'QueueReferences', traits: {"smithy.api#required" => {}}))
+    DisassociateRoutingProfileQueuesRequest.add_member(:queue_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueReferenceList, location_name: 'QueueReferences'))
+    DisassociateRoutingProfileQueuesRequest.add_member(:manual_assignment_queue_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueReferenceList, location_name: 'ManualAssignmentQueueReferences'))
     DisassociateRoutingProfileQueuesRequest.type = Types::DisassociateRoutingProfileQueuesRequest
     DisassociateSecurityKeyRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateSecurityKeyRequest.add_member(:association_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationId, location_name: 'AssociationId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3590,6 +3629,8 @@ module Aws::Connect
     InitiateAs.add_member(:connected_to_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CONNECTED_TO_USER', traits: {"smithy.api#enumValue" => "CONNECTED_TO_USER"}))
     InitiateAs.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'COMPLETED', traits: {"smithy.api#enumValue" => "COMPLETED"}))
     InitiationMethodList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInitiationMethod)
+    InputPredefinedAttributeConfiguration.add_member(:enable_value_validation_on_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableValueValidationOnAssociation, location_name: 'EnableValueValidationOnAssociation', traits: {"smithy.api#default" => false}))
+    InputPredefinedAttributeConfiguration.type = Types::InputPredefinedAttributeConfiguration
     Instance.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'Id'))
     Instance.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'Arn'))
     Instance.add_member(:identity_management_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryType, location_name: 'IdentityManagementType'))
@@ -4008,6 +4049,16 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:segments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegments, location_name: 'Segments', traits: {"smithy.api#required" => {}}))
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LargeNextToken, location_name: 'NextToken'))
     ListRealtimeContactAnalysisSegmentsV2Response.type = Types::ListRealtimeContactAnalysisSegmentsV2Response
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:routing_profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: 'RoutingProfileId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListRoutingProfileManualAssignmentQueuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResult100, location_name: 'MaxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListRoutingProfileManualAssignmentQueuesRequest.type = Types::ListRoutingProfileManualAssignmentQueuesRequest
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:routing_profile_manual_assignment_queue_config_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigSummaryList, location_name: 'RoutingProfileManualAssignmentQueueConfigSummaryList'))
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastModifiedTime'))
+    ListRoutingProfileManualAssignmentQueuesResponse.add_member(:last_modified_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'LastModifiedRegion'))
+    ListRoutingProfileManualAssignmentQueuesResponse.type = Types::ListRoutingProfileManualAssignmentQueuesResponse
     ListRoutingProfileQueuesRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListRoutingProfileQueuesRequest.add_member(:routing_profile_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: 'RoutingProfileId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListRoutingProfileQueuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -4204,6 +4255,9 @@ module Aws::Connect
     MonitorContactResponse.add_member(:contact_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactId, location_name: 'ContactId'))
     MonitorContactResponse.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'ContactArn'))
     MonitorContactResponse.type = Types::MonitorContactResponse
+    NameCriteria.add_member(:search_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchTextList, location_name: 'SearchText', traits: {"smithy.api#required" => {}}))
+    NameCriteria.add_member(:match_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: 'MatchType', traits: {"smithy.api#required" => {}}))
+    NameCriteria.type = Types::NameCriteria
     NewSessionDetails.add_member(:supported_messaging_content_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: 'SupportedMessagingContentTypes'))
     NewSessionDetails.add_member(:participant_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParticipantDetails, location_name: 'ParticipantDetails'))
     NewSessionDetails.add_member(:attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Attributes, location_name: 'Attributes'))
@@ -4599,9 +4653,15 @@ module Aws::Connect
     PotentialAudioQualityIssues.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PotentialAudioQualityIssue)
     PredefinedAttribute.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: 'Name'))
     PredefinedAttribute.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: 'Values'))
+    PredefinedAttribute.add_member(:purposes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributePurposeNameList, location_name: 'Purposes'))
+    PredefinedAttribute.add_member(:attribute_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeConfiguration, location_name: 'AttributeConfiguration'))
     PredefinedAttribute.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastModifiedTime'))
     PredefinedAttribute.add_member(:last_modified_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'LastModifiedRegion'))
     PredefinedAttribute.type = Types::PredefinedAttribute
+    PredefinedAttributeConfiguration.add_member(:enable_value_validation_on_association, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableValueValidationOnAssociation, location_name: 'EnableValueValidationOnAssociation', traits: {"smithy.api#default" => false}))
+    PredefinedAttributeConfiguration.add_member(:is_read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsReadOnly, location_name: 'IsReadOnly', traits: {"smithy.api#default" => false}))
+    PredefinedAttributeConfiguration.type = Types::PredefinedAttributeConfiguration
+    PredefinedAttributePurposeNameList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributePurposeName)
     PredefinedAttributeSearchConditionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeSearchCriteria)
     PredefinedAttributeSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeSearchConditionList, location_name: 'OrConditions'))
     PredefinedAttributeSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeSearchConditionList, location_name: 'AndConditions'))
@@ -4981,14 +5041,25 @@ module Aws::Connect
     RoutingProfile.add_member(:default_outbound_queue_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueId, location_name: 'DefaultOutboundQueueId'))
     RoutingProfile.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags'))
     RoutingProfile.add_member(:number_of_associated_queues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'NumberOfAssociatedQueues'))
+    RoutingProfile.add_member(:number_of_associated_manual_assignment_queues, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'NumberOfAssociatedManualAssignmentQueues'))
     RoutingProfile.add_member(:number_of_associated_users, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Long, location_name: 'NumberOfAssociatedUsers'))
     RoutingProfile.add_member(:agent_availability_timer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: 'AgentAvailabilityTimer'))
     RoutingProfile.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastModifiedTime'))
     RoutingProfile.add_member(:last_modified_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'LastModifiedRegion'))
     RoutingProfile.add_member(:is_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'IsDefault', traits: {"smithy.api#default" => false}))
     RoutingProfile.add_member(:associated_queue_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociatedQueueIdList, location_name: 'AssociatedQueueIds'))
+    RoutingProfile.add_member(:associated_manual_assignment_queue_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociatedQueueIdList, location_name: 'AssociatedManualAssignmentQueueIds'))
     RoutingProfile.type = Types::RoutingProfile
     RoutingProfileList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfile)
+    RoutingProfileManualAssignmentQueueConfig.add_member(:queue_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueReference, location_name: 'QueueReference', traits: {"smithy.api#required" => {}}))
+    RoutingProfileManualAssignmentQueueConfig.type = Types::RoutingProfileManualAssignmentQueueConfig
+    RoutingProfileManualAssignmentQueueConfigList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfig)
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueId, location_name: 'QueueId', traits: {"smithy.api#required" => {}}))
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ARN, location_name: 'QueueArn', traits: {"smithy.api#required" => {}}))
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueName, location_name: 'QueueName', traits: {"smithy.api#required" => {}}))
+    RoutingProfileManualAssignmentQueueConfigSummary.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Channel, location_name: 'Channel', traits: {"smithy.api#required" => {}}))
+    RoutingProfileManualAssignmentQueueConfigSummary.type = Types::RoutingProfileManualAssignmentQueueConfigSummary
+    RoutingProfileManualAssignmentQueueConfigSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileManualAssignmentQueueConfigSummary)
     RoutingProfileQueueConfig.add_member(:queue_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingProfileQueueReference, location_name: 'QueueReference', traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfig.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Priority, location_name: 'Priority', traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfig.add_member(:delay, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delay, location_name: 'Delay', traits: {"smithy.api#default" => nil, "smithy.api#required" => {}}))
@@ -5109,8 +5180,17 @@ module Aws::Connect
     SearchContactFlowsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken2500, location_name: 'NextToken'))
     SearchContactFlowsResponse.add_member(:approximate_total_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: 'ApproximateTotalCount'))
     SearchContactFlowsResponse.type = Types::SearchContactFlowsResponse
+    SearchContactsAdditionalTimeRange.add_member(:criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRangeCriteriaList, location_name: 'Criteria', traits: {"smithy.api#required" => {}}))
+    SearchContactsAdditionalTimeRange.add_member(:match_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: 'MatchType', traits: {"smithy.api#required" => {}}))
+    SearchContactsAdditionalTimeRange.type = Types::SearchContactsAdditionalTimeRange
+    SearchContactsAdditionalTimeRangeCriteria.add_member(:time_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsTimeRange, location_name: 'TimeRange'))
+    SearchContactsAdditionalTimeRangeCriteria.add_member(:timestamp_condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsTimestampCondition, location_name: 'TimestampCondition'))
+    SearchContactsAdditionalTimeRangeCriteria.type = Types::SearchContactsAdditionalTimeRangeCriteria
+    SearchContactsAdditionalTimeRangeCriteriaList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRangeCriteria)
     SearchContactsMatchType.add_member(:match_all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MATCH_ALL', traits: {"smithy.api#enumValue" => "MATCH_ALL"}))
     SearchContactsMatchType.add_member(:match_any, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MATCH_ANY', traits: {"smithy.api#enumValue" => "MATCH_ANY"}))
+    SearchContactsMatchType.add_member(:match_exact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MATCH_EXACT', traits: {"smithy.api#enumValue" => "MATCH_EXACT"}))
+    SearchContactsMatchType.add_member(:match_none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MATCH_NONE', traits: {"smithy.api#enumValue" => "MATCH_NONE"}))
     SearchContactsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#required" => {}}))
     SearchContactsRequest.add_member(:time_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsTimeRange, location_name: 'TimeRange', traits: {"smithy.api#required" => {}}))
     SearchContactsRequest.add_member(:search_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchCriteria, location_name: 'SearchCriteria'))
@@ -5126,16 +5206,24 @@ module Aws::Connect
     SearchContactsTimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'StartTime', traits: {"smithy.api#required" => {}}))
     SearchContactsTimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'EndTime', traits: {"smithy.api#required" => {}}))
     SearchContactsTimeRange.type = Types::SearchContactsTimeRange
+    SearchContactsTimeRangeConditionType.add_member(:not_exists, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NOT_EXISTS', traits: {"smithy.api#enumValue" => "NOT_EXISTS"}))
     SearchContactsTimeRangeType.add_member(:initiation_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INITIATION_TIMESTAMP', traits: {"smithy.api#enumValue" => "INITIATION_TIMESTAMP"}))
     SearchContactsTimeRangeType.add_member(:scheduled_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SCHEDULED_TIMESTAMP', traits: {"smithy.api#enumValue" => "SCHEDULED_TIMESTAMP"}))
     SearchContactsTimeRangeType.add_member(:connected_to_agent_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CONNECTED_TO_AGENT_TIMESTAMP', traits: {"smithy.api#enumValue" => "CONNECTED_TO_AGENT_TIMESTAMP"}))
     SearchContactsTimeRangeType.add_member(:disconnect_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISCONNECT_TIMESTAMP', traits: {"smithy.api#enumValue" => "DISCONNECT_TIMESTAMP"}))
+    SearchContactsTimeRangeType.add_member(:enqueue_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENQUEUE_TIMESTAMP', traits: {"smithy.api#enumValue" => "ENQUEUE_TIMESTAMP"}))
+    SearchContactsTimestampCondition.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsTimeRangeType, location_name: 'Type', traits: {"smithy.api#required" => {}}))
+    SearchContactsTimestampCondition.add_member(:condition_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsTimeRangeConditionType, location_name: 'ConditionType', traits: {"smithy.api#required" => {}}))
+    SearchContactsTimestampCondition.type = Types::SearchContactsTimestampCondition
+    SearchCriteria.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameCriteria, location_name: 'Name'))
     SearchCriteria.add_member(:agent_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentResourceIdList, location_name: 'AgentIds'))
     SearchCriteria.add_member(:agent_hierarchy_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentHierarchyGroups, location_name: 'AgentHierarchyGroups'))
     SearchCriteria.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelList, location_name: 'Channels'))
     SearchCriteria.add_member(:contact_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactAnalysis, location_name: 'ContactAnalysis'))
     SearchCriteria.add_member(:initiation_methods, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InitiationMethodList, location_name: 'InitiationMethods'))
     SearchCriteria.add_member(:queue_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueIdList, location_name: 'QueueIds'))
+    SearchCriteria.add_member(:routing_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableRoutingCriteria, location_name: 'RoutingCriteria'))
+    SearchCriteria.add_member(:additional_time_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRange, location_name: 'AdditionalTimeRange'))
     SearchCriteria.add_member(:searchable_contact_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableContactAttributes, location_name: 'SearchableContactAttributes'))
     SearchCriteria.add_member(:searchable_segment_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableSegmentAttributes, location_name: 'SearchableSegmentAttributes'))
     SearchCriteria.type = Types::SearchCriteria
@@ -5268,6 +5356,9 @@ module Aws::Connect
     SearchVocabulariesResponse.add_member(:vocabulary_summary_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VocabularySummaryList, location_name: 'VocabularySummaryList'))
     SearchVocabulariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: 'NextToken'))
     SearchVocabulariesResponse.type = Types::SearchVocabulariesResponse
+    SearchableAgentCriteriaStep.add_member(:agent_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentResourceIdList, location_name: 'AgentIds'))
+    SearchableAgentCriteriaStep.add_member(:match_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: 'MatchType'))
+    SearchableAgentCriteriaStep.type = Types::SearchableAgentCriteriaStep
     SearchableContactAttributeValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableContactAttributeValue)
     SearchableContactAttributes.add_member(:criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableContactAttributesCriteriaList, location_name: 'Criteria', traits: {"smithy.api#required" => {}}))
     SearchableContactAttributes.add_member(:match_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: 'MatchType'))
@@ -5277,6 +5368,11 @@ module Aws::Connect
     SearchableContactAttributesCriteria.type = Types::SearchableContactAttributesCriteria
     SearchableContactAttributesCriteriaList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableContactAttributesCriteria)
     SearchableQueueType.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STANDARD', traits: {"smithy.api#enumValue" => "STANDARD"}))
+    SearchableRoutingCriteria.add_member(:steps, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableRoutingCriteriaStepList, location_name: 'Steps'))
+    SearchableRoutingCriteria.type = Types::SearchableRoutingCriteria
+    SearchableRoutingCriteriaStep.add_member(:agent_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableAgentCriteriaStep, location_name: 'AgentCriteria'))
+    SearchableRoutingCriteriaStep.type = Types::SearchableRoutingCriteriaStep
+    SearchableRoutingCriteriaStepList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableRoutingCriteriaStep)
     SearchableSegmentAttributeValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableSegmentAttributeValue)
     SearchableSegmentAttributes.add_member(:criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchableSegmentAttributesCriteriaList, location_name: 'Criteria', traits: {"smithy.api#required" => {}}))
     SearchableSegmentAttributes.add_member(:match_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: 'MatchType'))
@@ -5329,7 +5425,10 @@ module Aws::Connect
     SegmentAttributeValue.add_member(:value_string, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: 'ValueString'))
     SegmentAttributeValue.add_member(:value_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueMap, location_name: 'ValueMap'))
     SegmentAttributeValue.add_member(:value_integer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueInteger, location_name: 'ValueInteger'))
+    SegmentAttributeValue.add_member(:value_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueList, location_name: 'ValueList'))
+    SegmentAttributeValue.add_member(:value_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: 'ValueArn'))
     SegmentAttributeValue.type = Types::SegmentAttributeValue
+    SegmentAttributeValueList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValue)
     SegmentAttributeValueMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeName)
     SegmentAttributeValueMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeValue)
     SegmentAttributes.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SegmentAttributeName)
@@ -5392,6 +5491,7 @@ module Aws::Connect
     SortableFieldName.add_member(:disconnect_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISCONNECT_TIMESTAMP', traits: {"smithy.api#enumValue" => "DISCONNECT_TIMESTAMP"}))
     SortableFieldName.add_member(:initiation_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INITIATION_METHOD', traits: {"smithy.api#enumValue" => "INITIATION_METHOD"}))
     SortableFieldName.add_member(:channel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CHANNEL', traits: {"smithy.api#enumValue" => "CHANNEL"}))
+    SortableFieldName.add_member(:expiry_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXPIRY_TIMESTAMP', traits: {"smithy.api#enumValue" => "EXPIRY_TIMESTAMP"}))
     SourceCampaign.add_member(:campaign_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CampaignId, location_name: 'CampaignId'))
     SourceCampaign.add_member(:outbound_request_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutboundRequestId, location_name: 'OutboundRequestId'))
     SourceCampaign.type = Types::SourceCampaign
@@ -5935,6 +6035,8 @@ module Aws::Connect
     UpdatePredefinedAttributeRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePredefinedAttributeRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: 'Name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePredefinedAttributeRequest.add_member(:values, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: 'Values'))
+    UpdatePredefinedAttributeRequest.add_member(:purposes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributePurposeNameList, location_name: 'Purposes'))
+    UpdatePredefinedAttributeRequest.add_member(:attribute_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputPredefinedAttributeConfiguration, location_name: 'AttributeConfiguration'))
     UpdatePredefinedAttributeRequest.type = Types::UpdatePredefinedAttributeRequest
     UpdatePromptRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InstanceId, location_name: 'InstanceId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePromptRequest.add_member(:prompt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptId, location_name: 'PromptId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -6165,6 +6267,7 @@ module Aws::Connect
     UserPhoneConfig.add_member(:auto_accept, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoAccept, location_name: 'AutoAccept', traits: {"smithy.api#default" => false}))
     UserPhoneConfig.add_member(:after_contact_work_time_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AfterContactWorkTimeLimit, location_name: 'AfterContactWorkTimeLimit', traits: {"smithy.api#default" => 0}))
     UserPhoneConfig.add_member(:desk_phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: 'DeskPhoneNumber'))
+    UserPhoneConfig.add_member(:persistent_connection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PersistentConnection, location_name: 'PersistentConnection', traits: {"smithy.api#default" => nil}))
     UserPhoneConfig.type = Types::UserPhoneConfig
     UserProficiency.add_member(:attribute_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: 'AttributeName', traits: {"smithy.api#required" => {}}))
     UserProficiency.add_member(:attribute_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PredefinedAttributeStringValue, location_name: 'AttributeValue', traits: {"smithy.api#required" => {}}))
@@ -6378,6 +6481,19 @@ module Aws::Connect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/instance/{InstanceId}/bot", "code" => 200}}
+      end)
+      service.add_operation(:associate_contact_with_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.connect#AssociateContactWithUser"
+        operation.name = "AssociateContactWithUser"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateContactWithUserRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateContactWithUserResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/contacts/{InstanceId}/{ContactId}/associate-user", "code" => 200}}
       end)
       service.add_operation(:associate_default_vocabulary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connect#AssociateDefaultVocabulary"
@@ -8438,6 +8554,19 @@ module Aws::Connect
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/contact/list-real-time-analysis-segments-v2/{InstanceId}/{ContactId}", "code" => 200}}
         operation[:paginator] = Paginators::ListRealtimeContactAnalysisSegmentsV2.new
+      end)
+      service.add_operation(:list_routing_profile_manual_assignment_queues, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueues"
+        operation.name = "ListRoutingProfileManualAssignmentQueues"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutingProfileManualAssignmentQueuesRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRoutingProfileManualAssignmentQueuesResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/routing-profiles/{InstanceId}/{RoutingProfileId}/manual-assignment-queues", "code" => 200}}
+        operation[:paginator] = Paginators::ListRoutingProfileManualAssignmentQueues.new
       end)
       service.add_operation(:list_routing_profile_queues, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connect#ListRoutingProfileQueues"

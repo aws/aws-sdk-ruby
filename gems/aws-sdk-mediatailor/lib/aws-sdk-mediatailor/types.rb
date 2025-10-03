@@ -1666,10 +1666,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p>The maximum number of alerts that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> alerts, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p>The maximum number of alerts that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> alerts, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListAlerts</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -1698,10 +1698,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p>The maximum number of channels that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> channels, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p>The maximum number of channels that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> channels, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListChannels</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     class ListChannelsInput < Struct.new(
       :max_results,
@@ -1726,10 +1726,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p>The maximum number of live sources that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> live sources, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p>The maximum number of live sources that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> live sources, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListLiveSources</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     # @!attribute source_location_name
     #   <p>The name of the source location associated with this Live Sources list.</p>
@@ -1758,10 +1758,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p>The maximum number of playback configurations that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> playback configurations, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p>The maximum number of playback configurations that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> playback configurations, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListPlaybackConfigurations</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     class ListPlaybackConfigurationsInput < Struct.new(
       :max_results,
@@ -1786,10 +1786,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p>The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> prefetch schedules, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p>The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> prefetch schedules, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>(Optional) If the playback configuration has more than <code>MaxResults</code> prefetch schedules, use <code>NextToken</code> to get the second and subsequent pages of results.</p> <p> For the first <code>ListPrefetchSchedulesRequest</code> request, omit this value.</p> <p> For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request.</p> <p> If the previous response didn't include a <code>NextToken</code> element, there are no more prefetch schedules to get.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListPrefetchSchedules</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     # @!attribute playback_configuration_name
     #   <p>Retrieves the prefetch schedule(s) for a specific playback configuration.</p>
@@ -1826,10 +1826,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p> The maximum number of source locations that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> source locations, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p> The maximum number of source locations that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> source locations, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListSourceLocations</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     class ListSourceLocationsInput < Struct.new(
       :max_results,
@@ -1874,10 +1874,10 @@ module Aws::MediaTailor
     end
 
     # @!attribute max_results
-    #   <p> The maximum number of VOD sources that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> VOD sources, use the value of <code>NextToken</code> in the response to get the next page of results.</p>
+    #   <p> The maximum number of VOD sources that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> VOD sources, use the value of <code>NextToken</code> in the response to get the next page of results.</p> <p>The default value is 100. MediaTailor uses DynamoDB-based pagination, which means that a response might contain fewer than <code>MaxResults</code> items, including 0 items, even when more results are available. To retrieve all results, you must continue making requests using the <code>NextToken</code> value from each response until the response no longer includes a <code>NextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>
+    #   <p>Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p> <p>For the first <code>ListVodSources</code> request, omit this value. For subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request. Continue making requests until the response no longer includes a <code>NextToken</code> value, which indicates that all results have been retrieved.</p>
     #   @return [String]
     # @!attribute source_location_name
     #   <p>The name of the source location associated with this VOD Source list.</p>
@@ -2142,17 +2142,21 @@ module Aws::MediaTailor
     #   <p>The time when prefetch retrievals can start for this break. Ad prefetching will be attempted for manifest requests that occur at or after this time. Defaults to the current time. If not specified, the prefetch retrieval starts as soon as possible.</p>
     #   @return [Time]
     # @!attribute traffic_shaping_type
-    #   <p>Indicates if this configuration uses a retrieval window for traffic shaping and limiting the number of requests to the ADS at one time.</p>
+    #   <p>Indicates the type of traffic shaping used for prefetch traffic shaping and limiting the number of requests to the ADS at one time.</p>
     #   @return [String]
     # @!attribute traffic_shaping_retrieval_window
     #   <p>Configuration for spreading ADS traffic across a set window instead of sending ADS requests for all sessions at the same time.</p>
     #   @return [Types::TrafficShapingRetrievalWindow]
+    # @!attribute traffic_shaping_tps_configuration
+    #   <p>The configuration for TPS-based traffic shaping that limits the number of requests to the ad decision server (ADS) based on transactions per second instead of time windows.</p>
+    #   @return [Types::TrafficShapingTpsConfiguration]
     class PrefetchRetrieval < Struct.new(
       :dynamic_variables,
       :end_time,
       :start_time,
       :traffic_shaping_type,
       :traffic_shaping_retrieval_window,
+      :traffic_shaping_tps_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2428,16 +2432,20 @@ module Aws::MediaTailor
     #   <p>The number of seconds that MediaTailor waits after an ad avail before prefetching ads for the next avail. If not set, the default is 0 (no delay).</p>
     #   @return [Integer]
     # @!attribute traffic_shaping_type
-    #   <p>Indicates if this configuration uses a retrieval window for traffic shaping and limiting the number of requests to the ADS at one time.</p>
+    #   <p>Indicates the type of traffic shaping used for traffic shaping and limiting the number of requests to the ADS at one time.</p>
     #   @return [String]
     # @!attribute traffic_shaping_retrieval_window
     #   <p>Configuration for spreading ADS traffic across a set window instead of sending ADS requests for all sessions at the same time.</p>
     #   @return [Types::TrafficShapingRetrievalWindow]
+    # @!attribute traffic_shaping_tps_configuration
+    #   <p>The configuration for TPS-based traffic shaping that limits the number of requests to the ad decision server (ADS) based on transactions per second instead of time windows.</p>
+    #   @return [Types::TrafficShapingTpsConfiguration]
     class RecurringRetrieval < Struct.new(
       :dynamic_variables,
       :delay_after_avail_end_seconds,
       :traffic_shaping_type,
       :traffic_shaping_retrieval_window,
+      :traffic_shaping_tps_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2810,6 +2818,21 @@ module Aws::MediaTailor
     #   @return [Integer]
     class TrafficShapingRetrievalWindow < Struct.new(
       :retrieval_window_duration_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for TPS-based traffic shaping. This approach limits requests to the ad decision server (ADS) based on transactions per second and concurrent users, providing more intuitive capacity management compared to time-window based traffic shaping.</p>
+    # @!attribute peak_tps
+    #   <p>The maximum number of transactions per second (TPS) that your ad decision server (ADS) can handle. MediaTailor uses this value along with concurrent users and headroom multiplier to calculate optimal traffic distribution and prevent ADS overload.</p>
+    #   @return [Integer]
+    # @!attribute peak_concurrent_users
+    #   <p>The expected peak number of concurrent viewers for your content. MediaTailor uses this value along with peak TPS to determine how to distribute prefetch requests across the available capacity without exceeding your ADS limits.</p>
+    #   @return [Integer]
+    class TrafficShapingTpsConfiguration < Struct.new(
+      :peak_tps,
+      :peak_concurrent_users,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

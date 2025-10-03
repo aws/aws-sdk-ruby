@@ -107,8 +107,7 @@ module Aws::Connect
       end
     end
 
-    # <p>The contact with the specified ID is not active or does not exist. Applies to Voice calls
-    #    only, not to Chat or Task contacts.</p>
+    # <p>The contact with the specified ID is not active or does not exist.</p>
     class ContactNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ContactNotFoundException] data

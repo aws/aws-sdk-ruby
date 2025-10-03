@@ -2365,6 +2365,7 @@ module Aws::BedrockRuntime
       STOP_SEQUENCE: String
       GUARDRAIL_INTERVENED: String
       CONTENT_FILTERED: String
+      MODEL_CONTEXT_WINDOW_EXCEEDED: String
     end
 
     class SystemContentBlock

@@ -7,20 +7,20 @@ module Aws::BedrockAgentCoreControl
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
-    Agent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#Agent', name: 'Agent')
-    AgentArtifact = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentArtifact', name: 'AgentArtifact')
-    AgentEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentEndpoint', name: 'AgentEndpoint')
     AgentEndpointDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentEndpointDescription', name: 'AgentEndpointDescription', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
-    AgentEndpointStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentEndpointStatus', name: 'AgentEndpointStatus')
-    AgentEndpoints = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentEndpoints', name: 'AgentEndpoints')
+    AgentRuntime = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntime', name: 'AgentRuntime')
     AgentRuntimeArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeArn', name: 'AgentRuntimeArn', traits: {"aws.api#arnReference" => {"type" => "AWS::BedrockAgentCore::Runtime"}, "smithy.api#pattern" => "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:agent/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}:([0-9]{0,4}[1-9][0-9]{0,4})$"})
+    AgentRuntimeArtifact = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeArtifact', name: 'AgentRuntimeArtifact')
+    AgentRuntimeEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeEndpoint', name: 'AgentRuntimeEndpoint')
     AgentRuntimeEndpointArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeEndpointArn', name: 'AgentRuntimeEndpointArn', traits: {"aws.api#arnReference" => {"type" => "AWS::BedrockAgentCore::RuntimeEndpoint"}, "smithy.api#pattern" => "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:agentEndpoint/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"})
     AgentRuntimeEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeEndpointId', name: 'AgentRuntimeEndpointId', traits: {"smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"})
+    AgentRuntimeEndpointStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeEndpointStatus', name: 'AgentRuntimeEndpointStatus')
+    AgentRuntimeEndpoints = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeEndpoints', name: 'AgentRuntimeEndpoints')
     AgentRuntimeId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeId', name: 'AgentRuntimeId', traits: {"smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"})
     AgentRuntimeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeName', name: 'AgentRuntimeName', traits: {"smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"})
+    AgentRuntimeStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeStatus', name: 'AgentRuntimeStatus')
     AgentRuntimeVersion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimeVersion', name: 'AgentRuntimeVersion', traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#pattern" => "^([1-9][0-9]{0,4})$"})
-    AgentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentStatus', name: 'AgentStatus')
-    Agents = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#Agents', name: 'Agents')
+    AgentRuntimes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AgentRuntimes', name: 'AgentRuntimes')
     AllowedAudience = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AllowedAudience', name: 'AllowedAudience')
     AllowedAudienceList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AllowedAudienceList', name: 'AllowedAudienceList', traits: {"smithy.api#length" => {"min" => 1}})
     AllowedClient = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#AllowedClient', name: 'AllowedClient')
@@ -170,6 +170,7 @@ module Aws::BedrockAgentCoreControl
     GithubOauth2ProviderConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#GithubOauth2ProviderConfigOutput', name: 'GithubOauth2ProviderConfigOutput')
     GoogleOauth2ProviderConfigInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#GoogleOauth2ProviderConfigInput', name: 'GoogleOauth2ProviderConfigInput')
     GoogleOauth2ProviderConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#GoogleOauth2ProviderConfigOutput', name: 'GoogleOauth2ProviderConfigOutput')
+    HeaderName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#HeaderName', name: 'HeaderName', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$"})
     InlinePayload = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#InlinePayload', name: 'InlinePayload', traits: {"smithy.api#sensitive" => {}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     IssuerUrlType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#IssuerUrlType', name: 'IssuerUrlType')
@@ -197,6 +198,8 @@ module Aws::BedrockAgentCoreControl
     ListMemoriesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListMemoriesOutput', name: 'ListMemoriesOutput')
     ListOauth2CredentialProvidersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListOauth2CredentialProvidersRequest', name: 'ListOauth2CredentialProvidersRequest')
     ListOauth2CredentialProvidersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListOauth2CredentialProvidersResponse', name: 'ListOauth2CredentialProvidersResponse')
+    ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
     ListWorkloadIdentitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListWorkloadIdentitiesRequest', name: 'ListWorkloadIdentitiesRequest')
     ListWorkloadIdentitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ListWorkloadIdentitiesResponse', name: 'ListWorkloadIdentitiesResponse')
     MCPGatewayConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#MCPGatewayConfiguration', name: 'MCPGatewayConfiguration')
@@ -252,6 +255,8 @@ module Aws::BedrockAgentCoreControl
     Prompt = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#Prompt', name: 'Prompt', traits: {"smithy.api#length" => {"min" => 1, "max" => 30000}, "smithy.api#sensitive" => {}})
     ProtocolConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration', name: 'ProtocolConfiguration')
     RecordingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RecordingConfig', name: 'RecordingConfig')
+    RequestHeaderAllowlist = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RequestHeaderAllowlist', name: 'RequestHeaderAllowlist', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#uniqueItems" => {}})
+    RequestHeaderConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RequestHeaderConfiguration', name: 'RequestHeaderConfiguration')
     RequiredProperties = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RequiredProperties', name: 'RequiredProperties')
     ResourceLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ResourceLimitExceededException', name: 'ResourceLimitExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -261,7 +266,7 @@ module Aws::BedrockAgentCoreControl
     ResponseListType = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ResponseListType', name: 'ResponseListType')
     ResponseType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ResponseType', name: 'ResponseType')
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RoleArn', name: 'RoleArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"})
-    RuntimeContainerUri = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RuntimeContainerUri', name: 'RuntimeContainerUri', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^\\d{12}\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)([:@]\\S+)$"})
+    RuntimeContainerUri = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#RuntimeContainerUri', name: 'RuntimeContainerUri', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"})
     S3BucketUri = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#S3BucketUri', name: 'S3BucketUri', traits: {"smithy.api#pattern" => "^s3://.{1,2043}$"})
     S3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#S3Configuration', name: 'S3Configuration')
     S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#S3Location', name: 'S3Location')
@@ -274,6 +279,8 @@ module Aws::BedrockAgentCoreControl
     SearchType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SearchType', name: 'SearchType')
     Secret = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#Secret', name: 'Secret')
     SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SecretArn', name: 'SecretArn', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov):secretsmanager:[A-Za-z0-9-]{1,64}:[0-9]{12}:secret:[a-zA-Z0-9-_/+=.@!]+$"})
+    SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SecurityGroupId', name: 'SecurityGroupId', traits: {"smithy.api#pattern" => "^sg-[0-9a-zA-Z]{8,17}$"})
+    SecurityGroups = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SecurityGroups', name: 'SecurityGroups', traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
     SemanticConsolidationOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SemanticConsolidationOverride', name: 'SemanticConsolidationOverride')
     SemanticExtractionOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SemanticExtractionOverride', name: 'SemanticExtractionOverride')
     SemanticMemoryStrategyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SemanticMemoryStrategyInput', name: 'SemanticMemoryStrategyInput')
@@ -290,10 +297,19 @@ module Aws::BedrockAgentCoreControl
     StatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#StatusReason', name: 'StatusReason', traits: {"smithy.api#length" => {"max" => 2048}})
     StatusReasons = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#StatusReasons', name: 'StatusReasons', traits: {"smithy.api#length" => {"max" => 100}})
     StrategyConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#StrategyConfiguration', name: 'StrategyConfiguration')
+    SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SubnetId', name: 'SubnetId', traits: {"smithy.api#pattern" => "^subnet-[0-9a-zA-Z]{8,17}$"})
+    Subnets = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#Subnets', name: 'Subnets', traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
     SummaryConsolidationOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SummaryConsolidationOverride', name: 'SummaryConsolidationOverride')
     SummaryMemoryStrategyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SummaryMemoryStrategyInput', name: 'SummaryMemoryStrategyInput')
     SummaryOverrideConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SummaryOverrideConfigurationInput', name: 'SummaryOverrideConfigurationInput')
     SummaryOverrideConsolidationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#SummaryOverrideConsolidationConfigurationInput', name: 'SummaryOverrideConsolidationConfigurationInput')
+    TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s._:/=+@-]*$"})
+    TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TagKeyList', name: 'TagKeyList', traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TagResourceRequest', name: 'TagResourceRequest')
+    TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TagResourceResponse', name: 'TagResourceResponse')
+    TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TagValue', name: 'TagValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s._:/=+@-]*$"})
+    TaggableResourcesArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TaggableResourcesArn', name: 'TaggableResourcesArn', traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:(?:[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:([a-z-]+/[^/]+)(?:/[a-z-]+/[^/]+)*$"})
+    TagsMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TagsMap', name: 'TagsMap', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TargetConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TargetConfiguration', name: 'TargetConfiguration')
     TargetDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TargetDescription', name: 'TargetDescription', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#sensitive" => {}})
     TargetId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#TargetId', name: 'TargetId', traits: {"smithy.api#pattern" => "^[0-9a-zA-Z]{10}$"})
@@ -311,6 +327,8 @@ module Aws::BedrockAgentCoreControl
     ToolDefinitions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ToolDefinitions', name: 'ToolDefinitions')
     ToolSchema = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ToolSchema', name: 'ToolSchema')
     UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#UnauthorizedException', name: 'UnauthorizedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
+    UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#UntagResourceRequest', name: 'UntagResourceRequest')
+    UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#UntagResourceResponse', name: 'UntagResourceResponse')
     UpdateAgentRuntimeEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeEndpointRequest', name: 'UpdateAgentRuntimeEndpointRequest')
     UpdateAgentRuntimeEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeEndpointResponse', name: 'UpdateAgentRuntimeEndpointResponse')
     UpdateAgentRuntimeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeRequest', name: 'UpdateAgentRuntimeRequest')
@@ -337,6 +355,7 @@ module Aws::BedrockAgentCoreControl
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ValidationExceptionField', name: 'ValidationExceptionField')
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ValidationExceptionFieldList', name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#ValidationExceptionReason', name: 'ValidationExceptionReason')
+    VpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#VpcConfig', name: 'VpcConfig')
     WorkloadIdentityArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityArn', name: 'WorkloadIdentityArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     WorkloadIdentityArnType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityArnType', name: 'WorkloadIdentityArnType', traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     WorkloadIdentityDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagentcorecontrol#WorkloadIdentityDetails', name: 'WorkloadIdentityDetails')
@@ -346,42 +365,42 @@ module Aws::BedrockAgentCoreControl
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
     AccessDeniedException.type = Types::AccessDeniedException
-    Agent.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
-    Agent.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#required" => {}}))
-    Agent.add_member(:agent_runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'agentRuntimeVersion', traits: {"smithy.api#required" => {}}))
-    Agent.add_member(:agent_runtime_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeName, location_name: 'agentRuntimeName', traits: {"smithy.api#required" => {}}))
-    Agent.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description', traits: {"smithy.api#required" => {}}))
-    Agent.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
-    Agent.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
-    Agent.type = Types::Agent
-    AgentArtifact.add_member(:container_configuration, Types::AgentArtifact::ContainerConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerConfiguration, location_name: 'containerConfiguration'))
-    AgentArtifact.add_member(:unknown, Types::AgentArtifact::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
-    AgentArtifact.type = Types::AgentArtifact
-    AgentEndpoint.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointName, location_name: 'name', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.add_member(:live_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'liveVersion'))
-    AgentEndpoint.add_member(:target_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'targetVersion'))
-    AgentEndpoint.add_member(:agent_runtime_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, location_name: 'agentRuntimeEndpointArn', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointId, location_name: 'id', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: 'description'))
-    AgentEndpoint.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
-    AgentEndpoint.type = Types::AgentEndpoint
-    AgentEndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
-    AgentEndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    AgentEndpointStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
-    AgentEndpointStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATE_FAILED', traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    AgentEndpointStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))
-    AgentEndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETING', traits: {"smithy.api#enumValue" => "DELETING"}))
-    AgentEndpoints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpoint)
-    AgentStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
-    AgentStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    AgentStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
-    AgentStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATE_FAILED', traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    AgentStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))
-    AgentStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETING', traits: {"smithy.api#enumValue" => "DELETING"}))
-    Agents.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Agent)
+    AgentRuntime.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.add_member(:agent_runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'agentRuntimeVersion', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.add_member(:agent_runtime_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeName, location_name: 'agentRuntimeName', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    AgentRuntime.type = Types::AgentRuntime
+    AgentRuntimeArtifact.add_member(:container_configuration, Types::AgentRuntimeArtifact::ContainerConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContainerConfiguration, location_name: 'containerConfiguration'))
+    AgentRuntimeArtifact.add_member(:unknown, Types::AgentRuntimeArtifact::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AgentRuntimeArtifact.type = Types::AgentRuntimeArtifact
+    AgentRuntimeEndpoint.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointName, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.add_member(:live_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'liveVersion'))
+    AgentRuntimeEndpoint.add_member(:target_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'targetVersion'))
+    AgentRuntimeEndpoint.add_member(:agent_runtime_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, location_name: 'agentRuntimeEndpointArn', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointId, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: 'description'))
+    AgentRuntimeEndpoint.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
+    AgentRuntimeEndpoint.type = Types::AgentRuntimeEndpoint
+    AgentRuntimeEndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
+    AgentRuntimeEndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    AgentRuntimeEndpointStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
+    AgentRuntimeEndpointStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATE_FAILED', traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    AgentRuntimeEndpointStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))
+    AgentRuntimeEndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETING', traits: {"smithy.api#enumValue" => "DELETING"}))
+    AgentRuntimeEndpoints.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpoint)
+    AgentRuntimeStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
+    AgentRuntimeStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    AgentRuntimeStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
+    AgentRuntimeStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATE_FAILED', traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    AgentRuntimeStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))
+    AgentRuntimeStatus.add_member(:deleting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETING', traits: {"smithy.api#enumValue" => "DELETING"}))
+    AgentRuntimes.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntime)
     AllowedAudienceList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedAudience)
     AllowedClientsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedClient)
     ApiKeyCredentialLocation.add_member(:header, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HEADER', traits: {"smithy.api#enumValue" => "HEADER"}))
@@ -401,8 +420,10 @@ module Aws::BedrockAgentCoreControl
     AuthorizerConfiguration.type = Types::AuthorizerConfiguration
     AuthorizerType.add_member(:custom_jwt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CUSTOM_JWT', traits: {"smithy.api#enumValue" => "CUSTOM_JWT"}))
     BrowserNetworkConfiguration.add_member(:network_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserNetworkMode, location_name: 'networkMode', traits: {"smithy.api#default" => "PUBLIC", "smithy.api#required" => {}}))
+    BrowserNetworkConfiguration.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: 'vpcConfig'))
     BrowserNetworkConfiguration.type = Types::BrowserNetworkConfiguration
     BrowserNetworkMode.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PUBLIC', traits: {"smithy.api#enumValue" => "PUBLIC"}))
+    BrowserNetworkMode.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VPC', traits: {"smithy.api#enumValue" => "VPC"}))
     BrowserStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
     BrowserStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     BrowserStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))
@@ -419,9 +440,11 @@ module Aws::BedrockAgentCoreControl
     BrowserSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt'))
     BrowserSummary.type = Types::BrowserSummary
     CodeInterpreterNetworkConfiguration.add_member(:network_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeInterpreterNetworkMode, location_name: 'networkMode', traits: {"smithy.api#default" => "SANDBOX", "smithy.api#required" => {}}))
+    CodeInterpreterNetworkConfiguration.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: 'vpcConfig'))
     CodeInterpreterNetworkConfiguration.type = Types::CodeInterpreterNetworkConfiguration
     CodeInterpreterNetworkMode.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PUBLIC', traits: {"smithy.api#enumValue" => "PUBLIC"}))
     CodeInterpreterNetworkMode.add_member(:sandbox, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SANDBOX', traits: {"smithy.api#enumValue" => "SANDBOX"}))
+    CodeInterpreterNetworkMode.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VPC', traits: {"smithy.api#enumValue" => "VPC"}))
     CodeInterpreterStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
     CodeInterpreterStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATE_FAILED', traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     CodeInterpreterStatus.add_member(:ready, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'READY', traits: {"smithy.api#enumValue" => "READY"}))
@@ -451,29 +474,32 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeEndpointRequest.add_member(:agent_runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'agentRuntimeVersion'))
     CreateAgentRuntimeEndpointRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: 'description'))
     CreateAgentRuntimeEndpointRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateAgentRuntimeEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags'))
     CreateAgentRuntimeEndpointRequest.type = Types::CreateAgentRuntimeEndpointRequest
     CreateAgentRuntimeEndpointResponse.add_member(:target_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'targetVersion', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, location_name: 'agentRuntimeEndpointArn', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
-    CreateAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    CreateAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeEndpointResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeEndpointResponse.type = Types::CreateAgentRuntimeEndpointResponse
     CreateAgentRuntimeRequest.add_member(:agent_runtime_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeName, location_name: 'agentRuntimeName', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description'))
-    CreateAgentRuntimeRequest.add_member(:agent_runtime_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArtifact, location_name: 'agentRuntimeArtifact', traits: {"smithy.api#required" => {}}))
+    CreateAgentRuntimeRequest.add_member(:agent_runtime_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArtifact, location_name: 'agentRuntimeArtifact', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeRequest.add_member(:protocol_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtocolConfiguration, location_name: 'protocolConfiguration'))
     CreateAgentRuntimeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     CreateAgentRuntimeRequest.add_member(:environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: 'environmentVariables'))
     CreateAgentRuntimeRequest.add_member(:authorizer_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: 'authorizerConfiguration'))
+    CreateAgentRuntimeRequest.add_member(:request_header_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestHeaderConfiguration, location_name: 'requestHeaderConfiguration'))
+    CreateAgentRuntimeRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags'))
     CreateAgentRuntimeRequest.type = Types::CreateAgentRuntimeRequest
     CreateAgentRuntimeResponse.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeResponse.add_member(:workload_identity_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: 'workloadIdentityDetails'))
     CreateAgentRuntimeResponse.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeResponse.add_member(:agent_runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'agentRuntimeVersion', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
-    CreateAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    CreateAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     CreateAgentRuntimeResponse.type = Types::CreateAgentRuntimeResponse
     CreateApiKeyCredentialProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialProviderName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     CreateApiKeyCredentialProviderRequest.add_member(:api_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApiKeyType, location_name: 'apiKey', traits: {"smithy.api#required" => {}}))
@@ -488,6 +514,7 @@ module Aws::BedrockAgentCoreControl
     CreateBrowserRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserNetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     CreateBrowserRequest.add_member(:recording, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfig, location_name: 'recording'))
     CreateBrowserRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateBrowserRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags'))
     CreateBrowserRequest.type = Types::CreateBrowserRequest
     CreateBrowserResponse.add_member(:browser_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserId, location_name: 'browserId', traits: {"smithy.api#required" => {}}))
     CreateBrowserResponse.add_member(:browser_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserArn, location_name: 'browserArn', traits: {"smithy.api#required" => {}}))
@@ -499,6 +526,7 @@ module Aws::BedrockAgentCoreControl
     CreateCodeInterpreterRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'executionRoleArn'))
     CreateCodeInterpreterRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeInterpreterNetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     CreateCodeInterpreterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateCodeInterpreterRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags'))
     CreateCodeInterpreterRequest.type = Types::CreateCodeInterpreterRequest
     CreateCodeInterpreterResponse.add_member(:code_interpreter_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeInterpreterId, location_name: 'codeInterpreterId', traits: {"smithy.api#required" => {}}))
     CreateCodeInterpreterResponse.add_member(:code_interpreter_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeInterpreterArn, location_name: 'codeInterpreterArn', traits: {"smithy.api#required" => {}}))
@@ -515,6 +543,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayRequest.add_member(:authorizer_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: 'authorizerConfiguration', traits: {"smithy.api#required" => {}}))
     CreateGatewayRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: 'kmsKeyArn'))
     CreateGatewayRequest.add_member(:exception_level, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionLevel, location_name: 'exceptionLevel'))
+    CreateGatewayRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags'))
     CreateGatewayRequest.type = Types::CreateGatewayRequest
     CreateGatewayResponse.add_member(:gateway_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayArn, location_name: 'gatewayArn', traits: {"smithy.api#required" => {}}))
     CreateGatewayResponse.add_member(:gateway_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GatewayId, location_name: 'gatewayId', traits: {"smithy.api#required" => {}}))
@@ -638,11 +667,11 @@ module Aws::BedrockAgentCoreControl
     DeleteAgentRuntimeEndpointRequest.add_member(:endpoint_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointName, location_name: 'endpointName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAgentRuntimeEndpointRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteAgentRuntimeEndpointRequest.type = Types::DeleteAgentRuntimeEndpointRequest
-    DeleteAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    DeleteAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     DeleteAgentRuntimeEndpointResponse.type = Types::DeleteAgentRuntimeEndpointResponse
     DeleteAgentRuntimeRequest.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAgentRuntimeRequest.type = Types::DeleteAgentRuntimeRequest
-    DeleteAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    DeleteAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     DeleteAgentRuntimeResponse.type = Types::DeleteAgentRuntimeResponse
     DeleteApiKeyCredentialProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialProviderName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     DeleteApiKeyCredentialProviderRequest.type = Types::DeleteApiKeyCredentialProviderRequest
@@ -731,7 +760,7 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, location_name: 'agentRuntimeEndpointArn', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeEndpointResponse.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointDescription, location_name: 'description'))
-    GetAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    GetAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeEndpointResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeEndpointResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeEndpointResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'failureReason'))
@@ -750,12 +779,13 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn', traits: {"smithy.api#required" => {}}))
-    GetAgentRuntimeResponse.add_member(:agent_runtime_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArtifact, location_name: 'agentRuntimeArtifact'))
+    GetAgentRuntimeResponse.add_member(:agent_runtime_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArtifact, location_name: 'agentRuntimeArtifact'))
     GetAgentRuntimeResponse.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeResponse.add_member(:protocol_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtocolConfiguration, location_name: 'protocolConfiguration'))
     GetAgentRuntimeResponse.add_member(:environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: 'environmentVariables'))
     GetAgentRuntimeResponse.add_member(:authorizer_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: 'authorizerConfiguration'))
-    GetAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    GetAgentRuntimeResponse.add_member(:request_header_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestHeaderConfiguration, location_name: 'requestHeaderConfiguration'))
+    GetAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     GetAgentRuntimeResponse.type = Types::GetAgentRuntimeResponse
     GetApiKeyCredentialProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialProviderName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     GetApiKeyCredentialProviderRequest.type = Types::GetApiKeyCredentialProviderRequest
@@ -775,6 +805,7 @@ module Aws::BedrockAgentCoreControl
     GetBrowserResponse.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserNetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     GetBrowserResponse.add_member(:recording, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingConfig, location_name: 'recording'))
     GetBrowserResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    GetBrowserResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'failureReason'))
     GetBrowserResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     GetBrowserResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
     GetBrowserResponse.type = Types::GetBrowserResponse
@@ -787,6 +818,7 @@ module Aws::BedrockAgentCoreControl
     GetCodeInterpreterResponse.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'executionRoleArn'))
     GetCodeInterpreterResponse.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeInterpreterNetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     GetCodeInterpreterResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CodeInterpreterStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    GetCodeInterpreterResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'failureReason'))
     GetCodeInterpreterResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     GetCodeInterpreterResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
     GetCodeInterpreterResponse.type = Types::GetCodeInterpreterResponse
@@ -873,20 +905,20 @@ module Aws::BedrockAgentCoreControl
     ListAgentRuntimeEndpointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAgentRuntimeEndpointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAgentRuntimeEndpointsRequest.type = Types::ListAgentRuntimeEndpointsRequest
-    ListAgentRuntimeEndpointsResponse.add_member(:runtime_endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpoints, location_name: 'runtimeEndpoints', traits: {"smithy.api#required" => {}}))
+    ListAgentRuntimeEndpointsResponse.add_member(:runtime_endpoints, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpoints, location_name: 'runtimeEndpoints', traits: {"smithy.api#required" => {}}))
     ListAgentRuntimeEndpointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
     ListAgentRuntimeEndpointsResponse.type = Types::ListAgentRuntimeEndpointsResponse
     ListAgentRuntimeVersionsRequest.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAgentRuntimeVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAgentRuntimeVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAgentRuntimeVersionsRequest.type = Types::ListAgentRuntimeVersionsRequest
-    ListAgentRuntimeVersionsResponse.add_member(:agent_runtimes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Agents, location_name: 'agentRuntimes', traits: {"smithy.api#required" => {}}))
+    ListAgentRuntimeVersionsResponse.add_member(:agent_runtimes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimes, location_name: 'agentRuntimes', traits: {"smithy.api#required" => {}}))
     ListAgentRuntimeVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
     ListAgentRuntimeVersionsResponse.type = Types::ListAgentRuntimeVersionsResponse
     ListAgentRuntimesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAgentRuntimesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAgentRuntimesRequest.type = Types::ListAgentRuntimesRequest
-    ListAgentRuntimesResponse.add_member(:agent_runtimes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Agents, location_name: 'agentRuntimes', traits: {"smithy.api#required" => {}}))
+    ListAgentRuntimesResponse.add_member(:agent_runtimes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimes, location_name: 'agentRuntimes', traits: {"smithy.api#required" => {}}))
     ListAgentRuntimesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
     ListAgentRuntimesResponse.type = Types::ListAgentRuntimesResponse
     ListApiKeyCredentialProvidersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'nextToken'))
@@ -934,6 +966,10 @@ module Aws::BedrockAgentCoreControl
     ListOauth2CredentialProvidersResponse.add_member(:credential_providers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Oauth2CredentialProviders, location_name: 'credentialProviders', traits: {"smithy.api#required" => {}}))
     ListOauth2CredentialProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'nextToken'))
     ListOauth2CredentialProvidersResponse.type = Types::ListOauth2CredentialProvidersResponse
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourcesArn, location_name: 'resourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
+    ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags'))
+    ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
     ListWorkloadIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'nextToken'))
     ListWorkloadIdentitiesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#default" => 10, "smithy.api#range" => {"min" => 1, "max" => 20}}))
     ListWorkloadIdentitiesRequest.type = Types::ListWorkloadIdentitiesRequest
@@ -1029,8 +1065,10 @@ module Aws::BedrockAgentCoreControl
     ModifyStrategyConfiguration.type = Types::ModifyStrategyConfiguration
     NamespacesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Namespace)
     NetworkConfiguration.add_member(:network_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkMode, location_name: 'networkMode', traits: {"smithy.api#required" => {}}))
+    NetworkConfiguration.add_member(:network_mode_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfig, location_name: 'networkModeConfig'))
     NetworkConfiguration.type = Types::NetworkConfiguration
     NetworkMode.add_member(:public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PUBLIC', traits: {"smithy.api#enumValue" => "PUBLIC"}))
+    NetworkMode.add_member(:vpc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VPC', traits: {"smithy.api#enumValue" => "VPC"}))
     OAuthCredentialProvider.add_member(:provider_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthCredentialProviderArn, location_name: 'providerArn', traits: {"smithy.api#required" => {}}))
     OAuthCredentialProvider.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthScopes, location_name: 'scopes', traits: {"smithy.api#required" => {}}))
     OAuthCredentialProvider.add_member(:custom_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuthCustomParameters, location_name: 'customParameters'))
@@ -1078,6 +1116,10 @@ module Aws::BedrockAgentCoreControl
     RecordingConfig.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'enabled', traits: {"smithy.api#default" => false}))
     RecordingConfig.add_member(:s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: 's3Location'))
     RecordingConfig.type = Types::RecordingConfig
+    RequestHeaderAllowlist.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeaderName)
+    RequestHeaderConfiguration.add_member(:request_header_allowlist, Types::RequestHeaderConfiguration::RequestHeaderAllowlist, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestHeaderAllowlist, location_name: 'requestHeaderAllowlist'))
+    RequestHeaderConfiguration.add_member(:unknown, Types::RequestHeaderConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RequestHeaderConfiguration.type = Types::RequestHeaderConfiguration
     RequiredProperties.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
     ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
     ResourceLimitExceededException.type = Types::ResourceLimitExceededException
@@ -1115,6 +1157,7 @@ module Aws::BedrockAgentCoreControl
     SearchType.add_member(:semantic, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SEMANTIC', traits: {"smithy.api#enumValue" => "SEMANTIC"}))
     Secret.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecretArn, location_name: 'secretArn', traits: {"smithy.api#required" => {}}))
     Secret.type = Types::Secret
+    SecurityGroups.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupId)
     SemanticConsolidationOverride.add_member(:append_to_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: 'appendToPrompt', traits: {"smithy.api#required" => {}}))
     SemanticConsolidationOverride.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'modelId', traits: {"smithy.api#required" => {}}))
     SemanticConsolidationOverride.type = Types::SemanticConsolidationOverride
@@ -1157,6 +1200,7 @@ module Aws::BedrockAgentCoreControl
     StrategyConfiguration.add_member(:extraction, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExtractionConfiguration, location_name: 'extraction'))
     StrategyConfiguration.add_member(:consolidation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConsolidationConfiguration, location_name: 'consolidation'))
     StrategyConfiguration.type = Types::StrategyConfiguration
+    Subnets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
     SummaryConsolidationOverride.add_member(:append_to_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: 'appendToPrompt', traits: {"smithy.api#required" => {}}))
     SummaryConsolidationOverride.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'modelId', traits: {"smithy.api#required" => {}}))
     SummaryConsolidationOverride.type = Types::SummaryConsolidationOverride
@@ -1169,6 +1213,13 @@ module Aws::BedrockAgentCoreControl
     SummaryOverrideConsolidationConfigurationInput.add_member(:append_to_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prompt, location_name: 'appendToPrompt', traits: {"smithy.api#required" => {}}))
     SummaryOverrideConsolidationConfigurationInput.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'modelId', traits: {"smithy.api#required" => {}}))
     SummaryOverrideConsolidationConfigurationInput.type = Types::SummaryOverrideConsolidationConfigurationInput
+    TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourcesArn, location_name: 'resourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagsMap, location_name: 'tags', traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.type = Types::TagResourceRequest
+    TagResourceResponse.type = Types::TagResourceResponse
+    TagsMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
+    TagsMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
     TargetConfiguration.add_member(:mcp, Types::TargetConfiguration::Mcp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: McpTargetConfiguration, location_name: 'mcp'))
     TargetConfiguration.add_member(:unknown, Types::TargetConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     TargetConfiguration.type = Types::TargetConfiguration
@@ -1202,6 +1253,10 @@ module Aws::BedrockAgentCoreControl
     ToolSchema.type = Types::ToolSchema
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
     UnauthorizedException.type = Types::UnauthorizedException
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggableResourcesArn, location_name: 'resourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKeyList, location_name: 'tagKeys', traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceRequest.type = Types::UntagResourceRequest
+    UntagResourceResponse.type = Types::UntagResourceResponse
     UpdateAgentRuntimeEndpointRequest.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAgentRuntimeEndpointRequest.add_member(:endpoint_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointName, location_name: 'endpointName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAgentRuntimeEndpointRequest.add_member(:agent_runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'agentRuntimeVersion'))
@@ -1212,19 +1267,20 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeEndpointResponse.add_member(:target_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'targetVersion'))
     UpdateAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, location_name: 'agentRuntimeEndpointArn', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
-    UpdateAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    UpdateAgentRuntimeEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeEndpointResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeEndpointResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeEndpointResponse.type = Types::UpdateAgentRuntimeEndpointResponse
     UpdateAgentRuntimeRequest.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAgentRuntimeRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description'))
-    UpdateAgentRuntimeRequest.add_member(:agent_runtime_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentArtifact, location_name: 'agentRuntimeArtifact', traits: {"smithy.api#required" => {}}))
+    UpdateAgentRuntimeRequest.add_member(:agent_runtime_artifact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArtifact, location_name: 'agentRuntimeArtifact', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: 'networkConfiguration', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeRequest.add_member(:protocol_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtocolConfiguration, location_name: 'protocolConfiguration'))
     UpdateAgentRuntimeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateAgentRuntimeRequest.add_member(:environment_variables, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: 'environmentVariables'))
     UpdateAgentRuntimeRequest.add_member(:authorizer_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: 'authorizerConfiguration'))
+    UpdateAgentRuntimeRequest.add_member(:request_header_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestHeaderConfiguration, location_name: 'requestHeaderConfiguration'))
     UpdateAgentRuntimeRequest.type = Types::UpdateAgentRuntimeRequest
     UpdateAgentRuntimeResponse.add_member(:agent_runtime_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeArn, location_name: 'agentRuntimeArn', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeResponse.add_member(:agent_runtime_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: 'agentRuntimeId', traits: {"smithy.api#required" => {}}))
@@ -1232,7 +1288,7 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeResponse.add_member(:agent_runtime_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeVersion, location_name: 'agentRuntimeVersion', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'lastUpdatedAt', traits: {"smithy.api#required" => {}}))
-    UpdateAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    UpdateAgentRuntimeResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentRuntimeStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     UpdateAgentRuntimeResponse.type = Types::UpdateAgentRuntimeResponse
     UpdateApiKeyCredentialProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CredentialProviderName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     UpdateApiKeyCredentialProviderRequest.add_member(:api_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApiKeyType, location_name: 'apiKey', traits: {"smithy.api#required" => {}}))
@@ -1352,6 +1408,9 @@ module Aws::BedrockAgentCoreControl
     ValidationExceptionReason.add_member(:idempotent_parameter_mismatch_exception, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION', traits: {"smithy.api#enumValue" => "IdempotentParameterMismatchException"}))
     ValidationExceptionReason.add_member(:root_event_in_other_session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ROOT_EVENT_IN_OTHER_SESSION', traits: {"smithy.api#enumValue" => "EventInOtherSession"}))
     ValidationExceptionReason.add_member(:resource_conflict, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'RESOURCE_CONFLICT', traits: {"smithy.api#enumValue" => "ResourceConflict"}))
+    VpcConfig.add_member(:security_groups, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroups, location_name: 'securityGroups', traits: {"smithy.api#required" => {}}))
+    VpcConfig.add_member(:subnets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Subnets, location_name: 'subnets', traits: {"smithy.api#required" => {}}))
+    VpcConfig.type = Types::VpcConfig
     WorkloadIdentityDetails.add_member(:workload_identity_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadIdentityArn, location_name: 'workloadIdentityArn', traits: {"smithy.api#required" => {}}))
     WorkloadIdentityDetails.type = Types::WorkloadIdentityDetails
     WorkloadIdentityList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkloadIdentityType)
@@ -1900,6 +1959,18 @@ module Aws::BedrockAgentCoreControl
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"uri" => "/identities/ListOauth2CredentialProviders", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListOauth2CredentialProviders.new
       end)
+      service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentcorecontrol#ListTagsForResource"
+        operation.name = "ListTagsForResource"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/tags/{resourceArn}"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:list_workload_identities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockagentcorecontrol#ListWorkloadIdentities"
         operation.name = "ListWorkloadIdentities"
@@ -1927,6 +1998,31 @@ module Aws::BedrockAgentCoreControl
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"uri" => "/identities/set-token-vault-cmk", "method" => "POST"}}
+      end)
+      service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentcorecontrol#TagResource"
+        operation.name = "TagResource"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagResourceResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "POST", "uri" => "/tags/{resourceArn}"}}
+      end)
+      service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentcorecontrol#UntagResource"
+        operation.name = "UntagResource"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_agent_runtime, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntime"

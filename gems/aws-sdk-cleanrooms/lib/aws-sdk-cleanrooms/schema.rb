@@ -6,6 +6,13 @@ module Aws::CleanRooms
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AccessBudget = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AccessBudget', name: 'AccessBudget')
+    AccessBudgetDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AccessBudgetDetails', name: 'AccessBudgetDetails')
+    AccessBudgetDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#AccessBudgetDetailsList', name: 'AccessBudgetDetailsList', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    AccessBudgetType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#AccessBudgetType', name: 'AccessBudgetType')
+    AccessBudgetsPrivacyTemplateParametersInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateParametersInput', name: 'AccessBudgetsPrivacyTemplateParametersInput')
+    AccessBudgetsPrivacyTemplateParametersOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateParametersOutput', name: 'AccessBudgetsPrivacyTemplateParametersOutput')
+    AccessBudgetsPrivacyTemplateUpdateParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AccessBudgetsPrivacyTemplateUpdateParameters', name: 'AccessBudgetsPrivacyTemplateUpdateParameters')
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessDeniedExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#AccessDeniedExceptionReason', name: 'AccessDeniedExceptionReason', traits: {"smithy.api#enum" => [{"value" => "INSUFFICIENT_PERMISSIONS", "name" => "INSUFFICIENT_PERMISSIONS"}]})
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#AccountId', name: 'AccountId', traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d+$"})
@@ -68,6 +75,7 @@ module Aws::CleanRooms
     AthenaWorkGroup = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#AthenaWorkGroup', name: 'AthenaWorkGroup', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([a-zA-Z0-9._-])*$"})
     AutoApprovedChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#AutoApprovedChangeType', name: 'AutoApprovedChangeType')
     AutoApprovedChangeTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#AutoApprovedChangeTypeList', name: 'AutoApprovedChangeTypeList', traits: {"smithy.api#uniqueItems" => {}})
+    AutoRefreshMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#AutoRefreshMode', name: 'AutoRefreshMode')
     BatchGetCollaborationAnalysisTemplateError = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateError', name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateErrorList', name: 'BatchGetCollaborationAnalysisTemplateErrorList', traits: {"smithy.api#length" => {"max" => 10}})
     BatchGetCollaborationAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateOperationInput', name: 'BatchGetCollaborationAnalysisTemplateOperationInput')
@@ -82,6 +90,10 @@ module Aws::CleanRooms
     BatchGetSchemaOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BatchGetSchemaOperationOutput', name: 'BatchGetSchemaOperationOutput')
     BilledJobResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BilledJobResourceUtilization', name: 'BilledJobResourceUtilization')
     BilledResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BilledResourceUtilization', name: 'BilledResourceUtilization')
+    Budget = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cleanrooms#Budget', name: 'Budget', traits: {"smithy.api#range" => {"min" => 0, "max" => 1000000}})
+    BudgetParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BudgetParameter', name: 'BudgetParameter')
+    BudgetParameters = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#BudgetParameters', name: 'BudgetParameters', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    BudgetedResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#BudgetedResourceArn', name: 'BudgetedResourceArn', traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/configuredtableassociation/[\\d\\w-]+$"})
     Change = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#Change', name: 'Change')
     ChangeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ChangeInput', name: 'ChangeInput')
     ChangeInputList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ChangeInputList', name: 'ChangeInputList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
@@ -308,6 +320,7 @@ module Aws::CleanRooms
     IdNamespaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#IdNamespaceType', name: 'IdNamespaceType')
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     JobComputePaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#JobComputePaymentConfig', name: 'JobComputePaymentConfig')
+    JobType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#JobType', name: 'JobType')
     JoinOperator = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#JoinOperator', name: 'JoinOperator', traits: {"smithy.api#enum" => [{"name" => "OR", "value" => "OR"}, {"name" => "AND", "value" => "AND"}]})
     JoinOperatorsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#JoinOperatorsList', name: 'JoinOperatorsList', traits: {"smithy.api#length" => {"max" => 2}})
     JoinRequiredOption = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#JoinRequiredOption', name: 'JoinRequiredOption', traits: {"smithy.api#enum" => [{"name" => "QUERY_RUNNER", "value" => "QUERY_RUNNER"}]})
@@ -472,6 +485,7 @@ module Aws::CleanRooms
     ReceiverAccountIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ReceiverAccountIds', name: 'ReceiverAccountIds')
     ReceiverConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ReceiverConfiguration', name: 'ReceiverConfiguration')
     ReceiverConfigurationsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ReceiverConfigurationsList', name: 'ReceiverConfigurationsList')
+    RemainingBudget = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cleanrooms#RemainingBudget', name: 'RemainingBudget', traits: {"smithy.api#range" => {"min" => 0}})
     ResourceAlias = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#ResourceAlias', name: 'ResourceAlias', traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"})
     ResourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#ResourceDescription', name: 'ResourceDescription', traits: {"smithy.api#length" => {"max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -488,6 +502,7 @@ module Aws::CleanRooms
     SchemaConfiguration = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#SchemaConfiguration', name: 'SchemaConfiguration')
     SchemaConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#SchemaConfigurationList', name: 'SchemaConfigurationList')
     SchemaList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#SchemaList', name: 'SchemaList', traits: {"smithy.api#length" => {"max" => 25}})
+    SchemaResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#SchemaResourceArn', name: 'SchemaResourceArn', traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership\\/[\\d\\w-]+\\/(configuredtableassociation|idmappingtable)\\/[\\d\\w-]+$"})
     SchemaStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#SchemaStatus', name: 'SchemaStatus')
     SchemaStatusDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#SchemaStatusDetail', name: 'SchemaStatusDetail')
     SchemaStatusDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#SchemaStatusDetailList', name: 'SchemaStatusDetailList')
@@ -564,6 +579,30 @@ module Aws::CleanRooms
     WorkerComputeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#WorkerComputeConfiguration', name: 'WorkerComputeConfiguration')
     WorkerComputeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#WorkerComputeType', name: 'WorkerComputeType')
 
+    AccessBudget.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetedResourceArn, location_name: 'resourceArn', traits: {"smithy.api#required" => {}}))
+    AccessBudget.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetDetailsList, location_name: 'details', traits: {"smithy.api#required" => {}}))
+    AccessBudget.add_member(:aggregate_remaining_budget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemainingBudget, location_name: 'aggregateRemainingBudget', traits: {"smithy.api#required" => {}}))
+    AccessBudget.type = Types::AccessBudget
+    AccessBudgetDetails.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'startTime', traits: {"smithy.api#required" => {}}))
+    AccessBudgetDetails.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'endTime'))
+    AccessBudgetDetails.add_member(:remaining_budget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RemainingBudget, location_name: 'remainingBudget', traits: {"smithy.api#required" => {}}))
+    AccessBudgetDetails.add_member(:budget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Budget, location_name: 'budget', traits: {"smithy.api#required" => {}}))
+    AccessBudgetDetails.add_member(:budget_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetType, location_name: 'budgetType', traits: {"smithy.api#required" => {}}))
+    AccessBudgetDetails.add_member(:auto_refresh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoRefreshMode, location_name: 'autoRefresh'))
+    AccessBudgetDetails.type = Types::AccessBudgetDetails
+    AccessBudgetDetailsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetDetails)
+    AccessBudgetType.add_member(:calendar_day, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CALENDAR_DAY', traits: {"smithy.api#enumValue" => "CALENDAR_DAY"}))
+    AccessBudgetType.add_member(:calendar_month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CALENDAR_MONTH', traits: {"smithy.api#enumValue" => "CALENDAR_MONTH"}))
+    AccessBudgetType.add_member(:calendar_week, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CALENDAR_WEEK', traits: {"smithy.api#enumValue" => "CALENDAR_WEEK"}))
+    AccessBudgetType.add_member(:lifetime, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LIFETIME', traits: {"smithy.api#enumValue" => "LIFETIME"}))
+    AccessBudgetsPrivacyTemplateParametersInput.add_member(:budget_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetParameters, location_name: 'budgetParameters', traits: {"smithy.api#required" => {}}))
+    AccessBudgetsPrivacyTemplateParametersInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetedResourceArn, location_name: 'resourceArn', traits: {"smithy.api#required" => {}}))
+    AccessBudgetsPrivacyTemplateParametersInput.type = Types::AccessBudgetsPrivacyTemplateParametersInput
+    AccessBudgetsPrivacyTemplateParametersOutput.add_member(:budget_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetParameters, location_name: 'budgetParameters', traits: {"smithy.api#required" => {}}))
+    AccessBudgetsPrivacyTemplateParametersOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetedResourceArn, location_name: 'resourceArn', traits: {"smithy.api#required" => {}}))
+    AccessBudgetsPrivacyTemplateParametersOutput.type = Types::AccessBudgetsPrivacyTemplateParametersOutput
+    AccessBudgetsPrivacyTemplateUpdateParameters.add_member(:budget_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetParameters, location_name: 'budgetParameters', traits: {"smithy.api#required" => {}}))
+    AccessBudgetsPrivacyTemplateUpdateParameters.type = Types::AccessBudgetsPrivacyTemplateUpdateParameters
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
     AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: 'reason'))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -716,6 +755,8 @@ module Aws::CleanRooms
     AthenaTableReference.type = Types::AthenaTableReference
     AutoApprovedChangeType.add_member(:add_member, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADD_MEMBER', traits: {"smithy.api#enumValue" => "ADD_MEMBER"}))
     AutoApprovedChangeTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoApprovedChangeType)
+    AutoRefreshMode.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AutoRefreshMode.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'code', traits: {"smithy.api#required" => {}}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
@@ -754,6 +795,11 @@ module Aws::CleanRooms
     BilledJobResourceUtilization.type = Types::BilledJobResourceUtilization
     BilledResourceUtilization.add_member(:units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: 'units', traits: {"smithy.api#required" => {}}))
     BilledResourceUtilization.type = Types::BilledResourceUtilization
+    BudgetParameter.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetType, location_name: 'type', traits: {"smithy.api#required" => {}}))
+    BudgetParameter.add_member(:budget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Budget, location_name: 'budget', traits: {"smithy.api#required" => {}}))
+    BudgetParameter.add_member(:auto_refresh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoRefreshMode, location_name: 'autoRefresh'))
+    BudgetParameter.type = Types::BudgetParameter
+    BudgetParameters.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetParameter)
     Change.add_member(:specification_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSpecificationType, location_name: 'specificationType', traits: {"smithy.api#required" => {}}))
     Change.add_member(:specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSpecification, location_name: 'specification', traits: {"smithy.api#required" => {}}))
     Change.add_member(:types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeTypeList, location_name: 'types', traits: {"smithy.api#required" => {}}))
@@ -1207,7 +1253,7 @@ module Aws::CleanRooms
     CreateMembershipOperationOutput.add_member(:membership, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Membership, location_name: 'membership', traits: {"smithy.api#required" => {}}))
     CreateMembershipOperationOutput.type = Types::CreateMembershipOperationOutput
     CreatePrivacyBudgetTemplateInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MembershipIdentifier, location_name: 'membershipIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "membershipIdentifier"}))
-    CreatePrivacyBudgetTemplateInput.add_member(:auto_refresh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, location_name: 'autoRefresh', traits: {"smithy.api#required" => {}}))
+    CreatePrivacyBudgetTemplateInput.add_member(:auto_refresh, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, location_name: 'autoRefresh'))
     CreatePrivacyBudgetTemplateInput.add_member(:privacy_budget_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetType, location_name: 'privacyBudgetType', traits: {"smithy.api#required" => {}}))
     CreatePrivacyBudgetTemplateInput.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateParametersInput, location_name: 'parameters', traits: {"smithy.api#required" => {}}))
     CreatePrivacyBudgetTemplateInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
@@ -1506,6 +1552,9 @@ module Aws::CleanRooms
     InternalServerException.type = Types::InternalServerException
     JobComputePaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isResponsible', traits: {"smithy.api#required" => {}}))
     JobComputePaymentConfig.type = Types::JobComputePaymentConfig
+    JobType.add_member(:batch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BATCH', traits: {"smithy.api#enumValue" => "BATCH"}))
+    JobType.add_member(:incremental, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INCREMENTAL', traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
+    JobType.add_member(:delete_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETE_ONLY', traits: {"smithy.api#enumValue" => "DELETE_ONLY"}))
     JoinOperatorsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: JoinOperator)
     ListAnalysisTemplatesOperationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MembershipIdentifier, location_name: 'membershipIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAnalysisTemplatesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1554,6 +1603,7 @@ module Aws::CleanRooms
     ListCollaborationPrivacyBudgetsInput.add_member(:privacy_budget_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetType, location_name: 'privacyBudgetType', traits: {"smithy.api#httpQuery" => "privacyBudgetType", "smithy.api#required" => {}}))
     ListCollaborationPrivacyBudgetsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListCollaborationPrivacyBudgetsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListCollaborationPrivacyBudgetsInput.add_member(:access_budget_resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetedResourceArn, location_name: 'accessBudgetResourceArn', traits: {"smithy.api#httpQuery" => "accessBudgetResourceArn"}))
     ListCollaborationPrivacyBudgetsInput.type = Types::ListCollaborationPrivacyBudgetsInput
     ListCollaborationPrivacyBudgetsOutput.add_member(:collaboration_privacy_budget_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetSummaryList, location_name: 'collaborationPrivacyBudgetSummaries', traits: {"smithy.api#required" => {}}))
     ListCollaborationPrivacyBudgetsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
@@ -1624,6 +1674,7 @@ module Aws::CleanRooms
     ListPrivacyBudgetsInput.add_member(:privacy_budget_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetType, location_name: 'privacyBudgetType', traits: {"smithy.api#httpQuery" => "privacyBudgetType", "smithy.api#required" => {}}))
     ListPrivacyBudgetsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListPrivacyBudgetsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListPrivacyBudgetsInput.add_member(:access_budget_resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BudgetedResourceArn, location_name: 'accessBudgetResourceArn', traits: {"smithy.api#httpQuery" => "accessBudgetResourceArn"}))
     ListPrivacyBudgetsInput.type = Types::ListPrivacyBudgetsInput
     ListPrivacyBudgetsOutput.add_member(:privacy_budget_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetSummaryList, location_name: 'privacyBudgetSummaries', traits: {"smithy.api#required" => {}}))
     ListPrivacyBudgetsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
@@ -1792,6 +1843,7 @@ module Aws::CleanRooms
     PaymentConfiguration.type = Types::PaymentConfiguration
     PopulateIdMappingTableInput.add_member(:id_mapping_table_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'idMappingTableIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IdMappingTableId"}))
     PopulateIdMappingTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MembershipIdentifier, location_name: 'membershipIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    PopulateIdMappingTableInput.add_member(:job_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobType, location_name: 'jobType'))
     PopulateIdMappingTableInput.type = Types::PopulateIdMappingTableInput
     PopulateIdMappingTableOutput.add_member(:id_mapping_job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'idMappingJobId', traits: {"smithy.api#required" => {}}))
     PopulateIdMappingTableOutput.type = Types::PopulateIdMappingTableOutput
@@ -1804,6 +1856,7 @@ module Aws::CleanRooms
     PreviewPrivacyImpactParametersInput.add_member(:unknown, Types::PreviewPrivacyImpactParametersInput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     PreviewPrivacyImpactParametersInput.type = Types::PreviewPrivacyImpactParametersInput
     PrivacyBudget.add_member(:differential_privacy, Types::PrivacyBudget::DifferentialPrivacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudget, location_name: 'differentialPrivacy'))
+    PrivacyBudget.add_member(:access_budget, Types::PrivacyBudget::AccessBudget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudget, location_name: 'accessBudget'))
     PrivacyBudget.add_member(:unknown, Types::PrivacyBudget::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     PrivacyBudget.type = Types::PrivacyBudget
     PrivacyBudgetSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'id', traits: {"smithy.api#required" => {}}))
@@ -1834,9 +1887,11 @@ module Aws::CleanRooms
     PrivacyBudgetTemplateAutoRefresh.add_member(:calendar_month, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CALENDAR_MONTH', traits: {"smithy.api#enumValue" => "CALENDAR_MONTH"}))
     PrivacyBudgetTemplateAutoRefresh.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
     PrivacyBudgetTemplateParametersInput.add_member(:differential_privacy, Types::PrivacyBudgetTemplateParametersInput::DifferentialPrivacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateParametersInput, location_name: 'differentialPrivacy'))
+    PrivacyBudgetTemplateParametersInput.add_member(:access_budget, Types::PrivacyBudgetTemplateParametersInput::AccessBudget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetsPrivacyTemplateParametersInput, location_name: 'accessBudget'))
     PrivacyBudgetTemplateParametersInput.add_member(:unknown, Types::PrivacyBudgetTemplateParametersInput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     PrivacyBudgetTemplateParametersInput.type = Types::PrivacyBudgetTemplateParametersInput
     PrivacyBudgetTemplateParametersOutput.add_member(:differential_privacy, Types::PrivacyBudgetTemplateParametersOutput::DifferentialPrivacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateParametersOutput, location_name: 'differentialPrivacy'))
+    PrivacyBudgetTemplateParametersOutput.add_member(:access_budget, Types::PrivacyBudgetTemplateParametersOutput::AccessBudget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetsPrivacyTemplateParametersOutput, location_name: 'accessBudget'))
     PrivacyBudgetTemplateParametersOutput.add_member(:unknown, Types::PrivacyBudgetTemplateParametersOutput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     PrivacyBudgetTemplateParametersOutput.type = Types::PrivacyBudgetTemplateParametersOutput
     PrivacyBudgetTemplateSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, location_name: 'id', traits: {"smithy.api#required" => {}}))
@@ -1851,9 +1906,11 @@ module Aws::CleanRooms
     PrivacyBudgetTemplateSummary.type = Types::PrivacyBudgetTemplateSummary
     PrivacyBudgetTemplateSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateSummary)
     PrivacyBudgetTemplateUpdateParameters.add_member(:differential_privacy, Types::PrivacyBudgetTemplateUpdateParameters::DifferentialPrivacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateUpdateParameters, location_name: 'differentialPrivacy'))
+    PrivacyBudgetTemplateUpdateParameters.add_member(:access_budget, Types::PrivacyBudgetTemplateUpdateParameters::AccessBudget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessBudgetsPrivacyTemplateUpdateParameters, location_name: 'accessBudget'))
     PrivacyBudgetTemplateUpdateParameters.add_member(:unknown, Types::PrivacyBudgetTemplateUpdateParameters::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     PrivacyBudgetTemplateUpdateParameters.type = Types::PrivacyBudgetTemplateUpdateParameters
     PrivacyBudgetType.add_member(:differential_privacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DIFFERENTIAL_PRIVACY', traits: {"smithy.api#enumValue" => "DIFFERENTIAL_PRIVACY"}))
+    PrivacyBudgetType.add_member(:access_budget, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ACCESS_BUDGET', traits: {"smithy.api#enumValue" => "ACCESS_BUDGET"}))
     PrivacyImpact.add_member(:differential_privacy, Types::PrivacyImpact::DifferentialPrivacy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyImpact, location_name: 'differentialPrivacy'))
     PrivacyImpact.add_member(:unknown, Types::PrivacyImpact::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     PrivacyImpact.type = Types::PrivacyImpact
@@ -2046,6 +2103,7 @@ module Aws::CleanRooms
     Schema.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updateTime', traits: {"smithy.api#required" => {}}))
     Schema.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaType, location_name: 'type', traits: {"smithy.api#required" => {}}))
     Schema.add_member(:schema_status_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaStatusDetailList, location_name: 'schemaStatusDetails', traits: {"smithy.api#default" => [], "smithy.api#required" => {}}))
+    Schema.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaResourceArn, location_name: 'resourceArn'))
     Schema.add_member(:schema_type_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaTypeProperties, location_name: 'schemaTypeProperties'))
     Schema.type = Types::Schema
     SchemaAnalysisRuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisRule)
@@ -2089,6 +2147,7 @@ module Aws::CleanRooms
     SchemaSummary.add_member(:collaboration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationArn, location_name: 'collaborationArn', traits: {"smithy.api#required" => {}}))
     SchemaSummary.add_member(:analysis_rule_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisRuleTypeList, location_name: 'analysisRuleTypes', traits: {"smithy.api#required" => {}}))
     SchemaSummary.add_member(:analysis_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisMethod, location_name: 'analysisMethod'))
+    SchemaSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaResourceArn, location_name: 'resourceArn'))
     SchemaSummary.add_member(:selected_analysis_methods, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: 'selectedAnalysisMethods'))
     SchemaSummary.type = Types::SchemaSummary
     SchemaSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaSummary)
@@ -2461,6 +2520,7 @@ module Aws::CleanRooms
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a new privacy budget template", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/privacybudgettemplates"}}

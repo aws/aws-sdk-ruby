@@ -28,6 +28,7 @@ module Aws::DAX
         ?parameter_group: Types::ParameterGroupStatus,
         ?sse_description: Types::SSEDescription,
         ?cluster_endpoint_encryption_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -49,6 +50,7 @@ module Aws::DAX
       attr_accessor parameter_group: Types::ParameterGroupStatus?
       attr_accessor sse_description: Types::SSEDescription?
       attr_accessor cluster_endpoint_encryption_type: String?
+      attr_accessor network_type: String?
     end
 
     class ClusterAlreadyExistsFault
@@ -107,6 +109,7 @@ module Aws::DAX
         ?tags: Array[Types::Tag],
         ?sse_specification: Types::SSESpecification,
         ?cluster_endpoint_encryption_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -124,6 +127,7 @@ module Aws::DAX
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor sse_specification: Types::SSESpecification?
       attr_accessor cluster_endpoint_encryption_type: String?
+      attr_accessor network_type: String?
     end
 
     class CreateClusterResponse
@@ -635,6 +639,12 @@ module Aws::DAX
       attr_accessor next_token: String?
     end
 
+    module NetworkType
+      IPV4: String
+      IPV6: String
+      DUAL_STACK: String
+    end
+
     class Node
       include Smithy::Schema::Structure
 
@@ -921,11 +931,13 @@ module Aws::DAX
       def initialize: (
         ?subnet_identifier: String,
         ?subnet_availability_zone: String,
+        ?supported_network_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor subnet_identifier: String?
       attr_accessor subnet_availability_zone: String?
+      attr_accessor supported_network_types: Array[String]?
     end
 
     class SubnetGroup
@@ -936,6 +948,7 @@ module Aws::DAX
         ?description: String,
         ?vpc_id: String,
         ?subnets: Array[Types::Subnet],
+        ?supported_network_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -943,6 +956,7 @@ module Aws::DAX
       attr_accessor description: String?
       attr_accessor vpc_id: String?
       attr_accessor subnets: Array[Types::Subnet]?
+      attr_accessor supported_network_types: Array[String]?
     end
 
     class SubnetGroupAlreadyExistsFault
@@ -990,6 +1004,17 @@ module Aws::DAX
     end
 
     class SubnetInUse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubnetNotAllowedFault
       include Smithy::Schema::Structure
 
       def initialize: (

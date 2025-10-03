@@ -7,6 +7,7 @@ module Aws::DirectoryService
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -62,6 +63,7 @@ module Aws::DirectoryService
       ?ip_routes: Array[
         {
           cidr_ip: String,
+          cidr_ipv6: String,
           description: String
         }
       ],
@@ -115,6 +117,7 @@ module Aws::DirectoryService
         vpc_id: String,
         subnet_ids: Array[String],
         customer_dns_ips: Array[String],
+        customer_dns_ips_v6: Array[String],
         customer_user_name: String
       },
       ?tags: Array[
@@ -122,7 +125,8 @@ module Aws::DirectoryService
           key: String,
           value: String
         }
-      ]
+      ],
+      ?network_type: String
     ) -> _ConnectDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConnectDirectoryResponse
 
     interface _CreateAliasResponse
@@ -158,7 +162,8 @@ module Aws::DirectoryService
     def create_conditional_forwarder: (
       ?directory_id: String,
       ?remote_domain_name: String,
-      ?dns_ip_addrs: Array[String]
+      ?dns_ip_addrs: Array[String],
+      ?dns_ipv6_addrs: Array[String]
     ) -> _CreateConditionalForwarderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConditionalForwarderResponse
 
     interface _CreateDirectoryResponse
@@ -180,7 +185,8 @@ module Aws::DirectoryService
           key: String,
           value: String
         }
-      ]
+      ],
+      ?network_type: String
     ) -> _CreateDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectoryResponse
 
     interface _CreateHybridADResponse
@@ -225,7 +231,8 @@ module Aws::DirectoryService
           key: String,
           value: String
         }
-      ]
+      ],
+      ?network_type: String
     ) -> _CreateMicrosoftADResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMicrosoftADResponse
 
     interface _CreateSnapshotResponse
@@ -248,6 +255,7 @@ module Aws::DirectoryService
       ?trust_direction: String,
       ?trust_type: String,
       ?conditional_forwarder_ip_addrs: Array[String],
+      ?conditional_forwarder_ipv6_addrs: Array[String],
       ?selective_auth: String
     ) -> _CreateTrustResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrustResponse
 
@@ -584,6 +592,7 @@ module Aws::DirectoryService
       ?directory_id: String,
       ?radius_settings: {
         radius_servers: Array[String],
+        radius_servers_ipv6: untyped,
         radius_port: Integer,
         radius_timeout: Integer,
         radius_retries: Integer,
@@ -717,7 +726,8 @@ module Aws::DirectoryService
     end
     def remove_ip_routes: (
       ?directory_id: String,
-      ?cidr_ips: Array[String]
+      ?cidr_ips: Array[String],
+      ?cidr_ipv6s: Array[String]
     ) -> _RemoveIpRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveIpRoutesResponse
 
     interface _RemoveRegionResponse
@@ -812,7 +822,8 @@ module Aws::DirectoryService
     def update_conditional_forwarder: (
       ?directory_id: String,
       ?remote_domain_name: String,
-      ?dns_ip_addrs: Array[String]
+      ?dns_ip_addrs: Array[String],
+      ?dns_ipv6_addrs: Array[String]
     ) -> _UpdateConditionalForwarderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConditionalForwarderResponse
 
     interface _UpdateDirectorySetupResponse
@@ -823,6 +834,13 @@ module Aws::DirectoryService
       ?update_type: String,
       ?os_update_settings: {
         os_version: String
+      },
+      ?directory_size_update_settings: {
+        directory_size: String
+      },
+      ?network_update_settings: {
+        network_type: String,
+        customer_dns_ips_v6: Array[String]
       },
       ?create_snapshot_before_update: bool
     ) -> _UpdateDirectorySetupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectorySetupResponse
@@ -858,6 +876,7 @@ module Aws::DirectoryService
       ?directory_id: String,
       ?radius_settings: {
         radius_servers: Array[String],
+        radius_servers_ipv6: untyped,
         radius_port: Integer,
         radius_timeout: Integer,
         radius_retries: Integer,

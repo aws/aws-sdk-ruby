@@ -132,7 +132,7 @@ module Aws::CloudFormation
     #           <code>Type</code>, and <code>PublisherId</code>.</p>
     #   @return [String]
     # @!attribute type_name_alias
-    #   <p>An alias to assign to the public extension, in this account and Region. If you specify an
+    #   <p>An alias to assign to the public extension in this account and Region. If you specify an
     #         alias for the extension, CloudFormation treats the alias as the extension type name within this
     #         account and Region. You must use the alias to refer to the extension in your templates, API
     #         calls, and CloudFormation console.</p>
@@ -193,7 +193,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute arn
-    #   <p>The Amazon Resource Name (ARN) of the activated extension, in this account and
+    #   <p>The Amazon Resource Name (ARN) of the activated extension in this account and
     #         Region.</p>
     #   @return [String]
     class ActivateTypeOutput < Struct.new(
@@ -927,7 +927,7 @@ module Aws::CloudFormation
 
     # @!attribute resources
     #   <p>An optional list of resources to be included in the generated template.</p>
-    #            <p> If no resources are specified,the template will be created without any resources.
+    #            <p>If no resources are specified,the template will be created without any resources.
     #         Resources can be added to the template using the <code>UpdateGeneratedTemplate</code> API
     #         action.</p>
     #   @return [Array<Types::ResourceDefinition>]
@@ -1636,7 +1636,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute type_name
-    #   <p>The type name of the extension, in this account and Region. If you specified a type name
+    #   <p>The type name of the extension in this account and Region. If you specified a type name
     #         alias when enabling the extension, use the type name alias.</p>
     #            <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and
     #           <code>Type</code>.</p>
@@ -1647,7 +1647,7 @@ module Aws::CloudFormation
     #           <code>Type</code>.</p>
     #   @return [String]
     # @!attribute arn
-    #   <p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p>
+    #   <p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>
     #            <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and
     #           <code>Type</code>.</p>
     #   @return [String]
@@ -3138,8 +3138,9 @@ module Aws::CloudFormation
     #   @return [String]
     # @!attribute schema
     #   <p>The schema that defines the extension.</p>
-    #            <p>For more information about extension schemas, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html">Resource type
-    #           schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html">Resource type
+    #           schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i> and the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation
+    #           Hooks User Guide</a>.</p>
     #   @return [String]
     # @!attribute provisioning_type
     #   <p>For resource type extensions, the provisioning behavior of the resource type. CloudFormation
@@ -3256,9 +3257,7 @@ module Aws::CloudFormation
     # @!attribute configuration_schema
     #   <p>A JSON string that represent the current configuration data for the extension in this
     #         account and Region.</p>
-    #            <p>To set the configuration data for an extension, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a>. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html">Edit configuration
-    #           data for extensions in your account</a> in the
-    #         <i>CloudFormation User Guide</i>.</p>
+    #            <p>To set the configuration data for an extension, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a>.</p>
     #   @return [String]
     # @!attribute publisher_id
     #   <p>The publisher ID of the extension publisher.</p>
@@ -4172,7 +4171,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of resource scan results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. By default the <code>ListGeneratedTemplates</code> API action
     #         will return at most 50 results in each response. The maximum value is 100.</p>
@@ -4324,7 +4323,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of resource scan results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. By default the <code>ListResourceScanRelatedResources</code> API
     #         action will return up to 100 results in each response. The maximum value is 100.</p>
@@ -4379,7 +4378,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of resource scan results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. By default the <code>ListResourceScanResources</code> API action
     #         will return at most 100 results in each response. The maximum value is 100.</p>
@@ -4419,7 +4418,7 @@ module Aws::CloudFormation
     #   <p>A string that identifies the next page of resource scan results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> If the number of available results exceeds this maximum, the response includes a
+    #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
     #         get the next set of results. The default value is 10. The maximum value is 100.</p>
     #   @return [Integer]
@@ -5241,8 +5240,8 @@ module Aws::CloudFormation
     #               <li>
     #                  <p>
     #                     <code>PUBLIC</code>: Extensions that are publicly visible and available to be
-    #             activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to
-    #             third-party publishers.</p>
+    #             activated within any Amazon Web Services account. This includes extensions from Amazon Web Services and third-party
+    #             publishers.</p>
     #               </li>
     #            </ul>
     #            <p>The default is <code>PRIVATE</code>.</p>
@@ -6659,7 +6658,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute type_arn
-    #   <p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p>
+    #   <p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>
     #            <p>For public extensions, this will be the ARN assigned when you call the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html">ActivateType</a> API operation in this account and Region. For private extensions, this
     #         will be the ARN assigned when you call the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html">RegisterType</a> API
     #         operation in this account and Region.</p>
@@ -6667,11 +6666,9 @@ module Aws::CloudFormation
     #         configuration for an extension, but not for a specific extension version.</p>
     #   @return [String]
     # @!attribute configuration
-    #   <p>The configuration data for the extension, in this account and Region.</p>
-    #            <p>The configuration data must be formatted as JSON, and validate against the schema returned
-    #         in the <code>ConfigurationSchema</code> response element of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>. For
-    #         more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration">Defining the account-level configuration of an extension</a> in the
-    #           <i>CloudFormation Command Line Interface (CLI) User Guide</i>.</p>
+    #   <p>The configuration data for the extension in this account and Region.</p>
+    #            <p>The configuration data must be formatted as JSON and validate against the extension's
+    #         schema returned in the <code>Schema</code> response element of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.</p>
     #   @return [String]
     # @!attribute configuration_alias
     #   <p>An alias by which to refer to this extension configuration data.</p>
@@ -6700,7 +6697,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute configuration_arn
-    #   <p>The Amazon Resource Name (ARN) for the configuration data, in this account and
+    #   <p>The Amazon Resource Name (ARN) for the configuration data in this account and
     #         Region.</p>
     #            <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and
     #           <code>TypeName</code>.</p>
@@ -8869,14 +8866,12 @@ module Aws::CloudFormation
     # <p>The Tag type enables you to specify a key-value pair that can be used to store information
     #    about an CloudFormation stack.</p>
     # @!attribute key
-    #   <p>
-    #               <i>Required</i>. A string used to identify this tag. You can specify a maximum of
+    #   <p>A string used to identify this tag. You can specify a maximum of
     #      128 characters for a tag key. Tags owned by Amazon Web Services have the reserved prefix:
     #      <code>aws:</code>.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>
-    #               <i>Required</i>. A string that contains the value for this tag. You can specify a
+    #   <p>A string that contains the value for this tag. You can specify a
     #      maximum of 256 characters for a tag value.</p>
     #   @return [String]
     class Tag < Struct.new(

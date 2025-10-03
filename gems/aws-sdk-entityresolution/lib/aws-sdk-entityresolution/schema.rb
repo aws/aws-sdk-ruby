@@ -71,6 +71,8 @@ module Aws::EntityResolution
     GetSchemaMappingInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#GetSchemaMappingInput', name: 'GetSchemaMappingInput')
     GetSchemaMappingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#GetSchemaMappingOutput', name: 'GetSchemaMappingOutput')
     HeaderSafeUniqueId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.entityresolution#HeaderSafeUniqueId', name: 'HeaderSafeUniqueId', traits: {"smithy.api#length" => {"min" => 1, "max" => 780}, "smithy.api#pattern" => "^[a-zA-Z_0-9-+=/,]*$"})
+    IdMappingIncrementalRunConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#IdMappingIncrementalRunConfig', name: 'IdMappingIncrementalRunConfig')
+    IdMappingIncrementalRunType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.entityresolution#IdMappingIncrementalRunType', name: 'IdMappingIncrementalRunType')
     IdMappingJobMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#IdMappingJobMetrics', name: 'IdMappingJobMetrics')
     IdMappingJobOutputSource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#IdMappingJobOutputSource', name: 'IdMappingJobOutputSource')
     IdMappingJobOutputSourceConfig = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.entityresolution#IdMappingJobOutputSourceConfig', name: 'IdMappingJobOutputSourceConfig', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
@@ -100,6 +102,7 @@ module Aws::EntityResolution
     IncrementalRunConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#IncrementalRunConfig', name: 'IncrementalRunConfig')
     IncrementalRunType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.entityresolution#IncrementalRunType', name: 'IncrementalRunType')
     InputSource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#InputSource', name: 'InputSource')
+    InputSourceARN = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.entityresolution#InputSourceARN', name: 'InputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$"})
     InputSourceConfig = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.entityresolution#InputSourceConfig', name: 'InputSourceConfig', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     IntermediateSourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#IntermediateSourceConfiguration', name: 'IntermediateSourceConfiguration')
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
@@ -110,6 +113,7 @@ module Aws::EntityResolution
     JobOutputSourceConfig = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.entityresolution#JobOutputSourceConfig', name: 'JobOutputSourceConfig', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     JobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.entityresolution#JobStatus', name: 'JobStatus')
     JobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#JobSummary', name: 'JobSummary')
+    JobType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.entityresolution#JobType', name: 'JobType')
     KMSArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.entityresolution#KMSArn', name: 'KMSArn', traits: {"smithy.api#pattern" => "^arn:aws:kms:.*:[0-9]+:.*$"})
     ListIdMappingJobsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#ListIdMappingJobsInput', name: 'ListIdMappingJobsInput')
     ListIdMappingJobsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.entityresolution#ListIdMappingJobsOutput', name: 'ListIdMappingJobsOutput')
@@ -252,6 +256,7 @@ module Aws::EntityResolution
     CreateIdMappingWorkflowInput.add_member(:input_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, location_name: 'inputSourceConfig', traits: {"smithy.api#required" => {}}))
     CreateIdMappingWorkflowInput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: 'outputSourceConfig'))
     CreateIdMappingWorkflowInput.add_member(:id_mapping_techniques, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingTechniques, location_name: 'idMappingTechniques', traits: {"smithy.api#required" => {}}))
+    CreateIdMappingWorkflowInput.add_member(:incremental_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: 'incrementalRunConfig'))
     CreateIdMappingWorkflowInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: 'roleArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     CreateIdMappingWorkflowInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     CreateIdMappingWorkflowInput.type = Types::CreateIdMappingWorkflowInput
@@ -261,6 +266,7 @@ module Aws::EntityResolution
     CreateIdMappingWorkflowOutput.add_member(:input_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, location_name: 'inputSourceConfig', traits: {"smithy.api#required" => {}}))
     CreateIdMappingWorkflowOutput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: 'outputSourceConfig'))
     CreateIdMappingWorkflowOutput.add_member(:id_mapping_techniques, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingTechniques, location_name: 'idMappingTechniques', traits: {"smithy.api#required" => {}}))
+    CreateIdMappingWorkflowOutput.add_member(:incremental_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: 'incrementalRunConfig'))
     CreateIdMappingWorkflowOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: 'roleArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     CreateIdMappingWorkflowOutput.type = Types::CreateIdMappingWorkflowOutput
     CreateIdNamespaceInput.add_member(:id_namespace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'idNamespaceName', traits: {"smithy.api#required" => {}}))
@@ -351,7 +357,7 @@ module Aws::EntityResolution
     ExceedsLimitException.add_member(:quota_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'quotaName'))
     ExceedsLimitException.add_member(:quota_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'quotaValue'))
     ExceedsLimitException.type = Types::ExceedsLimitException
-    FailedRecord.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'inputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$", "smithy.api#required" => {}}))
+    FailedRecord.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSourceARN, location_name: 'inputSourceARN', traits: {"smithy.api#required" => {}}))
     FailedRecord.add_member(:unique_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'uniqueId', traits: {"smithy.api#required" => {}}))
     FailedRecord.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'errorMessage', traits: {"smithy.api#required" => {}}))
     FailedRecord.type = Types::FailedRecord
@@ -373,6 +379,7 @@ module Aws::EntityResolution
     GetIdMappingJobOutput.add_member(:metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingJobMetrics, location_name: 'metrics'))
     GetIdMappingJobOutput.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetails, location_name: 'errorDetails'))
     GetIdMappingJobOutput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingJobOutputSourceConfig, location_name: 'outputSourceConfig'))
+    GetIdMappingJobOutput.add_member(:job_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobType, location_name: 'jobType'))
     GetIdMappingJobOutput.type = Types::GetIdMappingJobOutput
     GetIdMappingWorkflowInput.add_member(:workflow_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'workflowName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetIdMappingWorkflowInput.type = Types::GetIdMappingWorkflowInput
@@ -384,6 +391,7 @@ module Aws::EntityResolution
     GetIdMappingWorkflowOutput.add_member(:id_mapping_techniques, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingTechniques, location_name: 'idMappingTechniques', traits: {"smithy.api#required" => {}}))
     GetIdMappingWorkflowOutput.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createdAt', traits: {"smithy.api#required" => {}}))
     GetIdMappingWorkflowOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updatedAt', traits: {"smithy.api#required" => {}}))
+    GetIdMappingWorkflowOutput.add_member(:incremental_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: 'incrementalRunConfig'))
     GetIdMappingWorkflowOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: 'roleArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     GetIdMappingWorkflowOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     GetIdMappingWorkflowOutput.type = Types::GetIdMappingWorkflowOutput
@@ -466,13 +474,24 @@ module Aws::EntityResolution
     GetSchemaMappingOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     GetSchemaMappingOutput.add_member(:has_workflows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'hasWorkflows', traits: {"smithy.api#required" => {}}))
     GetSchemaMappingOutput.type = Types::GetSchemaMappingOutput
+    IdMappingIncrementalRunConfig.add_member(:incremental_run_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingIncrementalRunType, location_name: 'incrementalRunType'))
+    IdMappingIncrementalRunConfig.type = Types::IdMappingIncrementalRunConfig
+    IdMappingIncrementalRunType.add_member(:on_demand, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ON_DEMAND', traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     IdMappingJobMetrics.add_member(:input_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'inputRecords'))
     IdMappingJobMetrics.add_member(:total_records_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'totalRecordsProcessed'))
     IdMappingJobMetrics.add_member(:records_not_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'recordsNotProcessed'))
+    IdMappingJobMetrics.add_member(:delete_records_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'deleteRecordsProcessed'))
     IdMappingJobMetrics.add_member(:total_mapped_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'totalMappedRecords'))
     IdMappingJobMetrics.add_member(:total_mapped_source_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'totalMappedSourceRecords'))
     IdMappingJobMetrics.add_member(:total_mapped_target_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'totalMappedTargetRecords'))
     IdMappingJobMetrics.add_member(:unique_records_loaded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'uniqueRecordsLoaded'))
+    IdMappingJobMetrics.add_member(:new_mapped_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'newMappedRecords'))
+    IdMappingJobMetrics.add_member(:new_mapped_source_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'newMappedSourceRecords'))
+    IdMappingJobMetrics.add_member(:new_mapped_target_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'newMappedTargetRecords'))
+    IdMappingJobMetrics.add_member(:new_unique_records_loaded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'newUniqueRecordsLoaded'))
+    IdMappingJobMetrics.add_member(:mapped_records_removed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'mappedRecordsRemoved'))
+    IdMappingJobMetrics.add_member(:mapped_source_records_removed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'mappedSourceRecordsRemoved'))
+    IdMappingJobMetrics.add_member(:mapped_target_records_removed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'mappedTargetRecordsRemoved'))
     IdMappingJobMetrics.type = Types::IdMappingJobMetrics
     IdMappingJobOutputSource.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn', traits: {"smithy.api#required" => {}}))
     IdMappingJobOutputSource.add_member(:output_s3_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Path, location_name: 'outputS3Path', traits: {"smithy.api#required" => {}}))
@@ -490,7 +509,7 @@ module Aws::EntityResolution
     IdMappingTechniques.type = Types::IdMappingTechniques
     IdMappingType.add_member(:provider, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PROVIDER', traits: {"smithy.api#enumValue" => "PROVIDER"}))
     IdMappingType.add_member(:rule_based, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'RULE_BASED', traits: {"smithy.api#enumValue" => "RULE_BASED"}))
-    IdMappingWorkflowInputSource.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'inputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$", "smithy.api#required" => {}}))
+    IdMappingWorkflowInputSource.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSourceARN, location_name: 'inputSourceARN', traits: {"smithy.api#required" => {}}))
     IdMappingWorkflowInputSource.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'schemaName'))
     IdMappingWorkflowInputSource.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdNamespaceType, location_name: 'type'))
     IdMappingWorkflowInputSource.type = Types::IdMappingWorkflowInputSource
@@ -516,7 +535,7 @@ module Aws::EntityResolution
     IdNamespaceIdMappingWorkflowProperties.add_member(:provider_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NamespaceProviderProperties, location_name: 'providerProperties'))
     IdNamespaceIdMappingWorkflowProperties.type = Types::IdNamespaceIdMappingWorkflowProperties
     IdNamespaceIdMappingWorkflowPropertiesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdNamespaceIdMappingWorkflowProperties)
-    IdNamespaceInputSource.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'inputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$", "smithy.api#required" => {}}))
+    IdNamespaceInputSource.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSourceARN, location_name: 'inputSourceARN', traits: {"smithy.api#required" => {}}))
     IdNamespaceInputSource.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'schemaName'))
     IdNamespaceInputSource.type = Types::IdNamespaceInputSource
     IdNamespaceInputSourceConfig.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdNamespaceInputSource)
@@ -534,7 +553,7 @@ module Aws::EntityResolution
     IncrementalRunConfig.add_member(:incremental_run_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncrementalRunType, location_name: 'incrementalRunType'))
     IncrementalRunConfig.type = Types::IncrementalRunConfig
     IncrementalRunType.add_member(:immediate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMMEDIATE', traits: {"smithy.api#enumValue" => "IMMEDIATE"}))
-    InputSource.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'inputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$", "smithy.api#required" => {}}))
+    InputSource.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSourceARN, location_name: 'inputSourceARN', traits: {"smithy.api#required" => {}}))
     InputSource.add_member(:schema_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'schemaName', traits: {"smithy.api#required" => {}}))
     InputSource.add_member(:apply_normalization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'applyNormalization'))
     InputSource.type = Types::InputSource
@@ -547,6 +566,7 @@ module Aws::EntityResolution
     JobMetrics.add_member(:input_records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'inputRecords'))
     JobMetrics.add_member(:total_records_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'totalRecordsProcessed'))
     JobMetrics.add_member(:records_not_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'recordsNotProcessed'))
+    JobMetrics.add_member(:delete_records_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'deleteRecordsProcessed'))
     JobMetrics.add_member(:match_i_ds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'matchIDs'))
     JobMetrics.type = Types::JobMetrics
     JobOutputSource.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'roleArn', traits: {"smithy.api#required" => {}}))
@@ -563,6 +583,9 @@ module Aws::EntityResolution
     JobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'startTime', traits: {"smithy.api#required" => {}}))
     JobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'endTime'))
     JobSummary.type = Types::JobSummary
+    JobType.add_member(:batch, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BATCH', traits: {"smithy.api#enumValue" => "BATCH"}))
+    JobType.add_member(:incremental, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INCREMENTAL', traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
+    JobType.add_member(:delete_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETE_ONLY', traits: {"smithy.api#enumValue" => "DELETE_ONLY"}))
     ListIdMappingJobsInput.add_member(:workflow_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNameOrIdMappingWorkflowArn, location_name: 'workflowName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListIdMappingJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListIdMappingJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 25}}))
@@ -619,7 +642,7 @@ module Aws::EntityResolution
     MatchGroupsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchGroup)
     MatchPurpose.add_member(:identifier_generation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IDENTIFIER_GENERATION', traits: {"smithy.api#enumValue" => "IDENTIFIER_GENERATION"}))
     MatchPurpose.add_member(:indexing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INDEXING', traits: {"smithy.api#enumValue" => "INDEXING"}))
-    MatchedRecord.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'inputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$", "smithy.api#required" => {}}))
+    MatchedRecord.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSourceARN, location_name: 'inputSourceARN', traits: {"smithy.api#required" => {}}))
     MatchedRecord.add_member(:record_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'recordId', traits: {"smithy.api#required" => {}}))
     MatchedRecord.type = Types::MatchedRecord
     MatchedRecordsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MatchedRecord)
@@ -695,7 +718,7 @@ module Aws::EntityResolution
     PutPolicyOutput.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyToken, location_name: 'token', traits: {"smithy.api#required" => {}}))
     PutPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyDocument, location_name: 'policy'))
     PutPolicyOutput.type = Types::PutPolicyOutput
-    Record.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'inputSourceARN', traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$", "smithy.api#required" => {}}))
+    Record.add_member(:input_source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSourceARN, location_name: 'inputSourceARN', traits: {"smithy.api#required" => {}}))
     Record.add_member(:unique_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UniqueId, location_name: 'uniqueId', traits: {"smithy.api#required" => {}}))
     Record.add_member(:record_attribute_map, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordAttributeMapString255, location_name: 'recordAttributeMap', traits: {"smithy.api#required" => {}}))
     Record.type = Types::Record
@@ -776,9 +799,11 @@ module Aws::EntityResolution
     ServiceType.add_member(:id_mapping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ID_MAPPING', traits: {"smithy.api#enumValue" => "ID_MAPPING"}))
     StartIdMappingJobInput.add_member(:workflow_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNameOrIdMappingWorkflowArn, location_name: 'workflowName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartIdMappingJobInput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingJobOutputSourceConfig, location_name: 'outputSourceConfig'))
+    StartIdMappingJobInput.add_member(:job_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobType, location_name: 'jobType'))
     StartIdMappingJobInput.type = Types::StartIdMappingJobInput
     StartIdMappingJobOutput.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobId, location_name: 'jobId', traits: {"smithy.api#required" => {}}))
     StartIdMappingJobOutput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingJobOutputSourceConfig, location_name: 'outputSourceConfig'))
+    StartIdMappingJobOutput.add_member(:job_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobType, location_name: 'jobType'))
     StartIdMappingJobOutput.type = Types::StartIdMappingJobOutput
     StartMatchingJobInput.add_member(:workflow_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'workflowName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartMatchingJobInput.type = Types::StartMatchingJobInput
@@ -807,6 +832,7 @@ module Aws::EntityResolution
     UpdateIdMappingWorkflowInput.add_member(:input_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, location_name: 'inputSourceConfig', traits: {"smithy.api#required" => {}}))
     UpdateIdMappingWorkflowInput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: 'outputSourceConfig'))
     UpdateIdMappingWorkflowInput.add_member(:id_mapping_techniques, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingTechniques, location_name: 'idMappingTechniques', traits: {"smithy.api#required" => {}}))
+    UpdateIdMappingWorkflowInput.add_member(:incremental_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: 'incrementalRunConfig'))
     UpdateIdMappingWorkflowInput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: 'roleArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     UpdateIdMappingWorkflowInput.type = Types::UpdateIdMappingWorkflowInput
     UpdateIdMappingWorkflowOutput.add_member(:workflow_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'workflowName', traits: {"smithy.api#required" => {}}))
@@ -815,6 +841,7 @@ module Aws::EntityResolution
     UpdateIdMappingWorkflowOutput.add_member(:input_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, location_name: 'inputSourceConfig', traits: {"smithy.api#required" => {}}))
     UpdateIdMappingWorkflowOutput.add_member(:output_source_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: 'outputSourceConfig'))
     UpdateIdMappingWorkflowOutput.add_member(:id_mapping_techniques, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingTechniques, location_name: 'idMappingTechniques', traits: {"smithy.api#required" => {}}))
+    UpdateIdMappingWorkflowOutput.add_member(:incremental_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingIncrementalRunConfig, location_name: 'incrementalRunConfig'))
     UpdateIdMappingWorkflowOutput.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: 'roleArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     UpdateIdMappingWorkflowOutput.type = Types::UpdateIdMappingWorkflowOutput
     UpdateIdNamespaceInput.add_member(:id_namespace_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityName, location_name: 'idNamespaceName', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

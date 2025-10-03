@@ -10,6 +10,7 @@ module Aws::SSOAdmin
     AccessControlAttributeValueSourceList: ListShape
     AccessDeniedException: StructureShape
     AccessDeniedExceptionMessage: StringShape
+    AccessDeniedExceptionReason: EnumShape
     AccountAssignment: StructureShape
     AccountAssignmentForPrincipal: StructureShape
     AccountAssignmentList: ListShape
@@ -117,6 +118,8 @@ module Aws::SSOAdmin
     DetachManagedPolicyFromPermissionSetResponse: StructureShape
     DisplayData: StructureShape
     Duration: StringShape
+    EncryptionConfiguration: StructureShape
+    EncryptionConfigurationDetails: StructureShape
     FederationProtocol: EnumShape
     GetApplicationAccessScopeRequest: StructureShape
     GetApplicationAccessScopeResponse: StructureShape
@@ -151,6 +154,9 @@ module Aws::SSOAdmin
     JMESPath: StringShape
     JwksRetrievalOption: EnumShape
     JwtBearerGrant: StructureShape
+    KmsKeyArn: StringShape
+    KmsKeyStatus: EnumShape
+    KmsKeyType: EnumShape
     ListAccountAssignmentCreationStatusRequest: StructureShape
     ListAccountAssignmentCreationStatusResponse: StructureShape
     ListAccountAssignmentDeletionStatusRequest: StructureShape
@@ -236,6 +242,7 @@ module Aws::SSOAdmin
     RefreshTokenGrant: StructureShape
     RelayState: StringShape
     ResourceNotFoundException: StructureShape
+    ResourceNotFoundExceptionReason: EnumShape
     ResourceNotFoundMessage: StringShape
     ResourceServerConfig: StructureShape
     ResourceServerScope: StringShape
@@ -263,6 +270,7 @@ module Aws::SSOAdmin
     TargetType: EnumShape
     ThrottlingException: StructureShape
     ThrottlingExceptionMessage: StringShape
+    ThrottlingExceptionReason: EnumShape
     Token: StringShape
     TokenExchangeGrant: StructureShape
     TokenIssuerAudience: StringShape
@@ -293,6 +301,7 @@ module Aws::SSOAdmin
     UserBackgroundSessionApplicationStatus: EnumShape
     ValidationException: StructureShape
     ValidationExceptionMessage: StringShape
+    ValidationExceptionReason: EnumShape
 
     SWBExternalService: ServiceShape
   end

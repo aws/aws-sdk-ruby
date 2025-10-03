@@ -1194,6 +1194,7 @@ module Aws::NetworkFirewall
         ?stateful_engine_options: Types::StatefulEngineOptions,
         ?tls_inspection_configuration_arn: String,
         ?policy_variables: Types::PolicyVariables,
+        ?enable_tls_session_holding: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1206,6 +1207,7 @@ module Aws::NetworkFirewall
       attr_accessor stateful_engine_options: Types::StatefulEngineOptions?
       attr_accessor tls_inspection_configuration_arn: String?
       attr_accessor policy_variables: Types::PolicyVariables?
+      attr_accessor enable_tls_session_holding: bool?
     end
 
     class FirewallPolicyMetadata
@@ -1377,6 +1379,8 @@ module Aws::NetworkFirewall
     module GeneratedRulesType
       ALLOWLIST: String
       DENYLIST: String
+      REJECTLIST: String
+      ALERTLIST: String
     end
 
     class GetAnalysisReportResultsRequest

@@ -7,6 +7,7 @@ module Aws::Synthetics
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -66,6 +67,7 @@ module Aws::Synthetics
         s3_version: untyped,
         zip_file: String,
         handler: String,
+        blueprint_types: Array[String],
         dependencies: Array[
           {
             type: String,
@@ -267,6 +269,7 @@ module Aws::Synthetics
         s3_version: untyped,
         zip_file: String,
         handler: String,
+        blueprint_types: Array[String],
         dependencies: Array[
           {
             type: String,
@@ -361,6 +364,7 @@ module Aws::Synthetics
         s3_version: untyped,
         zip_file: String,
         handler: String,
+        blueprint_types: Array[String],
         dependencies: Array[
           {
             type: String,

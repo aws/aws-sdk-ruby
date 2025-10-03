@@ -12,6 +12,92 @@ module Aws::ApplicationSignals
       attr_accessor message: String?
     end
 
+    class AttributeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_filter_name: String,
+        ?attribute_filter_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_filter_name: String?
+      attr_accessor attribute_filter_values: Array[String]?
+    end
+
+    class AuditFinding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?auditor_results: Array[Types::AuditorResult],
+        ?operation: String,
+        ?metric_graph: Types::MetricGraph,
+        ?dependency_graph: Types::DependencyGraph,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor auditor_results: Array[Types::AuditorResult]?
+      attr_accessor operation: String?
+      attr_accessor metric_graph: Types::MetricGraph?
+      attr_accessor dependency_graph: Types::DependencyGraph?
+      attr_accessor type: String?
+    end
+
+    class AuditTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?data: Types::AuditTargetEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor data: Types::AuditTargetEntity?
+    end
+
+    class AuditTargetEntity
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?service: Types::ServiceEntity,
+        ?slo: Types::ServiceLevelObjectiveEntity,
+        ?service_operation: Types::ServiceOperationEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::ServiceEntity?
+      attr_accessor slo: Types::ServiceLevelObjectiveEntity?
+      attr_accessor service_operation: Types::ServiceOperationEntity?
+
+      class Service < AuditTargetEntity
+      end
+      class Slo < AuditTargetEntity
+      end
+      class ServiceOperation < AuditTargetEntity
+      end
+      class Unknown < AuditTargetEntity
+      end
+    end
+
+    class AuditorResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auditor: String,
+        ?description: String,
+        ?severity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auditor: String?
+      attr_accessor description: String?
+      attr_accessor severity: String?
+    end
+
     class BatchGetServiceLevelObjectiveBudgetReportInput
       include Smithy::Schema::Structure
 
@@ -109,6 +195,35 @@ module Aws::ApplicationSignals
       attr_accessor duration: Integer?
     end
 
+    class ChangeEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?account_id: String,
+        ?region: String,
+        ?entity: Hash[String, String],
+        ?change_event_type: String,
+        ?event_id: String,
+        ?user_name: String,
+        ?event_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor entity: Hash[String, String]?
+      attr_accessor change_event_type: String?
+      attr_accessor event_id: String?
+      attr_accessor user_name: String?
+      attr_accessor event_name: String?
+    end
+
+    module ChangeEventType
+      DEPLOYMENT: String
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -118,6 +233,11 @@ module Aws::ApplicationSignals
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module ConnectionType
+      INDIRECT: String
+      DIRECT: String
     end
 
     class CreateServiceLevelObjectiveInput
@@ -154,6 +274,15 @@ module Aws::ApplicationSignals
       attr_accessor slo: Types::ServiceLevelObjective?
     end
 
+    class DeleteGroupingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteServiceLevelObjectiveInput
       include Smithy::Schema::Structure
 
@@ -187,6 +316,19 @@ module Aws::ApplicationSignals
       attr_accessor dependency_operation_name: String?
     end
 
+    class DependencyGraph
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nodes: Array[Types::Node],
+        ?edges: Array[Types::Edge],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nodes: Array[Types::Node]?
+      attr_accessor edges: Array[Types::Edge]?
+    end
+
     class Dimension
       include Smithy::Schema::Structure
 
@@ -205,6 +347,23 @@ module Aws::ApplicationSignals
       HOUR: String
       DAY: String
       MONTH: String
+    end
+
+    class Edge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_node_id: String,
+        ?destination_node_id: String,
+        ?duration: Float,
+        ?connection_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_node_id: String?
+      attr_accessor destination_node_id: String?
+      attr_accessor duration: Float?
+      attr_accessor connection_type: String?
     end
 
     module EvaluationType
@@ -298,6 +457,34 @@ module Aws::ApplicationSignals
       attr_accessor warning_threshold: Float?
     end
 
+    class GroupingAttributeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_name: String,
+        ?grouping_source_keys: Array[String],
+        ?default_grouping_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_name: String?
+      attr_accessor grouping_source_keys: Array[String]?
+      attr_accessor default_grouping_value: String?
+    end
+
+    class GroupingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition]?
+      attr_accessor updated_at: Time?
+    end
+
     class Interval
       include Smithy::Schema::Union
 
@@ -316,6 +503,66 @@ module Aws::ApplicationSignals
       end
       class Unknown < Interval
       end
+    end
+
+    class ListAuditFindingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?auditors: Array[String],
+        ?audit_targets: Array[Types::AuditTarget],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor auditors: Array[String]?
+      attr_accessor audit_targets: Array[Types::AuditTarget]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAuditFindingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audit_findings: Array[Types::AuditFinding],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audit_findings: Array[Types::AuditFinding]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupingAttributeDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupingAttributeDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition],
+        ?updated_at: Time,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition]?
+      attr_accessor updated_at: Time?
+      attr_accessor next_token: String?
     end
 
     class ListServiceDependenciesInput
@@ -427,9 +674,9 @@ module Aws::ApplicationSignals
         ?dependency_config: Types::DependencyConfig,
         ?max_results: Integer,
         ?next_token: String,
-        ?metric_source_types: Array[String],
         ?include_linked_accounts: bool,
         ?slo_owner_aws_account_id: String,
+        ?metric_source_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -438,9 +685,9 @@ module Aws::ApplicationSignals
       attr_accessor dependency_config: Types::DependencyConfig?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
-      attr_accessor metric_source_types: Array[String]?
       attr_accessor include_linked_accounts: bool?
       attr_accessor slo_owner_aws_account_id: String?
+      attr_accessor metric_source_types: Array[String]?
     end
 
     class ListServiceLevelObjectivesOutput
@@ -489,6 +736,46 @@ module Aws::ApplicationSignals
       attr_accessor start_time: Time?
       attr_accessor end_time: Time?
       attr_accessor service_operations: Array[Types::ServiceOperation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceStatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_linked_accounts: bool,
+        ?aws_account_id: String,
+        ?attribute_filters: Array[Types::AttributeFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_linked_accounts: bool?
+      attr_accessor aws_account_id: String?
+      attr_accessor attribute_filters: Array[Types::AttributeFilter]?
+    end
+
+    class ListServiceStatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?service_states: Array[Types::ServiceState],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor service_states: Array[Types::ServiceState]?
       attr_accessor next_token: String?
     end
 
@@ -590,6 +877,21 @@ module Aws::ApplicationSignals
       attr_accessor account_id: String?
     end
 
+    class MetricGraph
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_data_queries: Array[Types::MetricDataQuery],
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
     class MetricReference
       include Smithy::Schema::Structure
 
@@ -650,6 +952,51 @@ module Aws::ApplicationSignals
       end
       class Unknown < MonitoredRequestCountMetricDataQueries
       end
+    end
+
+    class Node
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?name: String,
+        ?node_id: String,
+        ?operation: String,
+        ?type: String,
+        ?duration: Float,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor name: String?
+      attr_accessor node_id: String?
+      attr_accessor operation: String?
+      attr_accessor type: String?
+      attr_accessor duration: Float?
+      attr_accessor status: String?
+    end
+
+    class PutGroupingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition]?
+    end
+
+    class PutGroupingConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grouping_configuration: Types::GroupingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grouping_configuration: Types::GroupingConfiguration?
     end
 
     class RecurrenceRule
@@ -769,6 +1116,7 @@ module Aws::ApplicationSignals
       def initialize: (
         ?key_attributes: Hash[String, String],
         ?attribute_maps: Array[Hash[String, String]],
+        ?service_groups: Array[Types::ServiceGroup],
         ?metric_references: Array[Types::MetricReference],
         ?log_group_references: Array[Hash[String, String]],
       ) -> void
@@ -776,6 +1124,7 @@ module Aws::ApplicationSignals
 
       attr_accessor key_attributes: Hash[String, String]?
       attr_accessor attribute_maps: Array[Hash[String, String]]?
+      attr_accessor service_groups: Array[Types::ServiceGroup]?
       attr_accessor metric_references: Array[Types::MetricReference]?
       attr_accessor log_group_references: Array[Hash[String, String]]?
     end
@@ -812,6 +1161,40 @@ module Aws::ApplicationSignals
       attr_accessor dependent_key_attributes: Hash[String, String]?
       attr_accessor dependent_operation_name: String?
       attr_accessor metric_references: Array[Types::MetricReference]?
+    end
+
+    class ServiceEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?environment: String,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor environment: String?
+      attr_accessor aws_account_id: String?
+    end
+
+    class ServiceGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_value: String,
+        ?group_source: String,
+        ?group_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_value: String?
+      attr_accessor group_source: String?
+      attr_accessor group_identifier: String?
     end
 
     class ServiceLevelIndicator
@@ -877,6 +1260,7 @@ module Aws::ApplicationSignals
         ?key_attributes: Hash[String, String],
         ?operation_name: String,
         ?metric_type: String,
+        ?metric_name: String,
         ?statistic: String,
         ?period_seconds: Integer,
         ?metric_data_queries: Array[Types::MetricDataQuery],
@@ -887,6 +1271,7 @@ module Aws::ApplicationSignals
       attr_accessor key_attributes: Hash[String, String]?
       attr_accessor operation_name: String?
       attr_accessor metric_type: String?
+      attr_accessor metric_name: String?
       attr_accessor statistic: String?
       attr_accessor period_seconds: Integer?
       attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
@@ -986,6 +1371,19 @@ module Aws::ApplicationSignals
       INSUFFICIENT_DATA: String
     end
 
+    class ServiceLevelObjectiveEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo_name: String,
+        ?slo_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo_name: String?
+      attr_accessor slo_arn: String?
+    end
+
     class ServiceLevelObjectiveSummary
       include Smithy::Schema::Structure
 
@@ -1024,6 +1422,21 @@ module Aws::ApplicationSignals
       attr_accessor metric_references: Array[Types::MetricReference]?
     end
 
+    class ServiceOperationEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::ServiceEntity,
+        ?operation: String,
+        ?metric_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::ServiceEntity?
+      attr_accessor operation: String?
+      attr_accessor metric_type: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -1035,6 +1448,21 @@ module Aws::ApplicationSignals
       attr_accessor message: String?
     end
 
+    class ServiceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_filters: Array[Types::AttributeFilter],
+        ?service: Hash[String, String],
+        ?latest_change_events: Array[Types::ChangeEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_filters: Array[Types::AttributeFilter]?
+      attr_accessor service: Hash[String, String]?
+      attr_accessor latest_change_events: Array[Types::ChangeEvent]?
+    end
+
     class ServiceSummary
       include Smithy::Schema::Structure
 
@@ -1042,12 +1470,22 @@ module Aws::ApplicationSignals
         ?key_attributes: Hash[String, String],
         ?attribute_maps: Array[Hash[String, String]],
         ?metric_references: Array[Types::MetricReference],
+        ?service_groups: Array[Types::ServiceGroup],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor key_attributes: Hash[String, String]?
       attr_accessor attribute_maps: Array[Hash[String, String]]?
       attr_accessor metric_references: Array[Types::MetricReference]?
+      attr_accessor service_groups: Array[Types::ServiceGroup]?
+    end
+
+    module Severity
+      CRITICAL: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+      NONE: String
     end
 
     module StandardUnit

@@ -2356,6 +2356,7 @@ module Aws::CloudFormation
     WarningType.add_member(:unsupported_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNSUPPORTED_PROPERTIES', traits: {"smithy.api#enumValue" => "UNSUPPORTED_PROPERTIES"}))
     WarningType.add_member(:mutually_exclusive_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MUTUALLY_EXCLUSIVE_TYPES', traits: {"smithy.api#enumValue" => "MUTUALLY_EXCLUSIVE_TYPES"}))
     WarningType.add_member(:excluded_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXCLUDED_PROPERTIES', traits: {"smithy.api#enumValue" => "EXCLUDED_PROPERTIES"}))
+    WarningType.add_member(:excluded_resources, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXCLUDED_RESOURCES', traits: {"smithy.api#enumValue" => "EXCLUDED_RESOURCES"}))
     Warnings.add_member(:unrecognized_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceTypes, location_name: 'UnrecognizedResourceTypes'))
     Warnings.type = Types::Warnings
 

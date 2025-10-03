@@ -5,6 +5,7 @@ module Aws::BedrockDataAutomation
     AccessDeniedException: StructureShape
     AudioExtractionCategory: StructureShape
     AudioExtractionCategoryType: EnumShape
+    AudioExtractionCategoryTypeConfiguration: StructureShape
     AudioExtractionCategoryTypes: ListShape
     AudioOverrideConfiguration: StructureShape
     AudioStandardExtraction: StructureShape
@@ -24,6 +25,7 @@ module Aws::BedrockDataAutomation
     BlueprintSummary: StructureShape
     BlueprintVersion: StringShape
     Blueprints: ListShape
+    ChannelLabelingConfiguration: StructureShape
     ClientToken: StringShape
     ConflictException: StructureShape
     CreateBlueprintRequest: StructureShape
@@ -97,6 +99,7 @@ module Aws::BedrockDataAutomation
     ResourceNotFoundException: StructureShape
     ResourceOwner: EnumShape
     ServiceQuotaExceededException: StructureShape
+    SpeakerLabelingConfiguration: StructureShape
     SplitterConfiguration: StructureShape
     StandardOutputConfiguration: StructureShape
     State: EnumShape
@@ -109,6 +112,7 @@ module Aws::BedrockDataAutomation
     TagValue: StringShape
     TaggableResourceArn: StringShape
     ThrottlingException: StructureShape
+    TranscriptConfiguration: StructureShape
     Type: EnumShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape

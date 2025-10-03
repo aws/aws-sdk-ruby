@@ -1703,6 +1703,8 @@ module Aws::Redshift
         ?iam_role_arn: String,
         ?authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer],
         ?service_integrations: Array[Types::ServiceIntegrationsUnion],
+        ?tags: Array[Types::Tag],
+        ?sso_tag_keys: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1713,6 +1715,8 @@ module Aws::Redshift
       attr_accessor iam_role_arn: String?
       attr_accessor authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer]?
       attr_accessor service_integrations: Array[Types::ServiceIntegrationsUnion]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sso_tag_keys: Array[String]?
     end
 
     class CreateRedshiftIdcApplicationResult
@@ -6085,6 +6089,8 @@ module Aws::Redshift
         ?idc_onboard_status: String,
         ?authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer],
         ?service_integrations: Array[Types::ServiceIntegrationsUnion],
+        ?tags: Array[Types::Tag],
+        ?sso_tag_keys: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6098,6 +6104,8 @@ module Aws::Redshift
       attr_accessor idc_onboard_status: String?
       attr_accessor authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer]?
       attr_accessor service_integrations: Array[Types::ServiceIntegrationsUnion]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sso_tag_keys: Array[String]?
     end
 
     class RedshiftIdcApplicationAlreadyExistsFault

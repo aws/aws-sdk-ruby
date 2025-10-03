@@ -7,6 +7,7 @@ module Aws::Amp
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -199,6 +200,14 @@ module Aws::Amp
       ?client_token: String
     ) -> _DeleteScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScraperResponse
 
+    interface _DeleteScraperLoggingConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_scraper_logging_configuration: (
+      ?scraper_id: String,
+      ?client_token: String
+    ) -> _DeleteScraperLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScraperLoggingConfigurationResponse
+
     interface _DeleteWorkspaceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -257,6 +266,18 @@ module Aws::Amp
     def describe_scraper: (
       ?scraper_id: String
     ) -> _DescribeScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScraperResponse
+
+    interface _DescribeScraperLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeScraperLoggingConfigurationResponse]
+      def status: () -> Types::ScraperLoggingConfigurationStatus?
+      def scraper_id: () -> String?
+      def logging_destination: () -> Types::ScraperLoggingDestination?
+      def scraper_components: () -> Array[Types::ScraperComponent]?
+      def modified_at: () -> Time?
+    end
+    def describe_scraper_logging_configuration: (
+      ?scraper_id: String
+    ) -> _DescribeScraperLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScraperLoggingConfigurationResponse
 
     interface _DescribeWorkspaceResponse
       include Smithy::Client::_Response[Types::DescribeWorkspaceOutput]
@@ -429,6 +450,27 @@ module Aws::Amp
       },
       ?client_token: String
     ) -> _UpdateScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScraperResponse
+
+    interface _UpdateScraperLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateScraperLoggingConfigurationResponse]
+      def status: () -> Types::ScraperLoggingConfigurationStatus?
+    end
+    def update_scraper_logging_configuration: (
+      ?scraper_id: String,
+      ?logging_destination: {
+        cloud_watch_logs: {
+          log_group_arn: String
+        }
+      },
+      ?scraper_components: Array[
+        {
+          type: String,
+          config: {
+            options: Hash[String, String]
+          }
+        }
+      ]
+    ) -> _UpdateScraperLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScraperLoggingConfigurationResponse
 
     interface _UpdateWorkspaceAliasResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

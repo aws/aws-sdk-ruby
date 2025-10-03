@@ -162,6 +162,7 @@ module Aws::MediaTailor
     TimeShiftConfiguration: StructureShape
     TimeSignalMessage: StructureShape
     TrafficShapingRetrievalWindow: StructureShape
+    TrafficShapingTpsConfiguration: StructureShape
     TrafficShapingType: EnumShape
     Transition: StructureShape
     Type: EnumShape

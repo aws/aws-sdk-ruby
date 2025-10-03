@@ -11,6 +11,8 @@ module Aws::Imagebuilder
     AmiList: ListShape
     AmiNameString: StringShape
     Arn: StringShape
+    AutoDisableFailureCount: IntegerShape
+    AutoDisablePolicy: StructureShape
     Boolean: BooleanShape
     BuildType: EnumShape
     CallRateLimitExceededException: StructureShape
@@ -44,6 +46,7 @@ module Aws::Imagebuilder
     ComponentVersionArn: StringShape
     ComponentVersionArnOrBuildVersionArn: StringShape
     ComponentVersionList: ListShape
+    ConsecutiveFailures: IntegerShape
     Container: StructureShape
     ContainerDistributionConfiguration: StructureShape
     ContainerList: ListShape
@@ -165,6 +168,7 @@ module Aws::Imagebuilder
     ImageBuildMessage: StringShape
     ImageBuildVersionArn: StringShape
     ImageBuilderArn: StringShape
+    ImageLoggingConfiguration: StructureShape
     ImagePackage: StructureShape
     ImagePackageList: ListShape
     ImagePipeline: StructureShape
@@ -311,6 +315,7 @@ module Aws::Imagebuilder
     ListWorkflowStepExecutionsResponse: StructureShape
     ListWorkflowsRequest: StructureShape
     ListWorkflowsResponse: StructureShape
+    LogGroupName: StringShape
     Logging: StructureShape
     MarketplaceResourceLocation: StringShape
     MarketplaceResourceType: EnumShape
@@ -334,6 +339,7 @@ module Aws::Imagebuilder
     PaginationToken: StringShape
     ParallelGroup: StringShape
     PipelineExecutionStartCondition: EnumShape
+    PipelineLoggingConfiguration: StructureShape
     PipelineStatus: EnumShape
     Placement: StructureShape
     Platform: EnumShape

@@ -4095,8 +4095,12 @@ module Aws::IoTSiteWise
     # @!attribute computation_model_id
     #   <p>The ID of the computation model.</p>
     #   @return [String]
+    # @!attribute computation_model_version
+    #   <p>The version of the computation model.</p>
+    #   @return [String]
     class DescribeComputationModelRequest < Struct.new(
       :computation_model_id,
+      :computation_model_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4942,7 +4946,7 @@ module Aws::IoTSiteWise
     #                  <p>Maximum is 20000</p>
     #               </li>
     #               <li>
-    #                  <p>Default is 250</p>
+    #                  <p>Default is 20000</p>
     #               </li>
     #            </ul>
     #   @return [Integer]

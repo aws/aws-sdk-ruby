@@ -1136,6 +1136,12 @@ module Aws::BedrockAgentRuntime
     # @!attribute flow_failure_event
     #   <p>Contains information about a failure that occurred at the flow level during execution.</p>
     #   @return [Types::FlowFailureEvent]
+    # @!attribute node_action_event
+    #   <p>Contains information about an action (operation) called by a node during execution.</p>
+    #   @return [Types::NodeActionEvent]
+    # @!attribute node_dependency_event
+    #   <p>Contains information about an internal trace of a specific node during execution.</p>
+    #   @return [Types::NodeDependencyEvent]
     class FlowExecutionEvent < Struct.new(
       :flow_input_event,
       :flow_output_event,
@@ -1144,6 +1150,8 @@ module Aws::BedrockAgentRuntime
       :condition_result_event,
       :node_failure_event,
       :flow_failure_event,
+      :node_action_event,
+      :node_dependency_event,
       :unknown,
       keyword_init: true
     )
@@ -1156,6 +1164,8 @@ module Aws::BedrockAgentRuntime
       class ConditionResultEvent < FlowExecutionEvent; end
       class NodeFailureEvent < FlowExecutionEvent; end
       class FlowFailureEvent < FlowExecutionEvent; end
+      class NodeActionEvent < FlowExecutionEvent; end
+      class NodeDependencyEvent < FlowExecutionEvent; end
       class Unknown < FlowExecutionEvent; end
     end
 
@@ -1482,13 +1492,17 @@ module Aws::BedrockAgentRuntime
     #   <p>Contains information about an output from a condition node.</p>
     #   @return [Types::FlowTraceConditionNodeResultEvent]
     # @!attribute node_action_trace
-    #   <p>Contains information about an action (operation) called by a node. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>
+    #   <p>Contains information about an action (operation) called by a node.</p>
     #   @return [Types::FlowTraceNodeActionEvent]
+    # @!attribute node_dependency_trace
+    #   <p>Contains information about an internal trace of a node.</p>
+    #   @return [Types::FlowTraceDependencyEvent]
     class FlowTrace < Struct.new(
       :node_input_trace,
       :node_output_trace,
       :condition_node_result_trace,
       :node_action_trace,
+      :node_dependency_trace,
       :unknown,
       keyword_init: true
     )
@@ -1498,6 +1512,7 @@ module Aws::BedrockAgentRuntime
       class NodeOutputTrace < FlowTrace; end
       class ConditionNodeResultTrace < FlowTrace; end
       class NodeActionTrace < FlowTrace; end
+      class NodeDependencyTrace < FlowTrace; end
       class Unknown < FlowTrace; end
     end
 
@@ -1533,6 +1548,26 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a dependency trace event in the flow.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the node that generated the dependency trace.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The date and time that the dependency trace was generated.</p>
+    #   @return [Time]
+    # @!attribute trace_elements
+    #   <p>The trace elements containing detailed information about the dependency.</p>
+    #   @return [Types::TraceElements]
+    class FlowTraceDependencyEvent < Struct.new(
+      :node_name,
+      :timestamp,
+      :trace_elements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about a trace, which tracks an input or output for a node in the flow. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>
     # @!attribute trace
     #   <p>The trace object containing information about an input or output for a node in the flow.</p>
@@ -1561,12 +1596,20 @@ module Aws::BedrockAgentRuntime
     # @!attribute operation_name
     #   <p>The name of the operation that the node called.</p>
     #   @return [String]
+    # @!attribute operation_request
+    #   <p>The request payload sent to the downstream service.</p>
+    #   @return [JSON]
+    # @!attribute operation_response
+    #   <p>The response payload received from the downstream service.</p>
+    #   @return [JSON]
     class FlowTraceNodeActionEvent < Struct.new(
       :node_name,
       :timestamp,
       :request_id,
       :service_name,
       :operation_name,
+      :operation_request,
+      :operation_response,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1608,6 +1651,26 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents an item in the execution chain for flow trace node input tracking.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the node in the execution chain.</p>
+    #   @return [String]
+    # @!attribute index
+    #   <p>The index position of this item in the execution chain.</p>
+    #   @return [Integer]
+    # @!attribute type
+    #   <p>The type of execution chain item. Supported values are Iterator and Loop.</p>
+    #   @return [String]
+    class FlowTraceNodeInputExecutionChainItem < Struct.new(
+      :node_name,
+      :index,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about a field in the input into a node. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute node_input_name
@@ -1616,9 +1679,45 @@ module Aws::BedrockAgentRuntime
     # @!attribute content
     #   <p>The content of the node input.</p>
     #   @return [Types::FlowTraceNodeInputContent]
+    # @!attribute source
+    #   <p>The source node that provides input data to this field.</p>
+    #   @return [Types::FlowTraceNodeInputSource]
+    # @!attribute type
+    #   <p>The data type of the input field for compatibility validation.</p>
+    #   @return [String]
+    # @!attribute category
+    #   <p>The category of the input field.</p>
+    #   @return [String]
+    # @!attribute execution_chain
+    #   <p>The execution path through nested nodes like iterators and loops.</p>
+    #   @return [Array<Types::FlowTraceNodeInputExecutionChainItem>]
     class FlowTraceNodeInputField < Struct.new(
       :node_input_name,
       :content,
+      :source,
+      :type,
+      :category,
+      :execution_chain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the source of input data for a flow trace node field.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the source node that provides the input data.</p>
+    #   @return [String]
+    # @!attribute output_field_name
+    #   <p>The name of the output field from the source node.</p>
+    #   @return [String]
+    # @!attribute expression
+    #   <p>The expression used to extract data from the source.</p>
+    #   @return [String]
+    class FlowTraceNodeInputSource < Struct.new(
+      :node_name,
+      :output_field_name,
+      :expression,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1667,9 +1766,33 @@ module Aws::BedrockAgentRuntime
     # @!attribute content
     #   <p>The content of the node output.</p>
     #   @return [Types::FlowTraceNodeOutputContent]
+    # @!attribute next
+    #   <p>The next node that receives output data from this field.</p>
+    #   @return [Array<Types::FlowTraceNodeOutputNext>]
+    # @!attribute type
+    #   <p>The data type of the output field for compatibility validation.</p>
+    #   @return [String]
     class FlowTraceNodeOutputField < Struct.new(
       :node_output_name,
       :content,
+      :next,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the next node that receives output data from a flow trace.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the next node that receives the output data.</p>
+    #   @return [String]
+    # @!attribute input_field_name
+    #   <p>The name of the input field in the next node that receives the data.</p>
+    #   @return [String]
+    class FlowTraceNodeOutputNext < Struct.new(
+      :node_name,
+      :input_field_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3653,6 +3776,62 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about an action (operation) called by a node during execution.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the node that called the operation.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The date and time that the operation was called.</p>
+    #   @return [Time]
+    # @!attribute request_id
+    #   <p>The ID of the request that the node made to the operation.</p>
+    #   @return [String]
+    # @!attribute service_name
+    #   <p>The name of the service that the node called.</p>
+    #   @return [String]
+    # @!attribute operation_name
+    #   <p>The name of the operation that the node called.</p>
+    #   @return [String]
+    # @!attribute operation_request
+    #   <p>The request payload sent to the downstream service.</p>
+    #   @return [JSON]
+    # @!attribute operation_response
+    #   <p>The response payload received from the downstream service.</p>
+    #   @return [JSON]
+    class NodeActionEvent < Struct.new(
+      :node_name,
+      :timestamp,
+      :request_id,
+      :service_name,
+      :operation_name,
+      :operation_request,
+      :operation_response,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about an internal trace of a specific node during execution.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the node that generated the dependency trace.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The date and time that the dependency trace was generated.</p>
+    #   @return [Time]
+    # @!attribute trace_elements
+    #   <p>The trace elements containing detailed information about the node execution.</p>
+    #   @return [Types::NodeTraceElements]
+    class NodeDependencyEvent < Struct.new(
+      :node_name,
+      :timestamp,
+      :trace_elements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the content of a flow node's input or output field for a flow execution.</p> <note> <p>Flow executions is in preview release for Amazon Bedrock and is subject to change.</p> </note>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute document
@@ -3713,6 +3892,25 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents an item in the execution chain for node input tracking.</p>
+    # @!attribute node_name
+    #   <p>The name of the node in the execution chain.</p>
+    #   @return [String]
+    # @!attribute index
+    #   <p>The index position of this item in the execution chain.</p>
+    #   @return [Integer]
+    # @!attribute type
+    #   <p>The type of execution chain item. Supported values are Iterator and Loop.</p>
+    #   @return [String]
+    class NodeInputExecutionChainItem < Struct.new(
+      :node_name,
+      :index,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents an input field provided to a node during a flow execution.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute name
@@ -3721,9 +3919,44 @@ module Aws::BedrockAgentRuntime
     # @!attribute content
     #   <p>The content of the input field, which can contain text or structured data.</p>
     #   @return [Types::NodeExecutionContent]
+    # @!attribute source
+    #   <p>The source node that provides input data to this field.</p>
+    #   @return [Types::NodeInputSource]
+    # @!attribute type
+    #   <p>The data type of the input field for compatibility validation.</p>
+    #   @return [String]
+    # @!attribute category
+    #   <p>The category of the input field.</p>
+    #   @return [String]
+    # @!attribute execution_chain
+    #   <p>The execution path through nested nodes like iterators and loops.</p>
+    #   @return [Array<Types::NodeInputExecutionChainItem>]
     class NodeInputField < Struct.new(
       :name,
       :content,
+      :source,
+      :type,
+      :category,
+      :execution_chain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the source of input data for a node field.</p>
+    # @!attribute node_name
+    #   <p>The name of the source node that provides the input data.</p>
+    #   @return [String]
+    # @!attribute output_field_name
+    #   <p>The name of the output field from the source node.</p>
+    #   @return [String]
+    # @!attribute expression
+    #   <p>The expression used to extract data from the source.</p>
+    #   @return [String]
+    class NodeInputSource < Struct.new(
+      :node_name,
+      :output_field_name,
+      :expression,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3757,12 +3990,52 @@ module Aws::BedrockAgentRuntime
     # @!attribute content
     #   <p>The content of the output field, which can contain text or structured data.</p>
     #   @return [Types::NodeExecutionContent]
+    # @!attribute next
+    #   <p>The next node that receives output data from this field.</p>
+    #   @return [Array<Types::NodeOutputNext>]
+    # @!attribute type
+    #   <p>The data type of the output field for compatibility validation.</p>
+    #   @return [String]
     class NodeOutputField < Struct.new(
       :name,
       :content,
+      :next,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the next node that receives output data.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute node_name
+    #   <p>The name of the next node that receives the output data.</p>
+    #   @return [String]
+    # @!attribute input_field_name
+    #   <p>The name of the input field in the next node that receives the data.</p>
+    #   @return [String]
+    class NodeOutputNext < Struct.new(
+      :node_name,
+      :input_field_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains trace elements for node execution tracking.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute agent_traces
+    #   <p>Agent trace information for the node execution.</p>
+    #   @return [Array<Types::TracePart>]
+    class NodeTraceElements < Struct.new(
+      :agent_traces,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AgentTraces < NodeTraceElements; end
+      class Unknown < NodeTraceElements; end
     end
 
     # <p>Contains the result or output of an action group or knowledge base, or the response to the user.</p>
@@ -5724,6 +5997,22 @@ module Aws::BedrockAgentRuntime
       class FailureTrace < Trace; end
       class CustomOrchestrationTrace < Trace; end
       class Unknown < Trace; end
+    end
+
+    # <p>Contains trace elements for flow execution tracking.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute agent_traces
+    #   <p>Agent trace information for the flow execution.</p>
+    #   @return [Array<Types::TracePart>]
+    class TraceElements < Struct.new(
+      :agent_traces,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AgentTraces < TraceElements; end
+      class Unknown < TraceElements; end
     end
 
     # <p>Contains information about the agent and session, alongside the agent's reasoning process and results from calling API actions and querying knowledge bases and metadata about the trace. You can use the trace to understand how the agent arrived at the response it provided the customer. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement">Trace enablement</a>.</p>

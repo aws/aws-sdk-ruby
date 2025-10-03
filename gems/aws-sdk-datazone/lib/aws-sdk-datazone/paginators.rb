@@ -532,6 +532,31 @@ module Aws::DataZone
     end
 
     # @api private
+    class CreateEnvironmentBlueprint
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.items
+      end
+    end
+
+    # @api private
     class CreateEnvironmentProfile
       def next_tokens(data)
         next_token = data.next_token
@@ -1133,6 +1158,31 @@ module Aws::DataZone
 
     # @api private
     class DeleteEnvironmentAction
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.items
+      end
+    end
+
+    # @api private
+    class DeleteEnvironmentBlueprint
       def next_tokens(data)
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?
@@ -3858,6 +3908,31 @@ module Aws::DataZone
 
     # @api private
     class UpdateEnvironmentAction
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.items
+      end
+    end
+
+    # @api private
+    class UpdateEnvironmentBlueprint
       def next_tokens(data)
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?

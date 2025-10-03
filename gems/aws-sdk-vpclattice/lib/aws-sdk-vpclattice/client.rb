@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::VPCLattice
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::VPCLattice
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::VPCLattice
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::VPCLattice::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::VPCLattice::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -188,14 +193,7 @@ module Aws::VPCLattice
       super
     end
 
-    # <p>Updates the listener rules in a batch. You can use this operation to change the priority of
-    #    listener rules. This can be useful when bulk updating or swapping rule priority.</p>
-    #          <p>
-    #             <b>Required permissions:</b>
-    #             <code>vpc-lattice:UpdateRule</code>
-    #          </p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/security_iam_service-with-iam.html">How Amazon VPC Lattice works with
-    #     IAM</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Updates the listener rules in a batch. You can use this operation to change the priority of listener rules. This can be useful when bulk updating or swapping rule priority.</p> <p> <b>Required permissions:</b> <code>vpc-lattice:UpdateRule</code> </p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/security_iam_service-with-iam.html">How Amazon VPC Lattice works with IAM</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::BatchUpdateRuleInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
@@ -322,23 +320,14 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kinesis Data Firehose. The service network owner
-    #    can use the access logs to audit the services in the network. The service network owner can only
-    #    see access logs from clients and services that are associated with their service network. Access
-    #    log entries represent traffic originated from VPCs associated with that network. For more
-    #    information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/monitoring-access-logs.html">Access logs</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kinesis Data Firehose. The service network owner can use the access logs to audit the services in the network. The service network owner can only see access logs from clients and services that are associated with their service network. Access log entries represent traffic originated from VPCs associated with that network. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/monitoring-access-logs.html">Access logs</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::CreateAccessLogSubscriptionInput] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :resource_identifier
     #   <p>The ID or ARN of the service network or service.</p>
     # @option params [String] :destination_arn
-    #   <p>The Amazon Resource Name (ARN) of the destination. The supported destination types are
-    #      CloudWatch Log groups, Kinesis Data Firehose delivery streams, and Amazon S3 buckets.</p>
+    #   <p>The Amazon Resource Name (ARN) of the destination. The supported destination types are CloudWatch Log groups, Kinesis Data Firehose delivery streams, and Amazon S3 buckets.</p>
     # @option params [String] :service_network_log_type
     #   <p>The type of log that monitors your Amazon VPC Lattice service networks.</p>
     # @option params [Hash<String, String>] :tags
@@ -371,29 +360,20 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a listener for a service. Before you start using your Amazon VPC Lattice service, you must
-    #    add one or more listeners. A listener is a process that checks for connection requests to your
-    #    services. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html">Listeners</a> in the
-    #    <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Creates a listener for a service. Before you start using your Amazon VPC Lattice service, you must add one or more listeners. A listener is a process that checks for connection requests to your services. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html">Listeners</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::CreateListenerInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
     # @option params [String] :name
-    #   <p>The name of the listener. A listener name must be unique within a service. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the listener. A listener name must be unique within a service. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [String] :protocol
     #   <p>The listener protocol.</p>
     # @option params [Integer] :port
-    #   <p>The listener port. You can specify a value from 1 to 65535. For HTTP, the default is 80. For
-    #      HTTPS, the default is 443.</p>
+    #   <p>The listener port. You can specify a value from 1 to 65535. For HTTP, the default is 80. For HTTPS, the default is 443.</p>
     # @option params [Types::RuleAction] :default_action
-    #   <p>The action for the default rule. Each listener has a default rule. The default rule is used
-    #      if no other rules match.</p>
+    #   <p>The action for the default rule. Each listener has a default rule. The default rule is used if no other rules match.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the listener.</p>
     # @example Request syntax with placeholder values
@@ -454,55 +434,26 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a resource configuration. A resource configuration defines a specific resource. You
-    #    can associate a resource configuration with a service network or a VPC endpoint.</p>
+    # <p>Creates a resource configuration. A resource configuration defines a specific resource. You can associate a resource configuration with a service network or a VPC endpoint.</p>
     # @param [Hash, Types::CreateResourceConfigurationRequest] params
     # @option params [String] :name
-    #   <p>The name of the resource configuration. The name must be unique within the account. The
-    #      valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last
-    #      character, or immediately after another hyphen.</p>
+    #   <p>The name of the resource configuration. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [String] :type
-    #   <p>The type of resource configuration.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>SINGLE</code> - A single resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GROUP</code> - A group of resources. You must create a group resource
-    #        configuration before you create a child resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CHILD</code> - A single resource that is part of a group resource configuration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ARN</code> - An Amazon Web Services resource.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>
     # @option params [Array<String>] :port_ranges
-    #   <p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration 
-    #      (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>
+    #   <p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>
     # @option params [String] :protocol
     #   <p>(SINGLE, GROUP) The protocol accepted by the resource configuration.</p>
     # @option params [String] :resource_gateway_identifier
-    #   <p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration.
-    #      For a child resource configuration, this value is inherited from the parent resource configuration.</p>
+    #   <p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration.</p>
     # @option params [String] :resource_configuration_group_identifier
-    #   <p>(CHILD) The ID or ARN of the parent resource configuration (type is <code>GROUP</code>). 
-    #      This is used to associate a child resource configuration with a group resource configuration.</p>
+    #   <p>(CHILD) The ID or ARN of the parent resource configuration of type <code>GROUP</code>. This is used to associate a child resource configuration with a group resource configuration.</p>
     # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
-    #   <p>(SINGLE, CHILD, ARN) The resource configuration.</p>
+    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>
     # @option params [Boolean] :allow_association_to_shareable_service_network
-    #   <p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with 
-    #      a sharable service network. The default is false.</p>
+    #   <p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with a sharable service network. The default is false.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the resource configuration.</p>
     # @example Request syntax with placeholder values
@@ -569,13 +520,10 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a resource gateway.</p>
+    # <p>A resource gateway is a point of ingress into the VPC where a resource resides. It spans multiple Availability Zones. For your resource to be accessible from all Availability Zones, you should create your resource gateways to span as many Availability Zones as possible. A VPC can have multiple resource gateways.</p>
     # @param [Hash, Types::CreateResourceGatewayRequest] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :name
     #   <p>The name of the resource gateway.</p>
     # @option params [String] :vpc_identifier
@@ -583,20 +531,22 @@ module Aws::VPCLattice
     # @option params [Array<String>] :subnet_ids
     #   <p>The IDs of the VPC subnets in which to create the resource gateway.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>The IDs of the security groups to apply to the resource gateway. The security groups must be
-    #      in the same VPC.</p>
+    #   <p>The IDs of the security groups to apply to the resource gateway. The security groups must be in the same VPC.</p>
     # @option params [String] :ip_address_type
-    #   <p>The type of IP address used by the resource gateway.</p>
+    #   <p>A resource gateway can have IPv4, IPv6 or dualstack addresses. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource, as described here: </p> <ul> <li> <p> <b>IPv4</b>Assign IPv4 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have IPv4 address ranges, and the resource also has an IPv4 address.</p> </li> <li> <p> <b>IPv6</b>Assign IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets are IPv6 only subnets, and the resource also has an IPv6 address.</p> </li> <li> <p> <b>Dualstack</b>Assign both IPv4 and IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have both IPv4 and IPv6 address ranges, and the resource either has an IPv4 or IPv6 address.</p> </li> </ul> <p>The IP address type of the resource gateway is independent of the IP address type of the client or the VPC endpoint through which the resource is accessed.</p>
+    # @option params [Integer] :ipv4_addresses_per_eni
+    #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the resource gateway.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
     #     name: "ResourceGatewayName", # required
-    #     vpc_identifier: "VpcId", # required
-    #     subnet_ids: ["SubnetId"], # required
+    #     vpc_identifier: "VpcId",
+    #     subnet_ids: ["SubnetId"],
     #     security_group_ids: ["SecurityGroupId"],
     #     ip_address_type: "ResourceGatewayIpAddressType",
+    #     ipv4_addresses_per_eni: 1,
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -613,7 +563,8 @@ module Aws::VPCLattice
     #     vpc_identifier: "VpcId",
     #     subnet_ids: ["SubnetId"],
     #     security_group_ids: ["SecurityGroupId"],
-    #     ip_address_type: "ResourceGatewayIpAddressType"
+    #     ip_address_type: "ResourceGatewayIpAddressType",
+    #     ipv4_addresses_per_eni: 1
     #   }
     # @return [Types::CreateResourceGatewayResponse]
     def create_resource_gateway(params = {}, options = {})
@@ -621,30 +572,22 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a listener rule. Each listener has a default rule for checking connection requests,
-    #    but you can define additional rules. Each rule consists of a priority, one or more actions, and
-    #    one or more conditions. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules">Listener rules</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Creates a listener rule. Each listener has a default rule for checking connection requests, but you can define additional rules. Each rule consists of a priority, one or more actions, and one or more conditions. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules">Listener rules</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::CreateRuleInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
     # @option params [String] :listener_identifier
     #   <p>The ID or ARN of the listener.</p>
     # @option params [String] :name
-    #   <p>The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [Types::RuleMatch] :match
     #   <p>The rule match.</p>
     # @option params [Integer] :priority
-    #   <p>The priority assigned to the rule. Each rule for a specific listener must have a unique
-    #      priority. The lower the priority number the higher the priority.</p>
+    #   <p>The priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.</p>
     # @option params [Types::RuleAction] :action
     #   <p>The action for the default rule.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the rule.</p>
     # @example Request syntax with placeholder values
@@ -754,19 +697,12 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a service. A service is any software application that can run on instances
-    #    containers, or serverless functions within an account or virtual private cloud (VPC).</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html">Services</a> in the
-    #    <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Creates a service. A service is any software application that can run on instances containers, or serverless functions within an account or virtual private cloud (VPC).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html">Services</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::CreateServiceInput] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :name
-    #   <p>The name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the service.</p>
     # @option params [String] :custom_domain_name
@@ -774,17 +710,7 @@ module Aws::VPCLattice
     # @option params [String] :certificate_arn
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     # @option params [String] :auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -819,31 +745,14 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a service network. A service network is a logical boundary for a collection of
-    #    services. You can associate services and VPCs with a service network.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html">Service networks</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Creates a service network. A service network is a logical boundary for a collection of services. You can associate services and VPCs with a service network.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html">Service networks</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::CreateServiceNetworkInput] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :name
-    #   <p>The name of the service network. The name must be unique to the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the service network. The name must be unique to the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [String] :auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the service network.</p>
     # @option params [Types::SharingConfig] :sharing_config
@@ -879,21 +788,16 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Associates the specified service network with the specified resource configuration.
-    #    This allows the resource configuration to receive connections through the service network,
-    #    including through a service network VPC endpoint.</p>
+    # <p>Associates the specified service network with the specified resource configuration. This allows the resource configuration to receive connections through the service network, including through a service network VPC endpoint.</p>
     # @param [Hash, Types::CreateServiceNetworkResourceAssociationRequest] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :resource_configuration_identifier
     #   <p>The ID of the resource configuration to associate with the service network.</p>
     # @option params [String] :service_network_identifier
     #   <p>The ID of the service network to associate with the resource configuration.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>The tags for the association.</p>
+    #   <p>A key-value pair to associate with a resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -919,21 +823,10 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Associates the specified service with the specified service network. For more information, see 
-    #    <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations">Manage service associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
-    #          <p>You can't use this operation if the service and service network are already associated or if
-    #    there is a disassociation or deletion in progress. If the association fails, you can retry the
-    #    operation by deleting the association and recreating it.</p>
-    #          <p>You cannot associate a service and service network that are shared with a caller. The caller
-    #    must own either the service or the service network.</p>
-    #          <p>As a result of this operation, the association is created in the service network account and
-    #    the association owner account.</p>
+    # <p>Associates the specified service with the specified service network. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations">Manage service associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p> <p>You can't use this operation if the service and service network are already associated or if there is a disassociation or deletion in progress. If the association fails, you can retry the operation by deleting the association and recreating it.</p> <p>You cannot associate a service and service network that are shared with a caller. The caller must own either the service or the service network.</p> <p>As a result of this operation, the association is created in the service network account and the association owner account.</p>
     # @param [Hash, Types::CreateServiceNetworkServiceAssociationInput] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
     # @option params [String] :service_network_identifier
@@ -970,33 +863,16 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Associates a VPC with a service network. When you associate a VPC with the service network,
-    #    it enables all the resources within that VPC to be clients and communicate with other services in
-    #    the service network. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
-    #          <p>You can't use this operation if there is a disassociation in progress. If the association
-    #    fails, retry by deleting the association and recreating it.</p>
-    #          <p>As a result of this operation, the association gets created in the service network account
-    #    and the VPC owner account.</p>
-    #          <p>If you add a security group to the service network and VPC association, the association must
-    #    continue to always have at least one security group. You can add or edit security groups at any
-    #    time. However, to remove all security groups, you must first delete the association and recreate
-    #    it without security groups.</p>
+    # <p>Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p> <p>You can't use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it.</p> <p>As a result of this operation, the association gets created in the service network account and the VPC owner account.</p> <p>If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.</p>
     # @param [Hash, Types::CreateServiceNetworkVpcAssociationInput] params
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [String] :service_network_identifier
     #   <p>The ID or ARN of the service network. You must use an ARN if the resources are in different accounts.</p>
     # @option params [String] :vpc_identifier
     #   <p>The ID of the VPC.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>The IDs of the security groups. Security groups aren't added by default. You can add a
-    #      security group to apply network level controls to control which resources in a VPC are allowed to
-    #      access the service network and its services. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Control traffic to
-    #       resources using security groups</a> in the <i>Amazon VPC User
-    #      Guide</i>.</p>
+    #   <p>The IDs of the security groups. Security groups aren't added by default. You can add a security group to apply network level controls to control which resources in a VPC are allowed to access the service network and its services. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Control traffic to resources using security groups</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the association.</p>
     # @example Request syntax with placeholder values
@@ -1026,23 +902,16 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates a target group. A target group is a collection of targets, or compute resources,
-    #    that run your application or service. A target group can only be used by a single service.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html">Target groups</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Creates a target group. A target group is a collection of targets, or compute resources, that run your application or service. A target group can only be used by a single service.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html">Target groups</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::CreateTargetGroupInput] params
     # @option params [String] :name
-    #   <p>The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a 
-    #     hyphen as the first or last character, or immediately after another hyphen.</p>
+    #   <p>The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [String] :type
     #   <p>The type of target group.</p>
     # @option params [Types::TargetGroupConfig] :config
     #   <p>The target group configuration.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure
-    #     the idempotency of the request. If you retry a request that completed successfully using
-    #     the same client token and parameters, the retry succeeds without performing any actions.
-    #     If the parameters aren't identical, the retry fails.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the target group.</p>
     # @example Request syntax with placeholder values
@@ -1136,10 +1005,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Deletes the specified auth policy. If an auth is set to <code>AWS_IAM</code> and the auth
-    #    policy is deleted, all requests are denied. If you are trying to remove the auth policy
-    #    completely, you must set the auth type to <code>NONE</code>. If auth is enabled on the resource,
-    #    but no auth policy is set, all requests are denied.</p>
+    # <p>Deletes the specified auth policy. If an auth is set to <code>AWS_IAM</code> and the auth policy is deleted, all requests are denied. If you are trying to remove the auth policy completely, you must set the auth type to <code>NONE</code>. If auth is enabled on the resource, but no auth policy is set, all requests are denied.</p>
     # @param [Hash, Types::DeleteAuthPolicyInput] params
     # @option params [String] :resource_identifier
     #   <p>The ID or ARN of the resource.</p>
@@ -1267,12 +1133,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Deletes a listener rule. Each listener has a default rule for checking connection requests,
-    #    but you can define additional rules. Each rule consists of a priority, one or more actions, and
-    #    one or more conditions. You can delete additional listener rules, but you cannot delete the
-    #    default rule.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules">Listener rules</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Deletes a listener rule. Each listener has a default rule for checking connection requests, but you can define additional rules. Each rule consists of a priority, one or more actions, and one or more conditions. You can delete additional listener rules, but you cannot delete the default rule.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules">Listener rules</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::DeleteRuleInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
@@ -1297,11 +1158,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Deletes a service. A service can't be deleted if it's associated with a service network. If
-    #    you delete a service, all resources related to the service, such as the resource policy, auth
-    #    policy, listeners, listener rules, and access log subscriptions, are also deleted. For more
-    #    information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service">Delete a service</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Deletes a service. A service can't be deleted if it's associated with a service network. If you delete a service, all resources related to the service, such as the resource policy, auth policy, listeners, listener rules, and access log subscriptions, are also deleted. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html#delete-service">Delete a service</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::DeleteServiceInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
@@ -1325,11 +1182,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Deletes a service network. You can only delete the service network if there is no service or
-    #    VPC associated with it. If you delete a service network, all resources related to the service
-    #    network, such as the resource policy, auth policy, and access log subscriptions, are also
-    #    deleted. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network">Delete a service
-    #     network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Deletes a service network. You can only delete the service network if there is no service or VPC associated with it. If you delete a service network, all resources related to the service network, such as the resource policy, auth policy, and access log subscriptions, are also deleted. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network">Delete a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::DeleteServiceNetworkInput] params
     # @option params [String] :service_network_identifier
     #   <p>The ID or ARN of the service network.</p>
@@ -1371,8 +1224,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Deletes the association between a service and a service network. This
-    #    operation fails if an association is still in progress.</p>
+    # <p>Deletes the association between a service and a service network. This operation fails if an association is still in progress.</p>
     # @param [Hash, Types::DeleteServiceNetworkServiceAssociationInput] params
     # @option params [String] :service_network_service_association_identifier
     #   <p>The ID or ARN of the association.</p>
@@ -1395,8 +1247,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Disassociates the VPC from the service network. You can't disassociate the VPC if there is a
-    #    create or update association in progress.</p>
+    # <p>Disassociates the VPC from the service network. You can't disassociate the VPC if there is a create or update association in progress.</p>
     # @param [Hash, Types::DeleteServiceNetworkVpcAssociationInput] params
     # @option params [String] :service_network_vpc_association_identifier
     #   <p>The ID or ARN of the association.</p>
@@ -1419,8 +1270,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Deletes a target group. You can't delete a target group if it is used in a listener rule or
-    #    if the target group creation is in progress.</p>
+    # <p>Deletes a target group. You can't delete a target group if it is used in a listener rule or if the target group creation is in progress.</p>
     # @param [Hash, Types::DeleteTargetGroupInput] params
     # @option params [String] :target_group_identifier
     #   <p>The ID or ARN of the target group.</p>
@@ -1513,8 +1363,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Retrieves information about the auth policy for the specified service or service
-    #    network.</p>
+    # <p>Retrieves information about the auth policy for the specified service or service network.</p>
     # @param [Hash, Types::GetAuthPolicyInput] params
     # @option params [String] :resource_identifier
     #   <p>The ID or ARN of the service network or service.</p>
@@ -1653,6 +1502,7 @@ module Aws::VPCLattice
     #     subnet_ids: ["SubnetId"],
     #     security_group_ids: ["SecurityGroupId"],
     #     ip_address_type: "ResourceGatewayIpAddressType",
+    #     ipv4_addresses_per_eni: 1,
     #     created_at: Time.now,
     #     last_updated_at: Time.now
     #   }
@@ -1662,8 +1512,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Retrieves information about the specified resource policy. The resource policy is an IAM policy
-    #    created on behalf of the resource owner when they share a resource.</p>
+    # <p>Retrieves information about the specified resource policy. The resource policy is an IAM policy created on behalf of the resource owner when they share a resource.</p>
     # @param [Hash, Types::GetResourcePolicyInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the service network or service.</p>
@@ -1684,9 +1533,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Retrieves information about the specified listener rules. You can also retrieve information about the
-    #    default listener rule. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules">Listener rules</a> in the
-    #     <i>Amazon VPC Lattice User Guide</i>.</p>
+    # <p>Retrieves information about the specified listener rules. You can also retrieve information about the default listener rule. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules">Listener rules</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::GetRuleInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
@@ -2074,7 +1921,7 @@ module Aws::VPCLattice
     # @option params [String] :resource_gateway_identifier
     #   <p>The ID of the resource gateway for the resource configuration.</p>
     # @option params [String] :resource_configuration_group_identifier
-    #   <p>The ID of the group resource configuration.</p>
+    #   <p>The ID of the resource configuration of type <code>Group</code>.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum page size.</p>
     # @option params [String] :next_token
@@ -2188,6 +2035,7 @@ module Aws::VPCLattice
     #         subnet_ids: ["SubnetId"],
     #         security_group_ids: ["SecurityGroupId"],
     #         ip_address_type: "ResourceGatewayIpAddressType",
+    #         ipv4_addresses_per_eni: 1,
     #         created_at: Time.now,
     #         last_updated_at: Time.now
     #       }
@@ -2246,17 +2094,20 @@ module Aws::VPCLattice
     # @option params [String] :service_network_identifier
     #   <p>The ID of the service network.</p>
     # @option params [String] :resource_configuration_identifier
-    #   <p>The ID of the resource configurationk.</p>
+    #   <p>The ID of the resource configuration.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum page size.</p>
     # @option params [String] :next_token
     #   <p>If there are additional results, a pagination token for the next page of results.</p>
+    # @option params [Boolean] :include_children
+    #   <p>Include service network resource associations of the child resource configuration with the grouped resource configuration.</p> <p>The type is boolean and the default value is false.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_network_identifier: "ServiceNetworkIdentifier",
     #     resource_configuration_identifier: "ResourceConfigurationIdentifier",
     #     max_results: 1,
-    #     next_token: "NextToken"
+    #     next_token: "NextToken",
+    #     include_children: false
     #   }
     #   options = {}
     #   response = client.list_service_network_resource_associations(params, options)
@@ -2296,13 +2147,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Lists the associations between a service network and a service. You can filter the list
-    #    either by service or service network. You must provide either the service network identifier or
-    #    the service identifier.</p>
-    #          <p>Every association in Amazon VPC Lattice has a unique Amazon Resource Name (ARN), such as when a
-    #    service network is associated with a VPC or when a service is associated with a service network.
-    #    If the association is for a resource is shared with another account, the association
-    #    includes the local account ID as the prefix in the ARN.</p>
+    # <p>Lists the associations between a service network and a service. You can filter the list either by service or service network. You must provide either the service network identifier or the service identifier.</p> <p>Every association in Amazon VPC Lattice has a unique Amazon Resource Name (ARN), such as when a service network is associated with a VPC or when a service is associated with a service network. If the association is for a resource is shared with another account, the association includes the local account ID as the prefix in the ARN.</p>
     # @param [Hash, Types::ListServiceNetworkServiceAssociationsInput] params
     # @option params [String] :service_network_identifier
     #   <p>The ID or ARN of the service network.</p>
@@ -2352,8 +2197,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Lists the associations between a service network and a VPC. You can filter the list either by VPC or
-    #    service network. You must provide either the ID of the service network identifier or the ID of the VPC.</p>
+    # <p>Lists the associations between a service network and a VPC. You can filter the list either by VPC or service network. You must provide either the ID of the service network identifier or the ID of the VPC.</p>
     # @param [Hash, Types::ListServiceNetworkVpcAssociationsInput] params
     # @option params [String] :service_network_identifier
     #   <p>The ID or ARN of the service network.</p>
@@ -2435,8 +2279,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Lists the service networks owned by or shared with this account. The account ID in the ARN
-    #    shows which account owns the service network.</p>
+    # <p>Lists the service networks owned by or shared with this account. The account ID in the ARN shows which account owns the service network.</p>
     # @param [Hash, Types::ListServiceNetworksInput] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -2534,8 +2377,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Lists your target groups. You can narrow your search by using the filters below in your
-    #    request.</p>
+    # <p>Lists your target groups. You can narrow your search by using the filters below in your request.</p>
     # @param [Hash, Types::ListTargetGroupsInput] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -2582,8 +2424,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Lists the targets for the target group. By default, all targets are included. You can use
-    #    this API to check the health status of targets. You can also ﬁlter the results by target.</p>
+    # <p>Lists the targets for the target group. By default, all targets are included. You can use this API to check the health status of targets. You can also ﬁlter the results by target.</p>
     # @param [Hash, Types::ListTargetsInput] params
     # @option params [String] :target_group_identifier
     #   <p>The ID or ARN of the target group.</p>
@@ -2626,14 +2467,10 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Creates or updates the auth policy. The policy string in JSON must not contain newlines or
-    #    blank lines.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html">Auth policies</a> in the <i>Amazon VPC
-    #     Lattice User Guide</i>.</p>
+    # <p>Creates or updates the auth policy. The policy string in JSON must not contain newlines or blank lines.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html">Auth policies</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>
     # @param [Hash, Types::PutAuthPolicyInput] params
     # @option params [String] :resource_identifier
-    #   <p>The ID or ARN of the service network or service for which the policy
-    #      is created.</p>
+    #   <p>The ID or ARN of the service network or service for which the policy is created.</p>
     # @option params [String] :policy
     #   <p>The auth policy. The policy string in JSON must not contain newlines or blank lines.</p>
     # @example Request syntax with placeholder values
@@ -2655,16 +2492,12 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Attaches a resource-based permission policy to a service or service network. The policy must
-    #    contain the same actions and condition statements as the Amazon Web Services Resource Access
-    #    Manager permission for sharing services and service networks.</p>
+    # <p>Attaches a resource-based permission policy to a service or service network. The policy must contain the same actions and condition statements as the Amazon Web Services Resource Access Manager permission for sharing services and service networks.</p>
     # @param [Hash, Types::PutResourcePolicyInput] params
     # @option params [String] :resource_arn
-    #   <p>The ID or ARN of the service network or service for which the policy
-    #      is created.</p>
+    #   <p>The ID or ARN of the service network or service for which the policy is created.</p>
     # @option params [String] :policy
-    #   <p>An IAM policy. The policy string in JSON must not contain newlines or blank
-    #      lines.</p>
+    #   <p>An IAM policy. The policy string in JSON must not contain newlines or blank lines.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArn", # required
@@ -2681,8 +2514,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Registers the targets with the target group. If it's a Lambda target, you can only have one
-    #    target in a target group.</p>
+    # <p>Registers the targets with the target group. If it's a Lambda target, you can only have one target in a target group.</p>
     # @param [Hash, Types::RegisterTargetsInput] params
     # @option params [String] :target_group_identifier
     #   <p>The ID or ARN of the target group.</p>
@@ -2863,7 +2695,7 @@ module Aws::VPCLattice
     # @option params [String] :resource_configuration_identifier
     #   <p>The ID of the resource configuration.</p>
     # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
-    #   <p>The resource configuration.</p>
+    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>
     # @option params [Boolean] :allow_association_to_shareable_service_network
     #   <p>Indicates whether to add the resource configuration to service networks that are shared with other accounts.</p>
     # @option params [Array<String>] :port_ranges
@@ -2953,8 +2785,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Updates a specified rule for the listener. You can't modify a default listener rule. To modify a
-    #    default listener rule, use <code>UpdateListener</code>.</p>
+    # <p>Updates a specified rule for the listener. You can't modify a default listener rule. To modify a default listener rule, use <code>UpdateListener</code>.</p>
     # @param [Hash, Types::UpdateRuleInput] params
     # @option params [String] :service_identifier
     #   <p>The ID or ARN of the service.</p>
@@ -3079,17 +2910,7 @@ module Aws::VPCLattice
     # @option params [String] :certificate_arn
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     # @option params [String] :auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_identifier: "ServiceIdentifier", # required
@@ -3119,17 +2940,7 @@ module Aws::VPCLattice
     # @option params [String] :service_network_identifier
     #   <p>The ID or ARN of the service network.</p>
     # @option params [String] :auth_type
-    #   <p>The type of IAM policy.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_network_identifier: "ServiceNetworkIdentifier", # required
@@ -3151,10 +2962,7 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
-    # <p>Updates the service network and VPC association. If you add a security group to the service
-    #    network and VPC association, the association must continue to have at least one security
-    #    group. You can add or edit security groups at any time. However, to remove all security groups,
-    #    you must first delete the association and then recreate it without security groups.</p>
+    # <p>Updates the service network and VPC association. If you add a security group to the service network and VPC association, the association must continue to have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and then recreate it without security groups.</p>
     # @param [Hash, Types::UpdateServiceNetworkVpcAssociationInput] params
     # @option params [String] :service_network_vpc_association_identifier
     #   <p>The ID or ARN of the association.</p>

@@ -10,6 +10,7 @@ module Aws::Amp
     AmpConfiguration: StructureShape
     CloudWatchLogDestination: StructureShape
     ClusterArn: StringShape
+    ComponentConfig: StructureShape
     ConflictException: StructureShape
     CreateAlertManagerDefinitionInput: StructureShape
     CreateAlertManagerDefinitionOutput: StructureShape
@@ -28,6 +29,7 @@ module Aws::Amp
     DeleteQueryLoggingConfigurationRequest: StructureShape
     DeleteResourcePolicyRequest: StructureShape
     DeleteRuleGroupsNamespaceInput: StructureShape
+    DeleteScraperLoggingConfigurationRequest: StructureShape
     DeleteScraperRequest: StructureShape
     DeleteScraperResponse: StructureShape
     DeleteWorkspaceInput: StructureShape
@@ -41,6 +43,8 @@ module Aws::Amp
     DescribeResourcePolicyResponse: StructureShape
     DescribeRuleGroupsNamespaceInput: StructureShape
     DescribeRuleGroupsNamespaceOutput: StructureShape
+    DescribeScraperLoggingConfigurationRequest: StructureShape
+    DescribeScraperLoggingConfigurationResponse: StructureShape
     DescribeScraperRequest: StructureShape
     DescribeScraperResponse: StructureShape
     DescribeWorkspaceConfigurationRequest: StructureShape
@@ -102,9 +106,15 @@ module Aws::Amp
     ScrapeConfiguration: UnionShape
     ScraperAlias: StringShape
     ScraperArn: StringShape
+    ScraperComponent: StructureShape
+    ScraperComponentType: StringShape
+    ScraperComponents: ListShape
     ScraperDescription: StructureShape
     ScraperFilters: MapShape
     ScraperId: StringShape
+    ScraperLoggingConfigurationStatus: StructureShape
+    ScraperLoggingConfigurationStatusCode: StringShape
+    ScraperLoggingDestination: UnionShape
     ScraperStatus: StructureShape
     ScraperStatusCode: StringShape
     ScraperSummary: StructureShape
@@ -114,6 +124,7 @@ module Aws::Amp
     ServiceQuotaExceededException: StructureShape
     Source: UnionShape
     StatusReason: StringShape
+    StringMap: MapShape
     SubnetId: StringShape
     SubnetIds: ListShape
     TagKey: StringShape
@@ -129,6 +140,8 @@ module Aws::Amp
     UpdateLoggingConfigurationOutput: StructureShape
     UpdateQueryLoggingConfigurationRequest: StructureShape
     UpdateQueryLoggingConfigurationResponse: StructureShape
+    UpdateScraperLoggingConfigurationRequest: StructureShape
+    UpdateScraperLoggingConfigurationResponse: StructureShape
     UpdateScraperRequest: StructureShape
     UpdateScraperResponse: StructureShape
     UpdateWorkspaceAliasInput: StructureShape

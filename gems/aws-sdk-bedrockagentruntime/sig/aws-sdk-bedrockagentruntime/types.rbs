@@ -954,6 +954,11 @@ module Aws::BedrockAgentRuntime
       INPUT_REQUIRED: String
     end
 
+    module FlowControlNodeType
+      ITERATOR: String
+      LOOP: String
+    end
+
     module FlowErrorCode
       VALIDATION: String
       INTERNAL_SERVER: String
@@ -1006,6 +1011,8 @@ module Aws::BedrockAgentRuntime
         ?condition_result_event: Types::ConditionResultEvent,
         ?node_failure_event: Types::NodeFailureEvent,
         ?flow_failure_event: Types::FlowFailureEvent,
+        ?node_action_event: Types::NodeActionEvent,
+        ?node_dependency_event: Types::NodeDependencyEvent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1016,6 +1023,8 @@ module Aws::BedrockAgentRuntime
       attr_accessor condition_result_event: Types::ConditionResultEvent?
       attr_accessor node_failure_event: Types::NodeFailureEvent?
       attr_accessor flow_failure_event: Types::FlowFailureEvent?
+      attr_accessor node_action_event: Types::NodeActionEvent?
+      attr_accessor node_dependency_event: Types::NodeDependencyEvent?
 
       class FlowInputEvent < FlowExecutionEvent
       end
@@ -1030,6 +1039,10 @@ module Aws::BedrockAgentRuntime
       class NodeFailureEvent < FlowExecutionEvent
       end
       class FlowFailureEvent < FlowExecutionEvent
+      end
+      class NodeActionEvent < FlowExecutionEvent
+      end
+      class NodeDependencyEvent < FlowExecutionEvent
       end
       class Unknown < FlowExecutionEvent
       end
@@ -1193,6 +1206,20 @@ module Aws::BedrockAgentRuntime
       attr_accessor content: Types::FlowMultiTurnInputContent?
     end
 
+    module FlowNodeIODataType
+      STRING: String
+      NUMBER: String
+      BOOLEAN: String
+      OBJECT: String
+      ARRAY: String
+    end
+
+    module FlowNodeInputCategory
+      LOOP_CONDITION: String
+      RETURN_VALUE_TO_LOOP_START: String
+      EXIT_LOOP: String
+    end
+
     class FlowOutputContent
       include Smithy::Schema::Union
 
@@ -1309,6 +1336,7 @@ module Aws::BedrockAgentRuntime
         ?node_output_trace: Types::FlowTraceNodeOutputEvent,
         ?condition_node_result_trace: Types::FlowTraceConditionNodeResultEvent,
         ?node_action_trace: Types::FlowTraceNodeActionEvent,
+        ?node_dependency_trace: Types::FlowTraceDependencyEvent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1316,6 +1344,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor node_output_trace: Types::FlowTraceNodeOutputEvent?
       attr_accessor condition_node_result_trace: Types::FlowTraceConditionNodeResultEvent?
       attr_accessor node_action_trace: Types::FlowTraceNodeActionEvent?
+      attr_accessor node_dependency_trace: Types::FlowTraceDependencyEvent?
 
       class NodeInputTrace < FlowTrace
       end
@@ -1324,6 +1353,8 @@ module Aws::BedrockAgentRuntime
       class ConditionNodeResultTrace < FlowTrace
       end
       class NodeActionTrace < FlowTrace
+      end
+      class NodeDependencyTrace < FlowTrace
       end
       class Unknown < FlowTrace
       end
@@ -1355,6 +1386,21 @@ module Aws::BedrockAgentRuntime
       attr_accessor satisfied_conditions: Array[Types::FlowTraceCondition]?
     end
 
+    class FlowTraceDependencyEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?timestamp: Time,
+        ?trace_elements: Types::TraceElements,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor trace_elements: Types::TraceElements?
+    end
+
     class FlowTraceEvent
       include Smithy::Schema::Structure
 
@@ -1375,6 +1421,8 @@ module Aws::BedrockAgentRuntime
         ?request_id: String,
         ?service_name: String,
         ?operation_name: String,
+        ?operation_request: Smithy::Schema::document,
+        ?operation_response: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1383,6 +1431,8 @@ module Aws::BedrockAgentRuntime
       attr_accessor request_id: String?
       attr_accessor service_name: String?
       attr_accessor operation_name: String?
+      attr_accessor operation_request: Smithy::Schema::document?
+      attr_accessor operation_response: Smithy::Schema::document?
     end
 
     class FlowTraceNodeInputContent
@@ -1416,17 +1466,55 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: Array[Types::FlowTraceNodeInputField]?
     end
 
+    class FlowTraceNodeInputExecutionChainItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?index: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor index: Integer?
+      attr_accessor type: String?
+    end
+
     class FlowTraceNodeInputField
       include Smithy::Schema::Structure
 
       def initialize: (
         ?node_input_name: String,
         ?content: Types::FlowTraceNodeInputContent,
+        ?source: Types::FlowTraceNodeInputSource,
+        ?type: String,
+        ?category: String,
+        ?execution_chain: Array[Types::FlowTraceNodeInputExecutionChainItem],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor node_input_name: String?
       attr_accessor content: Types::FlowTraceNodeInputContent?
+      attr_accessor source: Types::FlowTraceNodeInputSource?
+      attr_accessor type: String?
+      attr_accessor category: String?
+      attr_accessor execution_chain: Array[Types::FlowTraceNodeInputExecutionChainItem]?
+    end
+
+    class FlowTraceNodeInputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?output_field_name: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor output_field_name: String?
+      attr_accessor expression: String?
     end
 
     class FlowTraceNodeOutputContent
@@ -1466,11 +1554,28 @@ module Aws::BedrockAgentRuntime
       def initialize: (
         ?node_output_name: String,
         ?content: Types::FlowTraceNodeOutputContent,
+        ?next: Array[Types::FlowTraceNodeOutputNext],
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor node_output_name: String?
       attr_accessor content: Types::FlowTraceNodeOutputContent?
+      attr_accessor next: Array[Types::FlowTraceNodeOutputNext]?
+      attr_accessor type: String?
+    end
+
+    class FlowTraceNodeOutputNext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?input_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor input_field_name: String?
     end
 
     class FunctionDefinition
@@ -3156,6 +3261,44 @@ module Aws::BedrockAgentRuntime
       attr_accessor performance_config: Types::PerformanceConfiguration?
     end
 
+    class NodeActionEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?timestamp: Time,
+        ?request_id: String,
+        ?service_name: String,
+        ?operation_name: String,
+        ?operation_request: Smithy::Schema::document,
+        ?operation_response: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor request_id: String?
+      attr_accessor service_name: String?
+      attr_accessor operation_name: String?
+      attr_accessor operation_request: Smithy::Schema::document?
+      attr_accessor operation_response: Smithy::Schema::document?
+    end
+
+    class NodeDependencyEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?timestamp: Time,
+        ?trace_elements: Types::NodeTraceElements,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor trace_elements: Types::NodeTraceElements?
+    end
+
     module NodeErrorCode
       VALIDATION: String
       DEPENDENCY_FAILED: String
@@ -3211,17 +3354,55 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: Array[Types::NodeInputField]?
     end
 
+    class NodeInputExecutionChainItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?index: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor index: Integer?
+      attr_accessor type: String?
+    end
+
     class NodeInputField
       include Smithy::Schema::Structure
 
       def initialize: (
         ?name: String,
         ?content: Types::NodeExecutionContent,
+        ?source: Types::NodeInputSource,
+        ?type: String,
+        ?category: String,
+        ?execution_chain: Array[Types::NodeInputExecutionChainItem],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor content: Types::NodeExecutionContent?
+      attr_accessor source: Types::NodeInputSource?
+      attr_accessor type: String?
+      attr_accessor category: String?
+      attr_accessor execution_chain: Array[Types::NodeInputExecutionChainItem]?
+    end
+
+    class NodeInputSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?output_field_name: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor output_field_name: String?
+      attr_accessor expression: String?
     end
 
     class NodeOutputEvent
@@ -3245,11 +3426,44 @@ module Aws::BedrockAgentRuntime
       def initialize: (
         ?name: String,
         ?content: Types::NodeExecutionContent,
+        ?next: Array[Types::NodeOutputNext],
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor content: Types::NodeExecutionContent?
+      attr_accessor next: Array[Types::NodeOutputNext]?
+      attr_accessor type: String?
+    end
+
+    class NodeOutputNext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_name: String,
+        ?input_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_name: String?
+      attr_accessor input_field_name: String?
+    end
+
+    class NodeTraceElements
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?agent_traces: Array[Types::TracePart],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_traces: Array[Types::TracePart]?
+
+      class AgentTraces < NodeTraceElements
+      end
+      class Unknown < NodeTraceElements
+      end
     end
 
     module NodeType
@@ -5028,6 +5242,22 @@ module Aws::BedrockAgentRuntime
       class CustomOrchestrationTrace < Trace
       end
       class Unknown < Trace
+      end
+    end
+
+    class TraceElements
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?agent_traces: Array[Types::TracePart],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_traces: Array[Types::TracePart]?
+
+      class AgentTraces < TraceElements
+      end
+      class Unknown < TraceElements
       end
     end
 

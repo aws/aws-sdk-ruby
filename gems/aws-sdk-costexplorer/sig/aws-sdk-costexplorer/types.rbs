@@ -206,6 +206,17 @@ module Aws::CostExplorer
       attr_accessor message: String?
     end
 
+    class BillingViewHealthStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class CommitmentPurchaseAnalysisConfiguration
       include Smithy::Schema::Structure
 
@@ -829,6 +840,7 @@ module Aws::CostExplorer
       AZ: String
       INSTANCE_TYPE: String
       LINKED_ACCOUNT: String
+      PAYER_ACCOUNT: String
       LINKED_ACCOUNT_NAME: String
       OPERATION: String
       PURCHASE_TYPE: String

@@ -415,6 +415,7 @@ module Aws::ChimeSDKVoice
         ?require_encryption: bool,
         ?tags: Array[Types::Tag],
         ?integration_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -423,6 +424,7 @@ module Aws::ChimeSDKVoice
       attr_accessor require_encryption: bool?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor integration_type: String?
+      attr_accessor network_type: String?
     end
 
     class CreateVoiceConnectorResponse
@@ -1669,6 +1671,11 @@ module Aws::ChimeSDKVoice
 
       attr_accessor disabled: bool?
       attr_accessor configuration_arn: String?
+    end
+
+    module NetworkType
+      IPV4_ONLY: String
+      DUAL_STACK: String
     end
 
     class NotFoundException
@@ -3071,6 +3078,7 @@ module Aws::ChimeSDKVoice
         ?updated_timestamp: Time,
         ?voice_connector_arn: String,
         ?integration_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3083,6 +3091,7 @@ module Aws::ChimeSDKVoice
       attr_accessor updated_timestamp: Time?
       attr_accessor voice_connector_arn: String?
       attr_accessor integration_type: String?
+      attr_accessor network_type: String?
     end
 
     module VoiceConnectorAwsRegion

@@ -2443,6 +2443,8 @@ module Aws::CloudWatchLogs
         ?creation_time: Integer,
         ?log_group_name: String,
         ?apply_on_transformed_logs: bool,
+        ?field_selection_criteria: String,
+        ?emit_system_field_dimensions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2452,6 +2454,8 @@ module Aws::CloudWatchLogs
       attr_accessor creation_time: Integer?
       attr_accessor log_group_name: String?
       attr_accessor apply_on_transformed_logs: bool?
+      attr_accessor field_selection_criteria: String?
+      attr_accessor emit_system_field_dimensions: Array[String]?
     end
 
     class MetricFilterMatchRecord
@@ -3214,6 +3218,8 @@ module Aws::CloudWatchLogs
         ?filter_pattern: String,
         ?metric_transformations: Array[Types::MetricTransformation],
         ?apply_on_transformed_logs: bool,
+        ?field_selection_criteria: String,
+        ?emit_system_field_dimensions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3222,6 +3228,8 @@ module Aws::CloudWatchLogs
       attr_accessor filter_pattern: String?
       attr_accessor metric_transformations: Array[Types::MetricTransformation]?
       attr_accessor apply_on_transformed_logs: bool?
+      attr_accessor field_selection_criteria: String?
+      attr_accessor emit_system_field_dimensions: Array[String]?
     end
 
     class PutQueryDefinitionRequest
@@ -3310,6 +3318,8 @@ module Aws::CloudWatchLogs
         ?role_arn: String,
         ?distribution: String,
         ?apply_on_transformed_logs: bool,
+        ?field_selection_criteria: String,
+        ?emit_system_fields: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3320,6 +3330,8 @@ module Aws::CloudWatchLogs
       attr_accessor role_arn: String?
       attr_accessor distribution: String?
       attr_accessor apply_on_transformed_logs: bool?
+      attr_accessor field_selection_criteria: String?
+      attr_accessor emit_system_fields: Array[String]?
     end
 
     class PutTransformerRequest
@@ -3837,6 +3849,8 @@ module Aws::CloudWatchLogs
         ?distribution: String,
         ?apply_on_transformed_logs: bool,
         ?creation_time: Integer,
+        ?field_selection_criteria: String,
+        ?emit_system_fields: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3848,6 +3862,8 @@ module Aws::CloudWatchLogs
       attr_accessor distribution: String?
       attr_accessor apply_on_transformed_logs: bool?
       attr_accessor creation_time: Integer?
+      attr_accessor field_selection_criteria: String?
+      attr_accessor emit_system_fields: Array[String]?
     end
 
     class SubstituteString

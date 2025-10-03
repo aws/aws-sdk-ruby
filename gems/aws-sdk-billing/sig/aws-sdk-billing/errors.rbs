@@ -3,6 +3,9 @@ module Aws::Billing
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class BillingViewHealthStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
       def resource_id: () -> String?

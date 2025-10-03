@@ -18,6 +18,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -48,6 +49,7 @@ module Aws::FSx
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -62,7 +64,10 @@ module Aws::FSx
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -74,8 +79,8 @@ module Aws::FSx
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::FSx::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::FSx::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -487,7 +492,8 @@ module Aws::FSx
     #           disk_iops_configuration: {
     #             mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #             iops: 1
-    #           }
+    #           },
+    #           preferred_file_server_ipv6: "IpAddress"
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -679,11 +685,13 @@ module Aws::FSx
     #           endpoints: {
     #             intercluster: {
     #               dns_name: "DNSName",
-    #               ip_addresses: ["IpAddress"]
+    #               ip_addresses: ["IpAddress"],
+    #               ipv6_addresses: ["IpAddress"]
     #             },
     #             management: {
     #               dns_name: "DNSName",
-    #               ip_addresses: ["IpAddress"]
+    #               ip_addresses: ["IpAddress"],
+    #               ipv6_addresses: ["IpAddress"]
     #             }
     #           },
     #           disk_iops_configuration: {
@@ -696,7 +704,8 @@ module Aws::FSx
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           fsx_admin_password: "AdminPassword",
     #           ha_pairs: 1,
-    #           throughput_capacity_per_ha_pair: 1
+    #           throughput_capacity_per_ha_pair: 1,
+    #           endpoint_ipv6_address_range: "Ipv6AddressRange"
     #         },
     #         file_system_type_version: "FileSystemTypeVersion",
     #         open_zfs_configuration: {
@@ -860,7 +869,8 @@ module Aws::FSx
     #                 disk_iops_configuration: {
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
-    #                 }
+    #                 },
+    #                 preferred_file_server_ipv6: "IpAddress"
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -912,11 +922,13 @@ module Aws::FSx
     #                 endpoints: {
     #                   intercluster: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   },
     #                   management: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   }
     #                 },
     #                 disk_iops_configuration: {
@@ -929,7 +941,8 @@ module Aws::FSx
     #                 weekly_maintenance_start_time: "WeeklyTime",
     #                 fsx_admin_password: "AdminPassword",
     #                 ha_pairs: 1,
-    #                 throughput_capacity_per_ha_pair: 1
+    #                 throughput_capacity_per_ha_pair: 1,
+    #                 endpoint_ipv6_address_range: "Ipv6AddressRange"
     #               },
     #               file_system_type_version: "FileSystemTypeVersion",
     #               open_zfs_configuration: {
@@ -1172,7 +1185,8 @@ module Aws::FSx
     #             disk_iops_configuration: {
     #               mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #               iops: 1
-    #             }
+    #             },
+    #             preferred_file_server_ipv6: "IpAddress"
     #           },
     #           lustre_configuration: {
     #             weekly_maintenance_start_time: "WeeklyTime",
@@ -1224,11 +1238,13 @@ module Aws::FSx
     #             endpoints: {
     #               intercluster: {
     #                 dns_name: "DNSName",
-    #                 ip_addresses: ["IpAddress"]
+    #                 ip_addresses: ["IpAddress"],
+    #                 ipv6_addresses: ["IpAddress"]
     #               },
     #               management: {
     #                 dns_name: "DNSName",
-    #                 ip_addresses: ["IpAddress"]
+    #                 ip_addresses: ["IpAddress"],
+    #                 ipv6_addresses: ["IpAddress"]
     #               }
     #             },
     #             disk_iops_configuration: {
@@ -1241,7 +1257,8 @@ module Aws::FSx
     #             weekly_maintenance_start_time: "WeeklyTime",
     #             fsx_admin_password: "AdminPassword",
     #             ha_pairs: 1,
-    #             throughput_capacity_per_ha_pair: 1
+    #             throughput_capacity_per_ha_pair: 1,
+    #             endpoint_ipv6_address_range: "Ipv6AddressRange"
     #           },
     #           file_system_type_version: "FileSystemTypeVersion",
     #           open_zfs_configuration: {
@@ -1694,7 +1711,8 @@ module Aws::FSx
     #           disk_iops_configuration: {
     #             mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #             iops: 1
-    #           }
+    #           },
+    #           preferred_file_server_ipv6: "IpAddress"
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -1886,11 +1904,13 @@ module Aws::FSx
     #           endpoints: {
     #             intercluster: {
     #               dns_name: "DNSName",
-    #               ip_addresses: ["IpAddress"]
+    #               ip_addresses: ["IpAddress"],
+    #               ipv6_addresses: ["IpAddress"]
     #             },
     #             management: {
     #               dns_name: "DNSName",
-    #               ip_addresses: ["IpAddress"]
+    #               ip_addresses: ["IpAddress"],
+    #               ipv6_addresses: ["IpAddress"]
     #             }
     #           },
     #           disk_iops_configuration: {
@@ -1903,7 +1923,8 @@ module Aws::FSx
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           fsx_admin_password: "AdminPassword",
     #           ha_pairs: 1,
-    #           throughput_capacity_per_ha_pair: 1
+    #           throughput_capacity_per_ha_pair: 1,
+    #           endpoint_ipv6_address_range: "Ipv6AddressRange"
     #         },
     #         file_system_type_version: "FileSystemTypeVersion",
     #         open_zfs_configuration: {
@@ -2067,7 +2088,8 @@ module Aws::FSx
     #                 disk_iops_configuration: {
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
-    #                 }
+    #                 },
+    #                 preferred_file_server_ipv6: "IpAddress"
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -2119,11 +2141,13 @@ module Aws::FSx
     #                 endpoints: {
     #                   intercluster: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   },
     #                   management: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   }
     #                 },
     #                 disk_iops_configuration: {
@@ -2136,7 +2160,8 @@ module Aws::FSx
     #                 weekly_maintenance_start_time: "WeeklyTime",
     #                 fsx_admin_password: "AdminPassword",
     #                 ha_pairs: 1,
-    #                 throughput_capacity_per_ha_pair: 1
+    #                 throughput_capacity_per_ha_pair: 1,
+    #                 endpoint_ipv6_address_range: "Ipv6AddressRange"
     #               },
     #               file_system_type_version: "FileSystemTypeVersion",
     #               open_zfs_configuration: {
@@ -2965,8 +2990,9 @@ module Aws::FSx
     #   <p>The network type of the Amazon FSx file system that you
     #               are creating. Valid values are <code>IPV4</code> (which supports
     #               IPv4 only) and <code>DUAL</code> (for dual-stack mode, which supports
-    #               both IPv4 and IPv6). The default is <code>IPV4</code>. Supported only
-    #               for Amazon FSx for OpenZFS file systems.</p>
+    #               both IPv4 and IPv6). The default is <code>IPV4</code>. Supported
+    #               for FSx for OpenZFS, FSx for ONTAP, and FSx for Windows File Server
+    #               file systems.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_request_token: "ClientRequestToken",
@@ -3057,7 +3083,8 @@ module Aws::FSx
     #       throughput_capacity: 1,
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       ha_pairs: 1,
-    #       throughput_capacity_per_ha_pair: 1
+    #       throughput_capacity_per_ha_pair: 1,
+    #       endpoint_ipv6_address_range: "Ipv6AddressRange"
     #     },
     #     file_system_type_version: "FileSystemTypeVersion",
     #     open_zfs_configuration: {
@@ -3167,7 +3194,8 @@ module Aws::FSx
     #         disk_iops_configuration: {
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
-    #         }
+    #         },
+    #         preferred_file_server_ipv6: "IpAddress"
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -3359,11 +3387,13 @@ module Aws::FSx
     #         endpoints: {
     #           intercluster: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           management: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           }
     #         },
     #         disk_iops_configuration: {
@@ -3376,7 +3406,8 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         fsx_admin_password: "AdminPassword",
     #         ha_pairs: 1,
-    #         throughput_capacity_per_ha_pair: 1
+    #         throughput_capacity_per_ha_pair: 1,
+    #         endpoint_ipv6_address_range: "Ipv6AddressRange"
     #       },
     #       file_system_type_version: "FileSystemTypeVersion",
     #       open_zfs_configuration: {
@@ -3752,7 +3783,8 @@ module Aws::FSx
     #         disk_iops_configuration: {
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
-    #         }
+    #         },
+    #         preferred_file_server_ipv6: "IpAddress"
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -3944,11 +3976,13 @@ module Aws::FSx
     #         endpoints: {
     #           intercluster: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           management: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           }
     #         },
     #         disk_iops_configuration: {
@@ -3961,7 +3995,8 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         fsx_admin_password: "AdminPassword",
     #         ha_pairs: 1,
-    #         throughput_capacity_per_ha_pair: 1
+    #         throughput_capacity_per_ha_pair: 1,
+    #         endpoint_ipv6_address_range: "Ipv6AddressRange"
     #       },
     #       file_system_type_version: "FileSystemTypeVersion",
     #       open_zfs_configuration: {
@@ -4131,7 +4166,8 @@ module Aws::FSx
     #               disk_iops_configuration: {
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
-    #               }
+    #               },
+    #               preferred_file_server_ipv6: "IpAddress"
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -4183,11 +4219,13 @@ module Aws::FSx
     #               endpoints: {
     #                 intercluster: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 },
     #                 management: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 }
     #               },
     #               disk_iops_configuration: {
@@ -4200,7 +4238,8 @@ module Aws::FSx
     #               weekly_maintenance_start_time: "WeeklyTime",
     #               fsx_admin_password: "AdminPassword",
     #               ha_pairs: 1,
-    #               throughput_capacity_per_ha_pair: 1
+    #               throughput_capacity_per_ha_pair: 1,
+    #               endpoint_ipv6_address_range: "Ipv6AddressRange"
     #             },
     #             file_system_type_version: "FileSystemTypeVersion",
     #             open_zfs_configuration: {
@@ -4442,19 +4481,23 @@ module Aws::FSx
     #       endpoints: {
     #         iscsi: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         },
     #         management: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         },
     #         nfs: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         },
     #         smb: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         }
     #       },
     #       file_system_id: "FileSystemId",
@@ -4716,7 +4759,8 @@ module Aws::FSx
     #               disk_iops_configuration: {
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
-    #               }
+    #               },
+    #               preferred_file_server_ipv6: "IpAddress"
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -4768,11 +4812,13 @@ module Aws::FSx
     #               endpoints: {
     #                 intercluster: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 },
     #                 management: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 }
     #               },
     #               disk_iops_configuration: {
@@ -4785,7 +4831,8 @@ module Aws::FSx
     #               weekly_maintenance_start_time: "WeeklyTime",
     #               fsx_admin_password: "AdminPassword",
     #               ha_pairs: 1,
-    #               throughput_capacity_per_ha_pair: 1
+    #               throughput_capacity_per_ha_pair: 1,
+    #               endpoint_ipv6_address_range: "Ipv6AddressRange"
     #             },
     #             file_system_type_version: "FileSystemTypeVersion",
     #             open_zfs_configuration: {
@@ -5093,7 +5140,8 @@ module Aws::FSx
     #               disk_iops_configuration: {
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
-    #               }
+    #               },
+    #               preferred_file_server_ipv6: "IpAddress"
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -5145,11 +5193,13 @@ module Aws::FSx
     #               endpoints: {
     #                 intercluster: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 },
     #                 management: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 }
     #               },
     #               disk_iops_configuration: {
@@ -5162,7 +5212,8 @@ module Aws::FSx
     #               weekly_maintenance_start_time: "WeeklyTime",
     #               fsx_admin_password: "AdminPassword",
     #               ha_pairs: 1,
-    #               throughput_capacity_per_ha_pair: 1
+    #               throughput_capacity_per_ha_pair: 1,
+    #               endpoint_ipv6_address_range: "Ipv6AddressRange"
     #             },
     #             file_system_type_version: "FileSystemTypeVersion",
     #             open_zfs_configuration: {
@@ -5785,7 +5836,8 @@ module Aws::FSx
     #             disk_iops_configuration: {
     #               mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #               iops: 1
-    #             }
+    #             },
+    #             preferred_file_server_ipv6: "IpAddress"
     #           },
     #           lustre_configuration: {
     #             weekly_maintenance_start_time: "WeeklyTime",
@@ -5977,11 +6029,13 @@ module Aws::FSx
     #             endpoints: {
     #               intercluster: {
     #                 dns_name: "DNSName",
-    #                 ip_addresses: ["IpAddress"]
+    #                 ip_addresses: ["IpAddress"],
+    #                 ipv6_addresses: ["IpAddress"]
     #               },
     #               management: {
     #                 dns_name: "DNSName",
-    #                 ip_addresses: ["IpAddress"]
+    #                 ip_addresses: ["IpAddress"],
+    #                 ipv6_addresses: ["IpAddress"]
     #               }
     #             },
     #             disk_iops_configuration: {
@@ -5994,7 +6048,8 @@ module Aws::FSx
     #             weekly_maintenance_start_time: "WeeklyTime",
     #             fsx_admin_password: "AdminPassword",
     #             ha_pairs: 1,
-    #             throughput_capacity_per_ha_pair: 1
+    #             throughput_capacity_per_ha_pair: 1,
+    #             endpoint_ipv6_address_range: "Ipv6AddressRange"
     #           },
     #           file_system_type_version: "FileSystemTypeVersion",
     #           open_zfs_configuration: {
@@ -6158,7 +6213,8 @@ module Aws::FSx
     #                   disk_iops_configuration: {
     #                     mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                     iops: 1
-    #                   }
+    #                   },
+    #                   preferred_file_server_ipv6: "IpAddress"
     #                 },
     #                 lustre_configuration: {
     #                   weekly_maintenance_start_time: "WeeklyTime",
@@ -6210,11 +6266,13 @@ module Aws::FSx
     #                   endpoints: {
     #                     intercluster: {
     #                       dns_name: "DNSName",
-    #                       ip_addresses: ["IpAddress"]
+    #                       ip_addresses: ["IpAddress"],
+    #                       ipv6_addresses: ["IpAddress"]
     #                     },
     #                     management: {
     #                       dns_name: "DNSName",
-    #                       ip_addresses: ["IpAddress"]
+    #                       ip_addresses: ["IpAddress"],
+    #                       ipv6_addresses: ["IpAddress"]
     #                     }
     #                   },
     #                   disk_iops_configuration: {
@@ -6227,7 +6285,8 @@ module Aws::FSx
     #                   weekly_maintenance_start_time: "WeeklyTime",
     #                   fsx_admin_password: "AdminPassword",
     #                   ha_pairs: 1,
-    #                   throughput_capacity_per_ha_pair: 1
+    #                   throughput_capacity_per_ha_pair: 1,
+    #                   endpoint_ipv6_address_range: "Ipv6AddressRange"
     #                 },
     #                 file_system_type_version: "FileSystemTypeVersion",
     #                 open_zfs_configuration: {
@@ -6772,7 +6831,8 @@ module Aws::FSx
     #           disk_iops_configuration: {
     #             mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #             iops: 1
-    #           }
+    #           },
+    #           preferred_file_server_ipv6: "IpAddress"
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -6964,11 +7024,13 @@ module Aws::FSx
     #           endpoints: {
     #             intercluster: {
     #               dns_name: "DNSName",
-    #               ip_addresses: ["IpAddress"]
+    #               ip_addresses: ["IpAddress"],
+    #               ipv6_addresses: ["IpAddress"]
     #             },
     #             management: {
     #               dns_name: "DNSName",
-    #               ip_addresses: ["IpAddress"]
+    #               ip_addresses: ["IpAddress"],
+    #               ipv6_addresses: ["IpAddress"]
     #             }
     #           },
     #           disk_iops_configuration: {
@@ -6981,7 +7043,8 @@ module Aws::FSx
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           fsx_admin_password: "AdminPassword",
     #           ha_pairs: 1,
-    #           throughput_capacity_per_ha_pair: 1
+    #           throughput_capacity_per_ha_pair: 1,
+    #           endpoint_ipv6_address_range: "Ipv6AddressRange"
     #         },
     #         file_system_type_version: "FileSystemTypeVersion",
     #         open_zfs_configuration: {
@@ -7254,7 +7317,8 @@ module Aws::FSx
     #                 disk_iops_configuration: {
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
-    #                 }
+    #                 },
+    #                 preferred_file_server_ipv6: "IpAddress"
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -7306,11 +7370,13 @@ module Aws::FSx
     #                 endpoints: {
     #                   intercluster: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   },
     #                   management: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   }
     #                 },
     #                 disk_iops_configuration: {
@@ -7323,7 +7389,8 @@ module Aws::FSx
     #                 weekly_maintenance_start_time: "WeeklyTime",
     #                 fsx_admin_password: "AdminPassword",
     #                 ha_pairs: 1,
-    #                 throughput_capacity_per_ha_pair: 1
+    #                 throughput_capacity_per_ha_pair: 1,
+    #                 endpoint_ipv6_address_range: "Ipv6AddressRange"
     #               },
     #               file_system_type_version: "FileSystemTypeVersion",
     #               open_zfs_configuration: {
@@ -7525,19 +7592,23 @@ module Aws::FSx
     #         endpoints: {
     #           iscsi: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           management: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           nfs: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           smb: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           }
     #         },
     #         file_system_id: "FileSystemId",
@@ -7726,7 +7797,8 @@ module Aws::FSx
     #                 disk_iops_configuration: {
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
-    #                 }
+    #                 },
+    #                 preferred_file_server_ipv6: "IpAddress"
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -7778,11 +7850,13 @@ module Aws::FSx
     #                 endpoints: {
     #                   intercluster: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   },
     #                   management: {
     #                     dns_name: "DNSName",
-    #                     ip_addresses: ["IpAddress"]
+    #                     ip_addresses: ["IpAddress"],
+    #                     ipv6_addresses: ["IpAddress"]
     #                   }
     #                 },
     #                 disk_iops_configuration: {
@@ -7795,7 +7869,8 @@ module Aws::FSx
     #                 weekly_maintenance_start_time: "WeeklyTime",
     #                 fsx_admin_password: "AdminPassword",
     #                 ha_pairs: 1,
-    #                 throughput_capacity_per_ha_pair: 1
+    #                 throughput_capacity_per_ha_pair: 1,
+    #                 endpoint_ipv6_address_range: "Ipv6AddressRange"
     #               },
     #               file_system_type_version: "FileSystemTypeVersion",
     #               open_zfs_configuration: {
@@ -8137,7 +8212,8 @@ module Aws::FSx
     #         disk_iops_configuration: {
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
-    #         }
+    #         },
+    #         preferred_file_server_ipv6: "IpAddress"
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -8329,11 +8405,13 @@ module Aws::FSx
     #         endpoints: {
     #           intercluster: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           management: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           }
     #         },
     #         disk_iops_configuration: {
@@ -8346,7 +8424,8 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         fsx_admin_password: "AdminPassword",
     #         ha_pairs: 1,
-    #         throughput_capacity_per_ha_pair: 1
+    #         throughput_capacity_per_ha_pair: 1,
+    #         endpoint_ipv6_address_range: "Ipv6AddressRange"
     #       },
     #       file_system_type_version: "FileSystemTypeVersion",
     #       open_zfs_configuration: {
@@ -8486,7 +8565,8 @@ module Aws::FSx
     #             disk_iops_configuration: {
     #               mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #               iops: 1
-    #             }
+    #             },
+    #             preferred_file_server_ipv6: "IpAddress"
     #           },
     #           lustre_configuration: {
     #             weekly_maintenance_start_time: "WeeklyTime",
@@ -8538,11 +8618,13 @@ module Aws::FSx
     #             endpoints: {
     #               intercluster: {
     #                 dns_name: "DNSName",
-    #                 ip_addresses: ["IpAddress"]
+    #                 ip_addresses: ["IpAddress"],
+    #                 ipv6_addresses: ["IpAddress"]
     #               },
     #               management: {
     #                 dns_name: "DNSName",
-    #                 ip_addresses: ["IpAddress"]
+    #                 ip_addresses: ["IpAddress"],
+    #                 ipv6_addresses: ["IpAddress"]
     #               }
     #             },
     #             disk_iops_configuration: {
@@ -8555,7 +8637,8 @@ module Aws::FSx
     #             weekly_maintenance_start_time: "WeeklyTime",
     #             fsx_admin_password: "AdminPassword",
     #             ha_pairs: 1,
-    #             throughput_capacity_per_ha_pair: 1
+    #             throughput_capacity_per_ha_pair: 1,
+    #             endpoint_ipv6_address_range: "Ipv6AddressRange"
     #           },
     #           file_system_type_version: "FileSystemTypeVersion",
     #           open_zfs_configuration: {
@@ -8800,7 +8883,8 @@ module Aws::FSx
     #         disk_iops_configuration: {
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
-    #         }
+    #         },
+    #         preferred_file_server_ipv6: "IpAddress"
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -8992,11 +9076,13 @@ module Aws::FSx
     #         endpoints: {
     #           intercluster: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           management: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           }
     #         },
     #         disk_iops_configuration: {
@@ -9009,7 +9095,8 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         fsx_admin_password: "AdminPassword",
     #         ha_pairs: 1,
-    #         throughput_capacity_per_ha_pair: 1
+    #         throughput_capacity_per_ha_pair: 1,
+    #         endpoint_ipv6_address_range: "Ipv6AddressRange"
     #       },
     #       file_system_type_version: "FileSystemTypeVersion",
     #       open_zfs_configuration: {
@@ -9421,6 +9508,11 @@ module Aws::FSx
     #             </li>
     #             <li>
     #                <p>
+    #                   <code>EndpointIpv6AddressRange</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
     #                   <code>FsxAdminPassword</code>
     #                </p>
     #             </li>
@@ -9648,7 +9740,8 @@ module Aws::FSx
     #       add_route_table_ids: ["RouteTableId"],
     #       remove_route_table_ids: ["RouteTableId"],
     #       throughput_capacity_per_ha_pair: 1,
-    #       ha_pairs: 1
+    #       ha_pairs: 1,
+    #       endpoint_ipv6_address_range: "Ipv6AddressRange"
     #     },
     #     open_zfs_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -9734,7 +9827,8 @@ module Aws::FSx
     #         disk_iops_configuration: {
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
-    #         }
+    #         },
+    #         preferred_file_server_ipv6: "IpAddress"
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -9926,11 +10020,13 @@ module Aws::FSx
     #         endpoints: {
     #           intercluster: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           },
     #           management: {
     #             dns_name: "DNSName",
-    #             ip_addresses: ["IpAddress"]
+    #             ip_addresses: ["IpAddress"],
+    #             ipv6_addresses: ["IpAddress"]
     #           }
     #         },
     #         disk_iops_configuration: {
@@ -9943,7 +10039,8 @@ module Aws::FSx
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         fsx_admin_password: "AdminPassword",
     #         ha_pairs: 1,
-    #         throughput_capacity_per_ha_pair: 1
+    #         throughput_capacity_per_ha_pair: 1,
+    #         endpoint_ipv6_address_range: "Ipv6AddressRange"
     #       },
     #       file_system_type_version: "FileSystemTypeVersion",
     #       open_zfs_configuration: {
@@ -10116,7 +10213,8 @@ module Aws::FSx
     #               disk_iops_configuration: {
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
-    #               }
+    #               },
+    #               preferred_file_server_ipv6: "IpAddress"
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -10168,11 +10266,13 @@ module Aws::FSx
     #               endpoints: {
     #                 intercluster: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 },
     #                 management: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 }
     #               },
     #               disk_iops_configuration: {
@@ -10185,7 +10285,8 @@ module Aws::FSx
     #               weekly_maintenance_start_time: "WeeklyTime",
     #               fsx_admin_password: "AdminPassword",
     #               ha_pairs: 1,
-    #               throughput_capacity_per_ha_pair: 1
+    #               throughput_capacity_per_ha_pair: 1,
+    #               endpoint_ipv6_address_range: "Ipv6AddressRange"
     #             },
     #             file_system_type_version: "FileSystemTypeVersion",
     #             open_zfs_configuration: {
@@ -10388,19 +10489,23 @@ module Aws::FSx
     #       endpoints: {
     #         iscsi: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         },
     #         management: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         },
     #         nfs: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         },
     #         smb: {
     #           dns_name: "DNSName",
-    #           ip_addresses: ["IpAddress"]
+    #           ip_addresses: ["IpAddress"],
+    #           ipv6_addresses: ["IpAddress"]
     #         }
     #       },
     #       file_system_id: "FileSystemId",
@@ -10642,7 +10747,8 @@ module Aws::FSx
     #               disk_iops_configuration: {
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
-    #               }
+    #               },
+    #               preferred_file_server_ipv6: "IpAddress"
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -10694,11 +10800,13 @@ module Aws::FSx
     #               endpoints: {
     #                 intercluster: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 },
     #                 management: {
     #                   dns_name: "DNSName",
-    #                   ip_addresses: ["IpAddress"]
+    #                   ip_addresses: ["IpAddress"],
+    #                   ipv6_addresses: ["IpAddress"]
     #                 }
     #               },
     #               disk_iops_configuration: {
@@ -10711,7 +10819,8 @@ module Aws::FSx
     #               weekly_maintenance_start_time: "WeeklyTime",
     #               fsx_admin_password: "AdminPassword",
     #               ha_pairs: 1,
-    #               throughput_capacity_per_ha_pair: 1
+    #               throughput_capacity_per_ha_pair: 1,
+    #               endpoint_ipv6_address_range: "Ipv6AddressRange"
     #             },
     #             file_system_type_version: "FileSystemTypeVersion",
     #             open_zfs_configuration: {

@@ -66,7 +66,8 @@ module Aws::Lambda
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
     #  An object that resolves authentication schemes for request signing.
     # @option options [Array<String>] :auth_scheme_preference
-    #  A list of preferred authentication schemes to use when making a request.
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider

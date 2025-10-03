@@ -19,6 +19,7 @@ require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
+require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
@@ -50,6 +51,7 @@ module Aws::Bedrock
     add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
+    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
@@ -64,12 +66,17 @@ module Aws::Bedrock
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
     # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
-    #  An object that resolves authentication schemes for request signing
+    #  An object that resolves authentication schemes for request signing.
+    # @option options [Array<String>] :auth_scheme_preference
+    #  An ordered list of preferred authentication schemes to use when making a request.
+    #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
     # @option options [String] :bearer_token
     #  The bearer token to use for authentication.
     # @option options [Smithy::Client::BearerTokenProvider] :bearer_token_provider
     #  A bearer token identity provider. This can be an instance of a {Smithy::Client::BearerTokenProvider} or any
     #  class that responds to #identity and returns a {Smithy::Client::BearerToken}.
+    # @option options [Smithy::Client::BearerTokenSigner] :bearer_token_signer
+    #  A signer class that signs requests with a bearer token.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
@@ -81,8 +88,8 @@ module Aws::Bedrock
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
-    # @option options [Aws::Bedrock::EndpointProvider] :endpoint_provider
-    #  The endpoint provider used to resolve endpoints. Any object that responds to `#resolve(parameters)`.
+    # @option options [#resolve(parameters)] :endpoint_provider (Aws::Bedrock::EndpointProvider)
+    #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
     #  The path to a CA certification file in PEM format. Defaults to `nil` which uses
     #  the Net::HTTP default value.
@@ -3341,7 +3348,7 @@ module Aws::Bedrock
     #   <p>The model identifier. </p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     model_identifier: "ModelIdentifier", # required
+    #     model_identifier: "GetFoundationModelIdentifier", # required
     #   }
     #   options = {}
     #   response = client.get_foundation_model(params, options)
@@ -5874,8 +5881,6 @@ module Aws::Bedrock
     #   <p>The updated expected result of the Automated Reasoning check.</p>
     # @option params [Float] :confidence_threshold
     #   <p>The updated minimum confidence level for logic validation. If null is provided, the threshold will be removed.</p>
-    # @option params [String] :kms_key_arn
-    #   <p>The KMS key ARN for encrypting the test at rest. If not provided, the key will not be updated. Use <code>DISCARD</code> to remove the key.</p>
     # @option params [String] :client_request_token
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.</p>
     # @example Request syntax with placeholder values
@@ -5887,7 +5892,6 @@ module Aws::Bedrock
     #     last_updated_at: Time.now, # required
     #     expected_aggregated_findings_result: "VALID" # One of: ["VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"], # required
     #     confidence_threshold: 1.0,
-    #     kms_key_arn: "KmsKeyArn",
     #     client_request_token: "IdempotencyToken"
     #   }
     #   options = {}

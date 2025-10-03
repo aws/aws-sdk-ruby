@@ -2,6 +2,7 @@ module Aws::SSOOIDC
   module Errors
     class AccessDeniedException < Smithy::Client::ServiceError
       def error: () -> String?
+      def reason: () -> String?
       def error_description: () -> String?
     end
     class AuthorizationPendingException < Smithy::Client::ServiceError
@@ -34,6 +35,7 @@ module Aws::SSOOIDC
     end
     class InvalidRequestException < Smithy::Client::ServiceError
       def error: () -> String?
+      def reason: () -> String?
       def error_description: () -> String?
     end
     class InvalidRequestRegionException < Smithy::Client::ServiceError

@@ -7,6 +7,7 @@ module Aws::SageMaker
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -1275,7 +1276,8 @@ module Aws::SageMaker
           environment_id: String,
           project_s3_path: String,
           single_sign_on_application_arn: String
-        }
+        },
+        ip_address_type: String
       },
       ?subnet_ids: Array[String],
       ?vpc_id: String,
@@ -8545,7 +8547,8 @@ module Aws::SageMaker
           environment_id: String,
           project_s3_path: String,
           single_sign_on_application_arn: String
-        }
+        },
+        ip_address_type: String
       },
       ?app_security_group_management: String,
       ?default_space_settings: {

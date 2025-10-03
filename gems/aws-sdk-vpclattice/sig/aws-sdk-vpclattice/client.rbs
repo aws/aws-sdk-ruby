@@ -7,6 +7,7 @@ module Aws::VPCLattice
       ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
       ?convert_params: bool,
       ?credentials_provider: #identity,
       ?disable_host_prefix_injection: bool,
@@ -198,6 +199,7 @@ module Aws::VPCLattice
       def subnet_ids: () -> Array[String]?
       def security_group_ids: () -> Array[String]?
       def ip_address_type: () -> String?
+      def ipv4_addresses_per_eni: () -> Integer?
     end
     def create_resource_gateway: (
       ?client_token: String,
@@ -206,6 +208,7 @@ module Aws::VPCLattice
       ?subnet_ids: Array[String],
       ?security_group_ids: Array[String],
       ?ip_address_type: String,
+      ?ipv4_addresses_per_eni: Integer,
       ?tags: Hash[String, String]
     ) -> _CreateResourceGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceGatewayResponse
 
@@ -603,6 +606,7 @@ module Aws::VPCLattice
       def subnet_ids: () -> Array[String]?
       def security_group_ids: () -> Array[String]?
       def ip_address_type: () -> String?
+      def ipv4_addresses_per_eni: () -> Integer?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
     end
@@ -834,7 +838,8 @@ module Aws::VPCLattice
       ?service_network_identifier: String,
       ?resource_configuration_identifier: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?include_children: bool
     ) -> _ListServiceNetworkResourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceNetworkResourceAssociationsResponse
 
     interface _ListServiceNetworkServiceAssociationsResponse

@@ -102,9 +102,46 @@ module Aws::OSIS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline to create the endpoint for.</p>
+    #   @return [String]
+    # @!attribute vpc_options
+    #   <p>Container for the VPC configuration for the pipeline endpoint, including subnet IDs and
+    #      security group IDs.</p>
+    #   @return [Types::PipelineEndpointVpcOptions]
+    class CreatePipelineEndpointRequest < Struct.new(
+      :pipeline_arn,
+      :vpc_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline associated with the endpoint.</p>
+    #   @return [String]
+    # @!attribute endpoint_id
+    #   <p>The unique identifier of the pipeline endpoint.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the pipeline endpoint.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The ID of the VPC where the pipeline endpoint was created.</p>
+    #   @return [String]
+    class CreatePipelineEndpointResponse < Struct.new(
+      :pipeline_arn,
+      :endpoint_id,
+      :status,
+      :vpc_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute pipeline_name
-    #   <p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines
-    #      owned by an account within an Amazon Web Services Region.</p>
+    #   <p>The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the
+    #      pipelines owned by an account within an Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute min_units
     #   <p>The minimum pipeline capacity, in Ingestion Compute Units (ICUs).</p>
@@ -121,22 +158,22 @@ module Aws::OSIS
     #   <p>Key-value pairs to configure log publishing.</p>
     #   @return [Types::LogPublishingOptions]
     # @!attribute vpc_options
-    #   <p>Container for the values required to configure VPC access for the pipeline. If you don't specify
-    #      these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>
+    #   <p>Container for the values required to configure VPC access for the pipeline. If you don't
+    #      specify these values, OpenSearch Ingestion creates the pipeline with a public endpoint.</p>
     #   @return [Types::VpcOptions]
     # @!attribute buffer_options
     #   <p>Key-value pairs to configure persistent buffering for the pipeline.</p>
     #   @return [Types::BufferOptions]
     # @!attribute encryption_at_rest_options
-    #   <p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>
+    #   <p>Key-value pairs to configure encryption for data that is written to a persistent
+    #      buffer.</p>
     #   @return [Types::EncryptionAtRestOptions]
     # @!attribute tags
     #   <p>List of tags to add to the pipeline upon creation.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute pipeline_role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role that provides
-    #      the required permissions for a pipeline to read from the source and write to the sink.
-    #      For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access
+    #       Amazon Web Services resources.</p>
     #   @return [String]
     class CreatePipelineRequest < Struct.new(
       :pipeline_name,
@@ -164,6 +201,22 @@ module Aws::OSIS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute endpoint_id
+    #   <p>The unique identifier of the pipeline endpoint to delete.</p>
+    #   @return [String]
+    class DeletePipelineEndpointRequest < Struct.new(
+      :endpoint_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeletePipelineEndpointResponse < Struct.new(
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute pipeline_name
     #   <p>The name of the pipeline to delete.</p>
     #   @return [String]
@@ -175,6 +228,22 @@ module Aws::OSIS
     end
 
     class DeletePipelineResponse < Struct.new(
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource from which to delete the policy.</p>
+    #   @return [String]
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -270,6 +339,30 @@ module Aws::OSIS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.</p>
+    #   @return [String]
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy document in JSON format.</p>
+    #   @return [String]
+    class GetResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request failed because of an unknown error, exception, or failure (the failure is
     #    internal to the service).</p>
     # @!attribute message
@@ -318,8 +411,73 @@ module Aws::OSIS
     end
 
     # @!attribute max_results
+    #   <p>The maximum number of pipeline endpoint connections to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If your initial <code>ListPipelineEndpointConnections</code> operation returns a
+    #       <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent
+    #       <code>ListPipelineEndpointConnections</code> operations, which returns results in the next
+    #      page.</p>
+    #   @return [String]
+    class ListPipelineEndpointConnectionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of
+    #       <code>nextToken</code> is a unique pagination token for each page. Make the call again using the
+    #      returned token to retrieve the next page.</p>
+    #   @return [String]
+    # @!attribute pipeline_endpoint_connections
+    #   <p>A list of pipeline endpoint connections.</p>
+    #   @return [Array<Types::PipelineEndpointConnection>]
+    class ListPipelineEndpointConnectionsResponse < Struct.new(
+      :next_token,
+      :pipeline_endpoint_connections,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of pipeline endpoints to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If your initial <code>ListPipelineEndpoints</code> operation returns a
+    #       <code>NextToken</code>, you can include the returned <code>NextToken</code> in subsequent
+    #       <code>ListPipelineEndpoints</code> operations, which returns results in the next page.</p>
+    #   @return [String]
+    class ListPipelineEndpointsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>When <code>NextToken</code> is returned, there are more results available. The value of
+    #       <code>NextToken</code> is a unique pagination token for each page. Make the call again using the
+    #      returned token to retrieve the next page.</p>
+    #   @return [String]
+    # @!attribute pipeline_endpoints
+    #   <p>A list of pipeline endpoints.</p>
+    #   @return [Array<Types::PipelineEndpoint>]
+    class ListPipelineEndpointsResponse < Struct.new(
+      :next_token,
+      :pipeline_endpoints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use
-    #      <code>nextToken</code> to get the next page of results.</p>
+    #       <code>nextToken</code> to get the next page of results.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>If your initial <code>ListPipelines</code> operation returns a <code>nextToken</code>, you
@@ -336,8 +494,8 @@ module Aws::OSIS
 
     # @!attribute next_token
     #   <p>When <code>nextToken</code> is returned, there are more results available. The value of
-    #      <code>nextToken</code> is a unique pagination token for each page. Make the call again using
-    #      the returned token to retrieve the next page.</p>
+    #       <code>nextToken</code> is a unique pagination token for each page. Make the call again using the
+    #      returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute pipelines
     #   <p>A list of all existing Data Prepper pipelines.</p>
@@ -445,8 +603,8 @@ module Aws::OSIS
     #   <p>A list of tags associated with the given pipeline.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute pipeline_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that provides
-    #      the required permissions for a pipeline to read from the source and write to the sink.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the pipeline uses to access AWS
+    #      resources.</p>
     #   @return [String]
     class Pipeline < Struct.new(
       :pipeline_name,
@@ -552,6 +710,78 @@ module Aws::OSIS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a VPC endpoint for an OpenSearch Ingestion pipeline, enabling private
+    #    connectivity between your VPC and the pipeline.</p>
+    # @!attribute pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline associated with this endpoint.</p>
+    #   @return [String]
+    # @!attribute endpoint_id
+    #   <p>The unique identifier for the pipeline endpoint.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the pipeline endpoint.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The ID of the VPC where the pipeline endpoint is created.</p>
+    #   @return [String]
+    # @!attribute vpc_options
+    #   <p>Configuration options for the VPC endpoint, including subnet and security group
+    #      settings.</p>
+    #   @return [Types::PipelineEndpointVpcOptions]
+    # @!attribute ingest_endpoint_url
+    #   <p>The URL used to ingest data to the pipeline through the VPC endpoint.</p>
+    #   @return [String]
+    class PipelineEndpoint < Struct.new(
+      :pipeline_arn,
+      :endpoint_id,
+      :status,
+      :vpc_id,
+      :vpc_options,
+      :ingest_endpoint_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a connection to a pipeline endpoint, containing details about the endpoint
+    #    association.</p>
+    # @!attribute pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline in the endpoint connection.</p>
+    #   @return [String]
+    # @!attribute endpoint_id
+    #   <p>The unique identifier of the endpoint in the connection.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the pipeline endpoint connection.</p>
+    #   @return [String]
+    # @!attribute vpc_endpoint_owner
+    #   <p>The Amazon Web Services account ID that owns the VPC endpoint used in this connection.</p>
+    #   @return [String]
+    class PipelineEndpointConnection < Struct.new(
+      :pipeline_arn,
+      :endpoint_id,
+      :status,
+      :vpc_endpoint_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for the VPC endpoint, specifying network access controls.</p>
+    # @!attribute subnet_ids
+    #   <p>A list of subnet IDs where the pipeline endpoint network interfaces are created.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_ids
+    #   <p>A list of security group IDs that control network access to the pipeline endpoint.</p>
+    #   @return [Array<String>]
+    class PipelineEndpointVpcOptions < Struct.new(
+      :subnet_ids,
+      :security_group_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a pipeline's current status.</p>
     # @!attribute description
     #   <p>A description of why a pipeline has a certain status.</p>
@@ -610,6 +840,34 @@ module Aws::OSIS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource to attach the policy to.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy document in JSON format.</p>
+    #   @return [String]
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy document that was attached to the resource.</p>
+    #   @return [String]
+    class PutResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>You attempted to create a resource that already exists.</p>
     # @!attribute message
     #   @return [String]
@@ -625,6 +883,32 @@ module Aws::OSIS
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline from which to revoke endpoint
+    #      connections.</p>
+    #   @return [String]
+    # @!attribute endpoint_ids
+    #   <p>A list of endpoint IDs for which to revoke access to the pipeline.</p>
+    #   @return [Array<String>]
+    class RevokePipelineEndpointConnectionsRequest < Struct.new(
+      :pipeline_arn,
+      :endpoint_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute pipeline_arn
+    #   <p>The Amazon Resource Name (ARN) of the pipeline from which endpoint connections were
+    #      revoked.</p>
+    #   @return [String]
+    class RevokePipelineEndpointConnectionsResponse < Struct.new(
+      :pipeline_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -764,12 +1048,12 @@ module Aws::OSIS
     #   <p>Key-value pairs to configure persistent buffering for the pipeline.</p>
     #   @return [Types::BufferOptions]
     # @!attribute encryption_at_rest_options
-    #   <p>Key-value pairs to configure encryption for data that is written to a persistent buffer.</p>
+    #   <p>Key-value pairs to configure encryption for data that is written to a persistent
+    #      buffer.</p>
     #   @return [Types::EncryptionAtRestOptions]
     # @!attribute pipeline_role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role that provides
-    #      the required permissions for a pipeline to read from the source and write to the sink.
-    #      For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline-security-overview.html">Setting up roles and users in Amazon OpenSearch Ingestion</a>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access
+    #      Amazon Web Services resources.</p>
     #   @return [String]
     class UpdatePipelineRequest < Struct.new(
       :pipeline_name,

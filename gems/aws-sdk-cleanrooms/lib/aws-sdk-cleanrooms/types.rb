@@ -6,6 +6,97 @@ module Aws::CleanRooms
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>Controls and tracks usage limits for associated configured tables within a collaboration across queries and job. Supports both period-based budgets that can renew (daily, weekly, or monthly) and fixed lifetime budgets. Contains the resource ARN, remaining budget information, and up to two budget configurations (period-based and lifetime). By default, table usage is unlimited unless a budget is configured.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the access budget resource.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Detailed budget information including time bounds, remaining budget, and refresh settings.</p>
+    #   @return [Array<Types::AccessBudgetDetails>]
+    # @!attribute aggregate_remaining_budget
+    #   <p>The total remaining budget across all budget parameters, showing the lower value between the per-period budget and lifetime budget for this access budget. For individual parameter budgets, see <code>remainingBudget</code>.</p>
+    #   @return [Integer]
+    class AccessBudget < Struct.new(
+      :resource_arn,
+      :details,
+      :aggregate_remaining_budget,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detailed information about an access budget including time bounds, budget allocation, and configuration settings.</p>
+    # @!attribute start_time
+    #   <p>The start time for the access budget period.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end time for the access budget period.</p>
+    #   @return [Time]
+    # @!attribute remaining_budget
+    #   <p>The remaining budget amount available for use within this access budget.</p>
+    #   @return [Integer]
+    # @!attribute budget
+    #   <p>The total budget allocation amount for this access budget.</p>
+    #   @return [Integer]
+    # @!attribute budget_type
+    #   <p>Specifies the time period for limiting table usage in queries and jobs. For calendar-based periods, the budget can renew if auto refresh is enabled. For lifetime budgets, the limit applies to the total usage throughout the collaboration. Valid values are:</p> <p> <code>CALENDAR_DAY</code> - Limit table usage per day.</p> <p> <code>CALENDAR_WEEK</code> - Limit table usage per week.</p> <p> <code>CALENDAR_MONTH</code> - Limit table usage per month.</p> <p> <code>LIFETIME</code> - Limit total table usage for the collaboration duration.</p>
+    #   @return [String]
+    # @!attribute auto_refresh
+    #   <p>Indicates whether the budget automatically refreshes for each time period specified in <code>budgetType</code>. Valid values are:</p> <p> <code>ENABLED</code> - The budget refreshes automatically at the start of each period.</p> <p> <code>DISABLED</code> - The budget must be refreshed manually.</p> <p> <code>NULL</code> - The value is null when <code>budgetType</code> is set to <code>LIFETIME</code>.</p>
+    #   @return [String]
+    class AccessBudgetDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :remaining_budget,
+      :budget,
+      :budget_type,
+      :auto_refresh,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input parameters for privacy budget templates that support access budgets functionality, enabling enhanced budget management capabilities.</p>
+    # @!attribute budget_parameters
+    #   <p>An array of budget parameters that define the access budget configuration for the privacy template.</p>
+    #   @return [Array<Types::BudgetParameter>]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource associated with this privacy budget template.</p>
+    #   @return [String]
+    class AccessBudgetsPrivacyTemplateParametersInput < Struct.new(
+      :budget_parameters,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output parameters for privacy budget templates with access budgets support, containing the configured budget information.</p>
+    # @!attribute budget_parameters
+    #   <p>An array of budget parameters returned from the access budget configuration.</p>
+    #   @return [Array<Types::BudgetParameter>]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource associated with this privacy budget template.</p>
+    #   @return [String]
+    class AccessBudgetsPrivacyTemplateParametersOutput < Struct.new(
+      :budget_parameters,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Update parameters for privacy budget templates with access budgets functionality, allowing modification of existing budget configurations.</p>
+    # @!attribute budget_parameters
+    #   <p>Updated array of budget parameters for the access budget configuration.</p>
+    #   @return [Array<Types::BudgetParameter>]
+    class AccessBudgetsPrivacyTemplateUpdateParameters < Struct.new(
+      :budget_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Caller does not have sufficient access to perform this action.</p>
     # @!attribute message
     #   @return [String]
@@ -694,6 +785,25 @@ module Aws::CleanRooms
     #   @return [Float]
     class BilledResourceUtilization < Struct.new(
       :units,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Individual budget parameter configuration that defines specific budget allocation settings for access budgets.</p>
+    # @!attribute type
+    #   <p>The type of budget parameter being configured.</p>
+    #   @return [String]
+    # @!attribute budget
+    #   <p>The budget allocation amount for this specific parameter.</p>
+    #   @return [Integer]
+    # @!attribute auto_refresh
+    #   <p>Whether this individual budget parameter automatically refreshes when the budget period resets.</p>
+    #   @return [String]
+    class BudgetParameter < Struct.new(
+      :type,
+      :budget,
+      :auto_refresh,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4099,11 +4209,15 @@ module Aws::CleanRooms
     # @!attribute next_token
     #   <p>The pagination token that's used to fetch the next set of results.</p>
     #   @return [String]
+    # @!attribute access_budget_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Configured Table Association (ConfiguredTableAssociation) used to filter privacy budgets.</p>
+    #   @return [String]
     class ListCollaborationPrivacyBudgetsInput < Struct.new(
       :collaboration_identifier,
       :privacy_budget_type,
       :max_results,
       :next_token,
+      :access_budget_resource_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4419,11 +4533,15 @@ module Aws::CleanRooms
     # @!attribute max_results
     #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a `nextToken` even if the `maxResults` value has not been met.</p>
     #   @return [Integer]
+    # @!attribute access_budget_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the access budget resource to filter privacy budgets by.</p>
+    #   @return [String]
     class ListPrivacyBudgetsInput < Struct.new(
       :membership_identifier,
       :privacy_budget_type,
       :next_token,
       :max_results,
+      :access_budget_resource_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5009,9 +5127,13 @@ module Aws::CleanRooms
     # @!attribute membership_identifier
     #   <p>The unique identifier of the membership that contains the ID mapping table that you want to populate.</p>
     #   @return [String]
+    # @!attribute job_type
+    #   <p>The job type of the rule-based ID mapping job. Valid values include:</p> <p> <code>INCREMENTAL</code>: Processes only new or changed data since the last job run. This is the default job type if the ID mapping workflow was created in Entity Resolution with <code>incrementalRunConfig</code> specified.</p> <p> <code>BATCH</code>: Processes all data from the input source, regardless of previous job runs. This is the default job type if the ID mapping workflow was created in Entity Resolution but <code>incrementalRunConfig</code> wasn't specified.</p> <p> <code>DELETE_ONLY</code>: Processes only deletion requests from <code>BatchDeleteUniqueId</code>, which is set in Entity Resolution.</p> <p>For more information about <code>incrementalRunConfig</code> and <code>BatchDeleteUniqueId</code>, see the <a href="https://docs.aws.amazon.com/entityresolution/latest/apireference/Welcome.html">Entity Resolution API Reference</a>.</p>
+    #   @return [String]
     class PopulateIdMappingTableInput < Struct.new(
       :id_mapping_table_identifier,
       :membership_identifier,
+      :job_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5070,14 +5192,19 @@ module Aws::CleanRooms
     # @!attribute differential_privacy
     #   <p>An object that specifies the epsilon parameter and the utility in terms of total aggregations, as well as the remaining aggregations available.</p>
     #   @return [Types::DifferentialPrivacyPrivacyBudget]
+    # @!attribute access_budget
+    #   <p>Access budget information associated with this privacy budget.</p>
+    #   @return [Types::AccessBudget]
     class PrivacyBudget < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudget; end
+      class AccessBudget < PrivacyBudget; end
       class Unknown < PrivacyBudget; end
     end
 
@@ -5187,14 +5314,19 @@ module Aws::CleanRooms
     # @!attribute differential_privacy
     #   <p>An object that specifies the epsilon and noise parameters.</p>
     #   @return [Types::DifferentialPrivacyTemplateParametersInput]
+    # @!attribute access_budget
+    #   <p>Access budget configuration for the privacy budget template input, enabling integration with access budget functionality.</p>
+    #   @return [Types::AccessBudgetsPrivacyTemplateParametersInput]
     class PrivacyBudgetTemplateParametersInput < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput; end
+      class AccessBudget < PrivacyBudgetTemplateParametersInput; end
       class Unknown < PrivacyBudgetTemplateParametersInput; end
     end
 
@@ -5202,14 +5334,19 @@ module Aws::CleanRooms
     # @!attribute differential_privacy
     #   <p>The epsilon and noise parameters.</p>
     #   @return [Types::DifferentialPrivacyTemplateParametersOutput]
+    # @!attribute access_budget
+    #   <p>Access budget configuration returned from the privacy budget template, containing the configured access budget settings.</p>
+    #   @return [Types::AccessBudgetsPrivacyTemplateParametersOutput]
     class PrivacyBudgetTemplateParametersOutput < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput; end
+      class AccessBudget < PrivacyBudgetTemplateParametersOutput; end
       class Unknown < PrivacyBudgetTemplateParametersOutput; end
     end
 
@@ -5260,14 +5397,19 @@ module Aws::CleanRooms
     # @!attribute differential_privacy
     #   <p>An object that specifies the new values for the epsilon and noise parameters.</p>
     #   @return [Types::DifferentialPrivacyTemplateUpdateParameters]
+    # @!attribute access_budget
+    #   <p> The new access budget configuration that completely replaces the existing access budget settings in the privacy budget template.</p>
+    #   @return [Types::AccessBudgetsPrivacyTemplateUpdateParameters]
     class PrivacyBudgetTemplateUpdateParameters < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters; end
+      class AccessBudget < PrivacyBudgetTemplateUpdateParameters; end
       class Unknown < PrivacyBudgetTemplateUpdateParameters; end
     end
 
@@ -6090,6 +6232,9 @@ module Aws::CleanRooms
     # @!attribute schema_status_details
     #   <p>Details about the status of the schema. Currently, only one entry is present.</p>
     #   @return [Array<Types::SchemaStatusDetail>]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the schema resource.</p>
+    #   @return [String]
     # @!attribute schema_type_properties
     #   <p>The schema type properties.</p>
     #   @return [Types::SchemaTypeProperties]
@@ -6108,6 +6253,7 @@ module Aws::CleanRooms
       :update_time,
       :type,
       :schema_status_details,
+      :resource_arn,
       :schema_type_properties,
       keyword_init: true
     )
@@ -6209,6 +6355,9 @@ module Aws::CleanRooms
     # @!attribute analysis_method
     #   <p>The analysis method for the associated schema.</p> <p> <code>DIRECT_QUERY</code> allows SQL queries to be run directly on this table.</p> <p> <code>DIRECT_JOB</code> allows PySpark jobs to be run directly on this table.</p> <p> <code>MULTIPLE</code> allows both SQL queries and PySpark jobs to be run directly on this table.</p>
     #   @return [String]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the schema summary resource.</p>
+    #   @return [String]
     # @!attribute selected_analysis_methods
     #   <p> The selected analysis methods for the schema.</p>
     #   @return [Array<String>]
@@ -6222,6 +6371,7 @@ module Aws::CleanRooms
       :collaboration_arn,
       :analysis_rule_types,
       :analysis_method,
+      :resource_arn,
       :selected_analysis_methods,
       keyword_init: true
     )

@@ -6,6 +6,56 @@ module Aws::CleanRoomsML
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>An access budget that defines consumption limits for a specific resource within defined time periods.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource that this access budget applies to.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>A list of budget details for this resource. Contains active budget periods that apply to the resource.</p>
+    #   @return [Array<Types::AccessBudgetDetails>]
+    # @!attribute aggregate_remaining_budget
+    #   <p>The total remaining budget across all active budget periods for this resource.</p>
+    #   @return [Integer]
+    class AccessBudget < Struct.new(
+      :resource_arn,
+      :details,
+      :aggregate_remaining_budget,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The detailed information for a specific budget period, including time boundaries and budget amounts.</p>
+    # @!attribute start_time
+    #   <p>The start time of this budget period.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end time of this budget period. If not specified, the budget period continues indefinitely.</p>
+    #   @return [Time]
+    # @!attribute remaining_budget
+    #   <p>The amount of budget remaining in this period.</p>
+    #   @return [Integer]
+    # @!attribute budget
+    #   <p>The total budget amount allocated for this period.</p>
+    #   @return [Integer]
+    # @!attribute budget_type
+    #   <p>The type of budget period. Calendar-based types reset automatically at regular intervals, while LIFETIME budgets never reset.</p>
+    #   @return [String]
+    # @!attribute auto_refresh
+    #   <p>Specifies whether this budget automatically refreshes when the current period ends.</p>
+    #   @return [String]
+    class AccessBudgetDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :remaining_budget,
+      :budget,
+      :budget_type,
+      :auto_refresh,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>You do not have sufficient access to perform this action.</p>
     # @!attribute message
     #   @return [String]
@@ -1462,6 +1512,9 @@ module Aws::CleanRoomsML
     # @!attribute number_of_records
     #   <p>The number of records in the ML input channel.</p>
     #   @return [Integer]
+    # @!attribute privacy_budgets
+    #   <p>Returns the privacy budgets that control access to this Clean Rooms ML input channel. Use these budgets to monitor and limit resource consumption over specified time periods.</p>
+    #   @return [Types::PrivacyBudgets]
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
@@ -1484,6 +1537,7 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :privacy_budgets,
       :description,
       :create_time,
       :update_time,
@@ -1886,6 +1940,9 @@ module Aws::CleanRoomsML
     # @!attribute number_of_records
     #   <p>The number of records in the ML input channel.</p>
     #   @return [Integer]
+    # @!attribute privacy_budgets
+    #   <p>Returns the privacy budgets that control access to this Clean Rooms ML input channel. Use these budgets to monitor and limit resource consumption over specified time periods.</p>
+    #   @return [Types::PrivacyBudgets]
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
@@ -1923,6 +1980,7 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :privacy_budgets,
       :description,
       :create_time,
       :update_time,
@@ -3111,6 +3169,21 @@ module Aws::CleanRoomsML
         options[:s3_data_distribution_type] = 'FullyReplicated' unless options.key?(:s3_data_distribution_type)
         super
       end
+    end
+
+    # <p>The privacy budget information that controls access to Clean Rooms ML input channels.</p>
+    # @!attribute access_budgets
+    #   <p>A list of access budgets that apply to resources associated with this Clean Rooms ML input channel.</p>
+    #   @return [Array<Types::AccessBudget>]
+    class PrivacyBudgets < Struct.new(
+      :access_budgets,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AccessBudgets < PrivacyBudgets; end
+      class Unknown < PrivacyBudgets; end
     end
 
     # <p>Information about the privacy configuration for a configured model algorithm association.</p>

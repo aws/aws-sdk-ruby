@@ -1,5 +1,5 @@
 module Aws::NetworkMonitor
   class AuthResolver
-    def resolve: (AuthParameters) -> Array[String]
+    def resolve: (AuthParameters) -> Array[Smithy::Client::AuthOption]
   end
 end

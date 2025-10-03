@@ -79,57 +79,71 @@ module Aws::DirectoryService
     #            <p>Inbound:</p>
     #            <ul>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
-    #                  Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: Managed Microsoft AD VPC
+    #                  IPv4 CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
-    #                  Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: Managed Microsoft AD VPC
+    #                  IPv4 CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #               <li>
     #                  <p>Type: LDAP, Protocol: TCP, Range: 389, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
     #               </li>
     #               <li>
-    #                  <p>Type: All ICMP, Protocol: All, Range: N/A, Source: Managed Microsoft AD VPC IPv4 CIDR</p>
+    #                  <p>Type: All ICMP, Protocol: All, Range: N/A, Source: Managed Microsoft AD VPC IPv4
+    #                  CIDR</p>
     #               </li>
     #            </ul>
     #            <p></p>
@@ -675,6 +689,10 @@ module Aws::DirectoryService
     #   <p>The IP addresses of the remote DNS server associated with RemoteDomainName. This is the
     #         IP address of the DNS server that your conditional forwarder points to.</p>
     #   @return [Array<String>]
+    # @!attribute dns_ipv6_addrs
+    #   <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName. This is the
+    #         IPv6 address of the DNS server that your conditional forwarder points to.</p>
+    #   @return [Array<String>]
     # @!attribute replication_scope
     #   <p>The replication scope of the conditional forwarder. The only allowed value is
     #           <code>Domain</code>, which will replicate the conditional forwarder to all of the domain
@@ -683,6 +701,7 @@ module Aws::DirectoryService
     class ConditionalForwarder < Struct.new(
       :remote_domain_name,
       :dns_ip_addrs,
+      :dns_ipv6_addrs,
       :replication_scope,
       keyword_init: true
     )
@@ -713,6 +732,10 @@ module Aws::DirectoryService
     # @!attribute tags
     #   <p>The tags to be assigned to AD Connector.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute network_type
+    #   <p>The network type for your directory. The default value is <code>IPv4</code> or
+    #           <code>IPv6</code> based on the provided subnet capabilities.</p>
+    #   @return [String]
     class ConnectDirectoryRequest < Struct.new(
       :name,
       :short_name,
@@ -721,6 +744,7 @@ module Aws::DirectoryService
       :size,
       :connect_settings,
       :tags,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -822,10 +846,14 @@ module Aws::DirectoryService
     # @!attribute dns_ip_addrs
     #   <p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>
     #   @return [Array<String>]
+    # @!attribute dns_ipv6_addrs
+    #   <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
+    #   @return [Array<String>]
     class CreateConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs,
+      :dns_ipv6_addrs,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -889,6 +917,9 @@ module Aws::DirectoryService
     # @!attribute tags
     #   <p>The tags to be assigned to the Simple AD directory.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute network_type
+    #   <p>The network type for your directory. Simple AD supports IPv4 and Dual-stack only.</p>
+    #   @return [String]
     class CreateDirectoryRequest < Struct.new(
       :name,
       :short_name,
@@ -897,6 +928,7 @@ module Aws::DirectoryService
       :size,
       :vpc_settings,
       :tags,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1001,6 +1033,11 @@ module Aws::DirectoryService
     # @!attribute tags
     #   <p>The tags to be assigned to the Managed Microsoft AD directory.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute network_type
+    #   <p>
+    #         The network type for your domain. The default value is <code>IPv4</code> or <code>IPv6</code>
+    #         based on the provided subnet capabilities.</p>
+    #   @return [String]
     class CreateMicrosoftADRequest < Struct.new(
       :name,
       :short_name,
@@ -1009,6 +1046,7 @@ module Aws::DirectoryService
       :vpc_settings,
       :edition,
       :tags,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1078,6 +1116,9 @@ module Aws::DirectoryService
     # @!attribute conditional_forwarder_ip_addrs
     #   <p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>
     #   @return [Array<String>]
+    # @!attribute conditional_forwarder_ipv6_addrs
+    #   <p>The IPv6 addresses of the remote DNS server associated with RemoteDomainName.</p>
+    #   @return [Array<String>]
     # @!attribute selective_auth
     #   <p>Optional parameter to enable selective authentication for the trust.</p>
     #   @return [String]
@@ -1088,6 +1129,7 @@ module Aws::DirectoryService
       :trust_direction,
       :trust_type,
       :conditional_forwarder_ip_addrs,
+      :conditional_forwarder_ipv6_addrs,
       :selective_auth,
       keyword_init: true
     )
@@ -1499,7 +1541,8 @@ module Aws::DirectoryService
 
     # <p>Contains the results of the <a>DescribeDirectories</a> operation.</p>
     # @!attribute directory_descriptions
-    #   <p>The list of available <a>DirectoryDescription</a> objects that were retrieved.</p>
+    #   <p>The list of available <a>DirectoryDescription</a> objects that were
+    #         retrieved.</p>
     #            <p>It is possible that this list contains less than the number of items specified in the
     #           <code>Limit</code> member of the request. This occurs if there are less than the requested
     #         number of items left to retrieve, or if the limitations of the operation have been
@@ -1967,8 +2010,8 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information for the <a>ConnectDirectory</a> operation when an AD
-    #       Connector directory is being created.</p>
+    # <p>Contains connection settings for creating an AD
+    #       Connector with the <a>ConnectDirectory</a> action.</p>
     # @!attribute vpc_id
     #   <p>The identifier of the VPC in which the AD Connector is created.</p>
     #   @return [String]
@@ -1976,7 +2019,11 @@ module Aws::DirectoryService
     #   <p>A list of subnet identifiers in the VPC in which the AD Connector is created.</p>
     #   @return [Array<String>]
     # @!attribute customer_dns_ips
-    #   <p>A list of one or more IP addresses of DNS servers or domain controllers in your
+    #   <p>The IP addresses of DNS servers or domain controllers in your
+    #         self-managed directory.</p>
+    #   @return [Array<String>]
+    # @!attribute customer_dns_ips_v6
+    #   <p>The IPv6 addresses of DNS servers or domain controllers in your
     #         self-managed directory.</p>
     #   @return [Array<String>]
     # @!attribute customer_user_name
@@ -1998,10 +2045,16 @@ module Aws::DirectoryService
       :vpc_id,
       :subnet_ids,
       :customer_dns_ips,
+      :customer_dns_ips_v6,
       :customer_user_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:customer_dns_ips] = [] unless options.key?(:customer_dns_ips)
+        super
+      end
     end
 
     # <p>Contains information about an AD Connector directory.</p>
@@ -2018,10 +2071,13 @@ module Aws::DirectoryService
     #   <p>The security group identifier for the AD Connector directory.</p>
     #   @return [String]
     # @!attribute availability_zones
-    #   <p>A list of the Availability Zones that the directory is in.</p>
+    #   <p>The Availability Zones that the directory is in.</p>
     #   @return [Array<String>]
     # @!attribute connect_ips
     #   <p>The IP addresses of the AD Connector servers.</p>
+    #   @return [Array<String>]
+    # @!attribute connect_ips_v6
+    #   <p>The IPv6 addresses of the AD Connector servers.</p>
     #   @return [Array<String>]
     class DirectoryConnectSettingsDescription < Struct.new(
       :vpc_id,
@@ -2030,6 +2086,7 @@ module Aws::DirectoryService
       :security_group_id,
       :availability_zones,
       :connect_ips,
+      :connect_ips_v6,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2052,13 +2109,13 @@ module Aws::DirectoryService
     #   <p>The edition associated with this directory.</p>
     #   @return [String]
     # @!attribute alias
-    #   <p>The alias for the directory. If no alias has been created for the directory, the alias is
-    #         the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>
+    #   <p>The alias for the directory. If no alias exists, the alias is the directory identifier,
+    #         such as <code>d-XXXXXXXXXX</code>.</p>
     #   @return [String]
     # @!attribute access_url
     #   <p>The access URL for the directory, such as
-    #           <code>http://<alias>.awsapps.com</code>. If no alias has been created for the
-    #         directory, <code><alias></code> is the directory identifier, such as
+    #           <code>http://<alias>.awsapps.com</code>. If no alias exists,
+    #           <code><alias></code> is the directory identifier, such as
     #           <code>d-XXXXXXXXXX</code>.</p>
     #   @return [String]
     # @!attribute description
@@ -2067,7 +2124,13 @@ module Aws::DirectoryService
     # @!attribute dns_ip_addrs
     #   <p>The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD
     #         directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers.
-    #         For an AD Connector directory, these are the IP addresses of the DNS servers or domain
+    #         For an AD Connector directory, these are the IP addresses of self-managed directory to which
+    #         the AD Connector is connected.</p>
+    #   @return [Array<String>]
+    # @!attribute dns_ipv6_addrs
+    #   <p>The IPv6 addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD
+    #         directory, these are the IPv6 addresses of the Simple AD or Microsoft AD directory servers.
+    #         For an AD Connector directory, these are the IPv6 addresses of the DNS servers or domain
     #         controllers in your self-managed directory to which the AD Connector is connected.</p>
     #   @return [Array<String>]
     # @!attribute stage
@@ -2087,27 +2150,28 @@ module Aws::DirectoryService
     #         whether to approve or reject the share invitation.</p>
     #   @return [String]
     # @!attribute launch_time
-    #   <p>Specifies when the directory was created.</p>
+    #   <p>The date and time when the directory was created.</p>
     #   @return [Time]
     # @!attribute stage_last_updated_date_time
-    #   <p>The date and time that the stage was last updated.</p>
+    #   <p>The date and time when the stage was last updated.</p>
     #   @return [Time]
     # @!attribute type
     #   <p>The directory type.</p>
     #   @return [String]
     # @!attribute vpc_settings
     #   <p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional
-    #         information about a directory. This member is only present if the directory is a Simple AD
-    #         or Managed Microsoft AD directory.</p>
+    #         information about a directory. Present only for Simple AD and Managed Microsoft AD
+    #         directories.</p>
     #   @return [Types::DirectoryVpcSettingsDescription]
     # @!attribute connect_settings
-    #   <p>A <a>DirectoryConnectSettingsDescription</a> object that contains additional
-    #         information about an AD Connector directory. This member is only present if the directory is
-    #         an AD Connector directory.</p>
+    #   <p>
+    #               <a>DirectoryConnectSettingsDescription</a> object that contains additional
+    #         information about an AD Connector directory. Present only for AD Connector
+    #         directories.</p>
     #   @return [Types::DirectoryConnectSettingsDescription]
     # @!attribute radius_settings
-    #   <p>A <a>RadiusSettings</a> object that contains information about the RADIUS
-    #         server configured for this directory.</p>
+    #   <p>Information about the <a>RadiusSettings</a> object configured for this
+    #         directory.</p>
     #   @return [Types::RadiusSettings]
     # @!attribute radius_status
     #   <p>The status of the RADIUS MFA server connection.</p>
@@ -2116,7 +2180,8 @@ module Aws::DirectoryService
     #   <p>Additional information about the directory stage.</p>
     #   @return [String]
     # @!attribute sso_enabled
-    #   <p>Indicates if single sign-on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.</p>
+    #   <p>Indicates whether single sign-on is enabled for the directory. For more information, see
+    #           <a>EnableSso</a> and <a>DisableSso</a>.</p>
     #   @return [Boolean]
     # @!attribute desired_number_of_domain_controllers
     #   <p>The desired number of domain controllers in the directory if the directory is Microsoft
@@ -2135,6 +2200,9 @@ module Aws::DirectoryService
     #   <p>Contains information about the hybrid directory configuration for the directory,
     #               including Amazon Web Services System Manager managed node identifiers and DNS IPs.</p>
     #   @return [Types::HybridSettingsDescription]
+    # @!attribute network_type
+    #   <p>The network type of the directory.</p>
+    #   @return [String]
     class DirectoryDescription < Struct.new(
       :directory_id,
       :name,
@@ -2145,6 +2213,7 @@ module Aws::DirectoryService
       :access_url,
       :description,
       :dns_ip_addrs,
+      :dns_ipv6_addrs,
       :stage,
       :share_status,
       :share_method,
@@ -2163,6 +2232,7 @@ module Aws::DirectoryService
       :regions_info,
       :os_version,
       :hybrid_settings,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2280,6 +2350,17 @@ module Aws::DirectoryService
     class DirectoryNotSharedException < Struct.new(
       :message,
       :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the directory size configuration for update operations.</p>
+    # @!attribute directory_size
+    #   <p>The target directory size for the update operation.</p>
+    #   @return [String]
+    class DirectorySizeUpdateSettings < Struct.new(
+      :directory_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2494,6 +2575,9 @@ module Aws::DirectoryService
     # @!attribute dns_ip_addr
     #   <p>The IP address of the domain controller.</p>
     #   @return [String]
+    # @!attribute dns_ipv6_addr
+    #   <p>The IPv6 address of the domain controller.</p>
+    #   @return [String]
     # @!attribute vpc_id
     #   <p>The identifier of the VPC that contains the domain controller.</p>
     #   @return [String]
@@ -2519,6 +2603,7 @@ module Aws::DirectoryService
       :directory_id,
       :domain_controller_id,
       :dns_ip_addr,
+      :dns_ipv6_addr,
       :vpc_id,
       :subnet_id,
       :availability_zone,
@@ -3076,18 +3161,24 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>IP address block. This is often the address block of the DNS server used for your
-    #          self-managed domain. </p>
+    # <p>Contains the IP address block. This is often the address block of the DNS server used
+    #          for your self-managed domain. </p>
     # @!attribute cidr_ip
-    #   <p>IP address block using CIDR format, for example 10.0.0.0/24. This is often the
-    #            address block of the DNS server used for your self-managed domain. For a single IP address
-    #            use a CIDR address block with /32. For example 10.0.0.0/32.</p>
+    #   <p>IP address block in CIDR format, such as 10.0.0.0/24. This is often the address block of
+    #            the DNS server used for your self-managed domain. For a single IP address, use a CIDR
+    #            address block with /32. For example, 10.0.0.0/32.</p>
+    #   @return [String]
+    # @!attribute cidr_ipv6
+    #   <p>IPv6 address block in CIDR format, such as 2001:db8::/32. This is often the address
+    #            block of the DNS server used for your self-managed domain. For a single IPv6 address, use a
+    #            CIDR address block with /128. For example, 2001:db8::1/128.</p>
     #   @return [String]
     # @!attribute description
     #   <p>Description of the address block.</p>
     #   @return [String]
     class IpRoute < Struct.new(
       :cidr_ip,
+      :cidr_ipv6,
       :description,
       keyword_init: true
     )
@@ -3100,6 +3191,9 @@ module Aws::DirectoryService
     #   @return [String]
     # @!attribute cidr_ip
     #   <p>IP address block in the <a>IpRoute</a>.</p>
+    #   @return [String]
+    # @!attribute cidr_ipv6
+    #   <p>IPv6 address block in the <a>IpRoute</a>.</p>
     #   @return [String]
     # @!attribute ip_route_status_msg
     #   <p>The status of the IP address block.</p>
@@ -3116,6 +3210,7 @@ module Aws::DirectoryService
     class IpRouteInfo < Struct.new(
       :directory_id,
       :cidr_ip,
+      :cidr_ipv6,
       :ip_route_status_msg,
       :added_date_time,
       :ip_route_status_reason,
@@ -3235,15 +3330,14 @@ module Aws::DirectoryService
     end
 
     # @!attribute directory_id
-    #   <p>Identifier (ID) of the directory for which you want to retrieve the IP
-    #            addresses.</p>
+    #   <p>Identifier (ID) of the directory for which you want to retrieve the IP addresses.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.</p>
     #   @return [String]
     # @!attribute limit
-    #   <p>Maximum number of items to return. If this value is zero, the maximum number of items
-    #            is specified by the limitations of the operation.</p>
+    #   <p>Maximum number of items to return. If this value is zero, the maximum number of items is
+    #            specified by the limitations of the operation.</p>
     #   @return [Integer]
     class ListIpRoutesRequest < Struct.new(
       :directory_id,
@@ -3394,6 +3488,22 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the network configuration for directory update operations.</p>
+    # @!attribute network_type
+    #   <p>The target network type for the directory update.</p>
+    #   @return [String]
+    # @!attribute customer_dns_ips_v6
+    #   <p>IPv6 addresses of DNS servers or domain controllers in the self-managed directory.
+    #         Required only when updating an AD Connector directory.</p>
+    #   @return [Array<String>]
+    class NetworkUpdateSettings < Struct.new(
+      :network_type,
+      :customer_dns_ips_v6,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Client authentication setup could not be completed because at least one valid certificate
     #       must be registered in the system.</p>
     # @!attribute message
@@ -3410,9 +3520,9 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
-    # <p> OS version that the directory needs to be updated to. </p>
+    # <p>OS version that the directory needs to be updated to.</p>
     # @!attribute os_version
-    #   <p> OS version that the directory needs to be updated to. </p>
+    #   <p>OS version that the directory needs to be updated to.</p>
     #   @return [String]
     class OSUpdateSettings < Struct.new(
       :os_version,
@@ -3436,8 +3546,8 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the directory owner account details that have been shared to the directory
-    #       consumer account.</p>
+    # <p>Contains the directory owner account details shared with the directory consumer
+    #       account.</p>
     # @!attribute directory_id
     #   <p>Identifier of the Managed Microsoft AD directory in the directory owner account.</p>
     #   @return [String]
@@ -3447,23 +3557,30 @@ module Aws::DirectoryService
     # @!attribute dns_ip_addrs
     #   <p>IP address of the directory’s domain controllers.</p>
     #   @return [Array<String>]
+    # @!attribute dns_ipv6_addrs
+    #   <p>IPv6 addresses of the directory’s domain controllers.</p>
+    #   @return [Array<String>]
     # @!attribute vpc_settings
     #   <p>Information about the VPC settings for the directory.</p>
     #   @return [Types::DirectoryVpcSettingsDescription]
     # @!attribute radius_settings
-    #   <p>A <a>RadiusSettings</a> object that contains information about the RADIUS
-    #         server.</p>
+    #   <p>Information about the <a>RadiusSettings</a> object server configuration.</p>
     #   @return [Types::RadiusSettings]
     # @!attribute radius_status
-    #   <p>Information about the status of the RADIUS server.</p>
+    #   <p>The status of the RADIUS server.</p>
+    #   @return [String]
+    # @!attribute network_type
+    #   <p>Network type of the directory in the directory owner account.</p>
     #   @return [String]
     class OwnerDirectoryDescription < Struct.new(
       :directory_id,
       :account_id,
       :dns_ip_addrs,
+      :dns_ipv6_addrs,
       :vpc_settings,
       :radius_settings,
       :radius_status,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3472,19 +3589,23 @@ module Aws::DirectoryService
     # <p>Contains information about a Remote Authentication Dial In User Service (RADIUS)
     #          server.</p>
     # @!attribute radius_servers
-    #   <p>An array of strings that contains the fully qualified domain name (FQDN) or IP
-    #            addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server
+    #   <p>The fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints,
+    #            or the FQDN or IP addresses of your RADIUS server load balancer.</p>
+    #   @return [Array<String>]
+    # @!attribute radius_servers_ipv6
+    #   <p>The IPv6 addresses of the RADIUS server endpoints or RADIUS server
     #            load balancer.</p>
     #   @return [Array<String>]
     # @!attribute radius_port
-    #   <p>The port that your RADIUS server is using for communications. Your self-managed
-    #            network must allow inbound traffic over this port from the Directory Service servers.</p>
+    #   <p>The port that your RADIUS server is using for communications. Your self-managed network
+    #            must allow inbound traffic over this port from the Directory Service servers.</p>
     #   @return [Integer]
     # @!attribute radius_timeout
     #   <p>The amount of time, in seconds, to wait for the RADIUS server to respond.</p>
     #   @return [Integer]
     # @!attribute radius_retries
-    #   <p>The maximum number of times that communication with the RADIUS server is retried after the initial attempt.</p>
+    #   <p>The maximum number of times that communication with the RADIUS server is retried after
+    #            the initial attempt.</p>
     #   @return [Integer]
     # @!attribute shared_secret
     #   <p>Required for enabling RADIUS on the directory.</p>
@@ -3500,6 +3621,7 @@ module Aws::DirectoryService
     #   @return [Boolean]
     class RadiusSettings < Struct.new(
       :radius_servers,
+      :radius_servers_ipv6,
       :radius_port,
       :radius_timeout,
       :radius_retries,
@@ -3675,15 +3797,18 @@ module Aws::DirectoryService
     end
 
     # @!attribute directory_id
-    #   <p>Identifier (ID) of the directory from which you want to remove the IP
-    #            addresses.</p>
+    #   <p>Identifier (ID) of the directory from which you want to remove the IP addresses.</p>
     #   @return [String]
     # @!attribute cidr_ips
     #   <p>IP address blocks that you want to remove.</p>
     #   @return [Array<String>]
+    # @!attribute cidr_ipv6s
+    #   <p>IPv6 address blocks that you want to remove.</p>
+    #   @return [Array<String>]
     class RemoveIpRoutesRequest < Struct.new(
       :directory_id,
       :cidr_ips,
+      :cidr_ipv6s,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4339,10 +4464,15 @@ module Aws::DirectoryService
     #   <p>The updated IP addresses of the remote DNS server associated with the conditional
     #         forwarder.</p>
     #   @return [Array<String>]
+    # @!attribute dns_ipv6_addrs
+    #   <p>The updated IPv6 addresses of the remote DNS server associated with the conditional
+    #         forwarder.</p>
+    #   @return [Array<String>]
     class UpdateConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
       :dns_ip_addrs,
+      :dns_ipv6_addrs,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4356,22 +4486,29 @@ module Aws::DirectoryService
     end
 
     # @!attribute directory_id
-    #   <p> The identifier of the directory on which you want to perform the update. </p>
+    #   <p>The identifier of the directory to update.</p>
     #   @return [String]
     # @!attribute update_type
-    #   <p> The type of update that needs to be performed on the directory. For example, OS. </p>
+    #   <p>The type of update to perform on the directory.</p>
     #   @return [String]
     # @!attribute os_update_settings
-    #   <p> The settings for the OS update that needs to be performed on the directory. </p>
+    #   <p>Operating system configuration to apply during the directory update operation.</p>
     #   @return [Types::OSUpdateSettings]
+    # @!attribute directory_size_update_settings
+    #   <p>Directory size configuration to apply during the update operation.</p>
+    #   @return [Types::DirectorySizeUpdateSettings]
+    # @!attribute network_update_settings
+    #   <p>Network configuration to apply during the directory update operation.</p>
+    #   @return [Types::NetworkUpdateSettings]
     # @!attribute create_snapshot_before_update
-    #   <p> The boolean that specifies if a snapshot for the directory needs to be taken before
-    #         updating the directory. </p>
+    #   <p>Specifies whether to create a directory snapshot before performing the update.</p>
     #   @return [Boolean]
     class UpdateDirectorySetupRequest < Struct.new(
       :directory_id,
       :update_type,
       :os_update_settings,
+      :directory_size_update_settings,
+      :network_update_settings,
       :create_snapshot_before_update,
       keyword_init: true
     )
@@ -4426,7 +4563,7 @@ module Aws::DirectoryService
       include ::Smithy::Schema::Structure
     end
 
-    # <p> An entry of update information related to a requested update type. </p>
+    # <p>An entry of update information related to a requested update type.</p>
     # @!attribute region
     #   <p> The name of the Region. </p>
     #   @return [String]
