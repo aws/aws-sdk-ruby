@@ -298,7 +298,7 @@ module Aws::DataSync
       attr_accessor status: ("ONLINE" | "OFFLINE")
       attr_accessor last_connection_time: ::Time
       attr_accessor creation_time: ::Time
-      attr_accessor endpoint_type: ("PUBLIC" | "PRIVATE_LINK" | "FIPS")
+      attr_accessor endpoint_type: ("PUBLIC" | "PRIVATE_LINK" | "FIPS" | "FIPS_PRIVATE_LINK")
       attr_accessor private_link_config: Types::PrivateLinkConfig
       attr_accessor platform: Types::Platform
       SENSITIVE: []

@@ -10,6 +10,77 @@
 module Aws::CleanRoomsML
   module Types
 
+    # An access budget that defines consumption limits for a specific
+    # resource within defined time periods.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that this access
+    #   budget applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A list of budget details for this resource. Contains active budget
+    #   periods that apply to the resource.
+    #   @return [Array<Types::AccessBudgetDetails>]
+    #
+    # @!attribute [rw] aggregate_remaining_budget
+    #   The total remaining budget across all active budget periods for this
+    #   resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AccessBudget AWS API Documentation
+    #
+    class AccessBudget < Struct.new(
+      :resource_arn,
+      :details,
+      :aggregate_remaining_budget)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The detailed information for a specific budget period, including time
+    # boundaries and budget amounts.
+    #
+    # @!attribute [rw] start_time
+    #   The start time of this budget period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of this budget period. If not specified, the budget
+    #   period continues indefinitely.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remaining_budget
+    #   The amount of budget remaining in this period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget
+    #   The total budget amount allocated for this period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget_type
+    #   The type of budget period. Calendar-based types reset automatically
+    #   at regular intervals, while LIFETIME budgets never reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   Specifies whether this budget automatically refreshes when the
+    #   current period ends.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AccessBudgetDetails AWS API Documentation
+    #
+    class AccessBudgetDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :remaining_budget,
+      :budget,
+      :budget_type,
+      :auto_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -2289,6 +2360,12 @@ module Aws::CleanRoomsML
     #   The number of records in the ML input channel.
     #   @return [Integer]
     #
+    # @!attribute [rw] privacy_budgets
+    #   Returns the privacy budgets that control access to this Clean Rooms
+    #   ML input channel. Use these budgets to monitor and limit resource
+    #   consumption over specified time periods.
+    #   @return [Types::PrivacyBudgets]
+    #
     # @!attribute [rw] description
     #   The description of the ML input channel.
     #   @return [String]
@@ -2317,6 +2394,7 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :privacy_budgets,
       :description,
       :create_time,
       :update_time,
@@ -2919,6 +2997,12 @@ module Aws::CleanRoomsML
     #   The number of records in the ML input channel.
     #   @return [Integer]
     #
+    # @!attribute [rw] privacy_budgets
+    #   Returns the privacy budgets that control access to this Clean Rooms
+    #   ML input channel. Use these budgets to monitor and limit resource
+    #   consumption over specified time periods.
+    #   @return [Types::PrivacyBudgets]
+    #
     # @!attribute [rw] description
     #   The description of the ML input channel.
     #   @return [String]
@@ -2998,6 +3082,7 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :privacy_budgets,
       :description,
       :create_time,
       :update_time,
@@ -4644,6 +4729,29 @@ module Aws::CleanRoomsML
       :s3_data_distribution_type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The privacy budget information that controls access to Clean Rooms ML
+    # input channels.
+    #
+    # @note PrivacyBudgets is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrivacyBudgets corresponding to the set member.
+    #
+    # @!attribute [rw] access_budgets
+    #   A list of access budgets that apply to resources associated with
+    #   this Clean Rooms ML input channel.
+    #   @return [Array<Types::AccessBudget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PrivacyBudgets AWS API Documentation
+    #
+    class PrivacyBudgets < Struct.new(
+      :access_budgets,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccessBudgets < PrivacyBudgets; end
+      class Unknown < PrivacyBudgets; end
     end
 
     # Information about the privacy configuration for a configured model

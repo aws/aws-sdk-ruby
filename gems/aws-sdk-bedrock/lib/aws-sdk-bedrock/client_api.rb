@@ -370,6 +370,7 @@ module Aws::Bedrock
     GetEvaluationJobResponse = Shapes::StructureShape.new(name: 'GetEvaluationJobResponse')
     GetFoundationModelAvailabilityRequest = Shapes::StructureShape.new(name: 'GetFoundationModelAvailabilityRequest')
     GetFoundationModelAvailabilityResponse = Shapes::StructureShape.new(name: 'GetFoundationModelAvailabilityResponse')
+    GetFoundationModelIdentifier = Shapes::StringShape.new(name: 'GetFoundationModelIdentifier')
     GetFoundationModelRequest = Shapes::StructureShape.new(name: 'GetFoundationModelRequest')
     GetFoundationModelResponse = Shapes::StructureShape.new(name: 'GetFoundationModelResponse')
     GetGuardrailRequest = Shapes::StructureShape.new(name: 'GetGuardrailRequest')
@@ -1988,7 +1989,7 @@ module Aws::Bedrock
     GetFoundationModelAvailabilityResponse.add_member(:region_availability, Shapes::ShapeRef.new(shape: RegionAvailability, required: true, location_name: "regionAvailability"))
     GetFoundationModelAvailabilityResponse.struct_class = Types::GetFoundationModelAvailabilityResponse
 
-    GetFoundationModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
+    GetFoundationModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: GetFoundationModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     GetFoundationModelRequest.struct_class = Types::GetFoundationModelRequest
 
     GetFoundationModelResponse.add_member(:model_details, Shapes::ShapeRef.new(shape: FoundationModelDetails, location_name: "modelDetails"))

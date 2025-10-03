@@ -1991,7 +1991,17 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the threat entity set.
+    #   The URI of the file that contains the threat entity set. The format
+    #   of the `Location` URL must be a valid Amazon S3 URL format. Invalid
+    #   URL formats will result in an error, regardless of whether you
+    #   activate the entity set or not. For more information about format of
+    #   the location URLs, see [Format of location URL under Step 2: Adding
+    #   trusted or threat intelligence data][1] in the *Amazon GuardDuty
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -2141,7 +2151,17 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the trusted entity set.
+    #   The URI of the file that contains the threat entity set. The format
+    #   of the `Location` URL must be a valid Amazon S3 URL format. Invalid
+    #   URL formats will result in an error, regardless of whether you
+    #   activate the entity set or not. For more information about format of
+    #   the location URLs, see [Format of location URL under Step 2: Adding
+    #   trusted or threat intelligence data][1] in the *Amazon GuardDuty
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner

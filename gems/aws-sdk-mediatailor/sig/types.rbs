@@ -763,8 +763,9 @@ module Aws::MediaTailor
       attr_accessor dynamic_variables: ::Hash[::String, ::String]
       attr_accessor end_time: ::Time
       attr_accessor start_time: ::Time
-      attr_accessor traffic_shaping_type: ("RETRIEVAL_WINDOW")
+      attr_accessor traffic_shaping_type: ("RETRIEVAL_WINDOW" | "TPS")
       attr_accessor traffic_shaping_retrieval_window: Types::TrafficShapingRetrievalWindow
+      attr_accessor traffic_shaping_tps_configuration: Types::TrafficShapingTpsConfiguration
       SENSITIVE: []
     end
 
@@ -851,8 +852,9 @@ module Aws::MediaTailor
     class RecurringRetrieval
       attr_accessor dynamic_variables: ::Hash[::String, ::String]
       attr_accessor delay_after_avail_end_seconds: ::Integer
-      attr_accessor traffic_shaping_type: ("RETRIEVAL_WINDOW")
+      attr_accessor traffic_shaping_type: ("RETRIEVAL_WINDOW" | "TPS")
       attr_accessor traffic_shaping_retrieval_window: Types::TrafficShapingRetrievalWindow
+      attr_accessor traffic_shaping_tps_configuration: Types::TrafficShapingTpsConfiguration
       SENSITIVE: []
     end
 
@@ -988,6 +990,12 @@ module Aws::MediaTailor
 
     class TrafficShapingRetrievalWindow
       attr_accessor retrieval_window_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrafficShapingTpsConfiguration
+      attr_accessor peak_tps: ::Integer
+      attr_accessor peak_concurrent_users: ::Integer
       SENSITIVE: []
     end
 

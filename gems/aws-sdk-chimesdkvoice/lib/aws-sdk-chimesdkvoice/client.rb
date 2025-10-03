@@ -1010,6 +1010,10 @@ module Aws::ChimeSDKVoice
     #     contact center to Amazon Connect can start with Contact Lens
     #     analytics and performance insights ahead of agent migration.
     #
+    # @option params [String] :network_type
+    #   The type of network for the Voice Connector. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #
     # @return [Types::CreateVoiceConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVoiceConnectorResponse#voice_connector #voice_connector} => Types::VoiceConnector
@@ -1027,6 +1031,7 @@ module Aws::ChimeSDKVoice
     #       },
     #     ],
     #     integration_type: "CONNECT_CALL_TRANSFER_CONNECTOR", # accepts CONNECT_CALL_TRANSFER_CONNECTOR, CONNECT_ANALYTICS_CONNECTOR
+    #     network_type: "IPV4_ONLY", # accepts IPV4_ONLY, DUAL_STACK
     #   })
     #
     # @example Response structure
@@ -1040,6 +1045,7 @@ module Aws::ChimeSDKVoice
     #   resp.voice_connector.updated_timestamp #=> Time
     #   resp.voice_connector.voice_connector_arn #=> String
     #   resp.voice_connector.integration_type #=> String, one of "CONNECT_CALL_TRANSFER_CONNECTOR", "CONNECT_ANALYTICS_CONNECTOR"
+    #   resp.voice_connector.network_type #=> String, one of "IPV4_ONLY", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceConnector AWS API Documentation
     #
@@ -2055,6 +2061,7 @@ module Aws::ChimeSDKVoice
     #   resp.voice_connector.updated_timestamp #=> Time
     #   resp.voice_connector.voice_connector_arn #=> String
     #   resp.voice_connector.integration_type #=> String, one of "CONNECT_CALL_TRANSFER_CONNECTOR", "CONNECT_ANALYTICS_CONNECTOR"
+    #   resp.voice_connector.network_type #=> String, one of "IPV4_ONLY", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceConnector AWS API Documentation
     #
@@ -2954,6 +2961,7 @@ module Aws::ChimeSDKVoice
     #   resp.voice_connectors[0].updated_timestamp #=> Time
     #   resp.voice_connectors[0].voice_connector_arn #=> String
     #   resp.voice_connectors[0].integration_type #=> String, one of "CONNECT_CALL_TRANSFER_CONNECTOR", "CONNECT_ANALYTICS_CONNECTOR"
+    #   resp.voice_connectors[0].network_type #=> String, one of "IPV4_ONLY", "DUAL_STACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceConnectors AWS API Documentation
@@ -4187,6 +4195,7 @@ module Aws::ChimeSDKVoice
     #   resp.voice_connector.updated_timestamp #=> Time
     #   resp.voice_connector.voice_connector_arn #=> String
     #   resp.voice_connector.integration_type #=> String, one of "CONNECT_CALL_TRANSFER_CONNECTOR", "CONNECT_ANALYTICS_CONNECTOR"
+    #   resp.voice_connector.network_type #=> String, one of "IPV4_ONLY", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceConnector AWS API Documentation
     #
@@ -4441,7 +4450,7 @@ module Aws::ChimeSDKVoice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

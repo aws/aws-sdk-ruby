@@ -27,9 +27,6 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#db_instance_status-instance_method
       def db_instance_status: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#automatic_restart_time-instance_method
-      def automatic_restart_time: () -> ::Time
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#master_username-instance_method
       def master_username: () -> ::String
 
@@ -101,6 +98,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#iops-instance_method
       def iops: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#option_group_memberships-instance_method
       def option_group_memberships: () -> ::Array[Types::OptionGroupMembership]
@@ -204,14 +204,17 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#tag_list-instance_method
       def tag_list: () -> ::Array[Types::Tag]
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#db_instance_automated_backups_replications-instance_method
-      def db_instance_automated_backups_replications: () -> ::Array[Types::DBInstanceAutomatedBackupsReplication]
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#automation_mode-instance_method
+      def automation_mode: () -> ("full" | "all-paused")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#resume_full_automation_mode_time-instance_method
+      def resume_full_automation_mode_time: () -> ::Time
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#customer_owned_ip_enabled-instance_method
       def customer_owned_ip_enabled: () -> bool
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#aws_backup_recovery_point_arn-instance_method
-      def aws_backup_recovery_point_arn: () -> ::String
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#network_type-instance_method
+      def network_type: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#activity_stream_status-instance_method
       def activity_stream_status: () -> ("stopped" | "starting" | "started" | "stopping")
@@ -228,26 +231,26 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#activity_stream_engine_native_audit_fields_included-instance_method
       def activity_stream_engine_native_audit_fields_included: () -> bool
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#automation_mode-instance_method
-      def automation_mode: () -> ("full" | "all-paused")
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#aws_backup_recovery_point_arn-instance_method
+      def aws_backup_recovery_point_arn: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#resume_full_automation_mode_time-instance_method
-      def resume_full_automation_mode_time: () -> ::Time
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#custom_iam_instance_profile-instance_method
-      def custom_iam_instance_profile: () -> ::String
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#db_instance_automated_backups_replications-instance_method
+      def db_instance_automated_backups_replications: () -> ::Array[Types::DBInstanceAutomatedBackupsReplication]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#backup_target-instance_method
       def backup_target: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#network_type-instance_method
-      def network_type: () -> ::String
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#automatic_restart_time-instance_method
+      def automatic_restart_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#custom_iam_instance_profile-instance_method
+      def custom_iam_instance_profile: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#activity_stream_policy_status-instance_method
       def activity_stream_policy_status: () -> ("locked" | "unlocked" | "locking-policy" | "unlocking-policy")
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#storage_throughput-instance_method
-      def storage_throughput: () -> ::Integer
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#certificate_details-instance_method
+      def certificate_details: () -> Types::CertificateDetails
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#db_system_id-instance_method
       def db_system_id: () -> ::String
@@ -255,23 +258,20 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#master_user_secret-instance_method
       def master_user_secret: () -> Types::MasterUserSecret
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#certificate_details-instance_method
-      def certificate_details: () -> Types::CertificateDetails
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#read_replica_source_db_cluster_identifier-instance_method
       def read_replica_source_db_cluster_identifier: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#percent_progress-instance_method
       def percent_progress: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#multi_tenant-instance_method
+      def multi_tenant: () -> bool
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#dedicated_log_volume-instance_method
       def dedicated_log_volume: () -> bool
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#is_storage_config_upgrade_available-instance_method
       def is_storage_config_upgrade_available: () -> bool
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#multi_tenant-instance_method
-      def multi_tenant: () -> bool
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#engine_lifecycle_support-instance_method
       def engine_lifecycle_support: () -> ::String
@@ -311,6 +311,7 @@ module Aws
                     ?auto_minor_version_upgrade: bool,
                     ?license_model: ::String,
                     ?iops: ::Integer,
+                    ?storage_throughput: ::Integer,
                     ?option_group_name: ::String,
                     ?character_set_name: ::String,
                     ?nchar_character_set_name: ::String,
@@ -353,16 +354,15 @@ module Aws
                     ?deletion_protection: bool,
                     ?max_allocated_storage: ::Integer,
                     ?enable_customer_owned_ip: bool,
-                    ?custom_iam_instance_profile: ::String,
-                    ?backup_target: ::String,
                     ?network_type: ::String,
-                    ?storage_throughput: ::Integer,
+                    ?backup_target: ::String,
+                    ?custom_iam_instance_profile: ::String,
+                    ?db_system_id: ::String,
+                    ?ca_certificate_identifier: ::String,
                     ?manage_master_user_password: bool,
                     ?master_user_secret_kms_key_id: ::String,
-                    ?ca_certificate_identifier: ::String,
-                    ?db_system_id: ::String,
-                    ?dedicated_log_volume: bool,
                     ?multi_tenant: bool,
+                    ?dedicated_log_volume: bool,
                     ?engine_lifecycle_support: ::String,
                     ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
@@ -377,6 +377,7 @@ module Aws
                                  ?multi_az: bool,
                                  ?auto_minor_version_upgrade: bool,
                                  ?iops: ::Integer,
+                                 ?storage_throughput: ::Integer,
                                  ?option_group_name: ::String,
                                  ?db_parameter_group_name: ::String,
                                  ?publicly_accessible: bool,
@@ -415,12 +416,11 @@ module Aws
                                  ?domain_auth_secret_arn: ::String,
                                  ?domain_dns_ips: Array[::String],
                                  ?replica_mode: ("open-read-only" | "mounted"),
-                                 ?max_allocated_storage: ::Integer,
-                                 ?custom_iam_instance_profile: ::String,
-                                 ?network_type: ::String,
-                                 ?storage_throughput: ::Integer,
                                  ?enable_customer_owned_ip: bool,
+                                 ?network_type: ::String,
+                                 ?max_allocated_storage: ::Integer,
                                  ?backup_target: ::String,
+                                 ?custom_iam_instance_profile: ::String,
                                  ?allocated_storage: ::Integer,
                                  ?source_db_cluster_identifier: ::String,
                                  ?dedicated_log_volume: bool,
@@ -469,6 +469,7 @@ module Aws
                     ?auto_minor_version_upgrade: bool,
                     ?license_model: ::String,
                     ?iops: ::Integer,
+                    ?storage_throughput: ::Integer,
                     ?option_group_name: ::String,
                     ?new_db_instance_identifier: ::String,
                     ?storage_type: ::String,
@@ -480,13 +481,13 @@ module Aws
                     ?domain_ou: ::String,
                     ?domain_auth_secret_arn: ::String,
                     ?domain_dns_ips: Array[::String],
+                    ?disable_domain: bool,
                     ?copy_tags_to_snapshot: bool,
                     ?monitoring_interval: ::Integer,
                     ?db_port_number: ::Integer,
                     ?publicly_accessible: bool,
                     ?monitoring_role_arn: ::String,
                     ?domain_iam_role_name: ::String,
-                    ?disable_domain: bool,
                     ?promotion_tier: ::Integer,
                     ?enable_iam_database_authentication: bool,
                     ?database_insights_mode: ("standard" | "advanced"),
@@ -508,18 +509,17 @@ module Aws
                     ?max_allocated_storage: ::Integer,
                     ?certificate_rotation_restart: bool,
                     ?replica_mode: ("open-read-only" | "mounted"),
-                    ?enable_customer_owned_ip: bool,
-                    ?aws_backup_recovery_point_arn: ::String,
                     ?automation_mode: ("full" | "all-paused"),
                     ?resume_full_automation_mode_minutes: ::Integer,
+                    ?enable_customer_owned_ip: bool,
                     ?network_type: ::String,
-                    ?storage_throughput: ::Integer,
+                    ?aws_backup_recovery_point_arn: ::String,
                     ?manage_master_user_password: bool,
                     ?rotate_master_user_password: bool,
                     ?master_user_secret_kms_key_id: ::String,
-                    ?engine: ::String,
-                    ?dedicated_log_volume: bool,
                     ?multi_tenant: bool,
+                    ?dedicated_log_volume: bool,
+                    ?engine: ::String,
                     ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
@@ -553,6 +553,7 @@ module Aws
                      ?db_name: ::String,
                      ?engine: ::String,
                      ?iops: ::Integer,
+                     ?storage_throughput: ::Integer,
                      ?option_group_name: ::String,
                      ?copy_tags_to_snapshot: bool,
                      ?tags: Array[
@@ -584,12 +585,11 @@ module Aws
                      ?deletion_protection: bool,
                      ?source_dbi_resource_id: ::String,
                      ?max_allocated_storage: ::Integer,
-                     ?source_db_instance_automated_backups_arn: ::String,
                      ?enable_customer_owned_ip: bool,
-                     ?custom_iam_instance_profile: ::String,
-                     ?backup_target: ::String,
                      ?network_type: ::String,
-                     ?storage_throughput: ::Integer,
+                     ?source_db_instance_automated_backups_arn: ::String,
+                     ?backup_target: ::String,
+                     ?custom_iam_instance_profile: ::String,
                      ?allocated_storage: ::Integer,
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,

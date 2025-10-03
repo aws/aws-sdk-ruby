@@ -480,6 +480,7 @@ module Aws
         def status_details: () -> Types::StatusDetails
         def retention_in_days: () -> ::Integer
         def number_of_records: () -> ::Integer
+        def privacy_budgets: () -> Types::PrivacyBudgets
         def description: () -> ::String
         def create_time: () -> ::Time
         def update_time: () -> ::Time
@@ -621,6 +622,7 @@ module Aws
         def status_details: () -> Types::StatusDetails
         def retention_in_days: () -> ::Integer
         def number_of_records: () -> ::Integer
+        def privacy_budgets: () -> Types::PrivacyBudgets
         def description: () -> ::String
         def create_time: () -> ::Time
         def update_time: () -> ::Time

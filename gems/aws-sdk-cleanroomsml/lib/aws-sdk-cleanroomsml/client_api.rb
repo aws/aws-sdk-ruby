@@ -14,6 +14,11 @@ module Aws::CleanRoomsML
 
     include Seahorse::Model
 
+    AccessBudget = Shapes::StructureShape.new(name: 'AccessBudget')
+    AccessBudgetDetails = Shapes::StructureShape.new(name: 'AccessBudgetDetails')
+    AccessBudgetDetailsList = Shapes::ListShape.new(name: 'AccessBudgetDetailsList')
+    AccessBudgetType = Shapes::StringShape.new(name: 'AccessBudgetType')
+    AccessBudgets = Shapes::ListShape.new(name: 'AccessBudgets')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
@@ -39,7 +44,10 @@ module Aws::CleanRoomsML
     AudienceSizeConfig = Shapes::StructureShape.new(name: 'AudienceSizeConfig')
     AudienceSizeType = Shapes::StringShape.new(name: 'AudienceSizeType')
     AudienceSizeValue = Shapes::IntegerShape.new(name: 'AudienceSizeValue')
+    AutoRefreshMode = Shapes::StringShape.new(name: 'AutoRefreshMode')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Budget = Shapes::IntegerShape.new(name: 'Budget')
+    BudgetedResourceArn = Shapes::StringShape.new(name: 'BudgetedResourceArn')
     CancelTrainedModelInferenceJobRequest = Shapes::StructureShape.new(name: 'CancelTrainedModelInferenceJobRequest')
     CancelTrainedModelRequest = Shapes::StructureShape.new(name: 'CancelTrainedModelRequest')
     CollaborationConfiguredModelAlgorithmAssociationList = Shapes::ListShape.new(name: 'CollaborationConfiguredModelAlgorithmAssociationList')
@@ -249,6 +257,7 @@ module Aws::CleanRoomsML
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PolicyExistenceCondition = Shapes::StringShape.new(name: 'PolicyExistenceCondition')
+    PrivacyBudgets = Shapes::UnionShape.new(name: 'PrivacyBudgets')
     PrivacyConfiguration = Shapes::StructureShape.new(name: 'PrivacyConfiguration')
     PrivacyConfigurationPolicies = Shapes::StructureShape.new(name: 'PrivacyConfigurationPolicies')
     ProtectedQueryInputParameters = Shapes::StructureShape.new(name: 'ProtectedQueryInputParameters')
@@ -333,6 +342,23 @@ module Aws::CleanRoomsML
     WorkerComputeConfiguration = Shapes::StructureShape.new(name: 'WorkerComputeConfiguration')
     WorkerComputeConfigurationNumberInteger = Shapes::IntegerShape.new(name: 'WorkerComputeConfigurationNumberInteger')
     WorkerComputeType = Shapes::StringShape.new(name: 'WorkerComputeType')
+
+    AccessBudget.add_member(:resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, required: true, location_name: "resourceArn"))
+    AccessBudget.add_member(:details, Shapes::ShapeRef.new(shape: AccessBudgetDetailsList, required: true, location_name: "details"))
+    AccessBudget.add_member(:aggregate_remaining_budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "aggregateRemainingBudget"))
+    AccessBudget.struct_class = Types::AccessBudget
+
+    AccessBudgetDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    AccessBudgetDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    AccessBudgetDetails.add_member(:remaining_budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "remainingBudget"))
+    AccessBudgetDetails.add_member(:budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "budget"))
+    AccessBudgetDetails.add_member(:budget_type, Shapes::ShapeRef.new(shape: AccessBudgetType, required: true, location_name: "budgetType"))
+    AccessBudgetDetails.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: AutoRefreshMode, location_name: "autoRefresh"))
+    AccessBudgetDetails.struct_class = Types::AccessBudgetDetails
+
+    AccessBudgetDetailsList.member = Shapes::ShapeRef.new(shape: AccessBudgetDetails)
+
+    AccessBudgets.member = Shapes::ShapeRef.new(shape: AccessBudget)
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -775,6 +801,7 @@ module Aws::CleanRoomsML
     GetCollaborationMLInputChannelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     GetCollaborationMLInputChannelResponse.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: GetCollaborationMLInputChannelResponseRetentionInDaysInteger, required: true, location_name: "retentionInDays"))
     GetCollaborationMLInputChannelResponse.add_member(:number_of_records, Shapes::ShapeRef.new(shape: GetCollaborationMLInputChannelResponseNumberOfRecordsLong, location_name: "numberOfRecords"))
+    GetCollaborationMLInputChannelResponse.add_member(:privacy_budgets, Shapes::ShapeRef.new(shape: PrivacyBudgets, location_name: "privacyBudgets"))
     GetCollaborationMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetCollaborationMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     GetCollaborationMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
@@ -890,6 +917,7 @@ module Aws::CleanRoomsML
     GetMLInputChannelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     GetMLInputChannelResponse.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseRetentionInDaysInteger, required: true, location_name: "retentionInDays"))
     GetMLInputChannelResponse.add_member(:number_of_records, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseNumberOfRecordsLong, location_name: "numberOfRecords"))
+    GetMLInputChannelResponse.add_member(:privacy_budgets, Shapes::ShapeRef.new(shape: PrivacyBudgets, location_name: "privacyBudgets"))
     GetMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     GetMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
@@ -1245,6 +1273,12 @@ module Aws::CleanRoomsML
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterKey)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    PrivacyBudgets.add_member(:access_budgets, Shapes::ShapeRef.new(shape: AccessBudgets, location_name: "accessBudgets"))
+    PrivacyBudgets.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyBudgets.add_member_subclass(:access_budgets, Types::PrivacyBudgets::AccessBudgets)
+    PrivacyBudgets.add_member_subclass(:unknown, Types::PrivacyBudgets::Unknown)
+    PrivacyBudgets.struct_class = Types::PrivacyBudgets
 
     PrivacyConfiguration.add_member(:policies, Shapes::ShapeRef.new(shape: PrivacyConfigurationPolicies, required: true, location_name: "policies"))
     PrivacyConfiguration.struct_class = Types::PrivacyConfiguration

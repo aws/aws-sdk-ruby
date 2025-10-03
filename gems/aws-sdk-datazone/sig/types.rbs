@@ -3882,6 +3882,12 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ManagedEndpointCredentials
+      attr_accessor id: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
     class MatchOffset
       attr_accessor end_offset: ::Integer
       attr_accessor start_offset: ::Integer
@@ -4966,6 +4972,7 @@ module Aws::DataZone
       attr_accessor instance_profile_arn: ::String
       attr_accessor java_virtual_env: ::String
       attr_accessor log_uri: ::String
+      attr_accessor managed_endpoint_arn: ::String
       attr_accessor python_virtual_env: ::String
       attr_accessor runtime_role: ::String
       attr_accessor trusted_certificates_s3_uri: ::String
@@ -4973,6 +4980,7 @@ module Aws::DataZone
     end
 
     class SparkEmrPropertiesOutput
+      attr_accessor certificate_data: ::String
       attr_accessor compute_arn: ::String
       attr_accessor credentials: Types::UsernamePassword
       attr_accessor credentials_expiration: ::Time
@@ -4981,10 +4989,12 @@ module Aws::DataZone
       attr_accessor java_virtual_env: ::String
       attr_accessor livy_endpoint: ::String
       attr_accessor log_uri: ::String
+      attr_accessor managed_endpoint_arn: ::String
+      attr_accessor managed_endpoint_credentials: Types::ManagedEndpointCredentials
       attr_accessor python_virtual_env: ::String
       attr_accessor runtime_role: ::String
       attr_accessor trusted_certificates_s3_uri: ::String
-      SENSITIVE: [:credentials]
+      SENSITIVE: [:credentials, :managed_endpoint_credentials]
     end
 
     class SparkEmrPropertiesPatch
@@ -4992,6 +5002,7 @@ module Aws::DataZone
       attr_accessor instance_profile_arn: ::String
       attr_accessor java_virtual_env: ::String
       attr_accessor log_uri: ::String
+      attr_accessor managed_endpoint_arn: ::String
       attr_accessor python_virtual_env: ::String
       attr_accessor runtime_role: ::String
       attr_accessor trusted_certificates_s3_uri: ::String

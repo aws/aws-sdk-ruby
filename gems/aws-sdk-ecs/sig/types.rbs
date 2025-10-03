@@ -8,6 +8,18 @@
 module Aws::ECS
   module Types
 
+    class AcceleratorCountRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class AcceleratorTotalMemoryMiBRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
     class AccessDeniedException < Aws::EmptyStructure
     end
 
@@ -66,17 +78,26 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class BaselineEbsBandwidthMbpsRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
     class BlockedException < Aws::EmptyStructure
     end
 
     class CapacityProvider
       attr_accessor capacity_provider_arn: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor cluster: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "INACTIVE")
       attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProvider
-      attr_accessor update_status: ("DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED")
+      attr_accessor managed_instances_provider: Types::ManagedInstancesProvider
+      attr_accessor update_status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED")
       attr_accessor update_status_reason: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor type: ("EC2_AUTOSCALING" | "MANAGED_INSTANCES" | "FARGATE" | "FARGATE_SPOT")
       SENSITIVE: []
     end
 
@@ -116,6 +137,9 @@ module Aws::ECS
       attr_accessor execute_command_configuration: Types::ExecuteCommandConfiguration
       attr_accessor managed_storage_configuration: Types::ManagedStorageConfiguration
       SENSITIVE: []
+    end
+
+    class ClusterContainsCapacityProviderException < Aws::EmptyStructure
     end
 
     class ClusterContainsContainerInstancesException < Aws::EmptyStructure
@@ -291,7 +315,9 @@ module Aws::ECS
 
     class CreateCapacityProviderRequest
       attr_accessor name: ::String
+      attr_accessor cluster: ::String
       attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProvider
+      attr_accessor managed_instances_provider: Types::CreateManagedInstancesProviderConfiguration
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -317,6 +343,13 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class CreateManagedInstancesProviderConfiguration
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplate
+      attr_accessor propagate_tags: ("CAPACITY_PROVIDER" | "NONE")
+      SENSITIVE: []
+    end
+
     class CreateServiceRequest
       attr_accessor cluster: ::String
       attr_accessor service_name: ::String
@@ -326,7 +359,7 @@ module Aws::ECS
       attr_accessor service_registries: ::Array[Types::ServiceRegistry]
       attr_accessor desired_count: ::Integer
       attr_accessor client_token: ::String
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor platform_version: ::String
       attr_accessor role: ::String
@@ -360,7 +393,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor load_balancers: ::Array[Types::LoadBalancer]
       attr_accessor service_registries: ::Array[Types::ServiceRegistry]
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor platform_version: ::String
       attr_accessor scale: Types::Scale
@@ -404,6 +437,7 @@ module Aws::ECS
 
     class DeleteCapacityProviderRequest
       attr_accessor capacity_provider: ::String
+      attr_accessor cluster: ::String
       SENSITIVE: []
     end
 
@@ -469,7 +503,7 @@ module Aws::ECS
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor platform_version: ::String
       attr_accessor platform_family: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
@@ -549,6 +583,7 @@ module Aws::ECS
 
     class DescribeCapacityProvidersRequest
       attr_accessor capacity_providers: ::Array[::String]
+      attr_accessor cluster: ::String
       attr_accessor include: ::Array[("TAGS")]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -836,6 +871,52 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class InstanceLaunchTemplate
+      attr_accessor ec2_instance_profile_arn: ::String
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
+      attr_accessor monitoring: ("BASIC" | "DETAILED")
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      SENSITIVE: []
+    end
+
+    class InstanceLaunchTemplateUpdate
+      attr_accessor ec2_instance_profile_arn: ::String
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
+      attr_accessor monitoring: ("BASIC" | "DETAILED")
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      SENSITIVE: []
+    end
+
+    class InstanceRequirementsRequest
+      attr_accessor v_cpu_count: Types::VCpuCountRangeRequest
+      attr_accessor memory_mi_b: Types::MemoryMiBRequest
+      attr_accessor cpu_manufacturers: ::Array[("intel" | "amd" | "amazon-web-services")]
+      attr_accessor memory_gi_b_per_v_cpu: Types::MemoryGiBPerVCpuRequest
+      attr_accessor excluded_instance_types: ::Array[::String]
+      attr_accessor instance_generations: ::Array[("current" | "previous")]
+      attr_accessor spot_max_price_percentage_over_lowest_price: ::Integer
+      attr_accessor on_demand_max_price_percentage_over_lowest_price: ::Integer
+      attr_accessor bare_metal: ("included" | "required" | "excluded")
+      attr_accessor burstable_performance: ("included" | "required" | "excluded")
+      attr_accessor require_hibernate_support: bool
+      attr_accessor network_interface_count: Types::NetworkInterfaceCountRequest
+      attr_accessor local_storage: ("included" | "required" | "excluded")
+      attr_accessor local_storage_types: ::Array[("hdd" | "ssd")]
+      attr_accessor total_local_storage_gb: Types::TotalLocalStorageGBRequest
+      attr_accessor baseline_ebs_bandwidth_mbps: Types::BaselineEbsBandwidthMbpsRequest
+      attr_accessor accelerator_types: ::Array[("gpu" | "fpga" | "inference")]
+      attr_accessor accelerator_count: Types::AcceleratorCountRequest
+      attr_accessor accelerator_manufacturers: ::Array[("amazon-web-services" | "amd" | "nvidia" | "xilinx" | "habana")]
+      attr_accessor accelerator_names: ::Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g")]
+      attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest
+      attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest
+      attr_accessor allowed_instance_types: ::Array[::String]
+      attr_accessor max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer
+      SENSITIVE: []
+    end
+
     class InvalidParameterException < Aws::EmptyStructure
     end
 
@@ -957,7 +1038,7 @@ module Aws::ECS
       attr_accessor cluster: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor scheduling_strategy: ("REPLICA" | "DAEMON")
       SENSITIVE: []
     end
@@ -1016,7 +1097,7 @@ module Aws::ECS
       attr_accessor started_by: ::String
       attr_accessor service_name: ::String
       attr_accessor desired_status: ("RUNNING" | "PENDING" | "STOPPED")
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       SENSITIVE: []
     end
 
@@ -1058,6 +1139,24 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ManagedInstancesNetworkConfiguration
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ManagedInstancesProvider
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplate
+      attr_accessor propagate_tags: ("CAPACITY_PROVIDER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ManagedInstancesStorageConfiguration
+      attr_accessor storage_size_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
     class ManagedScaling
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor target_capacity: ::Integer
@@ -1073,6 +1172,18 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class MemoryGiBPerVCpuRequest
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class MemoryMiBRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
     class MissingVersionException < Aws::EmptyStructure
     end
 
@@ -1084,6 +1195,12 @@ module Aws::ECS
     end
 
     class NamespaceNotFoundException < Aws::EmptyStructure
+    end
+
+    class NetworkBandwidthGbpsRequest
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
     end
 
     class NetworkBinding
@@ -1105,6 +1222,12 @@ module Aws::ECS
       attr_accessor attachment_id: ::String
       attr_accessor private_ipv_4_address: ::String
       attr_accessor ipv6_address: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkInterfaceCountRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
       SENSITIVE: []
     end
 
@@ -1231,7 +1354,7 @@ module Aws::ECS
       attr_accessor container_definitions: ::Array[Types::ContainerDefinition]
       attr_accessor volumes: ::Array[Types::Volume]
       attr_accessor placement_constraints: ::Array[Types::TaskDefinitionPlacementConstraint]
-      attr_accessor requires_compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL")]
+      attr_accessor requires_compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")]
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -1297,7 +1420,7 @@ module Aws::ECS
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
       attr_accessor group: ::String
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor overrides: Types::TaskOverride
       attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
@@ -1352,7 +1475,7 @@ module Aws::ECS
       attr_accessor desired_count: ::Integer
       attr_accessor running_count: ::Integer
       attr_accessor pending_count: ::Integer
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor platform_version: ::String
       attr_accessor platform_family: ::String
@@ -1530,7 +1653,7 @@ module Aws::ECS
       attr_accessor cluster_arn: ::String
       attr_accessor task_definition: ::String
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor platform_version: ::String
       attr_accessor platform_family: ::String
       attr_accessor load_balancers: ::Array[Types::LoadBalancer]
@@ -1721,7 +1844,7 @@ module Aws::ECS
       attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")
       attr_accessor inference_accelerators: ::Array[Types::InferenceAccelerator]
       attr_accessor last_status: ::String
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor memory: ::String
       attr_accessor overrides: Types::TaskOverride
       attr_accessor platform_version: ::String
@@ -1755,9 +1878,9 @@ module Aws::ECS
       attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETE_IN_PROGRESS")
       attr_accessor requires_attributes: ::Array[Types::Attribute]
       attr_accessor placement_constraints: ::Array[Types::TaskDefinitionPlacementConstraint]
-      attr_accessor compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL")]
+      attr_accessor compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")]
       attr_accessor runtime_platform: Types::RuntimePlatform
-      attr_accessor requires_compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL")]
+      attr_accessor requires_compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")]
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
       attr_accessor inference_accelerators: ::Array[Types::InferenceAccelerator]
@@ -1830,7 +1953,7 @@ module Aws::ECS
       attr_accessor running_count: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor platform_version: ::String
       attr_accessor platform_family: ::String
@@ -1867,6 +1990,12 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class TotalLocalStorageGBRequest
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
     class Ulimit
       attr_accessor name: ("core" | "cpu" | "data" | "fsize" | "locks" | "memlock" | "msgqueue" | "nice" | "nofile" | "nproc" | "rss" | "rtprio" | "rttime" | "sigpending" | "stack")
       attr_accessor soft_limit: ::Integer
@@ -1888,7 +2017,9 @@ module Aws::ECS
 
     class UpdateCapacityProviderRequest
       attr_accessor name: ::String
+      attr_accessor cluster: ::String
       attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProviderUpdate
+      attr_accessor managed_instances_provider: Types::UpdateManagedInstancesProviderConfiguration
       SENSITIVE: []
     end
 
@@ -1946,6 +2077,13 @@ module Aws::ECS
     end
 
     class UpdateInProgressException < Aws::EmptyStructure
+    end
+
+    class UpdateManagedInstancesProviderConfiguration
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplateUpdate
+      attr_accessor propagate_tags: ("CAPACITY_PROVIDER" | "NONE")
+      SENSITIVE: []
     end
 
     class UpdateServicePrimaryTaskSetRequest
@@ -2015,6 +2153,12 @@ module Aws::ECS
 
     class UpdateTaskSetResponse
       attr_accessor task_set: Types::TaskSet
+      SENSITIVE: []
+    end
+
+    class VCpuCountRangeRequest
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
       SENSITIVE: []
     end
 

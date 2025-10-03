@@ -15,6 +15,7 @@ module Aws::CustomerProfiles
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ActionType = Shapes::StringShape.new(name: 'ActionType')
     AddProfileKeyRequest = Shapes::StructureShape.new(name: 'AddProfileKeyRequest')
     AddProfileKeyResponse = Shapes::StructureShape.new(name: 'AddProfileKeyResponse')
     AdditionalSearchKey = Shapes::StructureShape.new(name: 'AdditionalSearchKey')
@@ -195,6 +196,8 @@ module Aws::CustomerProfiles
     GetIntegrationResponse = Shapes::StructureShape.new(name: 'GetIntegrationResponse')
     GetMatchesRequest = Shapes::StructureShape.new(name: 'GetMatchesRequest')
     GetMatchesResponse = Shapes::StructureShape.new(name: 'GetMatchesResponse')
+    GetProfileHistoryRecordRequest = Shapes::StructureShape.new(name: 'GetProfileHistoryRecordRequest')
+    GetProfileHistoryRecordResponse = Shapes::StructureShape.new(name: 'GetProfileHistoryRecordResponse')
     GetProfileObjectTypeRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeRequest')
     GetProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateRequest')
@@ -265,6 +268,8 @@ module Aws::CustomerProfiles
     ListObjectTypeAttributesList = Shapes::ListShape.new(name: 'ListObjectTypeAttributesList')
     ListObjectTypeAttributesRequest = Shapes::StructureShape.new(name: 'ListObjectTypeAttributesRequest')
     ListObjectTypeAttributesResponse = Shapes::StructureShape.new(name: 'ListObjectTypeAttributesResponse')
+    ListProfileHistoryRecordsRequest = Shapes::StructureShape.new(name: 'ListProfileHistoryRecordsRequest')
+    ListProfileHistoryRecordsResponse = Shapes::StructureShape.new(name: 'ListProfileHistoryRecordsResponse')
     ListProfileObjectTypeItem = Shapes::StructureShape.new(name: 'ListProfileObjectTypeItem')
     ListProfileObjectTypeTemplateItem = Shapes::StructureShape.new(name: 'ListProfileObjectTypeTemplateItem')
     ListProfileObjectTypeTemplatesRequest = Shapes::StructureShape.new(name: 'ListProfileObjectTypeTemplatesRequest')
@@ -326,6 +331,8 @@ module Aws::CustomerProfiles
     ProfileAttributeValuesResponse = Shapes::StructureShape.new(name: 'ProfileAttributeValuesResponse')
     ProfileAttributes = Shapes::StructureShape.new(name: 'ProfileAttributes')
     ProfileDimension = Shapes::StructureShape.new(name: 'ProfileDimension')
+    ProfileHistoryRecord = Shapes::StructureShape.new(name: 'ProfileHistoryRecord')
+    ProfileHistoryRecords = Shapes::ListShape.new(name: 'ProfileHistoryRecords')
     ProfileId = Shapes::StringShape.new(name: 'ProfileId')
     ProfileIdList = Shapes::ListShape.new(name: 'ProfileIdList')
     ProfileIdToBeMergedList = Shapes::ListShape.new(name: 'ProfileIdToBeMergedList')
@@ -1284,6 +1291,21 @@ module Aws::CustomerProfiles
     GetMatchesResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MatchesList, location_name: "Matches"))
     GetMatchesResponse.struct_class = Types::GetMatchesResponse
 
+    GetProfileHistoryRecordRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetProfileHistoryRecordRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "ProfileId"))
+    GetProfileHistoryRecordRequest.add_member(:id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "Id"))
+    GetProfileHistoryRecordRequest.struct_class = Types::GetProfileHistoryRecordRequest
+
+    GetProfileHistoryRecordResponse.add_member(:id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "Id"))
+    GetProfileHistoryRecordResponse.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
+    GetProfileHistoryRecordResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    GetProfileHistoryRecordResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    GetProfileHistoryRecordResponse.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    GetProfileHistoryRecordResponse.add_member(:profile_object_unique_key, Shapes::ShapeRef.new(shape: string1To255, location_name: "ProfileObjectUniqueKey"))
+    GetProfileHistoryRecordResponse.add_member(:content, Shapes::ShapeRef.new(shape: stringifiedJson, location_name: "Content"))
+    GetProfileHistoryRecordResponse.add_member(:performed_by, Shapes::ShapeRef.new(shape: string1To255, location_name: "PerformedBy"))
+    GetProfileHistoryRecordResponse.struct_class = Types::GetProfileHistoryRecordResponse
+
     GetProfileObjectTypeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetProfileObjectTypeRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location: "uri", location_name: "ObjectTypeName"))
     GetProfileObjectTypeRequest.struct_class = Types::GetProfileObjectTypeRequest
@@ -1622,6 +1644,19 @@ module Aws::CustomerProfiles
     ListObjectTypeAttributesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListObjectTypeAttributesResponse.struct_class = Types::ListObjectTypeAttributesResponse
 
+    ListProfileHistoryRecordsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListProfileHistoryRecordsRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
+    ListProfileHistoryRecordsRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, location_name: "ObjectTypeName"))
+    ListProfileHistoryRecordsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListProfileHistoryRecordsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListProfileHistoryRecordsRequest.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, location_name: "ActionType"))
+    ListProfileHistoryRecordsRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: string1To255, location_name: "PerformedBy"))
+    ListProfileHistoryRecordsRequest.struct_class = Types::ListProfileHistoryRecordsRequest
+
+    ListProfileHistoryRecordsResponse.add_member(:profile_history_records, Shapes::ShapeRef.new(shape: ProfileHistoryRecords, location_name: "ProfileHistoryRecords"))
+    ListProfileHistoryRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListProfileHistoryRecordsResponse.struct_class = Types::ListProfileHistoryRecordsResponse
+
     ListProfileObjectTypeItem.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
     ListProfileObjectTypeItem.add_member(:description, Shapes::ShapeRef.new(shape: text, required: true, location_name: "Description"))
     ListProfileObjectTypeItem.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
@@ -1874,6 +1909,17 @@ module Aws::CustomerProfiles
     ProfileDimension.add_member(:dimension_type, Shapes::ShapeRef.new(shape: StringDimensionType, required: true, location_name: "DimensionType"))
     ProfileDimension.add_member(:values, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "Values"))
     ProfileDimension.struct_class = Types::ProfileDimension
+
+    ProfileHistoryRecord.add_member(:id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "Id"))
+    ProfileHistoryRecord.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
+    ProfileHistoryRecord.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    ProfileHistoryRecord.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    ProfileHistoryRecord.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    ProfileHistoryRecord.add_member(:profile_object_unique_key, Shapes::ShapeRef.new(shape: string1To255, location_name: "ProfileObjectUniqueKey"))
+    ProfileHistoryRecord.add_member(:performed_by, Shapes::ShapeRef.new(shape: string1To255, location_name: "PerformedBy"))
+    ProfileHistoryRecord.struct_class = Types::ProfileHistoryRecord
+
+    ProfileHistoryRecords.member = Shapes::ShapeRef.new(shape: ProfileHistoryRecord)
 
     ProfileIdList.member = Shapes::ShapeRef.new(shape: uuid)
 
@@ -2822,6 +2868,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_profile_history_record, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProfileHistoryRecord"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/profiles/{ProfileId}/history-records/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetProfileHistoryRecordRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProfileHistoryRecordResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_profile_object_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetProfileObjectType"
         o.http_method = "GET"
@@ -3131,6 +3190,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}/profile-attributes/{AttributeName}/values"
         o.input = Shapes::ShapeRef.new(shape: ProfileAttributeValuesRequest)
         o.output = Shapes::ShapeRef.new(shape: ProfileAttributeValuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_profile_history_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProfileHistoryRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/profiles/history-records"
+        o.input = Shapes::ShapeRef.new(shape: ListProfileHistoryRecordsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProfileHistoryRecordsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

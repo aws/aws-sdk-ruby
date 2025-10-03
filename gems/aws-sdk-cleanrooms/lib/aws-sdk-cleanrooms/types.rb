@@ -10,6 +10,162 @@
 module Aws::CleanRooms
   module Types
 
+    # Controls and tracks usage limits for associated configured tables
+    # within a collaboration across queries and job. Supports both
+    # period-based budgets that can renew (daily, weekly, or monthly) and
+    # fixed lifetime budgets. Contains the resource ARN, remaining budget
+    # information, and up to two budget configurations (period-based and
+    # lifetime). By default, table usage is unlimited unless a budget is
+    # configured.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the access budget resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Detailed budget information including time bounds, remaining budget,
+    #   and refresh settings.
+    #   @return [Array<Types::AccessBudgetDetails>]
+    #
+    # @!attribute [rw] aggregate_remaining_budget
+    #   The total remaining budget across all budget parameters, showing the
+    #   lower value between the per-period budget and lifetime budget for
+    #   this access budget. For individual parameter budgets, see
+    #   `remainingBudget`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudget AWS API Documentation
+    #
+    class AccessBudget < Struct.new(
+      :resource_arn,
+      :details,
+      :aggregate_remaining_budget)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about an access budget including time bounds,
+    # budget allocation, and configuration settings.
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the access budget period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the access budget period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remaining_budget
+    #   The remaining budget amount available for use within this access
+    #   budget.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget
+    #   The total budget allocation amount for this access budget.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget_type
+    #   Specifies the time period for limiting table usage in queries and
+    #   jobs. For calendar-based periods, the budget can renew if auto
+    #   refresh is enabled. For lifetime budgets, the limit applies to the
+    #   total usage throughout the collaboration. Valid values are:
+    #
+    #   `CALENDAR_DAY` - Limit table usage per day.
+    #
+    #   `CALENDAR_WEEK` - Limit table usage per week.
+    #
+    #   `CALENDAR_MONTH` - Limit table usage per month.
+    #
+    #   `LIFETIME` - Limit total table usage for the collaboration duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   Indicates whether the budget automatically refreshes for each time
+    #   period specified in `budgetType`. Valid values are:
+    #
+    #   `ENABLED` - The budget refreshes automatically at the start of each
+    #   period.
+    #
+    #   `DISABLED` - The budget must be refreshed manually.
+    #
+    #   `NULL` - The value is null when `budgetType` is set to `LIFETIME`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetDetails AWS API Documentation
+    #
+    class AccessBudgetDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :remaining_budget,
+      :budget,
+      :budget_type,
+      :auto_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input parameters for privacy budget templates that support access
+    # budgets functionality, enabling enhanced budget management
+    # capabilities.
+    #
+    # @!attribute [rw] budget_parameters
+    #   An array of budget parameters that define the access budget
+    #   configuration for the privacy template.
+    #   @return [Array<Types::BudgetParameter>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource associated with this
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetsPrivacyTemplateParametersInput AWS API Documentation
+    #
+    class AccessBudgetsPrivacyTemplateParametersInput < Struct.new(
+      :budget_parameters,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output parameters for privacy budget templates with access budgets
+    # support, containing the configured budget information.
+    #
+    # @!attribute [rw] budget_parameters
+    #   An array of budget parameters returned from the access budget
+    #   configuration.
+    #   @return [Array<Types::BudgetParameter>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource associated with this
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetsPrivacyTemplateParametersOutput AWS API Documentation
+    #
+    class AccessBudgetsPrivacyTemplateParametersOutput < Struct.new(
+      :budget_parameters,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Update parameters for privacy budget templates with access budgets
+    # functionality, allowing modification of existing budget
+    # configurations.
+    #
+    # @!attribute [rw] budget_parameters
+    #   Updated array of budget parameters for the access budget
+    #   configuration.
+    #   @return [Array<Types::BudgetParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetsPrivacyTemplateUpdateParameters AWS API Documentation
+    #
+    class AccessBudgetsPrivacyTemplateUpdateParameters < Struct.new(
+      :budget_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Caller does not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -972,6 +1128,32 @@ module Aws::CleanRooms
     #
     class BilledResourceUtilization < Struct.new(
       :units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Individual budget parameter configuration that defines specific budget
+    # allocation settings for access budgets.
+    #
+    # @!attribute [rw] type
+    #   The type of budget parameter being configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] budget
+    #   The budget allocation amount for this specific parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_refresh
+    #   Whether this individual budget parameter automatically refreshes
+    #   when the budget period resets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BudgetParameter AWS API Documentation
+    #
+    class BudgetParameter < Struct.new(
+      :type,
+      :budget,
+      :auto_refresh)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5677,13 +5859,19 @@ module Aws::CleanRooms
     #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the Configured Table Association
+    #   (ConfiguredTableAssociation) used to filter privacy budgets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsInput AWS API Documentation
     #
     class ListCollaborationPrivacyBudgetsInput < Struct.new(
       :collaboration_identifier,
       :privacy_budget_type,
       :max_results,
-      :next_token)
+      :next_token,
+      :access_budget_resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6107,13 +6295,19 @@ module Aws::CleanRooms
     #   value has not been met.
     #   @return [Integer]
     #
+    # @!attribute [rw] access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the access budget resource to
+    #   filter privacy budgets by.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsInput AWS API Documentation
     #
     class ListPrivacyBudgetsInput < Struct.new(
       :membership_identifier,
       :privacy_budget_type,
       :next_token,
-      :max_results)
+      :max_results,
+      :access_budget_resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7117,16 +7311,22 @@ module Aws::CleanRooms
     #   available.
     #   @return [Types::DifferentialPrivacyPrivacyBudget]
     #
+    # @!attribute [rw] access_budget
+    #   Access budget information associated with this privacy budget.
+    #   @return [Types::AccessBudget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudget AWS API Documentation
     #
     class PrivacyBudget < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudget; end
+      class AccessBudget < PrivacyBudget; end
       class Unknown < PrivacyBudget; end
     end
 
@@ -7284,16 +7484,23 @@ module Aws::CleanRooms
     #   An object that specifies the epsilon and noise parameters.
     #   @return [Types::DifferentialPrivacyTemplateParametersInput]
     #
+    # @!attribute [rw] access_budget
+    #   Access budget configuration for the privacy budget template input,
+    #   enabling integration with access budget functionality.
+    #   @return [Types::AccessBudgetsPrivacyTemplateParametersInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateParametersInput AWS API Documentation
     #
     class PrivacyBudgetTemplateParametersInput < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput; end
+      class AccessBudget < PrivacyBudgetTemplateParametersInput; end
       class Unknown < PrivacyBudgetTemplateParametersInput; end
     end
 
@@ -7306,16 +7513,23 @@ module Aws::CleanRooms
     #   The epsilon and noise parameters.
     #   @return [Types::DifferentialPrivacyTemplateParametersOutput]
     #
+    # @!attribute [rw] access_budget
+    #   Access budget configuration returned from the privacy budget
+    #   template, containing the configured access budget settings.
+    #   @return [Types::AccessBudgetsPrivacyTemplateParametersOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateParametersOutput AWS API Documentation
     #
     class PrivacyBudgetTemplateParametersOutput < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput; end
+      class AccessBudget < PrivacyBudgetTemplateParametersOutput; end
       class Unknown < PrivacyBudgetTemplateParametersOutput; end
     end
 
@@ -7389,16 +7603,23 @@ module Aws::CleanRooms
     #   parameters.
     #   @return [Types::DifferentialPrivacyTemplateUpdateParameters]
     #
+    # @!attribute [rw] access_budget
+    #   The new access budget configuration that completely replaces the
+    #   existing access budget settings in the privacy budget template.
+    #   @return [Types::AccessBudgetsPrivacyTemplateUpdateParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateUpdateParameters AWS API Documentation
     #
     class PrivacyBudgetTemplateUpdateParameters < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters; end
+      class AccessBudget < PrivacyBudgetTemplateUpdateParameters; end
       class Unknown < PrivacyBudgetTemplateUpdateParameters; end
     end
 
@@ -8532,6 +8753,10 @@ module Aws::CleanRooms
     #   present.
     #   @return [Array<Types::SchemaStatusDetail>]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the schema resource.
+    #   @return [String]
+    #
     # @!attribute [rw] schema_type_properties
     #   The schema type properties.
     #   @return [Types::SchemaTypeProperties]
@@ -8553,6 +8778,7 @@ module Aws::CleanRooms
       :update_time,
       :type,
       :schema_status_details,
+      :resource_arn,
       :schema_type_properties)
       SENSITIVE = []
       include Aws::Structure
@@ -8689,6 +8915,10 @@ module Aws::CleanRooms
     #   directly on this table.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the schema summary resource.
+    #   @return [String]
+    #
     # @!attribute [rw] selected_analysis_methods
     #   The selected analysis methods for the schema.
     #   @return [Array<String>]
@@ -8705,6 +8935,7 @@ module Aws::CleanRooms
       :collaboration_arn,
       :analysis_rule_types,
       :analysis_method,
+      :resource_arn,
       :selected_analysis_methods)
       SENSITIVE = []
       include Aws::Structure

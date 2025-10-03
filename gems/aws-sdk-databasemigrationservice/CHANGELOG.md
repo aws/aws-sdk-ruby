@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-10-01)
+------------------
+
+* Feature - This is a doc-only update, revising text for kms-key-arns.
+
 1.129.0 (2025-08-26)
 ------------------
 

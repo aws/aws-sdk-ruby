@@ -31,6 +31,7 @@ module Aws::ECS
   # * {AttributeLimitExceededException}
   # * {BlockedException}
   # * {ClientException}
+  # * {ClusterContainsCapacityProviderException}
   # * {ClusterContainsContainerInstancesException}
   # * {ClusterContainsServicesException}
   # * {ClusterContainsTasksException}
@@ -103,6 +104,16 @@ module Aws::ECS
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ClusterContainsCapacityProviderException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::ClusterContainsCapacityProviderException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 

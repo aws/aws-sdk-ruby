@@ -262,9 +262,9 @@ module Aws
                               ?pre_signed_url: ::String,
                               ?option_group_name: ::String,
                               ?target_custom_availability_zone: ::String,
+                              ?snapshot_target: ::String,
                               ?copy_option_group: bool,
                               ?snapshot_availability_zone: ::String,
-                              ?snapshot_target: ::String,
                               ?source_region: ::String
                             ) -> _CopyDBSnapshotResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBSnapshotResponseSuccess
@@ -316,13 +316,20 @@ module Aws
       interface _CreateCustomDBEngineVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DBEngineVersion]
         def engine: () -> ::String
+        def major_engine_version: () -> ::String
         def engine_version: () -> ::String
+        def database_installation_files_s3_bucket_name: () -> ::String
+        def database_installation_files_s3_prefix: () -> ::String
+        def custom_db_engine_version_manifest: () -> ::String
         def db_parameter_group_family: () -> ::String
         def db_engine_description: () -> ::String
+        def db_engine_version_arn: () -> ::String
         def db_engine_version_description: () -> ::String
         def default_character_set: () -> Types::CharacterSet
         def image: () -> Types::CustomDBEngineVersionAMI
         def db_engine_media_type: () -> ::String
+        def kms_key_id: () -> ::String
+        def create_time: () -> ::Time
         def supported_character_sets: () -> ::Array[Types::CharacterSet]
         def supported_nchar_character_sets: () -> ::Array[Types::CharacterSet]
         def valid_upgrade_target: () -> ::Array[Types::UpgradeTarget]
@@ -335,15 +342,8 @@ module Aws
         def status: () -> ::String
         def supports_parallel_query: () -> bool
         def supports_global_databases: () -> bool
-        def major_engine_version: () -> ::String
-        def database_installation_files_s3_bucket_name: () -> ::String
-        def database_installation_files_s3_prefix: () -> ::String
-        def db_engine_version_arn: () -> ::String
-        def kms_key_id: () -> ::String
-        def create_time: () -> ::Time
         def tag_list: () -> ::Array[Types::Tag]
         def supports_babelfish: () -> bool
-        def custom_db_engine_version_manifest: () -> ::String
         def supports_limitless_database: () -> bool
         def supports_certificate_rotation_without_restart: () -> bool
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
@@ -359,6 +359,8 @@ module Aws
                                              ?database_installation_files_s3_prefix: ::String,
                                              ?image_id: ::String,
                                              ?kms_key_id: ::String,
+                                             ?source_custom_db_engine_version_identifier: ::String,
+                                             ?use_aws_provided_latest_image: bool,
                                              ?description: ::String,
                                              ?manifest: ::String,
                                              ?tags: Array[
@@ -366,9 +368,7 @@ module Aws
                                                  key: ::String?,
                                                  value: ::String?
                                                },
-                                             ],
-                                             ?source_custom_db_engine_version_identifier: ::String,
-                                             ?use_aws_provided_latest_image: bool
+                                             ]
                                            ) -> _CreateCustomDBEngineVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDBEngineVersionResponseSuccess
 
@@ -421,6 +421,12 @@ module Aws
                                  transit_gateway_multicast_domain_id: ::String?,
                                  replica_mode: ("open-read-only" | "mounted")?
                                },
+                               ?db_cluster_instance_class: ::String,
+                               ?allocated_storage: ::Integer,
+                               ?storage_type: ::String,
+                               ?iops: ::Integer,
+                               ?publicly_accessible: bool,
+                               ?auto_minor_version_upgrade: bool,
                                ?deletion_protection: bool,
                                ?global_cluster_identifier: ::String,
                                ?enable_http_endpoint: bool,
@@ -428,12 +434,12 @@ module Aws
                                ?domain: ::String,
                                ?domain_iam_role_name: ::String,
                                ?enable_global_write_forwarding: bool,
-                               ?db_cluster_instance_class: ::String,
-                               ?allocated_storage: ::Integer,
-                               ?storage_type: ::String,
-                               ?iops: ::Integer,
-                               ?publicly_accessible: bool,
-                               ?auto_minor_version_upgrade: bool,
+                               ?network_type: ::String,
+                               ?serverless_v2_scaling_configuration: {
+                                 min_capacity: ::Float?,
+                                 max_capacity: ::Float?,
+                                 seconds_until_auto_pause: ::Integer?
+                               },
                                ?monitoring_interval: ::Integer,
                                ?monitoring_role_arn: ::String,
                                ?database_insights_mode: ("standard" | "advanced"),
@@ -441,17 +447,11 @@ module Aws
                                ?performance_insights_kms_key_id: ::String,
                                ?performance_insights_retention_period: ::Integer,
                                ?enable_limitless_database: bool,
-                               ?serverless_v2_scaling_configuration: {
-                                 min_capacity: ::Float?,
-                                 max_capacity: ::Float?,
-                                 seconds_until_auto_pause: ::Integer?
-                               },
-                               ?network_type: ::String,
-                               ?cluster_scalability_type: ("standard" | "limitless"),
+                               ?cluster_scalability_type: ("standard" | "limitless" | "scaleout"),
                                ?db_system_id: ::String,
                                ?manage_master_user_password: bool,
-                               ?master_user_secret_kms_key_id: ::String,
                                ?enable_local_write_forwarding: bool,
+                               ?master_user_secret_kms_key_id: ::String,
                                ?ca_certificate_identifier: ::String,
                                ?engine_lifecycle_support: ::String,
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
@@ -550,6 +550,7 @@ module Aws
                                 ?auto_minor_version_upgrade: bool,
                                 ?license_model: ::String,
                                 ?iops: ::Integer,
+                                ?storage_throughput: ::Integer,
                                 ?option_group_name: ::String,
                                 ?character_set_name: ::String,
                                 ?nchar_character_set_name: ::String,
@@ -592,16 +593,15 @@ module Aws
                                 ?deletion_protection: bool,
                                 ?max_allocated_storage: ::Integer,
                                 ?enable_customer_owned_ip: bool,
-                                ?custom_iam_instance_profile: ::String,
-                                ?backup_target: ::String,
                                 ?network_type: ::String,
-                                ?storage_throughput: ::Integer,
+                                ?backup_target: ::String,
+                                ?custom_iam_instance_profile: ::String,
+                                ?db_system_id: ::String,
+                                ?ca_certificate_identifier: ::String,
                                 ?manage_master_user_password: bool,
                                 ?master_user_secret_kms_key_id: ::String,
-                                ?ca_certificate_identifier: ::String,
-                                ?db_system_id: ::String,
-                                ?dedicated_log_volume: bool,
                                 ?multi_tenant: bool,
+                                ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
                                 ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _CreateDBInstanceResponseSuccess
@@ -621,6 +621,7 @@ module Aws
                                              ?multi_az: bool,
                                              ?auto_minor_version_upgrade: bool,
                                              ?iops: ::Integer,
+                                             ?storage_throughput: ::Integer,
                                              ?option_group_name: ::String,
                                              ?db_parameter_group_name: ::String,
                                              ?publicly_accessible: bool,
@@ -659,12 +660,11 @@ module Aws
                                              ?domain_auth_secret_arn: ::String,
                                              ?domain_dns_ips: Array[::String],
                                              ?replica_mode: ("open-read-only" | "mounted"),
-                                             ?max_allocated_storage: ::Integer,
-                                             ?custom_iam_instance_profile: ::String,
-                                             ?network_type: ::String,
-                                             ?storage_throughput: ::Integer,
                                              ?enable_customer_owned_ip: bool,
+                                             ?network_type: ::String,
+                                             ?max_allocated_storage: ::Integer,
                                              ?backup_target: ::String,
+                                             ?custom_iam_instance_profile: ::String,
                                              ?allocated_storage: ::Integer,
                                              ?source_db_cluster_identifier: ::String,
                                              ?dedicated_log_volume: bool,
@@ -859,7 +859,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_global_cluster-instance_method
       def create_global_cluster: (
-                                   ?global_cluster_identifier: ::String,
+                                   global_cluster_identifier: ::String,
                                    ?source_db_cluster_identifier: ::String,
                                    ?engine: ::String,
                                    ?engine_version: ::String,
@@ -874,7 +874,7 @@ module Aws
                                      },
                                    ]
                                  ) -> _CreateGlobalClusterResponseSuccess
-                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalClusterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalClusterResponseSuccess
 
       interface _CreateIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
@@ -886,10 +886,10 @@ module Aws
         def additional_encryption_context: () -> ::Hash[::String, ::String]
         def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
         def tags: () -> ::Array[Types::Tag]
-        def create_time: () -> ::Time
-        def errors: () -> ::Array[Types::IntegrationError]
         def data_filter: () -> ::String
         def description: () -> ::String
+        def create_time: () -> ::Time
+        def errors: () -> ::Array[Types::IntegrationError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_integration-instance_method
       def create_integration: (
@@ -965,13 +965,20 @@ module Aws
       interface _DeleteCustomDBEngineVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DBEngineVersion]
         def engine: () -> ::String
+        def major_engine_version: () -> ::String
         def engine_version: () -> ::String
+        def database_installation_files_s3_bucket_name: () -> ::String
+        def database_installation_files_s3_prefix: () -> ::String
+        def custom_db_engine_version_manifest: () -> ::String
         def db_parameter_group_family: () -> ::String
         def db_engine_description: () -> ::String
+        def db_engine_version_arn: () -> ::String
         def db_engine_version_description: () -> ::String
         def default_character_set: () -> Types::CharacterSet
         def image: () -> Types::CustomDBEngineVersionAMI
         def db_engine_media_type: () -> ::String
+        def kms_key_id: () -> ::String
+        def create_time: () -> ::Time
         def supported_character_sets: () -> ::Array[Types::CharacterSet]
         def supported_nchar_character_sets: () -> ::Array[Types::CharacterSet]
         def valid_upgrade_target: () -> ::Array[Types::UpgradeTarget]
@@ -984,15 +991,8 @@ module Aws
         def status: () -> ::String
         def supports_parallel_query: () -> bool
         def supports_global_databases: () -> bool
-        def major_engine_version: () -> ::String
-        def database_installation_files_s3_bucket_name: () -> ::String
-        def database_installation_files_s3_prefix: () -> ::String
-        def db_engine_version_arn: () -> ::String
-        def kms_key_id: () -> ::String
-        def create_time: () -> ::Time
         def tag_list: () -> ::Array[Types::Tag]
         def supports_babelfish: () -> bool
-        def custom_db_engine_version_manifest: () -> ::String
         def supports_limitless_database: () -> bool
         def supports_certificate_rotation_without_restart: () -> bool
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
@@ -1187,10 +1187,10 @@ module Aws
         def additional_encryption_context: () -> ::Hash[::String, ::String]
         def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
         def tags: () -> ::Array[Types::Tag]
-        def create_time: () -> ::Time
-        def errors: () -> ::Array[Types::IntegrationError]
         def data_filter: () -> ::String
         def description: () -> ::String
+        def create_time: () -> ::Time
+        def errors: () -> ::Array[Types::IntegrationError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_integration-instance_method
       def delete_integration: (
@@ -1862,7 +1862,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#describe_events-instance_method
       def describe_events: (
                              ?source_identifier: ::String,
-                             ?source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment"),
+                             ?source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment" | "db-shard-group" | "zero-etl"),
                              ?start_time: ::Time,
                              ?end_time: ::Time,
                              ?duration: ::Integer,
@@ -2244,13 +2244,20 @@ module Aws
       interface _ModifyCustomDBEngineVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DBEngineVersion]
         def engine: () -> ::String
+        def major_engine_version: () -> ::String
         def engine_version: () -> ::String
+        def database_installation_files_s3_bucket_name: () -> ::String
+        def database_installation_files_s3_prefix: () -> ::String
+        def custom_db_engine_version_manifest: () -> ::String
         def db_parameter_group_family: () -> ::String
         def db_engine_description: () -> ::String
+        def db_engine_version_arn: () -> ::String
         def db_engine_version_description: () -> ::String
         def default_character_set: () -> Types::CharacterSet
         def image: () -> Types::CustomDBEngineVersionAMI
         def db_engine_media_type: () -> ::String
+        def kms_key_id: () -> ::String
+        def create_time: () -> ::Time
         def supported_character_sets: () -> ::Array[Types::CharacterSet]
         def supported_nchar_character_sets: () -> ::Array[Types::CharacterSet]
         def valid_upgrade_target: () -> ::Array[Types::UpgradeTarget]
@@ -2263,15 +2270,8 @@ module Aws
         def status: () -> ::String
         def supports_parallel_query: () -> bool
         def supports_global_databases: () -> bool
-        def major_engine_version: () -> ::String
-        def database_installation_files_s3_bucket_name: () -> ::String
-        def database_installation_files_s3_prefix: () -> ::String
-        def db_engine_version_arn: () -> ::String
-        def kms_key_id: () -> ::String
-        def create_time: () -> ::Time
         def tag_list: () -> ::Array[Types::Tag]
         def supports_babelfish: () -> bool
-        def custom_db_engine_version_manifest: () -> ::String
         def supports_limitless_database: () -> bool
         def supports_certificate_rotation_without_restart: () -> bool
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
@@ -2333,24 +2333,24 @@ module Aws
                                ?storage_type: ::String,
                                ?iops: ::Integer,
                                ?auto_minor_version_upgrade: bool,
+                               ?network_type: ::String,
+                               ?serverless_v2_scaling_configuration: {
+                                 min_capacity: ::Float?,
+                                 max_capacity: ::Float?,
+                                 seconds_until_auto_pause: ::Integer?
+                               },
                                ?monitoring_interval: ::Integer,
                                ?monitoring_role_arn: ::String,
                                ?database_insights_mode: ("standard" | "advanced"),
                                ?enable_performance_insights: bool,
                                ?performance_insights_kms_key_id: ::String,
                                ?performance_insights_retention_period: ::Integer,
-                               ?serverless_v2_scaling_configuration: {
-                                 min_capacity: ::Float?,
-                                 max_capacity: ::Float?,
-                                 seconds_until_auto_pause: ::Integer?
-                               },
-                               ?network_type: ::String,
                                ?manage_master_user_password: bool,
                                ?rotate_master_user_password: bool,
+                               ?enable_local_write_forwarding: bool,
                                ?master_user_secret_kms_key_id: ::String,
                                ?engine_mode: ::String,
                                ?allow_engine_mode_change: bool,
-                               ?enable_local_write_forwarding: bool,
                                ?aws_backup_recovery_point_arn: ::String,
                                ?enable_limitless_database: bool,
                                ?ca_certificate_identifier: ::String,
@@ -2442,6 +2442,7 @@ module Aws
                                 ?auto_minor_version_upgrade: bool,
                                 ?license_model: ::String,
                                 ?iops: ::Integer,
+                                ?storage_throughput: ::Integer,
                                 ?option_group_name: ::String,
                                 ?new_db_instance_identifier: ::String,
                                 ?storage_type: ::String,
@@ -2453,13 +2454,13 @@ module Aws
                                 ?domain_ou: ::String,
                                 ?domain_auth_secret_arn: ::String,
                                 ?domain_dns_ips: Array[::String],
+                                ?disable_domain: bool,
                                 ?copy_tags_to_snapshot: bool,
                                 ?monitoring_interval: ::Integer,
                                 ?db_port_number: ::Integer,
                                 ?publicly_accessible: bool,
                                 ?monitoring_role_arn: ::String,
                                 ?domain_iam_role_name: ::String,
-                                ?disable_domain: bool,
                                 ?promotion_tier: ::Integer,
                                 ?enable_iam_database_authentication: bool,
                                 ?database_insights_mode: ("standard" | "advanced"),
@@ -2481,18 +2482,17 @@ module Aws
                                 ?max_allocated_storage: ::Integer,
                                 ?certificate_rotation_restart: bool,
                                 ?replica_mode: ("open-read-only" | "mounted"),
-                                ?enable_customer_owned_ip: bool,
-                                ?aws_backup_recovery_point_arn: ::String,
                                 ?automation_mode: ("full" | "all-paused"),
                                 ?resume_full_automation_mode_minutes: ::Integer,
+                                ?enable_customer_owned_ip: bool,
                                 ?network_type: ::String,
-                                ?storage_throughput: ::Integer,
+                                ?aws_backup_recovery_point_arn: ::String,
                                 ?manage_master_user_password: bool,
                                 ?rotate_master_user_password: bool,
                                 ?master_user_secret_kms_key_id: ::String,
-                                ?engine: ::String,
-                                ?dedicated_log_volume: bool,
                                 ?multi_tenant: bool,
+                                ?dedicated_log_volume: bool,
+                                ?engine: ::String,
                                 ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _ModifyDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBInstanceResponseSuccess
@@ -2678,13 +2678,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_global_cluster-instance_method
       def modify_global_cluster: (
-                                   ?global_cluster_identifier: ::String,
+                                   global_cluster_identifier: ::String,
                                    ?new_global_cluster_identifier: ::String,
                                    ?deletion_protection: bool,
                                    ?engine_version: ::String,
                                    ?allow_major_version_upgrade: bool
                                  ) -> _ModifyGlobalClusterResponseSuccess
-                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyGlobalClusterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyGlobalClusterResponseSuccess
 
       interface _ModifyIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
@@ -2696,10 +2696,10 @@ module Aws
         def additional_encryption_context: () -> ::Hash[::String, ::String]
         def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
         def tags: () -> ::Array[Types::Tag]
-        def create_time: () -> ::Time
-        def errors: () -> ::Array[Types::IntegrationError]
         def data_filter: () -> ::String
         def description: () -> ::String
+        def create_time: () -> ::Time
+        def errors: () -> ::Array[Types::IntegrationError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_integration-instance_method
       def modify_integration: (
@@ -2860,10 +2860,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#remove_from_global_cluster-instance_method
       def remove_from_global_cluster: (
-                                        ?global_cluster_identifier: ::String,
-                                        ?db_cluster_identifier: ::String
+                                        global_cluster_identifier: ::String,
+                                        db_cluster_identifier: ::String
                                       ) -> _RemoveFromGlobalClusterResponseSuccess
-                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFromGlobalClusterResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFromGlobalClusterResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#remove_role_from_db_cluster-instance_method
       def remove_role_from_db_cluster: (
@@ -2993,15 +2993,15 @@ module Aws
                                         ?copy_tags_to_snapshot: bool,
                                         ?domain: ::String,
                                         ?domain_iam_role_name: ::String,
+                                        ?storage_type: ::String,
+                                        ?network_type: ::String,
                                         ?serverless_v2_scaling_configuration: {
                                           min_capacity: ::Float?,
                                           max_capacity: ::Float?,
                                           seconds_until_auto_pause: ::Integer?
                                         },
-                                        ?network_type: ::String,
                                         ?manage_master_user_password: bool,
                                         ?master_user_secret_kms_key_id: ::String,
-                                        ?storage_type: ::String,
                                         ?engine_lifecycle_support: ::String
                                       ) -> _RestoreDBClusterFromS3ResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromS3ResponseSuccess
@@ -3050,12 +3050,12 @@ module Aws
                                               ?storage_type: ::String,
                                               ?iops: ::Integer,
                                               ?publicly_accessible: bool,
+                                              ?network_type: ::String,
                                               ?serverless_v2_scaling_configuration: {
                                                 min_capacity: ::Float?,
                                                 max_capacity: ::Float?,
                                                 seconds_until_auto_pause: ::Integer?
                                               },
-                                              ?network_type: ::String,
                                               ?rds_custom_cluster_configuration: {
                                                 interconnect_subnet_id: ::String?,
                                                 transit_gateway_multicast_domain_id: ::String?,
@@ -3100,6 +3100,17 @@ module Aws
                                                  ?copy_tags_to_snapshot: bool,
                                                  ?domain: ::String,
                                                  ?domain_iam_role_name: ::String,
+                                                 ?db_cluster_instance_class: ::String,
+                                                 ?storage_type: ::String,
+                                                 ?publicly_accessible: bool,
+                                                 ?iops: ::Integer,
+                                                 ?network_type: ::String,
+                                                 ?source_db_cluster_resource_id: ::String,
+                                                 ?serverless_v2_scaling_configuration: {
+                                                   min_capacity: ::Float?,
+                                                   max_capacity: ::Float?,
+                                                   seconds_until_auto_pause: ::Integer?
+                                                 },
                                                  ?scaling_configuration: {
                                                    min_capacity: ::Integer?,
                                                    max_capacity: ::Integer?,
@@ -3109,17 +3120,6 @@ module Aws
                                                    seconds_before_timeout: ::Integer?
                                                  },
                                                  ?engine_mode: ::String,
-                                                 ?db_cluster_instance_class: ::String,
-                                                 ?storage_type: ::String,
-                                                 ?publicly_accessible: bool,
-                                                 ?iops: ::Integer,
-                                                 ?serverless_v2_scaling_configuration: {
-                                                   min_capacity: ::Float?,
-                                                   max_capacity: ::Float?,
-                                                   seconds_until_auto_pause: ::Integer?
-                                                 },
-                                                 ?network_type: ::String,
-                                                 ?source_db_cluster_resource_id: ::String,
                                                  ?rds_custom_cluster_configuration: {
                                                    interconnect_subnet_id: ::String?,
                                                    transit_gateway_multicast_domain_id: ::String?,
@@ -3153,6 +3153,7 @@ module Aws
                                                   ?db_name: ::String,
                                                   ?engine: ::String,
                                                   ?iops: ::Integer,
+                                                  ?storage_throughput: ::Integer,
                                                   ?option_group_name: ::String,
                                                   ?tags: Array[
                                                     {
@@ -3183,12 +3184,11 @@ module Aws
                                                   ?db_parameter_group_name: ::String,
                                                   ?deletion_protection: bool,
                                                   ?enable_customer_owned_ip: bool,
-                                                  ?custom_iam_instance_profile: ::String,
-                                                  ?backup_target: ::String,
                                                   ?network_type: ::String,
-                                                  ?storage_throughput: ::Integer,
-                                                  ?db_cluster_snapshot_identifier: ::String,
+                                                  ?backup_target: ::String,
+                                                  ?custom_iam_instance_profile: ::String,
                                                   ?allocated_storage: ::Integer,
+                                                  ?db_cluster_snapshot_identifier: ::String,
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
@@ -3224,6 +3224,7 @@ module Aws
                                          ?auto_minor_version_upgrade: bool,
                                          ?license_model: ::String,
                                          ?iops: ::Integer,
+                                         ?storage_throughput: ::Integer,
                                          ?option_group_name: ::String,
                                          ?publicly_accessible: bool,
                                          ?tags: Array[
@@ -3259,7 +3260,6 @@ module Aws
                                          ?deletion_protection: bool,
                                          ?max_allocated_storage: ::Integer,
                                          ?network_type: ::String,
-                                         ?storage_throughput: ::Integer,
                                          ?manage_master_user_password: bool,
                                          ?master_user_secret_kms_key_id: ::String,
                                          ?dedicated_log_volume: bool,
@@ -3289,6 +3289,7 @@ module Aws
                                                   ?db_name: ::String,
                                                   ?engine: ::String,
                                                   ?iops: ::Integer,
+                                                  ?storage_throughput: ::Integer,
                                                   ?option_group_name: ::String,
                                                   ?copy_tags_to_snapshot: bool,
                                                   ?tags: Array[
@@ -3320,12 +3321,11 @@ module Aws
                                                   ?deletion_protection: bool,
                                                   ?source_dbi_resource_id: ::String,
                                                   ?max_allocated_storage: ::Integer,
-                                                  ?source_db_instance_automated_backups_arn: ::String,
                                                   ?enable_customer_owned_ip: bool,
-                                                  ?custom_iam_instance_profile: ::String,
-                                                  ?backup_target: ::String,
                                                   ?network_type: ::String,
-                                                  ?storage_throughput: ::Integer,
+                                                  ?source_db_instance_automated_backups_arn: ::String,
+                                                  ?backup_target: ::String,
+                                                  ?custom_iam_instance_profile: ::String,
                                                   ?allocated_storage: ::Integer,
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
@@ -3355,8 +3355,8 @@ module Aws
         def kinesis_stream_name: () -> ::String
         def status: () -> ("stopped" | "starting" | "started" | "stopping")
         def mode: () -> ("sync" | "async")
-        def apply_immediately: () -> bool
         def engine_native_audit_fields_included: () -> bool
+        def apply_immediately: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#start_activity_stream-instance_method
       def start_activity_stream: (

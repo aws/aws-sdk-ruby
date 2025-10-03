@@ -541,11 +541,11 @@ module Aws::CloudFormation
     #   and `PublisherId`.
     #
     # @option params [String] :type_name_alias
-    #   An alias to assign to the public extension, in this account and
-    #   Region. If you specify an alias for the extension, CloudFormation
-    #   treats the alias as the extension type name within this account and
-    #   Region. You must use the alias to refer to the extension in your
-    #   templates, API calls, and CloudFormation console.
+    #   An alias to assign to the public extension in this account and Region.
+    #   If you specify an alias for the extension, CloudFormation treats the
+    #   alias as the extension type name within this account and Region. You
+    #   must use the alias to refer to the extension in your templates, API
+    #   calls, and CloudFormation console.
     #
     #   An extension alias must be unique within a given account and Region.
     #   You can activate the same public resource multiple times in the same
@@ -2182,7 +2182,7 @@ module Aws::CloudFormation
     # module, or a CloudFormation Hook when you no longer use it.
     #
     # Deactivating an extension deletes the configuration details that are
-    # associated with it. To temporary disable a CloudFormation Hook
+    # associated with it. To temporarily disable a CloudFormation Hook
     # instead, you can use [SetTypeConfiguration][1].
     #
     # Once deactivated, an extension can't be used in any CloudFormation
@@ -2199,7 +2199,7 @@ module Aws::CloudFormation
     # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html
     #
     # @option params [String] :type_name
-    #   The type name of the extension, in this account and Region. If you
+    #   The type name of the extension in this account and Region. If you
     #   specified a type name alias when enabling the extension, use the type
     #   name alias.
     #
@@ -2211,7 +2211,7 @@ module Aws::CloudFormation
     #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
     #
     # @option params [String] :arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account and
+    #   The Amazon Resource Name (ARN) for the extension in this account and
     #   Region.
     #
     #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
@@ -2947,7 +2947,7 @@ module Aws::CloudFormation
     #   resp.resources[0].resource_status #=> String, one of "PENDING", "IN_PROGRESS", "FAILED", "COMPLETE"
     #   resp.resources[0].resource_status_reason #=> String
     #   resp.resources[0].warnings #=> Array
-    #   resp.resources[0].warnings[0].type #=> String, one of "MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES", "EXCLUDED_PROPERTIES"
+    #   resp.resources[0].warnings[0].type #=> String, one of "MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES", "EXCLUDED_PROPERTIES", "EXCLUDED_RESOURCES"
     #   resp.resources[0].warnings[0].properties #=> Array
     #   resp.resources[0].warnings[0].properties[0].property_path #=> String
     #   resp.resources[0].warnings[0].properties[0].required #=> Boolean
@@ -4048,6 +4048,13 @@ module Aws::CloudFormation
     # If you specify a `VersionId`, `DescribeType` returns information about
     # that specific extension version. Otherwise, it returns information
     # about the default extension version.
+    #
+    # For more information, see [Edit configuration data for extensions in
+    # your account][1] in the *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -5209,8 +5216,8 @@ module Aws::CloudFormation
     end
 
     # Returns summaries of invoked Hooks. For more information, see [View
-    # CloudFormation Hooks invocations][1] in the *CloudFormation Hooks User
-    # Guide*.
+    # invocation summaries for CloudFormation Hooks][1] in the
+    # *CloudFormation Hooks User Guide*.
     #
     # This operation supports the following parameter combinations:
     #
@@ -6695,8 +6702,7 @@ module Aws::CloudFormation
     #       Region.
     #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
-    #     extensions from Amazon Web Services, in addition to third-party
-    #     publishers.
+    #     extensions from Amazon Web Services and third-party publishers.
     #
     #   The default is `PRIVATE`.
     #
@@ -7297,28 +7303,36 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Specifies the configuration data for a registered CloudFormation
-    # extension, in the given account and Region.
+    # Specifies the configuration data for a CloudFormation extension, such
+    # as a resource or Hook, in the given account and Region.
+    #
+    # For more information, see [Edit configuration data for extensions in
+    # your account][1] in the *CloudFormation User Guide*.
     #
     # To view the current configuration data for an extension, refer to the
-    # `ConfigurationSchema` element of [DescribeType][1]. For more
-    # information, see [Edit configuration data for extensions in your
-    # account][2] in the *CloudFormation User Guide*.
+    # `ConfigurationSchema` element of [DescribeType][2].
     #
     # It's strongly recommended that you use dynamic references to restrict
     # sensitive configuration definitions, such as third-party credentials.
-    # For more details on dynamic references, see [Specify values stored in
-    # other services using dynamic references][3] in the *CloudFormation
-    # User Guide*.
+    # For more information, see [Specify values stored in other services
+    # using dynamic references][3] in the *CloudFormation User Guide*.
+    #
+    # For more information about setting the configuration data for resource
+    # types, see [Defining the account-level configuration of an
+    # extension][4] in the *CloudFormation Command Line Interface (CLI) User
+    # Guide*. For more information about setting the configuration data for
+    # Hooks, see the [CloudFormation Hooks User Guide][5].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
     # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
+    # [4]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
+    # [5]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html
     #
     # @option params [String] :type_arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account and
+    #   The Amazon Resource Name (ARN) for the extension in this account and
     #   Region.
     #
     #   For public extensions, this will be the ARN assigned when you call the
@@ -7336,18 +7350,15 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
     #
     # @option params [required, String] :configuration
-    #   The configuration data for the extension, in this account and Region.
+    #   The configuration data for the extension in this account and Region.
     #
-    #   The configuration data must be formatted as JSON, and validate against
-    #   the schema returned in the `ConfigurationSchema` response element of
-    #   [DescribeType][1]. For more information, see [Defining the
-    #   account-level configuration of an extension][2] in the *CloudFormation
-    #   Command Line Interface (CLI) User Guide*.
+    #   The configuration data must be formatted as JSON and validate against
+    #   the extension's schema returned in the `Schema` response element of
+    #   [DescribeType][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    #   [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
     #
     # @option params [String] :configuration_alias
     #   An alias by which to refer to this extension configuration data.
@@ -8894,7 +8905,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

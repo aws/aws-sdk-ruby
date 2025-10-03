@@ -105,8 +105,8 @@ module Aws
                                 },
                               ]?,
                               accounting: {
-                                mode: ("STANDARD" | "NONE"),
-                                default_purge_time_in_days: ::Integer?
+                                default_purge_time_in_days: ::Integer?,
+                                mode: ("STANDARD" | "NONE")
                               }?
                             },
                             ?client_token: ::String,
@@ -168,6 +168,14 @@ module Aws
                               compute_node_group_id: ::String?
                             },
                           ],
+                          ?slurm_configuration: {
+                            slurm_custom_settings: Array[
+                              {
+                                parameter_name: ::String,
+                                parameter_value: ::String
+                              },
+                            ]?
+                          },
                           ?client_token: ::String,
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateQueueResponseSuccess
@@ -312,6 +320,30 @@ module Aws
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            cluster_identifier: ::String,
+                            ?client_token: ::String,
+                            ?slurm_configuration: {
+                              scale_down_idle_time_in_seconds: ::Integer?,
+                              slurm_custom_settings: Array[
+                                {
+                                  parameter_name: ::String,
+                                  parameter_value: ::String
+                                },
+                              ]?,
+                              accounting: {
+                                default_purge_time_in_days: ::Integer?,
+                                mode: ("STANDARD" | "NONE")?
+                              }?
+                            }
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
       interface _UpdateComputeNodeGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComputeNodeGroupResponse]
         def compute_node_group: () -> Types::ComputeNodeGroup
@@ -360,6 +392,14 @@ module Aws
                               compute_node_group_id: ::String?
                             },
                           ],
+                          ?slurm_configuration: {
+                            slurm_custom_settings: Array[
+                              {
+                                parameter_name: ::String,
+                                parameter_value: ::String
+                              },
+                            ]?
+                          },
                           ?client_token: ::String
                         ) -> _UpdateQueueResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueResponseSuccess

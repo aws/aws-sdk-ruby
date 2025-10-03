@@ -44,6 +44,42 @@ module Aws::RDS
     end
     alias :engine_version :version
 
+    # The major engine version of the CEV.
+    # @return [String]
+    def major_engine_version
+      data[:major_engine_version]
+    end
+
+    # The name of the Amazon S3 bucket that contains your database
+    # installation files.
+    # @return [String]
+    def database_installation_files_s3_bucket_name
+      data[:database_installation_files_s3_bucket_name]
+    end
+
+    # The Amazon S3 directory that contains the database installation files.
+    # If not specified, then no prefix is assumed.
+    # @return [String]
+    def database_installation_files_s3_prefix
+      data[:database_installation_files_s3_prefix]
+    end
+
+    # JSON string that lists the installation files and parameters that RDS
+    # Custom uses to create a custom engine version (CEV). RDS Custom
+    # applies the patches in the order in which they're listed in the
+    # manifest. You can set the Oracle home, Oracle base, and UNIX/Linux
+    # user and group using the installation parameters. For more
+    # information, see [JSON fields in the CEV manifest][1] in the *Amazon
+    # RDS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
+    # @return [String]
+    def custom_db_engine_version_manifest
+      data[:custom_db_engine_version_manifest]
+    end
+
     # The name of the DB parameter group family for the database engine.
     # @return [String]
     def db_parameter_group_family
@@ -54,6 +90,12 @@ module Aws::RDS
     # @return [String]
     def db_engine_description
       data[:db_engine_description]
+    end
+
+    # The ARN of the custom engine version.
+    # @return [String]
+    def db_engine_version_arn
+      data[:db_engine_version_arn]
     end
 
     # The description of the database engine version.
@@ -81,6 +123,19 @@ module Aws::RDS
     # @return [String]
     def db_engine_media_type
       data[:db_engine_media_type]
+    end
+
+    # The Amazon Web Services KMS key identifier for an encrypted CEV. This
+    # parameter is required for RDS Custom, but optional for Amazon RDS.
+    # @return [String]
+    def kms_key_id
+      data[:kms_key_id]
+    end
+
+    # The creation time of the DB engine version.
+    # @return [Time]
+    def create_time
+      data[:create_time]
     end
 
     # A list of the character sets supported by this engine for the
@@ -181,45 +236,6 @@ module Aws::RDS
       data[:supports_global_databases]
     end
 
-    # The major engine version of the CEV.
-    # @return [String]
-    def major_engine_version
-      data[:major_engine_version]
-    end
-
-    # The name of the Amazon S3 bucket that contains your database
-    # installation files.
-    # @return [String]
-    def database_installation_files_s3_bucket_name
-      data[:database_installation_files_s3_bucket_name]
-    end
-
-    # The Amazon S3 directory that contains the database installation files.
-    # If not specified, then no prefix is assumed.
-    # @return [String]
-    def database_installation_files_s3_prefix
-      data[:database_installation_files_s3_prefix]
-    end
-
-    # The ARN of the custom engine version.
-    # @return [String]
-    def db_engine_version_arn
-      data[:db_engine_version_arn]
-    end
-
-    # The Amazon Web Services KMS key identifier for an encrypted CEV. This
-    # parameter is required for RDS Custom, but optional for Amazon RDS.
-    # @return [String]
-    def kms_key_id
-      data[:kms_key_id]
-    end
-
-    # The creation time of the DB engine version.
-    # @return [Time]
-    def create_time
-      data[:create_time]
-    end
-
     # A list of tags.
     #
     # For more information, see [Tagging Amazon RDS resources][1] in the
@@ -240,22 +256,6 @@ module Aws::RDS
     # @return [Boolean]
     def supports_babelfish
       data[:supports_babelfish]
-    end
-
-    # JSON string that lists the installation files and parameters that RDS
-    # Custom uses to create a custom engine version (CEV). RDS Custom
-    # applies the patches in the order in which they're listed in the
-    # manifest. You can set the Oracle home, Oracle base, and UNIX/Linux
-    # user and group using the installation parameters. For more
-    # information, see [JSON fields in the CEV manifest][1] in the *Amazon
-    # RDS User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
-    # @return [String]
-    def custom_db_engine_version_manifest
-      data[:custom_db_engine_version_manifest]
     end
 
     # Indicates whether the DB engine version supports Aurora Limitless

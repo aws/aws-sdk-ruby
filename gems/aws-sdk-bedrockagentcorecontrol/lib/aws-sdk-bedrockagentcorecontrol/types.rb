@@ -915,6 +915,11 @@ module Aws::BedrockAgentCoreControl
     #     the end user.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map of key-value pairs to associate with the gateway as metadata
+    #   tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRequest AWS API Documentation
     #
     class CreateGatewayRequest < Struct.new(
@@ -927,7 +932,8 @@ module Aws::BedrockAgentCoreControl
       :authorizer_type,
       :authorizer_configuration,
       :kms_key_arn,
-      :exception_level)
+      :exception_level,
+      :tags)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

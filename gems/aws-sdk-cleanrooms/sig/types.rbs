@@ -8,6 +8,40 @@
 module Aws::CleanRooms
   module Types
 
+    class AccessBudget
+      attr_accessor resource_arn: ::String
+      attr_accessor details: ::Array[Types::AccessBudgetDetails]
+      attr_accessor aggregate_remaining_budget: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessBudgetDetails
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor remaining_budget: ::Integer
+      attr_accessor budget: ::Integer
+      attr_accessor budget_type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME")
+      attr_accessor auto_refresh: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AccessBudgetsPrivacyTemplateParametersInput
+      attr_accessor budget_parameters: ::Array[Types::BudgetParameter]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AccessBudgetsPrivacyTemplateParametersOutput
+      attr_accessor budget_parameters: ::Array[Types::BudgetParameter]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AccessBudgetsPrivacyTemplateUpdateParameters
+      attr_accessor budget_parameters: ::Array[Types::BudgetParameter]
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor reason: ("INSUFFICIENT_PERMISSIONS")
@@ -284,6 +318,13 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class BudgetParameter
+      attr_accessor type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME")
+      attr_accessor budget: ::Integer
+      attr_accessor auto_refresh: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class Change
       attr_accessor specification_type: ("MEMBER")
       attr_accessor specification: Types::ChangeSpecification
@@ -448,7 +489,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor collaboration_arn: ::String
       attr_accessor creator_account_id: ::String
-      attr_accessor type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor budget: Types::PrivacyBudget
@@ -463,7 +504,7 @@ module Aws::CleanRooms
       attr_accessor creator_account_id: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor auto_refresh: ("CALENDAR_MONTH" | "NONE")
       attr_accessor parameters: Types::PrivacyBudgetTemplateParametersOutput
       SENSITIVE: []
@@ -475,7 +516,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor collaboration_arn: ::String
       attr_accessor creator_account_id: ::String
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       SENSITIVE: []
@@ -948,7 +989,7 @@ module Aws::CleanRooms
     class CreatePrivacyBudgetTemplateInput
       attr_accessor membership_identifier: ::String
       attr_accessor auto_refresh: ("CALENDAR_MONTH" | "NONE")
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor parameters: Types::PrivacyBudgetTemplateParametersInput
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1585,9 +1626,10 @@ module Aws::CleanRooms
 
     class ListCollaborationPrivacyBudgetsInput
       attr_accessor collaboration_identifier: ::String
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor access_budget_resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -1715,9 +1757,10 @@ module Aws::CleanRooms
 
     class ListPrivacyBudgetsInput
       attr_accessor membership_identifier: ::String
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor access_budget_resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -1978,10 +2021,13 @@ module Aws::CleanRooms
 
     class PrivacyBudget
       attr_accessor differential_privacy: Types::DifferentialPrivacyPrivacyBudget
+      attr_accessor access_budget: Types::AccessBudget
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DifferentialPrivacy < PrivacyBudget
+      end
+      class AccessBudget < PrivacyBudget
       end
       class Unknown < PrivacyBudget
       end
@@ -1995,7 +2041,7 @@ module Aws::CleanRooms
       attr_accessor membership_arn: ::String
       attr_accessor collaboration_id: ::String
       attr_accessor collaboration_arn: ::String
-      attr_accessor type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor budget: Types::PrivacyBudget
@@ -2011,7 +2057,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor auto_refresh: ("CALENDAR_MONTH" | "NONE")
       attr_accessor parameters: Types::PrivacyBudgetTemplateParametersOutput
       SENSITIVE: []
@@ -2019,10 +2065,13 @@ module Aws::CleanRooms
 
     class PrivacyBudgetTemplateParametersInput
       attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersInput
+      attr_accessor access_budget: Types::AccessBudgetsPrivacyTemplateParametersInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput
+      end
+      class AccessBudget < PrivacyBudgetTemplateParametersInput
       end
       class Unknown < PrivacyBudgetTemplateParametersInput
       end
@@ -2030,10 +2079,13 @@ module Aws::CleanRooms
 
     class PrivacyBudgetTemplateParametersOutput
       attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateParametersOutput
+      attr_accessor access_budget: Types::AccessBudgetsPrivacyTemplateParametersOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput
+      end
+      class AccessBudget < PrivacyBudgetTemplateParametersOutput
       end
       class Unknown < PrivacyBudgetTemplateParametersOutput
       end
@@ -2046,7 +2098,7 @@ module Aws::CleanRooms
       attr_accessor membership_arn: ::String
       attr_accessor collaboration_id: ::String
       attr_accessor collaboration_arn: ::String
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       SENSITIVE: []
@@ -2054,10 +2106,13 @@ module Aws::CleanRooms
 
     class PrivacyBudgetTemplateUpdateParameters
       attr_accessor differential_privacy: Types::DifferentialPrivacyTemplateUpdateParameters
+      attr_accessor access_budget: Types::AccessBudgetsPrivacyTemplateUpdateParameters
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters
+      end
+      class AccessBudget < PrivacyBudgetTemplateUpdateParameters
       end
       class Unknown < PrivacyBudgetTemplateUpdateParameters
       end
@@ -2433,6 +2488,7 @@ module Aws::CleanRooms
       attr_accessor update_time: ::Time
       attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE")
       attr_accessor schema_status_details: ::Array[Types::SchemaStatusDetail]
+      attr_accessor resource_arn: ::String
       attr_accessor schema_type_properties: Types::SchemaTypeProperties
       SENSITIVE: []
     end
@@ -2468,6 +2524,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: ::String
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")]
       attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
+      attr_accessor resource_arn: ::String
       attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       SENSITIVE: []
     end
@@ -2721,7 +2778,7 @@ module Aws::CleanRooms
     class UpdatePrivacyBudgetTemplateInput
       attr_accessor membership_identifier: ::String
       attr_accessor privacy_budget_template_identifier: ::String
-      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET")
       attr_accessor parameters: Types::PrivacyBudgetTemplateUpdateParameters
       SENSITIVE: []
     end

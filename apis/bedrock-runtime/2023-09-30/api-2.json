@@ -31,6 +31,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"},
+        {"shape":"ServiceUnavailableException"},
         {"shape":"ValidationException"},
         {"shape":"ServiceQuotaExceededException"}
       ]
@@ -93,7 +94,8 @@
         {"shape":"InternalServerException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"ValidationException"}
-      ]
+      ],
+      "readonly":true
     },
     "GetAsyncInvoke":{
       "name":"GetAsyncInvoke",
@@ -109,7 +111,8 @@
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"},
         {"shape":"ValidationException"}
-      ]
+      ],
+      "readonly":true
     },
     "InvokeModel":{
       "name":"InvokeModel",
@@ -193,7 +196,8 @@
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"},
         {"shape":"ValidationException"}
-      ]
+      ],
+      "readonly":true
     },
     "StartAsyncInvoke":{
       "name":"StartAsyncInvoke",
@@ -235,8 +239,7 @@
     },
     "AnyToolChoice":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "ApplyGuardrailRequest":{
       "type":"structure",
@@ -353,8 +356,7 @@
     },
     "AutoToolChoice":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AutomatedReasoningRuleIdentifier":{
       "type":"string",
@@ -762,8 +764,7 @@
     },
     "Document":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "document":true
     },
     "DocumentBlock":{
@@ -1030,8 +1031,7 @@
     },
     "GuardrailAutomatedReasoningNoTranslationsFinding":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "GuardrailAutomatedReasoningPoliciesProcessed":{
       "type":"integer",
@@ -1104,8 +1104,7 @@
     },
     "GuardrailAutomatedReasoningTooComplexFinding":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "GuardrailAutomatedReasoningTranslation":{
       "type":"structure",
@@ -2129,8 +2128,7 @@
     },
     "ModelInputPayload":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "document":true,
       "sensitive":true
     },
@@ -2402,7 +2400,8 @@
         "max_tokens",
         "stop_sequence",
         "guardrail_intervened",
-        "content_filtered"
+        "content_filtered",
+        "model_context_window_exceeded"
       ]
     },
     "String":{"type":"string"},

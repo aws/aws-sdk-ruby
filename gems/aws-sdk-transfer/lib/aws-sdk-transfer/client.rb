@@ -1278,7 +1278,11 @@ module Aws::Transfer
     #
     # @option params [Types::S3StorageOptions] :s3_storage_options
     #   Specifies whether or not performance for your Amazon S3 directories is
-    #   optimized. This is disabled by default.
+    #   optimized.
+    #
+    #   * If using the console, this is enabled by default.
+    #
+    #   * If using the API or CLI, this is disabled by default.
     #
     #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
     #   you enable this option, you would then need to explicitly set the
@@ -2288,6 +2292,14 @@ module Aws::Transfer
 
     # Describes the certificate that's identified by the `CertificateId`.
     #
+    # <note markdown="1"> Transfer Family automatically publishes a Amazon CloudWatch metric
+    # called `DaysUntilExpiry` for imported certificates. This metric tracks
+    # the number of days until the certificate expires based on the
+    # `InactiveDate`. The metric is available in the `AWS/Transfer`
+    # namespace and includes the `CertificateId` as a dimension.
+    #
+    #  </note>
+    #
     # @option params [required, String] :certificate_id
     #   An array of identifiers for the imported certificates. You use this
     #   identifier for working with profiles and partner profiles.
@@ -2897,10 +2909,32 @@ module Aws::Transfer
     # You can import both the certificate and its chain in the `Certificate`
     # parameter.
     #
+    # After importing a certificate, Transfer Family automatically creates a
+    # Amazon CloudWatch metric called `DaysUntilExpiry` that tracks the
+    # number of days until the certificate expires. The metric is based on
+    # the `InactiveDate` parameter and is published daily in the
+    # `AWS/Transfer` namespace.
+    #
+    # It can take up to a full day after importing a certificate for
+    # Transfer Family to emit the `DaysUntilExpiry` metric to your account.
+    #
     # <note markdown="1"> If you use the `Certificate` parameter to upload both the certificate
     # and its chain, don't use the `CertificateChain` parameter.
     #
     #  </note>
+    #
+    # **CloudWatch monitoring**
+    #
+    # The `DaysUntilExpiry` metric includes the following specifications:
+    #
+    # * **Units:** Count (days)
+    #
+    # * **Dimensions:** `CertificateId` (always present), `Description` (if
+    #   provided during certificate import)
+    #
+    # * **Statistics:** Minimum, Maximum, Average
+    #
+    # * **Frequency:** Published daily
     #
     # @option params [required, String] :usage
     #   Specifies how this certificate is used. It can be used in the
@@ -5167,7 +5201,11 @@ module Aws::Transfer
     #
     # @option params [Types::S3StorageOptions] :s3_storage_options
     #   Specifies whether or not performance for your Amazon S3 directories is
-    #   optimized. This is disabled by default.
+    #   optimized.
+    #
+    #   * If using the console, this is enabled by default.
+    #
+    #   * If using the API or CLI, this is disabled by default.
     #
     #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
     #   you enable this option, you would then need to explicitly set the
@@ -5195,6 +5233,28 @@ module Aws::Transfer
     #
     #
     #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
+    #
+    # @option params [String] :identity_provider_type
+    #   The mode of authentication for a server. The default value is
+    #   `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the Transfer Family service.
+    #
+    #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
+    #   groups in Directory Service for Microsoft Active Directory or
+    #   Microsoft Active Directory in your on-premises environment or in
+    #   Amazon Web Services using AD Connector. This option also requires you
+    #   to provide a Directory ID by using the `IdentityProviderDetails`
+    #   parameter.
+    #
+    #   Use the `API_GATEWAY` value to integrate with an identity provider of
+    #   your choosing. The `API_GATEWAY` setting requires you to provide an
+    #   Amazon API Gateway endpoint URL to call for authentication by using
+    #   the `IdentityProviderDetails` parameter.
+    #
+    #   Use the `AWS_LAMBDA` value to directly use an Lambda function as your
+    #   identity provider. If you choose this value, you must specify the ARN
+    #   for the Lambda function in the `Function` parameter for the
+    #   `IdentityProviderDetails` data type.
     #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5251,6 +5311,7 @@ module Aws::Transfer
     #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
+    #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #   })
     #
     # @example Response structure
@@ -5550,7 +5611,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

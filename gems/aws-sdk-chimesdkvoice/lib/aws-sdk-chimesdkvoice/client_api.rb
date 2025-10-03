@@ -177,6 +177,7 @@ module Aws::ChimeSDKVoice
     ListVoiceProfilesResponse = Shapes::StructureShape.new(name: 'ListVoiceProfilesResponse')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MediaInsightsConfiguration = Shapes::StructureShape.new(name: 'MediaInsightsConfiguration')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyString128 = Shapes::StringShape.new(name: 'NonEmptyString128')
@@ -487,6 +488,7 @@ module Aws::ChimeSDKVoice
     CreateVoiceConnectorRequest.add_member(:require_encryption, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RequireEncryption"))
     CreateVoiceConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateVoiceConnectorRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: VoiceConnectorIntegrationType, location_name: "IntegrationType"))
+    CreateVoiceConnectorRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateVoiceConnectorRequest.struct_class = Types::CreateVoiceConnectorRequest
 
     CreateVoiceConnectorResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnector, location_name: "VoiceConnector"))
@@ -1323,6 +1325,7 @@ module Aws::ChimeSDKVoice
     VoiceConnector.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
     VoiceConnector.add_member(:voice_connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorArn"))
     VoiceConnector.add_member(:integration_type, Shapes::ShapeRef.new(shape: VoiceConnectorIntegrationType, location_name: "IntegrationType"))
+    VoiceConnector.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     VoiceConnector.struct_class = Types::VoiceConnector
 
     VoiceConnectorAwsRegionList.member = Shapes::ShapeRef.new(shape: VoiceConnectorAwsRegion)

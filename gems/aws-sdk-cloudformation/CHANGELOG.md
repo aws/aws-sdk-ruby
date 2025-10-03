@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2025-10-02)
+------------------
+
+* Feature - Add new warning type 'EXCLUDED_RESOURCES'
+
 1.140.0 (2025-09-04)
 ------------------
 

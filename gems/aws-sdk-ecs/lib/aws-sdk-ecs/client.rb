@@ -483,14 +483,11 @@ module Aws::ECS
 
     # @!group API Operations
 
-    # Creates a new capacity provider. Capacity providers are associated
-    # with an Amazon ECS cluster and are used in capacity provider
-    # strategies to facilitate cluster auto scaling.
-    #
-    # Only capacity providers that use an Auto Scaling group can be created.
-    # Amazon ECS tasks on Fargate use the `FARGATE` and `FARGATE_SPOT`
-    # capacity providers. These providers are available to all accounts in
-    # the Amazon Web Services Regions that Fargate supports.
+    # Creates a capacity provider. Capacity providers are associated with a
+    # cluster and are used in capacity provider strategies to facilitate
+    # cluster auto scaling. You can create capacity providers for Amazon ECS
+    # Managed Instances and EC2 instances. Fargate has the predefined
+    # `FARGATE` and `FARGATE_SPOT` capacity providers.
     #
     # @option params [required, String] :name
     #   The name of the capacity provider. Up to 255 characters are allowed.
@@ -498,8 +495,19 @@ module Aws::ECS
     #   underscores (\_), and hyphens (-). The name can't be prefixed with
     #   "`aws`", "`ecs`", or "`fargate`".
     #
-    # @option params [required, Types::AutoScalingGroupProvider] :auto_scaling_group_provider
+    # @option params [String] :cluster
+    #   The name of the cluster to associate with the capacity provider. When
+    #   you create a capacity provider with Amazon ECS Managed Instances, it
+    #   becomes available only within the specified cluster.
+    #
+    # @option params [Types::AutoScalingGroupProvider] :auto_scaling_group_provider
     #   The details of the Auto Scaling group for the capacity provider.
+    #
+    # @option params [Types::CreateManagedInstancesProviderConfiguration] :managed_instances_provider
+    #   The configuration for the Amazon ECS Managed Instances provider. This
+    #   configuration specifies how Amazon ECS manages Amazon EC2 instances on
+    #   your behalf, including the infrastructure role, instance launch
+    #   template, and tag propagation settings.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the capacity provider to categorize and
@@ -579,7 +587,8 @@ module Aws::ECS
     #
     #   resp = client.create_capacity_provider({
     #     name: "String", # required
-    #     auto_scaling_group_provider: { # required
+    #     cluster: "String",
+    #     auto_scaling_group_provider: {
     #       auto_scaling_group_arn: "String", # required
     #       managed_scaling: {
     #         status: "ENABLED", # accepts ENABLED, DISABLED
@@ -590,6 +599,74 @@ module Aws::ECS
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
     #       managed_draining: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     managed_instances_provider: {
+    #       infrastructure_role_arn: "String", # required
+    #       instance_launch_template: { # required
+    #         ec2_instance_profile_arn: "String", # required
+    #         network_configuration: { # required
+    #           subnets: ["String"],
+    #           security_groups: ["String"],
+    #         },
+    #         storage_configuration: {
+    #           storage_size_gi_b: 1,
+    #         },
+    #         monitoring: "BASIC", # accepts BASIC, DETAILED
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #           accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
+    #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
+    #         },
+    #       },
+    #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #     },
     #     tags: [
     #       {
@@ -603,7 +680,8 @@ module Aws::ECS
     #
     #   resp.capacity_provider.capacity_provider_arn #=> String
     #   resp.capacity_provider.name #=> String
-    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_provider.cluster #=> String
+    #   resp.capacity_provider.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"
     #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
@@ -612,11 +690,62 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.capacity_provider.managed_instances_provider.infrastructure_role_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.ec2_instance_profile_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.subnets #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.subnets[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.instance_generations #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
     #   resp.capacity_provider.tags[0].value #=> String
+    #   resp.capacity_provider.type #=> String, one of "EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCapacityProvider AWS API Documentation
     #
@@ -1301,12 +1430,15 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [Integer] :health_check_grace_period_seconds
-    #   The period of time, in seconds, that the Amazon Amazon ECS service
-    #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
-    #   container health checks after a task has first started. If you do not
-    #   specify a health check grace period value, the default value of 0 is
-    #   used. If you do not use any of the health checks, then
+    #   The period of time, in seconds, that the Amazon ECS service scheduler
+    #   ignores unhealthy Elastic Load Balancing, VPC Lattice, and container
+    #   health checks after a task has first started. If you do not specify a
+    #   health check grace period value, the default value of 0 is used. If
+    #   you do not use any of the health checks, then
     #   `healthCheckGracePeriodSeconds` is unused.
+    #
+    #   If your service has more running tasks than desired, unhealthy tasks
+    #   in the grace period might be stopped to reach the desired count.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -1588,7 +1720,7 @@ module Aws::ECS
     #     ],
     #     desired_count: 1,
     #     client_token: "String",
-    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #     capacity_provider_strategy: [
     #       {
     #         capacity_provider: "String", # required
@@ -1764,7 +1896,7 @@ module Aws::ECS
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
-    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.capacity_provider_strategy #=> Array
     #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
@@ -1801,7 +1933,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].running_count #=> Integer
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
-    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -1849,7 +1981,7 @@ module Aws::ECS
     #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].platform_family #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -2188,7 +2320,7 @@ module Aws::ECS
     #         container_port: 1,
     #       },
     #     ],
-    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #     capacity_provider_strategy: [
     #       {
     #         capacity_provider: "String", # required
@@ -2225,7 +2357,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -2460,6 +2592,11 @@ module Aws::ECS
     #   The short name or full Amazon Resource Name (ARN) of the capacity
     #   provider to delete.
     #
+    # @option params [String] :cluster
+    #   The name of the cluster that contains the capacity provider to delete.
+    #   Managed instances capacity providers are cluster-scoped and can only
+    #   be deleted from their associated cluster.
+    #
     # @return [Types::DeleteCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
@@ -2499,13 +2636,15 @@ module Aws::ECS
     #
     #   resp = client.delete_capacity_provider({
     #     capacity_provider: "String", # required
+    #     cluster: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.capacity_provider.capacity_provider_arn #=> String
     #   resp.capacity_provider.name #=> String
-    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_provider.cluster #=> String
+    #   resp.capacity_provider.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"
     #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
@@ -2514,11 +2653,62 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.capacity_provider.managed_instances_provider.infrastructure_role_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.ec2_instance_profile_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.subnets #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.subnets[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.instance_generations #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
     #   resp.capacity_provider.tags[0].value #=> String
+    #   resp.capacity_provider.type #=> String, one of "EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProvider AWS API Documentation
     #
@@ -2725,7 +2915,7 @@ module Aws::ECS
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
-    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.capacity_provider_strategy #=> Array
     #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
@@ -2762,7 +2952,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].running_count #=> Integer
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
-    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -2810,7 +3000,7 @@ module Aws::ECS
     #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].platform_family #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -3158,11 +3348,11 @@ module Aws::ECS
     #   resp.task_definitions[0].placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definitions[0].placement_constraints[0].expression #=> String
     #   resp.task_definitions[0].compatibilities #=> Array
-    #   resp.task_definitions[0].compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definitions[0].compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definitions[0].runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.task_definitions[0].runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definitions[0].requires_compatibilities #=> Array
-    #   resp.task_definitions[0].requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definitions[0].requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definitions[0].cpu #=> String
     #   resp.task_definitions[0].memory #=> String
     #   resp.task_definitions[0].inference_accelerators #=> Array
@@ -3296,7 +3486,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -3710,11 +3900,11 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
-    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
-    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.inference_accelerators #=> Array
@@ -3748,6 +3938,11 @@ module Aws::ECS
     #   The short name or full Amazon Resource Name (ARN) of one or more
     #   capacity providers. Up to `100` capacity providers can be described in
     #   an action.
+    #
+    # @option params [String] :cluster
+    #   The name of the cluster to describe capacity providers for. When
+    #   specified, only capacity providers associated with this cluster are
+    #   returned, including Amazon ECS Managed Instances capacity providers.
     #
     # @option params [Array<String>] :include
     #   Specifies whether or not you want to see the resource tags for the
@@ -3874,6 +4069,7 @@ module Aws::ECS
     #
     #   resp = client.describe_capacity_providers({
     #     capacity_providers: ["String"],
+    #     cluster: "String",
     #     include: ["TAGS"], # accepts TAGS
     #     max_results: 1,
     #     next_token: "String",
@@ -3884,7 +4080,8 @@ module Aws::ECS
     #   resp.capacity_providers #=> Array
     #   resp.capacity_providers[0].capacity_provider_arn #=> String
     #   resp.capacity_providers[0].name #=> String
-    #   resp.capacity_providers[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_providers[0].cluster #=> String
+    #   resp.capacity_providers[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"
     #   resp.capacity_providers[0].auto_scaling_group_provider.auto_scaling_group_arn #=> String
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
@@ -3893,11 +4090,62 @@ module Aws::ECS
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.capacity_providers[0].managed_instances_provider.infrastructure_role_arn #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.ec2_instance_profile_arn #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.subnets #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.subnets[0] #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.instance_generations #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_providers[0].update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
     #   resp.capacity_providers[0].tags[0].key #=> String
     #   resp.capacity_providers[0].tags[0].value #=> String
+    #   resp.capacity_providers[0].type #=> String, one of "EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4447,7 +4695,7 @@ module Aws::ECS
     #   resp.service_revisions[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service_revisions[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service_revisions[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service_revisions[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service_revisions[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service_revisions[0].platform_version #=> String
     #   resp.service_revisions[0].platform_family #=> String
     #   resp.service_revisions[0].load_balancers #=> Array
@@ -4647,7 +4895,7 @@ module Aws::ECS
     #   resp.services[0].desired_count #=> Integer
     #   resp.services[0].running_count #=> Integer
     #   resp.services[0].pending_count #=> Integer
-    #   resp.services[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.services[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.services[0].capacity_provider_strategy #=> Array
     #   resp.services[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.services[0].capacity_provider_strategy[0].weight #=> Integer
@@ -4684,7 +4932,7 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].running_count #=> Integer
     #   resp.services[0].task_sets[0].created_at #=> Time
     #   resp.services[0].task_sets[0].updated_at #=> Time
-    #   resp.services[0].task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.services[0].task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.services[0].task_sets[0].capacity_provider_strategy #=> Array
     #   resp.services[0].task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.services[0].task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -4732,7 +4980,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.services[0].deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.services[0].deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.services[0].deployments[0].platform_version #=> String
     #   resp.services[0].deployments[0].platform_family #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -5083,11 +5331,11 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
-    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
-    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.inference_accelerators #=> Array
@@ -5227,7 +5475,7 @@ module Aws::ECS
     #   resp.task_sets[0].running_count #=> Integer
     #   resp.task_sets[0].created_at #=> Time
     #   resp.task_sets[0].updated_at #=> Time
-    #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -5425,7 +5673,7 @@ module Aws::ECS
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].overrides.container_overrides #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].name #=> String
@@ -6321,7 +6569,7 @@ module Aws::ECS
     #     cluster: "String",
     #     next_token: "String",
     #     max_results: 1,
-    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #   })
     #
@@ -6828,7 +7076,7 @@ module Aws::ECS
     #     started_by: "String",
     #     service_name: "String",
     #     desired_status: "RUNNING", # accepts RUNNING, PENDING, STOPPED
-    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #   })
     #
     # @example Response structure
@@ -7390,6 +7638,10 @@ module Aws::ECS
     # capacity provider strategy is used. We recommend that you define a
     # default capacity provider strategy for your cluster. However, you must
     # specify an empty array (`[]`) to bypass defining a default strategy.
+    #
+    # Amazon ECS Managed Instances doesn't support this, because when you
+    # create a capacity provider with Amazon ECS Managed Instances, it
+    # becomes available only within the specified cluster.
     #
     #
     #
@@ -8561,7 +8813,7 @@ module Aws::ECS
     #         expression: "String",
     #       },
     #     ],
-    #     requires_compatibilities: ["EC2"], # accepts EC2, FARGATE, EXTERNAL
+    #     requires_compatibilities: ["EC2"], # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #     cpu: "String",
     #     memory: "String",
     #     tags: [
@@ -8748,11 +9000,11 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
-    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_2025_CORE", "WINDOWS_SERVER_2025_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
-    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_definition.cpu #=> String
     #   resp.task_definition.memory #=> String
     #   resp.task_definition.inference_accelerators #=> Array
@@ -9154,7 +9406,7 @@ module Aws::ECS
     #     enable_ecs_managed_tags: false,
     #     enable_execute_command: false,
     #     group: "String",
-    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #     network_configuration: {
     #       awsvpc_configuration: {
     #         subnets: ["String"], # required
@@ -9326,7 +9578,7 @@ module Aws::ECS
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].overrides.container_overrides #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].name #=> String
@@ -9759,7 +10011,7 @@ module Aws::ECS
     #   resp.tasks[0].inference_accelerators[0].device_name #=> String
     #   resp.tasks[0].inference_accelerators[0].device_type #=> String
     #   resp.tasks[0].last_status #=> String
-    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.tasks[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.tasks[0].memory #=> String
     #   resp.tasks[0].overrides.container_overrides #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].name #=> String
@@ -10064,7 +10316,7 @@ module Aws::ECS
     #   resp.task.inference_accelerators[0].device_name #=> String
     #   resp.task.inference_accelerators[0].device_type #=> String
     #   resp.task.last_status #=> String
-    #   resp.task.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task.memory #=> String
     #   resp.task.overrides.container_overrides #=> Array
     #   resp.task.overrides.container_overrides[0].name #=> String
@@ -10480,12 +10732,26 @@ module Aws::ECS
 
     # Modifies the parameters for a capacity provider.
     #
+    # These changes only apply to new Amazon ECS Managed Instances, or EC2
+    # instances, not existing ones.
+    #
     # @option params [required, String] :name
     #   The name of the capacity provider to update.
     #
-    # @option params [required, Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
+    # @option params [String] :cluster
+    #   The name of the cluster that contains the capacity provider to update.
+    #   Managed instances capacity providers are cluster-scoped and can only
+    #   be updated within their associated cluster.
+    #
+    # @option params [Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
     #   An object that represent the parameters to update for the Auto Scaling
     #   group capacity provider.
+    #
+    # @option params [Types::UpdateManagedInstancesProviderConfiguration] :managed_instances_provider
+    #   The updated configuration for the Amazon ECS Managed Instances
+    #   provider. You can modify the infrastructure role, instance launch
+    #   template, and tag propagation settings. Changes take effect for new
+    #   instances launched after the update.
     #
     # @return [Types::UpdateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10535,7 +10801,8 @@ module Aws::ECS
     #
     #   resp = client.update_capacity_provider({
     #     name: "String", # required
-    #     auto_scaling_group_provider: { # required
+    #     cluster: "String",
+    #     auto_scaling_group_provider: {
     #       managed_scaling: {
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         target_capacity: 1,
@@ -10546,13 +10813,82 @@ module Aws::ECS
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
     #       managed_draining: "ENABLED", # accepts ENABLED, DISABLED
     #     },
+    #     managed_instances_provider: {
+    #       infrastructure_role_arn: "String", # required
+    #       instance_launch_template: { # required
+    #         ec2_instance_profile_arn: "String",
+    #         network_configuration: {
+    #           subnets: ["String"],
+    #           security_groups: ["String"],
+    #         },
+    #         storage_configuration: {
+    #           storage_size_gi_b: 1,
+    #         },
+    #         monitoring: "BASIC", # accepts BASIC, DETAILED
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #           accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
+    #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
+    #         },
+    #       },
+    #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.capacity_provider.capacity_provider_arn #=> String
     #   resp.capacity_provider.name #=> String
-    #   resp.capacity_provider.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.capacity_provider.cluster #=> String
+    #   resp.capacity_provider.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "INACTIVE"
     #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
@@ -10561,11 +10897,62 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
-    #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.capacity_provider.managed_instances_provider.infrastructure_role_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.ec2_instance_profile_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.subnets #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.subnets[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.instance_generations #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
     #   resp.capacity_provider.tags[0].key #=> String
     #   resp.capacity_provider.tags[0].value #=> String
+    #   resp.capacity_provider.type #=> String, one of "EC2_AUTOSCALING", "MANAGED_INSTANCES", "FARGATE", "FARGATE_SPOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProvider AWS API Documentation
     #
@@ -11795,6 +12182,9 @@ module Aws::ECS
     #   can prevent the service scheduler from marking tasks as unhealthy and
     #   stopping them before they have time to come up.
     #
+    #   If your service has more running tasks than desired, unhealthy tasks
+    #   in the grace period might be stopped to reach the desired count.
+    #
     #   This parameter doesn't trigger a new service deployment.
     #
     # @option params [Types::DeploymentController] :deployment_controller
@@ -12172,7 +12562,7 @@ module Aws::ECS
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
-    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.capacity_provider_strategy #=> Array
     #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
@@ -12209,7 +12599,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].running_count #=> Integer
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
-    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
     #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
@@ -12257,7 +12647,7 @@ module Aws::ECS
     #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
-    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].platform_family #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -12451,7 +12841,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -12775,7 +13165,7 @@ module Aws::ECS
     #   resp.task_set.running_count #=> Integer
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
-    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL", "MANAGED_INSTANCES"
     #   resp.task_set.capacity_provider_strategy #=> Array
     #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
@@ -12837,7 +13227,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.205.0'
+      context[:gem_version] = '1.207.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -894,9 +894,13 @@ module Aws::MediaTailor
     #       },
     #       end_time: Time.now, # required
     #       start_time: Time.now,
-    #       traffic_shaping_type: "RETRIEVAL_WINDOW", # accepts RETRIEVAL_WINDOW
+    #       traffic_shaping_type: "RETRIEVAL_WINDOW", # accepts RETRIEVAL_WINDOW, TPS
     #       traffic_shaping_retrieval_window: {
     #         retrieval_window_duration_seconds: 1,
+    #       },
+    #       traffic_shaping_tps_configuration: {
+    #         peak_tps: 1,
+    #         peak_concurrent_users: 1,
     #       },
     #     },
     #     recurring_prefetch_configuration: {
@@ -916,9 +920,13 @@ module Aws::MediaTailor
     #           "__string" => "__string",
     #         },
     #         delay_after_avail_end_seconds: 1,
-    #         traffic_shaping_type: "RETRIEVAL_WINDOW", # accepts RETRIEVAL_WINDOW
+    #         traffic_shaping_type: "RETRIEVAL_WINDOW", # accepts RETRIEVAL_WINDOW, TPS
     #         traffic_shaping_retrieval_window: {
     #           retrieval_window_duration_seconds: 1,
+    #         },
+    #         traffic_shaping_tps_configuration: {
+    #           peak_tps: 1,
+    #           peak_concurrent_users: 1,
     #         },
     #       },
     #     },
@@ -940,8 +948,10 @@ module Aws::MediaTailor
     #   resp.retrieval.dynamic_variables["__string"] #=> String
     #   resp.retrieval.end_time #=> Time
     #   resp.retrieval.start_time #=> Time
-    #   resp.retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW"
+    #   resp.retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW", "TPS"
     #   resp.retrieval.traffic_shaping_retrieval_window.retrieval_window_duration_seconds #=> Integer
+    #   resp.retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
+    #   resp.retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.recurring_prefetch_configuration.start_time #=> Time
     #   resp.recurring_prefetch_configuration.end_time #=> Time
     #   resp.recurring_prefetch_configuration.recurring_consumption.retrieved_ad_expiration_seconds #=> Integer
@@ -951,8 +961,10 @@ module Aws::MediaTailor
     #   resp.recurring_prefetch_configuration.recurring_retrieval.dynamic_variables #=> Hash
     #   resp.recurring_prefetch_configuration.recurring_retrieval.dynamic_variables["__string"] #=> String
     #   resp.recurring_prefetch_configuration.recurring_retrieval.delay_after_avail_end_seconds #=> Integer
-    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW"
+    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW", "TPS"
     #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_retrieval_window.retrieval_window_duration_seconds #=> Integer
+    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
+    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.schedule_type #=> String, one of "SINGLE", "RECURRING"
     #   resp.stream_id #=> String
     #
@@ -2185,8 +2197,10 @@ module Aws::MediaTailor
     #   resp.retrieval.dynamic_variables["__string"] #=> String
     #   resp.retrieval.end_time #=> Time
     #   resp.retrieval.start_time #=> Time
-    #   resp.retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW"
+    #   resp.retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW", "TPS"
     #   resp.retrieval.traffic_shaping_retrieval_window.retrieval_window_duration_seconds #=> Integer
+    #   resp.retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
+    #   resp.retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.schedule_type #=> String, one of "SINGLE", "RECURRING"
     #   resp.recurring_prefetch_configuration.start_time #=> Time
     #   resp.recurring_prefetch_configuration.end_time #=> Time
@@ -2197,8 +2211,10 @@ module Aws::MediaTailor
     #   resp.recurring_prefetch_configuration.recurring_retrieval.dynamic_variables #=> Hash
     #   resp.recurring_prefetch_configuration.recurring_retrieval.dynamic_variables["__string"] #=> String
     #   resp.recurring_prefetch_configuration.recurring_retrieval.delay_after_avail_end_seconds #=> Integer
-    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW"
+    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW", "TPS"
     #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_retrieval_window.retrieval_window_duration_seconds #=> Integer
+    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
+    #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.stream_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchSchedule AWS API Documentation
@@ -2219,9 +2235,22 @@ module Aws::MediaTailor
     #   alerts, use the value of `NextToken` in the response to get the next
     #   page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
     #   Pagination token returned by the list request when results exceed the
     #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListAlerts` request, omit this value. For subsequent
+    #   requests, get the value of `NextToken` from the previous response and
+    #   specify that value for `NextToken` in the request. Continue making
+    #   requests until the response no longer includes a `NextToken` value,
+    #   which indicates that all results have been retrieved.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2271,9 +2300,22 @@ module Aws::MediaTailor
     #   channels, use the value of `NextToken` in the response to get the next
     #   page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
     #   Pagination token returned by the list request when results exceed the
     #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListChannels` request, omit this value. For subsequent
+    #   requests, get the value of `NextToken` from the previous response and
+    #   specify that value for `NextToken` in the request. Continue making
+    #   requests until the response no longer includes a `NextToken` value,
+    #   which indicates that all results have been retrieved.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2338,9 +2380,23 @@ module Aws::MediaTailor
     #   `MaxResults` live sources, use the value of `NextToken` in the
     #   response to get the next page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
     #   Pagination token returned by the list request when results exceed the
     #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListLiveSources` request, omit this value. For
+    #   subsequent requests, get the value of `NextToken` from the previous
+    #   response and specify that value for `NextToken` in the request.
+    #   Continue making requests until the response no longer includes a
+    #   `NextToken` value, which indicates that all results have been
+    #   retrieved.
     #
     # @option params [required, String] :source_location_name
     #   The name of the source location associated with this Live Sources
@@ -2400,9 +2456,23 @@ module Aws::MediaTailor
     #   more than `MaxResults` playback configurations, use the value of
     #   `NextToken` in the response to get the next page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
     #   Pagination token returned by the list request when results exceed the
     #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListPlaybackConfigurations` request, omit this value.
+    #   For subsequent requests, get the value of `NextToken` from the
+    #   previous response and specify that value for `NextToken` in the
+    #   request. Continue making requests until the response no longer
+    #   includes a `NextToken` value, which indicates that all results have
+    #   been retrieved.
     #
     # @return [Types::ListPlaybackConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2479,19 +2549,23 @@ module Aws::MediaTailor
     #   `MaxResults` prefetch schedules, use the value of `NextToken` in the
     #   response to get the next page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
-    #   (Optional) If the playback configuration has more than `MaxResults`
-    #   prefetch schedules, use `NextToken` to get the second and subsequent
-    #   pages of results.
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
     #
-    #   For the first `ListPrefetchSchedulesRequest` request, omit this value.
-    #
-    #   For the second and subsequent requests, get the value of `NextToken`
-    #   from the previous response and specify that value for `NextToken` in
-    #   the request.
-    #
-    #   If the previous response didn't include a `NextToken` element, there
-    #   are no more prefetch schedules to get.
+    #   For the first `ListPrefetchSchedules` request, omit this value. For
+    #   subsequent requests, get the value of `NextToken` from the previous
+    #   response and specify that value for `NextToken` in the request.
+    #   Continue making requests until the response no longer includes a
+    #   `NextToken` value, which indicates that all results have been
+    #   retrieved.
     #
     # @option params [required, String] :playback_configuration_name
     #   Retrieves the prefetch schedule(s) for a specific playback
@@ -2540,8 +2614,10 @@ module Aws::MediaTailor
     #   resp.items[0].retrieval.dynamic_variables["__string"] #=> String
     #   resp.items[0].retrieval.end_time #=> Time
     #   resp.items[0].retrieval.start_time #=> Time
-    #   resp.items[0].retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW"
+    #   resp.items[0].retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW", "TPS"
     #   resp.items[0].retrieval.traffic_shaping_retrieval_window.retrieval_window_duration_seconds #=> Integer
+    #   resp.items[0].retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
+    #   resp.items[0].retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.items[0].schedule_type #=> String, one of "SINGLE", "RECURRING"
     #   resp.items[0].recurring_prefetch_configuration.start_time #=> Time
     #   resp.items[0].recurring_prefetch_configuration.end_time #=> Time
@@ -2552,8 +2628,10 @@ module Aws::MediaTailor
     #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.dynamic_variables #=> Hash
     #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.dynamic_variables["__string"] #=> String
     #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.delay_after_avail_end_seconds #=> Integer
-    #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW"
+    #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_type #=> String, one of "RETRIEVAL_WINDOW", "TPS"
     #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_retrieval_window.retrieval_window_duration_seconds #=> Integer
+    #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
+    #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.items[0].stream_id #=> String
     #   resp.next_token #=> String
     #
@@ -2575,9 +2653,23 @@ module Aws::MediaTailor
     #   `MaxResults` source locations, use the value of `NextToken` in the
     #   response to get the next page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
     #   Pagination token returned by the list request when results exceed the
     #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListSourceLocations` request, omit this value. For
+    #   subsequent requests, get the value of `NextToken` from the previous
+    #   response and specify that value for `NextToken` in the request.
+    #   Continue making requests until the response no longer includes a
+    #   `NextToken` value, which indicates that all results have been
+    #   retrieved.
     #
     # @return [Types::ListSourceLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2667,9 +2759,23 @@ module Aws::MediaTailor
     #   `MaxResults` VOD sources, use the value of `NextToken` in the response
     #   to get the next page of results.
     #
+    #   The default value is 100. MediaTailor uses DynamoDB-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
     # @option params [String] :next_token
     #   Pagination token returned by the list request when results exceed the
     #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListVodSources` request, omit this value. For
+    #   subsequent requests, get the value of `NextToken` from the previous
+    #   response and specify that value for `NextToken` in the request.
+    #   Continue making requests until the response no longer includes a
+    #   `NextToken` value, which indicates that all results have been
+    #   retrieved.
     #
     # @option params [required, String] :source_location_name
     #   The name of the source location associated with this VOD Source list.
@@ -3651,7 +3757,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

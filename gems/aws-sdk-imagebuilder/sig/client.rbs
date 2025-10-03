@@ -299,7 +299,10 @@ module Aws
                               on_failure: ("CONTINUE" | "ABORT")?
                             },
                           ],
-                          ?execution_role: ::String
+                          ?execution_role: ::String,
+                          ?logging_configuration: {
+                            log_group_name: ::String?
+                          }
                         ) -> _CreateImageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageResponseSuccess
 
@@ -325,7 +328,10 @@ module Aws
                                    ?schedule: {
                                      schedule_expression: ::String?,
                                      timezone: ::String?,
-                                     pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?
+                                     pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?,
+                                     auto_disable_policy: {
+                                       failure_count: ::Integer
+                                     }?
                                    },
                                    ?status: ("DISABLED" | "ENABLED"),
                                    ?tags: Hash[::String, ::String],
@@ -350,7 +356,11 @@ module Aws
                                        on_failure: ("CONTINUE" | "ABORT")?
                                      },
                                    ],
-                                   ?execution_role: ::String
+                                   ?execution_role: ::String,
+                                   ?logging_configuration: {
+                                     image_log_group_name: ::String?,
+                                     pipeline_log_group_name: ::String?
+                                   }
                                  ) -> _CreateImagePipelineResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImagePipelineResponseSuccess
 
@@ -402,6 +412,7 @@ module Aws
                                    }?,
                                    user_data_override: ::String?
                                  },
+                                 ?ami_tags: Hash[::String, ::String],
                                  client_token: ::String
                                ) -> _CreateImageRecipeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageRecipeResponseSuccess
@@ -870,6 +881,9 @@ module Aws
                                ?execution_role: ::String,
                                infrastructure_configuration_arn: ::String,
                                uri: ::String,
+                               ?logging_configuration: {
+                                 log_group_name: ::String?
+                               },
                                ?tags: Hash[::String, ::String],
                                client_token: ::String
                              ) -> _ImportDiskImageResponseSuccess
@@ -889,6 +903,9 @@ module Aws
                              platform: ("Windows" | "Linux" | "macOS"),
                              ?os_version: ::String,
                              vm_import_task_id: ::String,
+                             ?logging_configuration: {
+                               log_group_name: ::String?
+                             },
                              ?tags: Hash[::String, ::String],
                              client_token: ::String
                            ) -> _ImportVmImageResponseSuccess
@@ -1347,7 +1364,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#start_image_pipeline_execution-instance_method
       def start_image_pipeline_execution: (
                                             image_pipeline_arn: ::String,
-                                            client_token: ::String
+                                            client_token: ::String,
+                                            ?tags: Hash[::String, ::String]
                                           ) -> _StartImagePipelineExecutionResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImagePipelineExecutionResponseSuccess
 
@@ -1503,7 +1521,10 @@ module Aws
                                    ?schedule: {
                                      schedule_expression: ::String?,
                                      timezone: ::String?,
-                                     pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?
+                                     pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?,
+                                     auto_disable_policy: {
+                                       failure_count: ::Integer
+                                     }?
                                    },
                                    ?status: ("DISABLED" | "ENABLED"),
                                    client_token: ::String,
@@ -1527,6 +1548,10 @@ module Aws
                                        on_failure: ("CONTINUE" | "ABORT")?
                                      },
                                    ],
+                                   ?logging_configuration: {
+                                     image_log_group_name: ::String?,
+                                     pipeline_log_group_name: ::String?
+                                   },
                                    ?execution_role: ::String
                                  ) -> _UpdateImagePipelineResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImagePipelineResponseSuccess

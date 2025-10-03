@@ -23,7 +23,7 @@ module Aws::FSx
 
     class ActiveDirectoryError
       attr_accessor active_directory_id: ::String
-      attr_accessor type: ("DOMAIN_NOT_FOUND" | "INCOMPATIBLE_DOMAIN_MODE" | "WRONG_VPC" | "INVALID_DOMAIN_STAGE")
+      attr_accessor type: ("DOMAIN_NOT_FOUND" | "INCOMPATIBLE_DOMAIN_MODE" | "WRONG_VPC" | "INVALID_NETWORK_TYPE" | "INVALID_DOMAIN_STAGE")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -361,6 +361,7 @@ module Aws::FSx
       attr_accessor weekly_maintenance_start_time: ::String
       attr_accessor ha_pairs: ::Integer
       attr_accessor throughput_capacity_per_ha_pair: ::Integer
+      attr_accessor endpoint_ipv_6_address_range: ::String
       SENSITIVE: [:fsx_admin_password]
     end
 
@@ -1070,6 +1071,7 @@ module Aws::FSx
     class FileSystemEndpoint
       attr_accessor dns_name: ::String
       attr_accessor ip_addresses: ::Array[::String]
+      attr_accessor ipv_6_addresses: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1276,6 +1278,7 @@ module Aws::FSx
       attr_accessor fsx_admin_password: ::String
       attr_accessor ha_pairs: ::Integer
       attr_accessor throughput_capacity_per_ha_pair: ::Integer
+      attr_accessor endpoint_ipv_6_address_range: ::String
       SENSITIVE: [:fsx_admin_password]
     end
 
@@ -1619,6 +1622,7 @@ module Aws::FSx
     class SvmEndpoint
       attr_accessor dns_name: ::String
       attr_accessor ip_addresses: ::Array[::String]
+      attr_accessor ipv_6_addresses: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1733,6 +1737,7 @@ module Aws::FSx
       attr_accessor remove_route_table_ids: ::Array[::String]
       attr_accessor throughput_capacity_per_ha_pair: ::Integer
       attr_accessor ha_pairs: ::Integer
+      attr_accessor endpoint_ipv_6_address_range: ::String
       SENSITIVE: [:fsx_admin_password]
     end
 
@@ -1927,6 +1932,7 @@ module Aws::FSx
       attr_accessor aliases: ::Array[Types::Alias]
       attr_accessor audit_log_configuration: Types::WindowsAuditLogConfiguration
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
+      attr_accessor preferred_file_server_ipv_6: ::String
       SENSITIVE: []
     end
   end

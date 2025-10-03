@@ -21,11 +21,26 @@ module Aws
       def version: () -> String
       alias engine_version version
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#major_engine_version-instance_method
+      def major_engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files_s3_bucket_name-instance_method
+      def database_installation_files_s3_bucket_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files_s3_prefix-instance_method
+      def database_installation_files_s3_prefix: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#custom_db_engine_version_manifest-instance_method
+      def custom_db_engine_version_manifest: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_parameter_group_family-instance_method
       def db_parameter_group_family: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_description-instance_method
       def db_engine_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_version_arn-instance_method
+      def db_engine_version_arn: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_version_description-instance_method
       def db_engine_version_description: () -> ::String
@@ -38,6 +53,12 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_media_type-instance_method
       def db_engine_media_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#create_time-instance_method
+      def create_time: () -> ::Time
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_character_sets-instance_method
       def supported_character_sets: () -> ::Array[Types::CharacterSet]
@@ -75,32 +96,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_global_databases-instance_method
       def supports_global_databases: () -> bool
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#major_engine_version-instance_method
-      def major_engine_version: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files_s3_bucket_name-instance_method
-      def database_installation_files_s3_bucket_name: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files_s3_prefix-instance_method
-      def database_installation_files_s3_prefix: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_version_arn-instance_method
-      def db_engine_version_arn: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#kms_key_id-instance_method
-      def kms_key_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#create_time-instance_method
-      def create_time: () -> ::Time
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#tag_list-instance_method
       def tag_list: () -> ::Array[Types::Tag]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_babelfish-instance_method
       def supports_babelfish: () -> bool
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#custom_db_engine_version_manifest-instance_method
-      def custom_db_engine_version_manifest: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_limitless_database-instance_method
       def supports_limitless_database: () -> bool

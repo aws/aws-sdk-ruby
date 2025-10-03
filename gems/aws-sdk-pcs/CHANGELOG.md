@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2025-10-01)
+------------------
+
+* Feature - Added the UpdateCluster API action to modify cluster configurations, and Slurm custom settings for queues.
+
 1.31.0 (2025-09-17)
 ------------------
 

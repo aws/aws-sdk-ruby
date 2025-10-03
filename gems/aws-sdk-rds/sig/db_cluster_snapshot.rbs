@@ -82,17 +82,17 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#tag_list-instance_method
       def tag_list: () -> ::Array[Types::Tag]
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#db_system_id-instance_method
-      def db_system_id: () -> ::String
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#storage_type-instance_method
       def storage_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#db_cluster_resource_id-instance_method
       def db_cluster_resource_id: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#storage_throughput-instance_method
-      def storage_throughput: () -> ::Integer
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#db_system_id-instance_method
+      def db_system_id: () -> ::String
 
       def client: () -> Client
 
@@ -178,12 +178,12 @@ module Aws
                      ?storage_type: ::String,
                      ?iops: ::Integer,
                      ?publicly_accessible: bool,
+                     ?network_type: ::String,
                      ?serverless_v2_scaling_configuration: {
                        min_capacity: ::Float?,
                        max_capacity: ::Float?,
                        seconds_until_auto_pause: ::Integer?
                      },
-                     ?network_type: ::String,
                      ?rds_custom_cluster_configuration: {
                        interconnect_subnet_id: ::String?,
                        transit_gateway_multicast_domain_id: ::String?,

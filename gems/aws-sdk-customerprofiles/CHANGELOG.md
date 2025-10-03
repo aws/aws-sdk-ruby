@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2025-09-30)
+------------------
+
+* Feature - This release introduces ListProfileHistoryRecords and GetProfileHistoryRecord APIs for comprehensive profile history tracking with complete audit trails of creation, updates, merges, deletions, and data ingestion events.
+
 1.71.0 (2025-08-26)
 ------------------
 

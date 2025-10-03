@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2025-10-01)
+------------------
+
+* Feature - Remove incorrect ReadOnly trait on IVS RealTime ImportPublicKey API
+
 1.50.0 (2025-09-16)
 ------------------
 

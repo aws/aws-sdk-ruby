@@ -282,7 +282,7 @@ module Aws::BedrockRuntime
 
     class ConverseResponse
       attr_accessor output: Types::ConverseOutput
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "model_context_window_exceeded")
       attr_accessor usage: Types::TokenUsage
       attr_accessor metrics: Types::ConverseMetrics
       attr_accessor additional_model_response_fields: untyped
@@ -920,7 +920,7 @@ module Aws::BedrockRuntime
     end
 
     class MessageStopEvent
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "model_context_window_exceeded")
       attr_accessor additional_model_response_fields: untyped
       attr_accessor event_type: untyped
       SENSITIVE: []

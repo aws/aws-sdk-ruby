@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2025-09-30)
+------------------
+
+* Feature - Added support for FIPS VPC endpoints in FIPS-enabled AWS Regions.
+
 1.110.0 (2025-08-26)
 ------------------
 

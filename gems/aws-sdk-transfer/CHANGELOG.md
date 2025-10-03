@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2025-09-30)
+------------------
+
+* Feature - Add support for updating server identity provider type
+
 1.124.0 (2025-08-26)
 ------------------
 

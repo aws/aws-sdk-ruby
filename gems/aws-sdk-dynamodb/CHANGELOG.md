@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2025-10-02)
+------------------
+
+* Feature - Add support for dual-stack account endpoint generation
+
 1.153.0 (2025-08-28)
 ------------------
 

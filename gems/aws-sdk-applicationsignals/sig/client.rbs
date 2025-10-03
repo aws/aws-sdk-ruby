@@ -141,6 +141,7 @@ module Aws
                                                 key_attributes: Hash[::String, ::String]?,
                                                 operation_name: ::String?,
                                                 metric_type: ("LATENCY" | "AVAILABILITY")?,
+                                                metric_name: ::String?,
                                                 statistic: ::String?,
                                                 period_seconds: ::Integer?,
                                                 metric_data_queries: Array[
@@ -295,6 +296,13 @@ module Aws
                                           ) -> _CreateServiceLevelObjectiveResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceLevelObjectiveResponseSuccess
 
+      interface _DeleteGroupingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupingConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#delete_grouping_configuration-instance_method
+      def delete_grouping_configuration: () -> _DeleteGroupingConfigurationResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupingConfigurationResponseSuccess
+
       interface _DeleteServiceLevelObjectiveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceLevelObjectiveOutput]
       end
@@ -328,6 +336,60 @@ module Aws
                                          id: ::String
                                        ) -> _GetServiceLevelObjectiveResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceLevelObjectiveResponseSuccess
+
+      interface _ListAuditFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAuditFindingsOutput]
+        def audit_findings: () -> ::Array[Types::AuditFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_audit_findings-instance_method
+      def list_audit_findings: (
+                                 start_time: ::Time,
+                                 end_time: ::Time,
+                                 ?auditors: Array[::String],
+                                 audit_targets: Array[
+                                   {
+                                     type: ::String,
+                                     data: {
+                                       service: {
+                                         type: ::String?,
+                                         name: ::String?,
+                                         environment: ::String?,
+                                         aws_account_id: ::String?
+                                       }?,
+                                       slo: {
+                                         slo_name: ::String?,
+                                         slo_arn: ::String?
+                                       }?,
+                                       service_operation: {
+                                         service: {
+                                           type: ::String?,
+                                           name: ::String?,
+                                           environment: ::String?,
+                                           aws_account_id: ::String?
+                                         }?,
+                                         operation: ::String?,
+                                         metric_type: ::String?
+                                       }?
+                                     }
+                                   },
+                                 ],
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListAuditFindingsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAuditFindingsResponseSuccess
+
+      interface _ListGroupingAttributeDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupingAttributeDefinitionsOutput]
+        def grouping_attribute_definitions: () -> ::Array[Types::GroupingAttributeDefinition]
+        def updated_at: () -> ::Time
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_grouping_attribute_definitions-instance_method
+      def list_grouping_attribute_definitions: (
+                                                 ?next_token: ::String
+                                               ) -> _ListGroupingAttributeDefinitionsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupingAttributeDefinitionsResponseSuccess
 
       interface _ListServiceDependenciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceDependenciesOutput]
@@ -391,9 +453,9 @@ module Aws
                                            },
                                            ?max_results: ::Integer,
                                            ?next_token: ::String,
-                                           ?metric_source_types: Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")],
                                            ?include_linked_accounts: bool,
-                                           ?slo_owner_aws_account_id: ::String
+                                           ?slo_owner_aws_account_id: ::String,
+                                           ?metric_source_types: Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")]
                                          ) -> _ListServiceLevelObjectivesResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceLevelObjectivesResponseSuccess
 
@@ -413,6 +475,30 @@ module Aws
                                      ?next_token: ::String
                                    ) -> _ListServiceOperationsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceOperationsResponseSuccess
+
+      interface _ListServiceStatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceStatesOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def service_states: () -> ::Array[Types::ServiceState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_service_states-instance_method
+      def list_service_states: (
+                                 start_time: ::Time,
+                                 end_time: ::Time,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?include_linked_accounts: bool,
+                                 ?aws_account_id: ::String,
+                                 ?attribute_filters: Array[
+                                   {
+                                     attribute_filter_name: ::String,
+                                     attribute_filter_values: Array[::String]
+                                   },
+                                 ]
+                               ) -> _ListServiceStatesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceStatesResponseSuccess
 
       interface _ListServicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesOutput]
@@ -441,6 +527,22 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutGroupingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutGroupingConfigurationOutput]
+        def grouping_configuration: () -> Types::GroupingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#put_grouping_configuration-instance_method
+      def put_grouping_configuration: (
+                                        grouping_attribute_definitions: Array[
+                                          {
+                                            grouping_name: ::String,
+                                            grouping_source_keys: Array[::String]?,
+                                            default_grouping_value: ::String?
+                                          },
+                                        ]
+                                      ) -> _PutGroupingConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupingConfigurationResponseSuccess
 
       interface _StartDiscoveryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartDiscoveryOutput]
@@ -488,6 +590,7 @@ module Aws
                                                 key_attributes: Hash[::String, ::String]?,
                                                 operation_name: ::String?,
                                                 metric_type: ("LATENCY" | "AVAILABILITY")?,
+                                                metric_name: ::String?,
                                                 statistic: ::String?,
                                                 period_seconds: ::Integer?,
                                                 metric_data_queries: Array[

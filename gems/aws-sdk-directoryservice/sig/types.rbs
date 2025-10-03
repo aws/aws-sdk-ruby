@@ -210,6 +210,7 @@ module Aws::DirectoryService
     class ConditionalForwarder
       attr_accessor remote_domain_name: ::String
       attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor dns_ipv_6_addrs: ::Array[::String]
       attr_accessor replication_scope: ("Domain")
       SENSITIVE: []
     end
@@ -222,6 +223,7 @@ module Aws::DirectoryService
       attr_accessor size: ("Small" | "Large")
       attr_accessor connect_settings: Types::DirectoryConnectSettings
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor network_type: ("Dual-stack" | "IPv4" | "IPv6")
       SENSITIVE: [:password]
     end
 
@@ -260,6 +262,7 @@ module Aws::DirectoryService
       attr_accessor directory_id: ::String
       attr_accessor remote_domain_name: ::String
       attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor dns_ipv_6_addrs: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -274,6 +277,7 @@ module Aws::DirectoryService
       attr_accessor size: ("Small" | "Large")
       attr_accessor vpc_settings: Types::DirectoryVpcSettings
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor network_type: ("Dual-stack" | "IPv4" | "IPv6")
       SENSITIVE: [:password]
     end
 
@@ -309,8 +313,9 @@ module Aws::DirectoryService
       attr_accessor password: ::String
       attr_accessor description: ::String
       attr_accessor vpc_settings: Types::DirectoryVpcSettings
-      attr_accessor edition: ("Enterprise" | "Standard")
+      attr_accessor edition: ("Enterprise" | "Standard" | "Hybrid")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor network_type: ("Dual-stack" | "IPv4" | "IPv6")
       SENSITIVE: [:password]
     end
 
@@ -337,6 +342,7 @@ module Aws::DirectoryService
       attr_accessor trust_direction: ("One-Way: Outgoing" | "One-Way: Incoming" | "Two-Way")
       attr_accessor trust_type: ("Forest" | "External")
       attr_accessor conditional_forwarder_ip_addrs: ::Array[::String]
+      attr_accessor conditional_forwarder_ipv_6_addrs: ::Array[::String]
       attr_accessor selective_auth: ("Enabled" | "Disabled")
       SENSITIVE: [:trust_password]
     end
@@ -629,7 +635,7 @@ module Aws::DirectoryService
 
     class DescribeUpdateDirectoryRequest
       attr_accessor directory_id: ::String
-      attr_accessor update_type: ("OS")
+      attr_accessor update_type: ("OS" | "NETWORK" | "SIZE")
       attr_accessor region_name: ::String
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -657,6 +663,7 @@ module Aws::DirectoryService
       attr_accessor vpc_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor customer_dns_ips: ::Array[::String]
+      attr_accessor customer_dns_ips_v6: ::Array[::String]
       attr_accessor customer_user_name: ::String
       SENSITIVE: []
     end
@@ -668,6 +675,7 @@ module Aws::DirectoryService
       attr_accessor security_group_id: ::String
       attr_accessor availability_zones: ::Array[::String]
       attr_accessor connect_ips: ::Array[::String]
+      attr_accessor connect_ips_v6: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -676,11 +684,12 @@ module Aws::DirectoryService
       attr_accessor name: ::String
       attr_accessor short_name: ::String
       attr_accessor size: ("Small" | "Large")
-      attr_accessor edition: ("Enterprise" | "Standard")
+      attr_accessor edition: ("Enterprise" | "Standard" | "Hybrid")
       attr_accessor alias: ::String
       attr_accessor access_url: ::String
       attr_accessor description: ::String
       attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor dns_ipv_6_addrs: ::Array[::String]
       attr_accessor stage: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed" | "Updating")
       attr_accessor share_status: ("Shared" | "PendingAcceptance" | "Rejected" | "Rejecting" | "RejectFailed" | "Sharing" | "ShareFailed" | "Deleted" | "Deleting")
       attr_accessor share_method: ("ORGANIZATIONS" | "HANDSHAKE")
@@ -699,6 +708,7 @@ module Aws::DirectoryService
       attr_accessor regions_info: Types::RegionsInfo
       attr_accessor os_version: ("SERVER_2012" | "SERVER_2019")
       attr_accessor hybrid_settings: Types::HybridSettingsDescription
+      attr_accessor network_type: ("Dual-stack" | "IPv4" | "IPv6")
       SENSITIVE: [:share_notes]
     end
 
@@ -736,6 +746,11 @@ module Aws::DirectoryService
     class DirectoryNotSharedException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectorySizeUpdateSettings
+      attr_accessor directory_size: ("Small" | "Large")
       SENSITIVE: []
     end
 
@@ -821,6 +836,7 @@ module Aws::DirectoryService
       attr_accessor directory_id: ::String
       attr_accessor domain_controller_id: ::String
       attr_accessor dns_ip_addr: ::String
+      attr_accessor dns_ipv_6_addr: ::String
       attr_accessor vpc_id: ::String
       attr_accessor subnet_id: ::String
       attr_accessor availability_zone: ::String
@@ -1033,6 +1049,7 @@ module Aws::DirectoryService
 
     class IpRoute
       attr_accessor cidr_ip: ::String
+      attr_accessor cidr_ipv_6: ::String
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -1040,6 +1057,7 @@ module Aws::DirectoryService
     class IpRouteInfo
       attr_accessor directory_id: ::String
       attr_accessor cidr_ip: ::String
+      attr_accessor cidr_ipv_6: ::String
       attr_accessor ip_route_status_msg: ("Adding" | "Added" | "Removing" | "Removed" | "AddFailed" | "RemoveFailed")
       attr_accessor added_date_time: ::Time
       attr_accessor ip_route_status_reason: ::String
@@ -1145,6 +1163,12 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class NetworkUpdateSettings
+      attr_accessor network_type: ("Dual-stack" | "IPv4" | "IPv6")
+      attr_accessor customer_dns_ips_v6: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class NoAvailableCertificateException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -1166,14 +1190,17 @@ module Aws::DirectoryService
       attr_accessor directory_id: ::String
       attr_accessor account_id: ::String
       attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor dns_ipv_6_addrs: ::Array[::String]
       attr_accessor vpc_settings: Types::DirectoryVpcSettingsDescription
       attr_accessor radius_settings: Types::RadiusSettings
       attr_accessor radius_status: ("Creating" | "Completed" | "Failed")
+      attr_accessor network_type: ("Dual-stack" | "IPv4" | "IPv6")
       SENSITIVE: []
     end
 
     class RadiusSettings
       attr_accessor radius_servers: ::Array[::String]
+      attr_accessor radius_servers_ipv_6: ::Array[::String]
       attr_accessor radius_port: ::Integer
       attr_accessor radius_timeout: ::Integer
       attr_accessor radius_retries: ::Integer
@@ -1244,6 +1271,7 @@ module Aws::DirectoryService
     class RemoveIpRoutesRequest
       attr_accessor directory_id: ::String
       attr_accessor cidr_ips: ::Array[::String]
+      attr_accessor cidr_ipv_6s: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1468,6 +1496,7 @@ module Aws::DirectoryService
       attr_accessor directory_id: ::String
       attr_accessor remote_domain_name: ::String
       attr_accessor dns_ip_addrs: ::Array[::String]
+      attr_accessor dns_ipv_6_addrs: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1476,8 +1505,10 @@ module Aws::DirectoryService
 
     class UpdateDirectorySetupRequest
       attr_accessor directory_id: ::String
-      attr_accessor update_type: ("OS")
+      attr_accessor update_type: ("OS" | "NETWORK" | "SIZE")
       attr_accessor os_update_settings: Types::OSUpdateSettings
+      attr_accessor directory_size_update_settings: Types::DirectorySizeUpdateSettings
+      attr_accessor network_update_settings: Types::NetworkUpdateSettings
       attr_accessor create_snapshot_before_update: bool
       SENSITIVE: []
     end

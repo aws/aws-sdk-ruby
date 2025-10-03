@@ -1231,11 +1231,8 @@ module Aws::DatabaseMigrationService
     #   encrypt the connection parameters for the instance profile.
     #
     #   If you don't specify a value for the `KmsKeyArn` parameter, then
-    #   DMS uses your default encryption key.
-    #
-    #   KMS creates the default encryption key for your Amazon Web Services
-    #   account. Your Amazon Web Services account has a different default
-    #   encryption key for each Amazon Web Services Region.
+    #   DMS uses an Amazon Web Services owned encryption key to encrypt your
+    #   resources.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -6546,11 +6543,8 @@ module Aws::DatabaseMigrationService
     #   encrypt the connection parameters for the instance profile.
     #
     #   If you don't specify a value for the `KmsKeyArn` parameter, then
-    #   DMS uses your default encryption key.
-    #
-    #   KMS creates the default encryption key for your Amazon Web Services
-    #   account. Your Amazon Web Services account has a different default
-    #   encryption key for each Amazon Web Services Region.
+    #   DMS uses an Amazon Web Services owned encryption key to encrypt your
+    #   resources.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -8078,11 +8072,8 @@ module Aws::DatabaseMigrationService
     #   encrypt the connection parameters for the instance profile.
     #
     #   If you don't specify a value for the `KmsKeyArn` parameter, then
-    #   DMS uses your default encryption key.
-    #
-    #   KMS creates the default encryption key for your Amazon Web Services
-    #   account. Your Amazon Web Services account has a different default
-    #   encryption key for each Amazon Web Services Region.
+    #   DMS uses an Amazon Web Services owned encryption key to encrypt your
+    #   resources.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible

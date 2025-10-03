@@ -482,7 +482,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK ID of the meeting to which you're adding
@@ -563,6 +563,13 @@ module Aws::ChimeSDKMeetings
     #   you can set your `video` capability to receive and you set your
     #   `content` capability to not receive.
     #
+    # * If meeting features is defined as `Video:MaxResolution:None` but
+    #   `Content:MaxResolution` is defined as something other than `None`
+    #   and attendee capabilities are not defined in the API request, then
+    #   the default attendee video capability is set to `Receive` and
+    #   attendee content capability is set to `SendReceive`. This is because
+    #   content `SendReceive` requires video to be at least `Receive`.
+    #
     # * When you change an `audio` capability from `None` or `Receive` to
     #   `Send` or `SendReceive` , and if the attendee left their microphone
     #   unmuted, audio will flow from the attendee to the other meeting
@@ -618,7 +625,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting.
@@ -661,6 +668,13 @@ module Aws::ChimeSDKMeetings
     #     response will contain an HTTP 400 Bad Request status code. However,
     #     you can set your `video` capability to receive and you set your
     #     `content` capability to not receive.
+    #
+    #   * If meeting features is defined as `Video:MaxResolution:None` but
+    #     `Content:MaxResolution` is defined as something other than `None`
+    #     and attendee capabilities are not defined in the API request, then
+    #     the default attendee video capability is set to `Receive` and
+    #     attendee content capability is set to `SendReceive`. This is because
+    #     content `SendReceive` requires video to be at least `Receive`.
     #
     #   * When you change an `audio` capability from `None` or `Receive` to
     #     `Send` or `SendReceive` , and if the attendee left their microphone
@@ -709,14 +723,27 @@ module Aws::ChimeSDKMeetings
 
     # Creates a new Amazon Chime SDK meeting in the specified media Region
     # with no initial attendees. For more information about specifying media
-    # Regions, see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime
-    # Developer Guide*. For more information about the Amazon Chime SDK, see
-    # [Using the Amazon Chime SDK][2] in the *Amazon Chime Developer Guide*.
+    # Regions, see [Available Regions][1] and [Using meeting Regions][2],
+    # both in the *Amazon Chime SDK Developer Guide*. For more information
+    # about the Amazon Chime SDK, see [Using the Amazon Chime SDK][3] in the
+    # *Amazon Chime SDK Developer Guide*.
+    #
+    # <note markdown="1"> If you use this API in conjuction with the and APIs, and you don't
+    # specify the `MeetingFeatures.Content.MaxResolution` or
+    # `MeetingFeatures.Video.MaxResolution` parameters, the following
+    # defaults are used:
+    #
+    #  * Content.MaxResolution: FHD
+    #
+    # * Video.MaxResolution: HD
+    #
+    #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html
-    # [2]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions
+    # [2]: https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html
+    # [3]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :client_request_token
     #   The unique identifier for the client request. Use a different token
@@ -816,6 +843,10 @@ module Aws::ChimeSDKMeetings
     #   [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
     #
+    # @option params [String] :media_placement_network_type
+    #   The type of network for the media placement. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #
     # @return [Types::CreateMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingResponse#meeting #meeting} => Types::Meeting
@@ -854,6 +885,7 @@ module Aws::ChimeSDKMeetings
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     media_placement_network_type: "Ipv4Only", # accepts Ipv4Only, DualStack
     #   })
     #
     # @example Response structure
@@ -890,14 +922,27 @@ module Aws::ChimeSDKMeetings
 
     # Creates a new Amazon Chime SDK meeting in the specified media Region,
     # with attendees. For more information about specifying media Regions,
-    # see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime Developer
-    # Guide*. For more information about the Amazon Chime SDK, see [Using
-    # the Amazon Chime SDK][2] in the *Amazon Chime Developer Guide*.
+    # see [Available Regions][1] and [Using meeting Regions][2], both in the
+    # *Amazon Chime SDK Developer Guide*. For more information about the
+    # Amazon Chime SDK, see [Using the Amazon Chime SDK][3] in the *Amazon
+    # Chime SDK Developer Guide*.
+    #
+    # <note markdown="1"> If you use this API in conjuction with the and APIs, and you don't
+    # specify the `MeetingFeatures.Content.MaxResolution` or
+    # `MeetingFeatures.Video.MaxResolution` parameters, the following
+    # defaults are used:
+    #
+    #  * Content.MaxResolution: FHD
+    #
+    # * Video.MaxResolution: HD
+    #
+    #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html
-    # [2]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions
+    # [2]: https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html
+    # [3]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :client_request_token
     #   The unique identifier for the client request. Use a different token
@@ -951,6 +996,10 @@ module Aws::ChimeSDKMeetings
     # @option params [Array<Types::Tag>] :tags
     #   The tags in the request.
     #
+    # @option params [String] :media_placement_network_type
+    #   The type of network for the media placement. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #
     # @return [Types::CreateMeetingWithAttendeesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingWithAttendeesResponse#meeting #meeting} => Types::Meeting
@@ -1001,6 +1050,7 @@ module Aws::ChimeSDKMeetings
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     media_placement_network_type: "Ipv4Only", # accepts Ipv4Only, DualStack
     #   })
     #
     # @example Response structure
@@ -1054,7 +1104,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1088,7 +1138,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1116,7 +1166,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1159,7 +1209,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1212,7 +1262,7 @@ module Aws::ChimeSDKMeetings
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1523,6 +1573,13 @@ module Aws::ChimeSDKMeetings
     #   you can set your `video` capability to receive and you set your
     #   `content` capability to not receive.
     #
+    # * If meeting features is defined as `Video:MaxResolution:None` but
+    #   `Content:MaxResolution` is defined as something other than `None`
+    #   and attendee capabilities are not defined in the API request, then
+    #   the default attendee video capability is set to `Receive` and
+    #   attendee content capability is set to `SendReceive`. This is because
+    #   content `SendReceive` requires video to be at least `Receive`.
+    #
     # * When you change an `audio` capability from `None` or `Receive` to
     #   `Send` or `SendReceive` , and if the attendee left their microphone
     #   unmuted, audio will flow from the attendee to the other meeting
@@ -1595,7 +1652,7 @@ module Aws::ChimeSDKMeetings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

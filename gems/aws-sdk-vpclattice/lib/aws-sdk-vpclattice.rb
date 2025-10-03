@@ -49,12 +49,13 @@ module Aws::VPCLattice
   end
   autoload :Client, 'aws-sdk-vpclattice/client'
   autoload :Errors, 'aws-sdk-vpclattice/errors'
+  autoload :Waiters, 'aws-sdk-vpclattice/waiters'
   autoload :Resource, 'aws-sdk-vpclattice/resource'
   autoload :EndpointParameters, 'aws-sdk-vpclattice/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-vpclattice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-vpclattice/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

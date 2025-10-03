@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2025-09-30)
+------------------
+
+* Feature - This release adds support for creation of EMR on EKS Connections in Amazon DataZone.
+
 1.52.0 (2025-09-11)
 ------------------
 

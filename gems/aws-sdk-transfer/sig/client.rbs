@@ -1197,7 +1197,8 @@ module Aws
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
                            },
-                           ?ip_address_type: ("IPV4" | "DUALSTACK")
+                           ?ip_address_type: ("IPV4" | "DUALSTACK"),
+                           ?identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
                          ) -> _UpdateServerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServerResponseSuccess
 

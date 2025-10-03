@@ -506,12 +506,22 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_privacy_budget_template-instance_method
       def create_privacy_budget_template: (
                                             membership_identifier: ::String,
-                                            auto_refresh: ("CALENDAR_MONTH" | "NONE"),
-                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                            ?auto_refresh: ("CALENDAR_MONTH" | "NONE"),
+                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                             parameters: {
                                               differential_privacy: {
                                                 epsilon: ::Integer,
                                                 users_noise_per_query: ::Integer
+                                              }?,
+                                              access_budget: {
+                                                budget_parameters: Array[
+                                                  {
+                                                    type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME"),
+                                                    budget: ::Integer,
+                                                    auto_refresh: ("ENABLED" | "DISABLED")?
+                                                  },
+                                                ],
+                                                resource_arn: ::String
                                               }?
                                             },
                                             ?tags: Hash[::String, ::String]
@@ -942,9 +952,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_privacy_budgets-instance_method
       def list_collaboration_privacy_budgets: (
                                                 collaboration_identifier: ::String,
-                                                privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                                privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                                 ?max_results: ::Integer,
-                                                ?next_token: ::String
+                                                ?next_token: ::String,
+                                                ?access_budget_resource_arn: ::String
                                               ) -> _ListCollaborationPrivacyBudgetsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationPrivacyBudgetsResponseSuccess
 
@@ -1072,9 +1083,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_privacy_budgets-instance_method
       def list_privacy_budgets: (
                                   membership_identifier: ::String,
-                                  privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                  privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                   ?next_token: ::String,
-                                  ?max_results: ::Integer
+                                  ?max_results: ::Integer,
+                                  ?access_budget_resource_arn: ::String
                                 ) -> _ListPrivacyBudgetsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivacyBudgetsResponseSuccess
 
@@ -1500,11 +1512,20 @@ module Aws
       def update_privacy_budget_template: (
                                             membership_identifier: ::String,
                                             privacy_budget_template_identifier: ::String,
-                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                             ?parameters: {
                                               differential_privacy: {
                                                 epsilon: ::Integer?,
                                                 users_noise_per_query: ::Integer?
+                                              }?,
+                                              access_budget: {
+                                                budget_parameters: Array[
+                                                  {
+                                                    type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME"),
+                                                    budget: ::Integer,
+                                                    auto_refresh: ("ENABLED" | "DISABLED")?
+                                                  },
+                                                ]
                                               }?
                                             }
                                           ) -> _UpdatePrivacyBudgetTemplateResponseSuccess

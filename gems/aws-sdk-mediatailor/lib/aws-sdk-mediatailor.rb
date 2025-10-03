@@ -54,7 +54,7 @@ module Aws::MediaTailor
   autoload :EndpointProvider, 'aws-sdk-mediatailor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediatailor/endpoints'
 
-  GEM_VERSION = '1.106.0'
+  GEM_VERSION = '1.107.0'
 
 end
 

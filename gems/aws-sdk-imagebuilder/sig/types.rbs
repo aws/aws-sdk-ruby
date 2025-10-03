@@ -40,6 +40,11 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class AutoDisablePolicy
+      attr_accessor failure_count: ::Integer
+      SENSITIVE: []
+    end
+
     class CallRateLimitExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -198,6 +203,7 @@ module Aws::Imagebuilder
       attr_accessor owner: ::String
       attr_accessor parent_image: ::String
       attr_accessor date_created: ::String
+      attr_accessor instance_image: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -283,6 +289,7 @@ module Aws::Imagebuilder
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
       attr_accessor execution_role: ::String
+      attr_accessor logging_configuration: Types::PipelineLoggingConfiguration
       SENSITIVE: []
     end
 
@@ -303,6 +310,7 @@ module Aws::Imagebuilder
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor working_directory: ::String
       attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration
+      attr_accessor ami_tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -326,6 +334,7 @@ module Aws::Imagebuilder
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
       attr_accessor execution_role: ::String
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration
       SENSITIVE: []
     end
 
@@ -853,12 +862,18 @@ module Aws::Imagebuilder
       attr_accessor lifecycle_execution_id: ::String
       attr_accessor execution_role: ::String
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration
       SENSITIVE: []
     end
 
     class ImageAggregation
       attr_accessor image_build_version_arn: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      SENSITIVE: []
+    end
+
+    class ImageLoggingConfiguration
+      attr_accessor log_group_name: ::String
       SENSITIVE: []
     end
 
@@ -884,11 +899,14 @@ module Aws::Imagebuilder
       attr_accessor date_created: ::String
       attr_accessor date_updated: ::String
       attr_accessor date_last_run: ::String
+      attr_accessor last_run_status: ("PENDING" | "CREATING" | "BUILDING" | "TESTING" | "DISTRIBUTING" | "INTEGRATING" | "AVAILABLE" | "CANCELLED" | "FAILED" | "DEPRECATED" | "DELETED" | "DISABLED")
       attr_accessor date_next_run: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor execution_role: ::String
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      attr_accessor logging_configuration: Types::PipelineLoggingConfiguration
+      attr_accessor consecutive_failures: ::Integer
       SENSITIVE: []
     end
 
@@ -913,6 +931,7 @@ module Aws::Imagebuilder
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor working_directory: ::String
       attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration
+      attr_accessor ami_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -993,6 +1012,7 @@ module Aws::Imagebuilder
       attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
       attr_accessor deprecation_time: ::Time
       attr_accessor lifecycle_execution_id: ::String
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration
       SENSITIVE: []
     end
 
@@ -1048,6 +1068,7 @@ module Aws::Imagebuilder
       attr_accessor execution_role: ::String
       attr_accessor infrastructure_configuration_arn: ::String
       attr_accessor uri: ::String
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -1066,6 +1087,7 @@ module Aws::Imagebuilder
       attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor os_version: ::String
       attr_accessor vm_import_task_id: ::String
+      attr_accessor logging_configuration: Types::ImageLoggingConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -1668,6 +1690,12 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class PipelineLoggingConfiguration
+      attr_accessor image_log_group_name: ::String
+      attr_accessor pipeline_log_group_name: ::String
+      SENSITIVE: []
+    end
+
     class Placement
       attr_accessor availability_zone: ::String
       attr_accessor tenancy: ("default" | "dedicated" | "host")
@@ -1796,6 +1824,7 @@ module Aws::Imagebuilder
       attr_accessor schedule_expression: ::String
       attr_accessor timezone: ::String
       attr_accessor pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")
+      attr_accessor auto_disable_policy: Types::AutoDisablePolicy
       SENSITIVE: []
     end
 
@@ -1848,6 +1877,7 @@ module Aws::Imagebuilder
     class StartImagePipelineExecutionRequest
       attr_accessor image_pipeline_arn: ::String
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1933,6 +1963,7 @@ module Aws::Imagebuilder
       attr_accessor client_token: ::String
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      attr_accessor logging_configuration: Types::PipelineLoggingConfiguration
       attr_accessor execution_role: ::String
       SENSITIVE: []
     end

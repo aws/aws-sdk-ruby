@@ -828,6 +828,12 @@ module Aws::DirectoryService
     #   conditional forwarder points to.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dns_ipv_6_addrs
+    #   The IPv6 addresses of the remote DNS server associated with
+    #   RemoteDomainName. This is the IPv6 address of the DNS server that
+    #   your conditional forwarder points to.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] replication_scope
     #   The replication scope of the conditional forwarder. The only allowed
     #   value is `Domain`, which will replicate the conditional forwarder to
@@ -840,6 +846,7 @@ module Aws::DirectoryService
     class ConditionalForwarder < Struct.new(
       :remote_domain_name,
       :dns_ip_addrs,
+      :dns_ipv_6_addrs,
       :replication_scope)
       SENSITIVE = []
       include Aws::Structure
@@ -877,6 +884,11 @@ module Aws::DirectoryService
     #   The tags to be assigned to AD Connector.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] network_type
+    #   The network type for your directory. The default value is `IPv4` or
+    #   `IPv6` based on the provided subnet capabilities.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryRequest AWS API Documentation
     #
     class ConnectDirectoryRequest < Struct.new(
@@ -886,7 +898,8 @@ module Aws::DirectoryService
       :description,
       :size,
       :connect_settings,
-      :tags)
+      :tags,
+      :network_type)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -1019,12 +1032,18 @@ module Aws::DirectoryService
     #   RemoteDomainName.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dns_ipv_6_addrs
+    #   The IPv6 addresses of the remote DNS server associated with
+    #   RemoteDomainName.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarderRequest AWS API Documentation
     #
     class CreateConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
-      :dns_ip_addrs)
+      :dns_ip_addrs,
+      :dns_ipv_6_addrs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1102,6 +1121,11 @@ module Aws::DirectoryService
     #   The tags to be assigned to the Simple AD directory.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] network_type
+    #   The network type for your directory. Simple AD supports IPv4 and
+    #   Dual-stack only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryRequest AWS API Documentation
     #
     class CreateDirectoryRequest < Struct.new(
@@ -1111,7 +1135,8 @@ module Aws::DirectoryService
       :description,
       :size,
       :vpc_settings,
-      :tags)
+      :tags,
+      :network_type)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -1241,6 +1266,11 @@ module Aws::DirectoryService
     #   The tags to be assigned to the Managed Microsoft AD directory.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] network_type
+    #   The network type for your domain. The default value is `IPv4` or
+    #   `IPv6` based on the provided subnet capabilities.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest AWS API Documentation
     #
     class CreateMicrosoftADRequest < Struct.new(
@@ -1250,7 +1280,8 @@ module Aws::DirectoryService
       :description,
       :vpc_settings,
       :edition,
-      :tags)
+      :tags,
+      :network_type)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -1342,6 +1373,11 @@ module Aws::DirectoryService
     #   RemoteDomainName.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] conditional_forwarder_ipv_6_addrs
+    #   The IPv6 addresses of the remote DNS server associated with
+    #   RemoteDomainName.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] selective_auth
     #   Optional parameter to enable selective authentication for the trust.
     #   @return [String]
@@ -1355,6 +1391,7 @@ module Aws::DirectoryService
       :trust_direction,
       :trust_type,
       :conditional_forwarder_ip_addrs,
+      :conditional_forwarder_ipv_6_addrs,
       :selective_auth)
       SENSITIVE = [:trust_password]
       include Aws::Structure
@@ -2432,8 +2469,8 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Contains information for the ConnectDirectory operation when an AD
-    # Connector directory is being created.
+    # Contains connection settings for creating an AD Connector with the
+    # ConnectDirectory action.
     #
     # @!attribute [rw] vpc_id
     #   The identifier of the VPC in which the AD Connector is created.
@@ -2445,8 +2482,13 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_dns_ips
-    #   A list of one or more IP addresses of DNS servers or domain
-    #   controllers in your self-managed directory.
+    #   The IP addresses of DNS servers or domain controllers in your
+    #   self-managed directory.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] customer_dns_ips_v6
+    #   The IPv6 addresses of DNS servers or domain controllers in your
+    #   self-managed directory.
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
@@ -2467,6 +2509,7 @@ module Aws::DirectoryService
       :vpc_id,
       :subnet_ids,
       :customer_dns_ips,
+      :customer_dns_ips_v6,
       :customer_user_name)
       SENSITIVE = []
       include Aws::Structure
@@ -2491,11 +2534,15 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   A list of the Availability Zones that the directory is in.
+    #   The Availability Zones that the directory is in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] connect_ips
     #   The IP addresses of the AD Connector servers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connect_ips_v6
+    #   The IPv6 addresses of the AD Connector servers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryConnectSettingsDescription AWS API Documentation
@@ -2506,7 +2553,8 @@ module Aws::DirectoryService
       :customer_user_name,
       :security_group_id,
       :availability_zones,
-      :connect_ips)
+      :connect_ips,
+      :connect_ips_v6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2534,16 +2582,14 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] alias
-    #   The alias for the directory. If no alias has been created for the
-    #   directory, the alias is the directory identifier, such as
-    #   `d-XXXXXXXXXX`.
+    #   The alias for the directory. If no alias exists, the alias is the
+    #   directory identifier, such as `d-XXXXXXXXXX`.
     #   @return [String]
     #
     # @!attribute [rw] access_url
     #   The access URL for the directory, such as
-    #   `http://<alias>.awsapps.com`. If no alias has been created for the
-    #   directory, `<alias>` is the directory identifier, such as
-    #   `d-XXXXXXXXXX`.
+    #   `http://<alias>.awsapps.com`. If no alias exists, `<alias>` is the
+    #   directory identifier, such as `d-XXXXXXXXXX`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2554,7 +2600,15 @@ module Aws::DirectoryService
     #   The IP addresses of the DNS servers for the directory. For a Simple
     #   AD or Microsoft AD directory, these are the IP addresses of the
     #   Simple AD or Microsoft AD directory servers. For an AD Connector
-    #   directory, these are the IP addresses of the DNS servers or domain
+    #   directory, these are the IP addresses of self-managed directory to
+    #   which the AD Connector is connected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_ipv_6_addrs
+    #   The IPv6 addresses of the DNS servers for the directory. For a
+    #   Simple AD or Microsoft AD directory, these are the IPv6 addresses of
+    #   the Simple AD or Microsoft AD directory servers. For an AD Connector
+    #   directory, these are the IPv6 addresses of the DNS servers or domain
     #   controllers in your self-managed directory to which the AD Connector
     #   is connected.
     #   @return [Array<String>]
@@ -2583,11 +2637,11 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] launch_time
-    #   Specifies when the directory was created.
+    #   The date and time when the directory was created.
     #   @return [Time]
     #
     # @!attribute [rw] stage_last_updated_date_time
-    #   The date and time that the stage was last updated.
+    #   The date and time when the stage was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] type
@@ -2596,19 +2650,19 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] vpc_settings
     #   A DirectoryVpcSettingsDescription object that contains additional
-    #   information about a directory. This member is only present if the
-    #   directory is a Simple AD or Managed Microsoft AD directory.
+    #   information about a directory. Present only for Simple AD and
+    #   Managed Microsoft AD directories.
     #   @return [Types::DirectoryVpcSettingsDescription]
     #
     # @!attribute [rw] connect_settings
-    #   A DirectoryConnectSettingsDescription object that contains
-    #   additional information about an AD Connector directory. This member
-    #   is only present if the directory is an AD Connector directory.
+    #   DirectoryConnectSettingsDescription object that contains additional
+    #   information about an AD Connector directory. Present only for AD
+    #   Connector directories.
     #   @return [Types::DirectoryConnectSettingsDescription]
     #
     # @!attribute [rw] radius_settings
-    #   A RadiusSettings object that contains information about the RADIUS
-    #   server configured for this directory.
+    #   Information about the RadiusSettings object configured for this
+    #   directory.
     #   @return [Types::RadiusSettings]
     #
     # @!attribute [rw] radius_status
@@ -2620,8 +2674,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] sso_enabled
-    #   Indicates if single sign-on is enabled for the directory. For more
-    #   information, see EnableSso and DisableSso.
+    #   Indicates whether single sign-on is enabled for the directory. For
+    #   more information, see EnableSso and DisableSso.
     #   @return [Boolean]
     #
     # @!attribute [rw] desired_number_of_domain_controllers
@@ -2648,6 +2702,10 @@ module Aws::DirectoryService
     #   node identifiers and DNS IPs.
     #   @return [Types::HybridSettingsDescription]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the directory.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
     class DirectoryDescription < Struct.new(
@@ -2660,6 +2718,7 @@ module Aws::DirectoryService
       :access_url,
       :description,
       :dns_ip_addrs,
+      :dns_ipv_6_addrs,
       :stage,
       :share_status,
       :share_method,
@@ -2677,7 +2736,8 @@ module Aws::DirectoryService
       :owner_directory_description,
       :regions_info,
       :os_version,
-      :hybrid_settings)
+      :hybrid_settings,
+      :network_type)
       SENSITIVE = [:share_notes]
       include Aws::Structure
     end
@@ -2814,6 +2874,20 @@ module Aws::DirectoryService
     class DirectoryNotSharedException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the directory size configuration for update operations.
+    #
+    # @!attribute [rw] directory_size
+    #   The target directory size for the update operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectorySizeUpdateSettings AWS API Documentation
+    #
+    class DirectorySizeUpdateSettings < Struct.new(
+      :directory_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3066,6 +3140,10 @@ module Aws::DirectoryService
     #   The IP address of the domain controller.
     #   @return [String]
     #
+    # @!attribute [rw] dns_ipv_6_addr
+    #   The IPv6 address of the domain controller.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_id
     #   The identifier of the VPC that contains the domain controller.
     #   @return [String]
@@ -3101,6 +3179,7 @@ module Aws::DirectoryService
       :directory_id,
       :domain_controller_id,
       :dns_ip_addr,
+      :dns_ipv_6_addr,
       :vpc_id,
       :subnet_id,
       :availability_zone,
@@ -3780,14 +3859,21 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # IP address block. This is often the address block of the DNS server
-    # used for your self-managed domain.
+    # Contains the IP address block. This is often the address block of the
+    # DNS server used for your self-managed domain.
     #
     # @!attribute [rw] cidr_ip
-    #   IP address block using CIDR format, for example 10.0.0.0/24. This is
+    #   IP address block in CIDR format, such as 10.0.0.0/24. This is often
+    #   the address block of the DNS server used for your self-managed
+    #   domain. For a single IP address, use a CIDR address block with /32.
+    #   For example, 10.0.0.0/32.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_ipv_6
+    #   IPv6 address block in CIDR format, such as 2001:db8::/32. This is
     #   often the address block of the DNS server used for your self-managed
-    #   domain. For a single IP address use a CIDR address block with /32.
-    #   For example 10.0.0.0/32.
+    #   domain. For a single IPv6 address, use a CIDR address block with
+    #   /128. For example, 2001:db8::1/128.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3798,6 +3884,7 @@ module Aws::DirectoryService
     #
     class IpRoute < Struct.new(
       :cidr_ip,
+      :cidr_ipv_6,
       :description)
       SENSITIVE = []
       include Aws::Structure
@@ -3811,6 +3898,10 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] cidr_ip
     #   IP address block in the IpRoute.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_ipv_6
+    #   IPv6 address block in the IpRoute.
     #   @return [String]
     #
     # @!attribute [rw] ip_route_status_msg
@@ -3834,6 +3925,7 @@ module Aws::DirectoryService
     class IpRouteInfo < Struct.new(
       :directory_id,
       :cidr_ip,
+      :cidr_ipv_6,
       :ip_route_status_msg,
       :added_date_time,
       :ip_route_status_reason,
@@ -4173,6 +4265,27 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # Contains the network configuration for directory update operations.
+    #
+    # @!attribute [rw] network_type
+    #   The target network type for the directory update.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_dns_ips_v6
+    #   IPv6 addresses of DNS servers or domain controllers in the
+    #   self-managed directory. Required only when updating an AD Connector
+    #   directory.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/NetworkUpdateSettings AWS API Documentation
+    #
+    class NetworkUpdateSettings < Struct.new(
+      :network_type,
+      :customer_dns_ips_v6)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Client authentication setup could not be completed because at least
     # one valid certificate must be registered in the system.
     #
@@ -4227,8 +4340,8 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Describes the directory owner account details that have been shared to
-    # the directory consumer account.
+    # Contains the directory owner account details shared with the directory
+    # consumer account.
     #
     # @!attribute [rw] directory_id
     #   Identifier of the Managed Microsoft AD directory in the directory
@@ -4243,17 +4356,24 @@ module Aws::DirectoryService
     #   IP address of the directory’s domain controllers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dns_ipv_6_addrs
+    #   IPv6 addresses of the directory’s domain controllers.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] vpc_settings
     #   Information about the VPC settings for the directory.
     #   @return [Types::DirectoryVpcSettingsDescription]
     #
     # @!attribute [rw] radius_settings
-    #   A RadiusSettings object that contains information about the RADIUS
-    #   server.
+    #   Information about the RadiusSettings object server configuration.
     #   @return [Types::RadiusSettings]
     #
     # @!attribute [rw] radius_status
-    #   Information about the status of the RADIUS server.
+    #   The status of the RADIUS server.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   Network type of the directory in the directory owner account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OwnerDirectoryDescription AWS API Documentation
@@ -4262,9 +4382,11 @@ module Aws::DirectoryService
       :directory_id,
       :account_id,
       :dns_ip_addrs,
+      :dns_ipv_6_addrs,
       :vpc_settings,
       :radius_settings,
-      :radius_status)
+      :radius_status,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4273,9 +4395,14 @@ module Aws::DirectoryService
     # Service (RADIUS) server.
     #
     # @!attribute [rw] radius_servers
-    #   An array of strings that contains the fully qualified domain name
-    #   (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN
-    #   or IP addresses of your RADIUS server load balancer.
+    #   The fully qualified domain name (FQDN) or IP addresses of the RADIUS
+    #   server endpoints, or the FQDN or IP addresses of your RADIUS server
+    #   load balancer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] radius_servers_ipv_6
+    #   The IPv6 addresses of the RADIUS server endpoints or RADIUS server
+    #   load balancer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] radius_port
@@ -4314,6 +4441,7 @@ module Aws::DirectoryService
     #
     class RadiusSettings < Struct.new(
       :radius_servers,
+      :radius_servers_ipv_6,
       :radius_port,
       :radius_timeout,
       :radius_retries,
@@ -4530,11 +4658,16 @@ module Aws::DirectoryService
     #   IP address blocks that you want to remove.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cidr_ipv_6s
+    #   IPv6 address blocks that you want to remove.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutesRequest AWS API Documentation
     #
     class RemoveIpRoutesRequest < Struct.new(
       :directory_id,
-      :cidr_ips)
+      :cidr_ips,
+      :cidr_ipv_6s)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5333,12 +5466,18 @@ module Aws::DirectoryService
     #   the conditional forwarder.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dns_ipv_6_addrs
+    #   The updated IPv6 addresses of the remote DNS server associated with
+    #   the conditional forwarder.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderRequest AWS API Documentation
     #
     class UpdateConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
-      :dns_ip_addrs)
+      :dns_ip_addrs,
+      :dns_ipv_6_addrs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5350,23 +5489,30 @@ module Aws::DirectoryService
     class UpdateConditionalForwarderResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] directory_id
-    #   The identifier of the directory on which you want to perform the
-    #   update.
+    #   The identifier of the directory to update.
     #   @return [String]
     #
     # @!attribute [rw] update_type
-    #   The type of update that needs to be performed on the directory. For
-    #   example, OS.
+    #   The type of update to perform on the directory.
     #   @return [String]
     #
     # @!attribute [rw] os_update_settings
-    #   The settings for the OS update that needs to be performed on the
-    #   directory.
+    #   Operating system configuration to apply during the directory update
+    #   operation.
     #   @return [Types::OSUpdateSettings]
     #
+    # @!attribute [rw] directory_size_update_settings
+    #   Directory size configuration to apply during the update operation.
+    #   @return [Types::DirectorySizeUpdateSettings]
+    #
+    # @!attribute [rw] network_update_settings
+    #   Network configuration to apply during the directory update
+    #   operation.
+    #   @return [Types::NetworkUpdateSettings]
+    #
     # @!attribute [rw] create_snapshot_before_update
-    #   The boolean that specifies if a snapshot for the directory needs to
-    #   be taken before updating the directory.
+    #   Specifies whether to create a directory snapshot before performing
+    #   the update.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateDirectorySetupRequest AWS API Documentation
@@ -5375,6 +5521,8 @@ module Aws::DirectoryService
       :directory_id,
       :update_type,
       :os_update_settings,
+      :directory_size_update_settings,
+      :network_update_settings,
       :create_snapshot_before_update)
       SENSITIVE = []
       include Aws::Structure

@@ -215,9 +215,13 @@ module Aws
                                         dynamic_variables: Hash[::String, ::String]?,
                                         end_time: ::Time,
                                         start_time: ::Time?,
-                                        traffic_shaping_type: ("RETRIEVAL_WINDOW")?,
+                                        traffic_shaping_type: ("RETRIEVAL_WINDOW" | "TPS")?,
                                         traffic_shaping_retrieval_window: {
                                           retrieval_window_duration_seconds: ::Integer?
+                                        }?,
+                                        traffic_shaping_tps_configuration: {
+                                          peak_tps: ::Integer?,
+                                          peak_concurrent_users: ::Integer?
                                         }?
                                       },
                                       ?recurring_prefetch_configuration: {
@@ -235,9 +239,13 @@ module Aws
                                         recurring_retrieval: {
                                           dynamic_variables: Hash[::String, ::String]?,
                                           delay_after_avail_end_seconds: ::Integer?,
-                                          traffic_shaping_type: ("RETRIEVAL_WINDOW")?,
+                                          traffic_shaping_type: ("RETRIEVAL_WINDOW" | "TPS")?,
                                           traffic_shaping_retrieval_window: {
                                             retrieval_window_duration_seconds: ::Integer?
+                                          }?,
+                                          traffic_shaping_tps_configuration: {
+                                            peak_tps: ::Integer?,
+                                            peak_concurrent_users: ::Integer?
                                           }?
                                         }
                                       },

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-10-01)
+------------------
+
+* Feature - This release introduces data access budgets to view how many times an input channel can be used for ML jobs in a collaboration.
+
 1.34.0 (2025-09-03)
 ------------------
 

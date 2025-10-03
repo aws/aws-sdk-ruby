@@ -2266,7 +2266,7 @@ module Aws::DataSync
     #   resp.status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.last_connection_time #=> Time
     #   resp.creation_time #=> Time
-    #   resp.endpoint_type #=> String, one of "PUBLIC", "PRIVATE_LINK", "FIPS"
+    #   resp.endpoint_type #=> String, one of "PUBLIC", "PRIVATE_LINK", "FIPS", "FIPS_PRIVATE_LINK"
     #   resp.private_link_config.vpc_endpoint_id #=> String
     #   resp.private_link_config.private_link_endpoint #=> String
     #   resp.private_link_config.subnet_arns #=> Array
@@ -4812,7 +4812,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

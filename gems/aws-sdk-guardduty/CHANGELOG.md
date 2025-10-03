@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-10-02)
+------------------
+
+* Feature - Updated descriptions for the Location parameter in CreateTrustedEntitySet and CreateThreatEntitySet.
+
 1.128.0 (2025-09-11)
 ------------------
 

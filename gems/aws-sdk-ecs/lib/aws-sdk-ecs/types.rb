@@ -10,6 +10,52 @@
 module Aws::ECS
   module Types
 
+    # The minimum and maximum number of accelerators (such as GPUs) for
+    # instance type selection. This is used for workloads that require
+    # specific numbers of accelerators.
+    #
+    # @!attribute [rw] min
+    #   The minimum number of accelerators. Instance types with fewer
+    #   accelerators are excluded from selection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of accelerators. Instance types with more
+    #   accelerators are excluded from selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AcceleratorCountRequest AWS API Documentation
+    #
+    class AcceleratorCountRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum total accelerator memory in mebibytes (MiB)
+    # for instance type selection. This is important for GPU workloads that
+    # require specific amounts of video memory.
+    #
+    # @!attribute [rw] min
+    #   The minimum total accelerator memory in MiB. Instance types with
+    #   less accelerator memory are excluded from selection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum total accelerator memory in MiB. Instance types with
+    #   more accelerator memory are excluded from selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AcceleratorTotalMemoryMiBRequest AWS API Documentation
+    #
+    class AcceleratorTotalMemoryMiBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You don't have authorization to perform the requested action.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AccessDeniedException AWS API Documentation
@@ -333,6 +379,29 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The minimum and maximum baseline Amazon EBS bandwidth in megabits per
+    # second (Mbps) for instance type selection. This is important for
+    # workloads with high storage I/O requirements.
+    #
+    # @!attribute [rw] min
+    #   The minimum baseline Amazon EBS bandwidth in Mbps. Instance types
+    #   with lower Amazon EBS bandwidth are excluded from selection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum baseline Amazon EBS bandwidth in Mbps. Instance types
+    #   with higher Amazon EBS bandwidth are excluded from selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/BaselineEbsBandwidthMbpsRequest AWS API Documentation
+    #
+    class BaselineEbsBandwidthMbpsRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your Amazon Web Services account was blocked. For more information,
     # contact [ Amazon Web Services Support][1].
     #
@@ -355,6 +424,12 @@ module Aws::ECS
     #   The name of the capacity provider.
     #   @return [String]
     #
+    # @!attribute [rw] cluster
+    #   The cluster that this capacity provider is associated with. Managed
+    #   instances capacity providers are cluster-scoped, meaning they can
+    #   only be used within their associated cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the capacity provider. Only capacity providers
     #   in an `ACTIVE` state can be used in a cluster. When a capacity
@@ -364,6 +439,12 @@ module Aws::ECS
     # @!attribute [rw] auto_scaling_group_provider
     #   The Auto Scaling group settings for the capacity provider.
     #   @return [Types::AutoScalingGroupProvider]
+    #
+    # @!attribute [rw] managed_instances_provider
+    #   The configuration for the Amazon ECS Managed Instances provider.
+    #   This includes the infrastructure role, the launch template
+    #   configuration, and tag propagation settings.
+    #   @return [Types::ManagedInstancesProvider]
     #
     # @!attribute [rw] update_status
     #   The update status of the capacity provider. The following are the
@@ -420,16 +501,25 @@ module Aws::ECS
     #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] type
+    #   The type of capacity provider. For Amazon ECS Managed Instances,
+    #   this value is `MANAGED_INSTANCES`, indicating that Amazon ECS
+    #   manages the underlying Amazon EC2 instances on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CapacityProvider AWS API Documentation
     #
     class CapacityProvider < Struct.new(
       :capacity_provider_arn,
       :name,
+      :cluster,
       :status,
       :auto_scaling_group_provider,
+      :managed_instances_provider,
       :update_status,
       :update_status_reason,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -803,6 +893,17 @@ module Aws::ECS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The cluster contains one or more capacity providers that prevent the
+    # requested operation. This exception occurs when you try to delete a
+    # cluster that still has active capacity providers, including Amazon ECS
+    # Managed Instances capacity providers. You must first delete all
+    # capacity providers from the cluster before you can delete the cluster
+    # itself.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterContainsCapacityProviderException AWS API Documentation
+    #
+    class ClusterContainsCapacityProviderException < Aws::EmptyStructure; end
 
     # You can't delete a cluster that has registered container instances.
     # First, deregister the container instances before you can delete the
@@ -2479,9 +2580,22 @@ module Aws::ECS
     #   "`aws`", "`ecs`", or "`fargate`".
     #   @return [String]
     #
+    # @!attribute [rw] cluster
+    #   The name of the cluster to associate with the capacity provider.
+    #   When you create a capacity provider with Amazon ECS Managed
+    #   Instances, it becomes available only within the specified cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_scaling_group_provider
     #   The details of the Auto Scaling group for the capacity provider.
     #   @return [Types::AutoScalingGroupProvider]
+    #
+    # @!attribute [rw] managed_instances_provider
+    #   The configuration for the Amazon ECS Managed Instances provider.
+    #   This configuration specifies how Amazon ECS manages Amazon EC2
+    #   instances on your behalf, including the infrastructure role,
+    #   instance launch template, and tag propagation settings.
+    #   @return [Types::CreateManagedInstancesProviderConfiguration]
     #
     # @!attribute [rw] tags
     #   The metadata that you apply to the capacity provider to categorize
@@ -2518,7 +2632,9 @@ module Aws::ECS
     #
     class CreateCapacityProviderRequest < Struct.new(
       :name,
+      :cluster,
       :auto_scaling_group_provider,
+      :managed_instances_provider,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2683,6 +2799,58 @@ module Aws::ECS
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for creating a Amazon ECS Managed Instances
+    # provider. This specifies how Amazon ECS should manage Amazon EC2
+    # instances, including the infrastructure role, instance launch
+    # template, and whether to propagate tags from the capacity provider to
+    # the instances.
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the infrastructure role that
+    #   Amazon ECS uses to manage instances on your behalf. This role must
+    #   have permissions to launch, terminate, and manage Amazon EC2
+    #   instances, as well as access to other Amazon Web Services services
+    #   required for Amazon ECS Managed Instances functionality.
+    #
+    #   For more information, see [Amazon ECS infrastructure IAM role][1] in
+    #   the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_launch_template
+    #   The launch template configuration that specifies how Amazon ECS
+    #   should launch Amazon EC2 instances. This includes the instance
+    #   profile, network configuration, storage settings, and instance
+    #   requirements for attribute-based instance type selection.
+    #
+    #   For more information, see [Store instance launch parameters in
+    #   Amazon EC2 launch templates][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    #   @return [Types::InstanceLaunchTemplate]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether to propagate tags from the capacity provider to
+    #   the Amazon ECS Managed Instances. When enabled, tags applied to the
+    #   capacity provider are automatically applied to all instances
+    #   launched by this provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateManagedInstancesProviderConfiguration AWS API Documentation
+    #
+    class CreateManagedInstancesProviderConfiguration < Struct.new(
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :propagate_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2950,12 +3118,15 @@ module Aws::ECS
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] health_check_grace_period_seconds
-    #   The period of time, in seconds, that the Amazon Amazon ECS service
+    #   The period of time, in seconds, that the Amazon ECS service
     #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
     #   container health checks after a task has first started. If you do
     #   not specify a health check grace period value, the default value of
     #   0 is used. If you do not use any of the health checks, then
     #   `healthCheckGracePeriodSeconds` is unused.
+    #
+    #   If your service has more running tasks than desired, unhealthy tasks
+    #   in the grace period might be stopped to reach the desired count.
     #   @return [Integer]
     #
     # @!attribute [rw] scheduling_strategy
@@ -3438,10 +3609,17 @@ module Aws::ECS
     #   provider to delete.
     #   @return [String]
     #
+    # @!attribute [rw] cluster
+    #   The name of the cluster that contains the capacity provider to
+    #   delete. Managed instances capacity providers are cluster-scoped and
+    #   can only be deleted from their associated cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProviderRequest AWS API Documentation
     #
     class DeleteCapacityProviderRequest < Struct.new(
-      :capacity_provider)
+      :capacity_provider,
+      :cluster)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4409,6 +4587,12 @@ module Aws::ECS
     #   in an action.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cluster
+    #   The name of the cluster to describe capacity providers for. When
+    #   specified, only capacity providers associated with this cluster are
+    #   returned, including Amazon ECS Managed Instances capacity providers.
+    #   @return [String]
+    #
     # @!attribute [rw] include
     #   Specifies whether or not you want to see the resource tags for the
     #   capacity provider. If `TAGS` is specified, the tags are included in
@@ -4446,6 +4630,7 @@ module Aws::ECS
     #
     class DescribeCapacityProvidersRequest < Struct.new(
       :capacity_providers,
+      :cluster,
       :include,
       :max_results,
       :next_token)
@@ -5941,6 +6126,333 @@ module Aws::ECS
       :status,
       :last_updated,
       :last_status_change)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The launch template configuration for Amazon ECS Managed Instances.
+    # This defines how Amazon ECS launches Amazon EC2 instances, including
+    # the instance profile for your tasks, network and storage
+    # configuration, capacity options, and instance requirements for
+    # flexible instance type selection.
+    #
+    # @!attribute [rw] ec2_instance_profile_arn
+    #   The Amazon Resource Name (ARN) of the instance profile that Amazon
+    #   ECS applies to Amazon ECS Managed Instances. This instance profile
+    #   must include the necessary permissions for your tasks to access
+    #   Amazon Web Services services and resources.
+    #
+    #   For more information, see [Amazon ECS instance profile for Managed
+    #   Instances][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for Amazon ECS Managed Instances. This
+    #   specifies the subnets and security groups that instances use for
+    #   network connectivity.
+    #   @return [Types::ManagedInstancesNetworkConfiguration]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The storage configuration for Amazon ECS Managed Instances. This
+    #   defines the root volume size and type for the instances.
+    #   @return [Types::ManagedInstancesStorageConfiguration]
+    #
+    # @!attribute [rw] monitoring
+    #   CloudWatch provides two categories of monitoring: basic monitoring
+    #   and detailed monitoring. By default, your managed instance is
+    #   configured for basic monitoring. You can optionally enable detailed
+    #   monitoring to help you more quickly identify and act on operational
+    #   issues. You can enable or turn off detailed monitoring at launch or
+    #   when the managed instance is running or stopped. For more
+    #   information, see [Detailed monitoring for Amazon ECS Managed
+    #   Instances][1] in the Amazon ECS Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The instance requirements. You can specify:
+    #
+    #   * The instance types
+    #
+    #   * Instance requirements such as vCPU count, memory, network
+    #     performance, and accelerator specifications
+    #
+    #   Amazon ECS automatically selects the instances that match the
+    #   specified criteria.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceLaunchTemplate AWS API Documentation
+    #
+    class InstanceLaunchTemplate < Struct.new(
+      :ec2_instance_profile_arn,
+      :network_configuration,
+      :storage_configuration,
+      :monitoring,
+      :instance_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The updated launch template configuration for Amazon ECS Managed
+    # Instances. You can modify the instance profile, network configuration,
+    # storage settings, and instance requirements. Changes apply to new
+    # instances launched after the update.
+    #
+    # For more information, see [Store instance launch parameters in Amazon
+    # EC2 launch templates][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    #
+    # @!attribute [rw] ec2_instance_profile_arn
+    #   The updated Amazon Resource Name (ARN) of the instance profile. The
+    #   new instance profile must have the necessary permissions for your
+    #   tasks.
+    #
+    #   For more information, see [Amazon ECS instance profile for Managed
+    #   Instances][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   The updated network configuration for Amazon ECS Managed Instances.
+    #   Changes to subnets and security groups affect new instances launched
+    #   after the update.
+    #   @return [Types::ManagedInstancesNetworkConfiguration]
+    #
+    # @!attribute [rw] storage_configuration
+    #   The updated storage configuration for Amazon ECS Managed Instances.
+    #   Changes to storage settings apply to new instances launched after
+    #   the update.
+    #   @return [Types::ManagedInstancesStorageConfiguration]
+    #
+    # @!attribute [rw] monitoring
+    #   CloudWatch provides two categories of monitoring: basic monitoring
+    #   and detailed monitoring. By default, your managed instance is
+    #   configured for basic monitoring. You can optionally enable detailed
+    #   monitoring to help you more quickly identify and act on operational
+    #   issues. You can enable or turn off detailed monitoring at launch or
+    #   when the managed instance is running or stopped. For more
+    #   information, see [Detailed monitoring for Amazon ECS Managed
+    #   Instances][1] in the Amazon ECS Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The updated instance requirements for attribute-based instance type
+    #   selection. Changes to instance requirements affect which instance
+    #   types Amazon ECS selects for new instances.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceLaunchTemplateUpdate AWS API Documentation
+    #
+    class InstanceLaunchTemplateUpdate < Struct.new(
+      :ec2_instance_profile_arn,
+      :network_configuration,
+      :storage_configuration,
+      :monitoring,
+      :instance_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance requirements for attribute-based instance type selection.
+    # Instead of specifying exact instance types, you define requirements
+    # such as vCPU count, memory size, network performance, and accelerator
+    # specifications. Amazon ECS automatically selects Amazon EC2 instance
+    # types that match these requirements, providing flexibility and helping
+    # to mitigate capacity constraints.
+    #
+    # @!attribute [rw] v_cpu_count
+    #   The minimum and maximum number of vCPUs for the instance types.
+    #   Amazon ECS selects instance types that have vCPU counts within this
+    #   range.
+    #   @return [Types::VCpuCountRangeRequest]
+    #
+    # @!attribute [rw] memory_mi_b
+    #   The minimum and maximum amount of memory in mebibytes (MiB) for the
+    #   instance types. Amazon ECS selects instance types that have memory
+    #   within this range.
+    #   @return [Types::MemoryMiBRequest]
+    #
+    # @!attribute [rw] cpu_manufacturers
+    #   The CPU manufacturers to include or exclude. You can specify
+    #   `intel`, `amd`, or `amazon-web-services` to control which CPU types
+    #   are used for your workloads.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_gi_b_per_v_cpu
+    #   The minimum and maximum amount of memory per vCPU in gibibytes
+    #   (GiB). This helps ensure that instance types have the appropriate
+    #   memory-to-CPU ratio for your workloads.
+    #   @return [Types::MemoryGiBPerVCpuRequest]
+    #
+    # @!attribute [rw] excluded_instance_types
+    #   The instance types to exclude from selection. Use this to prevent
+    #   Amazon ECS from selecting specific instance types that may not be
+    #   suitable for your workloads.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_generations
+    #   The instance generations to include. You can specify `current` to
+    #   use the latest generation instances, or `previous` to include
+    #   previous generation instances for cost optimization.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] spot_max_price_percentage_over_lowest_price
+    #   The maximum price for Spot instances as a percentage over the lowest
+    #   priced On-Demand instance. This helps control Spot instance costs
+    #   while maintaining access to capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
+    #   The price protection threshold for On-Demand Instances, as a
+    #   percentage higher than an identified On-Demand price. The identified
+    #   On-Demand price is the price of the lowest priced current generation
+    #   C, M, or R instance type with your specified attributes. If no
+    #   current generation C, M, or R instance type matches your attributes,
+    #   then the identified price is from either the lowest priced current
+    #   generation instance types or, failing that, the lowest priced
+    #   previous generation instance types that match your attributes. When
+    #   Amazon ECS selects instance types with your attributes, we will
+    #   exclude instance types whose price exceeds your specified threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bare_metal
+    #   Indicates whether to include bare metal instance types. Set to
+    #   `included` to allow bare metal instances, `excluded` to exclude
+    #   them, or `required` to use only bare metal instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] burstable_performance
+    #   Indicates whether to include burstable performance instance types
+    #   (T2, T3, T3a, T4g). Set to `included` to allow burstable instances,
+    #   `excluded` to exclude them, or `required` to use only burstable
+    #   instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] require_hibernate_support
+    #   Indicates whether the instance types must support hibernation. When
+    #   set to `true`, only instance types that support hibernation are
+    #   selected.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_interface_count
+    #   The minimum and maximum number of network interfaces for the
+    #   instance types. This is useful for workloads that require multiple
+    #   network interfaces.
+    #   @return [Types::NetworkInterfaceCountRequest]
+    #
+    # @!attribute [rw] local_storage
+    #   Indicates whether to include instance types with local storage. Set
+    #   to `included` to allow local storage, `excluded` to exclude it, or
+    #   `required` to use only instances with local storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_storage_types
+    #   The local storage types to include. You can specify `hdd` for hard
+    #   disk drives, `ssd` for solid state drives, or both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_local_storage_gb
+    #   The minimum and maximum total local storage in gigabytes (GB) for
+    #   instance types with local storage.
+    #   @return [Types::TotalLocalStorageGBRequest]
+    #
+    # @!attribute [rw] baseline_ebs_bandwidth_mbps
+    #   The minimum and maximum baseline Amazon EBS bandwidth in megabits
+    #   per second (Mbps). This is important for workloads with high storage
+    #   I/O requirements.
+    #   @return [Types::BaselineEbsBandwidthMbpsRequest]
+    #
+    # @!attribute [rw] accelerator_types
+    #   The accelerator types to include. You can specify `gpu` for graphics
+    #   processing units, `fpga` for field programmable gate arrays, or
+    #   `inference` for machine learning inference accelerators.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_count
+    #   The minimum and maximum number of accelerators for the instance
+    #   types. This is used when you need instances with specific numbers of
+    #   GPUs or other accelerators.
+    #   @return [Types::AcceleratorCountRequest]
+    #
+    # @!attribute [rw] accelerator_manufacturers
+    #   The accelerator manufacturers to include. You can specify `nvidia`,
+    #   `amd`, `amazon-web-services`, or `xilinx` depending on your
+    #   accelerator requirements.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_names
+    #   The specific accelerator names to include. For example, you can
+    #   specify `a100`, `v100`, `k80`, or other specific accelerator models.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_total_memory_mi_b
+    #   The minimum and maximum total accelerator memory in mebibytes (MiB).
+    #   This is important for GPU workloads that require specific amounts of
+    #   video memory.
+    #   @return [Types::AcceleratorTotalMemoryMiBRequest]
+    #
+    # @!attribute [rw] network_bandwidth_gbps
+    #   The minimum and maximum network bandwidth in gigabits per second
+    #   (Gbps). This is crucial for network-intensive workloads that require
+    #   high throughput.
+    #   @return [Types::NetworkBandwidthGbpsRequest]
+    #
+    # @!attribute [rw] allowed_instance_types
+    #   The instance types to include in the selection. When specified,
+    #   Amazon ECS only considers these instance types, subject to the other
+    #   requirements specified.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   The maximum price for Spot instances as a percentage of the optimal
+    #   On-Demand price. This provides more precise cost control for Spot
+    #   instance selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceRequirementsRequest AWS API Documentation
+    #
+    class InstanceRequirementsRequest < Struct.new(
+      :v_cpu_count,
+      :memory_mi_b,
+      :cpu_manufacturers,
+      :memory_gi_b_per_v_cpu,
+      :excluded_instance_types,
+      :instance_generations,
+      :spot_max_price_percentage_over_lowest_price,
+      :on_demand_max_price_percentage_over_lowest_price,
+      :bare_metal,
+      :burstable_performance,
+      :require_hibernate_support,
+      :network_interface_count,
+      :local_storage,
+      :local_storage_types,
+      :total_local_storage_gb,
+      :baseline_ebs_bandwidth_mbps,
+      :accelerator_types,
+      :accelerator_count,
+      :accelerator_manufacturers,
+      :accelerator_names,
+      :accelerator_total_memory_mi_b,
+      :network_bandwidth_gbps,
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7505,6 +8017,103 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The network configuration for Amazon ECS Managed Instances. This
+    # specifies the VPC subnets and security groups that instances use for
+    # network connectivity. Amazon ECS Managed Instances support multiple
+    # network modes including `awsvpc` (instances receive ENIs for task
+    # isolation), `host` (instances share network namespace with tasks), and
+    # `none` (no external network connectivity), ensuring backward
+    # compatibility for migrating workloads from Fargate or Amazon EC2.
+    #
+    # @!attribute [rw] subnets
+    #   The list of subnet IDs where Amazon ECS can launch Amazon ECS
+    #   Managed Instances. Instances are distributed across the specified
+    #   subnets for high availability. All subnets must be in the same VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of security group IDs to apply to Amazon ECS Managed
+    #   Instances. These security groups control the network traffic allowed
+    #   to and from the instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedInstancesNetworkConfiguration AWS API Documentation
+    #
+    class ManagedInstancesNetworkConfiguration < Struct.new(
+      :subnets,
+      :security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a Amazon ECS Managed Instances provider. Amazon
+    # ECS uses this configuration to automatically launch, manage, and
+    # terminate Amazon EC2 instances on your behalf. Managed instances
+    # provide access to the full range of Amazon EC2 instance types and
+    # features while offloading infrastructure management to Amazon Web
+    # Services.
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the infrastructure role that
+    #   Amazon ECS assumes to manage instances. This role must include
+    #   permissions for Amazon EC2 instance lifecycle management,
+    #   networking, and any additional Amazon Web Services services required
+    #   for your workloads.
+    #
+    #   For more information, see [Amazon ECS infrastructure IAM role][1] in
+    #   the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_launch_template
+    #   The launch template that defines how Amazon ECS launches Amazon ECS
+    #   Managed Instances. This includes the instance profile for your
+    #   tasks, network and storage configuration, and instance requirements
+    #   that determine which Amazon EC2 instance types can be used.
+    #
+    #   For more information, see [Store instance launch parameters in
+    #   Amazon EC2 launch templates][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    #   @return [Types::InstanceLaunchTemplate]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Determines whether tags from the capacity provider are automatically
+    #   applied to Amazon ECS Managed Instances. This helps with cost
+    #   allocation and resource management by ensuring consistent tagging
+    #   across your infrastructure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedInstancesProvider AWS API Documentation
+    #
+    class ManagedInstancesProvider < Struct.new(
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :propagate_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The storage configuration for Amazon ECS Managed Instances. This
+    # defines the root volume configuration for the instances.
+    #
+    # @!attribute [rw] storage_size_gi_b
+    #   The size of the tasks volume.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedInstancesStorageConfiguration AWS API Documentation
+    #
+    class ManagedInstancesStorageConfiguration < Struct.new(
+      :storage_size_gi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The managed scaling settings for the Auto Scaling group capacity
     # provider.
     #
@@ -7620,6 +8229,52 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The minimum and maximum amount of memory per vCPU in gibibytes (GiB).
+    # This helps ensure that instance types have the appropriate
+    # memory-to-CPU ratio for your workloads.
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory per vCPU in GiB. Instance types with a
+    #   lower memory-to-vCPU ratio are excluded from selection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory per vCPU in GiB. Instance types with a
+    #   higher memory-to-vCPU ratio are excluded from selection.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MemoryGiBPerVCpuRequest AWS API Documentation
+    #
+    class MemoryGiBPerVCpuRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory in mebibytes (MiB) for
+    # instance type selection. This ensures that selected instance types
+    # have adequate memory for your workloads.
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory in MiB. Instance types with less memory
+    #   than this value are excluded from selection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory in MiB. Instance types with more memory
+    #   than this value are excluded from selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MemoryMiBRequest AWS API Documentation
+    #
+    class MemoryMiBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon ECS can't determine the current version of the Amazon ECS
     # container agent on the container instance and doesn't have enough
     # information to proceed with an update. This could be because the agent
@@ -7663,6 +8318,29 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NamespaceNotFoundException AWS API Documentation
     #
     class NamespaceNotFoundException < Aws::EmptyStructure; end
+
+    # The minimum and maximum network bandwidth in gigabits per second
+    # (Gbps) for instance type selection. This is important for
+    # network-intensive workloads.
+    #
+    # @!attribute [rw] min
+    #   The minimum network bandwidth in Gbps. Instance types with lower
+    #   network bandwidth are excluded from selection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum network bandwidth in Gbps. Instance types with higher
+    #   network bandwidth are excluded from selection.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkBandwidthGbpsRequest AWS API Documentation
+    #
+    class NetworkBandwidthGbpsRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Details on the network bindings between a container and its host
     # container instance. After a task reaches the `RUNNING` status, manual
@@ -7810,6 +8488,29 @@ module Aws::ECS
       :attachment_id,
       :private_ipv_4_address,
       :ipv6_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of network interfaces for instance type
+    # selection. This is useful for workloads that require multiple network
+    # interfaces.
+    #
+    # @!attribute [rw] min
+    #   The minimum number of network interfaces. Instance types that
+    #   support fewer network interfaces are excluded from selection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of network interfaces. Instance types that
+    #   support more network interfaces are excluded from selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkInterfaceCountRequest AWS API Documentation
+    #
+    class NetworkInterfaceCountRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9947,6 +10648,9 @@ module Aws::ECS
     #   The period of time, in seconds, that the Amazon ECS service
     #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
     #   container health checks after a task has first started.
+    #
+    #   If your service has more running tasks than desired, unhealthy tasks
+    #   in the grace period might be stopped to reach the desired count.
     #   @return [Integer]
     #
     # @!attribute [rw] scheduling_strategy
@@ -13553,6 +14257,29 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The minimum and maximum total local storage in gigabytes (GB) for
+    # instance types with local storage. This is useful for workloads that
+    # require local storage for temporary data or caching.
+    #
+    # @!attribute [rw] min
+    #   The minimum total local storage in GB. Instance types with less
+    #   local storage are excluded from selection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum total local storage in GB. Instance types with more
+    #   local storage are excluded from selection.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TotalLocalStorageGBRequest AWS API Documentation
+    #
+    class TotalLocalStorageGBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `ulimit` settings to pass to the container.
     #
     # Amazon ECS tasks hosted on Fargate use the default resource limit
@@ -13625,16 +14352,31 @@ module Aws::ECS
     #   The name of the capacity provider to update.
     #   @return [String]
     #
+    # @!attribute [rw] cluster
+    #   The name of the cluster that contains the capacity provider to
+    #   update. Managed instances capacity providers are cluster-scoped and
+    #   can only be updated within their associated cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_scaling_group_provider
     #   An object that represent the parameters to update for the Auto
     #   Scaling group capacity provider.
     #   @return [Types::AutoScalingGroupProviderUpdate]
     #
+    # @!attribute [rw] managed_instances_provider
+    #   The updated configuration for the Amazon ECS Managed Instances
+    #   provider. You can modify the infrastructure role, instance launch
+    #   template, and tag propagation settings. Changes take effect for new
+    #   instances launched after the update.
+    #   @return [Types::UpdateManagedInstancesProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProviderRequest AWS API Documentation
     #
     class UpdateCapacityProviderRequest < Struct.new(
       :name,
-      :auto_scaling_group_provider)
+      :cluster,
+      :auto_scaling_group_provider,
+      :managed_instances_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13844,6 +14586,45 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateInProgressException AWS API Documentation
     #
     class UpdateInProgressException < Aws::EmptyStructure; end
+
+    # The updated configuration for a Amazon ECS Managed Instances provider.
+    # You can modify the infrastructure role, instance launch template, and
+    # tag propagation settings. Changes apply to new instances launched
+    # after the update.
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The updated Amazon Resource Name (ARN) of the infrastructure role.
+    #   The new role must have the necessary permissions to manage instances
+    #   and access required Amazon Web Services services.
+    #
+    #   For more information, see [Amazon ECS infrastructure IAM role][1] in
+    #   the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_launch_template
+    #   The updated launch template configuration. Changes to the launch
+    #   template affect new instances launched after the update, while
+    #   existing instances continue to use their original configuration.
+    #   @return [Types::InstanceLaunchTemplateUpdate]
+    #
+    # @!attribute [rw] propagate_tags
+    #   The updated tag propagation setting. When changed, this affects only
+    #   new instances launched after the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateManagedInstancesProviderConfiguration AWS API Documentation
+    #
+    class UpdateManagedInstancesProviderConfiguration < Struct.new(
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :propagate_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -14060,6 +14841,9 @@ module Aws::ECS
     #   ECS service scheduler ignores health check status. This grace period
     #   can prevent the service scheduler from marking tasks as unhealthy
     #   and stopping them before they have time to come up.
+    #
+    #   If your service has more running tasks than desired, unhealthy tasks
+    #   in the grace period might be stopped to reach the desired count.
     #
     #   This parameter doesn't trigger a new service deployment.
     #   @return [Integer]
@@ -14366,6 +15150,29 @@ module Aws::ECS
     #
     class UpdateTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of vCPUs for instance type selection.
+    # This allows you to specify a range of vCPU counts that meet your
+    # workload requirements.
+    #
+    # @!attribute [rw] min
+    #   The minimum number of vCPUs. Instance types with fewer vCPUs than
+    #   this value are excluded from selection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of vCPUs. Instance types with more vCPUs than
+    #   this value are excluded from selection.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VCpuCountRangeRequest AWS API Documentation
+    #
+    class VCpuCountRangeRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end

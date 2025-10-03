@@ -232,7 +232,8 @@ module Aws
                                         value: ::String
                                       },
                                     ],
-                                    ?integration_type: ("CONNECT_CALL_TRANSFER_CONNECTOR" | "CONNECT_ANALYTICS_CONNECTOR")
+                                    ?integration_type: ("CONNECT_CALL_TRANSFER_CONNECTOR" | "CONNECT_ANALYTICS_CONNECTOR"),
+                                    ?network_type: ("IPV4_ONLY" | "DUAL_STACK")
                                   ) -> _CreateVoiceConnectorResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceConnectorResponseSuccess
 

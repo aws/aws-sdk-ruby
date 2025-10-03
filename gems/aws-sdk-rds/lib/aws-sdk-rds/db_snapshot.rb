@@ -127,6 +127,12 @@ module Aws::RDS
       data[:iops]
     end
 
+    # Specifies the storage throughput for the DB snapshot.
+    # @return [Integer]
+    def storage_throughput
+      data[:storage_throughput]
+    end
+
     # Provides the option group name for the DB snapshot.
     # @return [String]
     def option_group_name
@@ -234,6 +240,13 @@ module Aws::RDS
       data[:tag_list]
     end
 
+    # Specifies where manual snapshots are stored: Dedicated Local Zones,
+    # Amazon Web Services Outposts or the Amazon Web Services Region.
+    # @return [String]
+    def snapshot_target
+      data[:snapshot_target]
+    end
+
     # Specifies the time of the CreateDBSnapshot operation in Coordinated
     # Universal Time (UTC). Doesn't change when the snapshot is copied.
     # @return [Time]
@@ -256,19 +269,6 @@ module Aws::RDS
       data[:snapshot_database_time]
     end
 
-    # Specifies where manual snapshots are stored: Dedicated Local Zones,
-    # Amazon Web Services Outposts or the Amazon Web Services Region.
-    # @return [String]
-    def snapshot_target
-      data[:snapshot_target]
-    end
-
-    # Specifies the storage throughput for the DB snapshot.
-    # @return [Integer]
-    def storage_throughput
-      data[:storage_throughput]
-    end
-
     # The Oracle system identifier (SID), which is the name of the Oracle
     # database instance that manages your database files. The Oracle SID is
     # also the name of your CDB.
@@ -277,19 +277,19 @@ module Aws::RDS
       data[:db_system_id]
     end
 
-    # Indicates whether the DB instance has a dedicated log volume (DLV)
-    # enabled.
-    # @return [Boolean]
-    def dedicated_log_volume
-      data[:dedicated_log_volume]
-    end
-
     # Indicates whether the snapshot is of a DB instance using the
     # multi-tenant configuration (TRUE) or the single-tenant configuration
     # (FALSE).
     # @return [Boolean]
     def multi_tenant
       data[:multi_tenant]
+    end
+
+    # Indicates whether the DB instance has a dedicated log volume (DLV)
+    # enabled.
+    # @return [Boolean]
+    def dedicated_log_volume
+      data[:dedicated_log_volume]
     end
 
     # Specifies the name of the Availability Zone where RDS stores the DB
@@ -489,12 +489,12 @@ module Aws::RDS
     #       },
     #     ],
     #     copy_tags: false,
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
+    #     snapshot_target: "String",
     #     copy_option_group: false,
     #     snapshot_availability_zone: "String",
-    #     snapshot_target: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -636,15 +636,6 @@ module Aws::RDS
     #   CAZ.
     #
     #   Example: `rds-caz-aiqhTgQv`.
-    # @option options [Boolean] :copy_option_group
-    #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group can
-    #   be copied only with cross-account snapshot copy calls.
-    # @option options [String] :snapshot_availability_zone
-    #   Specifies the name of the Availability Zone where RDS stores the DB
-    #   snapshot. This value is valid only for snapshots that RDS stores on a
-    #   Dedicated Local Zone.
     # @option options [String] :snapshot_target
     #   Configures the location where RDS will store copied snapshots.
     #
@@ -655,6 +646,15 @@ module Aws::RDS
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
+    # @option options [Boolean] :copy_option_group
+    #   Specifies whether to copy the DB option group associated with the
+    #   source DB snapshot to the target Amazon Web Services account and
+    #   associate with the target DB snapshot. The associated option group can
+    #   be copied only with cross-account snapshot copy calls.
+    # @option options [String] :snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on a
+    #   Dedicated Local Zone.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -705,6 +705,7 @@ module Aws::RDS
     #     db_name: "String",
     #     engine: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     tags: [
     #       {
@@ -714,7 +715,7 @@ module Aws::RDS
     #     ],
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_fqdn: "String",
@@ -735,12 +736,11 @@ module Aws::RDS
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
-    #     db_cluster_snapshot_identifier: "String",
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
+    #     db_cluster_snapshot_identifier: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -929,6 +929,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    # @option options [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @option options [String] :option_group_name
     #   The name of the option group to be used for the restored DB instance.
     #
@@ -1138,6 +1142,39 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored for
+    #   the restored DB instance.
+    #
+    #   Possible values are `local` (Dedicated Local Zone), `outposts` (Amazon
+    #   Web Services Outposts), and `region` (Amazon Web Services Region). The
+    #   default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     # @option options [String] :custom_iam_instance_profile
     #   The instance profile associated with the underlying Amazon EC2
     #   instance of an RDS Custom DB instance. The instance profile must meet
@@ -1159,43 +1196,17 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
-    # @option options [String] :backup_target
-    #   Specifies where automated backups and manual snapshots are stored for
-    #   the restored DB instance.
+    # @option options [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in CreateDBInstance.
     #
-    #   Possible values are `local` (Dedicated Local Zone), `outposts` (Amazon
-    #   Web Services Outposts), and `region` (Amazon Web Services Region). The
-    #   default is `region`.
+    #   This setting isn't valid for RDS for SQL Server.
     #
-    #   For more information, see [Working with Amazon RDS on Amazon Web
-    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
+    #   the restore operation can succeed. You can also allocate additional
+    #   storage for future growth.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    # @option options [String] :network_type
-    #   The network type of the DB instance.
-    #
-    #   Valid Values:
-    #
-    #   * `IPV4`
-    #
-    #   * `DUAL`
-    #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
-    #   or the IPv4 and the IPv6 protocols (`DUAL`).
-    #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon RDS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    # @option options [Integer] :storage_throughput
-    #   Specifies the storage throughput value for the DB instance.
-    #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #    </note>
     # @option options [String] :db_cluster_snapshot_identifier
     #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
     #
@@ -1220,17 +1231,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
-    # @option options [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate initially for the DB
-    #   instance. Follow the allocation rules specified in CreateDBInstance.
-    #
-    #   This setting isn't valid for RDS for SQL Server.
-    #
-    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
-    #   the restore operation can succeed. You can also allocate additional
-    #   storage for future growth.
-    #
-    #    </note>
     # @option options [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.

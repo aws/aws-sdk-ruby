@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2025-09-30)
+------------------
+
+* Feature - Tagging support for AgentCore Gateway
+
 1.5.0 (2025-09-19)
 ------------------
 

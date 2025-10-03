@@ -61,6 +61,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#iops-instance_method
       def iops: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#option_group_name-instance_method
       def option_group_name: () -> ::String
 
@@ -103,26 +106,23 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#tag_list-instance_method
       def tag_list: () -> ::Array[Types::Tag]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_target-instance_method
+      def snapshot_target: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#original_snapshot_create_time-instance_method
       def original_snapshot_create_time: () -> ::Time
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_database_time-instance_method
       def snapshot_database_time: () -> ::Time
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_target-instance_method
-      def snapshot_target: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#storage_throughput-instance_method
-      def storage_throughput: () -> ::Integer
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#db_system_id-instance_method
       def db_system_id: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#dedicated_log_volume-instance_method
-      def dedicated_log_volume: () -> bool
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#multi_tenant-instance_method
       def multi_tenant: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#dedicated_log_volume-instance_method
+      def dedicated_log_volume: () -> bool
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_availability_zone-instance_method
       def snapshot_availability_zone: () -> ::String
@@ -165,9 +165,9 @@ module Aws
                   ?pre_signed_url: ::String,
                   ?option_group_name: ::String,
                   ?target_custom_availability_zone: ::String,
+                  ?snapshot_target: ::String,
                   ?copy_option_group: bool,
                   ?snapshot_availability_zone: ::String,
-                  ?snapshot_target: ::String,
                   ?source_region: ::String
                 ) -> DBSnapshot
               | (?Hash[Symbol, untyped]) -> DBSnapshot
@@ -191,6 +191,7 @@ module Aws
                      ?db_name: ::String,
                      ?engine: ::String,
                      ?iops: ::Integer,
+                     ?storage_throughput: ::Integer,
                      ?option_group_name: ::String,
                      ?tags: Array[
                        {
@@ -221,12 +222,11 @@ module Aws
                      ?db_parameter_group_name: ::String,
                      ?deletion_protection: bool,
                      ?enable_customer_owned_ip: bool,
-                     ?custom_iam_instance_profile: ::String,
-                     ?backup_target: ::String,
                      ?network_type: ::String,
-                     ?storage_throughput: ::Integer,
-                     ?db_cluster_snapshot_identifier: ::String,
+                     ?backup_target: ::String,
+                     ?custom_iam_instance_profile: ::String,
                      ?allocated_storage: ::Integer,
+                     ?db_cluster_snapshot_identifier: ::String,
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,

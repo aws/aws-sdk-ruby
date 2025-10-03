@@ -13,6 +13,52 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class AttributeFilter
+      attr_accessor attribute_filter_name: ::String
+      attr_accessor attribute_filter_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuditFinding
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor auditor_results: ::Array[Types::AuditorResult]
+      attr_accessor operation: ::String
+      attr_accessor metric_graph: Types::MetricGraph
+      attr_accessor dependency_graph: Types::DependencyGraph
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class AuditTarget
+      attr_accessor type: ::String
+      attr_accessor data: Types::AuditTargetEntity
+      SENSITIVE: []
+    end
+
+    class AuditTargetEntity
+      attr_accessor service: Types::ServiceEntity
+      attr_accessor slo: Types::ServiceLevelObjectiveEntity
+      attr_accessor service_operation: Types::ServiceOperationEntity
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Service < AuditTargetEntity
+      end
+      class Slo < AuditTargetEntity
+      end
+      class ServiceOperation < AuditTargetEntity
+      end
+      class Unknown < AuditTargetEntity
+      end
+    end
+
+    class AuditorResult
+      attr_accessor auditor: ::String
+      attr_accessor description: ::String
+      attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "NONE")
+      SENSITIVE: []
+    end
+
     class BatchGetServiceLevelObjectiveBudgetReportInput
       attr_accessor timestamp: ::Time
       attr_accessor slo_ids: ::Array[::String]
@@ -58,6 +104,18 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class ChangeEvent
+      attr_accessor timestamp: ::Time
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor entity: ::Hash[::String, ::String]
+      attr_accessor change_event_type: ("DEPLOYMENT")
+      attr_accessor event_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor event_name: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -79,6 +137,9 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class DeleteGroupingConfigurationOutput < Aws::EmptyStructure
+    end
+
     class DeleteServiceLevelObjectiveInput
       attr_accessor id: ::String
       SENSITIVE: []
@@ -93,9 +154,23 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class DependencyGraph
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor edges: ::Array[Types::Edge]
+      SENSITIVE: []
+    end
+
     class Dimension
       attr_accessor name: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Edge
+      attr_accessor source_node_id: ::String
+      attr_accessor destination_node_id: ::String
+      attr_accessor duration: ::Float
+      attr_accessor connection_type: ("INDIRECT" | "DIRECT")
       SENSITIVE: []
     end
 
@@ -139,6 +214,19 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class GroupingAttributeDefinition
+      attr_accessor grouping_name: ::String
+      attr_accessor grouping_source_keys: ::Array[::String]
+      attr_accessor default_grouping_value: ::String
+      SENSITIVE: []
+    end
+
+    class GroupingConfiguration
+      attr_accessor grouping_attribute_definitions: ::Array[Types::GroupingAttributeDefinition]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class Interval
       attr_accessor rolling_interval: Types::RollingInterval
       attr_accessor calendar_interval: Types::CalendarInterval
@@ -151,6 +239,34 @@ module Aws::ApplicationSignals
       end
       class Unknown < Interval
       end
+    end
+
+    class ListAuditFindingsInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor auditors: ::Array[::String]
+      attr_accessor audit_targets: ::Array[Types::AuditTarget]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAuditFindingsOutput
+      attr_accessor audit_findings: ::Array[Types::AuditFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupingAttributeDefinitionsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupingAttributeDefinitionsOutput
+      attr_accessor grouping_attribute_definitions: ::Array[Types::GroupingAttributeDefinition]
+      attr_accessor updated_at: ::Time
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class ListServiceDependenciesInput
@@ -206,9 +322,9 @@ module Aws::ApplicationSignals
       attr_accessor dependency_config: Types::DependencyConfig
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor metric_source_types: ::Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")]
       attr_accessor include_linked_accounts: bool
       attr_accessor slo_owner_aws_account_id: ::String
+      attr_accessor metric_source_types: ::Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")]
       SENSITIVE: []
     end
 
@@ -231,6 +347,25 @@ module Aws::ApplicationSignals
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor service_operations: ::Array[Types::ServiceOperation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceStatesInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_linked_accounts: bool
+      attr_accessor aws_account_id: ::String
+      attr_accessor attribute_filters: ::Array[Types::AttributeFilter]
+      SENSITIVE: []
+    end
+
+    class ListServiceStatesOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor service_states: ::Array[Types::ServiceState]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -281,6 +416,13 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class MetricGraph
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
     class MetricReference
       attr_accessor namespace: ::String
       attr_accessor metric_type: ::String
@@ -310,6 +452,27 @@ module Aws::ApplicationSignals
       end
       class Unknown < MonitoredRequestCountMetricDataQueries
       end
+    end
+
+    class Node
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor node_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor type: ::String
+      attr_accessor duration: ::Float
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class PutGroupingConfigurationInput
+      attr_accessor grouping_attribute_definitions: ::Array[Types::GroupingAttributeDefinition]
+      SENSITIVE: []
+    end
+
+    class PutGroupingConfigurationOutput
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      SENSITIVE: []
     end
 
     class RecurrenceRule
@@ -367,6 +530,7 @@ module Aws::ApplicationSignals
     class Service
       attr_accessor key_attributes: ::Hash[::String, ::String]
       attr_accessor attribute_maps: ::Array[::Hash[::String, ::String]]
+      attr_accessor service_groups: ::Array[Types::ServiceGroup]
       attr_accessor metric_references: ::Array[Types::MetricReference]
       attr_accessor log_group_references: ::Array[::Hash[::String, ::String]]
       SENSITIVE: []
@@ -385,6 +549,22 @@ module Aws::ApplicationSignals
       attr_accessor dependent_key_attributes: ::Hash[::String, ::String]
       attr_accessor dependent_operation_name: ::String
       attr_accessor metric_references: ::Array[Types::MetricReference]
+      SENSITIVE: []
+    end
+
+    class ServiceEntity
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor environment: ::String
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceGroup
+      attr_accessor group_name: ::String
+      attr_accessor group_value: ::String
+      attr_accessor group_source: ::String
+      attr_accessor group_identifier: ::String
       SENSITIVE: []
     end
 
@@ -415,6 +595,7 @@ module Aws::ApplicationSignals
       attr_accessor key_attributes: ::Hash[::String, ::String]
       attr_accessor operation_name: ::String
       attr_accessor metric_type: ("LATENCY" | "AVAILABILITY")
+      attr_accessor metric_name: ::String
       attr_accessor statistic: ::String
       attr_accessor period_seconds: ::Integer
       attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
@@ -461,6 +642,12 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class ServiceLevelObjectiveEntity
+      attr_accessor slo_name: ::String
+      attr_accessor slo_arn: ::String
+      SENSITIVE: []
+    end
+
     class ServiceLevelObjectiveSummary
       attr_accessor arn: ::String
       attr_accessor name: ::String
@@ -479,8 +666,22 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class ServiceOperationEntity
+      attr_accessor service: Types::ServiceEntity
+      attr_accessor operation: ::String
+      attr_accessor metric_type: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceState
+      attr_accessor attribute_filters: ::Array[Types::AttributeFilter]
+      attr_accessor service: ::Hash[::String, ::String]
+      attr_accessor latest_change_events: ::Array[Types::ChangeEvent]
       SENSITIVE: []
     end
 
@@ -488,6 +689,7 @@ module Aws::ApplicationSignals
       attr_accessor key_attributes: ::Hash[::String, ::String]
       attr_accessor attribute_maps: ::Array[::Hash[::String, ::String]]
       attr_accessor metric_references: ::Array[Types::MetricReference]
+      attr_accessor service_groups: ::Array[Types::ServiceGroup]
       SENSITIVE: []
     end
 

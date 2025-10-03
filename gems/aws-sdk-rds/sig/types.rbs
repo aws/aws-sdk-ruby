@@ -188,12 +188,12 @@ module Aws::RDS
       attr_accessor iam_database_authentication_enabled: bool
       attr_accessor engine_version: ::String
       attr_accessor backup_retention_period: ::Integer
+      attr_accessor storage_type: ::String
       attr_accessor allocated_storage: ::Integer
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
       attr_accessor iops: ::Integer
-      attr_accessor storage_type: ::String
       attr_accessor certificate_details: Types::CertificateDetails
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password]
     end
 
     class ConnectionPoolConfiguration
@@ -241,7 +241,7 @@ module Aws::RDS
       attr_accessor copy_tags: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor source_region: ::String
-      SENSITIVE: []
+      SENSITIVE: [:pre_signed_url]
     end
 
     class CopyDBClusterSnapshotResult
@@ -271,11 +271,11 @@ module Aws::RDS
       attr_accessor pre_signed_url: ::String
       attr_accessor option_group_name: ::String
       attr_accessor target_custom_availability_zone: ::String
+      attr_accessor snapshot_target: ::String
       attr_accessor copy_option_group: bool
       attr_accessor snapshot_availability_zone: ::String
-      attr_accessor snapshot_target: ::String
       attr_accessor source_region: ::String
-      SENSITIVE: []
+      SENSITIVE: [:pre_signed_url]
     end
 
     class CopyDBSnapshotResult
@@ -327,11 +327,11 @@ module Aws::RDS
       attr_accessor database_installation_files_s3_prefix: ::String
       attr_accessor image_id: ::String
       attr_accessor kms_key_id: ::String
+      attr_accessor source_custom_db_engine_version_identifier: ::String
+      attr_accessor use_aws_provided_latest_image: bool
       attr_accessor description: ::String
       attr_accessor manifest: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor source_custom_db_engine_version_identifier: ::String
-      attr_accessor use_aws_provided_latest_image: bool
       SENSITIVE: []
     end
 
@@ -373,6 +373,12 @@ module Aws::RDS
       attr_accessor engine_mode: ::String
       attr_accessor scaling_configuration: Types::ScalingConfiguration
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
+      attr_accessor db_cluster_instance_class: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor storage_type: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor auto_minor_version_upgrade: bool
       attr_accessor deletion_protection: bool
       attr_accessor global_cluster_identifier: ::String
       attr_accessor enable_http_endpoint: bool
@@ -380,12 +386,8 @@ module Aws::RDS
       attr_accessor domain: ::String
       attr_accessor domain_iam_role_name: ::String
       attr_accessor enable_global_write_forwarding: bool
-      attr_accessor db_cluster_instance_class: ::String
-      attr_accessor allocated_storage: ::Integer
-      attr_accessor storage_type: ::String
-      attr_accessor iops: ::Integer
-      attr_accessor publicly_accessible: bool
-      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor network_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor monitoring_interval: ::Integer
       attr_accessor monitoring_role_arn: ::String
       attr_accessor database_insights_mode: ("standard" | "advanced")
@@ -393,18 +395,16 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor enable_limitless_database: bool
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
-      attr_accessor network_type: ::String
-      attr_accessor cluster_scalability_type: ("standard" | "limitless")
+      attr_accessor cluster_scalability_type: ("standard" | "limitless" | "scaleout")
       attr_accessor db_system_id: ::String
       attr_accessor manage_master_user_password: bool
-      attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor enable_local_write_forwarding: bool
+      attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor source_region: ::String
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password, :pre_signed_url]
     end
 
     class CreateDBClusterParameterGroupMessage
@@ -459,6 +459,7 @@ module Aws::RDS
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor license_model: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor character_set_name: ::String
       attr_accessor nchar_character_set_name: ::String
@@ -491,19 +492,18 @@ module Aws::RDS
       attr_accessor deletion_protection: bool
       attr_accessor max_allocated_storage: ::Integer
       attr_accessor enable_customer_owned_ip: bool
-      attr_accessor custom_iam_instance_profile: ::String
-      attr_accessor backup_target: ::String
       attr_accessor network_type: ::String
-      attr_accessor storage_throughput: ::Integer
+      attr_accessor backup_target: ::String
+      attr_accessor custom_iam_instance_profile: ::String
+      attr_accessor db_system_id: ::String
+      attr_accessor ca_certificate_identifier: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      attr_accessor ca_certificate_identifier: ::String
-      attr_accessor db_system_id: ::String
-      attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
+      attr_accessor dedicated_log_volume: bool
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password, :tde_credential_password]
     end
 
     class CreateDBInstanceReadReplicaMessage
@@ -515,6 +515,7 @@ module Aws::RDS
       attr_accessor multi_az: bool
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor db_parameter_group_name: ::String
       attr_accessor publicly_accessible: bool
@@ -543,19 +544,18 @@ module Aws::RDS
       attr_accessor domain_auth_secret_arn: ::String
       attr_accessor domain_dns_ips: ::Array[::String]
       attr_accessor replica_mode: ("open-read-only" | "mounted")
-      attr_accessor max_allocated_storage: ::Integer
-      attr_accessor custom_iam_instance_profile: ::String
-      attr_accessor network_type: ::String
-      attr_accessor storage_throughput: ::Integer
       attr_accessor enable_customer_owned_ip: bool
+      attr_accessor network_type: ::String
+      attr_accessor max_allocated_storage: ::Integer
       attr_accessor backup_target: ::String
+      attr_accessor custom_iam_instance_profile: ::String
       attr_accessor allocated_storage: ::Integer
       attr_accessor source_db_cluster_identifier: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor upgrade_storage_config: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor source_region: ::String
-      SENSITIVE: []
+      SENSITIVE: [:pre_signed_url]
     end
 
     class CreateDBInstanceReadReplicaResult
@@ -773,7 +773,6 @@ module Aws::RDS
       attr_accessor db_cluster_parameter_group: ::String
       attr_accessor db_subnet_group: ::String
       attr_accessor status: ::String
-      attr_accessor automatic_restart_time: ::Time
       attr_accessor percent_progress: ::String
       attr_accessor earliest_restorable_time: ::Time
       attr_accessor endpoint: ::String
@@ -807,9 +806,17 @@ module Aws::RDS
       attr_accessor backtrack_consumed_change_records: ::Integer
       attr_accessor enabled_cloudwatch_logs_exports: ::Array[::String]
       attr_accessor capacity: ::Integer
+      attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues
       attr_accessor engine_mode: ::String
       attr_accessor scaling_configuration_info: Types::ScalingConfigurationInfo
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
+      attr_accessor db_cluster_instance_class: ::String
+      attr_accessor storage_type: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
+      attr_accessor io_optimized_next_allowed_modification_time: ::Time
+      attr_accessor publicly_accessible: bool
+      attr_accessor auto_minor_version_upgrade: bool
       attr_accessor deletion_protection: bool
       attr_accessor http_endpoint_enabled: bool
       attr_accessor activity_stream_mode: ("sync" | "async")
@@ -823,29 +830,22 @@ module Aws::RDS
       attr_accessor global_cluster_identifier: ::String
       attr_accessor global_write_forwarding_status: ("enabled" | "disabled" | "enabling" | "disabling" | "unknown")
       attr_accessor global_write_forwarding_requested: bool
-      attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues
-      attr_accessor db_cluster_instance_class: ::String
-      attr_accessor storage_type: ::String
-      attr_accessor iops: ::Integer
-      attr_accessor publicly_accessible: bool
-      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor network_type: ::String
+      attr_accessor automatic_restart_time: ::Time
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo
+      attr_accessor serverless_v2_platform_version: ::String
       attr_accessor monitoring_interval: ::Integer
       attr_accessor monitoring_role_arn: ::String
       attr_accessor database_insights_mode: ("standard" | "advanced")
       attr_accessor performance_insights_enabled: bool
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo
-      attr_accessor serverless_v2_platform_version: ::String
-      attr_accessor network_type: ::String
       attr_accessor db_system_id: ::String
       attr_accessor master_user_secret: Types::MasterUserSecret
-      attr_accessor io_optimized_next_allowed_modification_time: ::Time
       attr_accessor local_write_forwarding_status: ("enabled" | "disabled" | "enabling" | "disabling" | "requested")
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor limitless_database: Types::LimitlessDatabase
-      attr_accessor storage_throughput: ::Integer
-      attr_accessor cluster_scalability_type: ("standard" | "limitless")
+      attr_accessor cluster_scalability_type: ("standard" | "limitless" | "scaleout")
       attr_accessor certificate_details: Types::CertificateDetails
       attr_accessor engine_lifecycle_support: ::String
       SENSITIVE: []
@@ -878,8 +878,8 @@ module Aws::RDS
       attr_accessor kms_key_id: ::String
       attr_accessor storage_type: ::String
       attr_accessor iops: ::Integer
-      attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor storage_throughput: ::Integer
+      attr_accessor aws_backup_recovery_point_arn: ::String
       SENSITIVE: []
     end
 
@@ -1045,10 +1045,10 @@ module Aws::RDS
       attr_accessor source_db_cluster_snapshot_arn: ::String
       attr_accessor iam_database_authentication_enabled: bool
       attr_accessor tag_list: ::Array[Types::Tag]
-      attr_accessor db_system_id: ::String
       attr_accessor storage_type: ::String
-      attr_accessor db_cluster_resource_id: ::String
       attr_accessor storage_throughput: ::Integer
+      attr_accessor db_cluster_resource_id: ::String
+      attr_accessor db_system_id: ::String
       SENSITIVE: []
     end
 
@@ -1086,13 +1086,20 @@ module Aws::RDS
 
     class DBEngineVersion
       attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
       attr_accessor engine_version: ::String
+      attr_accessor database_installation_files_s3_bucket_name: ::String
+      attr_accessor database_installation_files_s3_prefix: ::String
+      attr_accessor custom_db_engine_version_manifest: ::String
       attr_accessor db_parameter_group_family: ::String
       attr_accessor db_engine_description: ::String
+      attr_accessor db_engine_version_arn: ::String
       attr_accessor db_engine_version_description: ::String
       attr_accessor default_character_set: Types::CharacterSet
       attr_accessor image: Types::CustomDBEngineVersionAMI
       attr_accessor db_engine_media_type: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor create_time: ::Time
       attr_accessor supported_character_sets: ::Array[Types::CharacterSet]
       attr_accessor supported_nchar_character_sets: ::Array[Types::CharacterSet]
       attr_accessor valid_upgrade_target: ::Array[Types::UpgradeTarget]
@@ -1105,15 +1112,8 @@ module Aws::RDS
       attr_accessor status: ::String
       attr_accessor supports_parallel_query: bool
       attr_accessor supports_global_databases: bool
-      attr_accessor major_engine_version: ::String
-      attr_accessor database_installation_files_s3_bucket_name: ::String
-      attr_accessor database_installation_files_s3_prefix: ::String
-      attr_accessor db_engine_version_arn: ::String
-      attr_accessor kms_key_id: ::String
-      attr_accessor create_time: ::Time
       attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor supports_babelfish: bool
-      attr_accessor custom_db_engine_version_manifest: ::String
       attr_accessor supports_limitless_database: bool
       attr_accessor supports_certificate_rotation_without_restart: bool
       attr_accessor supported_ca_certificate_identifiers: ::Array[::String]
@@ -1134,7 +1134,6 @@ module Aws::RDS
       attr_accessor db_instance_class: ::String
       attr_accessor engine: ::String
       attr_accessor db_instance_status: ::String
-      attr_accessor automatic_restart_time: ::Time
       attr_accessor master_username: ::String
       attr_accessor db_name: ::String
       attr_accessor endpoint: Types::Endpoint
@@ -1159,6 +1158,7 @@ module Aws::RDS
       attr_accessor replica_mode: ("open-read-only" | "mounted")
       attr_accessor license_model: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_memberships: ::Array[Types::OptionGroupMembership]
       attr_accessor character_set_name: ::String
       attr_accessor nchar_character_set_name: ::String
@@ -1193,29 +1193,29 @@ module Aws::RDS
       attr_accessor listener_endpoint: Types::Endpoint
       attr_accessor max_allocated_storage: ::Integer
       attr_accessor tag_list: ::Array[Types::Tag]
-      attr_accessor db_instance_automated_backups_replications: ::Array[Types::DBInstanceAutomatedBackupsReplication]
+      attr_accessor automation_mode: ("full" | "all-paused")
+      attr_accessor resume_full_automation_mode_time: ::Time
       attr_accessor customer_owned_ip_enabled: bool
-      attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor network_type: ::String
       attr_accessor activity_stream_status: ("stopped" | "starting" | "started" | "stopping")
       attr_accessor activity_stream_kms_key_id: ::String
       attr_accessor activity_stream_kinesis_stream_name: ::String
       attr_accessor activity_stream_mode: ("sync" | "async")
       attr_accessor activity_stream_engine_native_audit_fields_included: bool
-      attr_accessor automation_mode: ("full" | "all-paused")
-      attr_accessor resume_full_automation_mode_time: ::Time
-      attr_accessor custom_iam_instance_profile: ::String
+      attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor db_instance_automated_backups_replications: ::Array[Types::DBInstanceAutomatedBackupsReplication]
       attr_accessor backup_target: ::String
-      attr_accessor network_type: ::String
+      attr_accessor automatic_restart_time: ::Time
+      attr_accessor custom_iam_instance_profile: ::String
       attr_accessor activity_stream_policy_status: ("locked" | "unlocked" | "locking-policy" | "unlocking-policy")
-      attr_accessor storage_throughput: ::Integer
+      attr_accessor certificate_details: Types::CertificateDetails
       attr_accessor db_system_id: ::String
       attr_accessor master_user_secret: Types::MasterUserSecret
-      attr_accessor certificate_details: Types::CertificateDetails
       attr_accessor read_replica_source_db_cluster_identifier: ::String
       attr_accessor percent_progress: ::String
+      attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor is_storage_config_upgrade_available: bool
-      attr_accessor multi_tenant: bool
       attr_accessor engine_lifecycle_support: ::String
       SENSITIVE: []
     end
@@ -1240,6 +1240,7 @@ module Aws::RDS
       attr_accessor engine_version: ::String
       attr_accessor license_model: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor tde_credential_arn: ::String
       attr_accessor encrypted: bool
@@ -1251,10 +1252,9 @@ module Aws::RDS
       attr_accessor db_instance_automated_backups_arn: ::String
       attr_accessor db_instance_automated_backups_replications: ::Array[Types::DBInstanceAutomatedBackupsReplication]
       attr_accessor backup_target: ::String
-      attr_accessor storage_throughput: ::Integer
+      attr_accessor multi_tenant: bool
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor dedicated_log_volume: bool
-      attr_accessor multi_tenant: bool
       SENSITIVE: []
     end
 
@@ -1557,6 +1557,7 @@ module Aws::RDS
       attr_accessor license_model: ::String
       attr_accessor snapshot_type: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor percent_progress: ::Integer
       attr_accessor source_region: ::String
@@ -1571,13 +1572,12 @@ module Aws::RDS
       attr_accessor processor_features: ::Array[Types::ProcessorFeature]
       attr_accessor dbi_resource_id: ::String
       attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor snapshot_target: ::String
       attr_accessor original_snapshot_create_time: ::Time
       attr_accessor snapshot_database_time: ::Time
-      attr_accessor snapshot_target: ::String
-      attr_accessor storage_throughput: ::Integer
       attr_accessor db_system_id: ::String
-      attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
+      attr_accessor dedicated_log_volume: bool
       attr_accessor snapshot_availability_zone: ::String
       SENSITIVE: []
     end
@@ -2221,7 +2221,7 @@ module Aws::RDS
 
     class DescribeEventsMessage
       attr_accessor source_identifier: ::String
-      attr_accessor source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment")
+      attr_accessor source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment" | "db-shard-group" | "zero-etl")
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor duration: ::Integer
@@ -2400,7 +2400,7 @@ module Aws::RDS
       attr_accessor log_file_data: ::String
       attr_accessor marker: ::String
       attr_accessor additional_data_pending: bool
-      SENSITIVE: []
+      SENSITIVE: [:log_file_data]
     end
 
     class DownloadDBLogFilePortionMessage
@@ -2449,7 +2449,7 @@ module Aws::RDS
 
     class Event
       attr_accessor source_identifier: ::String
-      attr_accessor source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment")
+      attr_accessor source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment" | "db-shard-group" | "zero-etl")
       attr_accessor message: ::String
       attr_accessor event_categories: ::Array[::String]
       attr_accessor date: ::Time
@@ -2645,10 +2645,10 @@ module Aws::RDS
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor status: ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor create_time: ::Time
-      attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
       attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor errors: ::Array[Types::IntegrationError]
       SENSITIVE: []
     end
 
@@ -2896,25 +2896,25 @@ module Aws::RDS
       attr_accessor storage_type: ::String
       attr_accessor iops: ::Integer
       attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor network_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor monitoring_interval: ::Integer
       attr_accessor monitoring_role_arn: ::String
       attr_accessor database_insights_mode: ("standard" | "advanced")
       attr_accessor enable_performance_insights: bool
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
-      attr_accessor network_type: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor rotate_master_user_password: bool
+      attr_accessor enable_local_write_forwarding: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor engine_mode: ::String
       attr_accessor allow_engine_mode_change: bool
-      attr_accessor enable_local_write_forwarding: bool
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor enable_limitless_database: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password]
     end
 
     class ModifyDBClusterParameterGroupMessage
@@ -2960,6 +2960,7 @@ module Aws::RDS
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor license_model: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor new_db_instance_identifier: ::String
       attr_accessor storage_type: ::String
@@ -2971,13 +2972,13 @@ module Aws::RDS
       attr_accessor domain_ou: ::String
       attr_accessor domain_auth_secret_arn: ::String
       attr_accessor domain_dns_ips: ::Array[::String]
+      attr_accessor disable_domain: bool
       attr_accessor copy_tags_to_snapshot: bool
       attr_accessor monitoring_interval: ::Integer
       attr_accessor db_port_number: ::Integer
       attr_accessor publicly_accessible: bool
       attr_accessor monitoring_role_arn: ::String
       attr_accessor domain_iam_role_name: ::String
-      attr_accessor disable_domain: bool
       attr_accessor promotion_tier: ::Integer
       attr_accessor enable_iam_database_authentication: bool
       attr_accessor database_insights_mode: ("standard" | "advanced")
@@ -2991,20 +2992,19 @@ module Aws::RDS
       attr_accessor max_allocated_storage: ::Integer
       attr_accessor certificate_rotation_restart: bool
       attr_accessor replica_mode: ("open-read-only" | "mounted")
-      attr_accessor enable_customer_owned_ip: bool
-      attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor automation_mode: ("full" | "all-paused")
       attr_accessor resume_full_automation_mode_minutes: ::Integer
+      attr_accessor enable_customer_owned_ip: bool
       attr_accessor network_type: ::String
-      attr_accessor storage_throughput: ::Integer
+      attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor rotate_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      attr_accessor engine: ::String
-      attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
+      attr_accessor dedicated_log_volume: bool
+      attr_accessor engine: ::String
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password, :tde_credential_password]
     end
 
     class ModifyDBInstanceResult
@@ -3290,7 +3290,7 @@ module Aws::RDS
       attr_accessor allowed_values: ::String
       attr_accessor is_modifiable: bool
       attr_accessor is_collection: bool
-      SENSITIVE: []
+      SENSITIVE: [:value]
     end
 
     class OptionVersion
@@ -3312,6 +3312,7 @@ module Aws::RDS
       attr_accessor supports_storage_encryption: bool
       attr_accessor storage_type: ::String
       attr_accessor supports_iops: bool
+      attr_accessor supports_storage_throughput: bool
       attr_accessor supports_enhanced_monitoring: bool
       attr_accessor supports_iam_database_authentication: bool
       attr_accessor supports_performance_insights: bool
@@ -3321,6 +3322,10 @@ module Aws::RDS
       attr_accessor max_iops_per_db_instance: ::Integer
       attr_accessor min_iops_per_gib: ::Float
       attr_accessor max_iops_per_gib: ::Float
+      attr_accessor min_storage_throughput_per_db_instance: ::Integer
+      attr_accessor max_storage_throughput_per_db_instance: ::Integer
+      attr_accessor min_storage_throughput_per_iops: ::Float
+      attr_accessor max_storage_throughput_per_iops: ::Float
       attr_accessor available_processor_features: ::Array[Types::AvailableProcessorFeature]
       attr_accessor supported_engine_modes: ::Array[::String]
       attr_accessor supports_storage_autoscaling: bool
@@ -3328,13 +3333,8 @@ module Aws::RDS
       attr_accessor outpost_capable: bool
       attr_accessor supported_activity_stream_modes: ::Array[::String]
       attr_accessor supports_global_databases: bool
-      attr_accessor supports_clusters: bool
       attr_accessor supported_network_types: ::Array[::String]
-      attr_accessor supports_storage_throughput: bool
-      attr_accessor min_storage_throughput_per_db_instance: ::Integer
-      attr_accessor max_storage_throughput_per_db_instance: ::Integer
-      attr_accessor min_storage_throughput_per_iops: ::Float
-      attr_accessor max_storage_throughput_per_iops: ::Float
+      attr_accessor supports_clusters: bool
       attr_accessor supports_dedicated_log_volume: bool
       attr_accessor supports_http_endpoint: bool
       SENSITIVE: []
@@ -3398,20 +3398,20 @@ module Aws::RDS
       attr_accessor engine_version: ::String
       attr_accessor license_model: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor db_instance_identifier: ::String
       attr_accessor storage_type: ::String
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor db_subnet_group_name: ::String
       attr_accessor pending_cloudwatch_logs_exports: Types::PendingCloudwatchLogsExports
       attr_accessor processor_features: ::Array[Types::ProcessorFeature]
-      attr_accessor iam_database_authentication_enabled: bool
       attr_accessor automation_mode: ("full" | "all-paused")
       attr_accessor resume_full_automation_mode_time: ::Time
-      attr_accessor storage_throughput: ::Integer
-      attr_accessor engine: ::String
-      attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
-      SENSITIVE: []
+      attr_accessor iam_database_authentication_enabled: bool
+      attr_accessor dedicated_log_volume: bool
+      attr_accessor engine: ::String
+      SENSITIVE: [:master_user_password]
     end
 
     class PerformanceInsightsMetricDimensionGroup
@@ -3726,13 +3726,13 @@ module Aws::RDS
       attr_accessor copy_tags_to_snapshot: bool
       attr_accessor domain: ::String
       attr_accessor domain_iam_role_name: ::String
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
+      attr_accessor storage_type: ::String
       attr_accessor network_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      attr_accessor storage_type: ::String
       attr_accessor engine_lifecycle_support: ::String
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password]
     end
 
     class RestoreDBClusterFromS3Result
@@ -3767,8 +3767,8 @@ module Aws::RDS
       attr_accessor storage_type: ::String
       attr_accessor iops: ::Integer
       attr_accessor publicly_accessible: bool
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor network_type: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
       attr_accessor monitoring_interval: ::Integer
       attr_accessor monitoring_role_arn: ::String
@@ -3804,15 +3804,15 @@ module Aws::RDS
       attr_accessor copy_tags_to_snapshot: bool
       attr_accessor domain: ::String
       attr_accessor domain_iam_role_name: ::String
-      attr_accessor scaling_configuration: Types::ScalingConfiguration
-      attr_accessor engine_mode: ::String
       attr_accessor db_cluster_instance_class: ::String
       attr_accessor storage_type: ::String
       attr_accessor publicly_accessible: bool
       attr_accessor iops: ::Integer
-      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor network_type: ::String
       attr_accessor source_db_cluster_resource_id: ::String
+      attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
+      attr_accessor scaling_configuration: Types::ScalingConfiguration
+      attr_accessor engine_mode: ::String
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
       attr_accessor monitoring_interval: ::Integer
       attr_accessor monitoring_role_arn: ::String
@@ -3842,6 +3842,7 @@ module Aws::RDS
       attr_accessor db_name: ::String
       attr_accessor engine: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor storage_type: ::String
@@ -3862,18 +3863,17 @@ module Aws::RDS
       attr_accessor db_parameter_group_name: ::String
       attr_accessor deletion_protection: bool
       attr_accessor enable_customer_owned_ip: bool
-      attr_accessor custom_iam_instance_profile: ::String
-      attr_accessor backup_target: ::String
       attr_accessor network_type: ::String
-      attr_accessor storage_throughput: ::Integer
-      attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor backup_target: ::String
+      attr_accessor custom_iam_instance_profile: ::String
       attr_accessor allocated_storage: ::Integer
+      attr_accessor db_cluster_snapshot_identifier: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tde_credential_password]
     end
 
     class RestoreDBInstanceFromDBSnapshotResult
@@ -3903,6 +3903,7 @@ module Aws::RDS
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor license_model: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor publicly_accessible: bool
       attr_accessor tags: ::Array[Types::Tag]
@@ -3928,13 +3929,12 @@ module Aws::RDS
       attr_accessor deletion_protection: bool
       attr_accessor max_allocated_storage: ::Integer
       attr_accessor network_type: ::String
-      attr_accessor storage_throughput: ::Integer
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password]
     end
 
     class RestoreDBInstanceFromS3Result
@@ -3958,6 +3958,7 @@ module Aws::RDS
       attr_accessor db_name: ::String
       attr_accessor engine: ::String
       attr_accessor iops: ::Integer
+      attr_accessor storage_throughput: ::Integer
       attr_accessor option_group_name: ::String
       attr_accessor copy_tags_to_snapshot: bool
       attr_accessor tags: ::Array[Types::Tag]
@@ -3979,19 +3980,18 @@ module Aws::RDS
       attr_accessor deletion_protection: bool
       attr_accessor source_dbi_resource_id: ::String
       attr_accessor max_allocated_storage: ::Integer
-      attr_accessor source_db_instance_automated_backups_arn: ::String
       attr_accessor enable_customer_owned_ip: bool
-      attr_accessor custom_iam_instance_profile: ::String
-      attr_accessor backup_target: ::String
       attr_accessor network_type: ::String
-      attr_accessor storage_throughput: ::Integer
+      attr_accessor source_db_instance_automated_backups_arn: ::String
+      attr_accessor backup_target: ::String
+      attr_accessor custom_iam_instance_profile: ::String
       attr_accessor allocated_storage: ::Integer
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tde_credential_password]
     end
 
     class RestoreDBInstanceToPointInTimeResult
@@ -4116,8 +4116,8 @@ module Aws::RDS
       attr_accessor kinesis_stream_name: ::String
       attr_accessor status: ("stopped" | "starting" | "started" | "stopping")
       attr_accessor mode: ("sync" | "async")
-      attr_accessor apply_immediately: bool
       attr_accessor engine_native_audit_fields_included: bool
+      attr_accessor apply_immediately: bool
       SENSITIVE: []
     end
 
@@ -4137,7 +4137,7 @@ module Aws::RDS
       attr_accessor kms_key_id: ::String
       attr_accessor pre_signed_url: ::String
       attr_accessor source_region: ::String
-      SENSITIVE: []
+      SENSITIVE: [:pre_signed_url]
     end
 
     class StartDBInstanceAutomatedBackupsReplicationResult
@@ -4297,8 +4297,8 @@ module Aws::RDS
     end
 
     class TargetHealth
-      attr_accessor state: ("REGISTERING" | "AVAILABLE" | "UNAVAILABLE")
-      attr_accessor reason: ("UNREACHABLE" | "CONNECTION_FAILED" | "AUTH_FAILURE" | "PENDING_PROXY_CAPACITY" | "INVALID_REPLICATION_STATE")
+      attr_accessor state: ("REGISTERING" | "AVAILABLE" | "UNAVAILABLE" | "UNUSED")
+      attr_accessor reason: ("UNREACHABLE" | "CONNECTION_FAILED" | "AUTH_FAILURE" | "PENDING_PROXY_CAPACITY" | "INVALID_REPLICATION_STATE" | "PROMOTED")
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -4398,9 +4398,9 @@ module Aws::RDS
       attr_accessor storage_size: ::Array[Types::Range]
       attr_accessor provisioned_iops: ::Array[Types::Range]
       attr_accessor iops_to_storage_ratio: ::Array[Types::DoubleRange]
-      attr_accessor supports_storage_autoscaling: bool
       attr_accessor provisioned_storage_throughput: ::Array[Types::Range]
       attr_accessor storage_throughput_to_iops_ratio: ::Array[Types::DoubleRange]
+      attr_accessor supports_storage_autoscaling: bool
       SENSITIVE: []
     end
 

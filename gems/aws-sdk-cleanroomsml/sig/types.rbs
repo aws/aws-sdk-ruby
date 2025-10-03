@@ -8,6 +8,23 @@
 module Aws::CleanRoomsML
   module Types
 
+    class AccessBudget
+      attr_accessor resource_arn: ::String
+      attr_accessor details: ::Array[Types::AccessBudgetDetails]
+      attr_accessor aggregate_remaining_budget: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessBudgetDetails
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor remaining_budget: ::Integer
+      attr_accessor budget: ::Integer
+      attr_accessor budget_type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME")
+      attr_accessor auto_refresh: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -524,6 +541,7 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails
       attr_accessor retention_in_days: ::Integer
       attr_accessor number_of_records: ::Integer
+      attr_accessor privacy_budgets: Types::PrivacyBudgets
       attr_accessor description: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
@@ -665,6 +683,7 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails
       attr_accessor retention_in_days: ::Integer
       attr_accessor number_of_records: ::Integer
+      attr_accessor privacy_budgets: Types::PrivacyBudgets
       attr_accessor description: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
@@ -1112,6 +1131,17 @@ module Aws::CleanRoomsML
       attr_accessor channel_name: ::String
       attr_accessor s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")
       SENSITIVE: []
+    end
+
+    class PrivacyBudgets
+      attr_accessor access_budgets: ::Array[Types::AccessBudget]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccessBudgets < PrivacyBudgets
+      end
+      class Unknown < PrivacyBudgets
+      end
     end
 
     class PrivacyConfiguration

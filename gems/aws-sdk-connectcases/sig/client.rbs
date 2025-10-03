@@ -85,19 +85,19 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_get_case_rule-instance_method
       def batch_get_case_rule: (
+                                 domain_id: ::String,
                                  case_rules: Array[
                                    {
                                      id: ::String
                                    },
-                                 ],
-                                 domain_id: ::String
+                                 ]
                                ) -> _BatchGetCaseRuleResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCaseRuleResponseSuccess
 
       interface _BatchGetFieldResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFieldResponse]
-        def errors: () -> ::Array[Types::FieldError]
         def fields: () -> ::Array[Types::GetFieldResponse]
+        def errors: () -> ::Array[Types::FieldError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_get_field-instance_method
       def batch_get_field: (
@@ -120,9 +120,9 @@ module Aws
                                      field_id: ::String,
                                      options: Array[
                                        {
-                                         active: bool,
                                          name: ::String,
-                                         value: ::String
+                                         value: ::String,
+                                         active: bool
                                        },
                                      ]
                                    ) -> _BatchPutFieldOptionsResponseSuccess
@@ -130,46 +130,47 @@ module Aws
 
       interface _CreateCaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseResponse]
-        def case_arn: () -> ::String
         def case_id: () -> ::String
+        def case_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_case-instance_method
       def create_case: (
-                         ?client_token: ::String,
                          domain_id: ::String,
+                         template_id: ::String,
                          fields: Array[
                            {
                              id: ::String,
                              value: {
-                               boolean_value: bool?,
+                               string_value: ::String?,
                                double_value: ::Float?,
+                               boolean_value: bool?,
                                empty_value: {
                                }?,
-                               string_value: ::String?,
                                user_arn_value: ::String?
                              }
                            },
                          ],
+                         ?client_token: ::String,
                          ?performed_by: {
-                           custom_entity: ::String?,
-                           user_arn: ::String?
-                         },
-                         template_id: ::String
+                           user_arn: ::String?,
+                           custom_entity: ::String?
+                         }
                        ) -> _CreateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCaseResponseSuccess
 
       interface _CreateCaseRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseRuleResponse]
-        def case_rule_arn: () -> ::String
         def case_rule_id: () -> ::String
+        def case_rule_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_case_rule-instance_method
       def create_case_rule: (
-                              ?description: ::String,
                               domain_id: ::String,
                               name: ::String,
+                              ?description: ::String,
                               rule: {
                                 required: {
+                                  default_value: bool,
                                   conditions: Array[
                                     {
                                       equal_to: {
@@ -177,11 +178,11 @@ module Aws
                                           field_id: ::String?
                                         },
                                         operand_two: {
+                                          string_value: ::String?,
                                           boolean_value: bool?,
                                           double_value: ::Float?,
                                           empty_value: {
-                                          }?,
-                                          string_value: ::String?
+                                          }?
                                         },
                                         result: bool
                                       }?,
@@ -190,17 +191,16 @@ module Aws
                                           field_id: ::String?
                                         },
                                         operand_two: {
+                                          string_value: ::String?,
                                           boolean_value: bool?,
                                           double_value: ::Float?,
                                           empty_value: {
-                                          }?,
-                                          string_value: ::String?
+                                          }?
                                         },
                                         result: bool
                                       }?
                                     },
-                                  ],
-                                  default_value: bool
+                                  ]
                                 }?
                               }
                             ) -> _CreateCaseRuleResponseSuccess
@@ -208,8 +208,8 @@ module Aws
 
       interface _CreateDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
-        def domain_arn: () -> ::String
         def domain_id: () -> ::String
+        def domain_arn: () -> ::String
         def domain_status: () -> ("Active" | "CreationInProgress" | "CreationFailed")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_domain-instance_method
@@ -220,134 +220,152 @@ module Aws
 
       interface _CreateFieldResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFieldResponse]
-        def field_arn: () -> ::String
         def field_id: () -> ::String
+        def field_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_field-instance_method
       def create_field: (
-                          ?description: ::String,
                           domain_id: ::String,
                           name: ::String,
-                          type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+                          type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User"),
+                          ?description: ::String
                         ) -> _CreateFieldResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFieldResponseSuccess
 
       interface _CreateLayoutResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLayoutResponse]
-        def layout_arn: () -> ::String
         def layout_id: () -> ::String
+        def layout_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_layout-instance_method
       def create_layout: (
+                           domain_id: ::String,
+                           name: ::String,
                            content: {
                              basic: {
-                               more_info: {
-                                 sections: Array[
-                                   {
-                                     field_group: {
-                                       fields: Array[
-                                         {
-                                           id: ::String
-                                         },
-                                       ],
-                                       name: ::String?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
                                top_panel: {
                                  sections: Array[
                                    {
                                      field_group: {
+                                       name: ::String?,
                                        fields: Array[
                                          {
                                            id: ::String
                                          },
-                                       ],
-                                       name: ::String?
+                                       ]
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               more_info: {
+                                 sections: Array[
+                                   {
+                                     field_group: {
+                                       name: ::String?,
+                                       fields: Array[
+                                         {
+                                           id: ::String
+                                         },
+                                       ]
                                      }?
                                    },
                                  ]?
                                }?
                              }?
-                           },
-                           domain_id: ::String,
-                           name: ::String
+                           }
                          ) -> _CreateLayoutResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLayoutResponseSuccess
 
       interface _CreateRelatedItemResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelatedItemResponse]
-        def related_item_arn: () -> ::String
         def related_item_id: () -> ::String
+        def related_item_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_related_item-instance_method
       def create_related_item: (
+                                 domain_id: ::String,
                                  case_id: ::String,
+                                 type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom"),
                                  content: {
+                                   contact: {
+                                     contact_arn: ::String
+                                   }?,
                                    comment: {
                                      body: ::String,
                                      content_type: ("Text/Plain")
-                                   }?,
-                                   contact: {
-                                     contact_arn: ::String
                                    }?,
                                    file: {
                                      file_arn: ::String
                                    }?,
                                    sla: {
                                      sla_input_configuration: {
-                                       field_id: ::String?,
                                        name: ::String,
+                                       type: ("CaseField"),
+                                       field_id: ::String?,
                                        target_field_values: Array[
                                          {
-                                           boolean_value: bool?,
+                                           string_value: ::String?,
                                            double_value: ::Float?,
+                                           boolean_value: bool?,
                                            empty_value: {
                                            }?,
-                                           string_value: ::String?,
                                            user_arn_value: ::String?
                                          },
                                        ]?,
-                                       target_sla_minutes: ::Integer,
-                                       type: ("CaseField")
+                                       target_sla_minutes: ::Integer
                                      }?
+                                   }?,
+                                   connect_case: {
+                                     case_id: ::String
+                                   }?,
+                                   custom: {
+                                     fields: Array[
+                                       {
+                                         id: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           double_value: ::Float?,
+                                           boolean_value: bool?,
+                                           empty_value: {
+                                           }?,
+                                           user_arn_value: ::String?
+                                         }
+                                       },
+                                     ]
                                    }?
                                  },
-                                 domain_id: ::String,
                                  ?performed_by: {
-                                   custom_entity: ::String?,
-                                   user_arn: ::String?
-                                 },
-                                 type: ("Contact" | "Comment" | "File" | "Sla")
+                                   user_arn: ::String?,
+                                   custom_entity: ::String?
+                                 }
                                ) -> _CreateRelatedItemResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelatedItemResponseSuccess
 
       interface _CreateTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateResponse]
-        def template_arn: () -> ::String
         def template_id: () -> ::String
+        def template_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_template-instance_method
       def create_template: (
-                             ?description: ::String,
                              domain_id: ::String,
+                             name: ::String,
+                             ?description: ::String,
                              ?layout_configuration: {
                                default_layout: ::String?
                              },
-                             name: ::String,
                              ?required_fields: Array[
                                {
                                  field_id: ::String
                                },
                              ],
+                             ?status: ("Active" | "Inactive"),
                              ?rules: Array[
                                {
                                  case_rule_id: ::String,
                                  field_id: ::String
                                },
-                             ],
-                             ?status: ("Active" | "Inactive")
+                             ]
                            ) -> _CreateTemplateResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
 
@@ -356,8 +374,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_case-instance_method
       def delete_case: (
-                         case_id: ::String,
-                         domain_id: ::String
+                         domain_id: ::String,
+                         case_id: ::String
                        ) -> _DeleteCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCaseResponseSuccess
 
@@ -366,8 +384,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_case_rule-instance_method
       def delete_case_rule: (
-                              case_rule_id: ::String,
-                              domain_id: ::String
+                              domain_id: ::String,
+                              case_rule_id: ::String
                             ) -> _DeleteCaseRuleResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCaseRuleResponseSuccess
 
@@ -405,8 +423,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_related_item-instance_method
       def delete_related_item: (
-                                 case_id: ::String,
                                  domain_id: ::String,
+                                 case_id: ::String,
                                  related_item_id: ::String
                                ) -> _DeleteRelatedItemResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelatedItemResponseSuccess
@@ -424,9 +442,9 @@ module Aws
       interface _GetCaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCaseResponse]
         def fields: () -> ::Array[Types::FieldValue]
+        def template_id: () -> ::String
         def next_token: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
-        def template_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_case-instance_method
       def get_case: (
@@ -443,8 +461,8 @@ module Aws
 
       interface _GetCaseAuditEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCaseAuditEventsResponse]
-        def audit_events: () -> ::Array[Types::AuditEvent]
         def next_token: () -> ::String
+        def audit_events: () -> ::Array[Types::AuditEvent]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_case_audit_events-instance_method
       def get_case_audit_events: (
@@ -467,11 +485,11 @@ module Aws
 
       interface _GetDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainResponse]
-        def created_time: () -> ::Time
-        def domain_arn: () -> ::String
         def domain_id: () -> ::String
-        def domain_status: () -> ("Active" | "CreationInProgress" | "CreationFailed")
+        def domain_arn: () -> ::String
         def name: () -> ::String
+        def created_time: () -> ::Time
+        def domain_status: () -> ("Active" | "CreationInProgress" | "CreationFailed")
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_domain-instance_method
@@ -482,14 +500,14 @@ module Aws
 
       interface _GetLayoutResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLayoutResponse]
-        def content: () -> Types::LayoutContent
-        def created_time: () -> ::Time
-        def deleted: () -> bool
-        def last_modified_time: () -> ::Time
-        def layout_arn: () -> ::String
         def layout_id: () -> ::String
+        def layout_arn: () -> ::String
         def name: () -> ::String
+        def content: () -> Types::LayoutContent
         def tags: () -> ::Hash[::String, ::String]
+        def deleted: () -> bool
+        def created_time: () -> ::Time
+        def last_modified_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_layout-instance_method
       def get_layout: (
@@ -500,18 +518,18 @@ module Aws
 
       interface _GetTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateResponse]
-        def created_time: () -> ::Time
-        def deleted: () -> bool
-        def description: () -> ::String
-        def last_modified_time: () -> ::Time
-        def layout_configuration: () -> Types::LayoutConfiguration
-        def name: () -> ::String
-        def required_fields: () -> ::Array[Types::RequiredField]
-        def rules: () -> ::Array[Types::TemplateRule]
-        def status: () -> ("Active" | "Inactive")
-        def tags: () -> ::Hash[::String, ::String]
-        def template_arn: () -> ::String
         def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def layout_configuration: () -> Types::LayoutConfiguration
+        def required_fields: () -> ::Array[Types::RequiredField]
+        def tags: () -> ::Hash[::String, ::String]
+        def status: () -> ("Active" | "Inactive")
+        def deleted: () -> bool
+        def created_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def rules: () -> ::Array[Types::TemplateRule]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_template-instance_method
       def get_template: (
@@ -540,8 +558,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_cases_for_contact-instance_method
       def list_cases_for_contact: (
-                                    contact_arn: ::String,
                                     domain_id: ::String,
+                                    contact_arn: ::String,
                                     ?max_results: ::Integer,
                                     ?next_token: ::String
                                   ) -> _ListCasesForContactResponseSuccess
@@ -561,8 +579,8 @@ module Aws
 
       interface _ListFieldOptionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFieldOptionsResponse]
-        def next_token: () -> ::String
         def options: () -> ::Array[Types::FieldOption]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_field_options-instance_method
       def list_field_options: (
@@ -612,8 +630,8 @@ module Aws
 
       interface _ListTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplatesResponse]
-        def next_token: () -> ::String
         def templates: () -> ::Array[Types::TemplateSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_templates-instance_method
       def list_templates: (
@@ -648,103 +666,221 @@ module Aws
                                         ) -> _PutCaseEventConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCaseEventConfigurationResponseSuccess
 
+      interface _SearchAllRelatedItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchAllRelatedItemsResponse]
+        def next_token: () -> ::String
+        def related_items: () -> ::Array[Types::SearchAllRelatedItemsResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#search_all_related_items-instance_method
+      def search_all_related_items: (
+                                      domain_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?filters: Array[
+                                        {
+                                          contact: {
+                                            channel: Array[::String]?,
+                                            contact_arn: ::String?
+                                          }?,
+                                          comment: {
+                                          }?,
+                                          file: {
+                                            file_arn: ::String?
+                                          }?,
+                                          sla: {
+                                            name: ::String?,
+                                            status: ("Active" | "Overdue" | "Met" | "NotMet")?
+                                          }?,
+                                          connect_case: {
+                                            case_id: ::String?
+                                          }?,
+                                          custom: {
+                                            fields: {
+                                              field: {
+                                                equal_to: {
+                                                  id: ::String,
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?,
+                                                    empty_value: {
+                                                    }?,
+                                                    user_arn_value: ::String?
+                                                  }
+                                                }?,
+                                                contains: {
+                                                  id: ::String,
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?,
+                                                    empty_value: {
+                                                    }?,
+                                                    user_arn_value: ::String?
+                                                  }
+                                                }?,
+                                                greater_than: {
+                                                  id: ::String,
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?,
+                                                    empty_value: {
+                                                    }?,
+                                                    user_arn_value: ::String?
+                                                  }
+                                                }?,
+                                                greater_than_or_equal_to: {
+                                                  id: ::String,
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?,
+                                                    empty_value: {
+                                                    }?,
+                                                    user_arn_value: ::String?
+                                                  }
+                                                }?,
+                                                less_than: {
+                                                  id: ::String,
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?,
+                                                    empty_value: {
+                                                    }?,
+                                                    user_arn_value: ::String?
+                                                  }
+                                                }?,
+                                                less_than_or_equal_to: {
+                                                  id: ::String,
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?,
+                                                    empty_value: {
+                                                    }?,
+                                                    user_arn_value: ::String?
+                                                  }
+                                                }?
+                                              }?,
+                                              not: untyped?,
+                                              and_all: Array[
+                                                untyped,
+                                              ]?,
+                                              or_all: Array[
+                                                untyped,
+                                              ]?
+                                            }?
+                                          }?
+                                        },
+                                      ],
+                                      ?sorts: Array[
+                                        {
+                                          sort_property: ("AssociationTime" | "CaseId"),
+                                          sort_order: ("Asc" | "Desc")
+                                        },
+                                      ]
+                                    ) -> _SearchAllRelatedItemsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAllRelatedItemsResponseSuccess
+
       interface _SearchCasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchCasesResponse]
-        def cases: () -> ::Array[Types::SearchCasesResponseItem]
         def next_token: () -> ::String
+        def cases: () -> ::Array[Types::SearchCasesResponseItem]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#search_cases-instance_method
       def search_cases: (
                           domain_id: ::String,
-                          ?fields: Array[
-                            {
-                              id: ::String
-                            },
-                          ],
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?search_term: ::String,
                           ?filter: {
-                            and_all: Array[
-                              untyped,
-                            ]?,
                             field: {
-                              contains: {
-                                id: ::String,
-                                value: {
-                                  boolean_value: bool?,
-                                  double_value: ::Float?,
-                                  empty_value: {
-                                  }?,
-                                  string_value: ::String?,
-                                  user_arn_value: ::String?
-                                }
-                              }?,
                               equal_to: {
                                 id: ::String,
                                 value: {
-                                  boolean_value: bool?,
+                                  string_value: ::String?,
                                   double_value: ::Float?,
+                                  boolean_value: bool?,
                                   empty_value: {
                                   }?,
+                                  user_arn_value: ::String?
+                                }
+                              }?,
+                              contains: {
+                                id: ::String,
+                                value: {
                                   string_value: ::String?,
+                                  double_value: ::Float?,
+                                  boolean_value: bool?,
+                                  empty_value: {
+                                  }?,
                                   user_arn_value: ::String?
                                 }
                               }?,
                               greater_than: {
                                 id: ::String,
                                 value: {
-                                  boolean_value: bool?,
+                                  string_value: ::String?,
                                   double_value: ::Float?,
+                                  boolean_value: bool?,
                                   empty_value: {
                                   }?,
-                                  string_value: ::String?,
                                   user_arn_value: ::String?
                                 }
                               }?,
                               greater_than_or_equal_to: {
                                 id: ::String,
                                 value: {
-                                  boolean_value: bool?,
+                                  string_value: ::String?,
                                   double_value: ::Float?,
+                                  boolean_value: bool?,
                                   empty_value: {
                                   }?,
-                                  string_value: ::String?,
                                   user_arn_value: ::String?
                                 }
                               }?,
                               less_than: {
                                 id: ::String,
                                 value: {
-                                  boolean_value: bool?,
+                                  string_value: ::String?,
                                   double_value: ::Float?,
+                                  boolean_value: bool?,
                                   empty_value: {
                                   }?,
-                                  string_value: ::String?,
                                   user_arn_value: ::String?
                                 }
                               }?,
                               less_than_or_equal_to: {
                                 id: ::String,
                                 value: {
-                                  boolean_value: bool?,
+                                  string_value: ::String?,
                                   double_value: ::Float?,
+                                  boolean_value: bool?,
                                   empty_value: {
                                   }?,
-                                  string_value: ::String?,
                                   user_arn_value: ::String?
                                 }
                               }?
                             }?,
                             not: untyped?,
+                            and_all: Array[
+                              untyped,
+                            ]?,
                             or_all: Array[
                               untyped,
                             ]?
                           },
-                          ?max_results: ::Integer,
-                          ?next_token: ::String,
-                          ?search_term: ::String,
                           ?sorts: Array[
                             {
                               field_id: ::String,
                               sort_order: ("Asc" | "Desc")
+                            },
+                          ],
+                          ?fields: Array[
+                            {
+                              id: ::String
                             },
                           ]
                         ) -> _SearchCasesResponseSuccess
@@ -757,15 +893,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#search_related_items-instance_method
       def search_related_items: (
-                                  case_id: ::String,
                                   domain_id: ::String,
+                                  case_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
                                   ?filters: Array[
                                     {
-                                      comment: {
-                                      }?,
                                       contact: {
                                         channel: Array[::String]?,
                                         contact_arn: ::String?
+                                      }?,
+                                      comment: {
                                       }?,
                                       file: {
                                         file_arn: ::String?
@@ -773,11 +911,91 @@ module Aws
                                       sla: {
                                         name: ::String?,
                                         status: ("Active" | "Overdue" | "Met" | "NotMet")?
+                                      }?,
+                                      connect_case: {
+                                        case_id: ::String?
+                                      }?,
+                                      custom: {
+                                        fields: {
+                                          field: {
+                                            equal_to: {
+                                              id: ::String,
+                                              value: {
+                                                string_value: ::String?,
+                                                double_value: ::Float?,
+                                                boolean_value: bool?,
+                                                empty_value: {
+                                                }?,
+                                                user_arn_value: ::String?
+                                              }
+                                            }?,
+                                            contains: {
+                                              id: ::String,
+                                              value: {
+                                                string_value: ::String?,
+                                                double_value: ::Float?,
+                                                boolean_value: bool?,
+                                                empty_value: {
+                                                }?,
+                                                user_arn_value: ::String?
+                                              }
+                                            }?,
+                                            greater_than: {
+                                              id: ::String,
+                                              value: {
+                                                string_value: ::String?,
+                                                double_value: ::Float?,
+                                                boolean_value: bool?,
+                                                empty_value: {
+                                                }?,
+                                                user_arn_value: ::String?
+                                              }
+                                            }?,
+                                            greater_than_or_equal_to: {
+                                              id: ::String,
+                                              value: {
+                                                string_value: ::String?,
+                                                double_value: ::Float?,
+                                                boolean_value: bool?,
+                                                empty_value: {
+                                                }?,
+                                                user_arn_value: ::String?
+                                              }
+                                            }?,
+                                            less_than: {
+                                              id: ::String,
+                                              value: {
+                                                string_value: ::String?,
+                                                double_value: ::Float?,
+                                                boolean_value: bool?,
+                                                empty_value: {
+                                                }?,
+                                                user_arn_value: ::String?
+                                              }
+                                            }?,
+                                            less_than_or_equal_to: {
+                                              id: ::String,
+                                              value: {
+                                                string_value: ::String?,
+                                                double_value: ::Float?,
+                                                boolean_value: bool?,
+                                                empty_value: {
+                                                }?,
+                                                user_arn_value: ::String?
+                                              }
+                                            }?
+                                          }?,
+                                          not: untyped?,
+                                          and_all: Array[
+                                            untyped,
+                                          ]?,
+                                          or_all: Array[
+                                            untyped,
+                                          ]?
+                                        }?
                                       }?
                                     },
-                                  ],
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String
+                                  ]
                                 ) -> _SearchRelatedItemsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRelatedItemsResponseSuccess
 
@@ -800,24 +1018,24 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_case-instance_method
       def update_case: (
-                         case_id: ::String,
                          domain_id: ::String,
+                         case_id: ::String,
                          fields: Array[
                            {
                              id: ::String,
                              value: {
-                               boolean_value: bool?,
+                               string_value: ::String?,
                                double_value: ::Float?,
+                               boolean_value: bool?,
                                empty_value: {
                                }?,
-                               string_value: ::String?,
                                user_arn_value: ::String?
                              }
                            },
                          ],
                          ?performed_by: {
-                           custom_entity: ::String?,
-                           user_arn: ::String?
+                           user_arn: ::String?,
+                           custom_entity: ::String?
                          }
                        ) -> _UpdateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseResponseSuccess
@@ -827,12 +1045,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_case_rule-instance_method
       def update_case_rule: (
-                              case_rule_id: ::String,
-                              ?description: ::String,
                               domain_id: ::String,
+                              case_rule_id: ::String,
                               ?name: ::String,
+                              ?description: ::String,
                               ?rule: {
                                 required: {
+                                  default_value: bool,
                                   conditions: Array[
                                     {
                                       equal_to: {
@@ -840,11 +1059,11 @@ module Aws
                                           field_id: ::String?
                                         },
                                         operand_two: {
+                                          string_value: ::String?,
                                           boolean_value: bool?,
                                           double_value: ::Float?,
                                           empty_value: {
-                                          }?,
-                                          string_value: ::String?
+                                          }?
                                         },
                                         result: bool
                                       }?,
@@ -853,17 +1072,16 @@ module Aws
                                           field_id: ::String?
                                         },
                                         operand_two: {
+                                          string_value: ::String?,
                                           boolean_value: bool?,
                                           double_value: ::Float?,
                                           empty_value: {
-                                          }?,
-                                          string_value: ::String?
+                                          }?
                                         },
                                         result: bool
                                       }?
                                     },
-                                  ],
-                                  default_value: bool
+                                  ]
                                 }?
                               }
                             ) -> _UpdateCaseRuleResponseSuccess
@@ -874,10 +1092,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_field-instance_method
       def update_field: (
-                          ?description: ::String,
                           domain_id: ::String,
                           field_id: ::String,
-                          ?name: ::String
+                          ?name: ::String,
+                          ?description: ::String
                         ) -> _UpdateFieldResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFieldResponseSuccess
 
@@ -886,41 +1104,41 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_layout-instance_method
       def update_layout: (
+                           domain_id: ::String,
+                           layout_id: ::String,
+                           ?name: ::String,
                            ?content: {
                              basic: {
-                               more_info: {
-                                 sections: Array[
-                                   {
-                                     field_group: {
-                                       fields: Array[
-                                         {
-                                           id: ::String
-                                         },
-                                       ],
-                                       name: ::String?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
                                top_panel: {
                                  sections: Array[
                                    {
                                      field_group: {
+                                       name: ::String?,
                                        fields: Array[
                                          {
                                            id: ::String
                                          },
-                                       ],
-                                       name: ::String?
+                                       ]
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               more_info: {
+                                 sections: Array[
+                                   {
+                                     field_group: {
+                                       name: ::String?,
+                                       fields: Array[
+                                         {
+                                           id: ::String
+                                         },
+                                       ]
                                      }?
                                    },
                                  ]?
                                }?
                              }?
-                           },
-                           domain_id: ::String,
-                           layout_id: ::String,
-                           ?name: ::String
+                           }
                          ) -> _UpdateLayoutResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLayoutResponseSuccess
 
@@ -929,25 +1147,25 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_template-instance_method
       def update_template: (
-                             ?description: ::String,
                              domain_id: ::String,
+                             template_id: ::String,
+                             ?name: ::String,
+                             ?description: ::String,
                              ?layout_configuration: {
                                default_layout: ::String?
                              },
-                             ?name: ::String,
                              ?required_fields: Array[
                                {
                                  field_id: ::String
                                },
                              ],
+                             ?status: ("Active" | "Inactive"),
                              ?rules: Array[
                                {
                                  case_rule_id: ::String,
                                  field_id: ::String
                                },
-                             ],
-                             ?status: ("Active" | "Inactive"),
-                             template_id: ::String
+                             ]
                            ) -> _UpdateTemplateResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTemplateResponseSuccess
     end

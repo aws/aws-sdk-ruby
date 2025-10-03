@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2025-09-30)
+------------------
+
+* Feature - Amazon CloudWatch Application Signals is introducing the Application Map to give users a more comprehensive view of their service health. Users will now be able to group services, track their latest deployments, and view automated audit findings concerning service performance.
+
 1.27.0 (2025-08-26)
 ------------------
 

@@ -386,7 +386,7 @@ module Aws::RDS
     #         option_settings: [
     #           {
     #             name: "String",
-    #             value: "String",
+    #             value: "PotentiallySensitiveOptionSettingValue",
     #             default_value: "String",
     #             description: "String",
     #             apply_type: "String",

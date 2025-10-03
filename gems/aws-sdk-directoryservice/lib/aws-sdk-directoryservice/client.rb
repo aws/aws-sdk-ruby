@@ -644,6 +644,7 @@ module Aws::DirectoryService
     #     ip_routes: [ # required
     #       {
     #         cidr_ip: "CidrIp",
+    #         cidr_ipv_6: "CidrIpv6",
     #         description: "Description",
     #       },
     #     ],
@@ -828,6 +829,10 @@ module Aws::DirectoryService
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be assigned to AD Connector.
     #
+    # @option params [String] :network_type
+    #   The network type for your directory. The default value is `IPv4` or
+    #   `IPv6` based on the provided subnet capabilities.
+    #
     # @return [Types::ConnectDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConnectDirectoryResult#directory_id #directory_id} => String
@@ -872,7 +877,8 @@ module Aws::DirectoryService
     #     connect_settings: { # required
     #       vpc_id: "VpcId", # required
     #       subnet_ids: ["SubnetId"], # required
-    #       customer_dns_ips: ["IpAddr"], # required
+    #       customer_dns_ips: ["IpAddr"],
+    #       customer_dns_ips_v6: ["Ipv6Addr"],
     #       customer_user_name: "UserName", # required
     #     },
     #     tags: [
@@ -881,6 +887,7 @@ module Aws::DirectoryService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     network_type: "Dual-stack", # accepts Dual-stack, IPv4, IPv6
     #   })
     #
     # @example Response structure
@@ -1063,8 +1070,12 @@ module Aws::DirectoryService
     #   The fully qualified domain name (FQDN) of the remote domain with which
     #   you will set up a trust relationship.
     #
-    # @option params [required, Array<String>] :dns_ip_addrs
+    # @option params [Array<String>] :dns_ip_addrs
     #   The IP addresses of the remote DNS server associated with
+    #   RemoteDomainName.
+    #
+    # @option params [Array<String>] :dns_ipv_6_addrs
+    #   The IPv6 addresses of the remote DNS server associated with
     #   RemoteDomainName.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1091,7 +1102,8 @@ module Aws::DirectoryService
     #   resp = client.create_conditional_forwarder({
     #     directory_id: "DirectoryId", # required
     #     remote_domain_name: "RemoteDomainName", # required
-    #     dns_ip_addrs: ["IpAddr"], # required
+    #     dns_ip_addrs: ["IpAddr"],
+    #     dns_ipv_6_addrs: ["Ipv6Addr"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarder AWS API Documentation
@@ -1175,6 +1187,10 @@ module Aws::DirectoryService
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be assigned to the Simple AD directory.
     #
+    # @option params [String] :network_type
+    #   The network type for your directory. Simple AD supports IPv4 and
+    #   Dual-stack only.
+    #
     # @return [Types::CreateDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDirectoryResult#directory_id #directory_id} => String
@@ -1222,6 +1238,7 @@ module Aws::DirectoryService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     network_type: "Dual-stack", # accepts Dual-stack, IPv4, IPv6
     #   })
     #
     # @example Response structure
@@ -1375,6 +1392,10 @@ module Aws::DirectoryService
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be assigned to the Managed Microsoft AD directory.
     #
+    # @option params [String] :network_type
+    #   The network type for your domain. The default value is `IPv4` or
+    #   `IPv6` based on the provided subnet capabilities.
+    #
     # @return [Types::CreateMicrosoftADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMicrosoftADResult#directory_id #directory_id} => String
@@ -1414,13 +1435,14 @@ module Aws::DirectoryService
     #       vpc_id: "VpcId", # required
     #       subnet_ids: ["SubnetId"], # required
     #     },
-    #     edition: "Enterprise", # accepts Enterprise, Standard
+    #     edition: "Enterprise", # accepts Enterprise, Standard, Hybrid
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     network_type: "Dual-stack", # accepts Dual-stack, IPv4, IPv6
     #   })
     #
     # @example Response structure
@@ -1522,6 +1544,10 @@ module Aws::DirectoryService
     #   The IP addresses of the remote DNS server associated with
     #   RemoteDomainName.
     #
+    # @option params [Array<String>] :conditional_forwarder_ipv_6_addrs
+    #   The IPv6 addresses of the remote DNS server associated with
+    #   RemoteDomainName.
+    #
     # @option params [String] :selective_auth
     #   Optional parameter to enable selective authentication for the trust.
     #
@@ -1559,6 +1585,7 @@ module Aws::DirectoryService
     #     trust_direction: "One-Way: Outgoing", # required, accepts One-Way: Outgoing, One-Way: Incoming, Two-Way
     #     trust_type: "Forest", # accepts Forest, External
     #     conditional_forwarder_ip_addrs: ["IpAddr"],
+    #     conditional_forwarder_ipv_6_addrs: ["Ipv6Addr"],
     #     selective_auth: "Enabled", # accepts Enabled, Disabled
     #   })
     #
@@ -2130,6 +2157,8 @@ module Aws::DirectoryService
     #   resp.conditional_forwarders[0].remote_domain_name #=> String
     #   resp.conditional_forwarders[0].dns_ip_addrs #=> Array
     #   resp.conditional_forwarders[0].dns_ip_addrs[0] #=> String
+    #   resp.conditional_forwarders[0].dns_ipv_6_addrs #=> Array
+    #   resp.conditional_forwarders[0].dns_ipv_6_addrs[0] #=> String
     #   resp.conditional_forwarders[0].replication_scope #=> String, one of "Domain"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwarders AWS API Documentation
@@ -2239,12 +2268,14 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].name #=> String
     #   resp.directory_descriptions[0].short_name #=> String
     #   resp.directory_descriptions[0].size #=> String, one of "Small", "Large"
-    #   resp.directory_descriptions[0].edition #=> String, one of "Enterprise", "Standard"
+    #   resp.directory_descriptions[0].edition #=> String, one of "Enterprise", "Standard", "Hybrid"
     #   resp.directory_descriptions[0].alias #=> String
     #   resp.directory_descriptions[0].access_url #=> String
     #   resp.directory_descriptions[0].description #=> String
     #   resp.directory_descriptions[0].dns_ip_addrs #=> Array
     #   resp.directory_descriptions[0].dns_ip_addrs[0] #=> String
+    #   resp.directory_descriptions[0].dns_ipv_6_addrs #=> Array
+    #   resp.directory_descriptions[0].dns_ipv_6_addrs[0] #=> String
     #   resp.directory_descriptions[0].stage #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed", "Updating"
     #   resp.directory_descriptions[0].share_status #=> String, one of "Shared", "PendingAcceptance", "Rejected", "Rejecting", "RejectFailed", "Sharing", "ShareFailed", "Deleted", "Deleting"
     #   resp.directory_descriptions[0].share_method #=> String, one of "ORGANIZATIONS", "HANDSHAKE"
@@ -2267,8 +2298,12 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].connect_settings.availability_zones[0] #=> String
     #   resp.directory_descriptions[0].connect_settings.connect_ips #=> Array
     #   resp.directory_descriptions[0].connect_settings.connect_ips[0] #=> String
+    #   resp.directory_descriptions[0].connect_settings.connect_ips_v6 #=> Array
+    #   resp.directory_descriptions[0].connect_settings.connect_ips_v6[0] #=> String
     #   resp.directory_descriptions[0].radius_settings.radius_servers #=> Array
     #   resp.directory_descriptions[0].radius_settings.radius_servers[0] #=> String
+    #   resp.directory_descriptions[0].radius_settings.radius_servers_ipv_6 #=> Array
+    #   resp.directory_descriptions[0].radius_settings.radius_servers_ipv_6[0] #=> String
     #   resp.directory_descriptions[0].radius_settings.radius_port #=> Integer
     #   resp.directory_descriptions[0].radius_settings.radius_timeout #=> Integer
     #   resp.directory_descriptions[0].radius_settings.radius_retries #=> Integer
@@ -2284,6 +2319,8 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].owner_directory_description.account_id #=> String
     #   resp.directory_descriptions[0].owner_directory_description.dns_ip_addrs #=> Array
     #   resp.directory_descriptions[0].owner_directory_description.dns_ip_addrs[0] #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.dns_ipv_6_addrs #=> Array
+    #   resp.directory_descriptions[0].owner_directory_description.dns_ipv_6_addrs[0] #=> String
     #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.vpc_id #=> String
     #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.subnet_ids #=> Array
     #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.subnet_ids[0] #=> String
@@ -2292,6 +2329,8 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].owner_directory_description.vpc_settings.availability_zones[0] #=> String
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_servers #=> Array
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_servers[0] #=> String
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_servers_ipv_6 #=> Array
+    #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_servers_ipv_6[0] #=> String
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_port #=> Integer
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_timeout #=> Integer
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.radius_retries #=> Integer
@@ -2300,6 +2339,7 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.display_label #=> String
     #   resp.directory_descriptions[0].owner_directory_description.radius_settings.use_same_username #=> Boolean
     #   resp.directory_descriptions[0].owner_directory_description.radius_status #=> String, one of "Creating", "Completed", "Failed"
+    #   resp.directory_descriptions[0].owner_directory_description.network_type #=> String, one of "Dual-stack", "IPv4", "IPv6"
     #   resp.directory_descriptions[0].regions_info.primary_region #=> String
     #   resp.directory_descriptions[0].regions_info.additional_regions #=> Array
     #   resp.directory_descriptions[0].regions_info.additional_regions[0] #=> String
@@ -2308,6 +2348,7 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].hybrid_settings.self_managed_dns_ip_addrs[0] #=> String
     #   resp.directory_descriptions[0].hybrid_settings.self_managed_instance_ids #=> Array
     #   resp.directory_descriptions[0].hybrid_settings.self_managed_instance_ids[0] #=> String
+    #   resp.directory_descriptions[0].network_type #=> String, one of "Dual-stack", "IPv4", "IPv6"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
@@ -2387,6 +2428,7 @@ module Aws::DirectoryService
     #   resp.domain_controllers[0].directory_id #=> String
     #   resp.domain_controllers[0].domain_controller_id #=> String
     #   resp.domain_controllers[0].dns_ip_addr #=> String
+    #   resp.domain_controllers[0].dns_ipv_6_addr #=> String
     #   resp.domain_controllers[0].vpc_id #=> String
     #   resp.domain_controllers[0].subnet_id #=> String
     #   resp.domain_controllers[0].availability_zone #=> String
@@ -2977,7 +3019,7 @@ module Aws::DirectoryService
     #
     #   resp = client.describe_update_directory({
     #     directory_id: "DirectoryId", # required
-    #     update_type: "OS", # required, accepts OS
+    #     update_type: "OS", # required, accepts OS, NETWORK, SIZE
     #     region_name: "RegionName",
     #     next_token: "NextToken",
     #   })
@@ -3383,6 +3425,7 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     radius_settings: { # required
     #       radius_servers: ["Server"],
+    #       radius_servers_ipv_6: ["Server"],
     #       radius_port: 1,
     #       radius_timeout: 1,
     #       radius_retries: 1,
@@ -3717,6 +3760,7 @@ module Aws::DirectoryService
     #   resp.ip_routes_info #=> Array
     #   resp.ip_routes_info[0].directory_id #=> String
     #   resp.ip_routes_info[0].cidr_ip #=> String
+    #   resp.ip_routes_info[0].cidr_ipv_6 #=> String
     #   resp.ip_routes_info[0].ip_route_status_msg #=> String, one of "Adding", "Added", "Removing", "Removed", "AddFailed", "RemoveFailed"
     #   resp.ip_routes_info[0].added_date_time #=> Time
     #   resp.ip_routes_info[0].ip_route_status_reason #=> String
@@ -4046,8 +4090,11 @@ module Aws::DirectoryService
     #   Identifier (ID) of the directory from which you want to remove the IP
     #   addresses.
     #
-    # @option params [required, Array<String>] :cidr_ips
+    # @option params [Array<String>] :cidr_ips
     #   IP address blocks that you want to remove.
+    #
+    # @option params [Array<String>] :cidr_ipv_6s
+    #   IPv6 address blocks that you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4071,7 +4118,8 @@ module Aws::DirectoryService
     #
     #   resp = client.remove_ip_routes({
     #     directory_id: "DirectoryId", # required
-    #     cidr_ips: ["CidrIp"], # required
+    #     cidr_ips: ["CidrIp"],
+    #     cidr_ipv_6s: ["CidrIpv6"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutes AWS API Documentation
@@ -4494,9 +4542,13 @@ module Aws::DirectoryService
     #   The fully qualified domain name (FQDN) of the remote domain with which
     #   you will set up a trust relationship.
     #
-    # @option params [required, Array<String>] :dns_ip_addrs
+    # @option params [Array<String>] :dns_ip_addrs
     #   The updated IP addresses of the remote DNS server associated with the
     #   conditional forwarder.
+    #
+    # @option params [Array<String>] :dns_ipv_6_addrs
+    #   The updated IPv6 addresses of the remote DNS server associated with
+    #   the conditional forwarder.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4522,7 +4574,8 @@ module Aws::DirectoryService
     #   resp = client.update_conditional_forwarder({
     #     directory_id: "DirectoryId", # required
     #     remote_domain_name: "RemoteDomainName", # required
-    #     dns_ip_addrs: ["IpAddr"], # required
+    #     dns_ip_addrs: ["IpAddr"],
+    #     dns_ipv_6_addrs: ["Ipv6Addr"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarder AWS API Documentation
@@ -4534,23 +4587,27 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Updates the directory for a particular update type.
+    # Updates directory configuration for the specified update type.
     #
     # @option params [required, String] :directory_id
-    #   The identifier of the directory on which you want to perform the
-    #   update.
+    #   The identifier of the directory to update.
     #
     # @option params [required, String] :update_type
-    #   The type of update that needs to be performed on the directory. For
-    #   example, OS.
+    #   The type of update to perform on the directory.
     #
     # @option params [Types::OSUpdateSettings] :os_update_settings
-    #   The settings for the OS update that needs to be performed on the
-    #   directory.
+    #   Operating system configuration to apply during the directory update
+    #   operation.
+    #
+    # @option params [Types::DirectorySizeUpdateSettings] :directory_size_update_settings
+    #   Directory size configuration to apply during the update operation.
+    #
+    # @option params [Types::NetworkUpdateSettings] :network_update_settings
+    #   Network configuration to apply during the directory update operation.
     #
     # @option params [Boolean] :create_snapshot_before_update
-    #   The boolean that specifies if a snapshot for the directory needs to be
-    #   taken before updating the directory.
+    #   Specifies whether to create a directory snapshot before performing the
+    #   update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4558,9 +4615,16 @@ module Aws::DirectoryService
     #
     #   resp = client.update_directory_setup({
     #     directory_id: "DirectoryId", # required
-    #     update_type: "OS", # required, accepts OS
+    #     update_type: "OS", # required, accepts OS, NETWORK, SIZE
     #     os_update_settings: {
     #       os_version: "SERVER_2012", # accepts SERVER_2012, SERVER_2019
+    #     },
+    #     directory_size_update_settings: {
+    #       directory_size: "Small", # accepts Small, Large
+    #     },
+    #     network_update_settings: {
+    #       network_type: "Dual-stack", # accepts Dual-stack, IPv4, IPv6
+    #       customer_dns_ips_v6: ["Ipv6Addr"],
     #     },
     #     create_snapshot_before_update: false,
     #   })
@@ -4727,6 +4791,7 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     radius_settings: { # required
     #       radius_servers: ["Server"],
+    #       radius_servers_ipv_6: ["Server"],
     #       radius_port: 1,
     #       radius_timeout: 1,
     #       radius_retries: 1,
@@ -4882,7 +4947,7 @@ module Aws::DirectoryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

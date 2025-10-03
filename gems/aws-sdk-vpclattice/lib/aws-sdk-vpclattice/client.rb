@@ -489,14 +489,14 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/security_iam_service-with-iam.html
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
     # @option params [required, String] :listener_identifier
     #   The ID or ARN of the listener.
     #
     # @option params [required, Array<Types::RuleUpdate>] :rules
     #   The rules for the specified listener.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
     #
     # @return [Types::BatchUpdateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -506,13 +506,36 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_update_rule({
+    #     service_identifier: "ServiceIdentifier", # required
     #     listener_identifier: "ListenerIdentifier", # required
     #     rules: [ # required
     #       {
-    #         action: {
-    #           fixed_response: {
-    #             status_code: 1, # required
+    #         rule_identifier: "RuleIdentifier", # required
+    #         match: {
+    #           http_match: {
+    #             method: "HttpMethod",
+    #             path_match: {
+    #               match: { # required
+    #                 exact: "PathMatchExact",
+    #                 prefix: "PathMatchPrefix",
+    #               },
+    #               case_sensitive: false,
+    #             },
+    #             header_matches: [
+    #               {
+    #                 name: "HeaderMatchName", # required
+    #                 match: { # required
+    #                   exact: "HeaderMatchExact",
+    #                   prefix: "HeaderMatchPrefix",
+    #                   contains: "HeaderMatchContains",
+    #                 },
+    #                 case_sensitive: false,
+    #               },
+    #             ],
     #           },
+    #         },
+    #         priority: 1,
+    #         action: {
     #           forward: {
     #             target_groups: [ # required
     #               {
@@ -521,63 +544,40 @@ module Aws::VPCLattice
     #               },
     #             ],
     #           },
-    #         },
-    #         match: {
-    #           http_match: {
-    #             header_matches: [
-    #               {
-    #                 case_sensitive: false,
-    #                 match: { # required
-    #                   contains: "HeaderMatchContains",
-    #                   exact: "HeaderMatchExact",
-    #                   prefix: "HeaderMatchPrefix",
-    #                 },
-    #                 name: "HeaderMatchName", # required
-    #               },
-    #             ],
-    #             method: "HttpMethod",
-    #             path_match: {
-    #               case_sensitive: false,
-    #               match: { # required
-    #                 exact: "PathMatchExact",
-    #                 prefix: "PathMatchPrefix",
-    #               },
-    #             },
+    #           fixed_response: {
+    #             status_code: 1, # required
     #           },
     #         },
-    #         priority: 1,
-    #         rule_identifier: "RuleIdentifier", # required
     #       },
     #     ],
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.successful #=> Array
-    #   resp.successful[0].action.fixed_response.status_code #=> Integer
+    #   resp.successful[0].arn #=> String
+    #   resp.successful[0].id #=> String
+    #   resp.successful[0].name #=> String
+    #   resp.successful[0].is_default #=> Boolean
+    #   resp.successful[0].match.http_match.method #=> String
+    #   resp.successful[0].match.http_match.path_match.match.exact #=> String
+    #   resp.successful[0].match.http_match.path_match.match.prefix #=> String
+    #   resp.successful[0].match.http_match.path_match.case_sensitive #=> Boolean
+    #   resp.successful[0].match.http_match.header_matches #=> Array
+    #   resp.successful[0].match.http_match.header_matches[0].name #=> String
+    #   resp.successful[0].match.http_match.header_matches[0].match.exact #=> String
+    #   resp.successful[0].match.http_match.header_matches[0].match.prefix #=> String
+    #   resp.successful[0].match.http_match.header_matches[0].match.contains #=> String
+    #   resp.successful[0].match.http_match.header_matches[0].case_sensitive #=> Boolean
+    #   resp.successful[0].priority #=> Integer
     #   resp.successful[0].action.forward.target_groups #=> Array
     #   resp.successful[0].action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.successful[0].action.forward.target_groups[0].weight #=> Integer
-    #   resp.successful[0].arn #=> String
-    #   resp.successful[0].id #=> String
-    #   resp.successful[0].is_default #=> Boolean
-    #   resp.successful[0].match.http_match.header_matches #=> Array
-    #   resp.successful[0].match.http_match.header_matches[0].case_sensitive #=> Boolean
-    #   resp.successful[0].match.http_match.header_matches[0].match.contains #=> String
-    #   resp.successful[0].match.http_match.header_matches[0].match.exact #=> String
-    #   resp.successful[0].match.http_match.header_matches[0].match.prefix #=> String
-    #   resp.successful[0].match.http_match.header_matches[0].name #=> String
-    #   resp.successful[0].match.http_match.method #=> String
-    #   resp.successful[0].match.http_match.path_match.case_sensitive #=> Boolean
-    #   resp.successful[0].match.http_match.path_match.match.exact #=> String
-    #   resp.successful[0].match.http_match.path_match.match.prefix #=> String
-    #   resp.successful[0].name #=> String
-    #   resp.successful[0].priority #=> Integer
+    #   resp.successful[0].action.fixed_response.status_code #=> Integer
     #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].rule_identifier #=> String
     #   resp.unsuccessful[0].failure_code #=> String
     #   resp.unsuccessful[0].failure_message #=> String
-    #   resp.unsuccessful[0].rule_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/BatchUpdateRule AWS API Documentation
     #
@@ -611,13 +611,13 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [required, String] :resource_identifier
+    #   The ID or ARN of the service network or service.
+    #
     # @option params [required, String] :destination_arn
     #   The Amazon Resource Name (ARN) of the destination. The supported
     #   destination types are CloudWatch Log groups, Kinesis Data Firehose
     #   delivery streams, and Amazon S3 buckets.
-    #
-    # @option params [required, String] :resource_identifier
-    #   The ID or ARN of the service network or service.
     #
     # @option params [String] :service_network_log_type
     #   The type of log that monitors your Amazon VPC Lattice service
@@ -628,19 +628,19 @@ module Aws::VPCLattice
     #
     # @return [Types::CreateAccessLogSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateAccessLogSubscriptionResponse#arn #arn} => String
-    #   * {Types::CreateAccessLogSubscriptionResponse#destination_arn #destination_arn} => String
     #   * {Types::CreateAccessLogSubscriptionResponse#id #id} => String
-    #   * {Types::CreateAccessLogSubscriptionResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateAccessLogSubscriptionResponse#arn #arn} => String
     #   * {Types::CreateAccessLogSubscriptionResponse#resource_id #resource_id} => String
+    #   * {Types::CreateAccessLogSubscriptionResponse#resource_arn #resource_arn} => String
     #   * {Types::CreateAccessLogSubscriptionResponse#service_network_log_type #service_network_log_type} => String
+    #   * {Types::CreateAccessLogSubscriptionResponse#destination_arn #destination_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_log_subscription({
     #     client_token: "ClientToken",
-    #     destination_arn: "AccessLogDestinationArn", # required
     #     resource_identifier: "ResourceIdentifier", # required
+    #     destination_arn: "AccessLogDestinationArn", # required
     #     service_network_log_type: "SERVICE", # accepts SERVICE, RESOURCE
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -649,12 +649,12 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.destination_arn #=> String
     #   resp.id #=> String
-    #   resp.resource_arn #=> String
+    #   resp.arn #=> String
     #   resp.resource_id #=> String
+    #   resp.resource_arn #=> String
     #   resp.service_network_log_type #=> String, one of "SERVICE", "RESOURCE"
+    #   resp.destination_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateAccessLogSubscription AWS API Documentation
     #
@@ -675,6 +675,26 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
+    # @option params [required, String] :name
+    #   The name of the listener. A listener name must be unique within a
+    #   service. The valid characters are a-z, 0-9, and hyphens (-). You
+    #   can't use a hyphen as the first or last character, or immediately
+    #   after another hyphen.
+    #
+    # @option params [required, String] :protocol
+    #   The listener protocol.
+    #
+    # @option params [Integer] :port
+    #   The listener port. You can specify a value from 1 to 65535. For HTTP,
+    #   the default is 80. For HTTPS, the default is 443.
+    #
+    # @option params [required, Types::RuleAction] :default_action
+    #   The action for the default rule. Each listener has a default rule. The
+    #   default rule is used if no other rules match.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you retry a request that completed
@@ -685,48 +705,28 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Types::RuleAction] :default_action
-    #   The action for the default rule. Each listener has a default rule. The
-    #   default rule is used if no other rules match.
-    #
-    # @option params [required, String] :name
-    #   The name of the listener. A listener name must be unique within a
-    #   service. The valid characters are a-z, 0-9, and hyphens (-). You
-    #   can't use a hyphen as the first or last character, or immediately
-    #   after another hyphen.
-    #
-    # @option params [Integer] :port
-    #   The listener port. You can specify a value from 1 to 65535. For HTTP,
-    #   the default is 80. For HTTPS, the default is 443.
-    #
-    # @option params [required, String] :protocol
-    #   The listener protocol.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
-    #
     # @option params [Hash<String,String>] :tags
     #   The tags for the listener.
     #
     # @return [Types::CreateListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateListenerResponse#arn #arn} => String
-    #   * {Types::CreateListenerResponse#default_action #default_action} => Types::RuleAction
     #   * {Types::CreateListenerResponse#id #id} => String
     #   * {Types::CreateListenerResponse#name #name} => String
-    #   * {Types::CreateListenerResponse#port #port} => Integer
     #   * {Types::CreateListenerResponse#protocol #protocol} => String
+    #   * {Types::CreateListenerResponse#port #port} => Integer
     #   * {Types::CreateListenerResponse#service_arn #service_arn} => String
     #   * {Types::CreateListenerResponse#service_id #service_id} => String
+    #   * {Types::CreateListenerResponse#default_action #default_action} => Types::RuleAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_listener({
-    #     client_token: "ClientToken",
+    #     service_identifier: "ServiceIdentifier", # required
+    #     name: "ListenerName", # required
+    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TLS_PASSTHROUGH
+    #     port: 1,
     #     default_action: { # required
-    #       fixed_response: {
-    #         status_code: 1, # required
-    #       },
     #       forward: {
     #         target_groups: [ # required
     #           {
@@ -735,11 +735,11 @@ module Aws::VPCLattice
     #           },
     #         ],
     #       },
+    #       fixed_response: {
+    #         status_code: 1, # required
+    #       },
     #     },
-    #     name: "ListenerName", # required
-    #     port: 1,
-    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TLS_PASSTHROUGH
-    #     service_identifier: "ServiceIdentifier", # required
+    #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -748,16 +748,16 @@ module Aws::VPCLattice
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.default_action.fixed_response.status_code #=> Integer
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
+    #   resp.port #=> Integer
+    #   resp.service_arn #=> String
+    #   resp.service_id #=> String
     #   resp.default_action.forward.target_groups #=> Array
     #   resp.default_action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.default_action.forward.target_groups[0].weight #=> Integer
-    #   resp.id #=> String
-    #   resp.name #=> String
-    #   resp.port #=> Integer
-    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
-    #   resp.service_arn #=> String
-    #   resp.service_id #=> String
+    #   resp.default_action.fixed_response.status_code #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateListener AWS API Documentation
     #
@@ -771,6 +771,57 @@ module Aws::VPCLattice
     # Creates a resource configuration. A resource configuration defines a
     # specific resource. You can associate a resource configuration with a
     # service network or a VPC endpoint.
+    #
+    # @option params [required, String] :name
+    #   The name of the resource configuration. The name must be unique within
+    #   the account. The valid characters are a-z, 0-9, and hyphens (-). You
+    #   can't use a hyphen as the first or last character, or immediately
+    #   after another hyphen.
+    #
+    # @option params [required, String] :type
+    #   The type of resource configuration. A resource configuration can be
+    #   one of the following types:
+    #
+    #   * **SINGLE** - A single resource.
+    #
+    #   * **GROUP** - A group of resources. You must create a group resource
+    #     configuration before you create a child resource configuration.
+    #
+    #   * **CHILD** - A single resource that is part of a group resource
+    #     configuration.
+    #
+    #   * **ARN** - An Amazon Web Services resource.
+    #
+    # @option params [Array<String>] :port_ranges
+    #   (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to
+    #   access a resource configuration (for example: 1-65535). You can
+    #   separate port ranges using commas (for example: 1,2,22-30).
+    #
+    # @option params [String] :protocol
+    #   (SINGLE, GROUP) The protocol accepted by the resource configuration.
+    #
+    # @option params [String] :resource_gateway_identifier
+    #   (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to
+    #   connect to the resource configuration. For a child resource
+    #   configuration, this value is inherited from the parent resource
+    #   configuration.
+    #
+    # @option params [String] :resource_configuration_group_identifier
+    #   (CHILD) The ID or ARN of the parent resource configuration of type
+    #   `GROUP`. This is used to associate a child resource configuration with
+    #   a group resource configuration.
+    #
+    # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
+    #   Identifies the resource configuration in one of the following ways:
+    #
+    #   * **Amazon Resource Name (ARN)** - Supported resource-types that are
+    #     provisioned by Amazon Web Services services, such as RDS databases,
+    #     can be identified by their ARN.
+    #
+    #   * **Domain name** - Any domain name that is publicly resolvable.
+    #
+    #   * **IP address** - For IPv4 and IPv6, only IP addresses in the VPC are
+    #     supported.
     #
     # @option params [Boolean] :allow_association_to_shareable_service_network
     #   (SINGLE, GROUP, ARN) Specifies whether the resource configuration can
@@ -786,78 +837,35 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   The name of the resource configuration. The name must be unique within
-    #   the account. The valid characters are a-z, 0-9, and hyphens (-). You
-    #   can't use a hyphen as the first or last character, or immediately
-    #   after another hyphen.
-    #
-    # @option params [Array<String>] :port_ranges
-    #   (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to
-    #   access a resource configuration (for example: 1-65535). You can
-    #   separate port ranges using commas (for example: 1,2,22-30).
-    #
-    # @option params [String] :protocol
-    #   (SINGLE, GROUP) The protocol accepted by the resource configuration.
-    #
-    # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
-    #   (SINGLE, CHILD, ARN) The resource configuration.
-    #
-    # @option params [String] :resource_configuration_group_identifier
-    #   (CHILD) The ID or ARN of the parent resource configuration (type is
-    #   `GROUP`). This is used to associate a child resource configuration
-    #   with a group resource configuration.
-    #
-    # @option params [String] :resource_gateway_identifier
-    #   (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to
-    #   connect to the resource configuration. For a child resource
-    #   configuration, this value is inherited from the parent resource
-    #   configuration.
-    #
     # @option params [Hash<String,String>] :tags
     #   The tags for the resource configuration.
     #
-    # @option params [required, String] :type
-    #   The type of resource configuration.
-    #
-    #   * `SINGLE` - A single resource.
-    #
-    #   * `GROUP` - A group of resources. You must create a group resource
-    #     configuration before you create a child resource configuration.
-    #
-    #   * `CHILD` - A single resource that is part of a group resource
-    #     configuration.
-    #
-    #   * `ARN` - An Amazon Web Services resource.
-    #
     # @return [Types::CreateResourceConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
-    #   * {Types::CreateResourceConfigurationResponse#arn #arn} => String
-    #   * {Types::CreateResourceConfigurationResponse#created_at #created_at} => Time
-    #   * {Types::CreateResourceConfigurationResponse#failure_reason #failure_reason} => String
     #   * {Types::CreateResourceConfigurationResponse#id #id} => String
     #   * {Types::CreateResourceConfigurationResponse#name #name} => String
+    #   * {Types::CreateResourceConfigurationResponse#arn #arn} => String
+    #   * {Types::CreateResourceConfigurationResponse#resource_gateway_id #resource_gateway_id} => String
+    #   * {Types::CreateResourceConfigurationResponse#resource_configuration_group_id #resource_configuration_group_id} => String
+    #   * {Types::CreateResourceConfigurationResponse#type #type} => String
     #   * {Types::CreateResourceConfigurationResponse#port_ranges #port_ranges} => Array&lt;String&gt;
     #   * {Types::CreateResourceConfigurationResponse#protocol #protocol} => String
-    #   * {Types::CreateResourceConfigurationResponse#resource_configuration_definition #resource_configuration_definition} => Types::ResourceConfigurationDefinition
-    #   * {Types::CreateResourceConfigurationResponse#resource_configuration_group_id #resource_configuration_group_id} => String
-    #   * {Types::CreateResourceConfigurationResponse#resource_gateway_id #resource_gateway_id} => String
     #   * {Types::CreateResourceConfigurationResponse#status #status} => String
-    #   * {Types::CreateResourceConfigurationResponse#type #type} => String
+    #   * {Types::CreateResourceConfigurationResponse#resource_configuration_definition #resource_configuration_definition} => Types::ResourceConfigurationDefinition
+    #   * {Types::CreateResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
+    #   * {Types::CreateResourceConfigurationResponse#created_at #created_at} => Time
+    #   * {Types::CreateResourceConfigurationResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_resource_configuration({
-    #     allow_association_to_shareable_service_network: false,
-    #     client_token: "ClientToken",
     #     name: "ResourceConfigurationName", # required
+    #     type: "GROUP", # required, accepts GROUP, CHILD, SINGLE, ARN
     #     port_ranges: ["PortRange"],
     #     protocol: "TCP", # accepts TCP
+    #     resource_gateway_identifier: "ResourceGatewayIdentifier",
+    #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
     #     resource_configuration_definition: {
-    #       arn_resource: {
-    #         arn: "WildcardArn",
-    #       },
     #       dns_resource: {
     #         domain_name: "DomainName",
     #         ip_address_type: "IPV4", # accepts IPV4, IPV6, DUALSTACK
@@ -865,34 +873,36 @@ module Aws::VPCLattice
     #       ip_resource: {
     #         ip_address: "IpAddress",
     #       },
+    #       arn_resource: {
+    #         arn: "WildcardArn",
+    #       },
     #     },
-    #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
-    #     resource_gateway_identifier: "ResourceGatewayIdentifier",
+    #     allow_association_to_shareable_service_network: false,
+    #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     type: "GROUP", # required, accepts GROUP, CHILD, SINGLE, ARN
     #   })
     #
     # @example Response structure
     #
-    #   resp.allow_association_to_shareable_service_network #=> Boolean
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.failure_reason #=> String
     #   resp.id #=> String
     #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.resource_gateway_id #=> String
+    #   resp.resource_configuration_group_id #=> String
+    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
     #   resp.port_ranges #=> Array
     #   resp.port_ranges[0] #=> String
     #   resp.protocol #=> String, one of "TCP"
-    #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.resource_configuration_definition.dns_resource.domain_name #=> String
     #   resp.resource_configuration_definition.dns_resource.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.resource_configuration_definition.ip_resource.ip_address #=> String
-    #   resp.resource_configuration_group_id #=> String
-    #   resp.resource_gateway_id #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
-    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.allow_association_to_shareable_service_network #=> Boolean
+    #   resp.created_at #=> Time
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateResourceConfiguration AWS API Documentation
     #
@@ -903,7 +913,11 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Creates a resource gateway.
+    # A resource gateway is a point of ingress into the VPC where a resource
+    # resides. It spans multiple Availability Zones. For your resource to be
+    # accessible from all Availability Zones, you should create your
+    # resource gateways to span as many Availability Zones as possible. A
+    # VPC can have multiple resource gateways.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -915,62 +929,88 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :ip_address_type
-    #   The type of IP address used by the resource gateway.
-    #
     # @option params [required, String] :name
     #   The name of the resource gateway.
+    #
+    # @option params [String] :vpc_identifier
+    #   The ID of the VPC for the resource gateway.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The IDs of the VPC subnets in which to create the resource gateway.
     #
     # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups to apply to the resource gateway. The
     #   security groups must be in the same VPC.
     #
-    # @option params [required, Array<String>] :subnet_ids
-    #   The IDs of the VPC subnets in which to create the resource gateway.
+    # @option params [String] :ip_address_type
+    #   A resource gateway can have IPv4, IPv6 or dualstack addresses. The IP
+    #   address type of a resource gateway must be compatible with the subnets
+    #   of the resource gateway and the IP address type of the resource, as
+    #   described here:
+    #
+    #   * **IPv4**Assign IPv4 addresses to your resource gateway network
+    #     interfaces. This option is supported only if all selected subnets
+    #     have IPv4 address ranges, and the resource also has an IPv4 address.
+    #
+    #   * **IPv6**Assign IPv6 addresses to your resource gateway network
+    #     interfaces. This option is supported only if all selected subnets
+    #     are IPv6 only subnets, and the resource also has an IPv6 address.
+    #
+    #   * **Dualstack**Assign both IPv4 and IPv6 addresses to your resource
+    #     gateway network interfaces. This option is supported only if all
+    #     selected subnets have both IPv4 and IPv6 address ranges, and the
+    #     resource either has an IPv4 or IPv6 address.
+    #
+    #   The IP address type of the resource gateway is independent of the IP
+    #   address type of the client or the VPC endpoint through which the
+    #   resource is accessed.
+    #
+    # @option params [Integer] :ipv4_addresses_per_eni
+    #   The number of IPv4 addresses in each ENI for the resource gateway.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags for the resource gateway.
     #
-    # @option params [required, String] :vpc_identifier
-    #   The ID of the VPC for the resource gateway.
-    #
     # @return [Types::CreateResourceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateResourceGatewayResponse#arn #arn} => String
-    #   * {Types::CreateResourceGatewayResponse#id #id} => String
-    #   * {Types::CreateResourceGatewayResponse#ip_address_type #ip_address_type} => String
     #   * {Types::CreateResourceGatewayResponse#name #name} => String
-    #   * {Types::CreateResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateResourceGatewayResponse#id #id} => String
+    #   * {Types::CreateResourceGatewayResponse#arn #arn} => String
     #   * {Types::CreateResourceGatewayResponse#status #status} => String
-    #   * {Types::CreateResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::CreateResourceGatewayResponse#vpc_identifier #vpc_identifier} => String
+    #   * {Types::CreateResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::CreateResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateResourceGatewayResponse#ip_address_type #ip_address_type} => String
+    #   * {Types::CreateResourceGatewayResponse#ipv4_addresses_per_eni #ipv4_addresses_per_eni} => Integer
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_resource_gateway({
     #     client_token: "ClientToken",
-    #     ip_address_type: "IPV4", # accepts IPV4, IPV6, DUALSTACK
     #     name: "ResourceGatewayName", # required
+    #     vpc_identifier: "VpcId",
+    #     subnet_ids: ["SubnetId"],
     #     security_group_ids: ["SecurityGroupId"],
-    #     subnet_ids: ["SubnetId"], # required
+    #     ip_address_type: "IPV4", # accepts IPV4, IPV6, DUALSTACK
+    #     ipv4_addresses_per_eni: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     vpc_identifier: "VpcId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.name #=> String
-    #   resp.security_group_ids #=> Array
-    #   resp.security_group_ids[0] #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.vpc_identifier #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
-    #   resp.vpc_identifier #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
+    #   resp.ipv4_addresses_per_eni #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateResourceGateway AWS API Documentation
     #
@@ -991,6 +1031,26 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
+    # @option params [required, String] :listener_identifier
+    #   The ID or ARN of the listener.
+    #
+    # @option params [required, String] :name
+    #   The name of the rule. The name must be unique within the listener. The
+    #   valid characters are a-z, 0-9, and hyphens (-). You can't use a
+    #   hyphen as the first or last character, or immediately after another
+    #   hyphen.
+    #
+    # @option params [required, Types::RuleMatch] :match
+    #   The rule match.
+    #
+    # @option params [required, Integer] :priority
+    #   The priority assigned to the rule. Each rule for a specific listener
+    #   must have a unique priority. The lower the priority number the higher
+    #   the priority.
+    #
     # @option params [required, Types::RuleAction] :action
     #   The action for the default rule.
     #
@@ -1004,45 +1064,49 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :listener_identifier
-    #   The ID or ARN of the listener.
-    #
-    # @option params [required, Types::RuleMatch] :match
-    #   The rule match.
-    #
-    # @option params [required, String] :name
-    #   The name of the rule. The name must be unique within the listener. The
-    #   valid characters are a-z, 0-9, and hyphens (-). You can't use a
-    #   hyphen as the first or last character, or immediately after another
-    #   hyphen.
-    #
-    # @option params [required, Integer] :priority
-    #   The priority assigned to the rule. Each rule for a specific listener
-    #   must have a unique priority. The lower the priority number the higher
-    #   the priority.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
-    #
     # @option params [Hash<String,String>] :tags
     #   The tags for the rule.
     #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateRuleResponse#action #action} => Types::RuleAction
     #   * {Types::CreateRuleResponse#arn #arn} => String
     #   * {Types::CreateRuleResponse#id #id} => String
-    #   * {Types::CreateRuleResponse#match #match} => Types::RuleMatch
     #   * {Types::CreateRuleResponse#name #name} => String
+    #   * {Types::CreateRuleResponse#match #match} => Types::RuleMatch
     #   * {Types::CreateRuleResponse#priority #priority} => Integer
+    #   * {Types::CreateRuleResponse#action #action} => Types::RuleAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_rule({
-    #     action: { # required
-    #       fixed_response: {
-    #         status_code: 1, # required
+    #     service_identifier: "ServiceIdentifier", # required
+    #     listener_identifier: "ListenerIdentifier", # required
+    #     name: "RuleName", # required
+    #     match: { # required
+    #       http_match: {
+    #         method: "HttpMethod",
+    #         path_match: {
+    #           match: { # required
+    #             exact: "PathMatchExact",
+    #             prefix: "PathMatchPrefix",
+    #           },
+    #           case_sensitive: false,
+    #         },
+    #         header_matches: [
+    #           {
+    #             name: "HeaderMatchName", # required
+    #             match: { # required
+    #               exact: "HeaderMatchExact",
+    #               prefix: "HeaderMatchPrefix",
+    #               contains: "HeaderMatchContains",
+    #             },
+    #             case_sensitive: false,
+    #           },
+    #         ],
     #       },
+    #     },
+    #     priority: 1, # required
+    #     action: { # required
     #       forward: {
     #         target_groups: [ # required
     #           {
@@ -1051,35 +1115,11 @@ module Aws::VPCLattice
     #           },
     #         ],
     #       },
-    #     },
-    #     client_token: "ClientToken",
-    #     listener_identifier: "ListenerIdentifier", # required
-    #     match: { # required
-    #       http_match: {
-    #         header_matches: [
-    #           {
-    #             case_sensitive: false,
-    #             match: { # required
-    #               contains: "HeaderMatchContains",
-    #               exact: "HeaderMatchExact",
-    #               prefix: "HeaderMatchPrefix",
-    #             },
-    #             name: "HeaderMatchName", # required
-    #           },
-    #         ],
-    #         method: "HttpMethod",
-    #         path_match: {
-    #           case_sensitive: false,
-    #           match: { # required
-    #             exact: "PathMatchExact",
-    #             prefix: "PathMatchPrefix",
-    #           },
-    #         },
+    #       fixed_response: {
+    #         status_code: 1, # required
     #       },
     #     },
-    #     name: "RuleName", # required
-    #     priority: 1, # required
-    #     service_identifier: "ServiceIdentifier", # required
+    #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1087,24 +1127,24 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.action.fixed_response.status_code #=> Integer
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.match.http_match.method #=> String
+    #   resp.match.http_match.path_match.match.exact #=> String
+    #   resp.match.http_match.path_match.match.prefix #=> String
+    #   resp.match.http_match.path_match.case_sensitive #=> Boolean
+    #   resp.match.http_match.header_matches #=> Array
+    #   resp.match.http_match.header_matches[0].name #=> String
+    #   resp.match.http_match.header_matches[0].match.exact #=> String
+    #   resp.match.http_match.header_matches[0].match.prefix #=> String
+    #   resp.match.http_match.header_matches[0].match.contains #=> String
+    #   resp.match.http_match.header_matches[0].case_sensitive #=> Boolean
+    #   resp.priority #=> Integer
     #   resp.action.forward.target_groups #=> Array
     #   resp.action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.action.forward.target_groups[0].weight #=> Integer
-    #   resp.arn #=> String
-    #   resp.id #=> String
-    #   resp.match.http_match.header_matches #=> Array
-    #   resp.match.http_match.header_matches[0].case_sensitive #=> Boolean
-    #   resp.match.http_match.header_matches[0].match.contains #=> String
-    #   resp.match.http_match.header_matches[0].match.exact #=> String
-    #   resp.match.http_match.header_matches[0].match.prefix #=> String
-    #   resp.match.http_match.header_matches[0].name #=> String
-    #   resp.match.http_match.method #=> String
-    #   resp.match.http_match.path_match.case_sensitive #=> Boolean
-    #   resp.match.http_match.path_match.match.exact #=> String
-    #   resp.match.http_match.path_match.match.prefix #=> String
-    #   resp.name #=> String
-    #   resp.priority #=> Integer
+    #   resp.action.fixed_response.status_code #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateRule AWS API Documentation
     #
@@ -1126,18 +1166,6 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html
     #
-    # @option params [String] :auth_type
-    #   The type of IAM policy.
-    #
-    #   * `NONE`: The resource does not use an IAM policy. This is the
-    #     default.
-    #
-    #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
-    #     auth is enabled and an auth policy is required.
-    #
-    # @option params [String] :certificate_arn
-    #   The Amazon Resource Name (ARN) of the certificate.
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you retry a request that completed
@@ -1148,9 +1176,6 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :custom_domain_name
-    #   The custom domain name of the service.
-    #
     # @option params [required, String] :name
     #   The name of the service. The name must be unique within the account.
     #   The valid characters are a-z, 0-9, and hyphens (-). You can't use a
@@ -1160,41 +1185,56 @@ module Aws::VPCLattice
     # @option params [Hash<String,String>] :tags
     #   The tags for the service.
     #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name of the service.
+    #
+    # @option params [String] :certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate.
+    #
+    # @option params [String] :auth_type
+    #   The type of IAM policy.
+    #
+    #   * `NONE`: The resource does not use an IAM policy. This is the
+    #     default.
+    #
+    #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
+    #     auth is enabled and an auth policy is required.
+    #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateServiceResponse#arn #arn} => String
-    #   * {Types::CreateServiceResponse#auth_type #auth_type} => String
-    #   * {Types::CreateServiceResponse#certificate_arn #certificate_arn} => String
-    #   * {Types::CreateServiceResponse#custom_domain_name #custom_domain_name} => String
-    #   * {Types::CreateServiceResponse#dns_entry #dns_entry} => Types::DnsEntry
     #   * {Types::CreateServiceResponse#id #id} => String
+    #   * {Types::CreateServiceResponse#arn #arn} => String
     #   * {Types::CreateServiceResponse#name #name} => String
+    #   * {Types::CreateServiceResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::CreateServiceResponse#certificate_arn #certificate_arn} => String
     #   * {Types::CreateServiceResponse#status #status} => String
+    #   * {Types::CreateServiceResponse#auth_type #auth_type} => String
+    #   * {Types::CreateServiceResponse#dns_entry #dns_entry} => Types::DnsEntry
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_service({
-    #     auth_type: "NONE", # accepts NONE, AWS_IAM
-    #     certificate_arn: "CertificateArn",
     #     client_token: "ClientToken",
-    #     custom_domain_name: "ServiceCustomDomainName",
     #     name: "ServiceName", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     custom_domain_name: "ServiceCustomDomainName",
+    #     certificate_arn: "CertificateArn",
+    #     auth_type: "NONE", # accepts NONE, AWS_IAM
     #   })
     #
     # @example Response structure
     #
+    #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
-    #   resp.certificate_arn #=> String
+    #   resp.name #=> String
     #   resp.custom_domain_name #=> String
+    #   resp.certificate_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #   resp.dns_entry.domain_name #=> String
     #   resp.dns_entry.hosted_zone_id #=> String
-    #   resp.id #=> String
-    #   resp.name #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateService AWS API Documentation
     #
@@ -1216,15 +1256,6 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html
     #
-    # @option params [String] :auth_type
-    #   The type of IAM policy.
-    #
-    #   * `NONE`: The resource does not use an IAM policy. This is the
-    #     default.
-    #
-    #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
-    #     auth is enabled and an auth policy is required.
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you retry a request that completed
@@ -1241,41 +1272,50 @@ module Aws::VPCLattice
     #   can't use a hyphen as the first or last character, or immediately
     #   after another hyphen.
     #
-    # @option params [Types::SharingConfig] :sharing_config
-    #   Specify if the service network should be enabled for sharing.
+    # @option params [String] :auth_type
+    #   The type of IAM policy.
+    #
+    #   * `NONE`: The resource does not use an IAM policy. This is the
+    #     default.
+    #
+    #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
+    #     auth is enabled and an auth policy is required.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags for the service network.
     #
+    # @option params [Types::SharingConfig] :sharing_config
+    #   Specify if the service network should be enabled for sharing.
+    #
     # @return [Types::CreateServiceNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateServiceNetworkResponse#arn #arn} => String
-    #   * {Types::CreateServiceNetworkResponse#auth_type #auth_type} => String
     #   * {Types::CreateServiceNetworkResponse#id #id} => String
     #   * {Types::CreateServiceNetworkResponse#name #name} => String
+    #   * {Types::CreateServiceNetworkResponse#arn #arn} => String
     #   * {Types::CreateServiceNetworkResponse#sharing_config #sharing_config} => Types::SharingConfig
+    #   * {Types::CreateServiceNetworkResponse#auth_type #auth_type} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_service_network({
-    #     auth_type: "NONE", # accepts NONE, AWS_IAM
     #     client_token: "ClientToken",
     #     name: "ServiceNetworkName", # required
-    #     sharing_config: {
-    #       enabled: false,
-    #     },
+    #     auth_type: "NONE", # accepts NONE, AWS_IAM
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     sharing_config: {
+    #       enabled: false,
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #   resp.id #=> String
     #   resp.name #=> String
+    #   resp.arn #=> String
     #   resp.sharing_config.enabled #=> Boolean
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetwork AWS API Documentation
     #
@@ -1310,14 +1350,14 @@ module Aws::VPCLattice
     #   configuration.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags for the association.
+    #   A key-value pair to associate with a resource.
     #
     # @return [Types::CreateServiceNetworkResourceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateServiceNetworkResourceAssociationResponse#arn #arn} => String
-    #   * {Types::CreateServiceNetworkResourceAssociationResponse#created_by #created_by} => String
     #   * {Types::CreateServiceNetworkResourceAssociationResponse#id #id} => String
+    #   * {Types::CreateServiceNetworkResourceAssociationResponse#arn #arn} => String
     #   * {Types::CreateServiceNetworkResourceAssociationResponse#status #status} => String
+    #   * {Types::CreateServiceNetworkResourceAssociationResponse#created_by #created_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1332,10 +1372,10 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_by #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.created_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkResourceAssociation AWS API Documentation
     #
@@ -1388,12 +1428,12 @@ module Aws::VPCLattice
     #
     # @return [Types::CreateServiceNetworkServiceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateServiceNetworkServiceAssociationResponse#id #id} => String
+    #   * {Types::CreateServiceNetworkServiceAssociationResponse#status #status} => String
     #   * {Types::CreateServiceNetworkServiceAssociationResponse#arn #arn} => String
     #   * {Types::CreateServiceNetworkServiceAssociationResponse#created_by #created_by} => String
     #   * {Types::CreateServiceNetworkServiceAssociationResponse#custom_domain_name #custom_domain_name} => String
     #   * {Types::CreateServiceNetworkServiceAssociationResponse#dns_entry #dns_entry} => Types::DnsEntry
-    #   * {Types::CreateServiceNetworkServiceAssociationResponse#id #id} => String
-    #   * {Types::CreateServiceNetworkServiceAssociationResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1408,13 +1448,13 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.arn #=> String
     #   resp.created_by #=> String
     #   resp.custom_domain_name #=> String
     #   resp.dns_entry.domain_name #=> String
     #   resp.dns_entry.hosted_zone_id #=> String
-    #   resp.id #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkServiceAssociation AWS API Documentation
     #
@@ -1458,6 +1498,13 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [required, String] :service_network_identifier
+    #   The ID or ARN of the service network. You must use an ARN if the
+    #   resources are in different accounts.
+    #
+    # @option params [required, String] :vpc_identifier
+    #   The ID of the VPC.
+    #
     # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups. Security groups aren't added by
     #   default. You can add a security group to apply network level controls
@@ -1469,44 +1516,37 @@ module Aws::VPCLattice
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
     #
-    # @option params [required, String] :service_network_identifier
-    #   The ID or ARN of the service network. You must use an ARN if the
-    #   resources are in different accounts.
-    #
     # @option params [Hash<String,String>] :tags
     #   The tags for the association.
     #
-    # @option params [required, String] :vpc_identifier
-    #   The ID of the VPC.
-    #
     # @return [Types::CreateServiceNetworkVpcAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateServiceNetworkVpcAssociationResponse#id #id} => String
+    #   * {Types::CreateServiceNetworkVpcAssociationResponse#status #status} => String
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#arn #arn} => String
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#created_by #created_by} => String
-    #   * {Types::CreateServiceNetworkVpcAssociationResponse#id #id} => String
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
-    #   * {Types::CreateServiceNetworkVpcAssociationResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_service_network_vpc_association({
     #     client_token: "ClientToken",
-    #     security_group_ids: ["SecurityGroupId"],
     #     service_network_identifier: "ServiceNetworkIdentifier", # required
+    #     vpc_identifier: "VpcId", # required
+    #     security_group_ids: ["SecurityGroupId"],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     vpc_identifier: "VpcId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
     #   resp.arn #=> String
     #   resp.created_by #=> String
-    #   resp.id #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -1528,6 +1568,18 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
     #
+    # @option params [required, String] :name
+    #   The name of the target group. The name must be unique within the
+    #   account. The valid characters are a-z, 0-9, and hyphens (-). You
+    #   can't use a hyphen as the first or last character, or immediately
+    #   after another hyphen.
+    #
+    # @option params [required, String] :type
+    #   The type of target group.
+    #
+    # @option params [Types::TargetGroupConfig] :config
+    #   The target group configuration.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you retry a request that completed
@@ -1538,86 +1590,74 @@ module Aws::VPCLattice
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [Types::TargetGroupConfig] :config
-    #   The target group configuration.
-    #
-    # @option params [required, String] :name
-    #   The name of the target group. The name must be unique within the
-    #   account. The valid characters are a-z, 0-9, and hyphens (-). You
-    #   can't use a hyphen as the first or last character, or immediately
-    #   after another hyphen.
-    #
     # @option params [Hash<String,String>] :tags
     #   The tags for the target group.
     #
-    # @option params [required, String] :type
-    #   The type of target group.
-    #
     # @return [Types::CreateTargetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateTargetGroupResponse#arn #arn} => String
-    #   * {Types::CreateTargetGroupResponse#config #config} => Types::TargetGroupConfig
     #   * {Types::CreateTargetGroupResponse#id #id} => String
+    #   * {Types::CreateTargetGroupResponse#arn #arn} => String
     #   * {Types::CreateTargetGroupResponse#name #name} => String
-    #   * {Types::CreateTargetGroupResponse#status #status} => String
     #   * {Types::CreateTargetGroupResponse#type #type} => String
+    #   * {Types::CreateTargetGroupResponse#config #config} => Types::TargetGroupConfig
+    #   * {Types::CreateTargetGroupResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_target_group({
-    #     client_token: "ClientToken",
+    #     name: "TargetGroupName", # required
+    #     type: "IP", # required, accepts IP, LAMBDA, INSTANCE, ALB
     #     config: {
-    #       health_check: {
-    #         enabled: false,
-    #         health_check_interval_seconds: 1,
-    #         health_check_timeout_seconds: 1,
-    #         healthy_threshold_count: 1,
-    #         matcher: {
-    #           http_code: "HttpCodeMatcher",
-    #         },
-    #         path: "HealthCheckPath",
-    #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
-    #         protocol_version: "HTTP1", # accepts HTTP1, HTTP2
-    #         unhealthy_threshold_count: 1,
-    #       },
-    #       ip_address_type: "IPV4", # accepts IPV4, IPV6
-    #       lambda_event_structure_version: "V1", # accepts V1, V2
     #       port: 1,
     #       protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #       protocol_version: "HTTP1", # accepts HTTP1, HTTP2, GRPC
+    #       ip_address_type: "IPV4", # accepts IPV4, IPV6
     #       vpc_identifier: "VpcId",
+    #       health_check: {
+    #         enabled: false,
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #         protocol_version: "HTTP1", # accepts HTTP1, HTTP2
+    #         port: 1,
+    #         path: "HealthCheckPath",
+    #         health_check_interval_seconds: 1,
+    #         health_check_timeout_seconds: 1,
+    #         healthy_threshold_count: 1,
+    #         unhealthy_threshold_count: 1,
+    #         matcher: {
+    #           http_code: "HttpCodeMatcher",
+    #         },
+    #       },
+    #       lambda_event_structure_version: "V1", # accepts V1, V2
     #     },
-    #     name: "TargetGroupName", # required
+    #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     type: "IP", # required, accepts IP, LAMBDA, INSTANCE, ALB
     #   })
     #
     # @example Response structure
     #
+    #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.config.health_check.enabled #=> Boolean
-    #   resp.config.health_check.health_check_interval_seconds #=> Integer
-    #   resp.config.health_check.health_check_timeout_seconds #=> Integer
-    #   resp.config.health_check.healthy_threshold_count #=> Integer
-    #   resp.config.health_check.matcher.http_code #=> String
-    #   resp.config.health_check.path #=> String
-    #   resp.config.health_check.port #=> Integer
-    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
-    #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
-    #   resp.config.health_check.unhealthy_threshold_count #=> Integer
-    #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
-    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
     #   resp.config.port #=> Integer
     #   resp.config.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
+    #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.config.vpc_identifier #=> String
-    #   resp.id #=> String
-    #   resp.name #=> String
+    #   resp.config.health_check.enabled #=> Boolean
+    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
+    #   resp.config.health_check.port #=> Integer
+    #   resp.config.health_check.path #=> String
+    #   resp.config.health_check.health_check_interval_seconds #=> Integer
+    #   resp.config.health_check.health_check_timeout_seconds #=> Integer
+    #   resp.config.health_check.healthy_threshold_count #=> Integer
+    #   resp.config.health_check.unhealthy_threshold_count #=> Integer
+    #   resp.config.health_check.matcher.http_code #=> String
+    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateTargetGroup AWS API Documentation
     #
@@ -1678,19 +1718,19 @@ module Aws::VPCLattice
 
     # Deletes the specified listener.
     #
-    # @option params [required, String] :listener_identifier
-    #   The ID or ARN of the listener.
-    #
     # @option params [required, String] :service_identifier
     #   The ID or ARN of the service.
+    #
+    # @option params [required, String] :listener_identifier
+    #   The ID or ARN of the listener.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_listener({
-    #     listener_identifier: "ListenerIdentifier", # required
     #     service_identifier: "ServiceIdentifier", # required
+    #     listener_identifier: "ListenerIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteListener AWS API Documentation
@@ -1732,10 +1772,10 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteResourceEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteResourceEndpointAssociationResponse#arn #arn} => String
     #   * {Types::DeleteResourceEndpointAssociationResponse#id #id} => String
-    #   * {Types::DeleteResourceEndpointAssociationResponse#resource_configuration_arn #resource_configuration_arn} => String
+    #   * {Types::DeleteResourceEndpointAssociationResponse#arn #arn} => String
     #   * {Types::DeleteResourceEndpointAssociationResponse#resource_configuration_id #resource_configuration_id} => String
+    #   * {Types::DeleteResourceEndpointAssociationResponse#resource_configuration_arn #resource_configuration_arn} => String
     #   * {Types::DeleteResourceEndpointAssociationResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #
     # @example Request syntax with placeholder values
@@ -1746,10 +1786,10 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.resource_configuration_arn #=> String
+    #   resp.arn #=> String
     #   resp.resource_configuration_id #=> String
+    #   resp.resource_configuration_arn #=> String
     #   resp.vpc_endpoint_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteResourceEndpointAssociation AWS API Documentation
@@ -1768,8 +1808,8 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteResourceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteResourceGatewayResponse#arn #arn} => String
     #   * {Types::DeleteResourceGatewayResponse#id #id} => String
+    #   * {Types::DeleteResourceGatewayResponse#arn #arn} => String
     #   * {Types::DeleteResourceGatewayResponse#name #name} => String
     #   * {Types::DeleteResourceGatewayResponse#status #status} => String
     #
@@ -1781,8 +1821,8 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #
@@ -1830,23 +1870,23 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
     # @option params [required, String] :listener_identifier
     #   The ID or ARN of the listener.
     #
     # @option params [required, String] :rule_identifier
     #   The ID or ARN of the rule.
     #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_rule({
+    #     service_identifier: "ServiceIdentifier", # required
     #     listener_identifier: "ListenerIdentifier", # required
     #     rule_identifier: "RuleIdentifier", # required
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteRule AWS API Documentation
@@ -1874,8 +1914,8 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteServiceResponse#arn #arn} => String
     #   * {Types::DeleteServiceResponse#id #id} => String
+    #   * {Types::DeleteServiceResponse#arn #arn} => String
     #   * {Types::DeleteServiceResponse#name #name} => String
     #   * {Types::DeleteServiceResponse#status #status} => String
     #
@@ -1887,8 +1927,8 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #
@@ -1940,8 +1980,8 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteServiceNetworkResourceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteServiceNetworkResourceAssociationResponse#arn #arn} => String
     #   * {Types::DeleteServiceNetworkResourceAssociationResponse#id #id} => String
+    #   * {Types::DeleteServiceNetworkResourceAssociationResponse#arn #arn} => String
     #   * {Types::DeleteServiceNetworkResourceAssociationResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -1952,8 +1992,8 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteServiceNetworkResourceAssociation AWS API Documentation
@@ -1973,9 +2013,9 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteServiceNetworkServiceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteServiceNetworkServiceAssociationResponse#arn #arn} => String
     #   * {Types::DeleteServiceNetworkServiceAssociationResponse#id #id} => String
     #   * {Types::DeleteServiceNetworkServiceAssociationResponse#status #status} => String
+    #   * {Types::DeleteServiceNetworkServiceAssociationResponse#arn #arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1985,9 +2025,9 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteServiceNetworkServiceAssociation AWS API Documentation
     #
@@ -2007,9 +2047,9 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteServiceNetworkVpcAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteServiceNetworkVpcAssociationResponse#arn #arn} => String
     #   * {Types::DeleteServiceNetworkVpcAssociationResponse#id #id} => String
     #   * {Types::DeleteServiceNetworkVpcAssociationResponse#status #status} => String
+    #   * {Types::DeleteServiceNetworkVpcAssociationResponse#arn #arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2019,9 +2059,9 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -2040,8 +2080,8 @@ module Aws::VPCLattice
     #
     # @return [Types::DeleteTargetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteTargetGroupResponse#arn #arn} => String
     #   * {Types::DeleteTargetGroupResponse#id #id} => String
+    #   * {Types::DeleteTargetGroupResponse#arn #arn} => String
     #   * {Types::DeleteTargetGroupResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -2052,8 +2092,8 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteTargetGroup AWS API Documentation
@@ -2096,10 +2136,10 @@ module Aws::VPCLattice
     #   resp.successful[0].id #=> String
     #   resp.successful[0].port #=> Integer
     #   resp.unsuccessful #=> Array
-    #   resp.unsuccessful[0].failure_code #=> String
-    #   resp.unsuccessful[0].failure_message #=> String
     #   resp.unsuccessful[0].id #=> String
     #   resp.unsuccessful[0].port #=> Integer
+    #   resp.unsuccessful[0].failure_code #=> String
+    #   resp.unsuccessful[0].failure_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeregisterTargets AWS API Documentation
     #
@@ -2117,14 +2157,14 @@ module Aws::VPCLattice
     #
     # @return [Types::GetAccessLogSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAccessLogSubscriptionResponse#arn #arn} => String
-    #   * {Types::GetAccessLogSubscriptionResponse#created_at #created_at} => Time
-    #   * {Types::GetAccessLogSubscriptionResponse#destination_arn #destination_arn} => String
     #   * {Types::GetAccessLogSubscriptionResponse#id #id} => String
-    #   * {Types::GetAccessLogSubscriptionResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetAccessLogSubscriptionResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetAccessLogSubscriptionResponse#arn #arn} => String
     #   * {Types::GetAccessLogSubscriptionResponse#resource_id #resource_id} => String
+    #   * {Types::GetAccessLogSubscriptionResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetAccessLogSubscriptionResponse#destination_arn #destination_arn} => String
     #   * {Types::GetAccessLogSubscriptionResponse#service_network_log_type #service_network_log_type} => String
+    #   * {Types::GetAccessLogSubscriptionResponse#created_at #created_at} => Time
+    #   * {Types::GetAccessLogSubscriptionResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2134,14 +2174,14 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.destination_arn #=> String
     #   resp.id #=> String
-    #   resp.last_updated_at #=> Time
-    #   resp.resource_arn #=> String
+    #   resp.arn #=> String
     #   resp.resource_id #=> String
+    #   resp.resource_arn #=> String
+    #   resp.destination_arn #=> String
     #   resp.service_network_log_type #=> String, one of "SERVICE", "RESOURCE"
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetAccessLogSubscription AWS API Documentation
     #
@@ -2160,10 +2200,10 @@ module Aws::VPCLattice
     #
     # @return [Types::GetAuthPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAuthPolicyResponse#created_at #created_at} => Time
-    #   * {Types::GetAuthPolicyResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetAuthPolicyResponse#policy #policy} => String
     #   * {Types::GetAuthPolicyResponse#state #state} => String
+    #   * {Types::GetAuthPolicyResponse#created_at #created_at} => Time
+    #   * {Types::GetAuthPolicyResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2173,10 +2213,10 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.created_at #=> Time
-    #   resp.last_updated_at #=> Time
     #   resp.policy #=> String
     #   resp.state #=> String, one of "Active", "Inactive"
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetAuthPolicy AWS API Documentation
     #
@@ -2190,47 +2230,47 @@ module Aws::VPCLattice
     # Retrieves information about the specified listener for the specified
     # service.
     #
-    # @option params [required, String] :listener_identifier
-    #   The ID or ARN of the listener.
-    #
     # @option params [required, String] :service_identifier
     #   The ID or ARN of the service.
+    #
+    # @option params [required, String] :listener_identifier
+    #   The ID or ARN of the listener.
     #
     # @return [Types::GetListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetListenerResponse#arn #arn} => String
-    #   * {Types::GetListenerResponse#created_at #created_at} => Time
-    #   * {Types::GetListenerResponse#default_action #default_action} => Types::RuleAction
     #   * {Types::GetListenerResponse#id #id} => String
-    #   * {Types::GetListenerResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetListenerResponse#name #name} => String
-    #   * {Types::GetListenerResponse#port #port} => Integer
     #   * {Types::GetListenerResponse#protocol #protocol} => String
+    #   * {Types::GetListenerResponse#port #port} => Integer
     #   * {Types::GetListenerResponse#service_arn #service_arn} => String
     #   * {Types::GetListenerResponse#service_id #service_id} => String
+    #   * {Types::GetListenerResponse#default_action #default_action} => Types::RuleAction
+    #   * {Types::GetListenerResponse#created_at #created_at} => Time
+    #   * {Types::GetListenerResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_listener({
-    #     listener_identifier: "ListenerIdentifier", # required
     #     service_identifier: "ServiceIdentifier", # required
+    #     listener_identifier: "ListenerIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.default_action.fixed_response.status_code #=> Integer
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
+    #   resp.port #=> Integer
+    #   resp.service_arn #=> String
+    #   resp.service_id #=> String
     #   resp.default_action.forward.target_groups #=> Array
     #   resp.default_action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.default_action.forward.target_groups[0].weight #=> Integer
-    #   resp.id #=> String
+    #   resp.default_action.fixed_response.status_code #=> Integer
+    #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.name #=> String
-    #   resp.port #=> Integer
-    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
-    #   resp.service_arn #=> String
-    #   resp.service_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetListener AWS API Documentation
     #
@@ -2248,22 +2288,22 @@ module Aws::VPCLattice
     #
     # @return [Types::GetResourceConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
-    #   * {Types::GetResourceConfigurationResponse#amazon_managed #amazon_managed} => Boolean
-    #   * {Types::GetResourceConfigurationResponse#arn #arn} => String
-    #   * {Types::GetResourceConfigurationResponse#created_at #created_at} => Time
-    #   * {Types::GetResourceConfigurationResponse#custom_domain_name #custom_domain_name} => String
-    #   * {Types::GetResourceConfigurationResponse#failure_reason #failure_reason} => String
     #   * {Types::GetResourceConfigurationResponse#id #id} => String
-    #   * {Types::GetResourceConfigurationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetResourceConfigurationResponse#name #name} => String
+    #   * {Types::GetResourceConfigurationResponse#arn #arn} => String
+    #   * {Types::GetResourceConfigurationResponse#resource_gateway_id #resource_gateway_id} => String
+    #   * {Types::GetResourceConfigurationResponse#resource_configuration_group_id #resource_configuration_group_id} => String
+    #   * {Types::GetResourceConfigurationResponse#type #type} => String
+    #   * {Types::GetResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
     #   * {Types::GetResourceConfigurationResponse#port_ranges #port_ranges} => Array&lt;String&gt;
     #   * {Types::GetResourceConfigurationResponse#protocol #protocol} => String
-    #   * {Types::GetResourceConfigurationResponse#resource_configuration_definition #resource_configuration_definition} => Types::ResourceConfigurationDefinition
-    #   * {Types::GetResourceConfigurationResponse#resource_configuration_group_id #resource_configuration_group_id} => String
-    #   * {Types::GetResourceConfigurationResponse#resource_gateway_id #resource_gateway_id} => String
+    #   * {Types::GetResourceConfigurationResponse#custom_domain_name #custom_domain_name} => String
     #   * {Types::GetResourceConfigurationResponse#status #status} => String
-    #   * {Types::GetResourceConfigurationResponse#type #type} => String
+    #   * {Types::GetResourceConfigurationResponse#resource_configuration_definition #resource_configuration_definition} => Types::ResourceConfigurationDefinition
+    #   * {Types::GetResourceConfigurationResponse#created_at #created_at} => Time
+    #   * {Types::GetResourceConfigurationResponse#amazon_managed #amazon_managed} => Boolean
+    #   * {Types::GetResourceConfigurationResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetResourceConfigurationResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2273,26 +2313,26 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.allow_association_to_shareable_service_network #=> Boolean
-    #   resp.amazon_managed #=> Boolean
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.custom_domain_name #=> String
-    #   resp.failure_reason #=> String
     #   resp.id #=> String
-    #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.resource_gateway_id #=> String
+    #   resp.resource_configuration_group_id #=> String
+    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.allow_association_to_shareable_service_network #=> Boolean
     #   resp.port_ranges #=> Array
     #   resp.port_ranges[0] #=> String
     #   resp.protocol #=> String, one of "TCP"
-    #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.custom_domain_name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.resource_configuration_definition.dns_resource.domain_name #=> String
     #   resp.resource_configuration_definition.dns_resource.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.resource_configuration_definition.ip_resource.ip_address #=> String
-    #   resp.resource_configuration_group_id #=> String
-    #   resp.resource_gateway_id #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
-    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.amazon_managed #=> Boolean
+    #   resp.failure_reason #=> String
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourceConfiguration AWS API Documentation
     #
@@ -2310,16 +2350,17 @@ module Aws::VPCLattice
     #
     # @return [Types::GetResourceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetResourceGatewayResponse#arn #arn} => String
-    #   * {Types::GetResourceGatewayResponse#created_at #created_at} => Time
-    #   * {Types::GetResourceGatewayResponse#id #id} => String
-    #   * {Types::GetResourceGatewayResponse#ip_address_type #ip_address_type} => String
-    #   * {Types::GetResourceGatewayResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetResourceGatewayResponse#name #name} => String
-    #   * {Types::GetResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetResourceGatewayResponse#id #id} => String
+    #   * {Types::GetResourceGatewayResponse#arn #arn} => String
     #   * {Types::GetResourceGatewayResponse#status #status} => String
-    #   * {Types::GetResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::GetResourceGatewayResponse#vpc_id #vpc_id} => String
+    #   * {Types::GetResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::GetResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetResourceGatewayResponse#ip_address_type #ip_address_type} => String
+    #   * {Types::GetResourceGatewayResponse#ipv4_addresses_per_eni #ipv4_addresses_per_eni} => Integer
+    #   * {Types::GetResourceGatewayResponse#created_at #created_at} => Time
+    #   * {Types::GetResourceGatewayResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2329,18 +2370,19 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
-    #   resp.last_updated_at #=> Time
     #   resp.name #=> String
-    #   resp.security_group_ids #=> Array
-    #   resp.security_group_ids[0] #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.vpc_id #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
-    #   resp.vpc_id #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
+    #   resp.ipv4_addresses_per_eni #=> Integer
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourceGateway AWS API Documentation
     #
@@ -2390,58 +2432,58 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
     # @option params [required, String] :listener_identifier
     #   The ID or ARN of the listener.
     #
     # @option params [required, String] :rule_identifier
     #   The ID or ARN of the listener rule.
     #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
-    #
     # @return [Types::GetRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetRuleResponse#action #action} => Types::RuleAction
     #   * {Types::GetRuleResponse#arn #arn} => String
-    #   * {Types::GetRuleResponse#created_at #created_at} => Time
     #   * {Types::GetRuleResponse#id #id} => String
-    #   * {Types::GetRuleResponse#is_default #is_default} => Boolean
-    #   * {Types::GetRuleResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetRuleResponse#match #match} => Types::RuleMatch
     #   * {Types::GetRuleResponse#name #name} => String
+    #   * {Types::GetRuleResponse#is_default #is_default} => Boolean
+    #   * {Types::GetRuleResponse#match #match} => Types::RuleMatch
     #   * {Types::GetRuleResponse#priority #priority} => Integer
+    #   * {Types::GetRuleResponse#action #action} => Types::RuleAction
+    #   * {Types::GetRuleResponse#created_at #created_at} => Time
+    #   * {Types::GetRuleResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_rule({
+    #     service_identifier: "ServiceIdentifier", # required
     #     listener_identifier: "ListenerIdentifier", # required
     #     rule_identifier: "RuleIdentifier", # required
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.action.fixed_response.status_code #=> Integer
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.is_default #=> Boolean
+    #   resp.match.http_match.method #=> String
+    #   resp.match.http_match.path_match.match.exact #=> String
+    #   resp.match.http_match.path_match.match.prefix #=> String
+    #   resp.match.http_match.path_match.case_sensitive #=> Boolean
+    #   resp.match.http_match.header_matches #=> Array
+    #   resp.match.http_match.header_matches[0].name #=> String
+    #   resp.match.http_match.header_matches[0].match.exact #=> String
+    #   resp.match.http_match.header_matches[0].match.prefix #=> String
+    #   resp.match.http_match.header_matches[0].match.contains #=> String
+    #   resp.match.http_match.header_matches[0].case_sensitive #=> Boolean
+    #   resp.priority #=> Integer
     #   resp.action.forward.target_groups #=> Array
     #   resp.action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.action.forward.target_groups[0].weight #=> Integer
-    #   resp.arn #=> String
+    #   resp.action.fixed_response.status_code #=> Integer
     #   resp.created_at #=> Time
-    #   resp.id #=> String
-    #   resp.is_default #=> Boolean
     #   resp.last_updated_at #=> Time
-    #   resp.match.http_match.header_matches #=> Array
-    #   resp.match.http_match.header_matches[0].case_sensitive #=> Boolean
-    #   resp.match.http_match.header_matches[0].match.contains #=> String
-    #   resp.match.http_match.header_matches[0].match.exact #=> String
-    #   resp.match.http_match.header_matches[0].match.prefix #=> String
-    #   resp.match.http_match.header_matches[0].name #=> String
-    #   resp.match.http_match.method #=> String
-    #   resp.match.http_match.path_match.case_sensitive #=> Boolean
-    #   resp.match.http_match.path_match.match.exact #=> String
-    #   resp.match.http_match.path_match.match.prefix #=> String
-    #   resp.name #=> String
-    #   resp.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetRule AWS API Documentation
     #
@@ -2459,18 +2501,18 @@ module Aws::VPCLattice
     #
     # @return [Types::GetServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetServiceResponse#id #id} => String
+    #   * {Types::GetServiceResponse#name #name} => String
     #   * {Types::GetServiceResponse#arn #arn} => String
-    #   * {Types::GetServiceResponse#auth_type #auth_type} => String
-    #   * {Types::GetServiceResponse#certificate_arn #certificate_arn} => String
     #   * {Types::GetServiceResponse#created_at #created_at} => Time
-    #   * {Types::GetServiceResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::GetServiceResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetServiceResponse#dns_entry #dns_entry} => Types::DnsEntry
+    #   * {Types::GetServiceResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::GetServiceResponse#certificate_arn #certificate_arn} => String
+    #   * {Types::GetServiceResponse#status #status} => String
+    #   * {Types::GetServiceResponse#auth_type #auth_type} => String
     #   * {Types::GetServiceResponse#failure_code #failure_code} => String
     #   * {Types::GetServiceResponse#failure_message #failure_message} => String
-    #   * {Types::GetServiceResponse#id #id} => String
-    #   * {Types::GetServiceResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetServiceResponse#name #name} => String
-    #   * {Types::GetServiceResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2480,19 +2522,19 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
+    #   resp.id #=> String
+    #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
-    #   resp.certificate_arn #=> String
     #   resp.created_at #=> Time
-    #   resp.custom_domain_name #=> String
+    #   resp.last_updated_at #=> Time
     #   resp.dns_entry.domain_name #=> String
     #   resp.dns_entry.hosted_zone_id #=> String
+    #   resp.custom_domain_name #=> String
+    #   resp.certificate_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #   resp.failure_code #=> String
     #   resp.failure_message #=> String
-    #   resp.id #=> String
-    #   resp.last_updated_at #=> Time
-    #   resp.name #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetService AWS API Documentation
     #
@@ -2510,15 +2552,15 @@ module Aws::VPCLattice
     #
     # @return [Types::GetServiceNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetServiceNetworkResponse#id #id} => String
+    #   * {Types::GetServiceNetworkResponse#name #name} => String
+    #   * {Types::GetServiceNetworkResponse#created_at #created_at} => Time
+    #   * {Types::GetServiceNetworkResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetServiceNetworkResponse#arn #arn} => String
     #   * {Types::GetServiceNetworkResponse#auth_type #auth_type} => String
-    #   * {Types::GetServiceNetworkResponse#created_at #created_at} => Time
-    #   * {Types::GetServiceNetworkResponse#id #id} => String
-    #   * {Types::GetServiceNetworkResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetServiceNetworkResponse#name #name} => String
-    #   * {Types::GetServiceNetworkResponse#number_of_associated_services #number_of_associated_services} => Integer
-    #   * {Types::GetServiceNetworkResponse#number_of_associated_vp_cs #number_of_associated_vp_cs} => Integer
     #   * {Types::GetServiceNetworkResponse#sharing_config #sharing_config} => Types::SharingConfig
+    #   * {Types::GetServiceNetworkResponse#number_of_associated_vp_cs #number_of_associated_vp_cs} => Integer
+    #   * {Types::GetServiceNetworkResponse#number_of_associated_services #number_of_associated_services} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -2528,15 +2570,15 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
     #   resp.arn #=> String
     #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
-    #   resp.created_at #=> Time
-    #   resp.id #=> String
-    #   resp.last_updated_at #=> Time
-    #   resp.name #=> String
-    #   resp.number_of_associated_services #=> Integer
-    #   resp.number_of_associated_vp_cs #=> Integer
     #   resp.sharing_config.enabled #=> Boolean
+    #   resp.number_of_associated_vp_cs #=> Integer
+    #   resp.number_of_associated_services #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetwork AWS API Documentation
     #
@@ -2555,23 +2597,23 @@ module Aws::VPCLattice
     #
     # @return [Types::GetServiceNetworkResourceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#arn #arn} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#created_at #created_at} => Time
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#created_by #created_by} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#dns_entry #dns_entry} => Types::DnsEntry
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#failure_code #failure_code} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#failure_reason #failure_reason} => String
     #   * {Types::GetServiceNetworkResourceAssociationResponse#id #id} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#is_managed_association #is_managed_association} => Boolean
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#arn #arn} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#status #status} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#created_by #created_by} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#created_at #created_at} => Time
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#resource_configuration_id #resource_configuration_id} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#resource_configuration_arn #resource_configuration_arn} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#resource_configuration_name #resource_configuration_name} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#service_network_id #service_network_id} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#service_network_arn #service_network_arn} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#service_network_name #service_network_name} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#failure_code #failure_code} => String
     #   * {Types::GetServiceNetworkResourceAssociationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetServiceNetworkResourceAssociationResponse#private_dns_entry #private_dns_entry} => Types::DnsEntry
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#resource_configuration_arn #resource_configuration_arn} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#resource_configuration_id #resource_configuration_id} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#resource_configuration_name #resource_configuration_name} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#service_network_arn #service_network_arn} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#service_network_id #service_network_id} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#service_network_name #service_network_name} => String
-    #   * {Types::GetServiceNetworkResourceAssociationResponse#status #status} => String
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#dns_entry #dns_entry} => Types::DnsEntry
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#is_managed_association #is_managed_association} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2581,25 +2623,25 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.created_by #=> String
-    #   resp.dns_entry.domain_name #=> String
-    #   resp.dns_entry.hosted_zone_id #=> String
-    #   resp.failure_code #=> String
-    #   resp.failure_reason #=> String
     #   resp.id #=> String
-    #   resp.is_managed_association #=> Boolean
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.resource_configuration_id #=> String
+    #   resp.resource_configuration_arn #=> String
+    #   resp.resource_configuration_name #=> String
+    #   resp.service_network_id #=> String
+    #   resp.service_network_arn #=> String
+    #   resp.service_network_name #=> String
+    #   resp.failure_reason #=> String
+    #   resp.failure_code #=> String
     #   resp.last_updated_at #=> Time
     #   resp.private_dns_entry.domain_name #=> String
     #   resp.private_dns_entry.hosted_zone_id #=> String
-    #   resp.resource_configuration_arn #=> String
-    #   resp.resource_configuration_id #=> String
-    #   resp.resource_configuration_name #=> String
-    #   resp.service_network_arn #=> String
-    #   resp.service_network_id #=> String
-    #   resp.service_network_name #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.dns_entry.domain_name #=> String
+    #   resp.dns_entry.hosted_zone_id #=> String
+    #   resp.is_managed_association #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkResourceAssociation AWS API Documentation
     #
@@ -2618,21 +2660,21 @@ module Aws::VPCLattice
     #
     # @return [Types::GetServiceNetworkServiceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#arn #arn} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#created_at #created_at} => Time
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#created_by #created_by} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#custom_domain_name #custom_domain_name} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#dns_entry #dns_entry} => Types::DnsEntry
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#failure_code #failure_code} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#failure_message #failure_message} => String
     #   * {Types::GetServiceNetworkServiceAssociationResponse#id #id} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#service_arn #service_arn} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#status #status} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#arn #arn} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#created_by #created_by} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#created_at #created_at} => Time
     #   * {Types::GetServiceNetworkServiceAssociationResponse#service_id #service_id} => String
     #   * {Types::GetServiceNetworkServiceAssociationResponse#service_name #service_name} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#service_network_arn #service_network_arn} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#service_arn #service_arn} => String
     #   * {Types::GetServiceNetworkServiceAssociationResponse#service_network_id #service_network_id} => String
     #   * {Types::GetServiceNetworkServiceAssociationResponse#service_network_name #service_network_name} => String
-    #   * {Types::GetServiceNetworkServiceAssociationResponse#status #status} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#service_network_arn #service_network_arn} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#dns_entry #dns_entry} => Types::DnsEntry
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#failure_message #failure_message} => String
+    #   * {Types::GetServiceNetworkServiceAssociationResponse#failure_code #failure_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2642,22 +2684,22 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.created_by #=> String
-    #   resp.custom_domain_name #=> String
-    #   resp.dns_entry.domain_name #=> String
-    #   resp.dns_entry.hosted_zone_id #=> String
-    #   resp.failure_code #=> String
-    #   resp.failure_message #=> String
     #   resp.id #=> String
-    #   resp.service_arn #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.arn #=> String
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
     #   resp.service_id #=> String
     #   resp.service_name #=> String
-    #   resp.service_network_arn #=> String
+    #   resp.service_arn #=> String
     #   resp.service_network_id #=> String
     #   resp.service_network_name #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.service_network_arn #=> String
+    #   resp.dns_entry.domain_name #=> String
+    #   resp.dns_entry.hosted_zone_id #=> String
+    #   resp.custom_domain_name #=> String
+    #   resp.failure_message #=> String
+    #   resp.failure_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkServiceAssociation AWS API Documentation
     #
@@ -2676,19 +2718,19 @@ module Aws::VPCLattice
     #
     # @return [Types::GetServiceNetworkVpcAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#arn #arn} => String
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#created_at #created_at} => Time
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#created_by #created_by} => String
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#failure_code #failure_code} => String
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#failure_message #failure_message} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#id #id} => String
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#service_network_arn #service_network_arn} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#status #status} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#arn #arn} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#created_by #created_by} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#created_at #created_at} => Time
     #   * {Types::GetServiceNetworkVpcAssociationResponse#service_network_id #service_network_id} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#service_network_name #service_network_name} => String
-    #   * {Types::GetServiceNetworkVpcAssociationResponse#status #status} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#service_network_arn #service_network_arn} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#vpc_id #vpc_id} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#failure_message #failure_message} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#failure_code #failure_code} => String
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2698,20 +2740,20 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.created_by #=> String
-    #   resp.failure_code #=> String
-    #   resp.failure_message #=> String
     #   resp.id #=> String
-    #   resp.last_updated_at #=> Time
-    #   resp.security_group_ids #=> Array
-    #   resp.security_group_ids[0] #=> String
-    #   resp.service_network_arn #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.arn #=> String
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
     #   resp.service_network_id #=> String
     #   resp.service_network_name #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.service_network_arn #=> String
     #   resp.vpc_id #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.failure_message #=> String
+    #   resp.failure_code #=> String
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -2729,17 +2771,17 @@ module Aws::VPCLattice
     #
     # @return [Types::GetTargetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetTargetGroupResponse#id #id} => String
     #   * {Types::GetTargetGroupResponse#arn #arn} => String
+    #   * {Types::GetTargetGroupResponse#name #name} => String
+    #   * {Types::GetTargetGroupResponse#type #type} => String
     #   * {Types::GetTargetGroupResponse#config #config} => Types::TargetGroupConfig
     #   * {Types::GetTargetGroupResponse#created_at #created_at} => Time
-    #   * {Types::GetTargetGroupResponse#failure_code #failure_code} => String
-    #   * {Types::GetTargetGroupResponse#failure_message #failure_message} => String
-    #   * {Types::GetTargetGroupResponse#id #id} => String
     #   * {Types::GetTargetGroupResponse#last_updated_at #last_updated_at} => Time
-    #   * {Types::GetTargetGroupResponse#name #name} => String
-    #   * {Types::GetTargetGroupResponse#service_arns #service_arns} => Array&lt;String&gt;
     #   * {Types::GetTargetGroupResponse#status #status} => String
-    #   * {Types::GetTargetGroupResponse#type #type} => String
+    #   * {Types::GetTargetGroupResponse#service_arns #service_arns} => Array&lt;String&gt;
+    #   * {Types::GetTargetGroupResponse#failure_message #failure_message} => String
+    #   * {Types::GetTargetGroupResponse#failure_code #failure_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2749,33 +2791,33 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
+    #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.config.health_check.enabled #=> Boolean
-    #   resp.config.health_check.health_check_interval_seconds #=> Integer
-    #   resp.config.health_check.health_check_timeout_seconds #=> Integer
-    #   resp.config.health_check.healthy_threshold_count #=> Integer
-    #   resp.config.health_check.matcher.http_code #=> String
-    #   resp.config.health_check.path #=> String
-    #   resp.config.health_check.port #=> Integer
-    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
-    #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
-    #   resp.config.health_check.unhealthy_threshold_count #=> Integer
-    #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
-    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
     #   resp.config.port #=> Integer
     #   resp.config.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
+    #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.config.vpc_identifier #=> String
+    #   resp.config.health_check.enabled #=> Boolean
+    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
+    #   resp.config.health_check.port #=> Integer
+    #   resp.config.health_check.path #=> String
+    #   resp.config.health_check.health_check_interval_seconds #=> Integer
+    #   resp.config.health_check.health_check_timeout_seconds #=> Integer
+    #   resp.config.health_check.healthy_threshold_count #=> Integer
+    #   resp.config.health_check.unhealthy_threshold_count #=> Integer
+    #   resp.config.health_check.matcher.http_code #=> String
+    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.created_at #=> Time
-    #   resp.failure_code #=> String
-    #   resp.failure_message #=> String
-    #   resp.id #=> String
     #   resp.last_updated_at #=> Time
-    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.service_arns #=> Array
     #   resp.service_arns[0] #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
+    #   resp.failure_message #=> String
+    #   resp.failure_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetTargetGroup AWS API Documentation
     #
@@ -2789,14 +2831,14 @@ module Aws::VPCLattice
     # Lists the access log subscriptions for the specified service network
     # or service.
     #
+    # @option params [required, String] :resource_identifier
+    #   The ID or ARN of the service network or service.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
-    #
-    # @option params [required, String] :resource_identifier
-    #   The ID or ARN of the service network or service.
     #
     # @return [Types::ListAccessLogSubscriptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2808,22 +2850,22 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_log_subscriptions({
+    #     resource_identifier: "ResourceIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_identifier: "ResourceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].destination_arn #=> String
     #   resp.items[0].id #=> String
-    #   resp.items[0].last_updated_at #=> Time
-    #   resp.items[0].resource_arn #=> String
+    #   resp.items[0].arn #=> String
     #   resp.items[0].resource_id #=> String
+    #   resp.items[0].resource_arn #=> String
+    #   resp.items[0].destination_arn #=> String
     #   resp.items[0].service_network_log_type #=> String, one of "SERVICE", "RESOURCE"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListAccessLogSubscriptions AWS API Documentation
@@ -2837,14 +2879,14 @@ module Aws::VPCLattice
 
     # Lists the listeners for the specified service.
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
     #
     # @return [Types::ListListenersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2856,21 +2898,21 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_listeners({
+    #     service_identifier: "ServiceIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
     #   resp.items[0].id #=> String
-    #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
-    #   resp.items[0].port #=> Integer
     #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
+    #   resp.items[0].port #=> Integer
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListListeners AWS API Documentation
@@ -2885,17 +2927,17 @@ module Aws::VPCLattice
     # Lists the resource configurations owned by or shared with this
     # account.
     #
+    # @option params [String] :resource_gateway_identifier
+    #   The ID of the resource gateway for the resource configuration.
+    #
+    # @option params [String] :resource_configuration_group_identifier
+    #   The ID of the resource configuration of type `Group`.
+    #
     # @option params [Integer] :max_results
     #   The maximum page size.
     #
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
-    #
-    # @option params [String] :resource_configuration_group_identifier
-    #   The ID of the group resource configuration.
-    #
-    # @option params [String] :resource_gateway_identifier
-    #   The ID of the resource gateway for the resource configuration.
     #
     # @return [Types::ListResourceConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2907,25 +2949,25 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resource_configurations({
+    #     resource_gateway_identifier: "ResourceGatewayIdentifier",
+    #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
-    #     resource_gateway_identifier: "ResourceGatewayIdentifier",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].amazon_managed #=> Boolean
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
     #   resp.items[0].id #=> String
-    #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
-    #   resp.items[0].resource_configuration_group_id #=> String
+    #   resp.items[0].arn #=> String
     #   resp.items[0].resource_gateway_id #=> String
-    #   resp.items[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].resource_configuration_group_id #=> String
     #   resp.items[0].type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.items[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].amazon_managed #=> Boolean
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListResourceConfigurations AWS API Documentation
@@ -2938,12 +2980,6 @@ module Aws::VPCLattice
     end
 
     # Lists the associations for the specified VPC endpoint.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum page size.
-    #
-    # @option params [String] :next_token
-    #   A pagination token for the next page of results.
     #
     # @option params [required, String] :resource_configuration_identifier
     #   The ID for the resource configuration associated with the VPC
@@ -2958,6 +2994,12 @@ module Aws::VPCLattice
     # @option params [String] :vpc_endpoint_owner
     #   The owner of the VPC endpoint in the association.
     #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next page of results.
+    #
     # @return [Types::ListResourceEndpointAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListResourceEndpointAssociationsResponse#items #items} => Array&lt;Types::ResourceEndpointAssociationSummary&gt;
@@ -2968,26 +3010,26 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resource_endpoint_associations({
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     resource_configuration_identifier: "ResourceConfigurationIdentifier", # required
     #     resource_endpoint_association_identifier: "ResourceEndpointAssociationIdentifier",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     vpc_endpoint_owner: "VpcEndpointOwner",
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].created_by #=> String
     #   resp.items[0].id #=> String
-    #   resp.items[0].resource_configuration_arn #=> String
+    #   resp.items[0].arn #=> String
     #   resp.items[0].resource_configuration_id #=> String
+    #   resp.items[0].resource_configuration_arn #=> String
     #   resp.items[0].resource_configuration_name #=> String
     #   resp.items[0].vpc_endpoint_id #=> String
     #   resp.items[0].vpc_endpoint_owner #=> String
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListResourceEndpointAssociations AWS API Documentation
@@ -3025,18 +3067,19 @@ module Aws::VPCLattice
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].id #=> String
-    #   resp.items[0].ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
-    #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
-    #   resp.items[0].security_group_ids #=> Array
-    #   resp.items[0].security_group_ids[0] #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].arn #=> String
     #   resp.items[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].vpc_identifier #=> String
     #   resp.items[0].subnet_ids #=> Array
     #   resp.items[0].subnet_ids[0] #=> String
-    #   resp.items[0].vpc_identifier #=> String
+    #   resp.items[0].security_group_ids #=> Array
+    #   resp.items[0].security_group_ids[0] #=> String
+    #   resp.items[0].ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
+    #   resp.items[0].ipv4_addresses_per_eni #=> Integer
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListResourceGateways AWS API Documentation
@@ -3050,6 +3093,9 @@ module Aws::VPCLattice
 
     # Lists the rules for the specified listener.
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
     # @option params [required, String] :listener_identifier
     #   The ID or ARN of the listener.
     #
@@ -3058,9 +3104,6 @@ module Aws::VPCLattice
     #
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
     #
     # @return [Types::ListRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3072,22 +3115,22 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_rules({
+    #     service_identifier: "ServiceIdentifier", # required
     #     listener_identifier: "ListenerIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
     #   resp.items[0].id #=> String
-    #   resp.items[0].is_default #=> Boolean
-    #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
+    #   resp.items[0].is_default #=> Boolean
     #   resp.items[0].priority #=> Integer
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListRules AWS API Documentation
@@ -3102,6 +3145,12 @@ module Aws::VPCLattice
     # Lists the associations between a service network and a resource
     # configuration.
     #
+    # @option params [String] :service_network_identifier
+    #   The ID of the service network.
+    #
+    # @option params [String] :resource_configuration_identifier
+    #   The ID of the resource configuration.
+    #
     # @option params [Integer] :max_results
     #   The maximum page size.
     #
@@ -3109,11 +3158,11 @@ module Aws::VPCLattice
     #   If there are additional results, a pagination token for the next page
     #   of results.
     #
-    # @option params [String] :resource_configuration_identifier
-    #   The ID of the resource configurationk.
+    # @option params [Boolean] :include_children
+    #   Include service network resource associations of the child resource
+    #   configuration with the grouped resource configuration.
     #
-    # @option params [String] :service_network_identifier
-    #   The ID of the service network.
+    #   The type is boolean and the default value is false.
     #
     # @return [Types::ListServiceNetworkResourceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3125,32 +3174,33 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_network_resource_associations({
+    #     service_network_identifier: "ServiceNetworkIdentifier",
+    #     resource_configuration_identifier: "ResourceConfigurationIdentifier",
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_configuration_identifier: "ResourceConfigurationIdentifier",
-    #     service_network_identifier: "ServiceNetworkIdentifier",
+    #     include_children: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].id #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].resource_configuration_id #=> String
+    #   resp.items[0].resource_configuration_arn #=> String
+    #   resp.items[0].resource_configuration_name #=> String
+    #   resp.items[0].service_network_id #=> String
+    #   resp.items[0].service_network_arn #=> String
+    #   resp.items[0].service_network_name #=> String
     #   resp.items[0].dns_entry.domain_name #=> String
     #   resp.items[0].dns_entry.hosted_zone_id #=> String
-    #   resp.items[0].failure_code #=> String
-    #   resp.items[0].id #=> String
-    #   resp.items[0].is_managed_association #=> Boolean
     #   resp.items[0].private_dns_entry.domain_name #=> String
     #   resp.items[0].private_dns_entry.hosted_zone_id #=> String
-    #   resp.items[0].resource_configuration_arn #=> String
-    #   resp.items[0].resource_configuration_id #=> String
-    #   resp.items[0].resource_configuration_name #=> String
-    #   resp.items[0].service_network_arn #=> String
-    #   resp.items[0].service_network_id #=> String
-    #   resp.items[0].service_network_name #=> String
-    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].is_managed_association #=> Boolean
+    #   resp.items[0].failure_code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListServiceNetworkResourceAssociations AWS API Documentation
@@ -3173,17 +3223,17 @@ module Aws::VPCLattice
     # association is for a resource is shared with another account, the
     # association includes the local account ID as the prefix in the ARN.
     #
+    # @option params [String] :service_network_identifier
+    #   The ID or ARN of the service network.
+    #
+    # @option params [String] :service_identifier
+    #   The ID or ARN of the service.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
-    #
-    # @option params [String] :service_identifier
-    #   The ID or ARN of the service.
-    #
-    # @option params [String] :service_network_identifier
-    #   The ID or ARN of the service network.
     #
     # @return [Types::ListServiceNetworkServiceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3195,29 +3245,29 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_network_service_associations({
+    #     service_network_identifier: "ServiceNetworkIdentifier",
+    #     service_identifier: "ServiceIdentifier",
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     service_identifier: "ServiceIdentifier",
-    #     service_network_identifier: "ServiceNetworkIdentifier",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].created_by #=> String
-    #   resp.items[0].custom_domain_name #=> String
-    #   resp.items[0].dns_entry.domain_name #=> String
-    #   resp.items[0].dns_entry.hosted_zone_id #=> String
     #   resp.items[0].id #=> String
-    #   resp.items[0].service_arn #=> String
+    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
     #   resp.items[0].service_id #=> String
     #   resp.items[0].service_name #=> String
-    #   resp.items[0].service_network_arn #=> String
+    #   resp.items[0].service_arn #=> String
     #   resp.items[0].service_network_id #=> String
     #   resp.items[0].service_network_name #=> String
-    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].service_network_arn #=> String
+    #   resp.items[0].dns_entry.domain_name #=> String
+    #   resp.items[0].dns_entry.hosted_zone_id #=> String
+    #   resp.items[0].custom_domain_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListServiceNetworkServiceAssociations AWS API Documentation
@@ -3233,17 +3283,17 @@ module Aws::VPCLattice
     # filter the list either by VPC or service network. You must provide
     # either the ID of the service network identifier or the ID of the VPC.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return.
-    #
-    # @option params [String] :next_token
-    #   A pagination token for the next page of results.
-    #
     # @option params [String] :service_network_identifier
     #   The ID or ARN of the service network.
     #
     # @option params [String] :vpc_identifier
     #   The ID or ARN of the VPC.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next page of results.
     #
     # @return [Types::ListServiceNetworkVpcAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3255,25 +3305,25 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_network_vpc_associations({
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     service_network_identifier: "ServiceNetworkIdentifier",
     #     vpc_identifier: "VpcId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].created_by #=> String
     #   resp.items[0].id #=> String
-    #   resp.items[0].last_updated_at #=> Time
-    #   resp.items[0].service_network_arn #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
     #   resp.items[0].service_network_id #=> String
     #   resp.items[0].service_network_name #=> String
-    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.items[0].service_network_arn #=> String
     #   resp.items[0].vpc_id #=> String
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListServiceNetworkVpcAssociations AWS API Documentation
@@ -3287,15 +3337,15 @@ module Aws::VPCLattice
 
     # Lists the associations between a service network and a VPC endpoint.
     #
+    # @option params [required, String] :service_network_identifier
+    #   The ID of the service network associated with the VPC endpoint.
+    #
     # @option params [Integer] :max_results
     #   The maximum page size.
     #
     # @option params [String] :next_token
     #   If there are additional results, a pagination token for the next page
     #   of results.
-    #
-    # @option params [required, String] :service_network_identifier
-    #   The ID of the service network associated with the VPC endpoint.
     #
     # @return [Types::ListServiceNetworkVpcEndpointAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3307,21 +3357,21 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_network_vpc_endpoint_associations({
+    #     service_network_identifier: "ServiceNetworkIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     service_network_identifier: "ServiceNetworkIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].id #=> String
-    #   resp.items[0].service_network_arn #=> String
-    #   resp.items[0].state #=> String
     #   resp.items[0].vpc_endpoint_id #=> String
-    #   resp.items[0].vpc_endpoint_owner_id #=> String
     #   resp.items[0].vpc_id #=> String
+    #   resp.items[0].vpc_endpoint_owner_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].state #=> String
+    #   resp.items[0].service_network_arn #=> String
+    #   resp.items[0].created_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListServiceNetworkVpcEndpointAssociations AWS API Documentation
@@ -3359,14 +3409,14 @@ module Aws::VPCLattice
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].created_at #=> Time
-    #   resp.items[0].id #=> String
     #   resp.items[0].last_updated_at #=> Time
-    #   resp.items[0].name #=> String
-    #   resp.items[0].number_of_associated_resource_configurations #=> Integer
-    #   resp.items[0].number_of_associated_services #=> Integer
     #   resp.items[0].number_of_associated_vp_cs #=> Integer
+    #   resp.items[0].number_of_associated_services #=> Integer
+    #   resp.items[0].number_of_associated_resource_configurations #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListServiceNetworks AWS API Documentation
@@ -3404,14 +3454,14 @@ module Aws::VPCLattice
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].created_at #=> Time
-    #   resp.items[0].custom_domain_name #=> String
+    #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].dns_entry.domain_name #=> String
     #   resp.items[0].dns_entry.hosted_zone_id #=> String
-    #   resp.items[0].id #=> String
-    #   resp.items[0].last_updated_at #=> Time
-    #   resp.items[0].name #=> String
+    #   resp.items[0].custom_domain_name #=> String
     #   resp.items[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
@@ -3462,11 +3512,11 @@ module Aws::VPCLattice
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
     #
-    # @option params [String] :target_group_type
-    #   The target group type.
-    #
     # @option params [String] :vpc_identifier
     #   The ID or ARN of the VPC.
+    #
+    # @option params [String] :target_group_type
+    #   The target group type.
     #
     # @return [Types::ListTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3480,27 +3530,27 @@ module Aws::VPCLattice
     #   resp = client.list_target_groups({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     target_group_type: "IP", # accepts IP, LAMBDA, INSTANCE, ALB
     #     vpc_identifier: "VpcId",
+    #     target_group_type: "IP", # accepts IP, LAMBDA, INSTANCE, ALB
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].created_at #=> Time
     #   resp.items[0].id #=> String
-    #   resp.items[0].ip_address_type #=> String, one of "IPV4", "IPV6"
-    #   resp.items[0].lambda_event_structure_version #=> String, one of "V1", "V2"
-    #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].arn #=> String
     #   resp.items[0].name #=> String
+    #   resp.items[0].type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
+    #   resp.items[0].created_at #=> Time
     #   resp.items[0].port #=> Integer
     #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.items[0].ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.items[0].vpc_identifier #=> String
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.items[0].service_arns #=> Array
     #   resp.items[0].service_arns[0] #=> String
-    #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.items[0].type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
-    #   resp.items[0].vpc_identifier #=> String
+    #   resp.items[0].lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListTargetGroups AWS API Documentation
@@ -3516,14 +3566,14 @@ module Aws::VPCLattice
     # included. You can use this API to check the health status of targets.
     # You can also ﬁlter the results by target.
     #
+    # @option params [required, String] :target_group_identifier
+    #   The ID or ARN of the target group.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
     # @option params [String] :next_token
     #   A pagination token for the next page of results.
-    #
-    # @option params [required, String] :target_group_identifier
-    #   The ID or ARN of the target group.
     #
     # @option params [Array<Types::Target>] :targets
     #   The targets.
@@ -3538,9 +3588,9 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_targets({
+    #     target_group_identifier: "TargetGroupIdentifier", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     target_group_identifier: "TargetGroupIdentifier", # required
     #     targets: [
     #       {
     #         id: "TargetIdString", # required
@@ -3554,8 +3604,8 @@ module Aws::VPCLattice
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
     #   resp.items[0].port #=> Integer
-    #   resp.items[0].reason_code #=> String
     #   resp.items[0].status #=> String, one of "DRAINING", "UNAVAILABLE", "HEALTHY", "UNHEALTHY", "INITIAL", "UNUSED"
+    #   resp.items[0].reason_code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListTargets AWS API Documentation
@@ -3577,13 +3627,13 @@ module Aws::VPCLattice
     #
     # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html
     #
-    # @option params [required, String] :policy
-    #   The auth policy. The policy string in JSON must not contain newlines
-    #   or blank lines.
-    #
     # @option params [required, String] :resource_identifier
     #   The ID or ARN of the service network or service for which the policy
     #   is created.
+    #
+    # @option params [required, String] :policy
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #
     # @return [Types::PutAuthPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3593,8 +3643,8 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_auth_policy({
-    #     policy: "AuthPolicyString", # required
     #     resource_identifier: "ResourceIdentifier", # required
+    #     policy: "AuthPolicyString", # required
     #   })
     #
     # @example Response structure
@@ -3616,21 +3666,21 @@ module Aws::VPCLattice
     # statements as the Amazon Web Services Resource Access Manager
     # permission for sharing services and service networks.
     #
-    # @option params [required, String] :policy
-    #   An IAM policy. The policy string in JSON must not contain newlines or
-    #   blank lines.
-    #
     # @option params [required, String] :resource_arn
     #   The ID or ARN of the service network or service for which the policy
     #   is created.
+    #
+    # @option params [required, String] :policy
+    #   An IAM policy. The policy string in JSON must not contain newlines or
+    #   blank lines.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_resource_policy({
-    #     policy: "PolicyString", # required
     #     resource_arn: "ResourceArn", # required
+    #     policy: "PolicyString", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/PutResourcePolicy AWS API Documentation
@@ -3674,10 +3724,10 @@ module Aws::VPCLattice
     #   resp.successful[0].id #=> String
     #   resp.successful[0].port #=> Integer
     #   resp.unsuccessful #=> Array
-    #   resp.unsuccessful[0].failure_code #=> String
-    #   resp.unsuccessful[0].failure_message #=> String
     #   resp.unsuccessful[0].id #=> String
     #   resp.unsuccessful[0].port #=> Integer
+    #   resp.unsuccessful[0].failure_code #=> String
+    #   resp.unsuccessful[0].failure_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/RegisterTargets AWS API Documentation
     #
@@ -3752,11 +3802,11 @@ module Aws::VPCLattice
     #
     # @return [Types::UpdateAccessLogSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateAccessLogSubscriptionResponse#arn #arn} => String
-    #   * {Types::UpdateAccessLogSubscriptionResponse#destination_arn #destination_arn} => String
     #   * {Types::UpdateAccessLogSubscriptionResponse#id #id} => String
-    #   * {Types::UpdateAccessLogSubscriptionResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateAccessLogSubscriptionResponse#arn #arn} => String
     #   * {Types::UpdateAccessLogSubscriptionResponse#resource_id #resource_id} => String
+    #   * {Types::UpdateAccessLogSubscriptionResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateAccessLogSubscriptionResponse#destination_arn #destination_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3767,11 +3817,11 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.destination_arn #=> String
     #   resp.id #=> String
-    #   resp.resource_arn #=> String
+    #   resp.arn #=> String
     #   resp.resource_id #=> String
+    #   resp.resource_arn #=> String
+    #   resp.destination_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateAccessLogSubscription AWS API Documentation
     #
@@ -3784,33 +3834,32 @@ module Aws::VPCLattice
 
     # Updates the specified listener for the specified service.
     #
-    # @option params [required, Types::RuleAction] :default_action
-    #   The action for the default rule.
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
     #
     # @option params [required, String] :listener_identifier
     #   The ID or ARN of the listener.
     #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
+    # @option params [required, Types::RuleAction] :default_action
+    #   The action for the default rule.
     #
     # @return [Types::UpdateListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateListenerResponse#arn #arn} => String
-    #   * {Types::UpdateListenerResponse#default_action #default_action} => Types::RuleAction
     #   * {Types::UpdateListenerResponse#id #id} => String
     #   * {Types::UpdateListenerResponse#name #name} => String
-    #   * {Types::UpdateListenerResponse#port #port} => Integer
     #   * {Types::UpdateListenerResponse#protocol #protocol} => String
+    #   * {Types::UpdateListenerResponse#port #port} => Integer
     #   * {Types::UpdateListenerResponse#service_arn #service_arn} => String
     #   * {Types::UpdateListenerResponse#service_id #service_id} => String
+    #   * {Types::UpdateListenerResponse#default_action #default_action} => Types::RuleAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_listener({
+    #     service_identifier: "ServiceIdentifier", # required
+    #     listener_identifier: "ListenerIdentifier", # required
     #     default_action: { # required
-    #       fixed_response: {
-    #         status_code: 1, # required
-    #       },
     #       forward: {
     #         target_groups: [ # required
     #           {
@@ -3819,24 +3868,25 @@ module Aws::VPCLattice
     #           },
     #         ],
     #       },
+    #       fixed_response: {
+    #         status_code: 1, # required
+    #       },
     #     },
-    #     listener_identifier: "ListenerIdentifier", # required
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.default_action.fixed_response.status_code #=> Integer
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
+    #   resp.port #=> Integer
+    #   resp.service_arn #=> String
+    #   resp.service_id #=> String
     #   resp.default_action.forward.target_groups #=> Array
     #   resp.default_action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.default_action.forward.target_groups[0].weight #=> Integer
-    #   resp.id #=> String
-    #   resp.name #=> String
-    #   resp.port #=> Integer
-    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
-    #   resp.service_arn #=> String
-    #   resp.service_id #=> String
+    #   resp.default_action.fixed_response.status_code #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateListener AWS API Documentation
     #
@@ -3849,6 +3899,21 @@ module Aws::VPCLattice
 
     # Updates the specified resource configuration.
     #
+    # @option params [required, String] :resource_configuration_identifier
+    #   The ID of the resource configuration.
+    #
+    # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
+    #   Identifies the resource configuration in one of the following ways:
+    #
+    #   * **Amazon Resource Name (ARN)** - Supported resource-types that are
+    #     provisioned by Amazon Web Services services, such as RDS databases,
+    #     can be identified by their ARN.
+    #
+    #   * **Domain name** - Any domain name that is publicly resolvable.
+    #
+    #   * **IP address** - For IPv4 and IPv6, only IP addresses in the VPC are
+    #     supported.
+    #
     # @option params [Boolean] :allow_association_to_shareable_service_network
     #   Indicates whether to add the resource configuration to service
     #   networks that are shared with other accounts.
@@ -3858,35 +3923,25 @@ module Aws::VPCLattice
     #   configuration. You can separate port ranges with a comma. Example:
     #   1-65535 or 1,2,22-30
     #
-    # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
-    #   The resource configuration.
-    #
-    # @option params [required, String] :resource_configuration_identifier
-    #   The ID of the resource configuration.
-    #
     # @return [Types::UpdateResourceConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
-    #   * {Types::UpdateResourceConfigurationResponse#arn #arn} => String
     #   * {Types::UpdateResourceConfigurationResponse#id #id} => String
     #   * {Types::UpdateResourceConfigurationResponse#name #name} => String
-    #   * {Types::UpdateResourceConfigurationResponse#port_ranges #port_ranges} => Array&lt;String&gt;
-    #   * {Types::UpdateResourceConfigurationResponse#protocol #protocol} => String
-    #   * {Types::UpdateResourceConfigurationResponse#resource_configuration_definition #resource_configuration_definition} => Types::ResourceConfigurationDefinition
-    #   * {Types::UpdateResourceConfigurationResponse#resource_configuration_group_id #resource_configuration_group_id} => String
+    #   * {Types::UpdateResourceConfigurationResponse#arn #arn} => String
     #   * {Types::UpdateResourceConfigurationResponse#resource_gateway_id #resource_gateway_id} => String
-    #   * {Types::UpdateResourceConfigurationResponse#status #status} => String
+    #   * {Types::UpdateResourceConfigurationResponse#resource_configuration_group_id #resource_configuration_group_id} => String
     #   * {Types::UpdateResourceConfigurationResponse#type #type} => String
+    #   * {Types::UpdateResourceConfigurationResponse#port_ranges #port_ranges} => Array&lt;String&gt;
+    #   * {Types::UpdateResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
+    #   * {Types::UpdateResourceConfigurationResponse#protocol #protocol} => String
+    #   * {Types::UpdateResourceConfigurationResponse#status #status} => String
+    #   * {Types::UpdateResourceConfigurationResponse#resource_configuration_definition #resource_configuration_definition} => Types::ResourceConfigurationDefinition
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_resource_configuration({
-    #     allow_association_to_shareable_service_network: false,
-    #     port_ranges: ["PortRange"],
+    #     resource_configuration_identifier: "ResourceConfigurationIdentifier", # required
     #     resource_configuration_definition: {
-    #       arn_resource: {
-    #         arn: "WildcardArn",
-    #       },
     #       dns_resource: {
     #         domain_name: "DomainName",
     #         ip_address_type: "IPV4", # accepts IPV4, IPV6, DUALSTACK
@@ -3894,27 +3949,31 @@ module Aws::VPCLattice
     #       ip_resource: {
     #         ip_address: "IpAddress",
     #       },
+    #       arn_resource: {
+    #         arn: "WildcardArn",
+    #       },
     #     },
-    #     resource_configuration_identifier: "ResourceConfigurationIdentifier", # required
+    #     allow_association_to_shareable_service_network: false,
+    #     port_ranges: ["PortRange"],
     #   })
     #
     # @example Response structure
     #
-    #   resp.allow_association_to_shareable_service_network #=> Boolean
-    #   resp.arn #=> String
     #   resp.id #=> String
     #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.resource_gateway_id #=> String
+    #   resp.resource_configuration_group_id #=> String
+    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
     #   resp.port_ranges #=> Array
     #   resp.port_ranges[0] #=> String
+    #   resp.allow_association_to_shareable_service_network #=> Boolean
     #   resp.protocol #=> String, one of "TCP"
-    #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.resource_configuration_definition.dns_resource.domain_name #=> String
     #   resp.resource_configuration_definition.dns_resource.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.resource_configuration_definition.ip_resource.ip_address #=> String
-    #   resp.resource_configuration_group_id #=> String
-    #   resp.resource_gateway_id #=> String
-    #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
-    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.resource_configuration_definition.arn_resource.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateResourceConfiguration AWS API Documentation
     #
@@ -3935,14 +3994,14 @@ module Aws::VPCLattice
     #
     # @return [Types::UpdateResourceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateResourceGatewayResponse#arn #arn} => String
-    #   * {Types::UpdateResourceGatewayResponse#id #id} => String
-    #   * {Types::UpdateResourceGatewayResponse#ip_address_type #ip_address_type} => String
     #   * {Types::UpdateResourceGatewayResponse#name #name} => String
-    #   * {Types::UpdateResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateResourceGatewayResponse#id #id} => String
+    #   * {Types::UpdateResourceGatewayResponse#arn #arn} => String
     #   * {Types::UpdateResourceGatewayResponse#status #status} => String
-    #   * {Types::UpdateResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::UpdateResourceGatewayResponse#vpc_id #vpc_id} => String
+    #   * {Types::UpdateResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateResourceGatewayResponse#ip_address_type #ip_address_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3953,16 +4012,16 @@ module Aws::VPCLattice
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.name #=> String
-    #   resp.security_group_ids #=> Array
-    #   resp.security_group_ids[0] #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.vpc_id #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
-    #   resp.vpc_id #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateResourceGateway AWS API Documentation
     #
@@ -3977,11 +4036,14 @@ module Aws::VPCLattice
     # listener rule. To modify a default listener rule, use
     # `UpdateListener`.
     #
-    # @option params [Types::RuleAction] :action
-    #   Information about the action for the specified listener rule.
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
     #
     # @option params [required, String] :listener_identifier
     #   The ID or ARN of the listener.
+    #
+    # @option params [required, String] :rule_identifier
+    #   The ID or ARN of the rule.
     #
     # @option params [Types::RuleMatch] :match
     #   The rule match.
@@ -3990,29 +4052,50 @@ module Aws::VPCLattice
     #   The rule priority. A listener can't have multiple rules with the same
     #   priority.
     #
-    # @option params [required, String] :rule_identifier
-    #   The ID or ARN of the rule.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
+    # @option params [Types::RuleAction] :action
+    #   Information about the action for the specified listener rule.
     #
     # @return [Types::UpdateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateRuleResponse#action #action} => Types::RuleAction
     #   * {Types::UpdateRuleResponse#arn #arn} => String
     #   * {Types::UpdateRuleResponse#id #id} => String
+    #   * {Types::UpdateRuleResponse#name #name} => String
     #   * {Types::UpdateRuleResponse#is_default #is_default} => Boolean
     #   * {Types::UpdateRuleResponse#match #match} => Types::RuleMatch
-    #   * {Types::UpdateRuleResponse#name #name} => String
     #   * {Types::UpdateRuleResponse#priority #priority} => Integer
+    #   * {Types::UpdateRuleResponse#action #action} => Types::RuleAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_rule({
-    #     action: {
-    #       fixed_response: {
-    #         status_code: 1, # required
+    #     service_identifier: "ServiceIdentifier", # required
+    #     listener_identifier: "ListenerIdentifier", # required
+    #     rule_identifier: "RuleIdentifier", # required
+    #     match: {
+    #       http_match: {
+    #         method: "HttpMethod",
+    #         path_match: {
+    #           match: { # required
+    #             exact: "PathMatchExact",
+    #             prefix: "PathMatchPrefix",
+    #           },
+    #           case_sensitive: false,
+    #         },
+    #         header_matches: [
+    #           {
+    #             name: "HeaderMatchName", # required
+    #             match: { # required
+    #               exact: "HeaderMatchExact",
+    #               prefix: "HeaderMatchPrefix",
+    #               contains: "HeaderMatchContains",
+    #             },
+    #             case_sensitive: false,
+    #           },
+    #         ],
     #       },
+    #     },
+    #     priority: 1,
+    #     action: {
     #       forward: {
     #         target_groups: [ # required
     #           {
@@ -4021,57 +4104,33 @@ module Aws::VPCLattice
     #           },
     #         ],
     #       },
-    #     },
-    #     listener_identifier: "ListenerIdentifier", # required
-    #     match: {
-    #       http_match: {
-    #         header_matches: [
-    #           {
-    #             case_sensitive: false,
-    #             match: { # required
-    #               contains: "HeaderMatchContains",
-    #               exact: "HeaderMatchExact",
-    #               prefix: "HeaderMatchPrefix",
-    #             },
-    #             name: "HeaderMatchName", # required
-    #           },
-    #         ],
-    #         method: "HttpMethod",
-    #         path_match: {
-    #           case_sensitive: false,
-    #           match: { # required
-    #             exact: "PathMatchExact",
-    #             prefix: "PathMatchPrefix",
-    #           },
-    #         },
+    #       fixed_response: {
+    #         status_code: 1, # required
     #       },
     #     },
-    #     priority: 1,
-    #     rule_identifier: "RuleIdentifier", # required
-    #     service_identifier: "ServiceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.action.fixed_response.status_code #=> Integer
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.is_default #=> Boolean
+    #   resp.match.http_match.method #=> String
+    #   resp.match.http_match.path_match.match.exact #=> String
+    #   resp.match.http_match.path_match.match.prefix #=> String
+    #   resp.match.http_match.path_match.case_sensitive #=> Boolean
+    #   resp.match.http_match.header_matches #=> Array
+    #   resp.match.http_match.header_matches[0].name #=> String
+    #   resp.match.http_match.header_matches[0].match.exact #=> String
+    #   resp.match.http_match.header_matches[0].match.prefix #=> String
+    #   resp.match.http_match.header_matches[0].match.contains #=> String
+    #   resp.match.http_match.header_matches[0].case_sensitive #=> Boolean
+    #   resp.priority #=> Integer
     #   resp.action.forward.target_groups #=> Array
     #   resp.action.forward.target_groups[0].target_group_identifier #=> String
     #   resp.action.forward.target_groups[0].weight #=> Integer
-    #   resp.arn #=> String
-    #   resp.id #=> String
-    #   resp.is_default #=> Boolean
-    #   resp.match.http_match.header_matches #=> Array
-    #   resp.match.http_match.header_matches[0].case_sensitive #=> Boolean
-    #   resp.match.http_match.header_matches[0].match.contains #=> String
-    #   resp.match.http_match.header_matches[0].match.exact #=> String
-    #   resp.match.http_match.header_matches[0].match.prefix #=> String
-    #   resp.match.http_match.header_matches[0].name #=> String
-    #   resp.match.http_match.method #=> String
-    #   resp.match.http_match.path_match.case_sensitive #=> Boolean
-    #   resp.match.http_match.path_match.match.exact #=> String
-    #   resp.match.http_match.path_match.match.prefix #=> String
-    #   resp.name #=> String
-    #   resp.priority #=> Integer
+    #   resp.action.fixed_response.status_code #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateRule AWS API Documentation
     #
@@ -4084,6 +4143,12 @@ module Aws::VPCLattice
 
     # Updates the specified service.
     #
+    # @option params [required, String] :service_identifier
+    #   The ID or ARN of the service.
+    #
+    # @option params [String] :certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate.
+    #
     # @option params [String] :auth_type
     #   The type of IAM policy.
     #
@@ -4093,37 +4158,31 @@ module Aws::VPCLattice
     #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
     #     auth is enabled and an auth policy is required.
     #
-    # @option params [String] :certificate_arn
-    #   The Amazon Resource Name (ARN) of the certificate.
-    #
-    # @option params [required, String] :service_identifier
-    #   The ID or ARN of the service.
-    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateServiceResponse#arn #arn} => String
-    #   * {Types::UpdateServiceResponse#auth_type #auth_type} => String
-    #   * {Types::UpdateServiceResponse#certificate_arn #certificate_arn} => String
-    #   * {Types::UpdateServiceResponse#custom_domain_name #custom_domain_name} => String
     #   * {Types::UpdateServiceResponse#id #id} => String
+    #   * {Types::UpdateServiceResponse#arn #arn} => String
     #   * {Types::UpdateServiceResponse#name #name} => String
+    #   * {Types::UpdateServiceResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::UpdateServiceResponse#certificate_arn #certificate_arn} => String
+    #   * {Types::UpdateServiceResponse#auth_type #auth_type} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service({
-    #     auth_type: "NONE", # accepts NONE, AWS_IAM
-    #     certificate_arn: "CertificateArn",
     #     service_identifier: "ServiceIdentifier", # required
+    #     certificate_arn: "CertificateArn",
+    #     auth_type: "NONE", # accepts NONE, AWS_IAM
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
-    #   resp.certificate_arn #=> String
-    #   resp.custom_domain_name #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.name #=> String
+    #   resp.custom_domain_name #=> String
+    #   resp.certificate_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateService AWS API Documentation
     #
@@ -4136,6 +4195,9 @@ module Aws::VPCLattice
 
     # Updates the specified service network.
     #
+    # @option params [required, String] :service_network_identifier
+    #   The ID or ARN of the service network.
+    #
     # @option params [required, String] :auth_type
     #   The type of IAM policy.
     #
@@ -4145,29 +4207,26 @@ module Aws::VPCLattice
     #   * `AWS_IAM`: The resource uses an IAM policy. When this type is used,
     #     auth is enabled and an auth policy is required.
     #
-    # @option params [required, String] :service_network_identifier
-    #   The ID or ARN of the service network.
-    #
     # @return [Types::UpdateServiceNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateServiceNetworkResponse#arn #arn} => String
-    #   * {Types::UpdateServiceNetworkResponse#auth_type #auth_type} => String
     #   * {Types::UpdateServiceNetworkResponse#id #id} => String
     #   * {Types::UpdateServiceNetworkResponse#name #name} => String
+    #   * {Types::UpdateServiceNetworkResponse#arn #arn} => String
+    #   * {Types::UpdateServiceNetworkResponse#auth_type #auth_type} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service_network({
-    #     auth_type: "NONE", # required, accepts NONE, AWS_IAM
     #     service_network_identifier: "ServiceNetworkIdentifier", # required
+    #     auth_type: "NONE", # required, accepts NONE, AWS_IAM
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #   resp.id #=> String
     #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceNetwork AWS API Documentation
     #
@@ -4185,35 +4244,35 @@ module Aws::VPCLattice
     # you must first delete the association and then recreate it without
     # security groups.
     #
-    # @option params [required, Array<String>] :security_group_ids
-    #   The IDs of the security groups.
-    #
     # @option params [required, String] :service_network_vpc_association_identifier
     #   The ID or ARN of the association.
     #
+    # @option params [required, Array<String>] :security_group_ids
+    #   The IDs of the security groups.
+    #
     # @return [Types::UpdateServiceNetworkVpcAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#arn #arn} => String
-    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#created_by #created_by} => String
     #   * {Types::UpdateServiceNetworkVpcAssociationResponse#id #id} => String
-    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#arn #arn} => String
     #   * {Types::UpdateServiceNetworkVpcAssociationResponse#status #status} => String
+    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#created_by #created_by} => String
+    #   * {Types::UpdateServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service_network_vpc_association({
-    #     security_group_ids: ["SecurityGroupId"], # required
     #     service_network_vpc_association_identifier: "ServiceNetworkVpcAssociationIdentifier", # required
+    #     security_group_ids: ["SecurityGroupId"], # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.created_by #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.created_by #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
-    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -4226,64 +4285,64 @@ module Aws::VPCLattice
 
     # Updates the specified target group.
     #
-    # @option params [required, Types::HealthCheckConfig] :health_check
-    #   The health check configuration.
-    #
     # @option params [required, String] :target_group_identifier
     #   The ID or ARN of the target group.
     #
+    # @option params [required, Types::HealthCheckConfig] :health_check
+    #   The health check configuration.
+    #
     # @return [Types::UpdateTargetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateTargetGroupResponse#arn #arn} => String
-    #   * {Types::UpdateTargetGroupResponse#config #config} => Types::TargetGroupConfig
     #   * {Types::UpdateTargetGroupResponse#id #id} => String
+    #   * {Types::UpdateTargetGroupResponse#arn #arn} => String
     #   * {Types::UpdateTargetGroupResponse#name #name} => String
-    #   * {Types::UpdateTargetGroupResponse#status #status} => String
     #   * {Types::UpdateTargetGroupResponse#type #type} => String
+    #   * {Types::UpdateTargetGroupResponse#config #config} => Types::TargetGroupConfig
+    #   * {Types::UpdateTargetGroupResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_target_group({
+    #     target_group_identifier: "TargetGroupIdentifier", # required
     #     health_check: { # required
     #       enabled: false,
+    #       protocol: "HTTP", # accepts HTTP, HTTPS, TCP
+    #       protocol_version: "HTTP1", # accepts HTTP1, HTTP2
+    #       port: 1,
+    #       path: "HealthCheckPath",
     #       health_check_interval_seconds: 1,
     #       health_check_timeout_seconds: 1,
     #       healthy_threshold_count: 1,
+    #       unhealthy_threshold_count: 1,
     #       matcher: {
     #         http_code: "HttpCodeMatcher",
     #       },
-    #       path: "HealthCheckPath",
-    #       port: 1,
-    #       protocol: "HTTP", # accepts HTTP, HTTPS, TCP
-    #       protocol_version: "HTTP1", # accepts HTTP1, HTTP2
-    #       unhealthy_threshold_count: 1,
     #     },
-    #     target_group_identifier: "TargetGroupIdentifier", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.config.health_check.enabled #=> Boolean
-    #   resp.config.health_check.health_check_interval_seconds #=> Integer
-    #   resp.config.health_check.health_check_timeout_seconds #=> Integer
-    #   resp.config.health_check.healthy_threshold_count #=> Integer
-    #   resp.config.health_check.matcher.http_code #=> String
-    #   resp.config.health_check.path #=> String
-    #   resp.config.health_check.port #=> Integer
-    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
-    #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
-    #   resp.config.health_check.unhealthy_threshold_count #=> Integer
-    #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
-    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
     #   resp.config.port #=> Integer
     #   resp.config.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
+    #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.config.vpc_identifier #=> String
-    #   resp.id #=> String
-    #   resp.name #=> String
+    #   resp.config.health_check.enabled #=> Boolean
+    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
+    #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
+    #   resp.config.health_check.port #=> Integer
+    #   resp.config.health_check.path #=> String
+    #   resp.config.health_check.health_check_interval_seconds #=> Integer
+    #   resp.config.health_check.health_check_timeout_seconds #=> Integer
+    #   resp.config.health_check.healthy_threshold_count #=> Integer
+    #   resp.config.health_check.unhealthy_threshold_count #=> Integer
+    #   resp.config.health_check.matcher.http_code #=> String
+    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.type #=> String, one of "IP", "LAMBDA", "INSTANCE", "ALB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateTargetGroup AWS API Documentation
     #
@@ -4312,7 +4371,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

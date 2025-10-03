@@ -1356,6 +1356,25 @@ module Aws
                        ) -> _GetMatchesResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchesResponseSuccess
 
+      interface _GetProfileHistoryRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileHistoryRecordResponse]
+        def id: () -> ::String
+        def object_type_name: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def action_type: () -> ("ADDED_PROFILE_KEY" | "DELETED_PROFILE_KEY" | "CREATED" | "UPDATED" | "INGESTED" | "DELETED_BY_CUSTOMER" | "EXPIRED" | "MERGED" | "DELETED_BY_MERGE")
+        def profile_object_unique_key: () -> ::String
+        def content: () -> ::String
+        def performed_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_profile_history_record-instance_method
+      def get_profile_history_record: (
+                                        domain_name: ::String,
+                                        profile_id: ::String,
+                                        id: ::String
+                                      ) -> _GetProfileHistoryRecordResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileHistoryRecordResponseSuccess
+
       interface _GetProfileObjectTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileObjectTypeResponse]
         def object_type_name: () -> ::String
@@ -1694,6 +1713,23 @@ module Aws
                                            attribute_name: ::String
                                          ) -> _ListProfileAttributeValuesResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileAttributeValuesResponseSuccess
+
+      interface _ListProfileHistoryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileHistoryRecordsResponse]
+        def profile_history_records: () -> ::Array[Types::ProfileHistoryRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_profile_history_records-instance_method
+      def list_profile_history_records: (
+                                          domain_name: ::String,
+                                          profile_id: ::String,
+                                          ?object_type_name: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          ?action_type: ("ADDED_PROFILE_KEY" | "DELETED_PROFILE_KEY" | "CREATED" | "UPDATED" | "INGESTED" | "DELETED_BY_CUSTOMER" | "EXPIRED" | "MERGED" | "DELETED_BY_MERGE"),
+                                          ?performed_by: ::String
+                                        ) -> _ListProfileHistoryRecordsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileHistoryRecordsResponseSuccess
 
       interface _ListProfileObjectTypeTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileObjectTypeTemplatesResponse]

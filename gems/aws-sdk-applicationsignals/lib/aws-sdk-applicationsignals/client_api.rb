@@ -19,9 +19,23 @@ module Aws::ApplicationSignals
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Attainment = Shapes::FloatShape.new(name: 'Attainment')
     AttainmentGoal = Shapes::FloatShape.new(name: 'AttainmentGoal')
+    AttributeFilter = Shapes::StructureShape.new(name: 'AttributeFilter')
+    AttributeFilterName = Shapes::StringShape.new(name: 'AttributeFilterName')
+    AttributeFilterValue = Shapes::StringShape.new(name: 'AttributeFilterValue')
+    AttributeFilterValues = Shapes::ListShape.new(name: 'AttributeFilterValues')
+    AttributeFilters = Shapes::ListShape.new(name: 'AttributeFilters')
     AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
     AttributeMaps = Shapes::ListShape.new(name: 'AttributeMaps')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
+    AuditFinding = Shapes::StructureShape.new(name: 'AuditFinding')
+    AuditFindings = Shapes::ListShape.new(name: 'AuditFindings')
+    AuditTarget = Shapes::StructureShape.new(name: 'AuditTarget')
+    AuditTargetEntity = Shapes::UnionShape.new(name: 'AuditTargetEntity')
+    AuditTargets = Shapes::ListShape.new(name: 'AuditTargets')
+    AuditorResult = Shapes::StructureShape.new(name: 'AuditorResult')
+    AuditorResultDescriptionString = Shapes::StringShape.new(name: 'AuditorResultDescriptionString')
+    AuditorResults = Shapes::ListShape.new(name: 'AuditorResults')
+    Auditors = Shapes::ListShape.new(name: 'Auditors')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BatchGetServiceLevelObjectiveBudgetReportInput = Shapes::StructureShape.new(name: 'BatchGetServiceLevelObjectiveBudgetReportInput')
     BatchGetServiceLevelObjectiveBudgetReportOutput = Shapes::StructureShape.new(name: 'BatchGetServiceLevelObjectiveBudgetReportOutput')
@@ -37,17 +51,25 @@ module Aws::ApplicationSignals
     BurnRateLookBackWindowMinutes = Shapes::IntegerShape.new(name: 'BurnRateLookBackWindowMinutes')
     CalendarInterval = Shapes::StructureShape.new(name: 'CalendarInterval')
     CalendarIntervalDuration = Shapes::IntegerShape.new(name: 'CalendarIntervalDuration')
+    ChangeEvent = Shapes::StructureShape.new(name: 'ChangeEvent')
+    ChangeEventType = Shapes::StringShape.new(name: 'ChangeEventType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CreateServiceLevelObjectiveInput = Shapes::StructureShape.new(name: 'CreateServiceLevelObjectiveInput')
     CreateServiceLevelObjectiveOutput = Shapes::StructureShape.new(name: 'CreateServiceLevelObjectiveOutput')
+    DeleteGroupingConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteGroupingConfigurationOutput')
     DeleteServiceLevelObjectiveInput = Shapes::StructureShape.new(name: 'DeleteServiceLevelObjectiveInput')
     DeleteServiceLevelObjectiveOutput = Shapes::StructureShape.new(name: 'DeleteServiceLevelObjectiveOutput')
     DependencyConfig = Shapes::StructureShape.new(name: 'DependencyConfig')
+    DependencyGraph = Shapes::StructureShape.new(name: 'DependencyGraph')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionName = Shapes::StringShape.new(name: 'DimensionName')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
+    Double = Shapes::FloatShape.new(name: 'Double')
     DurationUnit = Shapes::StringShape.new(name: 'DurationUnit')
+    Edge = Shapes::StructureShape.new(name: 'Edge')
+    Edges = Shapes::ListShape.new(name: 'Edges')
     EvaluationType = Shapes::StringShape.new(name: 'EvaluationType')
     ExclusionDuration = Shapes::IntegerShape.new(name: 'ExclusionDuration')
     ExclusionReason = Shapes::StringShape.new(name: 'ExclusionReason')
@@ -62,9 +84,24 @@ module Aws::ApplicationSignals
     GetServiceLevelObjectiveOutput = Shapes::StructureShape.new(name: 'GetServiceLevelObjectiveOutput')
     GetServiceOutput = Shapes::StructureShape.new(name: 'GetServiceOutput')
     Goal = Shapes::StructureShape.new(name: 'Goal')
+    GroupIdentifier = Shapes::StringShape.new(name: 'GroupIdentifier')
+    GroupName = Shapes::StringShape.new(name: 'GroupName')
+    GroupSource = Shapes::StringShape.new(name: 'GroupSource')
+    GroupValue = Shapes::StringShape.new(name: 'GroupValue')
+    GroupingAttributeDefinition = Shapes::StructureShape.new(name: 'GroupingAttributeDefinition')
+    GroupingAttributeDefinitions = Shapes::ListShape.new(name: 'GroupingAttributeDefinitions')
+    GroupingConfiguration = Shapes::StructureShape.new(name: 'GroupingConfiguration')
+    GroupingSourceKeyStringList = Shapes::ListShape.new(name: 'GroupingSourceKeyStringList')
+    GroupingString = Shapes::StringShape.new(name: 'GroupingString')
     Interval = Shapes::UnionShape.new(name: 'Interval')
     KeyAttributeName = Shapes::StringShape.new(name: 'KeyAttributeName')
     KeyAttributeValue = Shapes::StringShape.new(name: 'KeyAttributeValue')
+    LatestChangeEvents = Shapes::ListShape.new(name: 'LatestChangeEvents')
+    ListAuditFindingMaxResults = Shapes::IntegerShape.new(name: 'ListAuditFindingMaxResults')
+    ListAuditFindingsInput = Shapes::StructureShape.new(name: 'ListAuditFindingsInput')
+    ListAuditFindingsOutput = Shapes::StructureShape.new(name: 'ListAuditFindingsOutput')
+    ListGroupingAttributeDefinitionsInput = Shapes::StructureShape.new(name: 'ListGroupingAttributeDefinitionsInput')
+    ListGroupingAttributeDefinitionsOutput = Shapes::StructureShape.new(name: 'ListGroupingAttributeDefinitionsOutput')
     ListServiceDependenciesInput = Shapes::StructureShape.new(name: 'ListServiceDependenciesInput')
     ListServiceDependenciesMaxResults = Shapes::IntegerShape.new(name: 'ListServiceDependenciesMaxResults')
     ListServiceDependenciesOutput = Shapes::StructureShape.new(name: 'ListServiceDependenciesOutput')
@@ -80,6 +117,9 @@ module Aws::ApplicationSignals
     ListServiceOperationMaxResults = Shapes::IntegerShape.new(name: 'ListServiceOperationMaxResults')
     ListServiceOperationsInput = Shapes::StructureShape.new(name: 'ListServiceOperationsInput')
     ListServiceOperationsOutput = Shapes::StructureShape.new(name: 'ListServiceOperationsOutput')
+    ListServiceStatesInput = Shapes::StructureShape.new(name: 'ListServiceStatesInput')
+    ListServiceStatesMaxResults = Shapes::IntegerShape.new(name: 'ListServiceStatesMaxResults')
+    ListServiceStatesOutput = Shapes::StructureShape.new(name: 'ListServiceStatesOutput')
     ListServicesInput = Shapes::StructureShape.new(name: 'ListServicesInput')
     ListServicesMaxResults = Shapes::IntegerShape.new(name: 'ListServicesMaxResults')
     ListServicesOutput = Shapes::StructureShape.new(name: 'ListServicesOutput')
@@ -90,6 +130,7 @@ module Aws::ApplicationSignals
     MetricDataQueries = Shapes::ListShape.new(name: 'MetricDataQueries')
     MetricDataQuery = Shapes::StructureShape.new(name: 'MetricDataQuery')
     MetricExpression = Shapes::StringShape.new(name: 'MetricExpression')
+    MetricGraph = Shapes::StructureShape.new(name: 'MetricGraph')
     MetricId = Shapes::StringShape.new(name: 'MetricId')
     MetricLabel = Shapes::StringShape.new(name: 'MetricLabel')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -102,8 +143,12 @@ module Aws::ApplicationSignals
     MonitoredRequestCountMetricDataQueries = Shapes::UnionShape.new(name: 'MonitoredRequestCountMetricDataQueries')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Node = Shapes::StructureShape.new(name: 'Node')
+    Nodes = Shapes::ListShape.new(name: 'Nodes')
     OperationName = Shapes::StringShape.new(name: 'OperationName')
     Period = Shapes::IntegerShape.new(name: 'Period')
+    PutGroupingConfigurationInput = Shapes::StructureShape.new(name: 'PutGroupingConfigurationInput')
+    PutGroupingConfigurationOutput = Shapes::StructureShape.new(name: 'PutGroupingConfigurationOutput')
     RecurrenceRule = Shapes::StructureShape.new(name: 'RecurrenceRule')
     RequestBasedServiceLevelIndicator = Shapes::StructureShape.new(name: 'RequestBasedServiceLevelIndicator')
     RequestBasedServiceLevelIndicatorConfig = Shapes::StructureShape.new(name: 'RequestBasedServiceLevelIndicatorConfig')
@@ -121,7 +166,10 @@ module Aws::ApplicationSignals
     ServiceDependency = Shapes::StructureShape.new(name: 'ServiceDependency')
     ServiceDependent = Shapes::StructureShape.new(name: 'ServiceDependent')
     ServiceDependents = Shapes::ListShape.new(name: 'ServiceDependents')
+    ServiceEntity = Shapes::StructureShape.new(name: 'ServiceEntity')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
+    ServiceGroup = Shapes::StructureShape.new(name: 'ServiceGroup')
+    ServiceGroups = Shapes::ListShape.new(name: 'ServiceGroups')
     ServiceLevelIndicator = Shapes::StructureShape.new(name: 'ServiceLevelIndicator')
     ServiceLevelIndicatorComparisonOperator = Shapes::StringShape.new(name: 'ServiceLevelIndicatorComparisonOperator')
     ServiceLevelIndicatorConfig = Shapes::StructureShape.new(name: 'ServiceLevelIndicatorConfig')
@@ -140,16 +188,21 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveBudgetReports = Shapes::ListShape.new(name: 'ServiceLevelObjectiveBudgetReports')
     ServiceLevelObjectiveBudgetStatus = Shapes::StringShape.new(name: 'ServiceLevelObjectiveBudgetStatus')
     ServiceLevelObjectiveDescription = Shapes::StringShape.new(name: 'ServiceLevelObjectiveDescription')
+    ServiceLevelObjectiveEntity = Shapes::StructureShape.new(name: 'ServiceLevelObjectiveEntity')
     ServiceLevelObjectiveId = Shapes::StringShape.new(name: 'ServiceLevelObjectiveId')
     ServiceLevelObjectiveIds = Shapes::ListShape.new(name: 'ServiceLevelObjectiveIds')
     ServiceLevelObjectiveName = Shapes::StringShape.new(name: 'ServiceLevelObjectiveName')
     ServiceLevelObjectiveSummaries = Shapes::ListShape.new(name: 'ServiceLevelObjectiveSummaries')
     ServiceLevelObjectiveSummary = Shapes::StructureShape.new(name: 'ServiceLevelObjectiveSummary')
     ServiceOperation = Shapes::StructureShape.new(name: 'ServiceOperation')
+    ServiceOperationEntity = Shapes::StructureShape.new(name: 'ServiceOperationEntity')
     ServiceOperations = Shapes::ListShape.new(name: 'ServiceOperations')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceState = Shapes::StructureShape.new(name: 'ServiceState')
+    ServiceStates = Shapes::ListShape.new(name: 'ServiceStates')
     ServiceSummaries = Shapes::ListShape.new(name: 'ServiceSummaries')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
+    Severity = Shapes::StringShape.new(name: 'Severity')
     StandardUnit = Shapes::StringShape.new(name: 'StandardUnit')
     StartDiscoveryInput = Shapes::StructureShape.new(name: 'StartDiscoveryInput')
     StartDiscoveryOutput = Shapes::StructureShape.new(name: 'StartDiscoveryOutput')
@@ -178,6 +231,14 @@ module Aws::ApplicationSignals
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AttributeFilter.add_member(:attribute_filter_name, Shapes::ShapeRef.new(shape: AttributeFilterName, required: true, location_name: "AttributeFilterName"))
+    AttributeFilter.add_member(:attribute_filter_values, Shapes::ShapeRef.new(shape: AttributeFilterValues, required: true, location_name: "AttributeFilterValues"))
+    AttributeFilter.struct_class = Types::AttributeFilter
+
+    AttributeFilterValues.member = Shapes::ShapeRef.new(shape: AttributeFilterValue)
+
+    AttributeFilters.member = Shapes::ShapeRef.new(shape: AttributeFilter)
+
     AttributeMap.key = Shapes::ShapeRef.new(shape: String)
     AttributeMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -185,6 +246,41 @@ module Aws::ApplicationSignals
 
     Attributes.key = Shapes::ShapeRef.new(shape: KeyAttributeName)
     Attributes.value = Shapes::ShapeRef.new(shape: KeyAttributeValue)
+
+    AuditFinding.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "KeyAttributes"))
+    AuditFinding.add_member(:auditor_results, Shapes::ShapeRef.new(shape: AuditorResults, location_name: "AuditorResults"))
+    AuditFinding.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "Operation"))
+    AuditFinding.add_member(:metric_graph, Shapes::ShapeRef.new(shape: MetricGraph, location_name: "MetricGraph"))
+    AuditFinding.add_member(:dependency_graph, Shapes::ShapeRef.new(shape: DependencyGraph, location_name: "DependencyGraph"))
+    AuditFinding.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    AuditFinding.struct_class = Types::AuditFinding
+
+    AuditFindings.member = Shapes::ShapeRef.new(shape: AuditFinding)
+
+    AuditTarget.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    AuditTarget.add_member(:data, Shapes::ShapeRef.new(shape: AuditTargetEntity, required: true, location_name: "Data"))
+    AuditTarget.struct_class = Types::AuditTarget
+
+    AuditTargetEntity.add_member(:service, Shapes::ShapeRef.new(shape: ServiceEntity, location_name: "Service"))
+    AuditTargetEntity.add_member(:slo, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveEntity, location_name: "Slo"))
+    AuditTargetEntity.add_member(:service_operation, Shapes::ShapeRef.new(shape: ServiceOperationEntity, location_name: "ServiceOperation"))
+    AuditTargetEntity.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AuditTargetEntity.add_member_subclass(:service, Types::AuditTargetEntity::Service)
+    AuditTargetEntity.add_member_subclass(:slo, Types::AuditTargetEntity::Slo)
+    AuditTargetEntity.add_member_subclass(:service_operation, Types::AuditTargetEntity::ServiceOperation)
+    AuditTargetEntity.add_member_subclass(:unknown, Types::AuditTargetEntity::Unknown)
+    AuditTargetEntity.struct_class = Types::AuditTargetEntity
+
+    AuditTargets.member = Shapes::ShapeRef.new(shape: AuditTarget)
+
+    AuditorResult.add_member(:auditor, Shapes::ShapeRef.new(shape: String, location_name: "Auditor"))
+    AuditorResult.add_member(:description, Shapes::ShapeRef.new(shape: AuditorResultDescriptionString, location_name: "Description"))
+    AuditorResult.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
+    AuditorResult.struct_class = Types::AuditorResult
+
+    AuditorResults.member = Shapes::ShapeRef.new(shape: AuditorResult)
+
+    Auditors.member = Shapes::ShapeRef.new(shape: String)
 
     BatchGetServiceLevelObjectiveBudgetReportInput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     BatchGetServiceLevelObjectiveBudgetReportInput.add_member(:slo_ids, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveIds, required: true, location_name: "SloIds"))
@@ -221,6 +317,16 @@ module Aws::ApplicationSignals
     CalendarInterval.add_member(:duration, Shapes::ShapeRef.new(shape: CalendarIntervalDuration, required: true, location_name: "Duration"))
     CalendarInterval.struct_class = Types::CalendarInterval
 
+    ChangeEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    ChangeEvent.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "AccountId"))
+    ChangeEvent.add_member(:region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Region"))
+    ChangeEvent.add_member(:entity, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "Entity"))
+    ChangeEvent.add_member(:change_event_type, Shapes::ShapeRef.new(shape: ChangeEventType, required: true, location_name: "ChangeEventType"))
+    ChangeEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EventId"))
+    ChangeEvent.add_member(:user_name, Shapes::ShapeRef.new(shape: String, location_name: "UserName"))
+    ChangeEvent.add_member(:event_name, Shapes::ShapeRef.new(shape: String, location_name: "EventName"))
+    ChangeEvent.struct_class = Types::ChangeEvent
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -236,6 +342,8 @@ module Aws::ApplicationSignals
     CreateServiceLevelObjectiveOutput.add_member(:slo, Shapes::ShapeRef.new(shape: ServiceLevelObjective, required: true, location_name: "Slo"))
     CreateServiceLevelObjectiveOutput.struct_class = Types::CreateServiceLevelObjectiveOutput
 
+    DeleteGroupingConfigurationOutput.struct_class = Types::DeleteGroupingConfigurationOutput
+
     DeleteServiceLevelObjectiveInput.add_member(:id, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveId, required: true, location: "uri", location_name: "Id"))
     DeleteServiceLevelObjectiveInput.struct_class = Types::DeleteServiceLevelObjectiveInput
 
@@ -245,11 +353,23 @@ module Aws::ApplicationSignals
     DependencyConfig.add_member(:dependency_operation_name, Shapes::ShapeRef.new(shape: OperationName, required: true, location_name: "DependencyOperationName"))
     DependencyConfig.struct_class = Types::DependencyConfig
 
+    DependencyGraph.add_member(:nodes, Shapes::ShapeRef.new(shape: Nodes, location_name: "Nodes"))
+    DependencyGraph.add_member(:edges, Shapes::ShapeRef.new(shape: Edges, location_name: "Edges"))
+    DependencyGraph.struct_class = Types::DependencyGraph
+
     Dimension.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location_name: "Name"))
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
 
     Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+
+    Edge.add_member(:source_node_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceNodeId"))
+    Edge.add_member(:destination_node_id, Shapes::ShapeRef.new(shape: String, location_name: "DestinationNodeId"))
+    Edge.add_member(:duration, Shapes::ShapeRef.new(shape: Double, location_name: "Duration"))
+    Edge.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
+    Edge.struct_class = Types::Edge
+
+    Edges.member = Shapes::ShapeRef.new(shape: Edge)
 
     ExclusionWindow.add_member(:window, Shapes::ShapeRef.new(shape: Window, required: true, location_name: "Window"))
     ExclusionWindow.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
@@ -281,6 +401,19 @@ module Aws::ApplicationSignals
     Goal.add_member(:warning_threshold, Shapes::ShapeRef.new(shape: WarningThreshold, location_name: "WarningThreshold"))
     Goal.struct_class = Types::Goal
 
+    GroupingAttributeDefinition.add_member(:grouping_name, Shapes::ShapeRef.new(shape: GroupingString, required: true, location_name: "GroupingName"))
+    GroupingAttributeDefinition.add_member(:grouping_source_keys, Shapes::ShapeRef.new(shape: GroupingSourceKeyStringList, location_name: "GroupingSourceKeys"))
+    GroupingAttributeDefinition.add_member(:default_grouping_value, Shapes::ShapeRef.new(shape: GroupingString, location_name: "DefaultGroupingValue"))
+    GroupingAttributeDefinition.struct_class = Types::GroupingAttributeDefinition
+
+    GroupingAttributeDefinitions.member = Shapes::ShapeRef.new(shape: GroupingAttributeDefinition)
+
+    GroupingConfiguration.add_member(:grouping_attribute_definitions, Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, required: true, location_name: "GroupingAttributeDefinitions"))
+    GroupingConfiguration.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    GroupingConfiguration.struct_class = Types::GroupingConfiguration
+
+    GroupingSourceKeyStringList.member = Shapes::ShapeRef.new(shape: GroupingString)
+
     Interval.add_member(:rolling_interval, Shapes::ShapeRef.new(shape: RollingInterval, location_name: "RollingInterval"))
     Interval.add_member(:calendar_interval, Shapes::ShapeRef.new(shape: CalendarInterval, location_name: "CalendarInterval"))
     Interval.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -288,6 +421,28 @@ module Aws::ApplicationSignals
     Interval.add_member_subclass(:calendar_interval, Types::Interval::CalendarInterval)
     Interval.add_member_subclass(:unknown, Types::Interval::Unknown)
     Interval.struct_class = Types::Interval
+
+    LatestChangeEvents.member = Shapes::ShapeRef.new(shape: ChangeEvent)
+
+    ListAuditFindingsInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "StartTime"))
+    ListAuditFindingsInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "EndTime"))
+    ListAuditFindingsInput.add_member(:auditors, Shapes::ShapeRef.new(shape: Auditors, location_name: "Auditors"))
+    ListAuditFindingsInput.add_member(:audit_targets, Shapes::ShapeRef.new(shape: AuditTargets, required: true, location_name: "AuditTargets"))
+    ListAuditFindingsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAuditFindingsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAuditFindingMaxResults, location_name: "MaxResults"))
+    ListAuditFindingsInput.struct_class = Types::ListAuditFindingsInput
+
+    ListAuditFindingsOutput.add_member(:audit_findings, Shapes::ShapeRef.new(shape: AuditFindings, required: true, location_name: "AuditFindings"))
+    ListAuditFindingsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAuditFindingsOutput.struct_class = Types::ListAuditFindingsOutput
+
+    ListGroupingAttributeDefinitionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListGroupingAttributeDefinitionsInput.struct_class = Types::ListGroupingAttributeDefinitionsInput
+
+    ListGroupingAttributeDefinitionsOutput.add_member(:grouping_attribute_definitions, Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, required: true, location_name: "GroupingAttributeDefinitions"))
+    ListGroupingAttributeDefinitionsOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ListGroupingAttributeDefinitionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupingAttributeDefinitionsOutput.struct_class = Types::ListGroupingAttributeDefinitionsOutput
 
     ListServiceDependenciesInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "StartTime"))
     ListServiceDependenciesInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "EndTime"))
@@ -329,9 +484,9 @@ module Aws::ApplicationSignals
     ListServiceLevelObjectivesInput.add_member(:dependency_config, Shapes::ShapeRef.new(shape: DependencyConfig, location_name: "DependencyConfig"))
     ListServiceLevelObjectivesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListServiceLevelObjectivesMaxResults, location: "querystring", location_name: "MaxResults"))
     ListServiceLevelObjectivesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
-    ListServiceLevelObjectivesInput.add_member(:metric_source_types, Shapes::ShapeRef.new(shape: MetricSourceTypes, location_name: "MetricSourceTypes"))
     ListServiceLevelObjectivesInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "IncludeLinkedAccounts"))
     ListServiceLevelObjectivesInput.add_member(:slo_owner_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location: "querystring", location_name: "SloOwnerAwsAccountId"))
+    ListServiceLevelObjectivesInput.add_member(:metric_source_types, Shapes::ShapeRef.new(shape: MetricSourceTypes, location_name: "MetricSourceTypes"))
     ListServiceLevelObjectivesInput.struct_class = Types::ListServiceLevelObjectivesInput
 
     ListServiceLevelObjectivesOutput.add_member(:slo_summaries, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveSummaries, location_name: "SloSummaries"))
@@ -350,6 +505,21 @@ module Aws::ApplicationSignals
     ListServiceOperationsOutput.add_member(:service_operations, Shapes::ShapeRef.new(shape: ServiceOperations, required: true, location_name: "ServiceOperations"))
     ListServiceOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListServiceOperationsOutput.struct_class = Types::ListServiceOperationsOutput
+
+    ListServiceStatesInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    ListServiceStatesInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    ListServiceStatesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListServiceStatesMaxResults, location_name: "MaxResults"))
+    ListServiceStatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServiceStatesInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeLinkedAccounts"))
+    ListServiceStatesInput.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    ListServiceStatesInput.add_member(:attribute_filters, Shapes::ShapeRef.new(shape: AttributeFilters, location_name: "AttributeFilters"))
+    ListServiceStatesInput.struct_class = Types::ListServiceStatesInput
+
+    ListServiceStatesOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    ListServiceStatesOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    ListServiceStatesOutput.add_member(:service_states, Shapes::ShapeRef.new(shape: ServiceStates, required: true, location_name: "ServiceStates"))
+    ListServiceStatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServiceStatesOutput.struct_class = Types::ListServiceStatesOutput
 
     ListServicesInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "StartTime"))
     ListServicesInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "EndTime"))
@@ -389,6 +559,11 @@ module Aws::ApplicationSignals
     MetricDataQuery.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     MetricDataQuery.struct_class = Types::MetricDataQuery
 
+    MetricGraph.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "MetricDataQueries"))
+    MetricGraph.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    MetricGraph.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    MetricGraph.struct_class = Types::MetricGraph
+
     MetricReference.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     MetricReference.add_member(:metric_type, Shapes::ShapeRef.new(shape: MetricType, required: true, location_name: "MetricType"))
     MetricReference.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
@@ -413,6 +588,23 @@ module Aws::ApplicationSignals
     MonitoredRequestCountMetricDataQueries.add_member_subclass(:bad_count_metric, Types::MonitoredRequestCountMetricDataQueries::BadCountMetric)
     MonitoredRequestCountMetricDataQueries.add_member_subclass(:unknown, Types::MonitoredRequestCountMetricDataQueries::Unknown)
     MonitoredRequestCountMetricDataQueries.struct_class = Types::MonitoredRequestCountMetricDataQueries
+
+    Node.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "KeyAttributes"))
+    Node.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    Node.add_member(:node_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NodeId"))
+    Node.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "Operation"))
+    Node.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    Node.add_member(:duration, Shapes::ShapeRef.new(shape: Double, location_name: "Duration"))
+    Node.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    Node.struct_class = Types::Node
+
+    Nodes.member = Shapes::ShapeRef.new(shape: Node)
+
+    PutGroupingConfigurationInput.add_member(:grouping_attribute_definitions, Shapes::ShapeRef.new(shape: GroupingAttributeDefinitions, required: true, location_name: "GroupingAttributeDefinitions"))
+    PutGroupingConfigurationInput.struct_class = Types::PutGroupingConfigurationInput
+
+    PutGroupingConfigurationOutput.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, required: true, location_name: "GroupingConfiguration"))
+    PutGroupingConfigurationOutput.struct_class = Types::PutGroupingConfigurationOutput
 
     RecurrenceRule.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
     RecurrenceRule.struct_class = Types::RecurrenceRule
@@ -454,6 +646,7 @@ module Aws::ApplicationSignals
 
     Service.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "KeyAttributes"))
     Service.add_member(:attribute_maps, Shapes::ShapeRef.new(shape: AttributeMaps, location_name: "AttributeMaps"))
+    Service.add_member(:service_groups, Shapes::ShapeRef.new(shape: ServiceGroups, location_name: "ServiceGroups"))
     Service.add_member(:metric_references, Shapes::ShapeRef.new(shape: MetricReferences, required: true, location_name: "MetricReferences"))
     Service.add_member(:log_group_references, Shapes::ShapeRef.new(shape: LogGroupReferences, location_name: "LogGroupReferences"))
     Service.struct_class = Types::Service
@@ -473,6 +666,20 @@ module Aws::ApplicationSignals
     ServiceDependent.struct_class = Types::ServiceDependent
 
     ServiceDependents.member = Shapes::ShapeRef.new(shape: ServiceDependent)
+
+    ServiceEntity.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ServiceEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ServiceEntity.add_member(:environment, Shapes::ShapeRef.new(shape: String, location_name: "Environment"))
+    ServiceEntity.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: String, location_name: "AwsAccountId"))
+    ServiceEntity.struct_class = Types::ServiceEntity
+
+    ServiceGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
+    ServiceGroup.add_member(:group_value, Shapes::ShapeRef.new(shape: GroupValue, required: true, location_name: "GroupValue"))
+    ServiceGroup.add_member(:group_source, Shapes::ShapeRef.new(shape: GroupSource, required: true, location_name: "GroupSource"))
+    ServiceGroup.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location_name: "GroupIdentifier"))
+    ServiceGroup.struct_class = Types::ServiceGroup
+
+    ServiceGroups.member = Shapes::ShapeRef.new(shape: ServiceGroup)
 
     ServiceLevelIndicator.add_member(:sli_metric, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetric, required: true, location_name: "SliMetric"))
     ServiceLevelIndicator.add_member(:metric_threshold, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetricThreshold, required: true, location_name: "MetricThreshold"))
@@ -494,6 +701,7 @@ module Aws::ApplicationSignals
     ServiceLevelIndicatorMetricConfig.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "KeyAttributes"))
     ServiceLevelIndicatorMetricConfig.add_member(:operation_name, Shapes::ShapeRef.new(shape: OperationName, location_name: "OperationName"))
     ServiceLevelIndicatorMetricConfig.add_member(:metric_type, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetricType, location_name: "MetricType"))
+    ServiceLevelIndicatorMetricConfig.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     ServiceLevelIndicatorMetricConfig.add_member(:statistic, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorStatistic, location_name: "Statistic"))
     ServiceLevelIndicatorMetricConfig.add_member(:period_seconds, Shapes::ShapeRef.new(shape: SLIPeriodSeconds, location_name: "PeriodSeconds"))
     ServiceLevelIndicatorMetricConfig.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "MetricDataQueries"))
@@ -537,6 +745,10 @@ module Aws::ApplicationSignals
 
     ServiceLevelObjectiveBudgetReports.member = Shapes::ShapeRef.new(shape: ServiceLevelObjectiveBudgetReport)
 
+    ServiceLevelObjectiveEntity.add_member(:slo_name, Shapes::ShapeRef.new(shape: String, location_name: "SloName"))
+    ServiceLevelObjectiveEntity.add_member(:slo_arn, Shapes::ShapeRef.new(shape: String, location_name: "SloArn"))
+    ServiceLevelObjectiveEntity.struct_class = Types::ServiceLevelObjectiveEntity
+
     ServiceLevelObjectiveIds.member = Shapes::ShapeRef.new(shape: String)
 
     ServiceLevelObjectiveSummaries.member = Shapes::ShapeRef.new(shape: ServiceLevelObjectiveSummary)
@@ -555,16 +767,29 @@ module Aws::ApplicationSignals
     ServiceOperation.add_member(:metric_references, Shapes::ShapeRef.new(shape: MetricReferences, required: true, location_name: "MetricReferences"))
     ServiceOperation.struct_class = Types::ServiceOperation
 
+    ServiceOperationEntity.add_member(:service, Shapes::ShapeRef.new(shape: ServiceEntity, location_name: "Service"))
+    ServiceOperationEntity.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "Operation"))
+    ServiceOperationEntity.add_member(:metric_type, Shapes::ShapeRef.new(shape: String, location_name: "MetricType"))
+    ServiceOperationEntity.struct_class = Types::ServiceOperationEntity
+
     ServiceOperations.member = Shapes::ShapeRef.new(shape: ServiceOperation)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ServiceState.add_member(:attribute_filters, Shapes::ShapeRef.new(shape: AttributeFilters, location_name: "AttributeFilters"))
+    ServiceState.add_member(:service, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "Service"))
+    ServiceState.add_member(:latest_change_events, Shapes::ShapeRef.new(shape: LatestChangeEvents, required: true, location_name: "LatestChangeEvents"))
+    ServiceState.struct_class = Types::ServiceState
+
+    ServiceStates.member = Shapes::ShapeRef.new(shape: ServiceState)
 
     ServiceSummaries.member = Shapes::ShapeRef.new(shape: ServiceSummary)
 
     ServiceSummary.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "KeyAttributes"))
     ServiceSummary.add_member(:attribute_maps, Shapes::ShapeRef.new(shape: AttributeMaps, location_name: "AttributeMaps"))
     ServiceSummary.add_member(:metric_references, Shapes::ShapeRef.new(shape: MetricReferences, required: true, location_name: "MetricReferences"))
+    ServiceSummary.add_member(:service_groups, Shapes::ShapeRef.new(shape: ServiceGroups, location_name: "ServiceGroups"))
     ServiceSummary.struct_class = Types::ServiceSummary
 
     StartDiscoveryInput.struct_class = Types::StartDiscoveryInput
@@ -665,6 +890,17 @@ module Aws::ApplicationSignals
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_grouping_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGroupingConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/grouping-configuration"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DeleteGroupingConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_service_level_objective, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteServiceLevelObjective"
         o.http_method = "DELETE"
@@ -695,6 +931,27 @@ module Aws::ApplicationSignals
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_audit_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAuditFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/auditFindings"
+        o.input = Shapes::ShapeRef.new(shape: ListAuditFindingsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAuditFindingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_grouping_attribute_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGroupingAttributeDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/grouping-attribute-definitions"
+        o.input = Shapes::ShapeRef.new(shape: ListGroupingAttributeDefinitionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListGroupingAttributeDefinitionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:list_service_dependencies, Seahorse::Model::Operation.new.tap do |o|
@@ -778,6 +1035,22 @@ module Aws::ApplicationSignals
         )
       end)
 
+      api.add_operation(:list_service_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/service/states"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceStatesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceStatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_services, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListServices"
         o.http_method = "GET"
@@ -802,6 +1075,17 @@ module Aws::ApplicationSignals
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_grouping_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutGroupingConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/grouping-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutGroupingConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: PutGroupingConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_discovery, Seahorse::Model::Operation.new.tap do |o|

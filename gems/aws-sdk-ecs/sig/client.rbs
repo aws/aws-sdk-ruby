@@ -86,7 +86,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#create_capacity_provider-instance_method
       def create_capacity_provider: (
                                       name: ::String,
-                                      auto_scaling_group_provider: {
+                                      ?cluster: ::String,
+                                      ?auto_scaling_group_provider: {
                                         auto_scaling_group_arn: ::String,
                                         managed_scaling: {
                                           status: ("ENABLED" | "DISABLED")?,
@@ -97,6 +98,74 @@ module Aws
                                         }?,
                                         managed_termination_protection: ("ENABLED" | "DISABLED")?,
                                         managed_draining: ("ENABLED" | "DISABLED")?
+                                      },
+                                      ?managed_instances_provider: {
+                                        infrastructure_role_arn: ::String,
+                                        instance_launch_template: {
+                                          ec2_instance_profile_arn: ::String,
+                                          network_configuration: {
+                                            subnets: Array[::String]?,
+                                            security_groups: Array[::String]?
+                                          },
+                                          storage_configuration: {
+                                            storage_size_gi_b: ::Integer?
+                                          }?,
+                                          monitoring: ("BASIC" | "DETAILED")?,
+                                          instance_requirements: {
+                                            v_cpu_count: {
+                                              min: ::Integer,
+                                              max: ::Integer?
+                                            },
+                                            memory_mi_b: {
+                                              min: ::Integer,
+                                              max: ::Integer?
+                                            },
+                                            cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                            memory_gi_b_per_v_cpu: {
+                                              min: ::Float?,
+                                              max: ::Float?
+                                            }?,
+                                            excluded_instance_types: Array[::String]?,
+                                            instance_generations: Array[("current" | "previous")]?,
+                                            spot_max_price_percentage_over_lowest_price: ::Integer?,
+                                            on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+                                            bare_metal: ("included" | "required" | "excluded")?,
+                                            burstable_performance: ("included" | "required" | "excluded")?,
+                                            require_hibernate_support: bool?,
+                                            network_interface_count: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            local_storage: ("included" | "required" | "excluded")?,
+                                            local_storage_types: Array[("hdd" | "ssd")]?,
+                                            total_local_storage_gb: {
+                                              min: ::Float?,
+                                              max: ::Float?
+                                            }?,
+                                            baseline_ebs_bandwidth_mbps: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+                                            accelerator_count: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            accelerator_manufacturers: Array[("amazon-web-services" | "amd" | "nvidia" | "xilinx" | "habana")]?,
+                                            accelerator_names: Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g")]?,
+                                            accelerator_total_memory_mi_b: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            network_bandwidth_gbps: {
+                                              min: ::Float?,
+                                              max: ::Float?
+                                            }?,
+                                            allowed_instance_types: Array[::String]?,
+                                            max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
+                                          }?
+                                        },
+                                        propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?
                                       },
                                       ?tags: Array[
                                         {
@@ -191,7 +260,7 @@ module Aws
                             ],
                             ?desired_count: ::Integer,
                             ?client_token: ::String,
-                            ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL"),
+                            ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES"),
                             ?capacity_provider_strategy: Array[
                               {
                                 capacity_provider: ::String,
@@ -382,7 +451,7 @@ module Aws
                                  container_port: ::Integer?
                                },
                              ],
-                             ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL"),
+                             ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES"),
                              ?capacity_provider_strategy: Array[
                                {
                                  capacity_provider: ::String,
@@ -440,7 +509,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#delete_capacity_provider-instance_method
       def delete_capacity_provider: (
-                                      capacity_provider: ::String
+                                      capacity_provider: ::String,
+                                      ?cluster: ::String
                                     ) -> _DeleteCapacityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapacityProviderResponseSuccess
 
@@ -521,6 +591,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_capacity_providers-instance_method
       def describe_capacity_providers: (
                                          ?capacity_providers: Array[::String],
+                                         ?cluster: ::String,
                                          ?include: Array[("TAGS")],
                                          ?max_results: ::Integer,
                                          ?next_token: ::String
@@ -758,7 +829,7 @@ module Aws
                            ?cluster: ::String,
                            ?next_token: ::String,
                            ?max_results: ::Integer,
-                           ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL"),
+                           ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES"),
                            ?scheduling_strategy: ("REPLICA" | "DAEMON")
                          ) -> _ListServicesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
@@ -830,7 +901,7 @@ module Aws
                         ?started_by: ::String,
                         ?service_name: ::String,
                         ?desired_status: ("RUNNING" | "PENDING" | "STOPPED"),
-                        ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+                        ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
                       ) -> _ListTasksResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
 
@@ -1146,7 +1217,7 @@ module Aws
                                           expression: ::String?
                                         },
                                       ],
-                                      ?requires_compatibilities: Array[("EC2" | "FARGATE" | "EXTERNAL")],
+                                      ?requires_compatibilities: Array[("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")],
                                       ?cpu: ::String,
                                       ?memory: ::String,
                                       ?tags: Array[
@@ -1203,7 +1274,7 @@ module Aws
                       ?enable_ecs_managed_tags: bool,
                       ?enable_execute_command: bool,
                       ?group: ::String,
-                      ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL"),
+                      ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES"),
                       ?network_configuration: {
                         awsvpc_configuration: {
                           subnets: Array[::String],
@@ -1565,7 +1636,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#update_capacity_provider-instance_method
       def update_capacity_provider: (
                                       name: ::String,
-                                      auto_scaling_group_provider: {
+                                      ?cluster: ::String,
+                                      ?auto_scaling_group_provider: {
                                         managed_scaling: {
                                           status: ("ENABLED" | "DISABLED")?,
                                           target_capacity: ::Integer?,
@@ -1575,6 +1647,74 @@ module Aws
                                         }?,
                                         managed_termination_protection: ("ENABLED" | "DISABLED")?,
                                         managed_draining: ("ENABLED" | "DISABLED")?
+                                      },
+                                      ?managed_instances_provider: {
+                                        infrastructure_role_arn: ::String,
+                                        instance_launch_template: {
+                                          ec2_instance_profile_arn: ::String?,
+                                          network_configuration: {
+                                            subnets: Array[::String]?,
+                                            security_groups: Array[::String]?
+                                          }?,
+                                          storage_configuration: {
+                                            storage_size_gi_b: ::Integer?
+                                          }?,
+                                          monitoring: ("BASIC" | "DETAILED")?,
+                                          instance_requirements: {
+                                            v_cpu_count: {
+                                              min: ::Integer,
+                                              max: ::Integer?
+                                            },
+                                            memory_mi_b: {
+                                              min: ::Integer,
+                                              max: ::Integer?
+                                            },
+                                            cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                            memory_gi_b_per_v_cpu: {
+                                              min: ::Float?,
+                                              max: ::Float?
+                                            }?,
+                                            excluded_instance_types: Array[::String]?,
+                                            instance_generations: Array[("current" | "previous")]?,
+                                            spot_max_price_percentage_over_lowest_price: ::Integer?,
+                                            on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+                                            bare_metal: ("included" | "required" | "excluded")?,
+                                            burstable_performance: ("included" | "required" | "excluded")?,
+                                            require_hibernate_support: bool?,
+                                            network_interface_count: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            local_storage: ("included" | "required" | "excluded")?,
+                                            local_storage_types: Array[("hdd" | "ssd")]?,
+                                            total_local_storage_gb: {
+                                              min: ::Float?,
+                                              max: ::Float?
+                                            }?,
+                                            baseline_ebs_bandwidth_mbps: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+                                            accelerator_count: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            accelerator_manufacturers: Array[("amazon-web-services" | "amd" | "nvidia" | "xilinx" | "habana")]?,
+                                            accelerator_names: Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g")]?,
+                                            accelerator_total_memory_mi_b: {
+                                              min: ::Integer?,
+                                              max: ::Integer?
+                                            }?,
+                                            network_bandwidth_gbps: {
+                                              min: ::Float?,
+                                              max: ::Float?
+                                            }?,
+                                            allowed_instance_types: Array[::String]?,
+                                            max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
+                                          }?
+                                        },
+                                        propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?
                                       }
                                     ) -> _UpdateCapacityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapacityProviderResponseSuccess

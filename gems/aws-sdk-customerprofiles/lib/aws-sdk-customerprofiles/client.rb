@@ -3375,6 +3375,59 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Returns a history record for a specific profile, for a specific
+    # domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain for which to return a profile history
+    #   record.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile for which to return a history
+    #   record.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the profile history record to return.
+    #
+    # @return [Types::GetProfileHistoryRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProfileHistoryRecordResponse#id #id} => String
+    #   * {Types::GetProfileHistoryRecordResponse#object_type_name #object_type_name} => String
+    #   * {Types::GetProfileHistoryRecordResponse#created_at #created_at} => Time
+    #   * {Types::GetProfileHistoryRecordResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetProfileHistoryRecordResponse#action_type #action_type} => String
+    #   * {Types::GetProfileHistoryRecordResponse#profile_object_unique_key #profile_object_unique_key} => String
+    #   * {Types::GetProfileHistoryRecordResponse#content #content} => String
+    #   * {Types::GetProfileHistoryRecordResponse#performed_by #performed_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_profile_history_record({
+    #     domain_name: "name", # required
+    #     profile_id: "uuid", # required
+    #     id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.object_type_name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.action_type #=> String, one of "ADDED_PROFILE_KEY", "DELETED_PROFILE_KEY", "CREATED", "UPDATED", "INGESTED", "DELETED_BY_CUSTOMER", "EXPIRED", "MERGED", "DELETED_BY_MERGE"
+    #   resp.profile_object_unique_key #=> String
+    #   resp.content #=> String
+    #   resp.performed_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetProfileHistoryRecord AWS API Documentation
+    #
+    # @overload get_profile_history_record(params = {})
+    # @param [Hash] params ({})
+    def get_profile_history_record(params = {}, options = {})
+      req = build_request(:get_profile_history_record, params)
+      req.send_request(options)
+    end
+
     # Returns the object types for a specific domain.
     #
     # @option params [required, String] :domain_name
@@ -4691,6 +4744,76 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_profile_attribute_values(params = {}, options = {})
       req = build_request(:list_profile_attribute_values, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of history records for a specific profile, for a
+    # specific domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain for which to return profile history
+    #   records.
+    #
+    # @option params [required, String] :profile_id
+    #   The identifier of the profile to be taken.
+    #
+    # @option params [String] :object_type_name
+    #   Applies a filter to include profile history records only with the
+    #   specified `ObjectTypeName` value in the response.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :action_type
+    #   Applies a filter to include profile history records only with the
+    #   specified `ActionType` value in the response.
+    #
+    # @option params [String] :performed_by
+    #   Applies a filter to include profile history records only with the
+    #   specified `PerformedBy` value in the response. The `PerformedBy` value
+    #   can be the Amazon Resource Name (ARN) of the person or service
+    #   principal who performed the action.
+    #
+    # @return [Types::ListProfileHistoryRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfileHistoryRecordsResponse#profile_history_records #profile_history_records} => Array&lt;Types::ProfileHistoryRecord&gt;
+    #   * {Types::ListProfileHistoryRecordsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_history_records({
+    #     domain_name: "name", # required
+    #     profile_id: "uuid", # required
+    #     object_type_name: "typeName",
+    #     next_token: "token",
+    #     max_results: 1,
+    #     action_type: "ADDED_PROFILE_KEY", # accepts ADDED_PROFILE_KEY, DELETED_PROFILE_KEY, CREATED, UPDATED, INGESTED, DELETED_BY_CUSTOMER, EXPIRED, MERGED, DELETED_BY_MERGE
+    #     performed_by: "string1To255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_history_records #=> Array
+    #   resp.profile_history_records[0].id #=> String
+    #   resp.profile_history_records[0].object_type_name #=> String
+    #   resp.profile_history_records[0].created_at #=> Time
+    #   resp.profile_history_records[0].last_updated_at #=> Time
+    #   resp.profile_history_records[0].action_type #=> String, one of "ADDED_PROFILE_KEY", "DELETED_PROFILE_KEY", "CREATED", "UPDATED", "INGESTED", "DELETED_BY_CUSTOMER", "EXPIRED", "MERGED", "DELETED_BY_MERGE"
+    #   resp.profile_history_records[0].profile_object_unique_key #=> String
+    #   resp.profile_history_records[0].performed_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileHistoryRecords AWS API Documentation
+    #
+    # @overload list_profile_history_records(params = {})
+    # @param [Hash] params ({})
+    def list_profile_history_records(params = {}, options = {})
+      req = build_request(:list_profile_history_records, params)
       req.send_request(options)
     end
 
@@ -6528,7 +6651,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

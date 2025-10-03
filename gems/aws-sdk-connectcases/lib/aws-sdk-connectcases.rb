@@ -49,12 +49,13 @@ module Aws::ConnectCases
   end
   autoload :Client, 'aws-sdk-connectcases/client'
   autoload :Errors, 'aws-sdk-connectcases/errors'
+  autoload :Waiters, 'aws-sdk-connectcases/waiters'
   autoload :Resource, 'aws-sdk-connectcases/resource'
   autoload :EndpointParameters, 'aws-sdk-connectcases/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-connectcases/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcases/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

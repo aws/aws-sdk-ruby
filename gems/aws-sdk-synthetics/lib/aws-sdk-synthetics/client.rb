@@ -699,7 +699,8 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "CodeHandler", # required
+    #       handler: "CodeHandler",
+    #       blueprint_types: ["BlueprintType"],
     #       dependencies: [
     #         {
     #           type: "LambdaLayer", # accepts LambdaLayer
@@ -757,6 +758,8 @@ module Aws::Synthetics
     #   resp.canary.name #=> String
     #   resp.canary.code.source_location_arn #=> String
     #   resp.canary.code.handler #=> String
+    #   resp.canary.code.blueprint_types #=> Array
+    #   resp.canary.code.blueprint_types[0] #=> String
     #   resp.canary.code.dependencies #=> Array
     #   resp.canary.code.dependencies[0].type #=> String, one of "LambdaLayer"
     #   resp.canary.code.dependencies[0].reference #=> String
@@ -1059,6 +1062,8 @@ module Aws::Synthetics
     #   resp.canaries[0].name #=> String
     #   resp.canaries[0].code.source_location_arn #=> String
     #   resp.canaries[0].code.handler #=> String
+    #   resp.canaries[0].code.blueprint_types #=> Array
+    #   resp.canaries[0].code.blueprint_types[0] #=> String
     #   resp.canaries[0].code.dependencies #=> Array
     #   resp.canaries[0].code.dependencies[0].type #=> String, one of "LambdaLayer"
     #   resp.canaries[0].code.dependencies[0].reference #=> String
@@ -1329,6 +1334,8 @@ module Aws::Synthetics
     #   resp.canary.name #=> String
     #   resp.canary.code.source_location_arn #=> String
     #   resp.canary.code.handler #=> String
+    #   resp.canary.code.blueprint_types #=> Array
+    #   resp.canary.code.blueprint_types[0] #=> String
     #   resp.canary.code.dependencies #=> Array
     #   resp.canary.code.dependencies[0].type #=> String, one of "LambdaLayer"
     #   resp.canary.code.dependencies[0].reference #=> String
@@ -1884,7 +1891,8 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "CodeHandler", # required
+    #       handler: "CodeHandler",
+    #       blueprint_types: ["BlueprintType"],
     #       dependencies: [
     #         {
     #           type: "LambdaLayer", # accepts LambdaLayer
@@ -2284,7 +2292,8 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "CodeHandler", # required
+    #       handler: "CodeHandler",
+    #       blueprint_types: ["BlueprintType"],
     #       dependencies: [
     #         {
     #           type: "LambdaLayer", # accepts LambdaLayer
@@ -2382,7 +2391,7 @@ module Aws::Synthetics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -600,6 +600,7 @@ module Aws::CleanRooms
     #   resp.schemas[0].schema_status_details[0].configurations #=> Array
     #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
     #   resp.schemas[0].schema_status_details[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
+    #   resp.schemas[0].resource_arn #=> String
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
@@ -1886,7 +1887,7 @@ module Aws::CleanRooms
     #   The privacy budget template is created in the collaboration that this
     #   membership belongs to. Accepts a membership ID.
     #
-    # @option params [required, String] :auto_refresh
+    # @option params [String] :auto_refresh
     #   How often the privacy budget refreshes.
     #
     #   If you plan to regularly bring new data into the collaboration, you
@@ -1916,12 +1917,22 @@ module Aws::CleanRooms
     #
     #   resp = client.create_privacy_budget_template({
     #     membership_identifier: "MembershipIdentifier", # required
-    #     auto_refresh: "CALENDAR_MONTH", # required, accepts CALENDAR_MONTH, NONE
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     auto_refresh: "CALENDAR_MONTH", # accepts CALENDAR_MONTH, NONE
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     parameters: { # required
     #       differential_privacy: {
     #         epsilon: 1, # required
     #         users_noise_per_query: 1, # required
+    #       },
+    #       access_budget: {
+    #         budget_parameters: [ # required
+    #           {
+    #             type: "CALENDAR_DAY", # required, accepts CALENDAR_DAY, CALENDAR_MONTH, CALENDAR_WEEK, LIFETIME
+    #             budget: 1, # required
+    #             auto_refresh: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
+    #         resource_arn: "BudgetedResourceArn", # required
     #       },
     #     },
     #     tags: {
@@ -1939,10 +1950,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template.collaboration_arn #=> String
     #   resp.privacy_budget_template.create_time #=> Time
     #   resp.privacy_budget_template.update_time #=> Time
-    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreatePrivacyBudgetTemplate AWS API Documentation
     #
@@ -2619,10 +2635,15 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_template.creator_account_id #=> String
     #   resp.collaboration_privacy_budget_template.create_time #=> Time
     #   resp.collaboration_privacy_budget_template.update_time #=> Time
-    #   resp.collaboration_privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.collaboration_privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.collaboration_privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.collaboration_privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationPrivacyBudgetTemplate AWS API Documentation
     #
@@ -3089,10 +3110,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template.collaboration_arn #=> String
     #   resp.privacy_budget_template.create_time #=> Time
     #   resp.privacy_budget_template.update_time #=> Time
-    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetPrivacyBudgetTemplate AWS API Documentation
     #
@@ -3271,6 +3297,7 @@ module Aws::CleanRooms
     #   resp.schema.schema_status_details[0].configurations #=> Array
     #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
     #   resp.schema.schema_status_details[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
+    #   resp.schema.resource_arn #=> String
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
@@ -3740,7 +3767,7 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_template_summaries[0].collaboration_id #=> String
     #   resp.collaboration_privacy_budget_template_summaries[0].collaboration_arn #=> String
     #   resp.collaboration_privacy_budget_template_summaries[0].creator_account_id #=> String
-    #   resp.collaboration_privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.collaboration_privacy_budget_template_summaries[0].create_time #=> Time
     #   resp.collaboration_privacy_budget_template_summaries[0].update_time #=> Time
     #
@@ -3772,6 +3799,10 @@ module Aws::CleanRooms
     # @option params [String] :next_token
     #   The pagination token that's used to fetch the next set of results.
     #
+    # @option params [String] :access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the Configured Table Association
+    #   (ConfiguredTableAssociation) used to filter privacy budgets.
+    #
     # @return [Types::ListCollaborationPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCollaborationPrivacyBudgetsOutput#collaboration_privacy_budget_summaries #collaboration_privacy_budget_summaries} => Array&lt;Types::CollaborationPrivacyBudgetSummary&gt;
@@ -3783,9 +3814,10 @@ module Aws::CleanRooms
     #
     #   resp = client.list_collaboration_privacy_budgets({
     #     collaboration_identifier: "CollaborationIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     access_budget_resource_arn: "BudgetedResourceArn",
     #   })
     #
     # @example Response structure
@@ -3797,7 +3829,7 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_summaries[0].collaboration_id #=> String
     #   resp.collaboration_privacy_budget_summaries[0].collaboration_arn #=> String
     #   resp.collaboration_privacy_budget_summaries[0].creator_account_id #=> String
-    #   resp.collaboration_privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.collaboration_privacy_budget_summaries[0].create_time #=> Time
     #   resp.collaboration_privacy_budget_summaries[0].update_time #=> Time
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations #=> Array
@@ -3805,6 +3837,15 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].max_count #=> Integer
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].remaining_count #=> Integer
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.epsilon #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.resource_arn #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details #=> Array
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].start_time #=> Time
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].end_time #=> Time
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].remaining_budget #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].budget #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].budget_type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.aggregate_remaining_budget #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgets AWS API Documentation
@@ -4302,7 +4343,7 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template_summaries[0].membership_arn #=> String
     #   resp.privacy_budget_template_summaries[0].collaboration_id #=> String
     #   resp.privacy_budget_template_summaries[0].collaboration_arn #=> String
-    #   resp.privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template_summaries[0].create_time #=> Time
     #   resp.privacy_budget_template_summaries[0].update_time #=> Time
     #
@@ -4335,6 +4376,10 @@ module Aws::CleanRooms
     #   service might return a `nextToken` even if the `maxResults` value
     #   has not been met.
     #
+    # @option params [String] :access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the access budget resource to filter
+    #   privacy budgets by.
+    #
     # @return [Types::ListPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPrivacyBudgetsOutput#privacy_budget_summaries #privacy_budget_summaries} => Array&lt;Types::PrivacyBudgetSummary&gt;
@@ -4346,9 +4391,10 @@ module Aws::CleanRooms
     #
     #   resp = client.list_privacy_budgets({
     #     membership_identifier: "MembershipIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     access_budget_resource_arn: "BudgetedResourceArn",
     #   })
     #
     # @example Response structure
@@ -4361,7 +4407,7 @@ module Aws::CleanRooms
     #   resp.privacy_budget_summaries[0].membership_arn #=> String
     #   resp.privacy_budget_summaries[0].collaboration_id #=> String
     #   resp.privacy_budget_summaries[0].collaboration_arn #=> String
-    #   resp.privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_summaries[0].create_time #=> Time
     #   resp.privacy_budget_summaries[0].update_time #=> Time
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations #=> Array
@@ -4369,6 +4415,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].max_count #=> Integer
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].remaining_count #=> Integer
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.epsilon #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.access_budget.resource_arn #=> String
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details #=> Array
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].start_time #=> Time
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].end_time #=> Time
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].remaining_budget #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].budget #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].budget_type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_summaries[0].budget.access_budget.aggregate_remaining_budget #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgets AWS API Documentation
@@ -4539,6 +4594,7 @@ module Aws::CleanRooms
     #   resp.schema_summaries[0].analysis_rule_types #=> Array
     #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schema_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
+    #   resp.schema_summaries[0].resource_arn #=> String
     #   resp.schema_summaries[0].selected_analysis_methods #=> Array
     #   resp.schema_summaries[0].selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #   resp.next_token #=> String
@@ -5727,11 +5783,20 @@ module Aws::CleanRooms
     #   resp = client.update_privacy_budget_template({
     #     membership_identifier: "MembershipIdentifier", # required
     #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     parameters: {
     #       differential_privacy: {
     #         epsilon: 1,
     #         users_noise_per_query: 1,
+    #       },
+    #       access_budget: {
+    #         budget_parameters: [ # required
+    #           {
+    #             type: "CALENDAR_DAY", # required, accepts CALENDAR_DAY, CALENDAR_MONTH, CALENDAR_WEEK, LIFETIME
+    #             budget: 1, # required
+    #             auto_refresh: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -5746,10 +5811,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template.collaboration_arn #=> String
     #   resp.privacy_budget_template.create_time #=> Time
     #   resp.privacy_budget_template.update_time #=> Time
-    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdatePrivacyBudgetTemplate AWS API Documentation
     #
@@ -5906,7 +5976,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1853,6 +1853,7 @@ module Aws::CleanRoomsML
     #   * {Types::GetCollaborationMLInputChannelResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetCollaborationMLInputChannelResponse#retention_in_days #retention_in_days} => Integer
     #   * {Types::GetCollaborationMLInputChannelResponse#number_of_records #number_of_records} => Integer
+    #   * {Types::GetCollaborationMLInputChannelResponse#privacy_budgets #privacy_budgets} => Types::PrivacyBudgets
     #   * {Types::GetCollaborationMLInputChannelResponse#description #description} => String
     #   * {Types::GetCollaborationMLInputChannelResponse#create_time #create_time} => Time
     #   * {Types::GetCollaborationMLInputChannelResponse#update_time #update_time} => Time
@@ -1878,6 +1879,16 @@ module Aws::CleanRoomsML
     #   resp.status_details.message #=> String
     #   resp.retention_in_days #=> Integer
     #   resp.number_of_records #=> Integer
+    #   resp.privacy_budgets.access_budgets #=> Array
+    #   resp.privacy_budgets.access_budgets[0].resource_arn #=> String
+    #   resp.privacy_budgets.access_budgets[0].details #=> Array
+    #   resp.privacy_budgets.access_budgets[0].details[0].start_time #=> Time
+    #   resp.privacy_budgets.access_budgets[0].details[0].end_time #=> Time
+    #   resp.privacy_budgets.access_budgets[0].details[0].remaining_budget #=> Integer
+    #   resp.privacy_budgets.access_budgets[0].details[0].budget #=> Integer
+    #   resp.privacy_budgets.access_budgets[0].details[0].budget_type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budgets.access_budgets[0].details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budgets.access_budgets[0].aggregate_remaining_budget #=> Integer
     #   resp.description #=> String
     #   resp.create_time #=> Time
     #   resp.update_time #=> Time
@@ -2260,6 +2271,7 @@ module Aws::CleanRoomsML
     #   * {Types::GetMLInputChannelResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetMLInputChannelResponse#retention_in_days #retention_in_days} => Integer
     #   * {Types::GetMLInputChannelResponse#number_of_records #number_of_records} => Integer
+    #   * {Types::GetMLInputChannelResponse#privacy_budgets #privacy_budgets} => Types::PrivacyBudgets
     #   * {Types::GetMLInputChannelResponse#description #description} => String
     #   * {Types::GetMLInputChannelResponse#create_time #create_time} => Time
     #   * {Types::GetMLInputChannelResponse#update_time #update_time} => Time
@@ -2290,6 +2302,16 @@ module Aws::CleanRoomsML
     #   resp.status_details.message #=> String
     #   resp.retention_in_days #=> Integer
     #   resp.number_of_records #=> Integer
+    #   resp.privacy_budgets.access_budgets #=> Array
+    #   resp.privacy_budgets.access_budgets[0].resource_arn #=> String
+    #   resp.privacy_budgets.access_budgets[0].details #=> Array
+    #   resp.privacy_budgets.access_budgets[0].details[0].start_time #=> Time
+    #   resp.privacy_budgets.access_budgets[0].details[0].end_time #=> Time
+    #   resp.privacy_budgets.access_budgets[0].details[0].remaining_budget #=> Integer
+    #   resp.privacy_budgets.access_budgets[0].details[0].budget #=> Integer
+    #   resp.privacy_budgets.access_budgets[0].details[0].budget_type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budgets.access_budgets[0].details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budgets.access_budgets[0].aggregate_remaining_budget #=> Integer
     #   resp.description #=> String
     #   resp.create_time #=> Time
     #   resp.update_time #=> Time
@@ -4053,7 +4075,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

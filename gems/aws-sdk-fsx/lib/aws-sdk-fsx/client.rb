@@ -822,6 +822,7 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -944,9 +945,13 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -957,6 +962,7 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.backup.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.backup.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.file_system.file_system_type_version #=> String
     #   resp.backup.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -1076,6 +1082,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1110,9 +1117,13 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -1123,6 +1134,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -1331,6 +1343,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1365,9 +1378,13 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -1378,6 +1395,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -1808,6 +1826,7 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1930,9 +1949,13 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -1943,6 +1966,7 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.backup.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.backup.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.file_system.file_system_type_version #=> String
     #   resp.backup.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -2062,6 +2086,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2096,9 +2121,13 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -2109,6 +2138,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -2944,7 +2974,8 @@ module Aws::FSx
     #   The network type of the Amazon FSx file system that you are creating.
     #   Valid values are `IPV4` (which supports IPv4 only) and `DUAL` (for
     #   dual-stack mode, which supports both IPv4 and IPv6). The default is
-    #   `IPV4`. Supported only for Amazon FSx for OpenZFS file systems.
+    #   `IPV4`. Supported for FSx for OpenZFS, FSx for ONTAP, and FSx for
+    #   Windows File Server file systems.
     #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3115,6 +3146,7 @@ module Aws::FSx
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       ha_pairs: 1,
     #       throughput_capacity_per_ha_pair: 1,
+    #       endpoint_ipv_6_address_range: "Ipv6AddressRange",
     #     },
     #     file_system_type_version: "FileSystemTypeVersion",
     #     open_zfs_configuration: {
@@ -3211,6 +3243,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3333,9 +3366,13 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -3346,6 +3383,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -3787,6 +3825,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3909,9 +3948,13 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -3922,6 +3965,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -4083,6 +4127,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4117,9 +4162,13 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -4130,6 +4179,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -4333,15 +4383,23 @@ module Aws::FSx
     #   resp.storage_virtual_machine.endpoints.iscsi.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.iscsi.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.iscsi.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.endpoints.management.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.management.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.management.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.endpoints.nfs.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.nfs.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.nfs.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.endpoints.smb.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.smb.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.smb.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.smb.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.smb.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.file_system_id #=> String
     #   resp.storage_virtual_machine.lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
     #   resp.storage_virtual_machine.name #=> String
@@ -4576,6 +4634,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4610,9 +4669,13 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -4623,6 +4686,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -4876,6 +4940,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4910,9 +4975,13 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -4923,6 +4992,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -5654,6 +5724,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backups[0].file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backups[0].file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -5776,9 +5847,13 @@ module Aws::FSx
     #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.backups[0].file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.backups[0].file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.backups[0].file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.backups[0].file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -5789,6 +5864,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.backups[0].file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.backups[0].file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backups[0].file_system.file_system_type_version #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -5908,6 +5984,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -5942,9 +6019,13 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -5955,6 +6036,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -6540,6 +6622,7 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_systems[0].windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_systems[0].windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_systems[0].windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6662,9 +6745,13 @@ module Aws::FSx
     #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.file_systems[0].ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.file_systems[0].ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.file_systems[0].ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_systems[0].ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.file_systems[0].ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.file_systems[0].ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_systems[0].ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_systems[0].ontap_configuration.preferred_subnet_id #=> String
@@ -6675,6 +6762,7 @@ module Aws::FSx
     #   resp.file_systems[0].ontap_configuration.fsx_admin_password #=> String
     #   resp.file_systems[0].ontap_configuration.ha_pairs #=> Integer
     #   resp.file_systems[0].ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.file_systems[0].ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_systems[0].file_system_type_version #=> String
     #   resp.file_systems[0].open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -6946,6 +7034,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6980,9 +7069,13 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -6993,6 +7086,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -7152,15 +7246,23 @@ module Aws::FSx
     #   resp.storage_virtual_machines[0].endpoints.iscsi.dns_name #=> String
     #   resp.storage_virtual_machines[0].endpoints.iscsi.ip_addresses #=> Array
     #   resp.storage_virtual_machines[0].endpoints.iscsi.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.iscsi.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.iscsi.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machines[0].endpoints.management.dns_name #=> String
     #   resp.storage_virtual_machines[0].endpoints.management.ip_addresses #=> Array
     #   resp.storage_virtual_machines[0].endpoints.management.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.management.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machines[0].endpoints.nfs.dns_name #=> String
     #   resp.storage_virtual_machines[0].endpoints.nfs.ip_addresses #=> Array
     #   resp.storage_virtual_machines[0].endpoints.nfs.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.nfs.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.nfs.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machines[0].endpoints.smb.dns_name #=> String
     #   resp.storage_virtual_machines[0].endpoints.smb.ip_addresses #=> Array
     #   resp.storage_virtual_machines[0].endpoints.smb.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.smb.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.smb.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machines[0].file_system_id #=> String
     #   resp.storage_virtual_machines[0].lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
     #   resp.storage_virtual_machines[0].name #=> String
@@ -7319,6 +7421,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7353,9 +7456,13 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -7366,6 +7473,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -7708,6 +7816,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7830,9 +7939,13 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -7843,6 +7956,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -7975,6 +8089,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -8009,9 +8124,13 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -8022,6 +8141,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -8211,6 +8331,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -8333,9 +8454,13 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -8346,6 +8471,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -8691,6 +8817,8 @@ module Aws::FSx
     #
     # * `DiskIopsConfiguration`
     #
+    # * `EndpointIpv6AddressRange`
+    #
     # * `FsxAdminPassword`
     #
     # * `HAPairs`
@@ -8942,6 +9070,7 @@ module Aws::FSx
     #       remove_route_table_ids: ["RouteTableId"],
     #       throughput_capacity_per_ha_pair: 1,
     #       ha_pairs: 1,
+    #       endpoint_ipv_6_address_range: "Ipv6AddressRange",
     #     },
     #     open_zfs_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -9014,6 +9143,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -9136,9 +9266,13 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
@@ -9149,6 +9283,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.ontap_configuration.ha_pairs #=> Integer
     #   resp.file_system.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.file_system.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -9329,6 +9464,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -9363,9 +9499,13 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -9376,6 +9516,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -9538,15 +9679,23 @@ module Aws::FSx
     #   resp.storage_virtual_machine.endpoints.iscsi.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.iscsi.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.iscsi.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.endpoints.management.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.management.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.management.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.endpoints.nfs.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.nfs.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.nfs.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.endpoints.smb.dns_name #=> String
     #   resp.storage_virtual_machine.endpoints.smb.ip_addresses #=> Array
     #   resp.storage_virtual_machine.endpoints.smb.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.smb.ipv_6_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.smb.ipv_6_addresses[0] #=> String
     #   resp.storage_virtual_machine.file_system_id #=> String
     #   resp.storage_virtual_machine.lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
     #   resp.storage_virtual_machine.name #=> String
@@ -9762,6 +9911,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ipv_6 #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -9796,9 +9946,13 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ipv_6_addresses[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ipv_6_addresses[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
@@ -9809,6 +9963,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.ha_pairs #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity_per_ha_pair #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ipv_6_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -9900,7 +10055,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

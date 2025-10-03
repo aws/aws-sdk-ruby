@@ -15,37 +15,37 @@ module Aws::ConnectCases
 
     class AuditEvent
       attr_accessor event_id: ::String
+      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created")
+      attr_accessor related_item_type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
+      attr_accessor performed_time: ::Time
       attr_accessor fields: ::Array[Types::AuditEventField]
       attr_accessor performed_by: Types::AuditEventPerformedBy
-      attr_accessor performed_time: ::Time
-      attr_accessor related_item_type: ("Contact" | "Comment" | "File" | "Sla")
-      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created")
       SENSITIVE: []
     end
 
     class AuditEventField
       attr_accessor event_field_id: ::String
-      attr_accessor new_value: Types::AuditEventFieldValueUnion
       attr_accessor old_value: Types::AuditEventFieldValueUnion
+      attr_accessor new_value: Types::AuditEventFieldValueUnion
       SENSITIVE: []
     end
 
     class AuditEventFieldValueUnion
-      attr_accessor boolean_value: bool
-      attr_accessor double_value: ::Float
-      attr_accessor empty_value: Types::EmptyFieldValue
       attr_accessor string_value: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor empty_value: Types::EmptyFieldValue
       attr_accessor user_arn_value: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class BooleanValue < AuditEventFieldValueUnion
+      class StringValue < AuditEventFieldValueUnion
       end
       class DoubleValue < AuditEventFieldValueUnion
       end
-      class EmptyValue < AuditEventFieldValueUnion
+      class BooleanValue < AuditEventFieldValueUnion
       end
-      class StringValue < AuditEventFieldValueUnion
+      class EmptyValue < AuditEventFieldValueUnion
       end
       class UserArnValue < AuditEventFieldValueUnion
       end
@@ -54,20 +54,20 @@ module Aws::ConnectCases
     end
 
     class AuditEventPerformedBy
-      attr_accessor iam_principal_arn: ::String
       attr_accessor user: Types::UserUnion
+      attr_accessor iam_principal_arn: ::String
       SENSITIVE: []
     end
 
     class BasicLayout
-      attr_accessor more_info: Types::LayoutSections
       attr_accessor top_panel: Types::LayoutSections
+      attr_accessor more_info: Types::LayoutSections
       SENSITIVE: []
     end
 
     class BatchGetCaseRuleRequest
-      attr_accessor case_rules: ::Array[Types::CaseRuleIdentifier]
       attr_accessor domain_id: ::String
+      attr_accessor case_rules: ::Array[Types::CaseRuleIdentifier]
       SENSITIVE: []
     end
 
@@ -84,8 +84,8 @@ module Aws::ConnectCases
     end
 
     class BatchGetFieldResponse
-      attr_accessor errors: ::Array[Types::FieldError]
       attr_accessor fields: ::Array[Types::GetFieldResponse]
+      attr_accessor errors: ::Array[Types::FieldError]
       SENSITIVE: []
     end
 
@@ -128,18 +128,18 @@ module Aws::ConnectCases
     end
 
     class CaseFilter
-      attr_accessor and_all: ::Array[Types::CaseFilter]
       attr_accessor field: Types::FieldFilter
       attr_accessor not: Types::CaseFilter
+      attr_accessor and_all: ::Array[Types::CaseFilter]
       attr_accessor or_all: ::Array[Types::CaseFilter]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class AndAll < CaseFilter
-      end
       class Field < CaseFilter
       end
       class Not < CaseFilter
+      end
+      class AndAll < CaseFilter
       end
       class OrAll < CaseFilter
       end
@@ -159,8 +159,8 @@ module Aws::ConnectCases
     end
 
     class CaseRuleError
-      attr_accessor error_code: ::String
       attr_accessor id: ::String
+      attr_accessor error_code: ::String
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -171,11 +171,11 @@ module Aws::ConnectCases
     end
 
     class CaseRuleSummary
-      attr_accessor case_rule_arn: ::String
       attr_accessor case_rule_id: ::String
-      attr_accessor description: ::String
       attr_accessor name: ::String
+      attr_accessor case_rule_arn: ::String
       attr_accessor rule_type: ("Required")
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -199,15 +199,30 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class ConnectCaseContent
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectCaseFilter
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectCaseInputContent
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
     class Contact
       attr_accessor contact_arn: ::String
       SENSITIVE: []
     end
 
     class ContactContent
+      attr_accessor contact_arn: ::String
       attr_accessor channel: ::String
       attr_accessor connected_to_system_time: ::Time
-      attr_accessor contact_arn: ::String
       SENSITIVE: []
     end
 
@@ -218,31 +233,31 @@ module Aws::ConnectCases
     end
 
     class CreateCaseRequest
-      attr_accessor client_token: ::String
       attr_accessor domain_id: ::String
-      attr_accessor fields: ::Array[Types::FieldValue]
-      attr_accessor performed_by: Types::UserUnion
       attr_accessor template_id: ::String
+      attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor client_token: ::String
+      attr_accessor performed_by: Types::UserUnion
       SENSITIVE: []
     end
 
     class CreateCaseResponse
-      attr_accessor case_arn: ::String
       attr_accessor case_id: ::String
+      attr_accessor case_arn: ::String
       SENSITIVE: []
     end
 
     class CreateCaseRuleRequest
-      attr_accessor description: ::String
       attr_accessor domain_id: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor rule: Types::CaseRuleDetails
       SENSITIVE: []
     end
 
     class CreateCaseRuleResponse
-      attr_accessor case_rule_arn: ::String
       attr_accessor case_rule_id: ::String
+      attr_accessor case_rule_arn: ::String
       SENSITIVE: []
     end
 
@@ -252,74 +267,109 @@ module Aws::ConnectCases
     end
 
     class CreateDomainResponse
-      attr_accessor domain_arn: ::String
       attr_accessor domain_id: ::String
+      attr_accessor domain_arn: ::String
       attr_accessor domain_status: ("Active" | "CreationInProgress" | "CreationFailed")
       SENSITIVE: []
     end
 
     class CreateFieldRequest
-      attr_accessor description: ::String
       attr_accessor domain_id: ::String
       attr_accessor name: ::String
       attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
     class CreateFieldResponse
-      attr_accessor field_arn: ::String
       attr_accessor field_id: ::String
+      attr_accessor field_arn: ::String
       SENSITIVE: []
     end
 
     class CreateLayoutRequest
-      attr_accessor content: Types::LayoutContent
       attr_accessor domain_id: ::String
       attr_accessor name: ::String
+      attr_accessor content: Types::LayoutContent
       SENSITIVE: []
     end
 
     class CreateLayoutResponse
-      attr_accessor layout_arn: ::String
       attr_accessor layout_id: ::String
+      attr_accessor layout_arn: ::String
       SENSITIVE: []
     end
 
     class CreateRelatedItemRequest
-      attr_accessor case_id: ::String
-      attr_accessor content: Types::RelatedItemInputContent
       attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
+      attr_accessor type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
+      attr_accessor content: Types::RelatedItemInputContent
       attr_accessor performed_by: Types::UserUnion
-      attr_accessor type: ("Contact" | "Comment" | "File" | "Sla")
       SENSITIVE: []
     end
 
     class CreateRelatedItemResponse
-      attr_accessor related_item_arn: ::String
       attr_accessor related_item_id: ::String
+      attr_accessor related_item_arn: ::String
       SENSITIVE: []
     end
 
     class CreateTemplateRequest
-      attr_accessor description: ::String
       attr_accessor domain_id: ::String
-      attr_accessor layout_configuration: Types::LayoutConfiguration
       attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor layout_configuration: Types::LayoutConfiguration
       attr_accessor required_fields: ::Array[Types::RequiredField]
-      attr_accessor rules: ::Array[Types::TemplateRule]
       attr_accessor status: ("Active" | "Inactive")
+      attr_accessor rules: ::Array[Types::TemplateRule]
       SENSITIVE: []
     end
 
     class CreateTemplateResponse
-      attr_accessor template_arn: ::String
       attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomContent
+      attr_accessor fields: ::Array[Types::FieldValue]
+      SENSITIVE: []
+    end
+
+    class CustomFieldsFilter
+      attr_accessor field: Types::FieldFilter
+      attr_accessor not: Types::CustomFieldsFilter
+      attr_accessor and_all: ::Array[Types::CustomFieldsFilter]
+      attr_accessor or_all: ::Array[Types::CustomFieldsFilter]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Field < CustomFieldsFilter
+      end
+      class Not < CustomFieldsFilter
+      end
+      class AndAll < CustomFieldsFilter
+      end
+      class OrAll < CustomFieldsFilter
+      end
+      class Unknown < CustomFieldsFilter
+      end
+    end
+
+    class CustomFilter
+      attr_accessor fields: Types::CustomFieldsFilter
+      SENSITIVE: []
+    end
+
+    class CustomInputContent
+      attr_accessor fields: ::Array[Types::FieldValue]
       SENSITIVE: []
     end
 
     class DeleteCaseRequest
-      attr_accessor case_id: ::String
       attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
       SENSITIVE: []
     end
 
@@ -327,8 +377,8 @@ module Aws::ConnectCases
     end
 
     class DeleteCaseRuleRequest
-      attr_accessor case_rule_id: ::String
       attr_accessor domain_id: ::String
+      attr_accessor case_rule_id: ::String
       SENSITIVE: []
     end
 
@@ -362,8 +412,8 @@ module Aws::ConnectCases
     end
 
     class DeleteRelatedItemRequest
-      attr_accessor case_id: ::String
       attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
       attr_accessor related_item_id: ::String
       SENSITIVE: []
     end
@@ -381,8 +431,8 @@ module Aws::ConnectCases
     end
 
     class DomainSummary
-      attr_accessor domain_arn: ::String
       attr_accessor domain_id: ::String
+      attr_accessor domain_arn: ::String
       attr_accessor name: ::String
       SENSITIVE: []
     end
@@ -406,15 +456,15 @@ module Aws::ConnectCases
     end
 
     class FieldError
-      attr_accessor error_code: ::String
       attr_accessor id: ::String
+      attr_accessor error_code: ::String
       attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class FieldFilter
-      attr_accessor contains: Types::FieldValue
       attr_accessor equal_to: Types::FieldValue
+      attr_accessor contains: Types::FieldValue
       attr_accessor greater_than: Types::FieldValue
       attr_accessor greater_than_or_equal_to: Types::FieldValue
       attr_accessor less_than: Types::FieldValue
@@ -422,9 +472,9 @@ module Aws::ConnectCases
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Contains < FieldFilter
-      end
       class EqualTo < FieldFilter
+      end
+      class Contains < FieldFilter
       end
       class GreaterThan < FieldFilter
       end
@@ -439,8 +489,8 @@ module Aws::ConnectCases
     end
 
     class FieldGroup
-      attr_accessor fields: ::Array[Types::FieldItem]
       attr_accessor name: ::String
+      attr_accessor fields: ::Array[Types::FieldItem]
       SENSITIVE: []
     end
 
@@ -455,25 +505,25 @@ module Aws::ConnectCases
     end
 
     class FieldOption
-      attr_accessor active: bool
       attr_accessor name: ::String
       attr_accessor value: ::String
+      attr_accessor active: bool
       SENSITIVE: []
     end
 
     class FieldOptionError
-      attr_accessor error_code: ::String
       attr_accessor message: ::String
+      attr_accessor error_code: ::String
       attr_accessor value: ::String
       SENSITIVE: []
     end
 
     class FieldSummary
-      attr_accessor field_arn: ::String
       attr_accessor field_id: ::String
+      attr_accessor field_arn: ::String
       attr_accessor name: ::String
-      attr_accessor namespace: ("System" | "Custom")
       attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+      attr_accessor namespace: ("System" | "Custom")
       SENSITIVE: []
     end
 
@@ -484,21 +534,21 @@ module Aws::ConnectCases
     end
 
     class FieldValueUnion
-      attr_accessor boolean_value: bool
-      attr_accessor double_value: ::Float
-      attr_accessor empty_value: Types::EmptyFieldValue
       attr_accessor string_value: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor empty_value: Types::EmptyFieldValue
       attr_accessor user_arn_value: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class BooleanValue < FieldValueUnion
+      class StringValue < FieldValueUnion
       end
       class DoubleValue < FieldValueUnion
       end
-      class EmptyValue < FieldValueUnion
+      class BooleanValue < FieldValueUnion
       end
-      class StringValue < FieldValueUnion
+      class EmptyValue < FieldValueUnion
       end
       class UserArnValue < FieldValueUnion
       end
@@ -525,8 +575,8 @@ module Aws::ConnectCases
     end
 
     class GetCaseAuditEventsResponse
-      attr_accessor audit_events: ::Array[Types::AuditEvent]
       attr_accessor next_token: ::String
+      attr_accessor audit_events: ::Array[Types::AuditEvent]
       SENSITIVE: []
     end
 
@@ -550,21 +600,21 @@ module Aws::ConnectCases
 
     class GetCaseResponse
       attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor template_id: ::String
       attr_accessor next_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor template_id: ::String
       SENSITIVE: []
     end
 
     class GetCaseRuleResponse
-      attr_accessor case_rule_arn: ::String
       attr_accessor case_rule_id: ::String
-      attr_accessor created_time: ::Time
-      attr_accessor deleted: bool
-      attr_accessor description: ::String
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor case_rule_arn: ::String
       attr_accessor rule: Types::CaseRuleDetails
+      attr_accessor description: ::String
+      attr_accessor deleted: bool
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -575,26 +625,26 @@ module Aws::ConnectCases
     end
 
     class GetDomainResponse
-      attr_accessor created_time: ::Time
-      attr_accessor domain_arn: ::String
       attr_accessor domain_id: ::String
-      attr_accessor domain_status: ("Active" | "CreationInProgress" | "CreationFailed")
+      attr_accessor domain_arn: ::String
       attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor domain_status: ("Active" | "CreationInProgress" | "CreationFailed")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class GetFieldResponse
-      attr_accessor created_time: ::Time
-      attr_accessor deleted: bool
-      attr_accessor description: ::String
-      attr_accessor field_arn: ::String
       attr_accessor field_id: ::String
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor field_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
       attr_accessor namespace: ("System" | "Custom")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+      attr_accessor deleted: bool
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -605,14 +655,14 @@ module Aws::ConnectCases
     end
 
     class GetLayoutResponse
-      attr_accessor content: Types::LayoutContent
-      attr_accessor created_time: ::Time
-      attr_accessor deleted: bool
-      attr_accessor last_modified_time: ::Time
-      attr_accessor layout_arn: ::String
       attr_accessor layout_id: ::String
+      attr_accessor layout_arn: ::String
       attr_accessor name: ::String
+      attr_accessor content: Types::LayoutContent
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor deleted: bool
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -623,18 +673,18 @@ module Aws::ConnectCases
     end
 
     class GetTemplateResponse
-      attr_accessor created_time: ::Time
-      attr_accessor deleted: bool
-      attr_accessor description: ::String
-      attr_accessor last_modified_time: ::Time
-      attr_accessor layout_configuration: Types::LayoutConfiguration
-      attr_accessor name: ::String
-      attr_accessor required_fields: ::Array[Types::RequiredField]
-      attr_accessor rules: ::Array[Types::TemplateRule]
-      attr_accessor status: ("Active" | "Inactive")
-      attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor template_arn: ::String
       attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor layout_configuration: Types::LayoutConfiguration
+      attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor deleted: bool
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor rules: ::Array[Types::TemplateRule]
       SENSITIVE: []
     end
 
@@ -666,8 +716,8 @@ module Aws::ConnectCases
     end
 
     class LayoutSummary
-      attr_accessor layout_arn: ::String
       attr_accessor layout_id: ::String
+      attr_accessor layout_arn: ::String
       attr_accessor name: ::String
       SENSITIVE: []
     end
@@ -686,8 +736,8 @@ module Aws::ConnectCases
     end
 
     class ListCasesForContactRequest
-      attr_accessor contact_arn: ::String
       attr_accessor domain_id: ::String
+      attr_accessor contact_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -721,8 +771,8 @@ module Aws::ConnectCases
     end
 
     class ListFieldOptionsResponse
-      attr_accessor next_token: ::String
       attr_accessor options: ::Array[Types::FieldOption]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -771,8 +821,8 @@ module Aws::ConnectCases
     end
 
     class ListTemplatesResponse
-      attr_accessor next_token: ::String
       attr_accessor templates: ::Array[Types::TemplateSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -788,20 +838,20 @@ module Aws::ConnectCases
     end
 
     class OperandTwo
+      attr_accessor string_value: ::String
       attr_accessor boolean_value: bool
       attr_accessor double_value: ::Float
       attr_accessor empty_value: Types::EmptyOperandValue
-      attr_accessor string_value: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class StringValue < OperandTwo
+      end
       class BooleanValue < OperandTwo
       end
       class DoubleValue < OperandTwo
       end
       class EmptyValue < OperandTwo
-      end
-      class StringValue < OperandTwo
       end
       class Unknown < OperandTwo
       end
@@ -817,20 +867,26 @@ module Aws::ConnectCases
     end
 
     class RelatedItemContent
-      attr_accessor comment: Types::CommentContent
       attr_accessor contact: Types::ContactContent
+      attr_accessor comment: Types::CommentContent
       attr_accessor file: Types::FileContent
       attr_accessor sla: Types::SlaContent
+      attr_accessor connect_case: Types::ConnectCaseContent
+      attr_accessor custom: Types::CustomContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Comment < RelatedItemContent
-      end
       class Contact < RelatedItemContent
+      end
+      class Comment < RelatedItemContent
       end
       class File < RelatedItemContent
       end
       class Sla < RelatedItemContent
+      end
+      class ConnectCase < RelatedItemContent
+      end
+      class Custom < RelatedItemContent
       end
       class Unknown < RelatedItemContent
       end
@@ -842,48 +898,60 @@ module Aws::ConnectCases
     end
 
     class RelatedItemInputContent
-      attr_accessor comment: Types::CommentContent
       attr_accessor contact: Types::Contact
+      attr_accessor comment: Types::CommentContent
       attr_accessor file: Types::FileContent
       attr_accessor sla: Types::SlaInputContent
+      attr_accessor connect_case: Types::ConnectCaseInputContent
+      attr_accessor custom: Types::CustomInputContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Comment < RelatedItemInputContent
-      end
       class Contact < RelatedItemInputContent
+      end
+      class Comment < RelatedItemInputContent
       end
       class File < RelatedItemInputContent
       end
       class Sla < RelatedItemInputContent
+      end
+      class ConnectCase < RelatedItemInputContent
+      end
+      class Custom < RelatedItemInputContent
       end
       class Unknown < RelatedItemInputContent
       end
     end
 
     class RelatedItemTypeFilter
-      attr_accessor comment: Types::CommentFilter
       attr_accessor contact: Types::ContactFilter
+      attr_accessor comment: Types::CommentFilter
       attr_accessor file: Types::FileFilter
       attr_accessor sla: Types::SlaFilter
+      attr_accessor connect_case: Types::ConnectCaseFilter
+      attr_accessor custom: Types::CustomFilter
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Comment < RelatedItemTypeFilter
-      end
       class Contact < RelatedItemTypeFilter
+      end
+      class Comment < RelatedItemTypeFilter
       end
       class File < RelatedItemTypeFilter
       end
       class Sla < RelatedItemTypeFilter
+      end
+      class ConnectCase < RelatedItemTypeFilter
+      end
+      class Custom < RelatedItemTypeFilter
       end
       class Unknown < RelatedItemTypeFilter
       end
     end
 
     class RequiredCaseRule
-      attr_accessor conditions: ::Array[Types::BooleanCondition]
       attr_accessor default_value: bool
+      attr_accessor conditions: ::Array[Types::BooleanCondition]
       SENSITIVE: []
     end
 
@@ -899,37 +967,69 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class SearchAllRelatedItemsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RelatedItemTypeFilter]
+      attr_accessor sorts: ::Array[Types::SearchAllRelatedItemsSort]
+      SENSITIVE: []
+    end
+
+    class SearchAllRelatedItemsResponse
+      attr_accessor next_token: ::String
+      attr_accessor related_items: ::Array[Types::SearchAllRelatedItemsResponseItem]
+      SENSITIVE: []
+    end
+
+    class SearchAllRelatedItemsResponseItem
+      attr_accessor related_item_id: ::String
+      attr_accessor case_id: ::String
+      attr_accessor type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
+      attr_accessor association_time: ::Time
+      attr_accessor content: Types::RelatedItemContent
+      attr_accessor performed_by: Types::UserUnion
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SearchAllRelatedItemsSort
+      attr_accessor sort_property: ("AssociationTime" | "CaseId")
+      attr_accessor sort_order: ("Asc" | "Desc")
+      SENSITIVE: []
+    end
+
     class SearchCasesRequest
       attr_accessor domain_id: ::String
-      attr_accessor fields: ::Array[Types::FieldIdentifier]
-      attr_accessor filter: Types::CaseFilter
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor search_term: ::String
+      attr_accessor filter: Types::CaseFilter
       attr_accessor sorts: ::Array[Types::Sort]
+      attr_accessor fields: ::Array[Types::FieldIdentifier]
       SENSITIVE: []
     end
 
     class SearchCasesResponse
-      attr_accessor cases: ::Array[Types::SearchCasesResponseItem]
       attr_accessor next_token: ::String
+      attr_accessor cases: ::Array[Types::SearchCasesResponseItem]
       SENSITIVE: []
     end
 
     class SearchCasesResponseItem
       attr_accessor case_id: ::String
+      attr_accessor template_id: ::String
       attr_accessor fields: ::Array[Types::FieldValue]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor template_id: ::String
       SENSITIVE: []
     end
 
     class SearchRelatedItemsRequest
-      attr_accessor case_id: ::String
       attr_accessor domain_id: ::String
-      attr_accessor filters: ::Array[Types::RelatedItemTypeFilter]
+      attr_accessor case_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::RelatedItemTypeFilter]
       SENSITIVE: []
     end
 
@@ -940,12 +1040,12 @@ module Aws::ConnectCases
     end
 
     class SearchRelatedItemsResponseItem
+      attr_accessor related_item_id: ::String
+      attr_accessor type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
       attr_accessor association_time: ::Time
       attr_accessor content: Types::RelatedItemContent
-      attr_accessor performed_by: Types::UserUnion
-      attr_accessor related_item_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("Contact" | "Comment" | "File" | "Sla")
+      attr_accessor performed_by: Types::UserUnion
       SENSITIVE: []
     end
 
@@ -966,13 +1066,13 @@ module Aws::ConnectCases
     end
 
     class SlaConfiguration
-      attr_accessor completion_time: ::Time
-      attr_accessor field_id: ::String
       attr_accessor name: ::String
+      attr_accessor type: ("CaseField")
       attr_accessor status: ("Active" | "Overdue" | "Met" | "NotMet")
+      attr_accessor field_id: ::String
       attr_accessor target_field_values: ::Array[Types::FieldValueUnion]
       attr_accessor target_time: ::Time
-      attr_accessor type: ("CaseField")
+      attr_accessor completion_time: ::Time
       SENSITIVE: [:name]
     end
 
@@ -988,11 +1088,11 @@ module Aws::ConnectCases
     end
 
     class SlaInputConfiguration
-      attr_accessor field_id: ::String
       attr_accessor name: ::String
+      attr_accessor type: ("CaseField")
+      attr_accessor field_id: ::String
       attr_accessor target_field_values: ::Array[Types::FieldValueUnion]
       attr_accessor target_sla_minutes: ::Integer
-      attr_accessor type: ("CaseField")
       SENSITIVE: [:name]
     end
 
@@ -1026,10 +1126,10 @@ module Aws::ConnectCases
     end
 
     class TemplateSummary
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
       attr_accessor name: ::String
       attr_accessor status: ("Active" | "Inactive")
-      attr_accessor template_arn: ::String
-      attr_accessor template_id: ::String
       SENSITIVE: []
     end
 
@@ -1045,8 +1145,8 @@ module Aws::ConnectCases
     end
 
     class UpdateCaseRequest
-      attr_accessor case_id: ::String
       attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
       attr_accessor fields: ::Array[Types::FieldValue]
       attr_accessor performed_by: Types::UserUnion
       SENSITIVE: []
@@ -1056,10 +1156,10 @@ module Aws::ConnectCases
     end
 
     class UpdateCaseRuleRequest
-      attr_accessor case_rule_id: ::String
-      attr_accessor description: ::String
       attr_accessor domain_id: ::String
+      attr_accessor case_rule_id: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor rule: Types::CaseRuleDetails
       SENSITIVE: []
     end
@@ -1068,10 +1168,10 @@ module Aws::ConnectCases
     end
 
     class UpdateFieldRequest
-      attr_accessor description: ::String
       attr_accessor domain_id: ::String
       attr_accessor field_id: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -1079,10 +1179,10 @@ module Aws::ConnectCases
     end
 
     class UpdateLayoutRequest
-      attr_accessor content: Types::LayoutContent
       attr_accessor domain_id: ::String
       attr_accessor layout_id: ::String
       attr_accessor name: ::String
+      attr_accessor content: Types::LayoutContent
       SENSITIVE: []
     end
 
@@ -1090,14 +1190,14 @@ module Aws::ConnectCases
     end
 
     class UpdateTemplateRequest
-      attr_accessor description: ::String
       attr_accessor domain_id: ::String
-      attr_accessor layout_configuration: Types::LayoutConfiguration
-      attr_accessor name: ::String
-      attr_accessor required_fields: ::Array[Types::RequiredField]
-      attr_accessor rules: ::Array[Types::TemplateRule]
-      attr_accessor status: ("Active" | "Inactive")
       attr_accessor template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor layout_configuration: Types::LayoutConfiguration
+      attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor rules: ::Array[Types::TemplateRule]
       SENSITIVE: []
     end
 
@@ -1105,14 +1205,14 @@ module Aws::ConnectCases
     end
 
     class UserUnion
-      attr_accessor custom_entity: ::String
       attr_accessor user_arn: ::String
+      attr_accessor custom_entity: ::String
       attr_accessor unknown: untyped
       SENSITIVE: [:custom_entity]
 
-      class CustomEntity < UserUnion
-      end
       class UserArn < UserUnion
+      end
+      class CustomEntity < UserUnion
       end
       class Unknown < UserUnion
       end

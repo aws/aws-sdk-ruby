@@ -2313,11 +2313,8 @@ module Aws::DatabaseMigrationService
     #   the connection parameters for the instance profile.
     #
     #   If you don't specify a value for the `KmsKeyArn` parameter, then DMS
-    #   uses your default encryption key.
-    #
-    #   KMS creates the default encryption key for your Amazon Web Services
-    #   account. Your Amazon Web Services account has a different default
-    #   encryption key for each Amazon Web Services Region.
+    #   uses an Amazon Web Services owned encryption key to encrypt your
+    #   resources.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the instance profile. A value
@@ -10624,11 +10621,8 @@ module Aws::DatabaseMigrationService
     #   the connection parameters for the instance profile.
     #
     #   If you don't specify a value for the `KmsKeyArn` parameter, then DMS
-    #   uses your default encryption key.
-    #
-    #   KMS creates the default encryption key for your Amazon Web Services
-    #   account. Your Amazon Web Services account has a different default
-    #   encryption key for each Amazon Web Services Region.
+    #   uses an Amazon Web Services owned encryption key to encrypt your
+    #   resources.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the instance profile. A value
@@ -13200,7 +13194,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

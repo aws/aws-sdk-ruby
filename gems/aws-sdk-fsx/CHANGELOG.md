@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2025-09-30)
+------------------
+
+* Feature - Add Dual-Stack support for Amazon FSx for NetApp ONTAP and Windows File Server
+
 1.122.0 (2025-08-26)
 ------------------
 

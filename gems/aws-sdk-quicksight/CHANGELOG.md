@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2025-09-30)
+------------------
+
+* Feature - added warnings to a few CLI pages
+
 1.158.0 (2025-09-11)
 ------------------
 

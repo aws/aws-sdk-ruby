@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2025-09-30)
+------------------
+
+* Feature - Adding TPS Traffic Shaping to Prefetch Schedules
+
 1.106.0 (2025-08-26)
 ------------------
 

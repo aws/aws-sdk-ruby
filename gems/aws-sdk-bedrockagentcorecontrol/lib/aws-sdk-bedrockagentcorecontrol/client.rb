@@ -903,6 +903,10 @@ module Aws::BedrockAgentCoreControl
     #   * If the value is omitted, a generic error message is returned to the
     #     end user.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of key-value pairs to associate with the gateway as metadata
+    #   tags.
+    #
     # @return [Types::CreateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayResponse#gateway_arn #gateway_arn} => String
@@ -948,6 +952,9 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     kms_key_arn: "KmsKeyArn",
     #     exception_level: "DEBUG", # accepts DEBUG
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2863,6 +2870,11 @@ module Aws::BedrockAgentCoreControl
 
     # Lists the tags associated with the specified resource.
     #
+    # <note markdown="1"> This feature is currently available only for AgentCore Runtime,
+    # Browser, Code Interpreter tool, and Gateway.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
     #   list tags.
@@ -2975,6 +2987,11 @@ module Aws::BedrockAgentCoreControl
     # request parameters, they are not changed. When a resource is deleted,
     # the tags associated with that resource are also deleted.
     #
+    # <note markdown="1"> This feature is currently available only for AgentCore Runtime,
+    # Browser, Code Interpreter tool, and Gateway.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #
@@ -3002,6 +3019,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Removes the specified tags from the specified resource.
+    #
+    # <note markdown="1"> This feature is currently available only for AgentCore Runtime,
+    # Browser, Code Interpreter tool, and Gateway.
+    #
+    #  </note>
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to untag.
@@ -3898,7 +3920,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

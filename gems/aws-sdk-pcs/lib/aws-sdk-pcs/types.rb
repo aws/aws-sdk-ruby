@@ -38,11 +38,6 @@ module Aws::PCS
     # accounting. It's a property of the **ClusterSlurmConfiguration**
     # object.
     #
-    # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means Slurm accounting is enabled.
-    #   @return [String]
-    #
     # @!attribute [rw] default_purge_time_in_days
     #   The default value for all purge settings for `slurmdbd.conf`. For
     #   more information, see the [slurmdbd.conf documentation at
@@ -60,11 +55,16 @@ module Aws::PCS
     #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
     #   @return [Integer]
     #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/Accounting AWS API Documentation
     #
     class Accounting < Struct.new(
-      :mode,
-      :default_purge_time_in_days)
+      :default_purge_time_in_days,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -73,11 +73,6 @@ module Aws::PCS
     # accounting. It's a property of the **ClusterSlurmConfiguration**
     # object.
     #
-    # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means Slurm accounting is enabled.
-    #   @return [String]
-    #
     # @!attribute [rw] default_purge_time_in_days
     #   The default value for all purge settings for `slurmdbd.conf`. For
     #   more information, see the [slurmdbd.conf documentation at
@@ -95,11 +90,16 @@ module Aws::PCS
     #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
     #   @return [Integer]
     #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/AccountingRequest AWS API Documentation
     #
     class AccountingRequest < Struct.new(
-      :mode,
-      :default_purge_time_in_days)
+      :default_purge_time_in_days,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -809,6 +809,10 @@ module Aws::PCS
     #   queue. Queues assign jobs to associated compute node groups.
     #   @return [Array<Types::ComputeNodeGroupConfiguration>]
     #
+    # @!attribute [rw] slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #   @return [Types::QueueSlurmConfigurationRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -833,6 +837,7 @@ module Aws::PCS
       :cluster_identifier,
       :queue_name,
       :compute_node_group_configurations,
+      :slurm_configuration,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -1038,7 +1043,7 @@ module Aws::PCS
     end
 
     # @!attribute [rw] cluster_identifier
-    #   The name or ID of the cluster of the queue.
+    #   The name or ID of the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/GetClusterRequest AWS API Documentation
@@ -1469,6 +1474,10 @@ module Aws::PCS
     #   queue. Queues assign jobs to associated compute node groups.
     #   @return [Array<Types::ComputeNodeGroupConfiguration>]
     #
+    # @!attribute [rw] slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #   @return [Types::QueueSlurmConfiguration]
+    #
     # @!attribute [rw] error_info
     #   The list of errors that occurred during queue provisioning.
     #   @return [Array<Types::ErrorInfo>]
@@ -1484,7 +1493,38 @@ module Aws::PCS
       :modified_at,
       :status,
       :compute_node_group_configurations,
+      :slurm_configuration,
       :error_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional options related to the Slurm scheduler.
+    #
+    # @!attribute [rw] slurm_custom_settings
+    #   Additional Slurm-specific configuration that directly maps to Slurm
+    #   settings.
+    #   @return [Array<Types::SlurmCustomSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/QueueSlurmConfiguration AWS API Documentation
+    #
+    class QueueSlurmConfiguration < Struct.new(
+      :slurm_custom_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional options related to the Slurm scheduler.
+    #
+    # @!attribute [rw] slurm_custom_settings
+    #   Additional Slurm-specific configuration that directly maps to Slurm
+    #   settings.
+    #   @return [Array<Types::SlurmCustomSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/QueueSlurmConfigurationRequest AWS API Documentation
+    #
+    class QueueSlurmConfigurationRequest < Struct.new(
+      :slurm_custom_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1793,36 +1833,21 @@ module Aws::PCS
 
     # Additional settings that directly map to Slurm settings.
     #
+    # PCS supports a subset of Slurm settings. For more information, see
+    # [Configuring custom Slurm settings in PCS][1] in the *PCS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-custom-settings.html
+    #
     # @!attribute [rw] parameter_name
-    #   PCS supports configuration of the following Slurm parameters:
-    #
-    #   * For **clusters**
-    #
-    #     * [ `Prolog` ][1]
-    #
-    #     * [ `Epilog` ][2]
-    #
-    #     * [ `SelectTypeParameters` ][3]
-    #
-    #     * [ `AccountingStorageEnforce` ][4]
-    #
-    #       PCS supports a subset of the options for
-    #       `AccountingStorageEnforce`. For more information, see [Slurm
-    #       accounting in PCS][5] in the *PCS User Guide*.
-    #   * For **compute node groups**
-    #
-    #     * [ `Weight` ][6]
-    #
-    #     * [ `RealMemory` ][6]
+    #   PCS supports custom Slurm settings for clusters, compute node
+    #   groups, and queues. For more information, see [Configuring custom
+    #   Slurm settings in PCS][1] in the *PCS User Guide*.
     #
     #
     #
-    #   [1]: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1
-    #   [2]: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1
-    #   [3]: https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters
-    #   [4]: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce
-    #   [5]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-accounting.html
-    #   [6]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-custom-settings.html
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
@@ -1914,6 +1939,111 @@ module Aws::PCS
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The accounting configuration includes configurable settings for Slurm
+    # accounting.
+    #
+    # @!attribute [rw] default_purge_time_in_days
+    #   The default value for all purge settings for `slurmdbd.conf`. For
+    #   more information, see the [slurmdbd.conf documentation at
+    #   SchedMD][1].
+    #
+    #   The default value for `defaultPurgeTimeInDays` is `-1`.
+    #
+    #   A value of `-1` means there is no purge time and records persist as
+    #   long as the cluster exists.
+    #
+    #   `0` isn't a valid value.
+    #
+    #
+    #
+    #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateAccountingRequest AWS API Documentation
+    #
+    class UpdateAccountingRequest < Struct.new(
+      :default_purge_time_in_days,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_identifier
+    #   The name or ID of the cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect. If you don't specify a client
+    #   token, the CLI and SDK automatically generate 1 for you.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #   @return [Types::UpdateClusterSlurmConfigurationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateClusterRequest AWS API Documentation
+    #
+    class UpdateClusterRequest < Struct.new(
+      :cluster_identifier,
+      :client_token,
+      :slurm_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   The cluster resource and configuration.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateClusterResponse AWS API Documentation
+    #
+    class UpdateClusterResponse < Struct.new(
+      :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional options related to the Slurm scheduler.
+    #
+    # @!attribute [rw] scale_down_idle_time_in_seconds
+    #   The time (in seconds) before an idle node is scaled down.
+    #
+    #   Default: `600`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] slurm_custom_settings
+    #   Additional Slurm-specific configuration that directly maps to Slurm
+    #   settings.
+    #   @return [Array<Types::SlurmCustomSetting>]
+    #
+    # @!attribute [rw] accounting
+    #   The accounting configuration includes configurable settings for
+    #   Slurm accounting.
+    #   @return [Types::UpdateAccountingRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateClusterSlurmConfigurationRequest AWS API Documentation
+    #
+    class UpdateClusterSlurmConfigurationRequest < Struct.new(
+      :scale_down_idle_time_in_seconds,
+      :slurm_custom_settings,
+      :accounting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2055,6 +2185,10 @@ module Aws::PCS
     #   queue. Queues assign jobs to associated compute node groups.
     #   @return [Array<Types::ComputeNodeGroupConfiguration>]
     #
+    # @!attribute [rw] slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #   @return [Types::UpdateQueueSlurmConfigurationRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2074,6 +2208,7 @@ module Aws::PCS
       :cluster_identifier,
       :queue_identifier,
       :compute_node_group_configurations,
+      :slurm_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2087,6 +2222,21 @@ module Aws::PCS
     #
     class UpdateQueueResponse < Struct.new(
       :queue)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional options related to the Slurm scheduler.
+    #
+    # @!attribute [rw] slurm_custom_settings
+    #   Additional Slurm-specific configuration that directly maps to Slurm
+    #   settings.
+    #   @return [Array<Types::SlurmCustomSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateQueueSlurmConfigurationRequest AWS API Documentation
+    #
+    class UpdateQueueSlurmConfigurationRequest < Struct.new(
+      :slurm_custom_settings)
       SENSITIVE = []
       include Aws::Structure
     end

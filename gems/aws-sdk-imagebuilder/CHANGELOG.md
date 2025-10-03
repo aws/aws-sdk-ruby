@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2025-09-29)
+------------------
+
+* Feature - This release introduces several new features and improvements to enhance pipeline management, logging, and resource configuration.
+
 1.88.0 (2025-09-22)
 ------------------
 

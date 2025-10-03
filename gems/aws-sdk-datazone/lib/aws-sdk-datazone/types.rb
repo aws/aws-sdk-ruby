@@ -14657,6 +14657,25 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The managed endpoint credentials of the EMR on EKS cluster.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the managed endpoint credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   The ARN of the managed endpoint credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ManagedEndpointCredentials AWS API Documentation
+    #
+    class ManagedEndpointCredentials < Struct.new(
+      :id,
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The offset of a matched term.
     #
     # @!attribute [rw] end_offset
@@ -18062,6 +18081,10 @@ module Aws::DataZone
     #   The log URI of the Spark EMR.
     #   @return [String]
     #
+    # @!attribute [rw] managed_endpoint_arn
+    #   The managed endpoint ARN of the EMR on EKS cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] python_virtual_env
     #   The Python virtual env of the Spark EMR.
     #   @return [String]
@@ -18081,6 +18104,7 @@ module Aws::DataZone
       :instance_profile_arn,
       :java_virtual_env,
       :log_uri,
+      :managed_endpoint_arn,
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri)
@@ -18089,6 +18113,10 @@ module Aws::DataZone
     end
 
     # The Spark EMR properties.
+    #
+    # @!attribute [rw] certificate_data
+    #   The certificate data of the EMR on EKS cluster.
+    #   @return [String]
     #
     # @!attribute [rw] compute_arn
     #   The compute ARN of the Spark EMR.
@@ -18122,6 +18150,14 @@ module Aws::DataZone
     #   The log URI of the Spark EMR.
     #   @return [String]
     #
+    # @!attribute [rw] managed_endpoint_arn
+    #   The managed endpoint ARN of the EMR on EKS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_endpoint_credentials
+    #   The managed endpoint credentials of the EMR on EKS cluster.
+    #   @return [Types::ManagedEndpointCredentials]
+    #
     # @!attribute [rw] python_virtual_env
     #   The Python virtual env of the Spark EMR.
     #   @return [String]
@@ -18137,6 +18173,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SparkEmrPropertiesOutput AWS API Documentation
     #
     class SparkEmrPropertiesOutput < Struct.new(
+      :certificate_data,
       :compute_arn,
       :credentials,
       :credentials_expiration,
@@ -18145,10 +18182,12 @@ module Aws::DataZone
       :java_virtual_env,
       :livy_endpoint,
       :log_uri,
+      :managed_endpoint_arn,
+      :managed_endpoint_credentials,
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri)
-      SENSITIVE = [:credentials]
+      SENSITIVE = [:credentials, :managed_endpoint_credentials]
       include Aws::Structure
     end
 
@@ -18170,6 +18209,10 @@ module Aws::DataZone
     #   The log URI in the Spark EMR properties patch.
     #   @return [String]
     #
+    # @!attribute [rw] managed_endpoint_arn
+    #   The managed endpoint ARN of the EMR on EKS cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] python_virtual_env
     #   The Python virtual env in the Spark EMR properties patch.
     #   @return [String]
@@ -18189,6 +18232,7 @@ module Aws::DataZone
       :instance_profile_arn,
       :java_virtual_env,
       :log_uri,
+      :managed_endpoint_arn,
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri)

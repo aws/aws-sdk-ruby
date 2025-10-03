@@ -1135,6 +1135,34 @@
                     },
                     "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
                 }
+            },
+            {
+                "id": "RestJsonFooErrorWithNestedTypeProperty",
+                "description": "Some services serialize errors using __type, and if the response includes additional shapes that belong to a different namespace there'll be a nested __type property that must not be considered when determining which error to be surfaced.\n\nFor an example service see Amazon DynamoDB.",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/GreetingWithErrors",
+                        "responseCode": 200
+                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\",\n    \"ErrorDetails\": [\n      {\n          \"__type\": \"com.amazon.internal#ErrorDetails\",\n          \"reason\": \"Some reason\"\n      }\n    ]\n}"
+                }
             }
         ]
     },
@@ -1926,35 +1954,15 @@
                     "documentation": "<p>This example ensures that query string bound request parameters are serialized in the body of responses if the structure is used in both the request and response.</p>",
                     "readonly": true
                 },
-                "result": {},
+                "result": {
+                    "baz": "bam"
+                },
                 "response": {
                     "status_code": 200,
                     "headers": {
                         "Content-Type": "application/json"
                     },
-                    "body": "{}"
-                }
-            },
-            {
-                "id": "RestJsonIgnoreQueryParamsInResponseNoPayload",
-                "description": "This test is similar to RestJsonIgnoreQueryParamsInResponse,\nbut it ensures that clients gracefully handle responses from\nthe server that do not serialize an empty JSON object.",
-                "given": {
-                    "name": "IgnoreQueryParamsInResponse",
-                    "http": {
-                        "method": "GET",
-                        "requestUri": "/IgnoreQueryParamsInResponse",
-                        "responseCode": 200
-                    },
-                    "output": {
-                        "shape": "IgnoreQueryParamsInResponseOutput"
-                    },
-                    "documentation": "<p>This example ensures that query string bound request parameters are serialized in the body of responses if the structure is used in both the request and response.</p>",
-                    "readonly": true
-                },
-                "result": {},
-                "response": {
-                    "status_code": 200,
-                    "body": ""
+                    "body": "{\"baz\":\"bam\"}"
                 }
             }
         ]

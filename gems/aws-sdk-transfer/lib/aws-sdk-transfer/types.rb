@@ -1008,7 +1008,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] s3_storage_options
     #   Specifies whether or not performance for your Amazon S3 directories
-    #   is optimized. This is disabled by default.
+    #   is optimized.
+    #
+    #   * If using the console, this is enabled by default.
+    #
+    #   * If using the API or CLI, this is disabled by default.
     #
     #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
     #   you enable this option, you would then need to explicitly set the
@@ -3103,7 +3107,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] s3_storage_options
     #   Specifies whether or not performance for your Amazon S3 directories
-    #   is optimized. This is disabled by default.
+    #   is optimized.
+    #
+    #   * If using the console, this is enabled by default.
+    #
+    #   * If using the API or CLI, this is disabled by default.
     #
     #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
     #   you enable this option, you would then need to explicitly set the
@@ -3589,7 +3597,15 @@ module Aws::Transfer
     #   A list of security groups IDs that are available to attach to your
     #   server's endpoint.
     #
-    #   <note markdown="1"> This property can only be set when `EndpointType` is set to `VPC`.
+    #   <note markdown="1"> While `SecurityGroupIds` appears in the response syntax for
+    #   consistency with `CreateServer` and `UpdateServer` operations, this
+    #   field is not populated in `DescribeServer` responses. Security
+    #   groups are managed at the VPC endpoint level and can be modified
+    #   outside of the Transfer Family service. To retrieve current security
+    #   group information, use the EC2 `DescribeVpcEndpoints` API with the
+    #   `VpcEndpointId` returned in the response.
+    #
+    #    This property can only be set when `EndpointType` is set to `VPC`.
     #
     #    You can edit the `SecurityGroupIds` property in the
     #   [UpdateServer][1] API only if you are changing the `EndpointType`
@@ -5642,7 +5658,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] directory_listing_optimization
     #   Specifies whether or not performance for your Amazon S3 directories
-    #   is optimized. This is disabled by default.
+    #   is optimized.
+    #
+    #   * If using the console, this is enabled by default.
+    #
+    #   * If using the API or CLI, this is disabled by default.
     #
     #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
     #   you enable this option, you would then need to explicitly set the
@@ -5801,8 +5821,13 @@ module Aws::Transfer
     #
     # @!attribute [rw] max_concurrent_connections
     #   Specify the number of concurrent connections that your connector
-    #   creates to the remote server. The default value is `5` (this is also
-    #   the maximum value allowed).
+    #   creates to the remote server. The default value is `1`. The maximum
+    #   values is `5`.
+    #
+    #   <note markdown="1"> If you are using the Amazon Web Services Management Console, the
+    #   default value is `5`.
+    #
+    #    </note>
     #
     #   This parameter specifies the number of active connections that your
     #   connector can establish with the remote server at the same time.
@@ -7095,7 +7120,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] s3_storage_options
     #   Specifies whether or not performance for your Amazon S3 directories
-    #   is optimized. This is disabled by default.
+    #   is optimized.
+    #
+    #   * If using the console, this is enabled by default.
+    #
+    #   * If using the API or CLI, this is disabled by default.
     #
     #   By default, home directory mappings have a `TYPE` of `DIRECTORY`. If
     #   you enable this option, you would then need to explicitly set the
@@ -7128,6 +7157,29 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_type
+    #   The mode of authentication for a server. The default value is
+    #   `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the Transfer Family service.
+    #
+    #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
+    #   groups in Directory Service for Microsoft Active Directory or
+    #   Microsoft Active Directory in your on-premises environment or in
+    #   Amazon Web Services using AD Connector. This option also requires
+    #   you to provide a Directory ID by using the `IdentityProviderDetails`
+    #   parameter.
+    #
+    #   Use the `API_GATEWAY` value to integrate with an identity provider
+    #   of your choosing. The `API_GATEWAY` setting requires you to provide
+    #   an Amazon API Gateway endpoint URL to call for authentication by
+    #   using the `IdentityProviderDetails` parameter.
+    #
+    #   Use the `AWS_LAMBDA` value to directly use an Lambda function as
+    #   your identity provider. If you choose this value, you must specify
+    #   the ARN for the Lambda function in the `Function` parameter for the
+    #   `IdentityProviderDetails` data type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
@@ -7146,7 +7198,8 @@ module Aws::Transfer
       :workflow_details,
       :structured_log_destinations,
       :s3_storage_options,
-      :ip_address_type)
+      :ip_address_type,
+      :identity_provider_type)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end

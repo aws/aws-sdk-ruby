@@ -1379,7 +1379,17 @@ module Aws::GuardDuty
     #   The format of the file that contains the threat entity set.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the threat entity set.
+    #   The URI of the file that contains the threat entity set. The format of
+    #   the `Location` URL must be a valid Amazon S3 URL format. Invalid URL
+    #   formats will result in an error, regardless of whether you activate
+    #   the entity set or not. For more information about format of the
+    #   location URLs, see [Format of location URL under Step 2: Adding
+    #   trusted or threat intelligence data][1] in the *Amazon GuardDuty User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html
     #
     # @option params [String] :expected_bucket_owner
     #   The Amazon Web Services account ID that owns the Amazon S3 bucket
@@ -1537,7 +1547,17 @@ module Aws::GuardDuty
     #   The format of the file that contains the trusted entity set.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the trusted entity set.
+    #   The URI of the file that contains the threat entity set. The format of
+    #   the `Location` URL must be a valid Amazon S3 URL format. Invalid URL
+    #   formats will result in an error, regardless of whether you activate
+    #   the entity set or not. For more information about format of the
+    #   location URLs, see [Format of location URL under Step 2: Adding
+    #   trusted or threat intelligence data][1] in the *Amazon GuardDuty User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html
     #
     # @option params [String] :expected_bucket_owner
     #   The Amazon Web Services account ID that owns the Amazon S3 bucket
@@ -6189,7 +6209,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -410,7 +410,26 @@ module Aws::Synthetics
     #   `syn-nodejs.puppeteer-3.4`, and later runtimes, the handler can be
     #   specified as ` fileName.functionName `, or you can specify a folder
     #   where canary scripts reside as ` folder/fileName.functionName `.
+    #
+    #   This field is required when you don't specify `BlueprintTypes` and
+    #   is not allowed when you specify `BlueprintTypes`.
     #   @return [String]
+    #
+    # @!attribute [rw] blueprint_types
+    #   `BlueprintTypes` is a list of templates that enable simplified
+    #   canary creation. You can create canaries for common monitoring
+    #   scenarios by providing only a JSON configuration file instead of
+    #   writing custom scripts. The only supported value is `multi-checks`.
+    #
+    #   Multi-checks monitors HTTP/DNS/SSL/TCP endpoints with built-in
+    #   authentication schemes (Basic, API Key, OAuth, SigV4) and assertion
+    #   capabilities. When you specify `BlueprintTypes`, the Handler field
+    #   cannot be specified since the blueprint provides a pre-defined entry
+    #   point.
+    #
+    #   `BlueprintTypes` is supported only on canaries for syn-nodejs-3.0
+    #   runtime or later.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dependencies
     #   A list of dependencies that should be used for running this canary.
@@ -426,6 +445,7 @@ module Aws::Synthetics
       :s3_version,
       :zip_file,
       :handler,
+      :blueprint_types,
       :dependencies)
       SENSITIVE = []
       include Aws::Structure
@@ -441,7 +461,26 @@ module Aws::Synthetics
     #
     # @!attribute [rw] handler
     #   The entry point to use for the source code when running the canary.
+    #
+    #   This field is required when you don't specify `BlueprintTypes` and
+    #   is not allowed when you specify `BlueprintTypes`.
     #   @return [String]
+    #
+    # @!attribute [rw] blueprint_types
+    #   `BlueprintTypes` is a list of templates that enable simplified
+    #   canary creation. You can create canaries for common monitoring
+    #   scenarios by providing only a JSON configuration file instead of
+    #   writing custom scripts. The only supported value is `multi-checks`.
+    #
+    #   Multi-checks monitors HTTP/DNS/SSL/TCP endpoints with built-in
+    #   authentication schemes (Basic, API Key, OAuth, SigV4) and assertion
+    #   capabilities. When you specify `BlueprintTypes`, the Handler field
+    #   cannot be specified since the blueprint provides a pre-defined entry
+    #   point.
+    #
+    #   `BlueprintTypes` is supported only on canaries for syn-nodejs-3.0
+    #   runtime or later.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dependencies
     #   A list of dependencies that are used for running this canary. The
@@ -454,6 +493,7 @@ module Aws::Synthetics
     class CanaryCodeOutput < Struct.new(
       :source_location_arn,
       :handler,
+      :blueprint_types,
       :dependencies)
       SENSITIVE = []
       include Aws::Structure

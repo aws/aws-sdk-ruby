@@ -972,6 +972,25 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class GetProfileHistoryRecordRequest
+      attr_accessor domain_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileHistoryRecordResponse
+      attr_accessor id: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor action_type: ("ADDED_PROFILE_KEY" | "DELETED_PROFILE_KEY" | "CREATED" | "UPDATED" | "INGESTED" | "DELETED_BY_CUSTOMER" | "EXPIRED" | "MERGED" | "DELETED_BY_MERGE")
+      attr_accessor profile_object_unique_key: ::String
+      attr_accessor content: ::String
+      attr_accessor performed_by: ::String
+      SENSITIVE: [:content]
+    end
+
     class GetProfileObjectTypeRequest
       attr_accessor domain_name: ::String
       attr_accessor object_type_name: ::String
@@ -1407,6 +1426,23 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ListProfileHistoryRecordsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor action_type: ("ADDED_PROFILE_KEY" | "DELETED_PROFILE_KEY" | "CREATED" | "UPDATED" | "INGESTED" | "DELETED_BY_CUSTOMER" | "EXPIRED" | "MERGED" | "DELETED_BY_MERGE")
+      attr_accessor performed_by: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileHistoryRecordsResponse
+      attr_accessor profile_history_records: ::Array[Types::ProfileHistoryRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListProfileObjectTypeItem
       attr_accessor object_type_name: ::String
       attr_accessor description: ::String
@@ -1704,6 +1740,17 @@ module Aws::CustomerProfiles
     class ProfileDimension
       attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH")
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProfileHistoryRecord
+      attr_accessor id: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor action_type: ("ADDED_PROFILE_KEY" | "DELETED_PROFILE_KEY" | "CREATED" | "UPDATED" | "INGESTED" | "DELETED_BY_CUSTOMER" | "EXPIRED" | "MERGED" | "DELETED_BY_MERGE")
+      attr_accessor profile_object_unique_key: ::String
+      attr_accessor performed_by: ::String
       SENSITIVE: []
     end
 

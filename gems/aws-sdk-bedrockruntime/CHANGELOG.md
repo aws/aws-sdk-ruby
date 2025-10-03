@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2025-09-29)
+------------------
+
+* Feature - New stop reason for Converse and ConverseStream
+
 1.59.0 (2025-08-29)
 ------------------
 

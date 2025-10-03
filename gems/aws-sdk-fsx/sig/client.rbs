@@ -382,7 +382,8 @@ module Aws
                                   throughput_capacity: ::Integer?,
                                   weekly_maintenance_start_time: ::String?,
                                   ha_pairs: ::Integer?,
-                                  throughput_capacity_per_ha_pair: ::Integer?
+                                  throughput_capacity_per_ha_pair: ::Integer?,
+                                  endpoint_ipv_6_address_range: ::String?
                                 },
                                 ?file_system_type_version: ::String,
                                 ?open_zfs_configuration: {
@@ -1281,7 +1282,8 @@ module Aws
                                   add_route_table_ids: Array[::String]?,
                                   remove_route_table_ids: Array[::String]?,
                                   throughput_capacity_per_ha_pair: ::Integer?,
-                                  ha_pairs: ::Integer?
+                                  ha_pairs: ::Integer?,
+                                  endpoint_ipv_6_address_range: ::String?
                                 },
                                 ?open_zfs_configuration: {
                                   automatic_backup_retention_days: ::Integer?,

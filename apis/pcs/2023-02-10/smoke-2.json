@@ -1,50 +1,11 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetCluster_AccessDeniedException",
-    "operationName" : "GetCluster",
-    "input" : {
-      "clusterIdentifier" : "pcs_donotexist"
-    },
+    "id" : "ListClustersSuccess",
+    "operationName" : "ListClusters",
+    "input" : { },
     "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListComputeNodeGroups_AccessDeniedException",
-    "operationName" : "ListComputeNodeGroups",
-    "input" : {
-      "clusterIdentifier" : "pcs_donotexist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetQueueFailure_AccessDeniedException",
-    "operationName" : "GetQueue",
-    "input" : {
-      "clusterIdentifier" : "pcs_donotexist",
-      "queueIdentifier" : "pcs_donotexist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",
@@ -71,11 +32,15 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListClustersSuccess",
-    "operationName" : "ListClusters",
-    "input" : { },
+    "id" : "GetCluster_AccessDeniedException",
+    "operationName" : "GetCluster",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
     },
     "config" : {
       "region" : "us-west-2",
@@ -117,6 +82,58 @@
   }, {
     "id" : "ListQueueFailure_AccessDeniedException",
     "operationName" : "ListQueues",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetQueueFailure_AccessDeniedException",
+    "operationName" : "GetQueue",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist",
+      "queueIdentifier" : "pcs_donotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListComputeNodeGroups_AccessDeniedException",
+    "operationName" : "ListComputeNodeGroups",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateCluster_AccessDeniedException",
+    "operationName" : "UpdateCluster",
     "input" : {
       "clusterIdentifier" : "pcs_donotexist"
     },

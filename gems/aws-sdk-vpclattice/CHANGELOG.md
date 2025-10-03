@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2025-09-29)
+------------------
+
+* Feature - Adds support for specifying the number of IPv4 addresses in each ENI for the resource gateway for VPC Lattice.
+
 1.36.0 (2025-08-27)
 ------------------
 

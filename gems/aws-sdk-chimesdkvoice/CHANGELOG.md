@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-09-30)
+------------------
+
+* Feature - Added support for IPv4-only and dual-stack network configurations for VoiceConnector and CreateVoiceConnector API.
+
 1.46.0 (2025-08-27)
 ------------------
 

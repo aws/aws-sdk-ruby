@@ -1361,6 +1361,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
       attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
+      attr_accessor identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
       SENSITIVE: [:host_key]
     end
 

@@ -152,7 +152,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] type_name_alias
-    #   An alias to assign to the public extension, in this account and
+    #   An alias to assign to the public extension in this account and
     #   Region. If you specify an alias for the extension, CloudFormation
     #   treats the alias as the extension type name within this account and
     #   Region. You must use the alias to refer to the extension in your
@@ -219,7 +219,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the activated extension, in this
+    #   The Amazon Resource Name (ARN) of the activated extension in this
     #   account and Region.
     #   @return [String]
     #
@@ -1906,7 +1906,7 @@ module Aws::CloudFormation
     class DeactivateOrganizationsAccessOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] type_name
-    #   The type name of the extension, in this account and Region. If you
+    #   The type name of the extension in this account and Region. If you
     #   specified a type name alias when enabling the extension, use the
     #   type name alias.
     #
@@ -1922,8 +1922,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account
-    #   and Region.
+    #   The Amazon Resource Name (ARN) for the extension in this account and
+    #   Region.
     #
     #   Conditional: You must specify either `Arn`, or `TypeName` and
     #   `Type`.
@@ -3681,13 +3681,14 @@ module Aws::CloudFormation
     # @!attribute [rw] schema
     #   The schema that defines the extension.
     #
-    #   For more information about extension schemas, see [Resource type
-    #   schema][1] in the *CloudFormation Command Line Interface (CLI) User
-    #   Guide*.
+    #   For more information, see [Resource type schema][1] in the
+    #   *CloudFormation Command Line Interface (CLI) User Guide* and the
+    #   [CloudFormation Hooks User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+    #   [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html
     #   @return [String]
     #
     # @!attribute [rw] provisioning_type
@@ -3817,14 +3818,11 @@ module Aws::CloudFormation
     #   extension in this account and Region.
     #
     #   To set the configuration data for an extension, use
-    #   [SetTypeConfiguration][1]. For more information, see [Edit
-    #   configuration data for extensions in your account][2] in the
-    #   *CloudFormation User Guide*.
+    #   [SetTypeConfiguration][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] publisher_id
@@ -6171,8 +6169,7 @@ module Aws::CloudFormation
     #       Region.
     #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
-    #     extensions from Amazon Web Services, in addition to third-party
-    #     publishers.
+    #     extensions from Amazon Web Services and third-party publishers.
     #
     #   The default is `PRIVATE`.
     #   @return [String]
@@ -7864,8 +7861,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] type_arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account
-    #   and Region.
+    #   The Amazon Resource Name (ARN) for the extension in this account and
+    #   Region.
     #
     #   For public extensions, this will be the ARN assigned when you call
     #   the [ActivateType][1] API operation in this account and Region. For
@@ -7883,19 +7880,15 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The configuration data for the extension, in this account and
-    #   Region.
+    #   The configuration data for the extension in this account and Region.
     #
-    #   The configuration data must be formatted as JSON, and validate
-    #   against the schema returned in the `ConfigurationSchema` response
-    #   element of [DescribeType][1]. For more information, see [Defining
-    #   the account-level configuration of an extension][2] in the
-    #   *CloudFormation Command Line Interface (CLI) User Guide*.
+    #   The configuration data must be formatted as JSON and validate
+    #   against the extension's schema returned in the `Schema` response
+    #   element of [DescribeType][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    #   [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
     #   @return [String]
     #
     # @!attribute [rw] configuration_alias
@@ -7932,7 +7925,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] configuration_arn
-    #   The Amazon Resource Name (ARN) for the configuration data, in this
+    #   The Amazon Resource Name (ARN) for the configuration data in this
     #   account and Region.
     #
     #   Conditional: You must specify `ConfigurationArn`, or `Type` and
@@ -10490,14 +10483,14 @@ module Aws::CloudFormation
     # to store information about an CloudFormation stack.
     #
     # @!attribute [rw] key
-    #   *Required*. A string used to identify this tag. You can specify a
-    #   maximum of 128 characters for a tag key. Tags owned by Amazon Web
-    #   Services have the reserved prefix: `aws:`.
+    #   A string used to identify this tag. You can specify a maximum of 128
+    #   characters for a tag key. Tags owned by Amazon Web Services have the
+    #   reserved prefix: `aws:`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   *Required*. A string that contains the value for this tag. You can
-    #   specify a maximum of 256 characters for a tag value.
+    #   A string that contains the value for this tag. You can specify a
+    #   maximum of 256 characters for a tag value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag AWS API Documentation

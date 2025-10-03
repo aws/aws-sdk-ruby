@@ -253,7 +253,8 @@ module Aws
                               }?
                             },
                             ?kms_key_arn: ::String,
-                            ?exception_level: ("DEBUG")
+                            ?exception_level: ("DEBUG"),
+                            ?tags: Hash[::String, ::String]
                           ) -> _CreateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
 

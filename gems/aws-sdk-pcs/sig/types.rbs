@@ -14,14 +14,14 @@ module Aws::PCS
     end
 
     class Accounting
-      attr_accessor mode: ("STANDARD" | "NONE")
       attr_accessor default_purge_time_in_days: ::Integer
+      attr_accessor mode: ("STANDARD" | "NONE")
       SENSITIVE: []
     end
 
     class AccountingRequest
-      attr_accessor mode: ("STANDARD" | "NONE")
       attr_accessor default_purge_time_in_days: ::Integer
+      attr_accessor mode: ("STANDARD" | "NONE")
       SENSITIVE: []
     end
 
@@ -162,6 +162,7 @@ module Aws::PCS
       attr_accessor cluster_identifier: ::String
       attr_accessor queue_name: ::String
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor slurm_configuration: Types::QueueSlurmConfigurationRequest
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -335,7 +336,18 @@ module Aws::PCS
       attr_accessor modified_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor slurm_configuration: Types::QueueSlurmConfiguration
       attr_accessor error_info: ::Array[Types::ErrorInfo]
+      SENSITIVE: []
+    end
+
+    class QueueSlurmConfiguration
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class QueueSlurmConfigurationRequest
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       SENSITIVE: []
     end
 
@@ -438,6 +450,31 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class UpdateAccountingRequest
+      attr_accessor default_purge_time_in_days: ::Integer
+      attr_accessor mode: ("STANDARD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class UpdateClusterSlurmConfigurationRequest
+      attr_accessor scale_down_idle_time_in_seconds: ::Integer
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor accounting: Types::UpdateAccountingRequest
+      SENSITIVE: []
+    end
+
     class UpdateComputeNodeGroupRequest
       attr_accessor cluster_identifier: ::String
       attr_accessor compute_node_group_identifier: ::String
@@ -467,12 +504,18 @@ module Aws::PCS
       attr_accessor cluster_identifier: ::String
       attr_accessor queue_identifier: ::String
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor slurm_configuration: Types::UpdateQueueSlurmConfigurationRequest
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class UpdateQueueResponse
       attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class UpdateQueueSlurmConfigurationRequest
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       SENSITIVE: []
     end
 

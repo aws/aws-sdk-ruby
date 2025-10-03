@@ -2258,7 +2258,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API, Amazon FSx selects an unused IP address range
     #   for you from the 198.19.* range. By default in the Amazon FSx
@@ -2388,6 +2388,16 @@ module Aws::FSx
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemOntapConfiguration AWS API Documentation
     #
     class CreateFileSystemOntapConfiguration < Struct.new(
@@ -2402,7 +2412,8 @@ module Aws::FSx
       :throughput_capacity,
       :weekly_maintenance_start_time,
       :ha_pairs,
-      :throughput_capacity_per_ha_pair)
+      :throughput_capacity_per_ha_pair,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -2526,7 +2537,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /28 IP address range for you from one of the VPC's CIDR
@@ -2536,7 +2547,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ipv_6_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /118 IP address range for you from one of the VPC's CIDR
@@ -2783,8 +2794,8 @@ module Aws::FSx
     #   The network type of the Amazon FSx file system that you are
     #   creating. Valid values are `IPV4` (which supports IPv4 only) and
     #   `DUAL` (for dual-stack mode, which supports both IPv4 and IPv6). The
-    #   default is `IPV4`. Supported only for Amazon FSx for OpenZFS file
-    #   systems.
+    #   default is `IPV4`. Supported for FSx for OpenZFS, FSx for ONTAP, and
+    #   FSx for Windows File Server file systems.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
@@ -2923,12 +2934,8 @@ module Aws::FSx
     #   using the AssociateFileSystemAliases operation. You can remove DNS
     #   aliases from the file system after it is created using the
     #   DisassociateFileSystemAliases operation. You only need to specify
-    #   the alias name in the request payload.
-    #
-    #   For more information, see [Working with DNS Aliases][1] and
-    #   [Walkthrough 5: Using DNS aliases to access your file system][2],
-    #   including additional steps you must take to be able to access your
-    #   file system using a DNS alias.
+    #   the alias name in the request payload. For more information, see
+    #   [Managing DNS aliases][1] and [Accessing data using DNS aliases][2].
     #
     #   An alias name has to meet the following requirements:
     #
@@ -2950,7 +2957,7 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/dns-aliases.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_log_configuration
@@ -6386,14 +6393,19 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
-    #   IP addresses of the file system endpoint.
+    #   The IPv4 addresses of the file system endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses of the file system endpoint.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemEndpoint AWS API Documentation
     #
     class FileSystemEndpoint < Struct.new(
       :dns_name,
-      :ip_addresses)
+      :ip_addresses,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7290,7 +7302,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API, Amazon FSx selects an unused IP address range
     #   for you from the 198.19.* range. By default in the Amazon FSx
@@ -7397,6 +7409,16 @@ module Aws::FSx
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemConfiguration AWS API Documentation
     #
     class OntapFileSystemConfiguration < Struct.new(
@@ -7412,7 +7434,8 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :fsx_admin_password,
       :ha_pairs,
-      :throughput_capacity_per_ha_pair)
+      :throughput_capacity_per_ha_pair,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -7767,7 +7790,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /28 IP address range for you from one of the VPC's CIDR
@@ -7776,7 +7799,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ipv_6_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /118 IP address range for you from one of the VPC's CIDR
@@ -7791,7 +7814,7 @@ module Aws::FSx
     #   @return [Array<String>]
     #
     # @!attribute [rw] endpoint_ip_address
-    #   The IP address of the endpoint that is used to access data or to
+    #   The IPv4 address of the endpoint that is used to access data or to
     #   manage the file system.
     #   @return [String]
     #
@@ -8758,8 +8781,8 @@ module Aws::FSx
     end
 
     # An error indicating that a particular service limit was exceeded. You
-    # can increase some service limits by contacting Amazon Web
-    # ServicesSupport.
+    # can increase some service limits by contacting Amazon Web Services
+    # Support.
     #
     # @!attribute [rw] limit
     #   Enumeration of the service limit that was exceeded.
@@ -9243,14 +9266,19 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
-    #   The SVM endpoint's IP addresses.
+    #   The SVM endpoint's IPv4 addresses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   The SVM endpoint's IPv6 addresses.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SvmEndpoint AWS API Documentation
     #
     class SvmEndpoint < Struct.new(
       :dns_name,
-      :ip_addresses)
+      :ip_addresses,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9921,6 +9949,16 @@ module Aws::FSx
     #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/supported-fsx-clients.html#using-block-storage
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
     class UpdateFileSystemOntapConfiguration < Struct.new(
@@ -9933,7 +9971,8 @@ module Aws::FSx
       :add_route_table_ids,
       :remove_route_table_ids,
       :throughput_capacity_per_ha_pair,
-      :ha_pairs)
+      :ha_pairs,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -10022,7 +10061,7 @@ module Aws::FSx
     #   @return [Types::OpenZFSReadCacheConfiguration]
     #
     # @!attribute [rw] endpoint_ipv_6_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /118 IP address range for you from one of the VPC's CIDR
@@ -11043,21 +11082,21 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] preferred_file_server_ip
-    #   For `MULTI_AZ_1` deployment types, the IP address of the primary, or
-    #   preferred, file server.
+    #   For `MULTI_AZ_1` deployment types, the IPv4 address of the primary,
+    #   or preferred, file server.
     #
     #   Use this IP address when mounting the file system on Linux SMB
     #   clients or Windows SMB clients that are not joined to a Microsoft
     #   Active Directory. Applicable for all Windows file system deployment
-    #   types. This IP address is temporarily unavailable when the file
+    #   types. This IPv4 address is temporarily unavailable when the file
     #   system is undergoing maintenance. For Linux and Windows SMB clients
     #   that are joined to an Active Directory, use the file system's
     #   DNSName instead. For more information on mapping and mounting file
-    #   shares, see [Accessing File Shares][1].
+    #   shares, see [Accessing data using file shares][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-file-shares.html
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -11107,7 +11146,7 @@ module Aws::FSx
     #   aliases from the file system after it is created using the
     #   DisassociateFileSystemAliases operation. You only need to specify
     #   the alias name in the request payload. For more information, see
-    #   [DNS aliases][1].
+    #   [Managing DNS aliases][1].
     #
     #
     #
@@ -11128,6 +11167,17 @@ module Aws::FSx
     #   limit associated with your chosen throughput capacity.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] preferred_file_server_ipv_6
+    #   For MULTI\_AZ\_1 deployment types, the IPv6 address of the primary,
+    #   or preferred, file server. Use this IP address when mounting the
+    #   file system on Linux SMB clients or Windows SMB clients that are not
+    #   joined to a Microsoft Active Directory. Applicable for all Windows
+    #   file system deployment types. This IPv6 address is temporarily
+    #   unavailable when the file system is undergoing maintenance. For
+    #   Linux and Windows SMB clients that are joined to an Active
+    #   Directory, use the file system's DNSName instead.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
@@ -11145,7 +11195,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :aliases,
       :audit_log_configuration,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :preferred_file_server_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end

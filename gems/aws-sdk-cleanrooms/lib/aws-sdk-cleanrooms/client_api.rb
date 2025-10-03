@@ -14,6 +14,13 @@ module Aws::CleanRooms
 
     include Seahorse::Model
 
+    AccessBudget = Shapes::StructureShape.new(name: 'AccessBudget')
+    AccessBudgetDetails = Shapes::StructureShape.new(name: 'AccessBudgetDetails')
+    AccessBudgetDetailsList = Shapes::ListShape.new(name: 'AccessBudgetDetailsList')
+    AccessBudgetType = Shapes::StringShape.new(name: 'AccessBudgetType')
+    AccessBudgetsPrivacyTemplateParametersInput = Shapes::StructureShape.new(name: 'AccessBudgetsPrivacyTemplateParametersInput')
+    AccessBudgetsPrivacyTemplateParametersOutput = Shapes::StructureShape.new(name: 'AccessBudgetsPrivacyTemplateParametersOutput')
+    AccessBudgetsPrivacyTemplateUpdateParameters = Shapes::StructureShape.new(name: 'AccessBudgetsPrivacyTemplateUpdateParameters')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedExceptionReason')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -79,6 +86,7 @@ module Aws::CleanRooms
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
     AutoApprovedChangeType = Shapes::StringShape.new(name: 'AutoApprovedChangeType')
     AutoApprovedChangeTypeList = Shapes::ListShape.new(name: 'AutoApprovedChangeTypeList')
+    AutoRefreshMode = Shapes::StringShape.new(name: 'AutoRefreshMode')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
@@ -94,6 +102,10 @@ module Aws::CleanRooms
     BilledJobResourceUtilization = Shapes::StructureShape.new(name: 'BilledJobResourceUtilization')
     BilledResourceUtilization = Shapes::StructureShape.new(name: 'BilledResourceUtilization')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Budget = Shapes::IntegerShape.new(name: 'Budget')
+    BudgetParameter = Shapes::StructureShape.new(name: 'BudgetParameter')
+    BudgetParameters = Shapes::ListShape.new(name: 'BudgetParameters')
+    BudgetedResourceArn = Shapes::StringShape.new(name: 'BudgetedResourceArn')
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeInput = Shapes::StructureShape.new(name: 'ChangeInput')
     ChangeInputList = Shapes::ListShape.new(name: 'ChangeInputList')
@@ -502,6 +514,7 @@ module Aws::CleanRooms
     ReceiverAccountIds = Shapes::ListShape.new(name: 'ReceiverAccountIds')
     ReceiverConfiguration = Shapes::StructureShape.new(name: 'ReceiverConfiguration')
     ReceiverConfigurationsList = Shapes::ListShape.new(name: 'ReceiverConfigurationsList')
+    RemainingBudget = Shapes::IntegerShape.new(name: 'RemainingBudget')
     ResourceAlias = Shapes::StringShape.new(name: 'ResourceAlias')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -520,6 +533,7 @@ module Aws::CleanRooms
     SchemaConfiguration = Shapes::StringShape.new(name: 'SchemaConfiguration')
     SchemaConfigurationList = Shapes::ListShape.new(name: 'SchemaConfigurationList')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
+    SchemaResourceArn = Shapes::StringShape.new(name: 'SchemaResourceArn')
     SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
     SchemaStatusDetail = Shapes::StructureShape.new(name: 'SchemaStatusDetail')
     SchemaStatusDetailList = Shapes::ListShape.new(name: 'SchemaStatusDetailList')
@@ -598,6 +612,32 @@ module Aws::CleanRooms
     WorkerComputeConfiguration = Shapes::StructureShape.new(name: 'WorkerComputeConfiguration')
     WorkerComputeConfigurationNumberInteger = Shapes::IntegerShape.new(name: 'WorkerComputeConfigurationNumberInteger')
     WorkerComputeType = Shapes::StringShape.new(name: 'WorkerComputeType')
+
+    AccessBudget.add_member(:resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, required: true, location_name: "resourceArn"))
+    AccessBudget.add_member(:details, Shapes::ShapeRef.new(shape: AccessBudgetDetailsList, required: true, location_name: "details"))
+    AccessBudget.add_member(:aggregate_remaining_budget, Shapes::ShapeRef.new(shape: RemainingBudget, required: true, location_name: "aggregateRemainingBudget"))
+    AccessBudget.struct_class = Types::AccessBudget
+
+    AccessBudgetDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    AccessBudgetDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    AccessBudgetDetails.add_member(:remaining_budget, Shapes::ShapeRef.new(shape: RemainingBudget, required: true, location_name: "remainingBudget"))
+    AccessBudgetDetails.add_member(:budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "budget"))
+    AccessBudgetDetails.add_member(:budget_type, Shapes::ShapeRef.new(shape: AccessBudgetType, required: true, location_name: "budgetType"))
+    AccessBudgetDetails.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: AutoRefreshMode, location_name: "autoRefresh"))
+    AccessBudgetDetails.struct_class = Types::AccessBudgetDetails
+
+    AccessBudgetDetailsList.member = Shapes::ShapeRef.new(shape: AccessBudgetDetails)
+
+    AccessBudgetsPrivacyTemplateParametersInput.add_member(:budget_parameters, Shapes::ShapeRef.new(shape: BudgetParameters, required: true, location_name: "budgetParameters"))
+    AccessBudgetsPrivacyTemplateParametersInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, required: true, location_name: "resourceArn"))
+    AccessBudgetsPrivacyTemplateParametersInput.struct_class = Types::AccessBudgetsPrivacyTemplateParametersInput
+
+    AccessBudgetsPrivacyTemplateParametersOutput.add_member(:budget_parameters, Shapes::ShapeRef.new(shape: BudgetParameters, required: true, location_name: "budgetParameters"))
+    AccessBudgetsPrivacyTemplateParametersOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, required: true, location_name: "resourceArn"))
+    AccessBudgetsPrivacyTemplateParametersOutput.struct_class = Types::AccessBudgetsPrivacyTemplateParametersOutput
+
+    AccessBudgetsPrivacyTemplateUpdateParameters.add_member(:budget_parameters, Shapes::ShapeRef.new(shape: BudgetParameters, required: true, location_name: "budgetParameters"))
+    AccessBudgetsPrivacyTemplateUpdateParameters.struct_class = Types::AccessBudgetsPrivacyTemplateUpdateParameters
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "reason"))
@@ -836,6 +876,13 @@ module Aws::CleanRooms
 
     BilledResourceUtilization.add_member(:units, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "units"))
     BilledResourceUtilization.struct_class = Types::BilledResourceUtilization
+
+    BudgetParameter.add_member(:type, Shapes::ShapeRef.new(shape: AccessBudgetType, required: true, location_name: "type"))
+    BudgetParameter.add_member(:budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "budget"))
+    BudgetParameter.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: AutoRefreshMode, location_name: "autoRefresh"))
+    BudgetParameter.struct_class = Types::BudgetParameter
+
+    BudgetParameters.member = Shapes::ShapeRef.new(shape: BudgetParameter)
 
     Change.add_member(:specification_type, Shapes::ShapeRef.new(shape: ChangeSpecificationType, required: true, location_name: "specificationType"))
     Change.add_member(:specification, Shapes::ShapeRef.new(shape: ChangeSpecification, required: true, location_name: "specification"))
@@ -1384,7 +1431,7 @@ module Aws::CleanRooms
     CreateMembershipOutput.struct_class = Types::CreateMembershipOutput
 
     CreatePrivacyBudgetTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
-    CreatePrivacyBudgetTemplateInput.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, required: true, location_name: "autoRefresh"))
+    CreatePrivacyBudgetTemplateInput.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, location_name: "autoRefresh"))
     CreatePrivacyBudgetTemplateInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
     CreatePrivacyBudgetTemplateInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateParametersInput, required: true, location_name: "parameters"))
     CreatePrivacyBudgetTemplateInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1841,6 +1888,7 @@ module Aws::CleanRooms
     ListCollaborationPrivacyBudgetsInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location: "querystring", location_name: "privacyBudgetType"))
     ListCollaborationPrivacyBudgetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListCollaborationPrivacyBudgetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCollaborationPrivacyBudgetsInput.add_member(:access_budget_resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, location: "querystring", location_name: "accessBudgetResourceArn"))
     ListCollaborationPrivacyBudgetsInput.struct_class = Types::ListCollaborationPrivacyBudgetsInput
 
     ListCollaborationPrivacyBudgetsOutput.add_member(:collaboration_privacy_budget_summaries, Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetSummaryList, required: true, location_name: "collaborationPrivacyBudgetSummaries"))
@@ -1931,6 +1979,7 @@ module Aws::CleanRooms
     ListPrivacyBudgetsInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location: "querystring", location_name: "privacyBudgetType"))
     ListPrivacyBudgetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListPrivacyBudgetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPrivacyBudgetsInput.add_member(:access_budget_resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, location: "querystring", location_name: "accessBudgetResourceArn"))
     ListPrivacyBudgetsInput.struct_class = Types::ListPrivacyBudgetsInput
 
     ListPrivacyBudgetsOutput.add_member(:privacy_budget_summaries, Shapes::ShapeRef.new(shape: PrivacyBudgetSummaryList, required: true, location_name: "privacyBudgetSummaries"))
@@ -2123,8 +2172,10 @@ module Aws::CleanRooms
     PreviewPrivacyImpactParametersInput.struct_class = Types::PreviewPrivacyImpactParametersInput
 
     PrivacyBudget.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudget, location_name: "differentialPrivacy"))
+    PrivacyBudget.add_member(:access_budget, Shapes::ShapeRef.new(shape: AccessBudget, location_name: "accessBudget"))
     PrivacyBudget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PrivacyBudget.add_member_subclass(:differential_privacy, Types::PrivacyBudget::DifferentialPrivacy)
+    PrivacyBudget.add_member_subclass(:access_budget, Types::PrivacyBudget::AccessBudget)
     PrivacyBudget.add_member_subclass(:unknown, Types::PrivacyBudget::Unknown)
     PrivacyBudget.struct_class = Types::PrivacyBudget
 
@@ -2157,14 +2208,18 @@ module Aws::CleanRooms
     PrivacyBudgetTemplate.struct_class = Types::PrivacyBudgetTemplate
 
     PrivacyBudgetTemplateParametersInput.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateParametersInput, location_name: "differentialPrivacy"))
+    PrivacyBudgetTemplateParametersInput.add_member(:access_budget, Shapes::ShapeRef.new(shape: AccessBudgetsPrivacyTemplateParametersInput, location_name: "accessBudget"))
     PrivacyBudgetTemplateParametersInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PrivacyBudgetTemplateParametersInput.add_member_subclass(:differential_privacy, Types::PrivacyBudgetTemplateParametersInput::DifferentialPrivacy)
+    PrivacyBudgetTemplateParametersInput.add_member_subclass(:access_budget, Types::PrivacyBudgetTemplateParametersInput::AccessBudget)
     PrivacyBudgetTemplateParametersInput.add_member_subclass(:unknown, Types::PrivacyBudgetTemplateParametersInput::Unknown)
     PrivacyBudgetTemplateParametersInput.struct_class = Types::PrivacyBudgetTemplateParametersInput
 
     PrivacyBudgetTemplateParametersOutput.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateParametersOutput, location_name: "differentialPrivacy"))
+    PrivacyBudgetTemplateParametersOutput.add_member(:access_budget, Shapes::ShapeRef.new(shape: AccessBudgetsPrivacyTemplateParametersOutput, location_name: "accessBudget"))
     PrivacyBudgetTemplateParametersOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PrivacyBudgetTemplateParametersOutput.add_member_subclass(:differential_privacy, Types::PrivacyBudgetTemplateParametersOutput::DifferentialPrivacy)
+    PrivacyBudgetTemplateParametersOutput.add_member_subclass(:access_budget, Types::PrivacyBudgetTemplateParametersOutput::AccessBudget)
     PrivacyBudgetTemplateParametersOutput.add_member_subclass(:unknown, Types::PrivacyBudgetTemplateParametersOutput::Unknown)
     PrivacyBudgetTemplateParametersOutput.struct_class = Types::PrivacyBudgetTemplateParametersOutput
 
@@ -2182,8 +2237,10 @@ module Aws::CleanRooms
     PrivacyBudgetTemplateSummaryList.member = Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateSummary)
 
     PrivacyBudgetTemplateUpdateParameters.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateUpdateParameters, location_name: "differentialPrivacy"))
+    PrivacyBudgetTemplateUpdateParameters.add_member(:access_budget, Shapes::ShapeRef.new(shape: AccessBudgetsPrivacyTemplateUpdateParameters, location_name: "accessBudget"))
     PrivacyBudgetTemplateUpdateParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PrivacyBudgetTemplateUpdateParameters.add_member_subclass(:differential_privacy, Types::PrivacyBudgetTemplateUpdateParameters::DifferentialPrivacy)
+    PrivacyBudgetTemplateUpdateParameters.add_member_subclass(:access_budget, Types::PrivacyBudgetTemplateUpdateParameters::AccessBudget)
     PrivacyBudgetTemplateUpdateParameters.add_member_subclass(:unknown, Types::PrivacyBudgetTemplateUpdateParameters::Unknown)
     PrivacyBudgetTemplateUpdateParameters.struct_class = Types::PrivacyBudgetTemplateUpdateParameters
 
@@ -2453,6 +2510,7 @@ module Aws::CleanRooms
     Schema.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     Schema.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
     Schema.add_member(:schema_status_details, Shapes::ShapeRef.new(shape: SchemaStatusDetailList, required: true, location_name: "schemaStatusDetails"))
+    Schema.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SchemaResourceArn, location_name: "resourceArn"))
     Schema.add_member(:schema_type_properties, Shapes::ShapeRef.new(shape: SchemaTypeProperties, location_name: "schemaTypeProperties"))
     Schema.struct_class = Types::Schema
 
@@ -2492,6 +2550,7 @@ module Aws::CleanRooms
     SchemaSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
     SchemaSummary.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: AnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
     SchemaSummary.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, location_name: "analysisMethod"))
+    SchemaSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SchemaResourceArn, location_name: "resourceArn"))
     SchemaSummary.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     SchemaSummary.struct_class = Types::SchemaSummary
 

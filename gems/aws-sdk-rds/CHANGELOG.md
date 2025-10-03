@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.294.0 (2025-09-30)
+------------------
+
+* Feature - Enhanced RDS error handling: Added DBProxyEndpointNotFoundFault, DBShardGroupNotFoundFault, KMSKeyNotAccessibleFault for snapshots/restores/backups, NetworkTypeNotSupported, StorageTypeNotSupportedFault for restores, and granular state validation faults. Changed DBInstanceNotReadyFault to HTTP 400.
+
 1.293.0 (2025-09-11)
 ------------------
 

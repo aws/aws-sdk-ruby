@@ -98,6 +98,7 @@ module Aws
                            ip_routes: Array[
                              {
                                cidr_ip: ::String?,
+                               cidr_ipv_6: ::String?,
                                description: ::String?
                              },
                            ],
@@ -158,7 +159,8 @@ module Aws
                                connect_settings: {
                                  vpc_id: ::String,
                                  subnet_ids: Array[::String],
-                                 customer_dns_ips: Array[::String],
+                                 customer_dns_ips: Array[::String]?,
+                                 customer_dns_ips_v6: Array[::String]?,
                                  customer_user_name: ::String
                                },
                                ?tags: Array[
@@ -166,7 +168,8 @@ module Aws
                                    key: ::String,
                                    value: ::String
                                  },
-                               ]
+                               ],
+                               ?network_type: ("Dual-stack" | "IPv4" | "IPv6")
                              ) -> _ConnectDirectoryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConnectDirectoryResponseSuccess
 
@@ -208,7 +211,8 @@ module Aws
       def create_conditional_forwarder: (
                                           directory_id: ::String,
                                           remote_domain_name: ::String,
-                                          dns_ip_addrs: Array[::String]
+                                          ?dns_ip_addrs: Array[::String],
+                                          ?dns_ipv_6_addrs: Array[::String]
                                         ) -> _CreateConditionalForwarderResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConditionalForwarderResponseSuccess
 
@@ -232,7 +236,8 @@ module Aws
                                   key: ::String,
                                   value: ::String
                                 },
-                              ]
+                              ],
+                              ?network_type: ("Dual-stack" | "IPv4" | "IPv6")
                             ) -> _CreateDirectoryResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectoryResponseSuccess
 
@@ -277,13 +282,14 @@ module Aws
                                    vpc_id: ::String,
                                    subnet_ids: Array[::String]
                                  },
-                                 ?edition: ("Enterprise" | "Standard"),
+                                 ?edition: ("Enterprise" | "Standard" | "Hybrid"),
                                  ?tags: Array[
                                    {
                                      key: ::String,
                                      value: ::String
                                    },
-                                 ]
+                                 ],
+                                 ?network_type: ("Dual-stack" | "IPv4" | "IPv6")
                                ) -> _CreateMicrosoftADResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMicrosoftADResponseSuccess
 
@@ -310,6 +316,7 @@ module Aws
                           trust_direction: ("One-Way: Outgoing" | "One-Way: Incoming" | "Two-Way"),
                           ?trust_type: ("Forest" | "External"),
                           ?conditional_forwarder_ip_addrs: Array[::String],
+                          ?conditional_forwarder_ipv_6_addrs: Array[::String],
                           ?selective_auth: ("Enabled" | "Disabled")
                         ) -> _CreateTrustResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustResponseSuccess
@@ -607,7 +614,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_update_directory-instance_method
       def describe_update_directory: (
                                        directory_id: ::String,
-                                       update_type: ("OS"),
+                                       update_type: ("OS" | "NETWORK" | "SIZE"),
                                        ?region_name: ::String,
                                        ?next_token: ::String
                                      ) -> _DescribeUpdateDirectoryResponseSuccess
@@ -718,6 +725,7 @@ module Aws
                            directory_id: ::String,
                            radius_settings: {
                              radius_servers: Array[::String]?,
+                             radius_servers_ipv_6: Array[::String]?,
                              radius_port: ::Integer?,
                              radius_timeout: ::Integer?,
                              radius_retries: ::Integer?,
@@ -878,7 +886,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#remove_ip_routes-instance_method
       def remove_ip_routes: (
                               directory_id: ::String,
-                              cidr_ips: Array[::String]
+                              ?cidr_ips: Array[::String],
+                              ?cidr_ipv_6s: Array[::String]
                             ) -> _RemoveIpRoutesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveIpRoutesResponseSuccess
 
@@ -991,7 +1000,8 @@ module Aws
       def update_conditional_forwarder: (
                                           directory_id: ::String,
                                           remote_domain_name: ::String,
-                                          dns_ip_addrs: Array[::String]
+                                          ?dns_ip_addrs: Array[::String],
+                                          ?dns_ipv_6_addrs: Array[::String]
                                         ) -> _UpdateConditionalForwarderResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConditionalForwarderResponseSuccess
 
@@ -1001,9 +1011,16 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_directory_setup-instance_method
       def update_directory_setup: (
                                     directory_id: ::String,
-                                    update_type: ("OS"),
+                                    update_type: ("OS" | "NETWORK" | "SIZE"),
                                     ?os_update_settings: {
                                       os_version: ("SERVER_2012" | "SERVER_2019")?
+                                    },
+                                    ?directory_size_update_settings: {
+                                      directory_size: ("Small" | "Large")?
+                                    },
+                                    ?network_update_settings: {
+                                      network_type: ("Dual-stack" | "IPv4" | "IPv6")?,
+                                      customer_dns_ips_v6: Array[::String]?
                                     },
                                     ?create_snapshot_before_update: bool
                                   ) -> _UpdateDirectorySetupResponseSuccess
@@ -1045,6 +1062,7 @@ module Aws
                            directory_id: ::String,
                            radius_settings: {
                              radius_servers: Array[::String]?,
+                             radius_servers_ipv_6: Array[::String]?,
                              radius_port: ::Integer?,
                              radius_timeout: ::Integer?,
                              radius_retries: ::Integer?,

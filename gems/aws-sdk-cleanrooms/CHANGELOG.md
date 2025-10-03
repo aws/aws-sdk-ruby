@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2025-10-01)
+------------------
+
+* Feature - This release introduces data access budgets to control how many times a table can be used for queries and jobs in a collaboration.
+
 1.55.0 (2025-09-23)
 ------------------
 

@@ -782,6 +782,7 @@ module Aws::FSx
     CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     CreateFileSystemOntapConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
     CreateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    CreateFileSystemOntapConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     CreateFileSystemOntapConfiguration.struct_class = Types::CreateFileSystemOntapConfiguration
 
     CreateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -1338,6 +1339,7 @@ module Aws::FSx
 
     FileSystemEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
     FileSystemEndpoint.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    FileSystemEndpoint.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
     FileSystemEndpoint.struct_class = Types::FileSystemEndpoint
 
     FileSystemEndpoints.add_member(:intercluster, Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: "Intercluster"))
@@ -1498,6 +1500,7 @@ module Aws::FSx
     OntapFileSystemConfiguration.add_member(:fsx_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
     OntapFileSystemConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
     OntapFileSystemConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    OntapFileSystemConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     OntapFileSystemConfiguration.struct_class = Types::OntapFileSystemConfiguration
 
     OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, Shapes::ShapeRef.new(shape: FlexCacheEndpointType, location_name: "FlexCacheEndpointType"))
@@ -1799,6 +1802,7 @@ module Aws::FSx
 
     SvmEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
     SvmEndpoint.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    SvmEndpoint.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
     SvmEndpoint.struct_class = Types::SvmEndpoint
 
     SvmEndpoints.add_member(:iscsi, Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Iscsi"))
@@ -1887,6 +1891,7 @@ module Aws::FSx
     UpdateFileSystemOntapConfiguration.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
     UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
     UpdateFileSystemOntapConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
+    UpdateFileSystemOntapConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     UpdateFileSystemOntapConfiguration.struct_class = Types::UpdateFileSystemOntapConfiguration
 
     UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -2047,6 +2052,7 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     WindowsFileSystemConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
     WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv_6, Shapes::ShapeRef.new(shape: IpAddress, location_name: "PreferredFileServerIpv6"))
     WindowsFileSystemConfiguration.struct_class = Types::WindowsFileSystemConfiguration
 
 

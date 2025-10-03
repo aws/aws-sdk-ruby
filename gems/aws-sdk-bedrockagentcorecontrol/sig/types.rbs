@@ -255,6 +255,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor kms_key_arn: ::String
       attr_accessor exception_level: ("DEBUG")
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:name, :description]
     end
 
