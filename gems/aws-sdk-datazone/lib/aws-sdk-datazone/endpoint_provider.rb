@@ -13,26 +13,26 @@ module Aws::DataZone
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
         end
-        return Smithy::Client::EndpointRules::Endpoint.new(uri: parameters.endpoint, headers: {}, properties: {})
+        return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.aws_partition(parameters.region))
           if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
             if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
               if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-                return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://datazone-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://datazone-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
               end
               raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
             end
-            return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://datazone.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://datazone.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-              return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://datazone-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://datazone-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://datazone.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://datazone.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

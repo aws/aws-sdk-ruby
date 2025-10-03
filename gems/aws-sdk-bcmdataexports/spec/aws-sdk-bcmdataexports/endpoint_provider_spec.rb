@@ -16,7 +16,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "aws-global", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -31,7 +31,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -46,7 +46,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -61,7 +61,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -76,7 +76,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -91,7 +91,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -106,7 +106,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -121,7 +121,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, endpoint: "https://example.com"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -136,7 +136,7 @@ module Aws::BCMDataExports
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{use_fips: false, endpoint: "https://example.com"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end

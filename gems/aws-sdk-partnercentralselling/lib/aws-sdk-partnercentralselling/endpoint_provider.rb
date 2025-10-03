@@ -13,14 +13,14 @@ module Aws::PartnerCentralSelling
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
         end
-        return Smithy::Client::EndpointRules::Endpoint.new(uri: parameters.endpoint, headers: {}, properties: {})
+        return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.aws_partition(parameters.region))
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-            return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://partnercentral-selling-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://partnercentral-selling-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
-          return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://partnercentral-selling.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://partnercentral-selling.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

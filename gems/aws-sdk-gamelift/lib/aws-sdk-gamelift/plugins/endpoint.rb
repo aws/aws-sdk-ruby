@@ -59,7 +59,7 @@ module Aws::GameLift
         private
 
         def apply_endpoint(context, endpoint)
-          context.http_request.endpoint = endpoint.uri
+          context.http_request.endpoint = endpoint.url
           endpoint.headers.each do |key, value|
             context.http_request.headers[key] = value
           end
