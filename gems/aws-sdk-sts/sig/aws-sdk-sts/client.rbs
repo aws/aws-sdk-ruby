@@ -41,10 +41,10 @@ module Aws::STS
       ?sdk_ua_app_id: String,
       ?secret_access_key: String,
       ?session_token: String,
+      ?sts_regional_endpoints: String,
       ?stub_responses: bool,
-      ?use_dual_stack_endpoint: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
-      ?use_global_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 

@@ -7,15 +7,6 @@ module AwsSdkCodeGenerator
       def endpoint_built_in_bindings # rubocop:disable Metrics/MethodLength
         {
           'AWS::Region' => {
-            render_config: proc do |_plan|
-              <<~ADD_OPTION
-                option(
-                  :region,
-                  doc_type: String,
-                  docstring: 'TODO'
-                )
-              ADD_OPTION
-            end,
             render_build: proc do |_plan|
               'config.region'
             end,
@@ -24,55 +15,27 @@ module AwsSdkCodeGenerator
             end
           },
           'AWS::UseDualStack' => {
-            render_config: proc do |_plan|
-              <<~ADD_OPTION
-                option(
-                  :use_dual_stack_endpoint,
-                  doc_type: 'Boolean',
-                  docstring: 'TODO'
-                )
-              ADD_OPTION
-            end,
             render_build: proc do |_plan|
-              'config.use_dual_stack_endpoint'
+              'config.use_dualstack_endpoint'
             end,
             render_test_set: proc do |_plan, value|
-              { 'use_dual_stack' => value }
+              { 'use_dualstack_endpoint' => value }
             end
           },
           'AWS::UseFIPS' => {
-            render_config: proc do |_plan|
-              <<~ADD_OPTION
-                option(
-                  :use_fips_endpoint,
-                  doc_type: 'Boolean',
-                  docstring: 'TODO'
-                )
-              ADD_OPTION
-            end,
             render_build: proc do |_plan|
               'config.use_fips_endpoint'
             end,
             render_test_set: proc do |_plan, value|
-              { 'use_fips' => value }
+              { 'use_fips_endpoint' => value }
             end
           },
-          # TODO: find a way to staticly generate option to true and do not expose configuration
           'AWS::STS::UseGlobalEndpoint' => {
-            render_config: proc do |_plan|
-              <<~ADD_OPTION
-                option(
-                  :use_global_endpoint,
-                  doc_type: 'Boolean',
-                  docstring: 'TODO'
-                )
-              ADD_OPTION
-            end,
             render_build: proc do |_plan|
-              'config.use_global_endpoint'
+              'config.sts_regional_endpoints == "legacy"'
             end,
             render_test_set: proc do |_plan, value|
-              { 'use_global_endpoint' => value }
+              { 'sts_regional_endpoints' => value ? 'legacy' : 'regional' }
             end
           }
         }

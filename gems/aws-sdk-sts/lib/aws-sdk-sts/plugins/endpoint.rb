@@ -7,6 +7,15 @@ module Aws::STS
     # @api private
     class Endpoint < Smithy::Client::Plugin
       option(
+        :endpoint,
+        doc_type: 'String',
+        docstring: <<~DOCS
+          The endpoint to send requests to.
+          The endpoint should be a URI formatted like "http://example.com:123"'
+        DOCS
+      )
+
+      option(
         :endpoint_provider,
         doc_type: '#resolve(parameters)',
         doc_default: 'Aws::STS::EndpointProvider',
@@ -15,36 +24,6 @@ module Aws::STS
       ) do |_config|
         EndpointProvider.new
       end
-
-      option(
-        :region,
-        doc_type: String,
-        docstring: 'TODO'
-      )
-
-      option(
-        :use_dual_stack_endpoint,
-        doc_type: 'Boolean',
-        docstring: 'TODO'
-      )
-
-      option(
-        :use_fips_endpoint,
-        doc_type: 'Boolean',
-        docstring: 'TODO'
-      )
-
-      option(
-        :endpoint,
-        doc_type: String,
-        docstring: 'Custom Endpoint'
-      )
-
-      option(
-        :use_global_endpoint,
-        doc_type: 'Boolean',
-        docstring: 'TODO'
-      )
 
       option(:endpoint_auth_schemes) do
         {"bearer" => "smithy.api#httpBearerAuth", "none" => "smithy.api#noAuth", "sigv4a" => "aws.auth#sigv4a", "sigv4" => "aws.auth#sigv4"}
@@ -65,7 +44,7 @@ module Aws::STS
         private
 
         def apply_endpoint(context, endpoint)
-          context.http_request.endpoint = endpoint.uri
+          context.http_request.endpoint = endpoint.url
           endpoint.headers.each do |key, value|
             context.http_request.headers[key] = value
           end
