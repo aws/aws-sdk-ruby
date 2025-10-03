@@ -1,0 +1,135 @@
+module Aws::CloudFrontKeyValueStore
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudFrontKeyValueStore::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteKeyResponse
+      include Smithy::Client::_Response[Types::DeleteKeyResponse]
+      def item_count: () -> Integer?
+      def total_size_in_bytes: () -> Integer?
+      def e_tag: () -> String?
+    end
+    def delete_key: (
+      ?kvs_arn: String,
+      ?key: String,
+      ?if_match: String
+    ) -> _DeleteKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyResponse
+
+    interface _DescribeKeyValueStoreResponse
+      include Smithy::Client::_Response[Types::DescribeKeyValueStoreResponse]
+      def item_count: () -> Integer?
+      def total_size_in_bytes: () -> Integer?
+      def kvs_arn: () -> String?
+      def created: () -> Time?
+      def e_tag: () -> String?
+      def last_modified: () -> Time?
+      def status: () -> String?
+      def failure_reason: () -> String?
+    end
+    def describe_key_value_store: (
+      ?kvs_arn: String
+    ) -> _DescribeKeyValueStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKeyValueStoreResponse
+
+    interface _GetKeyResponse
+      include Smithy::Client::_Response[Types::GetKeyResponse]
+      def key: () -> String?
+      def value: () -> String?
+      def item_count: () -> Integer?
+      def total_size_in_bytes: () -> Integer?
+    end
+    def get_key: (
+      ?kvs_arn: String,
+      ?key: String
+    ) -> _GetKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyResponse
+
+    interface _ListKeysResponse
+      include Smithy::Client::_Response[Types::ListKeysResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ListKeysResponseListItem]?
+    end
+    def list_keys: (
+      ?kvs_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeysResponse
+
+    interface _PutKeyResponse
+      include Smithy::Client::_Response[Types::PutKeyResponse]
+      def item_count: () -> Integer?
+      def total_size_in_bytes: () -> Integer?
+      def e_tag: () -> String?
+    end
+    def put_key: (
+      ?key: String,
+      ?value: String,
+      ?kvs_arn: String,
+      ?if_match: String
+    ) -> _PutKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutKeyResponse
+
+    interface _UpdateKeysResponse
+      include Smithy::Client::_Response[Types::UpdateKeysResponse]
+      def item_count: () -> Integer?
+      def total_size_in_bytes: () -> Integer?
+      def e_tag: () -> String?
+    end
+    def update_keys: (
+      ?kvs_arn: String,
+      ?if_match: String,
+      ?puts: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?deletes: Array[
+        {
+          key: String
+        }
+      ]
+    ) -> _UpdateKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeysResponse
+  end
+end

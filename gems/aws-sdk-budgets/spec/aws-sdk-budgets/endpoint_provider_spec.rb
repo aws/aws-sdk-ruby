@@ -16,7 +16,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -59,7 +59,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -74,7 +74,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -89,7 +89,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -104,7 +104,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -119,7 +119,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -134,7 +134,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -149,7 +149,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -164,7 +164,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -179,7 +179,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -194,7 +194,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -209,7 +209,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -224,7 +224,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -239,7 +239,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -254,7 +254,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -269,7 +269,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -284,7 +284,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -299,7 +299,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -314,7 +314,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -329,7 +329,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -344,7 +344,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -359,7 +359,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "eusc-de-east-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -374,7 +374,7 @@ module Aws::Budgets
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "eusc-de-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end

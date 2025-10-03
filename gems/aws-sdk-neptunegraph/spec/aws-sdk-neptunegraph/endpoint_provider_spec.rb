@@ -16,7 +16,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{endpoint: "https://mycustomDomain.com", api_type: "ControlPlane", region: "us-east-1"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -31,7 +31,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{endpoint: "https://mycustomDomain.com", api_type: "DataPlane", region: "us-east-1"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -46,7 +46,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{endpoint: "https://mycustomDomain.com", api_type: "someInvalidApiType", region: "us-east-1"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -61,7 +61,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{endpoint: "https://mycustomDomain.com", api_type: "someInvalidApiType"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -76,7 +76,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -105,7 +105,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -134,7 +134,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -149,7 +149,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "us-east-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -164,7 +164,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -179,7 +179,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "us-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -194,7 +194,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-2", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -223,7 +223,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-2", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -252,7 +252,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-2", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -267,7 +267,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "us-east-2", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -282,7 +282,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-east-2", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -297,7 +297,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "us-east-2", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -312,7 +312,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-west-2", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -341,7 +341,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-west-2", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -370,7 +370,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-west-2", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -385,7 +385,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "us-west-2", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -400,7 +400,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "us-west-2", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -415,7 +415,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "us-west-2", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -430,7 +430,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -459,7 +459,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -488,7 +488,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -503,7 +503,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "eu-west-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -518,7 +518,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -533,7 +533,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "eu-west-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -548,7 +548,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-2", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -577,7 +577,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-2", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -606,7 +606,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-2", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -621,7 +621,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "eu-west-2", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -636,7 +636,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-west-2", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -651,7 +651,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "eu-west-2", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -666,7 +666,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-central-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -695,7 +695,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-central-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -724,7 +724,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-central-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -739,7 +739,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "eu-central-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -754,7 +754,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "eu-central-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -769,7 +769,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "eu-central-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -784,7 +784,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-southeast-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -813,7 +813,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-southeast-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -842,7 +842,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-southeast-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -857,7 +857,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "ap-southeast-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -872,7 +872,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-southeast-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -887,7 +887,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "ap-southeast-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -902,7 +902,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-northeast-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -931,7 +931,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-northeast-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -960,7 +960,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-northeast-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -975,7 +975,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "ap-northeast-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -990,7 +990,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "ControlPlane", region: "ap-northeast-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -1005,7 +1005,7 @@ module Aws::NeptuneGraph
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{api_type: "DataPlane", region: "ap-northeast-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end

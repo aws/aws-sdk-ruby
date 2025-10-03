@@ -16,44 +16,44 @@ module Aws::SecretsManager
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
           raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
         end
-        return Smithy::Client::EndpointRules::Endpoint.new(uri: parameters.endpoint, headers: {}, properties: {})
+        return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.aws_partition(parameters.region))
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               if Smithy::Client::EndpointRules.string_equals?("aws", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager-fips.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager-fips.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
               if Smithy::Client::EndpointRules.string_equals?("aws-us-gov", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager-fips.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager-fips.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
-              return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-              return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               if Smithy::Client::EndpointRules.string_equals?("aws", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
               if Smithy::Client::EndpointRules.string_equals?("aws-cn", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager.#{parameters.region}.amazonaws.com.cn", headers: {}, properties: {})
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager.#{parameters.region}.amazonaws.com.cn", headers: {}, properties: {})
               end
               if Smithy::Client::EndpointRules.string_equals?("aws-us-gov", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
-              return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
-          return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://secretsmanager.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://secretsmanager.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

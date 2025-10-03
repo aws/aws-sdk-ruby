@@ -16,7 +16,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -45,7 +45,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -60,7 +60,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -75,7 +75,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -90,7 +90,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -105,7 +105,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -120,7 +120,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -149,7 +149,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-west-2", use_control_plane_endpoint: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -164,7 +164,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_control_plane_endpoint: true, endpoint: "https://amazonaws.com"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -179,7 +179,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-west-2", use_control_plane_endpoint: true, endpoint: "https://amazonaws.com"})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -194,7 +194,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-west-2", use_control_plane_endpoint: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -209,7 +209,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-north-1", use_control_plane_endpoint: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -224,7 +224,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "cn-northwest-1", use_control_plane_endpoint: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -239,7 +239,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_control_plane_endpoint: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -254,7 +254,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-east-1", use_control_plane_endpoint: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -269,7 +269,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-west-2", use_control_plane_endpoint: true, use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
@@ -284,7 +284,7 @@ module Aws::ARCRegionswitch
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_control_plane_endpoint: true, use_fips: true})
         endpoint = subject.resolve(params)
-        expect(endpoint.uri).to eq(expected['endpoint']['url'])
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
