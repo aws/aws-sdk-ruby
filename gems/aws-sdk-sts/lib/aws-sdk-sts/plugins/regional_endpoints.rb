@@ -24,7 +24,7 @@ module Aws
 
           def resolve_sts_regional_endpoints(config)
             ENV['AWS_STS_REGIONAL_ENDPOINTS'] ||
-              Aws::Core.shared_config.profiles[config.profile]['sts_regional_endpoints'] ||
+              Aws::Core.shared_config.profiles.fetch(config.profile, {})['sts_regional_endpoints'] ||
               'regional'
           end
         end
