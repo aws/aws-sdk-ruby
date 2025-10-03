@@ -15,6 +15,19 @@ module AwsSdkCodeGenerator
           true
         end
 
+        def endpoint_built_in_bindings
+          {
+            'AWS::STS::UseGlobalEndpoint' => {
+              render_build: proc do |_plan|
+                'config.sts_regional_endpoints == "legacy"'
+              end,
+              render_test_set: proc do |_plan, value|
+                { 'sts_regional_endpoints' => value ? 'legacy' : 'regional' }
+              end
+            }
+          }
+        end
+
         def add_plugins
           base_path = 'aws-sdk-sts/plugins'
           {

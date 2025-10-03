@@ -29,14 +29,6 @@ module AwsSdkCodeGenerator
             render_test_set: proc do |_plan, value|
               { 'use_fips_endpoint' => value }
             end
-          },
-          'AWS::STS::UseGlobalEndpoint' => {
-            render_build: proc do |_plan|
-              'config.sts_regional_endpoints == "legacy"'
-            end,
-            render_test_set: proc do |_plan, value|
-              { 'sts_regional_endpoints' => value ? 'legacy' : 'regional' }
-            end
           }
         }
       end

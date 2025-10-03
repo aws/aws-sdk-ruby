@@ -11,7 +11,6 @@ task 'build' do
   #   aws-sdk-kinesis => ArgumentError: No endpoint function binding registered for aws.parseArn
   #   aws-sdk-s3control => ArgumentError: Endpoint built-in not available for AWS::S3Control::UseArnRegion
   #   aws-sdk-s3 => ArgumentError: Endpoint built-in not available for AWS::S3::ForcePathStyle
-  #   aws-sdk-sts => ArgumentError: Endpoint built-in not available for AWS::STS::UseGlobalEndpoint
   skip = %w[
     aws-sdk-cloudfrontkeyvaluestore
     aws-sdk-dynamodb
@@ -19,7 +18,6 @@ task 'build' do
     aws-sdk-kinesis
     aws-sdk-s3control
     aws-sdk-s3
-    aws-sdk-sts
   ]
 
   AwsSdkCodeGenerator::SERVICES.each do |service|
