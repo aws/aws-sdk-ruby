@@ -6,29 +6,19 @@ module Aws::NeptuneGraph
   # Endpoint parameters used to resolve endpoints per request.
   # @!attribute region
   #   The AWS region used to dispatch the request.
-  #
   #   @return [String]
-  #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
-  #
   #   @return [Boolean]
-  #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
-  #
   #   @return [Boolean]
-  #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
-  #
   #   @return [String]
-  #
   # @!attribute api_type
   #   Parameter to determine whether current API is a control plane or dataplane API
-  #
   #   @return [String]
-  #
   EndpointParameters = Struct.new(
     :region,
     :use_fips,
@@ -43,9 +33,9 @@ module Aws::NeptuneGraph
       self.use_dual_stack = options.fetch(:use_dual_stack, false)
       self.endpoint = options.fetch(:endpoint, nil)
       self.api_type = options.fetch(:api_type, nil)
-      raise ArgumentError, "Missing required EndpointParameter: :use_fips" if use_fips.nil?
-      raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "Missing required EndpointParameter: :api_type" if api_type.nil?
+      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
+      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
+      raise ArgumentError, "missing required parameter: :api_type" if api_type.nil?
     end
 
     # @api private
@@ -197,7 +187,7 @@ module Aws::NeptuneGraph
       new({
         region: config.region,
         use_fips: config.use_fips_endpoint,
-        use_dual_stack: config.use_dual_stack_endpoint,
+        use_dual_stack: config.use_dualstack_endpoint,
         endpoint: config.endpoint,
       }.merge(operation_params).compact)
     end

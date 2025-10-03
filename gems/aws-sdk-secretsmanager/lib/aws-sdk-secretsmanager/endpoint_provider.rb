@@ -19,7 +19,7 @@ module Aws::SecretsManager
         return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
-        if (partition_result = Aws::Core::EndpointRules.aws_partition(parameters.region))
+        if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               if Smithy::Client::EndpointRules.string_equals?("aws", Smithy::Client::EndpointRules.attr(partition_result, "name"))

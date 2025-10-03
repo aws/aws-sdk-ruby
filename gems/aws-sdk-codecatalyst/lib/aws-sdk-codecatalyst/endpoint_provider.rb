@@ -12,7 +12,7 @@ module Aws::CodeCatalyst
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
         return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
-      if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.region)) && (partition_result = Aws::Core::EndpointRules.aws_partition("us-west-2"))
+      if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.region)) && (partition_result = Aws::Core::EndpointRules.partition("us-west-2"))
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), false)
             raise ArgumentError, "Partition does not support FIPS."
@@ -21,7 +21,7 @@ module Aws::CodeCatalyst
         end
         return Smithy::Client::EndpointRules::Endpoint.new(url: "https://codecatalyst.global.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
       end
-      if Smithy::Client::EndpointRules.set?(parameters.region) && (partition_result = Aws::Core::EndpointRules.aws_partition(parameters.region))
+      if Smithy::Client::EndpointRules.set?(parameters.region) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), false)
             raise ArgumentError, "Partition does not support FIPS."
@@ -30,7 +30,6 @@ module Aws::CodeCatalyst
         end
         return Smithy::Client::EndpointRules::Endpoint.new(url: "https://codecatalyst.global.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
       end
-
     end
   end
 end

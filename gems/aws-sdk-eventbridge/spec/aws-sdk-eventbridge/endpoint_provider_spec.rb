@@ -718,12 +718,10 @@ module Aws::EventBridge
           endpoint_id: 'abc123.456def',
           entries: [{detail_type: "detailType", detail: "{ \"test\": [\"test\"] }", event_bus_name: "my-sdk-app"}],
         )
-        actual_uri = response.context.http_request.endpoint
-        expect(actual_uri).to eq(URI.parse(expected['endpoint']['url']))
-        actual_headers = response.context.http_request.headers
-        expected['endpoint'].fetch('headers', {}).each do |k,v|
-          expect(actual_headers[k]).to eq(v)
-        end
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 

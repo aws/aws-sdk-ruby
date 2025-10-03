@@ -157,7 +157,6 @@ module Aws::STS
     # @option options [String] :region
     #  The AWS region to connect to. The configured `:region` is used to determine the service `:endpoint`.
     #  When not provided, a default region is searched for in the following locations:
-    #  
     #  * `Aws.config[:region]`
     #  * `ENV['AWS_REGION']`
     #  * `ENV['AWS_DEFAULT_REGION']`

@@ -42,7 +42,7 @@ module Aws::ElastiCache
       ?secret_access_key: String,
       ?session_token: String,
       ?stub_responses: bool,
-      ?use_dual_stack_endpoint: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void

@@ -40,6 +40,7 @@ module Aws::CodeCatalyst
       ?retry_strategy: String | Class,
       ?sdk_ua_app_id: String,
       ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
