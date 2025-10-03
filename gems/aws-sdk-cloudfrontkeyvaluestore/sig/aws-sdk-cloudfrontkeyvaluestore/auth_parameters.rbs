@@ -1,0 +1,10 @@
+module Aws::CloudFrontKeyValueStore
+  class AuthParameters
+    def initialize: (
+      operation_name: Symbol,
+    ) -> void
+    | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor operation_name: Symbol
+  end
+end

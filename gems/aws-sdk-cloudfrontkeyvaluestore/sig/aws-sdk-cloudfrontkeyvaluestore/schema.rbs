@@ -1,0 +1,36 @@
+module Aws::CloudFrontKeyValueStore
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ConflictException: StructureShape
+    DeleteKeyRequest: StructureShape
+    DeleteKeyRequestListItem: StructureShape
+    DeleteKeyRequestsList: ListShape
+    DeleteKeyResponse: StructureShape
+    DescribeKeyValueStoreRequest: StructureShape
+    DescribeKeyValueStoreResponse: StructureShape
+    Etag: StringShape
+    GetKeyRequest: StructureShape
+    GetKeyResponse: StructureShape
+    InternalServerException: StructureShape
+    Key: StringShape
+    KvsARN: StringShape
+    ListKeysRequest: StructureShape
+    ListKeysResponse: StructureShape
+    ListKeysResponseList: ListShape
+    ListKeysResponseListItem: StructureShape
+    PutKeyRequest: StructureShape
+    PutKeyRequestListItem: StructureShape
+    PutKeyRequestsList: ListShape
+    PutKeyResponse: StructureShape
+    ResourceNotFoundException: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    UpdateKeysRequest: StructureShape
+    UpdateKeysResponse: StructureShape
+    ValidationException: StructureShape
+    Value: StringShape
+
+    CloudFrontKeyValueStore: ServiceShape
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module CloudFrontKeyValueStore
+      VERSION: String
+    end
+  end

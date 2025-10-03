@@ -1,0 +1,52 @@
+module Aws::Kinesis
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExpiredIteratorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExpiredNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSOptInRequired < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ProvisionedThroughputExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

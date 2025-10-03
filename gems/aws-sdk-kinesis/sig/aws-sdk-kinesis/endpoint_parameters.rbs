@@ -1,0 +1,23 @@
+module Aws::Kinesis
+  class EndpointParameters
+    def initialize: (
+      ?region: String,
+      use_dual_stack: bool,
+      use_fips: bool,
+      ?endpoint: String,
+      ?stream_arn: String,
+      ?operation_type: String,
+      ?consumer_arn: String,
+      ?resource_arn: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor region: String?
+    attr_accessor use_dual_stack: bool
+    attr_accessor use_fips: bool
+    attr_accessor endpoint: String?
+    attr_accessor stream_arn: String?
+    attr_accessor operation_type: String?
+    attr_accessor consumer_arn: String?
+    attr_accessor resource_arn: String?
+  end
+end

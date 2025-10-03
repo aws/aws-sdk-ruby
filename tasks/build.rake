@@ -4,18 +4,14 @@ require 'aws-sdk-code-generator'
 
 task 'build' do
   # TODO: These result in various errors:
-  #   aws-sdk-cloudfrontkeyvaluestore => ArgumentError: No endpoint function binding registered for aws.parseArn
   #   aws-sdk-dynamodb => ArgumentError: Endpoint built-in not available for AWS::Auth::AccountId
   #   aws-sdk-iotmanagedintegrations => NoMethodError: undefined method 'each_pair' for nil
   #     (from #structures in operation_examples.rb)
-  #   aws-sdk-kinesis => ArgumentError: No endpoint function binding registered for aws.parseArn
   #   aws-sdk-s3control => ArgumentError: Endpoint built-in not available for AWS::S3Control::UseArnRegion
   #   aws-sdk-s3 => ArgumentError: Endpoint built-in not available for AWS::S3::ForcePathStyle
   skip = %w[
-    aws-sdk-cloudfrontkeyvaluestore
     aws-sdk-dynamodb
     aws-sdk-iotmanagedintegrations
-    aws-sdk-kinesis
     aws-sdk-s3control
     aws-sdk-s3
   ]

@@ -35,7 +35,8 @@ module AwsSdkCodeGenerator
 
       def endpoint_function_bindings
         {
-          'aws.partition' => 'Aws::Core::EndpointRules.aws_partition'
+          'aws.partition' => 'Aws::Core::EndpointRules.partition',
+          'aws.parseArn' => 'Aws::Core::EndpointRules.parse_arn'
         }
       end
 
