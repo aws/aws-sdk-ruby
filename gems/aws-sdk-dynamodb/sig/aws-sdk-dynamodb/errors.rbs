@@ -1,0 +1,115 @@
+module Aws::DynamoDB
+  module Errors
+    class BackupInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BackupNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConditionalCheckFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def item: () -> Hash[String, Types::AttributeValue]?
+    end
+    class ContinuousBackupsUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateItemException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExportConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExportNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalTableAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class GlobalTableNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImportConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImportNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IndexNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEndpointException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidExportTimeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRestoreTimeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ItemCollectionSizeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PointInTimeRecoveryUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ProvisionedThroughputExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def throttling_reasons: () -> Array[Types::ThrottlingReason]?
+    end
+    class ReplicaAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicaNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplicatedWriteConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class RequestLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+      def throttling_reasons: () -> Array[Types::ThrottlingReason]?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TableAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TableInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TableNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def throttling_reasons: () -> Array[Types::ThrottlingReason]?
+    end
+    class TransactionCanceledException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def cancellation_reasons: () -> Array[Types::CancellationReason]?
+    end
+    class TransactionConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TransactionInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

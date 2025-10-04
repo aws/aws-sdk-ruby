@@ -1,0 +1,2389 @@
+module Aws::DynamoDB
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DynamoDB::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchExecuteStatementResponse
+      include Smithy::Client::_Response[Types::BatchExecuteStatementOutput]
+      def responses: () -> Array[Types::BatchStatementResponse]?
+      def consumed_capacity: () -> Array[Types::ConsumedCapacity]?
+    end
+    def batch_execute_statement: (
+      ?statements: Array[
+        {
+          statement: String,
+          parameters: Array[
+            {
+              s: String,
+              n: String,
+              b: String,
+              ss: Array[String],
+              ns: Array[String],
+              bs: Array[String],
+              m: Hash[String,
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: Array[
+                    {
+                      s: untyped,
+                      n: untyped,
+                      b: untyped,
+                      ss: untyped,
+                      ns: untyped,
+                      bs: untyped,
+                      m: untyped,
+                      l: untyped,
+                      null: bool,
+                      bool: bool
+                    }
+                  ],
+                  null: untyped,
+                  bool: untyped
+                }
+              ],
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          consistent_read: bool,
+          return_values_on_condition_check_failure: String
+        }
+      ],
+      ?return_consumed_capacity: String
+    ) -> _BatchExecuteStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchExecuteStatementResponse
+
+    interface _BatchGetItemResponse
+      include Smithy::Client::_Response[Types::BatchGetItemOutput]
+      def responses: () -> Hash[String, Array[Hash[String, Types::AttributeValue]]]?
+      def unprocessed_keys: () -> Hash[String, Types::KeysAndAttributes]?
+      def consumed_capacity: () -> Array[Types::ConsumedCapacity]?
+    end
+    def batch_get_item: (
+      ?request_items: Hash[String,
+        {
+          keys: Array[
+            Hash[String,
+              {
+                s: String,
+                n: String,
+                b: String,
+                ss: Array[String],
+                ns: Array[String],
+                bs: Array[String],
+                m: Hash[String,
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: Array[
+                      {
+                        s: untyped,
+                        n: untyped,
+                        b: untyped,
+                        ss: untyped,
+                        ns: untyped,
+                        bs: untyped,
+                        m: untyped,
+                        l: untyped,
+                        null: bool,
+                        bool: bool
+                      }
+                    ],
+                    null: untyped,
+                    bool: untyped
+                  }
+                ],
+                l: untyped,
+                null: untyped,
+                bool: untyped
+              }
+            ]
+          ],
+          attributes_to_get: Array[String],
+          consistent_read: bool,
+          projection_expression: String,
+          expression_attribute_names: Hash[String, String]
+        }
+      ],
+      ?return_consumed_capacity: String
+    ) -> _BatchGetItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetItemResponse
+
+    interface _BatchWriteItemResponse
+      include Smithy::Client::_Response[Types::BatchWriteItemOutput]
+      def unprocessed_items: () -> Hash[String, Array[Types::WriteRequest]]?
+      def item_collection_metrics: () -> Hash[String, Array[Types::ItemCollectionMetrics]]?
+      def consumed_capacity: () -> Array[Types::ConsumedCapacity]?
+    end
+    def batch_write_item: (
+      ?request_items: Hash[String,
+        Array[
+          {
+            put_request: {
+              item: Hash[String,
+                {
+                  s: String,
+                  n: String,
+                  b: String,
+                  ss: Array[String],
+                  ns: Array[String],
+                  bs: Array[String],
+                  m: Hash[String,
+                    {
+                      s: untyped,
+                      n: untyped,
+                      b: untyped,
+                      ss: untyped,
+                      ns: untyped,
+                      bs: untyped,
+                      m: untyped,
+                      l: Array[
+                        {
+                          s: untyped,
+                          n: untyped,
+                          b: untyped,
+                          ss: untyped,
+                          ns: untyped,
+                          bs: untyped,
+                          m: untyped,
+                          l: untyped,
+                          null: bool,
+                          bool: bool
+                        }
+                      ],
+                      null: untyped,
+                      bool: untyped
+                    }
+                  ],
+                  l: untyped,
+                  null: untyped,
+                  bool: untyped
+                }
+              ]
+            },
+            delete_request: {
+              key: Hash[String,
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: untyped,
+                  bool: untyped
+                }
+              ]
+            }
+          }
+        ]
+      ],
+      ?return_consumed_capacity: String,
+      ?return_item_collection_metrics: String
+    ) -> _BatchWriteItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchWriteItemResponse
+
+    interface _CreateBackupResponse
+      include Smithy::Client::_Response[Types::CreateBackupOutput]
+      def backup_details: () -> Types::BackupDetails?
+    end
+    def create_backup: (
+      ?table_name: String,
+      ?backup_name: String
+    ) -> _CreateBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackupResponse
+
+    interface _CreateGlobalTableResponse
+      include Smithy::Client::_Response[Types::CreateGlobalTableOutput]
+      def global_table_description: () -> Types::GlobalTableDescription?
+    end
+    def create_global_table: (
+      ?global_table_name: String,
+      ?replication_group: Array[
+        {
+          region_name: String
+        }
+      ]
+    ) -> _CreateGlobalTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlobalTableResponse
+
+    interface _CreateTableResponse
+      include Smithy::Client::_Response[Types::CreateTableOutput]
+      def table_description: () -> Types::TableDescription?
+    end
+    def create_table: (
+      ?attribute_definitions: Array[
+        {
+          attribute_name: String,
+          attribute_type: String
+        }
+      ],
+      ?table_name: String,
+      ?key_schema: Array[
+        {
+          attribute_name: String,
+          key_type: String
+        }
+      ],
+      ?local_secondary_indexes: Array[
+        {
+          index_name: String,
+          key_schema: Array[
+            {
+              attribute_name: String,
+              key_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          }
+        }
+      ],
+      ?global_secondary_indexes: Array[
+        {
+          index_name: String,
+          key_schema: Array[
+            {
+              attribute_name: String,
+              key_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          },
+          provisioned_throughput: {
+            read_capacity_units: Integer,
+            write_capacity_units: untyped
+          },
+          on_demand_throughput: {
+            max_read_request_units: Integer,
+            max_write_request_units: untyped
+          },
+          warm_throughput: {
+            read_units_per_second: untyped,
+            write_units_per_second: untyped
+          }
+        }
+      ],
+      ?billing_mode: String,
+      ?provisioned_throughput: {
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?stream_specification: {
+        stream_enabled: bool,
+        stream_view_type: String
+      },
+      ?sse_specification: {
+        enabled: bool,
+        sse_type: String,
+        kms_master_key_id: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?table_class: String,
+      ?deletion_protection_enabled: bool,
+      ?warm_throughput: {
+        read_units_per_second: Integer,
+        write_units_per_second: untyped
+      },
+      ?resource_policy: String,
+      ?on_demand_throughput: {
+        max_read_request_units: Integer,
+        max_write_request_units: untyped
+      }
+    ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
+
+    interface _DeleteBackupResponse
+      include Smithy::Client::_Response[Types::DeleteBackupOutput]
+      def backup_description: () -> Types::BackupDescription?
+    end
+    def delete_backup: (
+      ?backup_arn: String
+    ) -> _DeleteBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupResponse
+
+    interface _DeleteItemResponse
+      include Smithy::Client::_Response[Types::DeleteItemOutput]
+      def attributes: () -> Hash[String, Types::AttributeValue]?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+      def item_collection_metrics: () -> Types::ItemCollectionMetrics?
+    end
+    def delete_item: (
+      ?table_name: String,
+      ?key: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?expected: Hash[String,
+        {
+          value: {
+            s: String,
+            n: String,
+            b: String,
+            ss: Array[String],
+            ns: Array[String],
+            bs: Array[String],
+            m: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: Array[
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: untyped,
+                    null: bool,
+                    bool: bool
+                  }
+                ],
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            l: untyped,
+            null: untyped,
+            bool: untyped
+          },
+          exists: bool,
+          comparison_operator: String,
+          attribute_value_list: Array[
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ]
+        }
+      ],
+      ?conditional_operator: String,
+      ?return_values: String,
+      ?return_consumed_capacity: String,
+      ?return_item_collection_metrics: String,
+      ?condition_expression: String,
+      ?expression_attribute_names: Hash[String, String],
+      ?expression_attribute_values: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?return_values_on_condition_check_failure: String
+    ) -> _DeleteItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteItemResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyOutput]
+      def revision_id: () -> String?
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?expected_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteTableResponse
+      include Smithy::Client::_Response[Types::DeleteTableOutput]
+      def table_description: () -> Types::TableDescription?
+    end
+    def delete_table: (
+      ?table_name: String
+    ) -> _DeleteTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableResponse
+
+    interface _DescribeBackupResponse
+      include Smithy::Client::_Response[Types::DescribeBackupOutput]
+      def backup_description: () -> Types::BackupDescription?
+    end
+    def describe_backup: (
+      ?backup_arn: String
+    ) -> _DescribeBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBackupResponse
+
+    interface _DescribeContinuousBackupsResponse
+      include Smithy::Client::_Response[Types::DescribeContinuousBackupsOutput]
+      def continuous_backups_description: () -> Types::ContinuousBackupsDescription?
+    end
+    def describe_continuous_backups: (
+      ?table_name: String
+    ) -> _DescribeContinuousBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContinuousBackupsResponse
+
+    interface _DescribeContributorInsightsResponse
+      include Smithy::Client::_Response[Types::DescribeContributorInsightsOutput]
+      def table_name: () -> String?
+      def index_name: () -> String?
+      def contributor_insights_rule_list: () -> Array[String]?
+      def contributor_insights_status: () -> String?
+      def last_update_date_time: () -> Time?
+      def failure_exception: () -> Types::FailureException?
+      def contributor_insights_mode: () -> String?
+    end
+    def describe_contributor_insights: (
+      ?table_name: String,
+      ?index_name: String
+    ) -> _DescribeContributorInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContributorInsightsResponse
+
+    interface _DescribeEndpointsResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointsResponse]
+      def endpoints: () -> Array[Types::Endpoint]?
+    end
+    def describe_endpoints: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointsResponse
+
+    interface _DescribeExportResponse
+      include Smithy::Client::_Response[Types::DescribeExportOutput]
+      def export_description: () -> Types::ExportDescription?
+    end
+    def describe_export: (
+      ?export_arn: String
+    ) -> _DescribeExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExportResponse
+
+    interface _DescribeGlobalTableResponse
+      include Smithy::Client::_Response[Types::DescribeGlobalTableOutput]
+      def global_table_description: () -> Types::GlobalTableDescription?
+    end
+    def describe_global_table: (
+      ?global_table_name: String
+    ) -> _DescribeGlobalTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGlobalTableResponse
+
+    interface _DescribeGlobalTableSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeGlobalTableSettingsOutput]
+      def global_table_name: () -> String?
+      def replica_settings: () -> Array[Types::ReplicaSettingsDescription]?
+    end
+    def describe_global_table_settings: (
+      ?global_table_name: String
+    ) -> _DescribeGlobalTableSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGlobalTableSettingsResponse
+
+    interface _DescribeImportResponse
+      include Smithy::Client::_Response[Types::DescribeImportOutput]
+      def import_table_description: () -> Types::ImportTableDescription?
+    end
+    def describe_import: (
+      ?import_arn: String
+    ) -> _DescribeImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImportResponse
+
+    interface _DescribeKinesisStreamingDestinationResponse
+      include Smithy::Client::_Response[Types::DescribeKinesisStreamingDestinationOutput]
+      def table_name: () -> String?
+      def kinesis_data_stream_destinations: () -> Array[Types::KinesisDataStreamDestination]?
+    end
+    def describe_kinesis_streaming_destination: (
+      ?table_name: String
+    ) -> _DescribeKinesisStreamingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKinesisStreamingDestinationResponse
+
+    interface _DescribeLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeLimitsOutput]
+      def account_max_read_capacity_units: () -> Integer?
+      def account_max_write_capacity_units: () -> Integer?
+      def table_max_read_capacity_units: () -> Integer?
+      def table_max_write_capacity_units: () -> Integer?
+    end
+    def describe_limits: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLimitsResponse
+
+    interface _DescribeTableResponse
+      include Smithy::Client::_Response[Types::DescribeTableOutput]
+      def table: () -> Types::TableDescription?
+    end
+    def describe_table: (
+      ?table_name: String
+    ) -> _DescribeTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTableResponse
+
+    interface _DescribeTableReplicaAutoScalingResponse
+      include Smithy::Client::_Response[Types::DescribeTableReplicaAutoScalingOutput]
+      def table_auto_scaling_description: () -> Types::TableAutoScalingDescription?
+    end
+    def describe_table_replica_auto_scaling: (
+      ?table_name: String
+    ) -> _DescribeTableReplicaAutoScalingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTableReplicaAutoScalingResponse
+
+    interface _DescribeTimeToLiveResponse
+      include Smithy::Client::_Response[Types::DescribeTimeToLiveOutput]
+      def time_to_live_description: () -> Types::TimeToLiveDescription?
+    end
+    def describe_time_to_live: (
+      ?table_name: String
+    ) -> _DescribeTimeToLiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTimeToLiveResponse
+
+    interface _DisableKinesisStreamingDestinationResponse
+      include Smithy::Client::_Response[Types::DisableKinesisStreamingDestinationOutput]
+      def table_name: () -> String?
+      def stream_arn: () -> String?
+      def destination_status: () -> String?
+      def enable_kinesis_streaming_configuration: () -> Types::EnableKinesisStreamingConfiguration?
+    end
+    def disable_kinesis_streaming_destination: (
+      ?table_name: String,
+      ?stream_arn: String,
+      ?enable_kinesis_streaming_configuration: {
+        approximate_creation_date_time_precision: String
+      }
+    ) -> _DisableKinesisStreamingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableKinesisStreamingDestinationResponse
+
+    interface _EnableKinesisStreamingDestinationResponse
+      include Smithy::Client::_Response[Types::EnableKinesisStreamingDestinationOutput]
+      def table_name: () -> String?
+      def stream_arn: () -> String?
+      def destination_status: () -> String?
+      def enable_kinesis_streaming_configuration: () -> Types::EnableKinesisStreamingConfiguration?
+    end
+    def enable_kinesis_streaming_destination: (
+      ?table_name: String,
+      ?stream_arn: String,
+      ?enable_kinesis_streaming_configuration: {
+        approximate_creation_date_time_precision: String
+      }
+    ) -> _EnableKinesisStreamingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableKinesisStreamingDestinationResponse
+
+    interface _ExecuteStatementResponse
+      include Smithy::Client::_Response[Types::ExecuteStatementOutput]
+      def items: () -> Array[Hash[String, Types::AttributeValue]]?
+      def next_token: () -> String?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+      def last_evaluated_key: () -> Hash[String, Types::AttributeValue]?
+    end
+    def execute_statement: (
+      ?statement: String,
+      ?parameters: Array[
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?consistent_read: bool,
+      ?next_token: String,
+      ?return_consumed_capacity: String,
+      ?limit: Integer,
+      ?return_values_on_condition_check_failure: String
+    ) -> _ExecuteStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteStatementResponse
+
+    interface _ExecuteTransactionResponse
+      include Smithy::Client::_Response[Types::ExecuteTransactionOutput]
+      def responses: () -> Array[Types::ItemResponse]?
+      def consumed_capacity: () -> Array[Types::ConsumedCapacity]?
+    end
+    def execute_transaction: (
+      ?transact_statements: Array[
+        {
+          statement: String,
+          parameters: Array[
+            {
+              s: String,
+              n: String,
+              b: String,
+              ss: Array[String],
+              ns: Array[String],
+              bs: Array[String],
+              m: Hash[String,
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: Array[
+                    {
+                      s: untyped,
+                      n: untyped,
+                      b: untyped,
+                      ss: untyped,
+                      ns: untyped,
+                      bs: untyped,
+                      m: untyped,
+                      l: untyped,
+                      null: bool,
+                      bool: bool
+                    }
+                  ],
+                  null: untyped,
+                  bool: untyped
+                }
+              ],
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          return_values_on_condition_check_failure: String
+        }
+      ],
+      ?client_request_token: String,
+      ?return_consumed_capacity: String
+    ) -> _ExecuteTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteTransactionResponse
+
+    interface _ExportTableToPointInTimeResponse
+      include Smithy::Client::_Response[Types::ExportTableToPointInTimeOutput]
+      def export_description: () -> Types::ExportDescription?
+    end
+    def export_table_to_point_in_time: (
+      ?table_arn: String,
+      ?export_time: Time,
+      ?client_token: String,
+      ?s3_bucket: String,
+      ?s3_bucket_owner: String,
+      ?s3_prefix: String,
+      ?s3_sse_algorithm: String,
+      ?s3_sse_kms_key_id: String,
+      ?export_format: String,
+      ?export_type: String,
+      ?incremental_export_specification: {
+        export_from_time: Time,
+        export_to_time: Time,
+        export_view_type: String
+      }
+    ) -> _ExportTableToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportTableToPointInTimeResponse
+
+    interface _GetItemResponse
+      include Smithy::Client::_Response[Types::GetItemOutput]
+      def item: () -> Hash[String, Types::AttributeValue]?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+    end
+    def get_item: (
+      ?table_name: String,
+      ?key: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?attributes_to_get: Array[String],
+      ?consistent_read: bool,
+      ?return_consumed_capacity: String,
+      ?projection_expression: String,
+      ?expression_attribute_names: Hash[String, String]
+    ) -> _GetItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetItemResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ImportTableResponse
+      include Smithy::Client::_Response[Types::ImportTableOutput]
+      def import_table_description: () -> Types::ImportTableDescription?
+    end
+    def import_table: (
+      ?client_token: String,
+      ?s3_bucket_source: {
+        s3_bucket_owner: String,
+        s3_bucket: String,
+        s3_key_prefix: String
+      },
+      ?input_format: String,
+      ?input_format_options: {
+        csv: {
+          delimiter: String,
+          header_list: Array[String]
+        }
+      },
+      ?input_compression_type: String,
+      ?table_creation_parameters: {
+        table_name: String,
+        attribute_definitions: Array[
+          {
+            attribute_name: String,
+            attribute_type: String
+          }
+        ],
+        key_schema: Array[
+          {
+            attribute_name: untyped,
+            key_type: String
+          }
+        ],
+        billing_mode: String,
+        provisioned_throughput: {
+          read_capacity_units: Integer,
+          write_capacity_units: untyped
+        },
+        on_demand_throughput: {
+          max_read_request_units: Integer,
+          max_write_request_units: untyped
+        },
+        sse_specification: {
+          enabled: bool,
+          sse_type: String,
+          kms_master_key_id: String
+        },
+        global_secondary_indexes: Array[
+          {
+            index_name: String,
+            key_schema: untyped,
+            projection: {
+              projection_type: String,
+              non_key_attributes: Array[String]
+            },
+            provisioned_throughput: untyped,
+            on_demand_throughput: untyped,
+            warm_throughput: {
+              read_units_per_second: untyped,
+              write_units_per_second: untyped
+            }
+          }
+        ]
+      }
+    ) -> _ImportTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportTableResponse
+
+    interface _ListBackupsResponse
+      include Smithy::Client::_Response[Types::ListBackupsOutput]
+      def backup_summaries: () -> Array[Types::BackupSummary]?
+      def last_evaluated_backup_arn: () -> String?
+    end
+    def list_backups: (
+      ?table_name: String,
+      ?limit: Integer,
+      ?time_range_lower_bound: Time,
+      ?time_range_upper_bound: Time,
+      ?exclusive_start_backup_arn: String,
+      ?backup_type: String
+    ) -> _ListBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupsResponse
+
+    interface _ListContributorInsightsResponse
+      include Smithy::Client::_Response[Types::ListContributorInsightsOutput]
+      def contributor_insights_summaries: () -> Array[Types::ContributorInsightsSummary]?
+      def next_token: () -> String?
+    end
+    def list_contributor_insights: (
+      ?table_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContributorInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContributorInsightsResponse
+
+    interface _ListExportsResponse
+      include Smithy::Client::_Response[Types::ListExportsOutput]
+      def export_summaries: () -> Array[Types::ExportSummary]?
+      def next_token: () -> String?
+    end
+    def list_exports: (
+      ?table_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportsResponse
+
+    interface _ListGlobalTablesResponse
+      include Smithy::Client::_Response[Types::ListGlobalTablesOutput]
+      def global_tables: () -> Array[Types::GlobalTable]?
+      def last_evaluated_global_table_name: () -> String?
+    end
+    def list_global_tables: (
+      ?exclusive_start_global_table_name: String,
+      ?limit: Integer,
+      ?region_name: String
+    ) -> _ListGlobalTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGlobalTablesResponse
+
+    interface _ListImportsResponse
+      include Smithy::Client::_Response[Types::ListImportsOutput]
+      def import_summary_list: () -> Array[Types::ImportSummary]?
+      def next_token: () -> String?
+    end
+    def list_imports: (
+      ?table_arn: String,
+      ?page_size: Integer,
+      ?next_token: String
+    ) -> _ListImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportsResponse
+
+    interface _ListTablesResponse
+      include Smithy::Client::_Response[Types::ListTablesOutput]
+      def table_names: () -> Array[String]?
+      def last_evaluated_table_name: () -> String?
+    end
+    def list_tables: (
+      ?exclusive_start_table_name: String,
+      ?limit: Integer
+    ) -> _ListTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTablesResponse
+
+    interface _ListTagsOfResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsOfResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_of_resource: (
+      ?resource_arn: String,
+      ?next_token: String
+    ) -> _ListTagsOfResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsOfResourceResponse
+
+    interface _PutItemResponse
+      include Smithy::Client::_Response[Types::PutItemOutput]
+      def attributes: () -> Hash[String, Types::AttributeValue]?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+      def item_collection_metrics: () -> Types::ItemCollectionMetrics?
+    end
+    def put_item: (
+      ?table_name: String,
+      ?item: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?expected: Hash[String,
+        {
+          value: {
+            s: String,
+            n: String,
+            b: String,
+            ss: Array[String],
+            ns: Array[String],
+            bs: Array[String],
+            m: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: Array[
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: untyped,
+                    null: bool,
+                    bool: bool
+                  }
+                ],
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            l: untyped,
+            null: untyped,
+            bool: untyped
+          },
+          exists: bool,
+          comparison_operator: String,
+          attribute_value_list: Array[
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ]
+        }
+      ],
+      ?return_values: String,
+      ?return_consumed_capacity: String,
+      ?return_item_collection_metrics: String,
+      ?conditional_operator: String,
+      ?condition_expression: String,
+      ?expression_attribute_names: Hash[String, String],
+      ?expression_attribute_values: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?return_values_on_condition_check_failure: String
+    ) -> _PutItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutItemResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyOutput]
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String,
+      ?expected_revision_id: String,
+      ?confirm_remove_self_resource_access: bool
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _QueryResponse
+      include Smithy::Client::_Response[Types::QueryOutput]
+      def items: () -> Array[Hash[String, Types::AttributeValue]]?
+      def count: () -> Integer?
+      def scanned_count: () -> Integer?
+      def last_evaluated_key: () -> Hash[String, Types::AttributeValue]?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+    end
+    def query: (
+      ?table_name: String,
+      ?index_name: String,
+      ?select: String,
+      ?attributes_to_get: Array[String],
+      ?limit: Integer,
+      ?consistent_read: bool,
+      ?key_conditions: Hash[String,
+        {
+          attribute_value_list: Array[
+            {
+              s: String,
+              n: String,
+              b: String,
+              ss: Array[String],
+              ns: Array[String],
+              bs: Array[String],
+              m: Hash[String,
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: Array[
+                    {
+                      s: untyped,
+                      n: untyped,
+                      b: untyped,
+                      ss: untyped,
+                      ns: untyped,
+                      bs: untyped,
+                      m: untyped,
+                      l: untyped,
+                      null: bool,
+                      bool: bool
+                    }
+                  ],
+                  null: untyped,
+                  bool: untyped
+                }
+              ],
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          comparison_operator: String
+        }
+      ],
+      ?query_filter: Hash[String,
+        {
+          attribute_value_list: Array[
+            {
+              s: String,
+              n: String,
+              b: String,
+              ss: Array[String],
+              ns: Array[String],
+              bs: Array[String],
+              m: Hash[String,
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: Array[
+                    {
+                      s: untyped,
+                      n: untyped,
+                      b: untyped,
+                      ss: untyped,
+                      ns: untyped,
+                      bs: untyped,
+                      m: untyped,
+                      l: untyped,
+                      null: bool,
+                      bool: bool
+                    }
+                  ],
+                  null: untyped,
+                  bool: untyped
+                }
+              ],
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          comparison_operator: String
+        }
+      ],
+      ?conditional_operator: String,
+      ?scan_index_forward: bool,
+      ?exclusive_start_key: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?return_consumed_capacity: String,
+      ?projection_expression: String,
+      ?filter_expression: String,
+      ?key_condition_expression: String,
+      ?expression_attribute_names: Hash[String, String],
+      ?expression_attribute_values: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ]
+    ) -> _QueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryResponse
+
+    interface _RestoreTableFromBackupResponse
+      include Smithy::Client::_Response[Types::RestoreTableFromBackupOutput]
+      def table_description: () -> Types::TableDescription?
+    end
+    def restore_table_from_backup: (
+      ?target_table_name: String,
+      ?backup_arn: String,
+      ?billing_mode_override: String,
+      ?global_secondary_index_override: Array[
+        {
+          index_name: String,
+          key_schema: Array[
+            {
+              attribute_name: String,
+              key_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          },
+          provisioned_throughput: {
+            read_capacity_units: Integer,
+            write_capacity_units: untyped
+          },
+          on_demand_throughput: {
+            max_read_request_units: Integer,
+            max_write_request_units: untyped
+          },
+          warm_throughput: {
+            read_units_per_second: untyped,
+            write_units_per_second: untyped
+          }
+        }
+      ],
+      ?local_secondary_index_override: Array[
+        {
+          index_name: String,
+          key_schema: Array[
+            {
+              attribute_name: String,
+              key_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          }
+        }
+      ],
+      ?provisioned_throughput_override: {
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?on_demand_throughput_override: {
+        max_read_request_units: Integer,
+        max_write_request_units: untyped
+      },
+      ?sse_specification_override: {
+        enabled: bool,
+        sse_type: String,
+        kms_master_key_id: String
+      }
+    ) -> _RestoreTableFromBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableFromBackupResponse
+
+    interface _RestoreTableToPointInTimeResponse
+      include Smithy::Client::_Response[Types::RestoreTableToPointInTimeOutput]
+      def table_description: () -> Types::TableDescription?
+    end
+    def restore_table_to_point_in_time: (
+      ?source_table_arn: String,
+      ?source_table_name: String,
+      ?target_table_name: String,
+      ?use_latest_restorable_time: bool,
+      ?restore_date_time: Time,
+      ?billing_mode_override: String,
+      ?global_secondary_index_override: Array[
+        {
+          index_name: String,
+          key_schema: Array[
+            {
+              attribute_name: String,
+              key_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          },
+          provisioned_throughput: {
+            read_capacity_units: Integer,
+            write_capacity_units: untyped
+          },
+          on_demand_throughput: {
+            max_read_request_units: Integer,
+            max_write_request_units: untyped
+          },
+          warm_throughput: {
+            read_units_per_second: untyped,
+            write_units_per_second: untyped
+          }
+        }
+      ],
+      ?local_secondary_index_override: Array[
+        {
+          index_name: String,
+          key_schema: Array[
+            {
+              attribute_name: String,
+              key_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          }
+        }
+      ],
+      ?provisioned_throughput_override: {
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?on_demand_throughput_override: {
+        max_read_request_units: Integer,
+        max_write_request_units: untyped
+      },
+      ?sse_specification_override: {
+        enabled: bool,
+        sse_type: String,
+        kms_master_key_id: String
+      }
+    ) -> _RestoreTableToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableToPointInTimeResponse
+
+    interface _ScanResponse
+      include Smithy::Client::_Response[Types::ScanOutput]
+      def items: () -> Array[Hash[String, Types::AttributeValue]]?
+      def count: () -> Integer?
+      def scanned_count: () -> Integer?
+      def last_evaluated_key: () -> Hash[String, Types::AttributeValue]?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+    end
+    def scan: (
+      ?table_name: String,
+      ?index_name: String,
+      ?attributes_to_get: Array[String],
+      ?limit: Integer,
+      ?select: String,
+      ?scan_filter: Hash[String,
+        {
+          attribute_value_list: Array[
+            {
+              s: String,
+              n: String,
+              b: String,
+              ss: Array[String],
+              ns: Array[String],
+              bs: Array[String],
+              m: Hash[String,
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: Array[
+                    {
+                      s: untyped,
+                      n: untyped,
+                      b: untyped,
+                      ss: untyped,
+                      ns: untyped,
+                      bs: untyped,
+                      m: untyped,
+                      l: untyped,
+                      null: bool,
+                      bool: bool
+                    }
+                  ],
+                  null: untyped,
+                  bool: untyped
+                }
+              ],
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          comparison_operator: String
+        }
+      ],
+      ?conditional_operator: String,
+      ?exclusive_start_key: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?return_consumed_capacity: String,
+      ?total_segments: Integer,
+      ?segment: Integer,
+      ?projection_expression: String,
+      ?filter_expression: String,
+      ?expression_attribute_names: Hash[String, String],
+      ?expression_attribute_values: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?consistent_read: bool
+    ) -> _ScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ScanResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TransactGetItemsResponse
+      include Smithy::Client::_Response[Types::TransactGetItemsOutput]
+      def consumed_capacity: () -> Array[Types::ConsumedCapacity]?
+      def responses: () -> Array[Types::ItemResponse]?
+    end
+    def transact_get_items: (
+      ?transact_items: Array[
+        {
+          get: {
+            key: Hash[String,
+              {
+                s: String,
+                n: String,
+                b: String,
+                ss: Array[String],
+                ns: Array[String],
+                bs: Array[String],
+                m: Hash[String,
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: Array[
+                      {
+                        s: untyped,
+                        n: untyped,
+                        b: untyped,
+                        ss: untyped,
+                        ns: untyped,
+                        bs: untyped,
+                        m: untyped,
+                        l: untyped,
+                        null: bool,
+                        bool: bool
+                      }
+                    ],
+                    null: untyped,
+                    bool: untyped
+                  }
+                ],
+                l: untyped,
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            table_name: String,
+            projection_expression: String,
+            expression_attribute_names: Hash[String, String]
+          }
+        }
+      ],
+      ?return_consumed_capacity: String
+    ) -> _TransactGetItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransactGetItemsResponse
+
+    interface _TransactWriteItemsResponse
+      include Smithy::Client::_Response[Types::TransactWriteItemsOutput]
+      def consumed_capacity: () -> Array[Types::ConsumedCapacity]?
+      def item_collection_metrics: () -> Hash[String, Array[Types::ItemCollectionMetrics]]?
+    end
+    def transact_write_items: (
+      ?transact_items: Array[
+        {
+          condition_check: {
+            key: Hash[String,
+              {
+                s: String,
+                n: String,
+                b: String,
+                ss: Array[String],
+                ns: Array[String],
+                bs: Array[String],
+                m: Hash[String,
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: Array[
+                      {
+                        s: untyped,
+                        n: untyped,
+                        b: untyped,
+                        ss: untyped,
+                        ns: untyped,
+                        bs: untyped,
+                        m: untyped,
+                        l: untyped,
+                        null: bool,
+                        bool: bool
+                      }
+                    ],
+                    null: untyped,
+                    bool: untyped
+                  }
+                ],
+                l: untyped,
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            table_name: String,
+            condition_expression: String,
+            expression_attribute_names: Hash[String, String],
+            expression_attribute_values: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: untyped,
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            return_values_on_condition_check_failure: String
+          },
+          put: {
+            item: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: untyped,
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            table_name: untyped,
+            condition_expression: untyped,
+            expression_attribute_names: untyped,
+            expression_attribute_values: untyped,
+            return_values_on_condition_check_failure: untyped
+          },
+          delete: {
+            key: untyped,
+            table_name: untyped,
+            condition_expression: untyped,
+            expression_attribute_names: untyped,
+            expression_attribute_values: untyped,
+            return_values_on_condition_check_failure: untyped
+          },
+          update: {
+            key: untyped,
+            update_expression: String,
+            table_name: untyped,
+            condition_expression: untyped,
+            expression_attribute_names: untyped,
+            expression_attribute_values: untyped,
+            return_values_on_condition_check_failure: untyped
+          }
+        }
+      ],
+      ?return_consumed_capacity: String,
+      ?return_item_collection_metrics: String,
+      ?client_request_token: String
+    ) -> _TransactWriteItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransactWriteItemsResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateContinuousBackupsResponse
+      include Smithy::Client::_Response[Types::UpdateContinuousBackupsOutput]
+      def continuous_backups_description: () -> Types::ContinuousBackupsDescription?
+    end
+    def update_continuous_backups: (
+      ?table_name: String,
+      ?point_in_time_recovery_specification: {
+        point_in_time_recovery_enabled: bool,
+        recovery_period_in_days: Integer
+      }
+    ) -> _UpdateContinuousBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContinuousBackupsResponse
+
+    interface _UpdateContributorInsightsResponse
+      include Smithy::Client::_Response[Types::UpdateContributorInsightsOutput]
+      def table_name: () -> String?
+      def index_name: () -> String?
+      def contributor_insights_status: () -> String?
+      def contributor_insights_mode: () -> String?
+    end
+    def update_contributor_insights: (
+      ?table_name: String,
+      ?index_name: String,
+      ?contributor_insights_action: String,
+      ?contributor_insights_mode: String
+    ) -> _UpdateContributorInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContributorInsightsResponse
+
+    interface _UpdateGlobalTableResponse
+      include Smithy::Client::_Response[Types::UpdateGlobalTableOutput]
+      def global_table_description: () -> Types::GlobalTableDescription?
+    end
+    def update_global_table: (
+      ?global_table_name: String,
+      ?replica_updates: Array[
+        {
+          create: {
+            region_name: String
+          },
+          delete: {
+            region_name: untyped
+          }
+        }
+      ]
+    ) -> _UpdateGlobalTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalTableResponse
+
+    interface _UpdateGlobalTableSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateGlobalTableSettingsOutput]
+      def global_table_name: () -> String?
+      def replica_settings: () -> Array[Types::ReplicaSettingsDescription]?
+    end
+    def update_global_table_settings: (
+      ?global_table_name: String,
+      ?global_table_billing_mode: String,
+      ?global_table_provisioned_write_capacity_units: Integer,
+      ?global_table_provisioned_write_capacity_auto_scaling_settings_update: {
+        minimum_units: Integer,
+        maximum_units: untyped,
+        auto_scaling_disabled: bool,
+        auto_scaling_role_arn: String,
+        scaling_policy_update: {
+          policy_name: String,
+          target_tracking_scaling_policy_configuration: {
+            disable_scale_in: untyped,
+            scale_in_cooldown: Integer,
+            scale_out_cooldown: untyped,
+            target_value: Float
+          }
+        }
+      },
+      ?global_table_global_secondary_index_settings_update: Array[
+        {
+          index_name: String,
+          provisioned_write_capacity_units: Integer,
+          provisioned_write_capacity_auto_scaling_settings_update: {
+            minimum_units: untyped,
+            maximum_units: untyped,
+            auto_scaling_disabled: bool,
+            auto_scaling_role_arn: String,
+            scaling_policy_update: {
+              policy_name: String,
+              target_tracking_scaling_policy_configuration: {
+                disable_scale_in: untyped,
+                scale_in_cooldown: Integer,
+                scale_out_cooldown: untyped,
+                target_value: Float
+              }
+            }
+          }
+        }
+      ],
+      ?replica_settings_update: Array[
+        {
+          region_name: String,
+          replica_provisioned_read_capacity_units: Integer,
+          replica_provisioned_read_capacity_auto_scaling_settings_update: {
+            minimum_units: untyped,
+            maximum_units: untyped,
+            auto_scaling_disabled: bool,
+            auto_scaling_role_arn: String,
+            scaling_policy_update: {
+              policy_name: String,
+              target_tracking_scaling_policy_configuration: {
+                disable_scale_in: untyped,
+                scale_in_cooldown: Integer,
+                scale_out_cooldown: untyped,
+                target_value: Float
+              }
+            }
+          },
+          replica_global_secondary_index_settings_update: Array[
+            {
+              index_name: String,
+              provisioned_read_capacity_units: untyped,
+              provisioned_read_capacity_auto_scaling_settings_update: untyped
+            }
+          ],
+          replica_table_class: String
+        }
+      ]
+    ) -> _UpdateGlobalTableSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalTableSettingsResponse
+
+    interface _UpdateItemResponse
+      include Smithy::Client::_Response[Types::UpdateItemOutput]
+      def attributes: () -> Hash[String, Types::AttributeValue]?
+      def consumed_capacity: () -> Types::ConsumedCapacity?
+      def item_collection_metrics: () -> Types::ItemCollectionMetrics?
+    end
+    def update_item: (
+      ?table_name: String,
+      ?key: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?attribute_updates: Hash[String,
+        {
+          value: {
+            s: String,
+            n: String,
+            b: String,
+            ss: Array[String],
+            ns: Array[String],
+            bs: Array[String],
+            m: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: Array[
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: untyped,
+                    null: bool,
+                    bool: bool
+                  }
+                ],
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            l: untyped,
+            null: untyped,
+            bool: untyped
+          },
+          action: String
+        }
+      ],
+      ?expected: Hash[String,
+        {
+          value: {
+            s: String,
+            n: String,
+            b: String,
+            ss: Array[String],
+            ns: Array[String],
+            bs: Array[String],
+            m: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: Array[
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: untyped,
+                    null: bool,
+                    bool: bool
+                  }
+                ],
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            l: untyped,
+            null: untyped,
+            bool: untyped
+          },
+          exists: bool,
+          comparison_operator: String,
+          attribute_value_list: Array[
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: untyped,
+              null: untyped,
+              bool: untyped
+            }
+          ]
+        }
+      ],
+      ?conditional_operator: String,
+      ?return_values: String,
+      ?return_consumed_capacity: String,
+      ?return_item_collection_metrics: String,
+      ?update_expression: String,
+      ?condition_expression: String,
+      ?expression_attribute_names: Hash[String, String],
+      ?expression_attribute_values: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?return_values_on_condition_check_failure: String
+    ) -> _UpdateItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateItemResponse
+
+    interface _UpdateKinesisStreamingDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateKinesisStreamingDestinationOutput]
+      def table_name: () -> String?
+      def stream_arn: () -> String?
+      def destination_status: () -> String?
+      def update_kinesis_streaming_configuration: () -> Types::UpdateKinesisStreamingConfiguration?
+    end
+    def update_kinesis_streaming_destination: (
+      ?table_name: String,
+      ?stream_arn: String,
+      ?update_kinesis_streaming_configuration: {
+        approximate_creation_date_time_precision: String
+      }
+    ) -> _UpdateKinesisStreamingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKinesisStreamingDestinationResponse
+
+    interface _UpdateTableResponse
+      include Smithy::Client::_Response[Types::UpdateTableOutput]
+      def table_description: () -> Types::TableDescription?
+    end
+    def update_table: (
+      ?attribute_definitions: Array[
+        {
+          attribute_name: String,
+          attribute_type: String
+        }
+      ],
+      ?table_name: String,
+      ?billing_mode: String,
+      ?provisioned_throughput: {
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?global_secondary_index_updates: Array[
+        {
+          update: {
+            index_name: String,
+            provisioned_throughput: {
+              read_capacity_units: Integer,
+              write_capacity_units: untyped
+            },
+            on_demand_throughput: {
+              max_read_request_units: Integer,
+              max_write_request_units: untyped
+            },
+            warm_throughput: {
+              read_units_per_second: untyped,
+              write_units_per_second: untyped
+            }
+          },
+          create: {
+            index_name: untyped,
+            key_schema: Array[
+              {
+                attribute_name: String,
+                key_type: String
+              }
+            ],
+            projection: {
+              projection_type: String,
+              non_key_attributes: Array[String]
+            },
+            provisioned_throughput: untyped,
+            on_demand_throughput: untyped,
+            warm_throughput: untyped
+          },
+          delete: {
+            index_name: untyped
+          }
+        }
+      ],
+      ?stream_specification: {
+        stream_enabled: bool,
+        stream_view_type: String
+      },
+      ?sse_specification: {
+        enabled: bool,
+        sse_type: String,
+        kms_master_key_id: String
+      },
+      ?replica_updates: Array[
+        {
+          create: {
+            region_name: String,
+            kms_master_key_id: String,
+            provisioned_throughput_override: {
+              read_capacity_units: Integer
+            },
+            on_demand_throughput_override: {
+              max_read_request_units: Integer
+            },
+            global_secondary_indexes: Array[
+              {
+                index_name: String,
+                provisioned_throughput_override: untyped,
+                on_demand_throughput_override: untyped
+              }
+            ],
+            table_class_override: String
+          },
+          update: {
+            region_name: untyped,
+            kms_master_key_id: untyped,
+            provisioned_throughput_override: untyped,
+            on_demand_throughput_override: untyped,
+            global_secondary_indexes: untyped,
+            table_class_override: untyped
+          },
+          delete: {
+            region_name: untyped
+          }
+        }
+      ],
+      ?table_class: String,
+      ?deletion_protection_enabled: bool,
+      ?multi_region_consistency: String,
+      ?global_table_witness_updates: Array[
+        {
+          create: {
+            region_name: String
+          },
+          delete: {
+            region_name: untyped
+          }
+        }
+      ],
+      ?on_demand_throughput: {
+        max_read_request_units: Integer,
+        max_write_request_units: untyped
+      },
+      ?warm_throughput: {
+        read_units_per_second: Integer,
+        write_units_per_second: untyped
+      }
+    ) -> _UpdateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableResponse
+
+    interface _UpdateTableReplicaAutoScalingResponse
+      include Smithy::Client::_Response[Types::UpdateTableReplicaAutoScalingOutput]
+      def table_auto_scaling_description: () -> Types::TableAutoScalingDescription?
+    end
+    def update_table_replica_auto_scaling: (
+      ?global_secondary_index_updates: Array[
+        {
+          index_name: String,
+          provisioned_write_capacity_auto_scaling_update: {
+            minimum_units: Integer,
+            maximum_units: untyped,
+            auto_scaling_disabled: bool,
+            auto_scaling_role_arn: String,
+            scaling_policy_update: {
+              policy_name: String,
+              target_tracking_scaling_policy_configuration: {
+                disable_scale_in: untyped,
+                scale_in_cooldown: Integer,
+                scale_out_cooldown: untyped,
+                target_value: Float
+              }
+            }
+          }
+        }
+      ],
+      ?table_name: String,
+      ?provisioned_write_capacity_auto_scaling_update: {
+        minimum_units: Integer,
+        maximum_units: untyped,
+        auto_scaling_disabled: bool,
+        auto_scaling_role_arn: String,
+        scaling_policy_update: {
+          policy_name: String,
+          target_tracking_scaling_policy_configuration: {
+            disable_scale_in: untyped,
+            scale_in_cooldown: Integer,
+            scale_out_cooldown: untyped,
+            target_value: Float
+          }
+        }
+      },
+      ?replica_updates: Array[
+        {
+          region_name: String,
+          replica_global_secondary_index_updates: Array[
+            {
+              index_name: String,
+              provisioned_read_capacity_auto_scaling_update: {
+                minimum_units: Integer,
+                maximum_units: untyped,
+                auto_scaling_disabled: bool,
+                auto_scaling_role_arn: String,
+                scaling_policy_update: {
+                  policy_name: String,
+                  target_tracking_scaling_policy_configuration: {
+                    disable_scale_in: untyped,
+                    scale_in_cooldown: Integer,
+                    scale_out_cooldown: untyped,
+                    target_value: Float
+                  }
+                }
+              }
+            }
+          ],
+          replica_provisioned_read_capacity_auto_scaling_update: untyped
+        }
+      ]
+    ) -> _UpdateTableReplicaAutoScalingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableReplicaAutoScalingResponse
+
+    interface _UpdateTimeToLiveResponse
+      include Smithy::Client::_Response[Types::UpdateTimeToLiveOutput]
+      def time_to_live_specification: () -> Types::TimeToLiveSpecification?
+    end
+    def update_time_to_live: (
+      ?table_name: String,
+      ?time_to_live_specification: {
+        enabled: bool,
+        attribute_name: String
+      }
+    ) -> _UpdateTimeToLiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTimeToLiveResponse
+  end
+end

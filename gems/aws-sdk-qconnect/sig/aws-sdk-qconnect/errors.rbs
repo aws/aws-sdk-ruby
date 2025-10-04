@@ -6,6 +6,9 @@ module Aws::QConnect
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class DependencyFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class PreconditionFailedException < Smithy::Client::ServiceError
       def message: () -> String?
     end

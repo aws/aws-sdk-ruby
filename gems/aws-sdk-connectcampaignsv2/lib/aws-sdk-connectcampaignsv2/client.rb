@@ -20,10 +20,11 @@ require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
-require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/rest_json_protocol'
+require 'aws-sdk-core/plugins/sigv4'
 
 module Aws::ConnectCampaignsV2
   # An API client for Aws::ConnectCampaignsV2.
@@ -51,14 +52,20 @@ module Aws::ConnectCampaignsV2
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
-    add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::RestJsonProtocol)
+    add_plugin(Aws::Core::Plugins::SigV4)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
     # @option options [String] :account_id
+    # @option options [String] :account_id_endpoint_mode
+    #  The account ID endpoint mode to use. This can be one of the following values:
+    #  * `preferred` - (default) Use the account ID endpoint if available, otherwise use the standard endpoint.
+    #  * `disabled` - Never use the account ID endpoint, only use the standard endpoint.
+    #  * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
     # @option options [Boolean] :adaptive_retry_wait_to_fill (true)
     #  When true, the request will sleep until there is sufficient client side capacity to retry
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
@@ -78,7 +85,8 @@ module Aws::ConnectCampaignsV2
     # @option options [Boolean] :disable_request_compression
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
-    #  Custom Endpoint
+    #  The endpoint to send requests to.
+    #  The endpoint should be a URI formatted like "http://example.com:123"'
     # @option options [#resolve(parameters)] :endpoint_provider (Aws::ConnectCampaignsV2::EndpointProvider)
     #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
@@ -150,7 +158,13 @@ module Aws::ConnectCampaignsV2
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
     # @option options [String] :region
-    #  TODO
+    #  The AWS region to connect to. The configured `:region` is used to determine the service `:endpoint`.
+    #  When not provided, a default region is searched for in the following locations:
+    #  * `Aws.config[:region]`
+    #  * `ENV['AWS_REGION']`
+    #  * `ENV['AWS_DEFAULT_REGION']`
+    #  * `~/.aws/credentials` as `region` under a profile
+    #  * `~/.aws/config` as `region` under a profile
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
@@ -183,10 +197,18 @@ module Aws::ConnectCampaignsV2
     #  By default fake responses are generated and returned. You can specify the response data
     #  to return or errors to raise by calling {Stubs#stub_responses}.
     #  @see Stubs
-    # @option options [Boolean] :use_dual_stack_endpoint
-    #  TODO
+    # @option options [Boolean] :use_dualstack_endpoint
+    #  When set to `true`, dualstack enabled endpoints (with `.aws` TLD) will be used if available.
+    #  This option can also be configured in the following locations:
+    #  * `ENV['AWS_USE_DUALSTACK_ENDPOINT']`
+    #  * `~/.aws/credentials` as `use_dualstack_endpoint` under a profile
+    #  * `~/.aws/config` as `use_dualstack_endpoint` under a profile
     # @option options [Boolean] :use_fips_endpoint
-    #  TODO
+    #  When set to `true`, FIPS compatible endpoints will be used if available.
+    #  This option can also be configured in the following locations:
+    #  * `ENV['AWS_USE_FIPS_ENDPOINT']`
+    #  * `~/.aws/credentials` as `use_fips_endpoint` under a profile
+    #  * `~/.aws/config` as `use_fips_endpoint` under a profile
     # @option options [Boolean] :validate_params (true)
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)

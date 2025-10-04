@@ -20,10 +20,11 @@ require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
-require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/rest_json_protocol'
+require 'aws-sdk-core/plugins/sigv4'
 
 module Aws::QConnect
   # An API client for Aws::QConnect.
@@ -51,14 +52,20 @@ module Aws::QConnect
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
-    add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::RestJsonProtocol)
+    add_plugin(Aws::Core::Plugins::SigV4)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
     # @option options [String] :account_id
+    # @option options [String] :account_id_endpoint_mode
+    #  The account ID endpoint mode to use. This can be one of the following values:
+    #  * `preferred` - (default) Use the account ID endpoint if available, otherwise use the standard endpoint.
+    #  * `disabled` - Never use the account ID endpoint, only use the standard endpoint.
+    #  * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
     # @option options [Boolean] :adaptive_retry_wait_to_fill (true)
     #  When true, the request will sleep until there is sufficient client side capacity to retry
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
@@ -78,7 +85,8 @@ module Aws::QConnect
     # @option options [Boolean] :disable_request_compression
     #  When `true`, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
-    #  Custom Endpoint
+    #  The endpoint to send requests to.
+    #  The endpoint should be a URI formatted like "http://example.com:123"'
     # @option options [#resolve(parameters)] :endpoint_provider (Aws::QConnect::EndpointProvider)
     #  An object that provides an endpoint to use for the request.
     # @option options [String] :http_ca_file
@@ -150,7 +158,13 @@ module Aws::QConnect
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
     # @option options [String] :region
-    #  TODO
+    #  The AWS region to connect to. The configured `:region` is used to determine the service `:endpoint`.
+    #  When not provided, a default region is searched for in the following locations:
+    #  * `Aws.config[:region]`
+    #  * `ENV['AWS_REGION']`
+    #  * `ENV['AWS_DEFAULT_REGION']`
+    #  * `~/.aws/credentials` as `region` under a profile
+    #  * `~/.aws/config` as `region` under a profile
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
@@ -183,10 +197,18 @@ module Aws::QConnect
     #  By default fake responses are generated and returned. You can specify the response data
     #  to return or errors to raise by calling {Stubs#stub_responses}.
     #  @see Stubs
-    # @option options [Boolean] :use_dual_stack_endpoint
-    #  TODO
+    # @option options [Boolean] :use_dualstack_endpoint
+    #  When set to `true`, dualstack enabled endpoints (with `.aws` TLD) will be used if available.
+    #  This option can also be configured in the following locations:
+    #  * `ENV['AWS_USE_DUALSTACK_ENDPOINT']`
+    #  * `~/.aws/credentials` as `use_dualstack_endpoint` under a profile
+    #  * `~/.aws/config` as `use_dualstack_endpoint` under a profile
     # @option options [Boolean] :use_fips_endpoint
-    #  TODO
+    #  When set to `true`, FIPS compatible endpoints will be used if available.
+    #  This option can also be configured in the following locations:
+    #  * `ENV['AWS_USE_FIPS_ENDPOINT']`
+    #  * `~/.aws/credentials` as `use_fips_endpoint` under a profile
+    #  * `~/.aws/config` as `use_fips_endpoint` under a profile
     # @option options [Boolean] :validate_params (true)
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
@@ -381,6 +403,98 @@ module Aws::QConnect
     #             }
     #           }
     #         ]
+    #       },
+    #       email_response_ai_agent_configuration: {
+    #         email_response_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "AIAgentAssociationConfigurationType",
+    #             association_configuration_data: {
+    #               # One of:
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   # One of:
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue"
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   ],
+    #                   or_conditions: [{
+    #                     # One of:
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   }]
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #               }
+    #             }
+    #           }
+    #         ]
+    #       },
+    #       email_overview_ai_agent_configuration: {
+    #         email_overview_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString"
+    #       },
+    #       email_generative_answer_ai_agent_configuration: {
+    #         email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "AIAgentAssociationConfigurationType",
+    #             association_configuration_data: {
+    #               # One of:
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   # One of:
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue"
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   ],
+    #                   or_conditions: [{
+    #                     # One of:
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   }]
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #               }
+    #             }
+    #           }
+    #         ]
     #       }
     #     },
     #     visibility_status: "VisibilityStatus", # required
@@ -497,6 +611,98 @@ module Aws::QConnect
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
     #           self_service_answer_generation_ai_prompt_id: "UuidWithQualifier",
     #           self_service_ai_guardrail_id: "UuidWithQualifier",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_response_ai_agent_configuration: {
+    #           email_response_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_overview_ai_agent_configuration: {
+    #           email_overview_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         email_generative_answer_ai_agent_configuration: {
+    #           email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
     #           association_configurations: [
     #             {
     #               association_id: "Uuid",
@@ -679,6 +885,98 @@ module Aws::QConnect
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
     #           self_service_answer_generation_ai_prompt_id: "UuidWithQualifier",
     #           self_service_ai_guardrail_id: "UuidWithQualifier",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_response_ai_agent_configuration: {
+    #           email_response_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_overview_ai_agent_configuration: {
+    #           email_overview_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         email_generative_answer_ai_agent_configuration: {
+    #           email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
     #           association_configurations: [
     #             {
     #               association_id: "Uuid",
@@ -1017,7 +1315,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon Q in Connect AI Prompt.</p> <note> <p>For more information on supported models, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system and custom prompts</a>.</p> </note>
+    # <p>Creates an Amazon Q in Connect AI Prompt.</p>
     # @param [Hash, Types::CreateAIPromptRequest] params
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>..</p>
@@ -1034,7 +1332,7 @@ module Aws::QConnect
     # @option params [String] :template_type
     #   <p>The type of the prompt template for this AI Prompt.</p>
     # @option params [String] :model_id
-    #   <p>The identifier of the model used for this AI Prompt.</p>
+    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
     # @option params [String] :api_format
     #   <p>The API Format of the AI Prompt.</p> <p>Recommended values: <code>MESSAGES | TEXT_COMPLETIONS</code> </p> <note> <p>The values <code>ANTHROPIC_CLAUDE_MESSAGES | ANTHROPIC_CLAUDE_TEXT_COMPLETIONS</code> will be deprecated.</p> </note>
     # @option params [Hash<String, String>] :tags
@@ -2193,6 +2491,8 @@ module Aws::QConnect
     #   <p>An object that can be used to specify Tag conditions. </p>
     # @option params [Hash<String, Types::AIAgentConfigurationData>] :ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
+    # @option params [String] :contact_arn
+    #   <p>The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -2232,7 +2532,8 @@ module Aws::QConnect
     #       "AIAgentType" => {
     #         ai_agent_id: "UuidWithQualifier", # required
     #       }
-    #     }
+    #     },
+    #     contact_arn: "GenericArn"
     #   }
     #   options = {}
     #   response = client.create_session(params, options)
@@ -2777,6 +3078,98 @@ module Aws::QConnect
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
     #           self_service_answer_generation_ai_prompt_id: "UuidWithQualifier",
     #           self_service_ai_guardrail_id: "UuidWithQualifier",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_response_ai_agent_configuration: {
+    #           email_response_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_overview_ai_agent_configuration: {
+    #           email_overview_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         email_generative_answer_ai_agent_configuration: {
+    #           email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
     #           association_configurations: [
     #             {
     #               association_id: "Uuid",
@@ -3771,6 +4164,23 @@ module Aws::QConnect
     #                 }
     #               ],
     #               next_chunk_token: "NextToken"
+    #             },
+    #             email_response_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             email_overview_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             email_generative_answer_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               references: [
+    #                 {
+    #                   # recursive DataSummary
+    #                 }
+    #               ],
+    #               next_chunk_token: "NextToken"
     #             }
     #           }
     #         }
@@ -4037,6 +4447,98 @@ module Aws::QConnect
     #                   }
     #                 }
     #               ]
+    #             },
+    #             email_response_ai_agent_configuration: {
+    #               email_response_ai_prompt_id: "UuidWithQualifier",
+    #               email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #               locale: "NonEmptyString",
+    #               association_configurations: [
+    #                 {
+    #                   association_id: "Uuid",
+    #                   association_type: "AIAgentAssociationConfigurationType",
+    #                   association_configuration_data: {
+    #                     # One of:
+    #                     knowledge_base_association_configuration_data: {
+    #                       content_tag_filter: {
+    #                         # One of:
+    #                         tag_condition: {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         },
+    #                         and_conditions: [
+    #                           {
+    #                             key: "TagKey", # required
+    #                             value: "TagValue"
+    #                           }
+    #                         ],
+    #                         or_conditions: [{
+    #                           # One of:
+    #                           and_conditions: [
+    #                             {
+    #                               key: "TagKey", # required
+    #                               value: "TagValue"
+    #                             }
+    #                           ],
+    #                           tag_condition: {
+    #                             key: "TagKey", # required
+    #                             value: "TagValue"
+    #                           }
+    #                         }]
+    #                       },
+    #                       max_results: 1,
+    #                       override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                     }
+    #                   }
+    #                 }
+    #               ]
+    #             },
+    #             email_overview_ai_agent_configuration: {
+    #               email_overview_ai_prompt_id: "UuidWithQualifier",
+    #               locale: "NonEmptyString"
+    #             },
+    #             email_generative_answer_ai_agent_configuration: {
+    #               email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #               email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #               locale: "NonEmptyString",
+    #               association_configurations: [
+    #                 {
+    #                   association_id: "Uuid",
+    #                   association_type: "AIAgentAssociationConfigurationType",
+    #                   association_configuration_data: {
+    #                     # One of:
+    #                     knowledge_base_association_configuration_data: {
+    #                       content_tag_filter: {
+    #                         # One of:
+    #                         tag_condition: {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         },
+    #                         and_conditions: [
+    #                           {
+    #                             key: "TagKey", # required
+    #                             value: "TagValue"
+    #                           }
+    #                         ],
+    #                         or_conditions: [{
+    #                           # One of:
+    #                           and_conditions: [
+    #                             {
+    #                               key: "TagKey", # required
+    #                               value: "TagValue"
+    #                             }
+    #                           ],
+    #                           tag_condition: {
+    #                             key: "TagKey", # required
+    #                             value: "TagValue"
+    #                           }
+    #                         }]
+    #                       },
+    #                       max_results: 1,
+    #                       override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                     }
+    #                   }
+    #                 }
+    #               ]
     #             }
     #           },
     #           origin: "Origin",
@@ -4185,6 +4687,98 @@ module Aws::QConnect
     #             self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
     #             self_service_answer_generation_ai_prompt_id: "UuidWithQualifier",
     #             self_service_ai_guardrail_id: "UuidWithQualifier",
+    #             association_configurations: [
+    #               {
+    #                 association_id: "Uuid",
+    #                 association_type: "AIAgentAssociationConfigurationType",
+    #                 association_configuration_data: {
+    #                   # One of:
+    #                   knowledge_base_association_configuration_data: {
+    #                     content_tag_filter: {
+    #                       # One of:
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       },
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       or_conditions: [{
+    #                         # One of:
+    #                         and_conditions: [
+    #                           {
+    #                             key: "TagKey", # required
+    #                             value: "TagValue"
+    #                           }
+    #                         ],
+    #                         tag_condition: {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       }]
+    #                     },
+    #                     max_results: 1,
+    #                     override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                   }
+    #                 }
+    #               }
+    #             ]
+    #           },
+    #           email_response_ai_agent_configuration: {
+    #             email_response_ai_prompt_id: "UuidWithQualifier",
+    #             email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #             locale: "NonEmptyString",
+    #             association_configurations: [
+    #               {
+    #                 association_id: "Uuid",
+    #                 association_type: "AIAgentAssociationConfigurationType",
+    #                 association_configuration_data: {
+    #                   # One of:
+    #                   knowledge_base_association_configuration_data: {
+    #                     content_tag_filter: {
+    #                       # One of:
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       },
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       or_conditions: [{
+    #                         # One of:
+    #                         and_conditions: [
+    #                           {
+    #                             key: "TagKey", # required
+    #                             value: "TagValue"
+    #                           }
+    #                         ],
+    #                         tag_condition: {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       }]
+    #                     },
+    #                     max_results: 1,
+    #                     override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                   }
+    #                 }
+    #               }
+    #             ]
+    #           },
+    #           email_overview_ai_agent_configuration: {
+    #             email_overview_ai_prompt_id: "UuidWithQualifier",
+    #             locale: "NonEmptyString"
+    #           },
+    #           email_generative_answer_ai_agent_configuration: {
+    #             email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #             email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #             locale: "NonEmptyString",
     #             association_configurations: [
     #               {
     #                 association_id: "Uuid",
@@ -5243,6 +5837,23 @@ module Aws::QConnect
     #                 }
     #               ],
     #               next_chunk_token: "NextToken"
+    #             },
+    #             email_response_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             email_overview_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             email_generative_answer_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               references: [
+    #                 {
+    #                   # recursive DataSummary
+    #                 }
+    #               ],
+    #               next_chunk_token: "NextToken"
     #             }
     #           }
     #         },
@@ -6083,6 +6694,98 @@ module Aws::QConnect
     #             }
     #           }
     #         ]
+    #       },
+    #       email_response_ai_agent_configuration: {
+    #         email_response_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "AIAgentAssociationConfigurationType",
+    #             association_configuration_data: {
+    #               # One of:
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   # One of:
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue"
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   ],
+    #                   or_conditions: [{
+    #                     # One of:
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   }]
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #               }
+    #             }
+    #           }
+    #         ]
+    #       },
+    #       email_overview_ai_agent_configuration: {
+    #         email_overview_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString"
+    #       },
+    #       email_generative_answer_ai_agent_configuration: {
+    #         email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "AIAgentAssociationConfigurationType",
+    #             association_configuration_data: {
+    #               # One of:
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   # One of:
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue"
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   ],
+    #                   or_conditions: [{
+    #                     # One of:
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     }
+    #                   }]
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #               }
+    #             }
+    #           }
+    #         ]
     #       }
     #     },
     #     description: "Description"
@@ -6195,6 +6898,98 @@ module Aws::QConnect
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
     #           self_service_answer_generation_ai_prompt_id: "UuidWithQualifier",
     #           self_service_ai_guardrail_id: "UuidWithQualifier",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_response_ai_agent_configuration: {
+    #           email_response_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
+    #           association_configurations: [
+    #             {
+    #               association_id: "Uuid",
+    #               association_type: "AIAgentAssociationConfigurationType",
+    #               association_configuration_data: {
+    #                 # One of:
+    #                 knowledge_base_association_configuration_data: {
+    #                   content_tag_filter: {
+    #                     # One of:
+    #                     tag_condition: {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue"
+    #                     },
+    #                     and_conditions: [
+    #                       {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     ],
+    #                     or_conditions: [{
+    #                       # One of:
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue"
+    #                         }
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue"
+    #                       }
+    #                     }]
+    #                   },
+    #                   max_results: 1,
+    #                   override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #                 }
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         email_overview_ai_agent_configuration: {
+    #           email_overview_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         email_generative_answer_ai_agent_configuration: {
+    #           email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #           email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString",
     #           association_configurations: [
     #             {
     #               association_id: "Uuid",
@@ -6441,7 +7236,7 @@ module Aws::QConnect
     # @option params [String] :description
     #   <p>The description of the Amazon Q in Connect AI Prompt.</p>
     # @option params [String] :model_id
-    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For more information on supported models, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system and custom prompts</a>.</p> </note>
+    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",

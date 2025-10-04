@@ -5,6 +5,7 @@ module Aws::MediaLive
     def self.new: (
       ?access_key_id: String,
       ?account_id: String,
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],
@@ -42,7 +43,7 @@ module Aws::MediaLive
       ?secret_access_key: String,
       ?session_token: String,
       ?stub_responses: bool,
-      ?use_dual_stack_endpoint: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
@@ -684,7 +685,16 @@ module Aws::MediaLive
               media_package_group_settings: {
                 destination: untyped,
                 mediapackage_v2_group_settings: {
-                  caption_language_mappings: untyped
+                  caption_language_mappings: untyped,
+                  id3_behavior: String,
+                  klv_behavior: String,
+                  nielsen_id3_behavior: String,
+                  scte35_type: String,
+                  segment_length: untyped,
+                  segment_length_units: String,
+                  timed_metadata_id3_frame: String,
+                  timed_metadata_id3_period: Integer,
+                  timed_metadata_passthrough: String
                 }
               },
               ms_smooth_group_settings: {
@@ -702,7 +712,7 @@ module Aws::MediaLive
                 num_retries: untyped,
                 restart_delay: untyped,
                 segmentation_mode: String,
-                send_delay_ms: Integer,
+                send_delay_ms: untyped,
                 sparse_track_type: String,
                 stream_manifest_behavior: String,
                 timestamp_offset: untyped,
@@ -727,16 +737,16 @@ module Aws::MediaLive
               },
               cmaf_ingest_group_settings: {
                 destination: untyped,
-                nielsen_id3_behavior: String,
-                scte35_type: String,
+                nielsen_id3_behavior: untyped,
+                scte35_type: untyped,
                 segment_length: untyped,
-                segment_length_units: String,
+                segment_length_units: untyped,
                 send_delay_ms: Integer,
-                klv_behavior: String,
+                klv_behavior: untyped,
                 klv_name_modifier: String,
                 nielsen_id3_name_modifier: untyped,
                 scte35_name_modifier: untyped,
-                id3_behavior: String,
+                id3_behavior: untyped,
                 id3_name_modifier: untyped,
                 caption_language_mappings: Array[
                   {
@@ -744,9 +754,9 @@ module Aws::MediaLive
                     language_code: untyped
                   }
                 ],
-                timed_metadata_id3_frame: String,
+                timed_metadata_id3_frame: untyped,
                 timed_metadata_id3_period: untyped,
-                timed_metadata_passthrough: String,
+                timed_metadata_passthrough: untyped,
                 additional_destinations: Array[
                   {
                     destination: untyped
@@ -3269,7 +3279,16 @@ module Aws::MediaLive
               media_package_group_settings: {
                 destination: untyped,
                 mediapackage_v2_group_settings: {
-                  caption_language_mappings: untyped
+                  caption_language_mappings: untyped,
+                  id3_behavior: String,
+                  klv_behavior: String,
+                  nielsen_id3_behavior: String,
+                  scte35_type: String,
+                  segment_length: untyped,
+                  segment_length_units: String,
+                  timed_metadata_id3_frame: String,
+                  timed_metadata_id3_period: Integer,
+                  timed_metadata_passthrough: String
                 }
               },
               ms_smooth_group_settings: {
@@ -3287,7 +3306,7 @@ module Aws::MediaLive
                 num_retries: untyped,
                 restart_delay: untyped,
                 segmentation_mode: String,
-                send_delay_ms: Integer,
+                send_delay_ms: untyped,
                 sparse_track_type: String,
                 stream_manifest_behavior: String,
                 timestamp_offset: untyped,
@@ -3312,16 +3331,16 @@ module Aws::MediaLive
               },
               cmaf_ingest_group_settings: {
                 destination: untyped,
-                nielsen_id3_behavior: String,
-                scte35_type: String,
+                nielsen_id3_behavior: untyped,
+                scte35_type: untyped,
                 segment_length: untyped,
-                segment_length_units: String,
+                segment_length_units: untyped,
                 send_delay_ms: Integer,
-                klv_behavior: String,
+                klv_behavior: untyped,
                 klv_name_modifier: String,
                 nielsen_id3_name_modifier: untyped,
                 scte35_name_modifier: untyped,
-                id3_behavior: String,
+                id3_behavior: untyped,
                 id3_name_modifier: untyped,
                 caption_language_mappings: Array[
                   {
@@ -3329,9 +3348,9 @@ module Aws::MediaLive
                     language_code: untyped
                   }
                 ],
-                timed_metadata_id3_frame: String,
+                timed_metadata_id3_frame: untyped,
                 timed_metadata_id3_period: untyped,
-                timed_metadata_passthrough: String,
+                timed_metadata_passthrough: untyped,
                 additional_destinations: Array[
                   {
                     destination: untyped

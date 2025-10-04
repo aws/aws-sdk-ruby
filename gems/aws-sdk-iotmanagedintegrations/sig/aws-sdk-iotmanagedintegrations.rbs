@@ -1,0 +1,5 @@
+  module Aws
+    module IoTManagedIntegrations
+      VERSION: String
+    end
+  end

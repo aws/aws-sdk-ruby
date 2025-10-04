@@ -3842,6 +3842,15 @@ module Aws::MediaLive
     MediaPackageV2DestinationSettings.add_member(:hls_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HlsDefault, location_name: 'HlsDefault', traits: {"smithy.api#jsonName" => "hlsDefault"}))
     MediaPackageV2DestinationSettings.type = Types::MediaPackageV2DestinationSettings
     MediaPackageV2GroupSettings.add_member(:caption_language_mappings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofcaptionlanguagemapping, location_name: 'CaptionLanguageMappings', traits: {"smithy.api#jsonName" => "captionLanguageMappings"}))
+    MediaPackageV2GroupSettings.add_member(:id3_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmafId3Behavior, location_name: 'Id3Behavior', traits: {"smithy.api#jsonName" => "id3Behavior"}))
+    MediaPackageV2GroupSettings.add_member(:klv_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmafKLVBehavior, location_name: 'KlvBehavior', traits: {"smithy.api#jsonName" => "klvBehavior"}))
+    MediaPackageV2GroupSettings.add_member(:nielsen_id3_behavior, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmafNielsenId3Behavior, location_name: 'NielsenId3Behavior', traits: {"smithy.api#jsonName" => "nielsenId3Behavior"}))
+    MediaPackageV2GroupSettings.add_member(:scte35_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Scte35Type, location_name: 'Scte35Type', traits: {"smithy.api#jsonName" => "scte35Type"}))
+    MediaPackageV2GroupSettings.add_member(:segment_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1, location_name: 'SegmentLength', traits: {"smithy.api#jsonName" => "segmentLength"}))
+    MediaPackageV2GroupSettings.add_member(:segment_length_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmafIngestSegmentLengthUnits, location_name: 'SegmentLengthUnits', traits: {"smithy.api#jsonName" => "segmentLengthUnits"}))
+    MediaPackageV2GroupSettings.add_member(:timed_metadata_id3_frame, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmafTimedMetadataId3Frame, location_name: 'TimedMetadataId3Frame', traits: {"smithy.api#jsonName" => "timedMetadataId3Frame"}))
+    MediaPackageV2GroupSettings.add_member(:timed_metadata_id3_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin0max10000, location_name: 'TimedMetadataId3Period', traits: {"smithy.api#jsonName" => "timedMetadataId3Period"}))
+    MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: 'TimedMetadataPassthrough', traits: {"smithy.api#jsonName" => "timedMetadataPassthrough"}))
     MediaPackageV2GroupSettings.type = Types::MediaPackageV2GroupSettings
     MediaResource.add_member(:destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofmediaresourceneighbor, location_name: 'Destinations', traits: {"smithy.api#jsonName" => "destinations"}))
     MediaResource.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1max256, location_name: 'Name', traits: {"smithy.api#jsonName" => "name"}))

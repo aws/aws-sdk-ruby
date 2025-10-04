@@ -8,18 +8,30 @@ module Aws::QConnect
         ?manual_search_ai_agent_configuration: Types::ManualSearchAIAgentConfiguration,
         ?answer_recommendation_ai_agent_configuration: Types::AnswerRecommendationAIAgentConfiguration,
         ?self_service_ai_agent_configuration: Types::SelfServiceAIAgentConfiguration,
+        ?email_response_ai_agent_configuration: Types::EmailResponseAIAgentConfiguration,
+        ?email_overview_ai_agent_configuration: Types::EmailOverviewAIAgentConfiguration,
+        ?email_generative_answer_ai_agent_configuration: Types::EmailGenerativeAnswerAIAgentConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor manual_search_ai_agent_configuration: Types::ManualSearchAIAgentConfiguration?
       attr_accessor answer_recommendation_ai_agent_configuration: Types::AnswerRecommendationAIAgentConfiguration?
       attr_accessor self_service_ai_agent_configuration: Types::SelfServiceAIAgentConfiguration?
+      attr_accessor email_response_ai_agent_configuration: Types::EmailResponseAIAgentConfiguration?
+      attr_accessor email_overview_ai_agent_configuration: Types::EmailOverviewAIAgentConfiguration?
+      attr_accessor email_generative_answer_ai_agent_configuration: Types::EmailGenerativeAnswerAIAgentConfiguration?
 
       class ManualSearchAIAgentConfiguration < AIAgentConfiguration
       end
       class AnswerRecommendationAIAgentConfiguration < AIAgentConfiguration
       end
       class SelfServiceAIAgentConfiguration < AIAgentConfiguration
+      end
+      class EmailResponseAIAgentConfiguration < AIAgentConfiguration
+      end
+      class EmailOverviewAIAgentConfiguration < AIAgentConfiguration
+      end
+      class EmailGenerativeAnswerAIAgentConfiguration < AIAgentConfiguration
       end
       class Unknown < AIAgentConfiguration
       end
@@ -1492,6 +1504,7 @@ module Aws::QConnect
         ?tags: Hash[String, String],
         ?tag_filter: Types::TagFilter,
         ?ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData],
+        ?contact_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1502,6 +1515,7 @@ module Aws::QConnect
       attr_accessor tags: Hash[String, String]?
       attr_accessor tag_filter: Types::TagFilter?
       attr_accessor ai_agent_configuration: Hash[String, Types::AIAgentConfigurationData]?
+      attr_accessor contact_arn: String?
     end
 
     class CreateSessionOutput
@@ -1649,6 +1663,9 @@ module Aws::QConnect
         ?intent_detected_data: Types::IntentDetectedDataDetails,
         ?source_content_data: Types::SourceContentDataDetails,
         ?generative_chunk_data: Types::GenerativeChunkDataDetails,
+        ?email_response_chunk_data: Types::EmailResponseChunkDataDetails,
+        ?email_overview_chunk_data: Types::EmailOverviewChunkDataDetails,
+        ?email_generative_answer_chunk_data: Types::EmailGenerativeAnswerChunkDataDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1657,6 +1674,9 @@ module Aws::QConnect
       attr_accessor intent_detected_data: Types::IntentDetectedDataDetails?
       attr_accessor source_content_data: Types::SourceContentDataDetails?
       attr_accessor generative_chunk_data: Types::GenerativeChunkDataDetails?
+      attr_accessor email_response_chunk_data: Types::EmailResponseChunkDataDetails?
+      attr_accessor email_overview_chunk_data: Types::EmailOverviewChunkDataDetails?
+      attr_accessor email_generative_answer_chunk_data: Types::EmailGenerativeAnswerChunkDataDetails?
 
       class ContentData < DataDetails
       end
@@ -1667,6 +1687,12 @@ module Aws::QConnect
       class SourceContentData < DataDetails
       end
       class GenerativeChunkData < DataDetails
+      end
+      class EmailResponseChunkData < DataDetails
+      end
+      class EmailOverviewChunkData < DataDetails
+      end
+      class EmailGenerativeAnswerChunkData < DataDetails
       end
       class Unknown < DataDetails
       end
@@ -2071,6 +2097,17 @@ module Aws::QConnect
 
     end
 
+    class DependencyFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class Document
       include Smithy::Schema::Structure
 
@@ -2097,6 +2134,38 @@ module Aws::QConnect
 
       attr_accessor text: String?
       attr_accessor highlights: Array[Types::Highlight]?
+    end
+
+    class EmailGenerativeAnswerAIAgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_generative_answer_ai_prompt_id: String,
+        ?email_query_reformulation_ai_prompt_id: String,
+        ?locale: String,
+        ?association_configurations: Array[Types::AssociationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_generative_answer_ai_prompt_id: String?
+      attr_accessor email_query_reformulation_ai_prompt_id: String?
+      attr_accessor locale: String?
+      attr_accessor association_configurations: Array[Types::AssociationConfiguration]?
+    end
+
+    class EmailGenerativeAnswerChunkDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion: String,
+        ?references: Array[Types::DataSummary],
+        ?next_chunk_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion: String?
+      attr_accessor references: Array[Types::DataSummary]?
+      attr_accessor next_chunk_token: String?
     end
 
     class EmailHeader
@@ -2138,6 +2207,62 @@ module Aws::QConnect
 
       attr_accessor plain_text: Types::MessageTemplateBodyContentProvider?
       attr_accessor html: Types::MessageTemplateBodyContentProvider?
+    end
+
+    class EmailOverviewAIAgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_overview_ai_prompt_id: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_overview_ai_prompt_id: String?
+      attr_accessor locale: String?
+    end
+
+    class EmailOverviewChunkDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion: String,
+        ?next_chunk_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion: String?
+      attr_accessor next_chunk_token: String?
+    end
+
+    class EmailResponseAIAgentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_response_ai_prompt_id: String,
+        ?email_query_reformulation_ai_prompt_id: String,
+        ?locale: String,
+        ?association_configurations: Array[Types::AssociationConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_response_ai_prompt_id: String?
+      attr_accessor email_query_reformulation_ai_prompt_id: String?
+      attr_accessor locale: String?
+      attr_accessor association_configurations: Array[Types::AssociationConfiguration]?
+    end
+
+    class EmailResponseChunkDataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion: String,
+        ?next_chunk_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion: String?
+      attr_accessor next_chunk_token: String?
     end
 
     class ExtendedMessageTemplateData

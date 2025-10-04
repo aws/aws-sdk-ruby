@@ -5,6 +5,7 @@ module Aws::PaymentCryptographyData
     def self.new: (
       ?access_key_id: String,
       ?account_id: String,
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],
@@ -42,7 +43,7 @@ module Aws::PaymentCryptographyData
       ?secret_access_key: String,
       ?session_token: String,
       ?stub_responses: bool,
-      ?use_dual_stack_endpoint: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
@@ -416,6 +417,33 @@ module Aws::PaymentCryptographyData
         key_check_value_algorithm: String
       }
     ) -> _ReEncryptDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReEncryptDataResponse
+
+    interface _TranslateKeyMaterialResponse
+      include Smithy::Client::_Response[Types::TranslateKeyMaterialOutput]
+      def wrapped_key: () -> Types::WrappedWorkingKey?
+    end
+    def translate_key_material: (
+      ?incoming_key_material: {
+        diffie_hellman_tr31_key_block: {
+          private_key_identifier: String,
+          certificate_authority_public_key_identifier: untyped,
+          public_key_certificate: String,
+          derive_key_algorithm: String,
+          key_derivation_function: String,
+          key_derivation_hash_algorithm: String,
+          derivation_data: {
+            shared_information: String
+          },
+          wrapped_key_block: String
+        }
+      },
+      ?outgoing_key_material: {
+        tr31_key_block: {
+          wrapping_key_identifier: String
+        }
+      },
+      ?key_check_value_algorithm: String
+    ) -> _TranslateKeyMaterialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TranslateKeyMaterialResponse
 
     interface _TranslatePinDataResponse
       include Smithy::Client::_Response[Types::TranslatePinDataOutput]

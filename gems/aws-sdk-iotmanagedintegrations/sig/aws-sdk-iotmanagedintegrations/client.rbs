@@ -1,0 +1,1202 @@
+module Aws::IoTManagedIntegrations
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTManagedIntegrations::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAccountAssociationResponse
+      include Smithy::Client::_Response[Types::CreateAccountAssociationResponse]
+      def o_auth_authorization_url: () -> String?
+      def account_association_id: () -> String?
+      def association_state: () -> String?
+      def arn: () -> String?
+    end
+    def create_account_association: (
+      ?client_token: String,
+      ?connector_destination_id: String,
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountAssociationResponse
+
+    interface _CreateCloudConnectorResponse
+      include Smithy::Client::_Response[Types::CreateCloudConnectorResponse]
+      def id: () -> String?
+    end
+    def create_cloud_connector: (
+      ?name: String,
+      ?endpoint_config: {
+        lambda: {
+          arn: String
+        }
+      },
+      ?description: String,
+      ?endpoint_type: String,
+      ?client_token: String
+    ) -> _CreateCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudConnectorResponse
+
+    interface _CreateConnectorDestinationResponse
+      include Smithy::Client::_Response[Types::CreateConnectorDestinationResponse]
+      def id: () -> String?
+    end
+    def create_connector_destination: (
+      ?name: String,
+      ?description: String,
+      ?cloud_connector_id: String,
+      ?auth_type: String,
+      ?auth_config: {
+        o_auth: {
+          auth_url: String,
+          token_url: String,
+          scope: String,
+          token_endpoint_authentication_scheme: String,
+          o_auth_complete_redirect_url: untyped,
+          proactive_refresh_token_renewal: {
+            enabled: bool,
+            days_before_renewal: Integer
+          }
+        }
+      },
+      ?secrets_manager: {
+        arn: String,
+        version_id: String
+      },
+      ?client_token: String
+    ) -> _CreateConnectorDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorDestinationResponse
+
+    interface _CreateCredentialLockerResponse
+      include Smithy::Client::_Response[Types::CreateCredentialLockerResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_credential_locker: (
+      ?name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateCredentialLockerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCredentialLockerResponse
+
+    interface _CreateDestinationResponse
+      include Smithy::Client::_Response[Types::CreateDestinationResponse]
+      def name: () -> String?
+    end
+    def create_destination: (
+      ?delivery_destination_arn: String,
+      ?delivery_destination_type: String,
+      ?name: String,
+      ?role_arn: String,
+      ?client_token: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDestinationResponse
+
+    interface _CreateEventLogConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateEventLogConfigurationResponse]
+      def id: () -> String?
+    end
+    def create_event_log_configuration: (
+      ?resource_type: String,
+      ?resource_id: String,
+      ?event_log_level: String,
+      ?client_token: String
+    ) -> _CreateEventLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventLogConfigurationResponse
+
+    interface _CreateManagedThingResponse
+      include Smithy::Client::_Response[Types::CreateManagedThingResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_managed_thing: (
+      ?role: String,
+      ?owner: String,
+      ?credential_locker_id: String,
+      ?authentication_material: String,
+      ?authentication_material_type: String,
+      ?serial_number: String,
+      ?brand: String,
+      ?model: String,
+      ?name: String,
+      ?capability_report: {
+        version: String,
+        node_id: String,
+        endpoints: Array[
+          {
+            id: String,
+            device_types: Array[String],
+            capabilities: Array[
+              {
+                id: String,
+                name: String,
+                version: String,
+                properties: Array[String],
+                actions: Array[String],
+                events: Array[String]
+              }
+            ]
+          }
+        ]
+      },
+      ?capability_schemas: Array[
+        {
+          format: String,
+          capability_id: String,
+          extrinsic_id: String,
+          extrinsic_version: Integer,
+          schema: Smithy::Schema::document
+        }
+      ],
+      ?capabilities: String,
+      ?client_token: String,
+      ?classification: String,
+      ?tags: Hash[String, String],
+      ?meta_data: Hash[String, String]
+    ) -> _CreateManagedThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateManagedThingResponse
+
+    interface _CreateNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateNotificationConfigurationResponse]
+      def event_type: () -> String?
+    end
+    def create_notification_configuration: (
+      ?event_type: String,
+      ?destination_name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotificationConfigurationResponse
+
+    interface _CreateOtaTaskResponse
+      include Smithy::Client::_Response[Types::CreateOtaTaskResponse]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def description: () -> String?
+    end
+    def create_ota_task: (
+      ?description: String,
+      ?s3_url: String,
+      ?protocol: String,
+      ?target: Array[String],
+      ?task_configuration_id: String,
+      ?ota_mechanism: String,
+      ?ota_type: String,
+      ?ota_target_query_string: String,
+      ?client_token: String,
+      ?ota_scheduling_config: {
+        end_behavior: String,
+        end_time: String,
+        maintenance_windows: Array[
+          {
+            duration_in_minutes: Integer,
+            start_time: String
+          }
+        ],
+        start_time: String
+      },
+      ?ota_task_execution_retry_config: {
+        retry_config_criteria: Array[
+          {
+            failure_type: String,
+            min_number_of_retries: Integer
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateOtaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOtaTaskResponse
+
+    interface _CreateOtaTaskConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateOtaTaskConfigurationResponse]
+      def task_configuration_id: () -> String?
+    end
+    def create_ota_task_configuration: (
+      ?description: String,
+      ?name: String,
+      ?push_config: {
+        abort_config: {
+          abort_config_criteria_list: Array[
+            {
+              action: String,
+              failure_type: String,
+              min_number_of_executed_things: Integer,
+              threshold_percentage: Float
+            }
+          ]
+        },
+        rollout_config: {
+          exponential_rollout_rate: {
+            base_rate_per_minute: Integer,
+            increment_factor: Float,
+            rate_increase_criteria: {
+              number_of_notified_things: Integer,
+              number_of_succeeded_things: Integer
+            }
+          },
+          maximum_per_minute: Integer
+        },
+        timeout_config: {
+          in_progress_timeout_in_minutes: Integer
+        }
+      },
+      ?client_token: String
+    ) -> _CreateOtaTaskConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOtaTaskConfigurationResponse
+
+    interface _CreateProvisioningProfileResponse
+      include Smithy::Client::_Response[Types::CreateProvisioningProfileResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def provisioning_type: () -> String?
+      def id: () -> String?
+      def claim_certificate: () -> String?
+      def claim_certificate_private_key: () -> String?
+    end
+    def create_provisioning_profile: (
+      ?provisioning_type: String,
+      ?ca_certificate: String,
+      ?name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateProvisioningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProvisioningProfileResponse
+
+    interface _DeleteAccountAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_account_association: (
+      ?account_association_id: String
+    ) -> _DeleteAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountAssociationResponse
+
+    interface _DeleteCloudConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_cloud_connector: (
+      ?identifier: String
+    ) -> _DeleteCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudConnectorResponse
+
+    interface _DeleteConnectorDestinationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connector_destination: (
+      ?identifier: String
+    ) -> _DeleteConnectorDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorDestinationResponse
+
+    interface _DeleteCredentialLockerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_credential_locker: (
+      ?identifier: String
+    ) -> _DeleteCredentialLockerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCredentialLockerResponse
+
+    interface _DeleteDestinationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_destination: (
+      ?name: String
+    ) -> _DeleteDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDestinationResponse
+
+    interface _DeleteEventLogConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_event_log_configuration: (
+      ?id: String
+    ) -> _DeleteEventLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventLogConfigurationResponse
+
+    interface _DeleteManagedThingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_managed_thing: (
+      ?identifier: String,
+      ?force: bool
+    ) -> _DeleteManagedThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteManagedThingResponse
+
+    interface _DeleteNotificationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_notification_configuration: (
+      ?event_type: String
+    ) -> _DeleteNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationConfigurationResponse
+
+    interface _DeleteOtaTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ota_task: (
+      ?identifier: String
+    ) -> _DeleteOtaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOtaTaskResponse
+
+    interface _DeleteOtaTaskConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ota_task_configuration: (
+      ?identifier: String
+    ) -> _DeleteOtaTaskConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOtaTaskConfigurationResponse
+
+    interface _DeleteProvisioningProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_provisioning_profile: (
+      ?identifier: String
+    ) -> _DeleteProvisioningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisioningProfileResponse
+
+    interface _DeregisterAccountAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def deregister_account_association: (
+      ?managed_thing_id: String,
+      ?account_association_id: String
+    ) -> _DeregisterAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterAccountAssociationResponse
+
+    interface _GetAccountAssociationResponse
+      include Smithy::Client::_Response[Types::GetAccountAssociationResponse]
+      def account_association_id: () -> String?
+      def association_state: () -> String?
+      def error_message: () -> String?
+      def connector_destination_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def arn: () -> String?
+      def o_auth_authorization_url: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_account_association: (
+      ?account_association_id: String
+    ) -> _GetAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountAssociationResponse
+
+    interface _GetCloudConnectorResponse
+      include Smithy::Client::_Response[Types::GetCloudConnectorResponse]
+      def name: () -> String?
+      def endpoint_config: () -> Types::EndpointConfig?
+      def description: () -> String?
+      def endpoint_type: () -> String?
+      def id: () -> String?
+      def type: () -> String?
+    end
+    def get_cloud_connector: (
+      ?identifier: String
+    ) -> _GetCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudConnectorResponse
+
+    interface _GetConnectorDestinationResponse
+      include Smithy::Client::_Response[Types::GetConnectorDestinationResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def cloud_connector_id: () -> String?
+      def id: () -> String?
+      def auth_type: () -> String?
+      def auth_config: () -> Types::AuthConfig?
+      def secrets_manager: () -> Types::SecretsManager?
+      def o_auth_complete_redirect_url: () -> String?
+    end
+    def get_connector_destination: (
+      ?identifier: String
+    ) -> _GetConnectorDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorDestinationResponse
+
+    interface _GetCredentialLockerResponse
+      include Smithy::Client::_Response[Types::GetCredentialLockerResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_credential_locker: (
+      ?identifier: String
+    ) -> _GetCredentialLockerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCredentialLockerResponse
+
+    interface _GetCustomEndpointResponse
+      include Smithy::Client::_Response[Types::GetCustomEndpointResponse]
+      def endpoint_address: () -> String?
+    end
+    def get_custom_endpoint: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomEndpointResponse
+
+    interface _GetDefaultEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::GetDefaultEncryptionConfigurationResponse]
+      def configuration_status: () -> Types::ConfigurationStatus?
+      def encryption_type: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def get_default_encryption_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultEncryptionConfigurationResponse
+
+    interface _GetDestinationResponse
+      include Smithy::Client::_Response[Types::GetDestinationResponse]
+      def description: () -> String?
+      def delivery_destination_arn: () -> String?
+      def delivery_destination_type: () -> String?
+      def name: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_destination: (
+      ?name: String
+    ) -> _GetDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDestinationResponse
+
+    interface _GetDeviceDiscoveryResponse
+      include Smithy::Client::_Response[Types::GetDeviceDiscoveryResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def discovery_type: () -> String?
+      def status: () -> String?
+      def started_at: () -> Time?
+      def controller_id: () -> String?
+      def connector_association_id: () -> String?
+      def account_association_id: () -> String?
+      def finished_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_device_discovery: (
+      ?identifier: String
+    ) -> _GetDeviceDiscoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceDiscoveryResponse
+
+    interface _GetEventLogConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEventLogConfigurationResponse]
+      def id: () -> String?
+      def resource_type: () -> String?
+      def resource_id: () -> String?
+      def event_log_level: () -> String?
+    end
+    def get_event_log_configuration: (
+      ?id: String
+    ) -> _GetEventLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventLogConfigurationResponse
+
+    interface _GetHubConfigurationResponse
+      include Smithy::Client::_Response[Types::GetHubConfigurationResponse]
+      def hub_token_timer_expiry_setting_in_seconds: () -> Integer?
+      def updated_at: () -> Time?
+    end
+    def get_hub_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHubConfigurationResponse
+
+    interface _GetManagedThingResponse
+      include Smithy::Client::_Response[Types::GetManagedThingResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def owner: () -> String?
+      def credential_locker_id: () -> String?
+      def advertised_product_id: () -> String?
+      def role: () -> String?
+      def provisioning_status: () -> String?
+      def name: () -> String?
+      def model: () -> String?
+      def brand: () -> String?
+      def serial_number: () -> String?
+      def universal_product_code: () -> String?
+      def international_article_number: () -> String?
+      def connector_policy_id: () -> String?
+      def connector_destination_id: () -> String?
+      def connector_device_id: () -> String?
+      def device_specific_key: () -> String?
+      def mac_address: () -> String?
+      def parent_controller_id: () -> String?
+      def classification: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def activated_at: () -> Time?
+      def hub_network_mode: () -> String?
+      def meta_data: () -> Hash[String, String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_managed_thing: (
+      ?identifier: String
+    ) -> _GetManagedThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingResponse
+
+    interface _GetManagedThingCapabilitiesResponse
+      include Smithy::Client::_Response[Types::GetManagedThingCapabilitiesResponse]
+      def managed_thing_id: () -> String?
+      def capabilities: () -> String?
+      def capability_report: () -> Types::CapabilityReport?
+    end
+    def get_managed_thing_capabilities: (
+      ?identifier: String
+    ) -> _GetManagedThingCapabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingCapabilitiesResponse
+
+    interface _GetManagedThingConnectivityDataResponse
+      include Smithy::Client::_Response[Types::GetManagedThingConnectivityDataResponse]
+      def managed_thing_id: () -> String?
+      def connected: () -> bool?
+      def timestamp: () -> Time?
+      def disconnect_reason: () -> String?
+    end
+    def get_managed_thing_connectivity_data: (
+      ?identifier: String
+    ) -> _GetManagedThingConnectivityDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingConnectivityDataResponse
+
+    interface _GetManagedThingMetaDataResponse
+      include Smithy::Client::_Response[Types::GetManagedThingMetaDataResponse]
+      def managed_thing_id: () -> String?
+      def meta_data: () -> Hash[String, String]?
+    end
+    def get_managed_thing_meta_data: (
+      ?identifier: String
+    ) -> _GetManagedThingMetaDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingMetaDataResponse
+
+    interface _GetManagedThingStateResponse
+      include Smithy::Client::_Response[Types::GetManagedThingStateResponse]
+      def endpoints: () -> Array[Types::StateEndpoint]?
+    end
+    def get_managed_thing_state: (
+      ?managed_thing_id: String
+    ) -> _GetManagedThingStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingStateResponse
+
+    interface _GetNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetNotificationConfigurationResponse]
+      def event_type: () -> String?
+      def destination_name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_notification_configuration: (
+      ?event_type: String
+    ) -> _GetNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotificationConfigurationResponse
+
+    interface _GetOtaTaskResponse
+      include Smithy::Client::_Response[Types::GetOtaTaskResponse]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def description: () -> String?
+      def s3_url: () -> String?
+      def protocol: () -> String?
+      def ota_type: () -> String?
+      def ota_target_query_string: () -> String?
+      def ota_mechanism: () -> String?
+      def target: () -> Array[String]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def task_configuration_id: () -> String?
+      def task_processing_details: () -> Types::TaskProcessingDetails?
+      def ota_scheduling_config: () -> Types::OtaTaskSchedulingConfig?
+      def ota_task_execution_retry_config: () -> Types::OtaTaskExecutionRetryConfig?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_ota_task: (
+      ?identifier: String
+    ) -> _GetOtaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOtaTaskResponse
+
+    interface _GetOtaTaskConfigurationResponse
+      include Smithy::Client::_Response[Types::GetOtaTaskConfigurationResponse]
+      def task_configuration_id: () -> String?
+      def name: () -> String?
+      def push_config: () -> Types::PushConfig?
+      def description: () -> String?
+      def created_at: () -> Time?
+    end
+    def get_ota_task_configuration: (
+      ?identifier: String
+    ) -> _GetOtaTaskConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOtaTaskConfigurationResponse
+
+    interface _GetProvisioningProfileResponse
+      include Smithy::Client::_Response[Types::GetProvisioningProfileResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def provisioning_type: () -> String?
+      def id: () -> String?
+      def claim_certificate: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_provisioning_profile: (
+      ?identifier: String
+    ) -> _GetProvisioningProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisioningProfileResponse
+
+    interface _GetRuntimeLogConfigurationResponse
+      include Smithy::Client::_Response[Types::GetRuntimeLogConfigurationResponse]
+      def managed_thing_id: () -> String?
+      def runtime_log_configurations: () -> Types::RuntimeLogConfigurations?
+    end
+    def get_runtime_log_configuration: (
+      ?managed_thing_id: String
+    ) -> _GetRuntimeLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuntimeLogConfigurationResponse
+
+    interface _GetSchemaVersionResponse
+      include Smithy::Client::_Response[Types::GetSchemaVersionResponse]
+      def schema_id: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def namespace: () -> String?
+      def semantic_version: () -> String?
+      def visibility: () -> String?
+      def schema: () -> Smithy::Schema::document?
+    end
+    def get_schema_version: (
+      ?type: String,
+      ?schema_versioned_id: String,
+      ?format: String
+    ) -> _GetSchemaVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaVersionResponse
+
+    interface _ListAccountAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAccountAssociationsResponse]
+      def items: () -> Array[Types::AccountAssociationItem]?
+      def next_token: () -> String?
+    end
+    def list_account_associations: (
+      ?connector_destination_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccountAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountAssociationsResponse
+
+    interface _ListCloudConnectorsResponse
+      include Smithy::Client::_Response[Types::ListCloudConnectorsResponse]
+      def items: () -> Array[Types::ConnectorItem]?
+      def next_token: () -> String?
+    end
+    def list_cloud_connectors: (
+      ?type: String,
+      ?lambda_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCloudConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudConnectorsResponse
+
+    interface _ListConnectorDestinationsResponse
+      include Smithy::Client::_Response[Types::ListConnectorDestinationsResponse]
+      def connector_destination_list: () -> Array[Types::ConnectorDestinationSummary]?
+      def next_token: () -> String?
+    end
+    def list_connector_destinations: (
+      ?cloud_connector_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConnectorDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorDestinationsResponse
+
+    interface _ListCredentialLockersResponse
+      include Smithy::Client::_Response[Types::ListCredentialLockersResponse]
+      def items: () -> Array[Types::CredentialLockerSummary]?
+      def next_token: () -> String?
+    end
+    def list_credential_lockers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCredentialLockersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCredentialLockersResponse
+
+    interface _ListDestinationsResponse
+      include Smithy::Client::_Response[Types::ListDestinationsResponse]
+      def destination_list: () -> Array[Types::DestinationSummary]?
+      def next_token: () -> String?
+    end
+    def list_destinations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDestinationsResponse
+
+    interface _ListDeviceDiscoveriesResponse
+      include Smithy::Client::_Response[Types::ListDeviceDiscoveriesResponse]
+      def items: () -> Array[Types::DeviceDiscoverySummary]?
+      def next_token: () -> String?
+    end
+    def list_device_discoveries: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?type_filter: String,
+      ?status_filter: String
+    ) -> _ListDeviceDiscoveriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeviceDiscoveriesResponse
+
+    interface _ListDiscoveredDevicesResponse
+      include Smithy::Client::_Response[Types::ListDiscoveredDevicesResponse]
+      def items: () -> Array[Types::DiscoveredDeviceSummary]?
+      def next_token: () -> String?
+    end
+    def list_discovered_devices: (
+      ?identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDiscoveredDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoveredDevicesResponse
+
+    interface _ListEventLogConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListEventLogConfigurationsResponse]
+      def event_log_configuration_list: () -> Array[Types::EventLogConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_log_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventLogConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventLogConfigurationsResponse
+
+    interface _ListManagedThingAccountAssociationsResponse
+      include Smithy::Client::_Response[Types::ListManagedThingAccountAssociationsResponse]
+      def items: () -> Array[Types::ManagedThingAssociation]?
+      def next_token: () -> String?
+    end
+    def list_managed_thing_account_associations: (
+      ?managed_thing_id: String,
+      ?account_association_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListManagedThingAccountAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedThingAccountAssociationsResponse
+
+    interface _ListManagedThingSchemasResponse
+      include Smithy::Client::_Response[Types::ListManagedThingSchemasResponse]
+      def items: () -> Array[Types::ManagedThingSchemaListItem]?
+      def next_token: () -> String?
+    end
+    def list_managed_thing_schemas: (
+      ?identifier: String,
+      ?endpoint_id_filter: String,
+      ?capability_id_filter: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListManagedThingSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedThingSchemasResponse
+
+    interface _ListManagedThingsResponse
+      include Smithy::Client::_Response[Types::ListManagedThingsResponse]
+      def items: () -> Array[Types::ManagedThingSummary]?
+      def next_token: () -> String?
+    end
+    def list_managed_things: (
+      ?owner_filter: String,
+      ?credential_locker_filter: String,
+      ?role_filter: String,
+      ?parent_controller_identifier_filter: String,
+      ?connector_policy_id_filter: String,
+      ?connector_destination_id_filter: String,
+      ?connector_device_id_filter: String,
+      ?serial_number_filter: String,
+      ?provisioning_status_filter: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListManagedThingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedThingsResponse
+
+    interface _ListNotificationConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListNotificationConfigurationsResponse]
+      def notification_configuration_list: () -> Array[Types::NotificationConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_notification_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotificationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationConfigurationsResponse
+
+    interface _ListOtaTaskConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListOtaTaskConfigurationsResponse]
+      def items: () -> Array[Types::OtaTaskConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_ota_task_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOtaTaskConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOtaTaskConfigurationsResponse
+
+    interface _ListOtaTaskExecutionsResponse
+      include Smithy::Client::_Response[Types::ListOtaTaskExecutionsResponse]
+      def execution_summaries: () -> Array[Types::OtaTaskExecutionSummaries]?
+      def next_token: () -> String?
+    end
+    def list_ota_task_executions: (
+      ?identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOtaTaskExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOtaTaskExecutionsResponse
+
+    interface _ListOtaTasksResponse
+      include Smithy::Client::_Response[Types::ListOtaTasksResponse]
+      def tasks: () -> Array[Types::OtaTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_ota_tasks: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOtaTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOtaTasksResponse
+
+    interface _ListProvisioningProfilesResponse
+      include Smithy::Client::_Response[Types::ListProvisioningProfilesResponse]
+      def items: () -> Array[Types::ProvisioningProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_provisioning_profiles: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProvisioningProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisioningProfilesResponse
+
+    interface _ListSchemaVersionsResponse
+      include Smithy::Client::_Response[Types::ListSchemaVersionsResponse]
+      def items: () -> Array[Types::SchemaVersionListItem]?
+      def next_token: () -> String?
+    end
+    def list_schema_versions: (
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?schema_id: String,
+      ?namespace: String,
+      ?visibility: String,
+      ?semantic_version: String
+    ) -> _ListSchemaVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemaVersionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutDefaultEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::PutDefaultEncryptionConfigurationResponse]
+      def configuration_status: () -> Types::ConfigurationStatus?
+      def encryption_type: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def put_default_encryption_configuration: (
+      ?encryption_type: String,
+      ?kms_key_arn: String
+    ) -> _PutDefaultEncryptionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDefaultEncryptionConfigurationResponse
+
+    interface _PutHubConfigurationResponse
+      include Smithy::Client::_Response[Types::PutHubConfigurationResponse]
+      def hub_token_timer_expiry_setting_in_seconds: () -> Integer?
+    end
+    def put_hub_configuration: (
+      ?hub_token_timer_expiry_setting_in_seconds: Integer
+    ) -> _PutHubConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutHubConfigurationResponse
+
+    interface _PutRuntimeLogConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_runtime_log_configuration: (
+      ?managed_thing_id: String,
+      ?runtime_log_configurations: {
+        log_level: String,
+        log_flush_level: untyped,
+        local_store_location: String,
+        local_store_file_rotation_max_files: Integer,
+        local_store_file_rotation_max_bytes: Integer,
+        upload_log: bool,
+        upload_period_minutes: Integer,
+        delete_local_store_after_upload: bool
+      }
+    ) -> _PutRuntimeLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRuntimeLogConfigurationResponse
+
+    interface _RegisterAccountAssociationResponse
+      include Smithy::Client::_Response[Types::RegisterAccountAssociationResponse]
+      def account_association_id: () -> String?
+      def device_discovery_id: () -> String?
+      def managed_thing_id: () -> String?
+    end
+    def register_account_association: (
+      ?managed_thing_id: String,
+      ?account_association_id: String,
+      ?device_discovery_id: String
+    ) -> _RegisterAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterAccountAssociationResponse
+
+    interface _RegisterCustomEndpointResponse
+      include Smithy::Client::_Response[Types::RegisterCustomEndpointResponse]
+      def endpoint_address: () -> String?
+    end
+    def register_custom_endpoint: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterCustomEndpointResponse
+
+    interface _ResetRuntimeLogConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def reset_runtime_log_configuration: (
+      ?managed_thing_id: String
+    ) -> _ResetRuntimeLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetRuntimeLogConfigurationResponse
+
+    interface _SendConnectorEventResponse
+      include Smithy::Client::_Response[Types::SendConnectorEventResponse]
+      def connector_id: () -> String?
+    end
+    def send_connector_event: (
+      ?connector_id: String,
+      ?user_id: String,
+      ?operation: String,
+      ?operation_version: String,
+      ?status_code: Integer,
+      ?message: String,
+      ?device_discovery_id: String,
+      ?connector_device_id: String,
+      ?trace_id: String,
+      ?devices: Array[
+        {
+          connector_device_id: String,
+          connector_device_name: String,
+          capability_report: {
+            version: String,
+            node_id: String,
+            endpoints: Array[
+              {
+                id: String,
+                device_types: Array[String],
+                clusters: Array[
+                  {
+                    id: String,
+                    revision: Integer,
+                    public_id: String,
+                    name: String,
+                    spec_version: String,
+                    attributes: Array[
+                      {
+                        id: String,
+                        name: String,
+                        value: Smithy::Schema::document
+                      }
+                    ],
+                    commands: Array[String],
+                    events: Array[String],
+                    feature_map: Integer,
+                    generated_commands: Array[String],
+                    fabric_index: Integer
+                  }
+                ],
+                parts: Array[String],
+                semantic_tags: Array[String],
+                client_clusters: Array[String]
+              }
+            ]
+          },
+          capability_schemas: Array[
+            {
+              format: String,
+              capability_id: untyped,
+              extrinsic_id: String,
+              extrinsic_version: untyped,
+              schema: Smithy::Schema::document
+            }
+          ],
+          device_metadata: Smithy::Schema::document
+        }
+      ],
+      ?matter_endpoint: {
+        id: String,
+        clusters: Array[
+          {
+            id: String,
+            attributes: Smithy::Schema::document,
+            commands: Hash[String, Smithy::Schema::document],
+            events: Hash[String, Smithy::Schema::document]
+          }
+        ]
+      }
+    ) -> _SendConnectorEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendConnectorEventResponse
+
+    interface _SendManagedThingCommandResponse
+      include Smithy::Client::_Response[Types::SendManagedThingCommandResponse]
+      def trace_id: () -> String?
+    end
+    def send_managed_thing_command: (
+      ?managed_thing_id: String,
+      ?endpoints: Array[
+        {
+          endpoint_id: String,
+          capabilities: Array[
+            {
+              id: String,
+              name: String,
+              version: String,
+              actions: Array[
+                {
+                  name: String,
+                  ref: String,
+                  action_trace_id: String,
+                  parameters: Smithy::Schema::document
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      ?connector_association_id: String,
+      ?account_association_id: String
+    ) -> _SendManagedThingCommandResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendManagedThingCommandResponse
+
+    interface _StartAccountAssociationRefreshResponse
+      include Smithy::Client::_Response[Types::StartAccountAssociationRefreshResponse]
+      def o_auth_authorization_url: () -> String?
+    end
+    def start_account_association_refresh: (
+      ?account_association_id: String
+    ) -> _StartAccountAssociationRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAccountAssociationRefreshResponse
+
+    interface _StartDeviceDiscoveryResponse
+      include Smithy::Client::_Response[Types::StartDeviceDiscoveryResponse]
+      def id: () -> String?
+      def started_at: () -> Time?
+    end
+    def start_device_discovery: (
+      ?discovery_type: String,
+      ?custom_protocol_detail: Hash[String, String],
+      ?controller_identifier: String,
+      ?connector_association_identifier: String,
+      ?account_association_id: String,
+      ?authentication_material: String,
+      ?authentication_material_type: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _StartDeviceDiscoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeviceDiscoveryResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_account_association: (
+      ?account_association_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountAssociationResponse
+
+    interface _UpdateCloudConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_cloud_connector: (
+      ?identifier: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudConnectorResponse
+
+    interface _UpdateConnectorDestinationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_connector_destination: (
+      ?identifier: String,
+      ?description: String,
+      ?name: String,
+      ?auth_type: String,
+      ?auth_config: {
+        o_auth_update: {
+          o_auth_complete_redirect_url: String,
+          proactive_refresh_token_renewal: {
+            enabled: bool,
+            days_before_renewal: Integer
+          }
+        }
+      },
+      ?secrets_manager: {
+        arn: String,
+        version_id: String
+      }
+    ) -> _UpdateConnectorDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorDestinationResponse
+
+    interface _UpdateDestinationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_destination: (
+      ?name: String,
+      ?delivery_destination_arn: String,
+      ?delivery_destination_type: String,
+      ?role_arn: String,
+      ?description: String
+    ) -> _UpdateDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDestinationResponse
+
+    interface _UpdateEventLogConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_event_log_configuration: (
+      ?id: String,
+      ?event_log_level: String
+    ) -> _UpdateEventLogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventLogConfigurationResponse
+
+    interface _UpdateManagedThingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_managed_thing: (
+      ?identifier: String,
+      ?owner: String,
+      ?credential_locker_id: String,
+      ?serial_number: String,
+      ?brand: String,
+      ?model: String,
+      ?name: String,
+      ?capability_report: {
+        version: String,
+        node_id: String,
+        endpoints: Array[
+          {
+            id: String,
+            device_types: Array[String],
+            capabilities: Array[
+              {
+                id: String,
+                name: String,
+                version: String,
+                properties: Array[String],
+                actions: Array[String],
+                events: Array[String]
+              }
+            ]
+          }
+        ]
+      },
+      ?capability_schemas: Array[
+        {
+          format: String,
+          capability_id: String,
+          extrinsic_id: String,
+          extrinsic_version: Integer,
+          schema: Smithy::Schema::document
+        }
+      ],
+      ?capabilities: String,
+      ?classification: String,
+      ?hub_network_mode: String,
+      ?meta_data: Hash[String, String]
+    ) -> _UpdateManagedThingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateManagedThingResponse
+
+    interface _UpdateNotificationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_notification_configuration: (
+      ?event_type: String,
+      ?destination_name: String
+    ) -> _UpdateNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationConfigurationResponse
+
+    interface _UpdateOtaTaskResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_ota_task: (
+      ?identifier: String,
+      ?description: String,
+      ?task_configuration_id: String
+    ) -> _UpdateOtaTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOtaTaskResponse
+  end
+end

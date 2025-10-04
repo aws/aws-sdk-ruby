@@ -5,6 +5,7 @@ module Aws::Account
     def self.new: (
       ?access_key_id: String,
       ?account_id: String,
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],
@@ -42,7 +43,7 @@ module Aws::Account
       ?secret_access_key: String,
       ?session_token: String,
       ?stub_responses: bool,
-      ?use_dual_stack_endpoint: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void

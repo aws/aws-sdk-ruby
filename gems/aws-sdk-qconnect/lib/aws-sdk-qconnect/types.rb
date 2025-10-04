@@ -16,10 +16,22 @@ module Aws::QConnect
     # @!attribute self_service_ai_agent_configuration
     #   <p>The configuration for AI Agents of type SELF_SERVICE.</p>
     #   @return [Types::SelfServiceAIAgentConfiguration]
+    # @!attribute email_response_ai_agent_configuration
+    #   <p>Configuration for the EMAIL_RESPONSE AI agent that generates professional email responses using knowledge base content.</p>
+    #   @return [Types::EmailResponseAIAgentConfiguration]
+    # @!attribute email_overview_ai_agent_configuration
+    #   <p>Configuration for the EMAIL_OVERVIEW AI agent that generates structured overview of email conversations.</p>
+    #   @return [Types::EmailOverviewAIAgentConfiguration]
+    # @!attribute email_generative_answer_ai_agent_configuration
+    #   <p>Configuration for the EMAIL_GENERATIVE_ANSWER AI agent that provides comprehensive knowledge-based answers for customer queries.</p>
+    #   @return [Types::EmailGenerativeAnswerAIAgentConfiguration]
     class AIAgentConfiguration < Struct.new(
       :manual_search_ai_agent_configuration,
       :answer_recommendation_ai_agent_configuration,
       :self_service_ai_agent_configuration,
+      :email_response_ai_agent_configuration,
+      :email_overview_ai_agent_configuration,
+      :email_generative_answer_ai_agent_configuration,
       :unknown,
       keyword_init: true
     )
@@ -28,6 +40,9 @@ module Aws::QConnect
       class ManualSearchAIAgentConfiguration < AIAgentConfiguration; end
       class AnswerRecommendationAIAgentConfiguration < AIAgentConfiguration; end
       class SelfServiceAIAgentConfiguration < AIAgentConfiguration; end
+      class EmailResponseAIAgentConfiguration < AIAgentConfiguration; end
+      class EmailOverviewAIAgentConfiguration < AIAgentConfiguration; end
+      class EmailGenerativeAnswerAIAgentConfiguration < AIAgentConfiguration; end
       class Unknown < AIAgentConfiguration; end
     end
 
@@ -1526,7 +1541,7 @@ module Aws::QConnect
     #   <p>The type of the prompt template for this AI Prompt.</p>
     #   @return [String]
     # @!attribute model_id
-    #   <p>The identifier of the model used for this AI Prompt.</p>
+    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
     #   @return [String]
     # @!attribute api_format
     #   <p>The API Format of the AI Prompt.</p> <p>Recommended values: <code>MESSAGES | TEXT_COMPLETIONS</code> </p> <note> <p>The values <code>ANTHROPIC_CLAUDE_MESSAGES | ANTHROPIC_CLAUDE_TEXT_COMPLETIONS</code> will be deprecated.</p> </note>
@@ -2025,6 +2040,9 @@ module Aws::QConnect
     # @!attribute ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
+    # @!attribute contact_arn
+    #   <p>The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
+    #   @return [String]
     class CreateSessionInput < Struct.new(
       :client_token,
       :assistant_id,
@@ -2033,6 +2051,7 @@ module Aws::QConnect
       :tags,
       :tag_filter,
       :ai_agent_configuration,
+      :contact_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2303,12 +2322,24 @@ module Aws::QConnect
     # @!attribute generative_chunk_data
     #   <p>Details about the generative chunk data.</p>
     #   @return [Types::GenerativeChunkDataDetails]
+    # @!attribute email_response_chunk_data
+    #   <p>Streaming chunk data for email response generation containing partial response content.</p>
+    #   @return [Types::EmailResponseChunkDataDetails]
+    # @!attribute email_overview_chunk_data
+    #   <p>Streaming chunk data for email overview containing partial overview content.</p>
+    #   @return [Types::EmailOverviewChunkDataDetails]
+    # @!attribute email_generative_answer_chunk_data
+    #   <p>Streaming chunk data for email generative answers containing partial knowledge-based response content.</p>
+    #   @return [Types::EmailGenerativeAnswerChunkDataDetails]
     class DataDetails < Struct.new(
       :content_data,
       :generative_data,
       :intent_detected_data,
       :source_content_data,
       :generative_chunk_data,
+      :email_response_chunk_data,
+      :email_overview_chunk_data,
+      :email_generative_answer_chunk_data,
       :unknown,
       keyword_init: true
     )
@@ -2319,6 +2350,9 @@ module Aws::QConnect
       class IntentDetectedData < DataDetails; end
       class SourceContentData < DataDetails; end
       class GenerativeChunkData < DataDetails; end
+      class EmailResponseChunkData < DataDetails; end
+      class EmailOverviewChunkData < DataDetails; end
+      class EmailGenerativeAnswerChunkData < DataDetails; end
       class Unknown < DataDetails; end
     end
 
@@ -2705,6 +2739,16 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An error occurred while calling a dependency. For example, calling <code>connect:DecribeContact</code> as part of <code>CreateSession</code> with a contactArn.</p>
+    # @!attribute message
+    #   @return [String]
+    class DependencyFailedException < Struct.new(
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The document.</p>
     # @!attribute content_reference
     #   <p>A reference to the content resource.</p>
@@ -2734,6 +2778,48 @@ module Aws::QConnect
     class DocumentText < Struct.new(
       :text,
       :highlights,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for the EMAIL_GENERATIVE_ANSWER AI agent including prompts, locale, and knowledge base associations.</p>
+    # @!attribute email_generative_answer_ai_prompt_id
+    #   <p>The ID of the System AI prompt used for generating comprehensive knowledge-based answers from email queries.</p>
+    #   @return [String]
+    # @!attribute email_query_reformulation_ai_prompt_id
+    #   <p>The ID of the System AI prompt used for reformulating email queries to optimize knowledge base search results.</p>
+    #   @return [String]
+    # @!attribute locale
+    #   <p>The locale setting for language-specific email processing and response generation (for example, en_US, es_ES).</p>
+    #   @return [String]
+    # @!attribute association_configurations
+    #   <p>Configuration settings for knowledge base associations used by the email generative answer agent.</p>
+    #   @return [Array<Types::AssociationConfiguration>]
+    class EmailGenerativeAnswerAIAgentConfiguration < Struct.new(
+      :email_generative_answer_ai_prompt_id,
+      :email_query_reformulation_ai_prompt_id,
+      :locale,
+      :association_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of streaming chunk data for email generative answers including completion text and references.</p>
+    # @!attribute completion
+    #   <p>The partial or complete text content of the generative answer response.</p>
+    #   @return [String]
+    # @!attribute references
+    #   <p>Source references and citations from knowledge base articles used to generate the answer.</p>
+    #   @return [Array<Types::DataSummary>]
+    # @!attribute next_chunk_token
+    #   <p>Token for retrieving the next chunk of streaming response data, if available.</p>
+    #   @return [String]
+    class EmailGenerativeAnswerChunkDataDetails < Struct.new(
+      :completion,
+      :references,
+      :next_chunk_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2783,6 +2869,74 @@ module Aws::QConnect
     class EmailMessageTemplateContentBody < Struct.new(
       :plain_text,
       :html,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for the EMAIL_OVERVIEW AI agent including prompt ID and locale settings.</p>
+    # @!attribute email_overview_ai_prompt_id
+    #   <p>The ID of the System AI prompt used for generating structured email conversation summaries.</p>
+    #   @return [String]
+    # @!attribute locale
+    #   <p>The locale setting for language-specific email overview processing (for example, en_US, es_ES).</p>
+    #   @return [String]
+    class EmailOverviewAIAgentConfiguration < Struct.new(
+      :email_overview_ai_prompt_id,
+      :locale,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of streaming chunk data for email overview including completion text and pagination tokens.</p>
+    # @!attribute completion
+    #   <p>The partial or complete overview text content in structured HTML format with customer issues, resolutions, and next steps.</p>
+    #   @return [String]
+    # @!attribute next_chunk_token
+    #   <p>Token for retrieving the next chunk of streaming overview data, if available.</p>
+    #   @return [String]
+    class EmailOverviewChunkDataDetails < Struct.new(
+      :completion,
+      :next_chunk_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for the EMAIL_RESPONSE AI agent including prompts, locale, and knowledge base associations.</p>
+    # @!attribute email_response_ai_prompt_id
+    #   <p>The ID of the System AI prompt used for generating professional email responses based on knowledge base content.</p>
+    #   @return [String]
+    # @!attribute email_query_reformulation_ai_prompt_id
+    #   <p>The ID of the System AI prompt used for reformulating email queries to optimize knowledge base search for response generation.</p>
+    #   @return [String]
+    # @!attribute locale
+    #   <p>The locale setting for language-specific email response generation (for example, en_US, es_ES).</p>
+    #   @return [String]
+    # @!attribute association_configurations
+    #   <p>Configuration settings for knowledge base associations used by the email response agent.</p>
+    #   @return [Array<Types::AssociationConfiguration>]
+    class EmailResponseAIAgentConfiguration < Struct.new(
+      :email_response_ai_prompt_id,
+      :email_query_reformulation_ai_prompt_id,
+      :locale,
+      :association_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of streaming chunk data for email responses including completion text and pagination tokens.</p>
+    # @!attribute completion
+    #   <p>The partial or complete professional email response text with appropriate greetings and closings.</p>
+    #   @return [String]
+    # @!attribute next_chunk_token
+    #   <p>Token for retrieving the next chunk of streaming response data, if available.</p>
+    #   @return [String]
+    class EmailResponseChunkDataDetails < Struct.new(
+      :completion,
+      :next_chunk_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6669,7 +6823,7 @@ module Aws::QConnect
     #   <p>The description of the Amazon Q in Connect AI Prompt.</p>
     #   @return [String]
     # @!attribute model_id
-    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For more information on supported models, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system and custom prompts</a>.</p> </note>
+    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
     #   @return [String]
     class UpdateAIPromptRequest < Struct.new(
       :client_token,

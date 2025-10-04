@@ -25,6 +25,7 @@ module Aws::CleanRooms
     AllowedAnalysisProviderList: ListShape
     AllowedColumnList: ListShape
     AllowedResultReceivers: ListShape
+    AllowedResultRegions: ListShape
     AnalysisFormat: EnumShape
     AnalysisMethod: EnumShape
     AnalysisParameter: StructureShape
@@ -132,6 +133,7 @@ module Aws::CleanRooms
     ColumnList: ListShape
     ColumnName: StringShape
     ColumnTypeString: StringShape
+    CommercialRegion: EnumShape
     ComputeConfiguration: UnionShape
     ConfigurationDetails: UnionShape
     ConfiguredAudienceModelArn: StringShape
@@ -525,6 +527,7 @@ module Aws::CleanRooms
     StartProtectedJobOutput: StructureShape
     StartProtectedQueryOperationInput: StructureShape
     StartProtectedQueryOperationOutput: StructureShape
+    SupportedS3Region: EnumShape
     TableAlias: StringShape
     TableAliasList: ListShape
     TableDescription: StringShape

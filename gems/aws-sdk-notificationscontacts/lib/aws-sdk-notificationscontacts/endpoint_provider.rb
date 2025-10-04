@@ -16,7 +16,7 @@ module Aws::NotificationsContacts
         return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
-        if (partition_result = Aws::Core::EndpointRules.aws_partition(parameters.region))
+        if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
             return Smithy::Client::EndpointRules::Endpoint.new(url: "https://notifications-contacts-fips.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
           end

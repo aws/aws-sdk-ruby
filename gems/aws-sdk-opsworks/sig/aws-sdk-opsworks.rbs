@@ -1,5 +1,0 @@
-  module Aws
-    module OpsWorks
-      VERSION: String
-    end
-  end

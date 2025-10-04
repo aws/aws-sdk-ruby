@@ -14,6 +14,27 @@ module AwsSdkCodeGenerator
         true
       end
 
+      def endpoint_built_in_bindings
+        {
+          'AWS::Auth::AccountId' => {
+            render_build: proc do |_plan|
+              'config.credentials_provider.identity.account_id'
+            end,
+            render_test_set: proc do |_plan, value|
+              { 'account_id' => value }
+            end
+          },
+          'AWS::Auth::AccountIdEndpointMode' => {
+            render_build: proc do |_plan|
+              'config.account_id_endpoint_mode'
+            end,
+            render_test_set: proc do |_plan, value|
+              { 'account_id_endpoint_mode' => value }
+            end
+          }
+        }
+      end
+
       def add_plugins
         base_path = 'aws-sdk-core/plugins'
         {

@@ -1,5 +1,0 @@
-module Aws::SMS
-  class EndpointProvider
-    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
-  end
-end

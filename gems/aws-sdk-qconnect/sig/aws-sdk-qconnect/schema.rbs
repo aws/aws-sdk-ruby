@@ -169,15 +169,22 @@ module Aws::QConnect
     DeleteMessageTemplateResponse: StructureShape
     DeleteQuickResponseRequest: StructureShape
     DeleteQuickResponseResponse: StructureShape
+    DependencyFailedException: StructureShape
     Description: StringShape
     Document: StructureShape
     DocumentText: StructureShape
+    EmailGenerativeAnswerAIAgentConfiguration: StructureShape
+    EmailGenerativeAnswerChunkDataDetails: StructureShape
     EmailHeader: StructureShape
     EmailHeaderKey: StringShape
     EmailHeaderValue: StringShape
     EmailHeaders: ListShape
     EmailMessageTemplateContent: StructureShape
     EmailMessageTemplateContentBody: StructureShape
+    EmailOverviewAIAgentConfiguration: StructureShape
+    EmailOverviewChunkDataDetails: StructureShape
+    EmailResponseAIAgentConfiguration: StructureShape
+    EmailResponseChunkDataDetails: StructureShape
     ExtendedMessageTemplateData: StructureShape
     ExternalSource: StringShape
     ExternalSourceConfiguration: StructureShape

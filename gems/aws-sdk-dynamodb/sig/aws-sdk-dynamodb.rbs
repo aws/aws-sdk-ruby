@@ -1,0 +1,5 @@
+  module Aws
+    module DynamoDB
+      VERSION: String
+    end
+  end

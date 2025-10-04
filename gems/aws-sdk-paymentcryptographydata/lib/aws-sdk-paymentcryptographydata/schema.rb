@@ -20,7 +20,7 @@ module Aws::PaymentCryptographyData
     CardVerificationAttributes = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#CardVerificationAttributes', name: 'CardVerificationAttributes')
     CardVerificationValue1 = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#CardVerificationValue1', name: 'CardVerificationValue1')
     CardVerificationValue2 = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#CardVerificationValue2', name: 'CardVerificationValue2')
-    CertificateType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#CertificateType', name: 'CertificateType', traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$", "smithy.api#sensitive" => {}})
+    CertificateType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#CertificateType', name: 'CertificateType', traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$"})
     CipherTextType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#CipherTextType', name: 'CipherTextType', traits: {"smithy.api#length" => {"min" => 2, "max" => 4224}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$", "smithy.api#sensitive" => {}})
     CommandMessageDataType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#CommandMessageDataType', name: 'CommandMessageDataType', traits: {"smithy.api#length" => {"min" => 16, "max" => 1024}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$", "smithy.api#sensitive" => {}})
     CryptogramAuthResponse = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#CryptogramAuthResponse', name: 'CryptogramAuthResponse')
@@ -31,6 +31,7 @@ module Aws::PaymentCryptographyData
     DecryptDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#DecryptDataInput', name: 'DecryptDataInput')
     DecryptDataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#DecryptDataOutput', name: 'DecryptDataOutput')
     DerivationMethodAttributes = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#DerivationMethodAttributes', name: 'DerivationMethodAttributes')
+    DiffieHellmanDerivationData = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#DiffieHellmanDerivationData', name: 'DiffieHellmanDerivationData')
     DiscoverDynamicCardVerificationCode = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#DiscoverDynamicCardVerificationCode', name: 'DiscoverDynamicCardVerificationCode')
     DukptAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#DukptAttributes', name: 'DukptAttributes')
     DukptDerivationAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#DukptDerivationAttributes', name: 'DukptDerivationAttributes')
@@ -71,6 +72,8 @@ module Aws::PaymentCryptographyData
     Ibm3624PinOffset = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#Ibm3624PinOffset', name: 'Ibm3624PinOffset')
     Ibm3624PinVerification = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#Ibm3624PinVerification', name: 'Ibm3624PinVerification')
     Ibm3624RandomPin = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#Ibm3624RandomPin', name: 'Ibm3624RandomPin')
+    IncomingDiffieHellmanTr31KeyBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#IncomingDiffieHellmanTr31KeyBlock', name: 'IncomingDiffieHellmanTr31KeyBlock')
+    IncomingKeyMaterial = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#IncomingKeyMaterial', name: 'IncomingKeyMaterial')
     InitializationVectorType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#InitializationVectorType', name: 'InitializationVectorType', traits: {"smithy.api#length" => {"min" => 16, "max" => 32}, "smithy.api#pattern" => "^(?:[0-9a-fA-F]{16}|[0-9a-fA-F]{32})$", "smithy.api#sensitive" => {}})
     IntegerRangeBetween0And6 = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6', name: 'IntegerRangeBetween0And6', traits: {"smithy.api#range" => {"min" => 0, "max" => 6}})
     IntegerRangeBetween3And5Type = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.paymentcryptographydata#IntegerRangeBetween3And5Type', name: 'IntegerRangeBetween3And5Type', traits: {"smithy.api#range" => {"min" => 3, "max" => 5}})
@@ -83,6 +86,7 @@ module Aws::PaymentCryptographyData
     KeyCheckValueAlgorithm = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#KeyCheckValueAlgorithm', name: 'KeyCheckValueAlgorithm', traits: {"smithy.api#enum" => [{"value" => "CMAC", "name" => "CMAC"}, {"value" => "ANSI_X9_24", "name" => "ANSI_X9_24"}, {"value" => "HMAC", "name" => "HMAC"}, {"value" => "SHA_1", "name" => "SHA_1"}]})
     KeyDerivationFunction = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#KeyDerivationFunction', name: 'KeyDerivationFunction')
     KeyDerivationHashAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#KeyDerivationHashAlgorithm', name: 'KeyDerivationHashAlgorithm')
+    KeyMaterial = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#KeyMaterial', name: 'KeyMaterial', traits: {"smithy.api#length" => {"min" => 48, "max" => 16384}, "smithy.api#sensitive" => {}})
     MacAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#MacAlgorithm', name: 'MacAlgorithm')
     MacAlgorithmDukpt = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#MacAlgorithmDukpt', name: 'MacAlgorithmDukpt')
     MacAlgorithmEmv = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#MacAlgorithmEmv', name: 'MacAlgorithmEmv')
@@ -93,6 +97,8 @@ module Aws::PaymentCryptographyData
     MasterCardAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#MasterCardAttributes', name: 'MasterCardAttributes')
     MessageDataType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#MessageDataType', name: 'MessageDataType', traits: {"smithy.api#length" => {"min" => 2, "max" => 8192}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$", "smithy.api#sensitive" => {}})
     NumberLengthEquals2 = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#NumberLengthEquals2', name: 'NumberLengthEquals2', traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[0-9]+$"})
+    OutgoingKeyMaterial = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#OutgoingKeyMaterial', name: 'OutgoingKeyMaterial')
+    OutgoingTr31KeyBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#OutgoingTr31KeyBlock', name: 'OutgoingTr31KeyBlock')
     PaddingType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#PaddingType', name: 'PaddingType')
     PinBlockFormatForEmvPinChange = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#PinBlockFormatForEmvPinChange', name: 'PinBlockFormatForEmvPinChange')
     PinBlockFormatForPinData = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#PinBlockFormatForPinData', name: 'PinBlockFormatForPinData')
@@ -127,9 +133,11 @@ module Aws::PaymentCryptographyData
     SymmetricEncryptionAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#SymmetricEncryptionAttributes', name: 'SymmetricEncryptionAttributes')
     SymmetricKeyAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.paymentcryptographydata#SymmetricKeyAlgorithm', name: 'SymmetricKeyAlgorithm')
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
-    Tr31WrappedKeyBlock = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#Tr31WrappedKeyBlock', name: 'Tr31WrappedKeyBlock', traits: {"smithy.api#length" => {"min" => 56, "max" => 9984}, "smithy.api#pattern" => "^[0-9A-Z]+$", "smithy.api#sensitive" => {}})
+    Tr31WrappedKeyBlock = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#Tr31WrappedKeyBlock', name: 'Tr31WrappedKeyBlock', traits: {"smithy.api#length" => {"min" => 56, "max" => 9984}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$", "smithy.api#sensitive" => {}})
     TrackDataType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#TrackDataType', name: 'TrackDataType', traits: {"smithy.api#length" => {"min" => 2, "max" => 160}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
     TransactionDataType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#TransactionDataType', name: 'TransactionDataType', traits: {"smithy.api#length" => {"min" => 2, "max" => 1024}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
+    TranslateKeyMaterialInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#TranslateKeyMaterialInput', name: 'TranslateKeyMaterialInput')
+    TranslateKeyMaterialOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#TranslateKeyMaterialOutput', name: 'TranslateKeyMaterialOutput')
     TranslatePinDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#TranslatePinDataInput', name: 'TranslatePinDataInput')
     TranslatePinDataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#TranslatePinDataOutput', name: 'TranslatePinDataOutput')
     TranslationIsoFormats = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#TranslationIsoFormats', name: 'TranslationIsoFormats')
@@ -157,6 +165,8 @@ module Aws::PaymentCryptographyData
     VisaPinVerificationValue = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#VisaPinVerificationValue', name: 'VisaPinVerificationValue')
     WrappedKey = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#WrappedKey', name: 'WrappedKey')
     WrappedKeyMaterial = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.paymentcryptographydata#WrappedKeyMaterial', name: 'WrappedKeyMaterial')
+    WrappedKeyMaterialFormat = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.paymentcryptographydata#WrappedKeyMaterialFormat', name: 'WrappedKeyMaterialFormat', traits: {"smithy.api#enum" => [{"value" => "KEY_CRYPTOGRAM", "name" => "KEY_CRYPTOGRAM"}, {"value" => "TR31_KEY_BLOCK", "name" => "TR31_KEY_BLOCK"}, {"value" => "TR34_KEY_BLOCK", "name" => "TR34_KEY_BLOCK"}]})
+    WrappedWorkingKey = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.paymentcryptographydata#WrappedWorkingKey', name: 'WrappedWorkingKey')
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -230,6 +240,9 @@ module Aws::PaymentCryptographyData
     DerivationMethodAttributes.add_member(:mastercard, Types::DerivationMethodAttributes::Mastercard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterCardAttributes, location_name: 'Mastercard'))
     DerivationMethodAttributes.add_member(:unknown, Types::DerivationMethodAttributes::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     DerivationMethodAttributes.type = Types::DerivationMethodAttributes
+    DiffieHellmanDerivationData.add_member(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SharedInformation, location_name: 'SharedInformation'))
+    DiffieHellmanDerivationData.add_member(:unknown, Types::DiffieHellmanDerivationData::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    DiffieHellmanDerivationData.type = Types::DiffieHellmanDerivationData
     DiscoverDynamicCardVerificationCode.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CardExpiryDateType, location_name: 'CardExpiryDate', traits: {"smithy.api#required" => {}}))
     DiscoverDynamicCardVerificationCode.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And8, location_name: 'UnpredictableNumber', traits: {"smithy.api#required" => {}}))
     DiscoverDynamicCardVerificationCode.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthBetween2And4, location_name: 'ApplicationTransactionCounter', traits: {"smithy.api#required" => {}}))
@@ -361,7 +374,7 @@ module Aws::PaymentCryptographyData
     GeneratePinDataInput.add_member(:encryption_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'EncryptionKeyIdentifier', traits: {"smithy.api#required" => {}}))
     GeneratePinDataInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinGenerationAttributes, location_name: 'GenerationAttributes', traits: {"smithy.api#required" => {}}))
     GeneratePinDataInput.add_member(:pin_data_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: 'PinDataLength'))
-    GeneratePinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: 'PrimaryAccountNumber', traits: {"smithy.api#required" => {}}))
+    GeneratePinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: 'PrimaryAccountNumber'))
     GeneratePinDataInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, location_name: 'PinBlockFormat', traits: {"smithy.api#required" => {}}))
     GeneratePinDataInput.add_member(:encryption_wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKey, location_name: 'EncryptionWrappedKey'))
     GeneratePinDataInput.type = Types::GeneratePinDataInput
@@ -395,6 +408,18 @@ module Aws::PaymentCryptographyData
     Ibm3624RandomPin.add_member(:pin_validation_data_pad_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HexLengthEquals1, location_name: 'PinValidationDataPadCharacter', traits: {"smithy.api#required" => {}}))
     Ibm3624RandomPin.add_member(:pin_validation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinValidationDataType, location_name: 'PinValidationData', traits: {"smithy.api#required" => {}}))
     Ibm3624RandomPin.type = Types::Ibm3624RandomPin
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'PrivateKeyIdentifier', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'CertificateAuthorityPublicKeyIdentifier', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateType, location_name: 'PublicKeyCertificate', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, location_name: 'DeriveKeyAlgorithm', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationFunction, location_name: 'KeyDerivationFunction', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, location_name: 'KeyDerivationHashAlgorithm', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:derivation_data, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, location_name: 'DerivationData', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: 'WrappedKeyBlock', traits: {"smithy.api#required" => {}}))
+    IncomingDiffieHellmanTr31KeyBlock.type = Types::IncomingDiffieHellmanTr31KeyBlock
+    IncomingKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::IncomingKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncomingDiffieHellmanTr31KeyBlock, location_name: 'DiffieHellmanTr31KeyBlock'))
+    IncomingKeyMaterial.add_member(:unknown, Types::IncomingKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IncomingKeyMaterial.type = Types::IncomingKeyMaterial
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     InternalServerException.type = Types::InternalServerException
     KeyDerivationFunction.add_member(:nist_sp800, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NIST_SP800', traits: {"smithy.api#enumValue" => "NIST_SP800"}))
@@ -434,6 +459,11 @@ module Aws::PaymentCryptographyData
     MasterCardAttributes.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NumberLengthEquals2, location_name: 'PanSequenceNumber', traits: {"smithy.api#required" => {}}))
     MasterCardAttributes.add_member(:application_cryptogram, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationCryptogramType, location_name: 'ApplicationCryptogram', traits: {"smithy.api#required" => {}}))
     MasterCardAttributes.type = Types::MasterCardAttributes
+    OutgoingKeyMaterial.add_member(:tr31_key_block, Types::OutgoingKeyMaterial::Tr31KeyBlock, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutgoingTr31KeyBlock, location_name: 'Tr31KeyBlock'))
+    OutgoingKeyMaterial.add_member(:unknown, Types::OutgoingKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    OutgoingKeyMaterial.type = Types::OutgoingKeyMaterial
+    OutgoingTr31KeyBlock.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'WrappingKeyIdentifier', traits: {"smithy.api#required" => {}}))
+    OutgoingTr31KeyBlock.type = Types::OutgoingTr31KeyBlock
     PaddingType.add_member(:pkcs1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PKCS1', traits: {"smithy.api#enumValue" => "PKCS1"}))
     PaddingType.add_member(:oaep_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OAEP_SHA1', traits: {"smithy.api#enumValue" => "OAEP_SHA1"}))
     PaddingType.add_member(:oaep_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OAEP_SHA256', traits: {"smithy.api#enumValue" => "OAEP_SHA256"}))
@@ -442,6 +472,7 @@ module Aws::PaymentCryptographyData
     PinBlockFormatForEmvPinChange.add_member(:iso_format_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISO_FORMAT_1', traits: {"smithy.api#enumValue" => "ISO_FORMAT_1"}))
     PinBlockFormatForEmvPinChange.add_member(:iso_format_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISO_FORMAT_3', traits: {"smithy.api#enumValue" => "ISO_FORMAT_3"}))
     PinBlockFormatForPinData.add_member(:iso_format_0, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISO_FORMAT_0', traits: {"smithy.api#enumValue" => "ISO_FORMAT_0"}))
+    PinBlockFormatForPinData.add_member(:iso_format_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISO_FORMAT_1', traits: {"smithy.api#enumValue" => "ISO_FORMAT_1"}))
     PinBlockFormatForPinData.add_member(:iso_format_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISO_FORMAT_3', traits: {"smithy.api#enumValue" => "ISO_FORMAT_3"}))
     PinBlockFormatForPinData.add_member(:iso_format_4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ISO_FORMAT_4', traits: {"smithy.api#enumValue" => "ISO_FORMAT_4"}))
     PinBlockLengthPosition.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
@@ -532,6 +563,12 @@ module Aws::PaymentCryptographyData
     SymmetricKeyAlgorithm.add_member(:hmac_sha224, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HMAC_SHA224', traits: {"smithy.api#enumValue" => "HMAC_SHA224"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     ThrottlingException.type = Types::ThrottlingException
+    TranslateKeyMaterialInput.add_member(:incoming_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IncomingKeyMaterial, location_name: 'IncomingKeyMaterial', traits: {"smithy.api#required" => {}}))
+    TranslateKeyMaterialInput.add_member(:outgoing_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutgoingKeyMaterial, location_name: 'OutgoingKeyMaterial', traits: {"smithy.api#required" => {}}))
+    TranslateKeyMaterialInput.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: 'KeyCheckValueAlgorithm'))
+    TranslateKeyMaterialInput.type = Types::TranslateKeyMaterialInput
+    TranslateKeyMaterialOutput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedWorkingKey, location_name: 'WrappedKey', traits: {"smithy.api#required" => {}}))
+    TranslateKeyMaterialOutput.type = Types::TranslateKeyMaterialOutput
     TranslatePinDataInput.add_member(:incoming_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'IncomingKeyIdentifier', traits: {"smithy.api#required" => {}}))
     TranslatePinDataInput.add_member(:outgoing_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'OutgoingKeyIdentifier', traits: {"smithy.api#required" => {}}))
     TranslatePinDataInput.add_member(:incoming_translation_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslationIsoFormats, location_name: 'IncomingTranslationAttributes', traits: {"smithy.api#required" => {}}))
@@ -597,7 +634,7 @@ module Aws::PaymentCryptographyData
     VerifyPinDataInput.add_member(:encryption_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, location_name: 'EncryptionKeyIdentifier', traits: {"smithy.api#required" => {}}))
     VerifyPinDataInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinVerificationAttributes, location_name: 'VerificationAttributes', traits: {"smithy.api#required" => {}}))
     VerifyPinDataInput.add_member(:encrypted_pin_block, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptedPinBlockType, location_name: 'EncryptedPinBlock', traits: {"smithy.api#required" => {}}))
-    VerifyPinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: 'PrimaryAccountNumber', traits: {"smithy.api#required" => {}}))
+    VerifyPinDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: 'PrimaryAccountNumber'))
     VerifyPinDataInput.add_member(:pin_block_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, location_name: 'PinBlockFormat', traits: {"smithy.api#required" => {}}))
     VerifyPinDataInput.add_member(:pin_data_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: 'PinDataLength'))
     VerifyPinDataInput.add_member(:dukpt_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DukptAttributes, location_name: 'DukptAttributes'))
@@ -635,6 +672,10 @@ module Aws::PaymentCryptographyData
     WrappedKeyMaterial.add_member(:diffie_hellman_symmetric_key, Types::WrappedKeyMaterial::DiffieHellmanSymmetricKey, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EcdhDerivationAttributes, location_name: 'DiffieHellmanSymmetricKey'))
     WrappedKeyMaterial.add_member(:unknown, Types::WrappedKeyMaterial::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     WrappedKeyMaterial.type = Types::WrappedKeyMaterial
+    WrappedWorkingKey.add_member(:wrapped_key_material, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMaterial, location_name: 'WrappedKeyMaterial', traits: {"smithy.api#required" => {}}))
+    WrappedWorkingKey.add_member(:key_check_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: 'KeyCheckValue', traits: {"smithy.api#required" => {}}))
+    WrappedWorkingKey.add_member(:wrapped_key_material_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WrappedKeyMaterialFormat, location_name: 'WrappedKeyMaterialFormat', traits: {"smithy.api#required" => {}}))
+    WrappedWorkingKey.type = Types::WrappedWorkingKey
 
     PaymentCryptographyDataPlane = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.paymentcryptographydata#PaymentCryptographyDataPlane"
@@ -724,6 +765,18 @@ module Aws::PaymentCryptographyData
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keys/{IncomingKeyIdentifier}/reencrypt", "code" => 200}}
+      end)
+      service.add_operation(:translate_key_material, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptographydata#TranslateKeyMaterial"
+        operation.name = "TranslateKeyMaterial"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateKeyMaterialInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TranslateKeyMaterialOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keymaterial/translate", "code" => 200}}
       end)
       service.add_operation(:translate_pin_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#TranslatePinData"

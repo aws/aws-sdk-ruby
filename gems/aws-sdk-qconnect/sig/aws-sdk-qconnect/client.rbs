@@ -5,6 +5,7 @@ module Aws::QConnect
     def self.new: (
       ?access_key_id: String,
       ?account_id: String,
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],
@@ -42,7 +43,7 @@ module Aws::QConnect
       ?secret_access_key: String,
       ?session_token: String,
       ?stub_responses: bool,
-      ?use_dual_stack_endpoint: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
@@ -116,6 +117,22 @@ module Aws::QConnect
           self_service_pre_processing_ai_prompt_id: untyped,
           self_service_answer_generation_ai_prompt_id: untyped,
           self_service_ai_guardrail_id: untyped,
+          association_configurations: untyped
+        },
+        email_response_ai_agent_configuration: {
+          email_response_ai_prompt_id: untyped,
+          email_query_reformulation_ai_prompt_id: untyped,
+          locale: untyped,
+          association_configurations: untyped
+        },
+        email_overview_ai_agent_configuration: {
+          email_overview_ai_prompt_id: untyped,
+          locale: untyped
+        },
+        email_generative_answer_ai_agent_configuration: {
+          email_generative_answer_ai_prompt_id: untyped,
+          email_query_reformulation_ai_prompt_id: untyped,
+          locale: untyped,
           association_configurations: untyped
         }
       },
@@ -578,7 +595,8 @@ module Aws::QConnect
         {
           ai_agent_id: String
         }
-      ]
+      ],
+      ?contact_arn: String
     ) -> _CreateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionResponse
 
     interface _DeactivateMessageTemplateResponse
@@ -1463,6 +1481,22 @@ module Aws::QConnect
           self_service_pre_processing_ai_prompt_id: untyped,
           self_service_answer_generation_ai_prompt_id: untyped,
           self_service_ai_guardrail_id: untyped,
+          association_configurations: untyped
+        },
+        email_response_ai_agent_configuration: {
+          email_response_ai_prompt_id: untyped,
+          email_query_reformulation_ai_prompt_id: untyped,
+          locale: untyped,
+          association_configurations: untyped
+        },
+        email_overview_ai_agent_configuration: {
+          email_overview_ai_prompt_id: untyped,
+          locale: untyped
+        },
+        email_generative_answer_ai_agent_configuration: {
+          email_generative_answer_ai_prompt_id: untyped,
+          email_query_reformulation_ai_prompt_id: untyped,
+          locale: untyped,
           association_configurations: untyped
         }
       },

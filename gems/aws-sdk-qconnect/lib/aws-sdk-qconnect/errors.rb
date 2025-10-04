@@ -24,6 +24,7 @@ module Aws::QConnect
   #
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DependencyFailedException}
   # * {PreconditionFailedException}
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
@@ -55,6 +56,19 @@ module Aws::QConnect
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::ConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>An error occurred while calling a dependency. For example, calling <code>connect:DecribeContact</code> as part of <code>CreateSession</code> with a contactArn.</p>
+    class DependencyFailedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::QConnect::Types::DependencyFailedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

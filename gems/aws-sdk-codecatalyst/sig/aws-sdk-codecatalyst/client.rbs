@@ -3,6 +3,7 @@ module Aws::CodeCatalyst
     include Smithy::Client::Stubs
 
     def self.new: (
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],
@@ -40,6 +41,7 @@ module Aws::CodeCatalyst
       ?retry_strategy: String | Class,
       ?sdk_ua_app_id: String,
       ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
