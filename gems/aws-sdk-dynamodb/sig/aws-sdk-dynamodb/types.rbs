@@ -1,0 +1,4374 @@
+module Aws::DynamoDB
+  module Types
+
+    module ApproximateCreationDateTimePrecision
+      MILLISECOND: String
+      MICROSECOND: String
+    end
+
+    class ArchivalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?archival_date_time: Time,
+        ?archival_reason: String,
+        ?archival_backup_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor archival_date_time: Time?
+      attr_accessor archival_reason: String?
+      attr_accessor archival_backup_arn: String?
+    end
+
+    module AttributeAction
+      ADD: String
+      PUT: String
+      DELETE: String
+    end
+
+    class AttributeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+    end
+
+    class AttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s: String,
+        ?n: String,
+        ?b: String,
+        ?ss: Array[String],
+        ?ns: Array[String],
+        ?bs: Array[String],
+        ?m: Hash[String, Types::AttributeValue],
+        ?l: Array[Types::AttributeValue],
+        ?null: bool,
+        ?bool: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s: String?
+      attr_accessor n: String?
+      attr_accessor b: String?
+      attr_accessor ss: Array[String]?
+      attr_accessor ns: Array[String]?
+      attr_accessor bs: Array[String]?
+      attr_accessor m: Hash[String, Types::AttributeValue]?
+      attr_accessor l: Array[Types::AttributeValue]?
+      attr_accessor null: bool?
+      attr_accessor bool: bool?
+
+      class S < AttributeValue
+      end
+      class N < AttributeValue
+      end
+      class B < AttributeValue
+      end
+      class SS < AttributeValue
+      end
+      class NS < AttributeValue
+      end
+      class BS < AttributeValue
+      end
+      class M < AttributeValue
+      end
+      class L < AttributeValue
+      end
+      class NULL < AttributeValue
+      end
+      class BOOL < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
+    class AttributeValueUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::AttributeValue,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::AttributeValue?
+      attr_accessor action: String?
+    end
+
+    class AutoScalingPolicyDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?target_tracking_scaling_policy_configuration: Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor target_tracking_scaling_policy_configuration: Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription?
+    end
+
+    class AutoScalingPolicyUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?target_tracking_scaling_policy_configuration: Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor target_tracking_scaling_policy_configuration: Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate?
+    end
+
+    class AutoScalingSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_units: Integer,
+        ?maximum_units: Integer,
+        ?auto_scaling_disabled: bool,
+        ?auto_scaling_role_arn: String,
+        ?scaling_policies: Array[Types::AutoScalingPolicyDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_units: Integer?
+      attr_accessor maximum_units: Integer?
+      attr_accessor auto_scaling_disabled: bool?
+      attr_accessor auto_scaling_role_arn: String?
+      attr_accessor scaling_policies: Array[Types::AutoScalingPolicyDescription]?
+    end
+
+    class AutoScalingSettingsUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_units: Integer,
+        ?maximum_units: Integer,
+        ?auto_scaling_disabled: bool,
+        ?auto_scaling_role_arn: String,
+        ?scaling_policy_update: Types::AutoScalingPolicyUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_units: Integer?
+      attr_accessor maximum_units: Integer?
+      attr_accessor auto_scaling_disabled: bool?
+      attr_accessor auto_scaling_role_arn: String?
+      attr_accessor scaling_policy_update: Types::AutoScalingPolicyUpdate?
+    end
+
+    class AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disable_scale_in: bool,
+        ?scale_in_cooldown: Integer,
+        ?scale_out_cooldown: Integer,
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disable_scale_in: bool?
+      attr_accessor scale_in_cooldown: Integer?
+      attr_accessor scale_out_cooldown: Integer?
+      attr_accessor target_value: Float?
+    end
+
+    class AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disable_scale_in: bool,
+        ?scale_in_cooldown: Integer,
+        ?scale_out_cooldown: Integer,
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disable_scale_in: bool?
+      attr_accessor scale_in_cooldown: Integer?
+      attr_accessor scale_out_cooldown: Integer?
+      attr_accessor target_value: Float?
+    end
+
+    class BackupDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_details: Types::BackupDetails,
+        ?source_table_details: Types::SourceTableDetails,
+        ?source_table_feature_details: Types::SourceTableFeatureDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_details: Types::BackupDetails?
+      attr_accessor source_table_details: Types::SourceTableDetails?
+      attr_accessor source_table_feature_details: Types::SourceTableFeatureDetails?
+    end
+
+    class BackupDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_arn: String,
+        ?backup_name: String,
+        ?backup_size_bytes: Integer,
+        ?backup_status: String,
+        ?backup_type: String,
+        ?backup_creation_date_time: Time,
+        ?backup_expiry_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_arn: String?
+      attr_accessor backup_name: String?
+      attr_accessor backup_size_bytes: Integer?
+      attr_accessor backup_status: String?
+      attr_accessor backup_type: String?
+      attr_accessor backup_creation_date_time: Time?
+      attr_accessor backup_expiry_date_time: Time?
+    end
+
+    class BackupInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BackupNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BackupStatus
+      CREATING: String
+      DELETED: String
+      AVAILABLE: String
+    end
+
+    class BackupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?table_id: String,
+        ?table_arn: String,
+        ?backup_arn: String,
+        ?backup_name: String,
+        ?backup_creation_date_time: Time,
+        ?backup_expiry_date_time: Time,
+        ?backup_status: String,
+        ?backup_type: String,
+        ?backup_size_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor table_id: String?
+      attr_accessor table_arn: String?
+      attr_accessor backup_arn: String?
+      attr_accessor backup_name: String?
+      attr_accessor backup_creation_date_time: Time?
+      attr_accessor backup_expiry_date_time: Time?
+      attr_accessor backup_status: String?
+      attr_accessor backup_type: String?
+      attr_accessor backup_size_bytes: Integer?
+    end
+
+    module BackupType
+      USER: String
+      SYSTEM: String
+      AWS_BACKUP: String
+    end
+
+    module BackupTypeFilter
+      USER: String
+      SYSTEM: String
+      AWS_BACKUP: String
+      ALL: String
+    end
+
+    class BatchExecuteStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statements: Array[Types::BatchStatementRequest],
+        ?return_consumed_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statements: Array[Types::BatchStatementRequest]?
+      attr_accessor return_consumed_capacity: String?
+    end
+
+    class BatchExecuteStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responses: Array[Types::BatchStatementResponse],
+        ?consumed_capacity: Array[Types::ConsumedCapacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responses: Array[Types::BatchStatementResponse]?
+      attr_accessor consumed_capacity: Array[Types::ConsumedCapacity]?
+    end
+
+    class BatchGetItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_items: Hash[String, Types::KeysAndAttributes],
+        ?return_consumed_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_items: Hash[String, Types::KeysAndAttributes]?
+      attr_accessor return_consumed_capacity: String?
+    end
+
+    class BatchGetItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responses: Hash[String, Array[Hash[String, Types::AttributeValue]]],
+        ?unprocessed_keys: Hash[String, Types::KeysAndAttributes],
+        ?consumed_capacity: Array[Types::ConsumedCapacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responses: Hash[String, Array[Hash[String, Types::AttributeValue]]]?
+      attr_accessor unprocessed_keys: Hash[String, Types::KeysAndAttributes]?
+      attr_accessor consumed_capacity: Array[Types::ConsumedCapacity]?
+    end
+
+    class BatchStatementError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?item: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+    end
+
+    module BatchStatementErrorCodeEnum
+      ConditionalCheckFailed: String
+      ItemCollectionSizeLimitExceeded: String
+      RequestLimitExceeded: String
+      ValidationError: String
+      ProvisionedThroughputExceeded: String
+      TransactionConflict: String
+      ThrottlingError: String
+      InternalServerError: String
+      ResourceNotFound: String
+      AccessDenied: String
+      DuplicateItem: String
+    end
+
+    class BatchStatementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement: String,
+        ?parameters: Array[Types::AttributeValue],
+        ?consistent_read: bool,
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement: String?
+      attr_accessor parameters: Array[Types::AttributeValue]?
+      attr_accessor consistent_read: bool?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class BatchStatementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::BatchStatementError,
+        ?table_name: String,
+        ?item: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::BatchStatementError?
+      attr_accessor table_name: String?
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+    end
+
+    class BatchWriteItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_items: Hash[String, Array[Types::WriteRequest]],
+        ?return_consumed_capacity: String,
+        ?return_item_collection_metrics: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_items: Hash[String, Array[Types::WriteRequest]]?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor return_item_collection_metrics: String?
+    end
+
+    class BatchWriteItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unprocessed_items: Hash[String, Array[Types::WriteRequest]],
+        ?item_collection_metrics: Hash[String, Array[Types::ItemCollectionMetrics]],
+        ?consumed_capacity: Array[Types::ConsumedCapacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unprocessed_items: Hash[String, Array[Types::WriteRequest]]?
+      attr_accessor item_collection_metrics: Hash[String, Array[Types::ItemCollectionMetrics]]?
+      attr_accessor consumed_capacity: Array[Types::ConsumedCapacity]?
+    end
+
+    module BillingMode
+      PROVISIONED: String
+      PAY_PER_REQUEST: String
+    end
+
+    class BillingModeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_mode: String,
+        ?last_update_to_pay_per_request_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_mode: String?
+      attr_accessor last_update_to_pay_per_request_date_time: Time?
+    end
+
+    class CancellationReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item: Hash[String, Types::AttributeValue],
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class Capacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_capacity_units: Float,
+        ?write_capacity_units: Float,
+        ?capacity_units: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_capacity_units: Float?
+      attr_accessor write_capacity_units: Float?
+      attr_accessor capacity_units: Float?
+    end
+
+    module ComparisonOperator
+      EQ: String
+      NE: String
+      IN: String
+      LE: String
+      LT: String
+      GE: String
+      GT: String
+      BETWEEN: String
+      NOT_NULL: String
+      NULL: String
+      CONTAINS: String
+      NOT_CONTAINS: String
+      BEGINS_WITH: String
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_value_list: Array[Types::AttributeValue],
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_value_list: Array[Types::AttributeValue]?
+      attr_accessor comparison_operator: String?
+    end
+
+    class ConditionCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Hash[String, Types::AttributeValue],
+        ?table_name: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor table_name: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class ConditionalCheckFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?item: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+    end
+
+    module ConditionalOperator
+      AND: String
+      OR: String
+    end
+
+    class ConsumedCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?capacity_units: Float,
+        ?read_capacity_units: Float,
+        ?write_capacity_units: Float,
+        ?table: Types::Capacity,
+        ?local_secondary_indexes: Hash[String, Types::Capacity],
+        ?global_secondary_indexes: Hash[String, Types::Capacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor capacity_units: Float?
+      attr_accessor read_capacity_units: Float?
+      attr_accessor write_capacity_units: Float?
+      attr_accessor table: Types::Capacity?
+      attr_accessor local_secondary_indexes: Hash[String, Types::Capacity]?
+      attr_accessor global_secondary_indexes: Hash[String, Types::Capacity]?
+    end
+
+    class ContinuousBackupsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continuous_backups_status: String,
+        ?point_in_time_recovery_description: Types::PointInTimeRecoveryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continuous_backups_status: String?
+      attr_accessor point_in_time_recovery_description: Types::PointInTimeRecoveryDescription?
+    end
+
+    module ContinuousBackupsStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ContinuousBackupsUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContributorInsightsAction
+      ENABLE: String
+      DISABLE: String
+    end
+
+    module ContributorInsightsMode
+      ACCESSED_AND_THROTTLED_KEYS: String
+      THROTTLED_KEYS: String
+    end
+
+    module ContributorInsightsStatus
+      ENABLING: String
+      ENABLED: String
+      DISABLING: String
+      DISABLED: String
+      FAILED: String
+    end
+
+    class ContributorInsightsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?contributor_insights_status: String,
+        ?contributor_insights_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor contributor_insights_status: String?
+      attr_accessor contributor_insights_mode: String?
+    end
+
+    class CreateBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?backup_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor backup_name: String?
+    end
+
+    class CreateBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_details: Types::BackupDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_details: Types::BackupDetails?
+    end
+
+    class CreateGlobalSecondaryIndexAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?warm_throughput: Types::WarmThroughput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor warm_throughput: Types::WarmThroughput?
+    end
+
+    class CreateGlobalTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+        ?replication_group: Array[Types::Replica],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+      attr_accessor replication_group: Array[Types::Replica]?
+    end
+
+    class CreateGlobalTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_description: Types::GlobalTableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_description: Types::GlobalTableDescription?
+    end
+
+    class CreateGlobalTableWitnessGroupMemberAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class CreateReplicaAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class CreateReplicationGroupMemberAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?kms_master_key_id: String,
+        ?provisioned_throughput_override: Types::ProvisionedThroughputOverride,
+        ?on_demand_throughput_override: Types::OnDemandThroughputOverride,
+        ?global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndex],
+        ?table_class_override: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor kms_master_key_id: String?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride?
+      attr_accessor global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndex]?
+      attr_accessor table_class_override: String?
+    end
+
+    class CreateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_definitions: Array[Types::AttributeDefinition],
+        ?table_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?local_secondary_indexes: Array[Types::LocalSecondaryIndex],
+        ?global_secondary_indexes: Array[Types::GlobalSecondaryIndex],
+        ?billing_mode: String,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?stream_specification: Types::StreamSpecification,
+        ?sse_specification: Types::SSESpecification,
+        ?tags: Array[Types::Tag],
+        ?table_class: String,
+        ?deletion_protection_enabled: bool,
+        ?warm_throughput: Types::WarmThroughput,
+        ?resource_policy: String,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_definitions: Array[Types::AttributeDefinition]?
+      attr_accessor table_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor local_secondary_indexes: Array[Types::LocalSecondaryIndex]?
+      attr_accessor global_secondary_indexes: Array[Types::GlobalSecondaryIndex]?
+      attr_accessor billing_mode: String?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor stream_specification: Types::StreamSpecification?
+      attr_accessor sse_specification: Types::SSESpecification?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor table_class: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor warm_throughput: Types::WarmThroughput?
+      attr_accessor resource_policy: String?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+    end
+
+    class CreateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_description: Types::TableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_description: Types::TableDescription?
+    end
+
+    class CsvOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delimiter: String,
+        ?header_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delimiter: String?
+      attr_accessor header_list: Array[String]?
+    end
+
+    class Delete
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Hash[String, Types::AttributeValue],
+        ?table_name: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor table_name: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class DeleteBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_arn: String?
+    end
+
+    class DeleteBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_description: Types::BackupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_description: Types::BackupDescription?
+    end
+
+    class DeleteGlobalSecondaryIndexAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+    end
+
+    class DeleteGlobalTableWitnessGroupMemberAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class DeleteItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?key: Hash[String, Types::AttributeValue],
+        ?expected: Hash[String, Types::ExpectedAttributeValue],
+        ?conditional_operator: String,
+        ?return_values: String,
+        ?return_consumed_capacity: String,
+        ?return_item_collection_metrics: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor expected: Hash[String, Types::ExpectedAttributeValue]?
+      attr_accessor conditional_operator: String?
+      attr_accessor return_values: String?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor return_item_collection_metrics: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class DeleteItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, Types::AttributeValue],
+        ?consumed_capacity: Types::ConsumedCapacity,
+        ?item_collection_metrics: Types::ItemCollectionMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+      attr_accessor item_collection_metrics: Types::ItemCollectionMetrics?
+    end
+
+    class DeleteReplicaAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class DeleteReplicationGroupMemberAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class DeleteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+    end
+
+    class DeleteResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class DeleteResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+    end
+
+    class DeleteTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+    end
+
+    class DeleteTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_description: Types::TableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_description: Types::TableDescription?
+    end
+
+    class DescribeBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_arn: String?
+    end
+
+    class DescribeBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_description: Types::BackupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_description: Types::BackupDescription?
+    end
+
+    class DescribeContinuousBackupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+    end
+
+    class DescribeContinuousBackupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continuous_backups_description: Types::ContinuousBackupsDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continuous_backups_description: Types::ContinuousBackupsDescription?
+    end
+
+    class DescribeContributorInsightsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+    end
+
+    class DescribeContributorInsightsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?contributor_insights_rule_list: Array[String],
+        ?contributor_insights_status: String,
+        ?last_update_date_time: Time,
+        ?failure_exception: Types::FailureException,
+        ?contributor_insights_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor contributor_insights_rule_list: Array[String]?
+      attr_accessor contributor_insights_status: String?
+      attr_accessor last_update_date_time: Time?
+      attr_accessor failure_exception: Types::FailureException?
+      attr_accessor contributor_insights_mode: String?
+    end
+
+    class DescribeEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+    end
+
+    class DescribeExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_arn: String?
+    end
+
+    class DescribeExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_description: Types::ExportDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_description: Types::ExportDescription?
+    end
+
+    class DescribeGlobalTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+    end
+
+    class DescribeGlobalTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_description: Types::GlobalTableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_description: Types::GlobalTableDescription?
+    end
+
+    class DescribeGlobalTableSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+    end
+
+    class DescribeGlobalTableSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+        ?replica_settings: Array[Types::ReplicaSettingsDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+      attr_accessor replica_settings: Array[Types::ReplicaSettingsDescription]?
+    end
+
+    class DescribeImportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_arn: String?
+    end
+
+    class DescribeImportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_table_description: Types::ImportTableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_table_description: Types::ImportTableDescription?
+    end
+
+    class DescribeKinesisStreamingDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+    end
+
+    class DescribeKinesisStreamingDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?kinesis_data_stream_destinations: Array[Types::KinesisDataStreamDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor kinesis_data_stream_destinations: Array[Types::KinesisDataStreamDestination]?
+    end
+
+    class DescribeLimitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeLimitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_max_read_capacity_units: Integer,
+        ?account_max_write_capacity_units: Integer,
+        ?table_max_read_capacity_units: Integer,
+        ?table_max_write_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_max_read_capacity_units: Integer?
+      attr_accessor account_max_write_capacity_units: Integer?
+      attr_accessor table_max_read_capacity_units: Integer?
+      attr_accessor table_max_write_capacity_units: Integer?
+    end
+
+    class DescribeTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+    end
+
+    class DescribeTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table: Types::TableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table: Types::TableDescription?
+    end
+
+    class DescribeTableReplicaAutoScalingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+    end
+
+    class DescribeTableReplicaAutoScalingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_auto_scaling_description: Types::TableAutoScalingDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_auto_scaling_description: Types::TableAutoScalingDescription?
+    end
+
+    class DescribeTimeToLiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+    end
+
+    class DescribeTimeToLiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_to_live_description: Types::TimeToLiveDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_to_live_description: Types::TimeToLiveDescription?
+    end
+
+    module DestinationStatus
+      ENABLING: String
+      ACTIVE: String
+      DISABLING: String
+      DISABLED: String
+      ENABLE_FAILED: String
+      UPDATING: String
+    end
+
+    class DisableKinesisStreamingDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?stream_arn: String,
+        ?enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration?
+    end
+
+    class DisableKinesisStreamingDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?stream_arn: String,
+        ?destination_status: String,
+        ?enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor destination_status: String?
+      attr_accessor enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration?
+    end
+
+    class DuplicateItemException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EnableKinesisStreamingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_creation_date_time_precision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_creation_date_time_precision: String?
+    end
+
+    class EnableKinesisStreamingDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?stream_arn: String,
+        ?enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration?
+    end
+
+    class EnableKinesisStreamingDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?stream_arn: String,
+        ?destination_status: String,
+        ?enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor destination_status: String?
+      attr_accessor enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration?
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?cache_period_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor cache_period_in_minutes: Integer?
+    end
+
+    class ExecuteStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement: String,
+        ?parameters: Array[Types::AttributeValue],
+        ?consistent_read: bool,
+        ?next_token: String,
+        ?return_consumed_capacity: String,
+        ?limit: Integer,
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement: String?
+      attr_accessor parameters: Array[Types::AttributeValue]?
+      attr_accessor consistent_read: bool?
+      attr_accessor next_token: String?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor limit: Integer?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class ExecuteStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Hash[String, Types::AttributeValue]],
+        ?next_token: String,
+        ?consumed_capacity: Types::ConsumedCapacity,
+        ?last_evaluated_key: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Hash[String, Types::AttributeValue]]?
+      attr_accessor next_token: String?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+      attr_accessor last_evaluated_key: Hash[String, Types::AttributeValue]?
+    end
+
+    class ExecuteTransactionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transact_statements: Array[Types::ParameterizedStatement],
+        ?client_request_token: String,
+        ?return_consumed_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transact_statements: Array[Types::ParameterizedStatement]?
+      attr_accessor client_request_token: String?
+      attr_accessor return_consumed_capacity: String?
+    end
+
+    class ExecuteTransactionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responses: Array[Types::ItemResponse],
+        ?consumed_capacity: Array[Types::ConsumedCapacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responses: Array[Types::ItemResponse]?
+      attr_accessor consumed_capacity: Array[Types::ConsumedCapacity]?
+    end
+
+    class ExpectedAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::AttributeValue,
+        ?exists: bool,
+        ?comparison_operator: String,
+        ?attribute_value_list: Array[Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::AttributeValue?
+      attr_accessor exists: bool?
+      attr_accessor comparison_operator: String?
+      attr_accessor attribute_value_list: Array[Types::AttributeValue]?
+    end
+
+    class ExportConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExportDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_arn: String,
+        ?export_status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?export_manifest: String,
+        ?table_arn: String,
+        ?table_id: String,
+        ?export_time: Time,
+        ?client_token: String,
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+        ?s3_prefix: String,
+        ?s3_sse_algorithm: String,
+        ?s3_sse_kms_key_id: String,
+        ?failure_code: String,
+        ?failure_message: String,
+        ?export_format: String,
+        ?billed_size_bytes: Integer,
+        ?item_count: Integer,
+        ?export_type: String,
+        ?incremental_export_specification: Types::IncrementalExportSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_arn: String?
+      attr_accessor export_status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor export_manifest: String?
+      attr_accessor table_arn: String?
+      attr_accessor table_id: String?
+      attr_accessor export_time: Time?
+      attr_accessor client_token: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_prefix: String?
+      attr_accessor s3_sse_algorithm: String?
+      attr_accessor s3_sse_kms_key_id: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+      attr_accessor export_format: String?
+      attr_accessor billed_size_bytes: Integer?
+      attr_accessor item_count: Integer?
+      attr_accessor export_type: String?
+      attr_accessor incremental_export_specification: Types::IncrementalExportSpecification?
+    end
+
+    module ExportFormat
+      DYNAMODB_JSON: String
+      ION: String
+    end
+
+    class ExportNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ExportStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class ExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_arn: String,
+        ?export_status: String,
+        ?export_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_arn: String?
+      attr_accessor export_status: String?
+      attr_accessor export_type: String?
+    end
+
+    class ExportTableToPointInTimeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?export_time: Time,
+        ?client_token: String,
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+        ?s3_prefix: String,
+        ?s3_sse_algorithm: String,
+        ?s3_sse_kms_key_id: String,
+        ?export_format: String,
+        ?export_type: String,
+        ?incremental_export_specification: Types::IncrementalExportSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor export_time: Time?
+      attr_accessor client_token: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_prefix: String?
+      attr_accessor s3_sse_algorithm: String?
+      attr_accessor s3_sse_kms_key_id: String?
+      attr_accessor export_format: String?
+      attr_accessor export_type: String?
+      attr_accessor incremental_export_specification: Types::IncrementalExportSpecification?
+    end
+
+    class ExportTableToPointInTimeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_description: Types::ExportDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_description: Types::ExportDescription?
+    end
+
+    module ExportType
+      FULL_EXPORT: String
+      INCREMENTAL_EXPORT: String
+    end
+
+    module ExportViewType
+      NEW_IMAGE: String
+      NEW_AND_OLD_IMAGES: String
+    end
+
+    class FailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception_name: String,
+        ?exception_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception_name: String?
+      attr_accessor exception_description: String?
+    end
+
+    class Get
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Hash[String, Types::AttributeValue],
+        ?table_name: String,
+        ?projection_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor table_name: String?
+      attr_accessor projection_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+    end
+
+    class GetItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?key: Hash[String, Types::AttributeValue],
+        ?attributes_to_get: Array[String],
+        ?consistent_read: bool,
+        ?return_consumed_capacity: String,
+        ?projection_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor attributes_to_get: Array[String]?
+      attr_accessor consistent_read: bool?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor projection_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+    end
+
+    class GetItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item: Hash[String, Types::AttributeValue],
+        ?consumed_capacity: Types::ConsumedCapacity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GlobalSecondaryIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?warm_throughput: Types::WarmThroughput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor warm_throughput: Types::WarmThroughput?
+    end
+
+    class GlobalSecondaryIndexAutoScalingUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_write_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_write_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate?
+    end
+
+    class GlobalSecondaryIndexDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+        ?index_status: String,
+        ?backfilling: bool,
+        ?provisioned_throughput: Types::ProvisionedThroughputDescription,
+        ?index_size_bytes: Integer,
+        ?item_count: Integer,
+        ?index_arn: String,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?warm_throughput: Types::GlobalSecondaryIndexWarmThroughputDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor index_status: String?
+      attr_accessor backfilling: bool?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughputDescription?
+      attr_accessor index_size_bytes: Integer?
+      attr_accessor item_count: Integer?
+      attr_accessor index_arn: String?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor warm_throughput: Types::GlobalSecondaryIndexWarmThroughputDescription?
+    end
+
+    class GlobalSecondaryIndexInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+    end
+
+    class GlobalSecondaryIndexUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::UpdateGlobalSecondaryIndexAction,
+        ?create: Types::CreateGlobalSecondaryIndexAction,
+        ?delete: Types::DeleteGlobalSecondaryIndexAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::UpdateGlobalSecondaryIndexAction?
+      attr_accessor create: Types::CreateGlobalSecondaryIndexAction?
+      attr_accessor delete: Types::DeleteGlobalSecondaryIndexAction?
+    end
+
+    class GlobalSecondaryIndexWarmThroughputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_units_per_second: Integer,
+        ?write_units_per_second: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_units_per_second: Integer?
+      attr_accessor write_units_per_second: Integer?
+      attr_accessor status: String?
+    end
+
+    class GlobalTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+        ?replication_group: Array[Types::Replica],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+      attr_accessor replication_group: Array[Types::Replica]?
+    end
+
+    class GlobalTableAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GlobalTableDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_group: Array[Types::ReplicaDescription],
+        ?global_table_arn: String,
+        ?creation_date_time: Time,
+        ?global_table_status: String,
+        ?global_table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_group: Array[Types::ReplicaDescription]?
+      attr_accessor global_table_arn: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor global_table_status: String?
+      attr_accessor global_table_name: String?
+    end
+
+    class GlobalTableGlobalSecondaryIndexSettingsUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_write_capacity_units: Integer,
+        ?provisioned_write_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_write_capacity_units: Integer?
+      attr_accessor provisioned_write_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate?
+    end
+
+    class GlobalTableNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module GlobalTableStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      UPDATING: String
+    end
+
+    class GlobalTableWitnessDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?witness_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor witness_status: String?
+    end
+
+    class GlobalTableWitnessGroupUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create: Types::CreateGlobalTableWitnessGroupMemberAction,
+        ?delete: Types::DeleteGlobalTableWitnessGroupMemberAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create: Types::CreateGlobalTableWitnessGroupMemberAction?
+      attr_accessor delete: Types::DeleteGlobalTableWitnessGroupMemberAction?
+    end
+
+    class IdempotentParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImportConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImportNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ImportStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      CANCELLING: String
+      CANCELLED: String
+      FAILED: String
+    end
+
+    class ImportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_arn: String,
+        ?import_status: String,
+        ?table_arn: String,
+        ?s3_bucket_source: Types::S3BucketSource,
+        ?cloud_watch_log_group_arn: String,
+        ?input_format: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_arn: String?
+      attr_accessor import_status: String?
+      attr_accessor table_arn: String?
+      attr_accessor s3_bucket_source: Types::S3BucketSource?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor input_format: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ImportTableDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_arn: String,
+        ?import_status: String,
+        ?table_arn: String,
+        ?table_id: String,
+        ?client_token: String,
+        ?s3_bucket_source: Types::S3BucketSource,
+        ?error_count: Integer,
+        ?cloud_watch_log_group_arn: String,
+        ?input_format: String,
+        ?input_format_options: Types::InputFormatOptions,
+        ?input_compression_type: String,
+        ?table_creation_parameters: Types::TableCreationParameters,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?processed_size_bytes: Integer,
+        ?processed_item_count: Integer,
+        ?imported_item_count: Integer,
+        ?failure_code: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_arn: String?
+      attr_accessor import_status: String?
+      attr_accessor table_arn: String?
+      attr_accessor table_id: String?
+      attr_accessor client_token: String?
+      attr_accessor s3_bucket_source: Types::S3BucketSource?
+      attr_accessor error_count: Integer?
+      attr_accessor cloud_watch_log_group_arn: String?
+      attr_accessor input_format: String?
+      attr_accessor input_format_options: Types::InputFormatOptions?
+      attr_accessor input_compression_type: String?
+      attr_accessor table_creation_parameters: Types::TableCreationParameters?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor processed_size_bytes: Integer?
+      attr_accessor processed_item_count: Integer?
+      attr_accessor imported_item_count: Integer?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+    end
+
+    class ImportTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?s3_bucket_source: Types::S3BucketSource,
+        ?input_format: String,
+        ?input_format_options: Types::InputFormatOptions,
+        ?input_compression_type: String,
+        ?table_creation_parameters: Types::TableCreationParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor s3_bucket_source: Types::S3BucketSource?
+      attr_accessor input_format: String?
+      attr_accessor input_format_options: Types::InputFormatOptions?
+      attr_accessor input_compression_type: String?
+      attr_accessor table_creation_parameters: Types::TableCreationParameters?
+    end
+
+    class ImportTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_table_description: Types::ImportTableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_table_description: Types::ImportTableDescription?
+    end
+
+    class IncrementalExportSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_from_time: Time,
+        ?export_to_time: Time,
+        ?export_view_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_from_time: Time?
+      attr_accessor export_to_time: Time?
+      attr_accessor export_view_type: String?
+    end
+
+    class IndexNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IndexStatus
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      ACTIVE: String
+    end
+
+    module InputCompressionType
+      GZIP: String
+      ZSTD: String
+      NONE: String
+    end
+
+    module InputFormat
+      DYNAMODB_JSON: String
+      ION: String
+      CSV: String
+    end
+
+    class InputFormatOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv: Types::CsvOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv: Types::CsvOptions?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEndpointException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidExportTimeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRestoreTimeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ItemCollectionMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_collection_key: Hash[String, Types::AttributeValue],
+        ?size_estimate_range_gb: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_collection_key: Hash[String, Types::AttributeValue]?
+      attr_accessor size_estimate_range_gb: Array[Float]?
+    end
+
+    class ItemCollectionSizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ItemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+    end
+
+    class KeySchemaElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?key_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor key_type: String?
+    end
+
+    module KeyType
+      HASH: String
+      RANGE: String
+    end
+
+    class KeysAndAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keys: Array[Hash[String, Types::AttributeValue]],
+        ?attributes_to_get: Array[String],
+        ?consistent_read: bool,
+        ?projection_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keys: Array[Hash[String, Types::AttributeValue]]?
+      attr_accessor attributes_to_get: Array[String]?
+      attr_accessor consistent_read: bool?
+      attr_accessor projection_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+    end
+
+    class KinesisDataStreamDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?destination_status: String,
+        ?destination_status_description: String,
+        ?approximate_creation_date_time_precision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor destination_status: String?
+      attr_accessor destination_status_description: String?
+      attr_accessor approximate_creation_date_time_precision: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListBackupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?limit: Integer,
+        ?time_range_lower_bound: Time,
+        ?time_range_upper_bound: Time,
+        ?exclusive_start_backup_arn: String,
+        ?backup_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor time_range_lower_bound: Time?
+      attr_accessor time_range_upper_bound: Time?
+      attr_accessor exclusive_start_backup_arn: String?
+      attr_accessor backup_type: String?
+    end
+
+    class ListBackupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_summaries: Array[Types::BackupSummary],
+        ?last_evaluated_backup_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_summaries: Array[Types::BackupSummary]?
+      attr_accessor last_evaluated_backup_arn: String?
+    end
+
+    class ListContributorInsightsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListContributorInsightsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contributor_insights_summaries: Array[Types::ContributorInsightsSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contributor_insights_summaries: Array[Types::ContributorInsightsSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_summaries: Array[Types::ExportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_summaries: Array[Types::ExportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGlobalTablesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclusive_start_global_table_name: String,
+        ?limit: Integer,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclusive_start_global_table_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor region_name: String?
+    end
+
+    class ListGlobalTablesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_tables: Array[Types::GlobalTable],
+        ?last_evaluated_global_table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_tables: Array[Types::GlobalTable]?
+      attr_accessor last_evaluated_global_table_name: String?
+    end
+
+    class ListImportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?page_size: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor page_size: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_summary_list: Array[Types::ImportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_summary_list: Array[Types::ImportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTablesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclusive_start_table_name: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclusive_start_table_name: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTablesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_names: Array[String],
+        ?last_evaluated_table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_names: Array[String]?
+      attr_accessor last_evaluated_table_name: String?
+    end
+
+    class ListTagsOfResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsOfResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class LocalSecondaryIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+    end
+
+    class LocalSecondaryIndexDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+        ?index_size_bytes: Integer,
+        ?item_count: Integer,
+        ?index_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor index_size_bytes: Integer?
+      attr_accessor item_count: Integer?
+      attr_accessor index_arn: String?
+    end
+
+    class LocalSecondaryIndexInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?projection: Types::Projection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor projection: Types::Projection?
+    end
+
+    module MultiRegionConsistency
+      EVENTUAL: String
+      STRONG: String
+    end
+
+    class OnDemandThroughput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_read_request_units: Integer,
+        ?max_write_request_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_read_request_units: Integer?
+      attr_accessor max_write_request_units: Integer?
+    end
+
+    class OnDemandThroughputOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_read_request_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_read_request_units: Integer?
+    end
+
+    class ParameterizedStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement: String,
+        ?parameters: Array[Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement: String?
+      attr_accessor parameters: Array[Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class PointInTimeRecoveryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?point_in_time_recovery_status: String,
+        ?recovery_period_in_days: Integer,
+        ?earliest_restorable_date_time: Time,
+        ?latest_restorable_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor point_in_time_recovery_status: String?
+      attr_accessor recovery_period_in_days: Integer?
+      attr_accessor earliest_restorable_date_time: Time?
+      attr_accessor latest_restorable_date_time: Time?
+    end
+
+    class PointInTimeRecoverySpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?point_in_time_recovery_enabled: bool,
+        ?recovery_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor point_in_time_recovery_enabled: bool?
+      attr_accessor recovery_period_in_days: Integer?
+    end
+
+    module PointInTimeRecoveryStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class PointInTimeRecoveryUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Projection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?projection_type: String,
+        ?non_key_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor projection_type: String?
+      attr_accessor non_key_attributes: Array[String]?
+    end
+
+    module ProjectionType
+      ALL: String
+      KEYS_ONLY: String
+      INCLUDE: String
+    end
+
+    class ProvisionedThroughput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_capacity_units: Integer,
+        ?write_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_capacity_units: Integer?
+      attr_accessor write_capacity_units: Integer?
+    end
+
+    class ProvisionedThroughputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_increase_date_time: Time,
+        ?last_decrease_date_time: Time,
+        ?number_of_decreases_today: Integer,
+        ?read_capacity_units: Integer,
+        ?write_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_increase_date_time: Time?
+      attr_accessor last_decrease_date_time: Time?
+      attr_accessor number_of_decreases_today: Integer?
+      attr_accessor read_capacity_units: Integer?
+      attr_accessor write_capacity_units: Integer?
+    end
+
+    class ProvisionedThroughputExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?throttling_reasons: Array[Types::ThrottlingReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor throttling_reasons: Array[Types::ThrottlingReason]?
+    end
+
+    class ProvisionedThroughputOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_capacity_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_capacity_units: Integer?
+    end
+
+    class Put
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item: Hash[String, Types::AttributeValue],
+        ?table_name: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+      attr_accessor table_name: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class PutItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?item: Hash[String, Types::AttributeValue],
+        ?expected: Hash[String, Types::ExpectedAttributeValue],
+        ?return_values: String,
+        ?return_consumed_capacity: String,
+        ?return_item_collection_metrics: String,
+        ?conditional_operator: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+      attr_accessor expected: Hash[String, Types::ExpectedAttributeValue]?
+      attr_accessor return_values: String?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor return_item_collection_metrics: String?
+      attr_accessor conditional_operator: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class PutItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, Types::AttributeValue],
+        ?consumed_capacity: Types::ConsumedCapacity,
+        ?item_collection_metrics: Types::ItemCollectionMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+      attr_accessor item_collection_metrics: Types::ItemCollectionMetrics?
+    end
+
+    class PutRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+    end
+
+    class PutResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?expected_revision_id: String,
+        ?confirm_remove_self_resource_access: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor expected_revision_id: String?
+      attr_accessor confirm_remove_self_resource_access: bool?
+    end
+
+    class PutResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+    end
+
+    class QueryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?select: String,
+        ?attributes_to_get: Array[String],
+        ?limit: Integer,
+        ?consistent_read: bool,
+        ?key_conditions: Hash[String, Types::Condition],
+        ?query_filter: Hash[String, Types::Condition],
+        ?conditional_operator: String,
+        ?scan_index_forward: bool,
+        ?exclusive_start_key: Hash[String, Types::AttributeValue],
+        ?return_consumed_capacity: String,
+        ?projection_expression: String,
+        ?filter_expression: String,
+        ?key_condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor select: String?
+      attr_accessor attributes_to_get: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor consistent_read: bool?
+      attr_accessor key_conditions: Hash[String, Types::Condition]?
+      attr_accessor query_filter: Hash[String, Types::Condition]?
+      attr_accessor conditional_operator: String?
+      attr_accessor scan_index_forward: bool?
+      attr_accessor exclusive_start_key: Hash[String, Types::AttributeValue]?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor projection_expression: String?
+      attr_accessor filter_expression: String?
+      attr_accessor key_condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+    end
+
+    class QueryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Hash[String, Types::AttributeValue]],
+        ?count: Integer,
+        ?scanned_count: Integer,
+        ?last_evaluated_key: Hash[String, Types::AttributeValue],
+        ?consumed_capacity: Types::ConsumedCapacity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Hash[String, Types::AttributeValue]]?
+      attr_accessor count: Integer?
+      attr_accessor scanned_count: Integer?
+      attr_accessor last_evaluated_key: Hash[String, Types::AttributeValue]?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+    end
+
+    class Replica
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+    end
+
+    class ReplicaAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicaAutoScalingDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndexAutoScalingDescription],
+        ?replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+        ?replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+        ?replica_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndexAutoScalingDescription]?
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+      attr_accessor replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+      attr_accessor replica_status: String?
+    end
+
+    class ReplicaAutoScalingUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?replica_global_secondary_index_updates: Array[Types::ReplicaGlobalSecondaryIndexAutoScalingUpdate],
+        ?replica_provisioned_read_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor replica_global_secondary_index_updates: Array[Types::ReplicaGlobalSecondaryIndexAutoScalingUpdate]?
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate?
+    end
+
+    class ReplicaDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?replica_status: String,
+        ?replica_status_description: String,
+        ?replica_status_percent_progress: String,
+        ?kms_master_key_id: String,
+        ?provisioned_throughput_override: Types::ProvisionedThroughputOverride,
+        ?on_demand_throughput_override: Types::OnDemandThroughputOverride,
+        ?warm_throughput: Types::TableWarmThroughputDescription,
+        ?global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndexDescription],
+        ?replica_inaccessible_date_time: Time,
+        ?replica_table_class_summary: Types::TableClassSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor replica_status: String?
+      attr_accessor replica_status_description: String?
+      attr_accessor replica_status_percent_progress: String?
+      attr_accessor kms_master_key_id: String?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride?
+      attr_accessor warm_throughput: Types::TableWarmThroughputDescription?
+      attr_accessor global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndexDescription]?
+      attr_accessor replica_inaccessible_date_time: Time?
+      attr_accessor replica_table_class_summary: Types::TableClassSummary?
+    end
+
+    class ReplicaGlobalSecondaryIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_throughput_override: Types::ProvisionedThroughputOverride,
+        ?on_demand_throughput_override: Types::OnDemandThroughputOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride?
+    end
+
+    class ReplicaGlobalSecondaryIndexAutoScalingDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?index_status: String,
+        ?provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+        ?provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor index_status: String?
+      attr_accessor provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+      attr_accessor provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+    end
+
+    class ReplicaGlobalSecondaryIndexAutoScalingUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_read_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_read_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate?
+    end
+
+    class ReplicaGlobalSecondaryIndexDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_throughput_override: Types::ProvisionedThroughputOverride,
+        ?on_demand_throughput_override: Types::OnDemandThroughputOverride,
+        ?warm_throughput: Types::GlobalSecondaryIndexWarmThroughputDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride?
+      attr_accessor warm_throughput: Types::GlobalSecondaryIndexWarmThroughputDescription?
+    end
+
+    class ReplicaGlobalSecondaryIndexSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?index_status: String,
+        ?provisioned_read_capacity_units: Integer,
+        ?provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+        ?provisioned_write_capacity_units: Integer,
+        ?provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor index_status: String?
+      attr_accessor provisioned_read_capacity_units: Integer?
+      attr_accessor provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+      attr_accessor provisioned_write_capacity_units: Integer?
+      attr_accessor provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+    end
+
+    class ReplicaGlobalSecondaryIndexSettingsUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_read_capacity_units: Integer,
+        ?provisioned_read_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_read_capacity_units: Integer?
+      attr_accessor provisioned_read_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate?
+    end
+
+    class ReplicaNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicaSettingsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?replica_status: String,
+        ?replica_billing_mode_summary: Types::BillingModeSummary,
+        ?replica_provisioned_read_capacity_units: Integer,
+        ?replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+        ?replica_provisioned_write_capacity_units: Integer,
+        ?replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription,
+        ?replica_global_secondary_index_settings: Array[Types::ReplicaGlobalSecondaryIndexSettingsDescription],
+        ?replica_table_class_summary: Types::TableClassSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor replica_status: String?
+      attr_accessor replica_billing_mode_summary: Types::BillingModeSummary?
+      attr_accessor replica_provisioned_read_capacity_units: Integer?
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+      attr_accessor replica_provisioned_write_capacity_units: Integer?
+      attr_accessor replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription?
+      attr_accessor replica_global_secondary_index_settings: Array[Types::ReplicaGlobalSecondaryIndexSettingsDescription]?
+      attr_accessor replica_table_class_summary: Types::TableClassSummary?
+    end
+
+    class ReplicaSettingsUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?replica_provisioned_read_capacity_units: Integer,
+        ?replica_provisioned_read_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate,
+        ?replica_global_secondary_index_settings_update: Array[Types::ReplicaGlobalSecondaryIndexSettingsUpdate],
+        ?replica_table_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor replica_provisioned_read_capacity_units: Integer?
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate?
+      attr_accessor replica_global_secondary_index_settings_update: Array[Types::ReplicaGlobalSecondaryIndexSettingsUpdate]?
+      attr_accessor replica_table_class: String?
+    end
+
+    module ReplicaStatus
+      CREATING: String
+      CREATION_FAILED: String
+      UPDATING: String
+      DELETING: String
+      ACTIVE: String
+      REGION_DISABLED: String
+      INACCESSIBLE_ENCRYPTION_CREDENTIALS: String
+      ARCHIVING: String
+      ARCHIVED: String
+      REPLICATION_NOT_AUTHORIZED: String
+    end
+
+    class ReplicaUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create: Types::CreateReplicaAction,
+        ?delete: Types::DeleteReplicaAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create: Types::CreateReplicaAction?
+      attr_accessor delete: Types::DeleteReplicaAction?
+    end
+
+    class ReplicatedWriteConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReplicationGroupUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create: Types::CreateReplicationGroupMemberAction,
+        ?update: Types::UpdateReplicationGroupMemberAction,
+        ?delete: Types::DeleteReplicationGroupMemberAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create: Types::CreateReplicationGroupMemberAction?
+      attr_accessor update: Types::UpdateReplicationGroupMemberAction?
+      attr_accessor delete: Types::DeleteReplicationGroupMemberAction?
+    end
+
+    class RequestLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?throttling_reasons: Array[Types::ThrottlingReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor throttling_reasons: Array[Types::ThrottlingReason]?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RestoreSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_backup_arn: String,
+        ?source_table_arn: String,
+        ?restore_date_time: Time,
+        ?restore_in_progress: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_backup_arn: String?
+      attr_accessor source_table_arn: String?
+      attr_accessor restore_date_time: Time?
+      attr_accessor restore_in_progress: bool?
+    end
+
+    class RestoreTableFromBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_table_name: String,
+        ?backup_arn: String,
+        ?billing_mode_override: String,
+        ?global_secondary_index_override: Array[Types::GlobalSecondaryIndex],
+        ?local_secondary_index_override: Array[Types::LocalSecondaryIndex],
+        ?provisioned_throughput_override: Types::ProvisionedThroughput,
+        ?on_demand_throughput_override: Types::OnDemandThroughput,
+        ?sse_specification_override: Types::SSESpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_table_name: String?
+      attr_accessor backup_arn: String?
+      attr_accessor billing_mode_override: String?
+      attr_accessor global_secondary_index_override: Array[Types::GlobalSecondaryIndex]?
+      attr_accessor local_secondary_index_override: Array[Types::LocalSecondaryIndex]?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughput?
+      attr_accessor sse_specification_override: Types::SSESpecification?
+    end
+
+    class RestoreTableFromBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_description: Types::TableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_description: Types::TableDescription?
+    end
+
+    class RestoreTableToPointInTimeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_table_arn: String,
+        ?source_table_name: String,
+        ?target_table_name: String,
+        ?use_latest_restorable_time: bool,
+        ?restore_date_time: Time,
+        ?billing_mode_override: String,
+        ?global_secondary_index_override: Array[Types::GlobalSecondaryIndex],
+        ?local_secondary_index_override: Array[Types::LocalSecondaryIndex],
+        ?provisioned_throughput_override: Types::ProvisionedThroughput,
+        ?on_demand_throughput_override: Types::OnDemandThroughput,
+        ?sse_specification_override: Types::SSESpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_table_arn: String?
+      attr_accessor source_table_name: String?
+      attr_accessor target_table_name: String?
+      attr_accessor use_latest_restorable_time: bool?
+      attr_accessor restore_date_time: Time?
+      attr_accessor billing_mode_override: String?
+      attr_accessor global_secondary_index_override: Array[Types::GlobalSecondaryIndex]?
+      attr_accessor local_secondary_index_override: Array[Types::LocalSecondaryIndex]?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughput?
+      attr_accessor sse_specification_override: Types::SSESpecification?
+    end
+
+    class RestoreTableToPointInTimeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_description: Types::TableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_description: Types::TableDescription?
+    end
+
+    module ReturnConsumedCapacity
+      INDEXES: String
+      TOTAL: String
+      NONE: String
+    end
+
+    module ReturnItemCollectionMetrics
+      SIZE: String
+      NONE: String
+    end
+
+    module ReturnValue
+      NONE: String
+      ALL_OLD: String
+      UPDATED_OLD: String
+      ALL_NEW: String
+      UPDATED_NEW: String
+    end
+
+    module ReturnValuesOnConditionCheckFailure
+      ALL_OLD: String
+      NONE: String
+    end
+
+    class S3BucketSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_owner: String,
+        ?s3_bucket: String,
+        ?s3_key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key_prefix: String?
+    end
+
+    module S3SseAlgorithm
+      AES256: String
+      KMS: String
+    end
+
+    class SSEDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?sse_type: String,
+        ?kms_master_key_arn: String,
+        ?inaccessible_encryption_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor sse_type: String?
+      attr_accessor kms_master_key_arn: String?
+      attr_accessor inaccessible_encryption_date_time: Time?
+    end
+
+    class SSESpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?sse_type: String,
+        ?kms_master_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor sse_type: String?
+      attr_accessor kms_master_key_id: String?
+    end
+
+    module SSEStatus
+      ENABLING: String
+      ENABLED: String
+      DISABLING: String
+      DISABLED: String
+      UPDATING: String
+    end
+
+    module SSEType
+      AES256: String
+      KMS: String
+    end
+
+    module ScalarAttributeType
+      S: String
+      N: String
+      B: String
+    end
+
+    class ScanInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?attributes_to_get: Array[String],
+        ?limit: Integer,
+        ?select: String,
+        ?scan_filter: Hash[String, Types::Condition],
+        ?conditional_operator: String,
+        ?exclusive_start_key: Hash[String, Types::AttributeValue],
+        ?return_consumed_capacity: String,
+        ?total_segments: Integer,
+        ?segment: Integer,
+        ?projection_expression: String,
+        ?filter_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?consistent_read: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor attributes_to_get: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor select: String?
+      attr_accessor scan_filter: Hash[String, Types::Condition]?
+      attr_accessor conditional_operator: String?
+      attr_accessor exclusive_start_key: Hash[String, Types::AttributeValue]?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor total_segments: Integer?
+      attr_accessor segment: Integer?
+      attr_accessor projection_expression: String?
+      attr_accessor filter_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor consistent_read: bool?
+    end
+
+    class ScanOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Hash[String, Types::AttributeValue]],
+        ?count: Integer,
+        ?scanned_count: Integer,
+        ?last_evaluated_key: Hash[String, Types::AttributeValue],
+        ?consumed_capacity: Types::ConsumedCapacity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Hash[String, Types::AttributeValue]]?
+      attr_accessor count: Integer?
+      attr_accessor scanned_count: Integer?
+      attr_accessor last_evaluated_key: Hash[String, Types::AttributeValue]?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+    end
+
+    module Select
+      ALL_ATTRIBUTES: String
+      ALL_PROJECTED_ATTRIBUTES: String
+      SPECIFIC_ATTRIBUTES: String
+      COUNT: String
+    end
+
+    class SourceTableDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?table_id: String,
+        ?table_arn: String,
+        ?table_size_bytes: Integer,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?table_creation_date_time: Time,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?item_count: Integer,
+        ?billing_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor table_id: String?
+      attr_accessor table_arn: String?
+      attr_accessor table_size_bytes: Integer?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor table_creation_date_time: Time?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor item_count: Integer?
+      attr_accessor billing_mode: String?
+    end
+
+    class SourceTableFeatureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_secondary_indexes: Array[Types::LocalSecondaryIndexInfo],
+        ?global_secondary_indexes: Array[Types::GlobalSecondaryIndexInfo],
+        ?stream_description: Types::StreamSpecification,
+        ?time_to_live_description: Types::TimeToLiveDescription,
+        ?sse_description: Types::SSEDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_secondary_indexes: Array[Types::LocalSecondaryIndexInfo]?
+      attr_accessor global_secondary_indexes: Array[Types::GlobalSecondaryIndexInfo]?
+      attr_accessor stream_description: Types::StreamSpecification?
+      attr_accessor time_to_live_description: Types::TimeToLiveDescription?
+      attr_accessor sse_description: Types::SSEDescription?
+    end
+
+    class StreamSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_enabled: bool,
+        ?stream_view_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_enabled: bool?
+      attr_accessor stream_view_type: String?
+    end
+
+    module StreamViewType
+      NEW_IMAGE: String
+      OLD_IMAGE: String
+      NEW_AND_OLD_IMAGES: String
+      KEYS_ONLY: String
+    end
+
+    class TableAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TableAutoScalingDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?table_status: String,
+        ?replicas: Array[Types::ReplicaAutoScalingDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor table_status: String?
+      attr_accessor replicas: Array[Types::ReplicaAutoScalingDescription]?
+    end
+
+    module TableClass
+      STANDARD: String
+      STANDARD_INFREQUENT_ACCESS: String
+    end
+
+    class TableClassSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_class: String,
+        ?last_update_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_class: String?
+      attr_accessor last_update_date_time: Time?
+    end
+
+    class TableCreationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?attribute_definitions: Array[Types::AttributeDefinition],
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?billing_mode: String,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?sse_specification: Types::SSESpecification,
+        ?global_secondary_indexes: Array[Types::GlobalSecondaryIndex],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor attribute_definitions: Array[Types::AttributeDefinition]?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor billing_mode: String?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor sse_specification: Types::SSESpecification?
+      attr_accessor global_secondary_indexes: Array[Types::GlobalSecondaryIndex]?
+    end
+
+    class TableDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_definitions: Array[Types::AttributeDefinition],
+        ?table_name: String,
+        ?key_schema: Array[Types::KeySchemaElement],
+        ?table_status: String,
+        ?creation_date_time: Time,
+        ?provisioned_throughput: Types::ProvisionedThroughputDescription,
+        ?table_size_bytes: Integer,
+        ?item_count: Integer,
+        ?table_arn: String,
+        ?table_id: String,
+        ?billing_mode_summary: Types::BillingModeSummary,
+        ?local_secondary_indexes: Array[Types::LocalSecondaryIndexDescription],
+        ?global_secondary_indexes: Array[Types::GlobalSecondaryIndexDescription],
+        ?stream_specification: Types::StreamSpecification,
+        ?latest_stream_label: String,
+        ?latest_stream_arn: String,
+        ?global_table_version: String,
+        ?replicas: Array[Types::ReplicaDescription],
+        ?global_table_witnesses: Array[Types::GlobalTableWitnessDescription],
+        ?restore_summary: Types::RestoreSummary,
+        ?sse_description: Types::SSEDescription,
+        ?archival_summary: Types::ArchivalSummary,
+        ?table_class_summary: Types::TableClassSummary,
+        ?deletion_protection_enabled: bool,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?warm_throughput: Types::TableWarmThroughputDescription,
+        ?multi_region_consistency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_definitions: Array[Types::AttributeDefinition]?
+      attr_accessor table_name: String?
+      attr_accessor key_schema: Array[Types::KeySchemaElement]?
+      attr_accessor table_status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughputDescription?
+      attr_accessor table_size_bytes: Integer?
+      attr_accessor item_count: Integer?
+      attr_accessor table_arn: String?
+      attr_accessor table_id: String?
+      attr_accessor billing_mode_summary: Types::BillingModeSummary?
+      attr_accessor local_secondary_indexes: Array[Types::LocalSecondaryIndexDescription]?
+      attr_accessor global_secondary_indexes: Array[Types::GlobalSecondaryIndexDescription]?
+      attr_accessor stream_specification: Types::StreamSpecification?
+      attr_accessor latest_stream_label: String?
+      attr_accessor latest_stream_arn: String?
+      attr_accessor global_table_version: String?
+      attr_accessor replicas: Array[Types::ReplicaDescription]?
+      attr_accessor global_table_witnesses: Array[Types::GlobalTableWitnessDescription]?
+      attr_accessor restore_summary: Types::RestoreSummary?
+      attr_accessor sse_description: Types::SSEDescription?
+      attr_accessor archival_summary: Types::ArchivalSummary?
+      attr_accessor table_class_summary: Types::TableClassSummary?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor warm_throughput: Types::TableWarmThroughputDescription?
+      attr_accessor multi_region_consistency: String?
+    end
+
+    class TableInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TableNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TableStatus
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      ACTIVE: String
+      INACCESSIBLE_ENCRYPTION_CREDENTIALS: String
+      ARCHIVING: String
+      ARCHIVED: String
+      REPLICATION_NOT_AUTHORIZED: String
+    end
+
+    class TableWarmThroughputDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_units_per_second: Integer,
+        ?write_units_per_second: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_units_per_second: Integer?
+      attr_accessor write_units_per_second: Integer?
+      attr_accessor status: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?throttling_reasons: Array[Types::ThrottlingReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor throttling_reasons: Array[Types::ThrottlingReason]?
+    end
+
+    class ThrottlingReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor resource: String?
+    end
+
+    class TimeToLiveDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_to_live_status: String,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_to_live_status: String?
+      attr_accessor attribute_name: String?
+    end
+
+    class TimeToLiveSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor attribute_name: String?
+    end
+
+    module TimeToLiveStatus
+      ENABLING: String
+      DISABLING: String
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class TransactGetItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?get: Types::Get,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor get: Types::Get?
+    end
+
+    class TransactGetItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transact_items: Array[Types::TransactGetItem],
+        ?return_consumed_capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transact_items: Array[Types::TransactGetItem]?
+      attr_accessor return_consumed_capacity: String?
+    end
+
+    class TransactGetItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumed_capacity: Array[Types::ConsumedCapacity],
+        ?responses: Array[Types::ItemResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumed_capacity: Array[Types::ConsumedCapacity]?
+      attr_accessor responses: Array[Types::ItemResponse]?
+    end
+
+    class TransactWriteItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_check: Types::ConditionCheck,
+        ?put: Types::Put,
+        ?delete: Types::Delete,
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_check: Types::ConditionCheck?
+      attr_accessor put: Types::Put?
+      attr_accessor delete: Types::Delete?
+      attr_accessor update: Types::Update?
+    end
+
+    class TransactWriteItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transact_items: Array[Types::TransactWriteItem],
+        ?return_consumed_capacity: String,
+        ?return_item_collection_metrics: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transact_items: Array[Types::TransactWriteItem]?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor return_item_collection_metrics: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class TransactWriteItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumed_capacity: Array[Types::ConsumedCapacity],
+        ?item_collection_metrics: Hash[String, Array[Types::ItemCollectionMetrics]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumed_capacity: Array[Types::ConsumedCapacity]?
+      attr_accessor item_collection_metrics: Hash[String, Array[Types::ItemCollectionMetrics]]?
+    end
+
+    class TransactionCanceledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?cancellation_reasons: Array[Types::CancellationReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor cancellation_reasons: Array[Types::CancellationReason]?
+    end
+
+    class TransactionConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransactionInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class Update
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Hash[String, Types::AttributeValue],
+        ?update_expression: String,
+        ?table_name: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor update_expression: String?
+      attr_accessor table_name: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class UpdateContinuousBackupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?point_in_time_recovery_specification: Types::PointInTimeRecoverySpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor point_in_time_recovery_specification: Types::PointInTimeRecoverySpecification?
+    end
+
+    class UpdateContinuousBackupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continuous_backups_description: Types::ContinuousBackupsDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continuous_backups_description: Types::ContinuousBackupsDescription?
+    end
+
+    class UpdateContributorInsightsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?contributor_insights_action: String,
+        ?contributor_insights_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor contributor_insights_action: String?
+      attr_accessor contributor_insights_mode: String?
+    end
+
+    class UpdateContributorInsightsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?contributor_insights_status: String,
+        ?contributor_insights_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor contributor_insights_status: String?
+      attr_accessor contributor_insights_mode: String?
+    end
+
+    class UpdateGlobalSecondaryIndexAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?warm_throughput: Types::WarmThroughput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor warm_throughput: Types::WarmThroughput?
+    end
+
+    class UpdateGlobalTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+        ?replica_updates: Array[Types::ReplicaUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+      attr_accessor replica_updates: Array[Types::ReplicaUpdate]?
+    end
+
+    class UpdateGlobalTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_description: Types::GlobalTableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_description: Types::GlobalTableDescription?
+    end
+
+    class UpdateGlobalTableSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+        ?global_table_billing_mode: String,
+        ?global_table_provisioned_write_capacity_units: Integer,
+        ?global_table_provisioned_write_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate,
+        ?global_table_global_secondary_index_settings_update: Array[Types::GlobalTableGlobalSecondaryIndexSettingsUpdate],
+        ?replica_settings_update: Array[Types::ReplicaSettingsUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+      attr_accessor global_table_billing_mode: String?
+      attr_accessor global_table_provisioned_write_capacity_units: Integer?
+      attr_accessor global_table_provisioned_write_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate?
+      attr_accessor global_table_global_secondary_index_settings_update: Array[Types::GlobalTableGlobalSecondaryIndexSettingsUpdate]?
+      attr_accessor replica_settings_update: Array[Types::ReplicaSettingsUpdate]?
+    end
+
+    class UpdateGlobalTableSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_table_name: String,
+        ?replica_settings: Array[Types::ReplicaSettingsDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_table_name: String?
+      attr_accessor replica_settings: Array[Types::ReplicaSettingsDescription]?
+    end
+
+    class UpdateItemInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?key: Hash[String, Types::AttributeValue],
+        ?attribute_updates: Hash[String, Types::AttributeValueUpdate],
+        ?expected: Hash[String, Types::ExpectedAttributeValue],
+        ?conditional_operator: String,
+        ?return_values: String,
+        ?return_consumed_capacity: String,
+        ?return_item_collection_metrics: String,
+        ?update_expression: String,
+        ?condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?return_values_on_condition_check_failure: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor key: Hash[String, Types::AttributeValue]?
+      attr_accessor attribute_updates: Hash[String, Types::AttributeValueUpdate]?
+      attr_accessor expected: Hash[String, Types::ExpectedAttributeValue]?
+      attr_accessor conditional_operator: String?
+      attr_accessor return_values: String?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor return_item_collection_metrics: String?
+      attr_accessor update_expression: String?
+      attr_accessor condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor return_values_on_condition_check_failure: String?
+    end
+
+    class UpdateItemOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, Types::AttributeValue],
+        ?consumed_capacity: Types::ConsumedCapacity,
+        ?item_collection_metrics: Types::ItemCollectionMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor consumed_capacity: Types::ConsumedCapacity?
+      attr_accessor item_collection_metrics: Types::ItemCollectionMetrics?
+    end
+
+    class UpdateKinesisStreamingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_creation_date_time_precision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_creation_date_time_precision: String?
+    end
+
+    class UpdateKinesisStreamingDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?stream_arn: String,
+        ?update_kinesis_streaming_configuration: Types::UpdateKinesisStreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor update_kinesis_streaming_configuration: Types::UpdateKinesisStreamingConfiguration?
+    end
+
+    class UpdateKinesisStreamingDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?stream_arn: String,
+        ?destination_status: String,
+        ?update_kinesis_streaming_configuration: Types::UpdateKinesisStreamingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor destination_status: String?
+      attr_accessor update_kinesis_streaming_configuration: Types::UpdateKinesisStreamingConfiguration?
+    end
+
+    class UpdateReplicationGroupMemberAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?kms_master_key_id: String,
+        ?provisioned_throughput_override: Types::ProvisionedThroughputOverride,
+        ?on_demand_throughput_override: Types::OnDemandThroughputOverride,
+        ?global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndex],
+        ?table_class_override: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor kms_master_key_id: String?
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride?
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride?
+      attr_accessor global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndex]?
+      attr_accessor table_class_override: String?
+    end
+
+    class UpdateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_definitions: Array[Types::AttributeDefinition],
+        ?table_name: String,
+        ?billing_mode: String,
+        ?provisioned_throughput: Types::ProvisionedThroughput,
+        ?global_secondary_index_updates: Array[Types::GlobalSecondaryIndexUpdate],
+        ?stream_specification: Types::StreamSpecification,
+        ?sse_specification: Types::SSESpecification,
+        ?replica_updates: Array[Types::ReplicationGroupUpdate],
+        ?table_class: String,
+        ?deletion_protection_enabled: bool,
+        ?multi_region_consistency: String,
+        ?global_table_witness_updates: Array[Types::GlobalTableWitnessGroupUpdate],
+        ?on_demand_throughput: Types::OnDemandThroughput,
+        ?warm_throughput: Types::WarmThroughput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_definitions: Array[Types::AttributeDefinition]?
+      attr_accessor table_name: String?
+      attr_accessor billing_mode: String?
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput?
+      attr_accessor global_secondary_index_updates: Array[Types::GlobalSecondaryIndexUpdate]?
+      attr_accessor stream_specification: Types::StreamSpecification?
+      attr_accessor sse_specification: Types::SSESpecification?
+      attr_accessor replica_updates: Array[Types::ReplicationGroupUpdate]?
+      attr_accessor table_class: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor multi_region_consistency: String?
+      attr_accessor global_table_witness_updates: Array[Types::GlobalTableWitnessGroupUpdate]?
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor warm_throughput: Types::WarmThroughput?
+    end
+
+    class UpdateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_description: Types::TableDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_description: Types::TableDescription?
+    end
+
+    class UpdateTableReplicaAutoScalingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_secondary_index_updates: Array[Types::GlobalSecondaryIndexAutoScalingUpdate],
+        ?table_name: String,
+        ?provisioned_write_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate,
+        ?replica_updates: Array[Types::ReplicaAutoScalingUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_secondary_index_updates: Array[Types::GlobalSecondaryIndexAutoScalingUpdate]?
+      attr_accessor table_name: String?
+      attr_accessor provisioned_write_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate?
+      attr_accessor replica_updates: Array[Types::ReplicaAutoScalingUpdate]?
+    end
+
+    class UpdateTableReplicaAutoScalingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_auto_scaling_description: Types::TableAutoScalingDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_auto_scaling_description: Types::TableAutoScalingDescription?
+    end
+
+    class UpdateTimeToLiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?time_to_live_specification: Types::TimeToLiveSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor time_to_live_specification: Types::TimeToLiveSpecification?
+    end
+
+    class UpdateTimeToLiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_to_live_specification: Types::TimeToLiveSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_to_live_specification: Types::TimeToLiveSpecification?
+    end
+
+    class WarmThroughput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_units_per_second: Integer,
+        ?write_units_per_second: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_units_per_second: Integer?
+      attr_accessor write_units_per_second: Integer?
+    end
+
+    module WitnessStatus
+      CREATING: String
+      DELETING: String
+      ACTIVE: String
+    end
+
+    class WriteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?put_request: Types::PutRequest,
+        ?delete_request: Types::DeleteRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor put_request: Types::PutRequest?
+      attr_accessor delete_request: Types::DeleteRequest?
+    end
+  end
+end

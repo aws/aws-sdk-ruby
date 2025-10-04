@@ -61,6 +61,11 @@ module Aws::ACMPCA
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
     # @option options [String] :account_id
+    # @option options [String] :account_id_endpoint_mode
+    #  The account ID endpoint mode to use. This can be one of the following values:
+    #  * `preferred` - (default) Use the account ID endpoint if available, otherwise use the standard endpoint.
+    #  * `disabled` - Never use the account ID endpoint, only use the standard endpoint.
+    #  * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
     # @option options [Boolean] :adaptive_retry_wait_to_fill (true)
     #  When true, the request will sleep until there is sufficient client side capacity to retry
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will

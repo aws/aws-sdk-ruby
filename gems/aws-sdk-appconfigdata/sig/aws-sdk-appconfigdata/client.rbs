@@ -5,6 +5,7 @@ module Aws::AppConfigData
     def self.new: (
       ?access_key_id: String,
       ?account_id: String,
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],

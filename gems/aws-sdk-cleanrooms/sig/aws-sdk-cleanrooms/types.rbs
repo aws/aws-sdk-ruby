@@ -514,6 +514,7 @@ module Aws::CleanRooms
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?region: String,
         ?work_group: String,
         ?output_location: String,
         ?database_name: String,
@@ -521,6 +522,7 @@ module Aws::CleanRooms
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor region: String?
       attr_accessor work_group: String?
       attr_accessor output_location: String?
       attr_accessor database_name: String?
@@ -778,6 +780,7 @@ module Aws::CleanRooms
         ?job_log_status: String,
         ?analytics_engine: String,
         ?auto_approved_change_types: Array[String],
+        ?allowed_result_regions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -797,6 +800,7 @@ module Aws::CleanRooms
       attr_accessor job_log_status: String?
       attr_accessor analytics_engine: String?
       attr_accessor auto_approved_change_types: Array[String]?
+      attr_accessor allowed_result_regions: Array[String]?
     end
 
     class CollaborationAnalysisTemplate
@@ -1168,6 +1172,42 @@ module Aws::CleanRooms
 
       attr_accessor name: String?
       attr_accessor type: String?
+    end
+
+    module CommercialRegion
+      US_WEST_1: String
+      US_WEST_2: String
+      US_EAST_1: String
+      US_EAST_2: String
+      AF_SOUTH_1: String
+      AP_EAST_1: String
+      AP_SOUTH_2: String
+      AP_SOUTHEAST_1: String
+      AP_SOUTHEAST_2: String
+      AP_SOUTHEAST_3: String
+      AP_SOUTHEAST_5: String
+      AP_SOUTHEAST_4: String
+      AP_SOUTHEAST_7: String
+      AP_SOUTH_1: String
+      AP_NORTHEAST_3: String
+      AP_NORTHEAST_1: String
+      AP_NORTHEAST_2: String
+      CA_CENTRAL_1: String
+      CA_WEST_1: String
+      EU_SOUTH_1: String
+      EU_WEST_3: String
+      EU_SOUTH_2: String
+      EU_CENTRAL_2: String
+      EU_CENTRAL_1: String
+      EU_NORTH_1: String
+      EU_WEST_1: String
+      EU_WEST_2: String
+      ME_SOUTH_1: String
+      ME_CENTRAL_1: String
+      IL_CENTRAL_1: String
+      SA_EAST_1: String
+      MX_CENTRAL_1: String
+      AP_EAST_2: String
     end
 
     class ComputeConfiguration
@@ -1766,6 +1806,7 @@ module Aws::CleanRooms
         ?creator_payment_configuration: Types::PaymentConfiguration,
         ?analytics_engine: String,
         ?auto_approved_change_request_types: Array[String],
+        ?allowed_result_regions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1782,6 +1823,7 @@ module Aws::CleanRooms
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration?
       attr_accessor analytics_engine: String?
       attr_accessor auto_approved_change_request_types: Array[String]?
+      attr_accessor allowed_result_regions: Array[String]?
     end
 
     class CreateCollaborationOperationOutput
@@ -3029,11 +3071,13 @@ module Aws::CleanRooms
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?region: String,
         ?table_name: String,
         ?database_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor region: String?
       attr_accessor table_name: String?
       attr_accessor database_name: String?
     end
@@ -5514,6 +5558,42 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor protected_query: Types::ProtectedQuery?
+    end
+
+    module SupportedS3Region
+      US_WEST_1: String
+      US_WEST_2: String
+      US_EAST_1: String
+      US_EAST_2: String
+      AF_SOUTH_1: String
+      AP_EAST_1: String
+      AP_EAST_2: String
+      AP_SOUTH_2: String
+      AP_SOUTHEAST_1: String
+      AP_SOUTHEAST_2: String
+      AP_SOUTHEAST_3: String
+      AP_SOUTHEAST_5: String
+      AP_SOUTHEAST_4: String
+      AP_SOUTHEAST_7: String
+      AP_SOUTH_1: String
+      AP_NORTHEAST_3: String
+      AP_NORTHEAST_1: String
+      AP_NORTHEAST_2: String
+      CA_CENTRAL_1: String
+      CA_WEST_1: String
+      EU_SOUTH_1: String
+      EU_WEST_3: String
+      EU_SOUTH_2: String
+      EU_CENTRAL_2: String
+      EU_CENTRAL_1: String
+      EU_NORTH_1: String
+      EU_WEST_1: String
+      EU_WEST_2: String
+      ME_SOUTH_1: String
+      ME_CENTRAL_1: String
+      IL_CENTRAL_1: String
+      SA_EAST_1: String
+      MX_CENTRAL_1: String
     end
 
     class TableReference

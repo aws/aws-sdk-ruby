@@ -7845,10 +7845,28 @@ module Aws::MediaLive
 
       def initialize: (
         ?caption_language_mappings: Array[Types::CaptionLanguageMapping],
+        ?id3_behavior: String,
+        ?klv_behavior: String,
+        ?nielsen_id3_behavior: String,
+        ?scte35_type: String,
+        ?segment_length: Integer,
+        ?segment_length_units: String,
+        ?timed_metadata_id3_frame: String,
+        ?timed_metadata_id3_period: Integer,
+        ?timed_metadata_passthrough: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor caption_language_mappings: Array[Types::CaptionLanguageMapping]?
+      attr_accessor id3_behavior: String?
+      attr_accessor klv_behavior: String?
+      attr_accessor nielsen_id3_behavior: String?
+      attr_accessor scte35_type: String?
+      attr_accessor segment_length: Integer?
+      attr_accessor segment_length_units: String?
+      attr_accessor timed_metadata_id3_frame: String?
+      attr_accessor timed_metadata_id3_period: Integer?
+      attr_accessor timed_metadata_passthrough: String?
     end
 
     class MediaResource

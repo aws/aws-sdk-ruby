@@ -601,6 +601,9 @@ module Aws::CleanRooms
     end
 
     # <p> A reference to a table within Athena.</p>
+    # @!attribute region
+    #   <p>The Amazon Web Services Region where the Athena table is located. This parameter is required to uniquely identify and access tables across different Regions.</p>
+    #   @return [String]
     # @!attribute work_group
     #   <p> The workgroup of the Athena table reference.</p>
     #   @return [String]
@@ -614,6 +617,7 @@ module Aws::CleanRooms
     #   <p> The table reference.</p>
     #   @return [String]
     class AthenaTableReference < Struct.new(
+      :region,
       :work_group,
       :output_location,
       :database_name,
@@ -907,6 +911,9 @@ module Aws::CleanRooms
     # @!attribute auto_approved_change_types
     #   <p>The types of change requests that are automatically approved for this collaboration.</p>
     #   @return [Array<String>]
+    # @!attribute allowed_result_regions
+    #   <p>The Amazon Web Services Regions where collaboration query results can be stored. Returns the list of Region identifiers that were specified when the collaboration was created. This list is used to enforce regional storage policies and compliance requirements.</p>
+    #   @return [Array<String>]
     class Collaboration < Struct.new(
       :id,
       :arn,
@@ -924,6 +931,7 @@ module Aws::CleanRooms
       :job_log_status,
       :analytics_engine,
       :auto_approved_change_types,
+      :allowed_result_regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2313,6 +2321,9 @@ module Aws::CleanRooms
     # @!attribute auto_approved_change_request_types
     #   <p>The types of change requests that are automatically approved for this collaboration.</p>
     #   @return [Array<String>]
+    # @!attribute allowed_result_regions
+    #   <p>The Amazon Web Services Regions where collaboration query results can be stored. When specified, results can only be written to these Regions. This parameter enables you to meet your compliance and data governance requirements, and implement regional data governance policies.</p>
+    #   @return [Array<String>]
     class CreateCollaborationOperationInput < Struct.new(
       :members,
       :name,
@@ -2327,6 +2338,7 @@ module Aws::CleanRooms
       :creator_payment_configuration,
       :analytics_engine,
       :auto_approved_change_request_types,
+      :allowed_result_regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3622,6 +3634,9 @@ module Aws::CleanRooms
     end
 
     # <p>A reference to a table within an Glue data catalog.</p>
+    # @!attribute region
+    #   <p>The Amazon Web Services Region where the Glue table is located. This parameter is required to uniquely identify and access tables across different Regions.</p>
+    #   @return [String]
     # @!attribute table_name
     #   <p>The name of the Glue table.</p>
     #   @return [String]
@@ -3629,6 +3644,7 @@ module Aws::CleanRooms
     #   <p>The name of the database the Glue table belongs to.</p>
     #   @return [String]
     class GlueTableReference < Struct.new(
+      :region,
       :table_name,
       :database_name,
       keyword_init: true

@@ -11,18 +11,11 @@ module Aws
         option(:access_key_id, doc_type: String, docstring: '') do |config|
           'stubbed-access-key-id' if config.stub_responses
         end
-
         option(:secret_access_key, doc_type: String, docstring: '') do |config|
           'stubbed-secret-access-key' if config.stub_responses
         end
-
-        option(:session_token, doc_type: String, docstring: '') do |config|
-          'stubbed-session-token' if config.stub_responses
-        end
-
-        option(:account_id, doc_type: String, docstring: '') do |config|
-          'stubbed-account-id' if config.stub_responses
-        end
+        option(:session_token, doc_type: String, docstring: '')
+        option(:account_id, doc_type: String, docstring: '')
 
         option(
           :credentials_provider,

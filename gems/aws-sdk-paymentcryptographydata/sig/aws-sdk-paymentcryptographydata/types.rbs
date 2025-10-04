@@ -312,6 +312,22 @@ module Aws::PaymentCryptographyData
       end
     end
 
+    class DiffieHellmanDerivationData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?shared_information: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_information: String?
+
+      class SharedInformation < DiffieHellmanDerivationData
+      end
+      class Unknown < DiffieHellmanDerivationData
+      end
+    end
+
     class DiscoverDynamicCardVerificationCode
       include Smithy::Schema::Structure
 
@@ -829,6 +845,47 @@ module Aws::PaymentCryptographyData
       attr_accessor pin_validation_data: String?
     end
 
+    class IncomingDiffieHellmanTr31KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_key_identifier: String,
+        ?certificate_authority_public_key_identifier: String,
+        ?public_key_certificate: String,
+        ?derive_key_algorithm: String,
+        ?key_derivation_function: String,
+        ?key_derivation_hash_algorithm: String,
+        ?derivation_data: Types::DiffieHellmanDerivationData,
+        ?wrapped_key_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_key_identifier: String?
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor public_key_certificate: String?
+      attr_accessor derive_key_algorithm: String?
+      attr_accessor key_derivation_function: String?
+      attr_accessor key_derivation_hash_algorithm: String?
+      attr_accessor derivation_data: Types::DiffieHellmanDerivationData?
+      attr_accessor wrapped_key_block: String?
+    end
+
+    class IncomingKeyMaterial
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?diffie_hellman_tr31_key_block: Types::IncomingDiffieHellmanTr31KeyBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor diffie_hellman_tr31_key_block: Types::IncomingDiffieHellmanTr31KeyBlock?
+
+      class DiffieHellmanTr31KeyBlock < IncomingKeyMaterial
+      end
+      class Unknown < IncomingKeyMaterial
+      end
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -950,6 +1007,33 @@ module Aws::PaymentCryptographyData
       attr_accessor application_cryptogram: String?
     end
 
+    class OutgoingKeyMaterial
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tr31_key_block: Types::OutgoingTr31KeyBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tr31_key_block: Types::OutgoingTr31KeyBlock?
+
+      class Tr31KeyBlock < OutgoingKeyMaterial
+      end
+      class Unknown < OutgoingKeyMaterial
+      end
+    end
+
+    class OutgoingTr31KeyBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapping_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapping_key_identifier: String?
+    end
+
     module PaddingType
       PKCS1: String
       OAEP_SHA1: String
@@ -965,6 +1049,7 @@ module Aws::PaymentCryptographyData
 
     module PinBlockFormatForPinData
       ISO_FORMAT_0: String
+      ISO_FORMAT_1: String
       ISO_FORMAT_3: String
       ISO_FORMAT_4: String
     end
@@ -1293,6 +1378,32 @@ module Aws::PaymentCryptographyData
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class TranslateKeyMaterialInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?incoming_key_material: Types::IncomingKeyMaterial,
+        ?outgoing_key_material: Types::OutgoingKeyMaterial,
+        ?key_check_value_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor incoming_key_material: Types::IncomingKeyMaterial?
+      attr_accessor outgoing_key_material: Types::OutgoingKeyMaterial?
+      attr_accessor key_check_value_algorithm: String?
+    end
+
+    class TranslateKeyMaterialOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapped_key: Types::WrappedWorkingKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapped_key: Types::WrappedWorkingKey?
     end
 
     class TranslatePinDataInput
@@ -1672,6 +1783,21 @@ module Aws::PaymentCryptographyData
       end
       class Unknown < WrappedKeyMaterial
       end
+    end
+
+    class WrappedWorkingKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapped_key_material: String,
+        ?key_check_value: String,
+        ?wrapped_key_material_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapped_key_material: String?
+      attr_accessor key_check_value: String?
+      attr_accessor wrapped_key_material_format: String?
     end
   end
 end

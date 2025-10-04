@@ -5,6 +5,7 @@ module Aws::CleanRooms
     def self.new: (
       ?access_key_id: String,
       ?account_id: String,
+      ?account_id_endpoint_mode: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: AuthResolver,
       ?auth_scheme_preference: Array[String],
@@ -188,7 +189,8 @@ module Aws::CleanRooms
         }
       },
       ?analytics_engine: String,
-      ?auto_approved_change_request_types: Array[String]
+      ?auto_approved_change_request_types: Array[String],
+      ?allowed_result_regions: Array[String]
     ) -> _CreateCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollaborationResponse
 
     interface _CreateCollaborationChangeRequestResponse
@@ -233,6 +235,7 @@ module Aws::CleanRooms
       ?description: String,
       ?table_reference: {
         glue: {
+          region: String,
           table_name: String,
           database_name: String
         },
@@ -252,6 +255,7 @@ module Aws::CleanRooms
           }
         },
         athena: {
+          region: untyped,
           work_group: String,
           output_location: String,
           database_name: String,
@@ -1120,6 +1124,7 @@ module Aws::CleanRooms
       ?description: String,
       ?table_reference: {
         glue: {
+          region: String,
           table_name: String,
           database_name: String
         },
@@ -1139,6 +1144,7 @@ module Aws::CleanRooms
           }
         },
         athena: {
+          region: untyped,
           work_group: String,
           output_location: String,
           database_name: String,

@@ -203,7 +203,7 @@ module Aws::MediaLive
 
     # Archive Output Settings
     # @!attribute container_settings
-    #   Settings specific to the container type of the file.
+    #   Container for this output. Can be auto-detected from extension field.
     #   @return [Types::ArchiveContainerSettings]
     # @!attribute extension
     #   Output file extension. If excluded, this will be auto-selected from the container type.
@@ -612,7 +612,7 @@ module Aws::MediaLive
     #   The size of the buffer (HRD buffer model) in bits.
     #   @return [Integer]
     # @!attribute color_space_settings
-    #   Color Space settings
+    #   Specify the type of color space to apply or choose to pass through. The default is to pass through the color space that is in the source.
     #   @return [Types::Av1ColorSpaceSettings]
     # @!attribute fixed_afd
     #   Complete this property only if you set the afdSignaling property to FIXED. Choose the AFD value (4 bits) to write on all frames of the video encode.
@@ -5986,7 +5986,7 @@ module Aws::MediaLive
     #   Includes colorspace metadata in the output.
     #   @return [String]
     # @!attribute color_space_settings
-    #   Color Space settings
+    #   Specify the type of color space to apply or choose to pass through. The default is to pass through the color space that is in the source.
     #   @return [Types::H264ColorSpaceSettings]
     # @!attribute entropy_encoding
     #   Entropy encoding mode.  Use cabac (must be in Main or High profile) or cavlc.
@@ -6252,7 +6252,7 @@ module Aws::MediaLive
     #   Includes colorspace metadata in the output.
     #   @return [String]
     # @!attribute color_space_settings
-    #   Color Space settings
+    #   Specify the type of color space to apply or choose to pass through. The default is to pass through the color space that is in the source.
     #   @return [Types::H265ColorSpaceSettings]
     # @!attribute filter_settings
     #   Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
@@ -9131,8 +9131,44 @@ module Aws::MediaLive
     # @!attribute caption_language_mappings
     #   Mapping of up to 4 caption channels to caption languages.
     #   @return [Array<Types::CaptionLanguageMapping>]
+    # @!attribute id3_behavior
+    #   Set to ENABLED to enable ID3 metadata insertion. To include metadata, you configure other parameters in the output group, or you add an ID3 action to the channel schedule.
+    #   @return [String]
+    # @!attribute klv_behavior
+    #   If set to passthrough, passes any KLV data from the input source to this output.
+    #   @return [String]
+    # @!attribute nielsen_id3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
+    #   @return [String]
+    # @!attribute scte35_type
+    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   @return [String]
+    # @!attribute segment_length
+    #   The nominal duration of segments. The units are specified in SegmentLengthUnits. The segments will end on the next keyframe after the specified duration, so the actual segment length might be longer, and it might be a fraction of the units.
+    #   @return [Integer]
+    # @!attribute segment_length_units
+    #   Time unit for segment length parameter.
+    #   @return [String]
+    # @!attribute timed_metadata_id3_frame
+    #   Set to none if you don't want to insert a timecode in the output. Otherwise choose the frame type for the timecode.
+    #   @return [String]
+    # @!attribute timed_metadata_id3_period
+    #   If you set up to insert a timecode in the output, specify the frequency for the frame, in seconds.
+    #   @return [Integer]
+    # @!attribute timed_metadata_passthrough
+    #   Set to enabled to pass through ID3 metadata from the input sources.
+    #   @return [String]
     class MediaPackageV2GroupSettings < Struct.new(
       :caption_language_mappings,
+      :id3_behavior,
+      :klv_behavior,
+      :nielsen_id3_behavior,
+      :scte35_type,
+      :segment_length,
+      :segment_length_units,
+      :timed_metadata_id3_frame,
+      :timed_metadata_id3_period,
+      :timed_metadata_passthrough,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14038,10 +14074,10 @@ module Aws::MediaLive
 
     # Specifies a particular video stream within an input source. An input may have only a single video selector.
     # @!attribute color_space
-    #   Specifies the color space of an input. This setting works in tandem with colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine if any conversion will be performed.
+    #   Controls how MediaLive will use the color space metadata from the source. Typically, choose FOLLOW, which means to use the color space metadata without changing it. Or choose another value (a standard). In this case, the handling is controlled by the colorspaceUsage property.
     #   @return [String]
     # @!attribute color_space_settings
-    #   Color space settings
+    #   Choose HDR10 only if the following situation applies. Firstly, you specified HDR10 in ColorSpace. Secondly, the attached input is for AWS Elemental Link. Thirdly, you plan to convert the content to another color space. You need to specify the color space metadata that is missing from the source sent from AWS Elemental Link.
     #   @return [Types::VideoSelectorColorSpaceSettings]
     # @!attribute color_space_usage
     #   Applies only if colorSpace is a value other than follow. This field controls how the value in the colorSpace field will be used. fallback means that when the input does include color space data, that data will be used, but when the input has no color space data, the value in colorSpace will be used. Choose fallback if your input is sometimes missing color space data, but when it does have color space data, that data is correct. force means to always use the value in colorSpace. Choose force if your input usually has no color space data or might have unreliable color space data.

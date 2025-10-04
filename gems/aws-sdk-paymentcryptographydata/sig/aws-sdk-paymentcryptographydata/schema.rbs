@@ -27,6 +27,7 @@ module Aws::PaymentCryptographyData
     DecryptDataInput: StructureShape
     DecryptDataOutput: StructureShape
     DerivationMethodAttributes: UnionShape
+    DiffieHellmanDerivationData: UnionShape
     DiscoverDynamicCardVerificationCode: StructureShape
     DukptAttributes: StructureShape
     DukptDerivationAttributes: StructureShape
@@ -67,6 +68,8 @@ module Aws::PaymentCryptographyData
     Ibm3624PinOffset: StructureShape
     Ibm3624PinVerification: StructureShape
     Ibm3624RandomPin: StructureShape
+    IncomingDiffieHellmanTr31KeyBlock: StructureShape
+    IncomingKeyMaterial: UnionShape
     InitializationVectorType: StringShape
     IntegerRangeBetween0And6: IntegerShape
     IntegerRangeBetween3And5Type: IntegerShape
@@ -79,6 +82,7 @@ module Aws::PaymentCryptographyData
     KeyCheckValueAlgorithm: StringShape
     KeyDerivationFunction: EnumShape
     KeyDerivationHashAlgorithm: EnumShape
+    KeyMaterial: StringShape
     MacAlgorithm: EnumShape
     MacAlgorithmDukpt: StructureShape
     MacAlgorithmEmv: StructureShape
@@ -89,6 +93,8 @@ module Aws::PaymentCryptographyData
     MasterCardAttributes: StructureShape
     MessageDataType: StringShape
     NumberLengthEquals2: StringShape
+    OutgoingKeyMaterial: UnionShape
+    OutgoingTr31KeyBlock: StructureShape
     PaddingType: EnumShape
     PinBlockFormatForEmvPinChange: EnumShape
     PinBlockFormatForPinData: EnumShape
@@ -126,6 +132,8 @@ module Aws::PaymentCryptographyData
     Tr31WrappedKeyBlock: StringShape
     TrackDataType: StringShape
     TransactionDataType: StringShape
+    TranslateKeyMaterialInput: StructureShape
+    TranslateKeyMaterialOutput: StructureShape
     TranslatePinDataInput: StructureShape
     TranslatePinDataOutput: StructureShape
     TranslationIsoFormats: UnionShape
@@ -153,6 +161,8 @@ module Aws::PaymentCryptographyData
     VisaPinVerificationValue: StructureShape
     WrappedKey: StructureShape
     WrappedKeyMaterial: UnionShape
+    WrappedKeyMaterialFormat: StringShape
+    WrappedWorkingKey: StructureShape
 
     PaymentCryptographyDataPlane: ServiceShape
   end

@@ -47,6 +47,20 @@ module Aws
           resolve_use_fips_endpoint(config)
         end
 
+        option(
+          :account_id_endpoint_mode,
+          doc_type: 'String',
+          docstring: <<~DOCS) do |cfg|
+            The account ID endpoint mode to use. This can be one of the following values:
+            * `preferred` - (default) Use the account ID endpoint if available, otherwise use the standard endpoint.
+            * `disabled` - Never use the account ID endpoint, only use the standard endpoint.
+            * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
+          DOCS
+          ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE'] ||
+            Aws::Core.shared_config.profiles.fetch(cfg.profile, {})['account_id_endpoint_mode'] ||
+            'preferred'
+        end
+
         class << self
           private
 

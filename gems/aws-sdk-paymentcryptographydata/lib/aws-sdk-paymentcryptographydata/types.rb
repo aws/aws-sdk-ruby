@@ -360,6 +360,21 @@ module Aws::PaymentCryptographyData
       class Unknown < DerivationMethodAttributes; end
     end
 
+    # <p>The shared information used when deriving a key using ECDH.</p>
+    # @!attribute shared_information
+    #   <p>A string containing information that binds the ECDH derived key to the two parties involved or to the context of the key.</p> <p>It may include details like identities of the two parties deriving the key, context of the operation, session IDs, and optionally a nonce. It must not contain zero bytes. It is not recommended to reuse shared information for multiple ECDH key derivations, as it could result in derived key material being the same across different derivations.</p>
+    #   @return [String]
+    class DiffieHellmanDerivationData < Struct.new(
+      :shared_information,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class SharedInformation < DiffieHellmanDerivationData; end
+      class Unknown < DiffieHellmanDerivationData; end
+    end
+
     # <p>Parameters that are required to generate or verify dCVC (Dynamic Card Verification Code).</p>
     # @!attribute card_expiry_date
     #   <p>The expiry date of a payment card.</p>
@@ -848,7 +863,7 @@ module Aws::PaymentCryptographyData
     #   <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
     #   @return [String]
     # @!attribute pin_block_format
-    #   <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code> and <code>ISO_Format_3</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p>
+    #   <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code>, <code>ISO_Format_3</code> and <code>ISO_Format_4</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p> <p>The <code>ISO_Format_4</code> PIN block format is the only one supporting AES encryption. It is similar to <code>ISO_Format_3</code> but doubles the pin block length by padding with fill digit A and random values from 10 to 15.</p>
     #   @return [String]
     # @!attribute encryption_wrapped_key
     #   <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
@@ -1003,6 +1018,60 @@ module Aws::PaymentCryptographyData
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Parameter information of a TR31KeyBlock wrapped using an ECDH derived key.</p>
+    # @!attribute private_key_identifier
+    #   <p>The <code>keyARN</code> of the asymmetric ECC key pair.</p>
+    #   @return [String]
+    # @!attribute certificate_authority_public_key_identifier
+    #   <p>The <code>keyArn</code> of the certificate that signed the client's <code>PublicKeyCertificate</code>.</p>
+    #   @return [String]
+    # @!attribute public_key_certificate
+    #   <p>The client's public key certificate in PEM format (base64 encoded) to use for ECDH key derivation.</p>
+    #   @return [String]
+    # @!attribute derive_key_algorithm
+    #   <p>The key algorithm of the derived ECDH key.</p>
+    #   @return [String]
+    # @!attribute key_derivation_function
+    #   <p>The key derivation function to use for deriving a key using ECDH.</p>
+    #   @return [String]
+    # @!attribute key_derivation_hash_algorithm
+    #   <p>The hash type to use for deriving a key using ECDH.</p>
+    #   @return [String]
+    # @!attribute derivation_data
+    #   <p>The shared information used when deriving a key using ECDH.</p>
+    #   @return [Types::DiffieHellmanDerivationData]
+    # @!attribute wrapped_key_block
+    #   <p>The WrappedKeyBlock containing the transaction key wrapped using an ECDH dervied key. </p>
+    #   @return [String]
+    class IncomingDiffieHellmanTr31KeyBlock < Struct.new(
+      :private_key_identifier,
+      :certificate_authority_public_key_identifier,
+      :public_key_certificate,
+      :derive_key_algorithm,
+      :key_derivation_function,
+      :key_derivation_hash_algorithm,
+      :derivation_data,
+      :wrapped_key_block,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameter information of the incoming WrappedKeyBlock containing the transaction key.</p>
+    # @!attribute diffie_hellman_tr31_key_block
+    #   <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key wrapped using an ECDH dervied key.</p>
+    #   @return [Types::IncomingDiffieHellmanTr31KeyBlock]
+    class IncomingKeyMaterial < Struct.new(
+      :diffie_hellman_tr31_key_block,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DiffieHellmanTr31KeyBlock < IncomingKeyMaterial; end
+      class Unknown < IncomingKeyMaterial; end
+    end
+
     # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
     # @!attribute message
     #   @return [String]
@@ -1112,6 +1181,32 @@ module Aws::PaymentCryptographyData
       :primary_account_number,
       :pan_sequence_number,
       :application_cryptogram,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameter information of the outgoing TR31WrappedKeyBlock containing the transaction key.</p>
+    # @!attribute tr31_key_block
+    #   <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key wrapped using a KEK.</p>
+    #   @return [Types::OutgoingTr31KeyBlock]
+    class OutgoingKeyMaterial < Struct.new(
+      :tr31_key_block,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Tr31KeyBlock < OutgoingKeyMaterial; end
+      class Unknown < OutgoingKeyMaterial; end
+    end
+
+    # <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key wrapped using a KEK.</p>
+    # @!attribute wrapping_key_identifier
+    #   <p>The <code>keyARN</code> of the KEK used to wrap the transaction key.</p>
+    #   @return [String]
+    class OutgoingTr31KeyBlock < Struct.new(
+      :wrapping_key_identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1450,6 +1545,34 @@ module Aws::PaymentCryptographyData
     #   @return [String]
     class ThrottlingException < Struct.new(
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute incoming_key_material
+    #   <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key.</p>
+    #   @return [Types::IncomingKeyMaterial]
+    # @!attribute outgoing_key_material
+    #   <p>Parameter information of the wrapping key used to wrap the transaction key in the outgoing TR31WrappedKeyBlock.</p>
+    #   @return [Types::OutgoingKeyMaterial]
+    # @!attribute key_check_value_algorithm
+    #   <p>The key check value (KCV) algorithm used for calculating the KCV.</p>
+    #   @return [String]
+    class TranslateKeyMaterialInput < Struct.new(
+      :incoming_key_material,
+      :outgoing_key_material,
+      :key_check_value_algorithm,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute wrapped_key
+    #   <p>The outgoing KEK wrapped TR31WrappedKeyBlock.</p>
+    #   @return [Types::WrappedWorkingKey]
+    class TranslateKeyMaterialOutput < Struct.new(
+      :wrapped_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1922,6 +2045,25 @@ module Aws::PaymentCryptographyData
       class Tr31KeyBlock < WrappedKeyMaterial; end
       class DiffieHellmanSymmetricKey < WrappedKeyMaterial; end
       class Unknown < WrappedKeyMaterial; end
+    end
+
+    # <p>The parameter information of the outgoing wrapped key block.</p>
+    # @!attribute wrapped_key_material
+    #   <p>The wrapped key block of the outgoing transaction key.</p>
+    #   @return [String]
+    # @!attribute key_check_value
+    #   <p>The key check value (KCV) of the key contained within the outgoing TR31WrappedKeyBlock.</p> <p> The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. For more information on KCV, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.kcv">KCV</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute wrapped_key_material_format
+    #   <p>The key block format of the wrapped key.</p>
+    #   @return [String]
+    class WrappedWorkingKey < Struct.new(
+      :wrapped_key_material,
+      :key_check_value,
+      :wrapped_key_material_format,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
   end

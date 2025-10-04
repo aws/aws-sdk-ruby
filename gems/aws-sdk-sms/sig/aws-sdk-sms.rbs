@@ -1,5 +1,0 @@
-  module Aws
-    module SMS
-      VERSION: String
-    end
-  end

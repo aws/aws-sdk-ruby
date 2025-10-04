@@ -61,6 +61,11 @@ module Aws::PaymentCryptographyData
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
     # @option options [String] :account_id
+    # @option options [String] :account_id_endpoint_mode
+    #  The account ID endpoint mode to use. This can be one of the following values:
+    #  * `preferred` - (default) Use the account ID endpoint if available, otherwise use the standard endpoint.
+    #  * `disabled` - Never use the account ID endpoint, only use the standard endpoint.
+    #  * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
     # @option options [Boolean] :adaptive_retry_wait_to_fill (true)
     #  When true, the request will sleep until there is sufficient client side capacity to retry
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
@@ -417,7 +422,7 @@ module Aws::PaymentCryptographyData
       request.send_request(options)
     end
 
-    # <p>Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography. </p> <p>You can use this operation to authenticate card-related data by using known data values to generate MAC for data validation between the sending and receiving parties. This operation uses message data, a secret encryption key and MAC algorithm to generate a unique MAC value for transmission. The receiving party of the MAC must use the same message data, secret encryption key and MAC algorithm to reproduce another MAC value for comparision.</p> <p>You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for <code>KeyUsage</code> such as <code>TR31_M7_HMAC_KEY</code> for HMAC generation, and they key must have <code>KeyModesOfUse</code> set to <code>Generate</code> and <code>Verify</code>.</p> <p>For information about valid keys for this operation, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html">Understanding key attributes</a> and <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p> <p> <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>VerifyMac</a> </p> </li> </ul>
+    # <p>Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography. </p> <p>You can use this operation to authenticate card-related data by using known data values to generate MAC for data validation between the sending and receiving parties. This operation uses message data, a secret encryption key and MAC algorithm to generate a unique MAC value for transmission. The receiving party of the MAC must use the same message data, secret encryption key and MAC algorithm to reproduce another MAC value for comparision.</p> <p>You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and algorithm to the associated values. The MAC generation encryption key must have valid values for <code>KeyUsage</code> such as <code>TR31_M7_HMAC_KEY</code> for HMAC generation, and the key must have <code>KeyModesOfUse</code> set to <code>Generate</code> and <code>Verify</code>.</p> <p>For information about valid keys for this operation, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html">Understanding key attributes</a> and <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p> <p> <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>VerifyMac</a> </p> </li> </ul>
     # @param [Hash, Types::GenerateMacInput] params
     # @option params [String] :key_identifier
     #   <p>The <code>keyARN</code> of the MAC generation encryption key.</p>
@@ -588,7 +593,7 @@ module Aws::PaymentCryptographyData
     # @option params [String] :primary_account_number
     #   <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
     # @option params [String] :pin_block_format
-    #   <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code> and <code>ISO_Format_3</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p>
+    #   <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code>, <code>ISO_Format_3</code> and <code>ISO_Format_4</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p> <p>The <code>ISO_Format_4</code> PIN block format is the only one supporting AES encryption. It is similar to <code>ISO_Format_3</code> but doubles the pin block length by padding with fill digit A and random values from 10 to 15.</p>
     # @option params [Types::WrappedKey] :encryption_wrapped_key
     #   <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
     # @example Request syntax with placeholder values
@@ -628,8 +633,8 @@ module Aws::PaymentCryptographyData
     #       }
     #     },
     #     pin_data_length: 1,
-    #     primary_account_number: "PrimaryAccountNumberType", # required
-    #     pin_block_format: "ISO_FORMAT_0" # One of: ["ISO_FORMAT_0", "ISO_FORMAT_3", "ISO_FORMAT_4"], # required
+    #     primary_account_number: "PrimaryAccountNumberType",
+    #     pin_block_format: "ISO_FORMAT_0" # One of: ["ISO_FORMAT_0", "ISO_FORMAT_1", "ISO_FORMAT_3", "ISO_FORMAT_4"], # required
     #     encryption_wrapped_key: {
     #       wrapped_key_material: { # required
     #         # One of:
@@ -765,7 +770,58 @@ module Aws::PaymentCryptographyData
       request.send_request(options)
     end
 
-    # <p>Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html">Translate PIN data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>PIN block translation involves changing a PIN block from one encryption key to another and optionally change its format. PIN block translation occurs entirely within the HSM boundary and PIN data never enters or leaves Amazon Web Services Payment Cryptography in clear text. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK.</p> <p>Amazon Web Services Payment Cryptography also supports use of dynamic keys and ECDH (Elliptic Curve Diffie-Hellman) based key exchange for this operation.</p> <p>Dynamic keys allow you to pass a PEK as a TR-31 WrappedKeyBlock. They can be used when key material is frequently rotated, such as during every card transaction, and there is need to avoid importing short-lived keys into Amazon Web Services Payment Cryptography. To translate PIN block using dynamic keys, the <code>keyARN</code> is the Key Encryption Key (KEK) of the TR-31 wrapped PEK. The incoming wrapped key shall have a key purpose of P0 with a mode of use of B or D. For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html">Using Dynamic Keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>Using ECDH key exchange, you can receive cardholder selectable PINs into Amazon Web Services Payment Cryptography. The ECDH derived key protects the incoming PIN block, which is translated to a PEK encrypted PIN block for use within the service. You can also use ECDH for reveal PIN, wherein the service translates the PIN block from PEK to a ECDH derived encryption key. For more information on establishing ECDH derived keys, see the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html">Generating keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation. </p> <p>For information about valid keys for this operation, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html">Understanding key attributes</a> and <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <note> <p>Amazon Web Services Payment Cryptography currently supports ISO PIN block 4 translation for PIN block built using legacy PAN length. That is, PAN is the right most 12 digits excluding the check digits.</p> </note> <p> <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>GeneratePinData</a> </p> </li> <li> <p> <a>VerifyPinData</a> </p> </li> </ul>
+    # <p>Translates an encryption key between different wrapping keys without importing the key into Amazon Web Services Payment Cryptography.</p> <p>This operation can be used when key material is frequently rotated, such as during every card transaction, and there is a need to avoid importing short-lived keys into Amazon Web Services Payment Cryptography. It translates short-lived transaction keys such as Pin Encryption Key (PEK) generated for each transaction and wrapped with an ECDH (Elliptic Curve Diffie-Hellman) derived wrapping key to another KEK (Key Encryption Key) wrapping key. </p> <p>Before using this operation, you must first request the public key certificate of the ECC key pair generated within Amazon Web Services Payment Cryptography to establish an ECDH key agreement. In <code>TranslateKeyData</code>, the service uses its own ECC key pair, public certificate of receiving ECC key pair, and the key derivation parameters to generate a derived key. The service uses this derived key to unwrap the incoming transaction key received as a TR31WrappedKeyBlock and re-wrap using a user provided KEK to generate an outgoing Tr31WrappedKeyBlock. For more information on establishing ECDH derived keys, see the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html">Creating keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>For information about valid keys for this operation, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html">Understanding key attributes</a> and <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p> <p> <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html">CreateKey</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html">GetPublicCertificate</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html">ImportKey</a> </p> </li> </ul>
+    # @param [Hash, Types::TranslateKeyMaterialInput] params
+    # @option params [Types::IncomingKeyMaterial] :incoming_key_material
+    #   <p>Parameter information of the TR31WrappedKeyBlock containing the transaction key.</p>
+    # @option params [Types::OutgoingKeyMaterial] :outgoing_key_material
+    #   <p>Parameter information of the wrapping key used to wrap the transaction key in the outgoing TR31WrappedKeyBlock.</p>
+    # @option params [String] :key_check_value_algorithm
+    #   <p>The key check value (KCV) algorithm used for calculating the KCV.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     incoming_key_material: { # required
+    #       # One of:
+    #       diffie_hellman_tr31_key_block: {
+    #         private_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         public_key_certificate: "CertificateType", # required
+    #         derive_key_algorithm: "TDES_2KEY" # One of: ["TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "HMAC_SHA256", "HMAC_SHA384", "HMAC_SHA512", "HMAC_SHA224"], # required
+    #         key_derivation_function: "NIST_SP800" # One of: ["NIST_SP800", "ANSI_X963"], # required
+    #         key_derivation_hash_algorithm: "SHA_256" # One of: ["SHA_256", "SHA_384", "SHA_512"], # required
+    #         derivation_data: { # required
+    #           # One of:
+    #           shared_information: "SharedInformation"
+    #         },
+    #         wrapped_key_block: "Tr31WrappedKeyBlock", # required
+    #       }
+    #     },
+    #     outgoing_key_material: { # required
+    #       # One of:
+    #       tr31_key_block: {
+    #         wrapping_key_identifier: "KeyArnOrKeyAliasType", # required
+    #       }
+    #     },
+    #     key_check_value_algorithm: "KeyCheckValueAlgorithm"
+    #   }
+    #   options = {}
+    #   response = client.translate_key_material(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     wrapped_key: { # required
+    #       wrapped_key_material: "KeyMaterial", # required
+    #       key_check_value: "KeyCheckValue", # required
+    #       wrapped_key_material_format: "WrappedKeyMaterialFormat", # required
+    #     }
+    #   }
+    # @return [Types::TranslateKeyMaterialOutput]
+    def translate_key_material(params = {}, options = {})
+      request = build_request(:translate_key_material, params)
+      request.send_request(options)
+    end
+
+    # <p>Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html">Translate PIN data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>PIN block translation involves changing a PIN block from one encryption key to another and optionally change its format. PIN block translation occurs entirely within the HSM boundary and PIN data never enters or leaves Amazon Web Services Payment Cryptography in clear text. The encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for DUKPT or from BDK for DUKPT to PEK.</p> <p>Amazon Web Services Payment Cryptography also supports use of dynamic keys and ECDH (Elliptic Curve Diffie-Hellman) based key exchange for this operation.</p> <p>Dynamic keys allow you to pass a PEK as a TR-31 WrappedKeyBlock. They can be used when key material is frequently rotated, such as during every card transaction, and there is need to avoid importing short-lived keys into Amazon Web Services Payment Cryptography. To translate PIN block using dynamic keys, the <code>keyARN</code> is the Key Encryption Key (KEK) of the TR-31 wrapped PEK. The incoming wrapped key shall have a key purpose of P0 with a mode of use of B or D. For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html">Using Dynamic Keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>Using ECDH key exchange, you can receive cardholder selectable PINs into Amazon Web Services Payment Cryptography. The ECDH derived key protects the incoming PIN block, which is translated to a PEK encrypted PIN block for use within the service. You can also use ECDH for reveal PIN, wherein the service translates the PIN block from PEK to a ECDH derived encryption key. For more information on establishing ECDH derived keys, see the <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html">Creating keys</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <p>The allowed combinations of PIN block format translations are guided by PCI. It is important to note that not all encrypted PIN block formats (example, format 1) require PAN (Primary Account Number) as input. And as such, PIN block format that requires PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that does not require a PAN for generation. </p> <p>For information about valid keys for this operation, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html">Understanding key attributes</a> and <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p> <note> <p>Amazon Web Services Payment Cryptography currently supports ISO PIN block 4 translation for PIN block built using legacy PAN length. That is, PAN is the right most 12 digits excluding the check digits.</p> </note> <p> <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>GeneratePinData</a> </p> </li> <li> <p> <a>VerifyPinData</a> </p> </li> </ul>
     # @param [Hash, Types::TranslatePinDataInput] params
     # @option params [String] :incoming_key_identifier
     #   <p>The <code>keyARN</code> of the encryption key under which incoming PIN block data is encrypted. This key type can be PEK or BDK.</p> <p>For dynamic keys, it is the <code>keyARN</code> of KEK of the TR-31 wrapped PEK. For ECDH, it is the <code>keyARN</code> of the asymmetric ECC key.</p>
@@ -1117,8 +1173,8 @@ module Aws::PaymentCryptographyData
     #       }
     #     },
     #     encrypted_pin_block: "EncryptedPinBlockType", # required
-    #     primary_account_number: "PrimaryAccountNumberType", # required
-    #     pin_block_format: "ISO_FORMAT_0" # One of: ["ISO_FORMAT_0", "ISO_FORMAT_3", "ISO_FORMAT_4"], # required
+    #     primary_account_number: "PrimaryAccountNumberType",
+    #     pin_block_format: "ISO_FORMAT_0" # One of: ["ISO_FORMAT_0", "ISO_FORMAT_1", "ISO_FORMAT_3", "ISO_FORMAT_4"], # required
     #     pin_data_length: 1,
     #     dukpt_attributes: {
     #       key_serial_number: "HexLength16Or20Or24", # required

@@ -29,6 +29,7 @@ namespace :sync do
     require 'fileutils'
 
     dest_dir = 'models'
+    FileUtils.rm_rf(dest_dir)
     FileUtils.mkdir_p(dest_dir)
 
     def find_sdk_id(model_path)
@@ -41,10 +42,8 @@ namespace :sync do
 
     Dir.glob("#{src_dir}/*/smithy/model.json").each do |src_path|
       sdk_id = find_sdk_id(src_path)
-      puts "Found service: #{sdk_id}"
-      json_name = sdk_id.downcase.gsub(' ', '-')
-      dest_path = File.join(dest_dir, "#{json_name}.json")
-      puts "Copying from #{src_path} to #{dest_path}"
+      file_name = sdk_id.downcase.gsub(' ', '-')
+      dest_path = File.join(dest_dir, "#{file_name}.json")
       FileUtils.cp(src_path, dest_path)
     end
   end

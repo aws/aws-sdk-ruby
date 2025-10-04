@@ -61,6 +61,11 @@ module Aws::CleanRooms
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
     # @option options [String] :account_id
+    # @option options [String] :account_id_endpoint_mode
+    #  The account ID endpoint mode to use. This can be one of the following values:
+    #  * `preferred` - (default) Use the account ID endpoint if available, otherwise use the standard endpoint.
+    #  * `disabled` - Never use the account ID endpoint, only use the standard endpoint.
+    #  * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
     # @option options [Boolean] :adaptive_retry_wait_to_fill (true)
     #  When true, the request will sleep until there is sufficient client side capacity to retry
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
@@ -741,6 +746,8 @@ module Aws::CleanRooms
     #   <p> The analytics engine.</p> <note> <p>After July 16, 2025, the <code>CLEAN_ROOMS_SQL</code> parameter will no longer be available. </p> </note>
     # @option params [Array<String>] :auto_approved_change_request_types
     #   <p>The types of change requests that are automatically approved for this collaboration.</p>
+    # @option params [Array<String>] :allowed_result_regions
+    #   <p>The Amazon Web Services Regions where collaboration query results can be stored. When specified, results can only be written to these Regions. This parameter enables you to meet your compliance and data governance requirements, and implement regional data governance policies.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     members: [ # required
@@ -804,7 +811,8 @@ module Aws::CleanRooms
     #       }
     #     },
     #     analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #     auto_approved_change_request_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
+    #     auto_approved_change_request_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
+    #     allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
     #   }
     #   options = {}
     #   response = client.create_collaboration(params, options)
@@ -832,7 +840,8 @@ module Aws::CleanRooms
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
+    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
     #     }
     #   }
     # @return [Types::CreateCollaborationOperationOutput]
@@ -972,6 +981,7 @@ module Aws::CleanRooms
     #     table_reference: { # required
     #       # One of:
     #       glue: {
+    #         region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #         table_name: "GlueTableName", # required
     #         database_name: "GlueDatabaseName", # required
     #       },
@@ -992,6 +1002,7 @@ module Aws::CleanRooms
     #         }
     #       },
     #       athena: {
+    #         region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #         work_group: "AthenaWorkGroup", # required
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
@@ -1018,6 +1029,7 @@ module Aws::CleanRooms
     #       table_reference: { # required
     #         # One of:
     #         glue: {
+    #           region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #           table_name: "GlueTableName", # required
     #           database_name: "GlueDatabaseName", # required
     #         },
@@ -1038,6 +1050,7 @@ module Aws::CleanRooms
     #           }
     #         },
     #         athena: {
+    #           region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #           work_group: "AthenaWorkGroup", # required
     #           output_location: "AthenaOutputLocation",
     #           database_name: "AthenaDatabaseName", # required
@@ -2031,7 +2044,8 @@ module Aws::CleanRooms
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
+    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
     #     }
     #   }
     # @return [Types::GetCollaborationOperationOutput]
@@ -2367,6 +2381,7 @@ module Aws::CleanRooms
     #       table_reference: { # required
     #         # One of:
     #         glue: {
+    #           region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #           table_name: "GlueTableName", # required
     #           database_name: "GlueDatabaseName", # required
     #         },
@@ -2387,6 +2402,7 @@ module Aws::CleanRooms
     #           }
     #         },
     #         athena: {
+    #           region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #           work_group: "AthenaWorkGroup", # required
     #           output_location: "AthenaOutputLocation",
     #           database_name: "AthenaDatabaseName", # required
@@ -4722,7 +4738,8 @@ module Aws::CleanRooms
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
+    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
     #     }
     #   }
     # @return [Types::UpdateCollaborationOperationOutput]
@@ -4798,6 +4815,7 @@ module Aws::CleanRooms
     #     table_reference: {
     #       # One of:
     #       glue: {
+    #         region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #         table_name: "GlueTableName", # required
     #         database_name: "GlueDatabaseName", # required
     #       },
@@ -4818,6 +4836,7 @@ module Aws::CleanRooms
     #         }
     #       },
     #       athena: {
+    #         region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #         work_group: "AthenaWorkGroup", # required
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
@@ -4841,6 +4860,7 @@ module Aws::CleanRooms
     #       table_reference: { # required
     #         # One of:
     #         glue: {
+    #           region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #           table_name: "GlueTableName", # required
     #           database_name: "GlueDatabaseName", # required
     #         },
@@ -4861,6 +4881,7 @@ module Aws::CleanRooms
     #           }
     #         },
     #         athena: {
+    #           region: "us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"],
     #           work_group: "AthenaWorkGroup", # required
     #           output_location: "AthenaOutputLocation",
     #           database_name: "AthenaDatabaseName", # required

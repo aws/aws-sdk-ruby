@@ -13,7 +13,7 @@ module Aws::QConnect
     AIAgentData = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#AIAgentData', name: 'AIAgentData', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.qconnect#AIAgent"}]})
     AIAgentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#AIAgentSummary', name: 'AIAgentSummary', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.qconnect#AIAgent"}]})
     AIAgentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#AIAgentSummaryList', name: 'AIAgentSummaryList')
-    AIAgentType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#AIAgentType', name: 'AIAgentType', traits: {"smithy.api#enum" => [{"value" => "MANUAL_SEARCH", "name" => "MANUAL_SEARCH"}, {"value" => "ANSWER_RECOMMENDATION", "name" => "ANSWER_RECOMMENDATION"}, {"value" => "SELF_SERVICE", "name" => "SELF_SERVICE"}]})
+    AIAgentType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#AIAgentType', name: 'AIAgentType', traits: {"smithy.api#enum" => [{"value" => "MANUAL_SEARCH", "name" => "MANUAL_SEARCH"}, {"value" => "ANSWER_RECOMMENDATION", "name" => "ANSWER_RECOMMENDATION"}, {"value" => "SELF_SERVICE", "name" => "SELF_SERVICE"}, {"value" => "EMAIL_RESPONSE", "name" => "EMAIL_RESPONSE"}, {"value" => "EMAIL_OVERVIEW", "name" => "EMAIL_OVERVIEW"}, {"value" => "EMAIL_GENERATIVE_ANSWER", "name" => "EMAIL_GENERATIVE_ANSWER"}]})
     AIAgentVersionSummariesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#AIAgentVersionSummariesList', name: 'AIAgentVersionSummariesList')
     AIAgentVersionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#AIAgentVersionSummary', name: 'AIAgentVersionSummary')
     AIGuardrailBlockedMessaging = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#AIGuardrailBlockedMessaging', name: 'AIGuardrailBlockedMessaging', traits: {"smithy.api#length" => {"min" => 1, "max" => 500}, "smithy.api#sensitive" => {}})
@@ -35,7 +35,7 @@ module Aws::QConnect
     AIPromptSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#AIPromptSummaryList', name: 'AIPromptSummaryList')
     AIPromptTemplateConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.qconnect#AIPromptTemplateConfiguration', name: 'AIPromptTemplateConfiguration')
     AIPromptTemplateType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#AIPromptTemplateType', name: 'AIPromptTemplateType', traits: {"smithy.api#enum" => [{"value" => "TEXT", "name" => "TEXT"}]})
-    AIPromptType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#AIPromptType', name: 'AIPromptType', traits: {"smithy.api#enum" => [{"value" => "ANSWER_GENERATION", "name" => "ANSWER_GENERATION"}, {"value" => "INTENT_LABELING_GENERATION", "name" => "INTENT_LABELING_GENERATION"}, {"value" => "QUERY_REFORMULATION", "name" => "QUERY_REFORMULATION"}, {"value" => "SELF_SERVICE_PRE_PROCESSING", "name" => "SELF_SERVICE_PRE_PROCESSING"}, {"value" => "SELF_SERVICE_ANSWER_GENERATION", "name" => "SELF_SERVICE_ANSWER_GENERATION"}]})
+    AIPromptType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#AIPromptType', name: 'AIPromptType', traits: {"smithy.api#enum" => [{"value" => "ANSWER_GENERATION", "name" => "ANSWER_GENERATION"}, {"value" => "INTENT_LABELING_GENERATION", "name" => "INTENT_LABELING_GENERATION"}, {"value" => "QUERY_REFORMULATION", "name" => "QUERY_REFORMULATION"}, {"value" => "SELF_SERVICE_PRE_PROCESSING", "name" => "SELF_SERVICE_PRE_PROCESSING"}, {"value" => "SELF_SERVICE_ANSWER_GENERATION", "name" => "SELF_SERVICE_ANSWER_GENERATION"}, {"value" => "EMAIL_RESPONSE", "name" => "EMAIL_RESPONSE"}, {"value" => "EMAIL_OVERVIEW", "name" => "EMAIL_OVERVIEW"}, {"value" => "EMAIL_GENERATIVE_ANSWER", "name" => "EMAIL_GENERATIVE_ANSWER"}, {"value" => "EMAIL_QUERY_REFORMULATION", "name" => "EMAIL_QUERY_REFORMULATION"}]})
     AIPromptVersionSummariesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#AIPromptVersionSummariesList', name: 'AIPromptVersionSummariesList')
     AIPromptVersionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#AIPromptVersionSummary', name: 'AIPromptVersionSummary')
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
@@ -173,15 +173,22 @@ module Aws::QConnect
     DeleteMessageTemplateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#DeleteMessageTemplateResponse', name: 'DeleteMessageTemplateResponse')
     DeleteQuickResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#DeleteQuickResponseRequest', name: 'DeleteQuickResponseRequest')
     DeleteQuickResponseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#DeleteQuickResponseResponse', name: 'DeleteQuickResponseResponse')
+    DependencyFailedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#DependencyFailedException', name: 'DependencyFailedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 424})
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#Description', name: 'Description', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s_.,-]+"})
     Document = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#Document', name: 'Document')
     DocumentText = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#DocumentText', name: 'DocumentText')
+    EmailGenerativeAnswerAIAgentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailGenerativeAnswerAIAgentConfiguration', name: 'EmailGenerativeAnswerAIAgentConfiguration')
+    EmailGenerativeAnswerChunkDataDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailGenerativeAnswerChunkDataDetails', name: 'EmailGenerativeAnswerChunkDataDetails')
     EmailHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailHeader', name: 'EmailHeader')
     EmailHeaderKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#EmailHeaderKey', name: 'EmailHeaderKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 126}, "smithy.api#pattern" => "^[!-9;-@A-~]+$"})
     EmailHeaderValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#EmailHeaderValue', name: 'EmailHeaderValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 870}, "smithy.api#pattern" => "[ -~]*", "smithy.api#sensitive" => {}})
     EmailHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#EmailHeaders', name: 'EmailHeaders', traits: {"smithy.api#length" => {"min" => 0, "max" => 15}})
     EmailMessageTemplateContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailMessageTemplateContent', name: 'EmailMessageTemplateContent')
     EmailMessageTemplateContentBody = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailMessageTemplateContentBody', name: 'EmailMessageTemplateContentBody')
+    EmailOverviewAIAgentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailOverviewAIAgentConfiguration', name: 'EmailOverviewAIAgentConfiguration')
+    EmailOverviewChunkDataDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailOverviewChunkDataDetails', name: 'EmailOverviewChunkDataDetails')
+    EmailResponseAIAgentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailResponseAIAgentConfiguration', name: 'EmailResponseAIAgentConfiguration')
+    EmailResponseChunkDataDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#EmailResponseChunkDataDetails', name: 'EmailResponseChunkDataDetails')
     ExtendedMessageTemplateData = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#ExtendedMessageTemplateData', name: 'ExtendedMessageTemplateData')
     ExternalSource = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#ExternalSource', name: 'ExternalSource', traits: {"smithy.api#enum" => [{"value" => "AMAZON_CONNECT", "name" => "AMAZON_CONNECT"}]})
     ExternalSourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#ExternalSourceConfiguration', name: 'ExternalSourceConfiguration')
@@ -390,7 +397,7 @@ module Aws::QConnect
     QueryConditionItem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#QueryConditionItem', name: 'QueryConditionItem')
     QueryInputData = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.qconnect#QueryInputData', name: 'QueryInputData')
     QueryRecommendationTriggerData = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#QueryRecommendationTriggerData', name: 'QueryRecommendationTriggerData')
-    QueryResultType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#QueryResultType', name: 'QueryResultType', traits: {"smithy.api#enum" => [{"value" => "KNOWLEDGE_CONTENT", "name" => "KNOWLEDGE_CONTENT"}, {"value" => "INTENT_ANSWER", "name" => "INTENT_ANSWER"}, {"value" => "GENERATIVE_ANSWER", "name" => "GENERATIVE_ANSWER"}, {"value" => "GENERATIVE_ANSWER_CHUNK", "name" => "GENERATIVE_ANSWER_CHUNK"}, {"value" => "BLOCKED_GENERATIVE_ANSWER_CHUNK", "name" => "BLOCKED_GENERATIVE_ANSWER_CHUNK"}, {"value" => "INTENT_ANSWER_CHUNK", "name" => "INTENT_ANSWER_CHUNK"}, {"value" => "BLOCKED_INTENT_ANSWER_CHUNK", "name" => "BLOCKED_INTENT_ANSWER_CHUNK"}]})
+    QueryResultType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#QueryResultType', name: 'QueryResultType', traits: {"smithy.api#enum" => [{"value" => "KNOWLEDGE_CONTENT", "name" => "KNOWLEDGE_CONTENT"}, {"value" => "INTENT_ANSWER", "name" => "INTENT_ANSWER"}, {"value" => "GENERATIVE_ANSWER", "name" => "GENERATIVE_ANSWER"}, {"value" => "GENERATIVE_ANSWER_CHUNK", "name" => "GENERATIVE_ANSWER_CHUNK"}, {"value" => "BLOCKED_GENERATIVE_ANSWER_CHUNK", "name" => "BLOCKED_GENERATIVE_ANSWER_CHUNK"}, {"value" => "INTENT_ANSWER_CHUNK", "name" => "INTENT_ANSWER_CHUNK"}, {"value" => "BLOCKED_INTENT_ANSWER_CHUNK", "name" => "BLOCKED_INTENT_ANSWER_CHUNK"}, {"value" => "EMAIL_RESPONSE_CHUNK", "name" => "EMAIL_RESPONSE_CHUNK"}, {"value" => "EMAIL_OVERVIEW_CHUNK", "name" => "EMAIL_OVERVIEW_CHUNK"}, {"value" => "EMAIL_GENERATIVE_ANSWER_CHUNK", "name" => "EMAIL_GENERATIVE_ANSWER_CHUNK"}]})
     QueryResultsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#QueryResultsList', name: 'QueryResultsList')
     QueryText = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#QueryText', name: 'QueryText', traits: {"smithy.api#length" => {"max" => 512}, "smithy.api#sensitive" => {}})
     QueryTextInputData = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.qconnect#QueryTextInputData', name: 'QueryTextInputData')
@@ -429,7 +436,7 @@ module Aws::QConnect
     RecommendationTriggerData = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.qconnect#RecommendationTriggerData', name: 'RecommendationTriggerData')
     RecommendationTriggerList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.qconnect#RecommendationTriggerList', name: 'RecommendationTriggerList')
     RecommendationTriggerType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#RecommendationTriggerType', name: 'RecommendationTriggerType', traits: {"smithy.api#enum" => [{"value" => "QUERY", "name" => "QUERY"}, {"value" => "GENERATIVE", "name" => "GENERATIVE"}]})
-    RecommendationType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#RecommendationType', name: 'RecommendationType', traits: {"smithy.api#enum" => [{"value" => "KNOWLEDGE_CONTENT", "name" => "KNOWLEDGE_CONTENT"}, {"value" => "GENERATIVE_RESPONSE", "name" => "GENERATIVE_RESPONSE"}, {"value" => "GENERATIVE_ANSWER", "name" => "GENERATIVE_ANSWER"}, {"value" => "DETECTED_INTENT", "name" => "DETECTED_INTENT"}, {"value" => "GENERATIVE_ANSWER_CHUNK", "name" => "GENERATIVE_ANSWER_CHUNK"}, {"value" => "BLOCKED_GENERATIVE_ANSWER_CHUNK", "name" => "BLOCKED_GENERATIVE_ANSWER_CHUNK"}, {"value" => "INTENT_ANSWER_CHUNK", "name" => "INTENT_ANSWER_CHUNK"}, {"value" => "BLOCKED_INTENT_ANSWER_CHUNK", "name" => "BLOCKED_INTENT_ANSWER_CHUNK"}]})
+    RecommendationType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#RecommendationType', name: 'RecommendationType', traits: {"smithy.api#enum" => [{"value" => "KNOWLEDGE_CONTENT", "name" => "KNOWLEDGE_CONTENT"}, {"value" => "GENERATIVE_RESPONSE", "name" => "GENERATIVE_RESPONSE"}, {"value" => "GENERATIVE_ANSWER", "name" => "GENERATIVE_ANSWER"}, {"value" => "DETECTED_INTENT", "name" => "DETECTED_INTENT"}, {"value" => "GENERATIVE_ANSWER_CHUNK", "name" => "GENERATIVE_ANSWER_CHUNK"}, {"value" => "BLOCKED_GENERATIVE_ANSWER_CHUNK", "name" => "BLOCKED_GENERATIVE_ANSWER_CHUNK"}, {"value" => "INTENT_ANSWER_CHUNK", "name" => "INTENT_ANSWER_CHUNK"}, {"value" => "BLOCKED_INTENT_ANSWER_CHUNK", "name" => "BLOCKED_INTENT_ANSWER_CHUNK"}, {"value" => "EMAIL_RESPONSE_CHUNK", "name" => "EMAIL_RESPONSE_CHUNK"}, {"value" => "EMAIL_OVERVIEW_CHUNK", "name" => "EMAIL_OVERVIEW_CHUNK"}, {"value" => "EMAIL_GENERATIVE_ANSWER_CHUNK", "name" => "EMAIL_GENERATIVE_ANSWER_CHUNK"}]})
     ReferenceType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#ReferenceType', name: 'ReferenceType', traits: {"smithy.api#enum" => [{"value" => "WEB_CRAWLER", "name" => "WEB_CRAWLER"}, {"value" => "KNOWLEDGE_BASE", "name" => "KNOWLEDGE_BASE"}]})
     Relevance = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#Relevance', name: 'Relevance', traits: {"smithy.api#enum" => [{"value" => "HELPFUL", "name" => "HELPFUL"}, {"value" => "NOT_HELPFUL", "name" => "NOT_HELPFUL"}]})
     RelevanceLevel = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.qconnect#RelevanceLevel', name: 'RelevanceLevel', traits: {"smithy.api#enum" => [{"value" => "HIGH", "name" => "HIGH"}, {"value" => "MEDIUM", "name" => "MEDIUM"}, {"value" => "LOW", "name" => "LOW"}]})
@@ -550,6 +557,9 @@ module Aws::QConnect
     AIAgentConfiguration.add_member(:manual_search_ai_agent_configuration, Types::AIAgentConfiguration::ManualSearchAIAgentConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManualSearchAIAgentConfiguration, location_name: 'manualSearchAIAgentConfiguration'))
     AIAgentConfiguration.add_member(:answer_recommendation_ai_agent_configuration, Types::AIAgentConfiguration::AnswerRecommendationAIAgentConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnswerRecommendationAIAgentConfiguration, location_name: 'answerRecommendationAIAgentConfiguration'))
     AIAgentConfiguration.add_member(:self_service_ai_agent_configuration, Types::AIAgentConfiguration::SelfServiceAIAgentConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelfServiceAIAgentConfiguration, location_name: 'selfServiceAIAgentConfiguration'))
+    AIAgentConfiguration.add_member(:email_response_ai_agent_configuration, Types::AIAgentConfiguration::EmailResponseAIAgentConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailResponseAIAgentConfiguration, location_name: 'emailResponseAIAgentConfiguration'))
+    AIAgentConfiguration.add_member(:email_overview_ai_agent_configuration, Types::AIAgentConfiguration::EmailOverviewAIAgentConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailOverviewAIAgentConfiguration, location_name: 'emailOverviewAIAgentConfiguration'))
+    AIAgentConfiguration.add_member(:email_generative_answer_ai_agent_configuration, Types::AIAgentConfiguration::EmailGenerativeAnswerAIAgentConfiguration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailGenerativeAnswerAIAgentConfiguration, location_name: 'emailGenerativeAnswerAIAgentConfiguration'))
     AIAgentConfiguration.add_member(:unknown, Types::AIAgentConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     AIAgentConfiguration.type = Types::AIAgentConfiguration
     AIAgentConfigurationData.add_member(:ai_agent_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: 'aiAgentId', traits: {"smithy.api#required" => {}}))
@@ -1020,6 +1030,7 @@ module Aws::QConnect
     CreateSessionInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tags, location_name: 'tags'))
     CreateSessionInput.add_member(:tag_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagFilter, location_name: 'tagFilter'))
     CreateSessionInput.add_member(:ai_agent_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: 'aiAgentConfiguration'))
+    CreateSessionInput.add_member(:contact_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericArn, location_name: 'contactArn'))
     CreateSessionInput.type = Types::CreateSessionInput
     CreateSessionOutput.add_member(:session, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionData, location_name: 'session'))
     CreateSessionOutput.type = Types::CreateSessionOutput
@@ -1089,6 +1100,9 @@ module Aws::QConnect
     DataDetails.add_member(:intent_detected_data, Types::DataDetails::IntentDetectedData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntentDetectedDataDetails, location_name: 'intentDetectedData'))
     DataDetails.add_member(:source_content_data, Types::DataDetails::SourceContentData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceContentDataDetails, location_name: 'sourceContentData'))
     DataDetails.add_member(:generative_chunk_data, Types::DataDetails::GenerativeChunkData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenerativeChunkDataDetails, location_name: 'generativeChunkData'))
+    DataDetails.add_member(:email_response_chunk_data, Types::DataDetails::EmailResponseChunkData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailResponseChunkDataDetails, location_name: 'emailResponseChunkData'))
+    DataDetails.add_member(:email_overview_chunk_data, Types::DataDetails::EmailOverviewChunkData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailOverviewChunkDataDetails, location_name: 'emailOverviewChunkData'))
+    DataDetails.add_member(:email_generative_answer_chunk_data, Types::DataDetails::EmailGenerativeAnswerChunkData, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailGenerativeAnswerChunkDataDetails, location_name: 'emailGenerativeAnswerChunkData'))
     DataDetails.add_member(:unknown, Types::DataDetails::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     DataDetails.type = Types::DataDetails
     DataReference.add_member(:content_reference, Types::DataReference::ContentReference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentReference, location_name: 'contentReference'))
@@ -1170,6 +1184,8 @@ module Aws::QConnect
     DeleteQuickResponseRequest.add_member(:quick_response_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidOrArn, location_name: 'quickResponseId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteQuickResponseRequest.type = Types::DeleteQuickResponseRequest
     DeleteQuickResponseResponse.type = Types::DeleteQuickResponseResponse
+    DependencyFailedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
+    DependencyFailedException.type = Types::DependencyFailedException
     Document.add_member(:content_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentReference, location_name: 'contentReference', traits: {"smithy.api#required" => {}}))
     Document.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentText, location_name: 'title'))
     Document.add_member(:excerpt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentText, location_name: 'excerpt'))
@@ -1177,6 +1193,15 @@ module Aws::QConnect
     DocumentText.add_member(:text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'text'))
     DocumentText.add_member(:highlights, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Highlights, location_name: 'highlights'))
     DocumentText.type = Types::DocumentText
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:email_generative_answer_ai_prompt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: 'emailGenerativeAnswerAIPromptId'))
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:email_query_reformulation_ai_prompt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: 'emailQueryReformulationAIPromptId'))
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'locale'))
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:association_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: 'associationConfigurations'))
+    EmailGenerativeAnswerAIAgentConfiguration.type = Types::EmailGenerativeAnswerAIAgentConfiguration
+    EmailGenerativeAnswerChunkDataDetails.add_member(:completion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: 'completion'))
+    EmailGenerativeAnswerChunkDataDetails.add_member(:references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSummaryList, location_name: 'references'))
+    EmailGenerativeAnswerChunkDataDetails.add_member(:next_chunk_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextChunkToken'))
+    EmailGenerativeAnswerChunkDataDetails.type = Types::EmailGenerativeAnswerChunkDataDetails
     EmailHeader.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailHeaderKey, location_name: 'name'))
     EmailHeader.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailHeaderValue, location_name: 'value'))
     EmailHeader.type = Types::EmailHeader
@@ -1188,6 +1213,20 @@ module Aws::QConnect
     EmailMessageTemplateContentBody.add_member(:plain_text, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: 'plainText'))
     EmailMessageTemplateContentBody.add_member(:html, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: 'html'))
     EmailMessageTemplateContentBody.type = Types::EmailMessageTemplateContentBody
+    EmailOverviewAIAgentConfiguration.add_member(:email_overview_ai_prompt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: 'emailOverviewAIPromptId'))
+    EmailOverviewAIAgentConfiguration.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'locale'))
+    EmailOverviewAIAgentConfiguration.type = Types::EmailOverviewAIAgentConfiguration
+    EmailOverviewChunkDataDetails.add_member(:completion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: 'completion'))
+    EmailOverviewChunkDataDetails.add_member(:next_chunk_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextChunkToken'))
+    EmailOverviewChunkDataDetails.type = Types::EmailOverviewChunkDataDetails
+    EmailResponseAIAgentConfiguration.add_member(:email_response_ai_prompt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: 'emailResponseAIPromptId'))
+    EmailResponseAIAgentConfiguration.add_member(:email_query_reformulation_ai_prompt_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: 'emailQueryReformulationAIPromptId'))
+    EmailResponseAIAgentConfiguration.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'locale'))
+    EmailResponseAIAgentConfiguration.add_member(:association_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: 'associationConfigurations'))
+    EmailResponseAIAgentConfiguration.type = Types::EmailResponseAIAgentConfiguration
+    EmailResponseChunkDataDetails.add_member(:completion, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: 'completion'))
+    EmailResponseChunkDataDetails.add_member(:next_chunk_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextChunkToken'))
+    EmailResponseChunkDataDetails.type = Types::EmailResponseChunkDataDetails
     ExtendedMessageTemplateData.add_member(:message_template_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArnWithQualifier, location_name: 'messageTemplateArn', traits: {"smithy.api#required" => {}}))
     ExtendedMessageTemplateData.add_member(:message_template_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Uuid, location_name: 'messageTemplateId', traits: {"smithy.api#required" => {}}))
     ExtendedMessageTemplateData.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Arn, location_name: 'knowledgeBaseArn', traits: {"smithy.api#required" => {}}))
@@ -2397,6 +2436,7 @@ module Aws::QConnect
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSessionOutput)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: DependencyFailedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
