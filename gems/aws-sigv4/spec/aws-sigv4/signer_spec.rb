@@ -23,22 +23,6 @@ module Aws
         }
       end
 
-      describe '#unsigned_headers' do
-        it 'includes default headers' do
-          signer = Signer.new(options)
-          expect(signer.unsigned_headers).to include('user-agent')
-          expect(signer.unsigned_headers).to include('expect')
-        end
-
-        it 'merges custom unsigned headers with defaults' do
-          custom_headers = %w[custom-header x-custom]
-          signer = Signer.new(options.merge(unsigned_headers: custom_headers))
-          expect(signer.unsigned_headers).to include('user-agent')
-          expect(signer.unsigned_headers).to include('custom-header')
-          expect(signer.unsigned_headers).to include('x-custom')
-        end
-      end
-
       describe '#credentials_provider' do
         let(:options) { { service: 'ec2', region: 'us-east-1' } }
 
@@ -111,6 +95,22 @@ module Aws
           creds = signer.credentials_provider.identity
           expect(creds.access_key_id).to eq('')
           expect(creds.secret_access_key).to eq('')
+        end
+      end
+
+      describe '#unsigned_headers' do
+        it 'includes default headers' do
+          signer = Signer.new(options)
+          expect(signer.unsigned_headers).to include('user-agent')
+          expect(signer.unsigned_headers).to include('expect')
+        end
+
+        it 'merges custom unsigned headers with defaults' do
+          custom_headers = %w[custom-header x-custom]
+          signer = Signer.new(options.merge(unsigned_headers: custom_headers))
+          expect(signer.unsigned_headers).to include('user-agent')
+          expect(signer.unsigned_headers).to include('custom-header')
+          expect(signer.unsigned_headers).to include('x-custom')
         end
       end
 
