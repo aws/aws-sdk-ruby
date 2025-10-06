@@ -18,63 +18,63 @@ module Aws
     # @api private
     class DirectoryUploader
       def initialize(options = {})
-        @client = options[:client] || Client.new
-        @executor = options[:executor] || DefaultExecutor.new
-        @options = options
+        @client = options[:client]
+        @executor = options[:executor]
         @abort_upload = false
+        @mutex = Mutex.new
       end
 
-      # @return [Client]
-      attr_reader :client
-
-      # @return [Boolean]
-      attr_accessor :abort_upload
+      attr_reader :abort_upload
 
       # TODO: Need to add progress tracker
-      def upload(source, bucket:, **options)
-        raise ArgumentError, 'Invalid directory' unless Dir.exist?(source)
+      def upload(source_directory, bucket:, **options)
+        raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
-        upload_opts = options.dup
-        @ignore_failure = upload_opts.delete(:ignore_failure) || false
-        @errors = []
-
+        upload_opts = build_upload_opts(source_directory, bucket, options)
         uploader = FileUploader.new(
-          multipart_threshold: upload_opts.delete(:multipart_threshold),
+          multipart_threshold: options[:multipart_threshold],
           client: @client,
           executor: @executor
         )
-        producer = FileProducer.new(source, build_producer_opts(upload_opts))
-        producer.run
-        uploads = process_upload_queue(producer, uploader, upload_opts.merge(bucket: bucket))
-        build_result(uploads)
+        producer = FileProducer.new(build_producer_opts(upload_opts))
+        uploads, errors = process_upload_queue(producer, uploader, upload_opts)
+        build_result(uploads, errors)
       ensure
-        @executor.shutdown unless @options[:executor]
+        set_abort_flag(value: false)
       end
 
       private
 
-      def build_producer_opts(opts)
+      def set_abort_flag(value: true)
+        @mutex.synchronize { @abort_upload = value }
+      end
+
+      def build_upload_opts(source_directory, bucket, opts)
         {
-          directory_uploader: self,
+          source_dir: source_directory,
+          bucket: bucket,
           s3_prefix: opts.delete(:s3_prefix),
-          recursive: opts.delete(:recursive),
-          follow_symlinks: opts.delete(:follow_symlinks),
+          recursive: opts.delete(:recursive) || false,
+          follow_symlinks: opts.delete(:follow_symlinks) || false,
           filter_callback: opts.delete(:filter_callback),
-          ignore_failure: @ignore_failure,
-          errors: @errors
+          ignore_failure: opts.delete(:ignore_failure) || false,
         }
       end
 
-      def build_result(upload_count)
-        uploads = [upload_count - @errors.count, 0].max
+      def build_producer_opts(opts)
+        opts.merge(client: @client, directory_uploader: self)
+      end
+
+      def build_result(upload_count, errors)
+        uploads = [upload_count - errors.count, 0].max
 
         if @abort_upload
           msg = "failed to upload directory: uploaded #{uploads} files " \
-            "and failed to upload #{@errors.count} files."
-          raise DirectoryUploadError.new(msg, @errors)
+            "and failed to upload #{errors.count} files."
+          raise DirectoryUploadError.new(msg, errors)
         else
-          result = { completed_uploads: uploads, failed_uploads: @errors.count }
-          result[:errors] = @errors if @errors.any?
+          result = { completed_uploads: uploads, failed_uploads: errors.count }
+          result[:errors] = errors if errors.any?
           result
         end
       end
@@ -83,51 +83,69 @@ module Aws
         upload_attempts = 0
         completion_queue = Queue.new
         queue_executor = DefaultExecutor.new
-        while (file = producer.file_queue.shift) != :done
+        errors = []
+        producer.each do |file|
           break if @abort_upload
+
+          if file.is_a?(StandardError)
+            errors << file
+            next
+          end
 
           upload_attempts += 1
           queue_executor.post(file) do |f|
-            uploader.upload(f[:path], opts.merge(key: f[:key]))
+            uploader.upload(f[:path], bucket: opts[:bucket], key: f[:key])
+            puts 'yay this file uploaded'
           rescue StandardError => e
-            @errors << e
-            @abort_upload = true unless @ignore_failure
+            errors << e
+            set_abort_flag unless opts[:ignore_failure]
           ensure
             completion_queue << :done
           end
         end
         upload_attempts.times { completion_queue.pop }
-        upload_attempts
+        [upload_attempts, errors]
       ensure
         queue_executor.shutdown
       end
 
-
       # @api private
       class FileProducer
-        def initialize(source_dir, options = {})
-          @source_dir = source_dir
+        include Enumerable
+
+        DEFAULT_QUEUE_SIZE = 100
+
+        def initialize(options = {})
+          @source_dir = options[:source_dir]
           @s3_prefix = options[:s3_prefix]
-          @recursive = options[:recursive] || false
-          @follow_symlinks = options[:follow_symlinks] || false
+          @recursive = options[:recursive]
+          @follow_symlinks = options[:follow_symlinks]
           @ignore_failure = options[:ignore_failure]
           @filter_callback = options[:filter_callback]
-          @errors = options[:errors]
           @directory_uploader = options[:directory_uploader]
-          @file_queue = SizedQueue.new(100)
+          @file_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
-        attr_accessor :file_queue
-
-        def run
-          Thread.new do
-            if @recursive
-              find_recursively
-            else
-              find_directly
+        def each
+          producer_thread = Thread.new do
+            begin
+              if @recursive
+                find_recursively
+              else
+                find_directly
+              end
+            ensure
+              @file_queue << :done
             end
-            @file_queue << :done
           end
+
+          while (file = @file_queue.shift) != :done
+            break if @directory_uploader.abort_upload
+
+            yield file
+          end
+        ensure
+          producer_thread.join
         end
 
         private
@@ -142,14 +160,20 @@ module Aws
             break if @directory_uploader.abort_upload
 
             entry_path = File.join(@source_dir, entry)
-            next if File.directory?(entry_path) || skip_symlink?(entry_path)
+            if @follow_symlinks
+              stat = File.stat(entry_path)
+              next if stat.directory?
+            else
+              stat = File.lstat(entry_path)
+              next if stat.symlink? || stat.directory?
+            end
             next unless include_file?(entry_path, entry)
-            next unless valid_file_type?(entry_path)
 
             @file_queue << build_file_entry(entry_path, entry)
           rescue StandardError => e
-            @errors << e
-            @directory_uploader.abort_upload = true unless @ignore_failure
+            raise unless @ignore_failure
+
+            @file_queue << e
           end
         end
 
@@ -161,14 +185,6 @@ module Aws
           else
             scan_directory(@source_dir)
           end
-        end
-
-        def valid_file_type?(path)
-          File.file?(path) || File.symlink?(path)
-        end
-
-        def skip_symlink?(path)
-          !@follow_symlinks && File.symlink?(path)
         end
 
         def include_file?(file_path, file_name)
@@ -185,17 +201,27 @@ module Aws
 
             full_path = File.join(dir_path, entry)
             next unless include_file?(full_path, entry)
-            next if !@follow_symlinks && File.symlink?(full_path)
 
-            if File.directory?(full_path)
+            stat =
+              if @follow_symlinks
+                File.stat(full_path)
+              else
+                lstat = File.lstat(full_path)
+                next if lstat.symlink?
+
+                lstat
+              end
+
+            if stat.directory?
               handle_directory(full_path, entry, key_prefix, visited)
-            elsif valid_file_type?(full_path)
+            else
               key = key_prefix.empty? ? entry : File.join(key_prefix, entry)
               @file_queue << build_file_entry(full_path, key)
             end
           rescue StandardError => e
-            @errors << e
-            @directory_uploader.abort_upload = true unless @ignore_failure
+            raise unless @ignore_failure
+
+            @file_queue << e
           end
         end
 
