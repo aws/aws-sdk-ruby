@@ -413,6 +413,33 @@ module Aws
                                           ) -> _DescribeMultiRegionClustersResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMultiRegionClustersResponseSuccess
 
+      interface _DescribeMultiRegionParameterGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMultiRegionParameterGroupsResponse]
+        def next_token: () -> ::String
+        def multi_region_parameter_groups: () -> ::Array[Types::MultiRegionParameterGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_multi_region_parameter_groups-instance_method
+      def describe_multi_region_parameter_groups: (
+                                                    ?multi_region_parameter_group_name: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _DescribeMultiRegionParameterGroupsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMultiRegionParameterGroupsResponseSuccess
+
+      interface _DescribeMultiRegionParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMultiRegionParametersResponse]
+        def next_token: () -> ::String
+        def multi_region_parameters: () -> ::Array[Types::MultiRegionParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_multi_region_parameters-instance_method
+      def describe_multi_region_parameters: (
+                                              multi_region_parameter_group_name: ::String,
+                                              ?source: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _DescribeMultiRegionParametersResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMultiRegionParametersResponseSuccess
+
       interface _DescribeParameterGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeParameterGroupsResponse]
         def next_token: () -> ::String

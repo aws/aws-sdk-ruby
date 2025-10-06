@@ -101,7 +101,7 @@ module Aws
                              ?client_token: ::String,
                              assistant_id: ::String,
                              name: ::String,
-                             type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"),
+                             type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"),
                              configuration: {
                                manual_search_ai_agent_configuration: {
                                  answer_generation_ai_prompt_id: ::String?,
@@ -195,6 +195,96 @@ module Aws
                                  self_service_pre_processing_ai_prompt_id: ::String?,
                                  self_service_answer_generation_ai_prompt_id: ::String?,
                                  self_service_ai_guardrail_id: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?,
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?,
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               email_response_ai_agent_configuration: {
+                                 email_response_ai_prompt_id: ::String?,
+                                 email_query_reformulation_ai_prompt_id: ::String?,
+                                 locale: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?,
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?,
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               email_overview_ai_agent_configuration: {
+                                 email_overview_ai_prompt_id: ::String?,
+                                 locale: ::String?
+                               }?,
+                               email_generative_answer_ai_agent_configuration: {
+                                 email_generative_answer_ai_prompt_id: ::String?,
+                                 email_query_reformulation_ai_prompt_id: ::String?,
+                                 locale: ::String?,
                                  association_configurations: Array[
                                    {
                                      association_id: ::String?,
@@ -350,7 +440,7 @@ module Aws
                               ?client_token: ::String,
                               assistant_id: ::String,
                               name: ::String,
-                              type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION"),
+                              type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION"),
                               template_configuration: {
                                 text_full_ai_prompt_edit_template_configuration: {
                                   text: ::String
@@ -734,9 +824,10 @@ module Aws
                                 },
                               ]?
                             },
-                            ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), {
+                            ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), {
                                 ai_agent_id: ::String
-                              }]
+                              }],
+                            ?contact_arn: ::String
                           ) -> _CreateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
 
@@ -1383,7 +1474,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#remove_assistant_ai_agent-instance_method
       def remove_assistant_ai_agent: (
                                        assistant_id: ::String,
-                                       ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE")
+                                       ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
                                      ) -> _RemoveAssistantAIAgentResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveAssistantAIAgentResponseSuccess
 
@@ -1834,6 +1925,96 @@ module Aws
                                      }?
                                    },
                                  ]?
+                               }?,
+                               email_response_ai_agent_configuration: {
+                                 email_response_ai_prompt_id: ::String?,
+                                 email_query_reformulation_ai_prompt_id: ::String?,
+                                 locale: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?,
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?,
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               email_overview_ai_agent_configuration: {
+                                 email_overview_ai_prompt_id: ::String?,
+                                 locale: ::String?
+                               }?,
+                               email_generative_answer_ai_agent_configuration: {
+                                 email_generative_answer_ai_prompt_id: ::String?,
+                                 email_query_reformulation_ai_prompt_id: ::String?,
+                                 locale: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?,
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?,
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?
+                                   },
+                                 ]?
                                }?
                              },
                              ?description: ::String
@@ -1938,7 +2119,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_assistant_ai_agent-instance_method
       def update_assistant_ai_agent: (
                                        assistant_id: ::String,
-                                       ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"),
+                                       ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"),
                                        configuration: {
                                          ai_agent_id: ::String
                                        }
@@ -2167,7 +2348,7 @@ module Aws
                                 },
                               ]?
                             },
-                            ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), {
+                            ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), {
                                 ai_agent_id: ::String
                               }]
                           ) -> _UpdateSessionResponseSuccess

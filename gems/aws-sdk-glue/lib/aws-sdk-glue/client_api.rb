@@ -936,6 +936,7 @@ module Aws::Glue
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LabelCount = Shapes::IntegerShape.new(name: 'LabelCount')
     LabelingSetGenerationTaskRunProperties = Shapes::StructureShape.new(name: 'LabelingSetGenerationTaskRunProperties')
+    Labels = Shapes::MapShape.new(name: 'Labels')
     LakeFormationConfiguration = Shapes::StructureShape.new(name: 'LakeFormationConfiguration')
     Language = Shapes::StringShape.new(name: 'Language')
     LastActiveDefinition = Shapes::StructureShape.new(name: 'LastActiveDefinition')
@@ -3265,6 +3266,7 @@ module Aws::Glue
     DataQualityRuleResult.add_member(:evaluated_metrics, Shapes::ShapeRef.new(shape: EvaluatedMetricsMap, location_name: "EvaluatedMetrics"))
     DataQualityRuleResult.add_member(:evaluated_rule, Shapes::ShapeRef.new(shape: DataQualityRuleResultDescription, location_name: "EvaluatedRule"))
     DataQualityRuleResult.add_member(:rule_metrics, Shapes::ShapeRef.new(shape: RuleMetricsMap, location_name: "RuleMetrics"))
+    DataQualityRuleResult.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
     DataQualityRuleResult.struct_class = Types::DataQualityRuleResult
 
     DataQualityRuleResults.member = Shapes::ShapeRef.new(shape: DataQualityRuleResult)
@@ -5278,6 +5280,9 @@ module Aws::Glue
 
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
     LabelingSetGenerationTaskRunProperties.struct_class = Types::LabelingSetGenerationTaskRunProperties
+
+    Labels.key = Shapes::ShapeRef.new(shape: NameString)
+    Labels.value = Shapes::ShapeRef.new(shape: NameString)
 
     LakeFormationConfiguration.add_member(:use_lake_formation_credentials, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseLakeFormationCredentials"))
     LakeFormationConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))

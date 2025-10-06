@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagentcore)
 # structure.
 #
 #     bedrock_agent_core = Aws::BedrockAgentCore::Client.new
-#     resp = bedrock_agent_core.create_event(params)
+#     resp = bedrock_agent_core.batch_create_memory_records(params)
 #
 # See {Client} for more information.
 #
@@ -56,7 +56,7 @@ module Aws::BedrockAgentCore
   autoload :Endpoints, 'aws-sdk-bedrockagentcore/endpoints'
   autoload :EventStreams, 'aws-sdk-bedrockagentcore/event_streams'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
 

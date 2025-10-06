@@ -479,6 +479,11 @@ module Aws::MediaConnect
     #   The resolution of the video.
     #   @return [String]
     #
+    # @!attribute [rw] media_stream_tags
+    #   The key-value pairs that can be used to tag and organize the media
+    #   stream.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddMediaStreamRequest AWS API Documentation
     #
     class AddMediaStreamRequest < Struct.new(
@@ -488,7 +493,8 @@ module Aws::MediaConnect
       :media_stream_id,
       :media_stream_name,
       :media_stream_type,
-      :video_format)
+      :video_format,
+      :media_stream_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -592,6 +598,10 @@ module Aws::MediaConnect
     #   a custom name isn't specified, MediaConnect uses the output name.
     #   @return [String]
     #
+    # @!attribute [rw] output_tags
+    #   The key-value pairs that can be used to tag and organize the output.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -612,7 +622,8 @@ module Aws::MediaConnect
       :vpc_interface_attachment,
       :output_status,
       :ndi_speed_hq_quality,
-      :ndi_program_name)
+      :ndi_program_name,
+      :output_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1073,6 +1084,10 @@ module Aws::MediaConnect
     #   the flow includes NDI outputs.
     #   @return [Types::NdiConfig]
     #
+    # @!attribute [rw] flow_tags
+    #   The key-value pairs that can be used to tag and organize the flow.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -1088,7 +1103,8 @@ module Aws::MediaConnect
       :maintenance,
       :source_monitoring_config,
       :flow_size,
-      :ndi_config)
+      :ndi_config,
+      :flow_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2220,6 +2236,11 @@ module Aws::MediaConnect
     #   to create their own flows using your content as the source.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] entitlement_tags
+    #   The key-value pairs that can be used to tag and organize the
+    #   entitlement.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantEntitlementRequest AWS API Documentation
     #
     class GrantEntitlementRequest < Struct.new(
@@ -2228,7 +2249,8 @@ module Aws::MediaConnect
       :encryption,
       :entitlement_status,
       :name,
-      :subscribers)
+      :subscribers,
+      :entitlement_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4132,6 +4154,10 @@ module Aws::MediaConnect
     #   bridge.
     #   @return [Types::SetGatewayBridgeSourceRequest]
     #
+    # @!attribute [rw] source_tags
+    #   The key-value pairs that can be used to tag and organize the source.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SetSourceRequest AWS API Documentation
     #
     class SetSourceRequest < Struct.new(
@@ -4153,7 +4179,8 @@ module Aws::MediaConnect
       :stream_id,
       :vpc_interface_name,
       :whitelist_cidr,
-      :gateway_bridge_source)
+      :gateway_bridge_source,
+      :source_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5343,6 +5370,10 @@ module Aws::MediaConnect
     #   the flow includes NDI outputs.
     #   @return [Types::NdiConfig]
     #
+    # @!attribute [rw] flow_size
+    #   Determines the processing capacity and feature set of the flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
     #
     class UpdateFlowRequest < Struct.new(
@@ -5350,7 +5381,8 @@ module Aws::MediaConnect
       :source_failover_config,
       :maintenance,
       :source_monitoring_config,
-      :ndi_config)
+      :ndi_config,
+      :flow_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5724,6 +5756,11 @@ module Aws::MediaConnect
     #   the flow.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_tags
+    #   The key-value pairs that can be used to tag and organize the VPC
+    #   network interface.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterfaceRequest AWS API Documentation
     #
     class VpcInterfaceRequest < Struct.new(
@@ -5731,7 +5768,8 @@ module Aws::MediaConnect
       :network_interface_type,
       :role_arn,
       :security_group_ids,
-      :subnet_id)
+      :subnet_id,
+      :vpc_interface_tags)
       SENSITIVE = []
       include Aws::Structure
     end

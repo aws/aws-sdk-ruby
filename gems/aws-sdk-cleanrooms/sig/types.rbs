@@ -243,6 +243,7 @@ module Aws::CleanRooms
     end
 
     class AthenaTableReference
+      attr_accessor region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")
       attr_accessor work_group: ::String
       attr_accessor output_location: ::String
       attr_accessor database_name: ::String
@@ -366,6 +367,7 @@ module Aws::CleanRooms
       attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
       attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER")]
+      attr_accessor allowed_result_regions: ::Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
       SENSITIVE: []
     end
 
@@ -861,6 +863,7 @@ module Aws::CleanRooms
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
       attr_accessor auto_approved_change_request_types: ::Array[("ADD_MEMBER")]
+      attr_accessor allowed_result_regions: ::Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
       SENSITIVE: []
     end
 
@@ -1416,6 +1419,7 @@ module Aws::CleanRooms
     end
 
     class GlueTableReference
+      attr_accessor region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")
       attr_accessor table_name: ::String
       attr_accessor database_name: ::String
       SENSITIVE: []

@@ -36,6 +36,7 @@ module Aws::CleanRooms
     AllowedAdditionalAnalyses = Shapes::ListShape.new(name: 'AllowedAdditionalAnalyses')
     AllowedColumnList = Shapes::ListShape.new(name: 'AllowedColumnList')
     AllowedResultReceivers = Shapes::ListShape.new(name: 'AllowedResultReceivers')
+    AllowedResultRegions = Shapes::ListShape.new(name: 'AllowedResultRegions')
     AnalysisFormat = Shapes::StringShape.new(name: 'AnalysisFormat')
     AnalysisMethod = Shapes::StringShape.new(name: 'AnalysisMethod')
     AnalysisParameter = Shapes::StructureShape.new(name: 'AnalysisParameter')
@@ -148,6 +149,7 @@ module Aws::CleanRooms
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
+    CommercialRegion = Shapes::StringShape.new(name: 'CommercialRegion')
     ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
     ConfigurationDetails = Shapes::UnionShape.new(name: 'ConfigurationDetails')
     ConfiguredAudienceModelArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelArn')
@@ -561,6 +563,7 @@ module Aws::CleanRooms
     StartProtectedQueryInput = Shapes::StructureShape.new(name: 'StartProtectedQueryInput')
     StartProtectedQueryOutput = Shapes::StructureShape.new(name: 'StartProtectedQueryOutput')
     String = Shapes::StringShape.new(name: 'String')
+    SupportedS3Region = Shapes::StringShape.new(name: 'SupportedS3Region')
     TableAlias = Shapes::StringShape.new(name: 'TableAlias')
     TableAliasList = Shapes::ListShape.new(name: 'TableAliasList')
     TableDescription = Shapes::StringShape.new(name: 'TableDescription')
@@ -661,6 +664,8 @@ module Aws::CleanRooms
     AllowedColumnList.member = Shapes::ShapeRef.new(shape: ColumnName)
 
     AllowedResultReceivers.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    AllowedResultRegions.member = Shapes::ShapeRef.new(shape: SupportedS3Region)
 
     AnalysisParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "name"))
     AnalysisParameter.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, required: true, location_name: "type"))
@@ -817,6 +822,7 @@ module Aws::CleanRooms
 
     AnalysisTemplateValidationStatusReasonList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusReason)
 
+    AthenaTableReference.add_member(:region, Shapes::ShapeRef.new(shape: CommercialRegion, location_name: "region"))
     AthenaTableReference.add_member(:work_group, Shapes::ShapeRef.new(shape: AthenaWorkGroup, required: true, location_name: "workGroup"))
     AthenaTableReference.add_member(:output_location, Shapes::ShapeRef.new(shape: AthenaOutputLocation, location_name: "outputLocation"))
     AthenaTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: AthenaDatabaseName, required: true, location_name: "databaseName"))
@@ -921,6 +927,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:job_log_status, Shapes::ShapeRef.new(shape: CollaborationJobLogStatus, location_name: "jobLogStatus"))
     Collaboration.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     Collaboration.add_member(:auto_approved_change_types, Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: "autoApprovedChangeTypes"))
+    Collaboration.add_member(:allowed_result_regions, Shapes::ShapeRef.new(shape: AllowedResultRegions, location_name: "allowedResultRegions"))
     Collaboration.struct_class = Types::Collaboration
 
     CollaborationAnalysisTemplate.add_member(:id, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location_name: "id"))
@@ -1340,6 +1347,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:creator_payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "creatorPaymentConfiguration"))
     CreateCollaborationInput.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     CreateCollaborationInput.add_member(:auto_approved_change_request_types, Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: "autoApprovedChangeRequestTypes"))
+    CreateCollaborationInput.add_member(:allowed_result_regions, Shapes::ShapeRef.new(shape: AllowedResultRegions, location_name: "allowedResultRegions"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
@@ -1719,6 +1727,7 @@ module Aws::CleanRooms
     GetSchemaOutput.add_member(:schema, Shapes::ShapeRef.new(shape: Schema, required: true, location_name: "schema"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
+    GlueTableReference.add_member(:region, Shapes::ShapeRef.new(shape: CommercialRegion, location_name: "region"))
     GlueTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueTableName, required: true, location_name: "tableName"))
     GlueTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
     GlueTableReference.struct_class = Types::GlueTableReference

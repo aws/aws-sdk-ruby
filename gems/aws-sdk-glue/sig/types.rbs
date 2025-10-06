@@ -1910,6 +1910,7 @@ module Aws::Glue
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
       attr_accessor evaluated_rule: ::String
       attr_accessor rule_metrics: ::Hash[::String, ::Float]
+      attr_accessor labels: ::Hash[::String, ::String]
       SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
     end
 

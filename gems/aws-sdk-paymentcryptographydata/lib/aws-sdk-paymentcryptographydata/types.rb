@@ -522,6 +522,35 @@ module Aws::PaymentCryptographyData
       class Unknown < DerivationMethodAttributes; end
     end
 
+    # The shared information used when deriving a key using ECDH.
+    #
+    # @note DiffieHellmanDerivationData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] shared_information
+    #   A string containing information that binds the ECDH derived key to
+    #   the two parties involved or to the context of the key.
+    #
+    #   It may include details like identities of the two parties deriving
+    #   the key, context of the operation, session IDs, and optionally a
+    #   nonce. It must not contain zero bytes. It is not recommended to
+    #   reuse shared information for multiple ECDH key derivations, as it
+    #   could result in derived key material being the same across different
+    #   derivations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/DiffieHellmanDerivationData AWS API Documentation
+    #
+    class DiffieHellmanDerivationData < Struct.new(
+      :shared_information,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SharedInformation < DiffieHellmanDerivationData; end
+      class Unknown < DiffieHellmanDerivationData; end
+    end
+
     # Parameters that are required to generate or verify dCVC (Dynamic Card
     # Verification Code).
     #
@@ -757,7 +786,7 @@ module Aws::PaymentCryptographyData
       :key_derivation_function,
       :key_derivation_hash_algorithm,
       :shared_information)
-      SENSITIVE = [:public_key_certificate]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1269,7 +1298,7 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] pin_block_format
     #   The PIN encoding format for pin data generation as specified in ISO
     #   9564. Amazon Web Services Payment Cryptography supports
-    #   `ISO_Format_0` and `ISO_Format_3`.
+    #   `ISO_Format_0`, `ISO_Format_3` and `ISO_Format_4`.
     #
     #   The `ISO_Format_0` PIN block format is equivalent to the ANSI X9.8,
     #   VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN
@@ -1277,6 +1306,11 @@ module Aws::PaymentCryptographyData
     #
     #   The `ISO_Format_3` PIN block format is the same as `ISO_Format_0`
     #   except that the fill digits are random values from 10 to 15.
+    #
+    #   The `ISO_Format_4` PIN block format is the only one supporting AES
+    #   encryption. It is similar to `ISO_Format_3` but doubles the pin
+    #   block length by padding with fill digit A and random values from 10
+    #   to 15.
     #   @return [String]
     #
     # @!attribute [rw] encryption_wrapped_key
@@ -1504,6 +1538,82 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # Parameter information of a TR31KeyBlock wrapped using an ECDH derived
+    # key.
+    #
+    # @!attribute [rw] private_key_identifier
+    #   The `keyARN` of the asymmetric ECC key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_public_key_identifier
+    #   The `keyArn` of the certificate that signed the client's
+    #   `PublicKeyCertificate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_certificate
+    #   The client's public key certificate in PEM format (base64 encoded)
+    #   to use for ECDH key derivation.
+    #   @return [String]
+    #
+    # @!attribute [rw] derive_key_algorithm
+    #   The key algorithm of the derived ECDH key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_function
+    #   The key derivation function to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_hash_algorithm
+    #   The hash type to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] derivation_data
+    #   The shared information used when deriving a key using ECDH.
+    #   @return [Types::DiffieHellmanDerivationData]
+    #
+    # @!attribute [rw] wrapped_key_block
+    #   The WrappedKeyBlock containing the transaction key wrapped using an
+    #   ECDH dervied key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/IncomingDiffieHellmanTr31KeyBlock AWS API Documentation
+    #
+    class IncomingDiffieHellmanTr31KeyBlock < Struct.new(
+      :private_key_identifier,
+      :certificate_authority_public_key_identifier,
+      :public_key_certificate,
+      :derive_key_algorithm,
+      :key_derivation_function,
+      :key_derivation_hash_algorithm,
+      :derivation_data,
+      :wrapped_key_block)
+      SENSITIVE = [:wrapped_key_block]
+      include Aws::Structure
+    end
+
+    # Parameter information of the incoming WrappedKeyBlock containing the
+    # transaction key.
+    #
+    # @note IncomingKeyMaterial is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] diffie_hellman_tr_31_key_block
+    #   Parameter information of the TR31WrappedKeyBlock containing the
+    #   transaction key wrapped using an ECDH dervied key.
+    #   @return [Types::IncomingDiffieHellmanTr31KeyBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/IncomingKeyMaterial AWS API Documentation
+    #
+    class IncomingKeyMaterial < Struct.new(
+      :diffie_hellman_tr_31_key_block,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DiffieHellmanTr31KeyBlock < IncomingKeyMaterial; end
+      class Unknown < IncomingKeyMaterial; end
+    end
+
     # The request processing has failed because of an unknown error,
     # exception, or failure.
     #
@@ -1669,6 +1779,44 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_cryptogram)
       SENSITIVE = [:primary_account_number, :application_cryptogram]
+      include Aws::Structure
+    end
+
+    # Parameter information of the outgoing TR31WrappedKeyBlock containing
+    # the transaction key.
+    #
+    # @note OutgoingKeyMaterial is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] tr_31_key_block
+    #   Parameter information of the TR31WrappedKeyBlock containing the
+    #   transaction key wrapped using a KEK.
+    #   @return [Types::OutgoingTr31KeyBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/OutgoingKeyMaterial AWS API Documentation
+    #
+    class OutgoingKeyMaterial < Struct.new(
+      :tr_31_key_block,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Tr31KeyBlock < OutgoingKeyMaterial; end
+      class Unknown < OutgoingKeyMaterial; end
+    end
+
+    # Parameter information of the TR31WrappedKeyBlock containing the
+    # transaction key wrapped using a KEK.
+    #
+    # @!attribute [rw] wrapping_key_identifier
+    #   The `keyARN` of the KEK used to wrap the transaction key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/OutgoingTr31KeyBlock AWS API Documentation
+    #
+    class OutgoingTr31KeyBlock < Struct.new(
+      :wrapping_key_identifier)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2157,6 +2305,42 @@ module Aws::PaymentCryptographyData
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] incoming_key_material
+    #   Parameter information of the TR31WrappedKeyBlock containing the
+    #   transaction key.
+    #   @return [Types::IncomingKeyMaterial]
+    #
+    # @!attribute [rw] outgoing_key_material
+    #   Parameter information of the wrapping key used to wrap the
+    #   transaction key in the outgoing TR31WrappedKeyBlock.
+    #   @return [Types::OutgoingKeyMaterial]
+    #
+    # @!attribute [rw] key_check_value_algorithm
+    #   The key check value (KCV) algorithm used for calculating the KCV.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslateKeyMaterialInput AWS API Documentation
+    #
+    class TranslateKeyMaterialInput < Struct.new(
+      :incoming_key_material,
+      :outgoing_key_material,
+      :key_check_value_algorithm)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] wrapped_key
+    #   The outgoing KEK wrapped TR31WrappedKeyBlock.
+    #   @return [Types::WrappedWorkingKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslateKeyMaterialOutput AWS API Documentation
+    #
+    class TranslateKeyMaterialOutput < Struct.new(
+      :wrapped_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2861,6 +3045,40 @@ module Aws::PaymentCryptographyData
       class Tr31KeyBlock < WrappedKeyMaterial; end
       class DiffieHellmanSymmetricKey < WrappedKeyMaterial; end
       class Unknown < WrappedKeyMaterial; end
+    end
+
+    # The parameter information of the outgoing wrapped key block.
+    #
+    # @!attribute [rw] wrapped_key_material
+    #   The wrapped key block of the outgoing transaction key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_check_value
+    #   The key check value (KCV) of the key contained within the outgoing
+    #   TR31WrappedKeyBlock.
+    #
+    #   The KCV is used to check if all parties holding a given key have the
+    #   same key or to detect that a key has changed. For more information
+    #   on KCV, see [KCV][1] in the *Amazon Web Services Payment
+    #   Cryptography User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.kcv
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapped_key_material_format
+    #   The key block format of the wrapped key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/WrappedWorkingKey AWS API Documentation
+    #
+    class WrappedWorkingKey < Struct.new(
+      :wrapped_key_material,
+      :key_check_value,
+      :wrapped_key_material_format)
+      SENSITIVE = [:wrapped_key_material]
+      include Aws::Structure
     end
 
   end

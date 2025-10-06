@@ -531,8 +531,8 @@ module Aws::ResourceExplorer2
     #
     # @return [Types::BatchGetViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::BatchGetViewOutput#errors #errors} => Array&lt;Types::BatchGetViewError&gt;
     #   * {Types::BatchGetViewOutput#views #views} => Array&lt;Types::View&gt;
+    #   * {Types::BatchGetViewOutput#errors #errors} => Array&lt;Types::BatchGetViewError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -542,17 +542,17 @@ module Aws::ResourceExplorer2
     #
     # @example Response structure
     #
-    #   resp.errors #=> Array
-    #   resp.errors[0].error_message #=> String
-    #   resp.errors[0].view_arn #=> String
     #   resp.views #=> Array
-    #   resp.views[0].filters.filter_string #=> String
+    #   resp.views[0].view_arn #=> String
+    #   resp.views[0].owner #=> String
+    #   resp.views[0].last_updated_at #=> Time
+    #   resp.views[0].scope #=> String
     #   resp.views[0].included_properties #=> Array
     #   resp.views[0].included_properties[0].name #=> String
-    #   resp.views[0].last_updated_at #=> Time
-    #   resp.views[0].owner #=> String
-    #   resp.views[0].scope #=> String
-    #   resp.views[0].view_arn #=> String
+    #   resp.views[0].filters.filter_string #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].view_arn #=> String
+    #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/BatchGetView AWS API Documentation
     #
@@ -644,8 +644,8 @@ module Aws::ResourceExplorer2
     # @return [Types::CreateIndexOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIndexOutput#arn #arn} => String
-    #   * {Types::CreateIndexOutput#created_at #created_at} => Time
     #   * {Types::CreateIndexOutput#state #state} => String
+    #   * {Types::CreateIndexOutput#created_at #created_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -659,8 +659,8 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.created_at #=> Time
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "UPDATING"
+    #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/CreateIndex AWS API Documentation
     #
@@ -668,6 +668,51 @@ module Aws::ResourceExplorer2
     # @param [Hash] params ({})
     def create_index(params = {}, options = {})
       req = build_request(:create_index, params)
+      req.send_request(options)
+    end
+
+    # Creates a Resource Explorer setup configuration across multiple Amazon
+    # Web Services Regions. This operation sets up indexes and views in the
+    # specified Regions. This operation can also be used to set an
+    # aggregator Region for cross-Region resource search.
+    #
+    # @option params [required, Array<String>] :region_list
+    #   A list of Amazon Web Services Regions where Resource Explorer should
+    #   be configured. Each Region in the list will have a user-owned index
+    #   created.
+    #
+    # @option params [Array<String>] :aggregator_regions
+    #   A list of Amazon Web Services Regions that should be configured as
+    #   aggregator Regions. Aggregator Regions receive replicated index
+    #   information from all other Regions where there is a user-owned index.
+    #
+    # @option params [required, String] :view_name
+    #   The name for the view to be created as part of the Resource Explorer
+    #   setup. The view name must be unique within the Amazon Web Services
+    #   account and Region.
+    #
+    # @return [Types::CreateResourceExplorerSetupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourceExplorerSetupOutput#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_explorer_setup({
+    #     region_list: ["CreateResourceExplorerSetupInputRegionListListMemberString"], # required
+    #     aggregator_regions: ["CreateResourceExplorerSetupInputAggregatorRegionsListMemberString"],
+    #     view_name: "CreateResourceExplorerSetupInputViewNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/CreateResourceExplorerSetup AWS API Documentation
+    #
+    # @overload create_resource_explorer_setup(params = {})
+    # @param [Hash] params ({})
+    def create_resource_explorer_setup(params = {}, options = {})
+      req = build_request(:create_resource_explorer_setup, params)
       req.send_request(options)
     end
 
@@ -700,6 +745,26 @@ module Aws::ResourceExplorer2
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
+    # @option params [required, String] :view_name
+    #   The name of the new view. This name appears in the list of views in
+    #   Resource Explorer.
+    #
+    #   The name must be no more than 64 characters long, and can include
+    #   letters, digits, and the dash (-) character. The name must be unique
+    #   within its Amazon Web Services Region.
+    #
+    # @option params [Array<Types::IncludedProperty>] :included_properties
+    #   Specifies optional fields that you want included in search results
+    #   from this view. It is a list of objects that each describe a field to
+    #   include.
+    #
+    #   The default is an empty list, with no optional fields included in the
+    #   results.
+    #
+    # @option params [String] :scope
+    #   The root ARN of the account, an organizational unit (OU), or an
+    #   organization ARN. If left empty, the default is account.
+    #
     # @option params [Types::SearchFilter] :filters
     #   An array of strings that specify which resources are included in the
     #   results of queries made using this view. When you use this view in a
@@ -723,28 +788,8 @@ module Aws::ResourceExplorer2
     #   [2]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters
     #   [3]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators
     #
-    # @option params [Array<Types::IncludedProperty>] :included_properties
-    #   Specifies optional fields that you want included in search results
-    #   from this view. It is a list of objects that each describe a field to
-    #   include.
-    #
-    #   The default is an empty list, with no optional fields included in the
-    #   results.
-    #
-    # @option params [String] :scope
-    #   The root ARN of the account, an organizational unit (OU), or an
-    #   organization ARN. If left empty, the default is account.
-    #
     # @option params [Hash<String,String>] :tags
     #   Tag key and value pairs that are attached to the view.
-    #
-    # @option params [required, String] :view_name
-    #   The name of the new view. This name appears in the list of views in
-    #   Resource Explorer.
-    #
-    #   The name must be no more than 64 characters long, and can include
-    #   letters, digits, and the dash (-) character. The name must be unique
-    #   within its Amazon Web Services Region.
     #
     # @return [Types::CreateViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -754,30 +799,30 @@ module Aws::ResourceExplorer2
     #
     #   resp = client.create_view({
     #     client_token: "CreateViewInputClientTokenString",
-    #     filters: {
-    #       filter_string: "SearchFilterFilterStringString", # required
-    #     },
+    #     view_name: "ViewName", # required
     #     included_properties: [
     #       {
     #         name: "IncludedPropertyNameString", # required
     #       },
     #     ],
     #     scope: "CreateViewInputScopeString",
+    #     filters: {
+    #       filter_string: "SearchFilterFilterStringString", # required
+    #     },
     #     tags: {
     #       "String" => "String",
     #     },
-    #     view_name: "ViewName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.view.filters.filter_string #=> String
+    #   resp.view.view_arn #=> String
+    #   resp.view.owner #=> String
+    #   resp.view.last_updated_at #=> Time
+    #   resp.view.scope #=> String
     #   resp.view.included_properties #=> Array
     #   resp.view.included_properties[0].name #=> String
-    #   resp.view.last_updated_at #=> Time
-    #   resp.view.owner #=> String
-    #   resp.view.scope #=> String
-    #   resp.view.view_arn #=> String
+    #   resp.view.filters.filter_string #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/CreateView AWS API Documentation
     #
@@ -815,8 +860,8 @@ module Aws::ResourceExplorer2
     # @return [Types::DeleteIndexOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteIndexOutput#arn #arn} => String
-    #   * {Types::DeleteIndexOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::DeleteIndexOutput#state #state} => String
+    #   * {Types::DeleteIndexOutput#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -827,8 +872,8 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.last_updated_at #=> Time
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "UPDATING"
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/DeleteIndex AWS API Documentation
     #
@@ -836,6 +881,45 @@ module Aws::ResourceExplorer2
     # @param [Hash] params ({})
     def delete_index(params = {}, options = {})
       req = build_request(:delete_index, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Resource Explorer setup configuration. This operation
+    # removes indexes and views from the specified Regions or all Regions
+    # where Resource Explorer is configured.
+    #
+    # @option params [Array<String>] :region_list
+    #   A list of Amazon Web Services Regions from which to delete the
+    #   Resource Explorer configuration. If not specified, the operation uses
+    #   the `DeleteInAllRegions` parameter to determine scope.
+    #
+    # @option params [Boolean] :delete_in_all_regions
+    #   Specifies whether to delete Resource Explorer configuration from all
+    #   Regions where it is currently enabled. If this parameter is set to
+    #   `true`, a value for `RegionList` must not be provided. Otherwise, the
+    #   operation fails with a `ValidationException` error.
+    #
+    # @return [Types::DeleteResourceExplorerSetupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourceExplorerSetupOutput#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_explorer_setup({
+    #     region_list: ["RegionListMemberString"],
+    #     delete_in_all_regions: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/DeleteResourceExplorerSetup AWS API Documentation
+    #
+    # @overload delete_resource_explorer_setup(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_explorer_setup(params = {}, options = {})
+      req = build_request(:delete_resource_explorer_setup, params)
       req.send_request(options)
     end
 
@@ -949,27 +1033,27 @@ module Aws::ResourceExplorer2
     # @return [Types::GetIndexOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIndexOutput#arn #arn} => String
-    #   * {Types::GetIndexOutput#created_at #created_at} => Time
-    #   * {Types::GetIndexOutput#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetIndexOutput#type #type} => String
+    #   * {Types::GetIndexOutput#state #state} => String
     #   * {Types::GetIndexOutput#replicating_from #replicating_from} => Array&lt;String&gt;
     #   * {Types::GetIndexOutput#replicating_to #replicating_to} => Array&lt;String&gt;
-    #   * {Types::GetIndexOutput#state #state} => String
+    #   * {Types::GetIndexOutput#created_at #created_at} => Time
+    #   * {Types::GetIndexOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::GetIndexOutput#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetIndexOutput#type #type} => String
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.last_updated_at #=> Time
+    #   resp.type #=> String, one of "LOCAL", "AGGREGATOR"
+    #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "UPDATING"
     #   resp.replicating_from #=> Array
     #   resp.replicating_from[0] #=> String
     #   resp.replicating_to #=> Array
     #   resp.replicating_to[0] #=> String
-    #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "UPDATING"
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
-    #   resp.type #=> String, one of "LOCAL", "AGGREGATOR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetIndex AWS API Documentation
     #
@@ -1002,16 +1086,16 @@ module Aws::ResourceExplorer2
     #
     # @example Response structure
     #
-    #   resp.managed_view.filters.filter_string #=> String
-    #   resp.managed_view.included_properties #=> Array
-    #   resp.managed_view.included_properties[0].name #=> String
-    #   resp.managed_view.last_updated_at #=> Time
     #   resp.managed_view.managed_view_arn #=> String
     #   resp.managed_view.managed_view_name #=> String
-    #   resp.managed_view.owner #=> String
-    #   resp.managed_view.resource_policy #=> String
-    #   resp.managed_view.scope #=> String
     #   resp.managed_view.trusted_service #=> String
+    #   resp.managed_view.last_updated_at #=> Time
+    #   resp.managed_view.owner #=> String
+    #   resp.managed_view.scope #=> String
+    #   resp.managed_view.included_properties #=> Array
+    #   resp.managed_view.included_properties[0].name #=> String
+    #   resp.managed_view.filters.filter_string #=> String
+    #   resp.managed_view.resource_policy #=> String
     #   resp.managed_view.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetManagedView AWS API Documentation
@@ -1020,6 +1104,128 @@ module Aws::ResourceExplorer2
     # @param [Hash] params ({})
     def get_managed_view(params = {}, options = {})
       req = build_request(:get_managed_view, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the status and details of a Resource Explorer setup
+    # operation. This operation returns information about the progress of
+    # creating or deleting Resource Explorer configurations across Regions.
+    #
+    # @option params [required, String] :task_id
+    #   The unique identifier of the setup task to retrieve status information
+    #   for. This ID is returned by `CreateResourceExplorerSetup` or
+    #   `DeleteResourceExplorerSetup` operations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Region status results to return in a single
+    #   response. Valid values are between `1` and `100`.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous `GetResourceExplorerSetup`
+    #   response. Use this token to retrieve the next set of results.
+    #
+    # @return [Types::GetResourceExplorerSetupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceExplorerSetupOutput#regions #regions} => Array&lt;Types::RegionStatus&gt;
+    #   * {Types::GetResourceExplorerSetupOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_explorer_setup({
+    #     task_id: "GetResourceExplorerSetupInputTaskIdString", # required
+    #     max_results: 1,
+    #     next_token: "GetResourceExplorerSetupInputNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.regions #=> Array
+    #   resp.regions[0].region #=> String
+    #   resp.regions[0].index.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS", "SKIPPED"
+    #   resp.regions[0].index.index.region #=> String
+    #   resp.regions[0].index.index.arn #=> String
+    #   resp.regions[0].index.index.type #=> String, one of "LOCAL", "AGGREGATOR"
+    #   resp.regions[0].index.error_details.code #=> String
+    #   resp.regions[0].index.error_details.message #=> String
+    #   resp.regions[0].view.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS", "SKIPPED"
+    #   resp.regions[0].view.view.view_arn #=> String
+    #   resp.regions[0].view.view.owner #=> String
+    #   resp.regions[0].view.view.last_updated_at #=> Time
+    #   resp.regions[0].view.view.scope #=> String
+    #   resp.regions[0].view.view.included_properties #=> Array
+    #   resp.regions[0].view.view.included_properties[0].name #=> String
+    #   resp.regions[0].view.view.filters.filter_string #=> String
+    #   resp.regions[0].view.error_details.code #=> String
+    #   resp.regions[0].view.error_details.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetResourceExplorerSetup AWS API Documentation
+    #
+    # @overload get_resource_explorer_setup(params = {})
+    # @param [Hash] params ({})
+    def get_resource_explorer_setup(params = {}, options = {})
+      req = build_request(:get_resource_explorer_setup, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the Resource Explorer index in the current
+    # Amazon Web Services Region. This operation returns the ARN and type of
+    # the index if one exists.
+    #
+    # @return [Types::GetServiceIndexOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceIndexOutput#arn #arn} => String
+    #   * {Types::GetServiceIndexOutput#type #type} => String
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.type #=> String, one of "LOCAL", "AGGREGATOR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetServiceIndex AWS API Documentation
+    #
+    # @overload get_service_index(params = {})
+    # @param [Hash] params ({})
+    def get_service_index(params = {}, options = {})
+      req = build_request(:get_service_index, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a specific Resource Explorer service view.
+    # This operation returns the configuration and properties of the
+    # specified view.
+    #
+    # @option params [required, String] :service_view_arn
+    #   The Amazon Resource Name (ARN) of the service view to retrieve details
+    #   for.
+    #
+    # @return [Types::GetServiceViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceViewOutput#view #view} => Types::ServiceView
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_view({
+    #     service_view_arn: "GetServiceViewInputServiceViewArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view.service_view_arn #=> String
+    #   resp.view.filters.filter_string #=> String
+    #   resp.view.included_properties #=> Array
+    #   resp.view.included_properties[0].name #=> String
+    #   resp.view.streaming_access_for_service #=> String
+    #   resp.view.scope_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetServiceView AWS API Documentation
+    #
+    # @overload get_service_view(params = {})
+    # @param [Hash] params ({})
+    def get_service_view(params = {}, options = {})
+      req = build_request(:get_service_view, params)
       req.send_request(options)
     end
 
@@ -1035,8 +1241,8 @@ module Aws::ResourceExplorer2
     #
     # @return [Types::GetViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetViewOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetViewOutput#view #view} => Types::View
+    #   * {Types::GetViewOutput#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1046,15 +1252,15 @@ module Aws::ResourceExplorer2
     #
     # @example Response structure
     #
-    #   resp.tags #=> Hash
-    #   resp.tags["String"] #=> String
-    #   resp.view.filters.filter_string #=> String
+    #   resp.view.view_arn #=> String
+    #   resp.view.owner #=> String
+    #   resp.view.last_updated_at #=> Time
+    #   resp.view.scope #=> String
     #   resp.view.included_properties #=> Array
     #   resp.view.included_properties[0].name #=> String
-    #   resp.view.last_updated_at #=> Time
-    #   resp.view.owner #=> String
-    #   resp.view.scope #=> String
-    #   resp.view.view_arn #=> String
+    #   resp.view.filters.filter_string #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetView AWS API Documentation
     #
@@ -1068,6 +1274,16 @@ module Aws::ResourceExplorer2
     # Retrieves a list of all of the indexes in Amazon Web Services Regions
     # that are currently collecting resource information for Amazon Web
     # Services Resource Explorer.
+    #
+    # @option params [String] :type
+    #   If specified, limits the output to only indexes of the specified Type,
+    #   either `LOCAL` or `AGGREGATOR`.
+    #
+    #   Use this option to discover the aggregator index for your account.
+    #
+    # @option params [Array<String>] :regions
+    #   If specified, limits the response to only information about the index
+    #   in the specified list of Amazon Web Services Regions.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that you want included on each page of
@@ -1092,16 +1308,6 @@ module Aws::ResourceExplorer2
     #   the output should continue from. The pagination tokens expire after 24
     #   hours.
     #
-    # @option params [Array<String>] :regions
-    #   If specified, limits the response to only information about the index
-    #   in the specified list of Amazon Web Services Regions.
-    #
-    # @option params [String] :type
-    #   If specified, limits the output to only indexes of the specified Type,
-    #   either `LOCAL` or `AGGREGATOR`.
-    #
-    #   Use this option to discover the aggregator index for your account.
-    #
     # @return [Types::ListIndexesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListIndexesOutput#indexes #indexes} => Array&lt;Types::Index&gt;
@@ -1112,17 +1318,17 @@ module Aws::ResourceExplorer2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_indexes({
+    #     type: "LOCAL", # accepts LOCAL, AGGREGATOR
+    #     regions: ["ListIndexesInputRegionsListMemberString"],
     #     max_results: 1,
     #     next_token: "ListIndexesInputNextTokenString",
-    #     regions: ["String"],
-    #     type: "LOCAL", # accepts LOCAL, AGGREGATOR
     #   })
     #
     # @example Response structure
     #
     #   resp.indexes #=> Array
-    #   resp.indexes[0].arn #=> String
     #   resp.indexes[0].region #=> String
+    #   resp.indexes[0].arn #=> String
     #   resp.indexes[0].type #=> String, one of "LOCAL", "AGGREGATOR"
     #   resp.next_token #=> String
     #
@@ -1187,8 +1393,8 @@ module Aws::ResourceExplorer2
     #
     #   resp.indexes #=> Array
     #   resp.indexes[0].account_id #=> String
-    #   resp.indexes[0].arn #=> String
     #   resp.indexes[0].region #=> String
+    #   resp.indexes[0].arn #=> String
     #   resp.indexes[0].type #=> String, one of "LOCAL", "AGGREGATOR"
     #   resp.next_token #=> String
     #
@@ -1238,8 +1444,8 @@ module Aws::ResourceExplorer2
     #
     # @return [Types::ListManagedViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListManagedViewsOutput#managed_views #managed_views} => Array&lt;String&gt;
     #   * {Types::ListManagedViewsOutput#next_token #next_token} => String
+    #   * {Types::ListManagedViewsOutput#managed_views #managed_views} => Array&lt;String&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1253,9 +1459,9 @@ module Aws::ResourceExplorer2
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.managed_views #=> Array
     #   resp.managed_views[0] #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListManagedViews AWS API Documentation
     #
@@ -1309,6 +1515,15 @@ module Aws::ResourceExplorer2
     #
     #    </note>
     #
+    # @option params [String] :view_arn
+    #   Specifies the Amazon resource name (ARN) of the view to use for the
+    #   query. If you don't specify a value for this parameter, then the
+    #   operation automatically uses the default view for the Amazon Web
+    #   Services Region in which you called this operation. If the Region
+    #   either doesn't have a default view or if you don't have permission
+    #   to use the default view, then the operation fails with a 401
+    #   Unauthorized exception.
+    #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
     #   `NextToken` response in a previous request. A `NextToken` response
@@ -1322,19 +1537,10 @@ module Aws::ResourceExplorer2
     #
     #    </note>
     #
-    # @option params [String] :view_arn
-    #   Specifies the Amazon resource name (ARN) of the view to use for the
-    #   query. If you don't specify a value for this parameter, then the
-    #   operation automatically uses the default view for the Amazon Web
-    #   Services Region in which you called this operation. If the Region
-    #   either doesn't have a default view or if you don't have permission
-    #   to use the default view, then the operation fails with a 401
-    #   Unauthorized exception.
-    #
     # @return [Types::ListResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListResourcesOutput#next_token #next_token} => String
     #   * {Types::ListResourcesOutput#resources #resources} => Array&lt;Types::Resource&gt;
+    #   * {Types::ListResourcesOutput#next_token #next_token} => String
     #   * {Types::ListResourcesOutput#view_arn #view_arn} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1346,23 +1552,23 @@ module Aws::ResourceExplorer2
     #       filter_string: "SearchFilterFilterStringString", # required
     #     },
     #     max_results: 1,
-    #     next_token: "ListResourcesInputNextTokenString",
     #     view_arn: "ListResourcesInputViewArnString",
+    #     next_token: "ListResourcesInputNextTokenString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.resources #=> Array
     #   resp.resources[0].arn #=> String
-    #   resp.resources[0].last_reported_at #=> Time
     #   resp.resources[0].owning_account_id #=> String
-    #   resp.resources[0].properties #=> Array
-    #   resp.resources[0].properties[0].last_reported_at #=> Time
-    #   resp.resources[0].properties[0].name #=> String
     #   resp.resources[0].region #=> String
     #   resp.resources[0].resource_type #=> String
     #   resp.resources[0].service #=> String
+    #   resp.resources[0].last_reported_at #=> Time
+    #   resp.resources[0].properties #=> Array
+    #   resp.resources[0].properties[0].name #=> String
+    #   resp.resources[0].properties[0].last_reported_at #=> Time
+    #   resp.next_token #=> String
     #   resp.view_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListResources AWS API Documentation
@@ -1374,8 +1580,155 @@ module Aws::ResourceExplorer2
       req.send_request(options)
     end
 
+    # Lists all Resource Explorer indexes across the specified Amazon Web
+    # Services Regions. This operation returns information about indexes
+    # including their ARNs, types, and Regions.
+    #
+    # @option params [Array<String>] :regions
+    #   A list of Amazon Web Services Regions to include in the search for
+    #   indexes. If not specified, indexes from all Regions are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of index results to return in a single response.
+    #   Valid values are between `1` and `100`.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous `ListServiceIndexes` response.
+    #   Use this token to retrieve the next set of results.
+    #
+    # @return [Types::ListServiceIndexesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceIndexesOutput#indexes #indexes} => Array&lt;Types::Index&gt;
+    #   * {Types::ListServiceIndexesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_indexes({
+    #     regions: ["ListServiceIndexesInputRegionsListMemberString"],
+    #     max_results: 1,
+    #     next_token: "ListServiceIndexesInputNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.indexes #=> Array
+    #   resp.indexes[0].region #=> String
+    #   resp.indexes[0].arn #=> String
+    #   resp.indexes[0].type #=> String, one of "LOCAL", "AGGREGATOR"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListServiceIndexes AWS API Documentation
+    #
+    # @overload list_service_indexes(params = {})
+    # @param [Hash] params ({})
+    def list_service_indexes(params = {}, options = {})
+      req = build_request(:list_service_indexes, params)
+      req.send_request(options)
+    end
+
+    # Lists all Resource Explorer service views available in the current
+    # Amazon Web Services account. This operation returns the ARNs of
+    # available service views.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of service view results to return in a single
+    #   response. Valid values are between `1` and `50`.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous `ListServiceViews` response. Use
+    #   this token to retrieve the next set of results.
+    #
+    # @return [Types::ListServiceViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceViewsOutput#next_token #next_token} => String
+    #   * {Types::ListServiceViewsOutput#service_views #service_views} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_views({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.service_views #=> Array
+    #   resp.service_views[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListServiceViews AWS API Documentation
+    #
+    # @overload list_service_views(params = {})
+    # @param [Hash] params ({})
+    def list_service_views(params = {}, options = {})
+      req = build_request(:list_service_views, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Amazon Web Services services that have been granted
+    # streaming access to your Resource Explorer data. Streaming access
+    # allows Amazon Web Services services to receive real-time updates about
+    # your resources as they are indexed by Resource Explorer.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of streaming access entries to return in the
+    #   response. If there are more results available, the response includes a
+    #   NextToken value that you can use in a subsequent call to get the next
+    #   set of results. The value must be between 1 and 50. If you don't
+    #   specify a value, the default is 50.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
+    # @return [Types::ListStreamingAccessForServicesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamingAccessForServicesOutput#streaming_access_for_services #streaming_access_for_services} => Array&lt;Types::StreamingAccessDetails&gt;
+    #   * {Types::ListStreamingAccessForServicesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_streaming_access_for_services({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_access_for_services #=> Array
+    #   resp.streaming_access_for_services[0].service_principal #=> String
+    #   resp.streaming_access_for_services[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListStreamingAccessForServices AWS API Documentation
+    #
+    # @overload list_streaming_access_for_services(params = {})
+    # @param [Hash] params ({})
+    def list_streaming_access_for_services(params = {}, options = {})
+      req = build_request(:list_streaming_access_for_services, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of all resource types currently supported by Amazon
     # Web Services Resource Explorer.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that you want included on each page of
@@ -1392,34 +1745,26 @@ module Aws::ResourceExplorer2
     #
     #    </note>
     #
-    # @option params [String] :next_token
-    #   The parameter for receiving additional results if you receive a
-    #   `NextToken` response in a previous request. A `NextToken` response
-    #   indicates that more output is available. Set this parameter to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from. The pagination tokens expire after 24
-    #   hours.
-    #
     # @return [Types::ListSupportedResourceTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSupportedResourceTypesOutput#next_token #next_token} => String
     #   * {Types::ListSupportedResourceTypesOutput#resource_types #resource_types} => Array&lt;Types::SupportedResourceType&gt;
+    #   * {Types::ListSupportedResourceTypesOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_supported_resource_types({
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.resource_types #=> Array
-    #   resp.resource_types[0].resource_type #=> String
     #   resp.resource_types[0].service #=> String
+    #   resp.resource_types[0].resource_type #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListSupportedResourceTypes AWS API Documentation
     #
@@ -1479,6 +1824,14 @@ module Aws::ResourceExplorer2
     #
     # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results that you want included on each page of
     #   the response. If you do not include this parameter, it defaults to a
@@ -1494,33 +1847,25 @@ module Aws::ResourceExplorer2
     #
     #    </note>
     #
-    # @option params [String] :next_token
-    #   The parameter for receiving additional results if you receive a
-    #   `NextToken` response in a previous request. A `NextToken` response
-    #   indicates that more output is available. Set this parameter to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from. The pagination tokens expire after 24
-    #   hours.
-    #
     # @return [Types::ListViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListViewsOutput#next_token #next_token} => String
     #   * {Types::ListViewsOutput#views #views} => Array&lt;String&gt;
+    #   * {Types::ListViewsOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_views({
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.views #=> Array
     #   resp.views[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListViews AWS API Documentation
     #
@@ -1553,29 +1898,6 @@ module Aws::ResourceExplorer2
     # [1]: https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html
     # [2]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value appropriate to the operation. If additional items exist beyond
-    #   those included in the current response, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results.
-    #
-    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
-    #
-    #    </note>
-    #
-    # @option params [String] :next_token
-    #   The parameter for receiving additional results if you receive a
-    #   `NextToken` response in a previous request. A `NextToken` response
-    #   indicates that more output is available. Set this parameter to the
-    #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from. The pagination tokens expire after 24
-    #   hours.
-    #
     # @option params [required, String] :query_string
     #   A string that includes keywords and filters that specify the resources
     #   that you want to include in the results.
@@ -1596,6 +1918,21 @@ module Aws::ResourceExplorer2
     #
     #   [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
     # @option params [String] :view_arn
     #   Specifies the [Amazon resource name (ARN)][1] of the view to use for
     #   the query. If you don't specify a value for this parameter, then the
@@ -1609,40 +1946,48 @@ module Aws::ResourceExplorer2
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
     # @return [Types::SearchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SearchOutput#count #count} => Types::ResourceCount
-    #   * {Types::SearchOutput#next_token #next_token} => String
     #   * {Types::SearchOutput#resources #resources} => Array&lt;Types::Resource&gt;
+    #   * {Types::SearchOutput#next_token #next_token} => String
     #   * {Types::SearchOutput#view_arn #view_arn} => String
+    #   * {Types::SearchOutput#count #count} => Types::ResourceCount
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     max_results: 1,
-    #     next_token: "SearchInputNextTokenString",
     #     query_string: "QueryString", # required
+    #     max_results: 1,
     #     view_arn: "SearchInputViewArnString",
+    #     next_token: "SearchInputNextTokenString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.count.complete #=> Boolean
-    #   resp.count.total_resources #=> Integer
-    #   resp.next_token #=> String
     #   resp.resources #=> Array
     #   resp.resources[0].arn #=> String
-    #   resp.resources[0].last_reported_at #=> Time
     #   resp.resources[0].owning_account_id #=> String
-    #   resp.resources[0].properties #=> Array
-    #   resp.resources[0].properties[0].last_reported_at #=> Time
-    #   resp.resources[0].properties[0].name #=> String
     #   resp.resources[0].region #=> String
     #   resp.resources[0].resource_type #=> String
     #   resp.resources[0].service #=> String
+    #   resp.resources[0].last_reported_at #=> Time
+    #   resp.resources[0].properties #=> Array
+    #   resp.resources[0].properties[0].name #=> String
+    #   resp.resources[0].properties[0].last_reported_at #=> Time
+    #   resp.next_token #=> String
     #   resp.view_arn #=> String
+    #   resp.count.total_resources #=> Integer
+    #   resp.count.complete #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/Search AWS API Documentation
     #
@@ -1656,23 +2001,23 @@ module Aws::ResourceExplorer2
     # Adds one or more tag key and value pairs to an Amazon Web Services
     # Resource Explorer view or index.
     #
-    # @option params [Hash<String,String>] :tags
-    #   A list of tag key and value pairs that you want to attach to the
-    #   specified view or index.
-    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the view or index that you want to
     #   attach tags to.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tag key and value pairs that you want to attach to the
+    #   specified view or index.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
     #     tags: {
     #       "String" => "String",
     #     },
-    #     resource_arn: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/TagResource AWS API Documentation
@@ -1794,9 +2139,9 @@ module Aws::ResourceExplorer2
     # @return [Types::UpdateIndexTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIndexTypeOutput#arn #arn} => String
-    #   * {Types::UpdateIndexTypeOutput#last_updated_at #last_updated_at} => Time
-    #   * {Types::UpdateIndexTypeOutput#state #state} => String
     #   * {Types::UpdateIndexTypeOutput#type #type} => String
+    #   * {Types::UpdateIndexTypeOutput#state #state} => String
+    #   * {Types::UpdateIndexTypeOutput#last_updated_at #last_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1808,9 +2153,9 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.last_updated_at #=> Time
-    #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "UPDATING"
     #   resp.type #=> String, one of "LOCAL", "AGGREGATOR"
+    #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "UPDATING"
+    #   resp.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/UpdateIndexType AWS API Documentation
     #
@@ -1824,6 +2169,22 @@ module Aws::ResourceExplorer2
     # Modifies some of the details of a view. You can change the filter
     # string and the list of included properties. You can't change the name
     # of the view.
+    #
+    # @option params [required, String] :view_arn
+    #   The [Amazon resource name (ARN)][1] of the view that you want to
+    #   modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Array<Types::IncludedProperty>] :included_properties
+    #   Specifies optional fields that you want included in search results
+    #   from this view. It is a list of objects that each describe a field to
+    #   include.
+    #
+    #   The default is an empty list, with no optional fields included in the
+    #   results.
     #
     # @option params [Types::SearchFilter] :filters
     #   An array of strings that specify which resources are included in the
@@ -1848,22 +2209,6 @@ module Aws::ResourceExplorer2
     #   [2]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters
     #   [3]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators
     #
-    # @option params [Array<Types::IncludedProperty>] :included_properties
-    #   Specifies optional fields that you want included in search results
-    #   from this view. It is a list of objects that each describe a field to
-    #   include.
-    #
-    #   The default is an empty list, with no optional fields included in the
-    #   results.
-    #
-    # @option params [required, String] :view_arn
-    #   The [Amazon resource name (ARN)][1] of the view that you want to
-    #   modify.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #
     # @return [Types::UpdateViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateViewOutput#view #view} => Types::View
@@ -1871,26 +2216,26 @@ module Aws::ResourceExplorer2
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_view({
-    #     filters: {
-    #       filter_string: "SearchFilterFilterStringString", # required
-    #     },
+    #     view_arn: "UpdateViewInputViewArnString", # required
     #     included_properties: [
     #       {
     #         name: "IncludedPropertyNameString", # required
     #       },
     #     ],
-    #     view_arn: "UpdateViewInputViewArnString", # required
+    #     filters: {
+    #       filter_string: "SearchFilterFilterStringString", # required
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.view.filters.filter_string #=> String
+    #   resp.view.view_arn #=> String
+    #   resp.view.owner #=> String
+    #   resp.view.last_updated_at #=> Time
+    #   resp.view.scope #=> String
     #   resp.view.included_properties #=> Array
     #   resp.view.included_properties[0].name #=> String
-    #   resp.view.last_updated_at #=> Time
-    #   resp.view.owner #=> String
-    #   resp.view.scope #=> String
-    #   resp.view.view_arn #=> String
+    #   resp.view.filters.filter_string #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/UpdateView AWS API Documentation
     #
@@ -1919,7 +2264,7 @@ module Aws::ResourceExplorer2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

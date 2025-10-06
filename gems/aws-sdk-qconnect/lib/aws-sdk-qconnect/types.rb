@@ -29,12 +29,30 @@ module Aws::QConnect
     #   The configuration for AI Agents of type SELF\_SERVICE.
     #   @return [Types::SelfServiceAIAgentConfiguration]
     #
+    # @!attribute [rw] email_response_ai_agent_configuration
+    #   Configuration for the EMAIL\_RESPONSE AI agent that generates
+    #   professional email responses using knowledge base content.
+    #   @return [Types::EmailResponseAIAgentConfiguration]
+    #
+    # @!attribute [rw] email_overview_ai_agent_configuration
+    #   Configuration for the EMAIL\_OVERVIEW AI agent that generates
+    #   structured overview of email conversations.
+    #   @return [Types::EmailOverviewAIAgentConfiguration]
+    #
+    # @!attribute [rw] email_generative_answer_ai_agent_configuration
+    #   Configuration for the EMAIL\_GENERATIVE\_ANSWER AI agent that
+    #   provides comprehensive knowledge-based answers for customer queries.
+    #   @return [Types::EmailGenerativeAnswerAIAgentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AIAgentConfiguration AWS API Documentation
     #
     class AIAgentConfiguration < Struct.new(
       :manual_search_ai_agent_configuration,
       :answer_recommendation_ai_agent_configuration,
       :self_service_ai_agent_configuration,
+      :email_response_ai_agent_configuration,
+      :email_overview_ai_agent_configuration,
+      :email_generative_answer_ai_agent_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -43,6 +61,9 @@ module Aws::QConnect
       class ManualSearchAiAgentConfiguration < AIAgentConfiguration; end
       class AnswerRecommendationAiAgentConfiguration < AIAgentConfiguration; end
       class SelfServiceAiAgentConfiguration < AIAgentConfiguration; end
+      class EmailResponseAiAgentConfiguration < AIAgentConfiguration; end
+      class EmailOverviewAiAgentConfiguration < AIAgentConfiguration; end
+      class EmailGenerativeAnswerAiAgentConfiguration < AIAgentConfiguration; end
       class Unknown < AIAgentConfiguration; end
     end
 
@@ -2251,6 +2272,16 @@ module Aws::QConnect
     #
     # @!attribute [rw] model_id
     #   The identifier of the model used for this AI Prompt.
+    #
+    #   <note markdown="1"> For information about which models are supported in each Amazon Web
+    #   Services Region, see [Supported models for system/custom
+    #   prompts][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
     #   @return [String]
     #
     # @!attribute [rw] api_format
@@ -3070,6 +3101,12 @@ module Aws::QConnect
     #   Session.
     #   @return [Hash<String,Types::AIAgentConfigurationData>]
     #
+    # @!attribute [rw] contact_arn
+    #   The Amazon Resource Name (ARN) of the email contact in Amazon
+    #   Connect. Used to retrieve email content and establish session
+    #   context for AI-powered email assistance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateSessionRequest AWS API Documentation
     #
     class CreateSessionRequest < Struct.new(
@@ -3079,7 +3116,8 @@ module Aws::QConnect
       :description,
       :tags,
       :tag_filter,
-      :ai_agent_configuration)
+      :ai_agent_configuration,
+      :contact_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3422,6 +3460,21 @@ module Aws::QConnect
     #   Details about the generative chunk data.
     #   @return [Types::GenerativeChunkDataDetails]
     #
+    # @!attribute [rw] email_response_chunk_data
+    #   Streaming chunk data for email response generation containing
+    #   partial response content.
+    #   @return [Types::EmailResponseChunkDataDetails]
+    #
+    # @!attribute [rw] email_overview_chunk_data
+    #   Streaming chunk data for email overview containing partial overview
+    #   content.
+    #   @return [Types::EmailOverviewChunkDataDetails]
+    #
+    # @!attribute [rw] email_generative_answer_chunk_data
+    #   Streaming chunk data for email generative answers containing partial
+    #   knowledge-based response content.
+    #   @return [Types::EmailGenerativeAnswerChunkDataDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DataDetails AWS API Documentation
     #
     class DataDetails < Struct.new(
@@ -3430,6 +3483,9 @@ module Aws::QConnect
       :intent_detected_data,
       :source_content_data,
       :generative_chunk_data,
+      :email_response_chunk_data,
+      :email_overview_chunk_data,
+      :email_generative_answer_chunk_data,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -3440,6 +3496,9 @@ module Aws::QConnect
       class IntentDetectedData < DataDetails; end
       class SourceContentData < DataDetails; end
       class GenerativeChunkData < DataDetails; end
+      class EmailResponseChunkData < DataDetails; end
+      class EmailOverviewChunkData < DataDetails; end
+      class EmailGenerativeAnswerChunkData < DataDetails; end
       class Unknown < DataDetails; end
     end
 
@@ -3888,6 +3947,20 @@ module Aws::QConnect
     #
     class DeleteQuickResponseResponse < Aws::EmptyStructure; end
 
+    # An error occurred while calling a dependency. For example, calling
+    # `connect:DecribeContact` as part of `CreateSession` with a contactArn.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DependencyFailedException AWS API Documentation
+    #
+    class DependencyFailedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The document.
     #
     # @!attribute [rw] content_reference
@@ -3928,6 +4001,68 @@ module Aws::QConnect
       :text,
       :highlights)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # Configuration settings for the EMAIL\_GENERATIVE\_ANSWER AI agent
+    # including prompts, locale, and knowledge base associations.
+    #
+    # @!attribute [rw] email_generative_answer_ai_prompt_id
+    #   The ID of the System AI prompt used for generating comprehensive
+    #   knowledge-based answers from email queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_query_reformulation_ai_prompt_id
+    #   The ID of the System AI prompt used for reformulating email queries
+    #   to optimize knowledge base search results.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale setting for language-specific email processing and
+    #   response generation (for example, en\_US, es\_ES).
+    #   @return [String]
+    #
+    # @!attribute [rw] association_configurations
+    #   Configuration settings for knowledge base associations used by the
+    #   email generative answer agent.
+    #   @return [Array<Types::AssociationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailGenerativeAnswerAIAgentConfiguration AWS API Documentation
+    #
+    class EmailGenerativeAnswerAIAgentConfiguration < Struct.new(
+      :email_generative_answer_ai_prompt_id,
+      :email_query_reformulation_ai_prompt_id,
+      :locale,
+      :association_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of streaming chunk data for email generative answers including
+    # completion text and references.
+    #
+    # @!attribute [rw] completion
+    #   The partial or complete text content of the generative answer
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   Source references and citations from knowledge base articles used to
+    #   generate the answer.
+    #   @return [Array<Types::DataSummary>]
+    #
+    # @!attribute [rw] next_chunk_token
+    #   Token for retrieving the next chunk of streaming response data, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailGenerativeAnswerChunkDataDetails AWS API Documentation
+    #
+    class EmailGenerativeAnswerChunkDataDetails < Struct.new(
+      :completion,
+      :references,
+      :next_chunk_token)
+      SENSITIVE = [:completion]
       include Aws::Structure
     end
 
@@ -3998,6 +4133,106 @@ module Aws::QConnect
       :plain_text,
       :html)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for the EMAIL\_OVERVIEW AI agent including
+    # prompt ID and locale settings.
+    #
+    # @!attribute [rw] email_overview_ai_prompt_id
+    #   The ID of the System AI prompt used for generating structured email
+    #   conversation summaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale setting for language-specific email overview processing
+    #   (for example, en\_US, es\_ES).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailOverviewAIAgentConfiguration AWS API Documentation
+    #
+    class EmailOverviewAIAgentConfiguration < Struct.new(
+      :email_overview_ai_prompt_id,
+      :locale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of streaming chunk data for email overview including
+    # completion text and pagination tokens.
+    #
+    # @!attribute [rw] completion
+    #   The partial or complete overview text content in structured HTML
+    #   format with customer issues, resolutions, and next steps.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_chunk_token
+    #   Token for retrieving the next chunk of streaming overview data, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailOverviewChunkDataDetails AWS API Documentation
+    #
+    class EmailOverviewChunkDataDetails < Struct.new(
+      :completion,
+      :next_chunk_token)
+      SENSITIVE = [:completion]
+      include Aws::Structure
+    end
+
+    # Configuration settings for the EMAIL\_RESPONSE AI agent including
+    # prompts, locale, and knowledge base associations.
+    #
+    # @!attribute [rw] email_response_ai_prompt_id
+    #   The ID of the System AI prompt used for generating professional
+    #   email responses based on knowledge base content.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_query_reformulation_ai_prompt_id
+    #   The ID of the System AI prompt used for reformulating email queries
+    #   to optimize knowledge base search for response generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale setting for language-specific email response generation
+    #   (for example, en\_US, es\_ES).
+    #   @return [String]
+    #
+    # @!attribute [rw] association_configurations
+    #   Configuration settings for knowledge base associations used by the
+    #   email response agent.
+    #   @return [Array<Types::AssociationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailResponseAIAgentConfiguration AWS API Documentation
+    #
+    class EmailResponseAIAgentConfiguration < Struct.new(
+      :email_response_ai_prompt_id,
+      :email_query_reformulation_ai_prompt_id,
+      :locale,
+      :association_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of streaming chunk data for email responses including
+    # completion text and pagination tokens.
+    #
+    # @!attribute [rw] completion
+    #   The partial or complete professional email response text with
+    #   appropriate greetings and closings.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_chunk_token
+    #   Token for retrieving the next chunk of streaming response data, if
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailResponseChunkDataDetails AWS API Documentation
+    #
+    class EmailResponseChunkDataDetails < Struct.new(
+      :completion,
+      :next_chunk_token)
+      SENSITIVE = [:completion]
       include Aws::Structure
     end
 
@@ -9713,8 +9948,9 @@ module Aws::QConnect
     # @!attribute [rw] model_id
     #   The identifier of the model used for this AI Prompt.
     #
-    #   <note markdown="1"> For more information on supported models, see [Supported models for
-    #   system and custom prompts][1].
+    #   <note markdown="1"> For information about which models are supported in each Amazon Web
+    #   Services Region, see [Supported models for system/custom
+    #   prompts][1].
     #
     #    </note>
     #

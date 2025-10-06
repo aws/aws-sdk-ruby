@@ -779,7 +779,16 @@ module Aws
                                             language_code: ::String,
                                             language_description: ::String
                                           },
-                                        ]?
+                                        ]?,
+                                        id_3_behavior: ("DISABLED" | "ENABLED")?,
+                                        klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")?,
+                                        segment_length: ::Integer?,
+                                        segment_length_units: ("MILLISECONDS" | "SECONDS")?,
+                                        timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
+                                        timed_metadata_id_3_period: ::Integer?,
+                                        timed_metadata_passthrough: ("DISABLED" | "ENABLED")?
                                       }?
                                     }?,
                                     ms_smooth_group_settings: {
@@ -2910,7 +2919,16 @@ module Aws
                                             language_code: ::String,
                                             language_description: ::String
                                           },
-                                        ]?
+                                        ]?,
+                                        id_3_behavior: ("DISABLED" | "ENABLED")?,
+                                        klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")?,
+                                        segment_length: ::Integer?,
+                                        segment_length_units: ("MILLISECONDS" | "SECONDS")?,
+                                        timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
+                                        timed_metadata_id_3_period: ::Integer?,
+                                        timed_metadata_passthrough: ("DISABLED" | "ENABLED")?
                                       }?
                                     }?,
                                     ms_smooth_group_settings: {

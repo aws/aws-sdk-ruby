@@ -81,6 +81,67 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchCreateMemoryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateMemoryRecordsOutput]
+        def successful_records: () -> ::Array[Types::MemoryRecordOutput]
+        def failed_records: () -> ::Array[Types::MemoryRecordOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#batch_create_memory_records-instance_method
+      def batch_create_memory_records: (
+                                         memory_id: ::String,
+                                         records: Array[
+                                           {
+                                             request_identifier: ::String,
+                                             namespaces: Array[::String],
+                                             content: {
+                                               text: ::String?
+                                             },
+                                             timestamp: ::Time,
+                                             memory_strategy_id: ::String?
+                                           },
+                                         ],
+                                         ?client_token: ::String
+                                       ) -> _BatchCreateMemoryRecordsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateMemoryRecordsResponseSuccess
+
+      interface _BatchDeleteMemoryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteMemoryRecordsOutput]
+        def successful_records: () -> ::Array[Types::MemoryRecordOutput]
+        def failed_records: () -> ::Array[Types::MemoryRecordOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#batch_delete_memory_records-instance_method
+      def batch_delete_memory_records: (
+                                         memory_id: ::String,
+                                         records: Array[
+                                           {
+                                             memory_record_id: ::String
+                                           },
+                                         ]
+                                       ) -> _BatchDeleteMemoryRecordsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteMemoryRecordsResponseSuccess
+
+      interface _BatchUpdateMemoryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateMemoryRecordsOutput]
+        def successful_records: () -> ::Array[Types::MemoryRecordOutput]
+        def failed_records: () -> ::Array[Types::MemoryRecordOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#batch_update_memory_records-instance_method
+      def batch_update_memory_records: (
+                                         memory_id: ::String,
+                                         records: Array[
+                                           {
+                                             memory_record_id: ::String,
+                                             timestamp: ::Time,
+                                             content: {
+                                               text: ::String?
+                                             }?,
+                                             namespaces: Array[::String]?,
+                                             memory_strategy_id: ::String?
+                                           },
+                                         ]
+                                       ) -> _BatchUpdateMemoryRecordsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemoryRecordsResponseSuccess
+
       interface _CreateEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventOutput]
         def event: () -> Types::Event
@@ -107,7 +168,10 @@ module Aws
                             root_event_id: ::String?,
                             name: ::String
                           },
-                          ?client_token: ::String
+                          ?client_token: ::String,
+                          ?metadata: Hash[::String, {
+                              string_value: ::String?
+                            }]
                         ) -> _CreateEventResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventResponseSuccess
 
@@ -134,6 +198,20 @@ module Aws
                                   memory_record_id: ::String
                                 ) -> _DeleteMemoryRecordResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
+
+      interface _GetAgentCardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentCardResponse]
+        def runtime_session_id: () -> ::String
+        def agent_card: () -> untyped
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_agent_card-instance_method
+      def get_agent_card: (
+                            ?runtime_session_id: ::String,
+                            agent_runtime_arn: ::String,
+                            ?qualifier: ::String
+                          ) -> _GetAgentCardResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentCardResponseSuccess
 
       interface _GetBrowserSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBrowserSessionResponse]
@@ -372,7 +450,20 @@ module Aws
                            branch: {
                              name: ::String,
                              include_parent_branches: bool?
-                           }?
+                           }?,
+                           event_metadata: Array[
+                             {
+                               left: {
+                                 metadata_key: ::String?
+                               },
+                               operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS"),
+                               right: {
+                                 metadata_value: {
+                                   string_value: ::String?
+                                 }?
+                               }?
+                             },
+                           ]?
                          },
                          ?max_results: ::Integer,
                          ?next_token: ::String
@@ -489,6 +580,20 @@ module Aws
                                            ?client_token: ::String
                                          ) -> _StopCodeInterpreterSessionResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCodeInterpreterSessionResponseSuccess
+
+      interface _StopRuntimeSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRuntimeSessionResponse]
+        def runtime_session_id: () -> ::String
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_runtime_session-instance_method
+      def stop_runtime_session: (
+                                  runtime_session_id: ::String,
+                                  agent_runtime_arn: ::String,
+                                  ?qualifier: ::String,
+                                  ?client_token: ::String
+                                ) -> _StopRuntimeSessionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRuntimeSessionResponseSuccess
 
       interface _UpdateBrowserStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrowserStreamResponse]

@@ -5392,9 +5392,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're adding in the current Amazon
-    #   Web Services Region. You can add these to an Amazon Web Services
-    #   account and a QuickSight namespace.
+    #   The QuickSight customizations you're adding. You can add these to
+    #   an Amazon Web Services account and a QuickSight namespace.
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
@@ -5436,8 +5435,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're adding in the current Amazon
-    #   Web Services Region.
+    #   The QuickSight customizations you're adding.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -10908,7 +10906,7 @@ module Aws::QuickSight
 
     # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that you want to delete
-    #   QuickSight customizations from in this Amazon Web Services Region.
+    #   QuickSight customizations from.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -12360,8 +12358,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations that exist in the current Amazon Web
-    #   Services Region.
+    #   The QuickSight customizations that exist.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id
@@ -36017,8 +36014,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're updating in the current Amazon
-    #   Web Services Region.
+    #   The QuickSight customizations you're updating.
     #   @return [Types::AccountCustomization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountCustomizationRequest AWS API Documentation
@@ -36047,8 +36043,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] account_customization
-    #   The QuickSight customizations you're updating in the current Amazon
-    #   Web Services Region.
+    #   The QuickSight customizations you're updating.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] request_id

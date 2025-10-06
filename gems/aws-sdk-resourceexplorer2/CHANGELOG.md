@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2025-10-06)
+------------------
+
+* Feature - Add new AWS Resource Explorer APIs
+
 1.41.0 (2025-08-26)
 ------------------
 

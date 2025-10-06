@@ -12,6 +12,9 @@ module Aws::QConnect
       attr_accessor manual_search_ai_agent_configuration: Types::ManualSearchAIAgentConfiguration
       attr_accessor answer_recommendation_ai_agent_configuration: Types::AnswerRecommendationAIAgentConfiguration
       attr_accessor self_service_ai_agent_configuration: Types::SelfServiceAIAgentConfiguration
+      attr_accessor email_response_ai_agent_configuration: Types::EmailResponseAIAgentConfiguration
+      attr_accessor email_overview_ai_agent_configuration: Types::EmailOverviewAIAgentConfiguration
+      attr_accessor email_generative_answer_ai_agent_configuration: Types::EmailGenerativeAnswerAIAgentConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -20,6 +23,12 @@ module Aws::QConnect
       class AnswerRecommendationAiAgentConfiguration < AIAgentConfiguration
       end
       class SelfServiceAiAgentConfiguration < AIAgentConfiguration
+      end
+      class EmailResponseAiAgentConfiguration < AIAgentConfiguration
+      end
+      class EmailOverviewAiAgentConfiguration < AIAgentConfiguration
+      end
+      class EmailGenerativeAnswerAiAgentConfiguration < AIAgentConfiguration
       end
       class Unknown < AIAgentConfiguration
       end
@@ -36,7 +45,7 @@ module Aws::QConnect
       attr_accessor ai_agent_id: ::String
       attr_accessor ai_agent_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE")
+      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
       attr_accessor configuration: Types::AIAgentConfiguration
       attr_accessor modified_time: ::Time
       attr_accessor description: ::String
@@ -52,7 +61,7 @@ module Aws::QConnect
       attr_accessor assistant_id: ::String
       attr_accessor assistant_arn: ::String
       attr_accessor ai_agent_id: ::String
-      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE")
+      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
       attr_accessor ai_agent_arn: ::String
       attr_accessor modified_time: ::Time
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
@@ -144,7 +153,7 @@ module Aws::QConnect
       attr_accessor ai_prompt_id: ::String
       attr_accessor ai_prompt_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION")
+      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION")
       attr_accessor template_type: ("TEXT")
       attr_accessor model_id: ::String
       attr_accessor api_format: ("ANTHROPIC_CLAUDE_MESSAGES" | "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS" | "MESSAGES" | "TEXT_COMPLETIONS")
@@ -163,7 +172,7 @@ module Aws::QConnect
       attr_accessor assistant_id: ::String
       attr_accessor assistant_arn: ::String
       attr_accessor ai_prompt_id: ::String
-      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION")
+      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION")
       attr_accessor ai_prompt_arn: ::String
       attr_accessor modified_time: ::Time
       attr_accessor template_type: ("TEXT")
@@ -300,7 +309,7 @@ module Aws::QConnect
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration
       attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
       SENSITIVE: []
     end
 
@@ -320,7 +329,7 @@ module Aws::QConnect
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor integration_configuration: Types::AssistantIntegrationConfiguration
       attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
       SENSITIVE: []
     end
 
@@ -495,7 +504,7 @@ module Aws::QConnect
       attr_accessor client_token: ::String
       attr_accessor assistant_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE")
+      attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
       attr_accessor configuration: Types::AIAgentConfiguration
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor tags: ::Hash[::String, ::String]
@@ -562,7 +571,7 @@ module Aws::QConnect
       attr_accessor client_token: ::String
       attr_accessor assistant_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION")
+      attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION")
       attr_accessor template_configuration: Types::AIPromptTemplateConfiguration
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor template_type: ("TEXT")
@@ -745,7 +754,8 @@ module Aws::QConnect
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor tag_filter: Types::TagFilter
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
+      attr_accessor contact_arn: ::String
       SENSITIVE: []
     end
 
@@ -822,6 +832,9 @@ module Aws::QConnect
       attr_accessor intent_detected_data: Types::IntentDetectedDataDetails
       attr_accessor source_content_data: Types::SourceContentDataDetails
       attr_accessor generative_chunk_data: Types::GenerativeChunkDataDetails
+      attr_accessor email_response_chunk_data: Types::EmailResponseChunkDataDetails
+      attr_accessor email_overview_chunk_data: Types::EmailOverviewChunkDataDetails
+      attr_accessor email_generative_answer_chunk_data: Types::EmailGenerativeAnswerChunkDataDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -834,6 +847,12 @@ module Aws::QConnect
       class SourceContentData < DataDetails
       end
       class GenerativeChunkData < DataDetails
+      end
+      class EmailResponseChunkData < DataDetails
+      end
+      class EmailOverviewChunkData < DataDetails
+      end
+      class EmailGenerativeAnswerChunkData < DataDetails
       end
       class Unknown < DataDetails
       end
@@ -1011,6 +1030,11 @@ module Aws::QConnect
     class DeleteQuickResponseResponse < Aws::EmptyStructure
     end
 
+    class DependencyFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Document
       attr_accessor content_reference: Types::ContentReference
       attr_accessor title: Types::DocumentText
@@ -1022,6 +1046,21 @@ module Aws::QConnect
       attr_accessor text: ::String
       attr_accessor highlights: ::Array[Types::Highlight]
       SENSITIVE: [:text]
+    end
+
+    class EmailGenerativeAnswerAIAgentConfiguration
+      attr_accessor email_generative_answer_ai_prompt_id: ::String
+      attr_accessor email_query_reformulation_ai_prompt_id: ::String
+      attr_accessor locale: ::String
+      attr_accessor association_configurations: ::Array[Types::AssociationConfiguration]
+      SENSITIVE: []
+    end
+
+    class EmailGenerativeAnswerChunkDataDetails
+      attr_accessor completion: ::String
+      attr_accessor references: ::Array[Types::DataSummary]
+      attr_accessor next_chunk_token: ::String
+      SENSITIVE: [:completion]
     end
 
     class EmailHeader
@@ -1041,6 +1080,32 @@ module Aws::QConnect
       attr_accessor plain_text: Types::MessageTemplateBodyContentProvider
       attr_accessor html: Types::MessageTemplateBodyContentProvider
       SENSITIVE: []
+    end
+
+    class EmailOverviewAIAgentConfiguration
+      attr_accessor email_overview_ai_prompt_id: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class EmailOverviewChunkDataDetails
+      attr_accessor completion: ::String
+      attr_accessor next_chunk_token: ::String
+      SENSITIVE: [:completion]
+    end
+
+    class EmailResponseAIAgentConfiguration
+      attr_accessor email_response_ai_prompt_id: ::String
+      attr_accessor email_query_reformulation_ai_prompt_id: ::String
+      attr_accessor locale: ::String
+      attr_accessor association_configurations: ::Array[Types::AssociationConfiguration]
+      SENSITIVE: []
+    end
+
+    class EmailResponseChunkDataDetails
+      attr_accessor completion: ::String
+      attr_accessor next_chunk_token: ::String
+      SENSITIVE: [:completion]
     end
 
     class ExtendedMessageTemplateData
@@ -2118,7 +2183,7 @@ module Aws::QConnect
       attr_accessor document: Types::Document
       attr_accessor relevance_score: ::Float
       attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
-      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK")
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK")
       attr_accessor data: Types::DataSummary
       SENSITIVE: []
     end
@@ -2145,7 +2210,7 @@ module Aws::QConnect
 
     class RemoveAssistantAIAgentRequest
       attr_accessor assistant_id: ::String
-      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE")
+      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
       SENSITIVE: []
     end
 
@@ -2195,7 +2260,7 @@ module Aws::QConnect
       attr_accessor document: Types::Document
       attr_accessor relevance_score: ::Float
       attr_accessor data: Types::DataSummary
-      attr_accessor type: ("KNOWLEDGE_CONTENT" | "INTENT_ANSWER" | "GENERATIVE_ANSWER" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK")
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "INTENT_ANSWER" | "GENERATIVE_ANSWER" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK")
       SENSITIVE: []
     end
 
@@ -2351,7 +2416,7 @@ module Aws::QConnect
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor integration_configuration: Types::SessionIntegrationConfiguration
       attr_accessor tag_filter: Types::TagFilter
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
       attr_accessor origin: ("SYSTEM" | "CUSTOMER")
       SENSITIVE: []
     end
@@ -2561,7 +2626,7 @@ module Aws::QConnect
 
     class UpdateAssistantAIAgentRequest
       attr_accessor assistant_id: ::String
-      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE")
+      attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER")
       attr_accessor configuration: Types::AIAgentConfigurationData
       SENSITIVE: []
     end
@@ -2671,7 +2736,7 @@ module Aws::QConnect
       attr_accessor session_id: ::String
       attr_accessor description: ::String
       attr_accessor tag_filter: Types::TagFilter
-      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE"), Types::AIAgentConfigurationData]
+      attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER"), Types::AIAgentConfigurationData]
       SENSITIVE: []
     end
 

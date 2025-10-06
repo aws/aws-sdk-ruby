@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.237.0 (2025-10-06)
+------------------
+
+* Feature - Adds labeling for DataQualityRuleResult for GetDataQualityResult and PublishDataQualityResult APIs
+
 1.236.0 (2025-09-25)
 ------------------
 

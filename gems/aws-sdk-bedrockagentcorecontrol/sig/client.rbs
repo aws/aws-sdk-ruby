@@ -90,7 +90,6 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_agent_runtime-instance_method
       def create_agent_runtime: (
                                   agent_runtime_name: ::String,
-                                  ?description: ::String,
                                   agent_runtime_artifact: {
                                     container_configuration: {
                                       container_uri: ::String
@@ -104,11 +103,8 @@ module Aws
                                       subnets: Array[::String]
                                     }?
                                   },
-                                  ?protocol_configuration: {
-                                    server_protocol: ("MCP" | "HTTP")
-                                  },
                                   ?client_token: ::String,
-                                  ?environment_variables: Hash[::String, ::String],
+                                  ?description: ::String,
                                   ?authorizer_configuration: {
                                     custom_jwt_authorizer: {
                                       discovery_url: ::String,
@@ -119,6 +115,14 @@ module Aws
                                   ?request_header_configuration: {
                                     request_header_allowlist: Array[::String]?
                                   },
+                                  ?protocol_configuration: {
+                                    server_protocol: ("MCP" | "HTTP" | "A2A")
+                                  },
+                                  ?lifecycle_configuration: {
+                                    idle_runtime_session_timeout: ::Integer?,
+                                    max_lifetime: ::Integer?
+                                  },
+                                  ?environment_variables: Hash[::String, ::String],
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeResponseSuccess
@@ -408,7 +412,8 @@ module Aws
                                  }?
                                }?
                              },
-                           ]
+                           ],
+                           ?tags: Hash[::String, ::String]
                          ) -> _CreateMemoryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMemoryResponseSuccess
 
@@ -589,21 +594,22 @@ module Aws
       interface _GetAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRuntimeResponse]
         def agent_runtime_arn: () -> ::String
-        def workload_identity_details: () -> Types::WorkloadIdentityDetails
         def agent_runtime_name: () -> ::String
-        def description: () -> ::String
         def agent_runtime_id: () -> ::String
         def agent_runtime_version: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def role_arn: () -> ::String
-        def agent_runtime_artifact: () -> Types::AgentRuntimeArtifact
         def network_configuration: () -> Types::NetworkConfiguration
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def lifecycle_configuration: () -> Types::LifecycleConfiguration
+        def description: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def agent_runtime_artifact: () -> Types::AgentRuntimeArtifact
         def protocol_configuration: () -> Types::ProtocolConfiguration
         def environment_variables: () -> ::Hash[::String, ::String]
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def request_header_configuration: () -> Types::RequestHeaderConfiguration
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
       def get_agent_runtime: (
@@ -980,7 +986,6 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_agent_runtime-instance_method
       def update_agent_runtime: (
                                   agent_runtime_id: ::String,
-                                  ?description: ::String,
                                   agent_runtime_artifact: {
                                     container_configuration: {
                                       container_uri: ::String
@@ -994,11 +999,7 @@ module Aws
                                       subnets: Array[::String]
                                     }?
                                   },
-                                  ?protocol_configuration: {
-                                    server_protocol: ("MCP" | "HTTP")
-                                  },
-                                  ?client_token: ::String,
-                                  ?environment_variables: Hash[::String, ::String],
+                                  ?description: ::String,
                                   ?authorizer_configuration: {
                                     custom_jwt_authorizer: {
                                       discovery_url: ::String,
@@ -1008,7 +1009,16 @@ module Aws
                                   },
                                   ?request_header_configuration: {
                                     request_header_allowlist: Array[::String]?
-                                  }
+                                  },
+                                  ?protocol_configuration: {
+                                    server_protocol: ("MCP" | "HTTP" | "A2A")
+                                  },
+                                  ?lifecycle_configuration: {
+                                    idle_runtime_session_timeout: ::Integer?,
+                                    max_lifetime: ::Integer?
+                                  },
+                                  ?environment_variables: Hash[::String, ::String],
+                                  ?client_token: ::String
                                 ) -> _UpdateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeResponseSuccess
 

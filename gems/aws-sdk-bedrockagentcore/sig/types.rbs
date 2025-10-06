@@ -30,6 +30,43 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class BatchCreateMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor records: ::Array[Types::MemoryRecordCreateInput]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateMemoryRecordsOutput
+      attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
+      attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor records: ::Array[Types::MemoryRecordDeleteInput]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteMemoryRecordsOutput
+      attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
+      attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor records: ::Array[Types::MemoryRecordUpdateInput]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateMemoryRecordsOutput
+      attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
+      attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
     class Branch
       attr_accessor root_event_id: ::String
       attr_accessor name: ::String
@@ -120,6 +157,7 @@ module Aws::BedrockAgentCore
       attr_accessor payload: ::Array[Types::PayloadType]
       attr_accessor branch: Types::Branch
       attr_accessor client_token: ::String
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       SENSITIVE: []
     end
 
@@ -160,11 +198,34 @@ module Aws::BedrockAgentCore
       attr_accessor event_timestamp: ::Time
       attr_accessor payload: ::Array[Types::PayloadType]
       attr_accessor branch: Types::Branch
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
+      SENSITIVE: []
+    end
+
+    class EventMetadataFilterExpression
+      attr_accessor left: Types::LeftExpression
+      attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS")
+      attr_accessor right: Types::RightExpression
       SENSITIVE: []
     end
 
     class FilterInput
       attr_accessor branch: Types::BranchFilter
+      attr_accessor event_metadata: ::Array[Types::EventMetadataFilterExpression]
+      SENSITIVE: []
+    end
+
+    class GetAgentCardRequest
+      attr_accessor runtime_session_id: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentCardResponse
+      attr_accessor runtime_session_id: ::String
+      attr_accessor agent_card: untyped
+      attr_accessor status_code: ::Integer
       SENSITIVE: []
     end
 
@@ -351,6 +412,17 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class LeftExpression
+      attr_accessor metadata_key: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MetadataKey < LeftExpression
+      end
+      class Unknown < LeftExpression
+      end
+    end
+
     class ListActorsInput
       attr_accessor memory_id: ::String
       attr_accessor max_results: ::Integer
@@ -463,6 +535,29 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class MemoryRecordCreateInput
+      attr_accessor request_identifier: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor content: Types::MemoryContent
+      attr_accessor timestamp: ::Time
+      attr_accessor memory_strategy_id: ::String
+      SENSITIVE: []
+    end
+
+    class MemoryRecordDeleteInput
+      attr_accessor memory_record_id: ::String
+      SENSITIVE: []
+    end
+
+    class MemoryRecordOutput
+      attr_accessor memory_record_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor request_identifier: ::String
+      attr_accessor error_code: ::Integer
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class MemoryRecordSummary
       attr_accessor memory_record_id: ::String
       attr_accessor content: Types::MemoryContent
@@ -471,6 +566,26 @@ module Aws::BedrockAgentCore
       attr_accessor created_at: ::Time
       attr_accessor score: ::Float
       SENSITIVE: []
+    end
+
+    class MemoryRecordUpdateInput
+      attr_accessor memory_record_id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor content: Types::MemoryContent
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor memory_strategy_id: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataValue
+      attr_accessor string_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringValue < MetadataValue
+      end
+      class Unknown < MetadataValue
+      end
     end
 
     class PayloadType
@@ -515,6 +630,17 @@ module Aws::BedrockAgentCore
       attr_accessor memory_record_summaries: ::Array[Types::MemoryRecordSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class RightExpression
+      attr_accessor metadata_value: Types::MetadataValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MetadataValue < RightExpression
+      end
+      class Unknown < RightExpression
+      end
     end
 
     class RuntimeClientError
@@ -604,6 +730,20 @@ module Aws::BedrockAgentCore
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StopRuntimeSessionRequest
+      attr_accessor runtime_session_id: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StopRuntimeSessionResponse
+      attr_accessor runtime_session_id: ::String
+      attr_accessor status_code: ::Integer
       SENSITIVE: []
     end
 

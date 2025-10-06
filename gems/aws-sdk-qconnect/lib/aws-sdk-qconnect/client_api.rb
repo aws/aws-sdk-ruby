@@ -182,15 +182,22 @@ module Aws::QConnect
     DeleteMessageTemplateResponse = Shapes::StructureShape.new(name: 'DeleteMessageTemplateResponse')
     DeleteQuickResponseRequest = Shapes::StructureShape.new(name: 'DeleteQuickResponseRequest')
     DeleteQuickResponseResponse = Shapes::StructureShape.new(name: 'DeleteQuickResponseResponse')
+    DependencyFailedException = Shapes::StructureShape.new(name: 'DependencyFailedException')
     Description = Shapes::StringShape.new(name: 'Description')
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentText = Shapes::StructureShape.new(name: 'DocumentText')
+    EmailGenerativeAnswerAIAgentConfiguration = Shapes::StructureShape.new(name: 'EmailGenerativeAnswerAIAgentConfiguration')
+    EmailGenerativeAnswerChunkDataDetails = Shapes::StructureShape.new(name: 'EmailGenerativeAnswerChunkDataDetails')
     EmailHeader = Shapes::StructureShape.new(name: 'EmailHeader')
     EmailHeaderKey = Shapes::StringShape.new(name: 'EmailHeaderKey')
     EmailHeaderValue = Shapes::StringShape.new(name: 'EmailHeaderValue')
     EmailHeaders = Shapes::ListShape.new(name: 'EmailHeaders')
     EmailMessageTemplateContent = Shapes::StructureShape.new(name: 'EmailMessageTemplateContent')
     EmailMessageTemplateContentBody = Shapes::StructureShape.new(name: 'EmailMessageTemplateContentBody')
+    EmailOverviewAIAgentConfiguration = Shapes::StructureShape.new(name: 'EmailOverviewAIAgentConfiguration')
+    EmailOverviewChunkDataDetails = Shapes::StructureShape.new(name: 'EmailOverviewChunkDataDetails')
+    EmailResponseAIAgentConfiguration = Shapes::StructureShape.new(name: 'EmailResponseAIAgentConfiguration')
+    EmailResponseChunkDataDetails = Shapes::StructureShape.new(name: 'EmailResponseChunkDataDetails')
     ExtendedMessageTemplateData = Shapes::StructureShape.new(name: 'ExtendedMessageTemplateData')
     ExternalSource = Shapes::StringShape.new(name: 'ExternalSource')
     ExternalSourceConfiguration = Shapes::StructureShape.new(name: 'ExternalSourceConfiguration')
@@ -573,10 +580,16 @@ module Aws::QConnect
     AIAgentConfiguration.add_member(:manual_search_ai_agent_configuration, Shapes::ShapeRef.new(shape: ManualSearchAIAgentConfiguration, location_name: "manualSearchAIAgentConfiguration"))
     AIAgentConfiguration.add_member(:answer_recommendation_ai_agent_configuration, Shapes::ShapeRef.new(shape: AnswerRecommendationAIAgentConfiguration, location_name: "answerRecommendationAIAgentConfiguration"))
     AIAgentConfiguration.add_member(:self_service_ai_agent_configuration, Shapes::ShapeRef.new(shape: SelfServiceAIAgentConfiguration, location_name: "selfServiceAIAgentConfiguration"))
+    AIAgentConfiguration.add_member(:email_response_ai_agent_configuration, Shapes::ShapeRef.new(shape: EmailResponseAIAgentConfiguration, location_name: "emailResponseAIAgentConfiguration"))
+    AIAgentConfiguration.add_member(:email_overview_ai_agent_configuration, Shapes::ShapeRef.new(shape: EmailOverviewAIAgentConfiguration, location_name: "emailOverviewAIAgentConfiguration"))
+    AIAgentConfiguration.add_member(:email_generative_answer_ai_agent_configuration, Shapes::ShapeRef.new(shape: EmailGenerativeAnswerAIAgentConfiguration, location_name: "emailGenerativeAnswerAIAgentConfiguration"))
     AIAgentConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AIAgentConfiguration.add_member_subclass(:manual_search_ai_agent_configuration, Types::AIAgentConfiguration::ManualSearchAiAgentConfiguration)
     AIAgentConfiguration.add_member_subclass(:answer_recommendation_ai_agent_configuration, Types::AIAgentConfiguration::AnswerRecommendationAiAgentConfiguration)
     AIAgentConfiguration.add_member_subclass(:self_service_ai_agent_configuration, Types::AIAgentConfiguration::SelfServiceAiAgentConfiguration)
+    AIAgentConfiguration.add_member_subclass(:email_response_ai_agent_configuration, Types::AIAgentConfiguration::EmailResponseAiAgentConfiguration)
+    AIAgentConfiguration.add_member_subclass(:email_overview_ai_agent_configuration, Types::AIAgentConfiguration::EmailOverviewAiAgentConfiguration)
+    AIAgentConfiguration.add_member_subclass(:email_generative_answer_ai_agent_configuration, Types::AIAgentConfiguration::EmailGenerativeAnswerAiAgentConfiguration)
     AIAgentConfiguration.add_member_subclass(:unknown, Types::AIAgentConfiguration::Unknown)
     AIAgentConfiguration.struct_class = Types::AIAgentConfiguration
 
@@ -1158,6 +1171,7 @@ module Aws::QConnect
     CreateSessionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateSessionRequest.add_member(:tag_filter, Shapes::ShapeRef.new(shape: TagFilter, location_name: "tagFilter"))
     CreateSessionRequest.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
+    CreateSessionRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "contactArn"))
     CreateSessionRequest.struct_class = Types::CreateSessionRequest
 
     CreateSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionData, location_name: "session"))
@@ -1231,12 +1245,18 @@ module Aws::QConnect
     DataDetails.add_member(:intent_detected_data, Shapes::ShapeRef.new(shape: IntentDetectedDataDetails, location_name: "intentDetectedData"))
     DataDetails.add_member(:source_content_data, Shapes::ShapeRef.new(shape: SourceContentDataDetails, location_name: "sourceContentData"))
     DataDetails.add_member(:generative_chunk_data, Shapes::ShapeRef.new(shape: GenerativeChunkDataDetails, location_name: "generativeChunkData"))
+    DataDetails.add_member(:email_response_chunk_data, Shapes::ShapeRef.new(shape: EmailResponseChunkDataDetails, location_name: "emailResponseChunkData"))
+    DataDetails.add_member(:email_overview_chunk_data, Shapes::ShapeRef.new(shape: EmailOverviewChunkDataDetails, location_name: "emailOverviewChunkData"))
+    DataDetails.add_member(:email_generative_answer_chunk_data, Shapes::ShapeRef.new(shape: EmailGenerativeAnswerChunkDataDetails, location_name: "emailGenerativeAnswerChunkData"))
     DataDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DataDetails.add_member_subclass(:content_data, Types::DataDetails::ContentData)
     DataDetails.add_member_subclass(:generative_data, Types::DataDetails::GenerativeData)
     DataDetails.add_member_subclass(:intent_detected_data, Types::DataDetails::IntentDetectedData)
     DataDetails.add_member_subclass(:source_content_data, Types::DataDetails::SourceContentData)
     DataDetails.add_member_subclass(:generative_chunk_data, Types::DataDetails::GenerativeChunkData)
+    DataDetails.add_member_subclass(:email_response_chunk_data, Types::DataDetails::EmailResponseChunkData)
+    DataDetails.add_member_subclass(:email_overview_chunk_data, Types::DataDetails::EmailOverviewChunkData)
+    DataDetails.add_member_subclass(:email_generative_answer_chunk_data, Types::DataDetails::EmailGenerativeAnswerChunkData)
     DataDetails.add_member_subclass(:unknown, Types::DataDetails::Unknown)
     DataDetails.struct_class = Types::DataDetails
 
@@ -1357,6 +1377,9 @@ module Aws::QConnect
 
     DeleteQuickResponseResponse.struct_class = Types::DeleteQuickResponseResponse
 
+    DependencyFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DependencyFailedException.struct_class = Types::DependencyFailedException
+
     Document.add_member(:content_reference, Shapes::ShapeRef.new(shape: ContentReference, required: true, location_name: "contentReference"))
     Document.add_member(:title, Shapes::ShapeRef.new(shape: DocumentText, location_name: "title"))
     Document.add_member(:excerpt, Shapes::ShapeRef.new(shape: DocumentText, location_name: "excerpt"))
@@ -1365,6 +1388,17 @@ module Aws::QConnect
     DocumentText.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "text"))
     DocumentText.add_member(:highlights, Shapes::ShapeRef.new(shape: Highlights, location_name: "highlights"))
     DocumentText.struct_class = Types::DocumentText
+
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:email_generative_answer_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "emailGenerativeAnswerAIPromptId"))
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:email_query_reformulation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "emailQueryReformulationAIPromptId"))
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
+    EmailGenerativeAnswerAIAgentConfiguration.add_member(:association_configurations, Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: "associationConfigurations"))
+    EmailGenerativeAnswerAIAgentConfiguration.struct_class = Types::EmailGenerativeAnswerAIAgentConfiguration
+
+    EmailGenerativeAnswerChunkDataDetails.add_member(:completion, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "completion"))
+    EmailGenerativeAnswerChunkDataDetails.add_member(:references, Shapes::ShapeRef.new(shape: DataSummaryList, location_name: "references"))
+    EmailGenerativeAnswerChunkDataDetails.add_member(:next_chunk_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextChunkToken"))
+    EmailGenerativeAnswerChunkDataDetails.struct_class = Types::EmailGenerativeAnswerChunkDataDetails
 
     EmailHeader.add_member(:name, Shapes::ShapeRef.new(shape: EmailHeaderKey, location_name: "name"))
     EmailHeader.add_member(:value, Shapes::ShapeRef.new(shape: EmailHeaderValue, location_name: "value"))
@@ -1380,6 +1414,24 @@ module Aws::QConnect
     EmailMessageTemplateContentBody.add_member(:plain_text, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "plainText"))
     EmailMessageTemplateContentBody.add_member(:html, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "html"))
     EmailMessageTemplateContentBody.struct_class = Types::EmailMessageTemplateContentBody
+
+    EmailOverviewAIAgentConfiguration.add_member(:email_overview_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "emailOverviewAIPromptId"))
+    EmailOverviewAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
+    EmailOverviewAIAgentConfiguration.struct_class = Types::EmailOverviewAIAgentConfiguration
+
+    EmailOverviewChunkDataDetails.add_member(:completion, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "completion"))
+    EmailOverviewChunkDataDetails.add_member(:next_chunk_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextChunkToken"))
+    EmailOverviewChunkDataDetails.struct_class = Types::EmailOverviewChunkDataDetails
+
+    EmailResponseAIAgentConfiguration.add_member(:email_response_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "emailResponseAIPromptId"))
+    EmailResponseAIAgentConfiguration.add_member(:email_query_reformulation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "emailQueryReformulationAIPromptId"))
+    EmailResponseAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
+    EmailResponseAIAgentConfiguration.add_member(:association_configurations, Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: "associationConfigurations"))
+    EmailResponseAIAgentConfiguration.struct_class = Types::EmailResponseAIAgentConfiguration
+
+    EmailResponseChunkDataDetails.add_member(:completion, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "completion"))
+    EmailResponseChunkDataDetails.add_member(:next_chunk_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextChunkToken"))
+    EmailResponseChunkDataDetails.struct_class = Types::EmailResponseChunkDataDetails
 
     ExtendedMessageTemplateData.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
     ExtendedMessageTemplateData.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
@@ -2921,6 +2973,7 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

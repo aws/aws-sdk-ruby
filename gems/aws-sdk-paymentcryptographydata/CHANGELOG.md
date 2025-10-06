@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-10-03)
+------------------
+
+* Feature - Added a new API - translateKeyMaterial; allows keys wrapped by ECDH derived keys to be rewrapped under a static AES keyblock without first importing the key into the service.
+
 1.40.0 (2025-08-27)
 ------------------
 

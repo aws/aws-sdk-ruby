@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2025-10-06)
+------------------
+
+* Feature - Support for DescribeMultiRegionParameterGroups and DescribeMultiRegionParameters API.
+
 1.52.0 (2025-08-26)
 ------------------
 

@@ -29,6 +29,7 @@ module Aws::QConnect
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DependencyFailedException}
   # * {PreconditionFailedException}
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
@@ -64,6 +65,21 @@ module Aws::QConnect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::QConnect::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DependencyFailedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QConnect::Types::DependencyFailedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

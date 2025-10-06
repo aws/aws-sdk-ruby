@@ -3101,7 +3101,8 @@ module Aws::Backup
     class DescribeGlobalSettingsInput < Aws::EmptyStructure; end
 
     # @!attribute [rw] global_settings
-    #   The status of the flag `isCrossAccountBackupEnabled`.
+    #   The status of the flags `isCrossAccountBackupEnabled` and
+    #   `isMpaEnabled` ('Mpa' refers to multi-party approval).
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_update_time
@@ -3935,11 +3936,18 @@ module Aws::Backup
     #   at most 1,024 bytes long. Version IDs cannot be edited.
     #   @return [String]
     #
+    # @!attribute [rw] max_scheduled_runs_preview
+    #   Number of future scheduled backup runs to preview. When set to 0
+    #   (default), no scheduled runs preview is included in the response.
+    #   Valid range is 0-10.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanInput AWS API Documentation
     #
     class GetBackupPlanInput < Struct.new(
       :backup_plan_id,
-      :version_id)
+      :version_id,
+      :max_scheduled_runs_preview)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3997,6 +4005,13 @@ module Aws::Backup
     #   is populated only if the advanced option is set for the backup plan.
     #   @return [Array<Types::AdvancedBackupSetting>]
     #
+    # @!attribute [rw] scheduled_runs_preview
+    #   List of upcoming scheduled backup runs. Only included when
+    #   `MaxScheduledRunsPreview` parameter is greater than 0. Contains up
+    #   to 10 future backup executions with their scheduled times, execution
+    #   types, and associated rule IDs.
+    #   @return [Array<Types::ScheduledPlanExecutionMember>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanOutput AWS API Documentation
     #
     class GetBackupPlanOutput < Struct.new(
@@ -4008,7 +4023,8 @@ module Aws::Backup
       :creation_date,
       :deletion_date,
       :last_execution_date,
-      :advanced_backup_settings)
+      :advanced_backup_settings,
+      :scheduled_runs_preview)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8692,6 +8708,37 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Contains information about a scheduled backup plan execution,
+    # including the execution time, rule type, and associated rule
+    # identifier.
+    #
+    # @!attribute [rw] execution_time
+    #   The timestamp when the backup is scheduled to run, in Unix format
+    #   and Coordinated Universal Time (UTC). The value is accurate to
+    #   milliseconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the backup rule that will execute at the
+    #   scheduled time.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_execution_type
+    #   The type of backup rule execution. Valid values are `CONTINUOUS`
+    #   (point-in-time recovery), `SNAPSHOTS` (snapshot backups), or
+    #   `CONTINUOUS_AND_SNAPSHOTS` (both types combined).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ScheduledPlanExecutionMember AWS API Documentation
+    #
+    class ScheduledPlanExecutionMember < Struct.new(
+      :execution_time,
+      :rule_id,
+      :rule_execution_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed due to a temporary failure of the server.
     #
     # @!attribute [rw] code
@@ -9342,9 +9389,15 @@ module Aws::Backup
     end
 
     # @!attribute [rw] global_settings
+    #   Inputs can include:
+    #
     #   A value for `isCrossAccountBackupEnabled` and a Region. Example:
     #   `update-global-settings --global-settings
     #   isCrossAccountBackupEnabled=false --region us-west-2`.
+    #
+    #   A value for Multi-party approval, styled as "Mpa": `isMpaEnabled`.
+    #   Values can be true or false. Example: `update-global-settings
+    #   --global-settings isMpaEnabled=false --region us-west-2`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettingsInput AWS API Documentation

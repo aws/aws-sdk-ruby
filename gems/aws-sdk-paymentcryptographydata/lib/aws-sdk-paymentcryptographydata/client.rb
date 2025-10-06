@@ -921,8 +921,8 @@ module Aws::PaymentCryptographyData
     # You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC
     # by setting generation attributes and algorithm to the associated
     # values. The MAC generation encryption key must have valid values for
-    # `KeyUsage` such as `TR31_M7_HMAC_KEY` for HMAC generation, and they
-    # key must have `KeyModesOfUse` set to `Generate` and `Verify`.
+    # `KeyUsage` such as `TR31_M7_HMAC_KEY` for HMAC generation, and the key
+    # must have `KeyModesOfUse` set to `Generate` and `Verify`.
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][1] and [Key types for specific data
@@ -1241,15 +1241,15 @@ module Aws::PaymentCryptographyData
     # @option params [Integer] :pin_data_length
     #   The length of PIN under generation.
     #
-    # @option params [required, String] :primary_account_number
+    # @option params [String] :primary_account_number
     #   The Primary Account Number (PAN), a unique identifier for a payment
     #   credit or debit card that associates the card with a specific account
     #   holder.
     #
     # @option params [required, String] :pin_block_format
     #   The PIN encoding format for pin data generation as specified in ISO
-    #   9564. Amazon Web Services Payment Cryptography supports `ISO_Format_0`
-    #   and `ISO_Format_3`.
+    #   9564. Amazon Web Services Payment Cryptography supports
+    #   `ISO_Format_0`, `ISO_Format_3` and `ISO_Format_4`.
     #
     #   The `ISO_Format_0` PIN block format is equivalent to the ANSI X9.8,
     #   VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN
@@ -1257,6 +1257,10 @@ module Aws::PaymentCryptographyData
     #
     #   The `ISO_Format_3` PIN block format is the same as `ISO_Format_0`
     #   except that the fill digits are random values from 10 to 15.
+    #
+    #   The `ISO_Format_4` PIN block format is the only one supporting AES
+    #   encryption. It is similar to `ISO_Format_3` but doubles the pin block
+    #   length by padding with fill digit A and random values from 10 to 15.
     #
     # @option params [Types::WrappedKey] :encryption_wrapped_key
     #   Parameter information of a WrappedKeyBlock for encryption key
@@ -1308,8 +1312,8 @@ module Aws::PaymentCryptographyData
     #       },
     #     },
     #     pin_data_length: 1,
-    #     primary_account_number: "PrimaryAccountNumberType", # required
-    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3, ISO_FORMAT_4
+    #     primary_account_number: "PrimaryAccountNumberType",
+    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_1, ISO_FORMAT_3, ISO_FORMAT_4
     #     encryption_wrapped_key: {
     #       wrapped_key_material: { # required
     #         tr_31_key_block: "Tr31WrappedKeyBlock",
@@ -1513,6 +1517,109 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
+    # Translates an encryption key between different wrapping keys without
+    # importing the key into Amazon Web Services Payment Cryptography.
+    #
+    # This operation can be used when key material is frequently rotated,
+    # such as during every card transaction, and there is a need to avoid
+    # importing short-lived keys into Amazon Web Services Payment
+    # Cryptography. It translates short-lived transaction keys such as Pin
+    # Encryption Key (PEK) generated for each transaction and wrapped with
+    # an ECDH (Elliptic Curve Diffie-Hellman) derived wrapping key to
+    # another KEK (Key Encryption Key) wrapping key.
+    #
+    # Before using this operation, you must first request the public key
+    # certificate of the ECC key pair generated within Amazon Web Services
+    # Payment Cryptography to establish an ECDH key agreement. In
+    # `TranslateKeyData`, the service uses its own ECC key pair, public
+    # certificate of receiving ECC key pair, and the key derivation
+    # parameters to generate a derived key. The service uses this derived
+    # key to unwrap the incoming transaction key received as a
+    # TR31WrappedKeyBlock and re-wrap using a user provided KEK to generate
+    # an outgoing Tr31WrappedKeyBlock. For more information on establishing
+    # ECDH derived keys, see the [Creating keys][1] in the *Amazon Web
+    # Services Payment Cryptography User Guide*.
+    #
+    # For information about valid keys for this operation, see
+    # [Understanding key attributes][2] and [Key types for specific data
+    # operations][3] in the *Amazon Web Services Payment Cryptography User
+    # Guide*.
+    #
+    # **Cross-account use**: This operation can't be used across different
+    # Amazon Web Services accounts.
+    #
+    # **Related operations:**
+    #
+    # * [CreateKey][4]
+    #
+    # * [GetPublicCertificate][5]
+    #
+    # * [ImportKey][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    #
+    # @option params [required, Types::IncomingKeyMaterial] :incoming_key_material
+    #   Parameter information of the TR31WrappedKeyBlock containing the
+    #   transaction key.
+    #
+    # @option params [required, Types::OutgoingKeyMaterial] :outgoing_key_material
+    #   Parameter information of the wrapping key used to wrap the transaction
+    #   key in the outgoing TR31WrappedKeyBlock.
+    #
+    # @option params [String] :key_check_value_algorithm
+    #   The key check value (KCV) algorithm used for calculating the KCV.
+    #
+    # @return [Types::TranslateKeyMaterialOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TranslateKeyMaterialOutput#wrapped_key #wrapped_key} => Types::WrappedWorkingKey
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.translate_key_material({
+    #     incoming_key_material: { # required
+    #       diffie_hellman_tr_31_key_block: {
+    #         private_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         public_key_certificate: "CertificateType", # required
+    #         derive_key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
+    #         key_derivation_function: "NIST_SP800", # required, accepts NIST_SP800, ANSI_X963
+    #         key_derivation_hash_algorithm: "SHA_256", # required, accepts SHA_256, SHA_384, SHA_512
+    #         derivation_data: { # required
+    #           shared_information: "SharedInformation",
+    #         },
+    #         wrapped_key_block: "Tr31WrappedKeyBlock", # required
+    #       },
+    #     },
+    #     outgoing_key_material: { # required
+    #       tr_31_key_block: {
+    #         wrapping_key_identifier: "KeyArnOrKeyAliasType", # required
+    #       },
+    #     },
+    #     key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.wrapped_key.wrapped_key_material #=> String
+    #   resp.wrapped_key.key_check_value #=> String
+    #   resp.wrapped_key.wrapped_key_material_format #=> String, one of "KEY_CRYPTOGRAM", "TR31_KEY_BLOCK", "TR34_KEY_BLOCK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslateKeyMaterial AWS API Documentation
+    #
+    # @overload translate_key_material(params = {})
+    # @param [Hash] params ({})
+    def translate_key_material(params = {}, options = {})
+      req = build_request(:translate_key_material, params)
+      req.send_request(options)
+    end
+
     # Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4.
     # For more information, see [Translate PIN data][1] in the *Amazon Web
     # Services Payment Cryptography User Guide*.
@@ -1545,7 +1652,7 @@ module Aws::PaymentCryptographyData
     # encrypted PIN block for use within the service. You can also use ECDH
     # for reveal PIN, wherein the service translates the PIN block from PEK
     # to a ECDH derived encryption key. For more information on establishing
-    # ECDH derived keys, see the [Generating keys][3] in the *Amazon Web
+    # ECDH derived keys, see the [Creating keys][3] in the *Amazon Web
     # Services Payment Cryptography User Guide*.
     #
     # The allowed combinations of PIN block format translations are guided
@@ -2119,7 +2226,7 @@ module Aws::PaymentCryptographyData
     #   The encrypted PIN block data that Amazon Web Services Payment
     #   Cryptography verifies.
     #
-    # @option params [required, String] :primary_account_number
+    # @option params [String] :primary_account_number
     #   The Primary Account Number (PAN), a unique identifier for a payment
     #   credit or debit card that associates the card with a specific account
     #   holder.
@@ -2171,8 +2278,8 @@ module Aws::PaymentCryptographyData
     #       },
     #     },
     #     encrypted_pin_block: "EncryptedPinBlockType", # required
-    #     primary_account_number: "PrimaryAccountNumberType", # required
-    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3, ISO_FORMAT_4
+    #     primary_account_number: "PrimaryAccountNumberType",
+    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_1, ISO_FORMAT_3, ISO_FORMAT_4
     #     pin_data_length: 1,
     #     dukpt_attributes: {
     #       key_serial_number: "HexLength16Or20Or24", # required
@@ -2228,7 +2335,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -793,6 +793,7 @@ module Aws::Backup
     class GetBackupPlanInput
       attr_accessor backup_plan_id: ::String
       attr_accessor version_id: ::String
+      attr_accessor max_scheduled_runs_preview: ::Integer
       SENSITIVE: []
     end
 
@@ -806,6 +807,7 @@ module Aws::Backup
       attr_accessor deletion_date: ::Time
       attr_accessor last_execution_date: ::Time
       attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      attr_accessor scheduled_runs_preview: ::Array[Types::ScheduledPlanExecutionMember]
       SENSITIVE: []
     end
 
@@ -1763,6 +1765,13 @@ module Aws::Backup
       attr_accessor restore_access_backup_vault_arn: ::String
       attr_accessor requester_comment: ::String
       SENSITIVE: [:requester_comment]
+    end
+
+    class ScheduledPlanExecutionMember
+      attr_accessor execution_time: ::Time
+      attr_accessor rule_id: ::String
+      attr_accessor rule_execution_type: ("CONTINUOUS" | "SNAPSHOTS" | "CONTINUOUS_AND_SNAPSHOTS")
+      SENSITIVE: []
     end
 
     class ServiceUnavailableException

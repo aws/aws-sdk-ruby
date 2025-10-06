@@ -1363,6 +1363,15 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -2772,6 +2781,15 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -3945,6 +3963,15 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -6335,6 +6362,15 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -7315,6 +7351,15 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -8328,6 +8373,15 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -9224,6 +9278,15 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -10707,6 +10770,15 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_code #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.caption_language_mappings[0].language_description #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.klv_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_package_group_settings.mediapackage_v2_group_settings.timed_metadata_passthrough #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.acquisition_point_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.audio_only_timecode_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
@@ -14434,7 +14506,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -964,6 +964,13 @@ module Aws::CleanRooms
     #   The types of change requests that are automatically approved for this
     #   collaboration.
     #
+    # @option params [Array<String>] :allowed_result_regions
+    #   The Amazon Web Services Regions where collaboration query results can
+    #   be stored. When specified, results can only be written to these
+    #   Regions. This parameter enables you to meet your compliance and data
+    #   governance requirements, and implement regional data governance
+    #   policies.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -1033,6 +1040,7 @@ module Aws::CleanRooms
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
     #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER
+    #     allowed_result_regions: ["us-west-1"], # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-east-2, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1
     #   })
     #
     # @example Response structure
@@ -1057,6 +1065,8 @@ module Aws::CleanRooms
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.allowed_result_regions #=> Array
+    #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaboration AWS API Documentation
     #
@@ -1253,6 +1263,7 @@ module Aws::CleanRooms
     #     description: "TableDescription",
     #     table_reference: { # required
     #       glue: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         table_name: "GlueTableName", # required
     #         database_name: "GlueDatabaseName", # required
     #       },
@@ -1272,6 +1283,7 @@ module Aws::CleanRooms
     #         },
     #       },
     #       athena: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         work_group: "AthenaWorkGroup", # required
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
@@ -1292,6 +1304,7 @@ module Aws::CleanRooms
     #   resp.configured_table.arn #=> String
     #   resp.configured_table.name #=> String
     #   resp.configured_table.description #=> String
+    #   resp.configured_table.table_reference.glue.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.glue.table_name #=> String
     #   resp.configured_table.table_reference.glue.database_name #=> String
     #   resp.configured_table.table_reference.snowflake.secret_arn #=> String
@@ -1302,6 +1315,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.snowflake.table_schema.v1 #=> Array
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_name #=> String
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_type #=> String
+    #   resp.configured_table.table_reference.athena.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.athena.work_group #=> String
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
@@ -2394,6 +2408,8 @@ module Aws::CleanRooms
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.allowed_result_regions #=> Array
+    #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaboration AWS API Documentation
     #
@@ -2720,6 +2736,7 @@ module Aws::CleanRooms
     #   resp.configured_table.arn #=> String
     #   resp.configured_table.name #=> String
     #   resp.configured_table.description #=> String
+    #   resp.configured_table.table_reference.glue.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.glue.table_name #=> String
     #   resp.configured_table.table_reference.glue.database_name #=> String
     #   resp.configured_table.table_reference.snowflake.secret_arn #=> String
@@ -2730,6 +2747,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.snowflake.table_schema.v1 #=> Array
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_name #=> String
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_type #=> String
+    #   resp.configured_table.table_reference.athena.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.athena.work_group #=> String
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
@@ -5112,6 +5130,8 @@ module Aws::CleanRooms
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.allowed_result_regions #=> Array
+    #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaboration AWS API Documentation
     #
@@ -5220,6 +5240,7 @@ module Aws::CleanRooms
     #     description: "TableDescription",
     #     table_reference: {
     #       glue: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         table_name: "GlueTableName", # required
     #         database_name: "GlueDatabaseName", # required
     #       },
@@ -5239,6 +5260,7 @@ module Aws::CleanRooms
     #         },
     #       },
     #       athena: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         work_group: "AthenaWorkGroup", # required
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
@@ -5256,6 +5278,7 @@ module Aws::CleanRooms
     #   resp.configured_table.arn #=> String
     #   resp.configured_table.name #=> String
     #   resp.configured_table.description #=> String
+    #   resp.configured_table.table_reference.glue.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.glue.table_name #=> String
     #   resp.configured_table.table_reference.glue.database_name #=> String
     #   resp.configured_table.table_reference.snowflake.secret_arn #=> String
@@ -5266,6 +5289,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.snowflake.table_schema.v1 #=> Array
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_name #=> String
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_type #=> String
+    #   resp.configured_table.table_reference.athena.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.athena.work_group #=> String
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
@@ -5976,7 +6000,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

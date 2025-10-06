@@ -440,6 +440,7 @@ module Aws::MediaConnect
     AddMediaStreamRequest.add_member(:media_stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "mediaStreamName"))
     AddMediaStreamRequest.add_member(:media_stream_type, Shapes::ShapeRef.new(shape: MediaStreamType, required: true, location_name: "mediaStreamType"))
     AddMediaStreamRequest.add_member(:video_format, Shapes::ShapeRef.new(shape: String, location_name: "videoFormat"))
+    AddMediaStreamRequest.add_member(:media_stream_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "mediaStreamTags"))
     AddMediaStreamRequest.struct_class = Types::AddMediaStreamRequest
 
     AddOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOfString, location_name: "cidrAllowList"))
@@ -451,7 +452,7 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:min_latency, Shapes::ShapeRef.new(shape: Integer, location_name: "minLatency"))
     AddOutputRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     AddOutputRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
-    AddOutputRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    AddOutputRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     AddOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: String, location_name: "remoteId"))
     AddOutputRequest.add_member(:sender_control_port, Shapes::ShapeRef.new(shape: Integer, location_name: "senderControlPort"))
     AddOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: Integer, location_name: "smoothingLatency"))
@@ -460,6 +461,7 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:output_status, Shapes::ShapeRef.new(shape: OutputStatus, location_name: "outputStatus"))
     AddOutputRequest.add_member(:ndi_speed_hq_quality, Shapes::ShapeRef.new(shape: Integer, location_name: "ndiSpeedHqQuality"))
     AddOutputRequest.add_member(:ndi_program_name, Shapes::ShapeRef.new(shape: String, location_name: "ndiProgramName"))
+    AddOutputRequest.add_member(:output_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "outputTags"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
 
     AudioMonitoringSetting.add_member(:silent_audio, Shapes::ShapeRef.new(shape: SilentAudio, location_name: "silentAudio"))
@@ -553,6 +555,7 @@ module Aws::MediaConnect
     CreateFlowRequest.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     CreateFlowRequest.add_member(:flow_size, Shapes::ShapeRef.new(shape: FlowSize, location_name: "flowSize"))
     CreateFlowRequest.add_member(:ndi_config, Shapes::ShapeRef.new(shape: NdiConfig, location_name: "ndiConfig"))
+    CreateFlowRequest.add_member(:flow_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "flowTags"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -777,6 +780,7 @@ module Aws::MediaConnect
     GrantEntitlementRequest.add_member(:entitlement_status, Shapes::ShapeRef.new(shape: EntitlementStatus, location_name: "entitlementStatus"))
     GrantEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     GrantEntitlementRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOfString, required: true, location_name: "subscribers"))
+    GrantEntitlementRequest.add_member(:entitlement_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "entitlementTags"))
     GrantEntitlementRequest.struct_class = Types::GrantEntitlementRequest
 
     GrantFlowEntitlements420Exception.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1124,6 +1128,7 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: String, location_name: "vpcInterfaceName"))
     SetSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: String, location_name: "whitelistCidr"))
     SetSourceRequest.add_member(:gateway_bridge_source, Shapes::ShapeRef.new(shape: SetGatewayBridgeSourceRequest, location_name: "gatewayBridgeSource"))
+    SetSourceRequest.add_member(:source_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "sourceTags"))
     SetSourceRequest.struct_class = Types::SetSourceRequest
 
     SilentAudio.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
@@ -1350,6 +1355,7 @@ module Aws::MediaConnect
     UpdateFlowRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: UpdateMaintenance, location_name: "maintenance"))
     UpdateFlowRequest.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     UpdateFlowRequest.add_member(:ndi_config, Shapes::ShapeRef.new(shape: NdiConfig, location_name: "ndiConfig"))
+    UpdateFlowRequest.add_member(:flow_size, Shapes::ShapeRef.new(shape: FlowSize, location_name: "flowSize"))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -1422,6 +1428,7 @@ module Aws::MediaConnect
     VpcInterfaceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
     VpcInterfaceRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOfString, required: true, location_name: "securityGroupIds"))
     VpcInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
+    VpcInterfaceRequest.add_member(:vpc_interface_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "vpcInterfaceTags"))
     VpcInterfaceRequest.struct_class = Types::VpcInterfaceRequest
 
     __listOfAddBridgeOutputRequest.member = Shapes::ShapeRef.new(shape: AddBridgeOutputRequest)

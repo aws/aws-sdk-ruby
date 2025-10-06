@@ -58,10 +58,14 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # An ACL with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ACLAlreadyExistsFault AWS API Documentation
     #
     class ACLAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # The specified ACL does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ACLNotFoundFault AWS API Documentation
     #
     class ACLNotFoundFault < Aws::EmptyStructure; end
@@ -85,6 +89,9 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of ACLs allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ACLQuotaExceededFault AWS API Documentation
     #
     class ACLQuotaExceededFault < Aws::EmptyStructure; end
@@ -103,6 +110,9 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The customer has exceeded the maximum number of API requests allowed
+    # per time period.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/APICallRateForCustomerExceededFault AWS API Documentation
     #
     class APICallRateForCustomerExceededFault < Aws::EmptyStructure; end
@@ -380,6 +390,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A cluster with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ClusterAlreadyExistsFault AWS API Documentation
     #
     class ClusterAlreadyExistsFault < Aws::EmptyStructure; end
@@ -481,6 +493,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The specified cluster does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ClusterNotFoundFault AWS API Documentation
     #
     class ClusterNotFoundFault < Aws::EmptyStructure; end
@@ -509,6 +523,9 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of clusters allowed for this customer.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ClusterQuotaForCustomerExceededFault AWS API Documentation
     #
     class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure; end
@@ -1055,6 +1072,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A default user is required and must be specified.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DefaultUserRequired AWS API Documentation
     #
     class DefaultUserRequired < Aws::EmptyStructure; end
@@ -1533,6 +1552,110 @@ module Aws::MemoryDB
     class DescribeMultiRegionClustersResponse < Struct.new(
       :next_token,
       :multi_region_clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multi_region_parameter_group_name
+    #   The request for information on a specific multi-region parameter
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxResults value, a token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeMultiRegionParameterGroupsRequest AWS API Documentation
+    #
+    class DescribeMultiRegionParameterGroupsRequest < Struct.new(
+      :multi_region_parameter_group_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional token to include in the response. If this token is
+    #   provided, the response includes only results beyond the token, up to
+    #   the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_region_parameter_groups
+    #   A list of multi-region parameter groups. Each element in the list
+    #   contains detailed information about one parameter group.
+    #   @return [Array<Types::MultiRegionParameterGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeMultiRegionParameterGroupsResponse AWS API Documentation
+    #
+    class DescribeMultiRegionParameterGroupsResponse < Struct.new(
+      :next_token,
+      :multi_region_parameter_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multi_region_parameter_group_name
+    #   The name of the multi-region parameter group to return details for.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The parameter types to return. Valid values: user \| system \|
+    #   engine-default
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxResults value, a token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeMultiRegionParametersRequest AWS API Documentation
+    #
+    class DescribeMultiRegionParametersRequest < Struct.new(
+      :multi_region_parameter_group_name,
+      :source,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional token to include in the response. If this token is
+    #   provided, the response includes only results beyond the token, up to
+    #   the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_region_parameters
+    #   A list of parameters specific to a particular multi-region parameter
+    #   group. Each element in the list contains detailed information about
+    #   one parameter.
+    #   @return [Array<Types::MultiRegionParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeMultiRegionParametersResponse AWS API Documentation
+    #
+    class DescribeMultiRegionParametersResponse < Struct.new(
+      :next_token,
+      :multi_region_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2044,6 +2167,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A user with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DuplicateUserNameFault AWS API Documentation
     #
     class DuplicateUserNameFault < Aws::EmptyStructure; end
@@ -2181,26 +2306,39 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The cluster does not have sufficient capacity to perform the requested
+    # operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InsufficientClusterCapacityFault AWS API Documentation
     #
     class InsufficientClusterCapacityFault < Aws::EmptyStructure; end
 
+    # The ACL is not in a valid state for the requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidACLStateFault AWS API Documentation
     #
     class InvalidACLStateFault < Aws::EmptyStructure; end
 
+    # The specified Amazon Resource Name (ARN) is not valid.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidARNFault AWS API Documentation
     #
     class InvalidARNFault < Aws::EmptyStructure; end
 
+    # The cluster is not in a valid state for the requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidClusterStateFault AWS API Documentation
     #
     class InvalidClusterStateFault < Aws::EmptyStructure; end
 
+    # The provided credentials are not valid.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidCredentialsException AWS API Documentation
     #
     class InvalidCredentialsException < Aws::EmptyStructure; end
 
+    # The specified KMS key is not valid or accessible.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidKMSKeyFault AWS API Documentation
     #
     class InvalidKMSKeyFault < Aws::EmptyStructure; end
@@ -2212,10 +2350,14 @@ module Aws::MemoryDB
     #
     class InvalidMultiRegionClusterStateFault < Aws::EmptyStructure; end
 
+    # The node is not in a valid state for the requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidNodeStateFault AWS API Documentation
     #
     class InvalidNodeStateFault < Aws::EmptyStructure; end
 
+    # The specified parameter combination is not valid.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2227,10 +2369,15 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The parameter group is not in a valid state for the requested
+    # operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidParameterGroupStateFault AWS API Documentation
     #
     class InvalidParameterGroupStateFault < Aws::EmptyStructure; end
 
+    # The specified parameter value is not valid.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2242,18 +2389,26 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The snapshot is not in a valid state for the requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidSnapshotStateFault AWS API Documentation
     #
     class InvalidSnapshotStateFault < Aws::EmptyStructure; end
 
+    # The specified subnet is not valid.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidSubnet AWS API Documentation
     #
     class InvalidSubnet < Aws::EmptyStructure; end
 
+    # The user is not in a valid state for the requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidUserStateFault AWS API Documentation
     #
     class InvalidUserStateFault < Aws::EmptyStructure; end
 
+    # The VPC network is not in a valid state for the requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/InvalidVPCNetworkStateFault AWS API Documentation
     #
     class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
@@ -2420,12 +2575,92 @@ module Aws::MemoryDB
     #
     class MultiRegionClusterNotFoundFault < Aws::EmptyStructure; end
 
+    # Describes an individual setting that controls some aspect of MemoryDB
+    # behavior across multiple regions.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Indicates the source of the parameter value. Valid values: user \|
+    #   system \| engine-default
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The valid data type for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The valid range of values for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_engine_version
+    #   The earliest engine version to which the parameter can apply.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/MultiRegionParameter AWS API Documentation
+    #
+    class MultiRegionParameter < Struct.new(
+      :name,
+      :value,
+      :description,
+      :source,
+      :data_type,
+      :allowed_values,
+      :minimum_engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateMultiRegionParameterGroup operation.
+    # A multi-region parameter group represents a collection of parameters
+    # that can be applied to clusters across multiple regions.
+    #
+    # @!attribute [rw] name
+    #   The name of the multi-region parameter group.
+    #   @return [String]
+    #
+    # @!attribute [rw] family
+    #   The name of the parameter group family that this multi-region
+    #   parameter group is compatible with.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the multi-region parameter group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the multi-region parameter group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/MultiRegionParameterGroup AWS API Documentation
+    #
+    class MultiRegionParameterGroup < Struct.new(
+      :name,
+      :family,
+      :description,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified multi-Region parameter group does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/MultiRegionParameterGroupNotFoundFault AWS API Documentation
     #
     class MultiRegionParameterGroupNotFoundFault < Aws::EmptyStructure; end
 
+    # The requested operation would result in no changes.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/NoOperationFault AWS API Documentation
     #
     class NoOperationFault < Aws::EmptyStructure; end
@@ -2468,10 +2703,16 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of nodes allowed for this cluster.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/NodeQuotaForClusterExceededFault AWS API Documentation
     #
     class NodeQuotaForClusterExceededFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of nodes allowed for this customer.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/NodeQuotaForCustomerExceededFault AWS API Documentation
     #
     class NodeQuotaForCustomerExceededFault < Aws::EmptyStructure; end
@@ -2548,14 +2789,21 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A parameter group with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ParameterGroupAlreadyExistsFault AWS API Documentation
     #
     class ParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # The specified parameter group does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ParameterGroupNotFoundFault AWS API Documentation
     #
     class ParameterGroupNotFoundFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of parameter groups allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ParameterGroupQuotaExceededFault AWS API Documentation
     #
     class ParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
@@ -2912,6 +3160,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The required service-linked role was not found.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ServiceLinkedRoleNotFoundFault AWS API Documentation
     #
     class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure; end
@@ -2970,6 +3220,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The specified service update does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ServiceUpdateNotFoundFault AWS API Documentation
     #
     class ServiceUpdateNotFoundFault < Aws::EmptyStructure; end
@@ -3091,10 +3343,15 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The specified shard does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ShardNotFoundFault AWS API Documentation
     #
     class ShardNotFoundFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of shards allowed per cluster.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/ShardsPerClusterQuotaExceededFault AWS API Documentation
     #
     class ShardsPerClusterQuotaExceededFault < Aws::EmptyStructure; end
@@ -3166,14 +3423,21 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A snapshot with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SnapshotAlreadyExistsFault AWS API Documentation
     #
     class SnapshotAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # The specified snapshot does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SnapshotNotFoundFault AWS API Documentation
     #
     class SnapshotNotFoundFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of snapshots allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SnapshotQuotaExceededFault AWS API Documentation
     #
     class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
@@ -3258,30 +3522,46 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A subnet group with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetGroupAlreadyExistsFault AWS API Documentation
     #
     class SubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # The subnet group is currently in use and cannot be deleted.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetGroupInUseFault AWS API Documentation
     #
     class SubnetGroupInUseFault < Aws::EmptyStructure; end
 
+    # The specified subnet group does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetGroupNotFoundFault AWS API Documentation
     #
     class SubnetGroupNotFoundFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of subnet groups allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetGroupQuotaExceededFault AWS API Documentation
     #
     class SubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The subnet is currently in use and cannot be deleted.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetInUse AWS API Documentation
     #
     class SubnetInUse < Aws::EmptyStructure; end
 
+    # The specified subnet is not allowed for this operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetNotAllowedFault AWS API Documentation
     #
     class SubnetNotAllowedFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of subnets allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/SubnetQuotaExceededFault AWS API Documentation
     #
     class SubnetQuotaExceededFault < Aws::EmptyStructure; end
@@ -3314,10 +3594,15 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # The specified tag does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/TagNotFoundFault AWS API Documentation
     #
     class TagNotFoundFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of tags allowed per resource.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/TagQuotaPerResourceExceeded AWS API Documentation
     #
     class TagQuotaPerResourceExceeded < Aws::EmptyStructure; end
@@ -3354,6 +3639,8 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # Test failover is not available for this cluster configuration.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/TestFailoverNotAvailableFault AWS API Documentation
     #
     class TestFailoverNotAvailableFault < Aws::EmptyStructure; end
@@ -3787,14 +4074,21 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # A user with the specified name already exists.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/UserAlreadyExistsFault AWS API Documentation
     #
     class UserAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # The specified user does not exist.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/UserNotFoundFault AWS API Documentation
     #
     class UserNotFoundFault < Aws::EmptyStructure; end
 
+    # The request cannot be processed because it would exceed the maximum
+    # number of users allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/UserQuotaExceededFault AWS API Documentation
     #
     class UserQuotaExceededFault < Aws::EmptyStructure; end

@@ -148,6 +148,7 @@ module Aws::MediaConnect
       attr_accessor media_stream_name: ::String
       attr_accessor media_stream_type: ("video" | "audio" | "ancillary-data")
       attr_accessor video_format: ::String
+      attr_accessor media_stream_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -170,6 +171,7 @@ module Aws::MediaConnect
       attr_accessor output_status: ("ENABLED" | "DISABLED")
       attr_accessor ndi_speed_hq_quality: ::Integer
       attr_accessor ndi_program_name: ::String
+      attr_accessor output_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -295,6 +297,7 @@ module Aws::MediaConnect
       attr_accessor source_monitoring_config: Types::MonitoringConfig
       attr_accessor flow_size: ("MEDIUM" | "LARGE")
       attr_accessor ndi_config: Types::NdiConfig
+      attr_accessor flow_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -613,6 +616,7 @@ module Aws::MediaConnect
       attr_accessor entitlement_status: ("ENABLED" | "DISABLED")
       attr_accessor name: ::String
       attr_accessor subscribers: ::Array[::String]
+      attr_accessor entitlement_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1096,6 +1100,7 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: ::String
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::SetGatewayBridgeSourceRequest
+      attr_accessor source_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1394,6 +1399,7 @@ module Aws::MediaConnect
       attr_accessor maintenance: Types::UpdateMaintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
       attr_accessor ndi_config: Types::NdiConfig
+      attr_accessor flow_size: ("MEDIUM" | "LARGE")
       SENSITIVE: []
     end
 
@@ -1490,6 +1496,7 @@ module Aws::MediaConnect
       attr_accessor role_arn: ::String
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_id: ::String
+      attr_accessor vpc_interface_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
   end

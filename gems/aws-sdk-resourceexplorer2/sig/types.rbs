@@ -24,8 +24,8 @@ module Aws::ResourceExplorer2
     end
 
     class BatchGetViewError
-      attr_accessor error_message: ::String
       attr_accessor view_arn: ::String
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -35,8 +35,8 @@ module Aws::ResourceExplorer2
     end
 
     class BatchGetViewOutput
-      attr_accessor errors: ::Array[Types::BatchGetViewError]
       attr_accessor views: ::Array[Types::View]
+      attr_accessor errors: ::Array[Types::BatchGetViewError]
       SENSITIVE: []
     end
 
@@ -53,18 +53,30 @@ module Aws::ResourceExplorer2
 
     class CreateIndexOutput
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
       attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateResourceExplorerSetupInput
+      attr_accessor region_list: ::Array[::String]
+      attr_accessor aggregator_regions: ::Array[::String]
+      attr_accessor view_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceExplorerSetupOutput
+      attr_accessor task_id: ::String
       SENSITIVE: []
     end
 
     class CreateViewInput
       attr_accessor client_token: ::String
-      attr_accessor filters: Types::SearchFilter
+      attr_accessor view_name: ::String
       attr_accessor included_properties: ::Array[Types::IncludedProperty]
       attr_accessor scope: ::String
+      attr_accessor filters: Types::SearchFilter
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor view_name: ::String
       SENSITIVE: [:filters, :tags]
     end
 
@@ -80,8 +92,19 @@ module Aws::ResourceExplorer2
 
     class DeleteIndexOutput
       attr_accessor arn: ::String
-      attr_accessor last_updated_at: ::Time
       attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteResourceExplorerSetupInput
+      attr_accessor region_list: ::Array[::String]
+      attr_accessor delete_in_all_regions: bool
+      SENSITIVE: []
+    end
+
+    class DeleteResourceExplorerSetupOutput
+      attr_accessor task_id: ::String
       SENSITIVE: []
     end
 
@@ -92,6 +115,12 @@ module Aws::ResourceExplorer2
 
     class DeleteViewOutput
       attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor code: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -107,13 +136,13 @@ module Aws::ResourceExplorer2
 
     class GetIndexOutput
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor last_updated_at: ::Time
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
       attr_accessor replicating_from: ::Array[::String]
       attr_accessor replicating_to: ::Array[::String]
-      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("LOCAL" | "AGGREGATOR")
       SENSITIVE: [:tags]
     end
 
@@ -127,14 +156,43 @@ module Aws::ResourceExplorer2
       SENSITIVE: []
     end
 
+    class GetResourceExplorerSetupInput
+      attr_accessor task_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceExplorerSetupOutput
+      attr_accessor regions: ::Array[Types::RegionStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceIndexOutput
+      attr_accessor arn: ::String
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class GetServiceViewInput
+      attr_accessor service_view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceViewOutput
+      attr_accessor view: Types::ServiceView
+      SENSITIVE: []
+    end
+
     class GetViewInput
       attr_accessor view_arn: ::String
       SENSITIVE: []
     end
 
     class GetViewOutput
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor view: Types::View
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
     end
 
@@ -144,9 +202,16 @@ module Aws::ResourceExplorer2
     end
 
     class Index
-      attr_accessor arn: ::String
       attr_accessor region: ::String
+      attr_accessor arn: ::String
       attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class IndexStatus
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS" | "SKIPPED")
+      attr_accessor index: Types::Index
+      attr_accessor error_details: Types::ErrorDetails
       SENSITIVE: []
     end
 
@@ -169,10 +234,10 @@ module Aws::ResourceExplorer2
     end
 
     class ListIndexesInput
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      attr_accessor regions: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor regions: ::Array[::String]
-      attr_accessor type: ("LOCAL" | "AGGREGATOR")
       SENSITIVE: []
     end
 
@@ -190,35 +255,72 @@ module Aws::ResourceExplorer2
     end
 
     class ListManagedViewsOutput
-      attr_accessor managed_views: ::Array[::String]
       attr_accessor next_token: ::String
+      attr_accessor managed_views: ::Array[::String]
       SENSITIVE: []
     end
 
     class ListResourcesInput
       attr_accessor filters: Types::SearchFilter
       attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor view_arn: ::String
+      attr_accessor next_token: ::String
       SENSITIVE: [:filters]
     end
 
     class ListResourcesOutput
-      attr_accessor next_token: ::String
       attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
       attr_accessor view_arn: ::String
       SENSITIVE: []
     end
 
-    class ListSupportedResourceTypesInput
+    class ListServiceIndexesInput
+      attr_accessor regions: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
-    class ListSupportedResourceTypesOutput
+    class ListServiceIndexesOutput
+      attr_accessor indexes: ::Array[Types::Index]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceViewsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceViewsOutput
+      attr_accessor next_token: ::String
+      attr_accessor service_views: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListStreamingAccessForServicesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamingAccessForServicesOutput
+      attr_accessor streaming_access_for_services: ::Array[Types::StreamingAccessDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportedResourceTypesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSupportedResourceTypesOutput
       attr_accessor resource_types: ::Array[Types::SupportedResourceType]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -233,35 +335,35 @@ module Aws::ResourceExplorer2
     end
 
     class ListViewsInput
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListViewsOutput
-      attr_accessor next_token: ::String
       attr_accessor views: ::Array[::String]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ManagedView
-      attr_accessor filters: Types::SearchFilter
-      attr_accessor included_properties: ::Array[Types::IncludedProperty]
-      attr_accessor last_updated_at: ::Time
       attr_accessor managed_view_arn: ::String
       attr_accessor managed_view_name: ::String
-      attr_accessor owner: ::String
-      attr_accessor resource_policy: ::String
-      attr_accessor scope: ::String
       attr_accessor trusted_service: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor owner: ::String
+      attr_accessor scope: ::String
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor resource_policy: ::String
       attr_accessor version: ::String
       SENSITIVE: [:filters]
     end
 
     class MemberIndex
       attr_accessor account_id: ::String
-      attr_accessor arn: ::String
       attr_accessor region: ::String
+      attr_accessor arn: ::String
       attr_accessor type: ("LOCAL" | "AGGREGATOR")
       SENSITIVE: []
     end
@@ -272,20 +374,27 @@ module Aws::ResourceExplorer2
       SENSITIVE: []
     end
 
+    class RegionStatus
+      attr_accessor region: ::String
+      attr_accessor index: Types::IndexStatus
+      attr_accessor view: Types::ViewStatus
+      SENSITIVE: []
+    end
+
     class Resource
       attr_accessor arn: ::String
-      attr_accessor last_reported_at: ::Time
       attr_accessor owning_account_id: ::String
-      attr_accessor properties: ::Array[Types::ResourceProperty]
       attr_accessor region: ::String
       attr_accessor resource_type: ::String
       attr_accessor service: ::String
+      attr_accessor last_reported_at: ::Time
+      attr_accessor properties: ::Array[Types::ResourceProperty]
       SENSITIVE: []
     end
 
     class ResourceCount
-      attr_accessor complete: bool
       attr_accessor total_resources: ::Integer
+      attr_accessor complete: bool
       SENSITIVE: []
     end
 
@@ -295,9 +404,9 @@ module Aws::ResourceExplorer2
     end
 
     class ResourceProperty
-      attr_accessor data: untyped
-      attr_accessor last_reported_at: ::Time
       attr_accessor name: ::String
+      attr_accessor last_reported_at: ::Time
+      attr_accessor data: untyped
       SENSITIVE: []
     end
 
@@ -307,18 +416,18 @@ module Aws::ResourceExplorer2
     end
 
     class SearchInput
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor query_string: ::String
+      attr_accessor max_results: ::Integer
       attr_accessor view_arn: ::String
+      attr_accessor next_token: ::String
       SENSITIVE: [:query_string]
     end
 
     class SearchOutput
-      attr_accessor count: Types::ResourceCount
-      attr_accessor next_token: ::String
       attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
       attr_accessor view_arn: ::String
+      attr_accessor count: Types::ResourceCount
       SENSITIVE: []
     end
 
@@ -329,15 +438,30 @@ module Aws::ResourceExplorer2
       SENSITIVE: []
     end
 
+    class ServiceView
+      attr_accessor service_view_arn: ::String
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor streaming_access_for_service: ::String
+      attr_accessor scope_type: ::String
+      SENSITIVE: [:filters]
+    end
+
+    class StreamingAccessDetails
+      attr_accessor service_principal: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class SupportedResourceType
-      attr_accessor resource_type: ::String
       attr_accessor service: ::String
+      attr_accessor resource_type: ::String
       SENSITIVE: []
     end
 
     class TagResourceInput
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
     end
 
@@ -371,16 +495,16 @@ module Aws::ResourceExplorer2
 
     class UpdateIndexTypeOutput
       attr_accessor arn: ::String
-      attr_accessor last_updated_at: ::Time
-      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
       attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      attr_accessor last_updated_at: ::Time
       SENSITIVE: []
     end
 
     class UpdateViewInput
-      attr_accessor filters: Types::SearchFilter
-      attr_accessor included_properties: ::Array[Types::IncludedProperty]
       attr_accessor view_arn: ::String
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor filters: Types::SearchFilter
       SENSITIVE: [:filters]
     end
 
@@ -390,8 +514,8 @@ module Aws::ResourceExplorer2
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
@@ -402,13 +526,20 @@ module Aws::ResourceExplorer2
     end
 
     class View
-      attr_accessor filters: Types::SearchFilter
-      attr_accessor included_properties: ::Array[Types::IncludedProperty]
-      attr_accessor last_updated_at: ::Time
-      attr_accessor owner: ::String
-      attr_accessor scope: ::String
       attr_accessor view_arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor scope: ::String
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor filters: Types::SearchFilter
       SENSITIVE: [:filters]
+    end
+
+    class ViewStatus
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS" | "SKIPPED")
+      attr_accessor view: Types::View
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
     end
   end
 end

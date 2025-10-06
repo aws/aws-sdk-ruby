@@ -732,11 +732,13 @@ module Aws
         def deletion_date: () -> ::Time
         def last_execution_date: () -> ::Time
         def advanced_backup_settings: () -> ::Array[Types::AdvancedBackupSetting]
+        def scheduled_runs_preview: () -> ::Array[Types::ScheduledPlanExecutionMember]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_plan-instance_method
       def get_backup_plan: (
                              backup_plan_id: ::String,
-                             ?version_id: ::String
+                             ?version_id: ::String,
+                             ?max_scheduled_runs_preview: ::Integer
                            ) -> _GetBackupPlanResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackupPlanResponseSuccess
 

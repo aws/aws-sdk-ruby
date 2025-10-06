@@ -568,7 +568,7 @@ module Aws::QConnect
     #     client_token: "ClientToken",
     #     assistant_id: "UuidOrArn", # required
     #     name: "Name", # required
-    #     type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE
+    #     type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER
     #     configuration: { # required
     #       manual_search_ai_agent_configuration: {
     #         answer_generation_ai_prompt_id: "UuidWithQualifier",
@@ -701,6 +701,96 @@ module Aws::QConnect
     #           },
     #         ],
     #       },
+    #       email_response_ai_agent_configuration: {
+    #         email_response_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       email_overview_ai_agent_configuration: {
+    #         email_overview_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #       },
+    #       email_generative_answer_ai_agent_configuration: {
+    #         email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #     visibility_status: "SAVED", # required, accepts SAVED, PUBLISHED
     #     tags: {
@@ -716,7 +806,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -776,6 +866,46 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_response_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.email_overview_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_generative_answer_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -844,7 +974,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -904,6 +1034,46 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_response_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.email_overview_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_generative_answer_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -1191,15 +1361,6 @@ module Aws::QConnect
 
     # Creates an Amazon Q in Connect AI Prompt.
     #
-    # <note markdown="1"> For more information on supported models, see [Supported models for
-    # system and custom prompts][1].
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -1235,6 +1396,15 @@ module Aws::QConnect
     # @option params [required, String] :model_id
     #   The identifier of the model used for this AI Prompt.
     #
+    #   <note markdown="1"> For information about which models are supported in each Amazon Web
+    #   Services Region, see [Supported models for system/custom prompts][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt
+    #
     # @option params [required, String] :api_format
     #   The API Format of the AI Prompt.
     #
@@ -1261,7 +1431,7 @@ module Aws::QConnect
     #     client_token: "ClientToken",
     #     assistant_id: "UuidOrArn", # required
     #     name: "Name", # required
-    #     type: "ANSWER_GENERATION", # required, accepts ANSWER_GENERATION, INTENT_LABELING_GENERATION, QUERY_REFORMULATION, SELF_SERVICE_PRE_PROCESSING, SELF_SERVICE_ANSWER_GENERATION
+    #     type: "ANSWER_GENERATION", # required, accepts ANSWER_GENERATION, INTENT_LABELING_GENERATION, QUERY_REFORMULATION, SELF_SERVICE_PRE_PROCESSING, SELF_SERVICE_ANSWER_GENERATION, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, EMAIL_QUERY_REFORMULATION
     #     template_configuration: { # required
     #       text_full_ai_prompt_edit_template_configuration: {
     #         text: "TextAIPrompt", # required
@@ -1284,7 +1454,7 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
@@ -1352,7 +1522,7 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
@@ -2621,6 +2791,11 @@ module Aws::QConnect
     #   Agent version) that should be used by Amazon Q in Connect for this
     #   Session.
     #
+    # @option params [String] :contact_arn
+    #   The Amazon Resource Name (ARN) of the email contact in Amazon Connect.
+    #   Used to retrieve email content and establish session context for
+    #   AI-powered email assistance.
+    #
     # @return [Types::CreateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSessionResponse#session #session} => Types::SessionData
@@ -2666,6 +2841,7 @@ module Aws::QConnect
     #         ai_agent_id: "UuidWithQualifier", # required
     #       },
     #     },
+    #     contact_arn: "GenericArn",
     #   })
     #
     # @example Response structure
@@ -3230,7 +3406,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -3290,6 +3466,46 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_response_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.email_overview_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_generative_answer_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -3408,7 +3624,7 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
@@ -4100,7 +4316,7 @@ module Aws::QConnect
     #   resp.recommendations[0].document.excerpt.highlights[0].end_offset_exclusive #=> Integer
     #   resp.recommendations[0].relevance_score #=> Float
     #   resp.recommendations[0].relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
-    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK"
+    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK"
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_arn #=> String
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_id #=> String
     #   resp.recommendations[0].data.reference.content_reference.content_arn #=> String
@@ -4144,6 +4360,14 @@ module Aws::QConnect
     #   resp.recommendations[0].data.details.generative_chunk_data.references #=> Array
     #   resp.recommendations[0].data.details.generative_chunk_data.references[0] #=> Types::DataSummary
     #   resp.recommendations[0].data.details.generative_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.email_response_chunk_data.completion #=> String
+    #   resp.recommendations[0].data.details.email_response_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.email_overview_chunk_data.completion #=> String
+    #   resp.recommendations[0].data.details.email_overview_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.completion #=> String
+    #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.references #=> Array
+    #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.references[0] #=> Types::DataSummary
+    #   resp.recommendations[0].data.details.email_generative_answer_chunk_data.next_chunk_token #=> String
     #   resp.triggers #=> Array
     #   resp.triggers[0].id #=> String
     #   resp.triggers[0].type #=> String, one of "QUERY", "GENERATIVE"
@@ -4262,7 +4486,7 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.assistant_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.assistant_arn #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_id #=> String
-    #   resp.ai_agent_version_summaries[0].ai_agent_summary.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_arn #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.modified_time #=> Time
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -4325,6 +4549,46 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.email_response_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_overview_ai_agent_configuration.email_overview_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_overview_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.email_generative_answer_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.description #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -4384,7 +4648,7 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].assistant_id #=> String
     #   resp.ai_agent_summaries[0].assistant_arn #=> String
     #   resp.ai_agent_summaries[0].ai_agent_id #=> String
-    #   resp.ai_agent_summaries[0].type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE"
+    #   resp.ai_agent_summaries[0].type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
     #   resp.ai_agent_summaries[0].ai_agent_arn #=> String
     #   resp.ai_agent_summaries[0].modified_time #=> Time
     #   resp.ai_agent_summaries[0].visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -4447,6 +4711,46 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent_summaries[0].configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent_summaries[0].configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.email_response_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_summaries[0].configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_summaries[0].configuration.email_overview_ai_agent_configuration.email_overview_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_overview_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.email_generative_answer_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_summaries[0].configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent_summaries[0].origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.ai_agent_summaries[0].description #=> String
     #   resp.ai_agent_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -4625,7 +4929,7 @@ module Aws::QConnect
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.assistant_id #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.assistant_arn #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_id #=> String
-    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_arn #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.modified_time #=> Time
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.template_type #=> String, one of "TEXT"
@@ -4691,7 +4995,7 @@ module Aws::QConnect
     #   resp.ai_prompt_summaries[0].assistant_id #=> String
     #   resp.ai_prompt_summaries[0].assistant_arn #=> String
     #   resp.ai_prompt_summaries[0].ai_prompt_id #=> String
-    #   resp.ai_prompt_summaries[0].type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION"
+    #   resp.ai_prompt_summaries[0].type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
     #   resp.ai_prompt_summaries[0].ai_prompt_arn #=> String
     #   resp.ai_prompt_summaries[0].modified_time #=> Time
     #   resp.ai_prompt_summaries[0].template_type #=> String, one of "TEXT"
@@ -5559,7 +5863,15 @@ module Aws::QConnect
     #   resp.results[0].data.details.generative_chunk_data.references #=> Array
     #   resp.results[0].data.details.generative_chunk_data.references[0] #=> Types::DataSummary
     #   resp.results[0].data.details.generative_chunk_data.next_chunk_token #=> String
-    #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK"
+    #   resp.results[0].data.details.email_response_chunk_data.completion #=> String
+    #   resp.results[0].data.details.email_response_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].data.details.email_overview_chunk_data.completion #=> String
+    #   resp.results[0].data.details.email_overview_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].data.details.email_generative_answer_chunk_data.completion #=> String
+    #   resp.results[0].data.details.email_generative_answer_chunk_data.references #=> Array
+    #   resp.results[0].data.details.email_generative_answer_chunk_data.references[0] #=> Types::DataSummary
+    #   resp.results[0].data.details.email_generative_answer_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/QueryAssistant AWS API Documentation
@@ -5588,7 +5900,7 @@ module Aws::QConnect
     #
     #   resp = client.remove_assistant_ai_agent({
     #     assistant_id: "UuidOrArn", # required
-    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE
+    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RemoveAssistantAIAgent AWS API Documentation
@@ -6564,6 +6876,96 @@ module Aws::QConnect
     #           },
     #         ],
     #       },
+    #       email_response_ai_agent_configuration: {
+    #         email_response_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       email_overview_ai_agent_configuration: {
+    #         email_overview_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #       },
+    #       email_generative_answer_ai_agent_configuration: {
+    #         email_generative_answer_ai_prompt_id: "UuidWithQualifier",
+    #         email_query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString",
+    #         association_configurations: [
+    #           {
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #   })
@@ -6575,7 +6977,7 @@ module Aws::QConnect
     #   resp.ai_agent.ai_agent_id #=> String
     #   resp.ai_agent.ai_agent_arn #=> String
     #   resp.ai_agent.name #=> String
-    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE"
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER"
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
@@ -6635,6 +7037,46 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
     #   resp.ai_agent.configuration.self_service_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_response_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_response_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.email_overview_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_overview_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_generative_answer_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.email_query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.email_generative_answer_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
     #   resp.ai_agent.modified_time #=> Time
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
@@ -6857,8 +7299,8 @@ module Aws::QConnect
     # @option params [String] :model_id
     #   The identifier of the model used for this AI Prompt.
     #
-    #   <note markdown="1"> For more information on supported models, see [Supported models for
-    #   system and custom prompts][1].
+    #   <note markdown="1"> For information about which models are supported in each Amazon Web
+    #   Services Region, see [Supported models for system/custom prompts][1].
     #
     #    </note>
     #
@@ -6893,7 +7335,7 @@ module Aws::QConnect
     #   resp.ai_prompt.ai_prompt_id #=> String
     #   resp.ai_prompt.ai_prompt_arn #=> String
     #   resp.ai_prompt.name #=> String
-    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION"
     #   resp.ai_prompt.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt.model_id #=> String
     #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
@@ -6938,7 +7380,7 @@ module Aws::QConnect
     #
     #   resp = client.update_assistant_ai_agent({
     #     assistant_id: "UuidOrArn", # required
-    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE
+    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER
     #     configuration: { # required
     #       ai_agent_id: "UuidWithQualifier", # required
     #     },
@@ -7828,7 +8270,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

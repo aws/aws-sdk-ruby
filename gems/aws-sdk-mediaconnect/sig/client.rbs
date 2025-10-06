@@ -160,7 +160,8 @@ module Aws
                                         media_stream_id: ::Integer,
                                         media_stream_name: ::String,
                                         media_stream_type: ("video" | "audio" | "ancillary-data"),
-                                        video_format: ::String?
+                                        video_format: ::String?,
+                                        media_stream_tags: Hash[::String, ::String]?
                                       },
                                     ]
                                   ) -> _AddFlowMediaStreamsResponseSuccess
@@ -213,7 +214,7 @@ module Aws
                                   min_latency: ::Integer?,
                                   name: ::String?,
                                   port: ::Integer?,
-                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
+                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
                                   remote_id: ::String?,
                                   sender_control_port: ::Integer?,
                                   smoothing_latency: ::Integer?,
@@ -223,7 +224,8 @@ module Aws
                                   }?,
                                   output_status: ("ENABLED" | "DISABLED")?,
                                   ndi_speed_hq_quality: ::Integer?,
-                                  ndi_program_name: ::String?
+                                  ndi_program_name: ::String?,
+                                  output_tags: Hash[::String, ::String]?
                                 },
                               ]
                             ) -> _AddFlowOutputsResponseSuccess
@@ -285,7 +287,8 @@ module Aws
                                     vpc_interface_attachment: {
                                       vpc_interface_name: ::String?
                                     }?
-                                  }?
+                                  }?,
+                                  source_tags: Hash[::String, ::String]?
                                 },
                               ]
                             ) -> _AddFlowSourcesResponseSuccess
@@ -305,7 +308,8 @@ module Aws
                                          network_interface_type: ("ena" | "efa")?,
                                          role_arn: ::String,
                                          security_group_ids: Array[::String],
-                                         subnet_id: ::String
+                                         subnet_id: ::String,
+                                         vpc_interface_tags: Hash[::String, ::String]?
                                        },
                                      ]
                                    ) -> _AddFlowVpcInterfacesResponseSuccess
@@ -394,7 +398,8 @@ module Aws
                              }?,
                              entitlement_status: ("ENABLED" | "DISABLED")?,
                              name: ::String?,
-                             subscribers: Array[::String]
+                             subscribers: Array[::String],
+                             entitlement_tags: Hash[::String, ::String]?
                            },
                          ],
                          ?media_streams: Array[
@@ -416,7 +421,8 @@ module Aws
                              media_stream_id: ::Integer,
                              media_stream_name: ::String,
                              media_stream_type: ("video" | "audio" | "ancillary-data"),
-                             video_format: ::String?
+                             video_format: ::String?,
+                             media_stream_tags: Hash[::String, ::String]?
                            },
                          ],
                          name: ::String,
@@ -459,7 +465,7 @@ module Aws
                              min_latency: ::Integer?,
                              name: ::String?,
                              port: ::Integer?,
-                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
+                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
                              remote_id: ::String?,
                              sender_control_port: ::Integer?,
                              smoothing_latency: ::Integer?,
@@ -469,7 +475,8 @@ module Aws
                              }?,
                              output_status: ("ENABLED" | "DISABLED")?,
                              ndi_speed_hq_quality: ::Integer?,
-                             ndi_program_name: ::String?
+                             ndi_program_name: ::String?,
+                             output_tags: Hash[::String, ::String]?
                            },
                          ],
                          ?source: {
@@ -519,7 +526,8 @@ module Aws
                              vpc_interface_attachment: {
                                vpc_interface_name: ::String?
                              }?
-                           }?
+                           }?,
+                           source_tags: Hash[::String, ::String]?
                          },
                          ?source_failover_config: {
                            failover_mode: ("MERGE" | "FAILOVER")?,
@@ -577,7 +585,8 @@ module Aws
                                vpc_interface_attachment: {
                                  vpc_interface_name: ::String?
                                }?
-                             }?
+                             }?,
+                             source_tags: Hash[::String, ::String]?
                            },
                          ],
                          ?vpc_interfaces: Array[
@@ -586,7 +595,8 @@ module Aws
                              network_interface_type: ("ena" | "efa")?,
                              role_arn: ::String,
                              security_group_ids: Array[::String],
-                             subnet_id: ::String
+                             subnet_id: ::String,
+                             vpc_interface_tags: Hash[::String, ::String]?
                            },
                          ],
                          ?maintenance: {
@@ -628,7 +638,8 @@ module Aws
                                vpc_interface_adapter: ::String
                              },
                            ]?
-                         }
+                         },
+                         ?flow_tags: Hash[::String, ::String]
                        ) -> _CreateFlowResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowResponseSuccess
 
@@ -800,7 +811,8 @@ module Aws
                                          }?,
                                          entitlement_status: ("ENABLED" | "DISABLED")?,
                                          name: ::String?,
-                                         subscribers: Array[::String]
+                                         subscribers: Array[::String],
+                                         entitlement_tags: Hash[::String, ::String]?
                                        },
                                      ],
                                      flow_arn: ::String
@@ -1173,7 +1185,8 @@ module Aws
                                vpc_interface_adapter: ::String
                              },
                            ]?
-                         }
+                         },
+                         ?flow_size: ("MEDIUM" | "LARGE")
                        ) -> _UpdateFlowResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowResponseSuccess
 

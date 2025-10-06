@@ -8414,6 +8414,10 @@ module Aws::Glue
     #   based on row-level results.
     #   @return [Hash<String,Float>]
     #
+    # @!attribute [rw] labels
+    #   A map containing labels assigned to the data quality rule.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResult AWS API Documentation
     #
     class DataQualityRuleResult < Struct.new(
@@ -8423,7 +8427,8 @@ module Aws::Glue
       :result,
       :evaluated_metrics,
       :evaluated_rule,
-      :rule_metrics)
+      :rule_metrics,
+      :labels)
       SENSITIVE = [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
       include Aws::Structure
     end

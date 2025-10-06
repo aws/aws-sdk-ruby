@@ -481,9 +481,6 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :agent_runtime_name
     #   The name of the AgentCore Runtime.
     #
-    # @option params [String] :description
-    #   The description of the AgentCore Runtime.
-    #
     # @option params [required, Types::AgentRuntimeArtifact] :agent_runtime_artifact
     #   The artifact of the AgentCore Runtime.
     #
@@ -493,10 +490,6 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the AgentCore Runtime.
     #
-    # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -504,8 +497,8 @@ module Aws::BedrockAgentCoreControl
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [Hash<String,String>] :environment_variables
-    #   Environment variables to set in the AgentCore Runtime environment.
+    # @option params [String] :description
+    #   The description of the AgentCore Runtime.
     #
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
     #   The authorizer configuration for the AgentCore Runtime.
@@ -513,6 +506,16 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::RequestHeaderConfiguration] :request_header_configuration
     #   Configuration for HTTP request headers that will be passed through to
     #   the runtime.
+    #
+    # @option params [Types::ProtocolConfiguration] :protocol_configuration
+    #   The protocol configuration for an agent runtime. This structure
+    #   defines how the agent runtime communicates with clients.
+    #
+    # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
+    #   The life cycle configuration for the AgentCore Runtime.
+    #
+    # @option params [Hash<String,String>] :environment_variables
+    #   Environment variables to set in the AgentCore Runtime environment.
     #
     # @option params [Hash<String,String>] :tags
     #   A map of tag keys and values to assign to the agent runtime. Tags
@@ -532,7 +535,6 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp = client.create_agent_runtime({
     #     agent_runtime_name: "AgentRuntimeName", # required
-    #     description: "Description",
     #     agent_runtime_artifact: { # required
     #       container_configuration: {
     #         container_uri: "RuntimeContainerUri", # required
@@ -546,13 +548,8 @@ module Aws::BedrockAgentCoreControl
     #         subnets: ["SubnetId"], # required
     #       },
     #     },
-    #     protocol_configuration: {
-    #       server_protocol: "MCP", # required, accepts MCP, HTTP
-    #     },
     #     client_token: "ClientToken",
-    #     environment_variables: {
-    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #     },
+    #     description: "Description",
     #     authorizer_configuration: {
     #       custom_jwt_authorizer: {
     #         discovery_url: "DiscoveryUrl", # required
@@ -562,6 +559,16 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     request_header_configuration: {
     #       request_header_allowlist: ["HeaderName"],
+    #     },
+    #     protocol_configuration: {
+    #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A
+    #     },
+    #     lifecycle_configuration: {
+    #       idle_runtime_session_timeout: 1,
+    #       max_lifetime: 1,
+    #     },
+    #     environment_variables: {
+    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1221,6 +1228,11 @@ module Aws::BedrockAgentCoreControl
     #   The memory strategies to use for this memory. Strategies define how
     #   information is extracted, processed, and consolidated.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to an AgentCore Memory. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateMemoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMemoryOutput#memory #memory} => Types::Memory
@@ -1286,6 +1298,9 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1785,21 +1800,22 @@ module Aws::BedrockAgentCoreControl
     # @return [Types::GetAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAgentRuntimeResponse#agent_runtime_arn #agent_runtime_arn} => String
-    #   * {Types::GetAgentRuntimeResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
     #   * {Types::GetAgentRuntimeResponse#agent_runtime_name #agent_runtime_name} => String
-    #   * {Types::GetAgentRuntimeResponse#description #description} => String
     #   * {Types::GetAgentRuntimeResponse#agent_runtime_id #agent_runtime_id} => String
     #   * {Types::GetAgentRuntimeResponse#agent_runtime_version #agent_runtime_version} => String
     #   * {Types::GetAgentRuntimeResponse#created_at #created_at} => Time
     #   * {Types::GetAgentRuntimeResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetAgentRuntimeResponse#role_arn #role_arn} => String
-    #   * {Types::GetAgentRuntimeResponse#agent_runtime_artifact #agent_runtime_artifact} => Types::AgentRuntimeArtifact
     #   * {Types::GetAgentRuntimeResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
+    #   * {Types::GetAgentRuntimeResponse#status #status} => String
+    #   * {Types::GetAgentRuntimeResponse#lifecycle_configuration #lifecycle_configuration} => Types::LifecycleConfiguration
+    #   * {Types::GetAgentRuntimeResponse#description #description} => String
+    #   * {Types::GetAgentRuntimeResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
+    #   * {Types::GetAgentRuntimeResponse#agent_runtime_artifact #agent_runtime_artifact} => Types::AgentRuntimeArtifact
     #   * {Types::GetAgentRuntimeResponse#protocol_configuration #protocol_configuration} => Types::ProtocolConfiguration
     #   * {Types::GetAgentRuntimeResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
     #   * {Types::GetAgentRuntimeResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
     #   * {Types::GetAgentRuntimeResponse#request_header_configuration #request_header_configuration} => Types::RequestHeaderConfiguration
-    #   * {Types::GetAgentRuntimeResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1811,21 +1827,24 @@ module Aws::BedrockAgentCoreControl
     # @example Response structure
     #
     #   resp.agent_runtime_arn #=> String
-    #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.agent_runtime_name #=> String
-    #   resp.description #=> String
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.role_arn #=> String
-    #   resp.agent_runtime_artifact.container_configuration.container_uri #=> String
     #   resp.network_configuration.network_mode #=> String, one of "PUBLIC", "VPC"
     #   resp.network_configuration.network_mode_config.security_groups #=> Array
     #   resp.network_configuration.network_mode_config.security_groups[0] #=> String
     #   resp.network_configuration.network_mode_config.subnets #=> Array
     #   resp.network_configuration.network_mode_config.subnets[0] #=> String
-    #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
+    #   resp.lifecycle_configuration.max_lifetime #=> Integer
+    #   resp.description #=> String
+    #   resp.workload_identity_details.workload_identity_arn #=> String
+    #   resp.agent_runtime_artifact.container_configuration.container_uri #=> String
+    #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP", "A2A"
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
@@ -1835,7 +1854,6 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
     #   resp.request_header_configuration.request_header_allowlist #=> Array
     #   resp.request_header_configuration.request_header_allowlist[0] #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -3054,9 +3072,6 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :agent_runtime_id
     #   The unique identifier of the AgentCore Runtime to update.
     #
-    # @option params [String] :description
-    #   The updated description of the AgentCore Runtime.
-    #
     # @option params [required, Types::AgentRuntimeArtifact] :agent_runtime_artifact
     #   The updated artifact of the AgentCore Runtime.
     #
@@ -3067,20 +3082,8 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, Types::NetworkConfiguration] :network_configuration
     #   The updated network configuration for the AgentCore Runtime.
     #
-    # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
-    #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier to ensure idempotency of the
-    #   request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [Hash<String,String>] :environment_variables
-    #   Updated environment variables to set in the AgentCore Runtime
-    #   environment.
+    # @option params [String] :description
+    #   The updated description of the AgentCore Runtime.
     #
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
     #   The updated authorizer configuration for the AgentCore Runtime.
@@ -3088,6 +3091,24 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::RequestHeaderConfiguration] :request_header_configuration
     #   The updated configuration for HTTP request headers that will be passed
     #   through to the runtime.
+    #
+    # @option params [Types::ProtocolConfiguration] :protocol_configuration
+    #   The protocol configuration for an agent runtime. This structure
+    #   defines how the agent runtime communicates with clients.
+    #
+    # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
+    #   The updated life cycle configuration for the AgentCore Runtime.
+    #
+    # @option params [Hash<String,String>] :environment_variables
+    #   Updated environment variables to set in the AgentCore Runtime
+    #   environment.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3103,7 +3124,6 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp = client.update_agent_runtime({
     #     agent_runtime_id: "AgentRuntimeId", # required
-    #     description: "Description",
     #     agent_runtime_artifact: { # required
     #       container_configuration: {
     #         container_uri: "RuntimeContainerUri", # required
@@ -3117,13 +3137,7 @@ module Aws::BedrockAgentCoreControl
     #         subnets: ["SubnetId"], # required
     #       },
     #     },
-    #     protocol_configuration: {
-    #       server_protocol: "MCP", # required, accepts MCP, HTTP
-    #     },
-    #     client_token: "ClientToken",
-    #     environment_variables: {
-    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
-    #     },
+    #     description: "Description",
     #     authorizer_configuration: {
     #       custom_jwt_authorizer: {
     #         discovery_url: "DiscoveryUrl", # required
@@ -3134,6 +3148,17 @@ module Aws::BedrockAgentCoreControl
     #     request_header_configuration: {
     #       request_header_allowlist: ["HeaderName"],
     #     },
+    #     protocol_configuration: {
+    #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A
+    #     },
+    #     lifecycle_configuration: {
+    #       idle_runtime_session_timeout: 1,
+    #       max_lifetime: 1,
+    #     },
+    #     environment_variables: {
+    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -3920,7 +3945,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

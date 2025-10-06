@@ -4023,6 +4023,15 @@ module Aws::MediaLive
     MediaPackageV2DestinationSettings.struct_class = Types::MediaPackageV2DestinationSettings
 
     MediaPackageV2GroupSettings.add_member(:caption_language_mappings, Shapes::ShapeRef.new(shape: __listOfCaptionLanguageMapping, location_name: "captionLanguageMappings"))
+    MediaPackageV2GroupSettings.add_member(:id_3_behavior, Shapes::ShapeRef.new(shape: CmafId3Behavior, location_name: "id3Behavior"))
+    MediaPackageV2GroupSettings.add_member(:klv_behavior, Shapes::ShapeRef.new(shape: CmafKLVBehavior, location_name: "klvBehavior"))
+    MediaPackageV2GroupSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: CmafNielsenId3Behavior, location_name: "nielsenId3Behavior"))
+    MediaPackageV2GroupSettings.add_member(:scte_35_type, Shapes::ShapeRef.new(shape: Scte35Type, location_name: "scte35Type"))
+    MediaPackageV2GroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "segmentLength"))
+    MediaPackageV2GroupSettings.add_member(:segment_length_units, Shapes::ShapeRef.new(shape: CmafIngestSegmentLengthUnits, location_name: "segmentLengthUnits"))
+    MediaPackageV2GroupSettings.add_member(:timed_metadata_id_3_frame, Shapes::ShapeRef.new(shape: CmafTimedMetadataId3Frame, location_name: "timedMetadataId3Frame"))
+    MediaPackageV2GroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "timedMetadataId3Period"))
+    MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
     MediaPackageV2GroupSettings.struct_class = Types::MediaPackageV2GroupSettings
 
     MediaResource.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMediaResourceNeighbor, location_name: "destinations"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2025-10-03)
+------------------
+
+* Feature - Added support for reading data sources across regions, and results delivery to allowedlisted regions.
+
 1.56.0 (2025-10-01)
 ------------------
 

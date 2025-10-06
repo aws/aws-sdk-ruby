@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2025-10-06)
+------------------
+
+* Feature - Enabling Tag-on-Create for AWS Elemental MediaConnect flow-based resource types
+
 1.87.0 (2025-08-26)
 ------------------
 

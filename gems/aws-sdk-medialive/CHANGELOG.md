@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2025-10-03)
+------------------
+
+* Feature - AWS Elemental MediaLive enables Mediapackage V2 users to configure ID3, KLV, Nielsen ID3, and Segment Length related parameters through the Mediapackage output group.
+
 1.163.0 (2025-09-19)
 ------------------
 

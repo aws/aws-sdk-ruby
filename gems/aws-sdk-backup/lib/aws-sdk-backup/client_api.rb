@@ -257,6 +257,7 @@ module Aws::Backup
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxFrameworkInputs = Shapes::IntegerShape.new(name: 'MaxFrameworkInputs')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxScheduledRunsPreview = Shapes::IntegerShape.new(name: 'MaxScheduledRunsPreview')
     MessageCategory = Shapes::StringShape.new(name: 'MessageCategory')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
@@ -329,6 +330,9 @@ module Aws::Backup
     RestoreTestingSelections = Shapes::ListShape.new(name: 'RestoreTestingSelections')
     RestoreValidationStatus = Shapes::StringShape.new(name: 'RestoreValidationStatus')
     RevokeRestoreAccessBackupVaultInput = Shapes::StructureShape.new(name: 'RevokeRestoreAccessBackupVaultInput')
+    RuleExecutionType = Shapes::StringShape.new(name: 'RuleExecutionType')
+    ScheduledPlanExecutionMember = Shapes::StructureShape.new(name: 'ScheduledPlanExecutionMember')
+    ScheduledRunsPreview = Shapes::ListShape.new(name: 'ScheduledRunsPreview')
     SensitiveStringMap = Shapes::MapShape.new(name: 'SensitiveStringMap')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartBackupJobInput = Shapes::StructureShape.new(name: 'StartBackupJobInput')
@@ -1028,6 +1032,7 @@ module Aws::Backup
 
     GetBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     GetBackupPlanInput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "versionId"))
+    GetBackupPlanInput.add_member(:max_scheduled_runs_preview, Shapes::ShapeRef.new(shape: MaxScheduledRunsPreview, location: "querystring", location_name: "MaxScheduledRunsPreview"))
     GetBackupPlanInput.struct_class = Types::GetBackupPlanInput
 
     GetBackupPlanOutput.add_member(:backup_plan, Shapes::ShapeRef.new(shape: BackupPlan, location_name: "BackupPlan"))
@@ -1039,6 +1044,7 @@ module Aws::Backup
     GetBackupPlanOutput.add_member(:deletion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "DeletionDate"))
     GetBackupPlanOutput.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutionDate"))
     GetBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
+    GetBackupPlanOutput.add_member(:scheduled_runs_preview, Shapes::ShapeRef.new(shape: ScheduledRunsPreview, location_name: "ScheduledRunsPreview"))
     GetBackupPlanOutput.struct_class = Types::GetBackupPlanOutput
 
     GetBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -1818,6 +1824,13 @@ module Aws::Backup
     RevokeRestoreAccessBackupVaultInput.add_member(:restore_access_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "restoreAccessBackupVaultArn"))
     RevokeRestoreAccessBackupVaultInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location: "querystring", location_name: "requesterComment"))
     RevokeRestoreAccessBackupVaultInput.struct_class = Types::RevokeRestoreAccessBackupVaultInput
+
+    ScheduledPlanExecutionMember.add_member(:execution_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExecutionTime"))
+    ScheduledPlanExecutionMember.add_member(:rule_id, Shapes::ShapeRef.new(shape: string, location_name: "RuleId"))
+    ScheduledPlanExecutionMember.add_member(:rule_execution_type, Shapes::ShapeRef.new(shape: RuleExecutionType, location_name: "RuleExecutionType"))
+    ScheduledPlanExecutionMember.struct_class = Types::ScheduledPlanExecutionMember
+
+    ScheduledRunsPreview.member = Shapes::ShapeRef.new(shape: ScheduledPlanExecutionMember)
 
     SensitiveStringMap.key = Shapes::ShapeRef.new(shape: String)
     SensitiveStringMap.value = Shapes::ShapeRef.new(shape: String)

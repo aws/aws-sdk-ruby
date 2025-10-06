@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.295.0 (2025-10-06)
+------------------
+
+* Feature - Documentation updates to the CreateDBClusterMessage$PubliclyAccessible and CreateDBInstanceMessage$PubliclyAccessible properties.
+
 1.294.0 (2025-09-30)
 ------------------
 

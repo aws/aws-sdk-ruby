@@ -550,10 +550,6 @@ module Aws::BedrockAgentCoreControl
     #   The name of the AgentCore Runtime.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The description of the AgentCore Runtime.
-    #   @return [String]
-    #
     # @!attribute [rw] agent_runtime_artifact
     #   The artifact of the AgentCore Runtime.
     #   @return [Types::AgentRuntimeArtifact]
@@ -567,11 +563,6 @@ module Aws::BedrockAgentCoreControl
     #   The network configuration for the AgentCore Runtime.
     #   @return [Types::NetworkConfiguration]
     #
-    # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
-    #   @return [Types::ProtocolConfiguration]
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -580,9 +571,9 @@ module Aws::BedrockAgentCoreControl
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] environment_variables
-    #   Environment variables to set in the AgentCore Runtime environment.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] description
+    #   The description of the AgentCore Runtime.
+    #   @return [String]
     #
     # @!attribute [rw] authorizer_configuration
     #   The authorizer configuration for the AgentCore Runtime.
@@ -592,6 +583,19 @@ module Aws::BedrockAgentCoreControl
     #   Configuration for HTTP request headers that will be passed through
     #   to the runtime.
     #   @return [Types::RequestHeaderConfiguration]
+    #
+    # @!attribute [rw] protocol_configuration
+    #   The protocol configuration for an agent runtime. This structure
+    #   defines how the agent runtime communicates with clients.
+    #   @return [Types::ProtocolConfiguration]
+    #
+    # @!attribute [rw] lifecycle_configuration
+    #   The life cycle configuration for the AgentCore Runtime.
+    #   @return [Types::LifecycleConfiguration]
+    #
+    # @!attribute [rw] environment_variables
+    #   Environment variables to set in the AgentCore Runtime environment.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
     #   A map of tag keys and values to assign to the agent runtime. Tags
@@ -603,15 +607,16 @@ module Aws::BedrockAgentCoreControl
     #
     class CreateAgentRuntimeRequest < Struct.new(
       :agent_runtime_name,
-      :description,
       :agent_runtime_artifact,
       :role_arn,
       :network_configuration,
-      :protocol_configuration,
       :client_token,
-      :environment_variables,
+      :description,
       :authorizer_configuration,
       :request_header_configuration,
+      :protocol_configuration,
+      :lifecycle_configuration,
+      :environment_variables,
       :tags)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -1185,6 +1190,12 @@ module Aws::BedrockAgentCoreControl
     #   information is extracted, processed, and consolidated.
     #   @return [Array<Types::MemoryStrategyInput>]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to an AgentCore Memory. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateMemoryInput AWS API Documentation
     #
     class CreateMemoryInput < Struct.new(
@@ -1194,7 +1205,8 @@ module Aws::BedrockAgentCoreControl
       :encryption_key_arn,
       :memory_execution_role_arn,
       :event_expiry_duration,
-      :memory_strategies)
+      :memory_strategies,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -2159,16 +2171,8 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
-    # @!attribute [rw] workload_identity_details
-    #   The workload identity details for the AgentCore Runtime.
-    #   @return [Types::WorkloadIdentityDetails]
-    #
     # @!attribute [rw] agent_runtime_name
     #   The name of the AgentCore Runtime.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the AgentCore Runtime.
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_id
@@ -2192,13 +2196,29 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [String]
     #
-    # @!attribute [rw] agent_runtime_artifact
-    #   The artifact of the AgentCore Runtime.
-    #   @return [Types::AgentRuntimeArtifact]
-    #
     # @!attribute [rw] network_configuration
     #   The network configuration for the AgentCore Runtime.
     #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] status
+    #   The current status of the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_configuration
+    #   The life cycle configuration for the AgentCore Runtime.
+    #   @return [Types::LifecycleConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The description of the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_identity_details
+    #   The workload identity details for the AgentCore Runtime.
+    #   @return [Types::WorkloadIdentityDetails]
+    #
+    # @!attribute [rw] agent_runtime_artifact
+    #   The artifact of the AgentCore Runtime.
+    #   @return [Types::AgentRuntimeArtifact]
     #
     # @!attribute [rw] protocol_configuration
     #   The protocol configuration for an agent runtime. This structure
@@ -2218,29 +2238,26 @@ module Aws::BedrockAgentCoreControl
     #   to the runtime.
     #   @return [Types::RequestHeaderConfiguration]
     #
-    # @!attribute [rw] status
-    #   The current status of the AgentCore Runtime.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
       :agent_runtime_arn,
-      :workload_identity_details,
       :agent_runtime_name,
-      :description,
       :agent_runtime_id,
       :agent_runtime_version,
       :created_at,
       :last_updated_at,
       :role_arn,
-      :agent_runtime_artifact,
       :network_configuration,
+      :status,
+      :lifecycle_configuration,
+      :description,
+      :workload_identity_details,
+      :agent_runtime_artifact,
       :protocol_configuration,
       :environment_variables,
       :authorizer_configuration,
-      :request_header_configuration,
-      :status)
+      :request_header_configuration)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -2877,6 +2894,33 @@ module Aws::BedrockAgentCoreControl
     class KmsConfiguration < Struct.new(
       :key_type,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LifecycleConfiguration lets you manage the lifecycle of runtime
+    # sessions and resources in AgentCore Runtime. This configuration helps
+    # optimize resource utilization by automatically cleaning up idle
+    # sessions and preventing long-running instances from consuming
+    # resources indefinitely.
+    #
+    # @!attribute [rw] idle_runtime_session_timeout
+    #   Timeout in seconds for idle runtime sessions. When a session remains
+    #   idle for this duration, it will be automatically terminated.
+    #   Default: 900 seconds (15 minutes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_lifetime
+    #   Maximum lifetime for the instance in seconds. Once reached,
+    #   instances will be automatically terminated and replaced. Default:
+    #   28800 seconds (8 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LifecycleConfiguration AWS API Documentation
+    #
+    class LifecycleConfiguration < Struct.new(
+      :idle_runtime_session_timeout,
+      :max_lifetime)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4852,10 +4896,6 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the AgentCore Runtime to update.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The updated description of the AgentCore Runtime.
-    #   @return [String]
-    #
     # @!attribute [rw] agent_runtime_artifact
     #   The updated artifact of the AgentCore Runtime.
     #   @return [Types::AgentRuntimeArtifact]
@@ -4869,23 +4909,9 @@ module Aws::BedrockAgentCoreControl
     #   The updated network configuration for the AgentCore Runtime.
     #   @return [Types::NetworkConfiguration]
     #
-    # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
-    #   @return [Types::ProtocolConfiguration]
-    #
-    # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier to ensure idempotency of the
-    #   request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
+    # @!attribute [rw] description
+    #   The updated description of the AgentCore Runtime.
     #   @return [String]
-    #
-    # @!attribute [rw] environment_variables
-    #   Updated environment variables to set in the AgentCore Runtime
-    #   environment.
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] authorizer_configuration
     #   The updated authorizer configuration for the AgentCore Runtime.
@@ -4896,19 +4922,42 @@ module Aws::BedrockAgentCoreControl
     #   passed through to the runtime.
     #   @return [Types::RequestHeaderConfiguration]
     #
+    # @!attribute [rw] protocol_configuration
+    #   The protocol configuration for an agent runtime. This structure
+    #   defines how the agent runtime communicates with clients.
+    #   @return [Types::ProtocolConfiguration]
+    #
+    # @!attribute [rw] lifecycle_configuration
+    #   The updated life cycle configuration for the AgentCore Runtime.
+    #   @return [Types::LifecycleConfiguration]
+    #
+    # @!attribute [rw] environment_variables
+    #   Updated environment variables to set in the AgentCore Runtime
+    #   environment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntimeRequest AWS API Documentation
     #
     class UpdateAgentRuntimeRequest < Struct.new(
       :agent_runtime_id,
-      :description,
       :agent_runtime_artifact,
       :role_arn,
       :network_configuration,
-      :protocol_configuration,
-      :client_token,
-      :environment_variables,
+      :description,
       :authorizer_configuration,
-      :request_header_configuration)
+      :request_header_configuration,
+      :protocol_configuration,
+      :lifecycle_configuration,
+      :environment_variables,
+      :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end

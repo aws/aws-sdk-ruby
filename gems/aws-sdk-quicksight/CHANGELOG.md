@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2025-10-06)
+------------------
+
+* Feature - Documentation improvements for QuickSight API documentation to clarify that delete operation APIs are global.
+
 1.159.0 (2025-09-30)
 ------------------
 

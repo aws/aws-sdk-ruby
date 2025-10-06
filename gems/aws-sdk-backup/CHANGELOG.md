@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2025-10-06)
+------------------
+
+* Feature - Adds optional MaxScheduledRunsPreview input to GetBackupPlan API to provide a preview of up to 10 next scheduled backup plan runs in the GetBackupPlan response.
+
 1.95.0 (2025-08-26)
 ------------------
 

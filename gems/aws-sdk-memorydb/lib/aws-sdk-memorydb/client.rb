@@ -2014,6 +2014,110 @@ module Aws::MemoryDB
       req.send_request(options)
     end
 
+    # Returns a list of multi-region parameter groups.
+    #
+    # @option params [String] :multi_region_parameter_group_name
+    #   The request for information on a specific multi-region parameter
+    #   group.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @return [Types::DescribeMultiRegionParameterGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMultiRegionParameterGroupsResponse#next_token #next_token} => String
+    #   * {Types::DescribeMultiRegionParameterGroupsResponse#multi_region_parameter_groups #multi_region_parameter_groups} => Array&lt;Types::MultiRegionParameterGroup&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_multi_region_parameter_groups({
+    #     multi_region_parameter_group_name: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.multi_region_parameter_groups #=> Array
+    #   resp.multi_region_parameter_groups[0].name #=> String
+    #   resp.multi_region_parameter_groups[0].family #=> String
+    #   resp.multi_region_parameter_groups[0].description #=> String
+    #   resp.multi_region_parameter_groups[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeMultiRegionParameterGroups AWS API Documentation
+    #
+    # @overload describe_multi_region_parameter_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_multi_region_parameter_groups(params = {}, options = {})
+      req = build_request(:describe_multi_region_parameter_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns the detailed parameter list for a particular multi-region
+    # parameter group.
+    #
+    # @option params [required, String] :multi_region_parameter_group_name
+    #   The name of the multi-region parameter group to return details for.
+    #
+    # @option params [String] :source
+    #   The parameter types to return. Valid values: user \| system \|
+    #   engine-default
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @return [Types::DescribeMultiRegionParametersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMultiRegionParametersResponse#next_token #next_token} => String
+    #   * {Types::DescribeMultiRegionParametersResponse#multi_region_parameters #multi_region_parameters} => Array&lt;Types::MultiRegionParameter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_multi_region_parameters({
+    #     multi_region_parameter_group_name: "String", # required
+    #     source: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.multi_region_parameters #=> Array
+    #   resp.multi_region_parameters[0].name #=> String
+    #   resp.multi_region_parameters[0].value #=> String
+    #   resp.multi_region_parameters[0].description #=> String
+    #   resp.multi_region_parameters[0].source #=> String
+    #   resp.multi_region_parameters[0].data_type #=> String
+    #   resp.multi_region_parameters[0].allowed_values #=> String
+    #   resp.multi_region_parameters[0].minimum_engine_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeMultiRegionParameters AWS API Documentation
+    #
+    # @overload describe_multi_region_parameters(params = {})
+    # @param [Hash] params ({})
+    def describe_multi_region_parameters(params = {}, options = {})
+      req = build_request(:describe_multi_region_parameters, params)
+      req.send_request(options)
+    end
+
     # Returns a list of parameter group descriptions. If a parameter group
     # name is specified, the list contains only the descriptions for that
     # group.
@@ -3440,7 +3544,7 @@ module Aws::MemoryDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

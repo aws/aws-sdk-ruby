@@ -5685,6 +5685,15 @@ module Aws::MediaLive
 
     class MediaPackageV2GroupSettings
       attr_accessor caption_language_mappings: ::Array[Types::CaptionLanguageMapping]
+      attr_accessor id_3_behavior: ("DISABLED" | "ENABLED")
+      attr_accessor klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")
+      attr_accessor segment_length: ::Integer
+      attr_accessor segment_length_units: ("MILLISECONDS" | "SECONDS")
+      attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
+      attr_accessor timed_metadata_id_3_period: ::Integer
+      attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
   end

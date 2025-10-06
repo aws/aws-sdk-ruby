@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-10-03)
+------------------
+
+* Feature - Updated Amazon Q in Connect APIs to support Email Contact Recommendations.
+
 1.40.0 (2025-08-26)
 ------------------
 

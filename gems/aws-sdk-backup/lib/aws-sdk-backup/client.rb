@@ -2426,6 +2426,11 @@ module Aws::Backup
     #   Unique, randomly generated, Unicode, UTF-8 encoded strings that are at
     #   most 1,024 bytes long. Version IDs cannot be edited.
     #
+    # @option params [Integer] :max_scheduled_runs_preview
+    #   Number of future scheduled backup runs to preview. When set to 0
+    #   (default), no scheduled runs preview is included in the response.
+    #   Valid range is 0-10.
+    #
     # @return [Types::GetBackupPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBackupPlanOutput#backup_plan #backup_plan} => Types::BackupPlan
@@ -2437,12 +2442,14 @@ module Aws::Backup
     #   * {Types::GetBackupPlanOutput#deletion_date #deletion_date} => Time
     #   * {Types::GetBackupPlanOutput#last_execution_date #last_execution_date} => Time
     #   * {Types::GetBackupPlanOutput#advanced_backup_settings #advanced_backup_settings} => Array&lt;Types::AdvancedBackupSetting&gt;
+    #   * {Types::GetBackupPlanOutput#scheduled_runs_preview #scheduled_runs_preview} => Array&lt;Types::ScheduledPlanExecutionMember&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_backup_plan({
     #     backup_plan_id: "string", # required
     #     version_id: "string",
+    #     max_scheduled_runs_preview: 1,
     #   })
     #
     # @example Response structure
@@ -2485,6 +2492,10 @@ module Aws::Backup
     #   resp.advanced_backup_settings[0].resource_type #=> String
     #   resp.advanced_backup_settings[0].backup_options #=> Hash
     #   resp.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
+    #   resp.scheduled_runs_preview #=> Array
+    #   resp.scheduled_runs_preview[0].execution_time #=> Time
+    #   resp.scheduled_runs_preview[0].rule_id #=> String
+    #   resp.scheduled_runs_preview[0].rule_execution_type #=> String, one of "CONTINUOUS", "SNAPSHOTS", "CONTINUOUS_AND_SNAPSHOTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlan AWS API Documentation
     #
@@ -5590,6 +5601,13 @@ module Aws::Backup
     #
     # Does not support continuous backups.
     #
+    # See [Copy job retry][1] for information on how Backup retries copy job
+    # operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/recov-point-create-a-copy.html#backup-copy-retry
+    #
     # @option params [required, String] :recovery_point_arn
     #   An ARN that uniquely identifies a recovery point to use for the copy
     #   job; for example,
@@ -6143,9 +6161,15 @@ module Aws::Backup
     # to determine the current settings.
     #
     # @option params [Hash<String,String>] :global_settings
+    #   Inputs can include:
+    #
     #   A value for `isCrossAccountBackupEnabled` and a Region. Example:
     #   `update-global-settings --global-settings
     #   isCrossAccountBackupEnabled=false --region us-west-2`.
+    #
+    #   A value for Multi-party approval, styled as "Mpa": `isMpaEnabled`.
+    #   Values can be true or false. Example: `update-global-settings
+    #   --global-settings isMpaEnabled=false --region us-west-2`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6596,7 +6620,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

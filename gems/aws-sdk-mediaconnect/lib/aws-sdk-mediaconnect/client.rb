@@ -633,6 +633,9 @@ module Aws::MediaConnect
     #         media_stream_name: "String", # required
     #         media_stream_type: "video", # required, accepts video, audio, ancillary-data
     #         video_format: "String",
+    #         media_stream_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #   })
@@ -724,7 +727,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "String",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
     #         remote_id: "String",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -735,6 +738,9 @@ module Aws::MediaConnect
     #         output_status: "ENABLED", # accepts ENABLED, DISABLED
     #         ndi_speed_hq_quality: 1,
     #         ndi_program_name: "String",
+    #         output_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #   })
@@ -869,6 +875,9 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String",
     #           },
     #         },
+    #         source_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #   })
@@ -957,6 +966,9 @@ module Aws::MediaConnect
     #         role_arn: "String", # required
     #         security_group_ids: ["String"], # required
     #         subnet_id: "String", # required
+    #         vpc_interface_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #   })
@@ -1166,6 +1178,9 @@ module Aws::MediaConnect
     #   Specifies the configuration settings for NDI outputs. Required when
     #   the flow includes NDI outputs.
     #
+    # @option params [Hash<String,String>] :flow_tags
+    #   The key-value pairs that can be used to tag and organize the flow.
+    #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowResponse#flow #flow} => Types::Flow
@@ -1192,6 +1207,9 @@ module Aws::MediaConnect
     #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "String",
     #         subscribers: ["String"], # required
+    #         entitlement_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #     media_streams: [
@@ -1214,6 +1232,9 @@ module Aws::MediaConnect
     #         media_stream_name: "String", # required
     #         media_stream_type: "video", # required, accepts video, audio, ancillary-data
     #         video_format: "String",
+    #         media_stream_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #     name: "String", # required
@@ -1256,7 +1277,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "String",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
     #         remote_id: "String",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -1267,6 +1288,9 @@ module Aws::MediaConnect
     #         output_status: "ENABLED", # accepts ENABLED, DISABLED
     #         ndi_speed_hq_quality: 1,
     #         ndi_program_name: "String",
+    #         output_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #     source: {
@@ -1316,6 +1340,9 @@ module Aws::MediaConnect
     #         vpc_interface_attachment: {
     #           vpc_interface_name: "String",
     #         },
+    #       },
+    #       source_tags: {
+    #         "String" => "String",
     #       },
     #     },
     #     source_failover_config: {
@@ -1375,6 +1402,9 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String",
     #           },
     #         },
+    #         source_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #     vpc_interfaces: [
@@ -1384,6 +1414,9 @@ module Aws::MediaConnect
     #         role_arn: "String", # required
     #         security_group_ids: ["String"], # required
     #         subnet_id: "String", # required
+    #         vpc_interface_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #     maintenance: {
@@ -1425,6 +1458,9 @@ module Aws::MediaConnect
     #           vpc_interface_adapter: "String", # required
     #         },
     #       ],
+    #     },
+    #     flow_tags: {
+    #       "String" => "String",
     #     },
     #   })
     #
@@ -2449,6 +2485,9 @@ module Aws::MediaConnect
     #         entitlement_status: "ENABLED", # accepts ENABLED, DISABLED
     #         name: "String",
     #         subscribers: ["String"], # required
+    #         entitlement_tags: {
+    #           "String" => "String",
+    #         },
     #       },
     #     ],
     #     flow_arn: "GrantFlowEntitlementsRequestFlowArnString", # required
@@ -3638,6 +3677,9 @@ module Aws::MediaConnect
     #   Specifies the configuration settings for NDI outputs. Required when
     #   the flow includes NDI outputs.
     #
+    # @option params [String] :flow_size
+    #   Determines the processing capacity and feature set of the flow.
+    #
     # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowResponse#flow #flow} => Types::Flow
@@ -3694,6 +3736,7 @@ module Aws::MediaConnect
     #         },
     #       ],
     #     },
+    #     flow_size: "MEDIUM", # accepts MEDIUM, LARGE
     #   })
     #
     # @example Response structure
@@ -4562,7 +4605,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

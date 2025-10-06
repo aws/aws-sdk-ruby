@@ -487,6 +487,176 @@ module Aws::BedrockAgentCore
 
     # @!group API Operations
 
+    # Creates multiple memory records in a single batch operation for the
+    # specified memory with custom content.
+    #
+    # @option params [required, String] :memory_id
+    #   The unique ID of the memory resource where records will be created.
+    #
+    # @option params [required, Array<Types::MemoryRecordCreateInput>] :records
+    #   A list of memory record creation inputs to be processed in the batch
+    #   operation.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotent processing of
+    #   the batch request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::BatchCreateMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
+    #   * {Types::BatchCreateMemoryRecordsOutput#failed_records #failed_records} => Array&lt;Types::MemoryRecordOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_memory_records({
+    #     memory_id: "MemoryId", # required
+    #     records: [ # required
+    #       {
+    #         request_identifier: "RequestIdentifier", # required
+    #         namespaces: ["Namespace"], # required
+    #         content: { # required
+    #           text: "MemoryContentTextString",
+    #         },
+    #         timestamp: Time.now, # required
+    #         memory_strategy_id: "MemoryStrategyId",
+    #       },
+    #     ],
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_records #=> Array
+    #   resp.successful_records[0].memory_record_id #=> String
+    #   resp.successful_records[0].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.successful_records[0].request_identifier #=> String
+    #   resp.successful_records[0].error_code #=> Integer
+    #   resp.successful_records[0].error_message #=> String
+    #   resp.failed_records #=> Array
+    #   resp.failed_records[0].memory_record_id #=> String
+    #   resp.failed_records[0].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.failed_records[0].request_identifier #=> String
+    #   resp.failed_records[0].error_code #=> Integer
+    #   resp.failed_records[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchCreateMemoryRecords AWS API Documentation
+    #
+    # @overload batch_create_memory_records(params = {})
+    # @param [Hash] params ({})
+    def batch_create_memory_records(params = {}, options = {})
+      req = build_request(:batch_create_memory_records, params)
+      req.send_request(options)
+    end
+
+    # Deletes multiple memory records in a single batch operation from the
+    # specified memory.
+    #
+    # @option params [required, String] :memory_id
+    #   The unique ID of the memory resource where records will be deleted.
+    #
+    # @option params [required, Array<Types::MemoryRecordDeleteInput>] :records
+    #   A list of memory record deletion inputs to be processed in the batch
+    #   operation.
+    #
+    # @return [Types::BatchDeleteMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
+    #   * {Types::BatchDeleteMemoryRecordsOutput#failed_records #failed_records} => Array&lt;Types::MemoryRecordOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_memory_records({
+    #     memory_id: "MemoryId", # required
+    #     records: [ # required
+    #       {
+    #         memory_record_id: "MemoryRecordId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_records #=> Array
+    #   resp.successful_records[0].memory_record_id #=> String
+    #   resp.successful_records[0].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.successful_records[0].request_identifier #=> String
+    #   resp.successful_records[0].error_code #=> Integer
+    #   resp.successful_records[0].error_message #=> String
+    #   resp.failed_records #=> Array
+    #   resp.failed_records[0].memory_record_id #=> String
+    #   resp.failed_records[0].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.failed_records[0].request_identifier #=> String
+    #   resp.failed_records[0].error_code #=> Integer
+    #   resp.failed_records[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchDeleteMemoryRecords AWS API Documentation
+    #
+    # @overload batch_delete_memory_records(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_memory_records(params = {}, options = {})
+      req = build_request(:batch_delete_memory_records, params)
+      req.send_request(options)
+    end
+
+    # Updates multiple memory records with custom content in a single batch
+    # operation within the specified memory.
+    #
+    # @option params [required, String] :memory_id
+    #   The unique ID of the memory resource where records will be updated.
+    #
+    # @option params [required, Array<Types::MemoryRecordUpdateInput>] :records
+    #   A list of memory record update inputs to be processed in the batch
+    #   operation.
+    #
+    # @return [Types::BatchUpdateMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
+    #   * {Types::BatchUpdateMemoryRecordsOutput#failed_records #failed_records} => Array&lt;Types::MemoryRecordOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_memory_records({
+    #     memory_id: "MemoryId", # required
+    #     records: [ # required
+    #       {
+    #         memory_record_id: "MemoryRecordId", # required
+    #         timestamp: Time.now, # required
+    #         content: {
+    #           text: "MemoryContentTextString",
+    #         },
+    #         namespaces: ["Namespace"],
+    #         memory_strategy_id: "MemoryStrategyId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_records #=> Array
+    #   resp.successful_records[0].memory_record_id #=> String
+    #   resp.successful_records[0].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.successful_records[0].request_identifier #=> String
+    #   resp.successful_records[0].error_code #=> Integer
+    #   resp.successful_records[0].error_message #=> String
+    #   resp.failed_records #=> Array
+    #   resp.failed_records[0].memory_record_id #=> String
+    #   resp.failed_records[0].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.failed_records[0].request_identifier #=> String
+    #   resp.failed_records[0].error_code #=> Integer
+    #   resp.failed_records[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchUpdateMemoryRecords AWS API Documentation
+    #
+    # @overload batch_update_memory_records(params = {})
+    # @param [Hash] params ({})
+    def batch_update_memory_records(params = {}, options = {})
+      req = build_request(:batch_update_memory_records, params)
+      req.send_request(options)
+    end
+
     # Creates an event in an AgentCore Memory resource. Events represent
     # interactions or activities that occur within a session and are
     # associated with specific actors.
@@ -529,6 +699,9 @@ module Aws::BedrockAgentCore
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,Types::MetadataValue>] :metadata
+    #   The key-value metadata to attach to the event.
+    #
     # @return [Types::CreateEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventOutput#event #event} => Types::Event
@@ -557,6 +730,11 @@ module Aws::BedrockAgentCore
     #       name: "BranchName", # required
     #     },
     #     client_token: "String",
+    #     metadata: {
+    #       "MetadataKey" => {
+    #         string_value: "MetadataValueStringValueString",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -571,6 +749,8 @@ module Aws::BedrockAgentCore
     #   resp.event.payload[0].conversational.role #=> String, one of "ASSISTANT", "USER", "TOOL", "OTHER"
     #   resp.event.branch.root_event_id #=> String
     #   resp.event.branch.name #=> String
+    #   resp.event.metadata #=> Hash
+    #   resp.event.metadata["MetadataKey"].string_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreateEvent AWS API Documentation
     #
@@ -647,7 +827,7 @@ module Aws::BedrockAgentCore
     #
     #   resp = client.delete_memory_record({
     #     memory_id: "MemoryId", # required
-    #     memory_record_id: "String", # required
+    #     memory_record_id: "MemoryRecordId", # required
     #   })
     #
     # @example Response structure
@@ -660,6 +840,51 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def delete_memory_record(params = {}, options = {})
       req = build_request(:delete_memory_record, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the A2A agent card associated with an AgentCore Runtime
+    # agent.
+    #
+    # @option params [String] :runtime_session_id
+    #   The session ID that the AgentCore Runtime agent is using.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :agent_runtime_arn
+    #   The ARN of the AgentCore Runtime agent for which you want to get the
+    #   A2A agent card.
+    #
+    # @option params [String] :qualifier
+    #   Optional qualifier to specify an agent alias, such as `prod`code&gt;
+    #   or `dev`. If you don't provide a value, the DEFAULT alias is used.
+    #
+    # @return [Types::GetAgentCardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentCardResponse#runtime_session_id #runtime_session_id} => String
+    #   * {Types::GetAgentCardResponse#agent_card #agent_card} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetAgentCardResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_card({
+    #     runtime_session_id: "SessionType",
+    #     agent_runtime_arn: "String", # required
+    #     qualifier: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runtime_session_id #=> String
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetAgentCard AWS API Documentation
+    #
+    # @overload get_agent_card(params = {})
+    # @param [Hash] params ({})
+    def get_agent_card(params = {}, options = {})
+      req = build_request(:get_agent_card, params)
       req.send_request(options)
     end
 
@@ -843,6 +1068,8 @@ module Aws::BedrockAgentCore
     #   resp.event.payload[0].conversational.role #=> String, one of "ASSISTANT", "USER", "TOOL", "OTHER"
     #   resp.event.branch.root_event_id #=> String
     #   resp.event.branch.name #=> String
+    #   resp.event.metadata #=> Hash
+    #   resp.event.metadata["MetadataKey"].string_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetEvent AWS API Documentation
     #
@@ -873,7 +1100,7 @@ module Aws::BedrockAgentCore
     #
     #   resp = client.get_memory_record({
     #     memory_id: "MemoryId", # required
-    #     memory_record_id: "String", # required
+    #     memory_record_id: "MemoryRecordId", # required
     #   })
     #
     # @example Response structure
@@ -894,14 +1121,15 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Retrieves an API Key associated with an API Key Credential Provider
+    # Retrieves the API key associated with an API key credential provider.
     #
     # @option params [required, String] :workload_identity_token
-    #   The identity token of the workload you want to get the API Key of.
+    #   The identity token of the workload from which you want to retrieve the
+    #   API key.
     #
     # @option params [required, String] :resource_credential_provider_name
-    #   The credential provider name of the resource you are retrieving the
-    #   API Key of.
+    #   The credential provider name for the resource from which you are
+    #   retrieving the API key.
     #
     # @return [Types::GetResourceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -927,32 +1155,34 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Returns the OAuth 2.0 token of the provided resource
+    # Returns the OAuth 2.0 token of the provided resource.
     #
     # @option params [required, String] :workload_identity_token
-    #   The identity token of the workload you want to retrive the Oauth2
-    #   Token of.
+    #   The identity token of the workload from which you want to retrieve the
+    #   OAuth2 token.
     #
     # @option params [required, String] :resource_credential_provider_name
-    #   Reference to the credential provider
+    #   The name of the resource's credential provider.
     #
     # @option params [required, Array<String>] :scopes
-    #   The OAuth scopes requested
+    #   The OAuth scopes being requested.
     #
     # @option params [required, String] :oauth2_flow
-    #   The type of flow to be performed
+    #   The type of flow to be performed.
     #
     # @option params [String] :resource_oauth_2_return_url
-    #   Callback url to redirect after token retrieval completes. Should be
-    #   one of the provideded urls during WorkloadIdentity creation
+    #   The callback URL to redirect to after the OAuth 2.0 token retrieval is
+    #   complete. This URL must be one of the provided URLs configured for the
+    #   workload identity.
     #
     # @option params [Boolean] :force_authentication
-    #   If true, always initiate a new 3LO flow
+    #   Indicates whether to always initiate a new three-legged OAuth (3LO)
+    #   flow, regardless of any existing session.
     #
     # @option params [Hash<String,String>] :custom_parameters
-    #   Gives the ability to send extra/custom parameters to the resource
-    #   credentials provider during the authorization process. Standard OAuth2
-    #   flow parameters will not be overriden.
+    #   A map of custom parameters to include in the authorization request to
+    #   the resource credential provider. These parameters are in addition to
+    #   the standard OAuth 2.0 flow parameters, and will not override them.
     #
     # @return [Types::GetResourceOauth2TokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -987,11 +1217,11 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Obtains an Workload access token for agentic workloads not acting on
-    # behalf of user.
+    # Obtains a workload access token for agentic workloads not acting on
+    # behalf of a user.
     #
     # @option params [required, String] :workload_name
-    #   Unique identifier for the registered agent
+    #   The unique identifier for the registered workload.
     #
     # @return [Types::GetWorkloadAccessTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1016,14 +1246,14 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Obtains an Workload access token for agentic workloads acting on
-    # behalf of user with JWT token
+    # Obtains a workload access token for agentic workloads acting on behalf
+    # of a user, using a JWT token.
     #
     # @option params [required, String] :workload_name
-    #   Unique identifier for the registered agent
+    #   The unique identifier for the registered workload.
     #
     # @option params [required, String] :user_token
-    #   OAuth2 token issued by the user's identity provider
+    #   The OAuth 2.0 token issued by the user's identity provider.
     #
     # @return [Types::GetWorkloadAccessTokenForJWTResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1049,14 +1279,15 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Obtains an Workload access token for agentic workloads acting on
-    # behalf of user with User Id.
+    # Obtains a workload access token for agentic workloads acting on behalf
+    # of a user, using the user's ID.
     #
     # @option params [required, String] :workload_name
-    #   The name of the worklaod you want to get the access token of.
+    #   The name of the workload from which you want to retrieve the access
+    #   token.
     #
     # @option params [required, String] :user_id
-    #   The user id of the user you are retrieving the access token for.
+    #   The ID of the user for whom you are retrieving the access token.
     #
     # @return [Types::GetWorkloadAccessTokenForUserIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1785,6 +2016,19 @@ module Aws::BedrockAgentCore
     #         name: "BranchName", # required
     #         include_parent_branches: false,
     #       },
+    #       event_metadata: [
+    #         {
+    #           left: { # required
+    #             metadata_key: "MetadataKey",
+    #           },
+    #           operator: "EQUALS_TO", # required, accepts EQUALS_TO, EXISTS, NOT_EXISTS
+    #           right: {
+    #             metadata_value: {
+    #               string_value: "MetadataValueStringValueString",
+    #             },
+    #           },
+    #         },
+    #       ],
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1803,6 +2047,8 @@ module Aws::BedrockAgentCore
     #   resp.events[0].payload[0].conversational.role #=> String, one of "ASSISTANT", "USER", "TOOL", "OTHER"
     #   resp.events[0].branch.root_event_id #=> String
     #   resp.events[0].branch.name #=> String
+    #   resp.events[0].metadata #=> Hash
+    #   resp.events[0].metadata["MetadataKey"].string_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListEvents AWS API Documentation
@@ -2136,9 +2382,9 @@ module Aws::BedrockAgentCore
     #
     # @option params [Integer] :session_timeout_seconds
     #   The time in seconds after which the session automatically terminates
-    #   if there is no activity. The default value is 3600 seconds (1 hour).
-    #   The minimum allowed value is 60 seconds, and the maximum allowed value
-    #   is 28800 seconds (8 hours).
+    #   if there is no activity. The default value is 900 seconds (15
+    #   minutes). The minimum allowed value is 60 seconds, and the maximum
+    #   allowed value is 28800 seconds (8 hours).
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -2308,6 +2554,55 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Stops a session that is running in an running AgentCore Runtime agent.
+    #
+    # @option params [required, String] :runtime_session_id
+    #   The ID of the session that you want to stop.
+    #
+    # @option params [required, String] :agent_runtime_arn
+    #   The ARN of the agent that contains the session that you want to stop.
+    #
+    # @option params [String] :qualifier
+    #   Optional qualifier to specify an agent alias, such as `prod`code&gt;
+    #   or `dev`. If you don't provide a value, the DEFAULT alias is used.
+    #
+    # @option params [String] :client_token
+    #   Idempotent token used to identify the request. If you use the same
+    #   token with multiple requests, the same response is returned. Use
+    #   ClientToken to prevent the same request from being processed more than
+    #   once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StopRuntimeSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopRuntimeSessionResponse#runtime_session_id #runtime_session_id} => String
+    #   * {Types::StopRuntimeSessionResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_runtime_session({
+    #     runtime_session_id: "SessionType", # required
+    #     agent_runtime_arn: "String", # required
+    #     qualifier: "String",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runtime_session_id #=> String
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopRuntimeSession AWS API Documentation
+    #
+    # @overload stop_runtime_session(params = {})
+    # @param [Hash] params ({})
+    def stop_runtime_session(params = {}, options = {})
+      req = build_request(:stop_runtime_session, params)
+      req.send_request(options)
+    end
+
     # Updates a browser stream. To use this operation, you must have
     # permissions to perform the bedrock:UpdateBrowserStream action.
     #
@@ -2385,7 +2680,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

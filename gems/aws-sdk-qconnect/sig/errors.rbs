@@ -17,6 +17,9 @@ module Aws
       class ConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class DependencyFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class PreconditionFailedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

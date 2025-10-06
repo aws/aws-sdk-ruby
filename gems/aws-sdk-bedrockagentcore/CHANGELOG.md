@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2025-10-06)
+------------------
+
+* Feature - Add support for batch memory management, agent card retrieval and session termination
+
 1.5.0 (2025-08-27)
 ------------------
 

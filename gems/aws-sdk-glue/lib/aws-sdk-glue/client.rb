@@ -1044,6 +1044,8 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].evaluated_rule #=> String
     #   resp.results[0].rule_results[0].rule_metrics #=> Hash
     #   resp.results[0].rule_results[0].rule_metrics["NameString"] #=> Float
+    #   resp.results[0].rule_results[0].labels #=> Hash
+    #   resp.results[0].rule_results[0].labels["NameString"] #=> String
     #   resp.results[0].analyzer_results #=> Array
     #   resp.results[0].analyzer_results[0].name #=> String
     #   resp.results[0].analyzer_results[0].description #=> String
@@ -7704,6 +7706,8 @@ module Aws::Glue
     #   resp.rule_results[0].evaluated_rule #=> String
     #   resp.rule_results[0].rule_metrics #=> Hash
     #   resp.rule_results[0].rule_metrics["NameString"] #=> Float
+    #   resp.rule_results[0].labels #=> Hash
+    #   resp.rule_results[0].labels["NameString"] #=> String
     #   resp.analyzer_results #=> Array
     #   resp.analyzer_results[0].name #=> String
     #   resp.analyzer_results[0].description #=> String
@@ -17920,7 +17924,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.236.0'
+      context[:gem_version] = '1.237.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

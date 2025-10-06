@@ -49,12 +49,13 @@ module Aws::ResourceExplorer2
   end
   autoload :Client, 'aws-sdk-resourceexplorer2/client'
   autoload :Errors, 'aws-sdk-resourceexplorer2/errors'
+  autoload :Waiters, 'aws-sdk-resourceexplorer2/waiters'
   autoload :Resource, 'aws-sdk-resourceexplorer2/resource'
   autoload :EndpointParameters, 'aws-sdk-resourceexplorer2/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-resourceexplorer2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resourceexplorer2/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 
