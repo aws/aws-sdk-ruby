@@ -16,60 +16,64 @@ module Aws
     # @api private
     class DirectoryDownloader
       def initialize(options = {})
-        @client = options[:client] || Client.new
-        @executor = options[:executor] || DefaultExecutor.new
-        @options = options
+        @client = options[:client]
+        @executor = options[:executor]
         @abort_download = false
+        @mutex = Mutex.new
       end
 
-      attr_reader :client, :abort_download
+      attr_reader :abort_download
 
       # TODO: need to add progress tracker
       def download(destination, bucket:, **options)
         if File.exist?(destination)
-          raise ArgumentError 'invalid destination, expected a directory' unless File.directory?(destination)
+          raise ArgumentError, 'invalid destination, expected a directory' unless File.directory?(destination)
         else
           FileUtils.mkdir_p(destination)
         end
 
-        download_opts = options.dup
-        @bucket = bucket
-        @ignore_failure = download_opts.delete(:ignore_failure) || false
-        @errors = []
-
-        downloader = FileDownloader.new(client: client, executor: @executor)
-        producer = ObjectProducer.new(destination, build_producer_opts(download_opts))
-        producer.run
-
-        downloads = process_download_queue(producer, downloader, download_opts)
-        build_result(downloads)
+        download_opts = build_download_opts(destination, bucket, options)
+        downloader = FileDownloader.new(client: @client, executor: @executor)
+        producer = ObjectProducer.new(build_producer_opts(download_opts))
+        downloads, errors = process_download_queue(producer, downloader, download_opts)
+        build_result(downloads, errors)
       ensure
-        @executor.shutdown unless @options[:executor]
+        set_abort_flag(value: false)
       end
 
-      def build_producer_opts(opts)
+      private
+
+      def set_abort_flag(value: true)
+        @mutex.synchronize { @abort_download = value }
+      end
+
+      def build_download_opts(destination, bucket, opts)
         {
-          directory_downloader: self,
-          client: @client,
-          bucket: @bucket,
+          destination: destination,
+          bucket: bucket,
           s3_prefix: opts.delete(:s3_prefix),
-          ignore_failure: @ignore_failure,
+          ignore_failure: opts.delete(:ignore_failure) || false,
           filter_callback: opts.delete(:filter_callback),
-          errors: @errors
+          progress_callback: opts.delete(:progress_callback)
         }
       end
 
-      def build_result(download_count)
-        downloads = [download_count - @errors.count, 0].max
+      def build_producer_opts(opts)
+        opts.merge(client: @client, directory_downloader: self)
+      end
+
+      def build_result(download_count, errors)
+        downloads = [download_count - errors.count, 0].max
 
         if @abort_download
-          msg = "failed to download directory: downloaded #{downloads} files " \
-            "and failed to download #{@errors.count} files."
-          raise DirectoryDownloadError.new(msg, @errors)
+          msg = "failed to download directory: downloaded #{downloads} files, failed #{errors.count} files"
+          raise DirectoryDownloadError.new(msg, errors)
         else
-          result = { completed_downloads: downloads, failed_downloads: @errors.count }
-          result[:errors] = @errors if @errors.any?
-          result
+          {
+            completed_downloads: downloads,
+            failed_downloads: errors.count,
+            errors: errors.any? ? errors : nil
+          }.compact
         end
       end
 
@@ -77,49 +81,62 @@ module Aws
         download_attempts = 0
         completion_queue = Queue.new
         queue_executor = DefaultExecutor.new
-        while (object = producer.object_queue.shift) != :done
+        progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        errors = []
+        producer.each do |object|
           break if @abort_download
 
           download_attempts += 1
           queue_executor.post(object) do |o|
             dir_path = File.dirname(o[:path])
-            FileUtils.mkdir_p(dir_path) unless dir_path == @destination || Dir.exist?(dir_path)
+            FileUtils.mkdir_p(dir_path) unless dir_path == opts[:destination] || Dir.exist?(dir_path)
 
-            downloader.download(o[:path], opts.merge(bucket: @bucket, key: o[:key]))
+            downloader.download(o[:path], bucket: opts[:bucket], key: o[:key])
+            progress&.call(File.size(o[:path]))
           rescue StandardError => e
-            @errors << e
-            @abort_download = true unless @ignore_failure
+            errors << e
+            set_abort_flag unless opts[:ignore_failure]
           ensure
             completion_queue << :done
           end
         end
         download_attempts.times { completion_queue.pop }
-        download_attempts
+        [download_attempts, errors]
       ensure
         queue_executor.shutdown
       end
 
       # @api private
       class ObjectProducer
-        def initialize(destination_dir, options = {})
-          @destination_dir = destination_dir
+        include Enumerable
+
+        DEFAULT_QUEUE_SIZE = 100
+
+        def initialize(options = {})
+          @destination_dir = options[:destination]
           @client = options[:client]
           @bucket = options[:bucket]
           @s3_prefix = options[:s3_prefix]
-          @ignore_failure = options[:ignore_failure]
           @filter_callback = options[:filter_callback]
-          @errors = options[:errors]
           @directory_downloader = options[:directory_downloader]
-          @object_queue = SizedQueue.new(100)
+          @object_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
-        attr_reader :object_queue
-
-        def run
-          Thread.new do
+        def each
+          producer_thread = Thread.new do
             stream_objects
+          ensure
             @object_queue << :done
           end
+
+          # Yield objects from internal queue
+          while (object = @object_queue.shift) != :done
+            break if @directory_downloader.abort_download
+
+            yield object
+          end
+        ensure
+          producer_thread.join
         end
 
         private
@@ -128,26 +145,47 @@ module Aws
           { path: File.join(@destination_dir, normalize_key(key)), key: key }
         end
 
-        # TODO: need to add filter callback, double check handling of objects that ends with /
+        # TODO: double check handling of objects that ends with /
         def stream_objects(continuation_token: nil)
-          resp = @client.list_objects_v2(bucket: @bucket, continuation_token: continuation_token)
+          resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
           resp.contents.each do |o|
             break if @directory_downloader.abort_download
             next if o.key.end_with?('/')
+            next unless include_object?(o.key)
 
             @object_queue << build_object_entry(o.key)
-          rescue StandardError => e
-            @errors << e
-            @abort_download = true unless @ignore_failure
           end
           stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
 
+        def include_object?(key)
+          return true unless @filter_callback
+
+          @filter_callback.call(key)
+        end
+
         def normalize_key(key)
           key = key.delete_prefix(@s3_prefix) if @s3_prefix
-          return key if File::SEPARATOR == '/'
+          File::SEPARATOR == '/' ? key : key.tr('/', File::SEPARATOR)
+        end
+      end
 
-          key.tr('/', File::SEPARATOR)
+      # @api private
+      class DirectoryProgress
+        def initialize(progress_callback)
+          @transferred_bytes = 0
+          @transferred_files = 0
+          @progress_callback = progress_callback
+          @mutex = Mutex.new
+        end
+
+        def call(bytes_received)
+          @mutex.synchronize do
+            @transferred_bytes += bytes_received
+            @transferred_files += 1
+
+            @progress_callback.call(@transferred_bytes, @transferred_files)
+          end
         end
       end
     end
