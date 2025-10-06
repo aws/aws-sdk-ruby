@@ -20,13 +20,12 @@ module Aws
       def initialize(options = {})
         @client = options[:client]
         @executor = options[:executor]
-        @abort_upload = false
+        @abort_requested = false
         @mutex = Mutex.new
       end
 
-      attr_reader :abort_upload
+      attr_reader :abort_requested
 
-      # TODO: Need to add progress tracker
       def upload(source_directory, bucket:, **options)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
@@ -40,13 +39,13 @@ module Aws
         uploads, errors = process_upload_queue(producer, uploader, upload_opts)
         build_result(uploads, errors)
       ensure
-        set_abort_flag(value: false)
+        @abort_requested = false
       end
 
       private
 
-      def set_abort_flag(value: true)
-        @mutex.synchronize { @abort_upload = value }
+      def request_abort
+        @mutex.synchronize { @abort_requested = true }
       end
 
       def build_upload_opts(source_directory, bucket, opts)
@@ -58,6 +57,7 @@ module Aws
           follow_symlinks: opts.delete(:follow_symlinks) || false,
           filter_callback: opts.delete(:filter_callback),
           ignore_failure: opts.delete(:ignore_failure) || false,
+          progress_callback: opts.delete(:progress_callback)
         }
       end
 
@@ -68,7 +68,7 @@ module Aws
       def build_result(upload_count, errors)
         uploads = [upload_count - errors.count, 0].max
 
-        if @abort_upload
+        if @abort_requested
           msg = "failed to upload directory: uploaded #{uploads} files " \
             "and failed to upload #{errors.count} files."
           raise DirectoryUploadError.new(msg, errors)
@@ -80,33 +80,33 @@ module Aws
       end
 
       def process_upload_queue(producer, uploader, opts)
-        upload_attempts = 0
-        completion_queue = Queue.new
+        # Separate executor for lightweight queuing tasks,
+        # avoiding interference with main @executor lifecycle
         queue_executor = DefaultExecutor.new
+        progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        upload_attempts = 0
         errors = []
         producer.each do |file|
-          break if @abort_upload
+          break if @abort_requested
 
+          upload_attempts += 1
           if file.is_a?(StandardError)
             errors << file
             next
           end
 
-          upload_attempts += 1
           queue_executor.post(file) do |f|
             uploader.upload(f[:path], bucket: opts[:bucket], key: f[:key])
-            puts 'yay this file uploaded'
+            progress&.call(File.size(f[:path]))
           rescue StandardError => e
             errors << e
-            set_abort_flag unless opts[:ignore_failure]
-          ensure
-            completion_queue << :done
+            request_abort unless opts[:ignore_failure]
           end
         end
-        upload_attempts.times { completion_queue.pop }
+        queue_executor.shutdown
         [upload_attempts, errors]
       ensure
-        queue_executor.shutdown
+        queue_executor.shutdown if queue_executor.running?
       end
 
       # @api private
@@ -128,19 +128,17 @@ module Aws
 
         def each
           producer_thread = Thread.new do
-            begin
-              if @recursive
-                find_recursively
-              else
-                find_directly
-              end
-            ensure
-              @file_queue << :done
+            if @recursive
+              find_recursively
+            else
+              find_directly
             end
+          ensure
+            @file_queue << :done
           end
 
           while (file = @file_queue.shift) != :done
-            break if @directory_uploader.abort_upload
+            break if @directory_uploader.abort_requested
 
             yield file
           end
@@ -157,7 +155,7 @@ module Aws
 
         def find_directly
           Dir.each_child(@source_dir) do |entry|
-            break if @directory_uploader.abort_upload
+            break if @directory_uploader.abort_requested
 
             entry_path = File.join(@source_dir, entry)
             if @follow_symlinks
@@ -194,10 +192,10 @@ module Aws
         end
 
         def scan_directory(dir_path, key_prefix: '', visited: nil)
-          return if @directory_uploader.abort_upload
+          return if @directory_uploader.abort_requested
 
           Dir.each_child(dir_path) do |entry|
-            break if @directory_uploader.abort_upload
+            break if @directory_uploader.abort_requested
 
             full_path = File.join(dir_path, entry)
             next unless include_file?(full_path, entry)

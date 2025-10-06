@@ -18,13 +18,12 @@ module Aws
       def initialize(options = {})
         @client = options[:client]
         @executor = options[:executor]
-        @abort_download = false
+        @abort_requested = false
         @mutex = Mutex.new
       end
 
-      attr_reader :abort_download
+      attr_reader :abort_requested
 
-      # TODO: need to add progress tracker
       def download(destination, bucket:, **options)
         if File.exist?(destination)
           raise ArgumentError, 'invalid destination, expected a directory' unless File.directory?(destination)
@@ -38,15 +37,14 @@ module Aws
         downloads, errors = process_download_queue(producer, downloader, download_opts)
         build_result(downloads, errors)
       ensure
-        set_abort_flag(value: false)
+        @abort_requested = false
       end
 
       private
 
-      def set_abort_flag(value: true)
-        @mutex.synchronize { @abort_download = value }
+      def request_abort
+        @mutex.synchronize { @abort_requested = true }
       end
-
       def build_download_opts(destination, bucket, opts)
         {
           destination: destination,
@@ -65,7 +63,7 @@ module Aws
       def build_result(download_count, errors)
         downloads = [download_count - errors.count, 0].max
 
-        if @abort_download
+        if @abort_requested
           msg = "failed to download directory: downloaded #{downloads} files, failed #{errors.count} files"
           raise DirectoryDownloadError.new(msg, errors)
         else
@@ -78,13 +76,14 @@ module Aws
       end
 
       def process_download_queue(producer, downloader, opts)
-        download_attempts = 0
-        completion_queue = Queue.new
+        # Separate executor for lightweight queuing tasks,
+        # avoiding interference with main @executor lifecycle
         queue_executor = DefaultExecutor.new
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        download_attempts = 0
         errors = []
         producer.each do |object|
-          break if @abort_download
+          break if @abort_requested
 
           download_attempts += 1
           queue_executor.post(object) do |o|
@@ -95,15 +94,13 @@ module Aws
             progress&.call(File.size(o[:path]))
           rescue StandardError => e
             errors << e
-            set_abort_flag unless opts[:ignore_failure]
-          ensure
-            completion_queue << :done
+            request_abort unless opts[:ignore_failure]
           end
         end
-        download_attempts.times { completion_queue.pop }
+        queue_executor.shutdown
         [download_attempts, errors]
       ensure
-        queue_executor.shutdown
+        queue_executor.shutdown if queue_executor.running?
       end
 
       # @api private
@@ -131,7 +128,7 @@ module Aws
 
           # Yield objects from internal queue
           while (object = @object_queue.shift) != :done
-            break if @directory_downloader.abort_download
+            break if @directory_downloader.abort_requested
 
             yield object
           end
@@ -149,7 +146,7 @@ module Aws
         def stream_objects(continuation_token: nil)
           resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
           resp.contents.each do |o|
-            break if @directory_downloader.abort_download
+            break if @directory_downloader.abort_requested
             next if o.key.end_with?('/')
             next unless include_object?(o.key)
 
@@ -167,25 +164,6 @@ module Aws
         def normalize_key(key)
           key = key.delete_prefix(@s3_prefix) if @s3_prefix
           File::SEPARATOR == '/' ? key : key.tr('/', File::SEPARATOR)
-        end
-      end
-
-      # @api private
-      class DirectoryProgress
-        def initialize(progress_callback)
-          @transferred_bytes = 0
-          @transferred_files = 0
-          @progress_callback = progress_callback
-          @mutex = Mutex.new
-        end
-
-        def call(bytes_received)
-          @mutex.synchronize do
-            @transferred_bytes += bytes_received
-            @transferred_files += 1
-
-            @progress_callback.call(@transferred_bytes, @transferred_files)
-          end
         end
       end
     end
