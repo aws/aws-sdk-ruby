@@ -35,7 +35,7 @@ module Aws
           client: @client,
           executor: @executor
         )
-        producer = FileProducer.new(build_producer_opts(upload_opts))
+        producer = FileProducer.new(upload_opts.merge(client: @client, directory_uploader: self))
         uploads, errors = process_upload_queue(producer, uploader, upload_opts)
         build_result(uploads, errors)
       ensure
@@ -61,22 +61,24 @@ module Aws
         }
       end
 
-      def build_producer_opts(opts)
-        opts.merge(client: @client, directory_uploader: self)
-      end
-
       def build_result(upload_count, errors)
-        uploads = [upload_count - errors.count, 0].max
-
         if @abort_requested
-          msg = "failed to upload directory: uploaded #{uploads} files " \
-            "and failed to upload #{errors.count} files."
+          msg = "directory upload failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryUploadError.new(msg, errors)
         else
-          result = { completed_uploads: uploads, failed_uploads: errors.count }
-          result[:errors] = errors if errors.any?
-          result
+          {
+            completed_uploads: upload_count - errors.count,
+            failed_uploads: errors.count,
+            errors: errors.any? ? errors : nil
+          }.compact
         end
+      end
+
+      def handle_error(executor, opts)
+        return if opts[:ignore_failure]
+
+        request_abort
+        executor.kill
       end
 
       def process_upload_queue(producer, uploader, opts)
@@ -86,27 +88,30 @@ module Aws
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         upload_attempts = 0
         errors = []
-        producer.each do |file|
-          break if @abort_requested
+        begin
+          producer.each do |file|
+            break if @abort_requested
 
-          upload_attempts += 1
-          if file.is_a?(StandardError)
-            errors << file
-            next
-          end
+            upload_attempts += 1
+            if file.is_a?(StandardError)
+              errors << file
+              next
+            end
 
-          queue_executor.post(file) do |f|
-            uploader.upload(f[:path], bucket: opts[:bucket], key: f[:key])
-            progress&.call(File.size(f[:path]))
-          rescue StandardError => e
-            errors << e
-            request_abort unless opts[:ignore_failure]
+            queue_executor.post(file) do |f|
+              uploader.upload(f[:path], bucket: opts[:bucket], key: f[:key])
+              progress&.call(File.size(f[:path]))
+            rescue StandardError => e
+              errors << e
+              handle_error(queue_executor, opts)
+            end
           end
+        rescue StandardError => e
+          errors << e
+          handle_error(queue_executor, opts)
         end
         queue_executor.shutdown
         [upload_attempts, errors]
-      ensure
-        queue_executor.shutdown if queue_executor.running?
       end
 
       # @api private
