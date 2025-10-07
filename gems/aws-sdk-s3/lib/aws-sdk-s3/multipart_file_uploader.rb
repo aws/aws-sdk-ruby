@@ -9,7 +9,6 @@ module Aws
     class MultipartFileUploader
       MIN_PART_SIZE = 5 * 1024 * 1024 # 5MB
       MAX_PARTS = 10_000
-      DEFAULT_THREAD_COUNT = 10
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
       COMPLETE_OPTIONS = Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
       UPLOAD_PART_OPTIONS = Set.new(Client.api.operation(:upload_part).input.shape.member_names)
