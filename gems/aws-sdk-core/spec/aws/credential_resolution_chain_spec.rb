@@ -1009,6 +1009,59 @@ module Aws
           region: 'us-east-1'
         )
       end
+
+      it 'assumes role when default profile has credential_source=Environment, not return env vars directly' do
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+
+        # Create empty credentials file (no default profile)
+        temp_credentials = Tempfile.new(['aws_credentials', '.ini'])
+        temp_credentials.write("")
+        temp_credentials.close
+
+        # Create config file with default profile using credential_source = Environment
+        temp_config = Tempfile.new(['aws_config', '.ini'])
+        temp_config.write(<<~CONFIG)
+          [default]
+          region = us-east-1
+          role_arn = arn:aws:iam::123456789012:role/foo
+          credential_source = Environment
+        CONFIG
+        temp_config.close
+
+        # Reload config with temp files
+        Aws.shared_config.fresh(
+          config_enabled: true,
+          credentials_path: temp_credentials.path,
+          config_path: temp_config.path
+        )
+
+        assume_role_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'AKID_ENV_STUB',  # Source creds
+          'AR_AKID',        # Assumed role creds
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+
+        # Don't specify profile - should use default profile
+        client = ApiHelper.sample_rest_xml::Client.new(
+          region: 'us-east-1'
+        )
+        creds = client.config.credentials.credentials
+
+        # Should use assumed role credentials
+        expect(creds.access_key_id).to eq('AR_AKID')
+        # Should NOT return env credentials directly
+        expect(creds.access_key_id).not_to eq('AKID_ENV_STUB')
+
+        # Cleanup
+        temp_config.unlink
+        temp_credentials.unlink
+      end
     end
 
     describe 'AWS_SDK_CONFIG_OPT_OUT set' do

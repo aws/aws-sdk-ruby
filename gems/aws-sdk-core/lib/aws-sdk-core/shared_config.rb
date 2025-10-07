@@ -236,6 +236,26 @@ module Aws
       :ignore_configured_endpoint_urls
     )
 
+    # Check if a profile is configured for assume role with credential_source = Environment
+    # This is used to determine if environment credentials should be used as source credentials
+    # for role assumption rather than returned directly.
+    # @param profile [String] the profile name to check
+    # @return [Boolean] true if the profile has both role_arn and credential_source = Environment
+    def profile_uses_env_as_credential_source?(profile)
+      return false unless @config_enabled && profile
+
+      # Check both credentials and config files - credentials takes precedence
+      prof_cfg = @parsed_credentials.fetch(profile, {}) if @parsed_credentials
+      # Only check config if credentials didn't have the keys we need
+      if prof_cfg.nil? || (!prof_cfg['role_arn'] && @parsed_config)
+        prof_cfg = @parsed_config.fetch(profile, {})
+      end
+
+      prof_cfg &&
+        prof_cfg['role_arn'] &&
+        prof_cfg['credential_source'] == 'Environment'
+    end
+
     private
 
     # Get a config value from from shared credential/config files.

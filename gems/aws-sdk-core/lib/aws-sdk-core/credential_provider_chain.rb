@@ -99,11 +99,22 @@ module Aws
       nil
     end
 
-    def env_credentials(_options)
+    def env_credentials(options)
       key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
       token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
       account_id = %w[AWS_ACCOUNT_ID]
+
+      # Don't return env creds directly if they're meant to be used as source credentials
+      # for assume role with credential_source = Environment
+      if Aws.shared_config.config_enabled?
+        profile_name = options[:config] ? options[:config].profile : nil
+        profile_name ||= determine_profile_name(options)
+        if Aws.shared_config.profile_uses_env_as_credential_source?(profile_name)
+          return nil
+        end
+      end
+
       creds = Credentials.new(
         envar(key),
         envar(secret),
