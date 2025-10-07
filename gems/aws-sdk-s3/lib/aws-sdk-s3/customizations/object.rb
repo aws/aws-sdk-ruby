@@ -459,11 +459,17 @@ module Aws
       # @see Client#upload_part
       def upload_file(source, options = {})
         uploading_options = options.dup
-        uploader = FileUploader.new(multipart_threshold: uploading_options.delete(:multipart_threshold), client: client)
+        executor = DefaultExecutor.new(max_threads: uploading_options.delete(:thread_count))
+        uploader = FileUploader.new(
+          client: client,
+          executor: executor,
+          multipart_threshold: uploading_options.delete(:multipart_threshold)
+        )
         response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
         end
         yield response if block_given?
+        executor.shutdown
         true
       end
       deprecated(:upload_file, use: 'Aws::S3::TransferManager#upload_file', version: 'next major version')
@@ -539,10 +545,12 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, options = {})
-        downloader = FileDownloader.new(client: client)
+        executor = DefaultExecutor.new(max_threads: options[:thread_count])
+        downloader = FileDownloader.new(client: client, executor: executor)
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           downloader.download(destination, options.merge(bucket: bucket_name, key: key))
         end
+        executor.shutdown
         true
       end
       deprecated(:download_file, use: 'Aws::S3::TransferManager#download_file', version: 'next major version')
