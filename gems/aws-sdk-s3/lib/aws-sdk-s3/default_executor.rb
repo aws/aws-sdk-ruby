@@ -41,9 +41,8 @@ module Aws
           return true if @state == SHUTDOWN
 
           @state = SHUTTING_DOWN
+          @pool.size.times { @queue << :shutdown }
         end
-
-        @max_threads.times { @queue << :shutdown }
 
         if timeout
           deadline = Time.now + timeout
