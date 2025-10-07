@@ -17,10 +17,13 @@ module Aws
       end
 
       def post(*args, &block)
-        raise 'Executor is not accepting new tasks' unless @state == RUNNING
+        @mutex.synchronize do
+          raise 'Executor has been shutdown and is no longer accepting tasks' unless @state == RUNNING
 
-        @queue << [args, block]
-        ensure_worker_available
+          @queue << [args, block]
+          ensure_worker_available
+        end
+        true
       end
 
       def kill
@@ -43,7 +46,13 @@ module Aws
         @max_threads.times { @queue << :shutdown }
 
         if timeout
-          @pool.each { |thread| thread.join(timeout) }
+          deadline = Time.now + timeout
+          @pool.each do |thread|
+            remaining = deadline - Time.now
+            break if remaining <= 0
+
+            thread.join([remaining, 0].max)
+          end
           @pool.select(&:alive?).each(&:kill)
         else
           @pool.each(&:join)
@@ -69,12 +78,10 @@ module Aws
       private
 
       def ensure_worker_available
-        @mutex.synchronize do
-          return unless @state == RUNNING
+        return unless @state == RUNNING
 
-          @pool.select!(&:alive?)
-          @pool << spawn_worker if @pool.size < @max_threads
-        end
+        @pool.select!(&:alive?)
+        @pool << spawn_worker if @pool.size < @max_threads
       end
 
       def spawn_worker
