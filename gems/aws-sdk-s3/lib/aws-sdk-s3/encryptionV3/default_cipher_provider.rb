@@ -25,7 +25,7 @@ module Aws
         def encryption_cipher(options = {})
           validate_options(options)
           data_key = Utils.generate_data_key()
-          cipher, message_id, commitment_key = Utils.alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
+          cipher, message_id, commitment_key = Utils.generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
           enc_key = if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
               enc_key = encode64(
                 encrypt_rsa(data_key, @content_encryption_schema)
@@ -53,9 +53,6 @@ module Aws
         def decryption_cipher(envelope, options = {})
           validate_options(options)
           wrapping_key = @key_provider.key_for(envelope['x-amz-m'])
-          unless envelope.key?('x-amz-key') || envelope.key?('x-amz-key-v2')
-            raise Errors::LegacyDecryptionError
-          end
 
           data_key =
             case envelope['x-amz-w']

@@ -9,7 +9,7 @@ module Aws
       class EncryptHandler < Seahorse::Client::Handler
 
         def call(context)
-          envelope, cipher = context[:encryption][:cipher_provider]
+          envelope, cipher = context[:encryption][:v3_cipher_provider]
            .encryption_cipher(
              kms_encryption_context: context[:encryption][:kms_encryption_context]
            )
@@ -73,10 +73,10 @@ module Aws
         def split_for_instruction_file(envelop)
           ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
           ##% In the V3 format, the mapkeys "x-amz-c", "x-amz-d", and "x-amz-i" MUST be stored exclusively in the Object Metadata.
-          metadata_envelop = envelop.select { |k, v| V3_METADATA_KEY.include?(k) }
+          metadata_envelop = envelop.select { |k, v| EncryptionV3.METADATA_KEY.include?(k) }
           # Exclude the metadata keys rather than include the envelop keys
           # because there might be additional information
-          instruction_envelop = envelop.reject { |k, v| V3_METADATA_KEY.include?(k) }
+          instruction_envelop = envelop.reject { |k, v| EncryptionV3.METADATA_KEY.include?(k) }
           
           [instruction_envelop, metadata_envelop]
         end

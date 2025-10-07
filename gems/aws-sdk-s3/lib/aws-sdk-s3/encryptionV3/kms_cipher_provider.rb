@@ -29,7 +29,7 @@ module Aws
               key_spec: 'AES_256'
             )
           end
-          cipher, message_id, commitment_key = Utils.alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(key_data.plaintext)
+          cipher, message_id, commitment_key = Utils.generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(key_data.plaintext)
           envelope = {
             'x-amz-3' => encode64(key_data.ciphertext_blob),
             'x-amz-c' => @content_encryption_schema,
@@ -48,7 +48,7 @@ module Aws
           cek_alg = envelope['x-amz-c']
 
           case envelope['x-amz-w']
-          when 'kms+context'
+          when '12'
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
             ##% - The wrapping algorithm value "12" MUST be translated to kms+context upon retrieval, and vice versa on write.
             if cek_alg != encryption_context['aws:x-amz-cek-alg']
@@ -59,10 +59,10 @@ module Aws
               raise Errors::DecryptionError, 'Value of encryption context from'\
                 ' envelope does not match the provided encryption context'
             end
-          when 'AES/GCM'
+          when '02'
             raise ArgumentError, 'Key mismatch - Client is configured' \
                     ' with a KMS key and the x-amz-wrap-alg is AES/GCM.'
-          when 'RSA-OAEP-SHA1'
+          when '22'
             raise ArgumentError, 'Key mismatch - Client is configured' \
                     ' with a KMS key and the x-amz-wrap-alg is RSA-OAEP-SHA1.'
           else

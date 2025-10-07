@@ -2,6 +2,9 @@
 
 require 'base64'
 
+require 'logger'
+
+
 module Aws
   module S3
     module EncryptionV3
@@ -9,12 +12,17 @@ module Aws
       class DecryptHandler < Seahorse::Client::Handler
         @@warned_response_target_proc = false
 
+        V2_HANDLER = Aws::S3::EncryptionV2::DecryptHandler.new
+
         ENVELOP_KEY = %w(
           x-amz-3
           x-amz-w
-          x-amz-m
           x-amz-t
         )
+        # Need to deal with these options
+        # because they need to exist in the envelop
+        # x-amz-m
+        # x-amz-t
 
         METADATA_KEY = %w(
           x-amz-c
@@ -22,7 +30,12 @@ module Aws
           x-amz-i
         )
 
-        POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY).uniq
+        LEGACY_KEY = %w(
+
+        )
+
+        POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY + LEGACY_KEY).uniq
+        REQUIRED_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY).uniq
 
         # POSSIBLE_WRAPPING_FORMATS = %w(
         #   AES/GCM
@@ -66,8 +79,14 @@ module Aws
         def attach_http_event_listeners(context)
 
           context.http_response.on_headers(200) do
-            cipher, envelope = decryption_cipher(context)
-            decrypter = authenticated_decrypter(context, cipher, envelope)
+            decrypter = if context.http_response.headers.key?('x-amz-meta-x-amz-i')
+                cipher, envelope = decryption_cipher(context)
+                authenticated_decrypter(context, cipher, envelope)
+              else
+                Logger.new(STDOUT).info("FUCK:====#{context[:encryption].inspect}")
+                cipher, envelope = V2_HANDLER.send(:decryption_cipher, context)
+                V2_HANDLER.send(:authenticated_decrypter, context, cipher, envelope)
+              end 
             context.http_response.body = decrypter
           end
 
@@ -87,7 +106,7 @@ module Aws
 
         def decryption_cipher(context)
           if (envelope = get_encryption_envelope(context))
-            cipher = context[:encryption][:cipher_provider]
+            cipher = context[:encryption][:v3_cipher_provider]
              .decryption_cipher(
                envelope,
                context[:encryption]
@@ -124,11 +143,11 @@ module Aws
           # If we look at the metadata, we may still need to check the instruction file
           # Similarly, if we start checking the instruction file,
           # we sill need to get the message id and commitment key from the metadata
-          envelop_count = V3_ENVELOP_KEY.count { |key| possible_envelope.key?(key) }
-          metadata_count = V3_METADATA_KEY.count { |key| possible_envelope.key?(key) }
+          envelop_count = ENVELOP_KEY.count { |key| possible_envelope.key?(key) }
+          metadata_count = METADATA_KEY.count { |key| possible_envelope.key?(key) }
 
           # If we have all keys, we are done
-          (envelop_count == V3_ENVELOP_KEY.size && metadata_count == V3_METADATA_KEY.size) ||
+          (envelop_count == ENVELOP_KEY.size && metadata_count == METADATA_KEY.size) ||
           # If we have 0 keys, then this is done too.
           # Because it means we are not a v3 committing message.
           (envelop_count == 0 && metadata_count == 0)
@@ -148,8 +167,8 @@ module Aws
             bucket: context.params[:bucket],
             key: context.params[:key] + suffix
           ).body.read)
-          unless V3_METADATA_KEY.any? { |key| possible_envelope.key?(key) }
-            keys = V3_METADATA_KEY & possible_envelope.keys
+          unless METADATA_KEY.any? { |key| possible_envelope.key?(key) }
+            keys = METADATA_KEY & possible_envelope.keys
             msg = "unsupported metadata key found in instruction file: #{keys.join(', ')}"
             raise Errors::DecryptionError, msg
           end
@@ -158,23 +177,27 @@ module Aws
           nil
         end
 
-        def v3_envelope?(envelope)
-          unless POSSIBLE_V3_ENCRYPTION_FORMATS.include? envelope['x-amz-c']
-            alg = envelope['x-amz-c'].inspect
-            msg = "unsupported content encrypting key (cek) format: #{alg}"
+        def v3_envelope?(possible_envelope)
+          if possible_envelope.key?('x-amz-key') || possible_envelope.key?('x-amz-key-v2')
+            raise Errors::LegacyDecryptionError
+          end
+
+          unless POSSIBLE_ENCRYPTION_FORMATS.include? possible_envelope['x-amz-c']
+            alg = possible_envelope.inspect
+            msg = "unsupported content encrypting key (cek) format: #{alg} #{possible_envelope.inspect}"
             raise Errors::DecryptionError, msg
           end
-          unless POSSIBLE_V3_WRAPPING_FORMATS.include? envelope['x-amz-w']
-            alg = envelope['x-amz-w'].inspect
+          unless POSSIBLE_WRAPPING_FORMATS.include? possible_envelope['x-amz-w']
+            alg = possible_envelope['x-amz-w'].inspect
             msg = "unsupported key wrapping algorithm: #{alg}"
             raise Errors::DecryptionError, msg
           end
-          unless (missing_keys = V3_ENVELOPE_KEYS - envelope.keys).empty?
+          unless (missing_keys = REQUIRED_ENVELOPE_KEYS - possible_envelope.keys).empty?
             msg = "incomplete v3 encryption envelope:\n"
             msg += "  missing: #{missing_keys.join(',')}\n"
             raise Errors::DecryptionError, msg
           end
-          envelope
+          possible_envelope
         end
 
         # This method fetches the tag from the end of the object by
@@ -184,7 +207,6 @@ module Aws
         def authenticated_decrypter(context, cipher, envelope)
           http_resp = context.http_response
           content_length = http_resp.headers['content-length'].to_i
-          auth_tag_length = auth_tag_length(envelope)
 
           auth_tag = context.client.get_object(
             bucket: context.params[:bucket],
@@ -200,7 +222,7 @@ module Aws
           # plus a trailing auth tag.
           IOAuthDecrypter.new(
             io: http_resp.body,
-            encrypted_content_length: content_length - auth_tag_length,
+            encrypted_content_length: content_length - AES_GCM_TAG_LEN_BYTES,
             cipher: cipher)
         end
 

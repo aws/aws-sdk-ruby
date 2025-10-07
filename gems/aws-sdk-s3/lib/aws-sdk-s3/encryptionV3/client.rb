@@ -321,7 +321,9 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @cipher_provider = cipher_provider(options)
+          @v3_cipher_provider = cipher_provider(options)
+          v2_client = Aws::S3::EncryptionV2::Client.new(options)
+          @v2_cipher_provider = v2_client.instance_variable_get(:@cipher_provider)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
@@ -367,12 +369,11 @@ module Aws
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
-            cipher_provider: @cipher_provider,
+            v3_cipher_provider: @v3_cipher_provider,
+            cipher_provider: @v2_cipher_provider,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
-            kms_encryption_context: kms_encryption_context,
-
-            security_profile: security_profile
+            kms_encryption_context: kms_encryption_context
           }
           Aws::Plugins::UserAgent.metric('S3_CRYPTO_V3') do
             req.send_request
@@ -417,15 +418,18 @@ module Aws
           envelope_location, instruction_file_suffix = envelope_options(params)
           kms_encryption_context = params.delete(:kms_encryption_context)
           kms_any_cmk_mode = kms_any_cmk_mode(params)
+          security_profile = security_profile_from_params(params)
 
           req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
-            cipher_provider: @cipher_provider,
+            v3_cipher_provider: @v3_cipher_provider,
+            cipher_provider: @v2_cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
             kms_encryption_context: kms_encryption_context,
-            kms_allow_decrypt_with_any_cmk: kms_any_cmk_mode
+            kms_allow_decrypt_with_any_cmk: kms_any_cmk_mode,
+            security_profile: security_profile
           }
           Aws::Plugins::UserAgent.metric('S3_CRYPTO_V3') do
             req.send_request(target: block)
@@ -545,6 +549,16 @@ module Aws
 
         def extract_security_profile(options)
           validate_security_profile(options[:security_profile])
+        end
+
+        def security_profile_from_params(params)
+          security_profile =
+            if !params[:security_profile].nil?
+              params.delete(:security_profile)
+            else
+              @security_profile
+            end
+          validate_security_profile(security_profile)
         end
 
         def validate_security_profile(security_profile)
