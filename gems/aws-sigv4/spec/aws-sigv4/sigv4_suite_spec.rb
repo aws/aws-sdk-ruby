@@ -36,8 +36,8 @@ module Aws
             let(:request) do
               raw_request = File.read(File.join(path, 'request.txt'), encoding: 'utf-8')
               request = SpecHelper.parse_request(raw_request)
-              request[:headers]['X-Amz-Date'] = Time.parse(context['timestamp']).utc.strftime('%Y%m%dT%H%M%SZ')
               request[:expires_in] = context['expiration_in_seconds']
+              allow(Time).to receive(:now).and_return(Time.parse(context['timestamp']).utc)
               SpecHelper.debug("GIVEN REQUEST: |#{raw_request}|")
               SpecHelper.debug("PARSED REQUEST: |#{request.inspect}|")
               request

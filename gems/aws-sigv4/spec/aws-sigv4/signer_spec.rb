@@ -23,44 +23,8 @@ module Aws
         }
       end
 
-      context '#service' do
-        it 'requires a service' do
-          expect do
-            Signer.new(
-              region: 'us-east-1',
-              credentials: credentials
-            )
-          end.to raise_error(Errors::MissingServiceError)
-        end
-
-        it 'accepts a string' do
-          expect(Signer.new(options).service).to eq(options[:service])
-        end
-      end
-
-      context '#region' do
-        it 'requires a region' do
-          expect do
-            Signer.new(
-              service: 'ec2',
-              credentials: credentials
-            )
-          end.to raise_error(Errors::MissingRegionError)
-        end
-
-        it 'accepts a string' do
-          expect(Signer.new(options).region).to eq(options[:region])
-        end
-      end
-
-      describe '#credentials' do
+      describe '#credentials_provider' do
         let(:options) { { service: 'ec2', region: 'us-east-1' } }
-
-        it 'requires credentials' do
-          expect do
-            Signer.new(options)
-          end.to raise_error(Errors::MissingCredentialsError)
-        end
 
         it 'accepts :access_key_id and :secret_access_key' do
           signer = Signer.new(
@@ -134,6 +98,22 @@ module Aws
         end
       end
 
+      describe '#unsigned_headers' do
+        it 'includes default headers' do
+          signer = Signer.new(options)
+          expect(signer.unsigned_headers).to include('user-agent')
+          expect(signer.unsigned_headers).to include('expect')
+        end
+
+        it 'merges custom unsigned headers with defaults' do
+          custom_headers = %w[custom-header x-custom]
+          signer = Signer.new(options.merge(unsigned_headers: custom_headers))
+          expect(signer.unsigned_headers).to include('user-agent')
+          expect(signer.unsigned_headers).to include('custom-header')
+          expect(signer.unsigned_headers).to include('x-custom')
+        end
+      end
+
       describe '#sign_request' do
         let(:credentials_with_token) do
           Credentials.new(
@@ -148,6 +128,138 @@ module Aws
             http_method: 'GET',
             url: 'http://domain.com'
           }
+        end
+
+        it 'requires service' do
+          signer = Signer.new(
+            region: 'us-east-1',
+            credentials: credentials
+          )
+          expect do
+            signer.sign_request(http_method: 'GET', url: 'http://domain.com')
+          end.to raise_error(Errors::MissingServiceError)
+        end
+
+        it 'requires region' do
+          signer = Signer.new(
+            service: 'ec2',
+            credentials: credentials
+          )
+          expect do
+            signer.sign_request(http_method: 'GET', url: 'http://domain.com')
+          end.to raise_error(Errors::MissingRegionError)
+        end
+
+        it 'requires credentials' do
+          signer = Signer.new(
+            service: 'ec2',
+            region: 'us-east-1'
+          )
+          expect do
+            signer.sign_request(http_method: 'GET', url: 'http://domain.com')
+          end.to raise_error(Errors::MissingCredentialsError)
+        end
+
+        context 'with parameter overrides' do
+          it 'allows overriding the service' do
+            signer = Signer.new(options)
+            signature = signer.sign_request(
+              basic_request.merge(service: 'OVERRIDE-SERVICE')
+            )
+            expect(signature.headers['authorization']).to include('OVERRIDE-SERVICE')
+          end
+
+          it 'allows overriding the region' do
+            signer = Signer.new(options)
+            signature = signer.sign_request(
+              basic_request.merge(region: 'OVERRIDE-REGION')
+            )
+            expect(signature.headers['authorization']).to include('OVERRIDE-REGION')
+          end
+
+          it 'allows overriding the credentials' do
+            signer = Signer.new(options)
+            override_credentials = Credentials.new(
+              access_key_id: 'override-akid',
+              secret_access_key: 'override-secret'
+            )
+            signature = signer.sign_request(
+              basic_request.merge(credentials: override_credentials)
+            )
+            expect(signature.headers['authorization']).to include('override-akid')
+          end
+
+          it 'allows overriding the signing algorithm' do
+            signer = Signer.new(options)
+            signature = signer.sign_request(
+              basic_request.merge(signing_algorithm: 'sigv4a')
+            )
+            expect(signature.headers['authorization']).to include('AWS4-ECDSA-P256-SHA256')
+          end
+
+          it 'allows overriding the omit_session_token flag' do
+            signer = Signer.new(
+              service: 'SERVICE',
+              region: 'REGION',
+              credentials: credentials_with_token,
+              omit_session_token: false
+            )
+            signature = signer.sign_request(
+              basic_request.merge(omit_session_token: true)
+            )
+
+            # When omit_session_token is true, the token is excluded from the signature,
+            # but included in the headers
+            expect(signature.headers['x-amz-security-token']).to eq('session-token')
+            canonical_headers = signature.canonical_request.split("\n")[3]
+            expect(canonical_headers).not_to include('x-amz-security-token')
+            signed_headers = signature.canonical_request.split("\n")[4]
+            expect(signed_headers).not_to include('x-amz-security-token')
+          end
+
+          it 'allows overriding unsigned_headers' do
+            signer = Signer.new(options)
+            signature = signer.sign_request(
+              http_method: 'GET',
+              url: 'http://domain.com',
+              headers: {
+                'Content-Type' => 'application/json',
+                'Custom-Header' => 'custom-value'
+              },
+              unsigned_headers: ['custom-header']
+            )
+            signed_headers = signature.canonical_request.split("\n")[4]
+            expect(signed_headers).not_to include('custom-header')
+          end
+
+          it 'allows overriding uri_escape_path' do
+            signer = Signer.new(options.merge(uri_escape_path: true))
+            signature = signer.sign_request(
+              http_method: 'GET',
+              url: 'http://domain.com/path%20with%20spaces',
+              uri_escape_path: false
+            )
+            expect(signature.canonical_request).to include("/path%20with%20spaces\n")
+            expect(signature.canonical_request).not_to include("/path%2520with%2520spaces\n")
+          end
+
+          it 'allows overriding apply_checksum_header' do
+            signer = Signer.new(options.merge(apply_checksum_header: true))
+            signature = signer.sign_request(
+              basic_request.merge(apply_checksum_header: false)
+            )
+            expect(signature.headers).not_to include('x-amz-content-sha256')
+          end
+
+          it 'allows overriding normalize_path' do
+            signer = Signer.new(options.merge(normalize_path: true))
+            signature = signer.sign_request(
+              http_method: 'GET',
+              url: 'http://domain.com/path/../not-normalized',
+              normalize_path: false
+            )
+            expect(signature.canonical_request).to include("/path/../not-normalized\n")
+          end
         end
 
         context 'with uri_escape_path option' do
@@ -384,6 +496,136 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com'
           }
+        end
+
+        it 'requires service' do
+          signer = Signer.new(
+            region: 'us-east-1',
+            credentials: credentials
+          )
+          expect do
+            signer.presign_url(http_method: 'GET', url: 'http://domain.com')
+          end.to raise_error(Errors::MissingServiceError)
+        end
+
+        it 'requires region' do
+          signer = Signer.new(
+            service: 'ec2',
+            credentials: credentials
+          )
+          expect do
+            signer.presign_url(http_method: 'GET', url: 'http://domain.com')
+          end.to raise_error(Errors::MissingRegionError)
+        end
+
+        it 'requires credentials' do
+          signer = Signer.new(
+            service: 'ec2',
+            region: 'us-east-1'
+          )
+          expect do
+            signer.presign_url(http_method: 'GET', url: 'http://domain.com')
+          end.to raise_error(Errors::MissingCredentialsError)
+        end
+
+        context 'with parameter overrides' do
+          it 'allows overriding the service' do
+            signer = Signer.new(options)
+            url = signer.presign_url(
+              basic_request.merge(service: 'OVERRIDE-SERVICE')
+            )
+            expect(url.url.query).to include('OVERRIDE-SERVICE')
+          end
+
+          it 'allows overriding the region' do
+            signer = Signer.new(options)
+            url = signer.presign_url(
+              basic_request.merge(region: 'OVERRIDE-REGION')
+            )
+            expect(url.url.query).to include('OVERRIDE-REGION')
+          end
+
+          it 'allows overriding the credentials' do
+            signer = Signer.new(options)
+            override_credentials = Credentials.new(
+              access_key_id: 'override-akid',
+              secret_access_key: 'override-secret'
+            )
+            url = signer.presign_url(
+              basic_request.merge(credentials: override_credentials)
+            )
+            expect(url.url.query).to include('override-akid')
+          end
+
+          it 'allows overriding the signing algorithm' do
+            signer = Signer.new(options)
+            # We can't easily test sigv4a since it requires special setup,
+            # but we can verify the correct algorithm name is used
+            url = signer.presign_url(
+              basic_request.merge(signing_algorithm: 'sigv4a')
+            )
+            expect(url.url.query).to include('AWS4-ECDSA-P256-SHA256')
+          end
+
+          it 'allows overriding the omit_session_token flag' do
+            signer = Signer.new(
+              service: 'SERVICE',
+              region: 'REGION',
+              credentials: credentials_with_token,
+              omit_session_token: false
+            )
+            url = signer.presign_url(
+              basic_request.merge(omit_session_token: true)
+            )
+
+            # When omit_session_token is true, the token is excluded from the signature,
+            # but included in the URL query parameters.
+            parts = url.url.query.split('&')
+            security_token_param = parts.find { |p| p.start_with?('X-Amz-Security-Token=') }
+
+            expect(security_token_param).not_to be_nil
+            expect(security_token_param).to include('session-token')
+          end
+
+          it 'allows overriding unsigned_headers' do
+            headers = {
+              'Content-Type' => 'application/json',
+              'Custom-Header' => 'custom-value'
+            }
+
+            signer = Signer.new(options)
+            url = signer.presign_url(
+              http_method: 'PUT',
+              url: 'https://domain.com',
+              headers: headers,
+              unsigned_headers: ['custom-header']
+            )
+
+            signed_headers_param = url.url.query.split('&').find { |param| param.start_with?('X-Amz-SignedHeaders=') }
+            expect(signed_headers_param).to include('content-type')
+            expect(signed_headers_param).not_to include('custom-header')
+          end
+
+          it 'allows overriding uri_escape_path' do
+            signer = Signer.new(options.merge(uri_escape_path: true))
+            url = signer.presign_url(
+              http_method: 'GET',
+              url: 'https://domain.com/path%20with%20spaces',
+              uri_escape_path: false
+            )
+            expect(url.canonical_request).to include("/path%20with%20spaces\n")
+            expect(url.canonical_request).not_to include("/path%2520with%2520spaces\n")
+          end
+
+          it 'allows overriding normalize_path' do
+            signer = Signer.new(options.merge(normalize_path: true))
+            url = signer.presign_url(
+              http_method: 'GET',
+              url: 'https://domain.com/path/../not-normalized',
+              normalize_path: false
+            )
+            expect(url.canonical_request).to include("/path/../not-normalized\n")
+          end
         end
 
         context 'with expiration options' do
@@ -637,7 +879,6 @@ module Aws
               url: 'https://domain.com?existing=param'
             )
 
-            # Should preserve existing query param and add auth params
             query_parts = url.url.query.split('&')
             expect(query_parts).to include('existing=param')
             expect(query_parts.any? { |p| p.start_with?('X-Amz-Algorithm=') }).to be(true)
@@ -650,8 +891,6 @@ module Aws
               http_method: 'GET',
               url: 'https://domain.com/path?param=value with spaces&another=123'
             )
-
-            # Check that existing params are preserved and properly escaped in canonical request
             expect(url.canonical_request).to include('another=123&param=value%20with%20spaces')
           end
         end
