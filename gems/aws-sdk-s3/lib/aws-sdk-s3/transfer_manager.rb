@@ -12,16 +12,54 @@ module Aws
     # * track transfer progress by using progress listener
     #
     class TransferManager
+      # @example Using default executor (automatic creation and shutdown)
+      #     tm = TransferManager.new # No executor provided
+      #     # DefaultExecutor created, used, and shutdown automatically
+      #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key')
+      #
+      # @example Using custom executor (manual shutdown required)
+      #     require 'concurrent-ruby'
+      #
+      #     executor = Concurrent::ThreadPoolExecutor.new(max_threads: 5)
+      #     tm = TransferManager.new(executor: executor)
+      #     tm.download_file('/path/to/file1', bucket: 'bucket', key: 'key1')
+      #     executor.shutdown # You must shutdown custom executors
+      #
       # @param [Hash] options
       # @option options [S3::Client] :client (S3::Client.new)
       #   The S3 client to use for {TransferManager} operations. If not provided, a new default client
       #   will be created automatically.
+      # @option options [Object] :executor
+      #   The executor to use for multipart operations. Must implement the same interface as {DefaultExecutor}.
+      #   If not provided, a new {DefaultExecutor} will be created automatically for each operation and
+      #   shutdown after completion. When provided a custom executor, it will be reused across operations, and
+      #   you are responsible for shutting it down when finished.
+      #
+      #   **Required Methods:**
+      #
+      #   * `post(*args, &block)` - Execute a task with given arguments and block
+      #
+      #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
+      #
+      #   * `kill` - Immediately terminate all running tasks
+      #
+      #   * `running?` - Returns true if executor is accepting new tasks
+      #
+      #   * `shutting_down?` - Returns true if shutdown has been initiated but not completed
+      #
+      #   * `shutdown?` - Returns true if executor has been fully shutdown
+      #
       def initialize(options = {})
-        @client = options.delete(:client) || Client.new
+        @client = options[:client] || Client.new
+        @executor = options[:executor]
+        @options = options
       end
 
       # @return [S3::Client]
       attr_reader :client
+
+      # @return [S3::Client]
+      attr_reader :executor
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -74,6 +112,7 @@ module Aws
       # @option options [Integer] :chunk_size required in `"get_range"` mode.
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with this thread count).
       #
       # @option options [String] :version_id The object version id used to retrieve the object.
       #
@@ -102,8 +141,10 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
-        downloader = FileDownloader.new(client: @client)
+        executor = @executor || DefaultExecutor.new
+        downloader = FileDownloader.new(client: @client, executor: executor)
         downloader.download(destination, options.merge(bucket: bucket, key: key))
+        executor.shutdown if @options[:executor]
         true
       end
 
@@ -139,7 +180,7 @@ module Aws
       #   A file on the local file system that will be uploaded. This can either be a `String` or `Pathname` to the
       #   file, an open `File` object, or an open `Tempfile` object. If you pass an open `File` or `Tempfile` object,
       #   then you are responsible for closing it after the upload completes. When using an open Tempfile, rewind it
-      #   before  uploading or else the object will be empty.
+      #   before uploading or else the object will be empty.
       #
       # @param [String] bucket
       #   The name of the S3 bucket to upload to.
@@ -156,15 +197,14 @@ module Aws
       #   Files larger han or equal to `:multipart_threshold` are uploaded using the S3 multipart upload APIs.
       #   Default threshold is `100MB`.
       #
-      # @option options [Integer] :thread_count (10)
-      #    The number of parallel multipart uploads. This option is not used if the file is smaller than
-      #    `:multipart_threshold`.
+      # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with this thread count).
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.
       #   It will be invoked with `[bytes_read]` and  `[total_sizes]`.
       #
-      # @raise [MultipartUploadError] If an file is being uploaded in parts, and the upload can not be completed,
+      # @raise [MultipartUploadError] If a file is being uploaded in parts, and the upload can not be completed,
       #   then the upload is aborted and this error is raised.  The raised error has a `#errors` method that
       #   returns the failures that caused the upload to be aborted.
       #
@@ -175,13 +215,16 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
-        uploading_options = options.dup
+        executor = @executor || DefaultExecutor.new
+        upload_opts = options.dup
         uploader = FileUploader.new(
-          multipart_threshold: uploading_options.delete(:multipart_threshold),
-          client: @client
+          multipart_threshold: upload_opts.delete(:multipart_threshold),
+          client: @client,
+          executor: executor
         )
-        response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
+        response = uploader.upload(source, upload_opts.merge(bucket: bucket, key: key))
         yield response if block_given?
+        executor.shutdown if @options[:executor]
         true
       end
 
