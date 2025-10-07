@@ -33,7 +33,7 @@ module Aws
 
         download_opts = build_download_opts(destination, bucket, options)
         downloader = FileDownloader.new(client: @client, executor: @executor)
-        producer = ObjectProducer.new(build_producer_opts(download_opts))
+        producer = ObjectProducer.new(download_opts.merge(client: @client, directory_downloader: self))
         downloads, errors = process_download_queue(producer, downloader, download_opts)
         build_result(downloads, errors)
       ensure
@@ -56,23 +56,24 @@ module Aws
         }
       end
 
-      def build_producer_opts(opts)
-        opts.merge(client: @client, directory_downloader: self)
-      end
-
       def build_result(download_count, errors)
-        downloads = [download_count - errors.count, 0].max
-
         if @abort_requested
-          msg = "failed to download directory: downloaded #{downloads} files, failed #{errors.count} files"
+          msg = "directory download failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryDownloadError.new(msg, errors)
         else
           {
-            completed_downloads: downloads,
+            completed_downloads: [download_count - errors.count, 0].max,
             failed_downloads: errors.count,
             errors: errors.any? ? errors : nil
           }.compact
         end
+      end
+
+      def handle_error(executor, opts)
+        return if opts[:ignore_failure]
+
+        request_abort
+        executor.kill
       end
 
       def process_download_queue(producer, downloader, opts)
@@ -82,25 +83,28 @@ module Aws
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         download_attempts = 0
         errors = []
-        producer.each do |object|
-          break if @abort_requested
+        begin
+          producer.each do |object|
+            break if @abort_requested
 
-          download_attempts += 1
-          queue_executor.post(object) do |o|
-            dir_path = File.dirname(o[:path])
-            FileUtils.mkdir_p(dir_path) unless dir_path == opts[:destination] || Dir.exist?(dir_path)
+            download_attempts += 1
+            queue_executor.post(object) do |o|
+              dir_path = File.dirname(o[:path])
+              FileUtils.mkdir_p(dir_path) unless dir_path == opts[:destination] || Dir.exist?(dir_path)
 
-            downloader.download(o[:path], bucket: opts[:bucket], key: o[:key])
-            progress&.call(File.size(o[:path]))
-          rescue StandardError => e
-            errors << e
-            request_abort unless opts[:ignore_failure]
+              downloader.download(o[:path], bucket: opts[:bucket], key: o[:key])
+              progress&.call(File.size(o[:path]))
+            rescue StandardError => e
+              errors << e
+              handle_error(queue_executor, opts)
+            end
           end
+        rescue StandardError => e
+          errors << e
+          handle_error(queue_executor, opts)
         end
         queue_executor.shutdown
         [download_attempts, errors]
-      ensure
-        queue_executor.shutdown if queue_executor.running?
       end
 
       # @api private

@@ -67,7 +67,7 @@ module Aws
           raise DirectoryUploadError.new(msg, errors)
         else
           {
-            completed_uploads: upload_count - errors.count,
+            completed_uploads: [upload_count - errors.count, 0].max,
             failed_uploads: errors.count,
             errors: errors.any? ? errors : nil
           }.compact
