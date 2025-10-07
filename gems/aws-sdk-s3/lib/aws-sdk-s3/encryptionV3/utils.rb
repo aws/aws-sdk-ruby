@@ -112,7 +112,7 @@ module Aws
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
             ##% - The salt MUST be the Message ID with the length defined in the algorithm suite.
             commitment_key = Utils.derive_commitment_key(data_key, message_id)
-            cipher = alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id)
+            cipher = alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(:encrypt, data_key, message_id)
 
             ##= ../specification/s3-encryption/encryption.md#content-encryption
             ##% The generated IV or Message ID MUST be set or returned from the encryption process such that it can be included in the content metadata.
@@ -120,6 +120,17 @@ module Aws
           end
 
           def derive_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id, stored_commitment_key)
+            unless data_key.length == 32
+              raise DecryptionError, "Data key length does not match algorithm suite"
+            end
+
+            unless message_id.length == 28
+              raise DecryptionError, "Message id length does not match algorithm suite"
+            end
+
+            unless stored_commitment_key.length == 28
+              raise DecryptionError, "Commitment key length does not match algorithm suite"
+            end
 
             unless OpenSSL.secure_compare(
               Utils.derive_commitment_key(data_key, message_id),
@@ -128,17 +139,20 @@ module Aws
               raise DecryptionError, "Commitment key verification failed"
             end
 
-            alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id)
+            alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(:decrypt, data_key, message_id)
           end
 
-          def alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id)
+          def alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(mode, data_key, message_id)
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
             ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only zeros, and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
-            cipher = OpenSSL::Cipher.new("aes-256-gcm")
-            cipher.key = Utils.derive_encryption_key(data_key, message_id)
-            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
-            ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, the IV used in the AES-GCM content encryption/decryption MUST contain only zeros of the length defined in the algorithm suite.
-            cipher.iv = V3_IV_BYTES
+            cipher =  Utils.aes_cipher(
+              mode,
+              :GCM,
+              Utils.derive_encryption_key(data_key, message_id),
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, the IV used in the AES-GCM content encryption/decryption MUST contain only zeros of the length defined in the algorithm suite.
+              V3_IV_BYTES
+            ) #OpenSSL::Cipher.new("aes-256-gcm")
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
             ##% The client MUST set the AAD to the Algorithm Suite ID represented as bytes.
             cipher.auth_data = ALGO_ID # auth_data must be set after key and iv
