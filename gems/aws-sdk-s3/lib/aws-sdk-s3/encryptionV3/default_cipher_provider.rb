@@ -40,6 +40,8 @@ module Aws
             'x-amz-3' => enc_key,
             'x-amz-c' => @content_encryption_schema,
             'x-amz-w' => @key_wrap_schema,
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`)
             'x-amz-m' => materials_description,
             'x-amz-d' => encode64(commitment_key),
             'x-amz-i' => encode64(message_id)
@@ -127,7 +129,9 @@ module Aws
         end
 
         def materials_description
-          @key_provider.encryption_materials.description
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+          ##% If the mapkey is present, the default Material Description value MUST be set to an empty map (`{}`).
+          @key_provider.encryption_materials.description || {}
         end
 
         def encode64(str)

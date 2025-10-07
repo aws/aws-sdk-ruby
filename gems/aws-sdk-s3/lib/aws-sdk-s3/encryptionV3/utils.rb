@@ -106,13 +106,16 @@ module Aws
 
           def generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
 
-            cipher = Utils.aes_encryption_cipher(:GCM)
+            ##= ../specification/s3-encryption/encryption.md#content-encryption
+            ##% The client MUST generate an IV or Message ID using the length of the IV or Message ID defined in the algorithm suite.
             message_id = Utils.generate_message_id()
-            cipher.key = Utils.derive_encryption_key(data_key, message_id)
-            cipher.iv = V3_IV_BYTES
-            cipher.auth_data = ALGO_ID # auth_data must be set after key and iv
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##% - The salt MUST be the Message ID with the length defined in the algorithm suite.
             commitment_key = Utils.derive_commitment_key(data_key, message_id)
+            cipher = alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id)
 
+            ##= ../specification/s3-encryption/encryption.md#content-encryption
+            ##% The generated IV or Message ID MUST be set or returned from the encryption process such that it can be included in the content metadata.
             [cipher, message_id, commitment_key]
           end
 
@@ -125,11 +128,20 @@ module Aws
               raise DecryptionError, "Commitment key verification failed"
             end
 
-            cipher = Utils.aes_decryption_cipher(:GCM)
+            alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id)
+          end
+
+          def alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id)
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only zeros, and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
+            cipher = OpenSSL::Cipher.new("aes-256-gcm")
             cipher.key = Utils.derive_encryption_key(data_key, message_id)
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, the IV used in the AES-GCM content encryption/decryption MUST contain only zeros of the length defined in the algorithm suite.
             cipher.iv = V3_IV_BYTES
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##% The client MUST set the AAD to the Algorithm Suite ID represented as bytes.
             cipher.auth_data = ALGO_ID # auth_data must be set after key and iv
-            
             cipher
           end
 
@@ -138,15 +150,41 @@ module Aws
           end
 
           def generate_message_id()
+            ##= ../specification/s3-encryption/encryption.md#content-encryption
+            ##% The client MUST generate an IV or Message ID using the length of the IV or Message ID defined in the algorithm suite.
             OpenSSL::Random.random_bytes(28)
           end
 
           def derive_encryption_key(data_key, message_id)
-            hkdf(data_key, message_id, ENCRYPTION_KEY_INFO, 32)
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##% - The DEK input pseudorandom key MUST be the output from the extract step.
+            hkdf(
+              data_key,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The salt MUST be the Message ID with the length defined in the algorithm suite.
+              message_id,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The input info MUST be a concatenation of the algorithm suite ID as bytes followed by the string DERIVEKEY as UTF8 encoded bytes.
+              ENCRYPTION_KEY_INFO,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The length of the output keying material MUST equal the encryption key length specified by the algorithm suite encryption settings.
+              32
+            )
           end
 
           def derive_commitment_key(data_key, message_id)
-            hkdf(data_key, message_id, COMMITMENT_KEY_INFO, 28)
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##% - The CK input pseudorandom key MUST be the output from the extract step.
+            hkdf(
+              data_key,
+              message_id,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The input info MUST be a concatenation of the algorithm suite ID as bytes followed by the string COMMITKEY as UTF8 encoded bytes.
+              COMMITMENT_KEY_INFO,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The length of the output keying material MUST equal the commit key length specified by the supported algorithm suites.
+              28
+            )
           end
 
           def valid_commitment_key?(derived, stored)
@@ -155,10 +193,16 @@ module Aws
 
           def hkdf(input_key_material, salt, info, desired_length)
             OpenSSL::KDF.hkdf(
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The input keying material MUST be the plaintext data key (PDK) generated by the key provider.
               input_key_material,
               salt: salt,
               info: info,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The length of the input keying material MUST equal the key derivation input length specified by the algorithm suite commit key derivation setting.
               length: desired_length,
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% - The hash function MUST be specified by the algorithm suite commitment settings.
               hash: SHA512_DIGEST
             )
           end

@@ -36,6 +36,8 @@ module Aws
             'x-amz-w' => @key_wrap_schema,
             'x-amz-d' => encode64(commitment_key),
             'x-amz-i' => encode64(message_id),
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##% The Encryption Context value MUST be used for wrapping algorithm `kms+context` or `12`.
             'x-amz-t' => Json.dump(encryption_context)
           }
           [envelope, cipher]

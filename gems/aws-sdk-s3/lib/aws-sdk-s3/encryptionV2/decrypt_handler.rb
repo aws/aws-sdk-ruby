@@ -130,7 +130,11 @@ module Aws
 
         def extract_envelope(hash)
           return nil unless hash
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
+          ##% - If the metadata contains "x-amz-iv" and "x-amz-key" then the object MUST be considered as an S3EC-encrypted object using the V1 format.
           return v1_envelope(hash) if hash.key?('x-amz-key')
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
+          ##% - If the metadata contains "x-amz-iv" and "x-amz-metadata-x-amz-key-v2" then the object MUST be considered as an S3EC-encrypted object using the V2 format.
           return v2_envelope(hash) if hash.key?('x-amz-key-v2')
           if hash.keys.any? { |key| key.match(/^x-amz-key-(.+)$/) }
             msg = "unsupported envelope encryption version #{$1}"

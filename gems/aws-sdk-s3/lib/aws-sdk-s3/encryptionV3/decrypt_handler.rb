@@ -4,7 +4,6 @@ require 'base64'
 
 require 'logger'
 
-
 module Aws
   module S3
     module EncryptionV3
@@ -19,10 +18,11 @@ module Aws
           x-amz-w
           x-amz-t
         )
-        # Need to deal with these options
-        # because they need to exist in the envelop
-        # x-amz-m
-        # x-amz-t
+
+        OPTIONAL_ENVELOP_KEY = %w(
+          x-amz-m
+          x-amz-t
+        )
 
         METADATA_KEY = %w(
           x-amz-c
@@ -30,11 +30,7 @@ module Aws
           x-amz-i
         )
 
-        LEGACY_KEY = %w(
-
-        )
-
-        POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY + LEGACY_KEY).uniq
+        POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY + OPTIONAL_ENVELOP_KEY).uniq
         REQUIRED_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY).uniq
 
         # POSSIBLE_WRAPPING_FORMATS = %w(
@@ -80,10 +76,11 @@ module Aws
 
           context.http_response.on_headers(200) do
             decrypter = if context.http_response.headers.key?('x-amz-meta-x-amz-i')
+                ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
+                ##% - If the metadata contains "x-amz-3" and "x-amz-d" and "x-amz-i" then the object MUST be considered an S3EC-encrypted object using the V3 format.
                 cipher, envelope = decryption_cipher(context)
                 authenticated_decrypter(context, cipher, envelope)
               else
-                Logger.new(STDOUT).info("FUCK:====#{context[:encryption].inspect}")
                 cipher, envelope = V2_HANDLER.send(:decryption_cipher, context)
                 V2_HANDLER.send(:authenticated_decrypter, context, cipher, envelope)
               end 
@@ -126,6 +123,8 @@ module Aws
                     end
 
           # If empty or incomplete, get/merge data from secondary source
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
+          ##% If the object matches none of the V1/V2/V3 formats, the S3EC MUST attempt to get the instruction file.
           if envelope.nil? || envelope.empty? || !complete_envelop?(envelope)
             secondary = if context[:encryption][:envelope_location] == :metadata
                           envelope_from_instr_file(context)
@@ -179,6 +178,8 @@ module Aws
 
         def v3_envelope?(possible_envelope)
           if possible_envelope.key?('x-amz-key') || possible_envelope.key?('x-amz-key-v2')
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
+            ##% If there are multiple mapkeys which are meant to be exclusive, such as "x-amz-key", "x-amz-key-v2", and "x-amz-3" then the S3EC SHOULD throw an exception.
             raise Errors::LegacyDecryptionError
           end
 
@@ -193,6 +194,8 @@ module Aws
             raise Errors::DecryptionError, msg
           end
           unless (missing_keys = REQUIRED_ENVELOPE_KEYS - possible_envelope.keys).empty?
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
+            ##% In general, if there is any deviation from the above format, with the exception of additional unrelated mapkeys, then the S3EC SHOULD throw an exception.
             msg = "incomplete v3 encryption envelope:\n"
             msg += "  missing: #{missing_keys.join(',')}\n"
             raise Errors::DecryptionError, msg
@@ -238,3 +241,13 @@ module Aws
     end
   end
 end
+
+##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+##= type=exception
+##= reason=This has never been supported in Ruby
+##% This material description string MAY be encoded by the esoteric double-encoding scheme used by the S3 web server.
+
+##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+##= type=exception
+##= reason=This has never been supported in Ruby
+##% This encryption context string MAY be encoded by the esoteric double-encoding scheme used by the S3 web server.

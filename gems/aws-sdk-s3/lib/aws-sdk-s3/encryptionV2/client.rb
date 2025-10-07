@@ -568,3 +568,8 @@ module Aws
     end
   end
 end
+
+##= ../specification/s3-encryption/data-format/content-metadata.md#v1-v2-shared
+##= type=exception
+##= reason=This has never been supported in Ruby
+##% This string MAY be encoded by the esoteric double-encoding scheme used by the S3 web server.
