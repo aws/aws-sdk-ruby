@@ -29,7 +29,11 @@ module Aws
 
         option(:sigv4_signer) do |config|
           trait = config.service.traits['aws.auth#sigv4']
-          Aws::Core::SigV4Signer.new(name: trait['name'])
+          Aws::Core::SigV4Signer.new(
+            service: trait['name'],
+            region: config.region,
+            credentials_provider: config.credentials_provider
+          )
         end
 
         def after_initialize(client)
