@@ -38,16 +38,8 @@ module Aws
       #   **Required Methods:**
       #
       #   * `post(*args, &block)` - Execute a task with given arguments and block
-      #
       #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
-      #
       #   * `kill` - Immediately terminate all running tasks
-      #
-      #   * `running?` - Returns true if executor is accepting new tasks
-      #
-      #   * `shutting_down?` - Returns true if shutdown has been initiated but not completed
-      #
-      #   * `shutdown?` - Returns true if executor has been fully shutdown
       #
       def initialize(options = {})
         @client = options[:client] || Client.new
@@ -114,9 +106,8 @@ module Aws
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
       #   Only used when no custom executor is provided (creates {DefaultExecutor} with this thread count).
       #
-      # @option options [String] :version_id The object version id used to retrieve the object.
-      #
-      #     @see https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html ObjectVersioning
+      # @option options [String] :version_id The object version id used to retrieve the object. See
+      #   {https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html ObjectVersioning} for further details.
       #
       # @option options [String] :checksum_mode ("ENABLED")
       #   When `"ENABLED"` and the object has a stored checksum, it will be used to validate the download and will
@@ -141,10 +132,11 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
-        executor = @executor || DefaultExecutor.new
+        download_opts = options.dup
+        executor = @executor || DefaultExecutor.new(download_opts.delete(:thread_count))
         downloader = FileDownloader.new(client: @client, executor: executor)
         downloader.download(destination, options.merge(bucket: bucket, key: key))
-        executor.shutdown if @options[:executor]
+        executor.shutdown unless @options[:executor]
         true
       end
 
@@ -198,7 +190,7 @@ module Aws
       #   Default threshold is `100MB`.
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with this thread count).
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with the default thread count).
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.
@@ -215,8 +207,8 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
-        executor = @executor || DefaultExecutor.new
         upload_opts = options.dup
+        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
           multipart_threshold: upload_opts.delete(:multipart_threshold),
           client: @client,
@@ -224,7 +216,7 @@ module Aws
         )
         response = uploader.upload(source, upload_opts.merge(bucket: bucket, key: key))
         yield response if block_given?
-        executor.shutdown if @options[:executor]
+        executor.shutdown unless @options[:executor]
         true
       end
 
