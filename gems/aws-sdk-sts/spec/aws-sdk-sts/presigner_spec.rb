@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module STS
     describe Presigner do
-      let(:options) { { region: 'us-west-2' } }
+      let(:options) { { region: 'us-west-2', access_key_id: 'akid', secret_access_key: 'secret' } }
       let(:client) { Client.new(options) }
       let(:presigner) { Presigner.new(client: client) }
       let(:headers) { { 'X-K8s-Aws-Id' => 'my-eks-cluster' } }
@@ -17,7 +17,7 @@ module Aws
           expect(url).to include('Action=GetCallerIdentity')
           expect(url).to include('Version=2011-06-15')
           expect(url).to include('X-Amz-Algorithm=AWS4-HMAC-SHA256')
-          expect(url).to include('X-Amz-Credential=stubbed-access-key-id')
+          expect(url).to include('X-Amz-Credential=akid')
           expect(url).to include('X-Amz-Date=')
           expect(url).to include('X-Amz-Expires=900')
           expect(url).to include('X-Amz-SignedHeaders=host%3Bx-k8s-aws-id')

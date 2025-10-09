@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module Polly
     describe Presigner do
-      let(:options) { { region: 'us-west-2' } }
+      let(:options) { { region: 'us-west-2', access_key_id: 'akid', secret_access_key: 'secret' } }
       let(:client) { Client.new(options) }
       let(:presigner) { Presigner.new(client: client) }
       let(:params) { { output_format: 'mp3', text: 'Hello World', voice_id: 'Ewa' } }
@@ -18,7 +18,7 @@ module Aws
           expect(url).to include('Text=Hello%20World')
           expect(url).to include('VoiceId=Ewa')
           expect(url).to include('X-Amz-Algorithm=AWS4-HMAC-SHA256')
-          expect(url).to include('X-Amz-Credential=stubbed-access-key-id')
+          expect(url).to include('X-Amz-Credential=akid')
           expect(url).to include('X-Amz-Date=')
           expect(url).to include('X-Amz-Expires=900')
           expect(url).to include('X-Amz-SignedHeaders=host')
