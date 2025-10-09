@@ -2,7 +2,7 @@
 
 module Aws
   module Polly
-    # Allows you to create presigned URLs for Polly operations.`
+    # Allows you to create presigned URLs for Polly operations.
     #
     # @example
     #
