@@ -133,7 +133,7 @@ module Aws
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
         download_opts = options.dup
-        executor = @executor || DefaultExecutor.new(download_opts.delete(:thread_count))
+        executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
         downloader = FileDownloader.new(client: @client, executor: executor)
         downloader.download(destination, options.merge(bucket: bucket, key: key))
         executor.shutdown unless @options[:executor]
