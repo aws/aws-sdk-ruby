@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Add lightweight thread pool executor for multipart `download_file` and `upload_file`.
+* Feature - Add lightweight thread pool executor for multipart `download_file`, `upload_file` and `upload_stream`.
 
 1.199.1 (2025-09-25)
 ------------------
