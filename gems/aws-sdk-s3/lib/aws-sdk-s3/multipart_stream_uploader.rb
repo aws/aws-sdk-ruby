@@ -66,12 +66,10 @@ module Aws
               )
             end
 
-            begin
-              block.call(write_pipe)
-            ensure
-              # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
-              write_pipe.close
-            end
+            block.call(write_pipe)
+          ensure
+            # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
+            write_pipe.close
             upload_thread.join
           end
         rescue StandardError => e
