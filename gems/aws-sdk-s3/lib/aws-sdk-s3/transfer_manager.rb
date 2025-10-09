@@ -104,7 +104,7 @@ module Aws
       # @option options [Integer] :chunk_size required in `"get_range"` mode.
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with this thread count).
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with given thread count).
       #
       # @option options [String] :version_id The object version id used to retrieve the object. See
       #   {https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html ObjectVersioning} for further details.
@@ -190,7 +190,7 @@ module Aws
       #   Default threshold is `100MB`.
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with the default thread count).
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with the given thread count).
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.
@@ -252,7 +252,8 @@ module Aws
       #   {Client#upload_part} can be provided.
       #
       # @option options [Integer] :thread_count (10)
-      #   The number of parallel multipart uploads.
+      #   The number of parallel multipart uploads. Only used when no custom executor is provided
+      #   (creates {DefaultExecutor} with the given thread count).
       #
       # @option options [Boolean] :tempfile (false)
       #   Normally read data is stored in memory when building the parts in order to complete the underlying
