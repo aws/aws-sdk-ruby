@@ -18,7 +18,11 @@ module Aws
             * `~/.aws/credentials` as `region` under a profile
             * `~/.aws/config` as `region` under a profile
           DOCS
-          resolve_region(config)
+          if config.stub_responses
+            'us-stubbed-1'
+          else
+            resolve_region(config)
+          end
         end
 
         option(

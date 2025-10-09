@@ -118,9 +118,9 @@ module Aws
       # @option options [Boolean] :normalize_path (true) When `true`, the uri paths will be normalized when building
       #   the canonical request.
       def initialize(options = {})
-        @service = extract_service(options)
-        @region = extract_region(options)
-        @credentials_provider = extract_credentials_provider(options)
+        @service = options[:service]
+        @region = options[:region]
+        @credentials_provider = resolve_credentials_provider(options)
         @unsigned_headers = extract_unsigned_headers(options)
         @uri_escape_path = options.fetch(:uri_escape_path, true)
         @apply_checksum_header = options.fetch(:apply_checksum_header, true)
@@ -194,6 +194,7 @@ module Aws
       #     signature.signature #=> "..."
       #
       # @param [Hash] options
+      # @option options (see #initialize)
       # @option options [required, String] :http_method
       #   One of 'GET', 'HEAD', 'PUT', 'POST', 'PATCH', or 'DELETE'.
       # @option options [required, String, URI::HTTP, URI::HTTPS] :url
@@ -206,12 +207,22 @@ module Aws
       #  the hash of signing headers that should be applied to the HTTP request. The `string_to_sign`,
       #  `canonical_request`, `content_sha256`, and `signature` attributes are useful
       #  for debugging signature errors returned by AWS.
-      def sign_request(options) # rubocop:disable Metrics
-        creds, _creds_expiration = fetch_credentials
+      def sign_request(options = {}) # rubocop:disable Metrics
+        service = resolve_service(options)
+        region = resolve_region(options)
+        signing_algorithm = options.fetch(:signing_algorithm, @signing_algorithm)
+        omit_session_token = options.fetch(:omit_session_token, @omit_session_token)
+        uri_escape_path = options.fetch(:uri_escape_path, @uri_escape_path)
+        apply_checksum_header = options.fetch(:apply_checksum_header, @apply_checksum_header)
+        normalize_path = options.fetch(:normalize_path, @normalize_path)
+        credentials_provider = resolve_credentials_provider(options)
+        unsigned_headers = resolve_unsigned_headers(options)
+
+        creds, _creds_expiration = fetch_credentials(credentials_provider)
 
         http_method = extract_http_method(options)
         url = extract_url(options)
-        Signer.normalize_path(url) if @normalize_path
+        Signer.normalize_path(url) if normalize_path
         headers = downcase_headers(options[:headers])
 
         datetime = headers['x-amz-date']
@@ -223,32 +234,32 @@ module Aws
         sigv4_headers = {}
         sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
-        if creds.session_token && !@omit_session_token
-          if @signing_algorithm == 'sigv4-s3express'
+        if creds.session_token && !omit_session_token
+          if signing_algorithm == 'sigv4-s3express'
             sigv4_headers['x-amz-s3session-token'] = creds.session_token
           else
             sigv4_headers['x-amz-security-token'] = creds.session_token
           end
         end
-        sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
-        sigv4_headers['x-amz-region-set'] = @region if @signing_algorithm == 'sigv4a'
+        sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if apply_checksum_header
+        sigv4_headers['x-amz-region-set'] = region if signing_algorithm == 'sigv4a'
 
         # merge so we do not modify given headers hash
         headers = headers.merge(sigv4_headers)
 
-        algorithm = sts_algorithm
-        creq = canonical_request(http_method, url, headers, content_sha256)
-        sts = string_to_sign(datetime, creq, algorithm)
-        sig = signature(creds, date, sts)
+        algorithm = sts_algorithm(signing_algorithm)
+        creq = canonical_request(http_method, url, headers, content_sha256, uri_escape_path, unsigned_headers)
+        sts = string_to_sign(datetime, creq, algorithm, service, region, signing_algorithm)
+        sig = signature(creds, date, sts, service, region, signing_algorithm)
 
         headers['authorization'] = [
-          "#{algorithm} Credential=#{credential(creds, date)}",
-          "SignedHeaders=#{signed_headers(headers)}",
+          "#{algorithm} Credential=#{credential(creds, date, service, region, signing_algorithm)}",
+          "SignedHeaders=#{signed_headers(headers, unsigned_headers)}",
           "Signature=#{sig}"
         ].join(', ')
 
         # If we are omitting the session token from the signature, we need to add it back to the headers here.
-        headers['x-amz-security-token'] = creds.session_token if creds.session_token && @omit_session_token
+        headers['x-amz-security-token'] = creds.session_token if creds.session_token && omit_session_token
 
         Signature.new(
           headers: headers,
@@ -295,6 +306,7 @@ module Aws
       #     )
       #
       # @param [Hash] options
+      # @option options (see #initialize)
       # @option options [required, String] :http_method
       #   One of 'GET', 'HEAD', 'PUT', 'POST', 'PATCH', or 'DELETE'.
       # @option options [required, String, URI::HTTP, URI::HTTPS] :url
@@ -314,13 +326,22 @@ module Aws
       #   The `headers` attribute contains any additional headers that must be sent with the request.
       #   The `string_to_sign`, `canonical_request`, `content_sha256`, and `signature` attributes are useful
       #   for debugging signature errors returned by AWS.
-      def presign_url(options) # rubocop:disable Metrics
-        creds, creds_expiration = fetch_credentials
+      def presign_url(options = {}) # rubocop:disable Metrics
+        service = resolve_service(options)
+        region = resolve_region(options)
+        signing_algorithm = options.fetch(:signing_algorithm, @signing_algorithm)
+        omit_session_token = options.fetch(:omit_session_token, @omit_session_token)
+        uri_escape_path = options.fetch(:uri_escape_path, @uri_escape_path)
+        normalize_path = options.fetch(:normalize_path, @normalize_path)
+        credentials_provider = resolve_credentials_provider(options)
+        unsigned_headers = resolve_unsigned_headers(options)
+
+        creds, creds_expiration = fetch_credentials(credentials_provider)
 
         http_method = extract_http_method(options)
         url = extract_url(options)
         expires_in = extract_expires_in(options)
-        Signer.normalize_path(url) if @normalize_path
+        Signer.normalize_path(url) if normalize_path
         headers = downcase_headers(options[:headers])
 
         headers['host'] ||= host(url)
@@ -332,15 +353,15 @@ module Aws
         content_sha256 ||= options[:body_digest]
         content_sha256 ||= sha256_hexdigest(options[:body] || '')
 
-        algorithm = sts_algorithm
+        algorithm = sts_algorithm(signing_algorithm)
         params = {}
         params['X-Amz-Algorithm'] = algorithm
-        params['X-Amz-Credential'] = credential(creds, date)
+        params['X-Amz-Credential'] = credential(creds, date, service, region, signing_algorithm)
         params['X-Amz-Date'] = datetime
         params['X-Amz-Expires'] = presigned_url_expiration(expires_in, creds_expiration, datetime).to_s
-        params['X-Amz-Region-Set'] = @region if @signing_algorithm == 'sigv4a'
-        if creds.session_token && !@omit_session_token
-          if @signing_algorithm == 'sigv4-s3express'
+        params['X-Amz-Region-Set'] = region if signing_algorithm == 'sigv4a'
+        if creds.session_token && !omit_session_token
+          if signing_algorithm == 'sigv4-s3express'
             params['X-Amz-S3session-Token'] = creds.session_token
           else
             params['X-Amz-Security-Token'] = creds.session_token
@@ -353,7 +374,7 @@ module Aws
           signed_headers[key] = value unless x_amz_headers.include?(key.downcase)
         end
 
-        params['X-Amz-SignedHeaders'] = signed_headers(signed_headers)
+        params['X-Amz-SignedHeaders'] = signed_headers(signed_headers, unsigned_headers)
 
         params = params.map do |key, value|
           "#{Signer.uri_escape(key)}=#{Signer.uri_escape(value)}"
@@ -365,12 +386,12 @@ module Aws
           url.query = params
         end
 
-        creq = canonical_request(http_method, url, signed_headers, content_sha256)
-        sts = string_to_sign(datetime, creq, algorithm)
-        sig = signature(creds, date, sts)
+        creq = canonical_request(http_method, url, headers, content_sha256, uri_escape_path, unsigned_headers)
+        sts = string_to_sign(datetime, creq, algorithm, service, region, signing_algorithm)
+        sig = signature(creds, date, sts, service, region, signing_algorithm)
 
         # if we are omitting the session token from the signature, we need to add it back to the querystring here.
-        if creds.session_token && @omit_session_token
+        if creds.session_token && omit_session_token
           url.query += "&X-Amz-Security-Token=#{Signer.uri_escape(creds.session_token)}"
         end
         url.query += "&X-Amz-Signature=#{sig}"
@@ -387,25 +408,35 @@ module Aws
 
       private
 
-      def extract_service(options)
-        raise Errors::MissingServiceError unless options[:service]
+      def resolve_service(options)
+        service = options.fetch(:service, @service)
+        raise Errors::MissingServiceError unless service
 
-        options[:service]
+        service
       end
 
-      def extract_region(options)
-        raise Errors::MissingRegionError unless options[:region]
+      def resolve_region(options)
+        region = options.fetch(:region, @region)
+        raise Errors::MissingRegionError unless region
 
-        options[:region]
+        region
       end
 
-      def extract_credentials_provider(options)
+      def resolve_credentials_provider(options)
         if options[:credentials_provider]
           options[:credentials_provider]
         elsif options.key?(:credentials) || options.key?(:access_key_id)
           StaticCredentialsProvider.new(options)
         else
-          raise Errors::MissingCredentialsError
+          @credentials_provider
+        end
+      end
+
+      def resolve_unsigned_headers(options)
+        if options[:unsigned_headers]
+          extract_unsigned_headers(options)
+        else
+          @unsigned_headers
         end
       end
 
@@ -420,12 +451,10 @@ module Aws
         Set.new(unsigned_headers.concat(default_headers))
       end
 
-      def fetch_credentials
-        unless @credentials_provider.set?
-          raise Errors::MissingCredentialsError, 'unable to sign request without credentials set'
-        end
+      def fetch_credentials(provider = @credentials_provider)
+        raise Errors::MissingCredentialsError, 'unable to sign request without credentials set' unless provider&.set?
 
-        [@credentials_provider.identity, @credentials_provider.expiration]
+        [provider.identity, provider.expiration]
       end
 
       def credentials_set?(credentials)
@@ -458,59 +487,71 @@ module Aws
         end
       end
 
-      def sts_algorithm
-        if @signing_algorithm == 'sigv4a'
+      def sts_algorithm(algorithm)
+        algorithm ||= @signing_algorithm
+        if algorithm == 'sigv4a'
           'AWS4-ECDSA-P256-SHA256'
         else
           'AWS4-HMAC-SHA256'
         end
       end
 
-      def canonical_request(http_method, url, headers, content_sha256)
+      def canonical_request(http_method, url, headers, content_sha256, uri_escape_path = nil, unsigned_headers = nil) # rubocop:disable Metrics/ParameterLists
         [
           http_method,
-          path(url),
+          path(url, uri_escape_path),
           normalized_querystring(url.query || ''),
-          "#{canonical_headers(headers)}\n",
-          signed_headers(headers),
+          "#{canonical_headers(headers, unsigned_headers)}\n",
+          signed_headers(headers, unsigned_headers),
           content_sha256
         ].join("\n")
       end
 
-      def string_to_sign(datetime, canonical_request, algorithm)
+      def string_to_sign(datetime, canonical_request, algorithm, service = nil, region = nil, signing_algorithm = nil) # rubocop:disable Metrics/ParameterLists
         [
           algorithm,
           datetime,
-          credential_scope(datetime[0, 8]),
+          credential_scope(datetime[0, 8], service, region, signing_algorithm),
           sha256_hexdigest(canonical_request)
         ].join("\n")
       end
 
-      def credential_scope(date)
+      def credential_scope(date, service = nil, region = nil, signing_algorithm = nil)
+        service ||= @service
+        region ||= @region
+        signing_algorithm ||= @signing_algorithm
+
         [
           date,
-          (@region unless @signing_algorithm == 'sigv4a'),
-          @service,
+          (region unless signing_algorithm == 'sigv4a'),
+          service,
           'aws4_request'
         ].compact.join('/')
       end
 
-      def credential(credentials, date)
-        "#{credentials.access_key_id}/#{credential_scope(date)}"
+      def credential(credentials, date, service = nil, region = nil, signing_algorithm = nil)
+        "#{credentials.access_key_id}/#{credential_scope(date, service, region, signing_algorithm)}"
       end
 
-      def signature(creds, date, string_to_sign)
-        if @signing_algorithm == 'sigv4a'
+      def signature(creds, date, string_to_sign, service = nil, region = nil, signing_algorithm = nil) # rubocop:disable Metrics/ParameterLists
+        service ||= @service
+        region ||= @region
+        signing_algorithm ||= @signing_algorithm
+
+        if signing_algorithm == 'sigv4a'
           asymmetric_signature(creds, string_to_sign)
         else
-          symmetric_signature(creds.secret_access_key, date, string_to_sign)
+          symmetric_signature(creds.secret_access_key, date, string_to_sign, service, region)
         end
       end
 
-      def symmetric_signature(secret_access_key, date, string_to_sign)
+      def symmetric_signature(secret_access_key, date, string_to_sign, service = nil, region = nil)
+        service ||= @service
+        region ||= @region
+
         k_date = hmac("AWS4#{secret_access_key}", date)
-        k_region = hmac(k_date, @region)
-        k_service = hmac(k_region, @service)
+        k_region = hmac(k_date, region)
+        k_service = hmac(k_region, service)
         k_credentials = hmac(k_service, 'aws4_request')
         hexhmac(k_credentials, string_to_sign)
       end
@@ -523,10 +564,11 @@ module Aws
         Digest.hexencode(s)
       end
 
-      def path(url)
+      def path(url, escape_path = nil)
+        escape_path = @uri_escape_path if escape_path.nil?
         path = url.path
         path = '/' if path == ''
-        if @uri_escape_path
+        if escape_path
           Signer.uri_escape_path(path)
         else
           path
@@ -562,9 +604,10 @@ module Aws
         end.map(&:first).join('&')
       end
 
-      def signed_headers(headers)
+      def signed_headers(headers, unsigned_headers = nil)
+        unsigned_headers ||= @unsigned_headers
         headers.inject([]) do |signed_headers, (header, _)|
-          if @unsigned_headers.include?(header)
+          if unsigned_headers.include?(header)
             signed_headers
           else
             signed_headers << header
@@ -572,9 +615,10 @@ module Aws
         end.sort.join(';')
       end
 
-      def canonical_headers(headers)
+      def canonical_headers(headers, unsigned_headers = nil)
+        unsigned_headers ||= @unsigned_headers
         headers = headers.inject([]) do |hdrs, (k, v)|
-          if @unsigned_headers.include?(k)
+          if unsigned_headers.include?(k)
             hdrs
           else
             hdrs << [k, v]

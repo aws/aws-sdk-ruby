@@ -4,11 +4,9 @@ require 'aws-sdk-code-generator'
 
 task 'build' do
   # TODO: These result in various errors:
-  #   aws-sdk-dynamodb => ArgumentError: Endpoint built-in not available for AWS::Auth::AccountId
   #   aws-sdk-s3control => ArgumentError: Endpoint built-in not available for AWS::S3Control::UseArnRegion
   #   aws-sdk-s3 => ArgumentError: Endpoint built-in not available for AWS::S3::ForcePathStyle
   skip = %w[
-    aws-sdk-dynamodb
     aws-sdk-s3control
     aws-sdk-s3
   ]

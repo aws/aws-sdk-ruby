@@ -7,33 +7,33 @@ module Aws
     # Signs requests using AWS Signature Version 4.
     class SigV4Signer
       def initialize(options = {})
-        @name = options[:name]
+        @signer = Aws::SigV4::Signer.new(options)
       end
 
       def sign_request(context) # rubocop:disable Metrics/AbcSize
-        reset(context)
-        signer = Aws::SigV4::Signer.new(
-          service: context.auth.signer_properties['signingName'] || @name,
-          # TODO: fix default region
-          region: context.auth.signer_properties['signingRegion'] || 'us-west-2', # context.config.region,
-          credentials_provider: context.config.credentials_provider
-        )
-        signature = signer.sign_request(
-          http_method: context.http_request.http_method,
-          url: context.http_request.endpoint,
-          headers: context.http_request.headers,
-          body: context.http_request.body
+        http_request = context.http_request
+        reset(http_request.headers)
+
+        signer_properties = context.auth.signer_properties
+        signature = @signer.sign_request(
+          http_method: http_request.http_method,
+          url: http_request.endpoint,
+          headers: http_request.headers,
+          body: http_request.body,
+          service: signer_properties['signingName'] || @signer.service,
+          region: signer_properties['signingRegion'] || @signer.region,
+          credentials_provider: signer_properties['credentialsProvider'] || @signer.credentials_provider
         )
         context.http_request.headers.update(signature.headers)
       end
 
       private
 
-      def reset(context)
-        context.http_request.headers.delete('Authorization')
-        context.http_request.headers.delete('X-Amz-Security-Token')
-        context.http_request.headers.delete('X-Amz-Date')
-        context.http_request.headers.delete('x-Amz-Region-Set')
+      def reset(headers)
+        headers.delete('Authorization')
+        headers.delete('X-Amz-Security-Token')
+        headers.delete('X-Amz-Date')
+        headers.delete('x-Amz-Region-Set')
       end
     end
   end
