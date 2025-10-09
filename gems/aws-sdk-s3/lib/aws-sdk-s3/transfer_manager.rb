@@ -273,13 +273,15 @@ module Aws
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
         uploading_options = options.dup
+        executor = @executor || DefaultExecutor.new(max_threads: uploading_options.delete(:thread_count))
         uploader = MultipartStreamUploader.new(
           client: @client,
-          thread_count: uploading_options.delete(:thread_count),
+          executor: executor,
           tempfile: uploading_options.delete(:tempfile),
           part_size: uploading_options.delete(:part_size)
         )
         uploader.upload(uploading_options.merge(bucket: bucket, key: key), &block)
+        executor.shutdown unless @options[:executor]
         true
       end
     end

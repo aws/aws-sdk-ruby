@@ -384,9 +384,10 @@ module Aws
       # @see Client#upload_part
       def upload_stream(options = {}, &block)
         uploading_options = options.dup
+        executor = DefaultExecutor.new(max_threads: uploading_options.delete(:thread_count))
         uploader = MultipartStreamUploader.new(
           client: client,
-          thread_count: uploading_options.delete(:thread_count),
+          executor: executor,
           tempfile: uploading_options.delete(:tempfile),
           part_size: uploading_options.delete(:part_size)
         )
@@ -396,6 +397,7 @@ module Aws
             &block
           )
         end
+        executor.shutdown
         true
       end
       deprecated(:upload_stream, use: 'Aws::S3::TransferManager#upload_stream', version: 'next major version')
