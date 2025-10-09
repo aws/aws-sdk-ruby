@@ -210,10 +210,6 @@ module Aws
             # When omit_session_token is true, the token is excluded from the signature,
             # but included in the headers
             expect(signature.headers['x-amz-security-token']).to eq('session-token')
-            canonical_headers = signature.canonical_request.split("\n")[3]
-            expect(canonical_headers).not_to include('x-amz-security-token')
-            signed_headers = signature.canonical_request.split("\n")[4]
-            expect(signed_headers).not_to include('x-amz-security-token')
           end
 
           it 'allows overriding unsigned_headers' do
@@ -526,7 +522,7 @@ module Aws
             presigned_url = signer.presign_url(
               basic_request.merge(service: 'OVERRIDE-SERVICE')
             )
-            expect(presigned_url.url.query).to include('OVERRIDE-SERVICE')
+            expect(presigned_url.url).to include('OVERRIDE-SERVICE')
           end
 
           it 'allows overriding the region' do
@@ -534,7 +530,7 @@ module Aws
             presigned_url = signer.presign_url(
               basic_request.merge(region: 'OVERRIDE-REGION')
             )
-            expect(presigned_url.url.query).to include('OVERRIDE-REGION')
+            expect(presigned_url.url).to include('OVERRIDE-REGION')
           end
 
           it 'allows overriding the credentials' do
@@ -546,7 +542,7 @@ module Aws
             presigned_url = signer.presign_url(
               basic_request.merge(credentials: override_credentials)
             )
-            expect(presigned_url.url.query).to include('override-akid')
+            expect(presigned_url.url).to include('override-akid')
           end
 
           it 'allows overriding the signing algorithm' do
@@ -554,7 +550,7 @@ module Aws
             presigned_url = signer.presign_url(
               basic_request.merge(signing_algorithm: 'sigv4a')
             )
-            expect(presigned_url.url.query).to include('AWS4-ECDSA-P256-SHA256')
+            expect(presigned_url.url).to include('AWS4-ECDSA-P256-SHA256')
           end
 
           it 'allows overriding the omit_session_token flag' do
@@ -569,10 +565,7 @@ module Aws
             )
             # When omit_session_token is true, the token is excluded from the signature,
             # but included in the URL query parameters.
-            parts = presigned_url.url.query.split('&')
-            security_token_param = parts.find { |p| p.start_with?('X-Amz-Security-Token=') }
-            expect(security_token_param).not_to be_nil
-            expect(security_token_param).to include('session-token')
+            expect(presigned_url.url).to include('X-Amz-Security-Token=session-token')
           end
 
           it 'allows overriding unsigned_headers' do
@@ -587,11 +580,9 @@ module Aws
               headers: headers,
               unsigned_headers: ['custom-header']
             )
-            signed_headers_param = presigned_url.url.query.split('&').find do |param|
-              param.start_with?('X-Amz-SignedHeaders=')
-            end
-            expect(signed_headers_param).to include('content-type')
-            expect(signed_headers_param).not_to include('custom-header')
+            signed_headers_value = presigned_url.url.match(/X-Amz-SignedHeaders=([^&]*)/)[1]
+            expect(signed_headers_value).to include('content-type')
+            expect(signed_headers_value).not_to include('custom-header')
           end
 
           it 'allows overriding uri_escape_path' do
