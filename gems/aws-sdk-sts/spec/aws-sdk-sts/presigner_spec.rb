@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module STS
     describe Presigner do
-      let(:options) { { stub_responses: true, region: 'us-west-2' } }
+      let(:options) { { region: 'us-west-2' } }
       let(:client) { Client.new(options) }
       let(:presigner) { Presigner.new(client: client) }
       let(:headers) { { 'X-K8s-Aws-Id' => 'my-eks-cluster' } }

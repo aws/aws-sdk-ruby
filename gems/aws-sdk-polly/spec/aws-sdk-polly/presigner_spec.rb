@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module Polly
     describe Presigner do
-      let(:options) { { stub_responses: true, region: 'us-west-2' } }
+      let(:options) { { region: 'us-west-2' } }
       let(:client) { Client.new(options) }
       let(:presigner) { Presigner.new(client: client) }
       let(:params) { { output_format: 'mp3', text: 'Hello World', voice_id: 'Ewa' } }
