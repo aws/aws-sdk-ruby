@@ -7,8 +7,7 @@ module Aws
   module S3
     describe FileDownloader do
       let(:client) { S3::Client.new(stub_responses: true) }
-      let(:executor) { DefaultExecutor.new }
-      let(:subject) { FileDownloader.new(client: client, executor: executor) }
+      let(:subject) { FileDownloader.new(client: client, executor: DefaultExecutor.new) }
       let(:tmpdir) { Dir.tmpdir }
 
       describe '#initialize' do

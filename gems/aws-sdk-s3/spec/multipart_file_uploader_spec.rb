@@ -7,8 +7,7 @@ module Aws
   module S3
     describe MultipartFileUploader do
       let(:client) { S3::Client.new(stub_responses: true) }
-      let(:executor) { DefaultExecutor.new }
-      let(:subject) { MultipartFileUploader.new(client: client, executor: executor) }
+      let(:subject) { MultipartFileUploader.new(client: client, executor: DefaultExecutor.new) }
       let(:params) { { bucket: 'bucket', key: 'key' } }
 
       describe '#initialize' do

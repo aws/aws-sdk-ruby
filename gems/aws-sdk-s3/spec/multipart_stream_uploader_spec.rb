@@ -7,15 +7,10 @@ module Aws
   module S3
     describe MultipartStreamUploader do
       let(:client) { S3::Client.new(stub_responses: true) }
-      let(:executor) { S3::DefaultExecutor.new }
-      let(:subject) { MultipartStreamUploader.new(client: client, executor: executor) }
+      let(:subject) { MultipartStreamUploader.new(client: client, executor: DefaultExecutor.new) }
       let(:params) { { bucket: 'bucket', key: 'key' } }
       let(:one_mb) { '.' * 1024 * 1024 }
       let(:seventeen_mb) { one_mb * 17 }
-
-      after(:each) do
-        executor.shutdown
-      end
 
       describe '#initialize' do
         it 'constructs a default s3 client when none provided' do
@@ -159,7 +154,7 @@ module Aws
         end
 
         context 'when tempfile is true' do
-          let(:subject) { MultipartStreamUploader.new(client: client, tempfile: true, executor: S3::DefaultExecutor.new) }
+          let(:subject) { MultipartStreamUploader.new(client: client, tempfile: true, executor: DefaultExecutor.new) }
 
           it 'uses multipart APIs' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
