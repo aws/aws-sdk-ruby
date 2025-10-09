@@ -81,6 +81,9 @@ module Aws
                 cipher, envelope = decryption_cipher(context)
                 authenticated_decrypter(context, cipher, envelope)
               else
+                unless context[:commitment_policy] != :require_encrypt_require_decrypt
+                  raise Errors::LegacyDecryptionError
+                end
                 cipher, envelope = V2_HANDLER.send(:decryption_cipher, context)
                 V2_HANDLER.send(:authenticated_decrypter, context, cipher, envelope)
               end 

@@ -9,7 +9,7 @@ module Aws
       class EncryptHandler < Seahorse::Client::Handler
 
         def call(context)
-          envelope, cipher = context[:encryption][:v3_cipher_provider]
+          envelope, cipher = context[:encryption][:cipher_provider]
            .encryption_cipher(
              kms_encryption_context: context[:encryption][:kms_encryption_context]
            )

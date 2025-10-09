@@ -5,20 +5,6 @@ require 'forwardable'
 module Aws
   module S3
 
-    REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile]
-    SUPPORTED_SECURITY_PROFILES = [
-
-      :v2, :v2_and_legacy,
-
-      :forbid_encrypt_allow_unauthenticated_decrypt,
-      :require_encrypt_allow_unauthenticated_decrypt,
-
-      :forbid_encrypt_allow_decrypt,
-      :require_encrypt_allow_decrypt,
-      :require_encrypt_require_decrypt
-    ]
-    # DEFAULT_SECURITY_PROFILE = :require_encrypt_require_decrypt
-
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.  The `EncryptionV2::Client` (V2 Client)
     # provides improved security over the `Encryption::Client` (V1 Client)
@@ -241,6 +227,22 @@ module Aws
     module EncryptionV3
       class Client
 
+        REQUIRED_PARAMS = [:key_wrap_schema]
+        SUPPORTED_COMMITMENT_POLICIES = [
+          :forbid_encrypt_allow_decrypt,
+          :require_encrypt_allow_decrypt,
+          :require_encrypt_require_decrypt
+        ]
+
+        # :content_encryption_schema, :commitment_policy
+
+        # enableLegacyUnauthenticatedModes
+        # enableDelayedAuthenticationMode
+        # enableLegacyWrappingAlgorithms
+        DEFAULT_LEGACY_UNAUTHENTICATED_MODES = false
+        DEFAULT_LEGACY_WRAPPING_ALGORITHMS = false
+        DEFAULT_COMMITMENT_POLICIES = :require_encrypt_require_decrypt
+
         extend Deprecations
         extend Forwardable
         def_delegators :@client, :config, :delete_object, :head_object, :build_request
@@ -322,13 +324,23 @@ module Aws
           validate_params(options)
           @client = extract_client(options)
           @v3_cipher_provider = cipher_provider(options)
-          v2_client = Aws::S3::EncryptionV2::Client.new(options)
-          @v2_cipher_provider = v2_client.instance_variable_get(:@cipher_provider)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
             options[:kms_key_id] == :kms_allow_decrypt_with_any_cmk
-          @security_profile = extract_security_profile(options)
+          @commitment_policy = extract_commitment_policy(options)
+          @legacy_modes = options[:legacy_modes] || false
+
+          if @commitment_policy != :require_encrypt_require_decrypt
+            new_options = options.merge({
+              security_profile: options[:legacy_unauthenticated_modes] ? :v2_and_legacy : :v2,
+              content_encryption_schema: :aes_gcm_no_padding,
+              key_wrap_schema: options[:key_wrap_schema]
+            })
+            puts new_options.inspect
+            v2_client = Aws::S3::EncryptionV2::Client.new(new_options)
+            @v2_cipher_provider = v2_client.instance_variable_get(:@cipher_provider)
+          end
         end
 
         # @return [S3::Client]
@@ -340,7 +352,7 @@ module Aws
 
         # @return [Symbol] Determines the support for reading objects written
         #   using older key wrap or content encryption schemas.
-        attr_reader :security_profile
+        attr_reader :commitment_policy
 
         # @return [Boolean] If true the provided KMS key_id will not be used
         #   during decrypt, allowing decryption with the key_id from the object.
@@ -369,8 +381,7 @@ module Aws
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
-            v3_cipher_provider: @v3_cipher_provider,
-            cipher_provider: @v2_cipher_provider,
+            cipher_provider: @commitment_policy == :forbid_encrypt_allow_decrypt ? @v2_cipher_provider : @v3_cipher_provider,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
             kms_encryption_context: kms_encryption_context
@@ -418,19 +429,23 @@ module Aws
           envelope_location, instruction_file_suffix = envelope_options(params)
           kms_encryption_context = params.delete(:kms_encryption_context)
           kms_any_cmk_mode = kms_any_cmk_mode(params)
-          security_profile = security_profile_from_params(params)
+          commitment_policy = commitment_policy_from_params(params)
 
           req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             v3_cipher_provider: @v3_cipher_provider,
-            cipher_provider: @v2_cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
             kms_encryption_context: kms_encryption_context,
             kms_allow_decrypt_with_any_cmk: kms_any_cmk_mode,
-            security_profile: security_profile
-          }
+            commitment_policy: commitment_policy
+          }.tap do |hash|
+            if commitment_policy != :require_encrypt_require_decrypt
+              hash[:security_profile] = @legacy_modes ? :v2_and_legacy : :v2
+              hash[:cipher_provider] = @v2_cipher_provider
+            end
+          end
           Aws::Plugins::UserAgent.metric('S3_CRYPTO_V3') do
             req.send_request(target: block)
           end
@@ -547,35 +562,35 @@ module Aws
           end
         end
 
-        def extract_security_profile(options)
-          validate_security_profile(options[:security_profile])
+        def extract_commitment_policy(options)
+          validate_commitment_policy(options[:commitment_policy])
         end
 
-        def security_profile_from_params(params)
-          security_profile =
-            if !params[:security_profile].nil?
-              params.delete(:security_profile)
+        def commitment_policy_from_params(params)
+          commitment_policy =
+            if !params[:commitment_policy].nil?
+              params.delete(:commitment_policy)
             else
-              @security_profile
+              @commitment_policy
             end
-          validate_security_profile(security_profile)
+          validate_commitment_policy(commitment_policy)
         end
 
-        def validate_security_profile(security_profile)
-          unless SUPPORTED_SECURITY_PROFILES.include? security_profile
-            raise ArgumentError, "Unsupported security profile: :#{security_profile}. " \
-            "Please provide one of: #{SUPPORTED_SECURITY_PROFILES.map { |s| ":#{s}" }.join(', ')}"
+        def validate_commitment_policy(commitment_policy)
+          if commitment_policy.nil?
+            return DEFAULT_COMMITMENT_POLICIES
           end
-          if security_profile == :v2_and_legacy && !@warned_about_legacy
-            @warned_about_legacy = true
-            warn(
-              'The S3 Encryption Client is configured to read encrypted objects ' \
-              "with legacy encryption modes. If you don't have objects " \
-              'encrypted with these legacy modes, you should disable support ' \
-              'for them to enhance security.'
-            )
+
+          unless SUPPORTED_COMMITMENT_POLICIES.include? commitment_policy
+            raise ArgumentError, "Unsupported security profile: :#{commitment_policy}. " \
+            "Please provide one of: #{SUPPORTED_COMMITMENT_POLICIES.map { |s| ":#{s}" }.join(', ')}"
           end
-          security_profile
+          commitment_policy
+        end
+
+        def translate_to_v2_options(options)
+
+          options
         end
       end
     end
