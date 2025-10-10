@@ -333,11 +333,10 @@ module Aws
 
           if @commitment_policy != :require_encrypt_require_decrypt
             new_options = options.merge({
-              security_profile: options[:legacy_unauthenticated_modes] ? :v2_and_legacy : :v2,
+              security_profile: @legacy_modes ? :v2_and_legacy : :v2,
               content_encryption_schema: :aes_gcm_no_padding,
               key_wrap_schema: options[:key_wrap_schema]
             })
-            puts new_options.inspect
             v2_client = Aws::S3::EncryptionV2::Client.new(new_options)
             @v2_cipher_provider = v2_client.instance_variable_get(:@cipher_provider)
           end
