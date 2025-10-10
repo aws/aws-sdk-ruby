@@ -64,18 +64,14 @@ module Aws
         completion_queue = Queue.new
         abort_download = false
         error = nil
-        progress =
-          if (progress_callback = opts[:progress_callback])
-            MultipartProgress.new(part_list, total_size, progress_callback)
-          end
+        progress = MultipartProgress.new(part_list, total_size, opts[:progress_callback])
 
         while (part = part_list.shift)
           break if abort_download
 
           download_attempts += 1
           @executor.post(part) do |p|
-            update_progress(progress, p) if progress
-
+            update_progress(progress, p)
             resp = @client.get_object(p.params)
             range = extract_range(resp.content_range)
             validate_range(range, p.params[:range]) if p.params[:range]
@@ -199,6 +195,8 @@ module Aws
       end
 
       def update_progress(progress, part)
+        return unless progress.progress_callback
+
         part.params[:on_chunk_received] =
           proc do |_chunk, bytes, total|
             progress.call(part.part_number, bytes, total)
@@ -287,6 +285,8 @@ module Aws
           @total_size = total_size
           @progress_callback = progress_callback
         end
+
+        attr_reader :progress_callback
 
         def call(part_number, bytes_received, total)
           # part numbers start at 1

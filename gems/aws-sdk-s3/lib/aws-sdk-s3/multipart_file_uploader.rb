@@ -137,17 +137,14 @@ module Aws
         completion_queue = Queue.new
         abort_upload = false
         errors = []
-
-        if (callback = options[:progress_callback])
-          progress = MultipartProgress.new(pending, callback)
-        end
+        progress = MultipartProgress.new(pending, options[:progress_callback])
 
         while (part = pending.shift)
           break if abort_upload
 
           upload_attempts += 1
           @executor.post(part) do |p|
-            update_progress(progress, p) if progress
+            update_progress(progress, p)
             resp = @client.upload_part(p)
             p[:body].close
             completed_part = { etag: resp.etag, part_number: p[:part_number] }
@@ -180,6 +177,8 @@ module Aws
       end
 
       def update_progress(progress, part)
+        return unless progress.progress_callback
+
         part[:on_chunk_sent] =
           proc do |_chunk, bytes, _total|
             progress.call(part[:part_number], bytes)
@@ -225,6 +224,8 @@ module Aws
           @total_sizes = parts.part_sizes
           @progress_callback = progress_callback
         end
+
+        attr_reader :progress_callback
 
         def call(part_number, bytes_read)
           # part numbers start at 1
