@@ -35,7 +35,7 @@ module Aws
         end
         File.rename(opts[:temp_path], destination) if opts[:temp_path]
       ensure
-        cleanup_temp_file!(opts)
+        cleanup_temp_file(opts)
       end
 
       private
@@ -52,7 +52,7 @@ module Aws
         }
       end
 
-      def cleanup_temp_file!(opts)
+      def cleanup_temp_file(opts)
         return unless opts
 
         temp_file = opts[:temp_path]
