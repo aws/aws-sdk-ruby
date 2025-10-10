@@ -109,19 +109,19 @@ module Aws
         CHECKSUM_KEYS.include?(key)
       end
 
-      def has_checksum_keys?(keys)
+      def has_checksum_key?(keys)
         keys.any? { |key| checksum_key?(key) }
       end
 
       def create_opts(options)
         opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
-        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_keys?(options.keys)
+        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
         CREATE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
       def complete_opts(options)
         opts = {}
-        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_keys?(options.keys)
+        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
         COMPLETE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
