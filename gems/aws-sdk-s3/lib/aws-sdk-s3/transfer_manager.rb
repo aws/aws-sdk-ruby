@@ -50,7 +50,7 @@ module Aws
       # @return [S3::Client]
       attr_reader :client
 
-      # @return [S3::Client]
+      # @return [Object]
       attr_reader :executor
 
       # Downloads a file in S3 to a path on disk.
@@ -105,9 +105,6 @@ module Aws
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
       #   Only used when no custom executor is provided (creates {DefaultExecutor} with given thread count).
-      #
-      # @option options [String] :version_id The object version id used to retrieve the object. See
-      #   {https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html ObjectVersioning} for further details.
       #
       # @option options [String] :checksum_mode ("ENABLED")
       #   When `"ENABLED"` and the object has a stored checksum, it will be used to validate the download and will

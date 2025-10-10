@@ -520,10 +520,6 @@ module Aws
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
       #
-      # @option options [String] :version_id The object version id used to retrieve the object.
-      #
-      #     @see https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html ObjectVersioning
-      #
       # @option options [String] :checksum_mode ("ENABLED")
       #   When `"ENABLED"` and the object has a stored checksum, it will be used to validate the download and will
       #   raise an `Aws::Errors::ChecksumError` if checksum validation fails. You may provide a `on_checksum_validated`
