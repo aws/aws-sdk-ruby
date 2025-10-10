@@ -310,12 +310,13 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @cipher_provider = cipher_provider(options)
+          @cipher_provider = self.class.cipher_provider(options)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
             options[:kms_key_id] == :kms_allow_decrypt_with_any_cmk
           @security_profile = extract_security_profile(options)
+          @v3_cipher_provider = Aws::S3::EncryptionV3::Client.cipher_provider(options)
         end
 
         # @return [S3::Client]
@@ -410,6 +411,7 @@ module Aws
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             cipher_provider: @cipher_provider,
+            v3_cipher_provider: @v3_cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
             kms_encryption_context: kms_encryption_context,
@@ -418,6 +420,25 @@ module Aws
           }
           Aws::Plugins::UserAgent.metric('S3_CRYPTO_V2') do
             req.send_request(target: block)
+          end
+        end
+
+        # @api private
+        def self.cipher_provider(options)
+          if options[:kms_key_id]
+            KmsCipherProvider.new(
+              kms_key_id: options[:kms_key_id],
+              kms_client: kms_client(options),
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          else
+            @key_provider = extract_key_provider(options)
+            DefaultCipherProvider.new(
+              key_provider: @key_provider,
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
           end
         end
 
@@ -463,24 +484,6 @@ module Aws
               region: @client.config.region,
               credentials: @client.config.credentials,
               )
-          end
-        end
-
-        def cipher_provider(options)
-          if options[:kms_key_id]
-            KmsCipherProvider.new(
-              kms_key_id: options[:kms_key_id],
-              kms_client: kms_client(options),
-              key_wrap_schema: options[:key_wrap_schema],
-              content_encryption_schema: options[:content_encryption_schema]
-            )
-          else
-            @key_provider = extract_key_provider(options)
-            DefaultCipherProvider.new(
-              key_provider: @key_provider,
-              key_wrap_schema: options[:key_wrap_schema],
-              content_encryption_schema: options[:content_encryption_schema]
-            )
           end
         end
 

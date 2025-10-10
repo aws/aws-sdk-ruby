@@ -9,6 +9,8 @@ module Aws
       class DecryptHandler < Seahorse::Client::Handler
         @@warned_response_target_proc = false
 
+        V3_HANDLER = Aws::S3::EncryptionV3::DecryptHandler.new
+
         V1_ENVELOPE_KEYS = %w(
           x-amz-key
           x-amz-iv
@@ -65,10 +67,15 @@ module Aws
         def attach_http_event_listeners(context)
 
           context.http_response.on_headers(200) do
-            cipher, envelope = decryption_cipher(context)
-            decrypter = body_contains_auth_tag?(envelope) ?
-              authenticated_decrypter(context, cipher, envelope) :
-              IODecrypter.new(cipher, context.http_response.body)
+            decrypter = if context.http_response.headers.key?('x-amz-meta-x-amz-i')
+              cipher, envelope = V3_HANDLER.send(:decryption_cipher, context)
+              V3_HANDLER.send(:authenticated_decrypter, context, cipher, envelope)
+            else
+              cipher, envelope = decryption_cipher(context)
+              body_contains_auth_tag?(envelope) ?
+                authenticated_decrypter(context, cipher, envelope) :
+                IODecrypter.new(cipher, context.http_response.body)
+            end
             context.http_response.body = decrypter
           end
 

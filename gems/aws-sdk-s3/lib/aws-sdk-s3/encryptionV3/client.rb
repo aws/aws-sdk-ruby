@@ -323,7 +323,7 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @v3_cipher_provider = cipher_provider(options)
+          @v3_cipher_provider = self.class.cipher_provider(options)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
@@ -337,8 +337,7 @@ module Aws
               content_encryption_schema: :aes_gcm_no_padding,
               key_wrap_schema: options[:key_wrap_schema]
             })
-            v2_client = Aws::S3::EncryptionV2::Client.new(new_options)
-            @v2_cipher_provider = v2_client.instance_variable_get(:@cipher_provider)
+            @v2_cipher_provider = Aws::S3::EncryptionV2::Client.cipher_provider(new_options)
           end
         end
 
@@ -450,6 +449,23 @@ module Aws
           end
         end
 
+        # @api private
+        def self.cipher_provider(options)
+          if options[:kms_key_id]
+            KmsCipherProvider.new(
+              kms_key_id: options[:kms_key_id],
+              kms_client: kms_client(options),
+              key_wrap_schema: options[:key_wrap_schema]
+            )
+          else
+            @key_provider = extract_key_provider(options)
+            DefaultCipherProvider.new(
+              key_provider: @key_provider,
+              key_wrap_schema: options[:key_wrap_schema]
+            )
+          end
+        end
+
         private
 
         # Validate required parameters exist and don't conflict.
@@ -492,22 +508,6 @@ module Aws
               region: @client.config.region,
               credentials: @client.config.credentials,
               )
-          end
-        end
-
-        def cipher_provider(options)
-          if options[:kms_key_id]
-            KmsCipherProvider.new(
-              kms_key_id: options[:kms_key_id],
-              kms_client: kms_client(options),
-              key_wrap_schema: options[:key_wrap_schema]
-            )
-          else
-            @key_provider = extract_key_provider(options)
-            DefaultCipherProvider.new(
-              key_provider: @key_provider,
-              key_wrap_schema: options[:key_wrap_schema]
-            )
           end
         end
 
@@ -587,10 +587,6 @@ module Aws
           commitment_policy
         end
 
-        def translate_to_v2_options(options)
-
-          options
-        end
       end
     end
   end
