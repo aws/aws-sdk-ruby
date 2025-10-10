@@ -13,7 +13,7 @@ module Aws
           expect(block).to receive(:call).with('hello')
 
           subject.post('hello') { |arg| block.call(arg) }
-          sleep 0.1
+          sleep 0.01
         end
 
         it 'returns true when a task is submitted' do
@@ -29,10 +29,7 @@ module Aws
       describe '#shutdown' do
         it 'waits for running tasks to be complete' do
           result = nil
-          subject.post do
-            sleep 0.2
-            result = 'done'
-          end
+          subject.post { result = 'done' }
           expect(subject.shutdown).to be(true)
           expect(result).to eq('done')
         end
@@ -40,10 +37,10 @@ module Aws
         it 'kills threads after timeout' do
           result = nil
           subject.post do
-            sleep 1
+            sleep 0.02
             result = 'done'
           end
-          expect(subject.shutdown(0.1)).to be(true)
+          expect(subject.shutdown(0.01)).to be(true)
           expect(result).to be_nil
         end
       end
@@ -52,11 +49,9 @@ module Aws
         it 'stops all threads immediately and returns true' do
           completed = false
           subject.post do
-            sleep 1
+            sleep 0.01
             completed = true
           end
-
-          sleep 0.1
           result = subject.kill
 
           expect(result).to be(true)
