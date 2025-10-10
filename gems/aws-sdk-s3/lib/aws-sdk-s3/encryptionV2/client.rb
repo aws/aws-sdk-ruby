@@ -478,7 +478,7 @@ module Aws
           end
         end
 
-        def kms_client(options)
+        def self.kms_client(options)
           options[:kms_client] || begin
             KMS::Client.new(
               region: @client.config.region,
@@ -487,7 +487,7 @@ module Aws
           end
         end
 
-        def extract_key_provider(options)
+        def self.extract_key_provider(options)
           if options[:key_provider]
             options[:key_provider]
           elsif options[:encryption_key]
