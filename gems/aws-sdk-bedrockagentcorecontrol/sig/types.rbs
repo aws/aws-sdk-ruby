@@ -252,7 +252,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor role_arn: ::String
       attr_accessor protocol_type: ("MCP")
       attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
-      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor kms_key_arn: ::String
       attr_accessor exception_level: ("DEBUG")
@@ -273,7 +273,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor role_arn: ::String
       attr_accessor protocol_type: ("MCP")
       attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
-      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor kms_key_arn: ::String
       attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
@@ -629,7 +629,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor protocol_type: ("MCP")
       SENSITIVE: [:name, :description]
     end
@@ -753,7 +753,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor role_arn: ::String
       attr_accessor protocol_type: ("MCP")
       attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
-      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor kms_key_arn: ::String
       attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
@@ -1572,7 +1572,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor role_arn: ::String
       attr_accessor protocol_type: ("MCP")
       attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
-      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor kms_key_arn: ::String
       attr_accessor exception_level: ("DEBUG")
@@ -1592,7 +1592,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor role_arn: ::String
       attr_accessor protocol_type: ("MCP")
       attr_accessor protocol_configuration: Types::GatewayProtocolConfiguration
-      attr_accessor authorizer_type: ("CUSTOM_JWT")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor kms_key_arn: ::String
       attr_accessor workload_identity_details: Types::WorkloadIdentityDetails

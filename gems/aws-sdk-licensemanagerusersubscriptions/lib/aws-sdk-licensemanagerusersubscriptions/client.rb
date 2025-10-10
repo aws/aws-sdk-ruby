@@ -522,6 +522,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -549,6 +550,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -662,6 +665,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.license_server_endpoint.license_servers[0].provisioning_status #=> String, one of "PROVISIONING", "PROVISIONING_FAILED", "PROVISIONED", "DELETING", "DELETION_FAILED", "DELETED"
     #   resp.license_server_endpoint.license_servers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "NOT_APPLICABLE"
     #   resp.license_server_endpoint.license_servers[0].ipv_4_address #=> String
+    #   resp.license_server_endpoint.license_servers[0].ipv_6_address #=> String
     #   resp.license_server_endpoint.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/DeleteLicenseServerEndpoint AWS API Documentation
@@ -704,6 +708,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -727,6 +732,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -787,6 +794,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -812,6 +820,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.instance_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -878,6 +888,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -953,6 +965,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.instance_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1020,6 +1034,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.license_server_endpoints[0].license_servers[0].provisioning_status #=> String, one of "PROVISIONING", "PROVISIONING_FAILED", "PROVISIONED", "DELETING", "DELETION_FAILED", "DELETED"
     #   resp.license_server_endpoints[0].license_servers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "NOT_APPLICABLE"
     #   resp.license_server_endpoints[0].license_servers[0].ipv_4_address #=> String
+    #   resp.license_server_endpoints[0].license_servers[0].ipv_6_address #=> String
     #   resp.license_server_endpoints[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1078,6 +1093,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -1111,6 +1127,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.product_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1204,6 +1222,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -1237,6 +1256,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.instance_user_summaries[0].identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1292,6 +1313,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -1321,6 +1343,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1393,6 +1417,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -1421,6 +1446,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1479,6 +1506,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -1505,6 +1533,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.product_user_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1621,6 +1651,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv_4_list: ["IpV4"],
+    #           domain_ipv_6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             secrets_manager_credentials_provider: {
     #               secret_id: "SecretsManagerCredentialsProviderSecretIdString",
@@ -1649,6 +1680,8 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_name #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list #=> Array
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_4_list[0] #=> String
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list #=> Array
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_ipv_6_list[0] #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_credentials_provider.secrets_manager_credentials_provider.secret_id #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets #=> Array
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.active_directory_settings.domain_network_settings.subnets[0] #=> String
@@ -1690,7 +1723,7 @@ module Aws::LicenseManagerUserSubscriptions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanagerusersubscriptions'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

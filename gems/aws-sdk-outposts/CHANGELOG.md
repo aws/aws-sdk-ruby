@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2025-10-08)
+------------------
+
+* Feature - This release adds the new StartOutpostDecommission API, which starts the decommission process to return Outposts racks or servers.
+
 1.89.0 (2025-08-26)
 ------------------
 

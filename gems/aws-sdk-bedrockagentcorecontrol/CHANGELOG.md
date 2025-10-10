@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2025-10-08)
+------------------
+
+* Feature - Adding support for authorizer type AWS_IAM to AgentCore Control Gateway.
+
 1.7.0 (2025-10-06)
 ------------------
 

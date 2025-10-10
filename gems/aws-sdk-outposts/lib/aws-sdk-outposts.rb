@@ -54,7 +54,7 @@ module Aws::Outposts
   autoload :EndpointProvider, 'aws-sdk-outposts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-outposts/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

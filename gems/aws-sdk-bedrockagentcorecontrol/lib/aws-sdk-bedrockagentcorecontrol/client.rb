@@ -893,7 +893,7 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :authorizer_type
     #   The type of authorizer to use for the gateway.
     #
-    # @option params [required, Types::AuthorizerConfiguration] :authorizer_configuration
+    # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
     #   The authorizer configuration for the gateway.
     #
     # @option params [String] :kms_key_arn
@@ -949,8 +949,8 @@ module Aws::BedrockAgentCoreControl
     #         search_type: "SEMANTIC", # accepts SEMANTIC
     #       },
     #     },
-    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT
-    #     authorizer_configuration: { # required
+    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_configuration: {
     #       custom_jwt_authorizer: {
     #         discovery_url: "DiscoveryUrl", # required
     #         allowed_audience: ["AllowedAudience"],
@@ -982,7 +982,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
-    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT"
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
@@ -2106,7 +2106,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
-    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT"
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
@@ -2787,7 +2787,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
-    #   resp.items[0].authorizer_type #=> String, one of "CUSTOM_JWT"
+    #   resp.items[0].authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
     #   resp.items[0].protocol_type #=> String, one of "MCP"
     #   resp.next_token #=> String
     #
@@ -3307,7 +3307,7 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :authorizer_type
     #   The updated authorizer type for the gateway.
     #
-    # @option params [required, Types::AuthorizerConfiguration] :authorizer_configuration
+    # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
     #   The updated authorizer configuration for the gateway.
     #
     # @option params [String] :kms_key_arn
@@ -3358,8 +3358,8 @@ module Aws::BedrockAgentCoreControl
     #         search_type: "SEMANTIC", # accepts SEMANTIC
     #       },
     #     },
-    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT
-    #     authorizer_configuration: { # required
+    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_configuration: {
     #       custom_jwt_authorizer: {
     #         discovery_url: "DiscoveryUrl", # required
     #         allowed_audience: ["AllowedAudience"],
@@ -3388,7 +3388,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
-    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT"
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
@@ -3945,7 +3945,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

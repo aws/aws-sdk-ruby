@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-10-08)
+------------------
+
+* Feature - Released support for IPv6 and dual-stack active directories
+
 1.40.0 (2025-09-19)
 ------------------
 

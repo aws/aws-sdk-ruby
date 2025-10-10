@@ -228,7 +228,7 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -248,8 +248,8 @@ module Aws
                                 search_type: ("SEMANTIC")?
                               }?
                             },
-                            authorizer_type: ("CUSTOM_JWT"),
-                            authorizer_configuration: {
+                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                            ?authorizer_configuration: {
                               custom_jwt_authorizer: {
                                 discovery_url: ::String,
                                 allowed_audience: Array[::String]?,
@@ -706,7 +706,7 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -1071,7 +1071,7 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -1091,8 +1091,8 @@ module Aws
                                 search_type: ("SEMANTIC")?
                               }?
                             },
-                            authorizer_type: ("CUSTOM_JWT"),
-                            authorizer_configuration: {
+                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                            ?authorizer_configuration: {
                               custom_jwt_authorizer: {
                                 discovery_url: ::String,
                                 allowed_audience: Array[::String]?,

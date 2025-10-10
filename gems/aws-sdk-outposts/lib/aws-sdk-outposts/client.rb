@@ -530,7 +530,7 @@ module Aws::Outposts
     # @option params [required, String] :outpost_identifier
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
-    # @option params [required, Array<Types::LineItemRequest>] :line_items
+    # @option params [Array<Types::LineItemRequest>] :line_items
     #   The line items that make up the order.
     #
     # @option params [required, String] :payment_option
@@ -547,7 +547,7 @@ module Aws::Outposts
     #
     #   resp = client.create_order({
     #     outpost_identifier: "OutpostIdentifier", # required
-    #     line_items: [ # required
+    #     line_items: [
     #       {
     #         catalog_item_id: "SkuCode",
     #         quantity: 1,
@@ -1998,6 +1998,42 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Starts the decommission process to return the Outposts racks or
+    # servers.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost that you want to decommission.
+    #
+    # @option params [Boolean] :validate_only
+    #   Validates the request without starting the decommission process.
+    #
+    # @return [Types::StartOutpostDecommissionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartOutpostDecommissionOutput#status #status} => String
+    #   * {Types::StartOutpostDecommissionOutput#blocking_resource_types #blocking_resource_types} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_outpost_decommission({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     validate_only: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "SKIPPED", "BLOCKED", "REQUESTED"
+    #   resp.blocking_resource_types #=> Array
+    #   resp.blocking_resource_types[0] #=> String, one of "EC2_INSTANCE", "OUTPOST_RAM_SHARE", "LGW_ROUTING_DOMAIN", "LGW_ROUTE_TABLE", "LGW_VIRTUAL_INTERFACE_GROUP", "OUTPOST_ORDER_CANCELLABLE", "OUTPOST_ORDER_INTERVENTION_REQUIRED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartOutpostDecommission AWS API Documentation
+    #
+    # @overload start_outpost_decommission(params = {})
+    # @param [Hash] params ({})
+    def start_outpost_decommission(params = {}, options = {})
+      req = build_request(:start_outpost_decommission, params)
+      req.send_request(options)
+    end
+
     # Adds tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -2409,7 +2445,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

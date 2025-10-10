@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2025-10-07)
+------------------
+
+* Feature - Deprecating APIs in AWS Proton namespace.
+
 1.60.0 (2025-08-26)
 ------------------
 

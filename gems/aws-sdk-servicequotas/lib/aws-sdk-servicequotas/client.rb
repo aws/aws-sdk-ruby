@@ -654,6 +654,43 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
+    # Retrieves information about your [Service Quotas Automatic
+    # Management][1] configuration. Automatic Management monitors your
+    # Service Quotas utilization and notifies you before you run out of your
+    # allocated quotas.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html
+    #
+    # @return [Types::GetAutoManagementConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAutoManagementConfigurationResponse#opt_in_level #opt_in_level} => String
+    #   * {Types::GetAutoManagementConfigurationResponse#opt_in_type #opt_in_type} => String
+    #   * {Types::GetAutoManagementConfigurationResponse#notification_arn #notification_arn} => String
+    #   * {Types::GetAutoManagementConfigurationResponse#opt_in_status #opt_in_status} => String
+    #   * {Types::GetAutoManagementConfigurationResponse#exclusion_list #exclusion_list} => Hash&lt;String,Array&lt;Types::QuotaInfo&gt;&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in_level #=> String, one of "ACCOUNT"
+    #   resp.opt_in_type #=> String, one of "NotifyOnly", "NotifyAndAdjust"
+    #   resp.notification_arn #=> String
+    #   resp.opt_in_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.exclusion_list #=> Hash
+    #   resp.exclusion_list["ExcludedService"] #=> Array
+    #   resp.exclusion_list["ExcludedService"][0].quota_code #=> String
+    #   resp.exclusion_list["ExcludedService"][0].quota_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAutoManagementConfiguration AWS API Documentation
+    #
+    # @overload get_auto_management_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_auto_management_configuration(params = {}, options = {})
+      req = build_request(:get_auto_management_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the specified quota increase request.
     #
     # @option params [required, String] :request_id
@@ -1458,6 +1495,81 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
+    # Starts [Service Quotas Automatic Management][1] for an Amazon Web
+    # Services account, including notification preferences and excluded
+    # quotas configurations. Automatic Management monitors your Service
+    # Quotas utilization and notifies you before you run out of your
+    # allocated quotas.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html
+    #
+    # @option params [required, String] :opt_in_level
+    #   Sets the opt-in level for Automatic Management. Only Amazon Web
+    #   Services account level is supported.
+    #
+    # @option params [required, String] :opt_in_type
+    #   Sets the opt-in type for Automatic Management. There are two modes:
+    #   Notify only and Notify and Auto-Adjust. Currently, only NotifyOnly is
+    #   available.
+    #
+    # @option params [String] :notification_arn
+    #   The [User Notifications][1] Amazon Resource Name (ARN) for Automatic
+    #   Management notifications.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table
+    #
+    # @option params [Hash<String,Array>] :exclusion_list
+    #   List of Amazon Web Services services excluded from Automatic
+    #   Management. You won't be notified of Service Quotas utilization for
+    #   Amazon Web Services services added to the Automatic Management
+    #   exclusion list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_auto_management({
+    #     opt_in_level: "ACCOUNT", # required, accepts ACCOUNT
+    #     opt_in_type: "NotifyOnly", # required, accepts NotifyOnly, NotifyAndAdjust
+    #     notification_arn: "AmazonResourceName",
+    #     exclusion_list: {
+    #       "ExcludedService" => ["ExcludedLimit"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartAutoManagement AWS API Documentation
+    #
+    # @overload start_auto_management(params = {})
+    # @param [Hash] params ({})
+    def start_auto_management(params = {}, options = {})
+      req = build_request(:start_auto_management, params)
+      req.send_request(options)
+    end
+
+    # Stops [Service Quotas Automatic Management][1] for an Amazon Web
+    # Services account and removes all associated configurations. Automatic
+    # Management monitors your Service Quotas utilization and notifies you
+    # before you run out of your allocated quotas.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StopAutoManagement AWS API Documentation
+    #
+    # @overload stop_auto_management(params = {})
+    # @param [Hash] params ({})
+    def stop_auto_management(params = {}, options = {})
+      req = build_request(:stop_auto_management, params)
+      req.send_request(options)
+    end
+
     # Adds tags to the specified applied quota. You can include one or more
     # tags to add to the quota.
     #
@@ -1534,6 +1646,55 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
+    # Updates your [Service Quotas Automatic Management][1] configuration,
+    # including notification preferences and excluded quotas. Automatic
+    # Management monitors your Service Quotas utilization and notifies you
+    # before you run out of your allocated quotas.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html
+    #
+    # @option params [String] :opt_in_type
+    #   Information on the opt-in type for your Automatic Management
+    #   configuration. There are two modes: Notify only and Notify and
+    #   Auto-Adjust. Currently, only NotifyOnly is available.
+    #
+    # @option params [String] :notification_arn
+    #   The [User Notifications][1] Amazon Resource Name (ARN) for Automatic
+    #   Management notifications you want to update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table
+    #
+    # @option params [Hash<String,Array>] :exclusion_list
+    #   List of Amazon Web Services services you want to exclude from
+    #   Automatic Management. You won't be notified of Service Quotas
+    #   utilization for Amazon Web Services services added to the Automatic
+    #   Management exclusion list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_auto_management({
+    #     opt_in_type: "NotifyOnly", # accepts NotifyOnly, NotifyAndAdjust
+    #     notification_arn: "AmazonResourceName",
+    #     exclusion_list: {
+    #       "ExcludedService" => ["ExcludedLimit"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UpdateAutoManagement AWS API Documentation
+    #
+    # @overload update_auto_management(params = {})
+    # @param [Hash] params ({})
+    def update_auto_management(params = {}, options = {})
+      req = build_request(:update_auto_management, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1552,7 +1713,7 @@ module Aws::ServiceQuotas
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicequotas'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

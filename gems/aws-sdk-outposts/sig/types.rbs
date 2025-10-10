@@ -637,6 +637,18 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class StartOutpostDecommissionInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor validate_only: bool
+      SENSITIVE: []
+    end
+
+    class StartOutpostDecommissionOutput
+      attr_accessor status: ("SKIPPED" | "BLOCKED" | "REQUESTED")
+      attr_accessor blocking_resource_types: ::Array[("EC2_INSTANCE" | "OUTPOST_RAM_SHARE" | "LGW_ROUTING_DOMAIN" | "LGW_ROUTE_TABLE" | "LGW_VIRTUAL_INTERFACE_GROUP" | "OUTPOST_ORDER_CANCELLABLE" | "OUTPOST_ORDER_INTERVENTION_REQUIRED")]
+      SENSITIVE: []
+    end
+
     class Subscription
       attr_accessor subscription_id: ::String
       attr_accessor subscription_type: ("ORIGINAL" | "RENEWAL" | "CAPACITY_INCREASE")

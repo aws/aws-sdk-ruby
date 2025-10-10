@@ -54,7 +54,7 @@ module Aws::WAFV2
   autoload :EndpointProvider, 'aws-sdk-wafv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wafv2/endpoints'
 
-  GEM_VERSION = '1.117.0'
+  GEM_VERSION = '1.118.0'
 
 end
 
