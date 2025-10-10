@@ -81,9 +81,7 @@ module Aws
             validate_range(range, p.params[:range]) if p.params[:range]
             write(resp.body, range, opts)
 
-            if opts[:on_checksum_validated] && resp.checksum_validated
-              opts[:on_checksum_validated].call(resp.checksum_validated, resp)
-            end
+            execute_checksum_callback(resp, opts)
           rescue StandardError => e
             abort_download = true
             error = e
@@ -205,6 +203,12 @@ module Aws
           proc do |_chunk, bytes, total|
             progress.call(part.part_number, bytes, total)
           end
+      end
+
+      def execute_checksum_callback(resp, opts)
+        return unless opts[:on_checksum_validated] && resp.checksum_validated
+
+        opts[:on_checksum_validated].call(resp.checksum_validated, resp)
       end
 
       def validate_destination!(destination)
