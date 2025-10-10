@@ -20,7 +20,7 @@ module Aws
       #
       # @option options [Hash] :headers
       #   Headers that should be signed and sent along with the request.
-      #   All x-amz-* headers must be present during signing.
+      #   All `x-amz-*` headers must be present during signing.
       #   Other headers are optional.
       # @return [String] A presigned url string.
       #
