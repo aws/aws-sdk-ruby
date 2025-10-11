@@ -24,7 +24,11 @@ module Aws
           region: signer_properties['signingRegion'] || @signer.region,
           credentials_provider: signer_properties['credentialsProvider'] || @signer.credentials_provider
         )
-        context.http_request.headers.update(signature.headers)
+        http_request.headers.update(signature.headers)
+      end
+
+      def presign_url(*)
+        @signer.presign_url(*)
       end
 
       private

@@ -207,14 +207,9 @@ module Aws
             signature = signer.sign_request(
               basic_request.merge(omit_session_token: true)
             )
-
             # When omit_session_token is true, the token is excluded from the signature,
             # but included in the headers
             expect(signature.headers['x-amz-security-token']).to eq('session-token')
-            canonical_headers = signature.canonical_request.split("\n")[3]
-            expect(canonical_headers).not_to include('x-amz-security-token')
-            signed_headers = signature.canonical_request.split("\n")[4]
-            expect(signed_headers).not_to include('x-amz-security-token')
           end
 
           it 'allows overriding unsigned_headers' do
@@ -348,11 +343,9 @@ module Aws
             )
             signature = signer.sign_request(basic_request)
             expect(signature.headers['x-amz-security-token']).to eq('session-token')
-
             # The canonical request shouldn't include the token in the signed headers
             canonical_headers = signature.canonical_request.split("\n")[3]
             expect(canonical_headers).not_to include('x-amz-security-token')
-
             signed_headers = signature.canonical_request.split("\n")[4]
             expect(signed_headers).not_to include('x-amz-security-token')
           end
@@ -385,7 +378,6 @@ module Aws
             signer = Signer.new(
               options.merge(unsigned_headers: ['custom-header'])
             )
-
             signature = signer.sign_request(
               http_method: 'GET',
               url: 'http://domain.com',
@@ -413,7 +405,6 @@ module Aws
                 'X-Amz-Date' => '20230101T120000Z'
               }
             )
-
             signed_headers_line = signature.canonical_request.split("\n")[4]
             expect(signed_headers_line).not_to include('user-agent')
             expect(signed_headers_line).not_to include('expect')
@@ -449,7 +440,6 @@ module Aws
               url: 'http://domain.com',
               body: ''
             )
-
             empty_string_sha256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
             expect(signature.content_sha256).to eq(empty_string_sha256)
           end
@@ -461,7 +451,6 @@ module Aws
               url: 'http://domain.com',
               body: nil
             )
-
             empty_string_sha256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
             expect(signature.content_sha256).to eq(empty_string_sha256)
           end
@@ -474,7 +463,6 @@ module Aws
               url: 'http://domain.com',
               body: body
             )
-
             test_body_sha256 = Digest::SHA256.hexdigest('test body content')
             expect(signature.content_sha256).to eq(test_body_sha256)
             expect(body.pos).to eq(0)
@@ -531,18 +519,18 @@ module Aws
         context 'with parameter overrides' do
           it 'allows overriding the service' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               basic_request.merge(service: 'OVERRIDE-SERVICE')
             )
-            expect(url.url.query).to include('OVERRIDE-SERVICE')
+            expect(presigned_url.url).to include('OVERRIDE-SERVICE')
           end
 
           it 'allows overriding the region' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               basic_request.merge(region: 'OVERRIDE-REGION')
             )
-            expect(url.url.query).to include('OVERRIDE-REGION')
+            expect(presigned_url.url).to include('OVERRIDE-REGION')
           end
 
           it 'allows overriding the credentials' do
@@ -551,20 +539,18 @@ module Aws
               access_key_id: 'override-akid',
               secret_access_key: 'override-secret'
             )
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               basic_request.merge(credentials: override_credentials)
             )
-            expect(url.url.query).to include('override-akid')
+            expect(presigned_url.url).to include('override-akid')
           end
 
           it 'allows overriding the signing algorithm' do
             signer = Signer.new(options)
-            # We can't easily test sigv4a since it requires special setup,
-            # but we can verify the correct algorithm name is used
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               basic_request.merge(signing_algorithm: 'sigv4a')
             )
-            expect(url.url.query).to include('AWS4-ECDSA-P256-SHA256')
+            expect(presigned_url.url).to include('AWS4-ECDSA-P256-SHA256')
           end
 
           it 'allows overriding the omit_session_token flag' do
@@ -574,17 +560,12 @@ module Aws
               credentials: credentials_with_token,
               omit_session_token: false
             )
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               basic_request.merge(omit_session_token: true)
             )
-
             # When omit_session_token is true, the token is excluded from the signature,
             # but included in the URL query parameters.
-            parts = url.url.query.split('&')
-            security_token_param = parts.find { |p| p.start_with?('X-Amz-Security-Token=') }
-
-            expect(security_token_param).not_to be_nil
-            expect(security_token_param).to include('session-token')
+            expect(presigned_url.url).to include('X-Amz-Security-Token=session-token')
           end
 
           it 'allows overriding unsigned_headers' do
@@ -592,63 +573,60 @@ module Aws
               'Content-Type' => 'application/json',
               'Custom-Header' => 'custom-value'
             }
-
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'PUT',
               url: 'https://domain.com',
               headers: headers,
               unsigned_headers: ['custom-header']
             )
-
-            signed_headers_param = url.url.query.split('&').find { |param| param.start_with?('X-Amz-SignedHeaders=') }
-            expect(signed_headers_param).to include('content-type')
-            expect(signed_headers_param).not_to include('custom-header')
+            signed_headers_value = presigned_url.url.match(/X-Amz-SignedHeaders=([^&]*)/)[1]
+            expect(signed_headers_value).to include('content-type')
+            expect(signed_headers_value).not_to include('custom-header')
           end
 
           it 'allows overriding uri_escape_path' do
             signer = Signer.new(options.merge(uri_escape_path: true))
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path%20with%20spaces',
               uri_escape_path: false
             )
-            expect(url.canonical_request).to include("/path%20with%20spaces\n")
-            expect(url.canonical_request).not_to include("/path%2520with%2520spaces\n")
+            expect(presigned_url.canonical_request).to include("/path%20with%20spaces\n")
+            expect(presigned_url.canonical_request).not_to include("/path%2520with%2520spaces\n")
           end
 
           it 'allows overriding normalize_path' do
             signer = Signer.new(options.merge(normalize_path: true))
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path/../not-normalized',
               normalize_path: false
             )
-            expect(url.canonical_request).to include("/path/../not-normalized\n")
+            expect(presigned_url.canonical_request).to include("/path/../not-normalized\n")
           end
         end
 
         context 'with expiration options' do
           it 'defaults to 900 seconds expiration' do
             signer = Signer.new(options)
-            url = signer.presign_url(basic_request)
-            expect(url.url.query).to include('X-Amz-Expires=900')
+            presigned_url = signer.presign_url(basic_request)
+            expect(presigned_url.url).to include('X-Amz-Expires=900')
           end
 
           it 'accepts custom expiration in seconds' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com',
               expires_in: 300
             )
-            expect(url.url.query).to include('X-Amz-Expires=300')
+            expect(presigned_url.url).to include('X-Amz-Expires=300')
           end
 
           it 'uses credential expiration time if sooner than requested expires_in' do
             now = Time.now
             expiration = now + 60 # 60 seconds from now
-
             provider = StaticCredentialsProvider.new(
               access_key_id: 'provider_key_id',
               secret_access_key: 'provider_secret_key'
@@ -662,12 +640,12 @@ module Aws
             )
             allow(Time).to receive(:now).and_return(now)
 
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com',
               expires_in: 3600
             )
-            expect(url.url.query).to include('X-Amz-Expires=60')
+            expect(presigned_url.url).to include('X-Amz-Expires=60')
           end
         end
 
@@ -678,8 +656,8 @@ module Aws
               region: 'REGION',
               credentials: credentials_with_token
             )
-            url = signer.presign_url(basic_request)
-            expect(url.url.query).to include('X-Amz-Security-Token=session-token')
+            presigned_url = signer.presign_url(basic_request)
+            expect(presigned_url.url).to include('X-Amz-Security-Token=session-token')
           end
 
           it 'includes X-Amz-S3session-Token for S3Express algorithm' do
@@ -689,9 +667,9 @@ module Aws
               credentials: credentials_with_token,
               signing_algorithm: 'sigv4-s3express'
             )
-            url = signer.presign_url(basic_request)
-            expect(url.url.query).to include('X-Amz-S3session-Token=session-token')
-            expect(url.url.query).not_to include('X-Amz-Security-Token')
+            presigned_url = signer.presign_url(basic_request)
+            expect(presigned_url.url).to include('X-Amz-S3session-Token=session-token')
+            expect(presigned_url.url).not_to include('X-Amz-Security-Token')
           end
 
           it 'still includes token in query string even when omit_session_token is true' do
@@ -701,16 +679,16 @@ module Aws
               credentials: credentials_with_token,
               omit_session_token: true
             )
-            url = signer.presign_url(basic_request)
-            expect(url.url.query).to include('X-Amz-Security-Token=session-token')
+            presigned_url = signer.presign_url(basic_request)
+            expect(presigned_url.url).to include('X-Amz-Security-Token=session-token')
           end
         end
 
         context 'with signing_algorithm option' do
           it 'uses AWS4-HMAC-SHA256 algorithm by default' do
             signer = Signer.new(options)
-            url = signer.presign_url(basic_request)
-            expect(url.url.query).to include('X-Amz-Algorithm=AWS4-HMAC-SHA256')
+            presigned_url = signer.presign_url(basic_request)
+            expect(presigned_url.url).to include('X-Amz-Algorithm=AWS4-HMAC-SHA256')
           end
 
           it 'uses AWS4-ECDSA-P256-SHA256 with sigv4a algorithm' do
@@ -721,9 +699,9 @@ module Aws
               signing_algorithm: 'sigv4a'
             )
             begin
-              url = signer.presign_url(basic_request)
-              expect(url.url.query).to include('X-Amz-Algorithm=AWS4-ECDSA-P256-SHA256')
-              expect(url.url.query).to include('X-Amz-Region-Set=REGION')
+              presigned_url = signer.presign_url(basic_request)
+              expect(presigned_url.url).to include('X-Amz-Algorithm=AWS4-ECDSA-P256-SHA256')
+              expect(presigned_url.url).to include('X-Amz-Region-Set=REGION')
             rescue StandardError => e
               skip "sigv4a presign testing requires proper implementation: #{e.message}"
             end
@@ -733,99 +711,96 @@ module Aws
         context 'with uri_escape_path option' do
           it 'escapes the path when uri_escape_path is true (default)' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path%20with%20spaces'
             )
-            # The path in the canonical request should be escaped
-            expect(url.canonical_request).to include("/path%2520with%2520spaces\n")
+            expect(presigned_url.canonical_request).to include("/path%2520with%2520spaces\n")
           end
 
           it 'does not escape the path when uri_escape_path is false' do
             signer = Signer.new(options.merge(uri_escape_path: false))
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path%20with%20spaces'
             )
-            # The path in the canonical request should not be escaped
-            expect(url.canonical_request).to include("/path%20with%20spaces\n")
+            expect(presigned_url.canonical_request).to include("/path%20with%20spaces\n")
           end
         end
 
         context 'with normalize_path option' do
           it 'normalizes paths by default' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path/../normalized'
             )
-            expect(url.canonical_request).to include("/normalized\n")
+            expect(presigned_url.canonical_request).to include("/normalized\n")
           end
 
           it 'does not normalize paths when normalize_path is false' do
             signer = Signer.new(options.merge(normalize_path: false))
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path/../not-normalized'
             )
-            expect(url.canonical_request).to include("/path/../not-normalized\n")
+            expect(presigned_url.canonical_request).to include("/path/../not-normalized\n")
           end
         end
 
         context 'with content_sha256 handling' do
           it 'uses empty string SHA256 by default' do
             signer = Signer.new(options)
-            url = signer.presign_url(basic_request)
+            presigned_url = signer.presign_url(basic_request)
 
             empty_string_sha256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
-            expect(url.content_sha256).to eq(empty_string_sha256)
+            expect(presigned_url.content_sha256).to eq(empty_string_sha256)
           end
 
           it 'accepts body_digest option' do
             custom_digest = 'custom-body-digest'
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com',
               body_digest: custom_digest
             )
-            expect(url.content_sha256).to eq(custom_digest)
+            expect(presigned_url.content_sha256).to eq(custom_digest)
           end
 
           it 'computes SHA256 of provided body' do
             body = 'test body content'
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'PUT',
               url: 'https://domain.com',
               body: body
             )
-
             test_body_sha256 = Digest::SHA256.hexdigest(body)
-            expect(url.content_sha256).to eq(test_body_sha256)
+            expect(presigned_url.content_sha256).to eq(test_body_sha256)
           end
 
           it 'prioritizes body_digest over body' do
             custom_digest = 'custom-body-digest'
             body = 'test body content'
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'PUT',
               url: 'https://domain.com',
               body: body,
               body_digest: custom_digest
             )
-            expect(url.content_sha256).to eq(custom_digest)
+            expect(presigned_url.content_sha256).to eq(custom_digest)
           end
 
           it 'allows using UNSIGNED-PAYLOAD as body_digest' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'PUT',
               url: 'https://domain.com',
               body_digest: 'UNSIGNED-PAYLOAD'
             )
-            expect(url.content_sha256).to eq('UNSIGNED-PAYLOAD')
+            expect(presigned_url.content_sha256).to eq('UNSIGNED-PAYLOAD')
           end
         end
 
@@ -835,18 +810,16 @@ module Aws
               'Content-Type' => 'application/json',
               'Custom-Header' => 'custom-value'
             }
-
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'PUT',
               url: 'https://domain.com',
               headers: headers
             )
-
-            expect(url.url.query).to include('X-Amz-SignedHeaders=')
-            signed_headers_param = url.url.query.split('&').find { |param| param.start_with?('X-Amz-SignedHeaders=') }
-            expect(signed_headers_param).to include('content-type')
-            expect(signed_headers_param).to include('custom-header')
+            expect(presigned_url.url).to include('X-Amz-SignedHeaders=')
+            signed_headers_value = presigned_url.url.match(/X-Amz-SignedHeaders=([^&]*)/)[1]
+            expect(signed_headers_value).to include('content-type')
+            expect(signed_headers_value).to include('custom-header')
           end
 
           it 'respects unsigned_headers option' do
@@ -854,44 +827,39 @@ module Aws
               'Content-Type' => 'application/json',
               'Custom-Header' => 'custom-value'
             }
-
             signer = Signer.new(
               options.merge(unsigned_headers: ['custom-header'])
             )
-
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'PUT',
               url: 'https://domain.com',
               headers: headers
             )
-
-            signed_headers_param = url.url.query.split('&').find { |param| param.start_with?('X-Amz-SignedHeaders=') }
-            expect(signed_headers_param).to include('content-type')
-            expect(signed_headers_param).not_to include('custom-header')
+            signed_headers_value = presigned_url.url.match(/X-Amz-SignedHeaders=([^&]*)/)[1]
+            expect(signed_headers_value).to include('content-type')
+            expect(signed_headers_value).not_to include('custom-header')
           end
         end
 
         context 'existing query params' do
           it 'appends to existing query parameters' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com?existing=param'
             )
-
-            query_parts = url.url.query.split('&')
-            expect(query_parts).to include('existing=param')
-            expect(query_parts.any? { |p| p.start_with?('X-Amz-Algorithm=') }).to be(true)
-            expect(query_parts.any? { |p| p.start_with?('X-Amz-Credential=') }).to be(true)
+            expect(presigned_url.url).to include('existing=param')
+            expect(presigned_url.url).to include('X-Amz-Algorithm=')
+            expect(presigned_url.url).to include('X-Amz-Credential=')
           end
 
           it 'handles complex URLs with query params needing escaping' do
             signer = Signer.new(options)
-            url = signer.presign_url(
+            presigned_url = signer.presign_url(
               http_method: 'GET',
               url: 'https://domain.com/path?param=value with spaces&another=123'
             )
-            expect(url.canonical_request).to include('another=123&param=value%20with%20spaces')
+            expect(presigned_url.canonical_request).to include('another=123&param=value%20with%20spaces')
           end
         end
       end
