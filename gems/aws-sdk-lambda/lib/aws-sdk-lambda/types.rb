@@ -224,6 +224,18 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
     #   @return [String]
     #
+    # @!attribute [rw] invoked_via_function_url
+    #   Restricts the `lambda:InvokeFunction` action to calls coming from a
+    #   function URL. When set to `true`, this prevents the principal from
+    #   invoking the function by any means other than the function URL. For
+    #   more information, see [Security and auth model for Lambda function
+    #   URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
     #
     class AddPermissionRequest < Struct.new(
@@ -237,7 +249,8 @@ module Aws::Lambda
       :qualifier,
       :revision_id,
       :principal_org_id,
-      :function_url_auth_type)
+      :function_url_auth_type,
+      :invoked_via_function_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -436,8 +449,9 @@ module Aws::Lambda
     #   Code signing configuration policy for deployment validation failure.
     #   If you set the policy to `Enforce`, Lambda blocks the deployment
     #   request if signature validation checks fail. If you set the policy
-    #   to `Warn`, Lambda allows the deployment and creates a CloudWatch
-    #   log.
+    #   to `Warn`, Lambda allows the deployment and issues a new Amazon
+    #   CloudWatch metric (`SignatureValidationErrors`) and also stores the
+    #   warning in the CloudTrail log.
     #
     #   Default value: `Warn`
     #   @return [String]

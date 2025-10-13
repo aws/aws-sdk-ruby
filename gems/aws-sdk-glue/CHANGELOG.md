@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.238.0 (2025-10-10)
+------------------
+
+* Feature - Addition of AuditContext in GetTable/GetTables Request
+
 1.237.0 (2025-10-06)
 ------------------
 

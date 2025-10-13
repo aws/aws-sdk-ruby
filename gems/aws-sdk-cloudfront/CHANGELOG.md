@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-10-10)
+------------------
+
+* Feature - Added new viewer security policy, TLSv1.2_2025, for CloudFront.
+
 1.129.0 (2025-09-16)
 ------------------
 

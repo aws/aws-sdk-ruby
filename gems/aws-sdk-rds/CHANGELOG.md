@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.296.0 (2025-10-10)
+------------------
+
+* Feature - Updated the text in the Important section of the ModifyDBClusterParameterGroup page.
+
 1.295.0 (2025-10-06)
 ------------------
 

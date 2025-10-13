@@ -4476,6 +4476,11 @@ module Aws
                        name: ::String,
                        ?transaction_id: ::String,
                        ?query_as_of_time: ::Time,
+                       ?audit_context: {
+                         additional_audit_context: ::String?,
+                         requested_columns: Array[::String]?,
+                         all_columns_requested: bool?
+                       },
                        ?include_status_details: bool
                      ) -> _GetTableResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
@@ -4538,6 +4543,11 @@ module Aws
                         ?max_results: ::Integer,
                         ?transaction_id: ::String,
                         ?query_as_of_time: ::Time,
+                        ?audit_context: {
+                          additional_audit_context: ::String?,
+                          requested_columns: Array[::String]?,
+                          all_columns_requested: bool?
+                        },
                         ?include_status_details: bool,
                         ?attributes_to_get: Array[("NAME" | "TABLE_TYPE")]
                       ) -> _GetTablesResponseSuccess

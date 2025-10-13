@@ -1412,6 +1412,14 @@ module Aws::BedrockAgentCore
     #   stopped, the request will fail.
     #   @return [String]
     #
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the code interpreter to invoke.
     #   @return [String]
@@ -1429,6 +1437,8 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterRequest < Struct.new(
       :code_interpreter_identifier,
       :session_id,
+      :trace_id,
+      :trace_parent,
       :name,
       :arguments)
       SENSITIVE = []
@@ -2328,6 +2338,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_identifier
     #   The unique identifier of the browser to use for this session. This
     #   identifier specifies which browser environment to initialize for the
@@ -2367,6 +2385,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartBrowserSessionRequest AWS API Documentation
     #
     class StartBrowserSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :browser_identifier,
       :name,
       :session_timeout_seconds,
@@ -2404,6 +2424,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter to use for this
     #   session. This identifier specifies which code interpreter
@@ -2437,6 +2465,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartCodeInterpreterSessionRequest AWS API Documentation
     #
     class StartCodeInterpreterSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :code_interpreter_identifier,
       :name,
       :session_timeout_seconds,
@@ -2467,6 +2497,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_identifier
     #   The unique identifier of the browser associated with the session.
     #   @return [String]
@@ -2488,6 +2526,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopBrowserSessionRequest AWS API Documentation
     #
     class StopBrowserSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :browser_identifier,
       :session_id,
       :client_token)
@@ -2517,6 +2557,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
     #   session.
@@ -2539,6 +2587,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopCodeInterpreterSessionRequest AWS API Documentation
     #
     class StopCodeInterpreterSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :code_interpreter_identifier,
       :session_id,
       :client_token)

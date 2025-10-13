@@ -114,7 +114,8 @@ module Aws
                             ?qualifier: ::String,
                             ?revision_id: ::String,
                             ?principal_org_id: ::String,
-                            ?function_url_auth_type: ("NONE" | "AWS_IAM")
+                            ?function_url_auth_type: ("NONE" | "AWS_IAM"),
+                            ?invoked_via_function_url: bool
                           ) -> _AddPermissionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPermissionResponseSuccess
 

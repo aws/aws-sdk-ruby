@@ -11552,6 +11552,10 @@ module Aws::CloudFront
     # A public key that you can use with [signed URLs and signed
     # cookies][1], or with [field-level encryption][2].
     #
+    # CloudFront supports signed URLs and signed cookies with RSA 2048 or
+    # ECDSA 256 key signatures. Field-level encryption is only compatible
+    # with RSA 2048 key signatures.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
@@ -11602,6 +11606,10 @@ module Aws::CloudFront
     # Configuration information about a public key that you can use with
     # [signed URLs and signed cookies][1], or with [field-level
     # encryption][2].
+    #
+    # CloudFront supports signed URLs and signed cookies with RSA 2048 or
+    # ECDSA 256 key signatures. Field-level encryption is only compatible
+    # with RSA 2048 key signatures.
     #
     #
     #

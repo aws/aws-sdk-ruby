@@ -14644,6 +14644,14 @@ module Aws::Glue
     #   along with `TransactionId`.
     #   @return [Time]
     #
+    # @!attribute [rw] audit_context
+    #   A structure containing the Lake Formation [audit context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+    #   @return [Types::AuditContext]
+    #
     # @!attribute [rw] include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -14657,6 +14665,7 @@ module Aws::Glue
       :name,
       :transaction_id,
       :query_as_of_time,
+      :audit_context,
       :include_status_details)
       SENSITIVE = []
       include Aws::Structure
@@ -14805,6 +14814,14 @@ module Aws::Glue
     #   along with `TransactionId`.
     #   @return [Time]
     #
+    # @!attribute [rw] audit_context
+    #   A structure containing the Lake Formation [audit context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+    #   @return [Types::AuditContext]
+    #
     # @!attribute [rw] include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -14832,6 +14849,7 @@ module Aws::Glue
       :max_results,
       :transaction_id,
       :query_as_of_time,
+      :audit_context,
       :include_status_details,
       :attributes_to_get)
       SENSITIVE = []

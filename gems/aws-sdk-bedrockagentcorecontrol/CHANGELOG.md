@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2025-10-10)
+------------------
+
+* Feature - Bedrock AgentCore release for Gateway, and Memory including Self-Managed Strategies support for Memory.
+
 1.8.0 (2025-10-08)
 ------------------
 

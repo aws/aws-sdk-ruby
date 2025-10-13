@@ -3261,31 +3261,40 @@ module Aws::RDS
     # @option params [Boolean] :publicly_accessible
     #   Specifies whether the DB cluster is publicly accessible.
     #
-    #   Valid for Cluster Type: Multi-AZ DB clusters only
-    #
     #   When the DB cluster is publicly accessible and you connect from
-    #   outside of the DB cluster's virtual private cloud (VPC), its domain
-    #   name system (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB cluster, the endpoint
     #   resolves to the private IP address. Access to the DB cluster is
-    #   controlled by its security group settings.
+    #   ultimately controlled by the security group it uses. That public
+    #   access isn't permitted if the security group assigned to the DB
+    #   cluster doesn't permit it.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
     #
-    #   The default behavior when `PubliclyAccessible` is not specified
-    #   depends on whether a `DBSubnetGroup` is specified.
+    #   Valid for Cluster Type: Multi-AZ DB clusters only
     #
-    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
-    #   `true`.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
-    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
-    #   case `PubliclyAccessible` defaults to `true`.
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
     #
-    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
-    #   is in doesn't have an internet gateway attached to it, Amazon RDS
-    #   returns an error.
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB cluster is private.
+    #
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB cluster is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB cluster is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB cluster is public.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Specifies whether minor engine upgrades are applied automatically to
@@ -5188,28 +5197,37 @@ module Aws::RDS
     #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible and you connect from
-    #   outside of the DB instance's virtual private cloud (VPC), its domain
-    #   name system (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB instance's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB instance, the endpoint
     #   resolves to the private IP address. Access to the DB instance is
-    #   controlled by its security group settings.
+    #   ultimately controlled by the security group it uses. That public
+    #   access is not permitted if the security group assigned to the DB
+    #   instance doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
     #
-    #   The default behavior when `PubliclyAccessible` is not specified
-    #   depends on whether a `DBSubnetGroup` is specified.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
-    #   `false` for Aurora instances and `true` for non-Aurora instances.
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
     #
-    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
-    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
-    #   case `PubliclyAccessible` defaults to `true`.
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
-    #   is in doesn't have an internet gateway attached to it, Amazon RDS
-    #   returns an error.
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB instance is public.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the DB instance.
@@ -20339,23 +20357,14 @@ module Aws::RDS
     # `ParameterName`, `ParameterValue`, and `ApplyMethod`. A maximum of 20
     # parameters can be modified in a single request.
     #
-    # After you create a DB cluster parameter group, you should wait at
-    # least 5 minutes before creating your first DB cluster that uses that
-    # DB cluster parameter group as the default parameter group. This allows
-    # Amazon RDS to fully complete the create operation before the parameter
-    # group is used as the default for a new DB cluster. This is especially
-    # important for parameters that are critical when creating the default
-    # database for a DB cluster, such as the character set for the default
-    # database defined by the `character_set_database` parameter. You can
-    # use the *Parameter Groups* option of the [Amazon RDS console][1] or
-    # the `DescribeDBClusterParameters` operation to verify that your DB
-    # cluster parameter group has been created or modified.
-    #
-    #  If the modified DB cluster parameter group is used by an Aurora
-    # Serverless v1 cluster, Aurora applies the update immediately. The
-    # cluster restart might interrupt your workload. In that case, your
-    # application must reopen any connections and retry any transactions
-    # that were active when the parameter changes took effect.
+    # There are two types of parameters - dynamic parameters and static
+    # parameters. Changes to dynamic parameters are applied to the DB
+    # cluster immediately without a reboot. Changes to static parameters are
+    # applied only after the DB cluster is rebooted, which can be done using
+    # `RebootDBCluster` operation. You can use the *Parameter Groups* option
+    # of the [Amazon RDS console][1] or the `DescribeDBClusterParameters`
+    # operation to verify that your DB cluster parameter group has been
+    # created or modified.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
     # Amazon Aurora?][2] in the *Amazon Aurora User Guide*.
@@ -21168,7 +21177,7 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   ^
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
@@ -32596,7 +32605,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.295.0'
+      context[:gem_version] = '1.296.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -373,6 +373,8 @@ module Aws
       def invoke_code_interpreter: (
                                      code_interpreter_identifier: ::String,
                                      ?session_id: ::String,
+                                     ?trace_id: ::String,
+                                     ?trace_parent: ::String,
                                      name: ("executeCode" | "executeCommand" | "readFiles" | "listFiles" | "removeFiles" | "writeFiles" | "startCommandExecution" | "getTask" | "stopTask"),
                                      ?arguments: {
                                        code: ::String?,
@@ -527,6 +529,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_browser_session-instance_method
       def start_browser_session: (
+                                   ?trace_id: ::String,
+                                   ?trace_parent: ::String,
                                    browser_identifier: ::String,
                                    ?name: ::String,
                                    ?session_timeout_seconds: ::Integer,
@@ -546,6 +550,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_code_interpreter_session-instance_method
       def start_code_interpreter_session: (
+                                            ?trace_id: ::String,
+                                            ?trace_parent: ::String,
                                             code_interpreter_identifier: ::String,
                                             ?name: ::String,
                                             ?session_timeout_seconds: ::Integer,
@@ -561,6 +567,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_browser_session-instance_method
       def stop_browser_session: (
+                                  ?trace_id: ::String,
+                                  ?trace_parent: ::String,
                                   browser_identifier: ::String,
                                   session_id: ::String,
                                   ?client_token: ::String
@@ -575,6 +583,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_code_interpreter_session-instance_method
       def stop_code_interpreter_session: (
+                                           ?trace_id: ::String,
+                                           ?trace_parent: ::String,
                                            code_interpreter_identifier: ::String,
                                            session_id: ::String,
                                            ?client_token: ::String

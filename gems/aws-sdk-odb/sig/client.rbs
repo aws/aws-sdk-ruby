@@ -256,6 +256,7 @@ module Aws
                                            odb_network_id: ::String,
                                            peer_network_id: ::String,
                                            ?display_name: ::String,
+                                           ?peer_network_cidrs_to_be_added: Array[::String],
                                            ?client_token: ::String,
                                            ?tags: Hash[::String, ::String]
                                          ) -> _CreateOdbPeeringConnectionResponseSuccess
@@ -672,6 +673,22 @@ module Aws
                                 ?s3_policy_document: ::String
                               ) -> _UpdateOdbNetworkResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOdbNetworkResponseSuccess
+
+      interface _UpdateOdbPeeringConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOdbPeeringConnectionOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def odb_peering_connection_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_odb_peering_connection-instance_method
+      def update_odb_peering_connection: (
+                                           odb_peering_connection_id: ::String,
+                                           ?display_name: ::String,
+                                           ?peer_network_cidrs_to_be_added: Array[::String],
+                                           ?peer_network_cidrs_to_be_removed: Array[::String]
+                                         ) -> _UpdateOdbPeeringConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOdbPeeringConnectionResponseSuccess
     end
   end
 end

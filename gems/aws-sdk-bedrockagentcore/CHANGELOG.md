@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2025-10-10)
+------------------
+
+* Feature - Bedrock AgentCore release for Runtime, and Memory.
+
 1.6.0 (2025-10-06)
 ------------------
 

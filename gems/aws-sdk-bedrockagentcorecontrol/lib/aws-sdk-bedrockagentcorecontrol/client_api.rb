@@ -155,6 +155,8 @@ module Aws::BedrockAgentCoreControl
     GatewayStatus = Shapes::StringShape.new(name: 'GatewayStatus')
     GatewaySummaries = Shapes::ListShape.new(name: 'GatewaySummaries')
     GatewaySummary = Shapes::StructureShape.new(name: 'GatewaySummary')
+    GatewayTarget = Shapes::StructureShape.new(name: 'GatewayTarget')
+    GatewayTargetList = Shapes::ListShape.new(name: 'GatewayTargetList')
     GatewayUrl = Shapes::StringShape.new(name: 'GatewayUrl')
     GetAgentRuntimeEndpointRequest = Shapes::StructureShape.new(name: 'GetAgentRuntimeEndpointRequest')
     GetAgentRuntimeEndpointResponse = Shapes::StructureShape.new(name: 'GetAgentRuntimeEndpointResponse')
@@ -184,7 +186,11 @@ module Aws::BedrockAgentCoreControl
     GoogleOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigOutput')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     InlinePayload = Shapes::StringShape.new(name: 'InlinePayload')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvocationConfiguration = Shapes::StructureShape.new(name: 'InvocationConfiguration')
+    InvocationConfigurationInput = Shapes::StructureShape.new(name: 'InvocationConfigurationInput')
+    InvocationConfigurationInputPayloadDeliveryBucketNameString = Shapes::StringShape.new(name: 'InvocationConfigurationInputPayloadDeliveryBucketNameString')
     IssuerUrlType = Shapes::StringShape.new(name: 'IssuerUrlType')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KmsConfiguration = Shapes::StructureShape.new(name: 'KmsConfiguration')
@@ -224,6 +230,8 @@ module Aws::BedrockAgentCoreControl
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     McpInstructions = Shapes::StringShape.new(name: 'McpInstructions')
     McpLambdaTargetConfiguration = Shapes::StructureShape.new(name: 'McpLambdaTargetConfiguration')
+    McpServerTargetConfiguration = Shapes::StructureShape.new(name: 'McpServerTargetConfiguration')
+    McpServerTargetConfigurationEndpointString = Shapes::StringShape.new(name: 'McpServerTargetConfigurationEndpointString')
     McpSupportedVersions = Shapes::ListShape.new(name: 'McpSupportedVersions')
     McpTargetConfiguration = Shapes::UnionShape.new(name: 'McpTargetConfiguration')
     McpVersion = Shapes::StringShape.new(name: 'McpVersion')
@@ -241,13 +249,20 @@ module Aws::BedrockAgentCoreControl
     MemoryStrategyType = Shapes::StringShape.new(name: 'MemoryStrategyType')
     MemorySummary = Shapes::StructureShape.new(name: 'MemorySummary')
     MemorySummaryList = Shapes::ListShape.new(name: 'MemorySummaryList')
+    MessageBasedTrigger = Shapes::StructureShape.new(name: 'MessageBasedTrigger')
+    MessageBasedTriggerInput = Shapes::StructureShape.new(name: 'MessageBasedTriggerInput')
+    MessageBasedTriggerInputMessageCountInteger = Shapes::IntegerShape.new(name: 'MessageBasedTriggerInputMessageCountInteger')
     MicrosoftOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'MicrosoftOauth2ProviderConfigInput')
     MicrosoftOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'MicrosoftOauth2ProviderConfigOutput')
     ModifyConsolidationConfiguration = Shapes::UnionShape.new(name: 'ModifyConsolidationConfiguration')
     ModifyExtractionConfiguration = Shapes::UnionShape.new(name: 'ModifyExtractionConfiguration')
+    ModifyInvocationConfigurationInput = Shapes::StructureShape.new(name: 'ModifyInvocationConfigurationInput')
+    ModifyInvocationConfigurationInputPayloadDeliveryBucketNameString = Shapes::StringShape.new(name: 'ModifyInvocationConfigurationInputPayloadDeliveryBucketNameString')
     ModifyMemoryStrategies = Shapes::StructureShape.new(name: 'ModifyMemoryStrategies')
     ModifyMemoryStrategiesList = Shapes::ListShape.new(name: 'ModifyMemoryStrategiesList')
     ModifyMemoryStrategyInput = Shapes::StructureShape.new(name: 'ModifyMemoryStrategyInput')
+    ModifySelfManagedConfiguration = Shapes::StructureShape.new(name: 'ModifySelfManagedConfiguration')
+    ModifySelfManagedConfigurationHistoricalContextWindowSizeInteger = Shapes::IntegerShape.new(name: 'ModifySelfManagedConfigurationHistoricalContextWindowSizeInteger')
     ModifyStrategyConfiguration = Shapes::StructureShape.new(name: 'ModifyStrategyConfiguration')
     Name = Shapes::StringShape.new(name: 'Name')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
@@ -301,6 +316,9 @@ module Aws::BedrockAgentCoreControl
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    SelfManagedConfiguration = Shapes::StructureShape.new(name: 'SelfManagedConfiguration')
+    SelfManagedConfigurationInput = Shapes::StructureShape.new(name: 'SelfManagedConfigurationInput')
+    SelfManagedConfigurationInputHistoricalContextWindowSizeInteger = Shapes::IntegerShape.new(name: 'SelfManagedConfigurationInputHistoricalContextWindowSizeInteger')
     SemanticConsolidationOverride = Shapes::StructureShape.new(name: 'SemanticConsolidationOverride')
     SemanticExtractionOverride = Shapes::StructureShape.new(name: 'SemanticExtractionOverride')
     SemanticMemoryStrategyInput = Shapes::StructureShape.new(name: 'SemanticMemoryStrategyInput')
@@ -324,6 +342,8 @@ module Aws::BedrockAgentCoreControl
     SummaryMemoryStrategyInput = Shapes::StructureShape.new(name: 'SummaryMemoryStrategyInput')
     SummaryOverrideConfigurationInput = Shapes::StructureShape.new(name: 'SummaryOverrideConfigurationInput')
     SummaryOverrideConsolidationConfigurationInput = Shapes::StructureShape.new(name: 'SummaryOverrideConsolidationConfigurationInput')
+    SynchronizeGatewayTargetsRequest = Shapes::StructureShape.new(name: 'SynchronizeGatewayTargetsRequest')
+    SynchronizeGatewayTargetsResponse = Shapes::StructureShape.new(name: 'SynchronizeGatewayTargetsResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -334,6 +354,7 @@ module Aws::BedrockAgentCoreControl
     TargetConfiguration = Shapes::UnionShape.new(name: 'TargetConfiguration')
     TargetDescription = Shapes::StringShape.new(name: 'TargetDescription')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TargetIdList = Shapes::ListShape.new(name: 'TargetIdList')
     TargetMaxResults = Shapes::IntegerShape.new(name: 'TargetMaxResults')
     TargetName = Shapes::StringShape.new(name: 'TargetName')
     TargetNextToken = Shapes::StringShape.new(name: 'TargetNextToken')
@@ -342,12 +363,22 @@ module Aws::BedrockAgentCoreControl
     TargetSummary = Shapes::StructureShape.new(name: 'TargetSummary')
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeBasedTrigger = Shapes::StructureShape.new(name: 'TimeBasedTrigger')
+    TimeBasedTriggerInput = Shapes::StructureShape.new(name: 'TimeBasedTriggerInput')
+    TimeBasedTriggerInputIdleSessionTimeoutInteger = Shapes::IntegerShape.new(name: 'TimeBasedTriggerInputIdleSessionTimeoutInteger')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenBasedTrigger = Shapes::StructureShape.new(name: 'TokenBasedTrigger')
+    TokenBasedTriggerInput = Shapes::StructureShape.new(name: 'TokenBasedTriggerInput')
+    TokenBasedTriggerInputTokenCountInteger = Shapes::IntegerShape.new(name: 'TokenBasedTriggerInputTokenCountInteger')
     TokenEndpointType = Shapes::StringShape.new(name: 'TokenEndpointType')
     TokenVaultIdType = Shapes::StringShape.new(name: 'TokenVaultIdType')
     ToolDefinition = Shapes::StructureShape.new(name: 'ToolDefinition')
     ToolDefinitions = Shapes::ListShape.new(name: 'ToolDefinitions')
     ToolSchema = Shapes::UnionShape.new(name: 'ToolSchema')
+    TriggerCondition = Shapes::UnionShape.new(name: 'TriggerCondition')
+    TriggerConditionInput = Shapes::UnionShape.new(name: 'TriggerConditionInput')
+    TriggerConditionInputList = Shapes::ListShape.new(name: 'TriggerConditionInputList')
+    TriggerConditionsList = Shapes::ListShape.new(name: 'TriggerConditionsList')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -610,7 +641,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
     CreateGatewayTargetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGatewayTargetRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
-    CreateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    CreateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
     CreateGatewayTargetRequest.struct_class = Types::CreateGatewayTargetRequest
 
     CreateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -623,6 +654,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetResponse.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
     CreateGatewayTargetResponse.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     CreateGatewayTargetResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    CreateGatewayTargetResponse.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
     CreateGatewayTargetResponse.struct_class = Types::CreateGatewayTargetResponse
 
     CreateMemoryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateMemoryInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -674,10 +706,12 @@ module Aws::BedrockAgentCoreControl
     CustomConfigurationInput.add_member(:semantic_override, Shapes::ShapeRef.new(shape: SemanticOverrideConfigurationInput, location_name: "semanticOverride"))
     CustomConfigurationInput.add_member(:summary_override, Shapes::ShapeRef.new(shape: SummaryOverrideConfigurationInput, location_name: "summaryOverride"))
     CustomConfigurationInput.add_member(:user_preference_override, Shapes::ShapeRef.new(shape: UserPreferenceOverrideConfigurationInput, location_name: "userPreferenceOverride"))
+    CustomConfigurationInput.add_member(:self_managed_configuration, Shapes::ShapeRef.new(shape: SelfManagedConfigurationInput, location_name: "selfManagedConfiguration"))
     CustomConfigurationInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CustomConfigurationInput.add_member_subclass(:semantic_override, Types::CustomConfigurationInput::SemanticOverride)
     CustomConfigurationInput.add_member_subclass(:summary_override, Types::CustomConfigurationInput::SummaryOverride)
     CustomConfigurationInput.add_member_subclass(:user_preference_override, Types::CustomConfigurationInput::UserPreferenceOverride)
+    CustomConfigurationInput.add_member_subclass(:self_managed_configuration, Types::CustomConfigurationInput::SelfManagedConfiguration)
     CustomConfigurationInput.add_member_subclass(:unknown, Types::CustomConfigurationInput::Unknown)
     CustomConfigurationInput.struct_class = Types::CustomConfigurationInput
 
@@ -847,6 +881,21 @@ module Aws::BedrockAgentCoreControl
     GatewaySummary.add_member(:protocol_type, Shapes::ShapeRef.new(shape: GatewayProtocolType, required: true, location_name: "protocolType"))
     GatewaySummary.struct_class = Types::GatewaySummary
 
+    GatewayTarget.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
+    GatewayTarget.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "targetId"))
+    GatewayTarget.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GatewayTarget.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    GatewayTarget.add_member(:status, Shapes::ShapeRef.new(shape: TargetStatus, required: true, location_name: "status"))
+    GatewayTarget.add_member(:status_reasons, Shapes::ShapeRef.new(shape: StatusReasons, location_name: "statusReasons"))
+    GatewayTarget.add_member(:name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "name"))
+    GatewayTarget.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
+    GatewayTarget.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
+    GatewayTarget.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    GatewayTarget.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
+    GatewayTarget.struct_class = Types::GatewayTarget
+
+    GatewayTargetList.member = Shapes::ShapeRef.new(shape: GatewayTarget)
+
     GetAgentRuntimeEndpointRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     GetAgentRuntimeEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "endpointName"))
     GetAgentRuntimeEndpointRequest.struct_class = Types::GetAgentRuntimeEndpointRequest
@@ -964,6 +1013,7 @@ module Aws::BedrockAgentCoreControl
     GetGatewayTargetResponse.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
     GetGatewayTargetResponse.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     GetGatewayTargetResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    GetGatewayTargetResponse.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
     GetGatewayTargetResponse.struct_class = Types::GetGatewayTargetResponse
 
     GetMemoryInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
@@ -1018,6 +1068,14 @@ module Aws::BedrockAgentCoreControl
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InvocationConfiguration.add_member(:topic_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "topicArn"))
+    InvocationConfiguration.add_member(:payload_delivery_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "payloadDeliveryBucketName"))
+    InvocationConfiguration.struct_class = Types::InvocationConfiguration
+
+    InvocationConfigurationInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "topicArn"))
+    InvocationConfigurationInput.add_member(:payload_delivery_bucket_name, Shapes::ShapeRef.new(shape: InvocationConfigurationInputPayloadDeliveryBucketNameString, required: true, location_name: "payloadDeliveryBucketName"))
+    InvocationConfigurationInput.struct_class = Types::InvocationConfigurationInput
 
     KmsConfiguration.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, required: true, location_name: "keyType"))
     KmsConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
@@ -1135,15 +1193,20 @@ module Aws::BedrockAgentCoreControl
     McpLambdaTargetConfiguration.add_member(:tool_schema, Shapes::ShapeRef.new(shape: ToolSchema, required: true, location_name: "toolSchema"))
     McpLambdaTargetConfiguration.struct_class = Types::McpLambdaTargetConfiguration
 
+    McpServerTargetConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: McpServerTargetConfigurationEndpointString, required: true, location_name: "endpoint"))
+    McpServerTargetConfiguration.struct_class = Types::McpServerTargetConfiguration
+
     McpSupportedVersions.member = Shapes::ShapeRef.new(shape: McpVersion)
 
     McpTargetConfiguration.add_member(:open_api_schema, Shapes::ShapeRef.new(shape: ApiSchemaConfiguration, location_name: "openApiSchema"))
     McpTargetConfiguration.add_member(:smithy_model, Shapes::ShapeRef.new(shape: ApiSchemaConfiguration, location_name: "smithyModel"))
     McpTargetConfiguration.add_member(:lambda, Shapes::ShapeRef.new(shape: McpLambdaTargetConfiguration, location_name: "lambda"))
+    McpTargetConfiguration.add_member(:mcp_server, Shapes::ShapeRef.new(shape: McpServerTargetConfiguration, location_name: "mcpServer"))
     McpTargetConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     McpTargetConfiguration.add_member_subclass(:open_api_schema, Types::McpTargetConfiguration::OpenApiSchema)
     McpTargetConfiguration.add_member_subclass(:smithy_model, Types::McpTargetConfiguration::SmithyModel)
     McpTargetConfiguration.add_member_subclass(:lambda, Types::McpTargetConfiguration::Lambda)
+    McpTargetConfiguration.add_member_subclass(:mcp_server, Types::McpTargetConfiguration::McpServer)
     McpTargetConfiguration.add_member_subclass(:unknown, Types::McpTargetConfiguration::Unknown)
     McpTargetConfiguration.struct_class = Types::McpTargetConfiguration
 
@@ -1197,6 +1260,12 @@ module Aws::BedrockAgentCoreControl
 
     MemorySummaryList.member = Shapes::ShapeRef.new(shape: MemorySummary)
 
+    MessageBasedTrigger.add_member(:message_count, Shapes::ShapeRef.new(shape: Integer, location_name: "messageCount"))
+    MessageBasedTrigger.struct_class = Types::MessageBasedTrigger
+
+    MessageBasedTriggerInput.add_member(:message_count, Shapes::ShapeRef.new(shape: MessageBasedTriggerInputMessageCountInteger, location_name: "messageCount"))
+    MessageBasedTriggerInput.struct_class = Types::MessageBasedTriggerInput
+
     MicrosoftOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
     MicrosoftOauth2ProviderConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "clientSecret"))
     MicrosoftOauth2ProviderConfigInput.struct_class = Types::MicrosoftOauth2ProviderConfigInput
@@ -1216,6 +1285,10 @@ module Aws::BedrockAgentCoreControl
     ModifyExtractionConfiguration.add_member_subclass(:unknown, Types::ModifyExtractionConfiguration::Unknown)
     ModifyExtractionConfiguration.struct_class = Types::ModifyExtractionConfiguration
 
+    ModifyInvocationConfigurationInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "topicArn"))
+    ModifyInvocationConfigurationInput.add_member(:payload_delivery_bucket_name, Shapes::ShapeRef.new(shape: ModifyInvocationConfigurationInputPayloadDeliveryBucketNameString, location_name: "payloadDeliveryBucketName"))
+    ModifyInvocationConfigurationInput.struct_class = Types::ModifyInvocationConfigurationInput
+
     ModifyMemoryStrategies.add_member(:add_memory_strategies, Shapes::ShapeRef.new(shape: MemoryStrategyInputList, location_name: "addMemoryStrategies"))
     ModifyMemoryStrategies.add_member(:modify_memory_strategies, Shapes::ShapeRef.new(shape: ModifyMemoryStrategiesList, location_name: "modifyMemoryStrategies"))
     ModifyMemoryStrategies.add_member(:delete_memory_strategies, Shapes::ShapeRef.new(shape: DeleteMemoryStrategiesList, location_name: "deleteMemoryStrategies"))
@@ -1229,8 +1302,14 @@ module Aws::BedrockAgentCoreControl
     ModifyMemoryStrategyInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ModifyStrategyConfiguration, location_name: "configuration"))
     ModifyMemoryStrategyInput.struct_class = Types::ModifyMemoryStrategyInput
 
+    ModifySelfManagedConfiguration.add_member(:trigger_conditions, Shapes::ShapeRef.new(shape: TriggerConditionInputList, location_name: "triggerConditions"))
+    ModifySelfManagedConfiguration.add_member(:invocation_configuration, Shapes::ShapeRef.new(shape: ModifyInvocationConfigurationInput, location_name: "invocationConfiguration"))
+    ModifySelfManagedConfiguration.add_member(:historical_context_window_size, Shapes::ShapeRef.new(shape: ModifySelfManagedConfigurationHistoricalContextWindowSizeInteger, location_name: "historicalContextWindowSize"))
+    ModifySelfManagedConfiguration.struct_class = Types::ModifySelfManagedConfiguration
+
     ModifyStrategyConfiguration.add_member(:extraction, Shapes::ShapeRef.new(shape: ModifyExtractionConfiguration, location_name: "extraction"))
     ModifyStrategyConfiguration.add_member(:consolidation, Shapes::ShapeRef.new(shape: ModifyConsolidationConfiguration, location_name: "consolidation"))
+    ModifyStrategyConfiguration.add_member(:self_managed_configuration, Shapes::ShapeRef.new(shape: ModifySelfManagedConfiguration, location_name: "selfManagedConfiguration"))
     ModifyStrategyConfiguration.struct_class = Types::ModifyStrategyConfiguration
 
     NamespacesList.member = Shapes::ShapeRef.new(shape: Namespace)
@@ -1361,6 +1440,16 @@ module Aws::BedrockAgentCoreControl
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    SelfManagedConfiguration.add_member(:trigger_conditions, Shapes::ShapeRef.new(shape: TriggerConditionsList, required: true, location_name: "triggerConditions"))
+    SelfManagedConfiguration.add_member(:invocation_configuration, Shapes::ShapeRef.new(shape: InvocationConfiguration, required: true, location_name: "invocationConfiguration"))
+    SelfManagedConfiguration.add_member(:historical_context_window_size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "historicalContextWindowSize"))
+    SelfManagedConfiguration.struct_class = Types::SelfManagedConfiguration
+
+    SelfManagedConfigurationInput.add_member(:trigger_conditions, Shapes::ShapeRef.new(shape: TriggerConditionInputList, location_name: "triggerConditions"))
+    SelfManagedConfigurationInput.add_member(:invocation_configuration, Shapes::ShapeRef.new(shape: InvocationConfigurationInput, required: true, location_name: "invocationConfiguration"))
+    SelfManagedConfigurationInput.add_member(:historical_context_window_size, Shapes::ShapeRef.new(shape: SelfManagedConfigurationInputHistoricalContextWindowSizeInteger, location_name: "historicalContextWindowSize"))
+    SelfManagedConfigurationInput.struct_class = Types::SelfManagedConfigurationInput
+
     SemanticConsolidationOverride.add_member(:append_to_prompt, Shapes::ShapeRef.new(shape: Prompt, required: true, location_name: "appendToPrompt"))
     SemanticConsolidationOverride.add_member(:model_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "modelId"))
     SemanticConsolidationOverride.struct_class = Types::SemanticConsolidationOverride
@@ -1413,6 +1502,7 @@ module Aws::BedrockAgentCoreControl
     StrategyConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: OverrideType, location_name: "type"))
     StrategyConfiguration.add_member(:extraction, Shapes::ShapeRef.new(shape: ExtractionConfiguration, location_name: "extraction"))
     StrategyConfiguration.add_member(:consolidation, Shapes::ShapeRef.new(shape: ConsolidationConfiguration, location_name: "consolidation"))
+    StrategyConfiguration.add_member(:self_managed_configuration, Shapes::ShapeRef.new(shape: SelfManagedConfiguration, location_name: "selfManagedConfiguration"))
     StrategyConfiguration.struct_class = Types::StrategyConfiguration
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
@@ -1433,6 +1523,13 @@ module Aws::BedrockAgentCoreControl
     SummaryOverrideConsolidationConfigurationInput.add_member(:model_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "modelId"))
     SummaryOverrideConsolidationConfigurationInput.struct_class = Types::SummaryOverrideConsolidationConfigurationInput
 
+    SynchronizeGatewayTargetsRequest.add_member(:gateway_identifier, Shapes::ShapeRef.new(shape: GatewayIdentifier, required: true, location: "uri", location_name: "gatewayIdentifier"))
+    SynchronizeGatewayTargetsRequest.add_member(:target_id_list, Shapes::ShapeRef.new(shape: TargetIdList, required: true, location_name: "targetIdList"))
+    SynchronizeGatewayTargetsRequest.struct_class = Types::SynchronizeGatewayTargetsRequest
+
+    SynchronizeGatewayTargetsResponse.add_member(:targets, Shapes::ShapeRef.new(shape: GatewayTargetList, location_name: "targets"))
+    SynchronizeGatewayTargetsResponse.struct_class = Types::SynchronizeGatewayTargetsResponse
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -1450,6 +1547,8 @@ module Aws::BedrockAgentCoreControl
     TargetConfiguration.add_member_subclass(:unknown, Types::TargetConfiguration::Unknown)
     TargetConfiguration.struct_class = Types::TargetConfiguration
 
+    TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)
+
     TargetSummaries.member = Shapes::ShapeRef.new(shape: TargetSummary)
 
     TargetSummary.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "targetId"))
@@ -1466,6 +1565,18 @@ module Aws::BedrockAgentCoreControl
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TimeBasedTrigger.add_member(:idle_session_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "idleSessionTimeout"))
+    TimeBasedTrigger.struct_class = Types::TimeBasedTrigger
+
+    TimeBasedTriggerInput.add_member(:idle_session_timeout, Shapes::ShapeRef.new(shape: TimeBasedTriggerInputIdleSessionTimeoutInteger, location_name: "idleSessionTimeout"))
+    TimeBasedTriggerInput.struct_class = Types::TimeBasedTriggerInput
+
+    TokenBasedTrigger.add_member(:token_count, Shapes::ShapeRef.new(shape: Integer, location_name: "tokenCount"))
+    TokenBasedTrigger.struct_class = Types::TokenBasedTrigger
+
+    TokenBasedTriggerInput.add_member(:token_count, Shapes::ShapeRef.new(shape: TokenBasedTriggerInputTokenCountInteger, location_name: "tokenCount"))
+    TokenBasedTriggerInput.struct_class = Types::TokenBasedTriggerInput
+
     ToolDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     ToolDefinition.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
     ToolDefinition.add_member(:input_schema, Shapes::ShapeRef.new(shape: SchemaDefinition, required: true, location_name: "inputSchema"))
@@ -1481,6 +1592,30 @@ module Aws::BedrockAgentCoreControl
     ToolSchema.add_member_subclass(:inline_payload, Types::ToolSchema::InlinePayload)
     ToolSchema.add_member_subclass(:unknown, Types::ToolSchema::Unknown)
     ToolSchema.struct_class = Types::ToolSchema
+
+    TriggerCondition.add_member(:message_based_trigger, Shapes::ShapeRef.new(shape: MessageBasedTrigger, location_name: "messageBasedTrigger"))
+    TriggerCondition.add_member(:token_based_trigger, Shapes::ShapeRef.new(shape: TokenBasedTrigger, location_name: "tokenBasedTrigger"))
+    TriggerCondition.add_member(:time_based_trigger, Shapes::ShapeRef.new(shape: TimeBasedTrigger, location_name: "timeBasedTrigger"))
+    TriggerCondition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TriggerCondition.add_member_subclass(:message_based_trigger, Types::TriggerCondition::MessageBasedTrigger)
+    TriggerCondition.add_member_subclass(:token_based_trigger, Types::TriggerCondition::TokenBasedTrigger)
+    TriggerCondition.add_member_subclass(:time_based_trigger, Types::TriggerCondition::TimeBasedTrigger)
+    TriggerCondition.add_member_subclass(:unknown, Types::TriggerCondition::Unknown)
+    TriggerCondition.struct_class = Types::TriggerCondition
+
+    TriggerConditionInput.add_member(:message_based_trigger, Shapes::ShapeRef.new(shape: MessageBasedTriggerInput, location_name: "messageBasedTrigger"))
+    TriggerConditionInput.add_member(:token_based_trigger, Shapes::ShapeRef.new(shape: TokenBasedTriggerInput, location_name: "tokenBasedTrigger"))
+    TriggerConditionInput.add_member(:time_based_trigger, Shapes::ShapeRef.new(shape: TimeBasedTriggerInput, location_name: "timeBasedTrigger"))
+    TriggerConditionInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TriggerConditionInput.add_member_subclass(:message_based_trigger, Types::TriggerConditionInput::MessageBasedTrigger)
+    TriggerConditionInput.add_member_subclass(:token_based_trigger, Types::TriggerConditionInput::TokenBasedTrigger)
+    TriggerConditionInput.add_member_subclass(:time_based_trigger, Types::TriggerConditionInput::TimeBasedTrigger)
+    TriggerConditionInput.add_member_subclass(:unknown, Types::TriggerConditionInput::Unknown)
+    TriggerConditionInput.struct_class = Types::TriggerConditionInput
+
+    TriggerConditionInputList.member = Shapes::ShapeRef.new(shape: TriggerConditionInput)
+
+    TriggerConditionsList.member = Shapes::ShapeRef.new(shape: TriggerCondition)
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
@@ -1576,7 +1711,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetRequest.add_member(:name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "name"))
     UpdateGatewayTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
     UpdateGatewayTargetRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
-    UpdateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    UpdateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
     UpdateGatewayTargetRequest.struct_class = Types::UpdateGatewayTargetRequest
 
     UpdateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -1589,6 +1724,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetResponse.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
     UpdateGatewayTargetResponse.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     UpdateGatewayTargetResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    UpdateGatewayTargetResponse.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
     UpdateGatewayTargetResponse.struct_class = Types::UpdateGatewayTargetResponse
 
     UpdateMemoryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateMemoryInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -2367,6 +2503,21 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:synchronize_gateway_targets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SynchronizeGatewayTargets"
+        o.http_method = "PUT"
+        o.http_request_uri = "/gateways/{gatewayIdentifier}/synchronizeTargets"
+        o.input = Shapes::ShapeRef.new(shape: SynchronizeGatewayTargetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SynchronizeGatewayTargetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

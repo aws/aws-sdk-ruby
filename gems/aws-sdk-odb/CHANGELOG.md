@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2025-10-10)
+------------------
+
+* Feature - This release adds APIs that allow you to specify CIDR ranges in your ODB peering connection.
+
 1.5.0 (2025-08-26)
 ------------------
 

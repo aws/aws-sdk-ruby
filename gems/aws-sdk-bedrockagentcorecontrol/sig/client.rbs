@@ -268,12 +268,13 @@ module Aws
         def target_id: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+        def last_synchronized_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway_target-instance_method
       def create_gateway_target: (
@@ -325,10 +326,13 @@ module Aws
                                              },
                                            ]?
                                          }
+                                       }?,
+                                       mcp_server: {
+                                         endpoint: ::String
                                        }?
                                      }?
                                    },
-                                   credential_provider_configurations: Array[
+                                   ?credential_provider_configurations: Array[
                                      {
                                        credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY"),
                                        credential_provider: {
@@ -408,6 +412,26 @@ module Aws
                                        append_to_prompt: ::String,
                                        model_id: ::String
                                      }?
+                                   }?,
+                                   self_managed_configuration: {
+                                     trigger_conditions: Array[
+                                       {
+                                         message_based_trigger: {
+                                           message_count: ::Integer?
+                                         }?,
+                                         token_based_trigger: {
+                                           token_count: ::Integer?
+                                         }?,
+                                         time_based_trigger: {
+                                           idle_session_timeout: ::Integer?
+                                         }?
+                                       },
+                                     ]?,
+                                     invocation_configuration: {
+                                       topic_arn: ::String,
+                                       payload_delivery_bucket_name: ::String
+                                     },
+                                     historical_context_window_size: ::Integer?
                                    }?
                                  }?
                                }?
@@ -551,7 +575,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayTargetResponse]
         def gateway_arn: () -> ::String
         def target_id: () -> ::String
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_gateway_target-instance_method
@@ -724,12 +748,13 @@ module Aws
         def target_id: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+        def last_synchronized_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway_target-instance_method
       def get_gateway_target: (
@@ -953,6 +978,17 @@ module Aws
                                ) -> _SetTokenVaultCMKResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTokenVaultCMKResponseSuccess
 
+      interface _SynchronizeGatewayTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SynchronizeGatewayTargetsResponse]
+        def targets: () -> ::Array[Types::GatewayTarget]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#synchronize_gateway_targets-instance_method
+      def synchronize_gateway_targets: (
+                                         gateway_identifier: ::String,
+                                         target_id_list: Array[::String]
+                                       ) -> _SynchronizeGatewayTargetsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SynchronizeGatewayTargetsResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -1110,12 +1146,13 @@ module Aws
         def target_id: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+        def last_synchronized_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway_target-instance_method
       def update_gateway_target: (
@@ -1167,10 +1204,13 @@ module Aws
                                              },
                                            ]?
                                          }
+                                       }?,
+                                       mcp_server: {
+                                         endpoint: ::String
                                        }?
                                      }?
                                    },
-                                   credential_provider_configurations: Array[
+                                   ?credential_provider_configurations: Array[
                                      {
                                        credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY"),
                                        credential_provider: {
@@ -1250,6 +1290,26 @@ module Aws
                                          append_to_prompt: ::String,
                                          model_id: ::String
                                        }?
+                                     }?,
+                                     self_managed_configuration: {
+                                       trigger_conditions: Array[
+                                         {
+                                           message_based_trigger: {
+                                             message_count: ::Integer?
+                                           }?,
+                                           token_based_trigger: {
+                                             token_count: ::Integer?
+                                           }?,
+                                           time_based_trigger: {
+                                             idle_session_timeout: ::Integer?
+                                           }?
+                                         },
+                                       ]?,
+                                       invocation_configuration: {
+                                         topic_arn: ::String,
+                                         payload_delivery_bucket_name: ::String
+                                       },
+                                       historical_context_window_size: ::Integer?
                                      }?
                                    }?
                                  }?
@@ -1288,6 +1348,26 @@ module Aws
                                          model_id: ::String
                                        }?
                                      }?
+                                   }?,
+                                   self_managed_configuration: {
+                                     trigger_conditions: Array[
+                                       {
+                                         message_based_trigger: {
+                                           message_count: ::Integer?
+                                         }?,
+                                         token_based_trigger: {
+                                           token_count: ::Integer?
+                                         }?,
+                                         time_based_trigger: {
+                                           idle_session_timeout: ::Integer?
+                                         }?
+                                       },
+                                     ]?,
+                                     invocation_configuration: {
+                                       topic_arn: ::String?,
+                                       payload_delivery_bucket_name: ::String?
+                                     }?,
+                                     historical_context_window_size: ::Integer?
                                    }?
                                  }?
                                },

@@ -856,9 +856,8 @@ module Aws::BedrockAgentCoreControl
     # Creates a gateway for Amazon Bedrock Agent. A gateway serves as an
     # integration point between your agent and external services.
     #
-    # To create a gateway, you must specify a name, protocol type, and IAM
-    # role. The role grants the gateway permission to access Amazon Web
-    # Services services and resources.
+    # If you specify `CUSTOM_JWT` as the `authorizerType`, you must provide
+    # an `authorizerConfiguration`.
     #
     # @option params [required, String] :name
     #   The name of the gateway. The name must be unique within your account.
@@ -868,8 +867,9 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
-    #   completes no more than one time. If this token matches a previous
-    #   request, the service ignores the request, but does not return an
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
     #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -893,8 +893,13 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :authorizer_type
     #   The type of authorizer to use for the gateway.
     #
+    #   * `CUSTOM_JWT` - Authorize with a bearer token.
+    #
+    #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM credentials.
+    #
     # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
-    #   The authorizer configuration for the gateway.
+    #   The authorizer configuration for the gateway. Required if
+    #   `authorizerType` is `CUSTOM_JWT`.
     #
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key used to encrypt data
@@ -1016,8 +1021,9 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
-    #   completes no more than one time. If this token matches a previous
-    #   request, the service ignores the request, but does not return an
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
     #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1031,7 +1037,7 @@ module Aws::BedrockAgentCoreControl
     #   The configuration settings for the target, including endpoint
     #   information and schema definitions.
     #
-    # @option params [required, Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
+    # @option params [Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
     #   The credential provider configurations for the target. These
     #   configurations specify how the gateway authenticates with the target
     #   endpoint.
@@ -1048,6 +1054,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayTargetResponse#description #description} => String
     #   * {Types::CreateGatewayTargetResponse#target_configuration #target_configuration} => Types::TargetConfiguration
     #   * {Types::CreateGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
+    #   * {Types::CreateGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1113,9 +1120,12 @@ module Aws::BedrockAgentCoreControl
     #             ],
     #           },
     #         },
+    #         mcp_server: {
+    #           endpoint: "McpServerTargetConfigurationEndpointString", # required
+    #         },
     #       },
     #     },
-    #     credential_provider_configurations: [ # required
+    #     credential_provider_configurations: [
     #       {
     #         credential_provider_type: "GATEWAY_IAM_ROLE", # required, accepts GATEWAY_IAM_ROLE, OAUTH, API_KEY
     #         credential_provider: {
@@ -1143,7 +1153,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #   resp.name #=> String
@@ -1174,6 +1184,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.required[0] #=> String
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
+    #   resp.target_configuration.mcp.mcp_server.endpoint #=> String
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].credential_provider_type #=> String, one of "GATEWAY_IAM_ROLE", "OAUTH", "API_KEY"
     #   resp.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
@@ -1185,6 +1196,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.last_synchronized_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTarget AWS API Documentation
     #
@@ -1294,6 +1306,26 @@ module Aws::BedrockAgentCoreControl
     #                 model_id: "String", # required
     #               },
     #             },
+    #             self_managed_configuration: {
+    #               trigger_conditions: [
+    #                 {
+    #                   message_based_trigger: {
+    #                     message_count: 1,
+    #                   },
+    #                   token_based_trigger: {
+    #                     token_count: 1,
+    #                   },
+    #                   time_based_trigger: {
+    #                     idle_session_timeout: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               invocation_configuration: { # required
+    #                 topic_arn: "Arn", # required
+    #                 payload_delivery_bucket_name: "InvocationConfigurationInputPayloadDeliveryBucketNameString", # required
+    #               },
+    #               historical_context_window_size: 1,
+    #             },
     #           },
     #         },
     #       },
@@ -1320,7 +1352,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].strategy_id #=> String
     #   resp.memory.strategies[0].name #=> String
     #   resp.memory.strategies[0].description #=> String
-    #   resp.memory.strategies[0].configuration.type #=> String, one of "SEMANTIC_OVERRIDE", "SUMMARY_OVERRIDE", "USER_PREFERENCE_OVERRIDE"
+    #   resp.memory.strategies[0].configuration.type #=> String, one of "SEMANTIC_OVERRIDE", "SUMMARY_OVERRIDE", "USER_PREFERENCE_OVERRIDE", "SELF_MANAGED"
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.semantic_extraction_override.append_to_prompt #=> String
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.semantic_extraction_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.user_preference_extraction_override.append_to_prompt #=> String
@@ -1331,6 +1363,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.summary_consolidation_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.user_preference_consolidation_override.append_to_prompt #=> String
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.user_preference_consolidation_override.model_id #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions #=> Array
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].message_based_trigger.message_count #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].token_based_trigger.token_count #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].time_based_trigger.idle_session_timeout #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.invocation_configuration.topic_arn #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.invocation_configuration.payload_delivery_bucket_name #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.historical_context_window_size #=> Integer
     #   resp.memory.strategies[0].type #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "CUSTOM"
     #   resp.memory.strategies[0].namespaces #=> Array
     #   resp.memory.strategies[0].namespaces[0] #=> String
@@ -1693,7 +1732,7 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.gateway_arn #=> String
     #   resp.target_id #=> String
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #
@@ -2145,6 +2184,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayTargetResponse#description #description} => String
     #   * {Types::GetGatewayTargetResponse#target_configuration #target_configuration} => Types::TargetConfiguration
     #   * {Types::GetGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
+    #   * {Types::GetGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2159,7 +2199,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #   resp.name #=> String
@@ -2190,6 +2230,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.required[0] #=> String
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
+    #   resp.target_configuration.mcp.mcp_server.endpoint #=> String
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].credential_provider_type #=> String, one of "GATEWAY_IAM_ROLE", "OAUTH", "API_KEY"
     #   resp.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
@@ -2201,6 +2242,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.last_synchronized_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTarget AWS API Documentation
     #
@@ -2243,7 +2285,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].strategy_id #=> String
     #   resp.memory.strategies[0].name #=> String
     #   resp.memory.strategies[0].description #=> String
-    #   resp.memory.strategies[0].configuration.type #=> String, one of "SEMANTIC_OVERRIDE", "SUMMARY_OVERRIDE", "USER_PREFERENCE_OVERRIDE"
+    #   resp.memory.strategies[0].configuration.type #=> String, one of "SEMANTIC_OVERRIDE", "SUMMARY_OVERRIDE", "USER_PREFERENCE_OVERRIDE", "SELF_MANAGED"
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.semantic_extraction_override.append_to_prompt #=> String
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.semantic_extraction_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.user_preference_extraction_override.append_to_prompt #=> String
@@ -2254,6 +2296,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.summary_consolidation_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.user_preference_consolidation_override.append_to_prompt #=> String
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.user_preference_consolidation_override.model_id #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions #=> Array
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].message_based_trigger.message_count #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].token_based_trigger.token_count #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].time_based_trigger.idle_session_timeout #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.invocation_configuration.topic_arn #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.invocation_configuration.payload_delivery_bucket_name #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.historical_context_window_size #=> Integer
     #   resp.memory.strategies[0].type #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "CUSTOM"
     #   resp.memory.strategies[0].namespaces #=> Array
     #   resp.memory.strategies[0].namespaces[0] #=> String
@@ -2735,7 +2784,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.items #=> Array
     #   resp.items[0].target_id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED"
+    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
@@ -2997,6 +3046,86 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def set_token_vault_cmk(params = {}, options = {})
       req = build_request(:set_token_vault_cmk, params)
+      req.send_request(options)
+    end
+
+    # The gateway targets.
+    #
+    # @option params [required, String] :gateway_identifier
+    #   The gateway Identifier.
+    #
+    # @option params [required, Array<String>] :target_id_list
+    #   The target ID list.
+    #
+    # @return [Types::SynchronizeGatewayTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SynchronizeGatewayTargetsResponse#targets #targets} => Array&lt;Types::GatewayTarget&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.synchronize_gateway_targets({
+    #     gateway_identifier: "GatewayIdentifier", # required
+    #     target_id_list: ["TargetId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targets #=> Array
+    #   resp.targets[0].gateway_arn #=> String
+    #   resp.targets[0].target_id #=> String
+    #   resp.targets[0].created_at #=> Time
+    #   resp.targets[0].updated_at #=> Time
+    #   resp.targets[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.targets[0].status_reasons #=> Array
+    #   resp.targets[0].status_reasons[0] #=> String
+    #   resp.targets[0].name #=> String
+    #   resp.targets[0].description #=> String
+    #   resp.targets[0].target_configuration.mcp.open_api_schema.s3.uri #=> String
+    #   resp.targets[0].target_configuration.mcp.open_api_schema.s3.bucket_owner_account_id #=> String
+    #   resp.targets[0].target_configuration.mcp.open_api_schema.inline_payload #=> String
+    #   resp.targets[0].target_configuration.mcp.smithy_model.s3.uri #=> String
+    #   resp.targets[0].target_configuration.mcp.smithy_model.s3.bucket_owner_account_id #=> String
+    #   resp.targets[0].target_configuration.mcp.smithy_model.inline_payload #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.lambda_arn #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.s3.uri #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.s3.bucket_owner_account_id #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload #=> Array
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].name #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].description #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.type #=> String, one of "string", "number", "object", "array", "boolean", "integer"
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.properties #=> Hash
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.properties["String"] #=> Types::SchemaDefinition
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.required #=> Array
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.required[0] #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.items #=> Types::SchemaDefinition
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].input_schema.description #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.type #=> String, one of "string", "number", "object", "array", "boolean", "integer"
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.properties #=> Hash
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.properties["String"] #=> Types::SchemaDefinition
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.required #=> Array
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.required[0] #=> String
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
+    #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
+    #   resp.targets[0].target_configuration.mcp.mcp_server.endpoint #=> String
+    #   resp.targets[0].credential_provider_configurations #=> Array
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider_type #=> String, one of "GATEWAY_IAM_ROLE", "OAUTH", "API_KEY"
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["OAuthCustomParametersKey"] #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.provider_arn #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.targets[0].last_synchronized_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SynchronizeGatewayTargets AWS API Documentation
+    #
+    # @overload synchronize_gateway_targets(params = {})
+    # @param [Hash] params ({})
+    def synchronize_gateway_targets(params = {}, options = {})
+      req = build_request(:synchronize_gateway_targets, params)
       req.send_request(options)
     end
 
@@ -3425,7 +3554,7 @@ module Aws::BedrockAgentCoreControl
     #   The configuration for a gateway target. This structure defines how the
     #   gateway connects to and interacts with the target endpoint.
     #
-    # @option params [required, Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
+    # @option params [Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
     #   The updated credential provider configurations for the gateway target.
     #
     # @return [Types::UpdateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3440,6 +3569,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayTargetResponse#description #description} => String
     #   * {Types::UpdateGatewayTargetResponse#target_configuration #target_configuration} => Types::TargetConfiguration
     #   * {Types::UpdateGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
+    #   * {Types::UpdateGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -3505,9 +3635,12 @@ module Aws::BedrockAgentCoreControl
     #             ],
     #           },
     #         },
+    #         mcp_server: {
+    #           endpoint: "McpServerTargetConfigurationEndpointString", # required
+    #         },
     #       },
     #     },
-    #     credential_provider_configurations: [ # required
+    #     credential_provider_configurations: [
     #       {
     #         credential_provider_type: "GATEWAY_IAM_ROLE", # required, accepts GATEWAY_IAM_ROLE, OAUTH, API_KEY
     #         credential_provider: {
@@ -3535,7 +3668,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #   resp.name #=> String
@@ -3566,6 +3699,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.required[0] #=> String
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
+    #   resp.target_configuration.mcp.mcp_server.endpoint #=> String
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].credential_provider_type #=> String, one of "GATEWAY_IAM_ROLE", "OAUTH", "API_KEY"
     #   resp.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
@@ -3577,6 +3711,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.last_synchronized_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTarget AWS API Documentation
     #
@@ -3675,6 +3810,26 @@ module Aws::BedrockAgentCoreControl
     #                   model_id: "String", # required
     #                 },
     #               },
+    #               self_managed_configuration: {
+    #                 trigger_conditions: [
+    #                   {
+    #                     message_based_trigger: {
+    #                       message_count: 1,
+    #                     },
+    #                     token_based_trigger: {
+    #                       token_count: 1,
+    #                     },
+    #                     time_based_trigger: {
+    #                       idle_session_timeout: 1,
+    #                     },
+    #                   },
+    #                 ],
+    #                 invocation_configuration: { # required
+    #                   topic_arn: "Arn", # required
+    #                   payload_delivery_bucket_name: "InvocationConfigurationInputPayloadDeliveryBucketNameString", # required
+    #                 },
+    #                 historical_context_window_size: 1,
+    #               },
     #             },
     #           },
     #         },
@@ -3713,6 +3868,26 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #               },
     #             },
+    #             self_managed_configuration: {
+    #               trigger_conditions: [
+    #                 {
+    #                   message_based_trigger: {
+    #                     message_count: 1,
+    #                   },
+    #                   token_based_trigger: {
+    #                     token_count: 1,
+    #                   },
+    #                   time_based_trigger: {
+    #                     idle_session_timeout: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               invocation_configuration: {
+    #                 topic_arn: "Arn",
+    #                 payload_delivery_bucket_name: "ModifyInvocationConfigurationInputPayloadDeliveryBucketNameString",
+    #               },
+    #               historical_context_window_size: 1,
+    #             },
     #           },
     #         },
     #       ],
@@ -3741,7 +3916,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].strategy_id #=> String
     #   resp.memory.strategies[0].name #=> String
     #   resp.memory.strategies[0].description #=> String
-    #   resp.memory.strategies[0].configuration.type #=> String, one of "SEMANTIC_OVERRIDE", "SUMMARY_OVERRIDE", "USER_PREFERENCE_OVERRIDE"
+    #   resp.memory.strategies[0].configuration.type #=> String, one of "SEMANTIC_OVERRIDE", "SUMMARY_OVERRIDE", "USER_PREFERENCE_OVERRIDE", "SELF_MANAGED"
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.semantic_extraction_override.append_to_prompt #=> String
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.semantic_extraction_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.extraction.custom_extraction_configuration.user_preference_extraction_override.append_to_prompt #=> String
@@ -3752,6 +3927,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.summary_consolidation_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.user_preference_consolidation_override.append_to_prompt #=> String
     #   resp.memory.strategies[0].configuration.consolidation.custom_consolidation_configuration.user_preference_consolidation_override.model_id #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions #=> Array
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].message_based_trigger.message_count #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].token_based_trigger.token_count #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].time_based_trigger.idle_session_timeout #=> Integer
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.invocation_configuration.topic_arn #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.invocation_configuration.payload_delivery_bucket_name #=> String
+    #   resp.memory.strategies[0].configuration.self_managed_configuration.historical_context_window_size #=> Integer
     #   resp.memory.strategies[0].type #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "CUSTOM"
     #   resp.memory.strategies[0].namespaces #=> Array
     #   resp.memory.strategies[0].namespaces[0] #=> String
@@ -3945,7 +4127,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

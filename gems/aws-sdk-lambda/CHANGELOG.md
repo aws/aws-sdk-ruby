@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2025-10-10)
+------------------
+
+* Feature - Add InvokedViaFunctionUrl context key to limit invocations to only FURL invokes.
+
 1.160.0 (2025-08-26)
 ------------------
 

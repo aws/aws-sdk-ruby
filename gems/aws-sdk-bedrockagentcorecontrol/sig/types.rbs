@@ -296,12 +296,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
       attr_accessor status_reasons: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      attr_accessor last_synchronized_at: ::Time
       SENSITIVE: [:name, :description]
     end
 
@@ -373,6 +374,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor semantic_override: Types::SemanticOverrideConfigurationInput
       attr_accessor summary_override: Types::SummaryOverrideConfigurationInput
       attr_accessor user_preference_override: Types::UserPreferenceOverrideConfigurationInput
+      attr_accessor self_managed_configuration: Types::SelfManagedConfigurationInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -381,6 +383,8 @@ module Aws::BedrockAgentCoreControl
       class SummaryOverride < CustomConfigurationInput
       end
       class UserPreferenceOverride < CustomConfigurationInput
+      end
+      class SelfManagedConfiguration < CustomConfigurationInput
       end
       class Unknown < CustomConfigurationInput
       end
@@ -557,7 +561,7 @@ module Aws::BedrockAgentCoreControl
     class DeleteGatewayTargetResponse
       attr_accessor gateway_arn: ::String
       attr_accessor target_id: ::String
-      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
       attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: []
     end
@@ -631,6 +635,21 @@ module Aws::BedrockAgentCoreControl
       attr_accessor updated_at: ::Time
       attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       attr_accessor protocol_type: ("MCP")
+      SENSITIVE: [:name, :description]
+    end
+
+    class GatewayTarget
+      attr_accessor gateway_arn: ::String
+      attr_accessor target_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      attr_accessor last_synchronized_at: ::Time
       SENSITIVE: [:name, :description]
     end
 
@@ -772,12 +791,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
       attr_accessor status_reasons: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      attr_accessor last_synchronized_at: ::Time
       SENSITIVE: [:name, :description]
     end
 
@@ -857,6 +877,18 @@ module Aws::BedrockAgentCoreControl
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvocationConfiguration
+      attr_accessor topic_arn: ::String
+      attr_accessor payload_delivery_bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvocationConfigurationInput
+      attr_accessor topic_arn: ::String
+      attr_accessor payload_delivery_bucket_name: ::String
       SENSITIVE: []
     end
 
@@ -1032,10 +1064,16 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class McpServerTargetConfiguration
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
     class McpTargetConfiguration
       attr_accessor open_api_schema: Types::ApiSchemaConfiguration
       attr_accessor smithy_model: Types::ApiSchemaConfiguration
       attr_accessor lambda: Types::McpLambdaTargetConfiguration
+      attr_accessor mcp_server: Types::McpServerTargetConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1044,6 +1082,8 @@ module Aws::BedrockAgentCoreControl
       class SmithyModel < McpTargetConfiguration
       end
       class Lambda < McpTargetConfiguration
+      end
+      class McpServer < McpTargetConfiguration
       end
       class Unknown < McpTargetConfiguration
       end
@@ -1107,6 +1147,16 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class MessageBasedTrigger
+      attr_accessor message_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MessageBasedTriggerInput
+      attr_accessor message_count: ::Integer
+      SENSITIVE: []
+    end
+
     class MicrosoftOauth2ProviderConfigInput
       attr_accessor client_id: ::String
       attr_accessor client_secret: ::String
@@ -1140,6 +1190,12 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class ModifyInvocationConfigurationInput
+      attr_accessor topic_arn: ::String
+      attr_accessor payload_delivery_bucket_name: ::String
+      SENSITIVE: []
+    end
+
     class ModifyMemoryStrategies
       attr_accessor add_memory_strategies: ::Array[Types::MemoryStrategyInput]
       attr_accessor modify_memory_strategies: ::Array[Types::ModifyMemoryStrategyInput]
@@ -1155,9 +1211,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:description]
     end
 
+    class ModifySelfManagedConfiguration
+      attr_accessor trigger_conditions: ::Array[Types::TriggerConditionInput]
+      attr_accessor invocation_configuration: Types::ModifyInvocationConfigurationInput
+      attr_accessor historical_context_window_size: ::Integer
+      SENSITIVE: []
+    end
+
     class ModifyStrategyConfiguration
       attr_accessor extraction: Types::ModifyExtractionConfiguration
       attr_accessor consolidation: Types::ModifyConsolidationConfiguration
+      attr_accessor self_managed_configuration: Types::ModifySelfManagedConfiguration
       SENSITIVE: []
     end
 
@@ -1326,6 +1390,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class SelfManagedConfiguration
+      attr_accessor trigger_conditions: ::Array[Types::TriggerCondition]
+      attr_accessor invocation_configuration: Types::InvocationConfiguration
+      attr_accessor historical_context_window_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class SelfManagedConfigurationInput
+      attr_accessor trigger_conditions: ::Array[Types::TriggerConditionInput]
+      attr_accessor invocation_configuration: Types::InvocationConfigurationInput
+      attr_accessor historical_context_window_size: ::Integer
+      SENSITIVE: []
+    end
+
     class SemanticConsolidationOverride
       attr_accessor append_to_prompt: ::String
       attr_accessor model_id: ::String
@@ -1398,9 +1476,10 @@ module Aws::BedrockAgentCoreControl
     end
 
     class StrategyConfiguration
-      attr_accessor type: ("SEMANTIC_OVERRIDE" | "SUMMARY_OVERRIDE" | "USER_PREFERENCE_OVERRIDE")
+      attr_accessor type: ("SEMANTIC_OVERRIDE" | "SUMMARY_OVERRIDE" | "USER_PREFERENCE_OVERRIDE" | "SELF_MANAGED")
       attr_accessor extraction: Types::ExtractionConfiguration
       attr_accessor consolidation: Types::ConsolidationConfiguration
+      attr_accessor self_managed_configuration: Types::SelfManagedConfiguration
       SENSITIVE: []
     end
 
@@ -1428,6 +1507,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:append_to_prompt]
     end
 
+    class SynchronizeGatewayTargetsRequest
+      attr_accessor gateway_identifier: ::String
+      attr_accessor target_id_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SynchronizeGatewayTargetsResponse
+      attr_accessor targets: ::Array[Types::GatewayTarget]
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1451,7 +1541,7 @@ module Aws::BedrockAgentCoreControl
     class TargetSummary
       attr_accessor target_id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -1465,6 +1555,26 @@ module Aws::BedrockAgentCoreControl
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeBasedTrigger
+      attr_accessor idle_session_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeBasedTriggerInput
+      attr_accessor idle_session_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class TokenBasedTrigger
+      attr_accessor token_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class TokenBasedTriggerInput
+      attr_accessor token_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1487,6 +1597,40 @@ module Aws::BedrockAgentCoreControl
       class InlinePayload < ToolSchema
       end
       class Unknown < ToolSchema
+      end
+    end
+
+    class TriggerCondition
+      attr_accessor message_based_trigger: Types::MessageBasedTrigger
+      attr_accessor token_based_trigger: Types::TokenBasedTrigger
+      attr_accessor time_based_trigger: Types::TimeBasedTrigger
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MessageBasedTrigger < TriggerCondition
+      end
+      class TokenBasedTrigger < TriggerCondition
+      end
+      class TimeBasedTrigger < TriggerCondition
+      end
+      class Unknown < TriggerCondition
+      end
+    end
+
+    class TriggerConditionInput
+      attr_accessor message_based_trigger: Types::MessageBasedTriggerInput
+      attr_accessor token_based_trigger: Types::TokenBasedTriggerInput
+      attr_accessor time_based_trigger: Types::TimeBasedTriggerInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MessageBasedTrigger < TriggerConditionInput
+      end
+      class TokenBasedTrigger < TriggerConditionInput
+      end
+      class TimeBasedTrigger < TriggerConditionInput
+      end
+      class Unknown < TriggerConditionInput
       end
     end
 
@@ -1615,12 +1759,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
       attr_accessor status_reasons: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      attr_accessor last_synchronized_at: ::Time
       SENSITIVE: [:name, :description]
     end
 

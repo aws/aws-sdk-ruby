@@ -52,6 +52,7 @@ module Aws::Lambda
       attr_accessor revision_id: ::String
       attr_accessor principal_org_id: ::String
       attr_accessor function_url_auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor invoked_via_function_url: bool
       SENSITIVE: []
     end
 

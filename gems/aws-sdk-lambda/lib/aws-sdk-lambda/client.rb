@@ -680,6 +680,17 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
     #
+    # @option params [Boolean] :invoked_via_function_url
+    #   Restricts the `lambda:InvokeFunction` action to calls coming from a
+    #   function URL. When set to `true`, this prevents the principal from
+    #   invoking the function by any means other than the function URL. For
+    #   more information, see [Security and auth model for Lambda function
+    #   URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
     # @return [Types::AddPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddPermissionResponse#statement #statement} => String
@@ -734,6 +745,7 @@ module Aws::Lambda
     #     revision_id: "String",
     #     principal_org_id: "PrincipalOrgID",
     #     function_url_auth_type: "NONE", # accepts NONE, AWS_IAM
+    #     invoked_via_function_url: false,
     #   })
     #
     # @example Response structure
@@ -3869,9 +3881,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -3888,9 +3900,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -8350,7 +8362,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.160.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

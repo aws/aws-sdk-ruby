@@ -110,6 +110,8 @@ module Aws::BedrockAgentCore
     InvokeAgentRuntimeRequestTraceStateString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceStateString')
     InvokeAgentRuntimeResponse = Shapes::StructureShape.new(name: 'InvokeAgentRuntimeResponse')
     InvokeCodeInterpreterRequest = Shapes::StructureShape.new(name: 'InvokeCodeInterpreterRequest')
+    InvokeCodeInterpreterRequestTraceIdString = Shapes::StringShape.new(name: 'InvokeCodeInterpreterRequestTraceIdString')
+    InvokeCodeInterpreterRequestTraceParentString = Shapes::StringShape.new(name: 'InvokeCodeInterpreterRequestTraceParentString')
     InvokeCodeInterpreterResponse = Shapes::StructureShape.new(name: 'InvokeCodeInterpreterResponse')
     LeftExpression = Shapes::UnionShape.new(name: 'LeftExpression')
     ListActorsInput = Shapes::StructureShape.new(name: 'ListActorsInput')
@@ -184,12 +186,20 @@ module Aws::BedrockAgentCore
     SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
     StartBrowserSessionRequest = Shapes::StructureShape.new(name: 'StartBrowserSessionRequest')
+    StartBrowserSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartBrowserSessionRequestTraceIdString')
+    StartBrowserSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartBrowserSessionRequestTraceParentString')
     StartBrowserSessionResponse = Shapes::StructureShape.new(name: 'StartBrowserSessionResponse')
     StartCodeInterpreterSessionRequest = Shapes::StructureShape.new(name: 'StartCodeInterpreterSessionRequest')
+    StartCodeInterpreterSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceIdString')
+    StartCodeInterpreterSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceParentString')
     StartCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'StartCodeInterpreterSessionResponse')
     StopBrowserSessionRequest = Shapes::StructureShape.new(name: 'StopBrowserSessionRequest')
+    StopBrowserSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StopBrowserSessionRequestTraceIdString')
+    StopBrowserSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StopBrowserSessionRequestTraceParentString')
     StopBrowserSessionResponse = Shapes::StructureShape.new(name: 'StopBrowserSessionResponse')
     StopCodeInterpreterSessionRequest = Shapes::StructureShape.new(name: 'StopCodeInterpreterSessionRequest')
+    StopCodeInterpreterSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StopCodeInterpreterSessionRequestTraceIdString')
+    StopCodeInterpreterSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StopCodeInterpreterSessionRequestTraceParentString')
     StopCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'StopCodeInterpreterSessionResponse')
     StopRuntimeSessionRequest = Shapes::StructureShape.new(name: 'StopRuntimeSessionRequest')
     StopRuntimeSessionResponse = Shapes::StructureShape.new(name: 'StopRuntimeSessionResponse')
@@ -529,6 +539,8 @@ module Aws::BedrockAgentCore
 
     InvokeCodeInterpreterRequest.add_member(:code_interpreter_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "codeInterpreterIdentifier"))
     InvokeCodeInterpreterRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: CodeInterpreterSessionId, location: "header", location_name: "x-amzn-code-interpreter-session-id"))
+    InvokeCodeInterpreterRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: InvokeCodeInterpreterRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    InvokeCodeInterpreterRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: InvokeCodeInterpreterRequestTraceParentString, location: "header", location_name: "traceparent"))
     InvokeCodeInterpreterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     InvokeCodeInterpreterRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: ToolArguments, location_name: "arguments"))
     InvokeCodeInterpreterRequest.struct_class = Types::InvokeCodeInterpreterRequest
@@ -737,6 +749,8 @@ module Aws::BedrockAgentCore
 
     SessionSummaryList.member = Shapes::ShapeRef.new(shape: SessionSummary)
 
+    StartBrowserSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StartBrowserSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StartBrowserSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StartBrowserSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StartBrowserSessionRequest.add_member(:browser_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "browserIdentifier"))
     StartBrowserSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     StartBrowserSessionRequest.add_member(:session_timeout_seconds, Shapes::ShapeRef.new(shape: BrowserSessionTimeout, location_name: "sessionTimeoutSeconds"))
@@ -750,6 +764,8 @@ module Aws::BedrockAgentCore
     StartBrowserSessionResponse.add_member(:streams, Shapes::ShapeRef.new(shape: BrowserSessionStream, location_name: "streams"))
     StartBrowserSessionResponse.struct_class = Types::StartBrowserSessionResponse
 
+    StartCodeInterpreterSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StartCodeInterpreterSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StartCodeInterpreterSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StartCodeInterpreterSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StartCodeInterpreterSessionRequest.add_member(:code_interpreter_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "codeInterpreterIdentifier"))
     StartCodeInterpreterSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     StartCodeInterpreterSessionRequest.add_member(:session_timeout_seconds, Shapes::ShapeRef.new(shape: CodeInterpreterSessionTimeout, location_name: "sessionTimeoutSeconds"))
@@ -761,6 +777,8 @@ module Aws::BedrockAgentCore
     StartCodeInterpreterSessionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     StartCodeInterpreterSessionResponse.struct_class = Types::StartCodeInterpreterSessionResponse
 
+    StopBrowserSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StopBrowserSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StopBrowserSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StopBrowserSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StopBrowserSessionRequest.add_member(:browser_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "browserIdentifier"))
     StopBrowserSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: BrowserSessionId, required: true, location: "querystring", location_name: "sessionId"))
     StopBrowserSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -771,6 +789,8 @@ module Aws::BedrockAgentCore
     StopBrowserSessionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     StopBrowserSessionResponse.struct_class = Types::StopBrowserSessionResponse
 
+    StopCodeInterpreterSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StopCodeInterpreterSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StopCodeInterpreterSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StopCodeInterpreterSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StopCodeInterpreterSessionRequest.add_member(:code_interpreter_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "codeInterpreterIdentifier"))
     StopCodeInterpreterSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: CodeInterpreterSessionId, required: true, location: "querystring", location_name: "sessionId"))
     StopCodeInterpreterSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))

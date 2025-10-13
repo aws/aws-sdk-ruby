@@ -191,6 +191,7 @@ module Aws::Lambda
     InvokeWithResponseStreamRequest = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamRequest')
     InvokeWithResponseStreamResponse = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamResponse')
     InvokeWithResponseStreamResponseEvent = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamResponseEvent')
+    InvokedViaFunctionUrl = Shapes::BooleanShape.new(name: 'InvokedViaFunctionUrl')
     KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
     KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
@@ -434,6 +435,7 @@ module Aws::Lambda
     AddPermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     AddPermissionRequest.add_member(:principal_org_id, Shapes::ShapeRef.new(shape: PrincipalOrgID, location_name: "PrincipalOrgID"))
     AddPermissionRequest.add_member(:function_url_auth_type, Shapes::ShapeRef.new(shape: FunctionUrlAuthType, location_name: "FunctionUrlAuthType"))
+    AddPermissionRequest.add_member(:invoked_via_function_url, Shapes::ShapeRef.new(shape: InvokedViaFunctionUrl, location_name: "InvokedViaFunctionUrl"))
     AddPermissionRequest.struct_class = Types::AddPermissionRequest
 
     AddPermissionResponse.add_member(:statement, Shapes::ShapeRef.new(shape: String, location_name: "Statement"))

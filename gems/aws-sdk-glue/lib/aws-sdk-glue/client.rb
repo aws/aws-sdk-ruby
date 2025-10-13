@@ -10155,6 +10155,13 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure containing the Lake Formation [audit context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+    #
     # @option params [Boolean] :include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -10171,6 +10178,11 @@ module Aws::Glue
     #     name: "NameString", # required
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
+    #     },
     #     include_status_details: false,
     #   })
     #
@@ -10688,6 +10700,13 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure containing the Lake Formation [audit context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+    #
     # @option params [Boolean] :include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -10720,6 +10739,11 @@ module Aws::Glue
     #     max_results: 1,
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
+    #     },
     #     include_status_details: false,
     #     attributes_to_get: ["NAME"], # accepts NAME, TABLE_TYPE
     #   })
@@ -17924,7 +17948,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.237.0'
+      context[:gem_version] = '1.238.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

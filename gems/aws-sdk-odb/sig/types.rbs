@@ -454,6 +454,7 @@ module Aws::Odb
       attr_accessor odb_network_id: ::String
       attr_accessor peer_network_id: ::String
       attr_accessor display_name: ::String
+      attr_accessor peer_network_cidrs_to_be_added: ::Array[::String]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1050,6 +1051,7 @@ module Aws::Odb
       attr_accessor odb_network_arn: ::String
       attr_accessor peer_network_arn: ::String
       attr_accessor odb_peering_connection_type: ::String
+      attr_accessor peer_network_cidrs: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor percent_progress: ::Float
       SENSITIVE: []
@@ -1064,6 +1066,7 @@ module Aws::Odb
       attr_accessor odb_network_arn: ::String
       attr_accessor peer_network_arn: ::String
       attr_accessor odb_peering_connection_type: ::String
+      attr_accessor peer_network_cidrs: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor percent_progress: ::Float
       SENSITIVE: []
@@ -1198,6 +1201,22 @@ module Aws::Odb
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor odb_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOdbPeeringConnectionInput
+      attr_accessor odb_peering_connection_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor peer_network_cidrs_to_be_added: ::Array[::String]
+      attr_accessor peer_network_cidrs_to_be_removed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateOdbPeeringConnectionOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor odb_peering_connection_id: ::String
       SENSITIVE: []
     end
 

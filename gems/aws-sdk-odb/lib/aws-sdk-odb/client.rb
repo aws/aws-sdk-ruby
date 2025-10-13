@@ -1065,8 +1065,7 @@ module Aws::Odb
       req.send_request(options)
     end
 
-    # Creates a peering connection between an ODB network and either another
-    # ODB network or a customer-owned VPC.
+    # Creates a peering connection between an ODB network and a VPC.
     #
     # A peering connection enables private connectivity between the networks
     # for application-tier communication.
@@ -1081,6 +1080,11 @@ module Aws::Odb
     #
     # @option params [String] :display_name
     #   The display name for the ODB peering connection.
+    #
+    # @option params [Array<String>] :peer_network_cidrs_to_be_added
+    #   A list of CIDR blocks to add to the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection.
     #
     # @option params [String] :client_token
     #   The client token for the ODB peering connection request.
@@ -1110,6 +1114,7 @@ module Aws::Odb
     #     odb_network_id: "ResourceIdOrArn", # required
     #     peer_network_id: "ResourceIdOrArn", # required
     #     display_name: "ResourceDisplayName",
+    #     peer_network_cidrs_to_be_added: ["PeeredCidr"],
     #     client_token: "CreateOdbPeeringConnectionInputClientTokenString",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1777,6 +1782,8 @@ module Aws::Odb
     #   resp.odb_peering_connection.odb_network_arn #=> String
     #   resp.odb_peering_connection.peer_network_arn #=> String
     #   resp.odb_peering_connection.odb_peering_connection_type #=> String
+    #   resp.odb_peering_connection.peer_network_cidrs #=> Array
+    #   resp.odb_peering_connection.peer_network_cidrs[0] #=> String
     #   resp.odb_peering_connection.created_at #=> Time
     #   resp.odb_peering_connection.percent_progress #=> Float
     #
@@ -2552,6 +2559,8 @@ module Aws::Odb
     #   resp.odb_peering_connections[0].odb_network_arn #=> String
     #   resp.odb_peering_connections[0].peer_network_arn #=> String
     #   resp.odb_peering_connections[0].odb_peering_connection_type #=> String
+    #   resp.odb_peering_connections[0].peer_network_cidrs #=> Array
+    #   resp.odb_peering_connections[0].peer_network_cidrs[0] #=> String
     #   resp.odb_peering_connections[0].created_at #=> Time
     #   resp.odb_peering_connections[0].percent_progress #=> Float
     #
@@ -2933,6 +2942,59 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Modifies the settings of an Oracle Database@Amazon Web Services
+    # peering connection. You can update the display name and add or remove
+    # CIDR blocks from the peering connection.
+    #
+    # @option params [required, String] :odb_peering_connection_id
+    #   The identifier of the Oracle Database@Amazon Web Services peering
+    #   connection to update.
+    #
+    # @option params [String] :display_name
+    #   A new display name for the peering connection.
+    #
+    # @option params [Array<String>] :peer_network_cidrs_to_be_added
+    #   A list of CIDR blocks to add to the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection. The CIDR blocks must not overlap with existing
+    #   CIDR blocks in the Oracle Database@Amazon Web Services network.
+    #
+    # @option params [Array<String>] :peer_network_cidrs_to_be_removed
+    #   A list of CIDR blocks to remove from the peering connection. The CIDR
+    #   blocks must currently exist in the peering connection.
+    #
+    # @return [Types::UpdateOdbPeeringConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOdbPeeringConnectionOutput#display_name #display_name} => String
+    #   * {Types::UpdateOdbPeeringConnectionOutput#status #status} => String
+    #   * {Types::UpdateOdbPeeringConnectionOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateOdbPeeringConnectionOutput#odb_peering_connection_id #odb_peering_connection_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_odb_peering_connection({
+    #     odb_peering_connection_id: "ResourceIdOrArn", # required
+    #     display_name: "ResourceDisplayName",
+    #     peer_network_cidrs_to_be_added: ["PeeredCidr"],
+    #     peer_network_cidrs_to_be_removed: ["PeeredCidr"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.odb_peering_connection_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateOdbPeeringConnection AWS API Documentation
+    #
+    # @overload update_odb_peering_connection(params = {})
+    # @param [Hash] params ({})
+    def update_odb_peering_connection(params = {}, options = {})
+      req = build_request(:update_odb_peering_connection, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2951,7 +3013,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

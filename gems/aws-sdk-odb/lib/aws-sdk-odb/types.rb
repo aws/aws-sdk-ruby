@@ -2314,6 +2314,12 @@ module Aws::Odb
     #   The display name for the ODB peering connection.
     #   @return [String]
     #
+    # @!attribute [rw] peer_network_cidrs_to_be_added
+    #   A list of CIDR blocks to add to the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] client_token
     #   The client token for the ODB peering connection request.
     #
@@ -2337,6 +2343,7 @@ module Aws::Odb
       :odb_network_id,
       :peer_network_id,
       :display_name,
+      :peer_network_cidrs_to_be_added,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -4558,6 +4565,12 @@ module Aws::Odb
     #   Valid Values: `ODB-VPC | ODB-ODB`
     #   @return [String]
     #
+    # @!attribute [rw] peer_network_cidrs
+    #   The CIDR blocks associated with the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the ODB peering connection was created.
     #   @return [Time]
@@ -4578,6 +4591,7 @@ module Aws::Odb
       :odb_network_arn,
       :peer_network_arn,
       :odb_peering_connection_type,
+      :peer_network_cidrs,
       :created_at,
       :percent_progress)
       SENSITIVE = []
@@ -4625,6 +4639,12 @@ module Aws::Odb
     #   Valid Values: `ODB-VPC | ODB-ODB`
     #   @return [String]
     #
+    # @!attribute [rw] peer_network_cidrs
+    #   The CIDR blocks associated with the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the ODB peering connection was created.
     #   @return [Time]
@@ -4645,6 +4665,7 @@ module Aws::Odb
       :odb_network_arn,
       :peer_network_arn,
       :odb_peering_connection_type,
+      :peer_network_cidrs,
       :created_at,
       :percent_progress)
       SENSITIVE = []
@@ -5082,6 +5103,67 @@ module Aws::Odb
       :status,
       :status_reason,
       :odb_network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] odb_peering_connection_id
+    #   The identifier of the Oracle Database@Amazon Web Services peering
+    #   connection to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A new display name for the peering connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_network_cidrs_to_be_added
+    #   A list of CIDR blocks to add to the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection. The CIDR blocks must not overlap with existing
+    #   CIDR blocks in the Oracle Database@Amazon Web Services network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] peer_network_cidrs_to_be_removed
+    #   A list of CIDR blocks to remove from the peering connection. The
+    #   CIDR blocks must currently exist in the peering connection.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateOdbPeeringConnectionInput AWS API Documentation
+    #
+    class UpdateOdbPeeringConnectionInput < Struct.new(
+      :odb_peering_connection_id,
+      :display_name,
+      :peer_network_cidrs_to_be_added,
+      :peer_network_cidrs_to_be_removed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The display name of the peering connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the peering connection update operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the peering connection
+    #   update operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] odb_peering_connection_id
+    #   The identifier of the Oracle Database@Amazon Web Services peering
+    #   connection that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateOdbPeeringConnectionOutput AWS API Documentation
+    #
+    class UpdateOdbPeeringConnectionOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :odb_peering_connection_id)
       SENSITIVE = []
       include Aws::Structure
     end

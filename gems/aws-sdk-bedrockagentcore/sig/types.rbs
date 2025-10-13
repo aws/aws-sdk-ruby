@@ -401,6 +401,8 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterRequest
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor name: ("executeCode" | "executeCommand" | "readFiles" | "listFiles" | "removeFiles" | "writeFiles" | "startCommandExecution" | "getTask" | "stopTask")
       attr_accessor arguments: Types::ToolArguments
       SENSITIVE: []
@@ -674,6 +676,8 @@ module Aws::BedrockAgentCore
     end
 
     class StartBrowserSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor browser_identifier: ::String
       attr_accessor name: ::String
       attr_accessor session_timeout_seconds: ::Integer
@@ -691,6 +695,8 @@ module Aws::BedrockAgentCore
     end
 
     class StartCodeInterpreterSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor name: ::String
       attr_accessor session_timeout_seconds: ::Integer
@@ -706,6 +712,8 @@ module Aws::BedrockAgentCore
     end
 
     class StopBrowserSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor browser_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor client_token: ::String
@@ -720,6 +728,8 @@ module Aws::BedrockAgentCore
     end
 
     class StopCodeInterpreterSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor client_token: ::String

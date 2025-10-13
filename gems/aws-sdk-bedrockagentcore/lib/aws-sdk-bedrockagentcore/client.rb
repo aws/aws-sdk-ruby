@@ -1333,7 +1333,11 @@ module Aws::BedrockAgentCore
     # [Authenticate and authorize with Inbound Auth and Outbound Auth][2].
     #
     # To use this operation, you must have the
-    # `bedrock-agentcore:InvokeAgentRuntime` permission.
+    # `bedrock-agentcore:InvokeAgentRuntime` permission. If you are making a
+    # call to `InvokeAgentRuntime` on behalf of a user ID with the
+    # `X-Amzn-Bedrock-AgentCore-Runtime-User-Id` header, You require
+    # permissions to both actions (`bedrock-agentcore:InvokeAgentRuntime`
+    # and `bedrock-agentcore:InvokeAgentRuntimeForUser`).
     #
     #
     #
@@ -1480,6 +1484,12 @@ module Aws::BedrockAgentCore
     #   The unique identifier of the code interpreter session to use. This
     #   must be an active session created with `StartCodeInterpreterSession`.
     #   If the session has expired or been stopped, the request will fail.
+    #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
     #
     # @option params [required, String] :name
     #   The name of the code interpreter to invoke.
@@ -1653,6 +1663,8 @@ module Aws::BedrockAgentCore
     #   resp = client.invoke_code_interpreter({
     #     code_interpreter_identifier: "String", # required
     #     session_id: "CodeInterpreterSessionId",
+    #     trace_id: "InvokeCodeInterpreterRequestTraceIdString",
+    #     trace_parent: "InvokeCodeInterpreterRequestTraceParentString",
     #     name: "executeCode", # required, accepts executeCode, executeCommand, readFiles, listFiles, removeFiles, writeFiles, startCommandExecution, getTask, stopTask
     #     arguments: {
     #       code: "MaxLenString",
@@ -2279,6 +2291,12 @@ module Aws::BedrockAgentCore
     # [2]: https://docs.aws.amazon.com/API_UpdateBrowserStream.html
     # [3]: https://docs.aws.amazon.com/API_StopBrowserSession.html
     #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
+    #
     # @option params [required, String] :browser_identifier
     #   The unique identifier of the browser to use for this session. This
     #   identifier specifies which browser environment to initialize for the
@@ -2320,6 +2338,8 @@ module Aws::BedrockAgentCore
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_browser_session({
+    #     trace_id: "StartBrowserSessionRequestTraceIdString",
+    #     trace_parent: "StartBrowserSessionRequestTraceParentString",
     #     browser_identifier: "String", # required
     #     name: "Name",
     #     session_timeout_seconds: 1,
@@ -2371,6 +2391,12 @@ module Aws::BedrockAgentCore
     # [2]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
     # [3]: https://docs.aws.amazon.com/API_StopCodeInterpreterSession.html
     #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
+    #
     # @option params [required, String] :code_interpreter_identifier
     #   The unique identifier of the code interpreter to use for this session.
     #   This identifier specifies which code interpreter environment to
@@ -2405,6 +2431,8 @@ module Aws::BedrockAgentCore
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_code_interpreter_session({
+    #     trace_id: "StartCodeInterpreterSessionRequestTraceIdString",
+    #     trace_parent: "StartCodeInterpreterSessionRequestTraceParentString",
     #     code_interpreter_identifier: "String", # required
     #     name: "Name",
     #     session_timeout_seconds: 1,
@@ -2445,6 +2473,12 @@ module Aws::BedrockAgentCore
     # [1]: https://docs.aws.amazon.com/API_StartBrowserSession.html
     # [2]: https://docs.aws.amazon.com/API_GetBrowserSession.html
     #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
+    #
     # @option params [required, String] :browser_identifier
     #   The unique identifier of the browser associated with the session.
     #
@@ -2469,6 +2503,8 @@ module Aws::BedrockAgentCore
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_browser_session({
+    #     trace_id: "StopBrowserSessionRequestTraceIdString",
+    #     trace_parent: "StopBrowserSessionRequestTraceParentString",
     #     browser_identifier: "String", # required
     #     session_id: "BrowserSessionId", # required
     #     client_token: "ClientToken",
@@ -2509,6 +2545,12 @@ module Aws::BedrockAgentCore
     # [1]: https://docs.aws.amazon.com/API_StartCodeInterpreterSession.html
     # [2]: https://docs.aws.amazon.com/API_GetCodeInterpreterSession.html
     #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
+    #
     # @option params [required, String] :code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
     #   session.
@@ -2534,6 +2576,8 @@ module Aws::BedrockAgentCore
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_code_interpreter_session({
+    #     trace_id: "StopCodeInterpreterSessionRequestTraceIdString",
+    #     trace_parent: "StopCodeInterpreterSessionRequestTraceParentString",
     #     code_interpreter_identifier: "String", # required
     #     session_id: "CodeInterpreterSessionId", # required
     #     client_token: "ClientToken",
@@ -2680,7 +2724,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
