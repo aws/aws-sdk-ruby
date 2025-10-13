@@ -53,24 +53,22 @@ module Aws
 
       def upload_parts(upload_id, options, &block)
         completed_parts = Queue.new
+        done_signal = Queue.new
         errors = []
+        part_opts = upload_part_opts(options).merge(upload_id: upload_id)
 
         begin
           IO.pipe do |read_pipe, write_pipe|
-            upload_thread = Thread.new do
-              upload_with_executor(
-                read_pipe,
-                completed_parts,
-                errors,
-                upload_part_opts(options).merge(upload_id: upload_id)
-              )
+            @executor.post(read_pipe, completed_parts, errors, part_opts) do |r_pipe, parts, errs, opts|
+              upload_with_executor(r_pipe, parts, errs, opts)
+            ensure
+              done_signal << :done
             end
-
             block.call(write_pipe)
           ensure
             # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
             write_pipe.close
-            upload_thread.join
+            done_signal.pop
           end
         rescue StandardError => e
           errors << e
