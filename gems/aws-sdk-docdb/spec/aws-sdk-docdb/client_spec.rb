@@ -46,9 +46,7 @@ module Aws
 
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
-            resp = client.copy_db_cluster_snapshot(
-              copy_db_cluster_snapshot_params.merge(source_region: source_region)
-            )
+            resp = client.copy_db_cluster_snapshot(copy_db_cluster_snapshot_params.merge(source_region: source_region))
             expect(resp.context.params[:pre_signed_url]).to match(
               /01eda84cb84ff1558373f4759aaf76aa4b7be8664241a58f6906ae842a0a9d74/
             )
@@ -77,19 +75,14 @@ module Aws
 
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
-            resp = client.create_db_cluster(
-              create_db_cluster_params.merge(pre_signed_url: 'https://aws.com')
-            )
+            resp = client.create_db_cluster(create_db_cluster_params.merge(pre_signed_url: 'https://aws.com'))
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
-            resp = client.create_db_cluster(
-              create_db_cluster_params.merge(source_region: source_region)
-            )
-
+            resp = client.create_db_cluster(create_db_cluster_params.merge(source_region: source_region))
             expect(resp.context.params[:pre_signed_url]).to match(
               /015e49149a19b1f97a40e472ac8f6da55fb559c86834a3664a279fab99063e44/
             )

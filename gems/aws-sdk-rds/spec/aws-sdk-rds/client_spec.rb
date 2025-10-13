@@ -30,32 +30,21 @@ module Aws
 
         context 'no source_region and no pre_signed_url' do
           it 'does not generate pre_signed_url' do
-            resp = client.copy_db_snapshot(
-              copy_db_snapshot_params
-            )
+            resp = client.copy_db_snapshot(copy_db_snapshot_params)
             expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
-            resp = client.copy_db_snapshot(
-              copy_db_snapshot_params.merge(
-                pre_signed_url: 'https://aws.com'
-              )
-            )
+            resp = client.copy_db_snapshot(copy_db_snapshot_params.merge(pre_signed_url: 'https://aws.com'))
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
-            resp = client.copy_db_snapshot(
-              copy_db_snapshot_params.merge(
-                source_region: source_region
-              )
-            )
-
+            resp = client.copy_db_snapshot(copy_db_snapshot_params.merge(source_region: source_region))
             expect(resp.context.params[:pre_signed_url]).to match(
               /afee7e7f55fcbce926a89482f01acb51e9dc1df0adb09ee172622a079b47ea71/
             )
@@ -74,9 +63,7 @@ module Aws
 
         context 'no source_region and no pre_signed_url' do
           it 'does not generate pre_signed_url' do
-            resp = client.create_db_instance_read_replica(
-              create_db_instance_read_replica_params
-            )
+            resp = client.create_db_instance_read_replica(create_db_instance_read_replica_params)
             expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
@@ -84,9 +71,7 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.create_db_instance_read_replica(
-              create_db_instance_read_replica_params.merge(
-                pre_signed_url: 'https://aws.com'
-              )
+              create_db_instance_read_replica_params.merge(pre_signed_url: 'https://aws.com')
             )
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
@@ -95,11 +80,8 @@ module Aws
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
             resp = client.create_db_instance_read_replica(
-              create_db_instance_read_replica_params.merge(
-                source_region: source_region
-              )
+              create_db_instance_read_replica_params.merge(source_region: source_region)
             )
-
             expect(resp.context.params[:pre_signed_url]).to match(
               /ddab9b46aa026dd36339e3f80c16c361f0e9e4f86368ee7e391dcdd45cb385e6/
             )
@@ -118,9 +100,7 @@ module Aws
 
         context 'no source_region and no pre_signed_url' do
           it 'does not generate pre_signed_url' do
-            resp = client.copy_db_cluster_snapshot(
-              copy_db_cluster_snapshot_params
-            )
+            resp = client.copy_db_cluster_snapshot(copy_db_cluster_snapshot_params)
             expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
@@ -128,9 +108,7 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.copy_db_cluster_snapshot(
-              copy_db_cluster_snapshot_params.merge(
-                pre_signed_url: 'https://aws.com'
-              )
+              copy_db_cluster_snapshot_params.merge(pre_signed_url: 'https://aws.com')
             )
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
@@ -138,12 +116,7 @@ module Aws
 
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
-            resp = client.copy_db_cluster_snapshot(
-              copy_db_cluster_snapshot_params.merge(
-                source_region: source_region
-              )
-            )
-
+            resp = client.copy_db_cluster_snapshot(copy_db_cluster_snapshot_params.merge(source_region: source_region))
             expect(resp.context.params[:pre_signed_url]).to match(
               /01eda84cb84ff1558373f4759aaf76aa4b7be8664241a58f6906ae842a0a9d74/
             )
@@ -164,32 +137,21 @@ module Aws
 
         context 'no source_region and no pre_signed_url' do
           it 'does not generate pre_signed_url' do
-            resp = client.create_db_cluster(
-              create_db_cluster_params
-            )
+            resp = client.create_db_cluster(create_db_cluster_params)
             expect(resp.context.params[:pre_signed_url]).to eq nil
           end
         end
 
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
-            resp = client.create_db_cluster(
-              create_db_cluster_params.merge(
-                pre_signed_url: 'https://aws.com'
-              )
-            )
+            resp = client.create_db_cluster(create_db_cluster_params.merge(pre_signed_url: 'https://aws.com'))
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
         end
 
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
-            resp = client.create_db_cluster(
-              create_db_cluster_params.merge(
-                source_region: source_region
-              )
-            )
-
+            resp = client.create_db_cluster(create_db_cluster_params.merge(source_region: source_region))
             expect(resp.context.params[:pre_signed_url]).to match(
               /1f654a3049149ef925f2ad58d4fd71fdf94791eb65848f866a6f451f9be655f7/
             )
@@ -217,9 +179,7 @@ module Aws
         context 'source_region and pre_signed_url' do
           it 'uses provided pre_signed_url' do
             resp = client.start_db_instance_automated_backups_replication(
-              start_db_instance_automated_backups_replication_params.merge(
-                pre_signed_url: 'https://aws.com'
-              )
+              start_db_instance_automated_backups_replication_params.merge(pre_signed_url: 'https://aws.com')
             )
             expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
           end
@@ -228,11 +188,8 @@ module Aws
         context 'source_region and no pre_signed_url' do
           it 'generates pre_signed_url' do
             resp = client.start_db_instance_automated_backups_replication(
-              start_db_instance_automated_backups_replication_params.merge(
-                source_region: source_region
-              )
+              start_db_instance_automated_backups_replication_params.merge(source_region: source_region)
             )
-
             expect(resp.context.params[:pre_signed_url]).to match(
               /6beef10ce9ebd1602ed908c7d7121ebfff57f41343ac338a9163a759e66e619c/
             )
