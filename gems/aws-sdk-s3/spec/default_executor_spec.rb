@@ -9,11 +9,9 @@ module Aws
 
       describe '#post' do
         it 'executes a block with arguments' do
-          block = double('block')
-          expect(block).to receive(:call).with('hello')
-
-          subject.post('hello') { |arg| block.call(arg) }
-          sleep 0.01
+          queue = Queue.new
+          subject.post('hello') { |arg| queue << arg }
+          expect(queue.pop).to eq('hello')
         end
 
         it 'returns true when a task is submitted' do
@@ -29,33 +27,40 @@ module Aws
       describe '#shutdown' do
         it 'waits for running tasks to be complete' do
           result = nil
-          subject.post { result = 'done' }
+          subject.post { result = true }
           expect(subject.shutdown).to be(true)
-          expect(result).to eq('done')
+          expect(result).to be(true)
         end
 
         it 'kills threads after timeout' do
-          result = nil
+          started = Queue.new
+          counter = 0
           subject.post do
-            sleep 0.02
-            result = 'done'
+            counter += 1
+            started << 'work started'
+            sleep 1
+            counter += 1
           end
+          started.pop
           expect(subject.shutdown(0.01)).to be(true)
-          expect(result).to be_nil
+          expect(counter).to eq(1)
         end
       end
 
       describe '#kill' do
         it 'stops all threads immediately and returns true' do
-          completed = false
+          started = Queue.new
+          counter = 0
           subject.post do
-            sleep 0.01
-            completed = true
+            counter += 1
+            started << 'work started'
+            sleep 1
+            counter += 1
           end
+          started.pop
           result = subject.kill
-
           expect(result).to be(true)
-          expect(completed).to be(false)
+          expect(counter).to eq(1)
         end
       end
     end
