@@ -25,6 +25,7 @@ require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/query_protocol'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-docdb/plugins/cross_region_copying'
 
 module Aws::DocDB
   # An API client for Aws::DocDB.
@@ -57,6 +58,7 @@ module Aws::DocDB
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::QueryProtocol)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::DocDB::Plugins::CrossRegionCopying)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -536,6 +538,8 @@ module Aws::DocDB
     #               <code>false</code>. The default is <code>false</code>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be assigned to the cluster snapshot.</p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_db_cluster_snapshot_identifier: "String", # required
@@ -548,7 +552,8 @@ module Aws::DocDB
     #         key: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.copy_db_cluster_snapshot(params, options)
@@ -747,6 +752,8 @@ module Aws::DocDB
     #               If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
     #            <p>There is a default KMS key for your Amazon Web Services account. 
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zones: ["String"],
@@ -780,7 +787,8 @@ module Aws::DocDB
     #       max_capacity: 1.0
     #     },
     #     manage_master_user_password: false,
-    #     master_user_secret_kms_key_id: "String"
+    #     master_user_secret_kms_key_id: "String",
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.create_db_cluster(params, options)

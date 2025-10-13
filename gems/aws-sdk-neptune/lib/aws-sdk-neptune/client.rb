@@ -25,6 +25,7 @@ require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/query_protocol'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-neptune/plugins/cross_region_copying'
 
 module Aws::Neptune
   # An API client for Aws::Neptune.
@@ -57,6 +58,7 @@ module Aws::Neptune
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::QueryProtocol)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Neptune::Plugins::CrossRegionCopying)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -523,6 +525,8 @@ module Aws::Neptune
     #         snapshot, and otherwise false. The default is false.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to assign to the new DB cluster snapshot copy.</p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_db_cluster_snapshot_identifier: "String", # required
@@ -535,7 +539,8 @@ module Aws::Neptune
     #         key: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.copy_db_cluster_snapshot(params, options)
@@ -837,6 +842,8 @@ module Aws::Neptune
     #                  <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>
     #               </li>
     #            </ul>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zones: ["String"],
@@ -874,7 +881,8 @@ module Aws::Neptune
     #       max_capacity: 1.0
     #     },
     #     global_cluster_identifier: "GlobalClusterIdentifier",
-    #     storage_type: "String"
+    #     storage_type: "String",
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.create_db_cluster(params, options)

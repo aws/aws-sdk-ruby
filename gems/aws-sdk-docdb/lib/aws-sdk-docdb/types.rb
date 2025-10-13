@@ -449,6 +449,9 @@ module Aws::DocDB
     # @!attribute tags
     #   <p>The tags to be assigned to the cluster snapshot.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
@@ -456,6 +459,7 @@ module Aws::DocDB
       :pre_signed_url,
       :copy_tags,
       :tags,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -660,6 +664,9 @@ module Aws::DocDB
     #            <p>There is a default KMS key for your Amazon Web Services account. 
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
     #   @return [String]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CreateDBClusterMessage < Struct.new(
       :availability_zones,
       :backup_retention_period,
@@ -685,6 +692,7 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -18,11 +18,7 @@ module Aws
             * `~/.aws/credentials` as `region` under a profile
             * `~/.aws/config` as `region` under a profile
           DOCS
-          if config.stub_responses
-            'us-stubbed-1'
-          else
-            resolve_region(config)
-          end
+          resolve_region(config)
         end
 
         option(
@@ -63,6 +59,12 @@ module Aws
           ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE'] ||
             Aws::Core.shared_config.profiles.fetch(cfg.profile, {})['account_id_endpoint_mode'] ||
             'preferred'
+        end
+
+        def before_initialize(_client_class, options)
+          return unless options[:stub_responses]
+
+          options[:region] = 'us-stubbed-1' unless options.key?(:region)
         end
 
         class << self

@@ -1415,6 +1415,9 @@ module Aws::RDS
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
     #               </p>
     #   @return [Array<Types::Tag>]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
@@ -1422,6 +1425,7 @@ module Aws::RDS
       :pre_signed_url,
       :copy_tags,
       :tags,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1667,6 +1671,9 @@ module Aws::RDS
     # @!attribute snapshot_availability_zone
     #   <p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>
     #   @return [String]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CopyDBSnapshotMessage < Struct.new(
       :source_db_snapshot_identifier,
       :target_db_snapshot_identifier,
@@ -1679,6 +1686,7 @@ module Aws::RDS
       :snapshot_target,
       :copy_option_group,
       :snapshot_availability_zone,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3034,6 +3042,9 @@ module Aws::RDS
     #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
     #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     #   @return [String]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CreateDBClusterMessage < Struct.new(
       :availability_zones,
       :backup_retention_period,
@@ -3092,6 +3103,7 @@ module Aws::RDS
       :ca_certificate_identifier,
       :engine_lifecycle_support,
       :master_user_authentication_type,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5195,6 +5207,9 @@ module Aws::RDS
     #                       Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora 
     #                           User Guide</i>.</p>
     #   @return [String]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CreateDBInstanceReadReplicaMessage < Struct.new(
       :db_instance_identifier,
       :source_db_instance_identifier,
@@ -5243,6 +5258,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :upgrade_storage_config,
       :ca_certificate_identifier,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25438,11 +25454,15 @@ module Aws::RDS
     #                   for the operation that can run in the source Amazon Web Services Region.</p>
     #            </note>
     #   @return [String]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class StartDBInstanceAutomatedBackupsReplicationMessage < Struct.new(
       :source_db_instance_arn,
       :backup_retention_period,
       :kms_key_id,
       :pre_signed_url,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

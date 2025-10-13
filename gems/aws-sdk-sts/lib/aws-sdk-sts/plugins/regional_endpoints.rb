@@ -4,6 +4,8 @@ module Aws
   module STS
     # @api private
     module Plugins
+      # This plugin adds configuration for regional or global STS endpoints.
+      # Actual endpoint resolution is done in the endpoints provider.
       # @api private
       class RegionalEndpoints < Smithy::Client::Plugin
         option(
