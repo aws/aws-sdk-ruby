@@ -33,10 +33,6 @@ module Aws
 
       private
 
-      def request_abort
-        @mutex.synchronize { @abort_requested = true }
-      end
-
       def build_opts(source_directory, bucket, opts)
         ignore_failure = opts[:ignore_failure] || false
         uploader_opts = { progress_callback: opts[:progress_callback], ignore_failure: ignore_failure }
@@ -72,6 +68,10 @@ module Aws
 
         request_abort
         executor.kill
+      end
+
+      def request_abort
+        @mutex.synchronize { @abort_requested = true }
       end
 
       def process_upload_queue(producer, uploader, opts)
@@ -111,6 +111,7 @@ module Aws
         include Enumerable
 
         DEFAULT_QUEUE_SIZE = 100
+        DONE_MARKER = :done
 
         def initialize(options = {})
           @directory_uploader = options[:directory_uploader]
@@ -133,10 +134,10 @@ module Aws
               find_directly
             end
           ensure
-            @file_queue << :done
+            @file_queue << DONE_MARKER
           end
 
-          while (file = @file_queue.shift) != :done
+          while (file = @file_queue.shift) != DONE_MARKER
             break if @directory_uploader.abort_requested
 
             yield file
@@ -147,13 +148,19 @@ module Aws
 
         private
 
+        def apply_request_callback(params)
+          callback_params = @request_callback.call(file_path, params.dup)
+          return params unless callback_params.is_a?(Hash) && callback_params.any?
+
+          params.merge(callback_params)
+        end
+
         def build_upload_entry(file_path, key)
-          normalized_key = @s3_prefix ? File.join(@s3_prefix, key) : key
-          params = { bucket: @bucket, key: normalized_key }
-          if @request_callback
-            callback_params = @request_callback.call(file_path, params.dup)
-            params = params.merge(callback_params) if callback_params.is_a?(Hash) && callback_params.any?
-          end
+          params = {
+            bucket: @bucket,
+            key: @s3_prefix ? File.join(@s3_prefix, key) : key
+          }
+          params = apply_request_callback(params.dup) if @request_callback
 
           UploadEntry.new(path: file_path, params: params)
         end
