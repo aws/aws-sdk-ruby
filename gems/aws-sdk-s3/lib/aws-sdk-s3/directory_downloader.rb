@@ -20,7 +20,7 @@ module Aws
           FileUtils.mkdir_p(destination)
         end
 
-        download_opts = build_download_opts(destination, bucket, options)
+        download_opts = build_download_opts(destination, bucket, options.dup)
         downloader = FileDownloader.new(client: @client, executor: @executor)
         producer = ObjectProducer.new(download_opts.merge(client: @client, directory_downloader: self))
         downloads, errors = process_download_queue(producer, downloader, download_opts)
@@ -134,12 +134,11 @@ module Aws
           { path: File.join(@destination_dir, normalize_key(key)), key: key }
         end
 
-        # TODO: double check handling of objects that ends with /
         def stream_objects(continuation_token: nil)
           resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
           resp.contents.each do |o|
             break if @directory_downloader.abort_requested
-            next if o.key.end_with?('/')
+            next if o.key.end_with?('/') && o.size.zero?
             next unless include_object?(o.key)
 
             @object_queue << build_object_entry(o.key)

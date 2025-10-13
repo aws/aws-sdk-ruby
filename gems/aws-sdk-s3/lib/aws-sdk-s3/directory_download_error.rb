@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module S3
     # Raised when DirectoryDownloader fails to download objects from S3 bucket

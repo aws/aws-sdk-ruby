@@ -18,7 +18,7 @@ module Aws
       def upload(source_directory, bucket:, **options)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
-        upload_opts = build_upload_opts(source_directory, bucket, options)
+        upload_opts = build_upload_opts(source_directory, bucket, options.dup)
         uploader = FileUploader.new(
           multipart_threshold: options[:multipart_threshold],
           client: @client,
@@ -71,8 +71,7 @@ module Aws
       end
 
       def process_upload_queue(producer, uploader, opts)
-        # Separate executor for lightweight queuing tasks,
-        # avoiding interference with main @executor lifecycle
+        # Separate executor for lightweight queuing tasks, avoiding interference with main @executor lifecycle
         queue_executor = DefaultExecutor.new
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         upload_attempts = 0
