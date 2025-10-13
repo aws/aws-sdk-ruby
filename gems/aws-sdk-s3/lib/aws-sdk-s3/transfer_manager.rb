@@ -129,10 +129,10 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
-        download_opts = options.dup
+        download_opts = options.merge(bucket: bucket, key: key)
         executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
         downloader = FileDownloader.new(client: @client, executor: executor)
-        downloader.download(destination, options.merge(bucket: bucket, key: key))
+        downloader.download(destination, download_opts)
         executor.shutdown unless @options[:executor]
         true
       end
@@ -204,14 +204,14 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
-        upload_opts = options.dup
+        upload_opts = options.merge(bucket: bucket, key: key)
         executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
           multipart_threshold: upload_opts.delete(:multipart_threshold),
           client: @client,
           executor: executor
         )
-        response = uploader.upload(source, upload_opts.merge(bucket: bucket, key: key))
+        response = uploader.upload(source, upload_opts)
         yield response if block_given?
         executor.shutdown unless @options[:executor]
         true
@@ -270,15 +270,15 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
-        uploading_options = options.dup
-        executor = @executor || DefaultExecutor.new(max_threads: uploading_options.delete(:thread_count))
+        upload_opts = options.merge(bucket: bucket, key: key)
+        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = MultipartStreamUploader.new(
           client: @client,
           executor: executor,
-          tempfile: uploading_options.delete(:tempfile),
-          part_size: uploading_options.delete(:part_size)
+          tempfile: upload_opts.delete(:tempfile),
+          part_size: upload_opts.delete(:part_size)
         )
-        uploader.upload(uploading_options.merge(bucket: bucket, key: key), &block)
+        uploader.upload(upload_opts, &block)
         executor.shutdown unless @options[:executor]
         true
       end

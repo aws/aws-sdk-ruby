@@ -383,19 +383,16 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_stream(options = {}, &block)
-        uploading_options = options.dup
-        executor = DefaultExecutor.new(max_threads: uploading_options.delete(:thread_count))
+        upload_opts = options.merge(bucket: bucket_name, key: key)
+        executor = DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = MultipartStreamUploader.new(
           client: client,
           executor: executor,
-          tempfile: uploading_options.delete(:tempfile),
-          part_size: uploading_options.delete(:part_size)
+          tempfile: upload_opts.delete(:tempfile),
+          part_size: upload_opts.delete(:part_size)
         )
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(
-            uploading_options.merge(bucket: bucket_name, key: key),
-            &block
-          )
+          uploader.upload(upload_opts, &block)
         end
         executor.shutdown
         true
@@ -460,15 +457,15 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_file(source, options = {})
-        uploading_options = options.dup
-        executor = DefaultExecutor.new(max_threads: uploading_options.delete(:thread_count))
+        upload_opts = options.merge(bucket: bucket_name, key: key)
+        executor = DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
           client: client,
           executor: executor,
-          multipart_threshold: uploading_options.delete(:multipart_threshold)
+          multipart_threshold: upload_opts.delete(:multipart_threshold)
         )
         response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
+          uploader.upload(source, upload_opts)
         end
         yield response if block_given?
         executor.shutdown
@@ -543,11 +540,11 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, options = {})
-        download_options = options.dup
-        executor = DefaultExecutor.new(max_threads: download_options.delete([:thread_count]))
+        download_opts = options.merge(bucket: bucket_name, key: key)
+        executor = DefaultExecutor.new(max_threads: download_opts.delete([:thread_count]))
         downloader = FileDownloader.new(client: client, executor: executor)
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          downloader.download(destination, download_options.merge(bucket: bucket_name, key: key))
+          downloader.download(destination, download_opts)
         end
         executor.shutdown
         true

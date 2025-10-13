@@ -23,7 +23,7 @@ module Aws
 
       def download(destination, options = {})
         validate_destination!(destination)
-        opts = build_download_opts(destination, options.dup)
+        opts = build_download_opts(destination, options)
         validate_opts!(opts)
 
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
