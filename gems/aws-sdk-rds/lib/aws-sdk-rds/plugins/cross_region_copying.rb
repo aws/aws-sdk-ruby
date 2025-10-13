@@ -36,15 +36,12 @@ module Aws
             endpoint = context.config.endpoint_provider.resolve(endpoint_params)
             auth = Smithy::Client::Auth.resolve(context, endpoint.properties)
 
-            asdf = auth.signer.presign_url(
+            auth.signer.presign_url(
               region: source_region,  
               http_method: 'GET',
               url: "#{endpoint.url}?#{param_list}",
               expires_in: 3600,
-            )
-            require 'byebug'
-            byebug
-            asdf.url
+            ).url
           end
         end
 
