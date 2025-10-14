@@ -15,7 +15,7 @@ module Aws
 
       attr_reader :abort_requested
 
-      def upload(source_directory, bucket:, **options)
+      def upload(source_directory, bucket, **options)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
         upload_opts, producer_opts = build_opts(source_directory, bucket, options.dup)
