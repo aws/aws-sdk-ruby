@@ -3,7 +3,7 @@
 namespace :sync do
   desc 'Build the upstream protocol tests and copy the source JSON to the test folder'
   task 'protocol-tests' do
-    protocol_tests_dir = 'build_tools/aws-sdk-code-generator/spec/protocol_tests'
+    protocol_tests_dir = 'build_tools/spec/protocol_tests'
     smithy_build_file = "#{protocol_tests_dir}/smithy-build.json"
     skip_tests_file = File.join(Gem::Specification.find_by_name('smithy').full_gem_path, 'model/skip_tests.smithy')
     FileUtils.touch(smithy_build_file) # https://github.com/smithy-lang/smithy/issues/2537
