@@ -11,20 +11,44 @@ module Aws
     # * download a S3 object with multipart download
     # * track transfer progress by using progress listener
     #
+    # ## Executor Management
+    # TransferManager uses executors to handle concurrent operations during multipart transfers.
+    # You can control concurrency behavior by providing a custom executor or relying on the
+    # default executor management.
+    #
+    # ### **Default Behavior**
+    # When no `:executor` is provided, TransferManager automatically creates and manages
+    # executors for each operation, shutting them down when complete.
+    #
+    # ### **Custom Executor**
+    # You can provide your own executor (e.g., `Concurrent::ThreadPoolExecutor`) for fine-grained
+    # control over thread pools and resource management. When using a custom executor, you are
+    # responsible for shutting it down when finished. The executor will be reused across multiple
+    # TransferManager operations.
+    #
+    # In addition, it must implement the same interface as DefaultExecutor. The following is a list
+    # of required methods:
+    #
+    #   * `post(*args, &block)` - Execute a task with given arguments and block
+    #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
+    #   * `kill` - Immediately terminate all running tasks
+    #
+    # @example Using default executor (automatic creation and shutdown)
+    #     tm = TransferManager.new # No executor provided
+    #     # DefaultExecutor created, used, and shutdown automatically
+    #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key')
+    #
+    # @example Using custom executor (manual shutdown required)
+    #     require 'concurrent-ruby'
+    #
+    #     executor = Concurrent::ThreadPoolExecutor.new(max_threads: 5)
+    #     tm = TransferManager.new(executor: executor)
+    #     tm.download_file('/path/to/file1', bucket: 'bucket', key: 'key1')
+    #     executor.shutdown # You must shutdown custom executors
+    #
+    # See the `:executor` parameter documentation for required methods and examples.
     class TransferManager
-      # @example Using default executor (automatic creation and shutdown)
-      #     tm = TransferManager.new # No executor provided
-      #     # DefaultExecutor created, used, and shutdown automatically
-      #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key')
-      #
-      # @example Using custom executor (manual shutdown required)
-      #     require 'concurrent-ruby'
-      #
-      #     executor = Concurrent::ThreadPoolExecutor.new(max_threads: 5)
-      #     tm = TransferManager.new(executor: executor)
-      #     tm.download_file('/path/to/file1', bucket: 'bucket', key: 'key1')
-      #     executor.shutdown # You must shutdown custom executors
-      #
+
       # @param [Hash] options
       # @option options [S3::Client] :client (S3::Client.new)
       #   The S3 client to use for {TransferManager} operations. If not provided, a new default client
@@ -34,13 +58,6 @@ module Aws
       #   If not provided, a new {DefaultExecutor} will be created automatically for each operation and
       #   shutdown after completion. When provided a custom executor, it will be reused across operations, and
       #   you are responsible for shutting it down when finished.
-      #
-      #   **Required Methods:**
-      #
-      #   * `post(*args, &block)` - Execute a task with given arguments and block
-      #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
-      #   * `kill` - Immediately terminate all running tasks
-      #
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
