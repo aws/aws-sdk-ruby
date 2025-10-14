@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/sigv4'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/sigv4'
 
-module AwsSdkCodeGenerator
+module BuildTools
   module Welds
     # Provides default plugins.
     class SigV4 < Smithy::Weld
@@ -35,10 +35,16 @@ module AwsSdkCodeGenerator
         }
       end
 
-      def add_plugins
-        base_path = 'aws-sdk-core/plugins'
+      def endpoint_auth_scheme_bindings
         {
-          Aws::Core::Plugins::SigV4 => { require_path: "#{base_path}/sigv4" }
+          'sigv4a' => 'aws.auth#sigv4a',
+          'sigv4' => 'aws.auth#sigv4'
+        }
+      end
+
+      def add_plugins
+        {
+          Aws::Core::Plugins::SigV4 => { require_path: 'aws-sdk-core/plugins/sigv4' }
         }
       end
 

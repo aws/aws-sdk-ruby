@@ -2,10 +2,6 @@
 
 require 'smithy-xml'
 
-require 'aws-sdk-core/query'
-require 'aws-sdk-core/stubbing/query'
-require 'aws-sdk-core/xml'
-
 module Aws
   module Core
     module Plugins

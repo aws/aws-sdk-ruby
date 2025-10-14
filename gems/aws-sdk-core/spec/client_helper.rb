@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'smithy'
-require_relative '../../../build_tools/aws-sdk-code-generator/lib/aws-sdk-code-generator/welds'
+$LOAD_PATH.unshift(File.expand_path('../../../build_tools/lib', __dir__))
+
+require 'build_tools'
 
 module ClientHelper
   class << self

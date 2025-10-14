@@ -1,0 +1,35 @@
+# frozen_string_literal: true
+
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/shared_config'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent'
+
+module BuildTools
+  module Welds
+    # Provides default plugins.
+    class DefaultPlugins < Smithy::Weld
+      def for?(_service)
+        say_status :insert, 'Adding default AWS plugins', @plan.quiet
+        true
+      end
+
+      def add_dependencies
+        { 'aws-sdk-core' => '4.0.0.pre0' }
+      end
+
+      def remove_dependencies
+        ['smithy-client']
+      end
+
+      def add_plugins
+        {
+          Aws::Core::Plugins::SharedConfig => { require_path: 'aws-sdk-core/plugins/shared_config' },
+          Aws::Core::Plugins::UserAgent => { require_path: 'aws-sdk-core/plugins/user_agent' }
+        }
+      end
+
+      def remove_plugins
+        [Smithy::Client::Plugins::UserAgent]
+      end
+    end
+  end
+end

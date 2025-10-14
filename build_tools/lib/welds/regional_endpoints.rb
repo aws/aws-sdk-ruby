@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-module AwsSdkCodeGenerator
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoints'
+
+module BuildTools
   module Welds
     # @api private
-    class Endpoints < Smithy::Weld
+    class RegionalEndpoints < Smithy::Weld
       def endpoint_built_in_bindings # rubocop:disable Metrics/MethodLength
         {
           'AWS::Region' => {
@@ -40,10 +42,9 @@ module AwsSdkCodeGenerator
         }
       end
 
-      def endpoint_auth_scheme_bindings
+      def add_plugins
         {
-          'sigv4a' => 'aws.auth#sigv4a',
-          'sigv4' => 'aws.auth#sigv4'
+          Aws::Core::Plugins::RegionalEndpoints => { require_path: 'aws-sdk-core/plugins/regional_endpoints' }
         }
       end
     end
