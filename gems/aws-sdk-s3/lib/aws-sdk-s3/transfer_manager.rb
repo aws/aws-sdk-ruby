@@ -137,6 +137,87 @@ module Aws
         true
       end
 
+      # Uploads a directory from disk to S3.
+      #
+      # @example Uploading a directory
+      #     tm = TransferManager.new
+      #     tm.upload_directory('/path/to/directory', bucket: 'bucket')
+      #     # => {completed_uploads: 7, failed_uploads: 0}
+      #
+      # @example Using filter callback to upload only text files
+      #     tm = TransferManager.new
+      #     filter = proc do |file_path, file_name|
+      #       File.extname(file_name) == '.txt'  # Only upload .txt files
+      #     end
+      #     tm.upload_directory('/path/to/directory', bucket: 'bucket', filter_callback: filter)
+      #
+      # @example Add metadata to all uploads by using request callback
+      #
+      #
+      #
+      #
+      # You can provide a callback to monitor progress of the upload:
+      #
+      #     # bytes and totals are each an array with 1 entry per part
+      #     progress = proc do |bytes, totals|
+      #       bytes.map.with_index do |b, i|
+      #           puts "Part #{i + 1}: #{b} / #{totals[i]} " + "Total: #{100.0 * bytes.sum / totals.sum}%"
+      #       end
+      #     end
+      #     tm.upload_file('/path/to/file', bucket: 'bucket', key: 'key', progress_callback: progress)
+      #
+      # @param [String, Pathname, File, Tempfile] source
+      #  The source directory to upload.
+      #
+      # @param [String] bucket
+      #   The name of the bucket to upload objects to.
+      #
+      # @param [Hash] options
+      #
+      # @option options [String] :s3_prefix (nil)
+      #   The S3 key prefix to use for each object. If not provided, files will be uploaded to the root of the bucket.
+      #
+      # @option options [Boolean] :recursive (false)
+      #   Whether to upload directories recursively:
+      #   * `false` (default) - only files in the top-level directory are uploaded, subdirectories are ignored.
+      #   * `true` - all files and subdirectories are uploaded recursively.
+      #
+      # @option options [Proc] :follow_symlinks (false)
+      #   Whether to follow symbolic links when traversing the file tree:
+      #   * `false` (default) - symbolic links are ignored and not uploaded.
+      #   * `true` - symbolic links are followed and their target files/directories are uploaded.
+      #
+      # @option options [Proc] :ignore_failure (false)
+      #   How to handle individual file upload failures:
+      #   * `false` (default) - Cancel all ongoing requests, terminate the directory upload, and raise an exception
+      #   * `true` - Ignore the failure and continue the transfer for other objects
+      #
+      # @option options [Proc] :filter_callback (nil)
+      #   A Proc to filter which files to upload. Called for each discovered file with the file path.
+      #   Return `true` to upload the file, `false` to skip it.
+      #
+      # @option options [Proc] :request_callback (nil)
+      #   A Proc to modify upload parameters for each file. Called with upload parameters hash.
+      #   Must return the modified parameters.
+      #
+      # @option options [Proc] :progress_callback (nil)
+      #   A Proc that will be called as files are uploaded.
+      #   It will be invoked with `transferred_bytes` and `transferred_files`.
+      #
+      # @raise [DirectoryUploadError] TBD
+      #
+      # @return [Hash] Returns a hash with upload statistics:
+      #   * `:completed_uploads` - Number of files successfully uploaded
+      #   * `:failed_uploads` - Number of files that failed to upload
+      #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
+      def upload_directory(source, bucket:, **options)
+        executor = @executor || DefaultExecutor.new
+        uploader = DirectoryUploader.new(client: @client, executor: executor)
+        result = uploader.upload(source, bucket, **options)
+        executor.shutdown unless @options[:executor]
+        result
+      end
+
       # Uploads a file from disk to S3.
       #
       #     # a small file are uploaded with PutObject API
