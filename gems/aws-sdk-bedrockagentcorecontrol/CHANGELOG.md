@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-10-13)
+------------------
+
+* Feature - Updated http status code in control plane apis of agentcore runtime, tools and identity. Additional included provider types for AgentCore Identity
+
 1.9.0 (2025-10-10)
 ------------------
 

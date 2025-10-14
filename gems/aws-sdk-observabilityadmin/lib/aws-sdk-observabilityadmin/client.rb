@@ -796,6 +796,29 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Returns the current status of the resource tags for telemetry feature,
+    # which enhances telemetry data with additional resource metadata from
+    # Amazon Web Services Resource Explorer.
+    #
+    # @return [Types::GetTelemetryEnrichmentStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTelemetryEnrichmentStatusOutput#status #status} => String
+    #   * {Types::GetTelemetryEnrichmentStatusOutput#aws_resource_explorer_managed_view_arn #aws_resource_explorer_managed_view_arn} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "Running", "Stopped", "Impaired"
+    #   resp.aws_resource_explorer_managed_view_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEnrichmentStatus AWS API Documentation
+    #
+    # @overload get_telemetry_enrichment_status(params = {})
+    # @param [Hash] params ({})
+    def get_telemetry_enrichment_status(params = {}, options = {})
+      req = build_request(:get_telemetry_enrichment_status, params)
+      req.send_request(options)
+    end
+
     # Returns the current onboarding status of the telemetry config feature,
     # including the status of the feature and reason the feature failed to
     # start or stop.
@@ -1301,6 +1324,30 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Enables the resource tags for telemetry feature for your account,
+    # which enhances telemetry data with additional resource metadata from
+    # Amazon Web Services Resource Explorer to provide richer context for
+    # monitoring and observability.
+    #
+    # @return [Types::StartTelemetryEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTelemetryEnrichmentOutput#status #status} => String
+    #   * {Types::StartTelemetryEnrichmentOutput#aws_resource_explorer_managed_view_arn #aws_resource_explorer_managed_view_arn} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "Running", "Stopped", "Impaired"
+    #   resp.aws_resource_explorer_managed_view_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEnrichment AWS API Documentation
+    #
+    # @overload start_telemetry_enrichment(params = {})
+    # @param [Hash] params ({})
+    def start_telemetry_enrichment(params = {}, options = {})
+      req = build_request(:start_telemetry_enrichment, params)
+      req.send_request(options)
+    end
+
     # This action begins onboarding the caller Amazon Web Services account
     # to the telemetry config feature.
     #
@@ -1326,6 +1373,27 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def start_telemetry_evaluation_for_organization(params = {}, options = {})
       req = build_request(:start_telemetry_evaluation_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Disables the resource tags for telemetry feature for your account,
+    # stopping the enhancement of telemetry data with additional resource
+    # metadata.
+    #
+    # @return [Types::StopTelemetryEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopTelemetryEnrichmentOutput#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "Running", "Stopped", "Impaired"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StopTelemetryEnrichment AWS API Documentation
+    #
+    # @overload stop_telemetry_enrichment(params = {})
+    # @param [Hash] params ({})
+    def stop_telemetry_enrichment(params = {}, options = {})
+      req = build_request(:stop_telemetry_enrichment, params)
       req.send_request(options)
     end
 
@@ -1592,7 +1660,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

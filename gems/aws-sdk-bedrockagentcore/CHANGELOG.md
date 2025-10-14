@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2025-10-13)
+------------------
+
+* Feature - Updated InvokeAgentRuntime API to accept account id optionally and added CompleteResourceTokenAuth API.
+
 1.7.0 (2025-10-10)
 ------------------
 

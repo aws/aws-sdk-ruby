@@ -657,6 +657,41 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Confirms the user authentication session for obtaining OAuth2.0 tokens
+    # for a resource.
+    #
+    # @option params [required, Types::UserIdentifier] :user_identifier
+    #   The OAuth2.0 token or user ID that was used to generate the workload
+    #   access token used for initiating the user authorization flow to
+    #   retrieve OAuth2.0 tokens.
+    #
+    # @option params [required, String] :session_uri
+    #   Unique identifier for the user's authentication session for
+    #   retrieving OAuth2 tokens. This ID tracks the authorization flow state
+    #   across multiple requests and responses during the OAuth2
+    #   authentication process.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.complete_resource_token_auth({
+    #     user_identifier: { # required
+    #       user_token: "UserTokenType",
+    #       user_id: "UserIdType",
+    #     },
+    #     session_uri: "RequestUri", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CompleteResourceTokenAuth AWS API Documentation
+    #
+    # @overload complete_resource_token_auth(params = {})
+    # @param [Hash] params ({})
+    def complete_resource_token_auth(params = {}, options = {})
+      req = build_request(:complete_resource_token_auth, params)
+      req.send_request(options)
+    end
+
     # Creates an event in an AgentCore Memory resource. Events represent
     # interactions or activities that occur within a session and are
     # associated with specific actors.
@@ -1170,6 +1205,12 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :oauth2_flow
     #   The type of flow to be performed.
     #
+    # @option params [String] :session_uri
+    #   Unique identifier for the user's authentication session for
+    #   retrieving OAuth2 tokens. This ID tracks the authorization flow state
+    #   across multiple requests and responses during the OAuth2
+    #   authentication process.
+    #
     # @option params [String] :resource_oauth_2_return_url
     #   The callback URL to redirect to after the OAuth 2.0 token retrieval is
     #   complete. This URL must be one of the provided URLs configured for the
@@ -1184,10 +1225,18 @@ module Aws::BedrockAgentCore
     #   the resource credential provider. These parameters are in addition to
     #   the standard OAuth 2.0 flow parameters, and will not override them.
     #
+    # @option params [String] :custom_state
+    #   An opaque string that will be sent back to the callback URL provided
+    #   in resourceOauth2ReturnUrl. This state should be used to protect the
+    #   callback URL of your application against CSRF attacks by ensuring the
+    #   response corresponds to the original request.
+    #
     # @return [Types::GetResourceOauth2TokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourceOauth2TokenResponse#authorization_url #authorization_url} => String
     #   * {Types::GetResourceOauth2TokenResponse#access_token #access_token} => String
+    #   * {Types::GetResourceOauth2TokenResponse#session_uri #session_uri} => String
+    #   * {Types::GetResourceOauth2TokenResponse#session_status #session_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1196,17 +1245,21 @@ module Aws::BedrockAgentCore
     #     resource_credential_provider_name: "CredentialProviderName", # required
     #     scopes: ["ScopeType"], # required
     #     oauth2_flow: "USER_FEDERATION", # required, accepts USER_FEDERATION, M2M
+    #     session_uri: "RequestUri",
     #     resource_oauth_2_return_url: "ResourceOauth2ReturnUrlType",
     #     force_authentication: false,
     #     custom_parameters: {
     #       "CustomRequestKeyType" => "CustomRequestValueType",
     #     },
+    #     custom_state: "State",
     #   })
     #
     # @example Response structure
     #
     #   resp.authorization_url #=> String
     #   resp.access_token #=> String
+    #   resp.session_uri #=> String
+    #   resp.session_status #=> String, one of "IN_PROGRESS", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceOauth2Token AWS API Documentation
     #
@@ -1392,6 +1445,10 @@ module Aws::BedrockAgentCore
     #   specified, Amazon Bedrock uses the default version of the agent
     #   runtime.
     #
+    # @option params [String] :account_id
+    #   The identifier of the Amazon Web Services account for the agent
+    #   runtime resource.
+    #
     # @option params [required, String, StringIO, File] :payload
     #   The input data to send to the agent runtime. The format of this data
     #   depends on the specific agent configuration and must match the
@@ -1426,6 +1483,7 @@ module Aws::BedrockAgentCore
     #     baggage: "InvokeAgentRuntimeRequestBaggageString",
     #     agent_runtime_arn: "String", # required
     #     qualifier: "String",
+    #     account_id: "InvokeAgentRuntimeRequestAccountIdString",
     #     payload: "data", # required
     #   })
     #
@@ -2724,7 +2782,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

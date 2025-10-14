@@ -625,6 +625,8 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateAgentRuntimeEndpointResponse#target_version #target_version} => String
     #   * {Types::CreateAgentRuntimeEndpointResponse#agent_runtime_endpoint_arn #agent_runtime_endpoint_arn} => String
     #   * {Types::CreateAgentRuntimeEndpointResponse#agent_runtime_arn #agent_runtime_arn} => String
+    #   * {Types::CreateAgentRuntimeEndpointResponse#agent_runtime_id #agent_runtime_id} => String
+    #   * {Types::CreateAgentRuntimeEndpointResponse#endpoint_name #endpoint_name} => String
     #   * {Types::CreateAgentRuntimeEndpointResponse#status #status} => String
     #   * {Types::CreateAgentRuntimeEndpointResponse#created_at #created_at} => Time
     #
@@ -646,6 +648,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_version #=> String
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
+    #   resp.agent_runtime_id #=> String
+    #   resp.endpoint_name #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
     #   resp.created_at #=> Time
     #
@@ -668,6 +672,11 @@ module Aws::BedrockAgentCoreControl
     #   The API key to use for authentication. This value is encrypted and
     #   stored securely.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the API key credential
+    #   provider. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateApiKeyCredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApiKeyCredentialProviderResponse#api_key_secret_arn #api_key_secret_arn} => Types::Secret
@@ -679,6 +688,9 @@ module Aws::BedrockAgentCoreControl
     #   resp = client.create_api_key_credential_provider({
     #     name: "CredentialProviderName", # required
     #     api_key: "ApiKeyType", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1400,17 +1412,24 @@ module Aws::BedrockAgentCoreControl
     #   The configuration settings for the OAuth2 provider, including client
     #   ID, client secret, and other vendor-specific settings.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the OAuth2 credential
+    #   provider. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateOauth2CredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOauth2CredentialProviderResponse#client_secret_arn #client_secret_arn} => Types::Secret
     #   * {Types::CreateOauth2CredentialProviderResponse#name #name} => String
     #   * {Types::CreateOauth2CredentialProviderResponse#credential_provider_arn #credential_provider_arn} => String
+    #   * {Types::CreateOauth2CredentialProviderResponse#callback_url #callback_url} => String
+    #   * {Types::CreateOauth2CredentialProviderResponse#oauth2_provider_config_output #oauth2_provider_config_output} => Types::Oauth2ProviderConfigOutput
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_oauth_2_credential_provider({
     #     name: "CredentialProviderName", # required
-    #     credential_provider_vendor: "GoogleOauth2", # required, accepts GoogleOauth2, GithubOauth2, SlackOauth2, SalesforceOauth2, MicrosoftOauth2, CustomOauth2
+    #     credential_provider_vendor: "GoogleOauth2", # required, accepts GoogleOauth2, GithubOauth2, SlackOauth2, SalesforceOauth2, MicrosoftOauth2, CustomOauth2, AtlassianOauth2, LinkedinOauth2, XOauth2, OktaOauth2, OneLoginOauth2, PingOneOauth2, FacebookOauth2, YandexOauth2, RedditOauth2, ZoomOauth2, TwitchOauth2, SpotifyOauth2, DropboxOauth2, NotionOauth2, HubspotOauth2, CyberArkOauth2, FusionAuthOauth2, Auth0Oauth2, CognitoOauth2
     #     oauth2_provider_config_input: { # required
     #       custom_oauth_2_provider_config: {
     #         oauth_discovery: { # required
@@ -1420,6 +1439,7 @@ module Aws::BedrockAgentCoreControl
     #             authorization_endpoint: "AuthorizationEndpointType", # required
     #             token_endpoint: "TokenEndpointType", # required
     #             response_types: ["ResponseType"],
+    #             token_endpoint_auth_methods: ["TokenAuthMethod"],
     #           },
     #         },
     #         client_id: "ClientIdType", # required
@@ -1444,7 +1464,26 @@ module Aws::BedrockAgentCoreControl
     #       microsoft_oauth_2_provider_config: {
     #         client_id: "ClientIdType", # required
     #         client_secret: "ClientSecretType", # required
+    #         tenant_id: "TenantIdType",
     #       },
+    #       atlassian_oauth_2_provider_config: {
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType", # required
+    #       },
+    #       linkedin_oauth_2_provider_config: {
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType", # required
+    #       },
+    #       included_oauth_2_provider_config: {
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType", # required
+    #         issuer: "IssuerUrlType",
+    #         authorization_endpoint: "AuthorizationEndpointType",
+    #         token_endpoint: "TokenEndpointType",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -1453,6 +1492,88 @@ module Aws::BedrockAgentCoreControl
     #   resp.client_secret_arn.secret_arn #=> String
     #   resp.name #=> String
     #   resp.credential_provider_arn #=> String
+    #   resp.callback_url #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateOauth2CredentialProvider AWS API Documentation
     #
@@ -1473,6 +1594,11 @@ module Aws::BedrockAgentCoreControl
     #   The list of allowed OAuth2 return URLs for resources associated with
     #   this workload identity.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the workload identity. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateWorkloadIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkloadIdentityResponse#name #name} => String
@@ -1484,6 +1610,9 @@ module Aws::BedrockAgentCoreControl
     #   resp = client.create_workload_identity({
     #     name: "WorkloadIdentityNameType", # required
     #     allowed_resource_oauth_2_return_urls: ["ResourceOauth2ReturnUrlType"],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1510,6 +1639,7 @@ module Aws::BedrockAgentCoreControl
     # @return [Types::DeleteAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAgentRuntimeResponse#status #status} => String
+    #   * {Types::DeleteAgentRuntimeResponse#agent_runtime_id #agent_runtime_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1520,6 +1650,7 @@ module Aws::BedrockAgentCoreControl
     # @example Response structure
     #
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtime_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntime AWS API Documentation
     #
@@ -1549,6 +1680,8 @@ module Aws::BedrockAgentCoreControl
     # @return [Types::DeleteAgentRuntimeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAgentRuntimeEndpointResponse#status #status} => String
+    #   * {Types::DeleteAgentRuntimeEndpointResponse#agent_runtime_id #agent_runtime_id} => String
+    #   * {Types::DeleteAgentRuntimeEndpointResponse#endpoint_name #endpoint_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1561,6 +1694,8 @@ module Aws::BedrockAgentCoreControl
     # @example Response structure
     #
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtime_id #=> String
+    #   resp.endpoint_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeEndpoint AWS API Documentation
     #
@@ -2335,6 +2470,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetOauth2CredentialProviderResponse#name #name} => String
     #   * {Types::GetOauth2CredentialProviderResponse#credential_provider_arn #credential_provider_arn} => String
     #   * {Types::GetOauth2CredentialProviderResponse#credential_provider_vendor #credential_provider_vendor} => String
+    #   * {Types::GetOauth2CredentialProviderResponse#callback_url #callback_url} => String
     #   * {Types::GetOauth2CredentialProviderResponse#oauth2_provider_config_output #oauth2_provider_config_output} => Types::Oauth2ProviderConfigOutput
     #   * {Types::GetOauth2CredentialProviderResponse#created_time #created_time} => Time
     #   * {Types::GetOauth2CredentialProviderResponse#last_updated_time #last_updated_time} => Time
@@ -2350,43 +2486,89 @@ module Aws::BedrockAgentCoreControl
     #   resp.client_secret_arn.secret_arn #=> String
     #   resp.name #=> String
     #   resp.credential_provider_arn #=> String
-    #   resp.credential_provider_vendor #=> String, one of "GoogleOauth2", "GithubOauth2", "SlackOauth2", "SalesforceOauth2", "MicrosoftOauth2", "CustomOauth2"
+    #   resp.credential_provider_vendor #=> String, one of "GoogleOauth2", "GithubOauth2", "SlackOauth2", "SalesforceOauth2", "MicrosoftOauth2", "CustomOauth2", "AtlassianOauth2", "LinkedinOauth2", "XOauth2", "OktaOauth2", "OneLoginOauth2", "PingOneOauth2", "FacebookOauth2", "YandexOauth2", "RedditOauth2", "ZoomOauth2", "TwitchOauth2", "SpotifyOauth2", "DropboxOauth2", "NotionOauth2", "HubspotOauth2", "CyberArkOauth2", "FusionAuthOauth2", "Auth0Oauth2", "CognitoOauth2"
+    #   resp.callback_url #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.client_id #=> String
     #   resp.created_time #=> Time
     #   resp.last_updated_time #=> Time
     #
@@ -2920,7 +3102,7 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.credential_providers #=> Array
     #   resp.credential_providers[0].name #=> String
-    #   resp.credential_providers[0].credential_provider_vendor #=> String, one of "GoogleOauth2", "GithubOauth2", "SlackOauth2", "SalesforceOauth2", "MicrosoftOauth2", "CustomOauth2"
+    #   resp.credential_providers[0].credential_provider_vendor #=> String, one of "GoogleOauth2", "GithubOauth2", "SlackOauth2", "SalesforceOauth2", "MicrosoftOauth2", "CustomOauth2", "AtlassianOauth2", "LinkedinOauth2", "XOauth2", "OktaOauth2", "OneLoginOauth2", "PingOneOauth2", "FacebookOauth2", "YandexOauth2", "RedditOauth2", "ZoomOauth2", "TwitchOauth2", "SpotifyOauth2", "DropboxOauth2", "NotionOauth2", "HubspotOauth2", "CyberArkOauth2", "FusionAuthOauth2", "Auth0Oauth2", "CognitoOauth2"
     #   resp.credential_providers[0].credential_provider_arn #=> String
     #   resp.credential_providers[0].created_time #=> Time
     #   resp.credential_providers[0].last_updated_time #=> Time
@@ -3967,6 +4149,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateOauth2CredentialProviderResponse#name #name} => String
     #   * {Types::UpdateOauth2CredentialProviderResponse#credential_provider_vendor #credential_provider_vendor} => String
     #   * {Types::UpdateOauth2CredentialProviderResponse#credential_provider_arn #credential_provider_arn} => String
+    #   * {Types::UpdateOauth2CredentialProviderResponse#callback_url #callback_url} => String
     #   * {Types::UpdateOauth2CredentialProviderResponse#oauth2_provider_config_output #oauth2_provider_config_output} => Types::Oauth2ProviderConfigOutput
     #   * {Types::UpdateOauth2CredentialProviderResponse#created_time #created_time} => Time
     #   * {Types::UpdateOauth2CredentialProviderResponse#last_updated_time #last_updated_time} => Time
@@ -3975,7 +4158,7 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp = client.update_oauth_2_credential_provider({
     #     name: "CredentialProviderName", # required
-    #     credential_provider_vendor: "GoogleOauth2", # required, accepts GoogleOauth2, GithubOauth2, SlackOauth2, SalesforceOauth2, MicrosoftOauth2, CustomOauth2
+    #     credential_provider_vendor: "GoogleOauth2", # required, accepts GoogleOauth2, GithubOauth2, SlackOauth2, SalesforceOauth2, MicrosoftOauth2, CustomOauth2, AtlassianOauth2, LinkedinOauth2, XOauth2, OktaOauth2, OneLoginOauth2, PingOneOauth2, FacebookOauth2, YandexOauth2, RedditOauth2, ZoomOauth2, TwitchOauth2, SpotifyOauth2, DropboxOauth2, NotionOauth2, HubspotOauth2, CyberArkOauth2, FusionAuthOauth2, Auth0Oauth2, CognitoOauth2
     #     oauth2_provider_config_input: { # required
     #       custom_oauth_2_provider_config: {
     #         oauth_discovery: { # required
@@ -3985,6 +4168,7 @@ module Aws::BedrockAgentCoreControl
     #             authorization_endpoint: "AuthorizationEndpointType", # required
     #             token_endpoint: "TokenEndpointType", # required
     #             response_types: ["ResponseType"],
+    #             token_endpoint_auth_methods: ["TokenAuthMethod"],
     #           },
     #         },
     #         client_id: "ClientIdType", # required
@@ -4009,6 +4193,22 @@ module Aws::BedrockAgentCoreControl
     #       microsoft_oauth_2_provider_config: {
     #         client_id: "ClientIdType", # required
     #         client_secret: "ClientSecretType", # required
+    #         tenant_id: "TenantIdType",
+    #       },
+    #       atlassian_oauth_2_provider_config: {
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType", # required
+    #       },
+    #       linkedin_oauth_2_provider_config: {
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType", # required
+    #       },
+    #       included_oauth_2_provider_config: {
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType", # required
+    #         issuer: "IssuerUrlType",
+    #         authorization_endpoint: "AuthorizationEndpointType",
+    #         token_endpoint: "TokenEndpointType",
     #       },
     #     },
     #   })
@@ -4017,44 +4217,90 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.client_secret_arn.secret_arn #=> String
     #   resp.name #=> String
-    #   resp.credential_provider_vendor #=> String, one of "GoogleOauth2", "GithubOauth2", "SlackOauth2", "SalesforceOauth2", "MicrosoftOauth2", "CustomOauth2"
+    #   resp.credential_provider_vendor #=> String, one of "GoogleOauth2", "GithubOauth2", "SlackOauth2", "SalesforceOauth2", "MicrosoftOauth2", "CustomOauth2", "AtlassianOauth2", "LinkedinOauth2", "XOauth2", "OktaOauth2", "OneLoginOauth2", "PingOneOauth2", "FacebookOauth2", "YandexOauth2", "RedditOauth2", "ZoomOauth2", "TwitchOauth2", "SpotifyOauth2", "DropboxOauth2", "NotionOauth2", "HubspotOauth2", "CyberArkOauth2", "FusionAuthOauth2", "Auth0Oauth2", "CognitoOauth2"
     #   resp.credential_provider_arn #=> String
+    #   resp.callback_url #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.google_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.github_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.slack_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.salesforce_oauth_2_provider_config.client_id #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
     #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.microsoft_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.atlassian_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.linkedin_oauth_2_provider_config.client_id #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.discovery_url #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.issuer #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.authorization_endpoint #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types #=> Array
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.response_types[0] #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods #=> Array
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.oauth_discovery.authorization_server_metadata.token_endpoint_auth_methods[0] #=> String
+    #   resp.oauth2_provider_config_output.included_oauth_2_provider_config.client_id #=> String
     #   resp.created_time #=> Time
     #   resp.last_updated_time #=> Time
     #
@@ -4127,7 +4373,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

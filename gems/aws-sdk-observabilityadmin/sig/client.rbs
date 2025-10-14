@@ -204,6 +204,15 @@ module Aws
                                                     ) -> _GetCentralizationRuleForOrganizationResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCentralizationRuleForOrganizationResponseSuccess
 
+      interface _GetTelemetryEnrichmentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryEnrichmentStatusOutput]
+        def status: () -> ("Running" | "Stopped" | "Impaired")
+        def aws_resource_explorer_managed_view_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_telemetry_enrichment_status-instance_method
+      def get_telemetry_enrichment_status: () -> _GetTelemetryEnrichmentStatusResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryEnrichmentStatusResponseSuccess
+
       interface _GetTelemetryEvaluationStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryEvaluationStatusOutput]
         def status: () -> ("NOT_STARTED" | "STARTING" | "FAILED_START" | "RUNNING" | "STOPPING" | "FAILED_STOP" | "STOPPED")
@@ -335,6 +344,15 @@ module Aws
                                                  ) -> _ListTelemetryRulesForOrganizationResponseSuccess
                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryRulesForOrganizationResponseSuccess
 
+      interface _StartTelemetryEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTelemetryEnrichmentOutput]
+        def status: () -> ("Running" | "Stopped" | "Impaired")
+        def aws_resource_explorer_managed_view_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#start_telemetry_enrichment-instance_method
+      def start_telemetry_enrichment: () -> _StartTelemetryEnrichmentResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTelemetryEnrichmentResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#start_telemetry_evaluation-instance_method
       def start_telemetry_evaluation: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -342,6 +360,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#start_telemetry_evaluation_for_organization-instance_method
       def start_telemetry_evaluation_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopTelemetryEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTelemetryEnrichmentOutput]
+        def status: () -> ("Running" | "Stopped" | "Impaired")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#stop_telemetry_enrichment-instance_method
+      def stop_telemetry_enrichment: () -> _StopTelemetryEnrichmentResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTelemetryEnrichmentResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#stop_telemetry_evaluation-instance_method
       def stop_telemetry_evaluation: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

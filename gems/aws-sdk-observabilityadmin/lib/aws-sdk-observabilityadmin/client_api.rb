@@ -17,6 +17,7 @@ module Aws::ObservabilityAdmin
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountIdentifier = Shapes::StringShape.new(name: 'AccountIdentifier')
     AccountIdentifiers = Shapes::ListShape.new(name: 'AccountIdentifiers')
+    AwsResourceExplorerManagedViewArn = Shapes::StringShape.new(name: 'AwsResourceExplorerManagedViewArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CentralizationFailureReason = Shapes::StringShape.new(name: 'CentralizationFailureReason')
     CentralizationRule = Shapes::StructureShape.new(name: 'CentralizationRule')
@@ -42,6 +43,7 @@ module Aws::ObservabilityAdmin
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GetCentralizationRuleForOrganizationInput = Shapes::StructureShape.new(name: 'GetCentralizationRuleForOrganizationInput')
     GetCentralizationRuleForOrganizationOutput = Shapes::StructureShape.new(name: 'GetCentralizationRuleForOrganizationOutput')
+    GetTelemetryEnrichmentStatusOutput = Shapes::StructureShape.new(name: 'GetTelemetryEnrichmentStatusOutput')
     GetTelemetryEvaluationStatusForOrganizationOutput = Shapes::StructureShape.new(name: 'GetTelemetryEvaluationStatusForOrganizationOutput')
     GetTelemetryEvaluationStatusOutput = Shapes::StructureShape.new(name: 'GetTelemetryEvaluationStatusOutput')
     GetTelemetryRuleForOrganizationInput = Shapes::StructureShape.new(name: 'GetTelemetryRuleForOrganizationInput')
@@ -90,7 +92,9 @@ module Aws::ObservabilityAdmin
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SourceFilterString = Shapes::StringShape.new(name: 'SourceFilterString')
     SourceLogsConfiguration = Shapes::StructureShape.new(name: 'SourceLogsConfiguration')
+    StartTelemetryEnrichmentOutput = Shapes::StructureShape.new(name: 'StartTelemetryEnrichmentOutput')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopTelemetryEnrichmentOutput = Shapes::StructureShape.new(name: 'StopTelemetryEnrichmentOutput')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -102,6 +106,7 @@ module Aws::ObservabilityAdmin
     TelemetryConfigurationState = Shapes::MapShape.new(name: 'TelemetryConfigurationState')
     TelemetryConfigurations = Shapes::ListShape.new(name: 'TelemetryConfigurations')
     TelemetryDestinationConfiguration = Shapes::StructureShape.new(name: 'TelemetryDestinationConfiguration')
+    TelemetryEnrichmentStatus = Shapes::StringShape.new(name: 'TelemetryEnrichmentStatus')
     TelemetryRule = Shapes::StructureShape.new(name: 'TelemetryRule')
     TelemetryRuleSummaries = Shapes::ListShape.new(name: 'TelemetryRuleSummaries')
     TelemetryRuleSummary = Shapes::StructureShape.new(name: 'TelemetryRuleSummary')
@@ -205,6 +210,10 @@ module Aws::ObservabilityAdmin
     GetCentralizationRuleForOrganizationOutput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: CentralizationFailureReason, location_name: "FailureReason"))
     GetCentralizationRuleForOrganizationOutput.add_member(:centralization_rule, Shapes::ShapeRef.new(shape: CentralizationRule, location_name: "CentralizationRule"))
     GetCentralizationRuleForOrganizationOutput.struct_class = Types::GetCentralizationRuleForOrganizationOutput
+
+    GetTelemetryEnrichmentStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: TelemetryEnrichmentStatus, location_name: "Status"))
+    GetTelemetryEnrichmentStatusOutput.add_member(:aws_resource_explorer_managed_view_arn, Shapes::ShapeRef.new(shape: AwsResourceExplorerManagedViewArn, location_name: "AwsResourceExplorerManagedViewArn"))
+    GetTelemetryEnrichmentStatusOutput.struct_class = Types::GetTelemetryEnrichmentStatusOutput
 
     GetTelemetryEvaluationStatusForOrganizationOutput.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     GetTelemetryEvaluationStatusForOrganizationOutput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
@@ -324,6 +333,13 @@ module Aws::ObservabilityAdmin
     SourceLogsConfiguration.add_member(:log_group_selection_criteria, Shapes::ShapeRef.new(shape: LogsFilterString, required: true, location_name: "LogGroupSelectionCriteria"))
     SourceLogsConfiguration.add_member(:encrypted_log_group_strategy, Shapes::ShapeRef.new(shape: EncryptedLogGroupStrategy, required: true, location_name: "EncryptedLogGroupStrategy"))
     SourceLogsConfiguration.struct_class = Types::SourceLogsConfiguration
+
+    StartTelemetryEnrichmentOutput.add_member(:status, Shapes::ShapeRef.new(shape: TelemetryEnrichmentStatus, location_name: "Status"))
+    StartTelemetryEnrichmentOutput.add_member(:aws_resource_explorer_managed_view_arn, Shapes::ShapeRef.new(shape: AwsResourceExplorerManagedViewArn, location_name: "AwsResourceExplorerManagedViewArn"))
+    StartTelemetryEnrichmentOutput.struct_class = Types::StartTelemetryEnrichmentOutput
+
+    StopTelemetryEnrichmentOutput.add_member(:status, Shapes::ShapeRef.new(shape: TelemetryEnrichmentStatus, location_name: "Status"))
+    StopTelemetryEnrichmentOutput.struct_class = Types::StopTelemetryEnrichmentOutput
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -522,6 +538,18 @@ module Aws::ObservabilityAdmin
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_telemetry_enrichment_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTelemetryEnrichmentStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetTelemetryEnrichmentStatus"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetTelemetryEnrichmentStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_telemetry_evaluation_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTelemetryEvaluationStatus"
         o.http_method = "POST"
@@ -674,6 +702,18 @@ module Aws::ObservabilityAdmin
         )
       end)
 
+      api.add_operation(:start_telemetry_enrichment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTelemetryEnrichment"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartTelemetryEnrichment"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: StartTelemetryEnrichmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:start_telemetry_evaluation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartTelemetryEvaluation"
         o.http_method = "POST"
@@ -695,6 +735,18 @@ module Aws::ObservabilityAdmin
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:stop_telemetry_enrichment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTelemetryEnrichment"
+        o.http_method = "POST"
+        o.http_request_uri = "/StopTelemetryEnrichment"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: StopTelemetryEnrichmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 

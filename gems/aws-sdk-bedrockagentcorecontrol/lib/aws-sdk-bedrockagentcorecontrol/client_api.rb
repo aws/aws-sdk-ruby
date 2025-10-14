@@ -44,6 +44,8 @@ module Aws::BedrockAgentCoreControl
     ApiKeyType = Shapes::StringShape.new(name: 'ApiKeyType')
     ApiSchemaConfiguration = Shapes::UnionShape.new(name: 'ApiSchemaConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AtlassianOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'AtlassianOauth2ProviderConfigInput')
+    AtlassianOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'AtlassianOauth2ProviderConfigOutput')
     AuthorizationEndpointType = Shapes::StringShape.new(name: 'AuthorizationEndpointType')
     AuthorizerConfiguration = Shapes::UnionShape.new(name: 'AuthorizerConfiguration')
     AuthorizerType = Shapes::StringShape.new(name: 'AuthorizerType')
@@ -185,6 +187,8 @@ module Aws::BedrockAgentCoreControl
     GoogleOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigInput')
     GoogleOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigOutput')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
+    IncludedOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'IncludedOauth2ProviderConfigInput')
+    IncludedOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'IncludedOauth2ProviderConfigOutput')
     InlinePayload = Shapes::StringShape.new(name: 'InlinePayload')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -199,6 +203,8 @@ module Aws::BedrockAgentCoreControl
     LifecycleConfiguration = Shapes::StructureShape.new(name: 'LifecycleConfiguration')
     LifecycleConfigurationIdleRuntimeSessionTimeoutInteger = Shapes::IntegerShape.new(name: 'LifecycleConfigurationIdleRuntimeSessionTimeoutInteger')
     LifecycleConfigurationMaxLifetimeInteger = Shapes::IntegerShape.new(name: 'LifecycleConfigurationMaxLifetimeInteger')
+    LinkedinOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'LinkedinOauth2ProviderConfigInput')
+    LinkedinOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'LinkedinOauth2ProviderConfigOutput')
     ListAgentRuntimeEndpointsRequest = Shapes::StructureShape.new(name: 'ListAgentRuntimeEndpointsRequest')
     ListAgentRuntimeEndpointsResponse = Shapes::StructureShape.new(name: 'ListAgentRuntimeEndpointsResponse')
     ListAgentRuntimeVersionsRequest = Shapes::StructureShape.new(name: 'ListAgentRuntimeVersionsRequest')
@@ -361,15 +367,18 @@ module Aws::BedrockAgentCoreControl
     TargetStatus = Shapes::StringShape.new(name: 'TargetStatus')
     TargetSummaries = Shapes::ListShape.new(name: 'TargetSummaries')
     TargetSummary = Shapes::StructureShape.new(name: 'TargetSummary')
+    TenantIdType = Shapes::StringShape.new(name: 'TenantIdType')
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeBasedTrigger = Shapes::StructureShape.new(name: 'TimeBasedTrigger')
     TimeBasedTriggerInput = Shapes::StructureShape.new(name: 'TimeBasedTriggerInput')
     TimeBasedTriggerInputIdleSessionTimeoutInteger = Shapes::IntegerShape.new(name: 'TimeBasedTriggerInputIdleSessionTimeoutInteger')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenAuthMethod = Shapes::StringShape.new(name: 'TokenAuthMethod')
     TokenBasedTrigger = Shapes::StructureShape.new(name: 'TokenBasedTrigger')
     TokenBasedTriggerInput = Shapes::StructureShape.new(name: 'TokenBasedTriggerInput')
     TokenBasedTriggerInputTokenCountInteger = Shapes::IntegerShape.new(name: 'TokenBasedTriggerInputTokenCountInteger')
+    TokenEndpointAuthMethodsType = Shapes::ListShape.new(name: 'TokenEndpointAuthMethodsType')
     TokenEndpointType = Shapes::StringShape.new(name: 'TokenEndpointType')
     TokenVaultIdType = Shapes::StringShape.new(name: 'TokenVaultIdType')
     ToolDefinition = Shapes::StructureShape.new(name: 'ToolDefinition')
@@ -478,6 +487,14 @@ module Aws::BedrockAgentCoreControl
     ApiSchemaConfiguration.add_member_subclass(:unknown, Types::ApiSchemaConfiguration::Unknown)
     ApiSchemaConfiguration.struct_class = Types::ApiSchemaConfiguration
 
+    AtlassianOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
+    AtlassianOauth2ProviderConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "clientSecret"))
+    AtlassianOauth2ProviderConfigInput.struct_class = Types::AtlassianOauth2ProviderConfigInput
+
+    AtlassianOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    AtlassianOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
+    AtlassianOauth2ProviderConfigOutput.struct_class = Types::AtlassianOauth2ProviderConfigOutput
+
     AuthorizerConfiguration.add_member(:custom_jwt_authorizer, Shapes::ShapeRef.new(shape: CustomJWTAuthorizerConfiguration, location_name: "customJWTAuthorizer"))
     AuthorizerConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AuthorizerConfiguration.add_member_subclass(:custom_jwt_authorizer, Types::AuthorizerConfiguration::CustomJwtAuthorizer)
@@ -540,6 +557,8 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeEndpointResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "targetVersion"))
     CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
     CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
+    CreateAgentRuntimeEndpointResponse.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: "agentRuntimeId"))
+    CreateAgentRuntimeEndpointResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "endpointName"))
     CreateAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
     CreateAgentRuntimeEndpointResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     CreateAgentRuntimeEndpointResponse.struct_class = Types::CreateAgentRuntimeEndpointResponse
@@ -568,6 +587,7 @@ module Aws::BedrockAgentCoreControl
 
     CreateApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
     CreateApiKeyCredentialProviderRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKeyType, required: true, location_name: "apiKey"))
+    CreateApiKeyCredentialProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateApiKeyCredentialProviderRequest.struct_class = Types::CreateApiKeyCredentialProviderRequest
 
     CreateApiKeyCredentialProviderResponse.add_member(:api_key_secret_arn, Shapes::ShapeRef.new(shape: Secret, required: true, location_name: "apiKeySecretArn"))
@@ -673,15 +693,19 @@ module Aws::BedrockAgentCoreControl
     CreateOauth2CredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
     CreateOauth2CredentialProviderRequest.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: CredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
     CreateOauth2CredentialProviderRequest.add_member(:oauth2_provider_config_input, Shapes::ShapeRef.new(shape: Oauth2ProviderConfigInput, required: true, location_name: "oauth2ProviderConfigInput"))
+    CreateOauth2CredentialProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateOauth2CredentialProviderRequest.struct_class = Types::CreateOauth2CredentialProviderRequest
 
     CreateOauth2CredentialProviderResponse.add_member(:client_secret_arn, Shapes::ShapeRef.new(shape: Secret, required: true, location_name: "clientSecretArn"))
     CreateOauth2CredentialProviderResponse.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
     CreateOauth2CredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: CredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
+    CreateOauth2CredentialProviderResponse.add_member(:callback_url, Shapes::ShapeRef.new(shape: String, location_name: "callbackUrl"))
+    CreateOauth2CredentialProviderResponse.add_member(:oauth2_provider_config_output, Shapes::ShapeRef.new(shape: Oauth2ProviderConfigOutput, location_name: "oauth2ProviderConfigOutput"))
     CreateOauth2CredentialProviderResponse.struct_class = Types::CreateOauth2CredentialProviderResponse
 
     CreateWorkloadIdentityRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkloadIdentityNameType, required: true, location_name: "name"))
     CreateWorkloadIdentityRequest.add_member(:allowed_resource_oauth_2_return_urls, Shapes::ShapeRef.new(shape: ResourceOauth2ReturnUrlListType, location_name: "allowedResourceOauth2ReturnUrls"))
+    CreateWorkloadIdentityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateWorkloadIdentityRequest.struct_class = Types::CreateWorkloadIdentityRequest
 
     CreateWorkloadIdentityResponse.add_member(:name, Shapes::ShapeRef.new(shape: WorkloadIdentityNameType, required: true, location_name: "name"))
@@ -768,6 +792,7 @@ module Aws::BedrockAgentCoreControl
     CustomOauth2ProviderConfigInput.struct_class = Types::CustomOauth2ProviderConfigInput
 
     CustomOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    CustomOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     CustomOauth2ProviderConfigOutput.struct_class = Types::CustomOauth2ProviderConfigOutput
 
     DecryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -779,12 +804,15 @@ module Aws::BedrockAgentCoreControl
     DeleteAgentRuntimeEndpointRequest.struct_class = Types::DeleteAgentRuntimeEndpointRequest
 
     DeleteAgentRuntimeEndpointResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointStatus, required: true, location_name: "status"))
+    DeleteAgentRuntimeEndpointResponse.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: "agentRuntimeId"))
+    DeleteAgentRuntimeEndpointResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "endpointName"))
     DeleteAgentRuntimeEndpointResponse.struct_class = Types::DeleteAgentRuntimeEndpointResponse
 
     DeleteAgentRuntimeRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     DeleteAgentRuntimeRequest.struct_class = Types::DeleteAgentRuntimeRequest
 
     DeleteAgentRuntimeResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentRuntimeStatus, required: true, location_name: "status"))
+    DeleteAgentRuntimeResponse.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, location_name: "agentRuntimeId"))
     DeleteAgentRuntimeResponse.struct_class = Types::DeleteAgentRuntimeResponse
 
     DeleteApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -1029,6 +1057,7 @@ module Aws::BedrockAgentCoreControl
     GetOauth2CredentialProviderResponse.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
     GetOauth2CredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: CredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
     GetOauth2CredentialProviderResponse.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: CredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    GetOauth2CredentialProviderResponse.add_member(:callback_url, Shapes::ShapeRef.new(shape: String, location_name: "callbackUrl"))
     GetOauth2CredentialProviderResponse.add_member(:oauth2_provider_config_output, Shapes::ShapeRef.new(shape: Oauth2ProviderConfigOutput, required: true, location_name: "oauth2ProviderConfigOutput"))
     GetOauth2CredentialProviderResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
     GetOauth2CredentialProviderResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
@@ -1057,6 +1086,7 @@ module Aws::BedrockAgentCoreControl
     GithubOauth2ProviderConfigInput.struct_class = Types::GithubOauth2ProviderConfigInput
 
     GithubOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    GithubOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     GithubOauth2ProviderConfigOutput.struct_class = Types::GithubOauth2ProviderConfigOutput
 
     GoogleOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
@@ -1064,7 +1094,19 @@ module Aws::BedrockAgentCoreControl
     GoogleOauth2ProviderConfigInput.struct_class = Types::GoogleOauth2ProviderConfigInput
 
     GoogleOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    GoogleOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     GoogleOauth2ProviderConfigOutput.struct_class = Types::GoogleOauth2ProviderConfigOutput
+
+    IncludedOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
+    IncludedOauth2ProviderConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "clientSecret"))
+    IncludedOauth2ProviderConfigInput.add_member(:issuer, Shapes::ShapeRef.new(shape: IssuerUrlType, location_name: "issuer"))
+    IncludedOauth2ProviderConfigInput.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: AuthorizationEndpointType, location_name: "authorizationEndpoint"))
+    IncludedOauth2ProviderConfigInput.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: TokenEndpointType, location_name: "tokenEndpoint"))
+    IncludedOauth2ProviderConfigInput.struct_class = Types::IncludedOauth2ProviderConfigInput
+
+    IncludedOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    IncludedOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
+    IncludedOauth2ProviderConfigOutput.struct_class = Types::IncludedOauth2ProviderConfigOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -1084,6 +1126,14 @@ module Aws::BedrockAgentCoreControl
     LifecycleConfiguration.add_member(:idle_runtime_session_timeout, Shapes::ShapeRef.new(shape: LifecycleConfigurationIdleRuntimeSessionTimeoutInteger, location_name: "idleRuntimeSessionTimeout"))
     LifecycleConfiguration.add_member(:max_lifetime, Shapes::ShapeRef.new(shape: LifecycleConfigurationMaxLifetimeInteger, location_name: "maxLifetime"))
     LifecycleConfiguration.struct_class = Types::LifecycleConfiguration
+
+    LinkedinOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
+    LinkedinOauth2ProviderConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "clientSecret"))
+    LinkedinOauth2ProviderConfigInput.struct_class = Types::LinkedinOauth2ProviderConfigInput
+
+    LinkedinOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    LinkedinOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
+    LinkedinOauth2ProviderConfigOutput.struct_class = Types::LinkedinOauth2ProviderConfigOutput
 
     ListAgentRuntimeEndpointsRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     ListAgentRuntimeEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1268,9 +1318,11 @@ module Aws::BedrockAgentCoreControl
 
     MicrosoftOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
     MicrosoftOauth2ProviderConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "clientSecret"))
+    MicrosoftOauth2ProviderConfigInput.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantIdType, location_name: "tenantId"))
     MicrosoftOauth2ProviderConfigInput.struct_class = Types::MicrosoftOauth2ProviderConfigInput
 
     MicrosoftOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    MicrosoftOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     MicrosoftOauth2ProviderConfigOutput.struct_class = Types::MicrosoftOauth2ProviderConfigOutput
 
     ModifyConsolidationConfiguration.add_member(:custom_consolidation_configuration, Shapes::ShapeRef.new(shape: CustomConsolidationConfigurationInput, location_name: "customConsolidationConfiguration"))
@@ -1332,6 +1384,7 @@ module Aws::BedrockAgentCoreControl
     Oauth2AuthorizationServerMetadata.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: AuthorizationEndpointType, required: true, location_name: "authorizationEndpoint"))
     Oauth2AuthorizationServerMetadata.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: TokenEndpointType, required: true, location_name: "tokenEndpoint"))
     Oauth2AuthorizationServerMetadata.add_member(:response_types, Shapes::ShapeRef.new(shape: ResponseListType, location_name: "responseTypes"))
+    Oauth2AuthorizationServerMetadata.add_member(:token_endpoint_auth_methods, Shapes::ShapeRef.new(shape: TokenEndpointAuthMethodsType, location_name: "tokenEndpointAuthMethods"))
     Oauth2AuthorizationServerMetadata.struct_class = Types::Oauth2AuthorizationServerMetadata
 
     Oauth2CredentialProviderItem.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -1357,6 +1410,9 @@ module Aws::BedrockAgentCoreControl
     Oauth2ProviderConfigInput.add_member(:slack_oauth_2_provider_config, Shapes::ShapeRef.new(shape: SlackOauth2ProviderConfigInput, location_name: "slackOauth2ProviderConfig"))
     Oauth2ProviderConfigInput.add_member(:salesforce_oauth_2_provider_config, Shapes::ShapeRef.new(shape: SalesforceOauth2ProviderConfigInput, location_name: "salesforceOauth2ProviderConfig"))
     Oauth2ProviderConfigInput.add_member(:microsoft_oauth_2_provider_config, Shapes::ShapeRef.new(shape: MicrosoftOauth2ProviderConfigInput, location_name: "microsoftOauth2ProviderConfig"))
+    Oauth2ProviderConfigInput.add_member(:atlassian_oauth_2_provider_config, Shapes::ShapeRef.new(shape: AtlassianOauth2ProviderConfigInput, location_name: "atlassianOauth2ProviderConfig"))
+    Oauth2ProviderConfigInput.add_member(:linkedin_oauth_2_provider_config, Shapes::ShapeRef.new(shape: LinkedinOauth2ProviderConfigInput, location_name: "linkedinOauth2ProviderConfig"))
+    Oauth2ProviderConfigInput.add_member(:included_oauth_2_provider_config, Shapes::ShapeRef.new(shape: IncludedOauth2ProviderConfigInput, location_name: "includedOauth2ProviderConfig"))
     Oauth2ProviderConfigInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Oauth2ProviderConfigInput.add_member_subclass(:custom_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::CustomOauth2ProviderConfig)
     Oauth2ProviderConfigInput.add_member_subclass(:google_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::GoogleOauth2ProviderConfig)
@@ -1364,6 +1420,9 @@ module Aws::BedrockAgentCoreControl
     Oauth2ProviderConfigInput.add_member_subclass(:slack_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::SlackOauth2ProviderConfig)
     Oauth2ProviderConfigInput.add_member_subclass(:salesforce_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::SalesforceOauth2ProviderConfig)
     Oauth2ProviderConfigInput.add_member_subclass(:microsoft_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::MicrosoftOauth2ProviderConfig)
+    Oauth2ProviderConfigInput.add_member_subclass(:atlassian_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::AtlassianOauth2ProviderConfig)
+    Oauth2ProviderConfigInput.add_member_subclass(:linkedin_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::LinkedinOauth2ProviderConfig)
+    Oauth2ProviderConfigInput.add_member_subclass(:included_oauth_2_provider_config, Types::Oauth2ProviderConfigInput::IncludedOauth2ProviderConfig)
     Oauth2ProviderConfigInput.add_member_subclass(:unknown, Types::Oauth2ProviderConfigInput::Unknown)
     Oauth2ProviderConfigInput.struct_class = Types::Oauth2ProviderConfigInput
 
@@ -1373,6 +1432,9 @@ module Aws::BedrockAgentCoreControl
     Oauth2ProviderConfigOutput.add_member(:slack_oauth_2_provider_config, Shapes::ShapeRef.new(shape: SlackOauth2ProviderConfigOutput, location_name: "slackOauth2ProviderConfig"))
     Oauth2ProviderConfigOutput.add_member(:salesforce_oauth_2_provider_config, Shapes::ShapeRef.new(shape: SalesforceOauth2ProviderConfigOutput, location_name: "salesforceOauth2ProviderConfig"))
     Oauth2ProviderConfigOutput.add_member(:microsoft_oauth_2_provider_config, Shapes::ShapeRef.new(shape: MicrosoftOauth2ProviderConfigOutput, location_name: "microsoftOauth2ProviderConfig"))
+    Oauth2ProviderConfigOutput.add_member(:atlassian_oauth_2_provider_config, Shapes::ShapeRef.new(shape: AtlassianOauth2ProviderConfigOutput, location_name: "atlassianOauth2ProviderConfig"))
+    Oauth2ProviderConfigOutput.add_member(:linkedin_oauth_2_provider_config, Shapes::ShapeRef.new(shape: LinkedinOauth2ProviderConfigOutput, location_name: "linkedinOauth2ProviderConfig"))
+    Oauth2ProviderConfigOutput.add_member(:included_oauth_2_provider_config, Shapes::ShapeRef.new(shape: IncludedOauth2ProviderConfigOutput, location_name: "includedOauth2ProviderConfig"))
     Oauth2ProviderConfigOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Oauth2ProviderConfigOutput.add_member_subclass(:custom_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::CustomOauth2ProviderConfig)
     Oauth2ProviderConfigOutput.add_member_subclass(:google_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::GoogleOauth2ProviderConfig)
@@ -1380,6 +1442,9 @@ module Aws::BedrockAgentCoreControl
     Oauth2ProviderConfigOutput.add_member_subclass(:slack_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::SlackOauth2ProviderConfig)
     Oauth2ProviderConfigOutput.add_member_subclass(:salesforce_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::SalesforceOauth2ProviderConfig)
     Oauth2ProviderConfigOutput.add_member_subclass(:microsoft_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::MicrosoftOauth2ProviderConfig)
+    Oauth2ProviderConfigOutput.add_member_subclass(:atlassian_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::AtlassianOauth2ProviderConfig)
+    Oauth2ProviderConfigOutput.add_member_subclass(:linkedin_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::LinkedinOauth2ProviderConfig)
+    Oauth2ProviderConfigOutput.add_member_subclass(:included_oauth_2_provider_config, Types::Oauth2ProviderConfigOutput::IncludedOauth2ProviderConfig)
     Oauth2ProviderConfigOutput.add_member_subclass(:unknown, Types::Oauth2ProviderConfigOutput::Unknown)
     Oauth2ProviderConfigOutput.struct_class = Types::Oauth2ProviderConfigOutput
 
@@ -1423,6 +1488,7 @@ module Aws::BedrockAgentCoreControl
     SalesforceOauth2ProviderConfigInput.struct_class = Types::SalesforceOauth2ProviderConfigInput
 
     SalesforceOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    SalesforceOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     SalesforceOauth2ProviderConfigOutput.struct_class = Types::SalesforceOauth2ProviderConfigOutput
 
     SchemaDefinition.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
@@ -1495,6 +1561,7 @@ module Aws::BedrockAgentCoreControl
     SlackOauth2ProviderConfigInput.struct_class = Types::SlackOauth2ProviderConfigInput
 
     SlackOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
+    SlackOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     SlackOauth2ProviderConfigOutput.struct_class = Types::SlackOauth2ProviderConfigOutput
 
     StatusReasons.member = Shapes::ShapeRef.new(shape: StatusReason)
@@ -1576,6 +1643,8 @@ module Aws::BedrockAgentCoreControl
 
     TokenBasedTriggerInput.add_member(:token_count, Shapes::ShapeRef.new(shape: TokenBasedTriggerInputTokenCountInteger, location_name: "tokenCount"))
     TokenBasedTriggerInput.struct_class = Types::TokenBasedTriggerInput
+
+    TokenEndpointAuthMethodsType.member = Shapes::ShapeRef.new(shape: TokenAuthMethod)
 
     ToolDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     ToolDefinition.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
@@ -1747,6 +1816,7 @@ module Aws::BedrockAgentCoreControl
     UpdateOauth2CredentialProviderResponse.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
     UpdateOauth2CredentialProviderResponse.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: CredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
     UpdateOauth2CredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: CredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
+    UpdateOauth2CredentialProviderResponse.add_member(:callback_url, Shapes::ShapeRef.new(shape: String, location_name: "callbackUrl"))
     UpdateOauth2CredentialProviderResponse.add_member(:oauth2_provider_config_output, Shapes::ShapeRef.new(shape: Oauth2ProviderConfigOutput, required: true, location_name: "oauth2ProviderConfigOutput"))
     UpdateOauth2CredentialProviderResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
     UpdateOauth2CredentialProviderResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))

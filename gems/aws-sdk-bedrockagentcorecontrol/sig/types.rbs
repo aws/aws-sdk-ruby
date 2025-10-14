@@ -79,6 +79,18 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class AtlassianOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class AtlassianOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
     class AuthorizerConfiguration
       attr_accessor custom_jwt_authorizer: Types::CustomJWTAuthorizerConfiguration
       attr_accessor unknown: untyped
@@ -164,9 +176,11 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_version: ::String
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor endpoint_name: ::String
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
       attr_accessor created_at: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:endpoint_name]
     end
 
     class CreateAgentRuntimeRequest
@@ -198,6 +212,7 @@ module Aws::BedrockAgentCoreControl
     class CreateApiKeyCredentialProviderRequest
       attr_accessor name: ::String
       attr_accessor api_key: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:api_key]
     end
 
@@ -325,8 +340,9 @@ module Aws::BedrockAgentCoreControl
 
     class CreateOauth2CredentialProviderRequest
       attr_accessor name: ::String
-      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
       attr_accessor oauth2_provider_config_input: Types::Oauth2ProviderConfigInput
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -334,12 +350,15 @@ module Aws::BedrockAgentCoreControl
       attr_accessor client_secret_arn: Types::Secret
       attr_accessor name: ::String
       attr_accessor credential_provider_arn: ::String
+      attr_accessor callback_url: ::String
+      attr_accessor oauth2_provider_config_output: Types::Oauth2ProviderConfigOutput
       SENSITIVE: []
     end
 
     class CreateWorkloadIdentityRequest
       attr_accessor name: ::String
       attr_accessor allowed_resource_oauth_2_return_urls: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -476,6 +495,7 @@ module Aws::BedrockAgentCoreControl
 
     class CustomOauth2ProviderConfigOutput
       attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -493,7 +513,9 @@ module Aws::BedrockAgentCoreControl
 
     class DeleteAgentRuntimeEndpointResponse
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
-      SENSITIVE: []
+      attr_accessor agent_runtime_id: ::String
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: [:endpoint_name]
     end
 
     class DeleteAgentRuntimeRequest
@@ -503,6 +525,7 @@ module Aws::BedrockAgentCoreControl
 
     class DeleteAgentRuntimeResponse
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor agent_runtime_id: ::String
       SENSITIVE: []
     end
 
@@ -820,7 +843,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor client_secret_arn: Types::Secret
       attr_accessor name: ::String
       attr_accessor credential_provider_arn: ::String
-      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
+      attr_accessor callback_url: ::String
       attr_accessor oauth2_provider_config_output: Types::Oauth2ProviderConfigOutput
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -861,6 +885,7 @@ module Aws::BedrockAgentCoreControl
 
     class GithubOauth2ProviderConfigOutput
       attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -872,6 +897,22 @@ module Aws::BedrockAgentCoreControl
 
     class GoogleOauth2ProviderConfigOutput
       attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
+    class IncludedOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor issuer: ::String
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor token_endpoint: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class IncludedOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -901,6 +942,18 @@ module Aws::BedrockAgentCoreControl
     class LifecycleConfiguration
       attr_accessor idle_runtime_session_timeout: ::Integer
       attr_accessor max_lifetime: ::Integer
+      SENSITIVE: []
+    end
+
+    class LinkedinOauth2ProviderConfigInput
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class LinkedinOauth2ProviderConfigOutput
+      attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -1160,11 +1213,13 @@ module Aws::BedrockAgentCoreControl
     class MicrosoftOauth2ProviderConfigInput
       attr_accessor client_id: ::String
       attr_accessor client_secret: ::String
+      attr_accessor tenant_id: ::String
       SENSITIVE: [:client_secret]
     end
 
     class MicrosoftOauth2ProviderConfigOutput
       attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -1243,12 +1298,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor authorization_endpoint: ::String
       attr_accessor token_endpoint: ::String
       attr_accessor response_types: ::Array[::String]
+      attr_accessor token_endpoint_auth_methods: ::Array[::String]
       SENSITIVE: []
     end
 
     class Oauth2CredentialProviderItem
       attr_accessor name: ::String
-      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
       attr_accessor credential_provider_arn: ::String
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -1276,6 +1332,9 @@ module Aws::BedrockAgentCoreControl
       attr_accessor slack_oauth_2_provider_config: Types::SlackOauth2ProviderConfigInput
       attr_accessor salesforce_oauth_2_provider_config: Types::SalesforceOauth2ProviderConfigInput
       attr_accessor microsoft_oauth_2_provider_config: Types::MicrosoftOauth2ProviderConfigInput
+      attr_accessor atlassian_oauth_2_provider_config: Types::AtlassianOauth2ProviderConfigInput
+      attr_accessor linkedin_oauth_2_provider_config: Types::LinkedinOauth2ProviderConfigInput
+      attr_accessor included_oauth_2_provider_config: Types::IncludedOauth2ProviderConfigInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1291,6 +1350,12 @@ module Aws::BedrockAgentCoreControl
       end
       class MicrosoftOauth2ProviderConfig < Oauth2ProviderConfigInput
       end
+      class AtlassianOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class LinkedinOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
+      class IncludedOauth2ProviderConfig < Oauth2ProviderConfigInput
+      end
       class Unknown < Oauth2ProviderConfigInput
       end
     end
@@ -1302,6 +1367,9 @@ module Aws::BedrockAgentCoreControl
       attr_accessor slack_oauth_2_provider_config: Types::SlackOauth2ProviderConfigOutput
       attr_accessor salesforce_oauth_2_provider_config: Types::SalesforceOauth2ProviderConfigOutput
       attr_accessor microsoft_oauth_2_provider_config: Types::MicrosoftOauth2ProviderConfigOutput
+      attr_accessor atlassian_oauth_2_provider_config: Types::AtlassianOauth2ProviderConfigOutput
+      attr_accessor linkedin_oauth_2_provider_config: Types::LinkedinOauth2ProviderConfigOutput
+      attr_accessor included_oauth_2_provider_config: Types::IncludedOauth2ProviderConfigOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1316,6 +1384,12 @@ module Aws::BedrockAgentCoreControl
       class SalesforceOauth2ProviderConfig < Oauth2ProviderConfigOutput
       end
       class MicrosoftOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class AtlassianOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class LinkedinOauth2ProviderConfig < Oauth2ProviderConfigOutput
+      end
+      class IncludedOauth2ProviderConfig < Oauth2ProviderConfigOutput
       end
       class Unknown < Oauth2ProviderConfigOutput
       end
@@ -1373,6 +1447,7 @@ module Aws::BedrockAgentCoreControl
 
     class SalesforceOauth2ProviderConfigOutput
       attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -1472,6 +1547,7 @@ module Aws::BedrockAgentCoreControl
 
     class SlackOauth2ProviderConfigOutput
       attr_accessor oauth_discovery: Types::Oauth2Discovery
+      attr_accessor client_id: ::String
       SENSITIVE: []
     end
 
@@ -1786,7 +1862,7 @@ module Aws::BedrockAgentCoreControl
 
     class UpdateOauth2CredentialProviderRequest
       attr_accessor name: ::String
-      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
       attr_accessor oauth2_provider_config_input: Types::Oauth2ProviderConfigInput
       SENSITIVE: []
     end
@@ -1794,8 +1870,9 @@ module Aws::BedrockAgentCoreControl
     class UpdateOauth2CredentialProviderResponse
       attr_accessor client_secret_arn: Types::Secret
       attr_accessor name: ::String
-      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+      attr_accessor credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
       attr_accessor credential_provider_arn: ::String
+      attr_accessor callback_url: ::String
       attr_accessor oauth2_provider_config_output: Types::Oauth2ProviderConfigOutput
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time

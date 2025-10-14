@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.561.0 (2025-10-13)
+------------------
+
+* Feature - Release Amazon EC2 c8i, c8i-flex, m8a, and r8gb
+
 1.560.0 (2025-09-26)
 ------------------
 

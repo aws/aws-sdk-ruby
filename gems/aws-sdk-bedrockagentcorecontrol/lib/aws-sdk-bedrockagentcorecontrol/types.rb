@@ -249,6 +249,50 @@ module Aws::BedrockAgentCoreControl
       class Unknown < ApiSchemaConfiguration; end
     end
 
+    # Configuration settings for connecting to Atlassian services using
+    # OAuth2 authentication. This includes the client credentials required
+    # to authenticate with Atlassian's OAuth2 authorization server.
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the Atlassian OAuth2 provider. This identifier is
+    #   assigned by Atlassian when you register your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret for the Atlassian OAuth2 provider. This secret is
+    #   assigned by Atlassian and used along with the client ID to
+    #   authenticate your application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AtlassianOauth2ProviderConfigInput AWS API Documentation
+    #
+    class AtlassianOauth2ProviderConfigInput < Struct.new(
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # The configuration details returned for an Atlassian OAuth2 provider,
+    # including the client ID and OAuth2 discovery information.
+    #
+    # @!attribute [rw] oauth_discovery
+    #   Contains the discovery information for an OAuth2 provider.
+    #   @return [Types::Oauth2Discovery]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the Atlassian OAuth2 provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AtlassianOauth2ProviderConfigOutput AWS API Documentation
+    #
+    class AtlassianOauth2ProviderConfigOutput < Struct.new(
+      :oauth_discovery,
+      :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents inbound authorization configuration options used to
     # authenticate incoming requests.
     #
@@ -526,6 +570,14 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Resource Name (ARN) of the AgentCore Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] agent_runtime_id
+    #   The unique identifier of the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the AgentCore Runtime endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the AgentCore Runtime endpoint.
     #   @return [String]
@@ -540,9 +592,11 @@ module Aws::BedrockAgentCoreControl
       :target_version,
       :agent_runtime_endpoint_arn,
       :agent_runtime_arn,
+      :agent_runtime_id,
+      :endpoint_name,
       :status,
       :created_at)
-      SENSITIVE = []
+      SENSITIVE = [:endpoint_name]
       include Aws::Structure
     end
 
@@ -669,11 +723,18 @@ module Aws::BedrockAgentCoreControl
     #   stored securely.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the API key credential
+    #   provider. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateApiKeyCredentialProviderRequest AWS API Documentation
     #
     class CreateApiKeyCredentialProviderRequest < Struct.new(
       :name,
-      :api_key)
+      :api_key,
+      :tags)
       SENSITIVE = [:api_key]
       include Aws::Structure
     end
@@ -1254,12 +1315,19 @@ module Aws::BedrockAgentCoreControl
     #   ID, client secret, and other vendor-specific settings.
     #   @return [Types::Oauth2ProviderConfigInput]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the OAuth2 credential
+    #   provider. Tags enable you to categorize your resources in different
+    #   ways, for example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateOauth2CredentialProviderRequest AWS API Documentation
     #
     class CreateOauth2CredentialProviderRequest < Struct.new(
       :name,
       :credential_provider_vendor,
-      :oauth2_provider_config_input)
+      :oauth2_provider_config_input,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1277,12 +1345,24 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Resource Name (ARN) of the OAuth2 credential provider.
     #   @return [String]
     #
+    # @!attribute [rw] callback_url
+    #   Callback URL to register on the OAuth2 credential provider as an
+    #   allowed callback URL. This URL is where the OAuth2 authorization
+    #   server redirects users after they complete the authorization flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] oauth2_provider_config_output
+    #   Contains the output configuration for an OAuth2 provider.
+    #   @return [Types::Oauth2ProviderConfigOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateOauth2CredentialProviderResponse AWS API Documentation
     #
     class CreateOauth2CredentialProviderResponse < Struct.new(
       :client_secret_arn,
       :name,
-      :credential_provider_arn)
+      :credential_provider_arn,
+      :callback_url,
+      :oauth2_provider_config_output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1297,11 +1377,18 @@ module Aws::BedrockAgentCoreControl
     #   this workload identity.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the workload identity.
+    #   Tags enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateWorkloadIdentityRequest AWS API Documentation
     #
     class CreateWorkloadIdentityRequest < Struct.new(
       :name,
-      :allowed_resource_oauth_2_return_urls)
+      :allowed_resource_oauth_2_return_urls,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1631,10 +1718,15 @@ module Aws::BedrockAgentCoreControl
     #   The OAuth2 discovery information for the custom provider.
     #   @return [Types::Oauth2Discovery]
     #
+    # @!attribute [rw] client_id
+    #   The client ID for the custom OAuth2 provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomOauth2ProviderConfigOutput AWS API Documentation
     #
     class CustomOauth2ProviderConfigOutput < Struct.new(
-      :oauth_discovery)
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1683,11 +1775,21 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the AgentCore Runtime endpoint deletion.
     #   @return [String]
     #
+    # @!attribute [rw] agent_runtime_id
+    #   The unique identifier of the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the AgentCore Runtime endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeEndpointResponse AWS API Documentation
     #
     class DeleteAgentRuntimeEndpointResponse < Struct.new(
-      :status)
-      SENSITIVE = []
+      :status,
+      :agent_runtime_id,
+      :endpoint_name)
+      SENSITIVE = [:endpoint_name]
       include Aws::Structure
     end
 
@@ -1707,10 +1809,15 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the AgentCore Runtime deletion.
     #   @return [String]
     #
+    # @!attribute [rw] agent_runtime_id
+    #   The unique identifier of the AgentCore Runtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteAgentRuntimeResponse AWS API Documentation
     #
     class DeleteAgentRuntimeResponse < Struct.new(
-      :status)
+      :status,
+      :agent_runtime_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2785,6 +2892,12 @@ module Aws::BedrockAgentCoreControl
     #   The vendor of the OAuth2 credential provider.
     #   @return [String]
     #
+    # @!attribute [rw] callback_url
+    #   Callback URL to register on the OAuth2 credential provider as an
+    #   allowed callback URL. This URL is where the OAuth2 authorization
+    #   server redirects users after they complete the authorization flow.
+    #   @return [String]
+    #
     # @!attribute [rw] oauth2_provider_config_output
     #   The configuration output for the OAuth2 provider.
     #   @return [Types::Oauth2ProviderConfigOutput]
@@ -2804,6 +2917,7 @@ module Aws::BedrockAgentCoreControl
       :name,
       :credential_provider_arn,
       :credential_provider_vendor,
+      :callback_url,
       :oauth2_provider_config_output,
       :created_time,
       :last_updated_time)
@@ -2915,10 +3029,15 @@ module Aws::BedrockAgentCoreControl
     #   The OAuth2 discovery information for the GitHub provider.
     #   @return [Types::Oauth2Discovery]
     #
+    # @!attribute [rw] client_id
+    #   The client ID for the GitHub OAuth2 provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GithubOauth2ProviderConfigOutput AWS API Documentation
     #
     class GithubOauth2ProviderConfigOutput < Struct.new(
-      :oauth_discovery)
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2948,10 +3067,79 @@ module Aws::BedrockAgentCoreControl
     #   The OAuth2 discovery information for the Google provider.
     #   @return [Types::Oauth2Discovery]
     #
+    # @!attribute [rw] client_id
+    #   The client ID for the Google OAuth2 provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GoogleOauth2ProviderConfigOutput AWS API Documentation
     #
     class GoogleOauth2ProviderConfigOutput < Struct.new(
-      :oauth_discovery)
+      :oauth_discovery,
+      :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for connecting to a supported OAuth2 provider.
+    # This includes client credentials and OAuth2 discovery information for
+    # providers that have built-in support.
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the supported OAuth2 provider. This identifier is
+    #   assigned by the OAuth2 provider when you register your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret for the supported OAuth2 provider. This secret is
+    #   assigned by the OAuth2 provider and used along with the client ID to
+    #   authenticate your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   Token issuer of your isolated OAuth2 application tenant. This URL
+    #   identifies the authorization server that issues tokens for this
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_endpoint
+    #   OAuth2 authorization endpoint for your isolated OAuth2 application
+    #   tenant. This is where users are redirected to authenticate and
+    #   authorize access to their resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint
+    #   OAuth2 token endpoint for your isolated OAuth2 application tenant.
+    #   This is where authorization codes are exchanged for access tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/IncludedOauth2ProviderConfigInput AWS API Documentation
+    #
+    class IncludedOauth2ProviderConfigInput < Struct.new(
+      :client_id,
+      :client_secret,
+      :issuer,
+      :authorization_endpoint,
+      :token_endpoint)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # The configuration details returned for a supported OAuth2 provider,
+    # including client credentials and OAuth2 discovery information.
+    #
+    # @!attribute [rw] oauth_discovery
+    #   Contains the discovery information for an OAuth2 provider.
+    #   @return [Types::Oauth2Discovery]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the supported OAuth2 provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/IncludedOauth2ProviderConfigOutput AWS API Documentation
+    #
+    class IncludedOauth2ProviderConfigOutput < Struct.new(
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3052,6 +3240,50 @@ module Aws::BedrockAgentCoreControl
     class LifecycleConfiguration < Struct.new(
       :idle_runtime_session_timeout,
       :max_lifetime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for connecting to LinkedIn services using
+    # OAuth2 authentication. This includes the client credentials required
+    # to authenticate with LinkedIn's OAuth2 authorization server.
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the LinkedIn OAuth2 provider. This identifier is
+    #   assigned by LinkedIn when you register your application.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret for the LinkedIn OAuth2 provider. This secret is
+    #   assigned by LinkedIn and used along with the client ID to
+    #   authenticate your application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LinkedinOauth2ProviderConfigInput AWS API Documentation
+    #
+    class LinkedinOauth2ProviderConfigInput < Struct.new(
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # The configuration details returned for a LinkedIn OAuth2 provider,
+    # including the client ID and OAuth2 discovery information.
+    #
+    # @!attribute [rw] oauth_discovery
+    #   Contains the discovery information for an OAuth2 provider.
+    #   @return [Types::Oauth2Discovery]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the LinkedIn OAuth2 provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LinkedinOauth2ProviderConfigOutput AWS API Documentation
+    #
+    class LinkedinOauth2ProviderConfigOutput < Struct.new(
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3853,11 +4085,18 @@ module Aws::BedrockAgentCoreControl
     #   The client secret for the Microsoft OAuth2 provider.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_id
+    #   The Microsoft Entra ID (formerly Azure AD) tenant ID for your
+    #   organization. This identifies the specific tenant within
+    #   Microsoft's identity platform where your application is registered.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MicrosoftOauth2ProviderConfigInput AWS API Documentation
     #
     class MicrosoftOauth2ProviderConfigInput < Struct.new(
       :client_id,
-      :client_secret)
+      :client_secret,
+      :tenant_id)
       SENSITIVE = [:client_secret]
       include Aws::Structure
     end
@@ -3868,10 +4107,15 @@ module Aws::BedrockAgentCoreControl
     #   The OAuth2 discovery information for the Microsoft provider.
     #   @return [Types::Oauth2Discovery]
     #
+    # @!attribute [rw] client_id
+    #   The client ID for the Microsoft OAuth2 provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MicrosoftOauth2ProviderConfigOutput AWS API Documentation
     #
     class MicrosoftOauth2ProviderConfigOutput < Struct.new(
-      :oauth_discovery)
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4107,13 +4351,20 @@ module Aws::BedrockAgentCoreControl
     #   The supported response types for the OAuth2 authorization server.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] token_endpoint_auth_methods
+    #   The authentication methods supported by the token endpoint. This
+    #   specifies how clients can authenticate when requesting tokens from
+    #   the authorization server.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Oauth2AuthorizationServerMetadata AWS API Documentation
     #
     class Oauth2AuthorizationServerMetadata < Struct.new(
       :issuer,
       :authorization_endpoint,
       :token_endpoint,
-      :response_types)
+      :response_types,
+      :token_endpoint_auth_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4209,6 +4460,20 @@ module Aws::BedrockAgentCoreControl
     #   The configuration for a Microsoft OAuth2 provider.
     #   @return [Types::MicrosoftOauth2ProviderConfigInput]
     #
+    # @!attribute [rw] atlassian_oauth_2_provider_config
+    #   Configuration settings for Atlassian OAuth2 provider integration.
+    #   @return [Types::AtlassianOauth2ProviderConfigInput]
+    #
+    # @!attribute [rw] linkedin_oauth_2_provider_config
+    #   Configuration settings for LinkedIn OAuth2 provider integration.
+    #   @return [Types::LinkedinOauth2ProviderConfigInput]
+    #
+    # @!attribute [rw] included_oauth_2_provider_config
+    #   The configuration for a non-custom OAuth2 provider. This includes
+    #   settings for supported OAuth2 providers that have built-in
+    #   integration support.
+    #   @return [Types::IncludedOauth2ProviderConfigInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Oauth2ProviderConfigInput AWS API Documentation
     #
     class Oauth2ProviderConfigInput < Struct.new(
@@ -4218,6 +4483,9 @@ module Aws::BedrockAgentCoreControl
       :slack_oauth_2_provider_config,
       :salesforce_oauth_2_provider_config,
       :microsoft_oauth_2_provider_config,
+      :atlassian_oauth_2_provider_config,
+      :linkedin_oauth_2_provider_config,
+      :included_oauth_2_provider_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4229,6 +4497,9 @@ module Aws::BedrockAgentCoreControl
       class SlackOauth2ProviderConfig < Oauth2ProviderConfigInput; end
       class SalesforceOauth2ProviderConfig < Oauth2ProviderConfigInput; end
       class MicrosoftOauth2ProviderConfig < Oauth2ProviderConfigInput; end
+      class AtlassianOauth2ProviderConfig < Oauth2ProviderConfigInput; end
+      class LinkedinOauth2ProviderConfig < Oauth2ProviderConfigInput; end
+      class IncludedOauth2ProviderConfig < Oauth2ProviderConfigInput; end
       class Unknown < Oauth2ProviderConfigInput; end
     end
 
@@ -4260,6 +4531,20 @@ module Aws::BedrockAgentCoreControl
     #   The output configuration for a Microsoft OAuth2 provider.
     #   @return [Types::MicrosoftOauth2ProviderConfigOutput]
     #
+    # @!attribute [rw] atlassian_oauth_2_provider_config
+    #   The configuration details for the Atlassian OAuth2 provider.
+    #   @return [Types::AtlassianOauth2ProviderConfigOutput]
+    #
+    # @!attribute [rw] linkedin_oauth_2_provider_config
+    #   The configuration details for the LinkedIn OAuth2 provider.
+    #   @return [Types::LinkedinOauth2ProviderConfigOutput]
+    #
+    # @!attribute [rw] included_oauth_2_provider_config
+    #   The configuration for a non-custom OAuth2 provider. This includes
+    #   the configuration details for supported OAuth2 providers that have
+    #   built-in integration support.
+    #   @return [Types::IncludedOauth2ProviderConfigOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Oauth2ProviderConfigOutput AWS API Documentation
     #
     class Oauth2ProviderConfigOutput < Struct.new(
@@ -4269,6 +4554,9 @@ module Aws::BedrockAgentCoreControl
       :slack_oauth_2_provider_config,
       :salesforce_oauth_2_provider_config,
       :microsoft_oauth_2_provider_config,
+      :atlassian_oauth_2_provider_config,
+      :linkedin_oauth_2_provider_config,
+      :included_oauth_2_provider_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4280,6 +4568,9 @@ module Aws::BedrockAgentCoreControl
       class SlackOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
       class SalesforceOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
       class MicrosoftOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
+      class AtlassianOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
+      class LinkedinOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
+      class IncludedOauth2ProviderConfig < Oauth2ProviderConfigOutput; end
       class Unknown < Oauth2ProviderConfigOutput; end
     end
 
@@ -4442,10 +4733,15 @@ module Aws::BedrockAgentCoreControl
     #   The OAuth2 discovery information for the Salesforce provider.
     #   @return [Types::Oauth2Discovery]
     #
+    # @!attribute [rw] client_id
+    #   The client ID for the Salesforce OAuth2 provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SalesforceOauth2ProviderConfigOutput AWS API Documentation
     #
     class SalesforceOauth2ProviderConfigOutput < Struct.new(
-      :oauth_discovery)
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4766,10 +5062,15 @@ module Aws::BedrockAgentCoreControl
     #   The OAuth2 discovery information for the Slack provider.
     #   @return [Types::Oauth2Discovery]
     #
+    # @!attribute [rw] client_id
+    #   The client ID for the Slack OAuth2 provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SlackOauth2ProviderConfigOutput AWS API Documentation
     #
     class SlackOauth2ProviderConfigOutput < Struct.new(
-      :oauth_discovery)
+      :oauth_discovery,
+      :client_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5853,6 +6154,12 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Resource Name (ARN) of the OAuth2 credential provider.
     #   @return [String]
     #
+    # @!attribute [rw] callback_url
+    #   Callback URL to register on the OAuth2 credential provider as an
+    #   allowed callback URL. This URL is where the OAuth2 authorization
+    #   server redirects users after they complete the authorization flow.
+    #   @return [String]
+    #
     # @!attribute [rw] oauth2_provider_config_output
     #   The configuration output for the OAuth2 provider.
     #   @return [Types::Oauth2ProviderConfigOutput]
@@ -5872,6 +6179,7 @@ module Aws::BedrockAgentCoreControl
       :name,
       :credential_provider_vendor,
       :credential_provider_arn,
+      :callback_url,
       :oauth2_provider_config_output,
       :created_time,
       :last_updated_time)

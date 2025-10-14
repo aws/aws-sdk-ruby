@@ -113,6 +113,15 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class CompleteResourceTokenAuthRequest
+      attr_accessor user_identifier: Types::UserIdentifier
+      attr_accessor session_uri: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteResourceTokenAuthResponse < Aws::EmptyStructure
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -305,16 +314,20 @@ module Aws::BedrockAgentCore
       attr_accessor resource_credential_provider_name: ::String
       attr_accessor scopes: ::Array[::String]
       attr_accessor oauth2_flow: ("USER_FEDERATION" | "M2M")
+      attr_accessor session_uri: ::String
       attr_accessor resource_oauth_2_return_url: ::String
       attr_accessor force_authentication: bool
       attr_accessor custom_parameters: ::Hash[::String, ::String]
-      SENSITIVE: [:workload_identity_token]
+      attr_accessor custom_state: ::String
+      SENSITIVE: [:workload_identity_token, :custom_state]
     end
 
     class GetResourceOauth2TokenResponse
       attr_accessor authorization_url: ::String
       attr_accessor access_token: ::String
-      SENSITIVE: [:access_token]
+      attr_accessor session_uri: ::String
+      attr_accessor session_status: ("IN_PROGRESS" | "FAILED")
+      SENSITIVE: [:authorization_url, :access_token]
     end
 
     class GetWorkloadAccessTokenForJWTRequest
@@ -380,6 +393,7 @@ module Aws::BedrockAgentCore
       attr_accessor baggage: ::String
       attr_accessor agent_runtime_arn: ::String
       attr_accessor qualifier: ::String
+      attr_accessor account_id: ::String
       attr_accessor payload: ::String
       SENSITIVE: [:payload]
     end
@@ -821,6 +835,20 @@ module Aws::BedrockAgentCore
       attr_accessor streams: Types::BrowserSessionStream
       attr_accessor updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class UserIdentifier
+      attr_accessor user_token: ::String
+      attr_accessor user_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:user_token]
+
+      class UserToken < UserIdentifier
+      end
+      class UserId < UserIdentifier
+      end
+      class Unknown < UserIdentifier
+      end
     end
 
     class ValidationException
