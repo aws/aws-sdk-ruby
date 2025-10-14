@@ -22,7 +22,7 @@ module Aws
     # ### Custom Executor
     # You can provide your own executor (e.g., `Concurrent::ThreadPoolExecutor`) for fine-grained control over thread
     # pools and resource management. When using a custom executor, you are responsible for shutting it down
-    # when finished. The executor will be reused across multiple TransferManager operations.
+    # when finished. The executor may be reused across multiple TransferManager operations.
     #
     # In addition, it must implement the same interface as DefaultExecutor. The following is a list
     # of required methods:
@@ -58,7 +58,6 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
-        @options = options
       end
 
       # @return [S3::Client]
@@ -147,7 +146,7 @@ module Aws
         executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
         downloader = FileDownloader.new(client: @client, executor: executor)
         downloader.download(destination, download_opts)
-        executor.shutdown unless @options[:executor]
+        executor.shutdown unless @executor
         true
       end
 
@@ -227,7 +226,7 @@ module Aws
         )
         response = uploader.upload(source, upload_opts)
         yield response if block_given?
-        executor.shutdown unless @options[:executor]
+        executor.shutdown unless @executor
         true
       end
 
@@ -293,7 +292,7 @@ module Aws
           part_size: upload_opts.delete(:part_size)
         )
         uploader.upload(upload_opts, &block)
-        executor.shutdown unless @options[:executor]
+        executor.shutdown unless @executor
         true
       end
     end
