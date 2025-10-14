@@ -61,6 +61,7 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
+        @options = options
       end
 
       # @return [S3::Client]
@@ -146,9 +147,10 @@ module Aws
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
         download_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || self.class.default_executor
+        executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
         downloader = FileDownloader.new(client: @client, executor: executor)
         downloader.download(destination, download_opts)
+        executor.shutdown unless @options[:executor]
         true
       end
 
@@ -220,7 +222,7 @@ module Aws
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || self.class.default_executor
+        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
           multipart_threshold: upload_opts.delete(:multipart_threshold),
           client: @client,
@@ -228,6 +230,7 @@ module Aws
         )
         response = uploader.upload(source, upload_opts)
         yield response if block_given?
+        executor.shutdown unless @options[:executor]
         true
       end
 
@@ -285,7 +288,7 @@ module Aws
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
         upload_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || self.class.default_executor
+        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = MultipartStreamUploader.new(
           client: @client,
           executor: executor,
@@ -293,18 +296,8 @@ module Aws
           part_size: upload_opts.delete(:part_size)
         )
         uploader.upload(upload_opts, &block)
+        executor.shutdown unless @options[:executor]
         true
-      end
-
-      class << self
-        def default_executor
-          @default_executor ||=
-            begin
-              executor = DefaultExecutor.new
-              at_exit { executor.shutdown }
-              executor
-            end
-        end
       end
     end
   end
