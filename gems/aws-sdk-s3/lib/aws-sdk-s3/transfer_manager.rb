@@ -2,9 +2,8 @@
 
 module Aws
   module S3
-    # A high-level S3 transfer utility that provides enhanced upload and download
-    # capabilities with automatic multipart handling, progress tracking, and
-    # handling of large files. The following features are supported:
+    # A high-level S3 transfer utility that provides enhanced upload and download capabilities with automatic
+    # multipart handling, progress tracking, and handling of large files. The following features are supported:
     #
     # * upload a file with multipart upload
     # * upload a stream with multipart upload
@@ -12,19 +11,18 @@ module Aws
     # * track transfer progress by using progress listener
     #
     # ## Executor Management
-    # TransferManager uses executors to handle concurrent operations during multipart transfers.
-    # You can control concurrency behavior by providing a custom executor or relying on the
-    # default executor management.
+    # TransferManager uses executors to handle concurrent operations during multipart transfers. You can control
+    # concurrency behavior by providing a custom executor or relying on the default executor management.
     #
-    # ### **Default Behavior**
-    # When no `:executor` is provided, TransferManager automatically creates and manages
-    # executors for each operation, shutting them down when complete.
+    # ### Default Behavior
+    # When no `:executor` is provided, TransferManager creates a new DefaultExecutor for each individual
+    # operation (`download_file`, `upload_file`, etc.) and automatically shuts it down when that operation completes.
+    # Each operation gets its own isolated thread pool with the specified `:thread_count` (default 10 threads).
     #
-    # ### **Custom Executor**
-    # You can provide your own executor (e.g., `Concurrent::ThreadPoolExecutor`) for fine-grained
-    # control over thread pools and resource management. When using a custom executor, you are
-    # responsible for shutting it down when finished. The executor will be reused across multiple
-    # TransferManager operations.
+    # ### Custom Executor
+    # You can provide your own executor (e.g., `Concurrent::ThreadPoolExecutor`) for fine-grained control over thread
+    # pools and resource management. When using a custom executor, you are responsible for shutting it down
+    # when finished. The executor will be reused across multiple TransferManager operations.
     #
     # In addition, it must implement the same interface as DefaultExecutor. The following is a list
     # of required methods:
@@ -46,7 +44,6 @@ module Aws
     #     tm.download_file('/path/to/file1', bucket: 'bucket', key: 'key1')
     #     executor.shutdown # You must shutdown custom executors
     #
-    # See the `:executor` parameter documentation for required methods and examples.
     class TransferManager
 
       # @param [Hash] options
