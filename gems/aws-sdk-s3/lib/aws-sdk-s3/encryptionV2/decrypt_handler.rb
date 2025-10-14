@@ -72,9 +72,7 @@ module Aws
               V3_HANDLER.send(:authenticated_decrypter, context, cipher, envelope)
             else
               cipher, envelope = decryption_cipher(context)
-              body_contains_auth_tag?(envelope) ?
-                authenticated_decrypter(context, cipher, envelope) :
-                IODecrypter.new(cipher, context.http_response.body)
+              get_decrypter(context, cipher, envelope)
             end
             context.http_response.body = decrypter
           end
@@ -170,6 +168,16 @@ module Aws
             raise Errors::DecryptionError, msg
           end
           envelope
+        end
+
+        def get_decrypter(context, cipher, envelope)
+          if body_contains_auth_tag?(envelope)
+            puts "got one here"
+            authenticated_decrypter(context, cipher, envelope)
+          else
+            puts "other thing here"
+            IODecrypter.new(cipher, context.http_response.body)
+          end
         end
 
         # This method fetches the tag from the end of the object by

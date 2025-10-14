@@ -81,11 +81,11 @@ module Aws
                 cipher, envelope = decryption_cipher(context)
                 authenticated_decrypter(context, cipher, envelope)
               else
-                if context[:commitment_policy] == :require_encrypt_require_decrypt
+                if context[:encryption][:commitment_policy] == :require_encrypt_require_decrypt
                   raise Errors::LegacyDecryptionError
                 end
                 cipher, envelope = V2_HANDLER.send(:decryption_cipher, context)
-                V2_HANDLER.send(:authenticated_decrypter, context, cipher, envelope)
+                V2_HANDLER.send(:get_decrypter, context, cipher, envelope)
               end 
             context.http_response.body = decrypter
           end
