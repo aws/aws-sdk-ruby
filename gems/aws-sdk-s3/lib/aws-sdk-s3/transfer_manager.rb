@@ -262,8 +262,8 @@ module Aws
       #   {Client#upload_part} can be provided.
       #
       # @option options [Integer] :thread_count (10)
-      #   The number of parallel multipart uploads. Only used when no custom executor is provided
-      #   (creates {DefaultExecutor} with the given thread count).
+      #   The number of parallel multipart uploads. Only used when no custom executor is provided (creates
+      #   {DefaultExecutor} with the given thread count). An additional thread is used internally for task coordination.
       #
       # @option options [Boolean] :tempfile (false)
       #   Normally read data is stored in memory when building the parts in order to complete the underlying
