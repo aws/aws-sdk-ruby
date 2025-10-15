@@ -234,14 +234,9 @@ module Aws
           :require_encrypt_require_decrypt
         ]
 
-        # :content_encryption_schema, :commitment_policy
-
-        # enableLegacyUnauthenticatedModes
-        # enableDelayedAuthenticationMode
-        # enableLegacyWrappingAlgorithms
-        DEFAULT_LEGACY_UNAUTHENTICATED_MODES = false
-        DEFAULT_LEGACY_WRAPPING_ALGORITHMS = false
+        DEFAULT_LEGACY_MODE = false
         DEFAULT_COMMITMENT_POLICIES = :require_encrypt_require_decrypt
+        DEFAULT_CONTENT_ENCRYPTION_SCHEMA = :alg_aes_256_gcm_hkdf_sha512_commit_key
 
         extend Deprecations
         extend Forwardable
@@ -455,13 +450,15 @@ module Aws
             KmsCipherProvider.new(
               kms_key_id: options[:kms_key_id],
               kms_client: kms_client(options),
-              key_wrap_schema: options[:key_wrap_schema]
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
             )
           else
             @key_provider = extract_key_provider(options)
             DefaultCipherProvider.new(
               key_provider: @key_provider,
-              key_wrap_schema: options[:key_wrap_schema]
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
             )
           end
         end

@@ -14,7 +14,9 @@ module Aws
             options[:key_wrap_schema],
             @key_provider.encryption_materials.key
           )
-          @content_encryption_schema = '115'
+          @content_encryption_schema = validate_cek(
+            options[:content_encryption_schema]
+          )
         end
 
         V3_IV_BYTES = ("\x00" * 12).freeze
@@ -117,6 +119,18 @@ module Aws
             raise ArgumentError, 'A kms_key_id is required when using :kms_context.'
           else
             raise ArgumentError, "Unsupported key_wrap_schema: #{key_wrap_schema}"
+          end
+        end
+
+        def validate_cek(content_encryption_schema)
+          if content_encryption_schema.nil?
+            return '115'
+          end
+          case content_encryption_schema
+          when :alg_aes_256_gcm_hkdf_sha512_commit_key
+            '115'
+          else
+            raise ArgumentError, "Unsupported content_encryption_schema: #{content_encryption_schema}"
           end
         end
 
