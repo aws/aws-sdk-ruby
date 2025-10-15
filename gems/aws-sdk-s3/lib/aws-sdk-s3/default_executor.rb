@@ -72,8 +72,10 @@ module Aws
           @pool.each(&:join)
         end
 
-        @pool.clear
-        @state = SHUTDOWN
+        @mutex.synchronize do
+          @pool.clear
+          @state = SHUTDOWN
+        end
         true
       end
 
