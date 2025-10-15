@@ -162,7 +162,7 @@ module Aws
               )
               provider = client.config.credentials_provider
               expect(provider.features).to eq(
-                %w[CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN]
+                %w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
               )
             end
           end
@@ -251,15 +251,1087 @@ module Aws
           end
         end
 
+        describe '#profile_assume_role_credentials' do
+          context 'resolves' do
+            before do
+              mock_shared_config(shared_config)
+            end
+
+            context 'source_profile' do
+              context 'static' do
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    source_profile = static
+
+                    [profile static]
+                    aws_access_key_id = akid_static
+                    aws_secret_access_key = secret_static
+                    aws_session_token = token_static
+                    aws_account_id = 123456789012
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  StaticCredentialsProvider.new(
+                    access_key_id: 'akid_static',
+                    secret_access_key: 'secret_static',
+                    session_token: 'token_static',
+                    account_id: '123456789012'
+                  )
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_static',
+                    secret_access_key: 'secret_ar_static',
+                    session_token: 'token_ar_static'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  expect(StaticCredentialsProvider).to receive(:new).with(
+                    access_key_id: 'akid_static',
+                    secret_access_key: 'secret_static',
+                    session_token: 'token_static',
+                    account_id: '123456789012'
+                  ).and_return(source_provider)
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with source_profile of static' do
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_static')
+                  expect(creds.secret_access_key).to eq('secret_ar_static')
+                  expect(creds.session_token).to eq('token_ar_static')
+                end
+
+                it 'does not resolve static credentials from profile when initial profile contains credentials' do
+                  shared_config = <<~CONFIG
+                    [profile default]
+                    aws_access_key_id = akid_do_not_use
+                    aws_secret_access_key = secret_do_not_use
+                    role_arn = role_arn
+                    source_profile = static
+
+                    [profile static]
+                    aws_access_key_id = akid_static
+                    aws_secret_access_key = secret_static
+                    aws_session_token = token_static
+                    aws_account_id = 123456789012
+                  CONFIG
+                  mock_shared_config(shared_config)
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_static')
+                  expect(creds.secret_access_key).to eq('secret_ar_static')
+                  expect(creds.session_token).to eq('token_ar_static')
+                end
+
+                it 'resolves assume role credentials from profile when role session name is provided' do
+                  expect(Base64).to_not receive(:strict_encode64)
+                  expect(AssumeRoleCredentialsProvider).to receive(:new).with(
+                    hash_including(role_session_name: 'role_session_name')
+                  ).and_call_original
+                  shared_config = <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    role_session_name = role_session_name
+                    source_profile = static
+
+                    [profile static]
+                    aws_access_key_id = akid_static
+                    aws_secret_access_key = secret_static
+                    aws_session_token = token_static
+                    aws_account_id = 123456789012
+                  CONFIG
+                  mock_shared_config(shared_config)
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_static')
+                  expect(creds.secret_access_key).to eq('secret_ar_static')
+                  expect(creds.session_token).to eq('token_ar_static')
+                end
+
+                it 'resolves assume role credentials from profile when external id is provided' do
+                  expect(AssumeRoleCredentialsProvider).to receive(:new).with(
+                    hash_including(external_id: 'external_id')
+                  ).and_call_original
+                  shared_config = <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    external_id = external_id
+                    source_profile = static
+
+                    [profile static]
+                    aws_access_key_id = akid_static
+                    aws_secret_access_key = secret_static
+                    aws_session_token = token_static
+                    aws_account_id = 123456789012
+                  CONFIG
+                  mock_shared_config(shared_config)
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_static')
+                  expect(creds.secret_access_key).to eq('secret_ar_static')
+                  expect(creds.session_token).to eq('token_ar_static')
+                end
+
+                it 'resolves assume role credentials from profile when the profile references itself' do
+                  shared_config = <<~CONFIG
+                    [profile default]
+                    aws_access_key_id = akid_static
+                    aws_secret_access_key = secret_static
+                    aws_session_token = token_static
+                    aws_account_id = 123456789012
+                    role_arn = role_arn
+                    external_id = external_id
+                    source_profile = default
+                  CONFIG
+                  mock_shared_config(shared_config)
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_static')
+                  expect(creds.secret_access_key).to eq('secret_ar_static')
+                  expect(creds.session_token).to eq('token_ar_static')
+                end
+
+                it 'tracks the correct feature id' do
+                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
+                  )
+                end
+              end
+
+              context 'assume role' do
+                context 'chaining' do
+                  let(:shared_config) do
+                    <<~CONFIG
+                      [profile default]
+                      role_arn = role_arn_default
+                      source_profile = assume
+
+                      [profile assume]
+                      role_arn = role_arn_assume
+                      source_profile = static
+                      region = us-west-2
+
+                      [profile static]
+                      aws_access_key_id = akid_static
+                      aws_secret_access_key = secret_static
+                      aws_session_token = token_static
+                      aws_account_id = 123456789012
+                    CONFIG
+                  end
+
+                  let(:source_provider_static) do
+                    StaticCredentialsProvider.new(
+                      access_key_id: 'akid_static',
+                      secret_access_key: 'secret_static',
+                      session_token: 'token_static',
+                      account_id: '123456789012'
+                    )
+                  end
+
+                  let(:source_provider) do
+                    AssumeRoleCredentialsProvider.new(
+                      profile: 'assume',
+                      credentials_provider: source_provider_static,
+                      role_session_name: nil,
+                      role_arn: 'role_arn_assume',
+                      duration_seconds: nil,
+                      external_id: nil,
+                      serial_number: nil
+                    )
+                  end
+
+                  let(:creds_assume) do
+                    {
+                      access_key_id: 'akid_assume',
+                      secret_access_key: 'secret_assume',
+                      session_token: 'token_assume'
+                    }
+                  end
+
+                  let(:creds) do
+                    {
+                      access_key_id: 'akid_ar_assume',
+                      secret_access_key: 'secret_ar_assume',
+                      session_token: 'token_ar_assume'
+                    }
+                  end
+
+                  let(:sts_client_assume) do
+                    STS::Client.new(stub_responses: true, credentials_provider: source_provider_static)
+                  end
+                  let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                  before do
+                    allow(STS::Client).to receive(:new).and_call_original
+                    allow(STS::Client).to receive(:new).with(
+                      { profile: 'assume', credentials_provider: source_provider_static }
+                    ).and_return(sts_client_assume)
+                    sts_client_assume.stub_responses(:assume_role, { credentials: creds_assume })
+
+                    allow(AssumeRoleCredentialsProvider).to receive(:new).and_call_original
+                    allow(AssumeRoleCredentialsProvider).to receive(:new).with(
+                      {
+                        profile: 'assume',
+                        credentials_provider: source_provider_static,
+                        role_session_name: nil,
+                        role_arn: 'role_arn_assume',
+                        duration_seconds: nil,
+                        external_id: nil,
+                        serial_number: nil
+                      }
+                    ).and_return(source_provider)
+
+                    expect(StaticCredentialsProvider).to receive(:new).with(
+                      access_key_id: 'akid_static',
+                      secret_access_key: 'secret_static',
+                      session_token: 'token_static',
+                      account_id: '123456789012'
+                    ).and_return(source_provider_static)
+
+                    allow(STS::Client).to receive(:new).with(
+                      { profile: 'default', credentials_provider: source_provider }
+                    ).and_return(sts_client)
+                    sts_client.stub_responses(:assume_role, { credentials: creds })
+                  end
+
+                  it 'resolves assume role credentials from profile with chained assume role profiles' do
+                    client = client_class.new
+                    creds = client.config.credentials_provider.identity
+                    expect(creds.access_key_id).to eq('akid_ar_assume')
+                    expect(creds.secret_access_key).to eq('secret_ar_assume')
+                    expect(creds.session_token).to eq('token_ar_assume')
+                  end
+
+                  it 'tracks the correct feature id' do
+                    client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                    provider = client.config.credentials_provider
+                    expect(provider.features).to eq(
+                      %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
+                    )
+                  end
+                end
+
+                context 'chaining with static credentials' do
+                  let(:shared_config) do
+                    <<~CONFIG
+                      [profile default]
+                      aws_access_key_id = akid_do_not_use
+                      aws_secret_access_key = secret_do_not_use
+                      aws_session_token = token_do_not_use
+                      aws_account_id = 123456789012_do_not_use
+                      role_arn = role_arn_default
+                      source_profile = assume
+
+                      [profile assume]
+                      aws_access_key_id = akid_assume
+                      aws_secret_access_key = secret_assume
+                      aws_session_token = token_assume
+                      aws_account_id = 123456789012
+                      role_arn = role_arn_assume
+                      source_profile = static
+                      region = us-west-2
+
+                      [profile static]
+                      aws_access_key_id = akid_static_do_not_use
+                      aws_secret_access_key = secret_static_do_not_use
+                      aws_session_token = token_static_do_not_use
+                      aws_account_id = 123456789012_static_do_not_use
+                    CONFIG
+                  end
+
+                  let(:source_provider) do
+                    StaticCredentialsProvider.new(
+                      access_key_id: 'akid_assume',
+                      secret_access_key: 'secret_assume',
+                      session_token: 'token_assume',
+                      account_id: '123456789012'
+                    )
+                  end
+
+                  let(:creds) do
+                    {
+                      access_key_id: 'akid_ar_assume',
+                      secret_access_key: 'secret_ar_assume',
+                      session_token: 'token_ar_assume'
+                    }
+                  end
+
+                  let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                  before do
+                    expect(StaticCredentialsProvider).to receive(:new).with(
+                      access_key_id: 'akid_assume',
+                      secret_access_key: 'secret_assume',
+                      session_token: 'token_assume',
+                      account_id: '123456789012'
+                    ).and_return(source_provider)
+
+                    allow(STS::Client).to receive(:new).with(
+                      { profile: 'default', credentials_provider: source_provider }
+                    ).and_return(sts_client)
+                    sts_client.stub_responses(:assume_role, { credentials: creds })
+                  end
+
+                  it 'resolves assume role credentials from chained assume role profiles with static credentials' do
+                    client = client_class.new
+                    creds = client.config.credentials_provider.identity
+                    expect(creds.access_key_id).to eq('akid_ar_assume')
+                    expect(creds.secret_access_key).to eq('secret_ar_assume')
+                    expect(creds.session_token).to eq('token_ar_assume')
+                  end
+
+                  it 'tracks the correct feature id' do
+                    client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                    provider = client.config.credentials_provider
+                    expect(provider.features).to eq(
+                      %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
+                    )
+                  end
+                end
+
+                context 'chaining with credential_source' do
+                  let(:shared_config) do
+                    <<~CONFIG
+                      [profile default]
+                      role_arn = role_arn_default
+                      source_profile = assume
+
+                      [profile assume]
+                      role_arn = role_arn_assume
+                      credential_source = Environment
+                    CONFIG
+                  end
+
+                  let(:source_provider_static) do
+                    StaticCredentialsProvider.new(
+                      access_key_id: 'akid_env',
+                      secret_access_key: 'secret_env',
+                      session_token: 'token_env',
+                      account_id: '123456789012'
+                    )
+                  end
+
+                  let(:source_provider) do
+                    AssumeRoleCredentialsProvider.new(
+                      profile: 'assume',
+                      credentials_provider: source_provider_static,
+                      role_session_name: nil,
+                      role_arn: 'role_arn_assume',
+                      duration_seconds: nil,
+                      external_id: nil,
+                      serial_number: nil
+                    )
+                  end
+
+                  let(:creds_assume) do
+                    {
+                      access_key_id: 'akid_assume',
+                      secret_access_key: 'secret_assume',
+                      session_token: 'token_assume'
+                    }
+                  end
+
+                  let(:creds) do
+                    {
+                      access_key_id: 'akid_ar_assume',
+                      secret_access_key: 'secret_ar_assume',
+                      session_token: 'token_ar_assume'
+                    }
+                  end
+
+                  let(:sts_client_assume) do
+                    STS::Client.new(stub_responses: true, credentials_provider: source_provider_static)
+                  end
+                  let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                  before do
+                    ENV['AWS_ACCESS_KEY_ID'] = 'akid_env'
+                    ENV['AWS_SECRET_ACCESS_KEY'] = 'secret_env'
+                    ENV['AWS_SESSION_TOKEN'] = 'token_env'
+                    ENV['AWS_ACCOUNT_ID'] = '123456789012'
+                    allow(STS::Client).to receive(:new).and_call_original
+                    allow(STS::Client).to receive(:new).with(
+                      { profile: 'assume', credentials_provider: source_provider_static }
+                    ).and_return(sts_client_assume)
+                    sts_client_assume.stub_responses(:assume_role, { credentials: creds_assume })
+
+                    allow(AssumeRoleCredentialsProvider).to receive(:new).and_call_original
+                    allow(AssumeRoleCredentialsProvider).to receive(:new).with(
+                      {
+                        profile: 'assume',
+                        credentials_provider: source_provider_static,
+                        role_session_name: nil,
+                        role_arn: 'role_arn_assume',
+                        duration_seconds: nil,
+                        external_id: nil,
+                        serial_number: nil
+                      }
+                    ).and_return(source_provider)
+
+                    expect(StaticCredentialsProvider).to receive(:new).with(
+                      access_key_id: 'akid_env',
+                      secret_access_key: 'secret_env',
+                      session_token: 'token_env',
+                      account_id: '123456789012'
+                    ).and_return(source_provider_static)
+
+                    allow(STS::Client).to receive(:new).with(
+                      { profile: 'default', credentials_provider: source_provider }
+                    ).and_return(sts_client)
+                    sts_client.stub_responses(:assume_role, { credentials: creds })
+                  end
+
+                  it 'resolves assume role credentials from chained assume role profiles with credential_source' do
+                    # Profile must be configured explicitly for credential_source = Environment
+                    client = client_class.new(profile: 'default')
+                    creds = client.config.credentials_provider.identity
+                    expect(creds.access_key_id).to eq('akid_ar_assume')
+                    expect(creds.secret_access_key).to eq('secret_ar_assume')
+                    expect(creds.session_token).to eq('token_ar_assume')
+                  end
+
+                  it 'tracks the correct feature id' do
+                    # Profile must be configured explicitly for credential_source = Environment
+                    client = client_class.new(
+                      profile: 'default',
+                      access_key_id: nil,
+                      secret_access_key: nil,
+                      stub_responses: true
+                    )
+                    provider = client.config.credentials_provider
+                    expect(provider.features).to eq(
+                      %w[
+                        CREDENTIALS_PROFILE_SOURCE_PROFILE
+                        CREDENTIALS_PROFILE_NAMED_PROVIDER
+                        CREDENTIALS_ENV_VARS
+                        CREDENTIALS_STS_ASSUME_ROLE
+                        CREDENTIALS_CODE
+                      ]
+                    )
+                  end
+                end
+              end
+
+              context 'assume role web id' do
+                let(:token_file) { Tempfile.new('token.jwt') }
+                let(:token_file_path) { token_file.path }
+                let(:sts_client_arwid) { STS::Client.new(stub_responses: true) }
+
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    source_profile = arwid
+
+                    [profile arwid]
+                    web_identity_token_file = #{token_file_path}
+                    role_arn = role_arn_arwid
+                    role_session_name = role_session_name
+                    region = us-west-2
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  AssumeRoleWebIdentityCredentialsProvider.new(
+                    profile: 'arwid',
+                    web_identity_token_file: token_file_path,
+                    role_arn: 'role_arn_arwid',
+                    role_session_name: 'role_session_name',
+                    client: sts_client_arwid
+                  )
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_arwid',
+                    secret_access_key: 'secret_ar_arwid',
+                    session_token: 'token_ar_arwid'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  expect(AssumeRoleWebIdentityCredentialsProvider).to receive(:new).with(
+                    profile: 'arwid',
+                    web_identity_token_file: token_file_path,
+                    role_arn: 'role_arn_arwid',
+                    role_session_name: 'role_session_name'
+                  ).and_return(source_provider)
+                  sts_client_arwid.stub_responses(
+                    :assume_role_with_web_identity,
+                    {
+                      credentials: {
+                        access_key_id: 'akid_arwid',
+                        secret_access_key: 'secret_arwid',
+                        session_token: 'token_arwid'
+                      }
+                    }
+                  )
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with source_profile of web identity' do
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_arwid')
+                  expect(creds.secret_access_key).to eq('secret_ar_arwid')
+                  expect(creds.session_token).to eq('token_ar_arwid')
+                end
+
+                it 'tracks the correct feature id' do
+                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[
+                      CREDENTIALS_PROFILE_SOURCE_PROFILE
+                      CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN
+                      CREDENTIALS_STS_ASSUME_ROLE_WEB_ID
+                      CREDENTIALS_STS_ASSUME_ROLE
+                    ]
+                  )
+                end
+              end
+
+              context 'sso' do
+                let(:token) { SSOOIDCToken.new(token: 'token') }
+                let(:token_provider) do
+                  double(
+                    'SSOOIDCTokenProvider',
+                    identity: token,
+                    set?: true,
+                    expiration: nil
+                  )
+                end
+                let(:sso_client) { SSO::Client.new(stub_responses: true) }
+
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    source_profile = sso
+
+                    [profile sso]
+                    sso_session = SSO_SESSION
+                    sso_account_id = 123456789012
+                    sso_role_name = SSO_ROLE_NAME
+
+                    [sso-session SSO_SESSION]
+                    sso_region = us-east-1
+                    sso_start_url = SSO_START_URL
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  SSOCredentialsProvider.new(
+                    sso_session: 'SSO_SESSION',
+                    sso_account_id: '123456789012',
+                    sso_role_name: 'SSO_ROLE_NAME',
+                    sso_region: 'us-east-1',
+                    client: sso_client
+                  )
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_sso',
+                    secret_access_key: 'secret_ar_sso',
+                    session_token: 'token_ar_sso'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  allow(SSOOIDCTokenProvider).to receive(:new).with(
+                    sso_session: 'SSO_SESSION', sso_region: 'us-east-1'
+                  ).and_return(token_provider)
+                  expect(SSOCredentialsProvider).to receive(:new).with(
+                    sso_session: 'SSO_SESSION',
+                    sso_account_id: '123456789012',
+                    sso_role_name: 'SSO_ROLE_NAME',
+                    sso_region: 'us-east-1'
+                  ).and_return(source_provider)
+                  sso_client.stub_responses(
+                    :get_role_credentials,
+                    {
+                      role_credentials: {
+                        access_key_id: 'akid_sso',
+                        secret_access_key: 'secret_sso',
+                        session_token: 'token_sso',
+                        expiration: (Time.now.round + 3600).to_i * 1000
+                      }
+                    }
+                  )
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with source_profile of sso' do
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_sso')
+                  expect(creds.secret_access_key).to eq('secret_ar_sso')
+                  expect(creds.session_token).to eq('token_ar_sso')
+                end
+
+                it 'tracks the correct feature id' do
+                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[
+                      CREDENTIALS_PROFILE_SOURCE_PROFILE
+                      CREDENTIALS_PROFILE_SSO
+                      CREDENTIALS_SSO
+                      CREDENTIALS_STS_ASSUME_ROLE
+                    ]
+                  )
+                end
+              end
+
+              context 'process' do
+                let(:expiration) { Time.now.round + 3600 }
+                let(:creds_json) do
+                  {
+                    Version: 1,
+                    AccessKeyId: 'akid_process',
+                    SecretAccessKey: 'secret_process',
+                    SessionToken: 'token_process',
+                    AccountId: '123456789012',
+                    Expiration: expiration.utc.iso8601
+                  }.to_json
+                end
+                let(:process) { ["echo '#{creds_json}'"] }
+
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    source_profile = process
+
+                    [profile process]
+                    credential_process = echo '#{creds_json}'
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  ProcessCredentialsProvider.new(["echo '#{creds_json}'"])
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_process',
+                    secret_access_key: 'secret_ar_process',
+                    session_token: 'token_ar_process'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  expect(ProcessCredentialsProvider).to receive(:new).with(["echo '#{creds_json}'"])
+                                                                     .and_return(source_provider)
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with source_profile of process' do
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_process')
+                  expect(creds.secret_access_key).to eq('secret_ar_process')
+                  expect(creds.session_token).to eq('token_ar_process')
+                end
+
+                it 'tracks the correct feature id' do
+                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[
+                      CREDENTIALS_PROFILE_SOURCE_PROFILE
+                      CREDENTIALS_PROFILE_PROCESS
+                      CREDENTIALS_PROCESS
+                      CREDENTIALS_STS_ASSUME_ROLE
+                    ]
+                  )
+                end
+              end
+            end
+
+            context 'credential_source' do
+              context 'instance profile' do
+                let(:expiration) { Time.now.round + 3600 }
+                let(:imds_resp) { <<-JSON.strip }
+                  {
+                    "Code" : "Success",
+                    "LastUpdated" : "2013-11-22T20:03:48Z",
+                    "Type" : "AWS-HMAC",
+                    "AccessKeyId" : "akid_instance",
+                    "SecretAccessKey" : "secret_instance",
+                    "Token" : "token_instance",
+                    "AccountId" : "123456789012",
+                    "Expiration" : "#{expiration.iso8601}"
+                  }
+                JSON
+
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    credential_source = Ec2InstanceMetadata
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  InstanceProfileCredentialsProvider.new
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_instance',
+                    secret_access_key: 'secret_ar_instance',
+                    session_token: 'token_ar_instance'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  expect_any_instance_of(InstanceProfileCredentialsProvider).to receive(:retrieve_credentials)
+                    .and_return(imds_resp)
+                  expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(source_provider)
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with credential_source of instance' do
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_instance')
+                  expect(creds.secret_access_key).to eq('secret_ar_instance')
+                  expect(creds.session_token).to eq('token_ar_instance')
+                end
+
+                it 'tracks the correct feature id' do
+                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS CREDENTIALS_STS_ASSUME_ROLE]
+                  )
+                end
+              end
+
+              context 'container' do
+                let(:path) { '/latest/credentials?id=foobarbaz' }
+                let(:container_resp) { <<-JSON.strip }
+                  {
+                    "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
+                    "AccessKeyId": "akid_container",
+                    "SecretAccessKey": "secret_container",
+                    "Token": "token_container",
+                    "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+                  }
+                JSON
+
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    credential_source = EcsContainer
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  ContainerCredentialsProvider.new
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_container',
+                    secret_access_key: 'secret_ar_container',
+                    session_token: 'token_ar_container'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = path
+                  stub_request(:get, "http://169.254.170.2#{path}").to_return(status: 200, body: container_resp)
+                  expect(ContainerCredentialsProvider).to receive(:new).and_return(source_provider)
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with credential_source of container' do
+                  client = client_class.new
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_container')
+                  expect(creds.secret_access_key).to eq('secret_ar_container')
+                  expect(creds.session_token).to eq('token_ar_container')
+                end
+
+                it 'tracks the correct feature id' do
+                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP CREDENTIALS_STS_ASSUME_ROLE]
+                  )
+                end
+              end
+
+              context 'environment' do
+                let(:shared_config) do
+                  <<~CONFIG
+                    [profile default]
+                    role_arn = role_arn
+                    credential_source = Environment
+                  CONFIG
+                end
+
+                let(:source_provider) do
+                  StaticCredentialsProvider.new(
+                    access_key_id: 'akid_env',
+                    secret_access_key: 'secret_env',
+                    session_token: 'token_env',
+                    account_id: '123456789012'
+                  )
+                end
+
+                let(:creds) do
+                  {
+                    access_key_id: 'akid_ar_env',
+                    secret_access_key: 'secret_ar_env',
+                    session_token: 'token_ar_env'
+                  }
+                end
+
+                let(:sts_client) { STS::Client.new(stub_responses: true, credentials_provider: source_provider) }
+
+                before do
+                  ENV['AWS_ACCESS_KEY_ID'] = 'akid_env'
+                  ENV['AWS_SECRET_ACCESS_KEY'] = 'secret_env'
+                  ENV['AWS_SESSION_TOKEN'] = 'token_env'
+                  ENV['AWS_ACCOUNT_ID'] = '123456789012'
+                  expect(StaticCredentialsProvider).to receive(:new).with(
+                    access_key_id: 'akid_env',
+                    secret_access_key: 'secret_env',
+                    session_token: 'token_env',
+                    account_id: '123456789012'
+                  ).and_return(source_provider)
+
+                  expect(STS::Client).to receive(:new).with(
+                    { profile: 'default', credentials_provider: source_provider }
+                  ).and_return(sts_client)
+                  sts_client.stub_responses(:assume_role, { credentials: creds })
+                end
+
+                it 'resolves assume role credentials from profile with credential_source of env' do
+                  # Profile must be configured explicitly for credential_source = Environment
+                  client = client_class.new(profile: 'default')
+                  creds = client.config.credentials_provider.identity
+                  expect(creds.access_key_id).to eq('akid_ar_env')
+                  expect(creds.secret_access_key).to eq('secret_ar_env')
+                  expect(creds.session_token).to eq('token_ar_env')
+                end
+
+                it 'tracks the correct feature id' do
+                  # Profile must be configured explicitly for credential_source = Environment
+                  client = client_class.new(
+                    profile: 'default',
+                    access_key_id: nil,
+                    secret_access_key: nil,
+                    stub_responses: true
+                  )
+                  provider = client.config.credentials_provider
+                  expect(provider.features).to eq(
+                    %w[
+                      CREDENTIALS_PROFILE_NAMED_PROVIDER
+                      CREDENTIALS_ENV_VARS
+                      CREDENTIALS_STS_ASSUME_ROLE
+                      CREDENTIALS_CODE
+                    ]
+                  )
+                end
+              end
+            end
+          end
+
+          context 'fails to resolve' do
+            it 'fails to resolve assume role credentials when profile does not exist' do
+              expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                source_profile = static
+
+                [profile static]
+                aws_access_key_id = akid_static
+                aws_secret_access_key = secret_static
+                aws_session_token = token_static
+                aws_account_id = 123456789012
+              CONFIG
+              mock_shared_config(shared_config)
+              client = client_class.new(profile: 'nonexistent')
+              expect(client.config.credentials_provider).to be_nil
+            end
+
+            it 'raises when no source_profile or credential_source is configured' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/no source_profile or credential_source/)
+            end
+
+            it 'raises when both source_profile and credential_source are configured' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                credential_source = Environment
+                source_profile = static
+
+                [profile static]
+                aws_access_key_id = akid_static
+                aws_secret_access_key = secret_static
+                aws_session_token = token_static
+                aws_account_id = 123456789012
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/provide only source_profile or credential_source, not both/)
+            end
+
+            it 'raises when source_profile returns partial credentials' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                source_profile = static
+
+                [profile static]
+                aws_access_key_id = akid_static
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/the source_profile does not provide credentials/)
+            end
+
+            it 'raises when source_profile does not exist' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                source_profile = static
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/source_profile static does not exist/)
+            end
+
+            it 'raises when credential_source does not return credentials' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                credential_source = Environment
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/No provider resolved for credential_source/)
+            end
+
+            it 'raises when credential_source returns partial credentials' do
+              ENV['AWS_ACCESS_KEY_ID'] = 'akid_env'
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                credential_source = Environment
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/No provider resolved for credential_source/)
+            end
+
+            it 'raises when credential_source is not supported' do
+              ENV['AWS_ACCESS_KEY_ID'] = 'akid_env'
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn
+                credential_source = CustomUnsupportedProvider
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/Unsupported credential_source found in profile/)
+            end
+
+            it 'raises when chained assume role profiles loop infinitely' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn_default
+                source_profile = assume
+
+                [profile assume]
+                role_arn = role_arn_assume
+                source_profile = default
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/Circular reference in assume role source profiles/)
+            end
+
+            it 'raises when chained assume role profiles loop infinitely with static credentials' do
+              shared_config = <<~CONFIG
+                [profile default]
+                aws_access_key_id = akid_static
+                aws_secret_access_key = secret_static
+                aws_session_token = token_static
+                aws_account_id = 123456789012
+                role_arn = role_arn_default
+                source_profile = assume
+
+                [profile assume]
+                role_arn = role_arn_assume
+                source_profile = default
+                region = us-west-2
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/Circular reference in assume role source profiles/)
+            end
+          end
+        end
+
         describe '#profile_assume_role_web_identity_credentials' do
-          let(:client) { STS::Client.new(stub_responses: true) }
+          let(:sts_client) { STS::Client.new(stub_responses: true) }
           let(:token_file) { Tempfile.new('token.jwt') }
           let(:token_file_path) { token_file.path }
 
           context 'resolves' do
             before do
-              expect(STS::Client).to receive(:new).and_return(client)
-              client.stub_responses(
+              expect(STS::Client).to receive(:new).and_return(sts_client)
+              sts_client.stub_responses(
                 :assume_role_with_web_identity,
                 {
                   credentials: {
@@ -314,7 +1386,7 @@ module Aws
               client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
               provider = client.config.credentials_provider
               expect(provider.features).to eq(
-                %w[CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN]
+                %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
               )
             end
           end
@@ -703,7 +1775,7 @@ module Aws
           end
         end
 
-        describe '#identity' do
+        describe '#resolve' do
           file = File.join(File.dirname(__FILE__), 'credentials_provider_chain_tests.json')
           test_cases = JSON.load_file(file)
 
@@ -731,11 +1803,19 @@ module Aws
               when 'configFiles'
                 mock_shared_config(values['aws']) if values['aws']
               when 'stsResponse'
+                assume_role_provider = double(
+                  'AssumeRoleCredentialsProvider',
+                  identity: credentials(values),
+                  set?: true
+                )
                 assume_role_web_identity_provider = double(
                   'AssumeRoleWebIdentityCredentialsProvider',
                   identity: credentials(values),
                   set?: true
                 )
+                allow(AssumeRoleCredentialsProvider)
+                  .to receive(:new).and_return(assume_role_provider)
+                allow(assume_role_provider).to receive(:features=)
                 allow(AssumeRoleWebIdentityCredentialsProvider)
                   .to receive(:new).and_return(assume_role_web_identity_provider)
                 allow(assume_role_web_identity_provider).to receive(:features=)
@@ -775,6 +1855,7 @@ module Aws
                 )
                 allow(InstanceProfileCredentialsProvider)
                   .to receive(:new).and_return(instance_provider)
+                allow(instance_provider).to receive(:features).and_return(['CREDENTIALS_IMDS'])
               else
                 raise 'Unknown input type'
               end
@@ -786,15 +1867,13 @@ module Aws
               '2' => 'JVM is not used',
               '10' => 'Legacy SSO is not supported',
               '12' => 'Boto 2 config file is not supported',
-              '13' => 'Windows AWS SDK store is not supported',
-              '6' => 'Source Profile: Not implemented',
-              '7' => 'Credential Source: Not implemented'
+              '13' => 'Windows AWS SDK store is not supported'
             }
 
             it "passes: #{test_case['documentation']}" do
               skip(skippable[test_case['id']]) if skippable.key?(test_case['id'])
 
-              config = { profile: 'default' }
+              config = {}
               mock_input(test_case, config)
 
               expected = credentials(test_case['expected'] || {})

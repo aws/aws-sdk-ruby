@@ -10,12 +10,10 @@ module Aws
           :profile,
           doc_default: 'default',
           doc_type: String,
-          docstring: <<~DOCS) do |_config|
+          docstring: <<~DOCS)
             Used when loading credentials from the shared config file and credentials file
             at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
           DOCS
-          ENV['AWS_PROFILE'] || 'default'
-        end
       end
     end
   end
