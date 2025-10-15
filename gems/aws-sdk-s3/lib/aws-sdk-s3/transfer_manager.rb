@@ -24,12 +24,16 @@ module Aws
     # pools and resource management. When using a custom executor, you are responsible for shutting it down
     # when finished. The executor may be reused across multiple TransferManager operations.
     #
-    # In addition, it must implement the same interface as DefaultExecutor. The following is a list
-    # of required methods:
+    # Custom executors must implement the same interface as DefaultExecutor.
+    #
+    # **Required methods:**
     #
     #   * `post(*args, &block)` - Execute a task with given arguments and block
-    #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
     #   * `kill` - Immediately terminate all running tasks
+    #
+    # **Optional methods:**
+    #
+    #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
     #
     # @example Using default executor (automatic creation and shutdown)
     #     tm = TransferManager.new # No executor provided
