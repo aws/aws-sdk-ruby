@@ -120,7 +120,8 @@ module Aws::Neptune
           key: String,
           value: untyped
         }
-      ]
+      ],
+      ?source_region: String
     ) -> _CopyDBClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyDBClusterSnapshotResponse
 
     interface _CopyDBParameterGroupResponse
@@ -179,7 +180,8 @@ module Aws::Neptune
         max_capacity: untyped
       },
       ?global_cluster_identifier: String,
-      ?storage_type: String
+      ?storage_type: String,
+      ?source_region: String
     ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
 
     interface _CreateDBClusterEndpointResponse

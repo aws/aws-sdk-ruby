@@ -111,7 +111,8 @@ module Aws::DocDB
           key: String,
           value: untyped
         }
-      ]
+      ],
+      ?source_region: String
     ) -> _CopyDBClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyDBClusterSnapshotResponse
 
     interface _CreateDBClusterResponse
@@ -150,7 +151,8 @@ module Aws::DocDB
         max_capacity: untyped
       },
       ?manage_master_user_password: bool,
-      ?master_user_secret_kms_key_id: String
+      ?master_user_secret_kms_key_id: String,
+      ?source_region: String
     ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
 
     interface _CreateDBClusterParameterGroupResponse

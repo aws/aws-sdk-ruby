@@ -10,7 +10,7 @@ module Aws
       describe UserAgent do
         let(:shapes) do
           shapes = ClientHelper.sample_shapes
-          shapes['smithy.ruby.tests#SampleClient']['traits']['aws.api#service'] = { 'sdkId' => 'sample_service_id' }
+          shapes['smithy.ruby.tests#SampleClient']['traits']['aws.api#service'] = { 'sdkId' => 'sample' }
           shapes
         end
 
@@ -21,7 +21,7 @@ module Aws
           client_class.add_plugin(Plugins::UserAgent)
           client_class
         end
-        let(:client) { client_class.new(stub_responses: true) }
+        let(:client) { client_class.new(stub_responses: true, endpoint: 'https://example.com') }
 
         def setup(given)
           metric_callable = nil
@@ -105,24 +105,22 @@ module Aws
           end
         end
 
-        context 'test runner' do
-          tests = JSON.load_file(File.join(File.dirname(__FILE__), 'user_agent_tests.json'))
-          tests.each_with_index do |test, index|
-            it "passes test #{index + 1}: #{test['description']}" do
-              given = test['given']
-              expected_header = test['expectedRequestHeaders']['user-agent']
-              metric_callable, caller, config_frameworks = setup(given)
-              allow(Kernel).to receive(:caller).and_return(caller)
-              client.config.user_agent_frameworks = config_frameworks
+        tests = JSON.load_file(File.join(File.dirname(__FILE__), 'user_agent_tests.json'))
+        tests.each_with_index do |test, index|
+          it "passes test #{index + 1}: #{test['description']}" do
+            given = test['given']
+            expected_header = test['expectedRequestHeaders']['user-agent']
+            metric_callable, caller, config_frameworks = setup(given)
+            allow(Kernel).to receive(:caller).and_return(caller)
+            client.config.user_agent_frameworks = config_frameworks
 
-              callable1 = proc { client.operation }
-              callable2 = callable1
-              callable2 = proc { metric_callable.call(callable1) } if metric_callable
-              resp = callable2.call
+            callable1 = proc { client.operation }
+            callable2 = callable1
+            callable2 = proc { metric_callable.call(callable1) } if metric_callable
+            resp = callable2.call
 
-              actual_header = resp.context.http_request.headers['User-Agent']
-              assert_header(expected_header, actual_header)
-            end
+            actual_header = resp.context.http_request.headers['User-Agent']
+            assert_header(expected_header, actual_header)
           end
         end
       end

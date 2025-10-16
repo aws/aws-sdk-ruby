@@ -397,6 +397,9 @@ module Aws::Neptune
     # @!attribute tags
     #   <p>The tags to assign to the new DB cluster snapshot copy.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
@@ -404,6 +407,7 @@ module Aws::Neptune
       :pre_signed_url,
       :copy_tags,
       :tags,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -808,6 +812,9 @@ module Aws::Neptune
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   @return [String]
     class CreateDBClusterMessage < Struct.new(
       :availability_zones,
       :backup_retention_period,
@@ -837,6 +844,7 @@ module Aws::Neptune
       :serverless_v2_scaling_configuration,
       :global_cluster_identifier,
       :storage_type,
+      :source_region,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

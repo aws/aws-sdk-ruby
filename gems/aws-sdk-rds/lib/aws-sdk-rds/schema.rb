@@ -992,6 +992,7 @@ module Aws::RDS
     CopyDBClusterSnapshotMessage.add_member(:pre_signed_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'PreSignedUrl'))
     CopyDBClusterSnapshotMessage.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'CopyTags'))
     CopyDBClusterSnapshotMessage.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CopyDBClusterSnapshotMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     CopyDBClusterSnapshotMessage.type = Types::CopyDBClusterSnapshotMessage
     CopyDBClusterSnapshotResult.add_member(:db_cluster_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBClusterSnapshot, location_name: 'DBClusterSnapshot'))
     CopyDBClusterSnapshotResult.type = Types::CopyDBClusterSnapshotResult
@@ -1013,6 +1014,7 @@ module Aws::RDS
     CopyDBSnapshotMessage.add_member(:snapshot_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SnapshotTarget'))
     CopyDBSnapshotMessage.add_member(:copy_option_group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'CopyOptionGroup'))
     CopyDBSnapshotMessage.add_member(:snapshot_availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SnapshotAvailabilityZone'))
+    CopyDBSnapshotMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     CopyDBSnapshotMessage.type = Types::CopyDBSnapshotMessage
     CopyDBSnapshotResult.add_member(:db_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBSnapshot, location_name: 'DBSnapshot'))
     CopyDBSnapshotResult.type = Types::CopyDBSnapshotResult
@@ -1163,6 +1165,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'CACertificateIdentifier'))
     CreateDBClusterMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'EngineLifecycleSupport'))
     CreateDBClusterMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: 'MasterUserAuthenticationType'))
+    CreateDBClusterMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     CreateDBClusterMessage.type = Types::CreateDBClusterMessage
     CreateDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBClusterParameterGroupName', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateDBClusterParameterGroupMessage.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBParameterGroupFamily', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1292,6 +1295,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'DedicatedLogVolume'))
     CreateDBInstanceReadReplicaMessage.add_member(:upgrade_storage_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'UpgradeStorageConfig'))
     CreateDBInstanceReadReplicaMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'CACertificateIdentifier'))
+    CreateDBInstanceReadReplicaMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     CreateDBInstanceReadReplicaMessage.type = Types::CreateDBInstanceReadReplicaMessage
     CreateDBInstanceReadReplicaResult.add_member(:db_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBInstance, location_name: 'DBInstance'))
     CreateDBInstanceReadReplicaResult.type = Types::CreateDBInstanceReadReplicaResult
@@ -4084,6 +4088,7 @@ module Aws::RDS
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: 'BackupRetentionPeriod'))
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'KmsKeyId'))
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:pre_signed_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'PreSignedUrl'))
+    StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     StartDBInstanceAutomatedBackupsReplicationMessage.type = Types::StartDBInstanceAutomatedBackupsReplicationMessage
     StartDBInstanceAutomatedBackupsReplicationResult.add_member(:db_instance_automated_backup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: 'DBInstanceAutomatedBackup'))
     StartDBInstanceAutomatedBackupsReplicationResult.type = Types::StartDBInstanceAutomatedBackupsReplicationResult

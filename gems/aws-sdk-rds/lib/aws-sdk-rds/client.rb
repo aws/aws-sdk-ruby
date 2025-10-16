@@ -25,6 +25,7 @@ require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/query_protocol'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-rds/plugins/cross_region_copying'
 
 module Aws::RDS
   # An API client for Aws::RDS.
@@ -57,6 +58,7 @@ module Aws::RDS
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::QueryProtocol)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -1009,6 +1011,8 @@ module Aws::RDS
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or 
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
     #               </p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example To copy a DB cluster snapshot
     #   # The following example creates a copy of a DB cluster snapshot, including its tags.
     #   params = {
@@ -1058,7 +1062,8 @@ module Aws::RDS
     #         key: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.copy_db_cluster_snapshot(params, options)
@@ -1357,6 +1362,8 @@ module Aws::RDS
     #               cross-account snapshot copy calls.</p>
     # @option params [String] :snapshot_availability_zone
     #   <p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example To copy a DB snapshot
     #   # The following example creates a copy of a DB snapshot.
     #   params = {
@@ -1413,7 +1420,8 @@ module Aws::RDS
     #     target_custom_availability_zone: "String",
     #     snapshot_target: "String",
     #     copy_option_group: false,
-    #     snapshot_availability_zone: "String"
+    #     snapshot_availability_zone: "String",
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.copy_db_snapshot(params, options)
@@ -2651,6 +2659,8 @@ module Aws::RDS
     #            </ul>
     #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
     #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example To create a MySQL 5.7-compatible DB cluster
     #   # The following example creates a MySQL 5.7-compatible Aurora DB cluster.
     #   params = {
@@ -2852,7 +2862,8 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
-    #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
+    #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"],
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.create_db_cluster(params, options)
@@ -5577,6 +5588,8 @@ module Aws::RDS
     #                   <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html">
     #                       Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora 
     #                           User Guide</i>.</p>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example To create a DB instance read replica
     #   # This example creates a read replica of an existing DB instance named test-instance. The read replica is named test-instance-repl.
     #   params = {
@@ -5653,7 +5666,8 @@ module Aws::RDS
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
-    #     ca_certificate_identifier: "String"
+    #     ca_certificate_identifier: "String",
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.create_db_instance_read_replica(params, options)
@@ -27531,6 +27545,8 @@ module Aws::RDS
     #                       <code>SourceRegion</code> autogenerates a presigned URL that is a valid request
     #                   for the operation that can run in the source Amazon Web Services Region.</p>
     #            </note>
+    # @option params [String] :source_region
+    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
     # @example To enable cross-Region automated backups
     #   # The following example replicates automated backups from a DB instance in the US East (N. Virginia) Region. The backup retention period is 14 days.
     #   params = {
@@ -27569,7 +27585,8 @@ module Aws::RDS
     #     source_db_instance_arn: "String", # required
     #     backup_retention_period: 1,
     #     kms_key_id: "String",
-    #     pre_signed_url: "SensitiveString"
+    #     pre_signed_url: "SensitiveString",
+    #     source_region: "String"
     #   }
     #   options = {}
     #   response = client.start_db_instance_automated_backups_replication(params, options)
