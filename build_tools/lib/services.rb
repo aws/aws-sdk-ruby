@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module AwsSdkCodeGenerator
+module BuildTools
   # @api private
   class ServiceEnumerator
     include Enumerable
 
     # TODO: potentially add services.json like in V3 to track service name independently from service id
     def initialize(options = {})
-      @models_dir = options.fetch(:models_dir, File.expand_path('../../../../models', __dir__))
+      @models_dir = options.fetch(:models_dir, File.expand_path('../../models', __dir__))
     end
 
     # @param [String] identifier

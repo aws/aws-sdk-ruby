@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../../gems/aws-sdk-sts/lib/aws-sdk-sts/plugins/regional_endpoints'
+require_relative '../../../../gems/aws-sdk-sts/lib/aws-sdk-sts/plugins/regional_endpoints'
 
-module AwsSdkCodeGenerator
+module BuildTools
   module Welds
     module Services
       # Provides STS specific customizations.
@@ -29,9 +29,8 @@ module AwsSdkCodeGenerator
         end
 
         def add_plugins
-          base_path = 'aws-sdk-sts/plugins'
           {
-            Aws::STS::Plugins::RegionalEndpoints => { require_path: "#{base_path}/regional_endpoints" }
+            Aws::STS::Plugins::RegionalEndpoints => { require_path: 'aws-sdk-sts/plugins/regional_endpoints' }
           }
         end
       end

@@ -2,9 +2,6 @@
 
 require 'smithy-json'
 
-require 'aws-sdk-core/json'
-require 'aws-sdk-core/stubbing/json_rpc'
-
 module Aws
   module Core
     module Plugins

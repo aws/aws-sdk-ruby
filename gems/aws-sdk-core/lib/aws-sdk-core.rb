@@ -11,6 +11,7 @@ require_relative 'aws-sdk-core/ec2_metadata'
 require_relative 'aws-sdk-core/endpoint_rules'
 
 # Shared Config
+
 require_relative 'aws-sdk-core/config_file'
 require_relative 'aws-sdk-core/config_file_parser'
 require_relative 'aws-sdk-core/config_file_section'
@@ -19,6 +20,7 @@ require_relative 'aws-sdk-core/config_file_utils'
 require_relative 'aws-sdk-core/shared_config'
 
 # Identities and Identity Providers
+
 require_relative 'aws-sdk-core/assume_role_credentials_provider'
 require_relative 'aws-sdk-core/assume_role_web_identity_credentials_provider'
 require_relative 'aws-sdk-core/container_credentials_provider'
@@ -30,6 +32,14 @@ require_relative 'aws-sdk-core/sso_credentials_provider'
 require_relative 'aws-sdk-core/ssooidc_token'
 require_relative 'aws-sdk-core/ssooidc_token_provider'
 require_relative 'aws-sdk-core/static_credentials_provider'
+
+# Protocol Codecs
+
+require_relative 'aws-sdk-core/json'
+require_relative 'aws-sdk-core/query'
+require_relative 'aws-sdk-core/rest'
+require_relative 'aws-sdk-core/stubbing'
+require_relative 'aws-sdk-core/xml'
 
 module Aws
   # The root namespace for the AWS SDK for Ruby core modules and classes.

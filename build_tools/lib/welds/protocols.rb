@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/ec2_protocol'
-require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/json_rpc_protocol'
-require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/query_protocol'
-require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_json_protocol'
-require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_xml_protocol'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/ec2_protocol'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/json_rpc_protocol'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/query_protocol'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_json_protocol'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_xml_protocol'
 
-module AwsSdkCodeGenerator
+module BuildTools
   module Welds
     # Adds a supported protocol plugin to the client if the service has the trait, prioritized by a list.
     class Protocols < Smithy::Weld

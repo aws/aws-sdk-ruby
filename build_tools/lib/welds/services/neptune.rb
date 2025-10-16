@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../../gems/aws-sdk-neptune/lib/aws-sdk-neptune/plugins/cross_region_copying'
+require_relative '../../../../gems/aws-sdk-neptune/lib/aws-sdk-neptune/plugins/cross_region_copying'
 
-module AwsSdkCodeGenerator
+module BuildTools
   module Welds
     module Services
       # Provides Neptune specific customizations.

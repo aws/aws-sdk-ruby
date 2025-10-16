@@ -46,7 +46,6 @@ Naming/FileName:
   Exclude:
     - 'tasks/**/*.rake'
     - '**/spec/**/*.rb'
-    - 'build_tools/aws-sdk-code-generator/lib/aws-sdk-code-generator.rb'
     - 'gems/aws-partitions/lib/aws-partitions.rb'
     - 'gems/aws-sigv4/lib/aws-sigv4.rb'
     - 'gems/aws-sdk-core/lib/aws-sdk-core.rb'

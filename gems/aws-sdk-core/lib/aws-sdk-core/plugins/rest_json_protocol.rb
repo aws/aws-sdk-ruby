@@ -2,10 +2,6 @@
 
 require 'smithy-json'
 
-require 'aws-sdk-core/json'
-require 'aws-sdk-core/rest'
-require 'aws-sdk-core/stubbing/rest_json'
-
 module Aws
   module Core
     module Plugins

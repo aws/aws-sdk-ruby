@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'aws-sdk-code-generator'
-
 task 'build' do
   # TODO: These result in various errors:
   #   aws-sdk-s3control => ArgumentError: Endpoint built-in not available for AWS::S3Control::UseArnRegion
@@ -11,7 +9,7 @@ task 'build' do
     aws-sdk-s3
   ]
 
-  AwsSdkCodeGenerator::SERVICES.each do |service|
+  BuildTools::SERVICES.each do |service|
     next if skip.include? service.gem_name
 
     Rake::Task["build:#{service.gem_name}"].invoke
@@ -22,6 +20,6 @@ desc 'Generates the code for one service, e.g. `rake build:aws-sdk-dynamodb`'
 task 'build:aws-sdk-*'
 rule(/^build:aws-sdk-\w+$/) do |task|
   identifier = task.name.split('-').last
-  plan = AwsSdkCodeGenerator::SERVICES[identifier]
+  plan = BuildTools::SERVICES[identifier]
   Smithy.generate(plan)
 end

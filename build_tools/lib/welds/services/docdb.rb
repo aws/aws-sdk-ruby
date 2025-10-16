@@ -1,32 +1,29 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../../gems/aws-sdk-rds/lib/aws-sdk-rds/plugins/cross_region_copying'
+require_relative '../../../../gems/aws-sdk-docdb/lib/aws-sdk-docdb/plugins/cross_region_copying'
 
-module AwsSdkCodeGenerator
+module BuildTools
   module Welds
     module Services
-      # Provides RDS specific customizations.
-      class RDS < Smithy::Weld
+      # Provides DocDB specific customizations.
+      class DocDB < Smithy::Weld
         def for?(service)
           _id, service = service.first
-          return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'RDS'
+          return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'DocDB'
 
-          say_status :insert, 'Adding custom plugins for RDS', @plan.quiet
+          say_status :insert, 'Adding custom plugins for DocDB', @plan.quiet
           true
         end
 
         def pre_process(model)
           operation_inputs = %w[
             CopyDBClusterSnapshotMessage
-            CopyDBSnapshotMessage
             CreateDBClusterMessage
-            CreateDBInstanceReadReplicaMessage
-            StartDBInstanceAutomatedBackupsReplicationMessage
           ]
           operation_inputs.each do |op|
-            shape = model['shapes']["com.amazonaws.rds##{op}"]
+            shape = model['shapes']["com.amazonaws.docdb##{op}"]
             shape['members']['SourceRegion'] = {
-              'target' => 'com.amazonaws.rds#String',
+              'target' => 'com.amazonaws.docdb#String',
               'traits' => {
                 'smithy.api#documentation' =>
                   '<p>The source region of the snapshot. This is only needed when the shapshot ' \
@@ -38,7 +35,7 @@ module AwsSdkCodeGenerator
 
         def add_plugins
           {
-            Aws::RDS::Plugins::CrossRegionCopying => { require_path: 'aws-sdk-rds/plugins/cross_region_copying' }
+            Aws::DocDB::Plugins::CrossRegionCopying => { require_path: 'aws-sdk-docdb/plugins/cross_region_copying' }
           }
         end
       end

@@ -2,10 +2,6 @@
 
 require 'smithy-xml'
 
-require 'aws-sdk-core/xml'
-require 'aws-sdk-core/rest'
-require 'aws-sdk-core/stubbing/rest_xml'
-
 module Aws
   module Core
     module Plugins

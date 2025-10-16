@@ -66,7 +66,7 @@ namespace :test do
 
   # TODO: move this to a Spec Helper inside build_tools/
   def run_protocol_test(service_name)
-    model = JSON.load_file("build_tools/aws-sdk-code-generator/spec/protocol_tests/#{service_name}/model.json")
+    model = JSON.load_file("build_tools/spec/protocol_tests/#{service_name}/model.json")
     gem_name = service_name.underscore
     plan_options = {
       module_name: service_name,
