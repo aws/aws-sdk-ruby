@@ -5,4 +5,7 @@ require_relative 'welds/endpoints'
 require_relative 'welds/protocols'
 require_relative 'welds/sigv4'
 
+require_relative 'welds/services/docdb'
+require_relative 'welds/services/neptune'
+require_relative 'welds/services/rds'
 require_relative 'welds/services/sts'

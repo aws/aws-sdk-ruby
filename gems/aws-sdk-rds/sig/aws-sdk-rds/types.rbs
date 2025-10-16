@@ -638,6 +638,7 @@ module Aws::RDS
         ?pre_signed_url: String,
         ?copy_tags: bool,
         ?tags: Array[Types::Tag],
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -647,6 +648,7 @@ module Aws::RDS
       attr_accessor pre_signed_url: String?
       attr_accessor copy_tags: bool?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor source_region: String?
     end
 
     class CopyDBClusterSnapshotResult
@@ -703,6 +705,7 @@ module Aws::RDS
         ?snapshot_target: String,
         ?copy_option_group: bool,
         ?snapshot_availability_zone: String,
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -717,6 +720,7 @@ module Aws::RDS
       attr_accessor snapshot_target: String?
       attr_accessor copy_option_group: bool?
       attr_accessor snapshot_availability_zone: String?
+      attr_accessor source_region: String?
     end
 
     class CopyDBSnapshotResult
@@ -1034,6 +1038,7 @@ module Aws::RDS
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
         ?master_user_authentication_type: String,
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1094,6 +1099,7 @@ module Aws::RDS
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
       attr_accessor master_user_authentication_type: String?
+      attr_accessor source_region: String?
     end
 
     class CreateDBClusterParameterGroupMessage
@@ -1351,6 +1357,7 @@ module Aws::RDS
         ?dedicated_log_volume: bool,
         ?upgrade_storage_config: bool,
         ?ca_certificate_identifier: String,
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1401,6 +1408,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool?
       attr_accessor upgrade_storage_config: bool?
       attr_accessor ca_certificate_identifier: String?
+      attr_accessor source_region: String?
     end
 
     class CreateDBInstanceReadReplicaResult
@@ -10123,6 +10131,7 @@ module Aws::RDS
         ?backup_retention_period: Integer,
         ?kms_key_id: String,
         ?pre_signed_url: String,
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10130,6 +10139,7 @@ module Aws::RDS
       attr_accessor backup_retention_period: Integer?
       attr_accessor kms_key_id: String?
       attr_accessor pre_signed_url: String?
+      attr_accessor source_region: String?
     end
 
     class StartDBInstanceAutomatedBackupsReplicationResult

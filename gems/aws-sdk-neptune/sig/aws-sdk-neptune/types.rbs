@@ -206,6 +206,7 @@ module Aws::Neptune
         ?pre_signed_url: String,
         ?copy_tags: bool,
         ?tags: Array[Types::Tag],
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -215,6 +216,7 @@ module Aws::Neptune
       attr_accessor pre_signed_url: String?
       attr_accessor copy_tags: bool?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor source_region: String?
     end
 
     class CopyDBClusterSnapshotResult
@@ -338,6 +340,7 @@ module Aws::Neptune
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?global_cluster_identifier: String,
         ?storage_type: String,
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -369,6 +372,7 @@ module Aws::Neptune
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor global_cluster_identifier: String?
       attr_accessor storage_type: String?
+      attr_accessor source_region: String?
     end
 
     class CreateDBClusterParameterGroupMessage

@@ -215,6 +215,7 @@ module Aws::DocDB
         ?pre_signed_url: String,
         ?copy_tags: bool,
         ?tags: Array[Types::Tag],
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -224,6 +225,7 @@ module Aws::DocDB
       attr_accessor pre_signed_url: String?
       attr_accessor copy_tags: bool?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor source_region: String?
     end
 
     class CopyDBClusterSnapshotResult
@@ -265,6 +267,7 @@ module Aws::DocDB
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
+        ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -292,6 +295,7 @@ module Aws::DocDB
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
+      attr_accessor source_region: String?
     end
 
     class CreateDBClusterParameterGroupMessage

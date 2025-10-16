@@ -378,6 +378,7 @@ module Aws::Neptune
     CopyDBClusterSnapshotMessage.add_member(:pre_signed_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'PreSignedUrl'))
     CopyDBClusterSnapshotMessage.add_member(:copy_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'CopyTags'))
     CopyDBClusterSnapshotMessage.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CopyDBClusterSnapshotMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     CopyDBClusterSnapshotMessage.type = Types::CopyDBClusterSnapshotMessage
     CopyDBClusterSnapshotResult.add_member(:db_cluster_snapshot, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBClusterSnapshot, location_name: 'DBClusterSnapshot'))
     CopyDBClusterSnapshotResult.type = Types::CopyDBClusterSnapshotResult
@@ -434,6 +435,7 @@ module Aws::Neptune
     CreateDBClusterMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: 'ServerlessV2ScalingConfiguration'))
     CreateDBClusterMessage.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, location_name: 'GlobalClusterIdentifier'))
     CreateDBClusterMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'StorageType'))
+    CreateDBClusterMessage.add_member(:source_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceRegion'))
     CreateDBClusterMessage.type = Types::CreateDBClusterMessage
     CreateDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBClusterParameterGroupName', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateDBClusterParameterGroupMessage.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBParameterGroupFamily', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
