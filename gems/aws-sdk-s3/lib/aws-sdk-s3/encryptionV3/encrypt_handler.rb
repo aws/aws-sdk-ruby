@@ -34,6 +34,7 @@ module Aws
               key: context.params[:key] + suffix,
               ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
               ##% The content metadata stored in the Instruction File MUST be serialized to a JSON string.
+              ##% The serialized JSON string MUST be the only contents of the Instruction File.
               body: Json.dump(envelope)
             )
             context.params[:metadata] ||= {}
@@ -73,9 +74,21 @@ module Aws
         def split_for_instruction_file(envelop)
           ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
           ##% In the V3 format, the mapkeys "x-amz-c", "x-amz-d", and "x-amz-i" MUST be stored exclusively in the Object Metadata.
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#v3-instruction-files
+          ##% - The V3 message format MUST store the mapkey "x-amz-c" and its value in the Object Metadata when writing with an Instruction File.
+          ##% - The V3 message format MUST NOT store the mapkey "x-amz-c" and its value in the Instruction File.
+          ##% - The V3 message format MUST store the mapkey "x-amz-d" and its value in the Object Metadata when writing with an Instruction File.
+          ##% - The V3 message format MUST NOT store the mapkey "x-amz-d" and its value in the Instruction File.
+          ##% - The V3 message format MUST store the mapkey "x-amz-i" and its value in the Object Metadata when writing with an Instruction File.
+          ##% - The V3 message format MUST NOT store the mapkey "x-amz-i" and its value in the Instruction File.
           metadata_envelop = envelop.select { |k, v| EncryptionV3.METADATA_KEY.include?(k) }
           # Exclude the metadata keys rather than include the envelop keys
           # because there might be additional information
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#v3-instruction-files
+          ##% - The V3 message format MUST store the mapkey "x-amz-3" and its value in the Instruction File.
+          ##% - The V3 message format MUST store the mapkey "x-amz-w" and its value in the Instruction File.
+          ##% - The V3 message format MUST store the mapkey "x-amz-m" and its value (when present in the content metadata) in the Instruction File.
+          ##% - The V3 message format MUST store the mapkey "x-amz-t" and its value (when present in the content metadata) in the Instruction File.
           instruction_envelop = envelop.reject { |k, v| EncryptionV3.METADATA_KEY.include?(k) }
           
           [instruction_envelop, metadata_envelop]

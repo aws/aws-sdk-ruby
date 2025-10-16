@@ -319,6 +319,8 @@ module Aws
           validate_params(options)
           @client = extract_client(options)
           @v3_cipher_provider = self.class.cipher_provider(options)
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+          ##% Instruction File writes MUST be optionally configured during client creation or on each PutObject request.
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
@@ -374,7 +376,17 @@ module Aws
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
-            cipher_provider: @commitment_policy == :forbid_encrypt_allow_decrypt ? @v2_cipher_provider : @v3_cipher_provider,
+            cipher_provider: if @commitment_policy == :forbid_encrypt_allow_decrypt
+              ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
+              ##% When the commitment policy is FORBID_ENCRYPT_ALLOW_DECRYPT, the S3EC MUST NOT encrypt using an algorithm suite which supports key commitment.
+              @v2_cipher_provider
+            else
+              ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
+              ##% When the commitment policy is REQUIRE_ENCRYPT_ALLOW_DECRYPT, the S3EC MUST only encrypt using an algorithm suite which supports key commitment.
+              ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
+              ##% When the commitment policy is REQUIRE_ENCRYPT_REQUIRE_DECRYPT, the S3EC MUST only encrypt using an algorithm suite which supports key commitment.
+              @v3_cipher_provider
+            end,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
             kms_encryption_context: kms_encryption_context
@@ -443,6 +455,11 @@ module Aws
             req.send_request(target: block)
           end
         end
+
+        ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+        ##= type=exception
+        ##= reason=This has never been supported in Ruby
+        ##% The S3EC MAY support re-encryption/key rotation via Instruction Files.
 
         # @api private
         def self.cipher_provider(options)
@@ -523,13 +540,19 @@ module Aws
           location = params.delete(:envelope_location) || @envelope_location
           suffix = params.delete(:instruction_file_suffix)
           if suffix
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##% The S3EC SHOULD support providing a custom Instruction File suffix on GetObject requests, regardless of whether or not re-encryption is supported.
             [:instruction_file, suffix]
           else
             [location, @instruction_file_suffix]
           end
         end
 
-        def extract_location(options)
+      def extract_location(options)
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
+          ##% By default, the S3EC MUST store content metadata in the S3 Object Metadata.
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+          ##% Instruction File writes MUST NOT be enabled by default.
           location = options[:envelope_location] || :metadata
           if [:metadata, :instruction_file].include?(location)
             location
@@ -541,8 +564,14 @@ module Aws
         end
 
         def extract_suffix(options)
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+          ##% The default Instruction File behavior uses the same S3 object key as its associated object suffixed with ".instruction".
           suffix = options[:instruction_file_suffix] || '.instruction'
           if suffix.is_a? String
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##= type=exception
+            ##= reason=Ruby has always supported this option
+            ##% The S3EC MUST NOT support providing a custom Instruction File suffix on ordinary writes; custom suffixes MUST only be used during re-encryption.
             suffix
           else
             msg = ':instruction_file_suffix must be a String'

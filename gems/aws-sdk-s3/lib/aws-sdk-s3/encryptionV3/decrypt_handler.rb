@@ -73,7 +73,6 @@ module Aws
         private
 
         def attach_http_event_listeners(context)
-
           context.http_response.on_headers(200) do
             decrypter = if context.http_response.headers.key?('x-amz-meta-x-amz-i')
                 ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
@@ -82,8 +81,14 @@ module Aws
                 authenticated_decrypter(context, cipher, envelope)
               else
                 if context[:encryption][:commitment_policy] == :require_encrypt_require_decrypt
+                  ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
+                  ##% When the commitment policy is REQUIRE_ENCRYPT_REQUIRE_DECRYPT, the S3EC MUST NOT allow decryption using algorithm suites which do not support key commitment.
                   raise Errors::LegacyDecryptionError
                 end
+                ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
+                ##% When the commitment policy is FORBID_ENCRYPT_ALLOW_DECRYPT, the S3EC MUST allow decryption using algorithm suites which do not support key commitment.
+                ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
+                ##% When the commitment policy is REQUIRE_ENCRYPT_ALLOW_DECRYPT, the S3EC MUST allow decryption using algorithm suites which do not support key commitment.
                 cipher, envelope = V2_HANDLER.send(:decryption_cipher, context)
                 V2_HANDLER.send(:get_decrypter, context, cipher, envelope)
               end 
@@ -137,6 +142,8 @@ module Aws
             envelope.merge!(secondary) if secondary
           end
 
+          ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
+          ##% If the S3EC does not support decoding the S3 Server's "double encoding" then it MUST return the content metadata untouched.
           v3_envelope?(envelope)
         end
 
@@ -158,6 +165,13 @@ module Aws
         def envelope_from_metadata(context)
           POSSIBLE_ENVELOPE_KEYS.filter_map do |suffix|
             if value = context.http_response.headers["x-amz-meta-#{suffix}"]
+              ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
+              ##= type=exception
+              ##= reason=This has never been supported in Ruby
+              ##% The S3EC SHOULD support decoding the S3 Server's "double encoding".
+
+              ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
+              ##% If the S3EC does not support decoding the S3 Server's "double encoding" then it MUST return the content metadata untouched.
               [suffix, value]
             end
           end.to_h

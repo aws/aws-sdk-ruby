@@ -24,21 +24,6 @@ module Aws
             key.public_encrypt(buf.pack('C*'), OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
           end
 
-          def decrypt(key, data)
-            begin
-              case key
-              when OpenSSL::PKey::RSA # asymmetric decryption
-                key.private_decrypt(data)
-              when String # symmetric Decryption
-                cipher = aes_cipher(:decrypt, :ECB, key, nil)
-                cipher.update(data) + cipher.final
-              end
-            rescue OpenSSL::Cipher::CipherError
-              msg = 'decryption failed, possible incorrect key'
-              raise Errors::DecryptionError, msg
-            end
-          end
-
           def decrypt_aes_gcm(key, data, auth_data)
             # data is iv (12B) + key + tag (16B)
             buf = data.unpack('C*')
@@ -114,9 +99,15 @@ module Aws
             commitment_key = Utils.derive_commitment_key(data_key, message_id)
             cipher = alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(:encrypt, data_key, message_id)
 
-            ##= ../specification/s3-encryption/encryption.md#content-encryption
-            ##% The generated IV or Message ID MUST be set or returned from the encryption process such that it can be included in the content metadata.
-            [cipher, message_id, commitment_key]
+            [
+              cipher,
+              ##= ../specification/s3-encryption/encryption.md#content-encryption
+              ##% The generated IV or Message ID MUST be set or returned from the encryption process such that it can be included in the content metadata.
+              message_id,
+              ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-hkdf-sha512-commit-key
+              ##% The derived key commitment value MUST be set or returned from the encryption process such that it can be included in the content metadata.
+              commitment_key
+            ]
           end
 
           def derive_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id, stored_commitment_key)
@@ -148,6 +139,8 @@ module Aws
             cipher =  Utils.aes_cipher(
               mode,
               :GCM,
+              ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-hkdf-sha512-commit-key
+              ##% The client MUST use HKDF to derive the key commitment value and the derived encrypting key as described in [Key Derivation](key-derivation.md).
               Utils.derive_encryption_key(data_key, message_id),
               ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
               ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, the IV used in the AES-GCM content encryption/decryption MUST contain only zeros of the length defined in the algorithm suite.
