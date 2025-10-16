@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add `CREDENTIALS_CODE` metric for `static_profile_` methods in default credential chain.
+* Issue - Add `CREDENTIALS_CODE` metric for `static_profile_` prefixed methods in default credential chain.
 
 3.233.0 (2025-09-23)
 ------------------
