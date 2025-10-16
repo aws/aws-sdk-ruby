@@ -36,13 +36,10 @@ module Aws
       # {Aws::STS::Client#assume_role_with_web_identity}.
       #
       # @see Aws::STS::Client#assume_role_with_web_identity
-      def initialize(options = {}) # rubocop:disable Metrics/AbcSize
+      def initialize(options = {})
         unless defined?(Aws::STS)
           raise 'The aws-sdk-sts gem must be required in order to use AssumeRoleWebIdentityCredentialsProvider.'
         end
-
-        # TODO: update after adding region resolution
-        options[:region] = resolve_region(options.delete(:config))
 
         @web_identity_token_file = options.delete(:web_identity_token_file)
         @retries = options.delete(:retries) || 3
@@ -65,18 +62,6 @@ module Aws
 
       private
 
-      def resolve_region(config)
-        keys = %w[AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION]
-        env_region = ENV.values_at(*keys).compact.first
-        env_region = nil if env_region == ''
-        if config
-          profile = config.profile
-          profile_config = Aws::Core.shared_config.profiles[profile]
-          cfg_region = profile_config && profile_config['region'] ? profile_config['region'] : nil
-        end
-        env_region || cfg_region
-      end
-
       def backoff(backoff)
         case backoff
         when Proc then backoff
@@ -97,7 +82,7 @@ module Aws
             client_params[key] = value
           end
         end
-        client_params[:credentials] = nil
+        client_params[:credentials_provider] = nil
       end
 
       def refresh

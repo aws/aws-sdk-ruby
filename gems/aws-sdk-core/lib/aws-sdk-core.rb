@@ -21,6 +21,7 @@ require_relative 'aws-sdk-core/shared_config'
 
 # Identities and Identity Providers
 
+require_relative 'aws-sdk-core/assume_role_credentials_provider'
 require_relative 'aws-sdk-core/assume_role_web_identity_credentials_provider'
 require_relative 'aws-sdk-core/container_credentials_provider'
 require_relative 'aws-sdk-core/credentials'
