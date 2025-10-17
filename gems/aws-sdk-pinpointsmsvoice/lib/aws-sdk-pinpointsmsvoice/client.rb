@@ -244,7 +244,7 @@ module Aws::PinpointSMSVoice
     #   A name that identifies the event destination.
     # @example Request syntax with placeholder values
     #   params = {
-    #     configuration_set_name: "__string", # required
+    #     configuration_set_name: "String", # required
     #     event_destination: {
     #       cloud_watch_logs_destination: {
     #         iam_role_arn: "String",
@@ -279,7 +279,7 @@ module Aws::PinpointSMSVoice
     #   ConfigurationSetName
     # @example Request syntax with placeholder values
     #   params = {
-    #     configuration_set_name: "__string", # required
+    #     configuration_set_name: "String", # required
     #   }
     #   options = {}
     #   response = client.delete_configuration_set(params, options)
@@ -300,8 +300,8 @@ module Aws::PinpointSMSVoice
     #   EventDestinationName
     # @example Request syntax with placeholder values
     #   params = {
-    #     configuration_set_name: "__string", # required
-    #     event_destination_name: "__string", # required
+    #     configuration_set_name: "String", # required
+    #     event_destination_name: "String", # required
     #   }
     #   options = {}
     #   response = client.delete_configuration_set_event_destination(params, options)
@@ -320,7 +320,7 @@ module Aws::PinpointSMSVoice
     #   ConfigurationSetName
     # @example Request syntax with placeholder values
     #   params = {
-    #     configuration_set_name: "__string", # required
+    #     configuration_set_name: "String", # required
     #   }
     #   options = {}
     #   response = client.get_configuration_set_event_destinations(params, options)
@@ -360,8 +360,8 @@ module Aws::PinpointSMSVoice
     #   Used to specify the number of items that should be returned in the response.
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "__string",
-    #     page_size: "__string"
+    #     next_token: "String",
+    #     page_size: "String"
     #   }
     #   options = {}
     #   response = client.list_configuration_sets(params, options)
@@ -434,7 +434,7 @@ module Aws::PinpointSMSVoice
     #   EventDestinationName
     # @example Request syntax with placeholder values
     #   params = {
-    #     configuration_set_name: "__string", # required
+    #     configuration_set_name: "String", # required
     #     event_destination: {
     #       cloud_watch_logs_destination: {
     #         iam_role_arn: "String",
@@ -450,7 +450,7 @@ module Aws::PinpointSMSVoice
     #         topic_arn: "String"
     #       }
     #     },
-    #     event_destination_name: "__string", # required
+    #     event_destination_name: "String", # required
     #   }
     #   options = {}
     #   response = client.update_configuration_set_event_destination(params, options)

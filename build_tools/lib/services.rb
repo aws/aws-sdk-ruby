@@ -66,5 +66,5 @@ module BuildTools
     end
   end
 
-  SERVICES = ServiceEnumerator.new
+  Services = ServiceEnumerator.new
 end

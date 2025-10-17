@@ -6,7 +6,7 @@ AllCops:
     - 'build/**/*'
     - 'tasks/release/**/*'
     - 'vendor/**/*'
-    - !ruby/regexp /\/gems\/(?!aws-sdk-core|aws-partitions|aws-sigv4\/).*/
+    - !ruby/regexp /\/gems\/(?!aws-sdk-core|aws-partitions|aws-sigv4|aws-sdk\/).*/
 
 Gemspec/RequireMFA:
   Enabled: false
@@ -47,8 +47,9 @@ Naming/FileName:
     - 'tasks/**/*.rake'
     - '**/spec/**/*.rb'
     - 'gems/aws-partitions/lib/aws-partitions.rb'
-    - 'gems/aws-sigv4/lib/aws-sigv4.rb'
+    - 'gems/aws-sdk/lib/aws-sdk.rb'
     - 'gems/aws-sdk-core/lib/aws-sdk-core.rb'
+    - 'gems/aws-sigv4/lib/aws-sigv4.rb'
 
 Style/BlockComments:
   Exclude:
@@ -57,3 +58,8 @@ Style/BlockComments:
 Style/Documentation:
   Exclude:
     - '**/spec/**/*.rb'
+
+Style/GlobalVars:
+  Exclude:
+    - 'Rakefile'
+    - 'tasks/**/*.rake'
