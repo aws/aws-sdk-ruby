@@ -24,7 +24,7 @@ module Aws
         end
 
         def apply_aws_defaults(_client_class, options)
-          Aws.config.each do |option_name, default|
+          Aws::Core.config.each do |option_name, default|
             next if self.class.identifiers.include?(option_name)
             next if options.key?(option_name)
 
