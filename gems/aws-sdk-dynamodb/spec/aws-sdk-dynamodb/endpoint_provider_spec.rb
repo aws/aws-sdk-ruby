@@ -785,7 +785,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -816,7 +815,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -847,7 +845,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -879,7 +876,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -913,7 +909,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1023,7 +1018,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1056,7 +1050,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1087,7 +1080,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1118,7 +1110,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1150,7 +1141,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1184,7 +1174,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1218,7 +1207,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1266,7 +1254,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1297,7 +1284,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1328,7 +1314,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1360,7 +1345,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1423,7 +1407,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1454,7 +1437,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1485,7 +1467,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1517,7 +1498,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1551,7 +1531,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1661,7 +1640,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1694,7 +1672,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1725,7 +1702,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1756,7 +1732,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1788,7 +1763,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1822,7 +1796,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1856,7 +1829,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1904,7 +1876,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1935,7 +1906,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1966,7 +1936,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -1998,7 +1967,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2061,7 +2029,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2092,7 +2059,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2123,7 +2089,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2155,7 +2120,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2189,7 +2153,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2299,7 +2262,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2332,7 +2294,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2363,7 +2324,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2394,7 +2354,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2426,7 +2385,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2460,7 +2418,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2494,7 +2451,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2542,7 +2498,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2573,7 +2528,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2604,7 +2558,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2636,7 +2589,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           endpoint: 'https://example.com',
           region: 'us-east-1',
@@ -2742,7 +2694,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -2775,7 +2726,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -2884,7 +2834,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -2959,7 +2908,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -2992,7 +2940,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3025,7 +2972,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3115,7 +3061,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3220,7 +3165,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3253,7 +3197,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3362,7 +3305,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3437,7 +3379,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3470,7 +3411,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3503,7 +3443,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3593,7 +3532,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3698,7 +3636,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3731,7 +3668,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3840,7 +3776,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3915,7 +3850,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3948,7 +3882,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -3981,7 +3914,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -4071,7 +4003,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'local',
           use_fips_endpoint: false,
@@ -4134,7 +4065,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4167,7 +4097,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4200,7 +4129,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4233,7 +4161,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4266,7 +4193,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4374,7 +4300,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4405,7 +4330,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4438,7 +4362,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4471,7 +4394,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4504,7 +4426,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4537,7 +4458,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4570,7 +4490,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4618,7 +4537,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4651,7 +4569,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4684,7 +4601,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4717,7 +4633,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4779,7 +4694,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4809,7 +4723,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -4840,7 +4753,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4873,7 +4785,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -4906,7 +4817,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5014,7 +4924,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5044,7 +4953,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -5074,7 +4982,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -5105,7 +5012,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5138,7 +5044,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5170,7 +5075,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5200,7 +5104,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5244,7 +5147,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -5274,7 +5176,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -5305,7 +5206,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5338,7 +5238,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5441,7 +5340,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5471,7 +5369,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5572,7 +5469,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5644,7 +5540,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5674,7 +5569,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5704,7 +5598,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5790,7 +5683,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -5849,7 +5741,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -5882,7 +5773,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -5915,7 +5805,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5948,7 +5837,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -5981,7 +5869,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6090,7 +5977,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6123,7 +6009,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -6156,7 +6041,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -6189,7 +6073,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6222,7 +6105,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6255,7 +6137,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6288,7 +6169,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6336,7 +6216,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -6369,7 +6248,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: true,
@@ -6402,7 +6280,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6435,7 +6312,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           use_fips_endpoint: false,
@@ -6543,7 +6419,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -6576,7 +6451,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -6685,7 +6559,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -6763,7 +6636,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -6796,7 +6668,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -6829,7 +6700,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -6922,7 +6792,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'cn-north-1',
           use_fips_endpoint: false,
@@ -7030,7 +6899,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7063,7 +6931,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7172,7 +7039,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7250,7 +7116,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7283,7 +7148,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7316,7 +7180,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7409,7 +7272,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-iso-east-1',
           use_fips_endpoint: false,
@@ -7517,7 +7379,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,
@@ -7550,7 +7411,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,
@@ -7659,7 +7519,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling list_tables' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,
@@ -7737,7 +7596,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,
@@ -7770,7 +7628,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,
@@ -7803,7 +7660,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling describe_table' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,
@@ -7896,7 +7752,6 @@ module Aws::DynamoDB
       it 'produces the correct output from the client when calling batch_get_item' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-gov-east-1',
           use_fips_endpoint: false,

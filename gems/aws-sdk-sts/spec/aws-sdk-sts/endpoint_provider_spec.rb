@@ -771,7 +771,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'ap-northeast-1',
           sts_regional_endpoints: 'legacy',
@@ -801,7 +800,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'ap-south-1',
           sts_regional_endpoints: 'legacy',
@@ -831,7 +829,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'ap-southeast-1',
           sts_regional_endpoints: 'legacy',
@@ -861,7 +858,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'ap-southeast-2',
           sts_regional_endpoints: 'legacy',
@@ -891,7 +887,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'aws-global',
           sts_regional_endpoints: 'legacy',
@@ -921,7 +916,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'ca-central-1',
           sts_regional_endpoints: 'legacy',
@@ -951,7 +945,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'eu-central-1',
           sts_regional_endpoints: 'legacy',
@@ -981,7 +974,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'eu-north-1',
           sts_regional_endpoints: 'legacy',
@@ -1011,7 +1003,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'eu-west-1',
           sts_regional_endpoints: 'legacy',
@@ -1041,7 +1032,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'eu-west-2',
           sts_regional_endpoints: 'legacy',
@@ -1071,7 +1061,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'eu-west-3',
           sts_regional_endpoints: 'legacy',
@@ -1101,7 +1090,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'sa-east-1',
           sts_regional_endpoints: 'legacy',
@@ -1131,7 +1119,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
           sts_regional_endpoints: 'legacy',
@@ -1161,7 +1148,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-2',
           sts_regional_endpoints: 'legacy',
@@ -1191,7 +1177,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-west-1',
           sts_regional_endpoints: 'legacy',
@@ -1221,7 +1206,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-west-2',
           sts_regional_endpoints: 'legacy',
@@ -1251,7 +1235,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-3',
           sts_regional_endpoints: 'legacy',
@@ -1281,7 +1264,6 @@ module Aws::STS
       it 'produces the correct output from the client when calling get_caller_identity' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-west-1',
           sts_regional_endpoints: 'legacy',

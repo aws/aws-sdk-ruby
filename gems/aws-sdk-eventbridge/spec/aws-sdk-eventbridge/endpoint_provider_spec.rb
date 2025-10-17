@@ -711,7 +711,6 @@ module Aws::EventBridge
       it 'produces the correct output from the client when calling put_events' do
         client = Client.new(
           stub_responses: true,
-          endpoint: nil,
           endpoint_provider: subject,
           region: 'us-east-1',
         )
