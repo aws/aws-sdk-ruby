@@ -42,7 +42,6 @@ module Aws::PinpointSMSVoice
     UpdateConfigurationSetEventDestinationResponse: StructureShape
     VoiceMessageContent: StructureShape
     WordCharactersWithDelimiters: StringShape
-    String: StringShape
 
     PinpointSMSVoice: ServiceShape
   end
