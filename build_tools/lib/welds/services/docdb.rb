@@ -11,7 +11,7 @@ module BuildTools
           _id, service = service.first
           return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'DocDB'
 
-          say_status :insert, 'Adding custom plugins for DocDB', @plan.quiet
+          say_status :insert, 'Adding customizations for DocDB', @plan.quiet
           true
         end
 

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift(File.expand_path('build_tools/lib', __dir__))
-$LOAD_PATH.unshift(File.expand_path('gems/aws-sdk-core/lib', __dir__))
-$LOAD_PATH.unshift(File.expand_path('gems/aws-partitions/lib', __dir__))
-$LOAD_PATH.unshift(File.expand_path('gems/aws-sigv4/lib', __dir__))
+$REPO_ROOT = File.dirname(__FILE__)
+$GEMS_DIR = "#{$REPO_ROOT}/gems"
+
+$LOAD_PATH.unshift("#{$REPO_ROOT}/build_tools/lib")
+$LOAD_PATH.unshift("#{$GEMS_DIR}/aws-sdk-core/lib")
+$LOAD_PATH.unshift("#{$GEMS_DIR}/aws-partitions/lib")
+$LOAD_PATH.unshift("#{$GEMS_DIR}/aws-sigv4/lib")
 
 require 'build_tools'
 

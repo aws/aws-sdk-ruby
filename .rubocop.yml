@@ -6,7 +6,7 @@ AllCops:
     - 'build/**/*'
     - 'tasks/release/**/*'
     - 'vendor/**/*'
-    - !ruby/regexp /\/gems\/(?!aws-sdk-core|aws-partitions|aws-sigv4\/).*/
+    - !ruby/regexp /\/gems\/(?!aws-sdk-core|aws-partitions|aws-sigv4|aws-sdk\/).*/
 
 Gemspec/RequireMFA:
   Enabled: false
@@ -57,3 +57,8 @@ Style/BlockComments:
 Style/Documentation:
   Exclude:
     - '**/spec/**/*.rb'
+
+Style/GlobalVars:
+  Exclude:
+    - 'Rakefile'
+    - 'tasks/**/*.rake'
