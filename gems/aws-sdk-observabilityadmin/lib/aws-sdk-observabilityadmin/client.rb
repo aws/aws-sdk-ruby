@@ -20,10 +20,10 @@ require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
-require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/rest_json_protocol'
+require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
 
 module Aws::ObservabilityAdmin
@@ -52,10 +52,10 @@ module Aws::ObservabilityAdmin
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
-    add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::RestJsonProtocol)
+    add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
 
     # @param options [Hash] Client options
