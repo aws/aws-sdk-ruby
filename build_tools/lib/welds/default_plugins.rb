@@ -14,9 +14,6 @@ module BuildTools
       end
 
       def post_process(artifacts)
-        # Add the identifier for the global configuration plugin
-        # require 'byebug'
-        # byebug
         string = "\nAws::Core::Plugins::GlobalConfiguration.add_identifier(:#{@plan.service_name.downcase})\n"
         file = artifacts.find { |artifact| artifact.end_with?('/client.rb') }
         insert_into_file(file, string, before: "\nmodule #{@plan.module_name}")
