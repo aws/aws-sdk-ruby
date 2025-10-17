@@ -63,16 +63,16 @@ OptionParser.new do |opts| # rubocop:disable Metrics/BlockLength
   end
 
   opts.on('-v', '--verbose', 'enable client logging and HTTP wire tracing') do |value|
-    options[:log] = true
+    options[:log] = value
     options[:log_set] = true
-    options[:debug] = true
+    options[:debug] = value
     options[:debug_set] = true
   end
 
   opts.on('-q', '--quiet', 'disable client logging and HTTP wire tracing') do |value|
-    options[:log] = false
+    options[:log] = !value
     options[:log_set] = true
-    options[:debug] = false
+    options[:debug] = !value
     options[:debug_set] = true
   end
 
