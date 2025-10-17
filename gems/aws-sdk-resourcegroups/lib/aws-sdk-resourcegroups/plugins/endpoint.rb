@@ -29,12 +29,6 @@ module Aws::ResourceGroups
         {"bearer" => "smithy.api#httpBearerAuth", "none" => "smithy.api#noAuth", "sigv4a" => "aws.auth#sigv4a", "sigv4" => "aws.auth#sigv4"}
       end
 
-      def before_initialize(_client_class, options)
-        return unless options[:stub_responses]
-
-        options[:endpoint] = 'http://stubbed-endpoint' unless options.key?(:endpoint)
-      end
-
       # @api private
       class Handler < Smithy::Client::Handler
         def call(context)

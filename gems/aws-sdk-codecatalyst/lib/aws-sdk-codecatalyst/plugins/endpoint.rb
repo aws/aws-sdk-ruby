@@ -26,13 +26,7 @@ module Aws::CodeCatalyst
       end
 
       option(:endpoint_auth_schemes) do
-        {"bearer" => "smithy.api#httpBearerAuth", "none" => "smithy.api#noAuth", "sigv4a" => "aws.auth#sigv4a", "sigv4" => "aws.auth#sigv4"}
-      end
-
-      def before_initialize(_client_class, options)
-        return unless options[:stub_responses]
-
-        options[:endpoint] = 'http://stubbed-endpoint' unless options.key?(:endpoint)
+        {"bearer" => "smithy.api#httpBearerAuth", "none" => "smithy.api#noAuth"}
       end
 
       # @api private
