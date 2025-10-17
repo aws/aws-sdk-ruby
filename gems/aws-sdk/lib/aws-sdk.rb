@@ -2,8 +2,8 @@
 
 require 'aws-sdk-core'
 
-# Aws module documentation.
-module Aws
+# Top-level namespace for the AWS SDK for Ruby.
+module Aws # rubocop:disable Metrics/ModuleLength
   # START_AWS_SDK_SERVICE_GEMS_DEPENDENCIES
   autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
   autoload :Account, 'aws-sdk-account'

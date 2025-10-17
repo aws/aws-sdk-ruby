@@ -17,10 +17,10 @@ module BuildTools
           # Both String and __string are defined, causing constant redefinition warnings.
           model['shapes'].delete('com.amazonaws.pinpointsmsvoice#__string')
 
-          model['shapes'].each do |shape_name, shape|
+          model['shapes'].each_value do |shape|
             next unless shape['type'] == 'structure'
 
-            shape['members'].each do |member_name, member|
+            shape['members'].each_value do |member|
               if member['target'] == 'com.amazonaws.pinpointsmsvoice#__string'
                 member['target'] = 'com.amazonaws.pinpointsmsvoice#String'
               end
