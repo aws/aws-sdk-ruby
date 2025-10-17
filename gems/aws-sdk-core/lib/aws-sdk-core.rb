@@ -49,8 +49,37 @@ module Aws
     @config = {}
 
     class << self
-      # @return [Hash] Returns a hash of default configuration options shared
-      #  by all constructed AWS clients.
+      # ## Global AWS configuration
+      #
+      # You can specify global configuration defaults via `Aws::Core.config`
+      #
+      #     Aws::Core.config[:region] = 'us-west-2'
+      #
+      # Options applied to `Aws::Core.config` are merged with constructed service interfaces.
+      #
+      #     # uses the global configuration
+      #     Aws::EC2.new.config.region #=> 'us-west-2'
+      #
+      #     # constructor args have priority over global configuration
+      #     Aws::EC2.new(region: 'us-east-1').config.region #=> 'us-east-1'
+      #
+      # ## Service Specific Global Configuration
+      #
+      # Some services have very specific configuration options that are not
+      # shared by other services.
+      #
+      #     # oops, this option is only recognized by Aws::S3
+      #     Aws::Core.config[:force_path_style] = true
+      #     Aws::EC2.new
+      #     #=> raises ArgumentError: invalid configuration option `:force_path_style'
+      #
+      # To avoid this issue, you can nest service specific options
+      #
+      #     Aws::Core.config[:s3] = { force_path_style: true }
+      #
+      #     Aws::EC2.new # no error this time
+      #     Aws::S3.new.config.force_path_style #=> true
+      # @return [Hash]
       attr_reader :config
 
       # @param [Hash] config

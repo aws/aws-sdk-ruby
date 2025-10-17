@@ -20,12 +20,15 @@ require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
+require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/query_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-sts/plugins/regional_endpoints'
+
+Aws::Core::Plugins::GlobalConfiguration.add_identifier(:sts)
 
 module Aws::STS
   # An API client for Aws::STS.
@@ -34,6 +37,7 @@ module Aws::STS
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSSecurityTokenServiceV20110615
+    @identifier = :sts
 
     add_plugin(::Aws::STS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
@@ -53,6 +57,7 @@ module Aws::STS
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
+    add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::QueryProtocol)

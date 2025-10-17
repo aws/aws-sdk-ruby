@@ -31,9 +31,11 @@ module BuildTools
           model = JSON.load_file(file)
           sdk_id = sdk_id(model)
           identifier = sdk_id.downcase.gsub(' ', '')
+          service_name = convert_to_module_name(sdk_id)
           gem_name = "aws-sdk-#{identifier}"
           plan_options = {
-            module_name: "Aws::#{convert_to_module_name(sdk_id)}",
+            service_name: service_name,
+            module_name: "Aws::#{service_name}",
             gem_name: gem_name,
             gem_version: '2.0.0.pre0',
             destination_root: "gems/#{gem_name}",
