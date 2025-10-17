@@ -46,7 +46,6 @@ module Aws::PinpointSMSVoice
     UpdateConfigurationSetEventDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pinpointsmsvoice#UpdateConfigurationSetEventDestinationResponse', name: 'UpdateConfigurationSetEventDestinationResponse')
     VoiceMessageContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pinpointsmsvoice#VoiceMessageContent', name: 'VoiceMessageContent')
     WordCharactersWithDelimiters = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pinpointsmsvoice#WordCharactersWithDelimiters', name: 'WordCharactersWithDelimiters')
-    String = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pinpointsmsvoice#__string', name: 'String')
 
     AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Message'))
     AlreadyExistsException.type = Types::AlreadyExistsException

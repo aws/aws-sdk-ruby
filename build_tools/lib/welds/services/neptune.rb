@@ -11,7 +11,7 @@ module BuildTools
           _id, service = service.first
           return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'Neptune'
 
-          say_status :insert, 'Adding custom plugins for Neptune', @plan.quiet
+          say_status :insert, 'Adding customizations for Neptune', @plan.quiet
           true
         end
 

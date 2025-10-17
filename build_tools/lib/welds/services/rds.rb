@@ -11,7 +11,7 @@ module BuildTools
           _id, service = service.first
           return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'RDS'
 
-          say_status :insert, 'Adding custom plugins for RDS', @plan.quiet
+          say_status :insert, 'Adding customizations for RDS', @plan.quiet
           true
         end
 
