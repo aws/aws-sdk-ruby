@@ -64,10 +64,6 @@ Naming/FileName:
   Exclude:
     - 'tasks/**/*.rake'
     - '**/spec/**/*.rb'
-    - 'gems/aws-partitions/lib/aws-partitions.rb'
-    - 'gems/aws-sdk/lib/aws-sdk.rb'
-    - 'gems/aws-sdk-core/lib/aws-sdk-core.rb'
-    - 'gems/aws-sigv4/lib/aws-sigv4.rb'
 
 Style/BlockComments:
   Exclude:
