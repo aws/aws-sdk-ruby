@@ -33,6 +33,7 @@ module Aws::SSMQuickSetup
     include Smithy::Client::Stubs
 
     self.service = Schema::QuickSetup
+    @identifier = :ssmquicksetup
 
     add_plugin(::Aws::SSMQuickSetup::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

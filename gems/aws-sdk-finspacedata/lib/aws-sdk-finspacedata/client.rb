@@ -33,6 +33,7 @@ module Aws::Finspacedata
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSHabaneroPublicAPI
+    @identifier = :finspacedata
 
     add_plugin(::Aws::Finspacedata::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

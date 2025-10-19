@@ -33,6 +33,7 @@ module Aws::M2
     include Smithy::Client::Stubs
 
     self.service = Schema::AwsSupernovaControlPlaneService
+    @identifier = :m2
 
     add_plugin(::Aws::M2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

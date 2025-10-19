@@ -33,6 +33,7 @@ module Aws::MTurk
     include Smithy::Client::Stubs
 
     self.service = Schema::MTurkRequesterServiceV20170117
+    @identifier = :mturk
 
     add_plugin(::Aws::MTurk::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

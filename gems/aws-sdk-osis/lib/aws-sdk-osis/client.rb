@@ -33,6 +33,7 @@ module Aws::OSIS
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonOpenSearchIngestionService
+    @identifier = :osis
 
     add_plugin(::Aws::OSIS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::ServiceCatalog
     include Smithy::Client::Stubs
 
     self.service = Schema::AWS242ServiceCatalogService
+    @identifier = :servicecatalog
 
     add_plugin(::Aws::ServiceCatalog::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

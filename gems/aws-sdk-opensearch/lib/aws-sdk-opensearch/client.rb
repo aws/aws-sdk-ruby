@@ -33,6 +33,7 @@ module Aws::OpenSearch
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonOpenSearchService
+    @identifier = :opensearch
 
     add_plugin(::Aws::OpenSearch::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

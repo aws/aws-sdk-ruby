@@ -21,7 +21,7 @@ module Aws
 
           private
 
-          def presigned_url(context, params)
+          def presigned_url(context, params) # rubocop:disable Metrics/AbcSize
             # :source_region is not modeled in the api
             source_region = params.delete(:source_region)
 
@@ -37,10 +37,10 @@ module Aws
             auth = Smithy::Client::Auth.resolve(context, endpoint.properties)
 
             auth.signer.presign_url(
-              region: source_region,  
+              region: source_region,
               http_method: 'GET',
               url: "#{endpoint.url}?#{param_list}",
-              expires_in: 3600,
+              expires_in: 3600
             ).url
           end
         end
@@ -48,12 +48,12 @@ module Aws
         handler(
           Handler,
           step: :initialize,
-          operations: [
-            :copy_db_snapshot,
-            :copy_db_cluster_snapshot,
-            :create_db_cluster,
-            :create_db_instance_read_replica,
-            :start_db_instance_automated_backups_replication
+          operations: %i[
+            copy_db_snapshot
+            copy_db_cluster_snapshot
+            create_db_cluster
+            create_db_instance_read_replica
+            start_db_instance_automated_backups_replication
           ]
         )
       end

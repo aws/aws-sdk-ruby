@@ -33,6 +33,7 @@ module Aws::GroundStation
     include Smithy::Client::Stubs
 
     self.service = Schema::GroundStation
+    @identifier = :groundstation
 
     add_plugin(::Aws::GroundStation::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

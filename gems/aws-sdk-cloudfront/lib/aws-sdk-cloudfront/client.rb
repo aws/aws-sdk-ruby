@@ -33,6 +33,7 @@ module Aws::CloudFront
     include Smithy::Client::Stubs
 
     self.service = Schema::Cloudfront20200531
+    @identifier = :cloudfront
 
     add_plugin(::Aws::CloudFront::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

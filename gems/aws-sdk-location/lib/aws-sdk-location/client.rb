@@ -33,6 +33,7 @@ module Aws::Location
     include Smithy::Client::Stubs
 
     self.service = Schema::LocationService
+    @identifier = :location
 
     add_plugin(::Aws::Location::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

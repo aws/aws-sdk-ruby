@@ -33,6 +33,7 @@ module Aws::PartnerCentralSelling
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSPartnerCentralSelling
+    @identifier = :partnercentralselling
 
     add_plugin(::Aws::PartnerCentralSelling::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

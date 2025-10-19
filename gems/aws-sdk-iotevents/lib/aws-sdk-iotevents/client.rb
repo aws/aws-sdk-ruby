@@ -33,6 +33,7 @@ module Aws::IoTEvents
     include Smithy::Client::Stubs
 
     self.service = Schema::IotColumboService
+    @identifier = :iotevents
 
     add_plugin(::Aws::IoTEvents::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

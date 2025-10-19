@@ -33,6 +33,7 @@ module Aws::CodeDeploy
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeDeploy20141006
+    @identifier = :codedeploy
 
     add_plugin(::Aws::CodeDeploy::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

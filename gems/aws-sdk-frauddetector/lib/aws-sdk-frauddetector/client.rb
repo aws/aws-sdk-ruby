@@ -33,6 +33,7 @@ module Aws::FraudDetector
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSHawksNestServiceFacade
+    @identifier = :frauddetector
 
     add_plugin(::Aws::FraudDetector::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

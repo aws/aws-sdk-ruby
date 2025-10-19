@@ -19,8 +19,6 @@ module Aws
           resolve_sts_regional_endpoints(config)
         end
 
-        private
-
         class << self
           private
 

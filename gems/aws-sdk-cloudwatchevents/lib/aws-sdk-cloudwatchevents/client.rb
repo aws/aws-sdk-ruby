@@ -33,6 +33,7 @@ module Aws::CloudWatchEvents
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSEvents
+    @identifier = :cloudwatchevents
 
     add_plugin(::Aws::CloudWatchEvents::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

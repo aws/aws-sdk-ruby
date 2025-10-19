@@ -33,6 +33,7 @@ module Aws::SSMContacts
     include Smithy::Client::Stubs
 
     self.service = Schema::SSMContacts
+    @identifier = :ssmcontacts
 
     add_plugin(::Aws::SSMContacts::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

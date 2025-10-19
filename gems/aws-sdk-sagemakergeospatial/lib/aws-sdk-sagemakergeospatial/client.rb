@@ -33,6 +33,7 @@ module Aws::SageMakerGeospatial
     include Smithy::Client::Stubs
 
     self.service = Schema::SageMakerGeospatial
+    @identifier = :sagemakergeospatial
 
     add_plugin(::Aws::SageMakerGeospatial::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

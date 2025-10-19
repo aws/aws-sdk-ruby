@@ -33,6 +33,7 @@ module Aws::NetworkFlowMonitor
     include Smithy::Client::Stubs
 
     self.service = Schema::NetworkFlowMonitor
+    @identifier = :networkflowmonitor
 
     add_plugin(::Aws::NetworkFlowMonitor::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

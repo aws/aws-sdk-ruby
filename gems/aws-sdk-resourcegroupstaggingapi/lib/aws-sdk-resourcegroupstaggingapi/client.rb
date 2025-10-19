@@ -33,6 +33,7 @@ module Aws::ResourceGroupsTaggingAPI
     include Smithy::Client::Stubs
 
     self.service = Schema::ResourceGroupsTaggingAPI20170126
+    @identifier = :resourcegroupstaggingapi
 
     add_plugin(::Aws::ResourceGroupsTaggingAPI::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

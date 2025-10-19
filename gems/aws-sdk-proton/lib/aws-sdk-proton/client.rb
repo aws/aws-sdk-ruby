@@ -33,6 +33,7 @@ module Aws::Proton
     include Smithy::Client::Stubs
 
     self.service = Schema::AwsProton20200720
+    @identifier = :proton
 
     add_plugin(::Aws::Proton::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

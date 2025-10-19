@@ -33,6 +33,7 @@ module Aws::IoTFleetHub
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIoTFleetHub
+    @identifier = :iotfleethub
 
     add_plugin(::Aws::IoTFleetHub::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

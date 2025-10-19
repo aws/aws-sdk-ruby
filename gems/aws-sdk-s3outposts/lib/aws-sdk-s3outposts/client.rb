@@ -33,6 +33,7 @@ module Aws::S3Outposts
     include Smithy::Client::Stubs
 
     self.service = Schema::S3Outposts
+    @identifier = :s3outposts
 
     add_plugin(::Aws::S3Outposts::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

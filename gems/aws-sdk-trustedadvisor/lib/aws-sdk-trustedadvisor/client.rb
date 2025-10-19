@@ -33,6 +33,7 @@ module Aws::TrustedAdvisor
     include Smithy::Client::Stubs
 
     self.service = Schema::TrustedAdvisor
+    @identifier = :trustedadvisor
 
     add_plugin(::Aws::TrustedAdvisor::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

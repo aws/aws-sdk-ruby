@@ -33,6 +33,7 @@ module Aws::Signer
     include Smithy::Client::Stubs
 
     self.service = Schema::WallabyService
+    @identifier = :signer
 
     add_plugin(::Aws::Signer::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

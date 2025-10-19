@@ -33,6 +33,7 @@ module Aws::IoTThingsGraph
     include Smithy::Client::Stubs
 
     self.service = Schema::IotThingsGraphFrontEndService
+    @identifier = :iotthingsgraph
 
     add_plugin(::Aws::IoTThingsGraph::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

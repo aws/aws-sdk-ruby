@@ -33,6 +33,7 @@ module Aws::ConnectCases
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonConnectCases
+    @identifier = :connectcases
 
     add_plugin(::Aws::ConnectCases::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

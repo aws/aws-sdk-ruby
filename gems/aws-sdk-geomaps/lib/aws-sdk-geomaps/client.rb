@@ -33,6 +33,7 @@ module Aws::GeoMaps
     include Smithy::Client::Stubs
 
     self.service = Schema::MapsService
+    @identifier = :geomaps
 
     add_plugin(::Aws::GeoMaps::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

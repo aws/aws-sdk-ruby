@@ -33,6 +33,7 @@ module Aws::CloudFrontKeyValueStore
     include Smithy::Client::Stubs
 
     self.service = Schema::CloudFrontKeyValueStore
+    @identifier = :cloudfrontkeyvaluestore
 
     add_plugin(::Aws::CloudFrontKeyValueStore::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

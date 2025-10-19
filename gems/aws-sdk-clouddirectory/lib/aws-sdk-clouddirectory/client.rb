@@ -33,6 +33,7 @@ module Aws::CloudDirectory
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonCloudDirectory20170111
+    @identifier = :clouddirectory
 
     add_plugin(::Aws::CloudDirectory::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

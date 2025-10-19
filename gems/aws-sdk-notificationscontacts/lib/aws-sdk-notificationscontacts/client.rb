@@ -33,6 +33,7 @@ module Aws::NotificationsContacts
     include Smithy::Client::Stubs
 
     self.service = Schema::NotificationsContacts
+    @identifier = :notificationscontacts
 
     add_plugin(::Aws::NotificationsContacts::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

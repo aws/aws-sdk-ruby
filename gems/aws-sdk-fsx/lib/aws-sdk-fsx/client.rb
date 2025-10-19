@@ -33,6 +33,7 @@ module Aws::FSx
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSSimbaAPIServiceV20180301
+    @identifier = :fsx
 
     add_plugin(::Aws::FSx::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

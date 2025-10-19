@@ -6,10 +6,28 @@ AllCops:
     - 'build/**/*'
     - 'tasks/release/**/*'
     - 'vendor/**/*'
-    - !ruby/regexp /\/gems\/(?!aws-sdk-core|aws-partitions|aws-sigv4|aws-sdk\/).*/
+    # Generated gem code
+    - !ruby/regexp /gems\/([a-z0-9]+-[a-z0-9-]+)\/lib\/\1.rb/
+    - 'gems/*/lib/*/auth_parameters.rb'
+    - 'gems/*/lib/*/auth_resolver.rb'
+    - 'gems/*/lib/*/endpoint_parameters.rb'
+    - 'gems/*/lib/*/endpoint_provider.rb'
+    - 'gems/*/lib/*/client.rb'
+    - 'gems/*/lib/*/errors.rb'
+    - 'gems/*/lib/*/paginators.rb'
+    - 'gems/*/lib/*/plugins/endpoint.rb'
+    - 'gems/*/lib/*/schema.rb'
+    - 'gems/*/lib/*/types.rb'
+    - 'gems/*/lib/*/waiters.rb'
+    - 'gems/*/spec/*/endpoint_provider_spec.rb'
 
 Gemspec/RequireMFA:
   Enabled: false
+
+Lint/EmptyFile:
+  Exclude:
+    # Exclude only empty generated customization files
+    - 'gems/*/lib/*/customizations.rb'
 
 Metrics/AbcSize:
   Exclude:

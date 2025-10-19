@@ -33,6 +33,7 @@ module Aws::KeyspacesStreams
     include Smithy::Client::Stubs
 
     self.service = Schema::KeyspacesStreams
+    @identifier = :keyspacesstreams
 
     add_plugin(::Aws::KeyspacesStreams::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

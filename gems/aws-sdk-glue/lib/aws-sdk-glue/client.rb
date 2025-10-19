@@ -33,6 +33,7 @@ module Aws::Glue
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSGlue
+    @identifier = :glue
 
     add_plugin(::Aws::Glue::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::KinesisVideoSignaling
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSAcuitySignalingService
+    @identifier = :kinesisvideosignaling
 
     add_plugin(::Aws::KinesisVideoSignaling::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

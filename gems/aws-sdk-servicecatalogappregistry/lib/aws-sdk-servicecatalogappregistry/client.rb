@@ -33,6 +33,7 @@ module Aws::ServiceCatalogAppRegistry
     include Smithy::Client::Stubs
 
     self.service = Schema::AWS242AppRegistry
+    @identifier = :servicecatalogappregistry
 
     add_plugin(::Aws::ServiceCatalogAppRegistry::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

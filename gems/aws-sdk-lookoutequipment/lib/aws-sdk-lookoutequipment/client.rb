@@ -33,6 +33,7 @@ module Aws::LookoutEquipment
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSLookoutEquipmentFrontendService
+    @identifier = :lookoutequipment
 
     add_plugin(::Aws::LookoutEquipment::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

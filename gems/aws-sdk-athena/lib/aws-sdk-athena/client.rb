@@ -33,6 +33,7 @@ module Aws::Athena
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonAthena
+    @identifier = :athena
 
     add_plugin(::Aws::Athena::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

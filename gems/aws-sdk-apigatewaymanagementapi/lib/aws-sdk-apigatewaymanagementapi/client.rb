@@ -33,6 +33,7 @@ module Aws::ApiGatewayManagementApi
     include Smithy::Client::Stubs
 
     self.service = Schema::ApiGatewayManagementApi
+    @identifier = :apigatewaymanagementapi
 
     add_plugin(::Aws::ApiGatewayManagementApi::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

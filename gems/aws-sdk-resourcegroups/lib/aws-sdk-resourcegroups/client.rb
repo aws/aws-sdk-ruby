@@ -33,6 +33,7 @@ module Aws::ResourceGroups
     include Smithy::Client::Stubs
 
     self.service = Schema::Ardi
+    @identifier = :resourcegroups
 
     add_plugin(::Aws::ResourceGroups::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

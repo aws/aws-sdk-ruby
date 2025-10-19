@@ -33,6 +33,7 @@ module Aws::SSMIncidents
     include Smithy::Client::Stubs
 
     self.service = Schema::SSMIncidents
+    @identifier = :ssmincidents
 
     add_plugin(::Aws::SSMIncidents::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

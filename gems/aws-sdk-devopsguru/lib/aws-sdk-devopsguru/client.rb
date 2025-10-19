@@ -33,6 +33,7 @@ module Aws::DevOpsGuru
     include Smithy::Client::Stubs
 
     self.service = Schema::CapstoneControlPlaneService
+    @identifier = :devopsguru
 
     add_plugin(::Aws::DevOpsGuru::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

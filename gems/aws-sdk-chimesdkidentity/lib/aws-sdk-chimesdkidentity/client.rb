@@ -33,6 +33,7 @@ module Aws::ChimeSDKIdentity
     include Smithy::Client::Stubs
 
     self.service = Schema::ChimeIdentityService
+    @identifier = :chimesdkidentity
 
     add_plugin(::Aws::ChimeSDKIdentity::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

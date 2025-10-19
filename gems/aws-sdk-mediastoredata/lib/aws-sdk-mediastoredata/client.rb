@@ -33,6 +33,7 @@ module Aws::MediaStoreData
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaStoreObject20170901
+    @identifier = :mediastoredata
 
     add_plugin(::Aws::MediaStoreData::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

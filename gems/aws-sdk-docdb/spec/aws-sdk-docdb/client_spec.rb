@@ -23,7 +23,8 @@ module Aws
         let(:copy_db_cluster_snapshot_params) do
           {
             kms_key_id: kms_key_id,
-            source_db_cluster_snapshot_identifier: "arn:aws:rds:#{source_region}:123456789012:cluster-snapshot:source-db-cluster-snapshot",
+            source_db_cluster_snapshot_identifier:
+              "arn:aws:rds:#{source_region}:123456789012:cluster-snapshot:source-db-cluster-snapshot",
             target_db_cluster_snapshot_identifier: 'target-db-cluster-snapshot'
           }
         end

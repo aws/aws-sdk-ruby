@@ -33,6 +33,7 @@ module Aws::RoboMaker
     include Smithy::Client::Stubs
 
     self.service = Schema::Robomaker
+    @identifier = :robomaker
 
     add_plugin(::Aws::RoboMaker::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::Identitystore
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIdentityStore
+    @identifier = :identitystore
 
     add_plugin(::Aws::Identitystore::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::ConnectParticipant
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonConnectParticipantServiceLambda
+    @identifier = :connectparticipant
 
     add_plugin(::Aws::ConnectParticipant::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

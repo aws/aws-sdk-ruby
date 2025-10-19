@@ -33,6 +33,7 @@ module Aws::ObservabilityAdmin
     include Smithy::Client::Stubs
 
     self.service = Schema::ObservabilityAdmin
+    @identifier = :observabilityadmin
 
     add_plugin(::Aws::ObservabilityAdmin::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

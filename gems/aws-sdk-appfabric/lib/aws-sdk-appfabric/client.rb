@@ -33,6 +33,7 @@ module Aws::AppFabric
     include Smithy::Client::Stubs
 
     self.service = Schema::FabricFrontEndService
+    @identifier = :appfabric
 
     add_plugin(::Aws::AppFabric::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

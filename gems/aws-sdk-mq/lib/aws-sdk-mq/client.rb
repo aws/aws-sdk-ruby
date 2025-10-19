@@ -33,6 +33,7 @@ module Aws::Mq
     include Smithy::Client::Stubs
 
     self.service = Schema::Mq
+    @identifier = :mq
 
     add_plugin(::Aws::Mq::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

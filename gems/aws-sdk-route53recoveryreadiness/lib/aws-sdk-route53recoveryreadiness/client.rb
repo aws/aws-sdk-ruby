@@ -33,6 +33,7 @@ module Aws::Route53RecoveryReadiness
     include Smithy::Client::Stubs
 
     self.service = Schema::Route53RecoveryReadiness
+    @identifier = :route53recoveryreadiness
 
     add_plugin(::Aws::Route53RecoveryReadiness::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

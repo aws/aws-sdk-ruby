@@ -33,6 +33,7 @@ module Aws::KinesisVideoMedia
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSAcuityInletService
+    @identifier = :kinesisvideomedia
 
     add_plugin(::Aws::KinesisVideoMedia::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

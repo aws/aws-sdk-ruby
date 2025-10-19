@@ -33,6 +33,7 @@ module Aws::CodeGuruProfiler
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeGuruProfiler
+    @identifier = :codeguruprofiler
 
     add_plugin(::Aws::CodeGuruProfiler::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

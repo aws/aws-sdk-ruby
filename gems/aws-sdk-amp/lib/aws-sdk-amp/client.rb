@@ -33,6 +33,7 @@ module Aws::Amp
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonPrometheusService
+    @identifier = :amp
 
     add_plugin(::Aws::Amp::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

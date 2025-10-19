@@ -33,6 +33,7 @@ module Aws::ElasticLoadBalancingV2
     include Smithy::Client::Stubs
 
     self.service = Schema::ElasticLoadBalancingV10
+    @identifier = :elasticloadbalancingv2
 
     add_plugin(::Aws::ElasticLoadBalancingV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

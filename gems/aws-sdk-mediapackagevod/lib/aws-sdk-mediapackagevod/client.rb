@@ -33,6 +33,7 @@ module Aws::MediaPackageVod
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaPackageVod
+    @identifier = :mediapackagevod
 
     add_plugin(::Aws::MediaPackageVod::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

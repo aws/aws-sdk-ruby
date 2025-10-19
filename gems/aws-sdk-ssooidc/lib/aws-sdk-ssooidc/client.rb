@@ -33,6 +33,7 @@ module Aws::SSOOIDC
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSSSOOIDCService
+    @identifier = :ssooidc
 
     add_plugin(::Aws::SSOOIDC::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

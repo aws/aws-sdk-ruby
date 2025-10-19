@@ -33,6 +33,7 @@ module Aws::ApplicationSignals
     include Smithy::Client::Stubs
 
     self.service = Schema::ApplicationSignals
+    @identifier = :applicationsignals
 
     add_plugin(::Aws::ApplicationSignals::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::ChimeSDKMediaPipelines
     include Smithy::Client::Stubs
 
     self.service = Schema::ChimeSDKMediaPipelinesService
+    @identifier = :chimesdkmediapipelines
 
     add_plugin(::Aws::ChimeSDKMediaPipelines::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

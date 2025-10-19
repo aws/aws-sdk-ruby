@@ -33,6 +33,7 @@ module Aws::GameLift
     include Smithy::Client::Stubs
 
     self.service = Schema::GameLift
+    @identifier = :gamelift
 
     add_plugin(::Aws::GameLift::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

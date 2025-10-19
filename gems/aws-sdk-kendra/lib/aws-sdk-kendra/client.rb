@@ -33,6 +33,7 @@ module Aws::Kendra
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSKendraFrontendService
+    @identifier = :kendra
 
     add_plugin(::Aws::Kendra::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

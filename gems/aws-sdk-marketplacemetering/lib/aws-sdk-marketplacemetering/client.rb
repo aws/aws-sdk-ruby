@@ -33,6 +33,7 @@ module Aws::MarketplaceMetering
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMPMeteringService
+    @identifier = :marketplacemetering
 
     add_plugin(::Aws::MarketplaceMetering::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

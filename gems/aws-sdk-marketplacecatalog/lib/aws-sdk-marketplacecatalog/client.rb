@@ -33,6 +33,7 @@ module Aws::MarketplaceCatalog
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMPSeymour
+    @identifier = :marketplacecatalog
 
     add_plugin(::Aws::MarketplaceCatalog::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

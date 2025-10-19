@@ -33,6 +33,7 @@ module Aws::CloudSearch
     include Smithy::Client::Stubs
 
     self.service = Schema::A9SearchCloudConfigService2013
+    @identifier = :cloudsearch
 
     add_plugin(::Aws::CloudSearch::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

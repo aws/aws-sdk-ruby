@@ -33,6 +33,7 @@ module Aws::BCMRecommendedActions
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBillingAndCostManagementRecommendedActions
+    @identifier = :bcmrecommendedactions
 
     add_plugin(::Aws::BCMRecommendedActions::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

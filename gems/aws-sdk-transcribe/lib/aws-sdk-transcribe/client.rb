@@ -33,6 +33,7 @@ module Aws::Transcribe
     include Smithy::Client::Stubs
 
     self.service = Schema::Transcribe
+    @identifier = :transcribe
 
     add_plugin(::Aws::Transcribe::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

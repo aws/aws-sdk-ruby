@@ -33,6 +33,7 @@ module Aws::MediaLive
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaLive
+    @identifier = :medialive
 
     add_plugin(::Aws::MediaLive::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

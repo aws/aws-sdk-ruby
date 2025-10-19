@@ -33,6 +33,7 @@ module Aws::EKSAuth
     include Smithy::Client::Stubs
 
     self.service = Schema::EKSAuthFrontend
+    @identifier = :eksauth
 
     add_plugin(::Aws::EKSAuth::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

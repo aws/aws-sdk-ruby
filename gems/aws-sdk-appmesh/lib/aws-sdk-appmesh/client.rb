@@ -33,6 +33,7 @@ module Aws::AppMesh
     include Smithy::Client::Stubs
 
     self.service = Schema::AppMesh
+    @identifier = :appmesh
 
     add_plugin(::Aws::AppMesh::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

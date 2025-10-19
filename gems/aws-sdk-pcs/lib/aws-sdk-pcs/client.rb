@@ -33,6 +33,7 @@ module Aws::PCS
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSParallelComputingService
+    @identifier = :pcs
 
     add_plugin(::Aws::PCS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

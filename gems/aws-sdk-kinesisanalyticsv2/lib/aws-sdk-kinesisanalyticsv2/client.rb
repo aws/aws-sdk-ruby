@@ -33,6 +33,7 @@ module Aws::KinesisAnalyticsV2
     include Smithy::Client::Stubs
 
     self.service = Schema::KinesisAnalytics20180523
+    @identifier = :kinesisanalyticsv2
 
     add_plugin(::Aws::KinesisAnalyticsV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

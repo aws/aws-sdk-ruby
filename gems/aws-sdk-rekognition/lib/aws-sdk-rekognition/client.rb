@@ -33,6 +33,7 @@ module Aws::Rekognition
     include Smithy::Client::Stubs
 
     self.service = Schema::RekognitionService
+    @identifier = :rekognition
 
     add_plugin(::Aws::Rekognition::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::ECS
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonEC2ContainerServiceV20141113
+    @identifier = :ecs
 
     add_plugin(::Aws::ECS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::MWAA
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonMWAA
+    @identifier = :mwaa
 
     add_plugin(::Aws::MWAA::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

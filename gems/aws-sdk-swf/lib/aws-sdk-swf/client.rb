@@ -33,6 +33,7 @@ module Aws::SWF
     include Smithy::Client::Stubs
 
     self.service = Schema::SimpleWorkflowService
+    @identifier = :swf
 
     add_plugin(::Aws::SWF::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

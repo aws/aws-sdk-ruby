@@ -33,6 +33,7 @@ module Aws::BCMDataExports
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBillingAndCostManagementDataExports
+    @identifier = :bcmdataexports
 
     add_plugin(::Aws::BCMDataExports::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

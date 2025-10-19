@@ -33,6 +33,7 @@ module Aws::ConnectCampaignsV2
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonConnectCampaignServiceV2
+    @identifier = :connectcampaignsv2
 
     add_plugin(::Aws::ConnectCampaignsV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

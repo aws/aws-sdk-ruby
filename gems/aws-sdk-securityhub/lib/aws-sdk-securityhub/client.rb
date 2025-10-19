@@ -33,6 +33,7 @@ module Aws::SecurityHub
     include Smithy::Client::Stubs
 
     self.service = Schema::SecurityHubAPIService
+    @identifier = :securityhub
 
     add_plugin(::Aws::SecurityHub::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

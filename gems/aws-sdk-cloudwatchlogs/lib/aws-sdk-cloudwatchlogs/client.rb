@@ -33,6 +33,7 @@ module Aws::CloudWatchLogs
     include Smithy::Client::Stubs
 
     self.service = Schema::Logs20140328
+    @identifier = :cloudwatchlogs
 
     add_plugin(::Aws::CloudWatchLogs::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

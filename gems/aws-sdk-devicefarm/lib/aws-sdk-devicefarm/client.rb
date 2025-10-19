@@ -33,6 +33,7 @@ module Aws::DeviceFarm
     include Smithy::Client::Stubs
 
     self.service = Schema::DeviceFarm20150623
+    @identifier = :devicefarm
 
     add_plugin(::Aws::DeviceFarm::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

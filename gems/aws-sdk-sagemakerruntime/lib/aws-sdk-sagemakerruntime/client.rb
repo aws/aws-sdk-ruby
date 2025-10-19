@@ -33,6 +33,7 @@ module Aws::SageMakerRuntime
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonSageMakerRuntime
+    @identifier = :sagemakerruntime
 
     add_plugin(::Aws::SageMakerRuntime::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

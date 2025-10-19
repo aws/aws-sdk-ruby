@@ -33,6 +33,7 @@ module Aws::Health
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSHealth20160804
+    @identifier = :health
 
     add_plugin(::Aws::Health::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

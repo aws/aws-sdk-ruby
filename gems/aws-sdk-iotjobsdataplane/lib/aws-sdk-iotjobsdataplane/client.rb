@@ -33,6 +33,7 @@ module Aws::IoTJobsDataPlane
     include Smithy::Client::Stubs
 
     self.service = Schema::IotLaserThingJobManagerExternalService
+    @identifier = :iotjobsdataplane
 
     add_plugin(::Aws::IoTJobsDataPlane::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

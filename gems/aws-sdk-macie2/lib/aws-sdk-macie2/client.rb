@@ -33,6 +33,7 @@ module Aws::Macie2
     include Smithy::Client::Stubs
 
     self.service = Schema::Macie2
+    @identifier = :macie2
 
     add_plugin(::Aws::Macie2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

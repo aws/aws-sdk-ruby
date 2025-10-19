@@ -33,6 +33,7 @@ module Aws::ElasticBeanstalk
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSElasticBeanstalkService
+    @identifier = :elasticbeanstalk
 
     add_plugin(::Aws::ElasticBeanstalk::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

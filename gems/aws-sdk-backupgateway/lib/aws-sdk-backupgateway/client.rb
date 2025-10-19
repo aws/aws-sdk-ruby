@@ -33,6 +33,7 @@ module Aws::BackupGateway
     include Smithy::Client::Stubs
 
     self.service = Schema::BackupOnPremisesV20210101
+    @identifier = :backupgateway
 
     add_plugin(::Aws::BackupGateway::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

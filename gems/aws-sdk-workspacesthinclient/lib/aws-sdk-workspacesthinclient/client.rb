@@ -33,6 +33,7 @@ module Aws::WorkSpacesThinClient
     include Smithy::Client::Stubs
 
     self.service = Schema::ThinClient
+    @identifier = :workspacesthinclient
 
     add_plugin(::Aws::WorkSpacesThinClient::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

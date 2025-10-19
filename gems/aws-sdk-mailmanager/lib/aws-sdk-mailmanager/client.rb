@@ -33,6 +33,7 @@ module Aws::MailManager
     include Smithy::Client::Stubs
 
     self.service = Schema::MailManagerSvc
+    @identifier = :mailmanager
 
     add_plugin(::Aws::MailManager::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

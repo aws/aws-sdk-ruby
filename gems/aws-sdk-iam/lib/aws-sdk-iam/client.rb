@@ -33,6 +33,7 @@ module Aws::IAM
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIdentityManagementV20100508
+    @identifier = :iam
 
     add_plugin(::Aws::IAM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

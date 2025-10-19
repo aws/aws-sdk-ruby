@@ -33,6 +33,7 @@ module Aws::Inspector
     include Smithy::Client::Stubs
 
     self.service = Schema::InspectorService
+    @identifier = :inspector
 
     add_plugin(::Aws::Inspector::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

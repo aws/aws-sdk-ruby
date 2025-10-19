@@ -33,6 +33,7 @@ module Aws::Scheduler
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSChronosService
+    @identifier = :scheduler
 
     add_plugin(::Aws::Scheduler::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

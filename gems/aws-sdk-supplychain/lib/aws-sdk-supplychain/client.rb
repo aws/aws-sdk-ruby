@@ -33,6 +33,7 @@ module Aws::SupplyChain
     include Smithy::Client::Stubs
 
     self.service = Schema::GalaxyPublicAPIGateway
+    @identifier = :supplychain
 
     add_plugin(::Aws::SupplyChain::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

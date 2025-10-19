@@ -33,6 +33,7 @@ module Aws::Fis
     include Smithy::Client::Stubs
 
     self.service = Schema::FaultInjectionSimulator
+    @identifier = :fis
 
     add_plugin(::Aws::Fis::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

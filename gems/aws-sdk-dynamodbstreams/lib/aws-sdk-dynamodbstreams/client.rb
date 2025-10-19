@@ -33,6 +33,7 @@ module Aws::DynamoDBStreams
     include Smithy::Client::Stubs
 
     self.service = Schema::DynamoDBStreams20120810
+    @identifier = :dynamodbstreams
 
     add_plugin(::Aws::DynamoDBStreams::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

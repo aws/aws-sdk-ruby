@@ -33,6 +33,7 @@ module Aws::MarketplaceDeployment
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMPDeploymentParametersService
+    @identifier = :marketplacedeployment
 
     add_plugin(::Aws::MarketplaceDeployment::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

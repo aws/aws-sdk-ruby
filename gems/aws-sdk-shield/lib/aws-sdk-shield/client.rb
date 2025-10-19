@@ -33,6 +33,7 @@ module Aws::Shield
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSShield20160616
+    @identifier = :shield
 
     add_plugin(::Aws::Shield::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

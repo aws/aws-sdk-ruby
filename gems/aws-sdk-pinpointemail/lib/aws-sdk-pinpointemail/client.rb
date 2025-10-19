@@ -33,6 +33,7 @@ module Aws::PinpointEmail
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonPinpointEmailService
+    @identifier = :pinpointemail
 
     add_plugin(::Aws::PinpointEmail::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

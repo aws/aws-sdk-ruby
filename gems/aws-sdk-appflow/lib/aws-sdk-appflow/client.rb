@@ -33,6 +33,7 @@ module Aws::Appflow
     include Smithy::Client::Stubs
 
     self.service = Schema::SandstoneConfigurationServiceLambda
+    @identifier = :appflow
 
     add_plugin(::Aws::Appflow::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

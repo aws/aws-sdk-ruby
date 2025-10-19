@@ -33,6 +33,7 @@ module Aws::CleanRooms
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBastionControlPlaneServiceLambda
+    @identifier = :cleanrooms
 
     add_plugin(::Aws::CleanRooms::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

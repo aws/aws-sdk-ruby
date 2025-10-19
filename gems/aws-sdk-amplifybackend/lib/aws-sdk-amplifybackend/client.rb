@@ -33,6 +33,7 @@ module Aws::AmplifyBackend
     include Smithy::Client::Stubs
 
     self.service = Schema::AmplifyBackend
+    @identifier = :amplifybackend
 
     add_plugin(::Aws::AmplifyBackend::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

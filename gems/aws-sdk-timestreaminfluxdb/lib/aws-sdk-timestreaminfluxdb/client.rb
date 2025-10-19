@@ -33,6 +33,7 @@ module Aws::TimestreamInfluxDB
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonTimestreamInfluxDB
+    @identifier = :timestreaminfluxdb
 
     add_plugin(::Aws::TimestreamInfluxDB::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

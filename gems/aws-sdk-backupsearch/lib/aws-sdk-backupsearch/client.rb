@@ -33,6 +33,7 @@ module Aws::BackupSearch
     include Smithy::Client::Stubs
 
     self.service = Schema::CryoBackupSearchService
+    @identifier = :backupsearch
 
     add_plugin(::Aws::BackupSearch::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

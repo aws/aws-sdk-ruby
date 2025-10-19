@@ -33,6 +33,7 @@ module Aws::DSQL
     include Smithy::Client::Stubs
 
     self.service = Schema::DSQL
+    @identifier = :dsql
 
     add_plugin(::Aws::DSQL::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

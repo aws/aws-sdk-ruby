@@ -33,6 +33,7 @@ module Aws::EMR
     include Smithy::Client::Stubs
 
     self.service = Schema::ElasticMapReduce
+    @identifier = :emr
 
     add_plugin(::Aws::EMR::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

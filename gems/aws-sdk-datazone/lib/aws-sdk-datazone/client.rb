@@ -33,6 +33,7 @@ module Aws::DataZone
     include Smithy::Client::Stubs
 
     self.service = Schema::DataZone
+    @identifier = :datazone
 
     add_plugin(::Aws::DataZone::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

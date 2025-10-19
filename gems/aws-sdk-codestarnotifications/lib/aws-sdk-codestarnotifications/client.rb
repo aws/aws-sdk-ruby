@@ -33,6 +33,7 @@ module Aws::Codestarnotifications
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeStarNotifications20191015
+    @identifier = :codestarnotifications
 
     add_plugin(::Aws::Codestarnotifications::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

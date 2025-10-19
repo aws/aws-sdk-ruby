@@ -33,6 +33,7 @@ module Aws::AppSync
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSDeepdishControlPlaneService
+    @identifier = :appsync
 
     add_plugin(::Aws::AppSync::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

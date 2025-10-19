@@ -33,6 +33,7 @@ module Aws::PinpointSMSVoiceV2
     include Smithy::Client::Stubs
 
     self.service = Schema::PinpointSMSVoiceV2
+    @identifier = :pinpointsmsvoicev2
 
     add_plugin(::Aws::PinpointSMSVoiceV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

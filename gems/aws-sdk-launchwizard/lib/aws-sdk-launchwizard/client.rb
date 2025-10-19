@@ -33,6 +33,7 @@ module Aws::LaunchWizard
     include Smithy::Client::Stubs
 
     self.service = Schema::LaunchWizard
+    @identifier = :launchwizard
 
     add_plugin(::Aws::LaunchWizard::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

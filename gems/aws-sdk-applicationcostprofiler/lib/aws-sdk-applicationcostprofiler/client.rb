@@ -33,6 +33,7 @@ module Aws::ApplicationCostProfiler
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSApplicationCostProfiler
+    @identifier = :applicationcostprofiler
 
     add_plugin(::Aws::ApplicationCostProfiler::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

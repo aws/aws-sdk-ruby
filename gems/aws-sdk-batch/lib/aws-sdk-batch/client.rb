@@ -33,6 +33,7 @@ module Aws::Batch
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBatchV20160810
+    @identifier = :batch
 
     add_plugin(::Aws::Batch::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

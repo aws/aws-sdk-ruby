@@ -34,6 +34,7 @@ module Aws::ARCRegionswitch
     include Smithy::Client::Stubs
 
     self.service = Schema::ArcRegionSwitch
+    @identifier = :arcregionswitch
 
     add_plugin(::Aws::ARCRegionswitch::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

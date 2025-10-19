@@ -33,6 +33,7 @@ module Aws::EntityResolution
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSVeniceService
+    @identifier = :entityresolution
 
     add_plugin(::Aws::EntityResolution::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

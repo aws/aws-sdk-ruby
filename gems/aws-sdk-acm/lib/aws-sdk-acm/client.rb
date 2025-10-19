@@ -33,6 +33,7 @@ module Aws::ACM
     include Smithy::Client::Stubs
 
     self.service = Schema::CertificateManager
+    @identifier = :acm
 
     add_plugin(::Aws::ACM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

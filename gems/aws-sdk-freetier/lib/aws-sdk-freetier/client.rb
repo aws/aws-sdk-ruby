@@ -33,6 +33,7 @@ module Aws::FreeTier
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSFreeTierService
+    @identifier = :freetier
 
     add_plugin(::Aws::FreeTier::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::Detective
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonDetective
+    @identifier = :detective
 
     add_plugin(::Aws::Detective::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

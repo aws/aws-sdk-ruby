@@ -33,6 +33,7 @@ module Aws::AutoScaling
     include Smithy::Client::Stubs
 
     self.service = Schema::AutoScaling20110101
+    @identifier = :autoscaling
 
     add_plugin(::Aws::AutoScaling::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

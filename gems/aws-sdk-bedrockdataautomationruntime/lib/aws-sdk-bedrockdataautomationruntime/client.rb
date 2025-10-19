@@ -33,6 +33,7 @@ module Aws::BedrockDataAutomationRuntime
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonBedrockKeystoneRuntimeService
+    @identifier = :bedrockdataautomationruntime
 
     add_plugin(::Aws::BedrockDataAutomationRuntime::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

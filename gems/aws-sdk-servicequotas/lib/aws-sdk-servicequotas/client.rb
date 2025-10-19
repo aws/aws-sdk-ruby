@@ -33,6 +33,7 @@ module Aws::ServiceQuotas
     include Smithy::Client::Stubs
 
     self.service = Schema::ServiceQuotasV20190624
+    @identifier = :servicequotas
 
     add_plugin(::Aws::ServiceQuotas::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

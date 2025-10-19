@@ -33,6 +33,7 @@ module Aws::AppIntegrations
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonAppIntegrationService
+    @identifier = :appintegrations
 
     add_plugin(::Aws::AppIntegrations::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

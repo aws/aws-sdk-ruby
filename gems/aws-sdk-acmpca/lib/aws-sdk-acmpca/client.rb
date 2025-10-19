@@ -33,6 +33,7 @@ module Aws::ACMPCA
     include Smithy::Client::Stubs
 
     self.service = Schema::ACMPrivateCA
+    @identifier = :acmpca
 
     add_plugin(::Aws::ACMPCA::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

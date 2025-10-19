@@ -33,6 +33,7 @@ module Aws::AppRunner
     include Smithy::Client::Stubs
 
     self.service = Schema::AppRunner
+    @identifier = :apprunner
 
     add_plugin(::Aws::AppRunner::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::Ivschat
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonInteractiveVideoServiceChat
+    @identifier = :ivschat
 
     add_plugin(::Aws::Ivschat::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

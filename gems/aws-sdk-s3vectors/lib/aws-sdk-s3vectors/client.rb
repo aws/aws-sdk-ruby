@@ -33,6 +33,7 @@ module Aws::S3Vectors
     include Smithy::Client::Stubs
 
     self.service = Schema::S3Vectors
+    @identifier = :s3vectors
 
     add_plugin(::Aws::S3Vectors::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

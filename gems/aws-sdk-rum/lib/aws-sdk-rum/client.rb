@@ -33,6 +33,7 @@ module Aws::RUM
     include Smithy::Client::Stubs
 
     self.service = Schema::RUM
+    @identifier = :rum
 
     add_plugin(::Aws::RUM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
