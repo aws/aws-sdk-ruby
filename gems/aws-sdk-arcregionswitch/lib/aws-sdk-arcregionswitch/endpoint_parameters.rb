@@ -28,7 +28,6 @@ module Aws::ARCRegionswitch
       self.endpoint = options.fetch(:endpoint, nil)
       self.region = options.fetch(:region, nil)
       self.use_control_plane_endpoint = options.fetch(:use_control_plane_endpoint, nil)
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::MediaPackageV2
-
   # @api private
   module Waiters
+
     # @api private
     #
     #

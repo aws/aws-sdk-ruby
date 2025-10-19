@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::ECR
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until an image scan is complete and findings can be accessed

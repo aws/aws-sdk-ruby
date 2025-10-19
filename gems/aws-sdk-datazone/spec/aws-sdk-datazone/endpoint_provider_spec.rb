@@ -20,7 +20,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
@@ -35,7 +34,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
@@ -50,7 +48,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
@@ -65,7 +62,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
@@ -80,7 +76,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
@@ -95,7 +90,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region set and fips disabled and dualstack disabled" do
@@ -110,7 +104,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
@@ -125,7 +118,6 @@ module Aws::DataZone
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with fips enabled and dualstack disabled" do
@@ -139,7 +131,6 @@ module Aws::DataZone
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Missing region" do
@@ -153,7 +144,6 @@ module Aws::DataZone
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

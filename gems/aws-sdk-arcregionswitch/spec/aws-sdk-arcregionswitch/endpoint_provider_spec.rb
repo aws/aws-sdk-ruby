@@ -20,7 +20,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with fips enabled" do
@@ -34,7 +33,6 @@ module Aws::ARCRegionswitch
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
@@ -49,7 +47,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
@@ -64,7 +61,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
@@ -79,7 +75,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
@@ -94,7 +89,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
@@ -109,7 +103,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
@@ -124,7 +117,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Missing region" do
@@ -138,7 +130,6 @@ module Aws::ARCRegionswitch
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Control plane operation with DualStack in us-west-2 routes to us-east-1 DualStack endpoint" do
@@ -153,7 +144,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation with endpoint set in us-east-1 routes to provided endpoint" do
@@ -168,7 +158,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation with endpoint set in us-west-2 routes to provided endpoint" do
@@ -183,7 +172,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation in us-west-2 (standard partition) routes to us-east-1" do
@@ -198,7 +186,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation in cn-north-1 (China partition) routes to cn-north-1 with China DNS suffix" do
@@ -213,7 +200,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation in cn-northwest-1 (China partition) routes to cn-north-1 with China DNS suffix" do
@@ -228,7 +214,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation in us-gov-west-1 (GovCloud partition) routes to us-gov-west-1 with GovCloud DNS suffix" do
@@ -243,7 +228,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation in us-gov-east-1 (GovCloud partition) routes to us-gov-west-1 with GovCloud DNS suffix" do
@@ -258,7 +242,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation with FIPS in us-west-2 routes to us-east-1 FIPS endpoint" do
@@ -273,7 +256,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation with FIPS in us-east-1 routes to us-east-1 FIPS endpoint" do
@@ -288,7 +270,6 @@ module Aws::ARCRegionswitch
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Control plane operation with FIPS in CN returns an error" do
@@ -302,7 +283,6 @@ module Aws::ARCRegionswitch
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Control plane operation with endpoint set using FIPS in us-east-1 errors" do
@@ -316,7 +296,6 @@ module Aws::ARCRegionswitch
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Control plane operation with endpoint set using FIPS in us-west-2 routes to provided endpoint" do
@@ -330,7 +309,6 @@ module Aws::ARCRegionswitch
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

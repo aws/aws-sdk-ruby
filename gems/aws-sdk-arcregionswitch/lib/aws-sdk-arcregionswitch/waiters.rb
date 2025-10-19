@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::ARCRegionswitch
-
   # @api private
   module Waiters
+
     # @api private
     #
     #

@@ -13,7 +13,7 @@ module Aws::LexRuntimeV2
       when :recognize_utterance
         options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       else
-      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
+        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       end
       options
     end

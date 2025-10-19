@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::NeptuneGraph
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until Export Task is Cancelled

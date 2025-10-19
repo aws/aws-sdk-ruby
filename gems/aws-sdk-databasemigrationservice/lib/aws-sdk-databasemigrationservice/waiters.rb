@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::DatabaseMigrationService
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until testing endpoint is deleted.

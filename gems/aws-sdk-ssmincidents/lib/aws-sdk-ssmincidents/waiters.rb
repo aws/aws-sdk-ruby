@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::SSMIncidents
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait for a replication set to become ACTIVE

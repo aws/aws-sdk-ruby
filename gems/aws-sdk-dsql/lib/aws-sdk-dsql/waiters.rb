@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::DSQL
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a Cluster is ACTIVE

@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Deadline
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a Fleet is activated. Use this after invoking CreateFleet or UpdateFleet.
