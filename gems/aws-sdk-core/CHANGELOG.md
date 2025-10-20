@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix `request_checksum_calculation` when set to `when_required` to only calculate checksums when explicitly provided by user.
+* Issue - Fix `request_checksum_calculation` `when_required` mode to only calculate checksums when explicitly provided by user.
 
 3.233.0 (2025-09-23)
 ------------------

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix multipart upload to respect `request_checksum_calculation` `when_required` mode.
+
 1.200.0 (2025-10-15)
 ------------------
 
