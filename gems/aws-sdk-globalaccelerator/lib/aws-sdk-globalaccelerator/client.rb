@@ -33,6 +33,7 @@ module Aws::GlobalAccelerator
     include Smithy::Client::Stubs
 
     self.service = Schema::GlobalAcceleratorV20180706
+    @identifier = :globalaccelerator
 
     add_plugin(::Aws::GlobalAccelerator::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

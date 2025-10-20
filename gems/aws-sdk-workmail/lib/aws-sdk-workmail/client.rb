@@ -33,6 +33,7 @@ module Aws::WorkMail
     include Smithy::Client::Stubs
 
     self.service = Schema::WorkMailService
+    @identifier = :workmail
 
     add_plugin(::Aws::WorkMail::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

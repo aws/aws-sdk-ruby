@@ -33,6 +33,7 @@ module Aws::ApplicationInsights
     include Smithy::Client::Stubs
 
     self.service = Schema::EC2WindowsBarleyService
+    @identifier = :applicationinsights
 
     add_plugin(::Aws::ApplicationInsights::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

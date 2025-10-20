@@ -33,6 +33,7 @@ module Aws::Evs
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonElasticVMwareService
+    @identifier = :evs
 
     add_plugin(::Aws::Evs::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

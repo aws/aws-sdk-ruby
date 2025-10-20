@@ -33,6 +33,7 @@ module Aws::IotDeviceAdvisor
     include Smithy::Client::Stubs
 
     self.service = Schema::IotSenateService
+    @identifier = :iotdeviceadvisor
 
     add_plugin(::Aws::IotDeviceAdvisor::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

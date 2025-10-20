@@ -33,8 +33,6 @@ module Aws::NeptuneGraph
       self.use_dual_stack = options.fetch(:use_dual_stack, false)
       self.endpoint = options.fetch(:endpoint, nil)
       self.api_type = options.fetch(:api_type, nil)
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
       raise ArgumentError, "missing required parameter: :api_type" if api_type.nil?
     end
 

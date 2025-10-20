@@ -33,6 +33,7 @@ module Aws::SecretsManager
     include Smithy::Client::Stubs
 
     self.service = Schema::Secretsmanager
+    @identifier = :secretsmanager
 
     add_plugin(::Aws::SecretsManager::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

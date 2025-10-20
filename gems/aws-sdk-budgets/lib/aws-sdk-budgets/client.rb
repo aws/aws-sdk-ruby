@@ -33,6 +33,7 @@ module Aws::Budgets
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBudgetServiceGateway
+    @identifier = :budgets
 
     add_plugin(::Aws::Budgets::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

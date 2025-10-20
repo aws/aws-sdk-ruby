@@ -33,6 +33,7 @@ module Aws::Savingsplans
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSSavingsPlan
+    @identifier = :savingsplans
 
     add_plugin(::Aws::Savingsplans::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

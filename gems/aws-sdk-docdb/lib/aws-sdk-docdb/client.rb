@@ -34,6 +34,7 @@ module Aws::DocDB
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonRDSv19
+    @identifier = :docdb
 
     add_plugin(::Aws::DocDB::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

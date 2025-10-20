@@ -33,6 +33,7 @@ module Aws::DLM
     include Smithy::Client::Stubs
 
     self.service = Schema::Dlm20180112
+    @identifier = :dlm
 
     add_plugin(::Aws::DLM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

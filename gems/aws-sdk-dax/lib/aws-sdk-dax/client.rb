@@ -33,6 +33,7 @@ module Aws::DAX
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonDAXV3
+    @identifier = :dax
 
     add_plugin(::Aws::DAX::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

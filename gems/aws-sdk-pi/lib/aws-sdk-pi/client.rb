@@ -33,6 +33,7 @@ module Aws::PI
     include Smithy::Client::Stubs
 
     self.service = Schema::PerformanceInsightsv20180227
+    @identifier = :pi
 
     add_plugin(::Aws::PI::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

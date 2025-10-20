@@ -33,6 +33,7 @@ module Aws::WorkMailMessageFlow
     include Smithy::Client::Stubs
 
     self.service = Schema::GiraffeMessageInTransitService
+    @identifier = :workmailmessageflow
 
     add_plugin(::Aws::WorkMailMessageFlow::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

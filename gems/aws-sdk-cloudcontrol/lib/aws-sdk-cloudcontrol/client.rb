@@ -33,6 +33,7 @@ module Aws::CloudControl
     include Smithy::Client::Stubs
 
     self.service = Schema::CloudApiService
+    @identifier = :cloudcontrol
 
     add_plugin(::Aws::CloudControl::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

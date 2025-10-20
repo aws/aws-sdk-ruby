@@ -33,6 +33,7 @@ module Aws::PersonalizeEvents
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonPersonalizeEvents
+    @identifier = :personalizeevents
 
     add_plugin(::Aws::PersonalizeEvents::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

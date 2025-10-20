@@ -33,6 +33,7 @@ module Aws::ApiGatewayV2
     include Smithy::Client::Stubs
 
     self.service = Schema::ApiGatewayV2
+    @identifier = :apigatewayv2
 
     add_plugin(::Aws::ApiGatewayV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

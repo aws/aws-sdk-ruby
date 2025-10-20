@@ -33,6 +33,7 @@ module Aws::DatabaseMigrationService
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonDMSv20160101
+    @identifier = :databasemigrationservice
 
     add_plugin(::Aws::DatabaseMigrationService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

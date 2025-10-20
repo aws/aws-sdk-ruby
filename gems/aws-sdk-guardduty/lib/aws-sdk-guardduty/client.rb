@@ -33,6 +33,7 @@ module Aws::GuardDuty
     include Smithy::Client::Stubs
 
     self.service = Schema::GuardDutyAPIService
+    @identifier = :guardduty
 
     add_plugin(::Aws::GuardDuty::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::TimestreamWrite
     include Smithy::Client::Stubs
 
     self.service = Schema::Timestream20181101
+    @identifier = :timestreamwrite
 
     add_plugin(::Aws::TimestreamWrite::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

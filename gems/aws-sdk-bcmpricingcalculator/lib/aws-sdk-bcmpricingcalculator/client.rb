@@ -33,6 +33,7 @@ module Aws::BCMPricingCalculator
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBCMPricingCalculator
+    @identifier = :bcmpricingcalculator
 
     add_plugin(::Aws::BCMPricingCalculator::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

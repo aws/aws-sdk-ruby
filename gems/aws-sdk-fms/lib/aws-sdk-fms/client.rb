@@ -33,6 +33,7 @@ module Aws::FMS
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSFMS20180101
+    @identifier = :fms
 
     add_plugin(::Aws::FMS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

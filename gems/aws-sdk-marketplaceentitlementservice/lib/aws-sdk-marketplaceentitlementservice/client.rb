@@ -33,6 +33,7 @@ module Aws::MarketplaceEntitlementService
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMPEntitlementService
+    @identifier = :marketplaceentitlementservice
 
     add_plugin(::Aws::MarketplaceEntitlementService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

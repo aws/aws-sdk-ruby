@@ -33,6 +33,7 @@ module Aws::Deadline
     include Smithy::Client::Stubs
 
     self.service = Schema::Deadline
+    @identifier = :deadline
 
     add_plugin(::Aws::Deadline::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

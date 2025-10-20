@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Rekognition
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until the ProjectVersion is running.

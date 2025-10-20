@@ -33,6 +33,7 @@ module Aws::Comprehend
     include Smithy::Client::Stubs
 
     self.service = Schema::Comprehend20171127
+    @identifier = :comprehend
 
     add_plugin(::Aws::Comprehend::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

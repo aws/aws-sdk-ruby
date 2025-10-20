@@ -35,10 +35,12 @@ module Aws
             endpoint: endpoint,
             expires_in: 450
           )
-          expect(token).to match(/#{endpoint}\/\?Action=DbConnect/)
-          expect(token).to match(/X-Amz-Credential=akid%2F#{now.utc.strftime('%Y%m%d')}%2F#{region}%2Fdsql%2Faws4_request/)
+          expect(token).to match(%r{#{endpoint}/\?Action=DbConnect})
+          expect(token).to match(
+            /X-Amz-Credential=akid%2F#{now.utc.strftime('%Y%m%d')}%2F#{region}%2Fdsql%2Faws4_request/
+          )
           expect(token).to match(/X-Amz-Expires=450/)
-          expect(token).not_to match(/http[s?]:\/\//)
+          expect(token).not_to match(%r{http[s?]://})
         end
       end
 
@@ -63,10 +65,12 @@ module Aws
             endpoint: endpoint,
             expires_in: 450
           )
-          expect(token).to match(/#{endpoint}\/\?Action=DbConnectAdmin/)
-          expect(token).to match(/X-Amz-Credential=akid%2F#{now.utc.strftime('%Y%m%d')}%2F#{region}%2Fdsql%2Faws4_request/)
+          expect(token).to match(%r{#{endpoint}/\?Action=DbConnectAdmin})
+          expect(token).to match(
+            /X-Amz-Credential=akid%2F#{now.utc.strftime('%Y%m%d')}%2F#{region}%2Fdsql%2Faws4_request/
+          )
           expect(token).to match(/X-Amz-Expires=450/)
-          expect(token).not_to match(/http[s?]:\/\//)
+          expect(token).not_to match(%r{http[s?]://})
         end
       end
     end

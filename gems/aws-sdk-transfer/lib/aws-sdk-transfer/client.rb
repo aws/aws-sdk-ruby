@@ -33,6 +33,7 @@ module Aws::Transfer
     include Smithy::Client::Stubs
 
     self.service = Schema::TransferService
+    @identifier = :transfer
 
     add_plugin(::Aws::Transfer::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

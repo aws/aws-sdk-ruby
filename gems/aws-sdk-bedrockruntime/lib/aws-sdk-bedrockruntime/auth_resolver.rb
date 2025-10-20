@@ -9,8 +9,8 @@ module Aws::BedrockRuntime
     # @return [Array<Smithy::Client::AuthOption>]
     def resolve(parameters)
       options = []
-      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
-      options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#httpBearerAuth')
+        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
+        options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#httpBearerAuth')
       options
     end
   end

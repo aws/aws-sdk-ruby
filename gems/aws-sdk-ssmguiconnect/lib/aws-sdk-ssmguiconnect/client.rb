@@ -33,6 +33,7 @@ module Aws::SSMGuiConnect
     include Smithy::Client::Stubs
 
     self.service = Schema::SSMGuiConnect
+    @identifier = :ssmguiconnect
 
     add_plugin(::Aws::SSMGuiConnect::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

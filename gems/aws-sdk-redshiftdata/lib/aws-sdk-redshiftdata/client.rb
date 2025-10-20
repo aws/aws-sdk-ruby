@@ -33,6 +33,7 @@ module Aws::RedshiftData
     include Smithy::Client::Stubs
 
     self.service = Schema::RedshiftData
+    @identifier = :redshiftdata
 
     add_plugin(::Aws::RedshiftData::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

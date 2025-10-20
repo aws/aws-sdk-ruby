@@ -33,6 +33,7 @@ module Aws::Chime
     include Smithy::Client::Stubs
 
     self.service = Schema::UCBuzzConsoleService
+    @identifier = :chime
 
     add_plugin(::Aws::Chime::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

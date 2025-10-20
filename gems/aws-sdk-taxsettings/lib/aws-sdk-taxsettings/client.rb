@@ -33,6 +33,7 @@ module Aws::TaxSettings
     include Smithy::Client::Stubs
 
     self.service = Schema::TaxSettings
+    @identifier = :taxsettings
 
     add_plugin(::Aws::TaxSettings::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

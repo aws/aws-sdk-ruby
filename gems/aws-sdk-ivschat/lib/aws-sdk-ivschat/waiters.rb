@@ -3,8 +3,8 @@
 # This is generated code!
 
 module Aws::Ivschat
-
   # @api private
   module Waiters
+
   end
 end

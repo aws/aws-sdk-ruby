@@ -33,6 +33,7 @@ module Aws::MediaPackage
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaPackage
+    @identifier = :mediapackage
 
     add_plugin(::Aws::MediaPackage::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

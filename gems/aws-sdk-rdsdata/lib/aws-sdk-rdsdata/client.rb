@@ -33,6 +33,7 @@ module Aws::RDSData
     include Smithy::Client::Stubs
 
     self.service = Schema::RdsDataService
+    @identifier = :rdsdata
 
     add_plugin(::Aws::RDSData::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

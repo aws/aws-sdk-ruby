@@ -33,6 +33,7 @@ module Aws::B2bi
     include Smithy::Client::Stubs
 
     self.service = Schema::B2BI
+    @identifier = :b2bi
 
     add_plugin(::Aws::B2bi::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

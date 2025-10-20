@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::ElastiCache
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until ElastiCache cluster is available.

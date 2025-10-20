@@ -33,6 +33,7 @@ module Aws::Codeartifact
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeArtifactControlPlaneService
+    @identifier = :codeartifact
 
     add_plugin(::Aws::Codeartifact::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::IoTDataPlane
     include Smithy::Client::Stubs
 
     self.service = Schema::IotMoonrakerService
+    @identifier = :iotdataplane
 
     add_plugin(::Aws::IoTDataPlane::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

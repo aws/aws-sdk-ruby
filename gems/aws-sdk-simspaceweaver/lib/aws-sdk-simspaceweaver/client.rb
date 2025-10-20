@@ -33,6 +33,7 @@ module Aws::SimSpaceWeaver
     include Smithy::Client::Stubs
 
     self.service = Schema::SimSpaceWeaver
+    @identifier = :simspaceweaver
 
     add_plugin(::Aws::SimSpaceWeaver::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::MigrationHubOrchestrator
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMigrationHubOrchestrator
+    @identifier = :migrationhuborchestrator
 
     add_plugin(::Aws::MigrationHubOrchestrator::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

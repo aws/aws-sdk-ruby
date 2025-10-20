@@ -48,8 +48,6 @@ module Aws::Kinesis
       self.operation_type = options.fetch(:operation_type, nil)
       self.consumer_arn = options.fetch(:consumer_arn, nil)
       self.resource_arn = options.fetch(:resource_arn, nil)
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

@@ -33,6 +33,7 @@ module Aws::MediaConvert
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaConvert
+    @identifier = :mediaconvert
 
     add_plugin(::Aws::MediaConvert::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

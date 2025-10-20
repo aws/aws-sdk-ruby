@@ -33,6 +33,7 @@ module Aws::CodePipeline
     include Smithy::Client::Stubs
 
     self.service = Schema::CodePipeline20150709
+    @identifier = :codepipeline
 
     add_plugin(::Aws::CodePipeline::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

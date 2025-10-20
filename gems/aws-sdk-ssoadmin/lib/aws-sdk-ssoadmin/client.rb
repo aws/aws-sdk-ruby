@@ -33,6 +33,7 @@ module Aws::SSOAdmin
     include Smithy::Client::Stubs
 
     self.service = Schema::SWBExternalService
+    @identifier = :ssoadmin
 
     add_plugin(::Aws::SSOAdmin::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

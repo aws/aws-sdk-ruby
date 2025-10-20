@@ -33,6 +33,7 @@ module Aws::Braket
     include Smithy::Client::Stubs
 
     self.service = Schema::Braket
+    @identifier = :braket
 
     add_plugin(::Aws::Braket::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

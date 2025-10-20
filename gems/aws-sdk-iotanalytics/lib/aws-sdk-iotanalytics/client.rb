@@ -33,6 +33,7 @@ module Aws::IoTAnalytics
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIoTAnalytics
+    @identifier = :iotanalytics
 
     add_plugin(::Aws::IoTAnalytics::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

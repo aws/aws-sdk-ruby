@@ -33,6 +33,7 @@ module Aws::ECRPUBLIC
     include Smithy::Client::Stubs
 
     self.service = Schema::SpencerFrontendService
+    @identifier = :ecrpublic
 
     add_plugin(::Aws::ECRPUBLIC::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

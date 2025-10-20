@@ -19,7 +19,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "KVS ARN must be provided to use this service" do
@@ -33,7 +32,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "KVS ARN must be a valid ARN" do
@@ -47,7 +45,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Provided ARN was not a valid CloudFront Service ARN. Found: `notcloudfront`" do
@@ -61,7 +58,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Provided ARN must be a global resource ARN. Found: `us-west-2`" do
@@ -75,7 +71,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`" do
@@ -89,7 +84,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "CloudFront-KeyValueStore is not supported in partition `aws-cn`" do
@@ -103,7 +97,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`" do
@@ -117,7 +110,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Valid account based endpoint" do
@@ -132,7 +124,6 @@ module Aws::CloudFrontKeyValueStore
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Valid account based endpoint, with SDK region" do
@@ -147,7 +138,6 @@ module Aws::CloudFrontKeyValueStore
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Valid ARN, different partition, should error" do
@@ -161,7 +151,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Valid account based endpoint with FIPS, should error" do
@@ -175,7 +164,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Custom sdk endpoint override" do
@@ -190,7 +178,6 @@ module Aws::CloudFrontKeyValueStore
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Custom sdk endpoint override with path and http" do
@@ -205,7 +192,6 @@ module Aws::CloudFrontKeyValueStore
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Custom override with different partition should error" do
@@ -219,7 +205,6 @@ module Aws::CloudFrontKeyValueStore
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

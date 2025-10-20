@@ -34,6 +34,7 @@ module Aws::STS
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSSecurityTokenServiceV20110615
+    @identifier = :sts
 
     add_plugin(::Aws::STS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

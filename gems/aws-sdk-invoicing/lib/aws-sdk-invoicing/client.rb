@@ -33,6 +33,7 @@ module Aws::Invoicing
     include Smithy::Client::Stubs
 
     self.service = Schema::Invoicing
+    @identifier = :invoicing
 
     add_plugin(::Aws::Invoicing::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

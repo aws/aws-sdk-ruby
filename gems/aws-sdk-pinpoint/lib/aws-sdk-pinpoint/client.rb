@@ -33,6 +33,7 @@ module Aws::Pinpoint
     include Smithy::Client::Stubs
 
     self.service = Schema::Pinpoint
+    @identifier = :pinpoint
 
     add_plugin(::Aws::Pinpoint::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::LexModelsV2
     include Smithy::Client::Stubs
 
     self.service = Schema::LexModelBuildingServiceV2
+    @identifier = :lexmodelsv2
 
     add_plugin(::Aws::LexModelsV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

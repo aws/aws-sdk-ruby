@@ -33,9 +33,6 @@ module Aws::STS
       self.use_fips = options.fetch(:use_fips, false)
       self.endpoint = options.fetch(:endpoint, nil)
       self.use_global_endpoint = options.fetch(:use_global_endpoint, false)
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
-      raise ArgumentError, "missing required parameter: :use_global_endpoint" if use_global_endpoint.nil?
     end
 
     # @api private

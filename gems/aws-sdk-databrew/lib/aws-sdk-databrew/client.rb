@@ -33,6 +33,7 @@ module Aws::DataBrew
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSGlueDataBrew
+    @identifier = :databrew
 
     add_plugin(::Aws::DataBrew::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

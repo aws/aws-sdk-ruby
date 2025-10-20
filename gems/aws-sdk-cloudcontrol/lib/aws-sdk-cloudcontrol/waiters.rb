@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::CloudControl
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until resource operation request is successful

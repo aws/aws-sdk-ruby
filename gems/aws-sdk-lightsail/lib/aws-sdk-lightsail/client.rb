@@ -33,6 +33,7 @@ module Aws::Lightsail
     include Smithy::Client::Stubs
 
     self.service = Schema::Lightsail20161128
+    @identifier = :lightsail
 
     add_plugin(::Aws::Lightsail::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

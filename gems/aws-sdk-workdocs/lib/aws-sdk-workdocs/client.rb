@@ -33,6 +33,7 @@ module Aws::WorkDocs
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSGorillaBoyService
+    @identifier = :workdocs
 
     add_plugin(::Aws::WorkDocs::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::WAFV2
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSWAF20190729
+    @identifier = :wafv2
 
     add_plugin(::Aws::WAFV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

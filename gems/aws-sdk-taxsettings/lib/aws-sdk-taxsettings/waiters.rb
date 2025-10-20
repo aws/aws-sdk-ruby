@@ -3,8 +3,8 @@
 # This is generated code!
 
 module Aws::TaxSettings
-
   # @api private
   module Waiters
+
   end
 end

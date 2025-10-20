@@ -33,6 +33,7 @@ module Aws::ChimeSDKVoice
     include Smithy::Client::Stubs
 
     self.service = Schema::ChimeSDKTelephonyService
+    @identifier = :chimesdkvoice
 
     add_plugin(::Aws::ChimeSDKVoice::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

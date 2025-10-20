@@ -33,6 +33,7 @@ module Aws::CostOptimizationHub
     include Smithy::Client::Stubs
 
     self.service = Schema::CostOptimizationHubService
+    @identifier = :costoptimizationhub
 
     add_plugin(::Aws::CostOptimizationHub::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

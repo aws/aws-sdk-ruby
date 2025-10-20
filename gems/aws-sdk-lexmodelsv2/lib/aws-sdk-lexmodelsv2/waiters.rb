@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::LexModelsV2
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a bot alias is available

@@ -20,7 +20,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with fips enabled" do
@@ -34,7 +33,6 @@ module Aws::EFS
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "For custom endpoint with fips disabled and dualstack enabled" do
@@ -48,7 +46,6 @@ module Aws::EFS
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
@@ -63,7 +60,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack disabled" do
@@ -78,7 +74,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
@@ -93,7 +88,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack disabled" do
@@ -108,7 +102,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
@@ -123,7 +116,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack disabled" do
@@ -138,7 +130,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
@@ -153,7 +144,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
@@ -168,7 +158,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
@@ -183,7 +172,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
@@ -198,7 +186,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
@@ -213,7 +200,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
@@ -228,7 +214,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
@@ -243,7 +228,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
@@ -258,7 +242,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
@@ -273,7 +256,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
@@ -288,7 +270,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled" do
@@ -303,7 +284,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled" do
@@ -318,7 +298,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isof-south-1 with FIPS enabled and DualStack disabled" do
@@ -333,7 +312,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isof-south-1 with FIPS disabled and DualStack disabled" do
@@ -348,7 +326,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eusc-de-east-1 with FIPS enabled and DualStack disabled" do
@@ -363,7 +340,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eusc-de-east-1 with FIPS disabled and DualStack disabled" do
@@ -378,7 +354,6 @@ module Aws::EFS
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Missing region" do
@@ -392,7 +367,6 @@ module Aws::EFS
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

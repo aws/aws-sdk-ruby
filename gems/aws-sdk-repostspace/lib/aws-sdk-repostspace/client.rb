@@ -33,6 +33,7 @@ module Aws::Repostspace
     include Smithy::Client::Stubs
 
     self.service = Schema::RepostSpace
+    @identifier = :repostspace
 
     add_plugin(::Aws::Repostspace::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

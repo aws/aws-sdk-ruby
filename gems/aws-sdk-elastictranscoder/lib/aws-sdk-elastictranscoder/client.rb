@@ -33,6 +33,7 @@ module Aws::ElasticTranscoder
     include Smithy::Client::Stubs
 
     self.service = Schema::EtsCustomerService
+    @identifier = :elastictranscoder
 
     add_plugin(::Aws::ElasticTranscoder::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

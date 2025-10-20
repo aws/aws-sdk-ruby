@@ -33,6 +33,7 @@ module Aws::ARCZonalShift
     include Smithy::Client::Stubs
 
     self.service = Schema::PercDataPlane
+    @identifier = :arczonalshift
 
     add_plugin(::Aws::ARCZonalShift::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

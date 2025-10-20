@@ -33,6 +33,7 @@ module Aws::CodeCatalyst
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeCatalyst
+    @identifier = :codecatalyst
 
     add_plugin(::Aws::CodeCatalyst::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::HttpBearerAuth)

@@ -33,6 +33,7 @@ module Aws::AutoScalingPlans
     include Smithy::Client::Stubs
 
     self.service = Schema::AnyScaleScalingPlannerFrontendService
+    @identifier = :autoscalingplans
 
     add_plugin(::Aws::AutoScalingPlans::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

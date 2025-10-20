@@ -33,6 +33,7 @@ module Aws::Finspace
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSHabaneroManagementService
+    @identifier = :finspace
 
     add_plugin(::Aws::Finspace::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

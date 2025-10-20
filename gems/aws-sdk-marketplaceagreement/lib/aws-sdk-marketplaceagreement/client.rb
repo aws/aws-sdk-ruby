@@ -33,6 +33,7 @@ module Aws::MarketplaceAgreement
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMPCommerceServiceV20200301
+    @identifier = :marketplaceagreement
 
     add_plugin(::Aws::MarketplaceAgreement::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

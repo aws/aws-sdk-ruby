@@ -33,6 +33,7 @@ module Aws::MarketplaceReporting
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMarketplaceReporting
+    @identifier = :marketplacereporting
 
     add_plugin(::Aws::MarketplaceReporting::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::GameLiftStreams
     include Smithy::Client::Stubs
 
     self.service = Schema::GameLiftStreams
+    @identifier = :gameliftstreams
 
     add_plugin(::Aws::GameLiftStreams::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

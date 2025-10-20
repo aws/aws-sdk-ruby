@@ -20,7 +20,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
@@ -35,7 +34,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
@@ -50,7 +48,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
@@ -65,7 +62,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
@@ -80,7 +76,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
@@ -95,7 +90,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
@@ -110,7 +104,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
@@ -125,7 +118,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-3 with FIPS disabled and DualStack disabled" do
@@ -140,7 +132,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
@@ -155,7 +146,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
@@ -170,7 +160,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
@@ -185,7 +174,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
@@ -200,7 +188,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
@@ -215,7 +202,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
@@ -230,7 +216,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
@@ -245,7 +230,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region me-south-1 with FIPS disabled and DualStack disabled" do
@@ -260,7 +244,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
@@ -275,7 +258,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack disabled" do
@@ -290,7 +272,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack disabled" do
@@ -305,7 +286,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS disabled and DualStack disabled" do
@@ -320,7 +300,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS enabled and DualStack disabled" do
@@ -335,7 +314,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS disabled and DualStack disabled" do
@@ -350,7 +328,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS enabled and DualStack disabled" do
@@ -365,7 +342,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS disabled and DualStack disabled" do
@@ -380,7 +356,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS enabled and DualStack disabled" do
@@ -395,7 +370,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
@@ -410,7 +384,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
@@ -425,7 +398,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
@@ -440,7 +412,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
@@ -455,7 +426,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
@@ -470,7 +440,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
@@ -485,7 +454,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
@@ -500,7 +468,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
@@ -515,7 +482,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
@@ -530,7 +496,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
@@ -545,7 +510,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
@@ -560,7 +524,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
@@ -575,7 +538,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
@@ -590,7 +552,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
@@ -605,7 +566,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-west-1 with FIPS disabled and DualStack disabled" do
@@ -620,7 +580,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
@@ -635,7 +594,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
@@ -650,7 +608,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
@@ -665,7 +622,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region set and fips disabled and dualstack disabled" do
@@ -680,7 +636,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
@@ -695,7 +650,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with fips enabled and dualstack disabled" do
@@ -709,7 +663,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "For custom endpoint with fips disabled and dualstack enabled" do
@@ -723,7 +676,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Missing region" do
@@ -737,7 +689,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Failed to parse ARN." do
@@ -751,7 +702,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: partition missing from ARN." do
@@ -765,7 +715,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: partitions mismatch." do
@@ -779,7 +728,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Not Kinesis" do
@@ -793,7 +741,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Region is missing in ARN" do
@@ -807,7 +754,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Region is empty string in ARN" do
@@ -821,7 +767,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Invalid account id" do
@@ -835,7 +780,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Invalid account id" do
@@ -849,7 +793,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Kinesis ARNs only support stream arn types" do
@@ -863,7 +806,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "OperationType not set" do
@@ -877,7 +819,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Custom Endpoint is specified" do
@@ -892,7 +833,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting control operation type" do
@@ -907,7 +847,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting data operation type" do
@@ -922,7 +861,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting data operation type" do
@@ -937,7 +875,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting control operation type" do
@@ -952,7 +889,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with Dual Stack and FIPS enabled" do
@@ -967,7 +903,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with Dual Stack enabled" do
@@ -982,7 +917,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with FIPS and DualStack disabled" do
@@ -997,7 +931,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "RegionMismatch: client region should be used for endpoint region" do
@@ -1012,7 +945,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with FIPS enabled" do
@@ -1027,7 +959,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with FIPS and DualStack enabled for cn regions." do
@@ -1042,7 +973,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting control operation type in ADC regions" do
@@ -1057,7 +987,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting control operation type in ADC regions" do
@@ -1072,7 +1001,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting data operation type in ADC regions" do
@@ -1087,7 +1015,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting control operation type in ADC regions" do
@@ -1102,7 +1029,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting data operation type in ADC regions" do
@@ -1117,7 +1043,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Invalid ConsumerARN: Failed to parse ARN." do
@@ -1131,7 +1056,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ConsumerARN: partition missing from ARN." do
@@ -1145,7 +1069,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: partitions mismatch." do
@@ -1159,7 +1082,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Not Kinesis" do
@@ -1173,7 +1095,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Region is missing in ARN" do
@@ -1187,7 +1108,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Region is empty string in ARN" do
@@ -1201,7 +1121,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Invalid account id" do
@@ -1215,7 +1134,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Invalid account id" do
@@ -1229,7 +1147,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Invalid ARN: Kinesis ARNs only support stream arn/consumer arn types" do
@@ -1243,7 +1160,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "OperationType not set" do
@@ -1257,7 +1173,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Custom Endpoint is specified" do
@@ -1272,7 +1187,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting control operation type" do
@@ -1287,7 +1201,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting data operation type" do
@@ -1302,7 +1215,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting data operation type" do
@@ -1317,7 +1229,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting control operation type" do
@@ -1332,7 +1243,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with Dual Stack and FIPS enabled" do
@@ -1347,7 +1257,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with Dual Stack enabled" do
@@ -1362,7 +1271,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with FIPS and DualStack disabled" do
@@ -1377,7 +1285,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "RegionMismatch: client region should be used for endpoint region" do
@@ -1392,7 +1299,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with FIPS enabled" do
@@ -1407,7 +1313,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with FIPS and DualStack enabled for cn regions." do
@@ -1422,7 +1327,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting control operation type in ADC regions" do
@@ -1437,7 +1341,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting control operation type in ADC regions" do
@@ -1452,7 +1355,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint targeting data operation type in ADC regions" do
@@ -1467,7 +1369,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting control operation type in ADC regions" do
@@ -1482,7 +1383,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Account endpoint with fips targeting data operation type in ADC regions" do
@@ -1497,7 +1397,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ConsumerARN targeting US-EAST-1" do
@@ -1512,7 +1411,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Both StreamARN and ConsumerARN specified. StreamARN should take precedence" do
@@ -1527,7 +1425,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN test: Invalid ARN: Failed to parse ARN." do
@@ -1541,7 +1438,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: partition missing from ARN." do
@@ -1555,7 +1451,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: partitions mismatch." do
@@ -1569,7 +1464,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: Not Kinesis" do
@@ -1583,7 +1477,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: Region is missing in ARN" do
@@ -1597,7 +1490,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: Region is empty string in ARN" do
@@ -1611,7 +1503,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: Invalid account id" do
@@ -1625,7 +1516,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: Invalid account id" do
@@ -1639,7 +1529,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Invalid ARN: Kinesis ARNs only support stream arn types" do
@@ -1653,7 +1542,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: OperationType not set" do
@@ -1667,7 +1555,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as StreamARN test: Custom Endpoint is specified" do
@@ -1682,7 +1569,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint targeting control operation type" do
@@ -1697,7 +1583,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint targeting data operation type" do
@@ -1712,7 +1597,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with fips targeting data operation type" do
@@ -1727,7 +1611,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with fips targeting control operation type" do
@@ -1742,7 +1625,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with Dual Stack and FIPS enabled" do
@@ -1757,7 +1639,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with Dual Stack enabled" do
@@ -1772,7 +1653,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with FIPS and DualStack disabled" do
@@ -1787,7 +1667,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: RegionMismatch: client region should be used for endpoint region" do
@@ -1802,7 +1681,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with FIPS enabled" do
@@ -1817,7 +1695,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with FIPS and DualStack enabled for cn regions." do
@@ -1832,7 +1709,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint targeting control operation type in ADC regions" do
@@ -1847,7 +1723,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint targeting control operation type in ADC regions" do
@@ -1862,7 +1737,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint targeting data operation type in ADC regions" do
@@ -1877,7 +1751,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with fips targeting control operation type in ADC regions" do
@@ -1892,7 +1765,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as StreamARN test: Account endpoint with fips targeting data operation type in ADC regions" do
@@ -1907,7 +1779,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: partition missing from ARN." do
@@ -1921,7 +1792,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: partitions mismatch." do
@@ -1935,7 +1805,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Not Kinesis" do
@@ -1949,7 +1818,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Region is missing in ARN" do
@@ -1963,7 +1831,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Region is empty string in ARN" do
@@ -1977,7 +1844,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Invalid account id" do
@@ -1991,7 +1857,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Invalid account id" do
@@ -2005,7 +1870,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Kinesis ARNs only support stream arn/consumer arn types" do
@@ -2019,7 +1883,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: OperationType not set" do
@@ -2033,7 +1896,6 @@ module Aws::Kinesis
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Custom Endpoint is specified" do
@@ -2048,7 +1910,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint targeting control operation type" do
@@ -2063,7 +1924,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint targeting data operation type" do
@@ -2078,7 +1938,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with fips targeting data operation type" do
@@ -2093,7 +1952,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with fips targeting control operation type" do
@@ -2108,7 +1966,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with Dual Stack and FIPS enabled" do
@@ -2123,7 +1980,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with Dual Stack enabled" do
@@ -2138,7 +1994,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with FIPS and DualStack disabled" do
@@ -2153,7 +2008,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: RegionMismatch: client region should be used for endpoint region" do
@@ -2168,7 +2022,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with FIPS enabled" do
@@ -2183,7 +2036,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with FIPS and DualStack enabled for cn regions." do
@@ -2198,7 +2050,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint targeting control operation type in ADC regions" do
@@ -2213,7 +2064,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint targeting control operation type in ADC regions" do
@@ -2228,7 +2078,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint targeting data operation type in ADC regions" do
@@ -2243,7 +2092,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with fips targeting control operation type in ADC regions" do
@@ -2258,7 +2106,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "ResourceARN as ConsumerARN test: Account endpoint with fips targeting data operation type in ADC regions" do
@@ -2273,7 +2120,6 @@ module Aws::Kinesis
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
   end
 end

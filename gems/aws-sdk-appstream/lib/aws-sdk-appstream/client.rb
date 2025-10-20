@@ -33,6 +33,7 @@ module Aws::AppStream
     include Smithy::Client::Stubs
 
     self.service = Schema::PhotonAdminProxyService
+    @identifier = :appstream
 
     add_plugin(::Aws::AppStream::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

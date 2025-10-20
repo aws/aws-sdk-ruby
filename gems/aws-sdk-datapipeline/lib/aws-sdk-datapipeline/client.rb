@@ -33,6 +33,7 @@ module Aws::DataPipeline
     include Smithy::Client::Stubs
 
     self.service = Schema::DataPipeline
+    @identifier = :datapipeline
 
     add_plugin(::Aws::DataPipeline::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

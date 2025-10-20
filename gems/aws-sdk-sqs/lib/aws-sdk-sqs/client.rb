@@ -33,6 +33,7 @@ module Aws::SQS
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonSQS
+    @identifier = :sqs
 
     add_plugin(::Aws::SQS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

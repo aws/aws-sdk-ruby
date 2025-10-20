@@ -33,6 +33,7 @@ module Aws::DataExchange
     include Smithy::Client::Stubs
 
     self.service = Schema::DataExchange
+    @identifier = :dataexchange
 
     add_plugin(::Aws::DataExchange::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

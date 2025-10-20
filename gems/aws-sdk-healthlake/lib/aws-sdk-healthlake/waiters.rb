@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::HealthLake
-
   # @api private
   module Waiters
+
     # @api private
     #
     #

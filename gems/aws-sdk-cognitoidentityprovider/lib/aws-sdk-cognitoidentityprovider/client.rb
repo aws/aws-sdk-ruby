@@ -33,6 +33,7 @@ module Aws::CognitoIdentityProvider
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSCognitoIdentityProviderService
+    @identifier = :cognitoidentityprovider
 
     add_plugin(::Aws::CognitoIdentityProvider::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

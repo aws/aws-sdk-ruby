@@ -33,6 +33,7 @@ module Aws::DirectConnect
     include Smithy::Client::Stubs
 
     self.service = Schema::OvertureService
+    @identifier = :directconnect
 
     add_plugin(::Aws::DirectConnect::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

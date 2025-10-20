@@ -33,6 +33,7 @@ module Aws::Lambda
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSGirApiService
+    @identifier = :lambda
 
     add_plugin(::Aws::Lambda::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

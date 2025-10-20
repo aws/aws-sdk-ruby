@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::CloudFront
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a distribution is deployed.

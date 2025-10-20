@@ -33,6 +33,7 @@ module Aws::RolesAnywhere
     include Smithy::Client::Stubs
 
     self.service = Schema::RolesAnywhere
+    @identifier = :rolesanywhere
 
     add_plugin(::Aws::RolesAnywhere::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

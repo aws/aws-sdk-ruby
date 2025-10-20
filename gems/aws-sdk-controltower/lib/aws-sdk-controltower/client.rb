@@ -33,6 +33,7 @@ module Aws::ControlTower
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSControlTowerApis
+    @identifier = :controltower
 
     add_plugin(::Aws::ControlTower::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

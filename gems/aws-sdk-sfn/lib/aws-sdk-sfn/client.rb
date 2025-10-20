@@ -33,6 +33,7 @@ module Aws::SFN
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSStepFunctions
+    @identifier = :sfn
 
     add_plugin(::Aws::SFN::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

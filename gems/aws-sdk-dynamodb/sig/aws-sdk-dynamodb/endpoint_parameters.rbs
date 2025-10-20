@@ -2,8 +2,8 @@ module Aws::DynamoDB
   class EndpointParameters
     def initialize: (
       ?region: String,
-      use_dual_stack: bool,
-      use_fips: bool,
+      ?use_dual_stack: bool,
+      ?use_fips: bool,
       ?endpoint: String,
       ?account_id: String,
       ?account_id_endpoint_mode: String,
@@ -12,8 +12,8 @@ module Aws::DynamoDB
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     attr_accessor region: String?
-    attr_accessor use_dual_stack: bool
-    attr_accessor use_fips: bool
+    attr_accessor use_dual_stack: bool?
+    attr_accessor use_fips: bool?
     attr_accessor endpoint: String?
     attr_accessor account_id: String?
     attr_accessor account_id_endpoint_mode: String?

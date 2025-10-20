@@ -33,6 +33,7 @@ module Aws::CodeStarconnections
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeStarConnections20191201
+    @identifier = :codestarconnections
 
     add_plugin(::Aws::CodeStarconnections::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

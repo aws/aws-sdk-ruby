@@ -33,6 +33,7 @@ module Aws::Tnb
     include Smithy::Client::Stubs
 
     self.service = Schema::TNB
+    @identifier = :tnb
 
     add_plugin(::Aws::Tnb::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

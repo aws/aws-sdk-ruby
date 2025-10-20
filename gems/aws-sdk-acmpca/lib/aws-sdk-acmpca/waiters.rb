@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::ACMPCA
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a Audit Report is created

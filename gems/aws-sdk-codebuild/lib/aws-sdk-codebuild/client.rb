@@ -33,6 +33,7 @@ module Aws::CodeBuild
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeBuild20161006
+    @identifier = :codebuild
 
     add_plugin(::Aws::CodeBuild::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

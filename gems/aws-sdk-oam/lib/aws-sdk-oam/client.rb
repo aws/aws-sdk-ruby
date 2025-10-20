@@ -33,6 +33,7 @@ module Aws::OAM
     include Smithy::Client::Stubs
 
     self.service = Schema::Oamservice
+    @identifier = :oam
 
     add_plugin(::Aws::OAM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

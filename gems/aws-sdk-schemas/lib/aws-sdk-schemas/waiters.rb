@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Schemas
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until code binding is generated

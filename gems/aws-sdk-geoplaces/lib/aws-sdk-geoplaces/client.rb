@@ -33,6 +33,7 @@ module Aws::GeoPlaces
     include Smithy::Client::Stubs
 
     self.service = Schema::PlacesService
+    @identifier = :geoplaces
 
     add_plugin(::Aws::GeoPlaces::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

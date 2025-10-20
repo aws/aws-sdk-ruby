@@ -33,6 +33,7 @@ module Aws::NetworkManager
     include Smithy::Client::Stubs
 
     self.service = Schema::NetworkManager
+    @identifier = :networkmanager
 
     add_plugin(::Aws::NetworkManager::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

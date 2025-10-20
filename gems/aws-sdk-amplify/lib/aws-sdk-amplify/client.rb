@@ -33,6 +33,7 @@ module Aws::Amplify
     include Smithy::Client::Stubs
 
     self.service = Schema::Amplify
+    @identifier = :amplify
 
     add_plugin(::Aws::Amplify::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

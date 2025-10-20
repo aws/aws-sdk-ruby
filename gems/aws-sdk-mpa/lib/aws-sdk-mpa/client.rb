@@ -33,6 +33,7 @@ module Aws::MPA
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSFluffyCoreService
+    @identifier = :mpa
 
     add_plugin(::Aws::MPA::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

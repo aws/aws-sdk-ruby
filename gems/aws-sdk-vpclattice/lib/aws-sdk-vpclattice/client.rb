@@ -33,6 +33,7 @@ module Aws::VPCLattice
     include Smithy::Client::Stubs
 
     self.service = Schema::MercuryControlPlane
+    @identifier = :vpclattice
 
     add_plugin(::Aws::VPCLattice::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

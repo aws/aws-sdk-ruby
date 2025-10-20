@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::MediaLive
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a channel has been created

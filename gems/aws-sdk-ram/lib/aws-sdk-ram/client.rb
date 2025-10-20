@@ -33,6 +33,7 @@ module Aws::RAM
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonResourceSharing
+    @identifier = :ram
 
     add_plugin(::Aws::RAM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

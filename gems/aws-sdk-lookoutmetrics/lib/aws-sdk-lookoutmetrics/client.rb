@@ -33,6 +33,7 @@ module Aws::LookoutMetrics
     include Smithy::Client::Stubs
 
     self.service = Schema::LookoutMetrics
+    @identifier = :lookoutmetrics
 
     add_plugin(::Aws::LookoutMetrics::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

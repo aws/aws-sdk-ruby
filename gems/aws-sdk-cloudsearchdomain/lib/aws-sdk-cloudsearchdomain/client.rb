@@ -33,6 +33,7 @@ module Aws::CloudSearchDomain
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonCloudSearch2013
+    @identifier = :cloudsearchdomain
 
     add_plugin(::Aws::CloudSearchDomain::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::IoTSecureTunneling
     include Smithy::Client::Stubs
 
     self.service = Schema::IoTSecuredTunneling
+    @identifier = :iotsecuretunneling
 
     add_plugin(::Aws::IoTSecureTunneling::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

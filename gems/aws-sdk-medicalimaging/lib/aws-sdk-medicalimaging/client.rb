@@ -33,6 +33,7 @@ module Aws::MedicalImaging
     include Smithy::Client::Stubs
 
     self.service = Schema::AHIGatewayService
+    @identifier = :medicalimaging
 
     add_plugin(::Aws::MedicalImaging::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

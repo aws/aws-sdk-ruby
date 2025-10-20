@@ -33,6 +33,7 @@ module Aws::IoTTwinMaker
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIoTTwinMaker
+    @identifier = :iottwinmaker
 
     add_plugin(::Aws::IoTTwinMaker::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     include Smithy::Client::Stubs
 
     self.service = Schema::LicenseManagerLinuxSubscriptions
+    @identifier = :licensemanagerlinuxsubscriptions
 
     add_plugin(::Aws::LicenseManagerLinuxSubscriptions::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

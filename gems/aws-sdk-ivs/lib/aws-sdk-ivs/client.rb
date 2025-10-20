@@ -33,6 +33,7 @@ module Aws::Ivs
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonInteractiveVideoService
+    @identifier = :ivs
 
     add_plugin(::Aws::Ivs::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::PcaConnectorAd
     include Smithy::Client::Stubs
 
     self.service = Schema::PcaConnectorAd
+    @identifier = :pcaconnectorad
 
     add_plugin(::Aws::PcaConnectorAd::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

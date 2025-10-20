@@ -33,6 +33,7 @@ module Aws::SageMaker
     include Smithy::Client::Stubs
 
     self.service = Schema::SageMaker
+    @identifier = :sagemaker
 
     add_plugin(::Aws::SageMaker::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

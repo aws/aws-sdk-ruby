@@ -33,6 +33,7 @@ module Aws::CloudWatch
     include Smithy::Client::Stubs
 
     self.service = Schema::GraniteServiceVersion20100801
+    @identifier = :cloudwatch
 
     add_plugin(::Aws::CloudWatch::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

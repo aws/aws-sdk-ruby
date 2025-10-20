@@ -33,6 +33,7 @@ module Aws::NetworkFirewall
     include Smithy::Client::Stubs
 
     self.service = Schema::NetworkFirewall20201112
+    @identifier = :networkfirewall
 
     add_plugin(::Aws::NetworkFirewall::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

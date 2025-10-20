@@ -34,6 +34,7 @@ module Aws::RDS
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonRDSv19
+    @identifier = :rds
 
     add_plugin(::Aws::RDS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

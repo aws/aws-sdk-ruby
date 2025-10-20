@@ -33,6 +33,7 @@ module Aws::AIOps
     include Smithy::Client::Stubs
 
     self.service = Schema::AIOps
+    @identifier = :aiops
 
     add_plugin(::Aws::AIOps::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::Translate
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSShineFrontendService20170701
+    @identifier = :translate
 
     add_plugin(::Aws::Translate::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

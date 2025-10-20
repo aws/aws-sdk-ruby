@@ -33,6 +33,7 @@ module Aws::Route53Resolver
     include Smithy::Client::Stubs
 
     self.service = Schema::Route53Resolver
+    @identifier = :route53resolver
 
     add_plugin(::Aws::Route53Resolver::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

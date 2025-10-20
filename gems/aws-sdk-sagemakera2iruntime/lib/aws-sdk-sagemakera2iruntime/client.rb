@@ -33,6 +33,7 @@ module Aws::SageMakerA2IRuntime
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonSageMakerA2IRuntime
+    @identifier = :sagemakera2iruntime
 
     add_plugin(::Aws::SageMakerA2IRuntime::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

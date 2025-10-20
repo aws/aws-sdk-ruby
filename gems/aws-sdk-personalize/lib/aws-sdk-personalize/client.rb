@@ -33,6 +33,7 @@ module Aws::Personalize
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonPersonalize
+    @identifier = :personalize
 
     add_plugin(::Aws::Personalize::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

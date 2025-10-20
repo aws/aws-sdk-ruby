@@ -33,6 +33,7 @@ module Aws::Odb
     include Smithy::Client::Stubs
 
     self.service = Schema::Odb
+    @identifier = :odb
 
     add_plugin(::Aws::Odb::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

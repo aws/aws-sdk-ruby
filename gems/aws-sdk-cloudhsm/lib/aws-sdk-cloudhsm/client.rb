@@ -33,6 +33,7 @@ module Aws::CloudHSM
     include Smithy::Client::Stubs
 
     self.service = Schema::CloudHsmFrontendService
+    @identifier = :cloudhsm
 
     add_plugin(::Aws::CloudHSM::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

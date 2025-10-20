@@ -33,6 +33,7 @@ module Aws::LexRuntimeService
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSDeepSenseRunTimeService
+    @identifier = :lexruntimeservice
 
     add_plugin(::Aws::LexRuntimeService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

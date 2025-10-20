@@ -33,6 +33,7 @@ module Aws::Organizations
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSOrganizationsV20161128
+    @identifier = :organizations
 
     add_plugin(::Aws::Organizations::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

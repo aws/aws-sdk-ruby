@@ -33,6 +33,7 @@ module Aws::EC2
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonEC2
+    @identifier = :ec2
 
     add_plugin(::Aws::EC2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

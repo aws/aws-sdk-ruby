@@ -33,6 +33,7 @@ module Aws::SNS
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonSimpleNotificationService
+    @identifier = :sns
 
     add_plugin(::Aws::SNS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

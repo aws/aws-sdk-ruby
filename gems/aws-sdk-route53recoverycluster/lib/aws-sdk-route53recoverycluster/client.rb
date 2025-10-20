@@ -33,6 +33,7 @@ module Aws::Route53RecoveryCluster
     include Smithy::Client::Stubs
 
     self.service = Schema::ToggleCustomerAPI
+    @identifier = :route53recoverycluster
 
     add_plugin(::Aws::Route53RecoveryCluster::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

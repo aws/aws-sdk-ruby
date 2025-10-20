@@ -33,6 +33,7 @@ module Aws::CloudHSMV2
     include Smithy::Client::Stubs
 
     self.service = Schema::BaldrApiService
+    @identifier = :cloudhsmv2
 
     add_plugin(::Aws::CloudHSMV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

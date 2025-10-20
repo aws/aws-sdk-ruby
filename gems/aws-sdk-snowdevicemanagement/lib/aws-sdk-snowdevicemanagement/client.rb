@@ -33,6 +33,7 @@ module Aws::SnowDeviceManagement
     include Smithy::Client::Stubs
 
     self.service = Schema::SnowDeviceManagement
+    @identifier = :snowdevicemanagement
 
     add_plugin(::Aws::SnowDeviceManagement::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

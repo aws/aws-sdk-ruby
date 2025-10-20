@@ -33,6 +33,7 @@ module Aws::Mgn
     include Smithy::Client::Stubs
 
     self.service = Schema::ApplicationMigrationService
+    @identifier = :mgn
 
     add_plugin(::Aws::Mgn::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

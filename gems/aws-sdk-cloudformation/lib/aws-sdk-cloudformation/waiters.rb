@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::CloudFormation
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until change set status is CREATE_COMPLETE.

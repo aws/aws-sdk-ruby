@@ -33,6 +33,7 @@ module Aws::Forecastquery
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonForecastRuntime
+    @identifier = :forecastquery
 
     add_plugin(::Aws::Forecastquery::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
