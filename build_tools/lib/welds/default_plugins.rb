@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/shared_config'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent'
 
@@ -12,6 +13,12 @@ module BuildTools
         true
       end
 
+      def post_process(artifacts)
+        string = "\nAws::Core::Plugins::GlobalConfiguration.add_identifier(:#{@plan.service_name.downcase})\n"
+        file = artifacts.find { |artifact| artifact.end_with?('/client.rb') }
+        insert_into_file(file, string, before: "\nmodule #{@plan.module_name}")
+      end
+
       def add_dependencies
         { 'aws-sdk-core' => '4.0.0.pre0' }
       end
@@ -22,6 +29,7 @@ module BuildTools
 
       def add_plugins
         {
+          Aws::Core::Plugins::GlobalConfiguration => { require_path: 'aws-sdk-core/plugins/global_configuration' },
           Aws::Core::Plugins::SharedConfig => { require_path: 'aws-sdk-core/plugins/shared_config' },
           Aws::Core::Plugins::UserAgent => { require_path: 'aws-sdk-core/plugins/user_agent' }
         }

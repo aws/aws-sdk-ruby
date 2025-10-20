@@ -1,26 +1,13 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
-require_relative '../../../lib/aws-sdk-core/plugins/shared_config'
-require_relative '../../../lib/aws-sdk-core/plugins/user_agent'
 
 module Aws
   module Core
     module Plugins
       describe UserAgent do
-        let(:shapes) do
-          shapes = ClientHelper.sample_shapes
-          shapes['smithy.ruby.tests#SampleClient']['traits']['aws.api#service'] = { 'sdkId' => 'sample' }
-          shapes
-        end
-
-        let(:sample_client) { ClientHelper.sample_client(shapes: shapes) }
-        let(:client_class) do
-          client_class = sample_client.const_get(:Client)
-          client_class.add_plugin(Plugins::SharedConfig)
-          client_class.add_plugin(Plugins::UserAgent)
-          client_class
-        end
+        let(:sample_client) { ClientHelper.sample_client }
+        let(:client_class) { sample_client.const_get(:Client) }
         let(:client) { client_class.new(stub_responses: true, endpoint: 'https://example.com') }
 
         def setup(given)

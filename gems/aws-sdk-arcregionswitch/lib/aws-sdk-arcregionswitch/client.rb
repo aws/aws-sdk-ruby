@@ -21,11 +21,14 @@ require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
 require 'smithy-client/plugins/rpc_v2_cbor'
+require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+
+Aws::Core::Plugins::GlobalConfiguration.add_identifier(:arcregionswitch)
 
 module Aws::ARCRegionswitch
   # An API client for Aws::ARCRegionswitch.
@@ -55,6 +58,7 @@ module Aws::ARCRegionswitch
     add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Smithy::Client::Plugins::RpcV2Cbor)
+    add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
     add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
