@@ -2529,7 +2529,7 @@ module Aws::GuardDuty
       attr_accessor finding_ids: ::Array[::String]
       attr_accessor feedback: ("USEFUL" | "NOT_USEFUL")
       attr_accessor comments: ::String
-      SENSITIVE: []
+      SENSITIVE: [:comments]
     end
 
     class UpdateFindingsFeedbackResponse < Aws::EmptyStructure

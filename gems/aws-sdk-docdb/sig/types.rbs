@@ -137,6 +137,7 @@ module Aws::DocDB
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
+      attr_accessor network_type: ::String
       attr_accessor source_region: ::String
       SENSITIVE: []
     end
@@ -271,9 +272,11 @@ module Aws::DocDB
       attr_accessor cluster_create_time: ::Time
       attr_accessor enabled_cloudwatch_logs_exports: ::Array[::String]
       attr_accessor deletion_protection: bool
+      attr_accessor io_optimized_next_allowed_modification_time: ::Time
       attr_accessor storage_type: ::String
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo
       attr_accessor master_user_secret: Types::ClusterMasterUserSecret
+      attr_accessor network_type: ::String
       SENSITIVE: []
     end
 
@@ -480,6 +483,7 @@ module Aws::DocDB
       attr_accessor subnet_group_status: ::String
       attr_accessor subnets: ::Array[Types::Subnet]
       attr_accessor db_subnet_group_arn: ::String
+      attr_accessor supported_network_types: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -931,6 +935,7 @@ module Aws::DocDB
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor rotate_master_user_password: bool
+      attr_accessor network_type: ::String
       SENSITIVE: []
     end
 
@@ -1015,6 +1020,9 @@ module Aws::DocDB
     class ModifyGlobalClusterResult
       attr_accessor global_cluster: Types::GlobalCluster
       SENSITIVE: []
+    end
+
+    class NetworkTypeNotSupported < Aws::EmptyStructure
     end
 
     class OrderableDBInstanceOption
@@ -1159,6 +1167,7 @@ module Aws::DocDB
       attr_accessor db_cluster_parameter_group_name: ::String
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor storage_type: ::String
+      attr_accessor network_type: ::String
       SENSITIVE: []
     end
 
@@ -1182,6 +1191,7 @@ module Aws::DocDB
       attr_accessor deletion_protection: bool
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor storage_type: ::String
+      attr_accessor network_type: ::String
       SENSITIVE: []
     end
 

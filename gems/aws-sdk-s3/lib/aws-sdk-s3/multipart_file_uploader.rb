@@ -7,10 +7,8 @@ module Aws
   module S3
     # @api private
     class MultipartFileUploader
-
       MIN_PART_SIZE = 5 * 1024 * 1024 # 5MB
       MAX_PARTS = 10_000
-      DEFAULT_THREAD_COUNT = 10
       CREATE_OPTIONS = Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
       COMPLETE_OPTIONS = Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
       UPLOAD_PART_OPTIONS = Set.new(Client.api.operation(:upload_part).input.shape.member_names)
@@ -21,10 +19,9 @@ module Aws
       )
 
       # @option options [Client] :client
-      # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
+        @executor = options[:executor]
       end
 
       # @return [Client]
@@ -38,11 +35,12 @@ module Aws
       #   It will be invoked with [bytes_read], [total_sizes]
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(source, options = {})
-        raise ArgumentError, 'unable to multipart upload files smaller than 5MB' if File.size(source) < MIN_PART_SIZE
+        file_size = File.size(source)
+        raise ArgumentError, 'unable to multipart upload files smaller than 5MB' if file_size < MIN_PART_SIZE
 
         upload_id = initiate_upload(options)
-        parts = upload_parts(upload_id, source, options)
-        complete_upload(upload_id, parts, source, options)
+        parts = upload_parts(upload_id, source, file_size, options)
+        complete_upload(upload_id, parts, file_size, options)
       end
 
       private
@@ -51,22 +49,22 @@ module Aws
         @client.create_multipart_upload(create_opts(options)).upload_id
       end
 
-      def complete_upload(upload_id, parts, source, options)
+      def complete_upload(upload_id, parts, file_size, options)
         @client.complete_multipart_upload(
           **complete_opts(options).merge(
             upload_id: upload_id,
             multipart_upload: { parts: parts },
-            mpu_object_size: File.size(source)
+            mpu_object_size: file_size
           )
         )
       rescue StandardError => e
         abort_upload(upload_id, options, [e])
       end
 
-      def upload_parts(upload_id, source, options)
+      def upload_parts(upload_id, source, file_size, options)
         completed = PartList.new
-        pending = PartList.new(compute_parts(upload_id, source, options))
-        errors = upload_in_threads(pending, completed, options)
+        pending = PartList.new(compute_parts(upload_id, source, file_size, options))
+        errors = upload_with_executor(pending, completed, options)
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -86,17 +84,20 @@ module Aws
         raise MultipartUploadError.new(msg, errors + [e])
       end
 
-      def compute_parts(upload_id, source, options)
-        size = File.size(source)
-        default_part_size = compute_default_part_size(size)
+      def compute_parts(upload_id, source, file_size, options)
+        default_part_size = compute_default_part_size(file_size)
         offset = 0
         part_number = 1
         parts = []
-        while offset < size
+        while offset < file_size
           parts << upload_part_opts(options).merge(
             upload_id: upload_id,
             part_number: part_number,
-            body: FilePart.new(source: source, offset: offset, size: part_size(size, default_part_size, offset))
+            body: FilePart.new(
+              source: source,
+              offset: offset,
+              size: part_size(file_size, default_part_size, offset)
+            )
           )
           part_number += 1
           offset += default_part_size
@@ -115,17 +116,13 @@ module Aws
       def create_opts(options)
         opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
         opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
-        CREATE_OPTIONS.each_with_object(opts) do |key, hash|
-          hash[key] = options[key] if options.key?(key)
-        end
+        CREATE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
       def complete_opts(options)
         opts = {}
         opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
-        COMPLETE_OPTIONS.each_with_object(opts) do |key, hash|
-          hash[key] = options[key] if options.key?(key)
-        end
+        COMPLETE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
 
       def upload_part_opts(options)
@@ -135,43 +132,40 @@ module Aws
         end
       end
 
-      def upload_in_threads(pending, completed, options)
-        threads = []
-        if (callback = options[:progress_callback])
-          progress = MultipartProgress.new(pending, callback)
-        end
-        options.fetch(:thread_count, @thread_count).times do
-          thread = Thread.new do
-            begin
-              while (part = pending.shift)
-                if progress
-                  part[:on_chunk_sent] =
-                    proc do |_chunk, bytes, _total|
-                      progress.call(part[:part_number], bytes)
-                    end
-                end
-                resp = @client.upload_part(part)
-                part[:body].close
-                completed_part = { etag: resp.etag, part_number: part[:part_number] }
-                algorithm = resp.context.params[:checksum_algorithm]
-                k = "checksum_#{algorithm.downcase}".to_sym
-                completed_part[k] = resp.send(k)
-                completed.push(completed_part)
-              end
-              nil
-            rescue StandardError => e
-              # keep other threads from uploading other parts
-              pending.clear!
-              e
-            end
+      def upload_with_executor(pending, completed, options)
+        upload_attempts = 0
+        completion_queue = Queue.new
+        abort_upload = false
+        errors = []
+        progress = MultipartProgress.new(pending, options[:progress_callback])
+
+        while (part = pending.shift)
+          break if abort_upload
+
+          upload_attempts += 1
+          @executor.post(part) do |p|
+            update_progress(progress, p)
+            resp = @client.upload_part(p)
+            p[:body].close
+            completed_part = { etag: resp.etag, part_number: p[:part_number] }
+            algorithm = resp.context.params[:checksum_algorithm].downcase
+            k = "checksum_#{algorithm}".to_sym
+            completed_part[k] = resp.send(k)
+            completed.push(completed_part)
+          rescue StandardError => e
+            abort_upload = true
+            errors << e
+          ensure
+            completion_queue << :done
           end
-          threads << thread
         end
-        threads.map(&:value).compact
+
+        upload_attempts.times { completion_queue.pop }
+        errors
       end
 
-      def compute_default_part_size(source_size)
-        [(source_size.to_f / MAX_PARTS).ceil, MIN_PART_SIZE].max.to_i
+      def compute_default_part_size(file_size)
+        [(file_size.to_f / MAX_PARTS).ceil, MIN_PART_SIZE].max.to_i
       end
 
       def part_size(total_size, part_size, offset)
@@ -180,6 +174,15 @@ module Aws
         else
           part_size
         end
+      end
+
+      def update_progress(progress, part)
+        return unless progress.progress_callback
+
+        part[:on_chunk_sent] =
+          proc do |_chunk, bytes, _total|
+            progress.call(part[:part_number], bytes)
+          end
       end
 
       # @api private
@@ -221,6 +224,8 @@ module Aws
           @total_sizes = parts.part_sizes
           @progress_callback = progress_callback
         end
+
+        attr_reader :progress_callback
 
         def call(part_number, bytes_read)
           # part numbers start at 1

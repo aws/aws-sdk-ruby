@@ -92,7 +92,7 @@ module Aws::TimestreamInfluxDB
     #
     #   Valid Values: 1024-65535
     #
-    #   Default: 8086
+    #   Default: 8086 for InfluxDB v2, 8181 for InfluxDB v3
     #
     #   Constraints: The value can't be 2375-2376, 7788-7799, 8090, or
     #   51678-51680
@@ -228,7 +228,7 @@ module Aws::TimestreamInfluxDB
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password of the initial admin user created in InfluxDB. This
+    #   The password of the initial admin user created in InfluxDB v2. This
     #   password will allow you to access the InfluxDB UI to perform various
     #   administrative tasks and also use the InfluxDB CLI to create an
     #   operator token. These attributes will be stored in a Secret created
@@ -445,6 +445,10 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's role in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] instance_modes
+    #   Specifies the DbInstance's roles in the cluster.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstanceOutput AWS API Documentation
     #
     class CreateDbInstanceOutput < Struct.new(
@@ -468,7 +472,8 @@ module Aws::TimestreamInfluxDB
       :log_delivery_configuration,
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
-      :instance_mode)
+      :instance_mode,
+      :instance_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -591,6 +596,10 @@ module Aws::TimestreamInfluxDB
     #   gibibytes).
     #   @return [Integer]
     #
+    # @!attribute [rw] engine_type
+    #   The engine type of your DB cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DbClusterSummary AWS API Documentation
     #
     class DbClusterSummary < Struct.new(
@@ -605,7 +614,8 @@ module Aws::TimestreamInfluxDB
       :db_instance_type,
       :network_type,
       :db_storage_type,
-      :allocated_storage)
+      :allocated_storage,
+      :engine_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -665,6 +675,10 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DB instance's role in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] instance_modes
+    #   Specifies the DB instance's roles in the cluster.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DbInstanceForClusterSummary AWS API Documentation
     #
     class DbInstanceForClusterSummary < Struct.new(
@@ -679,7 +693,8 @@ module Aws::TimestreamInfluxDB
       :db_storage_type,
       :allocated_storage,
       :deployment_type,
-      :instance_mode)
+      :instance_mode,
+      :instance_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -916,6 +931,10 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's role in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] instance_modes
+    #   Specifies the DbInstance's roles in the cluster.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstanceOutput AWS API Documentation
     #
     class DeleteDbInstanceOutput < Struct.new(
@@ -939,7 +958,8 @@ module Aws::TimestreamInfluxDB
       :log_delivery_configuration,
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
-      :instance_mode)
+      :instance_mode,
+      :instance_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1029,6 +1049,10 @@ module Aws::TimestreamInfluxDB
     #   gibibytes).
     #   @return [Integer]
     #
+    # @!attribute [rw] engine_type
+    #   The engine type of your DB cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] publicly_accessible
     #   Indicates if the DB cluster has a public IP to facilitate access
     #   from outside the VPC.
@@ -1077,6 +1101,7 @@ module Aws::TimestreamInfluxDB
       :network_type,
       :db_storage_type,
       :allocated_storage,
+      :engine_type,
       :publicly_accessible,
       :db_parameter_group_identifier,
       :log_delivery_configuration,
@@ -1197,6 +1222,10 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's role in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] instance_modes
+    #   Specifies the DbInstance's roles in the cluster.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstanceOutput AWS API Documentation
     #
     class GetDbInstanceOutput < Struct.new(
@@ -1220,7 +1249,8 @@ module Aws::TimestreamInfluxDB
       :log_delivery_configuration,
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
-      :instance_mode)
+      :instance_mode,
+      :instance_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1582,6 +1612,701 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # All the customer-modifiable InfluxDB v3 Core parameters in Timestream
+    # for InfluxDB.
+    #
+    # @!attribute [rw] query_file_limit
+    #   Limits the number of Parquet files a query can access. If a query
+    #   attempts to read more than this limit, InfluxDB 3 returns an error.
+    #
+    #   Default: 432
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_log_size
+    #   Defines the size of the query log. Up to this many queries remain in
+    #   the log before older queries are evicted to make room for new ones.
+    #
+    #   Default: 1000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_filter
+    #   Sets the filter directive for logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_format
+    #   Defines the message format for logs.
+    #
+    #   Default: full
+    #   @return [String]
+    #
+    # @!attribute [rw] data_fusion_num_threads
+    #   Sets the maximum number of DataFusion runtime threads to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_type
+    #   Specifies the DataFusion tokio runtime type.
+    #
+    #   Default: multi-thread
+    #   @return [String]
+    #
+    # @!attribute [rw] data_fusion_runtime_disable_lifo_slot
+    #   Disables the LIFO slot of the DataFusion runtime.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_fusion_runtime_event_interval
+    #   Sets the number of scheduler ticks after which the scheduler of the
+    #   DataFusion tokio runtime polls for external events–for example:
+    #   timers, I/O.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_global_queue_interval
+    #   Sets the number of scheduler ticks after which the scheduler of the
+    #   DataFusion runtime polls the global task queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_max_blocking_threads
+    #   Specifies the limit for additional threads spawned by the DataFusion
+    #   runtime.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_max_io_events_per_tick
+    #   Configures the maximum number of events processed per tick by the
+    #   tokio DataFusion runtime.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_thread_keep_alive
+    #   Sets a custom timeout for a thread in the blocking pool of the tokio
+    #   DataFusion runtime.
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] data_fusion_runtime_thread_priority
+    #   Sets the thread priority for tokio DataFusion runtime workers.
+    #
+    #   Default: 10
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_max_parquet_fanout
+    #   When multiple parquet files are required in a sorted way
+    #   (deduplication for example), specifies the maximum fanout.
+    #
+    #   Default: 1000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_use_cached_parquet_loader
+    #   Uses a cached parquet loader when reading parquet files from the
+    #   object store.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_fusion_config
+    #   Provides custom configuration to DataFusion as a comma-separated
+    #   list of key:value pairs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_http_request_size
+    #   Specifies the maximum size of HTTP requests.
+    #
+    #   Default: 10485760
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force_snapshot_mem_threshold
+    #   Specifies the threshold for the internal memory buffer. Supports
+    #   either a percentage (portion of available memory) or absolute value
+    #   in MB–for example: 70% or 100
+    #
+    #   Default: 70%
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] wal_snapshot_size
+    #   Defines the number of WAL files to attempt to remove in a snapshot.
+    #   This, multiplied by the interval, determines how often snapshots are
+    #   taken.
+    #
+    #   Default: 600
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wal_max_write_buffer_size
+    #   Specifies the maximum number of write requests that can be buffered
+    #   before a flush must be executed and succeed.
+    #
+    #   Default: 100000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshotted_wal_files_to_keep
+    #   Specifies the number of snapshotted WAL files to retain in the
+    #   object store. Flushing the WAL files does not clear the WAL files
+    #   immediately; they are deleted when the number of snapshotted WAL
+    #   files exceeds this number.
+    #
+    #   Default: 300
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preemptive_cache_age
+    #   Specifies the interval to prefetch into the Parquet cache during
+    #   compaction.
+    #
+    #   Default: 3d
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] parquet_mem_cache_prune_percentage
+    #   Specifies the percentage of entries to prune during a prune
+    #   operation on the in-memory Parquet cache.
+    #
+    #   Default: 0.1
+    #   @return [Float]
+    #
+    # @!attribute [rw] parquet_mem_cache_prune_interval
+    #   Sets the interval to check if the in-memory Parquet cache needs to
+    #   be pruned.
+    #
+    #   Default: 1s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] disable_parquet_mem_cache
+    #   Disables the in-memory Parquet cache. By default, the cache is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parquet_mem_cache_query_path_duration
+    #   Specifies the time window for caching recent Parquet files in
+    #   memory.
+    #
+    #   Default: 5h
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] last_cache_eviction_interval
+    #   Specifies the interval to evict expired entries from the
+    #   Last-N-Value cache, expressed as a human-readable duration–for
+    #   example: 20s, 1m, 1h.
+    #
+    #   Default: 10s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] distinct_cache_eviction_interval
+    #   Specifies the interval to evict expired entries from the distinct
+    #   value cache, expressed as a human-readable duration–for example:
+    #   20s, 1m, 1h.
+    #
+    #   Default: 10s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] gen1_duration
+    #   Specifies the duration that Parquet files are arranged into. Data
+    #   timestamps land each row into a file of this duration. Supported
+    #   durations are 1m, 5m, and 10m. These files are known as “generation
+    #   1” files that the compactor in InfluxDB 3 Enterprise can merge into
+    #   larger generations.
+    #
+    #   Default: 10m
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] exec_mem_pool_bytes
+    #   Specifies the size of memory pool used during query execution. Can
+    #   be given as absolute value in bytes or as a percentage of the total
+    #   available memory–for example: 8000000000 or 10%.
+    #
+    #   Default: 20%
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] parquet_mem_cache_size
+    #   Specifies the size of the in-memory Parquet cache in megabytes or
+    #   percentage of total available memory.
+    #
+    #   Default: 20%
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] wal_replay_fail_on_error
+    #   Determines whether WAL replay should fail when encountering errors.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] wal_replay_concurrency_limit
+    #   Concurrency limit during WAL replay. Setting this number too high
+    #   can lead to OOM. The default is dynamically determined.
+    #
+    #   Default: max(num\_cpus, 10)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_index_cache_max_entries
+    #   Specifies the maximum number of entries in the table index cache.
+    #
+    #   Default: 1000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_index_cache_concurrency_limit
+    #   Limits the concurrency level for table index cache operations.
+    #
+    #   Default: 8
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gen1_lookback_duration
+    #   Specifies how far back to look when creating generation 1 Parquet
+    #   files.
+    #
+    #   Default: 24h
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] retention_check_interval
+    #   The interval at which retention policies are checked and enforced.
+    #   Enter as a human-readable time–for example: 30m or 1h.
+    #
+    #   Default: 30m
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] delete_grace_period
+    #   Specifies the grace period before permanently deleting data.
+    #
+    #   Default: 24h
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] hard_delete_default_duration
+    #   Sets the default duration for hard deletion of data.
+    #
+    #   Default: 90d
+    #   @return [Types::Duration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/InfluxDBv3CoreParameters AWS API Documentation
+    #
+    class InfluxDBv3CoreParameters < Struct.new(
+      :query_file_limit,
+      :query_log_size,
+      :log_filter,
+      :log_format,
+      :data_fusion_num_threads,
+      :data_fusion_runtime_type,
+      :data_fusion_runtime_disable_lifo_slot,
+      :data_fusion_runtime_event_interval,
+      :data_fusion_runtime_global_queue_interval,
+      :data_fusion_runtime_max_blocking_threads,
+      :data_fusion_runtime_max_io_events_per_tick,
+      :data_fusion_runtime_thread_keep_alive,
+      :data_fusion_runtime_thread_priority,
+      :data_fusion_max_parquet_fanout,
+      :data_fusion_use_cached_parquet_loader,
+      :data_fusion_config,
+      :max_http_request_size,
+      :force_snapshot_mem_threshold,
+      :wal_snapshot_size,
+      :wal_max_write_buffer_size,
+      :snapshotted_wal_files_to_keep,
+      :preemptive_cache_age,
+      :parquet_mem_cache_prune_percentage,
+      :parquet_mem_cache_prune_interval,
+      :disable_parquet_mem_cache,
+      :parquet_mem_cache_query_path_duration,
+      :last_cache_eviction_interval,
+      :distinct_cache_eviction_interval,
+      :gen1_duration,
+      :exec_mem_pool_bytes,
+      :parquet_mem_cache_size,
+      :wal_replay_fail_on_error,
+      :wal_replay_concurrency_limit,
+      :table_index_cache_max_entries,
+      :table_index_cache_concurrency_limit,
+      :gen1_lookback_duration,
+      :retention_check_interval,
+      :delete_grace_period,
+      :hard_delete_default_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # All the customer-modifiable InfluxDB v3 Enterprise parameters in
+    # Timestream for InfluxDB.
+    #
+    # @!attribute [rw] query_file_limit
+    #   Limits the number of Parquet files a query can access. If a query
+    #   attempts to read more than this limit, InfluxDB 3 returns an error.
+    #
+    #   Default: 432
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_log_size
+    #   Defines the size of the query log. Up to this many queries remain in
+    #   the log before older queries are evicted to make room for new ones.
+    #
+    #   Default: 1000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_filter
+    #   Sets the filter directive for logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_format
+    #   Defines the message format for logs.
+    #
+    #   Default: full
+    #   @return [String]
+    #
+    # @!attribute [rw] data_fusion_num_threads
+    #   Sets the maximum number of DataFusion runtime threads to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_type
+    #   Specifies the DataFusion tokio runtime type.
+    #
+    #   Default: multi-thread
+    #   @return [String]
+    #
+    # @!attribute [rw] data_fusion_runtime_disable_lifo_slot
+    #   Disables the LIFO slot of the DataFusion runtime.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_fusion_runtime_event_interval
+    #   Sets the number of scheduler ticks after which the scheduler of the
+    #   DataFusion tokio runtime polls for external events–for example:
+    #   timers, I/O.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_global_queue_interval
+    #   Sets the number of scheduler ticks after which the scheduler of the
+    #   DataFusion runtime polls the global task queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_max_blocking_threads
+    #   Specifies the limit for additional threads spawned by the DataFusion
+    #   runtime.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_max_io_events_per_tick
+    #   Configures the maximum number of events processed per tick by the
+    #   tokio DataFusion runtime.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_runtime_thread_keep_alive
+    #   Sets a custom timeout for a thread in the blocking pool of the tokio
+    #   DataFusion runtime.
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] data_fusion_runtime_thread_priority
+    #   Sets the thread priority for tokio DataFusion runtime workers.
+    #
+    #   Default: 10
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_max_parquet_fanout
+    #   When multiple parquet files are required in a sorted way
+    #   (deduplication for example), specifies the maximum fanout.
+    #
+    #   Default: 1000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_fusion_use_cached_parquet_loader
+    #   Uses a cached parquet loader when reading parquet files from the
+    #   object store.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_fusion_config
+    #   Provides custom configuration to DataFusion as a comma-separated
+    #   list of key:value pairs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_http_request_size
+    #   Specifies the maximum size of HTTP requests.
+    #
+    #   Default: 10485760
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force_snapshot_mem_threshold
+    #   Specifies the threshold for the internal memory buffer. Supports
+    #   either a percentage (portion of available memory) or absolute value
+    #   in MB–for example: 70% or 100
+    #
+    #   Default: 70%
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] wal_snapshot_size
+    #   Defines the number of WAL files to attempt to remove in a snapshot.
+    #   This, multiplied by the interval, determines how often snapshots are
+    #   taken.
+    #
+    #   Default: 600
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wal_max_write_buffer_size
+    #   Specifies the maximum number of write requests that can be buffered
+    #   before a flush must be executed and succeed.
+    #
+    #   Default: 100000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshotted_wal_files_to_keep
+    #   Specifies the number of snapshotted WAL files to retain in the
+    #   object store. Flushing the WAL files does not clear the WAL files
+    #   immediately; they are deleted when the number of snapshotted WAL
+    #   files exceeds this number.
+    #
+    #   Default: 300
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preemptive_cache_age
+    #   Specifies the interval to prefetch into the Parquet cache during
+    #   compaction.
+    #
+    #   Default: 3d
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] parquet_mem_cache_prune_percentage
+    #   Specifies the percentage of entries to prune during a prune
+    #   operation on the in-memory Parquet cache.
+    #
+    #   Default: 0.1
+    #   @return [Float]
+    #
+    # @!attribute [rw] parquet_mem_cache_prune_interval
+    #   Sets the interval to check if the in-memory Parquet cache needs to
+    #   be pruned.
+    #
+    #   Default: 1s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] disable_parquet_mem_cache
+    #   Disables the in-memory Parquet cache. By default, the cache is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parquet_mem_cache_query_path_duration
+    #   Specifies the time window for caching recent Parquet files in
+    #   memory.
+    #
+    #   Default: 5h
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] last_cache_eviction_interval
+    #   Specifies the interval to evict expired entries from the
+    #   Last-N-Value cache, expressed as a human-readable duration–for
+    #   example: 20s, 1m, 1h.
+    #
+    #   Default: 10s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] distinct_cache_eviction_interval
+    #   Specifies the interval to evict expired entries from the distinct
+    #   value cache, expressed as a human-readable duration–for example:
+    #   20s, 1m, 1h.
+    #
+    #   Default: 10s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] gen1_duration
+    #   Specifies the duration that Parquet files are arranged into. Data
+    #   timestamps land each row into a file of this duration. Supported
+    #   durations are 1m, 5m, and 10m. These files are known as “generation
+    #   1” files, which the compactor can merge into larger generations.
+    #
+    #   Default: 10m
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] exec_mem_pool_bytes
+    #   Specifies the size of memory pool used during query execution. Can
+    #   be given as absolute value in bytes or as a percentage of the total
+    #   available memory–for example: 8000000000 or 10%.
+    #
+    #   Default: 20%
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] parquet_mem_cache_size
+    #   Specifies the size of the in-memory Parquet cache in megabytes or
+    #   percentage of total available memory.
+    #
+    #   Default: 20%
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] wal_replay_fail_on_error
+    #   Determines whether WAL replay should fail when encountering errors.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] wal_replay_concurrency_limit
+    #   Concurrency limit during WAL replay. Setting this number too high
+    #   can lead to OOM. The default is dynamically determined.
+    #
+    #   Default: max(num\_cpus, 10)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_index_cache_max_entries
+    #   Specifies the maximum number of entries in the table index cache.
+    #
+    #   Default: 1000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_index_cache_concurrency_limit
+    #   Limits the concurrency level for table index cache operations.
+    #
+    #   Default: 8
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gen1_lookback_duration
+    #   Specifies how far back to look when creating generation 1 Parquet
+    #   files.
+    #
+    #   Default: 24h
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] retention_check_interval
+    #   The interval at which retention policies are checked and enforced.
+    #   Enter as a human-readable time–for example: 30m or 1h.
+    #
+    #   Default: 30m
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] delete_grace_period
+    #   Specifies the grace period before permanently deleting data.
+    #
+    #   Default: 24h
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] hard_delete_default_duration
+    #   Sets the default duration for hard deletion of data.
+    #
+    #   Default: 90d
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] ingest_query_instances
+    #   Specifies number of instances in the DbCluster which can both ingest
+    #   and query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_only_instances
+    #   Specifies number of instances in the DbCluster which can only query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dedicated_compactor
+    #   Specifies if the compactor instance should be a standalone instance
+    #   or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] compaction_row_limit
+    #   Specifies the soft limit for the number of rows per file that the
+    #   compactor writes. The compactor may write more rows than this limit.
+    #
+    #   Default: 1000000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compaction_max_num_files_per_plan
+    #   Sets the maximum number of files included in any compaction plan.
+    #
+    #   Default: 500
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compaction_gen_2_duration
+    #   Specifies the duration of the first level of compaction (gen2).
+    #   Later levels of compaction are multiples of this duration. This
+    #   value should be equal to or greater than the gen1 duration.
+    #
+    #   Default: 20m
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] compaction_multipliers
+    #   Specifies a comma-separated list of multiples defining the duration
+    #   of each level of compaction. The number of elements in the list
+    #   determines the number of compaction levels. The first element
+    #   specifies the duration of the first level (gen3); subsequent levels
+    #   are multiples of the previous level.
+    #
+    #   Default: 3,4,6,5
+    #   @return [String]
+    #
+    # @!attribute [rw] compaction_cleanup_wait
+    #   Specifies the amount of time that the compactor waits after
+    #   finishing a compaction run to delete files marked as needing
+    #   deletion during that compaction run.
+    #
+    #   Default: 10m
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] compaction_check_interval
+    #   Specifies how often the compactor checks for new compaction work to
+    #   perform.
+    #
+    #   Default: 10s
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] last_value_cache_disable_from_history
+    #   Disables populating the last-N-value cache from historical data. If
+    #   disabled, the cache is still populated with data from the
+    #   write-ahead log (WAL).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] distinct_value_cache_disable_from_history
+    #   Disables populating the distinct value cache from historical data.
+    #   If disabled, the cache is still populated with data from the
+    #   write-ahead log (WAL).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] replication_interval
+    #   Specifies the interval at which data replication occurs between
+    #   cluster nodes.
+    #
+    #   Default: 250ms
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] catalog_sync_interval
+    #   Defines how often the catalog synchronizes across cluster nodes.
+    #
+    #   Default: 10s
+    #   @return [Types::Duration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/InfluxDBv3EnterpriseParameters AWS API Documentation
+    #
+    class InfluxDBv3EnterpriseParameters < Struct.new(
+      :query_file_limit,
+      :query_log_size,
+      :log_filter,
+      :log_format,
+      :data_fusion_num_threads,
+      :data_fusion_runtime_type,
+      :data_fusion_runtime_disable_lifo_slot,
+      :data_fusion_runtime_event_interval,
+      :data_fusion_runtime_global_queue_interval,
+      :data_fusion_runtime_max_blocking_threads,
+      :data_fusion_runtime_max_io_events_per_tick,
+      :data_fusion_runtime_thread_keep_alive,
+      :data_fusion_runtime_thread_priority,
+      :data_fusion_max_parquet_fanout,
+      :data_fusion_use_cached_parquet_loader,
+      :data_fusion_config,
+      :max_http_request_size,
+      :force_snapshot_mem_threshold,
+      :wal_snapshot_size,
+      :wal_max_write_buffer_size,
+      :snapshotted_wal_files_to_keep,
+      :preemptive_cache_age,
+      :parquet_mem_cache_prune_percentage,
+      :parquet_mem_cache_prune_interval,
+      :disable_parquet_mem_cache,
+      :parquet_mem_cache_query_path_duration,
+      :last_cache_eviction_interval,
+      :distinct_cache_eviction_interval,
+      :gen1_duration,
+      :exec_mem_pool_bytes,
+      :parquet_mem_cache_size,
+      :wal_replay_fail_on_error,
+      :wal_replay_concurrency_limit,
+      :table_index_cache_max_entries,
+      :table_index_cache_concurrency_limit,
+      :gen1_lookback_duration,
+      :retention_check_interval,
+      :delete_grace_period,
+      :hard_delete_default_duration,
+      :ingest_query_instances,
+      :query_only_instances,
+      :dedicated_compactor,
+      :compaction_row_limit,
+      :compaction_max_num_files_per_plan,
+      :compaction_gen_2_duration,
+      :compaction_multipliers,
+      :compaction_cleanup_wait,
+      :compaction_check_interval,
+      :last_value_cache_disable_from_history,
+      :distinct_value_cache_disable_from_history,
+      :replication_interval,
+      :catalog_sync_interval)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request processing has failed because of an unknown error,
     # exception or failure.
     #
@@ -1812,17 +2537,60 @@ module Aws::TimestreamInfluxDB
     #   InfluxDB.
     #   @return [Types::InfluxDBv2Parameters]
     #
+    # @!attribute [rw] influx_d_bv_3_core
+    #   All the customer-modifiable InfluxDB v3 Core parameters in
+    #   Timestream for InfluxDB.
+    #   @return [Types::InfluxDBv3CoreParameters]
+    #
+    # @!attribute [rw] influx_d_bv_3_enterprise
+    #   All the customer-modifiable InfluxDB v3 Enterprise parameters in
+    #   Timestream for InfluxDB.
+    #   @return [Types::InfluxDBv3EnterpriseParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/Parameters AWS API Documentation
     #
     class Parameters < Struct.new(
       :influx_d_bv_2,
+      :influx_d_bv_3_core,
+      :influx_d_bv_3_enterprise,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class InfluxDBv2 < Parameters; end
+      class InfluxDBv3Core < Parameters; end
+      class InfluxDBv3Enterprise < Parameters; end
       class Unknown < Parameters; end
+    end
+
+    # Percent or Absolute Long for InfluxDB parameters
+    #
+    # @note PercentOrAbsoluteLong is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PercentOrAbsoluteLong is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PercentOrAbsoluteLong corresponding to the set member.
+    #
+    # @!attribute [rw] percent
+    #   Percent for InfluxDB parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute
+    #   Absolute long for InfluxDB parameters.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/PercentOrAbsoluteLong AWS API Documentation
+    #
+    class PercentOrAbsoluteLong < Struct.new(
+      :percent,
+      :absolute,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Percent < PercentOrAbsoluteLong; end
+      class Absolute < PercentOrAbsoluteLong; end
+      class Unknown < PercentOrAbsoluteLong; end
     end
 
     # The requested resource was not found or does not exist.
@@ -2143,6 +2911,10 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's role in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] instance_modes
+    #   Specifies the DbInstance's roles in the cluster.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceOutput AWS API Documentation
     #
     class UpdateDbInstanceOutput < Struct.new(
@@ -2166,7 +2938,8 @@ module Aws::TimestreamInfluxDB
       :log_delivery_configuration,
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
-      :instance_mode)
+      :instance_mode,
+      :instance_modes)
       SENSITIVE = []
       include Aws::Structure
     end

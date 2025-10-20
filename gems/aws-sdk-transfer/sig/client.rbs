@@ -144,7 +144,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_connector-instance_method
       def create_connector: (
-                              url: ::String,
+                              ?url: ::String,
                               ?as_2_config: {
                                 local_profile_id: ::String?,
                                 partner_profile_id: ::String?,
@@ -170,7 +170,13 @@ module Aws
                                 trusted_host_keys: Array[::String]?,
                                 max_concurrent_connections: ::Integer?
                               },
-                              ?security_policy_name: ::String
+                              ?security_policy_name: ::String,
+                              ?egress_config: {
+                                vpc_lattice: {
+                                  resource_configuration_arn: ::String,
+                                  port_number: ::Integer?
+                                }?
+                              }
                             ) -> _CreateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
 
@@ -1116,7 +1122,13 @@ module Aws
                                 trusted_host_keys: Array[::String]?,
                                 max_concurrent_connections: ::Integer?
                               },
-                              ?security_policy_name: ::String
+                              ?security_policy_name: ::String,
+                              ?egress_config: {
+                                vpc_lattice: {
+                                  resource_configuration_arn: ::String?,
+                                  port_number: ::Integer?
+                                }?
+                              }
                             ) -> _UpdateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
 

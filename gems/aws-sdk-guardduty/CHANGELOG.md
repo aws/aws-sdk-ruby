@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-10-15)
+------------------
+
+* Feature - Added default pagination value for ListMalwareProtectionPlans API and updated UpdateFindingsFeedback API
+
 1.129.0 (2025-10-02)
 ------------------
 

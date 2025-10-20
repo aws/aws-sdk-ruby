@@ -689,25 +689,15 @@ module Aws::Connect
     #
     # Following are common uses cases for this API:
     #
-    # * Custom contact routing. You can build custom contact routing
-    #   mechanisms beyond the default system routing in Amazon Connect. You
-    #   can create tailored contact distribution logic that offers queued
-    #   contacts directly to specific agents.
+    # * Programmatically assign queued contacts to available users.
     #
-    # * Manual contact assignment. You can programmatically assign queued
-    #   contacts to available users. This provides flexibility to contact
-    #   centers that require manual oversight or specialized routing
-    #   workflows outside of standard queue management.
-    #
-    #   For information about how manual contact assignment works in the
-    #   agent workspace, see the [Access the Worklist app in the Amazon
-    #   Connect agent workspace][1] in the *Amazon Connect Administrator
-    #   Guide*.
+    # * Leverage the IAM context key `connect:PreferredUserArn` to restrict
+    #   contact association to specific preferred user.
     #
     # **Important things to know**
     #
-    # * Use this API chat/SMS, email, and task contacts. It does not support
-    #   voice contacts.
+    # * Use this API with chat, email, and task contacts. It does not
+    #   support voice contacts.
     #
     # * Use it to associate contacts with users regardless of their current
     #   state, including custom states. Ensure your application logic
@@ -721,11 +711,16 @@ module Aws::Connect
     #   associations. Verify that your IAM policies are properly configured
     #   to support your intended use cases.
     #
+    # * The service quota *Queues per routing profile per instance* applies
+    #   to manually assigned queues, too. For more information about this
+    #   quota, see [Amazon Connect quotas][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
     # **Endpoints**: See [Amazon Connect endpoints and quotas][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
     # [2]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
@@ -5527,6 +5522,25 @@ module Aws::Connect
     #
     # Describes the specified contact.
     #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * Retrieve contact information such as the caller's phone number and
+    #   the specific number the caller dialed to integrate into custom
+    #   monitoring or custom agent experience solutions.
+    #
+    # * Detect when a customer chat session disconnects due to a network
+    #   issue on the agent's end. Use the DisconnectReason field in the
+    #   [ContactTraceRecord][1] to detect this event and then re-queue the
+    #   chat for followup.
+    #
+    # * Identify after contact work (ACW) duration and call recordings
+    #   information when a COMPLETED event is received by using the [contact
+    #   event stream][2].
+    #
+    # **Important things to know**
+    #
     # * `SystemEndpoint` is not populated for contacts with initiation
     #   method of MONITOR, QUEUE\_TRANSFER, or CALLBACK
     #
@@ -5534,6 +5548,14 @@ module Aws::Connect
     #   months from the `InitiationTimestamp`, and then it is deleted. Only
     #   contact information that is available in Amazon Connect is returned
     #   by this API.
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-events.html
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5715,6 +5737,8 @@ module Aws::Connect
     #   resp.contact.contact_evaluations["EvaluationId"].end_timestamp #=> Time
     #   resp.contact.contact_evaluations["EvaluationId"].delete_timestamp #=> Time
     #   resp.contact.contact_evaluations["EvaluationId"].export_location #=> String
+    #   resp.contact.task_template_info.arn #=> String
+    #   resp.contact.task_template_info.name #=> String
     #   resp.contact.contact_details.name #=> String
     #   resp.contact.contact_details.description #=> String
     #   resp.contact.attributes #=> Hash
@@ -12980,6 +13004,7 @@ module Aws::Connect
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #   Both Instance ID and Instance ARN are supported input formats.
     #
     #
     #
@@ -13155,9 +13180,9 @@ module Aws::Connect
     # Following are common uses cases for this API:
     #
     # * This API returns list of queues where contacts can be manually
-    #   assigned or picked. The user can additionally filter on queues, if
-    #   they have access to those queues (otherwise a invalid request
-    #   exception will be thrown).
+    #   assigned or picked by an agent who has access to the Worklist app.
+    #   The user can additionally filter on queues, if they have access to
+    #   those queues (otherwise a invalid request exception will be thrown).
     #
     #   For information about how manual contact assignment works in the
     #   agent workspace, see the [Access the Worklist app in the Amazon
@@ -22053,7 +22078,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.218.0'
+      context[:gem_version] = '1.219.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

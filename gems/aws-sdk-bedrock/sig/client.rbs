@@ -143,6 +143,7 @@ module Aws
                                                    },
                                                  ]?
                                                },
+                                               ?kms_key_id: ::String,
                                                ?tags: Array[
                                                  {
                                                    key: ::String,
@@ -1060,7 +1061,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_automated_reasoning_policy-instance_method
       def delete_automated_reasoning_policy: (
-                                               policy_arn: ::String
+                                               policy_arn: ::String,
+                                               ?force: bool
                                              ) -> _DeleteAutomatedReasoningPolicyResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAutomatedReasoningPolicyResponseSuccess
 
@@ -1203,6 +1205,7 @@ module Aws
         def policy_id: () -> ::String
         def description: () -> ::String
         def definition_hash: () -> ::String
+        def kms_key_arn: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end

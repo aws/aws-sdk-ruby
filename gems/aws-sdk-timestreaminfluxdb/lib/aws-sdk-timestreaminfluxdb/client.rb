@@ -499,7 +499,7 @@ module Aws::TimestreamInfluxDB
     #   the InfluxDB CLI to create an operator token. These attributes will be
     #   stored in a secret created in Secrets Manager in your account.
     #
-    # @option params [required, String] :password
+    # @option params [String] :password
     #   The password of the initial admin user created in InfluxDB. This
     #   password will allow you to access the InfluxDB UI to perform various
     #   administrative tasks and also use the InfluxDB CLI to create an
@@ -522,7 +522,7 @@ module Aws::TimestreamInfluxDB
     #
     #   Valid Values: 1024-65535
     #
-    #   Default: 8086
+    #   Default: 8086 for InfluxDB v2, 8181 for InfluxDB v3
     #
     #   Constraints: The value can't be 2375-2376, 7788-7799, 8090, or
     #   51678-51680
@@ -548,7 +548,7 @@ module Aws::TimestreamInfluxDB
     #
     #   * Influx I/O Included 16000 IOPS
     #
-    # @option params [required, Integer] :allocated_storage
+    # @option params [Integer] :allocated_storage
     #   The amount of storage to allocate for your DB storage type in GiB
     #   (gibibytes).
     #
@@ -570,7 +570,7 @@ module Aws::TimestreamInfluxDB
     #   A list of VPC security group IDs to associate with the Timestream for
     #   InfluxDB cluster.
     #
-    # @option params [required, String] :deployment_type
+    # @option params [String] :deployment_type
     #   Specifies the type of cluster to create.
     #
     # @option params [String] :failover_mode
@@ -594,19 +594,19 @@ module Aws::TimestreamInfluxDB
     #   resp = client.create_db_cluster({
     #     name: "DbClusterName", # required
     #     username: "Username",
-    #     password: "Password", # required
+    #     password: "Password",
     #     organization: "Organization",
     #     bucket: "Bucket",
     #     port: 1,
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
     #     db_instance_type: "db.influx.medium", # required, accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
     #     db_storage_type: "InfluxIOIncludedT1", # accepts InfluxIOIncludedT1, InfluxIOIncludedT2, InfluxIOIncludedT3
-    #     allocated_storage: 1, # required
+    #     allocated_storage: 1,
     #     network_type: "IPV4", # accepts IPV4, DUAL
     #     publicly_accessible: false,
     #     vpc_subnet_ids: ["VpcSubnetId"], # required
     #     vpc_security_group_ids: ["VpcSecurityGroupId"], # required
-    #     deployment_type: "MULTI_NODE_READ_REPLICAS", # required, accepts MULTI_NODE_READ_REPLICAS
+    #     deployment_type: "MULTI_NODE_READ_REPLICAS", # accepts MULTI_NODE_READ_REPLICAS
     #     failover_mode: "AUTOMATIC", # accepts AUTOMATIC, NO_FAILOVER
     #     log_delivery_configuration: {
     #       s3_configuration: { # required
@@ -650,7 +650,7 @@ module Aws::TimestreamInfluxDB
     #   stored in a Secret created in Amazon Secrets Manager in your account.
     #
     # @option params [required, String] :password
-    #   The password of the initial admin user created in InfluxDB. This
+    #   The password of the initial admin user created in InfluxDB v2. This
     #   password will allow you to access the InfluxDB UI to perform various
     #   administrative tasks and also use the InfluxDB CLI to create an
     #   operator token. These attributes will be stored in a Secret created in
@@ -752,6 +752,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::CreateDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
     #   * {Types::CreateDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::CreateDbInstanceOutput#instance_mode #instance_mode} => String
+    #   * {Types::CreateDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -807,7 +808,9 @@ module Aws::TimestreamInfluxDB
     #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
     #   resp.influx_auth_parameters_secret_arn #=> String
     #   resp.db_cluster_id #=> String
-    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA"
+    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.instance_modes #=> Array
+    #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstance AWS API Documentation
     #
@@ -854,22 +857,22 @@ module Aws::TimestreamInfluxDB
     #         no_tasks: false,
     #         query_concurrency: 1,
     #         query_queue_size: 1,
-    #         tracing_type: "log", # accepts log, jaeger
+    #         tracing_type: "log", # accepts log, jaeger, disabled
     #         metrics_disabled: false,
     #         http_idle_timeout: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         http_read_header_timeout: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         http_read_timeout: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         http_write_timeout: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         influxql_max_select_buckets: 1,
@@ -884,11 +887,11 @@ module Aws::TimestreamInfluxDB
     #         storage_cache_max_memory_size: 1,
     #         storage_cache_snapshot_memory_size: 1,
     #         storage_cache_snapshot_write_cold_duration: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         storage_compact_full_write_cold_duration: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         storage_compact_throughput_burst: 1,
@@ -896,17 +899,211 @@ module Aws::TimestreamInfluxDB
     #         storage_max_index_log_file_size: 1,
     #         storage_no_validate_field_size: false,
     #         storage_retention_check_interval: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         storage_series_file_max_concurrent_snapshot_compactions: 1,
     #         storage_series_id_set_cache_size: 1,
     #         storage_wal_max_concurrent_writes: 1,
     #         storage_wal_max_write_delay: {
-    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
     #         ui_disabled: false,
+    #       },
+    #       influx_d_bv_3_core: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "InfluxDBv3CoreParametersLogFilterString",
+    #         log_format: "full", # accepts full
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread", # accepts multi-thread, multi-thread-alt
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "InfluxDBv3CoreParametersDataFusionConfigString",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         parquet_mem_cache_size: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #       },
+    #       influx_d_bv_3_enterprise: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "InfluxDBv3EnterpriseParametersLogFilterString",
+    #         log_format: "full", # accepts full
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread", # accepts multi-thread, multi-thread-alt
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "InfluxDBv3EnterpriseParametersDataFusionConfigString",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         parquet_mem_cache_size: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         ingest_query_instances: 1, # required
+    #         query_only_instances: 1, # required
+    #         dedicated_compactor: false, # required
+    #         compaction_row_limit: 1,
+    #         compaction_max_num_files_per_plan: 1,
+    #         compaction_gen_2_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         compaction_multipliers: "InfluxDBv3EnterpriseParametersCompactionMultipliersString",
+    #         compaction_cleanup_wait: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         compaction_check_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         last_value_cache_disable_from_history: false,
+    #         distinct_value_cache_disable_from_history: false,
+    #         replication_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
+    #         catalog_sync_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
     #       },
     #     },
     #     tags: {
@@ -925,15 +1122,15 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_2.no_tasks #=> Boolean
     #   resp.parameters.influx_d_bv_2.query_concurrency #=> Integer
     #   resp.parameters.influx_d_bv_2.query_queue_size #=> Integer
-    #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger"
+    #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger", "disabled"
     #   resp.parameters.influx_d_bv_2.metrics_disabled #=> Boolean
-    #   resp.parameters.influx_d_bv_2.http_idle_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_idle_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_idle_timeout.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_read_header_timeout.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.http_read_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_read_timeout.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.http_write_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_write_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_write_timeout.value #=> Integer
     #   resp.parameters.influx_d_bv_2.influxql_max_select_buckets #=> Integer
     #   resp.parameters.influx_d_bv_2.influxql_max_select_point #=> Integer
@@ -946,22 +1143,146 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_2.session_renew_disabled #=> Boolean
     #   resp.parameters.influx_d_bv_2.storage_cache_max_memory_size #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_memory_size #=> Integer
-    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.value #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_compact_throughput_burst #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_max_concurrent_compactions #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_max_index_log_file_size #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_no_validate_field_size #=> Boolean
-    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.value #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_series_file_max_concurrent_snapshot_compactions #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_series_id_set_cache_size #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_wal_max_concurrent_writes #=> Integer
-    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.value #=> Integer
     #   resp.parameters.influx_d_bv_2.ui_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.query_file_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.query_log_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.log_filter #=> String
+    #   resp.parameters.influx_d_bv_3_core.log_format #=> String, one of "full"
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_num_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_type #=> String, one of "multi-thread", "multi-thread-alt"
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_disable_lifo_slot #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_event_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_global_queue_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_max_blocking_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_max_io_events_per_tick #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_thread_keep_alive.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_thread_keep_alive.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_thread_priority #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_max_parquet_fanout #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_use_cached_parquet_loader #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_config #=> String
+    #   resp.parameters.influx_d_bv_3_core.max_http_request_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.force_snapshot_mem_threshold.percent #=> String
+    #   resp.parameters.influx_d_bv_3_core.force_snapshot_mem_threshold.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.wal_snapshot_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.wal_max_write_buffer_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.snapshotted_wal_files_to_keep #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.preemptive_cache_age.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.preemptive_cache_age.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_prune_percentage #=> Float
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_prune_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_prune_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.disable_parquet_mem_cache #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_query_path_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_query_path_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.last_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.last_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.distinct_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.distinct_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.gen1_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.gen1_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.exec_mem_pool_bytes.percent #=> String
+    #   resp.parameters.influx_d_bv_3_core.exec_mem_pool_bytes.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_size.percent #=> String
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_size.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.wal_replay_fail_on_error #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.wal_replay_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.table_index_cache_max_entries #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.table_index_cache_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.gen1_lookback_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.gen1_lookback_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.retention_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.delete_grace_period.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.delete_grace_period.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.query_file_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.query_log_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.log_filter #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.log_format #=> String, one of "full"
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_num_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_type #=> String, one of "multi-thread", "multi-thread-alt"
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_disable_lifo_slot #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_event_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_global_queue_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_max_blocking_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_max_io_events_per_tick #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_thread_keep_alive.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_thread_keep_alive.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_thread_priority #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_max_parquet_fanout #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_use_cached_parquet_loader #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_config #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.max_http_request_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.force_snapshot_mem_threshold.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.force_snapshot_mem_threshold.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_snapshot_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_max_write_buffer_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshotted_wal_files_to_keep #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.preemptive_cache_age.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.preemptive_cache_age.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_prune_percentage #=> Float
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_prune_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_prune_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.disable_parquet_mem_cache #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_query_path_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_query_path_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.last_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.last_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.distinct_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.distinct_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.exec_mem_pool_bytes.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.exec_mem_pool_bytes.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_size.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_size.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_replay_fail_on_error #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_replay_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.table_index_cache_max_entries #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.table_index_cache_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_lookback_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_lookback_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.retention_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.delete_grace_period.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.delete_grace_period.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.ingest_query_instances #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.query_only_instances #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.dedicated_compactor #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_row_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_max_num_files_per_plan #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_gen_2_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_gen_2_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_multipliers #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_cleanup_wait.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_cleanup_wait.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.last_value_cache_disable_from_history #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.distinct_value_cache_disable_from_history #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.replication_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.replication_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.value #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbParameterGroup AWS API Documentation
     #
@@ -1028,6 +1349,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::DeleteDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
     #   * {Types::DeleteDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::DeleteDbInstanceOutput#instance_mode #instance_mode} => String
+    #   * {Types::DeleteDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1060,7 +1382,9 @@ module Aws::TimestreamInfluxDB
     #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
     #   resp.influx_auth_parameters_secret_arn #=> String
     #   resp.db_cluster_id #=> String
-    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA"
+    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.instance_modes #=> Array
+    #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstance AWS API Documentation
     #
@@ -1090,6 +1414,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbClusterOutput#network_type #network_type} => String
     #   * {Types::GetDbClusterOutput#db_storage_type #db_storage_type} => String
     #   * {Types::GetDbClusterOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::GetDbClusterOutput#engine_type #engine_type} => String
     #   * {Types::GetDbClusterOutput#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::GetDbClusterOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
     #   * {Types::GetDbClusterOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
@@ -1118,6 +1443,7 @@ module Aws::TimestreamInfluxDB
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.allocated_storage #=> Integer
+    #   resp.engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
     #   resp.publicly_accessible #=> Boolean
     #   resp.db_parameter_group_identifier #=> String
     #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
@@ -1166,6 +1492,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
     #   * {Types::GetDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::GetDbInstanceOutput#instance_mode #instance_mode} => String
+    #   * {Types::GetDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1198,7 +1525,9 @@ module Aws::TimestreamInfluxDB
     #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
     #   resp.influx_auth_parameters_secret_arn #=> String
     #   resp.db_cluster_id #=> String
-    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA"
+    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.instance_modes #=> Array
+    #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstance AWS API Documentation
     #
@@ -1239,15 +1568,15 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_2.no_tasks #=> Boolean
     #   resp.parameters.influx_d_bv_2.query_concurrency #=> Integer
     #   resp.parameters.influx_d_bv_2.query_queue_size #=> Integer
-    #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger"
+    #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger", "disabled"
     #   resp.parameters.influx_d_bv_2.metrics_disabled #=> Boolean
-    #   resp.parameters.influx_d_bv_2.http_idle_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_idle_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_idle_timeout.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_read_header_timeout.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.http_read_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_read_timeout.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.http_write_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_write_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.http_write_timeout.value #=> Integer
     #   resp.parameters.influx_d_bv_2.influxql_max_select_buckets #=> Integer
     #   resp.parameters.influx_d_bv_2.influxql_max_select_point #=> Integer
@@ -1260,22 +1589,146 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_2.session_renew_disabled #=> Boolean
     #   resp.parameters.influx_d_bv_2.storage_cache_max_memory_size #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_memory_size #=> Integer
-    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.value #=> Integer
-    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.value #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_compact_throughput_burst #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_max_concurrent_compactions #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_max_index_log_file_size #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_no_validate_field_size #=> Boolean
-    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.value #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_series_file_max_concurrent_snapshot_compactions #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_series_id_set_cache_size #=> Integer
     #   resp.parameters.influx_d_bv_2.storage_wal_max_concurrent_writes #=> Integer
-    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.value #=> Integer
     #   resp.parameters.influx_d_bv_2.ui_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.query_file_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.query_log_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.log_filter #=> String
+    #   resp.parameters.influx_d_bv_3_core.log_format #=> String, one of "full"
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_num_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_type #=> String, one of "multi-thread", "multi-thread-alt"
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_disable_lifo_slot #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_event_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_global_queue_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_max_blocking_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_max_io_events_per_tick #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_thread_keep_alive.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_thread_keep_alive.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_runtime_thread_priority #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_max_parquet_fanout #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_use_cached_parquet_loader #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.data_fusion_config #=> String
+    #   resp.parameters.influx_d_bv_3_core.max_http_request_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.force_snapshot_mem_threshold.percent #=> String
+    #   resp.parameters.influx_d_bv_3_core.force_snapshot_mem_threshold.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.wal_snapshot_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.wal_max_write_buffer_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.snapshotted_wal_files_to_keep #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.preemptive_cache_age.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.preemptive_cache_age.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_prune_percentage #=> Float
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_prune_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_prune_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.disable_parquet_mem_cache #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_query_path_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_query_path_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.last_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.last_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.distinct_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.distinct_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.gen1_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.gen1_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.exec_mem_pool_bytes.percent #=> String
+    #   resp.parameters.influx_d_bv_3_core.exec_mem_pool_bytes.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_size.percent #=> String
+    #   resp.parameters.influx_d_bv_3_core.parquet_mem_cache_size.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.wal_replay_fail_on_error #=> Boolean
+    #   resp.parameters.influx_d_bv_3_core.wal_replay_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.table_index_cache_max_entries #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.table_index_cache_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.gen1_lookback_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.gen1_lookback_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.retention_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.delete_grace_period.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.delete_grace_period.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_core.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.query_file_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.query_log_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.log_filter #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.log_format #=> String, one of "full"
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_num_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_type #=> String, one of "multi-thread", "multi-thread-alt"
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_disable_lifo_slot #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_event_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_global_queue_interval #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_max_blocking_threads #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_max_io_events_per_tick #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_thread_keep_alive.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_thread_keep_alive.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_runtime_thread_priority #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_max_parquet_fanout #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_use_cached_parquet_loader #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.data_fusion_config #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.max_http_request_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.force_snapshot_mem_threshold.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.force_snapshot_mem_threshold.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_snapshot_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_max_write_buffer_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshotted_wal_files_to_keep #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.preemptive_cache_age.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.preemptive_cache_age.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_prune_percentage #=> Float
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_prune_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_prune_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.disable_parquet_mem_cache #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_query_path_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_query_path_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.last_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.last_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.distinct_cache_eviction_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.distinct_cache_eviction_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.exec_mem_pool_bytes.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.exec_mem_pool_bytes.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_size.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.parquet_mem_cache_size.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_replay_fail_on_error #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_replay_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.table_index_cache_max_entries #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.table_index_cache_concurrency_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_lookback_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.gen1_lookback_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.retention_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.delete_grace_period.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.delete_grace_period.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.hard_delete_default_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.ingest_query_instances #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.query_only_instances #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.dedicated_compactor #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_row_limit #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_max_num_files_per_plan #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_gen_2_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_gen_2_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_multipliers #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_cleanup_wait.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_cleanup_wait.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.compaction_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.last_value_cache_disable_from_history #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.distinct_value_cache_disable_from_history #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.replication_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.replication_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.value #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbParameterGroup AWS API Documentation
     #
@@ -1327,6 +1780,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
     #   resp.items[0].db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.items[0].allocated_storage #=> Integer
+    #   resp.items[0].engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbClusters AWS API Documentation
@@ -1433,7 +1887,9 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.items[0].allocated_storage #=> Integer
     #   resp.items[0].deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
-    #   resp.items[0].instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA"
+    #   resp.items[0].instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.items[0].instance_modes #=> Array
+    #   resp.items[0].instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbInstancesForCluster AWS API Documentation
@@ -1690,6 +2146,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::UpdateDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
     #   * {Types::UpdateDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::UpdateDbInstanceOutput#instance_mode #instance_mode} => String
+    #   * {Types::UpdateDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1734,7 +2191,9 @@ module Aws::TimestreamInfluxDB
     #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
     #   resp.influx_auth_parameters_secret_arn #=> String
     #   resp.db_cluster_id #=> String
-    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA"
+    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.instance_modes #=> Array
+    #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstance AWS API Documentation
     #
@@ -1763,7 +2222,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

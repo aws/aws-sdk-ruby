@@ -659,9 +659,14 @@ module Aws::GameLiftStreams
     #     * Proton 8.0-2c (`Type=PROTON, Version=20230704`)
     #
     # @option params [required, String] :executable_path
-    #   The path and file name of the executable file that launches the
-    #   content for streaming. Enter a path value that is relative to the
-    #   location set in `ApplicationSourceUri`.
+    #   The relative path and file name of the executable file that Amazon
+    #   GameLift Streams will stream. Specify a path relative to the location
+    #   set in `ApplicationSourceUri`. The file must be contained within the
+    #   application's root folder. For Windows applications, the file must be
+    #   a valid Windows executable or batch file with a filename ending in
+    #   .exe, .cmd, or .bat. For Linux applications, the file must be a valid
+    #   Linux binary executable or a script that contains an initial
+    #   interpreter line starting with a shebang ('`#!`').
     #
     # @option params [required, String] :application_source_uri
     #   The location of the content that you want to stream. Enter an Amazon
@@ -816,8 +821,8 @@ module Aws::GameLiftStreams
     # * **Always-on**: The streaming capacity that is allocated and ready to
     #   handle stream requests without delay. You pay for this capacity
     #   whether it's in use or not. Best for quickest time from streaming
-    #   request to streaming session. Default is 1 when creating a stream
-    #   group or adding a location.
+    #   request to streaming session. Default is 1 (2 for high stream
+    #   classes) when creating a stream group or adding a location.
     #
     # * **On-demand**: The streaming capacity that Amazon GameLift Streams
     #   can allocate in response to stream requests, and then de-allocate
@@ -825,6 +830,9 @@ module Aws::GameLiftStreams
     #   at the expense of a greater startup time (typically under 5
     #   minutes). Default is 0 when creating a stream group or adding a
     #   location.
+    #
+    # Values for capacity must be whole number multiples of the tenancy
+    # value of the stream group's stream class.
     #
     # To adjust the capacity of any `ACTIVE` stream group, call
     # [UpdateStreamGroup][1].
@@ -2586,8 +2594,8 @@ module Aws::GameLiftStreams
     # * **Always-on**: The streaming capacity that is allocated and ready to
     #   handle stream requests without delay. You pay for this capacity
     #   whether it's in use or not. Best for quickest time from streaming
-    #   request to streaming session. Default is 1 when creating a stream
-    #   group or adding a location.
+    #   request to streaming session. Default is 1 (2 for high stream
+    #   classes) when creating a stream group or adding a location.
     #
     # * **On-demand**: The streaming capacity that Amazon GameLift Streams
     #   can allocate in response to stream requests, and then de-allocate
@@ -2595,6 +2603,9 @@ module Aws::GameLiftStreams
     #   at the expense of a greater startup time (typically under 5
     #   minutes). Default is 0 when creating a stream group or adding a
     #   location.
+    #
+    # Values for capacity must be whole number multiples of the tenancy
+    # value of the stream group's stream class.
     #
     # To update a stream group, specify the stream group's Amazon Resource
     # Name (ARN) and provide the new values. If the request is successful,
@@ -2722,7 +2733,7 @@ module Aws::GameLiftStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gameliftstreams'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

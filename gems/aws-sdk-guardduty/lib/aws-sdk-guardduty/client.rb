@@ -4744,7 +4744,7 @@ module Aws::GuardDuty
     #   this parameter to null on your first call to the list action. For
     #   subsequent calls to the action, fill nextToken in the request with the
     #   value of `NextToken` from the previous response to continue listing
-    #   data.
+    #   data. The default page size is 100 plans.
     #
     # @return [Types::ListMalwareProtectionPlansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5581,7 +5581,7 @@ module Aws::GuardDuty
     #     detector_id: "DetectorId", # required
     #     finding_ids: ["FindingId"], # required
     #     feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
-    #     comments: "String",
+    #     comments: "SensitiveString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback AWS API Documentation
@@ -6209,7 +6209,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

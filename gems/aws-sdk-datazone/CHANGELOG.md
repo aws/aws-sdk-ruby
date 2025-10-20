@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-10-14)
+------------------
+
+* Feature - Support creating scoped and trustedIdentityPropagation enabled connections.
+
 1.53.0 (2025-09-30)
 ------------------
 

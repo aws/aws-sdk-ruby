@@ -667,6 +667,7 @@ module Aws::Connect
       attr_accessor recordings: ::Array[Types::RecordingInfo]
       attr_accessor disconnect_reason: ::String
       attr_accessor contact_evaluations: ::Hash[::String, Types::ContactEvaluation]
+      attr_accessor task_template_info: Types::TaskTemplateInfoV2
       attr_accessor contact_details: Types::ContactDetails
       attr_accessor attributes: ::Hash[::String, ::String]
       SENSITIVE: [:name, :description]
@@ -5677,6 +5678,12 @@ module Aws::Connect
     end
 
     class TaskTemplateFieldIdentifier
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TaskTemplateInfoV2
+      attr_accessor arn: ::String
       attr_accessor name: ::String
       SENSITIVE: []
     end

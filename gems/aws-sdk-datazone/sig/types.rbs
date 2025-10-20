@@ -177,6 +177,27 @@ module Aws::DataZone
     class AllUsersGrantFilter < Aws::EmptyStructure
     end
 
+    class AmazonQPropertiesInput
+      attr_accessor auth_mode: ::String
+      attr_accessor is_enabled: bool
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonQPropertiesOutput
+      attr_accessor auth_mode: ::String
+      attr_accessor is_enabled: bool
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonQPropertiesPatch
+      attr_accessor auth_mode: ::String
+      attr_accessor is_enabled: bool
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
     class AssetFilterConfiguration
       attr_accessor column_configuration: Types::ColumnFilterConfiguration
       attr_accessor row_configuration: Types::RowFilterConfiguration
@@ -498,6 +519,7 @@ module Aws::DataZone
     end
 
     class ConnectionPropertiesInput
+      attr_accessor amazon_q_properties: Types::AmazonQPropertiesInput
       attr_accessor athena_properties: Types::AthenaPropertiesInput
       attr_accessor glue_properties: Types::GluePropertiesInput
       attr_accessor hyper_pod_properties: Types::HyperPodPropertiesInput
@@ -509,6 +531,8 @@ module Aws::DataZone
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class AmazonQProperties < ConnectionPropertiesInput
+      end
       class AthenaProperties < ConnectionPropertiesInput
       end
       class GlueProperties < ConnectionPropertiesInput
@@ -530,6 +554,7 @@ module Aws::DataZone
     end
 
     class ConnectionPropertiesOutput
+      attr_accessor amazon_q_properties: Types::AmazonQPropertiesOutput
       attr_accessor athena_properties: Types::AthenaPropertiesOutput
       attr_accessor glue_properties: Types::GluePropertiesOutput
       attr_accessor hyper_pod_properties: Types::HyperPodPropertiesOutput
@@ -541,6 +566,8 @@ module Aws::DataZone
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class AmazonQProperties < ConnectionPropertiesOutput
+      end
       class AthenaProperties < ConnectionPropertiesOutput
       end
       class GlueProperties < ConnectionPropertiesOutput
@@ -562,6 +589,7 @@ module Aws::DataZone
     end
 
     class ConnectionPropertiesPatch
+      attr_accessor amazon_q_properties: Types::AmazonQPropertiesPatch
       attr_accessor athena_properties: Types::AthenaPropertiesPatch
       attr_accessor glue_properties: Types::GluePropertiesPatch
       attr_accessor iam_properties: Types::IamPropertiesPatch
@@ -571,6 +599,8 @@ module Aws::DataZone
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class AmazonQProperties < ConnectionPropertiesPatch
+      end
       class AthenaProperties < ConnectionPropertiesPatch
       end
       class GlueProperties < ConnectionPropertiesPatch
@@ -596,7 +626,8 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor scope: ("DOMAIN" | "PROJECT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q")
       SENSITIVE: []
     end
 
@@ -760,9 +791,11 @@ module Aws::DataZone
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor domain_identifier: ::String
+      attr_accessor enable_trusted_identity_propagation: bool
       attr_accessor environment_identifier: ::String
       attr_accessor name: ::String
       attr_accessor props: Types::ConnectionPropertiesInput
+      attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
 
@@ -776,7 +809,8 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor scope: ("DOMAIN" | "PROJECT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q")
       SENSITIVE: [:description]
     end
 
@@ -2277,7 +2311,8 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor scope: ("DOMAIN" | "PROJECT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q")
       SENSITIVE: [:connection_credentials, :description]
     end
 
@@ -2974,7 +3009,7 @@ module Aws::DataZone
       attr_accessor compatible_compute_environments: ::Array[("SPARK" | "ATHENA" | "PYTHON")]
       attr_accessor connection_properties: ::Hash[::String, ::String]
       attr_accessor connection_schema_version: ::Integer
-      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q")
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
       attr_accessor last_connection_validation_time: ::Time
@@ -3372,9 +3407,10 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor next_token: ::String
       attr_accessor project_identifier: ::String
+      attr_accessor scope: ("DOMAIN" | "PROJECT")
       attr_accessor sort_by: ("NAME")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q")
       SENSITIVE: []
     end
 
@@ -4120,6 +4156,7 @@ module Aws::DataZone
 
     class PhysicalEndpoint
       attr_accessor aws_location: Types::AwsLocation
+      attr_accessor enable_trusted_identity_propagation: bool
       attr_accessor glue_connection: Types::GlueConnection
       attr_accessor glue_connection_name: ::String
       attr_accessor host: ::String
@@ -5406,7 +5443,8 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA")
+      attr_accessor scope: ("DOMAIN" | "PROJECT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q")
       SENSITIVE: [:description]
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2025-10-14)
+------------------
+
+* Feature - The AWS Backup job attribute extension enhancement helps customers better understand the plan that initiated each job, and the properties of the resource each job creates.
+
 1.96.0 (2025-10-06)
 ------------------
 

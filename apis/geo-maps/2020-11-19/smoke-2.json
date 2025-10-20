@@ -19,6 +19,21 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "GetStyleDescriptorSuccess",
+    "operationName" : "GetStyleDescriptor",
+    "input" : {
+      "Style" : "Standard"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetSpritesSuccess",
     "operationName" : "GetSprites",
     "input" : {
@@ -46,21 +61,6 @@
       "Center" : "-123.144847,49.303609",
       "Style" : "Satellite",
       "Zoom" : 10.0
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetStyleDescriptorSuccess",
-    "operationName" : "GetStyleDescriptor",
-    "input" : {
-      "Style" : "Standard"
     },
     "expectation" : {
       "success" : { }

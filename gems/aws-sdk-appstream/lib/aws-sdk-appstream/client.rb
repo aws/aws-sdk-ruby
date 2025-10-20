@@ -607,6 +607,84 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Associates license included application(s) with an existing image
+    # builder instance.
+    #
+    # @option params [required, String] :image_builder_name
+    #   The name of the target image builder instance.
+    #
+    # @option params [required, Array<String>] :software_names
+    #   The list of license included applications to associate with the image
+    #   builder.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_software_to_image_builder({
+    #     image_builder_name: "Name", # required
+    #     software_names: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateSoftwareToImageBuilder AWS API Documentation
+    #
+    # @overload associate_software_to_image_builder(params = {})
+    # @param [Hash] params ({})
+    def associate_software_to_image_builder(params = {}, options = {})
+      req = build_request(:associate_software_to_image_builder, params)
+      req.send_request(options)
+    end
+
     # Associates the specified users with the specified stacks. Users in a
     # user pool cannot be assigned to stacks with fleets that are joined to
     # an Active Directory domain.
@@ -1836,6 +1914,114 @@ module Aws::AppStream
     #   Administrators can connect to the image builder only through the
     #   specified endpoints.
     #
+    # @option params [Array<String>] :softwares_to_install
+    #   The list of license included applications to install on the image
+    #   builder during creation.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #
+    # @option params [Array<String>] :softwares_to_uninstall
+    #   The list of license included applications to uninstall from the image
+    #   builder during creation.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
@@ -1869,6 +2055,8 @@ module Aws::AppStream
     #         vpce_id: "String",
     #       },
     #     ],
+    #     softwares_to_install: ["String"],
+    #     softwares_to_uninstall: ["String"],
     #   })
     #
     # @example Response structure
@@ -1885,7 +2073,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -2361,6 +2549,7 @@ module Aws::AppStream
     #   resp.image.supported_instance_families[0] #=> String
     #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
+    #   resp.image.managed_software_included #=> Boolean
     #   resp.can_update_image #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImage AWS API Documentation
@@ -2654,6 +2843,7 @@ module Aws::AppStream
     #   resp.image.supported_instance_families[0] #=> String
     #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
+    #   resp.image.managed_software_included #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -2693,7 +2883,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -3011,6 +3201,54 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def describe_app_blocks(params = {}, options = {})
       req = build_request(:describe_app_blocks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves license included application usage information.
+    #
+    # @option params [required, String] :billing_period
+    #   Billing period for the usage record.
+    #
+    #   Specify the value in *yyyy-mm* format. For example, for August 2025,
+    #   use *2025-08*.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   Token for pagination of results.
+    #
+    # @return [Types::DescribeAppLicenseUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppLicenseUsageResult#app_license_usages #app_license_usages} => Array&lt;Types::AdminAppLicenseUsageRecord&gt;
+    #   * {Types::DescribeAppLicenseUsageResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_license_usage({
+    #     billing_period: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_license_usages #=> Array
+    #   resp.app_license_usages[0].user_arn #=> String
+    #   resp.app_license_usages[0].billing_period #=> String
+    #   resp.app_license_usages[0].owner_aws_account_id #=> String
+    #   resp.app_license_usages[0].subscription_first_used_date #=> Time
+    #   resp.app_license_usages[0].subscription_last_used_date #=> Time
+    #   resp.app_license_usages[0].license_type #=> String
+    #   resp.app_license_usages[0].user_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppLicenseUsage AWS API Documentation
+    #
+    # @overload describe_app_license_usage(params = {})
+    # @param [Hash] params ({})
+    def describe_app_license_usage(params = {}, options = {})
+      req = build_request(:describe_app_license_usage, params)
       req.send_request(options)
     end
 
@@ -3350,7 +3588,7 @@ module Aws::AppStream
     #   resp.image_builders[0].instance_type #=> String
     #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builders[0].iam_role_arn #=> String
-    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
+    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builders[0].state_change_reason.message #=> String
     #   resp.image_builders[0].created_time #=> Time
@@ -3518,6 +3756,7 @@ module Aws::AppStream
     #   resp.images[0].supported_instance_families[0] #=> String
     #   resp.images[0].dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.images[0].image_shared_with_others #=> String, one of "TRUE", "FALSE"
+    #   resp.images[0].managed_software_included #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -3601,6 +3840,54 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def describe_sessions(params = {}, options = {})
       req = build_request(:describe_sessions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves license included application associations for a specified
+    # resource.
+    #
+    # @option params [required, String] :associated_resource
+    #   The ARN of the resource to describe software associations. Possible
+    #   resources are Image and ImageBuilder.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation.
+    #
+    # @return [Types::DescribeSoftwareAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSoftwareAssociationsResult#associated_resource #associated_resource} => String
+    #   * {Types::DescribeSoftwareAssociationsResult#software_associations #software_associations} => Array&lt;Types::SoftwareAssociations&gt;
+    #   * {Types::DescribeSoftwareAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_software_associations({
+    #     associated_resource: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_resource #=> String
+    #   resp.software_associations #=> Array
+    #   resp.software_associations[0].software_name #=> String
+    #   resp.software_associations[0].status #=> String, one of "STAGED_FOR_INSTALLATION", "PENDING_INSTALLATION", "INSTALLED", "STAGED_FOR_UNINSTALLATION", "PENDING_UNINSTALLATION", "FAILED_TO_INSTALL", "FAILED_TO_UNINSTALL"
+    #   resp.software_associations[0].deployment_error #=> Array
+    #   resp.software_associations[0].deployment_error[0].error_code #=> String
+    #   resp.software_associations[0].deployment_error[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSoftwareAssociations AWS API Documentation
+    #
+    # @overload describe_software_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_software_associations(params = {}, options = {})
+      req = build_request(:describe_software_associations, params)
       req.send_request(options)
     end
 
@@ -4004,6 +4291,84 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Removes license included application(s) association(s) from an image
+    # builder instance.
+    #
+    # @option params [required, String] :image_builder_name
+    #   The name of the target image builder instance.
+    #
+    # @option params [required, Array<String>] :software_names
+    #   The list of license included applications to disassociate from the
+    #   image builder.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_software_from_image_builder({
+    #     image_builder_name: "Name", # required
+    #     software_names: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateSoftwareFromImageBuilder AWS API Documentation
+    #
+    # @overload disassociate_software_from_image_builder(params = {})
+    # @param [Hash] params ({})
+    def disassociate_software_from_image_builder(params = {}, options = {})
+      req = build_request(:disassociate_software_from_image_builder, params)
+      req.send_request(options)
+    end
+
     # Enables a user in the user pool. After being enabled, users can sign
     # in to AppStream 2.0 and open applications from the stacks to which
     # they are assigned.
@@ -4330,7 +4695,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -4355,6 +4720,34 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def start_image_builder(params = {}, options = {})
       req = build_request(:start_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Initiates license included applications deployment to an image builder
+    # instance.
+    #
+    # @option params [required, String] :image_builder_name
+    #   The name of the target image builder instance.
+    #
+    # @option params [Boolean] :retry_failed_deployments
+    #   Whether to retry previously failed license included application
+    #   deployments.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_software_deployment_to_image_builder({
+    #     image_builder_name: "Name", # required
+    #     retry_failed_deployments: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartSoftwareDeploymentToImageBuilder AWS API Documentation
+    #
+    # @overload start_software_deployment_to_image_builder(params = {})
+    # @param [Hash] params ({})
+    def start_software_deployment_to_image_builder(params = {}, options = {})
+      req = build_request(:start_software_deployment_to_image_builder, params)
       req.send_request(options)
     end
 
@@ -4462,7 +4855,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -5569,7 +5962,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

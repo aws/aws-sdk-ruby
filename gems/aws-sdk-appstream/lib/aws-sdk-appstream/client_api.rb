@@ -20,6 +20,8 @@ module Aws::AppStream
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
     Action = Shapes::StringShape.new(name: 'Action')
+    AdminAppLicenseUsageList = Shapes::ListShape.new(name: 'AdminAppLicenseUsageList')
+    AdminAppLicenseUsageRecord = Shapes::StructureShape.new(name: 'AdminAppLicenseUsageRecord')
     AppBlock = Shapes::StructureShape.new(name: 'AppBlock')
     AppBlockBuilder = Shapes::StructureShape.new(name: 'AppBlockBuilder')
     AppBlockBuilderAppBlockAssociation = Shapes::StructureShape.new(name: 'AppBlockBuilderAppBlockAssociation')
@@ -53,6 +55,8 @@ module Aws::AppStream
     AssociateApplicationToEntitlementResult = Shapes::StructureShape.new(name: 'AssociateApplicationToEntitlementResult')
     AssociateFleetRequest = Shapes::StructureShape.new(name: 'AssociateFleetRequest')
     AssociateFleetResult = Shapes::StructureShape.new(name: 'AssociateFleetResult')
+    AssociateSoftwareToImageBuilderRequest = Shapes::StructureShape.new(name: 'AssociateSoftwareToImageBuilderRequest')
+    AssociateSoftwareToImageBuilderResult = Shapes::StructureShape.new(name: 'AssociateSoftwareToImageBuilderResult')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAccountIdList = Shapes::ListShape.new(name: 'AwsAccountIdList')
@@ -131,6 +135,8 @@ module Aws::AppStream
     DescribeAppBlockBuildersResult = Shapes::StructureShape.new(name: 'DescribeAppBlockBuildersResult')
     DescribeAppBlocksRequest = Shapes::StructureShape.new(name: 'DescribeAppBlocksRequest')
     DescribeAppBlocksResult = Shapes::StructureShape.new(name: 'DescribeAppBlocksResult')
+    DescribeAppLicenseUsageRequest = Shapes::StructureShape.new(name: 'DescribeAppLicenseUsageRequest')
+    DescribeAppLicenseUsageResult = Shapes::StructureShape.new(name: 'DescribeAppLicenseUsageResult')
     DescribeApplicationFleetAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeApplicationFleetAssociationsRequest')
     DescribeApplicationFleetAssociationsResult = Shapes::StructureShape.new(name: 'DescribeApplicationFleetAssociationsResult')
     DescribeApplicationsRequest = Shapes::StructureShape.new(name: 'DescribeApplicationsRequest')
@@ -150,6 +156,8 @@ module Aws::AppStream
     DescribeImagesResult = Shapes::StructureShape.new(name: 'DescribeImagesResult')
     DescribeSessionsRequest = Shapes::StructureShape.new(name: 'DescribeSessionsRequest')
     DescribeSessionsResult = Shapes::StructureShape.new(name: 'DescribeSessionsResult')
+    DescribeSoftwareAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeSoftwareAssociationsRequest')
+    DescribeSoftwareAssociationsResult = Shapes::StructureShape.new(name: 'DescribeSoftwareAssociationsResult')
     DescribeStacksRequest = Shapes::StructureShape.new(name: 'DescribeStacksRequest')
     DescribeStacksResult = Shapes::StructureShape.new(name: 'DescribeStacksResult')
     DescribeThemeForStackRequest = Shapes::StructureShape.new(name: 'DescribeThemeForStackRequest')
@@ -175,6 +183,8 @@ module Aws::AppStream
     DisassociateApplicationFromEntitlementResult = Shapes::StructureShape.new(name: 'DisassociateApplicationFromEntitlementResult')
     DisassociateFleetRequest = Shapes::StructureShape.new(name: 'DisassociateFleetRequest')
     DisassociateFleetResult = Shapes::StructureShape.new(name: 'DisassociateFleetResult')
+    DisassociateSoftwareFromImageBuilderRequest = Shapes::StructureShape.new(name: 'DisassociateSoftwareFromImageBuilderRequest')
+    DisassociateSoftwareFromImageBuilderResult = Shapes::StructureShape.new(name: 'DisassociateSoftwareFromImageBuilderResult')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
@@ -273,6 +283,9 @@ module Aws::AppStream
     SettingsGroup = Shapes::StringShape.new(name: 'SettingsGroup')
     SharedImagePermissions = Shapes::StructureShape.new(name: 'SharedImagePermissions')
     SharedImagePermissionsList = Shapes::ListShape.new(name: 'SharedImagePermissionsList')
+    SoftwareAssociations = Shapes::StructureShape.new(name: 'SoftwareAssociations')
+    SoftwareAssociationsList = Shapes::ListShape.new(name: 'SoftwareAssociationsList')
+    SoftwareDeploymentStatus = Shapes::StringShape.new(name: 'SoftwareDeploymentStatus')
     Stack = Shapes::StructureShape.new(name: 'Stack')
     StackAttribute = Shapes::StringShape.new(name: 'StackAttribute')
     StackAttributes = Shapes::ListShape.new(name: 'StackAttributes')
@@ -286,6 +299,8 @@ module Aws::AppStream
     StartFleetResult = Shapes::StructureShape.new(name: 'StartFleetResult')
     StartImageBuilderRequest = Shapes::StructureShape.new(name: 'StartImageBuilderRequest')
     StartImageBuilderResult = Shapes::StructureShape.new(name: 'StartImageBuilderResult')
+    StartSoftwareDeploymentToImageBuilderRequest = Shapes::StructureShape.new(name: 'StartSoftwareDeploymentToImageBuilderRequest')
+    StartSoftwareDeploymentToImageBuilderResult = Shapes::StructureShape.new(name: 'StartSoftwareDeploymentToImageBuilderResult')
     StopAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'StopAppBlockBuilderRequest')
     StopAppBlockBuilderResult = Shapes::StructureShape.new(name: 'StopAppBlockBuilderResult')
     StopFleetRequest = Shapes::StructureShape.new(name: 'StopFleetRequest')
@@ -362,6 +377,17 @@ module Aws::AppStream
     AccessEndpoint.struct_class = Types::AccessEndpoint
 
     AccessEndpointList.member = Shapes::ShapeRef.new(shape: AccessEndpoint)
+
+    AdminAppLicenseUsageList.member = Shapes::ShapeRef.new(shape: AdminAppLicenseUsageRecord)
+
+    AdminAppLicenseUsageRecord.add_member(:user_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserArn"))
+    AdminAppLicenseUsageRecord.add_member(:billing_period, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BillingPeriod"))
+    AdminAppLicenseUsageRecord.add_member(:owner_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "OwnerAWSAccountId"))
+    AdminAppLicenseUsageRecord.add_member(:subscription_first_used_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SubscriptionFirstUsedDate"))
+    AdminAppLicenseUsageRecord.add_member(:subscription_last_used_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SubscriptionLastUsedDate"))
+    AdminAppLicenseUsageRecord.add_member(:license_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseType"))
+    AdminAppLicenseUsageRecord.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserId"))
+    AdminAppLicenseUsageRecord.struct_class = Types::AdminAppLicenseUsageRecord
 
     AppBlock.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     AppBlock.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -472,6 +498,12 @@ module Aws::AppStream
     AssociateFleetRequest.struct_class = Types::AssociateFleetRequest
 
     AssociateFleetResult.struct_class = Types::AssociateFleetResult
+
+    AssociateSoftwareToImageBuilderRequest.add_member(:image_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ImageBuilderName"))
+    AssociateSoftwareToImageBuilderRequest.add_member(:software_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "SoftwareNames"))
+    AssociateSoftwareToImageBuilderRequest.struct_class = Types::AssociateSoftwareToImageBuilderRequest
+
+    AssociateSoftwareToImageBuilderResult.struct_class = Types::AssociateSoftwareToImageBuilderResult
 
     AwsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
@@ -628,6 +660,8 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     CreateImageBuilderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateImageBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    CreateImageBuilderRequest.add_member(:softwares_to_install, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToInstall"))
+    CreateImageBuilderRequest.add_member(:softwares_to_uninstall, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToUninstall"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
 
     CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -805,6 +839,15 @@ module Aws::AppStream
     DescribeAppBlocksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeAppBlocksResult.struct_class = Types::DescribeAppBlocksResult
 
+    DescribeAppLicenseUsageRequest.add_member(:billing_period, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BillingPeriod"))
+    DescribeAppLicenseUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeAppLicenseUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAppLicenseUsageRequest.struct_class = Types::DescribeAppLicenseUsageRequest
+
+    DescribeAppLicenseUsageResult.add_member(:app_license_usages, Shapes::ShapeRef.new(shape: AdminAppLicenseUsageList, location_name: "AppLicenseUsages"))
+    DescribeAppLicenseUsageResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAppLicenseUsageResult.struct_class = Types::DescribeAppLicenseUsageResult
+
     DescribeApplicationFleetAssociationsRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: Name, location_name: "FleetName"))
     DescribeApplicationFleetAssociationsRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
     DescribeApplicationFleetAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
@@ -895,6 +938,16 @@ module Aws::AppStream
     DescribeSessionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeSessionsResult.struct_class = Types::DescribeSessionsResult
 
+    DescribeSoftwareAssociationsRequest.add_member(:associated_resource, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AssociatedResource"))
+    DescribeSoftwareAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeSoftwareAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSoftwareAssociationsRequest.struct_class = Types::DescribeSoftwareAssociationsRequest
+
+    DescribeSoftwareAssociationsResult.add_member(:associated_resource, Shapes::ShapeRef.new(shape: Arn, location_name: "AssociatedResource"))
+    DescribeSoftwareAssociationsResult.add_member(:software_associations, Shapes::ShapeRef.new(shape: SoftwareAssociationsList, location_name: "SoftwareAssociations"))
+    DescribeSoftwareAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSoftwareAssociationsResult.struct_class = Types::DescribeSoftwareAssociationsResult
+
     DescribeStacksRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
     DescribeStacksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeStacksRequest.struct_class = Types::DescribeStacksRequest
@@ -978,6 +1031,12 @@ module Aws::AppStream
     DisassociateFleetRequest.struct_class = Types::DisassociateFleetRequest
 
     DisassociateFleetResult.struct_class = Types::DisassociateFleetResult
+
+    DisassociateSoftwareFromImageBuilderRequest.add_member(:image_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ImageBuilderName"))
+    DisassociateSoftwareFromImageBuilderRequest.add_member(:software_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "SoftwareNames"))
+    DisassociateSoftwareFromImageBuilderRequest.struct_class = Types::DisassociateSoftwareFromImageBuilderRequest
+
+    DisassociateSoftwareFromImageBuilderResult.struct_class = Types::DisassociateSoftwareFromImageBuilderResult
 
     DomainJoinInfo.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DirectoryName"))
     DomainJoinInfo.add_member(:organizational_unit_distinguished_name, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
@@ -1090,6 +1149,7 @@ module Aws::AppStream
     Image.add_member(:supported_instance_families, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedInstanceFamilies"))
     Image.add_member(:dynamic_app_providers_enabled, Shapes::ShapeRef.new(shape: DynamicAppProvidersEnabled, location_name: "DynamicAppProvidersEnabled"))
     Image.add_member(:image_shared_with_others, Shapes::ShapeRef.new(shape: ImageSharedWithOthers, location_name: "ImageSharedWithOthers"))
+    Image.add_member(:managed_software_included, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedSoftwareIncluded"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -1255,6 +1315,13 @@ module Aws::AppStream
 
     SharedImagePermissionsList.member = Shapes::ShapeRef.new(shape: SharedImagePermissions)
 
+    SoftwareAssociations.add_member(:software_name, Shapes::ShapeRef.new(shape: String, location_name: "SoftwareName"))
+    SoftwareAssociations.add_member(:status, Shapes::ShapeRef.new(shape: SoftwareDeploymentStatus, location_name: "Status"))
+    SoftwareAssociations.add_member(:deployment_error, Shapes::ShapeRef.new(shape: ErrorDetailsList, location_name: "DeploymentError"))
+    SoftwareAssociations.struct_class = Types::SoftwareAssociations
+
+    SoftwareAssociationsList.member = Shapes::ShapeRef.new(shape: SoftwareAssociations)
+
     Stack.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Stack.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Stack.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -1298,6 +1365,12 @@ module Aws::AppStream
 
     StartImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
     StartImageBuilderResult.struct_class = Types::StartImageBuilderResult
+
+    StartSoftwareDeploymentToImageBuilderRequest.add_member(:image_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ImageBuilderName"))
+    StartSoftwareDeploymentToImageBuilderRequest.add_member(:retry_failed_deployments, Shapes::ShapeRef.new(shape: Boolean, location_name: "RetryFailedDeployments"))
+    StartSoftwareDeploymentToImageBuilderRequest.struct_class = Types::StartSoftwareDeploymentToImageBuilderRequest
+
+    StartSoftwareDeploymentToImageBuilderResult.struct_class = Types::StartSoftwareDeploymentToImageBuilderResult
 
     StopAppBlockBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     StopAppBlockBuilderRequest.struct_class = Types::StopAppBlockBuilderRequest
@@ -1599,6 +1672,19 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:associate_software_to_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSoftwareToImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSoftwareToImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSoftwareToImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:batch_associate_user_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -2029,6 +2115,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_app_license_usage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppLicenseUsage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppLicenseUsageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppLicenseUsageResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_application_fleet_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeApplicationFleetAssociations"
         o.http_method = "POST"
@@ -2125,6 +2222,16 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: DescribeSessionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSessionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:describe_software_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSoftwareAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSoftwareAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSoftwareAssociationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_stacks, Seahorse::Model::Operation.new.tap do |o|
@@ -2233,6 +2340,18 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
+      api.add_operation(:disassociate_software_from_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSoftwareFromImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSoftwareFromImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSoftwareFromImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:enable_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableUser"
         o.http_method = "POST"
@@ -2329,6 +2448,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+      end)
+
+      api.add_operation(:start_software_deployment_to_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSoftwareDeploymentToImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartSoftwareDeploymentToImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSoftwareDeploymentToImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:stop_app_block_builder, Seahorse::Model::Operation.new.tap do |o|

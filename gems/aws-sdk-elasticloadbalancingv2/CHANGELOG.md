@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2025-10-15)
+------------------
+
+* Feature - This release expands Listener Rule Conditions to support RegexValues and adds support for a new Transforms field in Listener Rules.
+
 1.139.0 (2025-08-26)
 ------------------
 

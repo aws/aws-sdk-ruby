@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-10-15)
+------------------
+
+* Feature - Add support for NetworkType field in CreateDbCluster, ModifyDbCluster, RestoreDbClusterFromSnapshot and RestoreDbClusterToPointInTime for DocumentDB.
+
 1.93.0 (2025-08-26)
 ------------------
 

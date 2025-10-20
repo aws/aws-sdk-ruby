@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2025-10-17)
+------------------
+
+* Feature - Releasing minor endpoint updates.
+
 1.77.0 (2025-08-28)
 ------------------
 

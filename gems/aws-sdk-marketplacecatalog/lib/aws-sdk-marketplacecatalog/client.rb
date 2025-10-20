@@ -1057,7 +1057,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       saa_s_product_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, ProductTitle, Visibility, LastModifiedDate
+    #         sort_by: "EntityId", # accepts EntityId, ProductTitle, Visibility, LastModifiedDate, DeliveryOptionTypes
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       ami_product_sort: {
@@ -1069,7 +1069,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       container_product_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductTitle, Visibility
+    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductTitle, Visibility, CompatibleAWSServices
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       resale_authorization_sort: {
@@ -1406,7 +1406,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

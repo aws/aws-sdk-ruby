@@ -478,6 +478,13 @@ module Aws::GeoMaps
 
     # `GetGlyphs` returns the map's glyphs.
     #
+    # For more information, see [Style labels with glyphs][1] in the *Amazon
+    # Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/styling-labels-with-glyphs.html
+    #
     # @option params [required, String] :font_stack
     #   Name of the `FontStack` to retrieve.
     #
@@ -650,7 +657,7 @@ module Aws::GeoMaps
     #   A Unicode range of characters to download glyphs for. This must be
     #   aligned to multiples of 256.
     #
-    #   Example: `0-255.pdf`
+    #   Example: `0-255.pbf`
     #
     # @return [Types::GetGlyphsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -683,6 +690,13 @@ module Aws::GeoMaps
     end
 
     # `GetSprites` returns the map's sprites.
+    #
+    # For more information, see [Style iconography with sprites][1] in the
+    # *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/styling-iconography-with-sprites.html
     #
     # @option params [required, String] :file_name
     #   `Sprites` API: The name of the sprite ﬁle to retrieve, following
@@ -753,17 +767,34 @@ module Aws::GeoMaps
     # additional information. It's an ideal solution for applications
     # requiring tailored static map snapshots.
     #
+    # For more information, see the following topics in the *Amazon Location
+    # Service Developer Guide*:
+    #
+    # * [Static maps][1]
+    #
+    # * [Customize static maps][2]
+    #
+    # * [Overlay on the static map][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/static-maps.html
+    # [2]: https://docs.aws.amazon.com/location/latest/developerguide/customizing-static-maps.html
+    # [3]: https://docs.aws.amazon.com/location/latest/developerguide/overlaying-static-map.html
+    #
     # @option params [String] :bounding_box
-    #   Takes in two pairs of coordinates, \[Lon, Lat\], denoting
-    #   south-westerly and north-easterly edges of the image. The underlying
-    #   area becomes the view of the image.
+    #   Takes in two pairs of coordinates in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\], denoting south-westerly and
+    #   north-easterly edges of the image. The underlying area becomes the
+    #   view of the image.
     #
     #   Example: -123.17075,49.26959,-123.08125,49.31429
     #
     # @option params [String] :bounded_positions
-    #   Takes in two or more pair of coordinates, \[Lon, Lat\], with each
-    #   coordinate separated by a comma. The API will generate an image to
-    #   encompass all of the provided coordinates.
+    #   Takes in two or more pair of coordinates in World Geodetic System (WGS
+    #   84) format: \[longitude, latitude\], with each coordinate separated by
+    #   a comma. The API will generate an image to encompass all of the
+    #   provided coordinates.
     #
     #   <note markdown="1"> Cannot be used with `Zoom` and or `Radius`
     #
@@ -772,9 +803,9 @@ module Aws::GeoMaps
     #   Example: 97.170451,78.039098,99.045536,27.176178
     #
     # @option params [String] :center
-    #   Takes in a pair of coordinates, \[Lon, Lat\], which becomes the center
-    #   point of the image. This parameter requires that either zoom or radius
-    #   is set.
+    #   Takes in a pair of coordinates in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\], which becomes the center point of the
+    #   image. This parameter requires that either zoom or radius is set.
     #
     #   <note markdown="1"> Cannot be used with `Zoom` and or `Radius`
     #
@@ -1119,6 +1150,13 @@ module Aws::GeoMaps
 
     # `GetStyleDescriptor` returns information about the style.
     #
+    # For more information, see [Style dynamic maps][1] in the *Amazon
+    # Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/styling-dynamic-maps.html
+    #
     # @option params [required, String] :style
     #   Style specifies the desired map style.
     #
@@ -1172,6 +1210,39 @@ module Aws::GeoMaps
     #
     #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     #
+    # @option params [String] :terrain
+    #   Adjusts how physical terrain details are rendered on the map.
+    #
+    #   The following terrain styles are currently supported:
+    #
+    #   * `Hillshade`: Displays the physical terrain details through shading
+    #     and highlighting of elevation change and geographic features.
+    #
+    #   ^
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #
+    # @option params [String] :contour_density
+    #   Displays the shape and steepness of terrain features using elevation
+    #   lines. The density value controls how densely the available contour
+    #   line information is rendered on the map.
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #
+    # @option params [String] :traffic
+    #   Displays real-time traffic information overlay on map, such as
+    #   incident events and flow events.
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #
+    # @option params [Array<String>] :travel_modes
+    #   Renders additional map information relevant to selected travel modes.
+    #   Information for multiple travel modes can be displayed simultaneously,
+    #   although this increases the overall information density rendered on
+    #   the map.
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
@@ -1189,6 +1260,10 @@ module Aws::GeoMaps
     #     style: "Standard", # required, accepts Standard, Monochrome, Hybrid, Satellite
     #     color_scheme: "Light", # accepts Light, Dark
     #     political_view: "CountryCode",
+    #     terrain: "Hillshade", # accepts Hillshade
+    #     contour_density: "Medium", # accepts Medium
+    #     traffic: "All", # accepts All
+    #     travel_modes: ["Transit"], # accepts Transit, Truck
     #     key: "ApiKey",
     #   })
     #
@@ -1211,6 +1286,13 @@ module Aws::GeoMaps
     # `GetTile` returns a tile. Map tiles are used by clients to render a
     # map. they're addressed using a grid arrangement with an X coordinate,
     # Y coordinate, and Z (zoom) level.
+    #
+    # For more information, see [Tiles][1] in the *Amazon Location Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/tiles.html
     #
     # @option params [required, String] :tileset
     #   Specifies the desired tile set.
@@ -1283,7 +1365,7 @@ module Aws::GeoMaps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geomaps'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

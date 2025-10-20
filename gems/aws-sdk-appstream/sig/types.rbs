@@ -14,6 +14,17 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class AdminAppLicenseUsageRecord
+      attr_accessor user_arn: ::String
+      attr_accessor billing_period: ::String
+      attr_accessor owner_aws_account_id: ::String
+      attr_accessor subscription_first_used_date: ::Time
+      attr_accessor subscription_last_used_date: ::Time
+      attr_accessor license_type: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
     class AppBlock
       attr_accessor name: ::String
       attr_accessor arn: ::String
@@ -136,6 +147,15 @@ module Aws::AppStream
     end
 
     class AssociateFleetResult < Aws::EmptyStructure
+    end
+
+    class AssociateSoftwareToImageBuilderRequest
+      attr_accessor image_builder_name: ::String
+      attr_accessor software_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateSoftwareToImageBuilderResult < Aws::EmptyStructure
     end
 
     class BatchAssociateUserStackRequest
@@ -340,6 +360,8 @@ module Aws::AppStream
       attr_accessor appstream_agent_version: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor softwares_to_install: ::Array[::String]
+      attr_accessor softwares_to_uninstall: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -598,6 +620,19 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class DescribeAppLicenseUsageRequest
+      attr_accessor billing_period: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppLicenseUsageResult
+      attr_accessor app_license_usages: ::Array[Types::AdminAppLicenseUsageRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeApplicationFleetAssociationsRequest
       attr_accessor fleet_name: ::String
       attr_accessor application_arn: ::String
@@ -724,6 +759,20 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class DescribeSoftwareAssociationsRequest
+      attr_accessor associated_resource: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSoftwareAssociationsResult
+      attr_accessor associated_resource: ::String
+      attr_accessor software_associations: ::Array[Types::SoftwareAssociations]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeStacksRequest
       attr_accessor names: ::Array[::String]
       attr_accessor next_token: ::String
@@ -839,6 +888,15 @@ module Aws::AppStream
     end
 
     class DisassociateFleetResult < Aws::EmptyStructure
+    end
+
+    class DisassociateSoftwareFromImageBuilderRequest
+      attr_accessor image_builder_name: ::String
+      attr_accessor software_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateSoftwareFromImageBuilderResult < Aws::EmptyStructure
     end
 
     class DomainJoinInfo
@@ -959,6 +1017,7 @@ module Aws::AppStream
       attr_accessor supported_instance_families: ::Array[::String]
       attr_accessor dynamic_app_providers_enabled: ("ENABLED" | "DISABLED")
       attr_accessor image_shared_with_others: ("TRUE" | "FALSE")
+      attr_accessor managed_software_included: bool
       SENSITIVE: []
     end
 
@@ -972,7 +1031,7 @@ module Aws::AppStream
       attr_accessor instance_type: ::String
       attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8" | "ROCKY_LINUX8")
       attr_accessor iam_role_arn: ::String
-      attr_accessor state: ("PENDING" | "UPDATING_AGENT" | "RUNNING" | "STOPPING" | "STOPPED" | "REBOOTING" | "SNAPSHOTTING" | "DELETING" | "FAILED" | "UPDATING" | "PENDING_QUALIFICATION")
+      attr_accessor state: ("PENDING" | "UPDATING_AGENT" | "RUNNING" | "STOPPING" | "STOPPED" | "REBOOTING" | "SNAPSHOTTING" | "DELETING" | "FAILED" | "UPDATING" | "PENDING_QUALIFICATION" | "PENDING_SYNCING_APPS" | "SYNCING_APPS")
       attr_accessor state_change_reason: Types::ImageBuilderStateChangeReason
       attr_accessor created_time: ::Time
       attr_accessor enable_default_internet_access: bool
@@ -1166,6 +1225,13 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class SoftwareAssociations
+      attr_accessor software_name: ::String
+      attr_accessor status: ("STAGED_FOR_INSTALLATION" | "PENDING_INSTALLATION" | "INSTALLED" | "STAGED_FOR_UNINSTALLATION" | "PENDING_UNINSTALLATION" | "FAILED_TO_INSTALL" | "FAILED_TO_UNINSTALL")
+      attr_accessor deployment_error: ::Array[Types::ErrorDetails]
+      SENSITIVE: []
+    end
+
     class Stack
       attr_accessor arn: ::String
       attr_accessor name: ::String
@@ -1217,6 +1283,15 @@ module Aws::AppStream
     class StartImageBuilderResult
       attr_accessor image_builder: Types::ImageBuilder
       SENSITIVE: []
+    end
+
+    class StartSoftwareDeploymentToImageBuilderRequest
+      attr_accessor image_builder_name: ::String
+      attr_accessor retry_failed_deployments: bool
+      SENSITIVE: []
+    end
+
+    class StartSoftwareDeploymentToImageBuilderResult < Aws::EmptyStructure
     end
 
     class StopAppBlockBuilderRequest

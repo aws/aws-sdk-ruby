@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-10-14)
+------------------
+
+* Feature - This release introduces support for Microsoft license included applications streaming.
+
 1.118.0 (2025-09-24)
 ------------------
 

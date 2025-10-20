@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-10-15)
+------------------
+
+* Feature - Add support for manage Lightsail Bucket CORS configuration
+
 1.118.0 (2025-09-25)
 ------------------
 

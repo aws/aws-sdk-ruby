@@ -2839,6 +2839,11 @@ module Aws::Connect
     #   FormId, which is a unique identifier for the form.
     #   @return [Hash<String,Types::ContactEvaluation>]
     #
+    # @!attribute [rw] task_template_info
+    #   If this contact was created using a task template, this contains
+    #   information about the task template.
+    #   @return [Types::TaskTemplateInfoV2]
+    #
     # @!attribute [rw] contact_details
     #   A map of string key/value pairs that contain user-defined attributes
     #   which are lightly typed within the contact. This object is used only
@@ -2893,6 +2898,7 @@ module Aws::Connect
       :recordings,
       :disconnect_reason,
       :contact_evaluations,
+      :task_template_info,
       :contact_details,
       :attributes)
       SENSITIVE = [:name, :description]
@@ -16408,6 +16414,7 @@ module Aws::Connect
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #   Both Instance ID and Instance ARN are supported input formats.
     #
     #
     #
@@ -20682,6 +20689,9 @@ module Aws::Connect
     # @!attribute [rw] channel
     #   The channels this queue supports. Valid Values: CHAT \| TASK \|
     #   EMAIL
+    #
+    #   VOICE is not supported. The information shown below is incorrect.
+    #   We're working to correct it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileManualAssignmentQueueConfigSummary AWS API Documentation
@@ -21430,7 +21440,15 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Time range that you additionally want to filter on.
+    # Time range that you **additionally** want to filter on.
+    #
+    # <note markdown="1"> This is different from the [SearchContactsTimeRange][1] data type.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchContactsTimeRange.html
     #
     # @!attribute [rw] criteria
     #   List of criteria of the time range to additionally filter on.
@@ -21555,8 +21573,9 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The timestamp condition indicating which timestamp should be used and
-    # how it should be filtered.
+    # The timestamp condition indicating which contact timestamp should be
+    # used and how it should be filtered. It is not an actual timestamp
+    # value.
     #
     # @!attribute [rw] type
     #   Type of the timestamps to use for the filter.
@@ -25079,6 +25098,26 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateFieldIdentifier AWS API Documentation
     #
     class TaskTemplateFieldIdentifier < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the task template used to create this contact.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the task template used to create
+    #   this contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template used to create this contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateInfoV2 AWS API Documentation
+    #
+    class TaskTemplateInfoV2 < Struct.new(
+      :arn,
       :name)
       SENSITIVE = []
       include Aws::Structure

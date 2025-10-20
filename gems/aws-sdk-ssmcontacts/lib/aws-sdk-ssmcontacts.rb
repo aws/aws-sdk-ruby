@@ -54,7 +54,7 @@ module Aws::SSMContacts
   autoload :EndpointProvider, 'aws-sdk-ssmcontacts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmcontacts/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

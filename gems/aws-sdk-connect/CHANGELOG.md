@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.219.0 (2025-10-14)
+------------------
+
+* Feature - SDK release for TaskTemplateInfo in Contact for DescribeContact response.
+
 1.218.0 (2025-09-26)
 ------------------
 

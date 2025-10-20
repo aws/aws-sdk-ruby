@@ -54,7 +54,7 @@ module Aws::GlueDataBrew
   autoload :EndpointProvider, 'aws-sdk-gluedatabrew/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-gluedatabrew/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

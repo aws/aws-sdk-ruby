@@ -133,8 +133,9 @@ module Aws::GameLiftStreams
     #
     #   * `READY`: The application is ready to deploy in a stream group.
     #
-    #   * `ERROR`: An error occurred when setting up the application. See
-    #     `StatusReason` for more information.
+    #   * `ERROR`: An error occurred when setting up the application. For
+    #     more information about the error, call `GetApplication` and refer
+    #     to `StatusReason`.
     #
     #   * `DELETING`: Amazon GameLift Streams is in the process of deleting
     #     the application.
@@ -304,9 +305,15 @@ module Aws::GameLiftStreams
     #   @return [Types::RuntimeEnvironment]
     #
     # @!attribute [rw] executable_path
-    #   The path and file name of the executable file that launches the
-    #   content for streaming. Enter a path value that is relative to the
-    #   location set in `ApplicationSourceUri`.
+    #   The relative path and file name of the executable file that Amazon
+    #   GameLift Streams will stream. Specify a path relative to the
+    #   location set in `ApplicationSourceUri`. The file must be contained
+    #   within the application's root folder. For Windows applications, the
+    #   file must be a valid Windows executable or batch file with a
+    #   filename ending in .exe, .cmd, or .bat. For Linux applications, the
+    #   file must be a valid Linux binary executable or a script that
+    #   contains an initial interpreter line starting with a shebang
+    #   ('`#!`').
     #   @return [String]
     #
     # @!attribute [rw] application_source_uri
@@ -438,8 +445,8 @@ module Aws::GameLiftStreams
     #   @return [Types::RuntimeEnvironment]
     #
     # @!attribute [rw] executable_path
-    #   The path and file name of the executable file that launches the
-    #   content for streaming.
+    #   The relative path and file name of the executable file that launches
+    #   the content for streaming.
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
@@ -833,7 +840,8 @@ module Aws::GameLiftStreams
     #     and remove any locations which are in error.
     #
     #   * `ERROR`: An error occurred when the stream group deployed. See
-    #     `StatusReason` for more information.
+    #     `StatusReason` (returned by `CreateStreamGroup`, `GetStreamGroup`,
+    #     and `UpdateStreamGroup`) for more information.
     #
     #   * `DELETING`: Amazon GameLift Streams is in the process of deleting
     #     the stream group.
@@ -1255,8 +1263,8 @@ module Aws::GameLiftStreams
     #   @return [Types::RuntimeEnvironment]
     #
     # @!attribute [rw] executable_path
-    #   The path and file name of the executable file that launches the
-    #   content for streaming.
+    #   The relative path and file name of the executable file that launches
+    #   the content for streaming.
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
@@ -1522,7 +1530,8 @@ module Aws::GameLiftStreams
     #     and remove any locations which are in error.
     #
     #   * `ERROR`: An error occurred when the stream group deployed. See
-    #     `StatusReason` for more information.
+    #     `StatusReason` (returned by `CreateStreamGroup`, `GetStreamGroup`,
+    #     and `UpdateStreamGroup`) for more information.
     #
     #   * `DELETING`: Amazon GameLift Streams is in the process of deleting
     #     the stream group.
@@ -1667,7 +1676,9 @@ module Aws::GameLiftStreams
     #     minutes, or if the maximum length of a session specified by
     #     `SessionLengthSeconds` in `StartStreamSession` is exceeded.
     #
-    #   * `ERROR`: The stream session failed to activate.
+    #   * `ERROR`: The stream session failed to activate. See `StatusReason`
+    #     (returned by `GetStreamSession` and `StartStreamSession`) for more
+    #     information.
     #
     #   * `PENDING_CLIENT_RECONNECTION`: A client has recently disconnected
     #     and the stream session is waiting for the client to reconnect. A
@@ -1688,6 +1699,23 @@ module Aws::GameLiftStreams
     # @!attribute [rw] status_reason
     #   A short description of the reason the stream session is in `ERROR`
     #   status.
+    #
+    #   * `internalError`: An internal service error occurred. Start a new
+    #     stream session to continue streaming.
+    #
+    #   * `invalidSignalRequest`: The WebRTC signal request that was sent is
+    #     not valid. When starting or reconnecting to a stream session, use
+    #     `generateSignalRequest` in the Amazon GameLift Streams Web SDK to
+    #     generate a new signal request.
+    #
+    #   * `placementTimeout`: Amazon GameLift Streams could not find
+    #     available stream capacity to start a stream session. Increase the
+    #     stream capacity in the stream group or wait until capacity becomes
+    #     available.
+    #
+    #   * `applicationLogS3DestinationError`: Could not write the
+    #     application log to the Amazon S3 bucket that is configured for the
+    #     streaming application. Make sure the bucket still exists.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -2122,8 +2150,8 @@ module Aws::GameLiftStreams
     #   The streaming capacity that is allocated and ready to handle stream
     #   requests without delay. You pay for this capacity whether it's in
     #   use or not. Best for quickest time from streaming request to
-    #   streaming session. Default is 1 when creating a stream group or
-    #   adding a location.
+    #   streaming session. Default is 1 (2 for high stream classes) when
+    #   creating a stream group or adding a location.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_capacity
@@ -2185,8 +2213,8 @@ module Aws::GameLiftStreams
     #   The streaming capacity that is allocated and ready to handle stream
     #   requests without delay. You pay for this capacity whether it's in
     #   use or not. Best for quickest time from streaming request to
-    #   streaming session. Default is 1 when creating a stream group or
-    #   adding a location.
+    #   streaming session. Default is 1 (2 for high stream classes) when
+    #   creating a stream group or adding a location.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_capacity
@@ -2198,23 +2226,33 @@ module Aws::GameLiftStreams
     #   @return [Integer]
     #
     # @!attribute [rw] requested_capacity
-    #   This value is the total number of compute resources that you request
-    #   for a stream group. This includes resources that Amazon GameLift
-    #   Streams has either already provisioned or is working to provision.
-    #   You request capacity for each location in a stream group.
+    #   This value is the always-on capacity that you most recently
+    #   requested for a stream group. You request capacity separately for
+    #   each location in a stream group. In response to an increase in
+    #   requested capacity, Amazon GameLift Streams attempts to provision
+    #   compute resources to make the stream group's allocated capacity
+    #   meet requested capacity. When always-on capacity is decreased, it
+    #   can take a few minutes to deprovision allocated capacity to match
+    #   the requested capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
-    #   This value is the number of compute resources that a stream group
-    #   has provisioned and is ready to stream. It includes resources that
-    #   are currently streaming and resources that are idle and ready to
-    #   respond to stream requests.
+    #   This value is the stream capacity that Amazon GameLift Streams has
+    #   provisioned in a stream group that can respond immediately to stream
+    #   requests. It includes resources that are currently streaming and
+    #   resources that are idle and ready to respond to stream requests. You
+    #   pay for this capacity whether it's in use or not. After making
+    #   changes to capacity, it can take a few minutes for the allocated
+    #   capacity count to reflect the change while compute resources are
+    #   allocated or deallocated. Similarly, when allocated on-demand
+    #   capacity is no longer needed, it can take a few minutes for Amazon
+    #   GameLift Streams to spin down the allocated capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] idle_capacity
     #   This value is the amount of allocated capacity that is not currently
-    #   streaming. It represents the stream group's availability to respond
-    #   to new stream requests, but not including on-demand capacity.
+    #   streaming. It represents the stream group's ability to respond
+    #   immediately to new stream requests with near-instant startup time.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/LocationState AWS API Documentation
@@ -2558,7 +2596,9 @@ module Aws::GameLiftStreams
     #     minutes, or if the maximum length of a session specified by
     #     `SessionLengthSeconds` in `StartStreamSession` is exceeded.
     #
-    #   * `ERROR`: The stream session failed to activate.
+    #   * `ERROR`: The stream session failed to activate. See `StatusReason`
+    #     (returned by `GetStreamSession` and `StartStreamSession`) for more
+    #     information.
     #
     #   * `PENDING_CLIENT_RECONNECTION`: A client has recently disconnected
     #     and the stream session is waiting for the client to reconnect. A
@@ -2579,6 +2619,23 @@ module Aws::GameLiftStreams
     # @!attribute [rw] status_reason
     #   A short description of the reason the stream session is in `ERROR`
     #   status.
+    #
+    #   * `internalError`: An internal service error occurred. Start a new
+    #     stream session to continue streaming.
+    #
+    #   * `invalidSignalRequest`: The WebRTC signal request that was sent is
+    #     not valid. When starting or reconnecting to a stream session, use
+    #     `generateSignalRequest` in the Amazon GameLift Streams Web SDK to
+    #     generate a new signal request.
+    #
+    #   * `placementTimeout`: Amazon GameLift Streams could not find
+    #     available stream capacity to start a stream session. Increase the
+    #     stream capacity in the stream group or wait until capacity becomes
+    #     available.
+    #
+    #   * `applicationLogS3DestinationError`: Could not write the
+    #     application log to the Amazon S3 bucket that is configured for the
+    #     streaming application. Make sure the bucket still exists.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -2846,7 +2903,8 @@ module Aws::GameLiftStreams
     #     and remove any locations which are in error.
     #
     #   * `ERROR`: An error occurred when the stream group deployed. See
-    #     `StatusReason` for more information.
+    #     `StatusReason` (returned by `CreateStreamGroup`, `GetStreamGroup`,
+    #     and `UpdateStreamGroup`) for more information.
     #
     #   * `DELETING`: Amazon GameLift Streams is in the process of deleting
     #     the stream group.
@@ -2921,7 +2979,9 @@ module Aws::GameLiftStreams
     #     minutes, or if the maximum length of a session specified by
     #     `SessionLengthSeconds` in `StartStreamSession` is exceeded.
     #
-    #   * `ERROR`: The stream session failed to activate.
+    #   * `ERROR`: The stream session failed to activate. See `StatusReason`
+    #     (returned by `GetStreamSession` and `StartStreamSession`) for more
+    #     information.
     #
     #   * `PENDING_CLIENT_RECONNECTION`: A client has recently disconnected
     #     and the stream session is waiting for the client to reconnect. A
@@ -3196,8 +3256,8 @@ module Aws::GameLiftStreams
     #   @return [Types::RuntimeEnvironment]
     #
     # @!attribute [rw] executable_path
-    #   The path and file name of the executable file that launches the
-    #   content for streaming.
+    #   The relative path and file name of the executable file that launches
+    #   the content for streaming.
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
@@ -3501,7 +3561,8 @@ module Aws::GameLiftStreams
     #     and remove any locations which are in error.
     #
     #   * `ERROR`: An error occurred when the stream group deployed. See
-    #     `StatusReason` for more information.
+    #     `StatusReason` (returned by `CreateStreamGroup`, `GetStreamGroup`,
+    #     and `UpdateStreamGroup`) for more information.
     #
     #   * `DELETING`: Amazon GameLift Streams is in the process of deleting
     #     the stream group.

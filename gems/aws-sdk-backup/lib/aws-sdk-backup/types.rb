@@ -28,7 +28,7 @@ module Aws::Backup
     #
     # @!attribute [rw] backup_options
     #   Specifies the backup option for a selected resource. This option is
-    #   only available for Windows VSS backup jobs.
+    #   available for Windows VSS backup jobs and S3 backups.
     #
     #   Valid values:
     #
@@ -37,6 +37,11 @@ module Aws::Backup
     #
     #   Set to `"WindowsVSS":"disabled"` to create a regular backup. The
     #   `WindowsVSS` option is not enabled by default.
+    #
+    #   For S3 backups, set to `"S3BackupACLs":"disabled"` to exclude ACLs
+    #   from the backup, or `"S3BackupObjectTags":"disabled"` to exclude
+    #   object tags from the backup. By default, both ACLs and object tags
+    #   are included in S3 backups.
     #
     #   If you specify an invalid option, you get an
     #   `InvalidParameterValueException` exception.
@@ -139,10 +144,57 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   The type of backup vault where the recovery point is stored. Valid
+    #   values are `BACKUP_VAULT` for standard backup vaults and
+    #   `LOGICALLY_AIR_GAPPED_BACKUP_VAULT` for logically air-gapped vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] vault_lock_state
+    #   The lock state of the backup vault. For logically air-gapped vaults,
+    #   this indicates whether the vault is locked in compliance mode. Valid
+    #   values include `LOCKED` and `UNLOCKED`.
+    #   @return [String]
+    #
     # @!attribute [rw] recovery_point_arn
     #   An ARN that uniquely identifies a recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_lifecycle
+    #   Specifies the time period, in days, before a recovery point
+    #   transitions to cold storage or is deleted.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days. Therefore, on the console, the retention
+    #   setting must be 90 days greater than the transition to cold after
+    #   days setting. The transition to cold after days setting can't be
+    #   changed after a backup has been transitioned to cold.
+    #
+    #   Resource types that can transition to cold storage are listed in the
+    #   [Feature availability by resource][1] table. Backup ignores this
+    #   expression for other resource types.
+    #
+    #   To remove the existing lifecycle and retention periods and keep your
+    #   recovery points indefinitely, specify -1 for
+    #   `MoveToColdStorageAfterDays` and `DeleteAfterDays`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+    #   @return [Types::Lifecycle]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   backup. This can be a customer-managed key or an Amazon Web Services
+    #   managed key, depending on the vault configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_encrypted
+    #   A boolean value indicating whether the backup is encrypted. All
+    #   backups in Backup are encrypted, but this field indicates the
+    #   encryption status for transparency.
+    #   @return [Boolean]
     #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
@@ -317,7 +369,12 @@ module Aws::Backup
       :backup_job_id,
       :backup_vault_name,
       :backup_vault_arn,
+      :vault_type,
+      :vault_lock_state,
       :recovery_point_arn,
+      :recovery_point_lifecycle,
+      :encryption_key_arn,
+      :is_encrypted,
       :resource_arn,
       :creation_date,
       :completion_date,
@@ -1417,11 +1474,53 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] destination_vault_type
+    #   The type of destination backup vault where the copied recovery point
+    #   is stored. Valid values are `BACKUP_VAULT` for standard backup
+    #   vaults and `LOGICALLY_AIR_GAPPED_BACKUP_VAULT` for logically
+    #   air-gapped vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_vault_lock_state
+    #   The lock state of the destination backup vault. For logically
+    #   air-gapped vaults, this indicates whether the vault is locked in
+    #   compliance mode. Valid values include `LOCKED` and `UNLOCKED`.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_recovery_point_arn
     #   An ARN that uniquely identifies a destination recovery point; for
     #   example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
+    #
+    # @!attribute [rw] destination_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   copied backup in the destination vault. This can be a
+    #   customer-managed key or an Amazon Web Services managed key.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_recovery_point_lifecycle
+    #   Specifies the time period, in days, before a recovery point
+    #   transitions to cold storage or is deleted.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days. Therefore, on the console, the retention
+    #   setting must be 90 days greater than the transition to cold after
+    #   days setting. The transition to cold after days setting can't be
+    #   changed after a backup has been transitioned to cold.
+    #
+    #   Resource types that can transition to cold storage are listed in the
+    #   [Feature availability by resource][1] table. Backup ignores this
+    #   expression for other resource types.
+    #
+    #   To remove the existing lifecycle and retention periods and keep your
+    #   recovery points indefinitely, specify -1 for
+    #   `MoveToColdStorageAfterDays` and `DeleteAfterDays`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+    #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Web Services resource to be copied; for example, an
@@ -1532,7 +1631,11 @@ module Aws::Backup
       :source_backup_vault_arn,
       :source_recovery_point_arn,
       :destination_backup_vault_arn,
+      :destination_vault_type,
+      :destination_vault_lock_state,
       :destination_recovery_point_arn,
+      :destination_encryption_key_arn,
+      :destination_recovery_point_lifecycle,
       :resource_arn,
       :creation_date,
       :completion_date,
@@ -2616,16 +2719,63 @@ module Aws::Backup
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_point_lifecycle
+    #   Specifies the time period, in days, before a recovery point
+    #   transitions to cold storage or is deleted.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days. Therefore, on the console, the retention
+    #   setting must be 90 days greater than the transition to cold after
+    #   days setting. The transition to cold after days setting can't be
+    #   changed after a backup has been transitioned to cold.
+    #
+    #   Resource types that can transition to cold storage are listed in the
+    #   [Feature availability by resource][1] table. Backup ignores this
+    #   expression for other resource types.
+    #
+    #   To remove the existing lifecycle and retention periods and keep your
+    #   recovery points indefinitely, specify -1 for
+    #   `MoveToColdStorageAfterDays` and `DeleteAfterDays`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+    #   @return [Types::Lifecycle]
+    #
     # @!attribute [rw] backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a backup
     #   vault; for example,
     #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   The type of backup vault where the recovery point is stored. Valid
+    #   values are `BACKUP_VAULT` for standard backup vaults and
+    #   `LOGICALLY_AIR_GAPPED_BACKUP_VAULT` for logically air-gapped vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] vault_lock_state
+    #   The lock state of the backup vault. For logically air-gapped vaults,
+    #   this indicates whether the vault is locked in compliance mode. Valid
+    #   values include `LOCKED` and `UNLOCKED`.
+    #   @return [String]
+    #
     # @!attribute [rw] recovery_point_arn
     #   An ARN that uniquely identifies a recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   backup. This can be a customer-managed key or an Amazon Web Services
+    #   managed key, depending on the vault configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_encrypted
+    #   A boolean value indicating whether the backup is encrypted. All
+    #   backups in Backup are encrypted, but this field indicates the
+    #   encryption status for transparency.
+    #   @return [Boolean]
     #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a saved resource. The format of the
@@ -2793,8 +2943,13 @@ module Aws::Backup
       :account_id,
       :backup_job_id,
       :backup_vault_name,
+      :recovery_point_lifecycle,
       :backup_vault_arn,
+      :vault_type,
+      :vault_lock_state,
       :recovery_point_arn,
+      :encryption_key_arn,
+      :is_encrypted,
       :resource_arn,
       :creation_date,
       :completion_date,
@@ -3596,6 +3751,18 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
     #
+    # @!attribute [rw] source_resource_arn
+    #   The Amazon Resource Name (ARN) of the original resource that was
+    #   backed up. This provides context about what resource is being
+    #   restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   The Amazon Resource Name (ARN) of the backup vault containing the
+    #   recovery point being restored. This helps identify vault access
+    #   policies and permissions.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date and time that a restore job is created, in Unix format and
     #   Coordinated Universal Time (UTC). The value of `CreationDate` is
@@ -3684,6 +3851,8 @@ module Aws::Backup
       :account_id,
       :restore_job_id,
       :recovery_point_arn,
+      :source_resource_arn,
+      :backup_vault_arn,
       :creation_date,
       :completion_date,
       :status,
@@ -7443,6 +7612,12 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50`.
     #   @return [String]
     #
+    # @!attribute [rw] backup_plan_name
+    #   The name of the backup plan that created this recovery point. This
+    #   provides human-readable context about which backup plan was
+    #   responsible for the backup job.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_plan_version
     #   Version IDs are unique, randomly generated, Unicode, UTF-8 encoded
     #   strings that are at most 1,024 bytes long. They cannot be edited.
@@ -7453,13 +7628,35 @@ module Aws::Backup
     #   selection of resources.
     #   @return [String]
     #
+    # @!attribute [rw] backup_rule_name
+    #   The name of the backup rule within the backup plan that created this
+    #   recovery point. This helps identify which specific rule triggered
+    #   the backup job.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_rule_cron
+    #   The cron expression that defines the schedule for the backup rule.
+    #   This shows the frequency and timing of when backups are
+    #   automatically triggered.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_rule_timezone
+    #   The timezone used for the backup rule schedule. This provides
+    #   context for when backups are scheduled to run in the specified
+    #   timezone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointCreator AWS API Documentation
     #
     class RecoveryPointCreator < Struct.new(
       :backup_plan_id,
       :backup_plan_arn,
+      :backup_plan_name,
       :backup_plan_version,
-      :backup_rule_id)
+      :backup_rule_id,
+      :backup_rule_name,
+      :backup_rule_cron,
+      :backup_rule_timezone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7935,6 +8132,18 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
     #
+    # @!attribute [rw] source_resource_arn
+    #   The Amazon Resource Name (ARN) of the original resource that was
+    #   backed up. This provides context about what resource is being
+    #   restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   The Amazon Resource Name (ARN) of the backup vault containing the
+    #   recovery point being restored. This helps identify vault access
+    #   policies and permissions.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date and time a restore job is created, in Unix format and
     #   Coordinated Universal Time (UTC). The value of `CreationDate` is
@@ -8024,6 +8233,8 @@ module Aws::Backup
       :account_id,
       :restore_job_id,
       :recovery_point_arn,
+      :source_resource_arn,
+      :backup_vault_arn,
       :creation_date,
       :completion_date,
       :status,

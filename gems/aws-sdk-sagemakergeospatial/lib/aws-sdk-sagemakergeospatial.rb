@@ -54,7 +54,7 @@ module Aws::SageMakerGeospatial
   autoload :EndpointProvider, 'aws-sdk-sagemakergeospatial/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakergeospatial/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

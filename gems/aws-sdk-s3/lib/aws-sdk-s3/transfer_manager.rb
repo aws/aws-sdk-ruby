@@ -2,26 +2,73 @@
 
 module Aws
   module S3
-    # A high-level S3 transfer utility that provides enhanced upload and download
-    # capabilities with automatic multipart handling, progress tracking, and
-    # handling of large files. The following features are supported:
+    # A high-level S3 transfer utility that provides enhanced upload and download capabilities with automatic
+    # multipart handling, progress tracking, and handling of large files. The following features are supported:
     #
     # * upload a file with multipart upload
     # * upload a stream with multipart upload
     # * download a S3 object with multipart download
     # * track transfer progress by using progress listener
     #
+    # ## Executor Management
+    # TransferManager uses executors to handle concurrent operations during multipart transfers. You can control
+    # concurrency behavior by providing a custom executor or relying on the default executor management.
+    #
+    # ### Default Behavior
+    # When no `:executor` is provided, TransferManager creates a new DefaultExecutor for each individual
+    # operation (`download_file`, `upload_file`, etc.) and automatically shuts it down when that operation completes.
+    # Each operation gets its own isolated thread pool with the specified `:thread_count` (default 10 threads).
+    #
+    # ### Custom Executor
+    # You can provide your own executor (e.g., `Concurrent::ThreadPoolExecutor`) for fine-grained control over thread
+    # pools and resource management. When using a custom executor, you are responsible for shutting it down
+    # when finished. The executor may be reused across multiple TransferManager operations.
+    #
+    # Custom executors must implement the same interface as DefaultExecutor.
+    #
+    # **Required methods:**
+    #
+    #   * `post(*args, &block)` - Execute a task with given arguments and block
+    #   * `kill` - Immediately terminate all running tasks
+    #
+    # **Optional methods:**
+    #
+    #   * `shutdown(timeout = nil)` - Gracefully shutdown the executor with optional timeout
+    #
+    # @example Using default executor (automatic creation and shutdown)
+    #     tm = TransferManager.new # No executor provided
+    #     # DefaultExecutor created, used, and shutdown automatically
+    #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key')
+    #
+    # @example Using custom executor (manual shutdown required)
+    #     require 'concurrent-ruby'
+    #
+    #     executor = Concurrent::ThreadPoolExecutor.new(max_threads: 5)
+    #     tm = TransferManager.new(executor: executor)
+    #     tm.download_file('/path/to/file1', bucket: 'bucket', key: 'key1')
+    #     executor.shutdown # You must shutdown custom executors
+    #
     class TransferManager
+
       # @param [Hash] options
       # @option options [S3::Client] :client (S3::Client.new)
       #   The S3 client to use for {TransferManager} operations. If not provided, a new default client
       #   will be created automatically.
+      # @option options [Object] :executor
+      #   The executor to use for multipart operations. Must implement the same interface as {DefaultExecutor}.
+      #   If not provided, a new {DefaultExecutor} will be created automatically for each operation and
+      #   shutdown after completion. When provided a custom executor, it will be reused across operations, and
+      #   you are responsible for shutting it down when finished.
       def initialize(options = {})
-        @client = options.delete(:client) || Client.new
+        @client = options[:client] || Client.new
+        @executor = options[:executor]
       end
 
       # @return [S3::Client]
       attr_reader :client
+
+      # @return [Object]
+      attr_reader :executor
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -74,10 +121,7 @@ module Aws
       # @option options [Integer] :chunk_size required in `"get_range"` mode.
       #
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
-      #
-      # @option options [String] :version_id The object version id used to retrieve the object.
-      #
-      #     @see https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html ObjectVersioning
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with given thread count).
       #
       # @option options [String] :checksum_mode ("ENABLED")
       #   When `"ENABLED"` and the object has a stored checksum, it will be used to validate the download and will
@@ -102,8 +146,11 @@ module Aws
       # @see Client#get_object
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
-        downloader = FileDownloader.new(client: @client)
-        downloader.download(destination, options.merge(bucket: bucket, key: key))
+        download_opts = options.merge(bucket: bucket, key: key)
+        executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
+        downloader = FileDownloader.new(client: @client, executor: executor)
+        downloader.download(destination, download_opts)
+        executor.shutdown unless @executor
         true
       end
 
@@ -139,7 +186,7 @@ module Aws
       #   A file on the local file system that will be uploaded. This can either be a `String` or `Pathname` to the
       #   file, an open `File` object, or an open `Tempfile` object. If you pass an open `File` or `Tempfile` object,
       #   then you are responsible for closing it after the upload completes. When using an open Tempfile, rewind it
-      #   before  uploading or else the object will be empty.
+      #   before uploading or else the object will be empty.
       #
       # @param [String] bucket
       #   The name of the S3 bucket to upload to.
@@ -156,15 +203,14 @@ module Aws
       #   Files larger han or equal to `:multipart_threshold` are uploaded using the S3 multipart upload APIs.
       #   Default threshold is `100MB`.
       #
-      # @option options [Integer] :thread_count (10)
-      #    The number of parallel multipart uploads. This option is not used if the file is smaller than
-      #    `:multipart_threshold`.
+      # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
+      #   Only used when no custom executor is provided (creates {DefaultExecutor} with the given thread count).
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.
       #   It will be invoked with `[bytes_read]` and  `[total_sizes]`.
       #
-      # @raise [MultipartUploadError] If an file is being uploaded in parts, and the upload can not be completed,
+      # @raise [MultipartUploadError] If a file is being uploaded in parts, and the upload can not be completed,
       #   then the upload is aborted and this error is raised.  The raised error has a `#errors` method that
       #   returns the failures that caused the upload to be aborted.
       #
@@ -175,13 +221,16 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
-        uploading_options = options.dup
+        upload_opts = options.merge(bucket: bucket, key: key)
+        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
-          multipart_threshold: uploading_options.delete(:multipart_threshold),
-          client: @client
+          multipart_threshold: upload_opts.delete(:multipart_threshold),
+          client: @client,
+          executor: executor
         )
-        response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
+        response = uploader.upload(source, upload_opts)
         yield response if block_given?
+        executor.shutdown unless @executor
         true
       end
 
@@ -217,7 +266,8 @@ module Aws
       #   {Client#upload_part} can be provided.
       #
       # @option options [Integer] :thread_count (10)
-      #   The number of parallel multipart uploads.
+      #   The number of parallel multipart uploads. Only used when no custom executor is provided (creates
+      #   {DefaultExecutor} with the given thread count). An additional thread is used internally for task coordination.
       #
       # @option options [Boolean] :tempfile (false)
       #   Normally read data is stored in memory when building the parts in order to complete the underlying
@@ -237,14 +287,16 @@ module Aws
       # @see Client#complete_multipart_upload
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
-        uploading_options = options.dup
+        upload_opts = options.merge(bucket: bucket, key: key)
+        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = MultipartStreamUploader.new(
           client: @client,
-          thread_count: uploading_options.delete(:thread_count),
-          tempfile: uploading_options.delete(:tempfile),
-          part_size: uploading_options.delete(:part_size)
+          executor: executor,
+          tempfile: upload_opts.delete(:tempfile),
+          part_size: upload_opts.delete(:part_size)
         )
-        uploader.upload(uploading_options.merge(bucket: bucket, key: key), &block)
+        uploader.upload(upload_opts, &block)
+        executor.shutdown unless @executor
         true
       end
     end

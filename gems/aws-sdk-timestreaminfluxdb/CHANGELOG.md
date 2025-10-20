@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2025-10-15)
+------------------
+
+* Feature - This release adds support for creating and managing InfluxDB 3 Core and Enterprise DbClusters.
+
 1.31.0 (2025-08-26)
 ------------------
 

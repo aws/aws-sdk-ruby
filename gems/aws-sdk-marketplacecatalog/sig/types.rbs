@@ -146,7 +146,7 @@ module Aws::MarketplaceCatalog
     end
 
     class ContainerProductSort
-      attr_accessor sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility")
+      attr_accessor sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility" | "CompatibleAWSServices")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
@@ -754,7 +754,7 @@ module Aws::MarketplaceCatalog
     end
 
     class SaaSProductSort
-      attr_accessor sort_by: ("EntityId" | "ProductTitle" | "Visibility" | "LastModifiedDate")
+      attr_accessor sort_by: ("EntityId" | "ProductTitle" | "Visibility" | "LastModifiedDate" | "DeliveryOptionTypes")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end

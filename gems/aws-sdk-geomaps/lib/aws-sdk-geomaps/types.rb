@@ -197,7 +197,7 @@ module Aws::GeoMaps
     #   A Unicode range of characters to download glyphs for. This must be
     #   aligned to multiples of 256.
     #
-    #   Example: `0-255.pdf`
+    #   Example: `0-255.pbf`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-maps-2020-11-19/GetGlyphsRequest AWS API Documentation
@@ -314,17 +314,19 @@ module Aws::GeoMaps
     end
 
     # @!attribute [rw] bounding_box
-    #   Takes in two pairs of coordinates, \[Lon, Lat\], denoting
-    #   south-westerly and north-easterly edges of the image. The underlying
-    #   area becomes the view of the image.
+    #   Takes in two pairs of coordinates in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\], denoting south-westerly and
+    #   north-easterly edges of the image. The underlying area becomes the
+    #   view of the image.
     #
     #   Example: -123.17075,49.26959,-123.08125,49.31429
     #   @return [String]
     #
     # @!attribute [rw] bounded_positions
-    #   Takes in two or more pair of coordinates, \[Lon, Lat\], with each
-    #   coordinate separated by a comma. The API will generate an image to
-    #   encompass all of the provided coordinates.
+    #   Takes in two or more pair of coordinates in World Geodetic System
+    #   (WGS 84) format: \[longitude, latitude\], with each coordinate
+    #   separated by a comma. The API will generate an image to encompass
+    #   all of the provided coordinates.
     #
     #   <note markdown="1"> Cannot be used with `Zoom` and or `Radius`
     #
@@ -334,9 +336,10 @@ module Aws::GeoMaps
     #   @return [String]
     #
     # @!attribute [rw] center
-    #   Takes in a pair of coordinates, \[Lon, Lat\], which becomes the
-    #   center point of the image. This parameter requires that either zoom
-    #   or radius is set.
+    #   Takes in a pair of coordinates in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\], which becomes the center point of
+    #   the image. This parameter requires that either zoom or radius is
+    #   set.
     #
     #   <note markdown="1"> Cannot be used with `Zoom` and or `Radius`
     #
@@ -765,6 +768,43 @@ module Aws::GeoMaps
     #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     #   @return [String]
     #
+    # @!attribute [rw] terrain
+    #   Adjusts how physical terrain details are rendered on the map.
+    #
+    #   The following terrain styles are currently supported:
+    #
+    #   * `Hillshade`: Displays the physical terrain details through shading
+    #     and highlighting of elevation change and geographic features.
+    #
+    #   ^
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #   @return [String]
+    #
+    # @!attribute [rw] contour_density
+    #   Displays the shape and steepness of terrain features using elevation
+    #   lines. The density value controls how densely the available contour
+    #   line information is rendered on the map.
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic
+    #   Displays real-time traffic information overlay on map, such as
+    #   incident events and flow events.
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #   @return [String]
+    #
+    # @!attribute [rw] travel_modes
+    #   Renders additional map information relevant to selected travel
+    #   modes. Information for multiple travel modes can be displayed
+    #   simultaneously, although this increases the overall information
+    #   density rendered on the map.
+    #
+    #   This parameter is valid only for the `Standard` map style.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] key
     #   Optional: The API key to be used for authorization. Either an API
     #   key or valid SigV4 signature must be provided when making a request.
@@ -776,6 +816,10 @@ module Aws::GeoMaps
       :style,
       :color_scheme,
       :political_view,
+      :terrain,
+      :contour_density,
+      :traffic,
+      :travel_modes,
       :key)
       SENSITIVE = [:political_view, :key]
       include Aws::Structure

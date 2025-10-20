@@ -54,7 +54,7 @@ module Aws::AmplifyBackend
   autoload :EndpointProvider, 'aws-sdk-amplifybackend/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-amplifybackend/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 

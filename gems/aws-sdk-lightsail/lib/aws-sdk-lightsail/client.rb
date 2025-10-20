@@ -1133,6 +1133,17 @@ module Aws::Lightsail
     #   resp.bucket.access_log_config.enabled #=> Boolean
     #   resp.bucket.access_log_config.destination #=> String
     #   resp.bucket.access_log_config.prefix #=> String
+    #   resp.bucket.cors.rules #=> Array
+    #   resp.bucket.cors.rules[0].id #=> String
+    #   resp.bucket.cors.rules[0].allowed_methods #=> Array
+    #   resp.bucket.cors.rules[0].allowed_methods[0] #=> String
+    #   resp.bucket.cors.rules[0].allowed_origins #=> Array
+    #   resp.bucket.cors.rules[0].allowed_origins[0] #=> String
+    #   resp.bucket.cors.rules[0].allowed_headers #=> Array
+    #   resp.bucket.cors.rules[0].allowed_headers[0] #=> String
+    #   resp.bucket.cors.rules[0].expose_headers #=> Array
+    #   resp.bucket.cors.rules[0].expose_headers[0] #=> String
+    #   resp.bucket.cors.rules[0].max_age_seconds #=> Integer
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
@@ -3178,7 +3189,7 @@ module Aws::Lightsail
 
     # Creates a Lightsail load balancer. To learn more about deciding
     # whether to load balance your application, see [Configure your
-    # Lightsail instances for load balancing][1]. You can create up to 5
+    # Lightsail instances for load balancing][1]. You can create up to 10
     # load balancers per AWS Region in your account.
     #
     # When you create a load balancer, you can specify a unique name and
@@ -5907,6 +5918,21 @@ module Aws::Lightsail
     #
     #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #
+    # @option params [Boolean] :include_cors
+    #   A Boolean value that indicates whether to include Lightsail bucket
+    #   CORS configuration in the response. For more information, see
+    #   [Configuring cross-origin resource sharing (CORS)][1].
+    #
+    #   <note markdown="1"> This parameter is only supported when getting a single bucket with
+    #   `bucketName` specified. The default value for this parameter is
+    #   `False`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html
+    #
     # @return [Types::GetBucketsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBucketsResult#buckets #buckets} => Array&lt;Types::Bucket&gt;
@@ -5919,6 +5945,7 @@ module Aws::Lightsail
     #     bucket_name: "BucketName",
     #     page_token: "string",
     #     include_connected_resources: false,
+    #     include_cors: false,
     #   })
     #
     # @example Response structure
@@ -5950,6 +5977,17 @@ module Aws::Lightsail
     #   resp.buckets[0].access_log_config.enabled #=> Boolean
     #   resp.buckets[0].access_log_config.destination #=> String
     #   resp.buckets[0].access_log_config.prefix #=> String
+    #   resp.buckets[0].cors.rules #=> Array
+    #   resp.buckets[0].cors.rules[0].id #=> String
+    #   resp.buckets[0].cors.rules[0].allowed_methods #=> Array
+    #   resp.buckets[0].cors.rules[0].allowed_methods[0] #=> String
+    #   resp.buckets[0].cors.rules[0].allowed_origins #=> Array
+    #   resp.buckets[0].cors.rules[0].allowed_origins[0] #=> String
+    #   resp.buckets[0].cors.rules[0].allowed_headers #=> Array
+    #   resp.buckets[0].cors.rules[0].allowed_headers[0] #=> String
+    #   resp.buckets[0].cors.rules[0].expose_headers #=> Array
+    #   resp.buckets[0].cors.rules[0].expose_headers[0] #=> String
+    #   resp.buckets[0].cors.rules[0].max_age_seconds #=> Integer
     #   resp.next_page_token #=> String
     #   resp.account_level_bpa_sync.status #=> String, one of "InSync", "Failed", "NeverSynced", "Defaulted"
     #   resp.account_level_bpa_sync.last_synced_at #=> Time
@@ -11467,6 +11505,22 @@ module Aws::Lightsail
     # @option params [Types::BucketAccessLogConfig] :access_log_config
     #   An object that describes the access log configuration for the bucket.
     #
+    # @option params [Types::BucketCorsConfig] :cors
+    #   Sets the cross-origin resource sharing (CORS) configuration for your
+    #   bucket. If a CORS configuration exists, it is replaced with the
+    #   specified configuration. For AWS CLI operations, this parameter can
+    #   also be passed as a file. For more information, see [Configuring
+    #   cross-origin resource sharing (CORS)][1].
+    #
+    #   <note markdown="1"> CORS information is only returned in a response when you update the
+    #   CORS policy.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html
+    #
     # @return [Types::UpdateBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBucketResult#bucket #bucket} => Types::Bucket
@@ -11486,6 +11540,18 @@ module Aws::Lightsail
     #       enabled: false, # required
     #       destination: "BucketName",
     #       prefix: "BucketAccessLogPrefix",
+    #     },
+    #     cors: {
+    #       rules: [
+    #         {
+    #           id: "BucketCorsRuleId",
+    #           allowed_methods: ["BucketCorsAllowedMethod"], # required
+    #           allowed_origins: ["string"], # required
+    #           allowed_headers: ["string"],
+    #           expose_headers: ["string"],
+    #           max_age_seconds: 1,
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -11517,6 +11583,17 @@ module Aws::Lightsail
     #   resp.bucket.access_log_config.enabled #=> Boolean
     #   resp.bucket.access_log_config.destination #=> String
     #   resp.bucket.access_log_config.prefix #=> String
+    #   resp.bucket.cors.rules #=> Array
+    #   resp.bucket.cors.rules[0].id #=> String
+    #   resp.bucket.cors.rules[0].allowed_methods #=> Array
+    #   resp.bucket.cors.rules[0].allowed_methods[0] #=> String
+    #   resp.bucket.cors.rules[0].allowed_origins #=> Array
+    #   resp.bucket.cors.rules[0].allowed_origins[0] #=> String
+    #   resp.bucket.cors.rules[0].allowed_headers #=> Array
+    #   resp.bucket.cors.rules[0].allowed_headers[0] #=> String
+    #   resp.bucket.cors.rules[0].expose_headers #=> Array
+    #   resp.bucket.cors.rules[0].expose_headers[0] #=> String
+    #   resp.bucket.cors.rules[0].max_age_seconds #=> Integer
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
@@ -12484,7 +12561,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

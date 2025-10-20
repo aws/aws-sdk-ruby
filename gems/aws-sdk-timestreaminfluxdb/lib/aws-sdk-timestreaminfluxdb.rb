@@ -54,7 +54,7 @@ module Aws::TimestreamInfluxDB
   autoload :EndpointProvider, 'aws-sdk-timestreaminfluxdb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-timestreaminfluxdb/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

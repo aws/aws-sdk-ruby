@@ -159,6 +159,32 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Configuration structure that defines how traffic is routed from the
+    # connector to the SFTP server. Contains VPC Lattice settings when using
+    # VPC\_LATTICE egress type for private connectivity through customer
+    # VPCs.
+    #
+    # @note ConnectorEgressConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] vpc_lattice
+    #   VPC\_LATTICE configuration for routing connector traffic through
+    #   customer VPCs. Enables private connectivity to SFTP servers without
+    #   requiring public internet access or complex network configurations.
+    #   @return [Types::ConnectorVpcLatticeEgressConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ConnectorEgressConfig AWS API Documentation
+    #
+    class ConnectorEgressConfig < Struct.new(
+      :vpc_lattice,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class VpcLattice < ConnectorEgressConfig; end
+      class Unknown < ConnectorEgressConfig; end
+    end
+
     # A structure that contains the details for files transferred using an
     # SFTP connector, during a single transfer.
     #
@@ -188,6 +214,33 @@ module Aws::Transfer
       :status_code,
       :failure_code,
       :failure_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # VPC\_LATTICE egress configuration that specifies the Resource
+    # Configuration ARN and port for connecting to SFTP servers through
+    # customer VPCs. Requires a valid Resource Configuration with
+    # appropriate network access.
+    #
+    # @!attribute [rw] resource_configuration_arn
+    #   ARN of the VPC\_LATTICE Resource Configuration that defines the
+    #   target SFTP server location. Must point to a valid Resource
+    #   Configuration in the customer's VPC with appropriate network
+    #   connectivity to the SFTP server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_number
+    #   Port number for connecting to the SFTP server through VPC\_LATTICE.
+    #   Defaults to 22 if not specified. Must match the port on which the
+    #   target SFTP server is listening.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ConnectorVpcLatticeEgressConfig AWS API Documentation
+    #
+    class ConnectorVpcLatticeEgressConfig < Struct.new(
+      :resource_configuration_arn,
+      :port_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -567,6 +620,11 @@ module Aws::Transfer
 
     # @!attribute [rw] url
     #   The URL of the partner's AS2 or SFTP endpoint.
+    #
+    #   When creating AS2 connectors or service-managed SFTP connectors
+    #   (connectors without egress configuration), you must provide a URL to
+    #   specify the remote server endpoint. For VPC Lattice type connectors,
+    #   the URL must be null.
     #   @return [String]
     #
     # @!attribute [rw] as_2_config
@@ -631,6 +689,13 @@ module Aws::Transfer
     #   Specifies the name of the security policy for the connector.
     #   @return [String]
     #
+    # @!attribute [rw] egress_config
+    #   Specifies the egress configuration for the connector, which
+    #   determines how traffic is routed from the connector to the SFTP
+    #   server. When set to VPC, enables routing through customer VPCs using
+    #   VPC\_LATTICE for private connectivity.
+    #   @return [Types::ConnectorEgressConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateConnectorRequest AWS API Documentation
     #
     class CreateConnectorRequest < Struct.new(
@@ -640,7 +705,8 @@ module Aws::Transfer
       :logging_role,
       :tags,
       :sftp_config,
-      :security_policy_name)
+      :security_policy_name,
+      :egress_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -944,6 +1010,14 @@ module Aws::Transfer
     # @!attribute [rw] protocol_details
     #   The protocol settings that are configured for your server.
     #
+    #   <note markdown="1"> Avoid placing Network Load Balancers (NLBs) or NAT gateways in front
+    #   of Transfer Family servers, as this increases costs and can cause
+    #   performance issues, including reduced connection limits for FTPS.
+    #   For more details, see [ Avoid placing NLBs and NATs in front of
+    #   Transfer Family][1].
+    #
+    #    </note>
+    #
     #   * To indicate passive mode (for FTP and FTPS protocols), use the
     #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address,
     #     such as the external IP address of a firewall, router, or load
@@ -965,6 +1039,10 @@ module Aws::Transfer
     #
     #   * `As2Transports` indicates the transport method for the AS2
     #     messages. Currently, only HTTP is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
     #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] security_policy_name
@@ -2518,6 +2596,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] url
     #   The URL of the partner's AS2 or SFTP endpoint.
+    #
+    #   When creating AS2 connectors or service-managed SFTP connectors
+    #   (connectors without egress configuration), you must provide a URL to
+    #   specify the remote server endpoint. For VPC Lattice type connectors,
+    #   the URL must be null.
     #   @return [String]
     #
     # @!attribute [rw] as_2_config
@@ -2586,6 +2669,33 @@ module Aws::Transfer
     #   The text name of the security policy for the specified connector.
     #   @return [String]
     #
+    # @!attribute [rw] egress_config
+    #   Current egress configuration of the connector, showing how traffic
+    #   is routed to the SFTP server. Contains VPC Lattice settings when
+    #   using VPC\_LATTICE egress type.
+    #
+    #   When using the VPC\_LATTICE egress type, Transfer Family uses a
+    #   managed Service Network to simplify the resource sharing process.
+    #   @return [Types::DescribedConnectorEgressConfig]
+    #
+    # @!attribute [rw] egress_type
+    #   Type of egress configuration for the connector. SERVICE\_MANAGED
+    #   uses Transfer Family managed NAT gateways, while VPC\_LATTICE routes
+    #   traffic through customer VPCs using VPC Lattice.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message providing details when the connector is in ERRORED
+    #   status. Contains information to help troubleshoot connector creation
+    #   or operation failures.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current status of the connector. PENDING indicates creation/update
+    #   in progress, ACTIVE means ready for operations, and ERRORED
+    #   indicates a failure requiring attention.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnector AWS API Documentation
     #
     class DescribedConnector < Struct.new(
@@ -2598,7 +2708,61 @@ module Aws::Transfer
       :tags,
       :sftp_config,
       :service_managed_egress_ip_addresses,
-      :security_policy_name)
+      :security_policy_name,
+      :egress_config,
+      :egress_type,
+      :error_message,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure containing the current egress configuration details
+    # for the connector. Shows how traffic is currently routed from the
+    # connector to the SFTP server.
+    #
+    # @note DescribedConnectorEgressConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DescribedConnectorEgressConfig corresponding to the set member.
+    #
+    # @!attribute [rw] vpc_lattice
+    #   VPC\_LATTICE configuration details in the response, showing the
+    #   current Resource Configuration ARN and port settings for VPC-based
+    #   connectivity.
+    #   @return [Types::DescribedConnectorVpcLatticeEgressConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnectorEgressConfig AWS API Documentation
+    #
+    class DescribedConnectorEgressConfig < Struct.new(
+      :vpc_lattice,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class VpcLattice < DescribedConnectorEgressConfig; end
+      class Unknown < DescribedConnectorEgressConfig; end
+    end
+
+    # VPC\_LATTICE egress configuration details in the response, containing
+    # the Resource Configuration ARN and port number currently configured
+    # for the connector.
+    #
+    # @!attribute [rw] resource_configuration_arn
+    #   ARN of the VPC\_LATTICE Resource Configuration currently used by the
+    #   connector. This Resource Configuration defines the network path to
+    #   the SFTP server through the customer's VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_number
+    #   Port number currently configured for SFTP connections through
+    #   VPC\_LATTICE. Shows the port on which the connector attempts to
+    #   connect to the target SFTP server.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnectorVpcLatticeEgressConfig AWS API Documentation
+    #
+    class DescribedConnectorVpcLatticeEgressConfig < Struct.new(
+      :resource_configuration_arn,
+      :port_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2897,6 +3061,14 @@ module Aws::Transfer
     # @!attribute [rw] protocol_details
     #   The protocol settings that are configured for your server.
     #
+    #   <note markdown="1"> Avoid placing Network Load Balancers (NLBs) or NAT gateways in front
+    #   of Transfer Family servers, as this increases costs and can cause
+    #   performance issues, including reduced connection limits for FTPS.
+    #   For more details, see [ Avoid placing NLBs and NATs in front of
+    #   Transfer Family][1].
+    #
+    #    </note>
+    #
     #   * To indicate passive mode (for FTP and FTPS protocols), use the
     #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address,
     #     such as the external IP address of a firewall, router, or load
@@ -2918,6 +3090,10 @@ module Aws::Transfer
     #
     #   * `As2Transports` indicates the transport method for the AS2
     #     messages. Currently, only HTTP is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
     #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] domain
@@ -5004,6 +5180,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] url
     #   The URL of the partner's AS2 or SFTP endpoint.
+    #
+    #   When creating AS2 connectors or service-managed SFTP connectors
+    #   (connectors without egress configuration), you must provide a URL to
+    #   specify the remote server endpoint. For VPC Lattice type connectors,
+    #   the URL must be null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedConnector AWS API Documentation
@@ -5440,6 +5621,18 @@ module Aws::Transfer
     #   [Configuring your FTPS server behind a firewall or NAT with Transfer
     #   Family][1].
     #
+    #    Additionally, avoid placing Network Load Balancers (NLBs) or NAT
+    #   gateways in front of Transfer Family servers. This configuration
+    #   increases costs and can cause performance issues. When NLBs or NATs
+    #   are in the communication path, Transfer Family cannot accurately
+    #   recognize client IP addresses, which impacts connection sharding and
+    #   limits FTPS servers to only 300 simultaneous connections instead of
+    #   10,000. If you must use an NLB, use port 21 for health checks and
+    #   enable TLS session resumption by setting `TlsSessionResumptionMode =
+    #   ENFORCED`. For optimal performance, migrate to VPC endpoints with
+    #   Elastic IP addresses instead of using NLBs. For more details, see [
+    #   Avoid placing NLBs and NATs in front of Transfer Family][2].
+    #
     #    </note>
     #
     #   *Special values*
@@ -5463,6 +5656,7 @@ module Aws::Transfer
     #
     #
     #   [1]: http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/
+    #   [2]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
     #   @return [String]
     #
     # @!attribute [rw] tls_session_resumption_mode
@@ -5790,6 +5984,12 @@ module Aws::Transfer
     #
     #    </note>
     #
+    #   When creating connectors with egress config (VPC\_LATTICE type
+    #   connectors), since host name is not something we can verify, the
+    #   only accepted trusted host key format is `key-type key-body` without
+    #   the host name. For example: `ssh-rsa
+    #   AAAAB3Nza...<long-string-for-public-key>`
+    #
     #   The three standard SSH public key format elements are `<key type>`,
     #   `<body base64>`, and an optional `<comment>`, with spaces between
     #   each element. Specify only the `<key type>` and `<body base64>`: do
@@ -5812,11 +6012,16 @@ module Aws::Transfer
     #
     #   This prints the public host key to standard output.
     #
-    #   `ftp.host.com ssh-rsa AAAAB3Nza...<long-string-for-public-key`
+    #   `ftp.host.com ssh-rsa AAAAB3Nza...<long-string-for-public-key>`
     #
     #   Copy and paste this string into the `TrustedHostKeys` field for the
     #   `create-connector` command or into the **Trusted host keys** field
     #   in the console.
+    #
+    #   For VPC Lattice type connectors (VPC\_LATTICE), remove the hostname
+    #   from the key and use only the `key-type key-body` format. In this
+    #   example, it should be: `ssh-rsa
+    #   AAAAB3Nza...<long-string-for-public-key>`
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_concurrent_connections
@@ -6693,12 +6898,42 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Structure for updating the egress configuration of an existing
+    # connector. Allows modification of how traffic is routed from the
+    # connector to the SFTP server, including VPC\_LATTICE settings.
+    #
+    # @note UpdateConnectorEgressConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] vpc_lattice
+    #   VPC\_LATTICE configuration updates for the connector. Use this to
+    #   modify the Resource Configuration ARN or port number for VPC-based
+    #   connectivity.
+    #   @return [Types::UpdateConnectorVpcLatticeEgressConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnectorEgressConfig AWS API Documentation
+    #
+    class UpdateConnectorEgressConfig < Struct.new(
+      :vpc_lattice,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class VpcLattice < UpdateConnectorEgressConfig; end
+      class Unknown < UpdateConnectorEgressConfig; end
+    end
+
     # @!attribute [rw] connector_id
     #   The unique identifier for the connector.
     #   @return [String]
     #
     # @!attribute [rw] url
     #   The URL of the partner's AS2 or SFTP endpoint.
+    #
+    #   When creating AS2 connectors or service-managed SFTP connectors
+    #   (connectors without egress configuration), you must provide a URL to
+    #   specify the remote server endpoint. For VPC Lattice type connectors,
+    #   the URL must be null.
     #   @return [String]
     #
     # @!attribute [rw] as_2_config
@@ -6758,6 +6993,12 @@ module Aws::Transfer
     #   Specifies the name of the security policy for the connector.
     #   @return [String]
     #
+    # @!attribute [rw] egress_config
+    #   Updates the egress configuration for the connector, allowing you to
+    #   modify how traffic is routed from the connector to the SFTP server.
+    #   Changes to VPC configuration may require connector restart.
+    #   @return [Types::UpdateConnectorEgressConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnectorRequest AWS API Documentation
     #
     class UpdateConnectorRequest < Struct.new(
@@ -6767,7 +7008,8 @@ module Aws::Transfer
       :access_role,
       :logging_role,
       :sftp_config,
-      :security_policy_name)
+      :security_policy_name,
+      :egress_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6781,6 +7023,31 @@ module Aws::Transfer
     #
     class UpdateConnectorResponse < Struct.new(
       :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # VPC\_LATTICE egress configuration updates for modifying how the
+    # connector routes traffic through customer VPCs. Changes to these
+    # settings may require connector restart to take effect.
+    #
+    # @!attribute [rw] resource_configuration_arn
+    #   Updated ARN of the VPC\_LATTICE Resource Configuration. Use this to
+    #   change the target SFTP server location or modify the network path
+    #   through the customer's VPC infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_number
+    #   Updated port number for SFTP connections through VPC\_LATTICE.
+    #   Change this if the target SFTP server port has been modified or if
+    #   connecting to a different server endpoint.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnectorVpcLatticeEgressConfig AWS API Documentation
+    #
+    class UpdateConnectorVpcLatticeEgressConfig < Struct.new(
+      :resource_configuration_arn,
+      :port_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6901,6 +7168,14 @@ module Aws::Transfer
     # @!attribute [rw] protocol_details
     #   The protocol settings that are configured for your server.
     #
+    #   <note markdown="1"> Avoid placing Network Load Balancers (NLBs) or NAT gateways in front
+    #   of Transfer Family servers, as this increases costs and can cause
+    #   performance issues, including reduced connection limits for FTPS.
+    #   For more details, see [ Avoid placing NLBs and NATs in front of
+    #   Transfer Family][1].
+    #
+    #    </note>
+    #
     #   * To indicate passive mode (for FTP and FTPS protocols), use the
     #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address,
     #     such as the external IP address of a firewall, router, or load
@@ -6922,6 +7197,10 @@ module Aws::Transfer
     #
     #   * `As2Transports` indicates the transport method for the AS2
     #     messages. Currently, only HTTP is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
     #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] endpoint_details

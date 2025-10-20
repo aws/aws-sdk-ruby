@@ -53,6 +53,15 @@ module Aws::DataZone
     AggregationOutputList = Shapes::ListShape.new(name: 'AggregationOutputList')
     AllDomainUnitsGrantFilter = Shapes::StructureShape.new(name: 'AllDomainUnitsGrantFilter')
     AllUsersGrantFilter = Shapes::StructureShape.new(name: 'AllUsersGrantFilter')
+    AmazonQPropertiesInput = Shapes::StructureShape.new(name: 'AmazonQPropertiesInput')
+    AmazonQPropertiesInputAuthModeString = Shapes::StringShape.new(name: 'AmazonQPropertiesInputAuthModeString')
+    AmazonQPropertiesInputProfileArnString = Shapes::StringShape.new(name: 'AmazonQPropertiesInputProfileArnString')
+    AmazonQPropertiesOutput = Shapes::StructureShape.new(name: 'AmazonQPropertiesOutput')
+    AmazonQPropertiesOutputAuthModeString = Shapes::StringShape.new(name: 'AmazonQPropertiesOutputAuthModeString')
+    AmazonQPropertiesOutputProfileArnString = Shapes::StringShape.new(name: 'AmazonQPropertiesOutputProfileArnString')
+    AmazonQPropertiesPatch = Shapes::StructureShape.new(name: 'AmazonQPropertiesPatch')
+    AmazonQPropertiesPatchAuthModeString = Shapes::StringShape.new(name: 'AmazonQPropertiesPatchAuthModeString')
+    AmazonQPropertiesPatchProfileArnString = Shapes::StringShape.new(name: 'AmazonQPropertiesPatchProfileArnString')
     ApplicableAssetTypes = Shapes::ListShape.new(name: 'ApplicableAssetTypes')
     AssetFilterConfiguration = Shapes::UnionShape.new(name: 'AssetFilterConfiguration')
     AssetFilterSummary = Shapes::StructureShape.new(name: 'AssetFilterSummary')
@@ -143,6 +152,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput = Shapes::UnionShape.new(name: 'ConnectionPropertiesOutput')
     ConnectionPropertiesPatch = Shapes::UnionShape.new(name: 'ConnectionPropertiesPatch')
     ConnectionPropertiesValueString = Shapes::StringShape.new(name: 'ConnectionPropertiesValueString')
+    ConnectionScope = Shapes::StringShape.new(name: 'ConnectionScope')
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
     ConnectionSummaries = Shapes::ListShape.new(name: 'ConnectionSummaries')
     ConnectionSummary = Shapes::StructureShape.new(name: 'ConnectionSummary')
@@ -1251,6 +1261,21 @@ module Aws::DataZone
 
     AllUsersGrantFilter.struct_class = Types::AllUsersGrantFilter
 
+    AmazonQPropertiesInput.add_member(:auth_mode, Shapes::ShapeRef.new(shape: AmazonQPropertiesInputAuthModeString, location_name: "authMode"))
+    AmazonQPropertiesInput.add_member(:is_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isEnabled"))
+    AmazonQPropertiesInput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AmazonQPropertiesInputProfileArnString, location_name: "profileArn"))
+    AmazonQPropertiesInput.struct_class = Types::AmazonQPropertiesInput
+
+    AmazonQPropertiesOutput.add_member(:auth_mode, Shapes::ShapeRef.new(shape: AmazonQPropertiesOutputAuthModeString, location_name: "authMode"))
+    AmazonQPropertiesOutput.add_member(:is_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isEnabled"))
+    AmazonQPropertiesOutput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AmazonQPropertiesOutputProfileArnString, location_name: "profileArn"))
+    AmazonQPropertiesOutput.struct_class = Types::AmazonQPropertiesOutput
+
+    AmazonQPropertiesPatch.add_member(:auth_mode, Shapes::ShapeRef.new(shape: AmazonQPropertiesPatchAuthModeString, location_name: "authMode"))
+    AmazonQPropertiesPatch.add_member(:is_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isEnabled"))
+    AmazonQPropertiesPatch.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AmazonQPropertiesPatchProfileArnString, location_name: "profileArn"))
+    AmazonQPropertiesPatch.struct_class = Types::AmazonQPropertiesPatch
+
     ApplicableAssetTypes.member = Shapes::ShapeRef.new(shape: TypeName)
 
     AssetFilterConfiguration.add_member(:column_configuration, Shapes::ShapeRef.new(shape: ColumnFilterConfiguration, location_name: "columnConfiguration"))
@@ -1519,6 +1544,7 @@ module Aws::DataZone
     ConnectionProperties.key = Shapes::ShapeRef.new(shape: String)
     ConnectionProperties.value = Shapes::ShapeRef.new(shape: ConnectionPropertiesValueString)
 
+    ConnectionPropertiesInput.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesInput, location_name: "amazonQProperties"))
     ConnectionPropertiesInput.add_member(:athena_properties, Shapes::ShapeRef.new(shape: AthenaPropertiesInput, location_name: "athenaProperties"))
     ConnectionPropertiesInput.add_member(:glue_properties, Shapes::ShapeRef.new(shape: GluePropertiesInput, location_name: "glueProperties"))
     ConnectionPropertiesInput.add_member(:hyper_pod_properties, Shapes::ShapeRef.new(shape: HyperPodPropertiesInput, location_name: "hyperPodProperties"))
@@ -1528,6 +1554,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesInput, location_name: "sparkEmrProperties"))
     ConnectionPropertiesInput.add_member(:spark_glue_properties, Shapes::ShapeRef.new(shape: SparkGluePropertiesInput, location_name: "sparkGlueProperties"))
     ConnectionPropertiesInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConnectionPropertiesInput.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesInput::AmazonQProperties)
     ConnectionPropertiesInput.add_member_subclass(:athena_properties, Types::ConnectionPropertiesInput::AthenaProperties)
     ConnectionPropertiesInput.add_member_subclass(:glue_properties, Types::ConnectionPropertiesInput::GlueProperties)
     ConnectionPropertiesInput.add_member_subclass(:hyper_pod_properties, Types::ConnectionPropertiesInput::HyperPodProperties)
@@ -1539,6 +1566,7 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member_subclass(:unknown, Types::ConnectionPropertiesInput::Unknown)
     ConnectionPropertiesInput.struct_class = Types::ConnectionPropertiesInput
 
+    ConnectionPropertiesOutput.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesOutput, location_name: "amazonQProperties"))
     ConnectionPropertiesOutput.add_member(:athena_properties, Shapes::ShapeRef.new(shape: AthenaPropertiesOutput, location_name: "athenaProperties"))
     ConnectionPropertiesOutput.add_member(:glue_properties, Shapes::ShapeRef.new(shape: GluePropertiesOutput, location_name: "glueProperties"))
     ConnectionPropertiesOutput.add_member(:hyper_pod_properties, Shapes::ShapeRef.new(shape: HyperPodPropertiesOutput, location_name: "hyperPodProperties"))
@@ -1548,6 +1576,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesOutput, location_name: "sparkEmrProperties"))
     ConnectionPropertiesOutput.add_member(:spark_glue_properties, Shapes::ShapeRef.new(shape: SparkGluePropertiesOutput, location_name: "sparkGlueProperties"))
     ConnectionPropertiesOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConnectionPropertiesOutput.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesOutput::AmazonQProperties)
     ConnectionPropertiesOutput.add_member_subclass(:athena_properties, Types::ConnectionPropertiesOutput::AthenaProperties)
     ConnectionPropertiesOutput.add_member_subclass(:glue_properties, Types::ConnectionPropertiesOutput::GlueProperties)
     ConnectionPropertiesOutput.add_member_subclass(:hyper_pod_properties, Types::ConnectionPropertiesOutput::HyperPodProperties)
@@ -1559,6 +1588,7 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member_subclass(:unknown, Types::ConnectionPropertiesOutput::Unknown)
     ConnectionPropertiesOutput.struct_class = Types::ConnectionPropertiesOutput
 
+    ConnectionPropertiesPatch.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesPatch, location_name: "amazonQProperties"))
     ConnectionPropertiesPatch.add_member(:athena_properties, Shapes::ShapeRef.new(shape: AthenaPropertiesPatch, location_name: "athenaProperties"))
     ConnectionPropertiesPatch.add_member(:glue_properties, Shapes::ShapeRef.new(shape: GluePropertiesPatch, location_name: "glueProperties"))
     ConnectionPropertiesPatch.add_member(:iam_properties, Shapes::ShapeRef.new(shape: IamPropertiesPatch, location_name: "iamProperties"))
@@ -1566,6 +1596,7 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesPatch, location_name: "s3Properties"))
     ConnectionPropertiesPatch.add_member(:spark_emr_properties, Shapes::ShapeRef.new(shape: SparkEmrPropertiesPatch, location_name: "sparkEmrProperties"))
     ConnectionPropertiesPatch.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConnectionPropertiesPatch.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesPatch::AmazonQProperties)
     ConnectionPropertiesPatch.add_member_subclass(:athena_properties, Types::ConnectionPropertiesPatch::AthenaProperties)
     ConnectionPropertiesPatch.add_member_subclass(:glue_properties, Types::ConnectionPropertiesPatch::GlueProperties)
     ConnectionPropertiesPatch.add_member_subclass(:iam_properties, Types::ConnectionPropertiesPatch::IamProperties)
@@ -1585,6 +1616,7 @@ module Aws::DataZone
     ConnectionSummary.add_member(:physical_endpoints, Shapes::ShapeRef.new(shape: PhysicalEndpoints, required: true, location_name: "physicalEndpoints"))
     ConnectionSummary.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     ConnectionSummary.add_member(:props, Shapes::ShapeRef.new(shape: ConnectionPropertiesOutput, location_name: "props"))
+    ConnectionSummary.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     ConnectionSummary.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     ConnectionSummary.struct_class = Types::ConnectionSummary
 
@@ -1729,9 +1761,11 @@ module Aws::DataZone
     CreateConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectionInput.add_member(:description, Shapes::ShapeRef.new(shape: CreateConnectionInputDescriptionString, location_name: "description"))
     CreateConnectionInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
-    CreateConnectionInput.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentIdentifier"))
+    CreateConnectionInput.add_member(:enable_trusted_identity_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTrustedIdentityPropagation"))
+    CreateConnectionInput.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentIdentifier"))
     CreateConnectionInput.add_member(:name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "name"))
     CreateConnectionInput.add_member(:props, Shapes::ShapeRef.new(shape: ConnectionPropertiesInput, location_name: "props"))
+    CreateConnectionInput.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     CreateConnectionInput.struct_class = Types::CreateConnectionInput
 
     CreateConnectionOutput.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
@@ -1743,6 +1777,7 @@ module Aws::DataZone
     CreateConnectionOutput.add_member(:physical_endpoints, Shapes::ShapeRef.new(shape: PhysicalEndpoints, required: true, location_name: "physicalEndpoints"))
     CreateConnectionOutput.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     CreateConnectionOutput.add_member(:props, Shapes::ShapeRef.new(shape: ConnectionPropertiesOutput, location_name: "props"))
+    CreateConnectionOutput.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     CreateConnectionOutput.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     CreateConnectionOutput.struct_class = Types::CreateConnectionOutput
 
@@ -2997,6 +3032,7 @@ module Aws::DataZone
     GetConnectionOutput.add_member(:physical_endpoints, Shapes::ShapeRef.new(shape: PhysicalEndpoints, required: true, location_name: "physicalEndpoints"))
     GetConnectionOutput.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     GetConnectionOutput.add_member(:props, Shapes::ShapeRef.new(shape: ConnectionPropertiesOutput, location_name: "props"))
+    GetConnectionOutput.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     GetConnectionOutput.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     GetConnectionOutput.struct_class = Types::GetConnectionOutput
 
@@ -3874,7 +3910,8 @@ module Aws::DataZone
     ListConnectionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListConnectionsInput.add_member(:name, Shapes::ShapeRef.new(shape: ConnectionName, location: "querystring", location_name: "name"))
     ListConnectionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
-    ListConnectionsInput.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "querystring", location_name: "projectIdentifier"))
+    ListConnectionsInput.add_member(:project_identifier, Shapes::ShapeRef.new(shape: ProjectId, location: "querystring", location_name: "projectIdentifier"))
+    ListConnectionsInput.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location: "querystring", location_name: "scope"))
     ListConnectionsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortFieldConnection, location: "querystring", location_name: "sortBy"))
     ListConnectionsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
     ListConnectionsInput.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, location: "querystring", location_name: "type"))
@@ -4442,6 +4479,7 @@ module Aws::DataZone
     PhysicalConnectionRequirements.struct_class = Types::PhysicalConnectionRequirements
 
     PhysicalEndpoint.add_member(:aws_location, Shapes::ShapeRef.new(shape: AwsLocation, location_name: "awsLocation"))
+    PhysicalEndpoint.add_member(:enable_trusted_identity_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTrustedIdentityPropagation"))
     PhysicalEndpoint.add_member(:glue_connection, Shapes::ShapeRef.new(shape: GlueConnection, location_name: "glueConnection"))
     PhysicalEndpoint.add_member(:glue_connection_name, Shapes::ShapeRef.new(shape: String, location_name: "glueConnectionName"))
     PhysicalEndpoint.add_member(:host, Shapes::ShapeRef.new(shape: String, location_name: "host"))
@@ -5490,6 +5528,7 @@ module Aws::DataZone
     UpdateConnectionOutput.add_member(:physical_endpoints, Shapes::ShapeRef.new(shape: PhysicalEndpoints, required: true, location_name: "physicalEndpoints"))
     UpdateConnectionOutput.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     UpdateConnectionOutput.add_member(:props, Shapes::ShapeRef.new(shape: ConnectionPropertiesOutput, location_name: "props"))
+    UpdateConnectionOutput.add_member(:scope, Shapes::ShapeRef.new(shape: ConnectionScope, location_name: "scope"))
     UpdateConnectionOutput.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     UpdateConnectionOutput.struct_class = Types::UpdateConnectionOutput
 

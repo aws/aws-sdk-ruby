@@ -55,7 +55,7 @@ module Aws::MachineLearning
   autoload :EndpointProvider, 'aws-sdk-machinelearning/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-machinelearning/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

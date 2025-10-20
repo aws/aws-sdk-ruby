@@ -713,7 +713,8 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the listener.
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1258,12 +1259,13 @@ module Aws::ElasticLoadBalancingV2
     # Creates a rule for the specified listener. The listener must be
     # associated with an Application Load Balancer.
     #
-    # Each rule consists of a priority, one or more actions, and one or more
-    # conditions. Rules are evaluated in priority order, from the lowest
-    # value to the highest value. When the conditions for a rule are met,
-    # its actions are performed. If the conditions for no rules are met, the
-    # actions for the default rule are performed. For more information, see
-    # [Listener rules][1] in the *Application Load Balancers Guide*.
+    # Each rule consists of a priority, one or more actions, one or more
+    # conditions, and up to two optional transforms. Rules are evaluated in
+    # priority order, from the lowest value to the highest value. When the
+    # conditions for a rule are met, its actions are performed. If the
+    # conditions for no rules are met, the actions for the default rule are
+    # performed. For more information, see [Listener rules][1] in the
+    # *Application Load Balancers Guide*.
     #
     #
     #
@@ -1284,6 +1286,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the rule.
+    #
+    # @option params [Array<Types::RuleTransform>] :transforms
+    #   The transforms to apply to requests that match this rule. You can add
+    #   one host header rewrite transform and one URL rewrite transform.
     #
     # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1349,13 +1355,16 @@ module Aws::ElasticLoadBalancingV2
     #         values: ["StringValue"],
     #         host_header_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         path_pattern_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         http_header_config: {
     #           http_header_name: "HttpHeaderConditionName",
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         query_string_config: {
     #           values: [
@@ -1371,6 +1380,7 @@ module Aws::ElasticLoadBalancingV2
     #         source_ip_config: {
     #           values: ["StringValue"],
     #         },
+    #         regex_values: ["StringValue"],
     #       },
     #     ],
     #     priority: 1, # required
@@ -1440,6 +1450,27 @@ module Aws::ElasticLoadBalancingV2
     #         value: "TagValue",
     #       },
     #     ],
+    #     transforms: [
+    #       {
+    #         type: "host-header-rewrite", # required, accepts host-header-rewrite, url-rewrite
+    #         host_header_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #         url_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1453,11 +1484,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -1465,6 +1502,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -1506,6 +1545,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule AWS API Documentation
     #
@@ -2717,11 +2764,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -2729,6 +2782,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -2770,6 +2825,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRules AWS API Documentation
@@ -3732,7 +3795,8 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4189,6 +4253,15 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Action>] :actions
     #   The actions.
     #
+    # @option params [Array<Types::RuleTransform>] :transforms
+    #   The transforms to apply to requests that match this rule. You can add
+    #   one host header rewrite transform and one URL rewrite transform. If
+    #   you specify `Transforms`, you can't specify `ResetTransforms`.
+    #
+    # @option params [Boolean] :reset_transforms
+    #   Indicates whether to remove all transforms from the rule. If you
+    #   specify `ResetTransforms`, you can't specify `Transforms`.
+    #
     # @return [Types::ModifyRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyRuleOutput#rules #rules} => Array&lt;Types::Rule&gt;
@@ -4245,13 +4318,16 @@ module Aws::ElasticLoadBalancingV2
     #         values: ["StringValue"],
     #         host_header_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         path_pattern_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         http_header_config: {
     #           http_header_name: "HttpHeaderConditionName",
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         query_string_config: {
     #           values: [
@@ -4267,6 +4343,7 @@ module Aws::ElasticLoadBalancingV2
     #         source_ip_config: {
     #           values: ["StringValue"],
     #         },
+    #         regex_values: ["StringValue"],
     #       },
     #     ],
     #     actions: [
@@ -4329,6 +4406,28 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #       },
     #     ],
+    #     transforms: [
+    #       {
+    #         type: "host-header-rewrite", # required, accepts host-header-rewrite, url-rewrite
+    #         host_header_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #         url_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     reset_transforms: false,
     #   })
     #
     # @example Response structure
@@ -4342,11 +4441,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -4354,6 +4459,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -4395,6 +4502,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule AWS API Documentation
     #
@@ -4436,7 +4551,10 @@ module Aws::ElasticLoadBalancingV2
     #   Services.ALB/healthcheck.
     #
     # @option params [Boolean] :health_check_enabled
-    #   Indicates whether health checks are enabled.
+    #   Indicates whether health checks are enabled. If the target type is
+    #   `lambda`, health checks are disabled by default but can be enabled. If
+    #   the target type is `instance`, `ip`, or `alb`, health checks are
+    #   always enabled and can't be disabled.
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
@@ -4991,11 +5109,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -5003,6 +5127,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
     #   resp.rules[0].actions[0].target_group_arn #=> String
@@ -5044,6 +5170,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities AWS API Documentation
     #
@@ -5127,10 +5261,6 @@ module Aws::ElasticLoadBalancingV2
     # Gateway Load Balancer. The specified subnets replace the previously
     # enabled subnets.
     #
-    # When you specify subnets for a Network Load Balancer, or Gateway Load
-    # Balancer you must include all subnets that were enabled previously,
-    # with their existing configurations, plus any additional subnets.
-    #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
@@ -5147,8 +5277,13 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers on Local Zones\] You can specify subnets
     #   from one or more Local Zones.
     #
-    #   \[Network Load Balancers and Gateway Load Balancers\] You can specify
-    #   subnets from one or more Availability Zones.
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You must include all subnets that were enabled
+    #   previously, with their existing configurations, plus any additional
+    #   subnets.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   The IDs of the public subnets. You can specify only one subnet per
@@ -5286,7 +5421,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

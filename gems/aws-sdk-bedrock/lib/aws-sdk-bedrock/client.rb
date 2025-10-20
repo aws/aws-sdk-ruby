@@ -610,6 +610,13 @@ module Aws::Bedrock
     #   and custom variable types used to validate foundation model responses
     #   in your application.
     #
+    # @option params [String] :kms_key_id
+    #   The identifier of the KMS key to use for encrypting the automated
+    #   reasoning policy and its associated artifacts. If you don't specify a
+    #   KMS key, Amazon Bedrock uses an KMS managed key for encryption. For
+    #   enhanced security and control, you can specify a customer managed KMS
+    #   key.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the Automated Reasoning policy. Tags
     #   help you organize and manage your policies.
@@ -659,6 +666,7 @@ module Aws::Bedrock
     #         },
     #       ],
     #     },
+    #     kms_key_id: "KmsKeyId",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2770,12 +2778,21 @@ module Aws::Bedrock
     #   The Amazon Resource Name (ARN) of the Automated Reasoning policy to
     #   delete.
     #
+    # @option params [Boolean] :force
+    #   Specifies whether to force delete the automated reasoning policy even
+    #   if it has active resources. When `false`, Amazon Bedrock validates if
+    #   all artifacts have been deleted (e.g. policy version, test case, test
+    #   result) for a policy before deletion. When `true`, Amazon Bedrock will
+    #   delete the policy and all its artifacts without validation. Default is
+    #   `false`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_automated_reasoning_policy({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteAutomatedReasoningPolicy AWS API Documentation
@@ -3210,6 +3227,7 @@ module Aws::Bedrock
     #   * {Types::GetAutomatedReasoningPolicyResponse#policy_id #policy_id} => String
     #   * {Types::GetAutomatedReasoningPolicyResponse#description #description} => String
     #   * {Types::GetAutomatedReasoningPolicyResponse#definition_hash #definition_hash} => String
+    #   * {Types::GetAutomatedReasoningPolicyResponse#kms_key_arn #kms_key_arn} => String
     #   * {Types::GetAutomatedReasoningPolicyResponse#created_at #created_at} => Time
     #   * {Types::GetAutomatedReasoningPolicyResponse#updated_at #updated_at} => Time
     #
@@ -3227,6 +3245,7 @@ module Aws::Bedrock
     #   resp.policy_id #=> String
     #   resp.description #=> String
     #   resp.definition_hash #=> String
+    #   resp.kms_key_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -7609,7 +7628,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1691,8 +1691,13 @@ module Aws::Backup
     #   * {Types::DescribeBackupJobOutput#account_id #account_id} => String
     #   * {Types::DescribeBackupJobOutput#backup_job_id #backup_job_id} => String
     #   * {Types::DescribeBackupJobOutput#backup_vault_name #backup_vault_name} => String
+    #   * {Types::DescribeBackupJobOutput#recovery_point_lifecycle #recovery_point_lifecycle} => Types::Lifecycle
     #   * {Types::DescribeBackupJobOutput#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::DescribeBackupJobOutput#vault_type #vault_type} => String
+    #   * {Types::DescribeBackupJobOutput#vault_lock_state #vault_lock_state} => String
     #   * {Types::DescribeBackupJobOutput#recovery_point_arn #recovery_point_arn} => String
+    #   * {Types::DescribeBackupJobOutput#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::DescribeBackupJobOutput#is_encrypted #is_encrypted} => Boolean
     #   * {Types::DescribeBackupJobOutput#resource_arn #resource_arn} => String
     #   * {Types::DescribeBackupJobOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeBackupJobOutput#completion_date #completion_date} => Time
@@ -1727,8 +1732,15 @@ module Aws::Backup
     #   resp.account_id #=> String
     #   resp.backup_job_id #=> String
     #   resp.backup_vault_name #=> String
+    #   resp.recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.recovery_point_lifecycle.delete_after_days #=> Integer
+    #   resp.recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.backup_vault_arn #=> String
+    #   resp.vault_type #=> String
+    #   resp.vault_lock_state #=> String
     #   resp.recovery_point_arn #=> String
+    #   resp.encryption_key_arn #=> String
+    #   resp.is_encrypted #=> Boolean
     #   resp.resource_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.completion_date #=> Time
@@ -1739,8 +1751,12 @@ module Aws::Backup
     #   resp.iam_role_arn #=> String
     #   resp.created_by.backup_plan_id #=> String
     #   resp.created_by.backup_plan_arn #=> String
+    #   resp.created_by.backup_plan_name #=> String
     #   resp.created_by.backup_plan_version #=> String
     #   resp.created_by.backup_rule_id #=> String
+    #   resp.created_by.backup_rule_name #=> String
+    #   resp.created_by.backup_rule_cron #=> String
+    #   resp.created_by.backup_rule_timezone #=> String
     #   resp.resource_type #=> String
     #   resp.bytes_transferred #=> Integer
     #   resp.expected_completion_date #=> Time
@@ -1856,7 +1872,13 @@ module Aws::Backup
     #   resp.copy_job.source_backup_vault_arn #=> String
     #   resp.copy_job.source_recovery_point_arn #=> String
     #   resp.copy_job.destination_backup_vault_arn #=> String
+    #   resp.copy_job.destination_vault_type #=> String
+    #   resp.copy_job.destination_vault_lock_state #=> String
     #   resp.copy_job.destination_recovery_point_arn #=> String
+    #   resp.copy_job.destination_encryption_key_arn #=> String
+    #   resp.copy_job.destination_recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.copy_job.destination_recovery_point_lifecycle.delete_after_days #=> Integer
+    #   resp.copy_job.destination_recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.copy_job.resource_arn #=> String
     #   resp.copy_job.creation_date #=> Time
     #   resp.copy_job.completion_date #=> Time
@@ -1866,8 +1888,12 @@ module Aws::Backup
     #   resp.copy_job.iam_role_arn #=> String
     #   resp.copy_job.created_by.backup_plan_id #=> String
     #   resp.copy_job.created_by.backup_plan_arn #=> String
+    #   resp.copy_job.created_by.backup_plan_name #=> String
     #   resp.copy_job.created_by.backup_plan_version #=> String
     #   resp.copy_job.created_by.backup_rule_id #=> String
+    #   resp.copy_job.created_by.backup_rule_name #=> String
+    #   resp.copy_job.created_by.backup_rule_cron #=> String
+    #   resp.copy_job.created_by.backup_rule_timezone #=> String
     #   resp.copy_job.resource_type #=> String
     #   resp.copy_job.parent_job_id #=> String
     #   resp.copy_job.is_parent #=> Boolean
@@ -2075,8 +2101,12 @@ module Aws::Backup
     #   resp.resource_type #=> String
     #   resp.created_by.backup_plan_id #=> String
     #   resp.created_by.backup_plan_arn #=> String
+    #   resp.created_by.backup_plan_name #=> String
     #   resp.created_by.backup_plan_version #=> String
     #   resp.created_by.backup_rule_id #=> String
+    #   resp.created_by.backup_rule_name #=> String
+    #   resp.created_by.backup_rule_cron #=> String
+    #   resp.created_by.backup_rule_timezone #=> String
     #   resp.iam_role_arn #=> String
     #   resp.status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED", "AVAILABLE", "STOPPED", "CREATING"
     #   resp.status_message #=> String
@@ -2237,6 +2267,8 @@ module Aws::Backup
     #   * {Types::DescribeRestoreJobOutput#account_id #account_id} => String
     #   * {Types::DescribeRestoreJobOutput#restore_job_id #restore_job_id} => String
     #   * {Types::DescribeRestoreJobOutput#recovery_point_arn #recovery_point_arn} => String
+    #   * {Types::DescribeRestoreJobOutput#source_resource_arn #source_resource_arn} => String
+    #   * {Types::DescribeRestoreJobOutput#backup_vault_arn #backup_vault_arn} => String
     #   * {Types::DescribeRestoreJobOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeRestoreJobOutput#completion_date #completion_date} => Time
     #   * {Types::DescribeRestoreJobOutput#status #status} => String
@@ -2265,6 +2297,8 @@ module Aws::Backup
     #   resp.account_id #=> String
     #   resp.restore_job_id #=> String
     #   resp.recovery_point_arn #=> String
+    #   resp.source_resource_arn #=> String
+    #   resp.backup_vault_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.completion_date #=> Time
     #   resp.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "ABORTED", "FAILED"
@@ -3384,7 +3418,14 @@ module Aws::Backup
     #   resp.backup_jobs[0].backup_job_id #=> String
     #   resp.backup_jobs[0].backup_vault_name #=> String
     #   resp.backup_jobs[0].backup_vault_arn #=> String
+    #   resp.backup_jobs[0].vault_type #=> String
+    #   resp.backup_jobs[0].vault_lock_state #=> String
     #   resp.backup_jobs[0].recovery_point_arn #=> String
+    #   resp.backup_jobs[0].recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.backup_jobs[0].recovery_point_lifecycle.delete_after_days #=> Integer
+    #   resp.backup_jobs[0].recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_jobs[0].encryption_key_arn #=> String
+    #   resp.backup_jobs[0].is_encrypted #=> Boolean
     #   resp.backup_jobs[0].resource_arn #=> String
     #   resp.backup_jobs[0].creation_date #=> Time
     #   resp.backup_jobs[0].completion_date #=> Time
@@ -3395,8 +3436,12 @@ module Aws::Backup
     #   resp.backup_jobs[0].iam_role_arn #=> String
     #   resp.backup_jobs[0].created_by.backup_plan_id #=> String
     #   resp.backup_jobs[0].created_by.backup_plan_arn #=> String
+    #   resp.backup_jobs[0].created_by.backup_plan_name #=> String
     #   resp.backup_jobs[0].created_by.backup_plan_version #=> String
     #   resp.backup_jobs[0].created_by.backup_rule_id #=> String
+    #   resp.backup_jobs[0].created_by.backup_rule_name #=> String
+    #   resp.backup_jobs[0].created_by.backup_rule_cron #=> String
+    #   resp.backup_jobs[0].created_by.backup_rule_timezone #=> String
     #   resp.backup_jobs[0].expected_completion_date #=> Time
     #   resp.backup_jobs[0].start_by #=> Time
     #   resp.backup_jobs[0].resource_type #=> String
@@ -3940,7 +3985,13 @@ module Aws::Backup
     #   resp.copy_jobs[0].source_backup_vault_arn #=> String
     #   resp.copy_jobs[0].source_recovery_point_arn #=> String
     #   resp.copy_jobs[0].destination_backup_vault_arn #=> String
+    #   resp.copy_jobs[0].destination_vault_type #=> String
+    #   resp.copy_jobs[0].destination_vault_lock_state #=> String
     #   resp.copy_jobs[0].destination_recovery_point_arn #=> String
+    #   resp.copy_jobs[0].destination_encryption_key_arn #=> String
+    #   resp.copy_jobs[0].destination_recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.copy_jobs[0].destination_recovery_point_lifecycle.delete_after_days #=> Integer
+    #   resp.copy_jobs[0].destination_recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
     #   resp.copy_jobs[0].resource_arn #=> String
     #   resp.copy_jobs[0].creation_date #=> Time
     #   resp.copy_jobs[0].completion_date #=> Time
@@ -3950,8 +4001,12 @@ module Aws::Backup
     #   resp.copy_jobs[0].iam_role_arn #=> String
     #   resp.copy_jobs[0].created_by.backup_plan_id #=> String
     #   resp.copy_jobs[0].created_by.backup_plan_arn #=> String
+    #   resp.copy_jobs[0].created_by.backup_plan_name #=> String
     #   resp.copy_jobs[0].created_by.backup_plan_version #=> String
     #   resp.copy_jobs[0].created_by.backup_rule_id #=> String
+    #   resp.copy_jobs[0].created_by.backup_rule_name #=> String
+    #   resp.copy_jobs[0].created_by.backup_rule_cron #=> String
+    #   resp.copy_jobs[0].created_by.backup_rule_timezone #=> String
     #   resp.copy_jobs[0].resource_type #=> String
     #   resp.copy_jobs[0].parent_job_id #=> String
     #   resp.copy_jobs[0].is_parent #=> Boolean
@@ -4371,8 +4426,12 @@ module Aws::Backup
     #   resp.recovery_points[0].resource_type #=> String
     #   resp.recovery_points[0].created_by.backup_plan_id #=> String
     #   resp.recovery_points[0].created_by.backup_plan_arn #=> String
+    #   resp.recovery_points[0].created_by.backup_plan_name #=> String
     #   resp.recovery_points[0].created_by.backup_plan_version #=> String
     #   resp.recovery_points[0].created_by.backup_rule_id #=> String
+    #   resp.recovery_points[0].created_by.backup_rule_name #=> String
+    #   resp.recovery_points[0].created_by.backup_rule_cron #=> String
+    #   resp.recovery_points[0].created_by.backup_rule_timezone #=> String
     #   resp.recovery_points[0].iam_role_arn #=> String
     #   resp.recovery_points[0].status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED", "AVAILABLE", "STOPPED", "CREATING"
     #   resp.recovery_points[0].status_message #=> String
@@ -4927,6 +4986,8 @@ module Aws::Backup
     #   resp.restore_jobs[0].account_id #=> String
     #   resp.restore_jobs[0].restore_job_id #=> String
     #   resp.restore_jobs[0].recovery_point_arn #=> String
+    #   resp.restore_jobs[0].source_resource_arn #=> String
+    #   resp.restore_jobs[0].backup_vault_arn #=> String
     #   resp.restore_jobs[0].creation_date #=> Time
     #   resp.restore_jobs[0].completion_date #=> Time
     #   resp.restore_jobs[0].status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "ABORTED", "FAILED"
@@ -5010,6 +5071,8 @@ module Aws::Backup
     #   resp.restore_jobs[0].account_id #=> String
     #   resp.restore_jobs[0].restore_job_id #=> String
     #   resp.restore_jobs[0].recovery_point_arn #=> String
+    #   resp.restore_jobs[0].source_resource_arn #=> String
+    #   resp.restore_jobs[0].backup_vault_arn #=> String
     #   resp.restore_jobs[0].creation_date #=> Time
     #   resp.restore_jobs[0].completion_date #=> Time
     #   resp.restore_jobs[0].status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "ABORTED", "FAILED"
@@ -6620,7 +6683,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

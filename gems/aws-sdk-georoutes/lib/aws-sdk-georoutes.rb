@@ -54,7 +54,7 @@ module Aws::GeoRoutes
   autoload :EndpointProvider, 'aws-sdk-georoutes/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-georoutes/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

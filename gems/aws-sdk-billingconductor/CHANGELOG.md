@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2025-10-16)
+------------------
+
+* Feature - New feature: service flat CLI and first AWS managed pricing plan (BasicPricingPlan)
+
 1.45.0 (2025-08-26)
 ------------------
 

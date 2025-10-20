@@ -1397,6 +1397,7 @@ module Aws::Connect
     TaskTemplateFieldValue = Shapes::StringShape.new(name: 'TaskTemplateFieldValue')
     TaskTemplateFields = Shapes::ListShape.new(name: 'TaskTemplateFields')
     TaskTemplateId = Shapes::StringShape.new(name: 'TaskTemplateId')
+    TaskTemplateInfoV2 = Shapes::StructureShape.new(name: 'TaskTemplateInfoV2')
     TaskTemplateList = Shapes::ListShape.new(name: 'TaskTemplateList')
     TaskTemplateMetadata = Shapes::StructureShape.new(name: 'TaskTemplateMetadata')
     TaskTemplateName = Shapes::StringShape.new(name: 'TaskTemplateName')
@@ -2147,6 +2148,7 @@ module Aws::Connect
     Contact.add_member(:recordings, Shapes::ShapeRef.new(shape: Recordings, location_name: "Recordings"))
     Contact.add_member(:disconnect_reason, Shapes::ShapeRef.new(shape: String, location_name: "DisconnectReason"))
     Contact.add_member(:contact_evaluations, Shapes::ShapeRef.new(shape: ContactEvaluations, location_name: "ContactEvaluations"))
+    Contact.add_member(:task_template_info, Shapes::ShapeRef.new(shape: TaskTemplateInfoV2, location_name: "TaskTemplateInfo"))
     Contact.add_member(:contact_details, Shapes::ShapeRef.new(shape: ContactDetails, location_name: "ContactDetails"))
     Contact.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     Contact.struct_class = Types::Contact
@@ -6111,6 +6113,10 @@ module Aws::Connect
     TaskTemplateFieldIdentifier.struct_class = Types::TaskTemplateFieldIdentifier
 
     TaskTemplateFields.member = Shapes::ShapeRef.new(shape: TaskTemplateField)
+
+    TaskTemplateInfoV2.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    TaskTemplateInfoV2.add_member(:name, Shapes::ShapeRef.new(shape: TaskTemplateName, location_name: "Name"))
+    TaskTemplateInfoV2.struct_class = Types::TaskTemplateInfoV2
 
     TaskTemplateList.member = Shapes::ShapeRef.new(shape: TaskTemplateMetadata)
 

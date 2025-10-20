@@ -185,7 +185,11 @@ module Aws
                                          },
                                        ]?
                                      },
-                                     ?account_id: ::String
+                                     ?account_id: ::String,
+                                     ?computation_rule: ("CONSOLIDATED"),
+                                     ?presentation_details: {
+                                       service: ::String
+                                     }
                                    ) -> _CreateCustomLineItemResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomLineItemResponseSuccess
 

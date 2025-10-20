@@ -81,12 +81,6 @@ module Aws
 
           subject.upload(ten_meg_file.path, params)
         end
-
-        it 'does not fail when given :thread_count' do
-          expect(client).to receive(:put_object).with(params.merge(body: ten_meg_file))
-
-          subject.upload(ten_meg_file, params.merge(thread_count: 1))
-        end
       end
     end
   end

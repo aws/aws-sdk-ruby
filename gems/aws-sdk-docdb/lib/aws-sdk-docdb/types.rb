@@ -400,13 +400,14 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must specify a valid system snapshot in the *available* state.
+    #   * Must specify a valid cluster snapshot in the *available* state.
     #
-    #   * If the source snapshot is in the same Amazon Web Services Region
-    #     as the copy, specify a valid snapshot identifier.
+    #   * If the source cluster snapshot is in the same Amazon Web Services
+    #     Region as the copy, specify a valid snapshot identifier.
     #
-    #   * If the source snapshot is in a different Amazon Web Services
-    #     Region than the copy, specify a valid cluster snapshot ARN.
+    #   * If the source cluster snapshot is in a different Amazon Web
+    #     Services Region or owned by another Amazon Web Services account,
+    #     specify the snapshot ARN.
     #
     #   Example: `my-cluster-snapshot1`
     #   @return [String]
@@ -724,9 +725,9 @@ module Aws::DocDB
     #
     #   Default value is `standard `
     #
-    #   <note markdown="1"> When you create a DocumentDB DB cluster with the storage type set to
-    #   `iopt1`, the storage type is returned in the response. The storage
-    #   type isn't returned when you set it to `standard`.
+    #   <note markdown="1"> When you create an Amazon DocumentDB cluster with the storage type
+    #   set to `iopt1`, the storage type is returned in the response. The
+    #   storage type isn't returned when you set it to `standard`.
     #
     #    </note>
     #   @return [String]
@@ -767,6 +768,23 @@ module Aws::DocDB
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -799,6 +817,7 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
+      :network_type,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1443,6 +1462,11 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] io_optimized_next_allowed_modification_time
+    #   The next time you can modify the Amazon DocumentDB cluster to use
+    #   the iopt1 storage type.
+    #   @return [Time]
+    #
     # @!attribute [rw] storage_type
     #   Storage type associated with your cluster
     #
@@ -1464,6 +1488,23 @@ module Aws::DocDB
     #   The secret managed by Amazon DocumentDB in Amazon Web Services
     #   Secrets Manager for the master user password.
     #   @return [Types::ClusterMasterUserSecret]
+    #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBCluster AWS API Documentation
     #
@@ -1500,9 +1541,11 @@ module Aws::DocDB
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection,
+      :io_optimized_next_allowed_modification_time,
       :storage_type,
       :serverless_v2_scaling_configuration,
-      :master_user_secret)
+      :master_user_secret,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2342,6 +2385,15 @@ module Aws::DocDB
     #   The Amazon Resource Name (ARN) for the DB subnet group.
     #   @return [String]
     #
+    # @!attribute [rw] supported_network_types
+    #   The network type of the DB subnet group.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #   A `DBSubnetGroup` can support only the IPv4 protocol or the IPv4 and
+    #   the IPv6 protocols (DUAL).
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroup AWS API Documentation
     #
     class DBSubnetGroup < Struct.new(
@@ -2350,7 +2402,8 @@ module Aws::DocDB
       :vpc_id,
       :subnet_group_status,
       :subnets,
-      :db_subnet_group_arn)
+      :db_subnet_group_arn,
+      :supported_network_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4308,9 +4361,27 @@ module Aws::DocDB
     # @!attribute [rw] allow_major_version_upgrade
     #   A value that indicates whether major version upgrades are allowed.
     #
-    #   Constraints: You must allow major version upgrades when specifying a
-    #   value for the `EngineVersion` parameter that is a different major
-    #   version than the DB cluster's current version.
+    #   Constraints:
+    #
+    #   * You must allow major version upgrades when specifying a value for
+    #     the `EngineVersion` parameter that is a different major version
+    #     than the cluster's current version.
+    #
+    #   * Since some parameters are version specific, changing them requires
+    #     executing a new `ModifyDBCluster` API call after the in-place MVU
+    #     completes.
+    #
+    #   <note markdown="1"> Performing an MVU directly impacts the following parameters:
+    #
+    #    * `MasterUserPassword`
+    #
+    #   * `NewDBClusterIdentifier`
+    #
+    #   * `VpcSecurityGroupIds`
+    #
+    #   * `Port`
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] deletion_protection
@@ -4396,6 +4467,23 @@ module Aws::DocDB
     #   master user password.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -4417,7 +4505,8 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
-      :rotate_master_user_password)
+      :rotate_master_user_password,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4848,6 +4937,13 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # The network type is not supported by either `DBSubnetGroup` or the DB
+    # engine version.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/NetworkTypeNotSupported AWS API Documentation
+    #
+    class NetworkTypeNotSupported < Aws::EmptyStructure; end
+
     # The options that are available for an instance.
     #
     # @!attribute [rw] engine
@@ -4920,7 +5016,33 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
-    #   Specifies the value of the parameter.
+    #   Specifies the value of the parameter. Must be one or more of the
+    #   cluster parameter's `AllowedValues` in CSV format:
+    #
+    #   Valid values are:
+    #
+    #   * `enabled`: The cluster accepts secure connections using TLS
+    #     version 1.0 through 1.3.
+    #
+    #   * `disabled`: The cluster does not accept secure connections using
+    #     TLS.
+    #
+    #   * `fips-140-3`: The cluster only accepts secure connections per the
+    #     requirements of the Federal Information Processing Standards
+    #     (FIPS) publication 140-3. Only supported starting with Amazon
+    #     DocumentDB 5.0 (engine version 3.0.3727) clusters in these
+    #     regions: ca-central-1, us-west-2, us-east-1, us-east-2,
+    #     us-gov-east-1, us-gov-west-1.
+    #
+    #   * `tls1.2+`: The cluster accepts secure connections using TLS
+    #     version 1.2 and above. Only supported starting with Amazon
+    #     DocumentDB 4.0 (engine version 2.0.10980) and Amazon DocumentDB
+    #     5.0 (engine version 3.0.11051).
+    #
+    #   * `tls1.3+`: The cluster accepts secure connections using TLS
+    #     version 1.3 and above. Only supported starting with Amazon
+    #     DocumentDB 4.0 (engine version 2.0.10980) and Amazon DocumentDB
+    #     5.0 (engine version 3.0.11051).
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5481,6 +5603,23 @@ module Aws::DocDB
     #   Default value is `standard `
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -5498,7 +5637,8 @@ module Aws::DocDB
       :deletion_protection,
       :db_cluster_parameter_group_name,
       :serverless_v2_scaling_configuration,
-      :storage_type)
+      :storage_type,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5671,6 +5811,23 @@ module Aws::DocDB
     #   Default value is `standard `
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -5687,7 +5844,8 @@ module Aws::DocDB
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
       :serverless_v2_scaling_configuration,
-      :storage_type)
+      :storage_type,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end

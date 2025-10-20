@@ -54,7 +54,7 @@ module Aws::LexModelBuildingService
   autoload :EndpointProvider, 'aws-sdk-lexmodelbuildingservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lexmodelbuildingservice/endpoints'
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.96.0'
 
 end
 

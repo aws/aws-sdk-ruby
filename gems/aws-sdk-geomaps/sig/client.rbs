@@ -153,6 +153,10 @@ module Aws
                                   style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite"),
                                   ?color_scheme: ("Light" | "Dark"),
                                   ?political_view: ::String,
+                                  ?terrain: ("Hillshade"),
+                                  ?contour_density: ("Medium"),
+                                  ?traffic: ("All"),
+                                  ?travel_modes: Array[("Transit" | "Truck")],
                                   ?key: ::String
                                 ) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess

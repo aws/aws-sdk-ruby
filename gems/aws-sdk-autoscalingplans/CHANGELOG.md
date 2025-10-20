@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2025-10-16)
+------------------
+
+* Feature - Updated FIPS endpoints for US GovCloud regions
+
 1.77.0 (2025-08-28)
 ------------------
 

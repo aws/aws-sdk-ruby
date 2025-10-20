@@ -722,13 +722,14 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must specify a valid system snapshot in the *available* state.
+    #   * Must specify a valid cluster snapshot in the *available* state.
     #
-    #   * If the source snapshot is in the same Amazon Web Services Region as
-    #     the copy, specify a valid snapshot identifier.
+    #   * If the source cluster snapshot is in the same Amazon Web Services
+    #     Region as the copy, specify a valid snapshot identifier.
     #
-    #   * If the source snapshot is in a different Amazon Web Services Region
-    #     than the copy, specify a valid cluster snapshot ARN.
+    #   * If the source cluster snapshot is in a different Amazon Web Services
+    #     Region or owned by another Amazon Web Services account, specify the
+    #     snapshot ARN.
     #
     #   Example: `my-cluster-snapshot1`
     #
@@ -1043,8 +1044,8 @@ module Aws::DocDB
     #
     #   Default value is `standard `
     #
-    #   <note markdown="1"> When you create a DocumentDB DB cluster with the storage type set to
-    #   `iopt1`, the storage type is returned in the response. The storage
+    #   <note markdown="1"> When you create an Amazon DocumentDB cluster with the storage type set
+    #   to `iopt1`, the storage type is returned in the response. The storage
     #   type isn't returned when you set it to `standard`.
     #
     #    </note>
@@ -1081,6 +1082,22 @@ module Aws::DocDB
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    #
+    # @option params [String] :network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1125,6 +1142,7 @@ module Aws::DocDB
     #     },
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -1173,12 +1191,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1507,6 +1527,8 @@ module Aws::DocDB
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -1609,6 +1631,8 @@ module Aws::DocDB
     #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroup AWS API Documentation
     #
@@ -1744,7 +1768,7 @@ module Aws::DocDB
 
     # Creates an Amazon DocumentDB global cluster that can span multiple
     # multiple Amazon Web Services Regions. The global cluster contains one
-    # primary cluster with read-write capability, and up-to give read-only
+    # primary cluster with read-write capability, and up-to 10 read-only
     # secondary clusters. Global clusters uses storage-based fast
     # replication across regions with latencies less than one second, using
     # dedicated infrastructure with no impact to your workload’s
@@ -1930,12 +1954,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2078,6 +2104,8 @@ module Aws::DocDB
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -2783,12 +2811,14 @@ module Aws::DocDB
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_clusters[0].deletion_protection #=> Boolean
+    #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_clusters[0].storage_type #=> String
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
+    #   resp.db_clusters[0].network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -3000,6 +3030,8 @@ module Aws::DocDB
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instances[0].db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instances[0].db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instances[0].db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instances[0].preferred_maintenance_window #=> String
     #   resp.db_instances[0].pending_modified_values.db_instance_class #=> String
     #   resp.db_instances[0].pending_modified_values.allocated_storage #=> Integer
@@ -3116,6 +3148,8 @@ module Aws::DocDB
     #   resp.db_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
+    #   resp.db_subnet_groups[0].supported_network_types #=> Array
+    #   resp.db_subnet_groups[0].supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBSubnetGroups AWS API Documentation
     #
@@ -3760,12 +3794,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4048,9 +4084,27 @@ module Aws::DocDB
     # @option params [Boolean] :allow_major_version_upgrade
     #   A value that indicates whether major version upgrades are allowed.
     #
-    #   Constraints: You must allow major version upgrades when specifying a
-    #   value for the `EngineVersion` parameter that is a different major
-    #   version than the DB cluster's current version.
+    #   Constraints:
+    #
+    #   * You must allow major version upgrades when specifying a value for
+    #     the `EngineVersion` parameter that is a different major version than
+    #     the cluster's current version.
+    #
+    #   * Since some parameters are version specific, changing them requires
+    #     executing a new `ModifyDBCluster` API call after the in-place MVU
+    #     completes.
+    #
+    #   <note markdown="1"> Performing an MVU directly impacts the following parameters:
+    #
+    #    * `MasterUserPassword`
+    #
+    #   * `NewDBClusterIdentifier`
+    #
+    #   * `VpcSecurityGroupIds`
+    #
+    #   * `Port`
+    #
+    #    </note>
     #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether this cluster can be deleted. If `DeletionProtection`
@@ -4127,6 +4181,22 @@ module Aws::DocDB
     #   Constraint: You must apply the change immediately when rotating the
     #   master user password.
     #
+    # @option params [String] :network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -4159,6 +4229,7 @@ module Aws::DocDB
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     rotate_master_user_password: false,
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -4206,12 +4277,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -4545,6 +4618,8 @@ module Aws::DocDB
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -4638,6 +4713,8 @@ module Aws::DocDB
     #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBSubnetGroup AWS API Documentation
     #
@@ -4846,6 +4923,8 @@ module Aws::DocDB
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -5217,6 +5296,22 @@ module Aws::DocDB
     #
     #   Default value is `standard `
     #
+    # @option params [String] :network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5247,6 +5342,7 @@ module Aws::DocDB
     #       max_capacity: 1.0,
     #     },
     #     storage_type: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -5294,12 +5390,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -5455,6 +5553,22 @@ module Aws::DocDB
     #
     #   Default value is `standard `
     #
+    # @option params [String] :network_type
+    #   The network type of the cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the cluster. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [DocumentDB clusters in a VPC][1] in the
+    #   Amazon DocumentDB Developer Guide.
+    #
+    #   Valid Values: `IPV4` \| `DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5484,6 +5598,7 @@ module Aws::DocDB
     #       max_capacity: 1.0,
     #     },
     #     storage_type: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -5531,12 +5646,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -5614,12 +5731,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -5697,12 +5816,14 @@ module Aws::DocDB
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.deletion_protection #=> Boolean
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -5801,7 +5922,7 @@ module Aws::DocDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -263,14 +263,17 @@ module Aws
                              field: ::String?,
                              values: Array[::String]?,
                              host_header_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              path_pattern_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              http_header_config: {
                                http_header_name: ::String?,
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              query_string_config: {
                                values: Array[
@@ -285,7 +288,8 @@ module Aws
                              }?,
                              source_ip_config: {
                                values: Array[::String]?
-                             }?
+                             }?,
+                             regex_values: Array[::String]?
                            },
                          ],
                          priority: ::Integer,
@@ -349,6 +353,27 @@ module Aws
                            {
                              key: ::String,
                              value: ::String?
+                           },
+                         ],
+                         ?transforms: Array[
+                           {
+                             type: ("host-header-rewrite" | "url-rewrite"),
+                             host_header_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?,
+                             url_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?
                            },
                          ]
                        ) -> _CreateRuleResponseSuccess
@@ -875,14 +900,17 @@ module Aws
                              field: ::String?,
                              values: Array[::String]?,
                              host_header_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              path_pattern_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              http_header_config: {
                                http_header_name: ::String?,
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              query_string_config: {
                                values: Array[
@@ -897,7 +925,8 @@ module Aws
                              }?,
                              source_ip_config: {
                                values: Array[::String]?
-                             }?
+                             }?,
+                             regex_values: Array[::String]?
                            },
                          ],
                          ?actions: Array[
@@ -955,7 +984,29 @@ module Aws
                                }?
                              }?
                            },
-                         ]
+                         ],
+                         ?transforms: Array[
+                           {
+                             type: ("host-header-rewrite" | "url-rewrite"),
+                             host_header_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?,
+                             url_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?
+                           },
+                         ],
+                         ?reset_transforms: bool
                        ) -> _ModifyRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyRuleResponseSuccess
 

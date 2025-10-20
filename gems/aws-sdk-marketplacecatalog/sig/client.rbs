@@ -405,7 +405,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              saa_s_product_sort: {
-                               sort_by: ("EntityId" | "ProductTitle" | "Visibility" | "LastModifiedDate")?,
+                               sort_by: ("EntityId" | "ProductTitle" | "Visibility" | "LastModifiedDate" | "DeliveryOptionTypes")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              ami_product_sort: {
@@ -417,7 +417,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              container_product_sort: {
-                               sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility")?,
+                               sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility" | "CompatibleAWSServices")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              resale_authorization_sort: {

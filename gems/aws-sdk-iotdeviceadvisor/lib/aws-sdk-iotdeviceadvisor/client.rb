@@ -1164,7 +1164,7 @@ module Aws::IoTDeviceAdvisor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

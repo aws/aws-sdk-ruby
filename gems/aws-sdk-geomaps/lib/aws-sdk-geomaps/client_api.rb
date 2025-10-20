@@ -20,6 +20,7 @@ module Aws::GeoMaps
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ColorScheme = Shapes::StringShape.new(name: 'ColorScheme')
     CompactOverlay = Shapes::StringShape.new(name: 'CompactOverlay')
+    ContourDensity = Shapes::StringShape.new(name: 'ContourDensity')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     DistanceMeters = Shapes::IntegerShape.new(name: 'DistanceMeters')
     GeoJsonOverlay = Shapes::StringShape.new(name: 'GeoJsonOverlay')
@@ -55,8 +56,12 @@ module Aws::GeoMaps
     SensitiveInteger = Shapes::IntegerShape.new(name: 'SensitiveInteger')
     StaticMapStyle = Shapes::StringShape.new(name: 'StaticMapStyle')
     String = Shapes::StringShape.new(name: 'String')
+    Terrain = Shapes::StringShape.new(name: 'Terrain')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Tileset = Shapes::StringShape.new(name: 'Tileset')
+    Traffic = Shapes::StringShape.new(name: 'Traffic')
+    TravelMode = Shapes::StringShape.new(name: 'TravelMode')
+    TravelModeList = Shapes::ListShape.new(name: 'TravelModeList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -126,6 +131,10 @@ module Aws::GeoMaps
     GetStyleDescriptorRequest.add_member(:style, Shapes::ShapeRef.new(shape: MapStyle, required: true, location: "uri", location_name: "Style"))
     GetStyleDescriptorRequest.add_member(:color_scheme, Shapes::ShapeRef.new(shape: ColorScheme, location: "querystring", location_name: "color-scheme"))
     GetStyleDescriptorRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location: "querystring", location_name: "political-view"))
+    GetStyleDescriptorRequest.add_member(:terrain, Shapes::ShapeRef.new(shape: Terrain, location: "querystring", location_name: "terrain"))
+    GetStyleDescriptorRequest.add_member(:contour_density, Shapes::ShapeRef.new(shape: ContourDensity, location: "querystring", location_name: "contour-density"))
+    GetStyleDescriptorRequest.add_member(:traffic, Shapes::ShapeRef.new(shape: Traffic, location: "querystring", location_name: "traffic"))
+    GetStyleDescriptorRequest.add_member(:travel_modes, Shapes::ShapeRef.new(shape: TravelModeList, location: "querystring", location_name: "travel-modes"))
     GetStyleDescriptorRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetStyleDescriptorRequest.struct_class = Types::GetStyleDescriptorRequest
 
@@ -161,6 +170,8 @@ module Aws::GeoMaps
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TravelModeList.member = Shapes::ShapeRef.new(shape: TravelMode)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))

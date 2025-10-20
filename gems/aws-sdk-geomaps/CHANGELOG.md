@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2025-10-17)
+------------------
+
+* Feature - Added support for optional style parameters in maps, including Terrain, ContourDensity, Traffic, and TravelModes.
+
 1.13.0 (2025-08-28)
 ------------------
 

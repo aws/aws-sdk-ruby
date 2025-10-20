@@ -94,6 +94,7 @@ module Aws::DocDB
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
   # * {KMSKeyNotAccessibleFault}
+  # * {NetworkTypeNotSupported}
   # * {ResourceNotFoundFault}
   # * {SNSInvalidTopicFault}
   #    * This error class is not used. `SNSInvalidTopic` is used during parsing instead.
@@ -606,6 +607,16 @@ module Aws::DocDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DocDB::Types::KMSKeyNotAccessibleFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class NetworkTypeNotSupported < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DocDB::Types::NetworkTypeNotSupported] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

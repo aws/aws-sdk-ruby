@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-10-14)
+------------------
+
+* Feature - Move UntagResource API body member to query parameter
+
 1.129.0 (2025-08-26)
 ------------------
 

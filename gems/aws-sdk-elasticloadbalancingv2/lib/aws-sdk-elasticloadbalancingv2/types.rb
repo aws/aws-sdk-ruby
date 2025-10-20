@@ -585,7 +585,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #   @return [Types::MutualAuthenticationAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
@@ -783,6 +784,11 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the rule.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] transforms
+    #   The transforms to apply to requests that match this rule. You can
+    #   add one host header rewrite transform and one URL rewrite transform.
+    #   @return [Array<Types::RuleTransform>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
     #
     class CreateRuleInput < Struct.new(
@@ -790,7 +796,8 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :priority,
       :actions,
-      :tags)
+      :tags,
+      :transforms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1975,21 +1982,44 @@ module Aws::ElasticLoadBalancingV2
     # Information about a host header condition.
     #
     # @!attribute [rw] values
-    #   The host names. The maximum size of each name is 128 characters. The
-    #   comparison is case insensitive. The following wildcard characters
-    #   are supported: * (matches 0 or more characters) and ? (matches
-    #   exactly 1 character). You must include at least one "." character.
-    #   You can include only alphabetical characters after the final "."
-    #   character.
+    #   The host names. The maximum length of each string is 128 characters.
+    #   The comparison is case insensitive. The following wildcard
+    #   characters are supported: * (matches 0 or more characters) and ?
+    #   (matches exactly 1 character). You must include at least one "."
+    #   character. You can include only alphabetical characters after the
+    #   final "." character.
     #
     #   If you specify multiple strings, the condition is satisfied if one
     #   of the strings matches the host name.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expressions to compare against the host header. The
+    #   maximum length of each string is 128 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig AWS API Documentation
     #
     class HostHeaderConditionConfig < Struct.new(
-      :values)
+      :values,
+      :regex_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a host header rewrite transform. This transform
+    # matches a pattern in the host header in an HTTP request and replaces
+    # it with the specified string.
+    #
+    # @!attribute [rw] rewrites
+    #   The host header rewrite transform. Each transform consists of a
+    #   regular expression to match and a replacement string.
+    #   @return [Array<Types::RewriteConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderRewriteConfig AWS API Documentation
+    #
+    class HostHeaderRewriteConfig < Struct.new(
+      :rewrites)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2000,7 +2030,7 @@ module Aws::ElasticLoadBalancingV2
     # custom HTTP header fields.
     #
     # @!attribute [rw] http_header_name
-    #   The name of the HTTP header field. The maximum size is 40
+    #   The name of the HTTP header field. The maximum length is 40
     #   characters. The header name is case insensitive. The allowed
     #   characters are specified by RFC 7230. Wildcards are not supported.
     #
@@ -2014,7 +2044,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] values
     #   The strings to compare against the value of the HTTP header. The
-    #   maximum size of each string is 128 characters. The comparison
+    #   maximum length of each string is 128 characters. The comparison
     #   strings are case insensitive. The following wildcard characters are
     #   supported: * (matches 0 or more characters) and ? (matches exactly
     #   1 character).
@@ -2027,11 +2057,17 @@ module Aws::ElasticLoadBalancingV2
     #   all of the strings are a match, create one condition per string.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expression to compare against the HTTP header. The
+    #   maximum length of each string is 128 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig AWS API Documentation
     #
     class HttpHeaderConditionConfig < Struct.new(
       :http_header_name,
-      :values)
+      :values,
+      :regex_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2047,7 +2083,7 @@ module Aws::ElasticLoadBalancingV2
     # [1]: https://www.iana.org/assignments/http-methods/http-methods.xhtml
     #
     # @!attribute [rw] values
-    #   The name of the request method. The maximum size is 40 characters.
+    #   The name of the request method. The maximum length is 40 characters.
     #   The allowed characters are A-Z, hyphen (-), and underscore (\_). The
     #   comparison is case sensitive. Wildcards are not supported;
     #   therefore, the method name must be an exact match.
@@ -2163,43 +2199,7 @@ module Aws::ElasticLoadBalancingV2
     # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html
     #
     # @!attribute [rw] name
-    #   The name of the limit. The possible values are:
-    #
-    #   * application-load-balancers
-    #
-    #   * condition-values-per-alb-rule
-    #
-    #   * condition-wildcards-per-alb-rule
-    #
-    #   * gateway-load-balancers
-    #
-    #   * gateway-load-balancers-per-vpc
-    #
-    #   * geneve-target-groups
-    #
-    #   * listeners-per-application-load-balancer
-    #
-    #   * listeners-per-network-load-balancer
-    #
-    #   * network-load-balancers
-    #
-    #   * rules-per-application-load-balancer
-    #
-    #   * target-groups
-    #
-    #   * target-groups-per-action-on-application-load-balancer
-    #
-    #   * target-groups-per-action-on-network-load-balancer
-    #
-    #   * target-groups-per-application-load-balancer
-    #
-    #   * targets-per-application-load-balancer
-    #
-    #   * targets-per-availability-zone-per-gateway-load-balancer
-    #
-    #   * targets-per-availability-zone-per-network-load-balancer
-    #
-    #   * targets-per-network-load-balancer
+    #   The name of the limit.
     #   @return [String]
     #
     # @!attribute [rw] max
@@ -2643,10 +2643,13 @@ module Aws::ElasticLoadBalancingV2
     #     * If the value is `remove`, the Application Load Balancer removes
     #       the `X-Forwarded-For` header in the HTTP request before it sends
     #       it to targets.
-    #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
-    #     possible values are `true` and `false`. The default is `true`.
-    #     Elastic Load Balancing requires that message header names contain
-    #     only alphanumeric characters and hyphens.
+    #   * `routing.http2.enabled` - Indicates whether clients can connect to
+    #     the load balancer using HTTP/2. If `true`, clients can connect
+    #     using HTTP/2 or HTTP/1.1. However, all client requests are subject
+    #     to the stricter HTTP/2 header validation rules. For example,
+    #     message header names must contain only alphanumeric characters and
+    #     hyphens. If `false`, clients must connect using HTTP/1.1. The
+    #     default is `true`.
     #
     #   * `waf.fail_open.enabled` - Indicates whether to allow a WAF-enabled
     #     load balancer to route requests to targets if it is unable to
@@ -2941,7 +2944,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #   @return [Types::MutualAuthenticationAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
@@ -3012,12 +3016,25 @@ module Aws::ElasticLoadBalancingV2
     #   The actions.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] transforms
+    #   The transforms to apply to requests that match this rule. You can
+    #   add one host header rewrite transform and one URL rewrite transform.
+    #   If you specify `Transforms`, you can't specify `ResetTransforms`.
+    #   @return [Array<Types::RuleTransform>]
+    #
+    # @!attribute [rw] reset_transforms
+    #   Indicates whether to remove all transforms from the rule. If you
+    #   specify `ResetTransforms`, you can't specify `Transforms`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput AWS API Documentation
     #
     class ModifyRuleInput < Struct.new(
       :rule_arn,
       :conditions,
-      :actions)
+      :actions,
+      :transforms,
+      :reset_transforms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3095,7 +3112,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] health_check_enabled
-    #   Indicates whether health checks are enabled.
+    #   Indicates whether health checks are enabled. If the target type is
+    #   `lambda`, health checks are disabled by default but can be enabled.
+    #   If the target type is `instance`, `ip`, or `alb`, health checks are
+    #   always enabled and can't be disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_interval_seconds
@@ -3241,7 +3261,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] values
     #   The path patterns to compare against the request URL. The maximum
-    #   size of each string is 128 characters. The comparison is case
+    #   length of each string is 128 characters. The comparison is case
     #   sensitive. The following wildcard characters are supported: *
     #   (matches 0 or more characters) and ? (matches exactly 1 character).
     #
@@ -3255,10 +3275,16 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions
     #   @return [Array<String>]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expressions to compare against the request URL. The
+    #   maximum length of each string is 128 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig AWS API Documentation
     #
     class PathPatternConditionConfig < Struct.new(
-      :values)
+      :values,
+      :regex_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3286,7 +3312,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] values
     #   The key/value pairs or values to find in the query string. The
-    #   maximum size of each string is 128 characters. The comparison is
+    #   maximum length of each string is 128 characters. The comparison is
     #   case insensitive. The following wildcard characters are supported:
     #   * (matches 0 or more characters) and ? (matches exactly 1
     #   character). To search for a literal '*' or '?' character in a
@@ -3532,6 +3558,29 @@ module Aws::ElasticLoadBalancingV2
     #
     class RevocationIdNotFoundException < Aws::EmptyStructure; end
 
+    # Information about a rewrite transform. This transform matches a
+    # pattern and replaces it with the specified string.
+    #
+    # @!attribute [rw] regex
+    #   The regular expression to match in the input string. The maximum
+    #   length of the string is 1,024 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace
+    #   The replacement string to use when rewriting the matched input. The
+    #   maximum length of the string is 1,024 characters. You can specify
+    #   capture groups in the regular expression (for example, $1 and $2).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RewriteConfig AWS API Documentation
+    #
+    class RewriteConfig < Struct.new(
+      :regex,
+      :replace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a rule.
     #
     # @!attribute [rw] rule_arn
@@ -3559,6 +3608,10 @@ module Aws::ElasticLoadBalancingV2
     #   Indicates whether this is the default rule.
     #   @return [Boolean]
     #
+    # @!attribute [rw] transforms
+    #   The transforms for the rule.
+    #   @return [Array<Types::RuleTransform>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Rule AWS API Documentation
     #
     class Rule < Struct.new(
@@ -3566,7 +3619,8 @@ module Aws::ElasticLoadBalancingV2
       :priority,
       :conditions,
       :actions,
-      :is_default)
+      :is_default,
+      :transforms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3670,6 +3724,12 @@ module Aws::ElasticLoadBalancingV2
     #   `source-ip`.
     #   @return [Types::SourceIpConditionConfig]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expressions to match against the condition field. The
+    #   maximum length of each string is 128 characters. Specify only when
+    #   `Field` is `http-header`, `host-header`, or `path-pattern`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition AWS API Documentation
     #
     class RuleCondition < Struct.new(
@@ -3680,7 +3740,8 @@ module Aws::ElasticLoadBalancingV2
       :http_header_config,
       :query_string_config,
       :http_request_method_config,
-      :source_ip_config)
+      :source_ip_config,
+      :regex_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3706,6 +3767,38 @@ module Aws::ElasticLoadBalancingV2
     class RulePriorityPair < Struct.new(
       :rule_arn,
       :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a transform to apply to requests that match a rule.
+    # Transforms are applied to requests before they are sent to targets.
+    #
+    # @!attribute [rw] type
+    #   The type of transform.
+    #
+    #   * `host-header-rewrite` - Rewrite the host header.
+    #
+    #   * `url-rewrite` - Rewrite the request URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header_rewrite_config
+    #   Information about a host header rewrite transform. This transform
+    #   modifies the host header in an HTTP request. Specify only when
+    #   `Type` is `host-header-rewrite`.
+    #   @return [Types::HostHeaderRewriteConfig]
+    #
+    # @!attribute [rw] url_rewrite_config
+    #   Information about a URL rewrite transform. This transform modifies
+    #   the request URL. Specify only when `Type` is `url-rewrite`.
+    #   @return [Types::UrlRewriteConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleTransform AWS API Documentation
+    #
+    class RuleTransform < Struct.new(
+      :type,
+      :host_header_rewrite_config,
+      :url_rewrite_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3844,8 +3937,13 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers on Local Zones\] You can specify
     #   subnets from one or more Local Zones.
     #
-    #   \[Network Load Balancers and Gateway Load Balancers\] You can
-    #   specify subnets from one or more Availability Zones.
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You must include all subnets that were enabled
+    #   previously, with their existing configurations, plus any additional
+    #   subnets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -4791,6 +4889,22 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/UnsupportedProtocolException AWS API Documentation
     #
     class UnsupportedProtocolException < Aws::EmptyStructure; end
+
+    # Information about a URL rewrite transform. This transform matches a
+    # pattern in the request URL and replaces it with the specified string.
+    #
+    # @!attribute [rw] rewrites
+    #   The URL rewrite transform to apply to the request. The transform
+    #   consists of a regular expression to match and a replacement string.
+    #   @return [Array<Types::RewriteConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/UrlRewriteConfig AWS API Documentation
+    #
+    class UrlRewriteConfig < Struct.new(
+      :rewrites)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The capacity reservation status for each Availability Zone.
     #
