@@ -33,6 +33,7 @@ module Aws::SecurityLake
     include Smithy::Client::Stubs
 
     self.service = Schema::SecurityLake
+    @identifier = :securitylake
 
     add_plugin(::Aws::SecurityLake::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

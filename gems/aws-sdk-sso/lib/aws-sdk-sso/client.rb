@@ -33,6 +33,7 @@ module Aws::SSO
     include Smithy::Client::Stubs
 
     self.service = Schema::SWBPortalService
+    @identifier = :sso
 
     add_plugin(::Aws::SSO::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

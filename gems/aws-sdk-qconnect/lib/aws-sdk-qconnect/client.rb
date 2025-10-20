@@ -33,6 +33,7 @@ module Aws::QConnect
     include Smithy::Client::Stubs
 
     self.service = Schema::WisdomService
+    @identifier = :qconnect
 
     add_plugin(::Aws::QConnect::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

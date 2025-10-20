@@ -33,6 +33,7 @@ module Aws::QApps
     include Smithy::Client::Stubs
 
     self.service = Schema::QAppsService
+    @identifier = :qapps
 
     add_plugin(::Aws::QApps::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

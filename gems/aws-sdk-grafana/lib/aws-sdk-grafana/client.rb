@@ -33,6 +33,7 @@ module Aws::Grafana
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSGrafanaControlPlane
+    @identifier = :grafana
 
     add_plugin(::Aws::Grafana::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

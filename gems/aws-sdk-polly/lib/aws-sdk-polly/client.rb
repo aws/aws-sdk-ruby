@@ -33,6 +33,7 @@ module Aws::Polly
     include Smithy::Client::Stubs
 
     self.service = Schema::ParrotV1
+    @identifier = :polly
 
     add_plugin(::Aws::Polly::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

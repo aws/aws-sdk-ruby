@@ -33,6 +33,7 @@ module Aws::VerifiedPermissions
     include Smithy::Client::Stubs
 
     self.service = Schema::VerifiedPermissions
+    @identifier = :verifiedpermissions
 
     add_plugin(::Aws::VerifiedPermissions::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

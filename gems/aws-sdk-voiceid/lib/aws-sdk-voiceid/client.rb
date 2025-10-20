@@ -33,6 +33,7 @@ module Aws::VoiceID
     include Smithy::Client::Stubs
 
     self.service = Schema::VoiceID
+    @identifier = :voiceid
 
     add_plugin(::Aws::VoiceID::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

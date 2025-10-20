@@ -33,6 +33,7 @@ module Aws::SocialMessaging
     include Smithy::Client::Stubs
 
     self.service = Schema::SocialMessaging
+    @identifier = :socialmessaging
 
     add_plugin(::Aws::SocialMessaging::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

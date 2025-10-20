@@ -33,6 +33,7 @@ module Aws::S3Tables
     include Smithy::Client::Stubs
 
     self.service = Schema::S3TableBuckets
+    @identifier = :s3tables
 
     add_plugin(::Aws::S3Tables::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

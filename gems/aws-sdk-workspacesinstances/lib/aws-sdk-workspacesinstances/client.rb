@@ -33,6 +33,7 @@ module Aws::WorkspacesInstances
     include Smithy::Client::Stubs
 
     self.service = Schema::EUCMIFrontendAPIService
+    @identifier = :workspacesinstances
 
     add_plugin(::Aws::WorkspacesInstances::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

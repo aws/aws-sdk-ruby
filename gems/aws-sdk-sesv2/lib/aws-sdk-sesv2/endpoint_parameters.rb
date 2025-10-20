@@ -33,8 +33,6 @@ module Aws::SESv2
       self.use_fips = options.fetch(:use_fips, false)
       self.endpoint = options.fetch(:endpoint, nil)
       self.endpoint_id = options.fetch(:endpoint_id, nil)
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

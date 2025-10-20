@@ -33,6 +33,7 @@ module Aws::ServiceDiscovery
     include Smithy::Client::Stubs
 
     self.service = Schema::Route53AutoNamingV20170314
+    @identifier = :servicediscovery
 
     add_plugin(::Aws::ServiceDiscovery::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

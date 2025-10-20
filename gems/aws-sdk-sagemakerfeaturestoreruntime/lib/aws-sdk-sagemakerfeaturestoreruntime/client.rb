@@ -33,6 +33,7 @@ module Aws::SageMakerFeatureStoreRuntime
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonSageMakerFeatureStoreRuntime
+    @identifier = :sagemakerfeaturestoreruntime
 
     add_plugin(::Aws::SageMakerFeatureStoreRuntime::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -28,8 +28,6 @@ module Aws::Billing
       self.use_fips = options.fetch(:use_fips, false)
       self.endpoint = options.fetch(:endpoint, nil)
       self.region = options.fetch(:region, nil)
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

@@ -33,6 +33,7 @@ module Aws::BCMDashboards
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBCMDashboardsService
+    @identifier = :bcmdashboards
 
     add_plugin(::Aws::BCMDashboards::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

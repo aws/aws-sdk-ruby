@@ -33,6 +33,7 @@ module Aws::CustomerProfiles
     include Smithy::Client::Stubs
 
     self.service = Schema::CustomerProfiles20200815
+    @identifier = :customerprofiles
 
     add_plugin(::Aws::CustomerProfiles::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

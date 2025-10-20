@@ -33,6 +33,7 @@ module Aws::NeptuneGraph
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonNeptuneGraph
+    @identifier = :neptunegraph
 
     add_plugin(::Aws::NeptuneGraph::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

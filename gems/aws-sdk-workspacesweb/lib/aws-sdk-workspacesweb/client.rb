@@ -33,6 +33,7 @@ module Aws::WorkSpacesWeb
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSErmineControlPlaneService
+    @identifier = :workspacesweb
 
     add_plugin(::Aws::WorkSpacesWeb::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

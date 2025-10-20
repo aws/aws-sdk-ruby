@@ -33,6 +33,7 @@ module Aws::SES
     include Smithy::Client::Stubs
 
     self.service = Schema::SimpleEmailService
+    @identifier = :ses
 
     add_plugin(::Aws::SES::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

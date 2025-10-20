@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::B2bi
-
   # @api private
   module Waiters
+
     # @api private
     #
     #

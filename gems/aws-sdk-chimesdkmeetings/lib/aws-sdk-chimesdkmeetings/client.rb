@@ -33,6 +33,7 @@ module Aws::ChimeSDKMeetings
     include Smithy::Client::Stubs
 
     self.service = Schema::ChimeMeetingsSDKService
+    @identifier = :chimesdkmeetings
 
     add_plugin(::Aws::ChimeSDKMeetings::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

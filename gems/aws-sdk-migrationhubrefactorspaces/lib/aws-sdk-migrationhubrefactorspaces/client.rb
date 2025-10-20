@@ -33,6 +33,7 @@ module Aws::MigrationHubRefactorSpaces
     include Smithy::Client::Stubs
 
     self.service = Schema::RefactorSpaces
+    @identifier = :migrationhubrefactorspaces
 
     add_plugin(::Aws::MigrationHubRefactorSpaces::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

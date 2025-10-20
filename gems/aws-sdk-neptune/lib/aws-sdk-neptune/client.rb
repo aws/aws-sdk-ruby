@@ -34,6 +34,7 @@ module Aws::Neptune
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonRDSv19
+    @identifier = :neptune
 
     add_plugin(::Aws::Neptune::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

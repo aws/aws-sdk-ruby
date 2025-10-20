@@ -33,6 +33,7 @@ module Aws::QLDB
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonQLDB
+    @identifier = :qldb
 
     add_plugin(::Aws::QLDB::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

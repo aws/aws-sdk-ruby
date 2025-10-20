@@ -33,6 +33,7 @@ module Aws::WAFRegional
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSWAFRegional20161128
+    @identifier = :wafregional
 
     add_plugin(::Aws::WAFRegional::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

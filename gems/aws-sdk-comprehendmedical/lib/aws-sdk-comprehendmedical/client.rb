@@ -33,6 +33,7 @@ module Aws::ComprehendMedical
     include Smithy::Client::Stubs
 
     self.service = Schema::ComprehendMedical20181030
+    @identifier = :comprehendmedical
 
     add_plugin(::Aws::ComprehendMedical::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

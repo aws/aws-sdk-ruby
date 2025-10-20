@@ -33,6 +33,7 @@ module Aws::Drs
     include Smithy::Client::Stubs
 
     self.service = Schema::ElasticDisasterRecoveryService
+    @identifier = :drs
 
     add_plugin(::Aws::Drs::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

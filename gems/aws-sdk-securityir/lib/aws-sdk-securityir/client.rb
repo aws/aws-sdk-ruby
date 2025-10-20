@@ -33,6 +33,7 @@ module Aws::SecurityIR
     include Smithy::Client::Stubs
 
     self.service = Schema::SecurityIncidentResponse
+    @identifier = :securityir
 
     add_plugin(::Aws::SecurityIR::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

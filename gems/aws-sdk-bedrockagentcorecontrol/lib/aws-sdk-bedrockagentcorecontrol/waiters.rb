@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::BedrockAgentCoreControl
-
   # @api private
   module Waiters
+
     # @api private
     #
     #

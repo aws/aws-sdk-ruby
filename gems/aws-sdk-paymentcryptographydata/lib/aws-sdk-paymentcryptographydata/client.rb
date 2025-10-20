@@ -33,6 +33,7 @@ module Aws::PaymentCryptographyData
     include Smithy::Client::Stubs
 
     self.service = Schema::PaymentCryptographyDataPlane
+    @identifier = :paymentcryptographydata
 
     add_plugin(::Aws::PaymentCryptographyData::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

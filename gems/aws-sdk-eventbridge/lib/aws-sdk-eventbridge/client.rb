@@ -33,6 +33,7 @@ module Aws::EventBridge
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSEvents
+    @identifier = :eventbridge
 
     add_plugin(::Aws::EventBridge::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

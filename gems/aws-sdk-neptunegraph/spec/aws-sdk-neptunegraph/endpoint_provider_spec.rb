@@ -20,7 +20,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Region and DP ApiType are provided" do
@@ -35,7 +34,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Region and invalid ApiType are provided" do
@@ -50,7 +48,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Only invalid ApiType is provided" do
@@ -65,7 +62,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -80,7 +76,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -94,7 +89,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -109,7 +103,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -123,7 +116,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -138,7 +130,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -153,7 +144,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -168,7 +158,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -183,7 +172,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -198,7 +186,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -212,7 +199,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -227,7 +213,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -241,7 +226,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -256,7 +240,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -271,7 +254,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -286,7 +268,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -301,7 +282,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -316,7 +296,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -330,7 +309,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -345,7 +323,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -359,7 +336,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -374,7 +350,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -389,7 +364,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -404,7 +378,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -419,7 +392,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -434,7 +406,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -448,7 +419,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -463,7 +433,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -477,7 +446,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -492,7 +460,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -507,7 +474,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -522,7 +488,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -537,7 +502,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -552,7 +516,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -566,7 +529,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -581,7 +543,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -595,7 +556,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -610,7 +570,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -625,7 +584,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -640,7 +598,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -655,7 +612,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -670,7 +626,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -684,7 +639,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -699,7 +653,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -713,7 +666,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -728,7 +680,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -743,7 +694,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -758,7 +708,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -773,7 +722,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -788,7 +736,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -802,7 +749,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -817,7 +763,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -831,7 +776,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -846,7 +790,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -861,7 +804,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -876,7 +818,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -891,7 +832,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -906,7 +846,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
@@ -920,7 +859,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -935,7 +873,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
@@ -949,7 +886,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -964,7 +900,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
@@ -979,7 +914,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -994,7 +928,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
@@ -1009,7 +942,6 @@ module Aws::NeptuneGraph
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Validate When no region is provided" do
@@ -1023,7 +955,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Validate When invalid/unknown ApiType provided" do
@@ -1037,7 +968,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Both Fips and dualstack enabled" do
@@ -1051,7 +981,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Fips enabled and dualstack disabled" do
@@ -1065,7 +994,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Fips disabled and dualstack enabled" do
@@ -1079,7 +1007,6 @@ module Aws::NeptuneGraph
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

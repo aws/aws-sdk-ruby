@@ -33,6 +33,7 @@ module Aws::MediaTailor
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaTailor
+    @identifier = :mediatailor
 
     add_plugin(::Aws::MediaTailor::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

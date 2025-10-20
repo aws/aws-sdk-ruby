@@ -33,6 +33,7 @@ module Aws::ResourceExplorer2
     include Smithy::Client::Stubs
 
     self.service = Schema::ResourceExplorer
+    @identifier = :resourceexplorer2
 
     add_plugin(::Aws::ResourceExplorer2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

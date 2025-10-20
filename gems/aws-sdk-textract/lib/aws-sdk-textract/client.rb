@@ -33,6 +33,7 @@ module Aws::Textract
     include Smithy::Client::Stubs
 
     self.service = Schema::Textract
+    @identifier = :textract
 
     add_plugin(::Aws::Textract::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

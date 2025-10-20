@@ -33,6 +33,7 @@ module Aws::EMRServerless
     include Smithy::Client::Stubs
 
     self.service = Schema::AwsToledoWebService
+    @identifier = :emrserverless
 
     add_plugin(::Aws::EMRServerless::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

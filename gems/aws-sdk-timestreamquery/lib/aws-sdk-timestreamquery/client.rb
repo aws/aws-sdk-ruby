@@ -33,6 +33,7 @@ module Aws::TimestreamQuery
     include Smithy::Client::Stubs
 
     self.service = Schema::Timestream20181101
+    @identifier = :timestreamquery
 
     add_plugin(::Aws::TimestreamQuery::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

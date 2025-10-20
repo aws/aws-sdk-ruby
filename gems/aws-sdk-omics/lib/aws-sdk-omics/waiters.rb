@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Omics
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until an annotation import is completed

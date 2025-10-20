@@ -33,6 +33,7 @@ module Aws::Evidently
     include Smithy::Client::Stubs
 
     self.service = Schema::Evidently
+    @identifier = :evidently
 
     add_plugin(::Aws::Evidently::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -3,8 +3,8 @@
 # This is generated code!
 
 module Aws::LexRuntimeV2
-
   # @api private
   module Waiters
+
   end
 end

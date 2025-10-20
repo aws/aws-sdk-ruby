@@ -33,6 +33,7 @@ module Aws::ElastiCache
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonElastiCacheV9
+    @identifier = :elasticache
 
     add_plugin(::Aws::ElastiCache::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

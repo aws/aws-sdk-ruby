@@ -33,6 +33,7 @@ module Aws::Cloud9
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSCloud9WorkspaceManagementService
+    @identifier = :cloud9
 
     add_plugin(::Aws::Cloud9::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

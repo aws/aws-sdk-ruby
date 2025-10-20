@@ -33,6 +33,7 @@ module Aws::CodeGuruReviewer
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSGuruFrontendService
+    @identifier = :codegurureviewer
 
     add_plugin(::Aws::CodeGuruReviewer::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

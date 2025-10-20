@@ -33,6 +33,7 @@ module Aws::EMRcontainers
     include Smithy::Client::Stubs
 
     self.service = Schema::AwsChicagoWebService
+    @identifier = :emrcontainers
 
     add_plugin(::Aws::EMRcontainers::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

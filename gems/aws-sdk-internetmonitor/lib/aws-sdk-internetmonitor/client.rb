@@ -33,6 +33,7 @@ module Aws::InternetMonitor
     include Smithy::Client::Stubs
 
     self.service = Schema::InternetMonitor20210603
+    @identifier = :internetmonitor
 
     add_plugin(::Aws::InternetMonitor::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

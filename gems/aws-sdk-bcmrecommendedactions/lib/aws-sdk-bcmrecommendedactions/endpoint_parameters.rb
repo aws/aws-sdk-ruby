@@ -23,7 +23,6 @@ module Aws::BCMRecommendedActions
       self.use_fips = options.fetch(:use_fips, false)
       self.endpoint = options.fetch(:endpoint, nil)
       self.region = options.fetch(:region, nil)
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

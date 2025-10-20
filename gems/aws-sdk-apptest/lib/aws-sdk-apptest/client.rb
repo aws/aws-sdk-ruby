@@ -33,6 +33,7 @@ module Aws::AppTest
     include Smithy::Client::Stubs
 
     self.service = Schema::AwsApptestControlPlaneService
+    @identifier = :apptest
 
     add_plugin(::Aws::AppTest::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

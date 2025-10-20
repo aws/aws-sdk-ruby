@@ -33,6 +33,7 @@ module Aws::CodeCommit
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeCommit20150413
+    @identifier = :codecommit
 
     add_plugin(::Aws::CodeCommit::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

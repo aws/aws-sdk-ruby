@@ -33,6 +33,7 @@ module Aws::ElasticsearchService
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonElasticsearchService2015
+    @identifier = :elasticsearchservice
 
     add_plugin(::Aws::ElasticsearchService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

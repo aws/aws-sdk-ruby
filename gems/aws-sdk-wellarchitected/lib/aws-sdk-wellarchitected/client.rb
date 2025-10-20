@@ -33,6 +33,7 @@ module Aws::WellArchitected
     include Smithy::Client::Stubs
 
     self.service = Schema::WellArchitectedApiServiceLambda
+    @identifier = :wellarchitected
 
     add_plugin(::Aws::WellArchitected::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

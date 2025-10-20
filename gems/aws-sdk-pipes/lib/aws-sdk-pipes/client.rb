@@ -33,6 +33,7 @@ module Aws::Pipes
     include Smithy::Client::Stubs
 
     self.service = Schema::Pipes
+    @identifier = :pipes
 
     add_plugin(::Aws::Pipes::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

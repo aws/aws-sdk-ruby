@@ -33,6 +33,7 @@ module Aws::IoT
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIotService
+    @identifier = :iot
 
     add_plugin(::Aws::IoT::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

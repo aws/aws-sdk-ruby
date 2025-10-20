@@ -33,6 +33,7 @@ module Aws::MachineLearning
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonML20141212
+    @identifier = :machinelearning
 
     add_plugin(::Aws::MachineLearning::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

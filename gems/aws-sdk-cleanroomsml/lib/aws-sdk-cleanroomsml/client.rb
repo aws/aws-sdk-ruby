@@ -33,6 +33,7 @@ module Aws::CleanRoomsML
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSStarkControlService
+    @identifier = :cleanroomsml
 
     add_plugin(::Aws::CleanRoomsML::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

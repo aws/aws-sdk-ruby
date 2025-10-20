@@ -33,6 +33,7 @@ module Aws::Account
     include Smithy::Client::Stubs
 
     self.service = Schema::Account
+    @identifier = :account
 
     add_plugin(::Aws::Account::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

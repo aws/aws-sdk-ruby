@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Macie2
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until the sensitive data occurrences are ready.

@@ -33,6 +33,7 @@ module Aws::GeoRoutes
     include Smithy::Client::Stubs
 
     self.service = Schema::RoutesService
+    @identifier = :georoutes
 
     add_plugin(::Aws::GeoRoutes::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

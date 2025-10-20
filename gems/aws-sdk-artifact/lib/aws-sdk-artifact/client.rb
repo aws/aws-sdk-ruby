@@ -33,6 +33,7 @@ module Aws::Artifact
     include Smithy::Client::Stubs
 
     self.service = Schema::Artifact
+    @identifier = :artifact
 
     add_plugin(::Aws::Artifact::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

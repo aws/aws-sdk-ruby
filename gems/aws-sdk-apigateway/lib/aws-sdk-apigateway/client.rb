@@ -33,6 +33,7 @@ module Aws::APIGateway
     include Smithy::Client::Stubs
 
     self.service = Schema::BackplaneControlService
+    @identifier = :apigateway
 
     add_plugin(::Aws::APIGateway::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

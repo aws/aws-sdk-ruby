@@ -28,7 +28,6 @@ module Aws::CloudFrontKeyValueStore
       self.region = options.fetch(:region, nil)
       self.use_fips = options.fetch(:use_fips, false)
       self.endpoint = options.fetch(:endpoint, nil)
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

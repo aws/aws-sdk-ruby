@@ -33,6 +33,7 @@ module Aws::ManagedBlockchain
     include Smithy::Client::Stubs
 
     self.service = Schema::TaigaWebService
+    @identifier = :managedblockchain
 
     add_plugin(::Aws::ManagedBlockchain::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

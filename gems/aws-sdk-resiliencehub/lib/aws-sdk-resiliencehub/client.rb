@@ -33,6 +33,7 @@ module Aws::Resiliencehub
     include Smithy::Client::Stubs
 
     self.service = Schema::AwsResilienceHub
+    @identifier = :resiliencehub
 
     add_plugin(::Aws::Resiliencehub::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

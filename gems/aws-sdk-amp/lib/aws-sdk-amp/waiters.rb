@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Amp
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a scraper reaches ACTIVE status

@@ -20,7 +20,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
@@ -35,7 +34,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
@@ -50,7 +48,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
@@ -65,7 +62,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
@@ -80,7 +76,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
@@ -95,7 +90,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
@@ -110,7 +104,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
@@ -125,7 +118,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-3 with FIPS disabled and DualStack disabled" do
@@ -140,7 +132,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
@@ -155,7 +146,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-central-1 with FIPS enabled and DualStack disabled" do
@@ -170,7 +160,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
@@ -185,7 +174,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
@@ -200,7 +188,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
@@ -215,7 +202,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
@@ -230,7 +216,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
@@ -245,7 +230,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
@@ -260,7 +244,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region local with FIPS disabled and DualStack disabled" do
@@ -275,7 +258,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region me-south-1 with FIPS disabled and DualStack disabled" do
@@ -290,7 +272,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
@@ -305,7 +286,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack disabled" do
@@ -320,7 +300,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack disabled" do
@@ -335,7 +314,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS disabled and DualStack disabled" do
@@ -350,7 +328,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS enabled and DualStack disabled" do
@@ -365,7 +342,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS disabled and DualStack disabled" do
@@ -380,7 +356,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS enabled and DualStack disabled" do
@@ -395,7 +370,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS disabled and DualStack disabled" do
@@ -410,7 +384,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS enabled and DualStack disabled" do
@@ -425,7 +398,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
@@ -440,7 +412,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
@@ -455,7 +426,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
@@ -470,7 +440,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
@@ -485,7 +454,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
@@ -500,7 +468,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
@@ -515,7 +482,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
@@ -530,7 +496,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
@@ -545,7 +510,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
@@ -560,7 +524,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
@@ -575,7 +538,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
@@ -590,7 +552,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
@@ -605,7 +566,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
@@ -620,7 +580,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
@@ -635,7 +594,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-west-1 with FIPS disabled and DualStack disabled" do
@@ -650,7 +608,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
@@ -665,7 +622,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
@@ -680,7 +636,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
@@ -695,7 +650,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region set and fips disabled and dualstack disabled" do
@@ -710,7 +664,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
@@ -725,7 +678,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with fips enabled and dualstack disabled" do
@@ -739,7 +691,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "For custom endpoint with fips disabled and dualstack enabled" do
@@ -753,7 +704,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Missing region" do
@@ -767,7 +717,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -939,7 +888,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -954,7 +902,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -969,7 +916,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -984,7 +930,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -999,7 +944,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1236,7 +1180,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1374,7 +1317,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1389,7 +1331,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1561,7 +1502,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1576,7 +1516,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1591,7 +1530,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1606,7 +1544,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1621,7 +1558,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1858,7 +1794,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -1996,7 +1931,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2011,7 +1945,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2183,7 +2116,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2198,7 +2130,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2213,7 +2144,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2228,7 +2158,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2243,7 +2172,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2480,7 +2408,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2618,7 +2545,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}" do
@@ -2633,7 +2559,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2647,7 +2572,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2661,7 +2585,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2675,7 +2598,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2755,7 +2677,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -2770,7 +2691,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -2785,7 +2705,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -2800,7 +2719,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=local}" do
@@ -2815,7 +2733,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2861,7 +2778,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2875,7 +2791,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}" do
@@ -2889,7 +2804,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}" do
@@ -3000,7 +2914,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -3014,7 +2927,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -3028,7 +2940,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -3042,7 +2953,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
@@ -3089,7 +2999,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=local}" do
@@ -3104,7 +3013,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3118,7 +3026,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3132,7 +3039,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3146,7 +3052,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3226,7 +3131,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3241,7 +3145,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3256,7 +3159,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3271,7 +3173,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3286,7 +3187,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3332,7 +3232,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3346,7 +3245,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3360,7 +3258,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3471,7 +3368,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3485,7 +3381,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3499,7 +3394,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3513,7 +3407,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
@@ -3560,7 +3453,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=local}" do
@@ -3575,7 +3467,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}" do
@@ -3589,7 +3480,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}" do
@@ -3603,7 +3493,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}" do
@@ -3617,7 +3506,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}" do
@@ -3697,7 +3585,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -3712,7 +3599,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -3727,7 +3613,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -3742,7 +3627,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=local}" do
@@ -3757,7 +3641,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local}" do
@@ -3803,7 +3686,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}" do
@@ -3817,7 +3699,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}" do
@@ -3831,7 +3712,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}" do
@@ -3942,7 +3822,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -3956,7 +3835,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -3970,7 +3848,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -3984,7 +3861,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
@@ -4031,7 +3907,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=local}" do
@@ -4046,7 +3921,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4222,7 +4096,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4237,7 +4110,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4252,7 +4124,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4267,7 +4138,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4282,7 +4152,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4518,7 +4387,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4661,7 +4529,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1}" do
@@ -4676,7 +4543,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -4846,7 +4712,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -4861,7 +4726,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -4876,7 +4740,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -4891,7 +4754,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -4906,7 +4768,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -5129,7 +4990,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -5266,7 +5126,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1}" do
@@ -5280,7 +5139,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5294,7 +5152,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5308,7 +5165,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5322,7 +5178,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5395,7 +5250,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5409,7 +5263,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5423,7 +5276,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5437,7 +5289,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5451,7 +5302,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5494,7 +5344,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5508,7 +5357,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5522,7 +5370,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5623,7 +5470,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5637,7 +5483,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5651,7 +5496,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5665,7 +5509,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5708,7 +5551,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=cn-north-1}" do
@@ -5722,7 +5564,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -5898,7 +5739,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -5913,7 +5753,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -5928,7 +5767,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -5943,7 +5781,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -5958,7 +5795,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -6197,7 +6033,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -6340,7 +6175,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1}" do
@@ -6355,7 +6189,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6370,7 +6203,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6385,7 +6217,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6400,7 +6231,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6480,7 +6310,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6495,7 +6324,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6510,7 +6338,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6525,7 +6352,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6540,7 +6366,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6587,7 +6412,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6602,7 +6426,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6617,7 +6440,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6728,7 +6550,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6743,7 +6564,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6758,7 +6578,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6773,7 +6592,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6820,7 +6638,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=cn-north-1}" do
@@ -6835,7 +6652,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -6850,7 +6666,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -6865,7 +6680,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -6880,7 +6694,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -6960,7 +6773,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -6975,7 +6787,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -6990,7 +6801,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7005,7 +6815,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7020,7 +6829,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7067,7 +6875,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7082,7 +6889,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7097,7 +6903,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7208,7 +7013,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7223,7 +7027,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7238,7 +7041,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7253,7 +7055,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7300,7 +7101,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
@@ -7315,7 +7115,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7330,7 +7129,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7345,7 +7143,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7360,7 +7157,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7440,7 +7236,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7455,7 +7250,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7470,7 +7264,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7485,7 +7278,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7500,7 +7292,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7547,7 +7338,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7562,7 +7352,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7577,7 +7366,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7688,7 +7476,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7703,7 +7490,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7718,7 +7504,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7733,7 +7518,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7780,7 +7564,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-gov-east-1}" do
@@ -7795,7 +7578,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}" do
@@ -7809,7 +7591,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}" do
@@ -7823,7 +7604,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}" do
@@ -7837,7 +7617,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}" do
@@ -7851,7 +7630,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1}" do
@@ -7866,7 +7644,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}" do
@@ -7881,7 +7658,6 @@ module Aws::DynamoDB
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}" do
@@ -7895,7 +7671,6 @@ module Aws::DynamoDB
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

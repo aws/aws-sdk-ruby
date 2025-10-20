@@ -33,6 +33,7 @@ module Aws::DynamoDB
     include Smithy::Client::Stubs
 
     self.service = Schema::DynamoDB20120810
+    @identifier = :dynamodb
 
     add_plugin(::Aws::DynamoDB::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

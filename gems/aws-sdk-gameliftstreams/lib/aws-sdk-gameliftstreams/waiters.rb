@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::GameLiftStreams
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Waits until an application is deleted

@@ -33,6 +33,7 @@ module Aws::ManagedBlockchainQuery
     include Smithy::Client::Stubs
 
     self.service = Schema::TietonChainQueryService
+    @identifier = :managedblockchainquery
 
     add_plugin(::Aws::ManagedBlockchainQuery::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

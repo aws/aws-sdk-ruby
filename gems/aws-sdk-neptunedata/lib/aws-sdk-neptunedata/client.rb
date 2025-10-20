@@ -33,6 +33,7 @@ module Aws::Neptunedata
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonNeptuneDataplane
+    @identifier = :neptunedata
 
     add_plugin(::Aws::Neptunedata::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

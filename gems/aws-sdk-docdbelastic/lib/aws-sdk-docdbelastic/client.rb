@@ -33,6 +33,7 @@ module Aws::DocDBElastic
     include Smithy::Client::Stubs
 
     self.service = Schema::ChimeraDbLionfishServiceLambda
+    @identifier = :docdbelastic
 
     add_plugin(::Aws::DocDBElastic::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

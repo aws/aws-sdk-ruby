@@ -33,6 +33,7 @@ module Aws::StorageGateway
     include Smithy::Client::Stubs
 
     self.service = Schema::StorageGateway20130630
+    @identifier = :storagegateway
 
     add_plugin(::Aws::StorageGateway::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::ServerlessApplicationRepository
     include Smithy::Client::Stubs
 
     self.service = Schema::ServerlessApplicationRepository
+    @identifier = :serverlessapplicationrepository
 
     add_plugin(::Aws::ServerlessApplicationRepository::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

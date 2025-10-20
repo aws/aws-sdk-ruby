@@ -33,6 +33,7 @@ module Aws::Backup
     include Smithy::Client::Stubs
 
     self.service = Schema::CryoControllerUserManager
+    @identifier = :backup
 
     add_plugin(::Aws::Backup::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

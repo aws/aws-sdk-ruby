@@ -33,6 +33,7 @@ module Aws::ApplicationDiscoveryService
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSPoseidonServiceV20151101
+    @identifier = :applicationdiscoveryservice
 
     add_plugin(::Aws::ApplicationDiscoveryService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

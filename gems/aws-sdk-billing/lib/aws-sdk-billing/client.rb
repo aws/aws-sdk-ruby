@@ -33,6 +33,7 @@ module Aws::Billing
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSBilling
+    @identifier = :billing
 
     add_plugin(::Aws::Billing::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

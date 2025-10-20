@@ -33,6 +33,7 @@ module Aws::Pricing
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSPriceListService
+    @identifier = :pricing
 
     add_plugin(::Aws::Pricing::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

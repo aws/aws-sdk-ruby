@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Lambda
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Waits for the function's State to be Active. This waiter uses GetFunctionConfiguration API. This should be used after new function creation.

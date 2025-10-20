@@ -33,6 +33,7 @@ module Aws::CostandUsageReportService
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSOrigamiServiceGatewayService
+    @identifier = :costandusagereportservice
 
     add_plugin(::Aws::CostandUsageReportService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

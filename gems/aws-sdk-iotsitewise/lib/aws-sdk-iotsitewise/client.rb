@@ -33,6 +33,7 @@ module Aws::IoTSiteWise
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIoTSiteWise
+    @identifier = :iotsitewise
 
     add_plugin(::Aws::IoTSiteWise::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::IoTFleetWise
     include Smithy::Client::Stubs
 
     self.service = Schema::IoTAutobahnControlPlane
+    @identifier = :iotfleetwise
 
     add_plugin(::Aws::IoTFleetWise::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::ECR
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonEC2ContainerRegistryV20150921
+    @identifier = :ecr
 
     add_plugin(::Aws::ECR::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

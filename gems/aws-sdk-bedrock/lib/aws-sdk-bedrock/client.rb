@@ -34,6 +34,7 @@ module Aws::Bedrock
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonBedrockControlPlaneService
+    @identifier = :bedrock
 
     add_plugin(::Aws::Bedrock::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::HttpBearerAuth)

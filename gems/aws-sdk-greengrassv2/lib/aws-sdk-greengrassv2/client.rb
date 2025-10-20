@@ -33,6 +33,7 @@ module Aws::GreengrassV2
     include Smithy::Client::Stubs
 
     self.service = Schema::GreengrassV2
+    @identifier = :greengrassv2
 
     add_plugin(::Aws::GreengrassV2::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

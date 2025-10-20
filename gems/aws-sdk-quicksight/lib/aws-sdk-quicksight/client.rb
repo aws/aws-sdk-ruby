@@ -33,6 +33,7 @@ module Aws::QuickSight
     include Smithy::Client::Stubs
 
     self.service = Schema::QuickSight20180401
+    @identifier = :quicksight
 
     add_plugin(::Aws::QuickSight::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

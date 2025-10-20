@@ -33,6 +33,7 @@ module Aws::Snowball
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSIESnowballJobManagementService
+    @identifier = :snowball
 
     add_plugin(::Aws::Snowball::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

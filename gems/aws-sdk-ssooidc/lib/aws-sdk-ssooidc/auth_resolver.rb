@@ -17,7 +17,7 @@ module Aws::SSOOIDC
       when :start_device_authorization
         options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#noAuth')
       else
-      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
+        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       end
       options
     end

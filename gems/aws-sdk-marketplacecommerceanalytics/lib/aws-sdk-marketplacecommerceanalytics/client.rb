@@ -33,6 +33,7 @@ module Aws::MarketplaceCommerceAnalytics
     include Smithy::Client::Stubs
 
     self.service = Schema::MarketplaceCommerceAnalytics20150701
+    @identifier = :marketplacecommerceanalytics
 
     add_plugin(::Aws::MarketplaceCommerceAnalytics::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

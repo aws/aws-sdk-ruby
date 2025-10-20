@@ -33,6 +33,7 @@ module Aws::MigrationHubStrategy
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMigrationHubStrategyRecommendation
+    @identifier = :migrationhubstrategy
 
     add_plugin(::Aws::MigrationHubStrategy::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

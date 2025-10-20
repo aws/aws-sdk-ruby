@@ -20,7 +20,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default endpoint (region not set)" do
@@ -35,7 +34,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default FIPS endpoint (region not set)" do
@@ -50,7 +48,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default endpoint (region: aws-global)" do
@@ -65,7 +62,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default FIPS endpoint (region: aws-global)" do
@@ -80,7 +76,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default endpoint for a valid home region (region: us-west-2)" do
@@ -95,7 +90,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default FIPS endpoint for a valid home region (region: us-west-2)" do
@@ -110,7 +104,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default endpoint for an unavailable home region (region: us-east-1)" do
@@ -125,7 +118,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "Default FIPS endpoint for an unavailable home region (region: us-east-1)" do
@@ -140,7 +132,6 @@ module Aws::CodeCatalyst
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
   end
 end

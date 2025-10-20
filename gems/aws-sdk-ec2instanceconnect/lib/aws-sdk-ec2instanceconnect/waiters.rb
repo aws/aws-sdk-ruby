@@ -3,8 +3,8 @@
 # This is generated code!
 
 module Aws::EC2InstanceConnect
-
   # @api private
   module Waiters
+
   end
 end

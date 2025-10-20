@@ -33,6 +33,7 @@ module Aws::EC2InstanceConnect
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSEC2InstanceConnectService
+    @identifier = :ec2instanceconnect
 
     add_plugin(::Aws::EC2InstanceConnect::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

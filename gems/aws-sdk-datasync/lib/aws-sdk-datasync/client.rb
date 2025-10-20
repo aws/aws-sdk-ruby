@@ -33,6 +33,7 @@ module Aws::DataSync
     include Smithy::Client::Stubs
 
     self.service = Schema::FmrsService
+    @identifier = :datasync
 
     add_plugin(::Aws::DataSync::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

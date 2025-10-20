@@ -33,6 +33,7 @@ module Aws::MemoryDB
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonMemoryDB
+    @identifier = :memorydb
 
     add_plugin(::Aws::MemoryDB::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

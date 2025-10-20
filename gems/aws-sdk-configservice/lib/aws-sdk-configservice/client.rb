@@ -33,6 +33,7 @@ module Aws::ConfigService
     include Smithy::Client::Stubs
 
     self.service = Schema::StarlingDoveService
+    @identifier = :configservice
 
     add_plugin(::Aws::ConfigService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

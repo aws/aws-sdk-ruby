@@ -3,8 +3,8 @@
 # This is generated code!
 
 module Aws::GeoPlaces
-
   # @api private
   module Waiters
+
   end
 end

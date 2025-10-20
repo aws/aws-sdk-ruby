@@ -33,6 +33,7 @@ module Aws::EKS
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSWesleyFrontend
+    @identifier = :eks
 
     add_plugin(::Aws::EKS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

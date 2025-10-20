@@ -33,6 +33,7 @@ module Aws::IoTManagedIntegrations
     include Smithy::Client::Stubs
 
     self.service = Schema::IotManagedIntegrations
+    @identifier = :iotmanagedintegrations
 
     add_plugin(::Aws::IoTManagedIntegrations::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

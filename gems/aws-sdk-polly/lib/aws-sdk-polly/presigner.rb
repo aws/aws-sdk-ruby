@@ -20,9 +20,9 @@ module Aws
       end
 
       # Returns a presigned url for synthesize_speech.
-      # 
+      #
       # @option params (see Client#synthesize_speech)
-      def synthesize_speech(params = {})
+      def synthesize_speech(params = {}) # rubocop:disable Metrics/AbcSize
         req = @client.build_request(:synthesize_speech, params)
         context = req.context
 
@@ -30,7 +30,7 @@ module Aws
         Smithy::Client::ParamValidator.new(input).validate!(params)
         parts = []
         input.shape.members.each do |name, ref|
-          parts << [ ref, params[name] ] unless params[name].nil?
+          parts << [ref, params[name]] unless params[name].nil?
         end
         query = Aws::Core::Rest::Request::QuerystringBuilder.new.build(parts)
 

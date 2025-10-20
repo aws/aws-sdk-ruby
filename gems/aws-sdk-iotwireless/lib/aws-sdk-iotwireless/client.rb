@@ -33,6 +33,7 @@ module Aws::IoTWireless
     include Smithy::Client::Stubs
 
     self.service = Schema::Iotwireless
+    @identifier = :iotwireless
 
     add_plugin(::Aws::IoTWireless::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

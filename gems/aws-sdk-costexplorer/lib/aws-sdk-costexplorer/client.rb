@@ -33,6 +33,7 @@ module Aws::CostExplorer
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSInsightsIndexService
+    @identifier = :costexplorer
 
     add_plugin(::Aws::CostExplorer::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -33,6 +33,7 @@ module Aws::KendraRanking
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSKendraRerankingFrontendService
+    @identifier = :kendraranking
 
     add_plugin(::Aws::KendraRanking::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

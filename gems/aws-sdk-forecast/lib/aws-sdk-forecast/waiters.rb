@@ -3,8 +3,8 @@
 # This is generated code!
 
 module Aws::Forecast
-
   # @api private
   module Waiters
+
   end
 end

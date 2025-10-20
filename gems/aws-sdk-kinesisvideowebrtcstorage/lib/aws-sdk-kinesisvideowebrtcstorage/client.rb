@@ -33,6 +33,7 @@ module Aws::KinesisVideoWebRTCStorage
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSAcuityRoutingServiceLambda
+    @identifier = :kinesisvideowebrtcstorage
 
     add_plugin(::Aws::KinesisVideoWebRTCStorage::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

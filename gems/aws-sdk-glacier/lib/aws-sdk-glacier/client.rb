@@ -33,6 +33,7 @@ module Aws::Glacier
     include Smithy::Client::Stubs
 
     self.service = Schema::Glacier
+    @identifier = :glacier
 
     add_plugin(::Aws::Glacier::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

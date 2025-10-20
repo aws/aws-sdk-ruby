@@ -33,6 +33,7 @@ module Aws::DirectoryService
     include Smithy::Client::Stubs
 
     self.service = Schema::DirectoryService20150416
+    @identifier = :directoryservice
 
     add_plugin(::Aws::DirectoryService::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

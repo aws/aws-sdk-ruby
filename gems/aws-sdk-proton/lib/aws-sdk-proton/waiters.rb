@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Proton
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a Component is deleted. Use this after invoking DeleteComponent

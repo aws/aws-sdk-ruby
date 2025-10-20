@@ -33,6 +33,7 @@ module Aws::Panorama
     include Smithy::Client::Stubs
 
     self.service = Schema::OmniCloudServiceLambda
+    @identifier = :panorama
 
     add_plugin(::Aws::Panorama::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

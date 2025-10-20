@@ -33,6 +33,7 @@ module Aws::CodeConnections
     include Smithy::Client::Stubs
 
     self.service = Schema::CodeConnections20231201
+    @identifier = :codeconnections
 
     add_plugin(::Aws::CodeConnections::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

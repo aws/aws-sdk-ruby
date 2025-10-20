@@ -33,6 +33,7 @@ module Aws::AuditManager
     include Smithy::Client::Stubs
 
     self.service = Schema::BedrockAssessmentManagerLambda
+    @identifier = :auditmanager
 
     add_plugin(::Aws::AuditManager::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

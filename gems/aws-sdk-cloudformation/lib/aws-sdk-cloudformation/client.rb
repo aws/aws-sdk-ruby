@@ -33,6 +33,7 @@ module Aws::CloudFormation
     include Smithy::Client::Stubs
 
     self.service = Schema::CloudFormation
+    @identifier = :cloudformation
 
     add_plugin(::Aws::CloudFormation::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

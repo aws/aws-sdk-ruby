@@ -48,8 +48,6 @@ module Aws::DynamoDB
       self.account_id_endpoint_mode = options.fetch(:account_id_endpoint_mode, nil)
       self.resource_arn = options.fetch(:resource_arn, nil)
       self.resource_arn_list = options.fetch(:resource_arn_list, nil)
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

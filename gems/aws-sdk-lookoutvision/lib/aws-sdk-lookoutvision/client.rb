@@ -33,6 +33,7 @@ module Aws::LookoutVision
     include Smithy::Client::Stubs
 
     self.service = Schema::LookoutVisionService
+    @identifier = :lookoutvision
 
     add_plugin(::Aws::LookoutVision::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

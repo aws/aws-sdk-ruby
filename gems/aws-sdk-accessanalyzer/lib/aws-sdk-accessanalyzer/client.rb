@@ -33,6 +33,7 @@ module Aws::AccessAnalyzer
     include Smithy::Client::Stubs
 
     self.service = Schema::AccessAnalyzer
+    @identifier = :accessanalyzer
 
     add_plugin(::Aws::AccessAnalyzer::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

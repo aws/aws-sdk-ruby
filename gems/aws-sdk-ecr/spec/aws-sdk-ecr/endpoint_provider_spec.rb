@@ -20,7 +20,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region af-south-1 with FIPS disabled and DualStack enabled" do
@@ -35,7 +34,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
@@ -50,7 +48,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-east-1 with FIPS disabled and DualStack enabled" do
@@ -65,7 +62,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
@@ -80,7 +76,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-1 with FIPS disabled and DualStack enabled" do
@@ -95,7 +90,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
@@ -110,7 +104,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-2 with FIPS disabled and DualStack enabled" do
@@ -125,7 +118,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
@@ -140,7 +132,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-northeast-3 with FIPS disabled and DualStack enabled" do
@@ -155,7 +146,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
@@ -170,7 +160,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-south-1 with FIPS disabled and DualStack enabled" do
@@ -185,7 +174,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-south-2 with FIPS disabled and DualStack disabled" do
@@ -200,7 +188,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-south-2 with FIPS disabled and DualStack enabled" do
@@ -215,7 +202,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
@@ -230,7 +216,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-1 with FIPS disabled and DualStack enabled" do
@@ -245,7 +230,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
@@ -260,7 +244,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-2 with FIPS disabled and DualStack enabled" do
@@ -275,7 +258,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-3 with FIPS disabled and DualStack disabled" do
@@ -290,7 +272,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-3 with FIPS disabled and DualStack enabled" do
@@ -305,7 +286,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-4 with FIPS disabled and DualStack disabled" do
@@ -320,7 +300,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-4 with FIPS disabled and DualStack enabled" do
@@ -335,7 +314,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-5 with FIPS disabled and DualStack disabled" do
@@ -350,7 +328,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-5 with FIPS disabled and DualStack enabled" do
@@ -365,7 +342,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-7 with FIPS disabled and DualStack disabled" do
@@ -380,7 +356,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ap-southeast-7 with FIPS disabled and DualStack enabled" do
@@ -395,7 +370,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
@@ -410,7 +384,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-central-1 with FIPS disabled and DualStack enabled" do
@@ -425,7 +398,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-west-1 with FIPS disabled and DualStack disabled" do
@@ -440,7 +412,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region ca-west-1 with FIPS disabled and DualStack enabled" do
@@ -455,7 +426,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
@@ -470,7 +440,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-central-1 with FIPS disabled and DualStack enabled" do
@@ -485,7 +454,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-central-2 with FIPS disabled and DualStack disabled" do
@@ -500,7 +468,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-central-2 with FIPS disabled and DualStack enabled" do
@@ -515,7 +482,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
@@ -530,7 +496,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-north-1 with FIPS disabled and DualStack enabled" do
@@ -545,7 +510,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
@@ -560,7 +524,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-south-1 with FIPS disabled and DualStack enabled" do
@@ -575,7 +538,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-south-2 with FIPS disabled and DualStack disabled" do
@@ -590,7 +552,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-south-2 with FIPS disabled and DualStack enabled" do
@@ -605,7 +566,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
@@ -620,7 +580,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-1 with FIPS disabled and DualStack enabled" do
@@ -635,7 +594,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
@@ -650,7 +608,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-2 with FIPS disabled and DualStack enabled" do
@@ -665,7 +622,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
@@ -680,7 +636,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region eu-west-3 with FIPS disabled and DualStack enabled" do
@@ -695,7 +650,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region il-central-1 with FIPS disabled and DualStack disabled" do
@@ -710,7 +664,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region il-central-1 with FIPS disabled and DualStack enabled" do
@@ -725,7 +678,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region me-central-1 with FIPS disabled and DualStack disabled" do
@@ -740,7 +692,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region me-central-1 with FIPS disabled and DualStack enabled" do
@@ -755,7 +706,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region me-south-1 with FIPS disabled and DualStack disabled" do
@@ -770,7 +720,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region me-south-1 with FIPS disabled and DualStack enabled" do
@@ -785,7 +734,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
@@ -800,7 +748,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region sa-east-1 with FIPS disabled and DualStack enabled" do
@@ -815,7 +762,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack disabled" do
@@ -830,7 +776,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack disabled" do
@@ -845,7 +790,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
@@ -860,7 +804,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
@@ -875,7 +818,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS disabled and DualStack disabled" do
@@ -890,7 +832,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS enabled and DualStack disabled" do
@@ -905,7 +846,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS disabled and DualStack enabled" do
@@ -920,7 +860,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-east-2 with FIPS enabled and DualStack enabled" do
@@ -935,7 +874,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS disabled and DualStack disabled" do
@@ -950,7 +888,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS enabled and DualStack disabled" do
@@ -965,7 +902,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS disabled and DualStack enabled" do
@@ -980,7 +916,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-1 with FIPS enabled and DualStack enabled" do
@@ -995,7 +930,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS disabled and DualStack disabled" do
@@ -1010,7 +944,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS enabled and DualStack disabled" do
@@ -1025,7 +958,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS disabled and DualStack enabled" do
@@ -1040,7 +972,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-west-2 with FIPS enabled and DualStack enabled" do
@@ -1055,7 +986,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
@@ -1070,7 +1000,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
@@ -1085,7 +1014,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
@@ -1100,7 +1028,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
@@ -1115,7 +1042,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
@@ -1130,7 +1056,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
@@ -1145,7 +1070,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
@@ -1160,7 +1084,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
@@ -1175,7 +1098,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
@@ -1190,7 +1112,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
@@ -1205,7 +1126,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
@@ -1220,7 +1140,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
@@ -1235,7 +1154,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
@@ -1250,7 +1168,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
@@ -1265,7 +1182,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
@@ -1280,7 +1196,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-west-1 with FIPS disabled and DualStack disabled" do
@@ -1295,7 +1210,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
@@ -1310,7 +1224,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
@@ -1325,7 +1238,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
@@ -1340,7 +1252,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region set and fips disabled and dualstack disabled" do
@@ -1355,7 +1266,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
@@ -1370,7 +1280,6 @@ module Aws::ECR
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
-
     end
 
     context "For custom endpoint with fips enabled and dualstack disabled" do
@@ -1384,7 +1293,6 @@ module Aws::ECR
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "For custom endpoint with fips disabled and dualstack enabled" do
@@ -1398,7 +1306,6 @@ module Aws::ECR
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
 
     context "Missing region" do
@@ -1412,7 +1319,6 @@ module Aws::ECR
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
-
     end
   end
 end

@@ -2,14 +2,14 @@ module Aws::Outposts
   class EndpointParameters
     def initialize: (
       ?region: String,
-      use_dual_stack: bool,
-      use_fips: bool,
+      ?use_dual_stack: bool,
+      ?use_fips: bool,
       ?endpoint: String,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     attr_accessor region: String?
-    attr_accessor use_dual_stack: bool
-    attr_accessor use_fips: bool
+    attr_accessor use_dual_stack: bool?
+    attr_accessor use_fips: bool?
     attr_accessor endpoint: String?
   end
 end

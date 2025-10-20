@@ -33,6 +33,7 @@ module Aws::LakeFormation
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSLakeFormation
+    @identifier = :lakeformation
 
     add_plugin(::Aws::LakeFormation::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

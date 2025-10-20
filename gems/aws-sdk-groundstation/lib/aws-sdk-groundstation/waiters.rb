@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::GroundStation
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Waits until a contact has been scheduled

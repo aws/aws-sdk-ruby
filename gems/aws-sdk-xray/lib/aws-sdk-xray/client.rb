@@ -33,6 +33,7 @@ module Aws::XRay
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSXRay
+    @identifier = :xray
 
     add_plugin(::Aws::XRay::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

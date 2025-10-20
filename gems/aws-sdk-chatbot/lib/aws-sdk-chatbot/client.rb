@@ -33,6 +33,7 @@ module Aws::Chatbot
     include Smithy::Client::Stubs
 
     self.service = Schema::WheatleyOrchestration20171011
+    @identifier = :chatbot
 
     add_plugin(::Aws::Chatbot::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

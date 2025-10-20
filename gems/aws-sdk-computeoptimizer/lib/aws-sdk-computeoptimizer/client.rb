@@ -33,6 +33,7 @@ module Aws::ComputeOptimizer
     include Smithy::Client::Stubs
 
     self.service = Schema::ComputeOptimizerService
+    @identifier = :computeoptimizer
 
     add_plugin(::Aws::ComputeOptimizer::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

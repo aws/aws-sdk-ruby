@@ -33,6 +33,7 @@ module Aws::CloudTrailData
     include Smithy::Client::Stubs
 
     self.service = Schema::CloudTrailDataService
+    @identifier = :cloudtraildata
 
     add_plugin(::Aws::CloudTrailData::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

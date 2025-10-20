@@ -33,6 +33,7 @@ module Aws::HealthLake
     include Smithy::Client::Stubs
 
     self.service = Schema::HealthLake
+    @identifier = :healthlake
 
     add_plugin(::Aws::HealthLake::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

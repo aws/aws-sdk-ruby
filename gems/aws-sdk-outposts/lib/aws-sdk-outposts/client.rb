@@ -33,6 +33,7 @@ module Aws::Outposts
     include Smithy::Client::Stubs
 
     self.service = Schema::OutpostsOlafService
+    @identifier = :outposts
 
     add_plugin(::Aws::Outposts::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

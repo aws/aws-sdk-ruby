@@ -30,7 +30,7 @@ module Aws
       #
       # @example This url can also converted to a token used by the EKS service.
       #   "k8s-aws-v1." + Base64.urlsafe_encode64(url).chomp("==")
-      def get_caller_identity(options = {})
+      def get_caller_identity(options = {}) # rubocop:disable Metrics/AbcSize
         req = @client.build_request(:get_caller_identity, {})
         context = req.context
 

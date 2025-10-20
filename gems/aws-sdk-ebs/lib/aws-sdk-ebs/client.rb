@@ -33,6 +33,7 @@ module Aws::EBS
     include Smithy::Client::Stubs
 
     self.service = Schema::Ebs
+    @identifier = :ebs
 
     add_plugin(::Aws::EBS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

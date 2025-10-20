@@ -33,6 +33,7 @@ module Aws::BedrockAgentCore
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonBedrockAgentCore
+    @identifier = :bedrockagentcore
 
     add_plugin(::Aws::BedrockAgentCore::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

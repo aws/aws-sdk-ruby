@@ -33,6 +33,7 @@ module Aws::SsmSap
     include Smithy::Client::Stubs
 
     self.service = Schema::SsmSap
+    @identifier = :ssmsap
 
     add_plugin(::Aws::SsmSap::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

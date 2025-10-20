@@ -33,6 +33,7 @@ module Aws::MigrationHubConfig
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSMigrationHubMultiAccountService
+    @identifier = :migrationhubconfig
 
     add_plugin(::Aws::MigrationHubConfig::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

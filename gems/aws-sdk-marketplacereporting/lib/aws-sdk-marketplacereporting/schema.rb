@@ -6,31 +6,31 @@ module Aws::MarketplaceReporting
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
-    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.marketplacereporting#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
-    BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.marketplacereporting#BadRequestException', name: 'BadRequestException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
-    DashboardIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.marketplacereporting#DashboardIdentifier', name: 'DashboardIdentifier', traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.marketplacereporting#AWSMarketplaceReporting", "resource" => "com.amazonaws.marketplacereporting#Dashboard", "type" => "AWS::Service::Resource"}, "smithy.api#length" => {"min" => 1, "max" => 1023}, "smithy.api#pattern" => "^arn:aws:aws-marketplace::[0-9]{12}:AWSMarketplace/ReportingData/(Agreement_V1/Dashboard/AgreementSummary_V1|BillingEvent_V1/Dashboard/CostAnalysis_V1)$"})
-    EmbeddingDomain = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.marketplacereporting#EmbeddingDomain', name: 'EmbeddingDomain', traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^(https://[a-zA-Z\\.\\*0-9\\-_]+[\\.]{1}[a-zA-Z]{1,}[a-zA-Z0-9&?/-_=]*[a-zA-Z\\*0-9/]+|http[s]*://localhost(:[0-9]{1,5})?)$"})
-    EmbeddingDomains = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.marketplacereporting#EmbeddingDomains', name: 'EmbeddingDomains', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
-    GetBuyerDashboardInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.marketplacereporting#GetBuyerDashboardInput', name: 'GetBuyerDashboardInput', traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.marketplacereporting#Dashboard", "ids" => {"dashboardIdentifier" => "dashboardIdentifier"}}]})
-    GetBuyerDashboardOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.marketplacereporting#GetBuyerDashboardOutput', name: 'GetBuyerDashboardOutput')
-    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.marketplacereporting#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
-    UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.marketplacereporting#UnauthorizedException', name: 'UnauthorizedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    DashboardIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacereporting#DashboardIdentifier", name: "DashboardIdentifier", traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.marketplacereporting#AWSMarketplaceReporting", "resource" => "com.amazonaws.marketplacereporting#Dashboard", "type" => "AWS::Service::Resource"}, "smithy.api#length" => {"min" => 1, "max" => 1023}, "smithy.api#pattern" => "^arn:aws:aws-marketplace::[0-9]{12}:AWSMarketplace/ReportingData/(Agreement_V1/Dashboard/AgreementSummary_V1|BillingEvent_V1/Dashboard/CostAnalysis_V1)$"})
+    EmbeddingDomain = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacereporting#EmbeddingDomain", name: "EmbeddingDomain", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^(https://[a-zA-Z\\.\\*0-9\\-_]+[\\.]{1}[a-zA-Z]{1,}[a-zA-Z0-9&?/-_=]*[a-zA-Z\\*0-9/]+|http[s]*://localhost(:[0-9]{1,5})?)$"})
+    EmbeddingDomains = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacereporting#EmbeddingDomains", name: "EmbeddingDomains", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    GetBuyerDashboardInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#GetBuyerDashboardInput", name: "GetBuyerDashboardInput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.marketplacereporting#Dashboard", "ids" => {"dashboardIdentifier" => "dashboardIdentifier"}}]})
+    GetBuyerDashboardOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#GetBuyerDashboardOutput", name: "GetBuyerDashboardOutput")
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacereporting#UnauthorizedException", name: "UnauthorizedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     BadRequestException.type = Types::BadRequestException
     EmbeddingDomains.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmbeddingDomain)
-    GetBuyerDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardIdentifier, location_name: 'dashboardIdentifier', traits: {"smithy.api#required" => {}}))
-    GetBuyerDashboardInput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmbeddingDomains, location_name: 'embeddingDomains', traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardIdentifier, location_name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardInput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmbeddingDomains, location_name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
     GetBuyerDashboardInput.type = Types::GetBuyerDashboardInput
-    GetBuyerDashboardOutput.add_member(:embed_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'embedUrl', traits: {"smithy.api#required" => {}}))
-    GetBuyerDashboardOutput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardIdentifier, location_name: 'dashboardIdentifier', traits: {"smithy.api#required" => {}}))
-    GetBuyerDashboardOutput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmbeddingDomains, location_name: 'embeddingDomains', traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardOutput.add_member(:embed_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "embedUrl", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardOutput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DashboardIdentifier, location_name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
+    GetBuyerDashboardOutput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmbeddingDomains, location_name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
     GetBuyerDashboardOutput.type = Types::GetBuyerDashboardOutput
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     InternalServerException.type = Types::InternalServerException
-    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message'))
+    UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
 
     AWSMarketplaceReporting = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

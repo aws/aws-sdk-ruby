@@ -28,8 +28,6 @@ module Aws::SnowDeviceManagement
       self.use_dual_stack = options.fetch(:use_dual_stack, false)
       self.use_fips = options.fetch(:use_fips, false)
       self.endpoint = options.fetch(:endpoint, nil)
-      raise ArgumentError, "missing required parameter: :use_dual_stack" if use_dual_stack.nil?
-      raise ArgumentError, "missing required parameter: :use_fips" if use_fips.nil?
     end
 
     # @api private

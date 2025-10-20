@@ -33,6 +33,7 @@ module Aws::ConnectContactLens
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonConnectContactLens
+    @identifier = :connectcontactlens
 
     add_plugin(::Aws::ConnectContactLens::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

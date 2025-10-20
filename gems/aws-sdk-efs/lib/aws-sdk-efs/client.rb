@@ -33,6 +33,7 @@ module Aws::EFS
     include Smithy::Client::Stubs
 
     self.service = Schema::MagnolioAPIServiceV20150201
+    @identifier = :efs
 
     add_plugin(::Aws::EFS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

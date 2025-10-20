@@ -33,6 +33,7 @@ module Aws::Firehose
     include Smithy::Client::Stubs
 
     self.service = Schema::Firehose20150804
+    @identifier = :firehose
 
     add_plugin(::Aws::Firehose::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

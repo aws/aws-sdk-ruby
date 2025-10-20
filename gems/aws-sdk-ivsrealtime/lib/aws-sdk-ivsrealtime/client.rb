@@ -33,6 +33,7 @@ module Aws::IVSRealTime
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonInteractiveVideoServiceRealTime
+    @identifier = :ivsrealtime
 
     add_plugin(::Aws::IVSRealTime::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

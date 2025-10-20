@@ -33,6 +33,7 @@ module Aws::QBusiness
     include Smithy::Client::Stubs
 
     self.service = Schema::ExpertQ
+    @identifier = :qbusiness
 
     add_plugin(::Aws::QBusiness::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

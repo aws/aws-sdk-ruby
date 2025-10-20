@@ -33,6 +33,7 @@ module Aws::AppConfigData
     include Smithy::Client::Stubs
 
     self.service = Schema::AppConfigData
+    @identifier = :appconfigdata
 
     add_plugin(::Aws::AppConfigData::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

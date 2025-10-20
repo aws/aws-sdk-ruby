@@ -33,6 +33,7 @@ module Aws::KMS
     include Smithy::Client::Stubs
 
     self.service = Schema::TrentService
+    @identifier = :kms
 
     add_plugin(::Aws::KMS::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

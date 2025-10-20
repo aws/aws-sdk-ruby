@@ -33,6 +33,7 @@ module Aws::Imagebuilder
     include Smithy::Client::Stubs
 
     self.service = Schema::Imagebuilder
+    @identifier = :imagebuilder
 
     add_plugin(::Aws::Imagebuilder::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

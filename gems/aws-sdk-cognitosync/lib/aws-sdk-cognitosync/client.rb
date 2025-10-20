@@ -33,6 +33,7 @@ module Aws::CognitoSync
     include Smithy::Client::Stubs
 
     self.service = Schema::AWSCognitoSyncService
+    @identifier = :cognitosync
 
     add_plugin(::Aws::CognitoSync::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

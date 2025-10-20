@@ -33,6 +33,7 @@ module Aws::KafkaConnect
     include Smithy::Client::Stubs
 
     self.service = Schema::KafkaConnect
+    @identifier = :kafkaconnect
 
     add_plugin(::Aws::KafkaConnect::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

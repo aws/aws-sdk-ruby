@@ -6,62 +6,62 @@ module Aws::SSMGuiConnect
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
-    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
-    AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmguiconnect#AccountId', name: 'AccountId', traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
-    BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmguiconnect#BucketName', name: 'BucketName', traits: {"smithy.api#pattern" => "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)"})
-    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmguiconnect#ClientToken', name: 'ClientToken', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
-    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
-    ConnectionRecordingPreferences = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#ConnectionRecordingPreferences', name: 'ConnectionRecordingPreferences')
-    DeleteConnectionRecordingPreferencesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#DeleteConnectionRecordingPreferencesRequest', name: 'DeleteConnectionRecordingPreferencesRequest')
-    DeleteConnectionRecordingPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#DeleteConnectionRecordingPreferencesResponse', name: 'DeleteConnectionRecordingPreferencesResponse')
-    ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmguiconnect#ErrorMessage', name: 'ErrorMessage')
-    GetConnectionRecordingPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#GetConnectionRecordingPreferencesResponse', name: 'GetConnectionRecordingPreferencesResponse')
-    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
-    RecordingDestinations = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#RecordingDestinations', name: 'RecordingDestinations')
-    ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
-    S3Bucket = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#S3Bucket', name: 'S3Bucket')
-    S3Buckets = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmguiconnect#S3Buckets', name: 'S3Buckets', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
-    ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#ServiceQuotaExceededException', name: 'ServiceQuotaExceededException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
-    ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#ThrottlingException', name: 'ThrottlingException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
-    UpdateConnectionRecordingPreferencesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#UpdateConnectionRecordingPreferencesRequest', name: 'UpdateConnectionRecordingPreferencesRequest')
-    UpdateConnectionRecordingPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#UpdateConnectionRecordingPreferencesResponse', name: 'UpdateConnectionRecordingPreferencesResponse')
-    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmguiconnect#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssmguiconnect#AccountId", name: "AccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
+    BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssmguiconnect#BucketName", name: "BucketName", traits: {"smithy.api#pattern" => "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)"})
+    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssmguiconnect#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ConnectionRecordingPreferences = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#ConnectionRecordingPreferences", name: "ConnectionRecordingPreferences")
+    DeleteConnectionRecordingPreferencesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#DeleteConnectionRecordingPreferencesRequest", name: "DeleteConnectionRecordingPreferencesRequest")
+    DeleteConnectionRecordingPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#DeleteConnectionRecordingPreferencesResponse", name: "DeleteConnectionRecordingPreferencesResponse")
+    ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssmguiconnect#ErrorMessage", name: "ErrorMessage")
+    GetConnectionRecordingPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#GetConnectionRecordingPreferencesResponse", name: "GetConnectionRecordingPreferencesResponse")
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    RecordingDestinations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#RecordingDestinations", name: "RecordingDestinations")
+    ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    S3Bucket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#S3Bucket", name: "S3Bucket")
+    S3Buckets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssmguiconnect#S3Buckets", name: "S3Buckets", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    UpdateConnectionRecordingPreferencesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#UpdateConnectionRecordingPreferencesRequest", name: "UpdateConnectionRecordingPreferencesRequest")
+    UpdateConnectionRecordingPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#UpdateConnectionRecordingPreferencesResponse", name: "UpdateConnectionRecordingPreferencesResponse")
+    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssmguiconnect#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    ConnectionRecordingPreferences.add_member(:recording_destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingDestinations, location_name: 'RecordingDestinations', traits: {"smithy.api#required" => {}}))
-    ConnectionRecordingPreferences.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'KMSKeyArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#required" => {}}))
+    ConnectionRecordingPreferences.add_member(:recording_destinations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordingDestinations, location_name: "RecordingDestinations", traits: {"smithy.api#required" => {}}))
+    ConnectionRecordingPreferences.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "KMSKeyArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#required" => {}}))
     ConnectionRecordingPreferences.type = Types::ConnectionRecordingPreferences
-    DeleteConnectionRecordingPreferencesRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteConnectionRecordingPreferencesRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteConnectionRecordingPreferencesRequest.type = Types::DeleteConnectionRecordingPreferencesRequest
-    DeleteConnectionRecordingPreferencesResponse.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken'))
+    DeleteConnectionRecordingPreferencesResponse.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
     DeleteConnectionRecordingPreferencesResponse.type = Types::DeleteConnectionRecordingPreferencesResponse
-    GetConnectionRecordingPreferencesResponse.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken'))
-    GetConnectionRecordingPreferencesResponse.add_member(:connection_recording_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionRecordingPreferences, location_name: 'ConnectionRecordingPreferences'))
+    GetConnectionRecordingPreferencesResponse.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    GetConnectionRecordingPreferencesResponse.add_member(:connection_recording_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionRecordingPreferences, location_name: "ConnectionRecordingPreferences"))
     GetConnectionRecordingPreferencesResponse.type = Types::GetConnectionRecordingPreferencesResponse
-    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    RecordingDestinations.add_member(:s3_buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Buckets, location_name: 'S3Buckets', traits: {"smithy.api#required" => {}}))
+    RecordingDestinations.add_member(:s3_buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Buckets, location_name: "S3Buckets", traits: {"smithy.api#required" => {}}))
     RecordingDestinations.type = Types::RecordingDestinations
-    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    S3Bucket.add_member(:bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'BucketOwner', traits: {"smithy.api#required" => {}}))
-    S3Bucket.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: 'BucketName', traits: {"smithy.api#required" => {}}))
+    S3Bucket.add_member(:bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketOwner", traits: {"smithy.api#required" => {}}))
+    S3Bucket.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
     S3Bucket.type = Types::S3Bucket
     S3Buckets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Bucket)
-    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    UpdateConnectionRecordingPreferencesRequest.add_member(:connection_recording_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionRecordingPreferences, location_name: 'ConnectionRecordingPreferences', traits: {"smithy.api#required" => {}}))
-    UpdateConnectionRecordingPreferencesRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken', traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateConnectionRecordingPreferencesRequest.add_member(:connection_recording_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionRecordingPreferences, location_name: "ConnectionRecordingPreferences", traits: {"smithy.api#required" => {}}))
+    UpdateConnectionRecordingPreferencesRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateConnectionRecordingPreferencesRequest.type = Types::UpdateConnectionRecordingPreferencesRequest
-    UpdateConnectionRecordingPreferencesResponse.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'ClientToken'))
-    UpdateConnectionRecordingPreferencesResponse.add_member(:connection_recording_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionRecordingPreferences, location_name: 'ConnectionRecordingPreferences'))
+    UpdateConnectionRecordingPreferencesResponse.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    UpdateConnectionRecordingPreferencesResponse.add_member(:connection_recording_preferences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionRecordingPreferences, location_name: "ConnectionRecordingPreferences"))
     UpdateConnectionRecordingPreferencesResponse.type = Types::UpdateConnectionRecordingPreferencesResponse
-    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 
     SSMGuiConnect = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

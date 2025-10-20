@@ -33,6 +33,7 @@ module Aws::Omics
     include Smithy::Client::Stubs
 
     self.service = Schema::Omics
+    @identifier = :omics
 
     add_plugin(::Aws::Omics::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

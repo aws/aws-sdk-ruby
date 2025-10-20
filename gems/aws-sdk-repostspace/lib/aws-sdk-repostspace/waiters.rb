@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Repostspace
-
   # @api private
   module Waiters
+
     # @api private
     #
     #

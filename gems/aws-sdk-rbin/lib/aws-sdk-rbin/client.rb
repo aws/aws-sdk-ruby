@@ -33,6 +33,7 @@ module Aws::Rbin
     include Smithy::Client::Stubs
 
     self.service = Schema::AmazonRecycleBin
+    @identifier = :rbin
 
     add_plugin(::Aws::Rbin::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)

@@ -3,9 +3,9 @@
 # This is generated code!
 
 module Aws::Route53RecoveryControlConfig
-
   # @api private
   module Waiters
+
     # @api private
     #
     # Wait until a cluster is created

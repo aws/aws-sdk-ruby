@@ -33,6 +33,7 @@ module Aws::MediaConnect
     include Smithy::Client::Stubs
 
     self.service = Schema::MediaConnect
+    @identifier = :mediaconnect
 
     add_plugin(::Aws::MediaConnect::Plugins::Endpoint)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
