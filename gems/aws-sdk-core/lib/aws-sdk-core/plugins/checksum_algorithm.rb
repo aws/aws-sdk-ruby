@@ -294,15 +294,13 @@ module Aws
 
           return true if http_checksum['requestChecksumRequired']
 
-          if (algorithm_member = http_checksum['requestAlgorithmMember'])
-            case context.config.request_checksum_calculation
-            when 'when_supported'
-              true
-            when 'when_required'
-              !context.params[algorithm_member.to_sym].nil?
-            else
-              false
-            end
+          return false unless (algorithm_member = http_checksum['requestAlgorithmMember'])
+
+          case context.config.request_checksum_calculation
+          when 'when_supported'
+            true
+          when 'when_required'
+            !context.params[algorithm_member.to_sym].nil?
           else
             false
           end
