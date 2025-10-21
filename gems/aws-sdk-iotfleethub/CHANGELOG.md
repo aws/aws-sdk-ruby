@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - IoT FleetHub has been removed from the SDK because it has been discontinued.
+
 1.49.0 (2025-08-26)
 ------------------
 

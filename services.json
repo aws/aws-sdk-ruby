@@ -69,7 +69,8 @@
     "models": "appsync/2017-07-25"
   },
   "AppTest": {
-    "models": "apptest/2022-12-06"
+    "models": "apptest/2022-12-06",
+    "deprecated": true
   },
   "Appflow": {
     "models": "appflow/2020-08-23"
@@ -639,7 +640,8 @@
     "models": "iotevents-data/2018-10-23"
   },
   "IoTFleetHub": {
-    "models": "iotfleethub/2020-11-03"
+    "models": "iotfleethub/2020-11-03",
+    "deprecated": true
   },
   "IoTFleetWise": {
     "models": "iotfleetwise/2021-06-17"
@@ -753,10 +755,12 @@
     "models": "lookoutequipment/2020-12-15"
   },
   "LookoutMetrics": {
-    "models": "lookoutmetrics/2017-07-25"
+    "models": "lookoutmetrics/2017-07-25",
+    "deprecated": true
   },
   "LookoutforVision": {
-    "models": "lookoutvision/2020-11-20"
+    "models": "lookoutvision/2020-11-20",
+    "deprecated": true
   },
   "MPA": {
     "models": "mpa/2022-07-26"
@@ -993,10 +997,12 @@
     "models": "qconnect/2020-10-19"
   },
   "QLDB": {
-    "models": "qldb/2019-01-02"
+    "models": "qldb/2019-01-02",
+    "deprecated": true
   },
   "QLDBSession": {
-    "models": "qldb-session/2019-07-11"
+    "models": "qldb-session/2019-07-11",
+    "deprecated": true
   },
   "QuickSight": {
     "models": "quicksight/2018-04-01"
@@ -1044,7 +1050,8 @@
     "models": "resourcegroupstaggingapi/2017-01-26"
   },
   "RoboMaker": {
-    "models": "robomaker/2018-06-29"
+    "models": "robomaker/2018-06-29",
+    "deprecated": true
   },
   "RolesAnywhere": {
     "models": "rolesanywhere/2018-05-10"
@@ -1314,10 +1321,12 @@
     "models": "voice-id/2021-09-27"
   },
   "WAF": {
-    "models": "waf/2015-08-24"
+    "models": "waf/2015-08-24",
+    "deprecated": true
   },
   "WAFRegional": {
-    "models": "waf-regional/2016-11-28"
+    "models": "waf-regional/2016-11-28",
+    "deprecated": true
   },
   "WAFV2": {
     "models": "wafv2/2019-07-29"

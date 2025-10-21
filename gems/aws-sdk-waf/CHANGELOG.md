@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - WAF has been removed from the SDK because it has been discontinued.
+
 1.84.0 (2025-08-28)
 ------------------
 

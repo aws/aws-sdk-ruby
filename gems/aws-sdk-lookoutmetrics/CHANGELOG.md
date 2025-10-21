@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Lookout Metrics has been removed from the SDK because it has been discontinued.
+
 1.59.0 (2025-08-26)
 ------------------
 

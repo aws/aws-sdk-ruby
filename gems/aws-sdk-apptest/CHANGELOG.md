@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - AppTest has been removed from the SDK because it has been discontinued.
+
 1.21.0 (2025-08-27)
 ------------------
 
