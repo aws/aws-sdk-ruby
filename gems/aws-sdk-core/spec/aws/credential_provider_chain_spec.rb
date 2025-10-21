@@ -194,7 +194,7 @@ module Aws
         allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
         ENV['AWS_DEFAULT_PROFILE'] = 'BAD_PROFILE'
         validate_credentials(expected_creds)
-        validate_metrics('CREDENTIALS_PROFILE')
+        validate_metrics('CREDENTIALS_CODE', 'CREDENTIALS_PROFILE')
       end
     end
 
@@ -219,7 +219,7 @@ module Aws
         allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
         with_env_credentials
         validate_credentials(expected_creds)
-        validate_metrics('CREDENTIALS_PROFILE')
+        validate_metrics('CREDENTIALS_CODE', 'CREDENTIALS_PROFILE')
       end
     end
   end
