@@ -117,7 +117,10 @@ module Aws
       end
 
       def create_opts(options)
-        opts = checksum_not_required?(options) ? {} : { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
+        opts = {}
+        unless checksum_not_required?(options)
+          opts[:checksum_algorithm] = Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM
+        end
         opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
         CREATE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
