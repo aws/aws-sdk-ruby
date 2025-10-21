@@ -31,12 +31,12 @@ module Aws
     # @option options [Proc] :before_refresh A Proc called before
     #   credentials are refreshed.  Useful for updating tokens.
     #   `:before_refresh` is called when AWS credentials are
-    #   required and need to be refreshed. Tokens can be refreshed using
-    #   the following example:
+    #   required and need to be refreshed. See the example in this doc.
     #
-    #       before_refresh = Proc.new do |assume_role_credentials|
-    #         assume_role_credentials.assume_role_params['token_code'] = update_token
-    #       end
+    # @example Tokens can be refreshed using a Proc.
+    #   before_refresh = Proc.new do |assume_role_credentials|
+    #     assume_role_credentials.assume_role_params['token_code'] = update_token
+    #   end
     #
     def initialize(options = {})
       client_opts = {}
