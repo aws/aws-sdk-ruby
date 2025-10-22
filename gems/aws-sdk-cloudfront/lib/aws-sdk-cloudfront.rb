@@ -5,6 +5,8 @@
 require 'aws-sdk-core'
 require 'smithy-xml'
 require 'aws-sigv4'
+require 'json'
+require 'base64'
 require 'smithy-client'
 
 Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
