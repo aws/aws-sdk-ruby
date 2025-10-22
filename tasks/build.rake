@@ -2,10 +2,8 @@
 
 task 'build' do
   # TODO: These result in various errors:
-  #   aws-sdk-s3control => ArgumentError: Endpoint built-in not available for AWS::S3Control::UseArnRegion
   #   aws-sdk-s3 => ArgumentError: Endpoint built-in not available for AWS::S3::ForcePathStyle
   skip = %w[
-    aws-sdk-s3control
     aws-sdk-s3
   ]
 

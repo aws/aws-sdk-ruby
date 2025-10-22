@@ -1,0 +1,31 @@
+module Aws::S3Control
+  class EndpointParameters
+    def initialize: (
+      ?region: String,
+      ?use_fips: bool,
+      ?use_dual_stack: bool,
+      ?endpoint: String,
+      ?account_id: String,
+      ?requires_account_id: bool,
+      ?outpost_id: String,
+      ?bucket: String,
+      ?access_point_name: String,
+      ?use_arn_region: bool,
+      ?resource_arn: String,
+      ?use_s3_express_control_endpoint: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor region: String?
+    attr_accessor use_fips: bool?
+    attr_accessor use_dual_stack: bool?
+    attr_accessor endpoint: String?
+    attr_accessor account_id: String?
+    attr_accessor requires_account_id: bool?
+    attr_accessor outpost_id: String?
+    attr_accessor bucket: String?
+    attr_accessor access_point_name: String?
+    attr_accessor use_arn_region: bool?
+    attr_accessor resource_arn: String?
+    attr_accessor use_s3_express_control_endpoint: bool?
+  end
+end
