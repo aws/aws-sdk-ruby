@@ -7,4 +7,3 @@ $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 require 'aws-sdk-kinesisvideosignaling'
 
 require 'rspec'
-require 'smithy-client/protocol_spec_matcher'

@@ -9,7 +9,7 @@ module Aws::SimSpaceWeaver
     # @return [Array<Smithy::Client::AuthOption>]
     def resolve(parameters)
       options = []
-        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
+      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       options
     end
   end

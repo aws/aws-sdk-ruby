@@ -7,4 +7,3 @@ $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 require 'aws-sdk-sagemakera2iruntime'
 
 require 'rspec'
-require 'smithy-client/protocol_spec_matcher'

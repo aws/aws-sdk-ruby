@@ -2,9 +2,6 @@
 
 source 'https://rubygems.org'
 
-# temporary
-gem 'railties', '~> 8.0.0'
-
 gem 'base64'
 gem 'logger'
 gem 'pry'
