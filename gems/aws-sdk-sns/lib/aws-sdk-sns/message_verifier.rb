@@ -39,9 +39,9 @@ module Aws
 
       # @param [Hash] options
       # @option options [String] :http_proxy A proxy to send requests through. Formatted like 'http://proxy.com:123'.
-      def initialize(http_options = {})
+      def initialize(options = {})
         @cached_pems = {}
-        @http_proxy = URI.parse(http_options[:http_proxy].to_s)
+        @http_proxy = URI.parse(options[:http_proxy].to_s)
       end
 
       # @param [String<JSON>] message_body
@@ -66,8 +66,7 @@ module Aws
         when '1' then verify?(msg, OpenSSL::Digest.new('SHA1'))
         when '2' then verify?(msg, OpenSSL::Digest.new('SHA256'))
         else
-          error_msg = 'Invalid SignatureVersion'
-          raise VerificationError, error_msg
+          raise VerificationError, 'Invalid SignatureVersion'
         end
       end
 

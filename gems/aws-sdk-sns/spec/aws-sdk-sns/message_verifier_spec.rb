@@ -194,8 +194,7 @@ module Aws
           stub_request(:get, signing_cert_url).to_return(status: 200, body: cert_with_extra)
           expect do
             verifier.authenticate!(message_SHA1)
-          end.to raise_error(MessageVerifier::VerificationError,
-                             /certificate does not match expected X509 PEM format/)
+          end.to raise_error(MessageVerifier::VerificationError, /certificate does not match expected X509 PEM format/)
         end
       end
 
