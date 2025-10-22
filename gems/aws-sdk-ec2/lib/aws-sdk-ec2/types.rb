@@ -6025,13 +6025,6 @@ module Aws::EC2
     #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute destination_region
-    #   <p>The destination Region to use in the <code>PresignedUrl</code> parameter of a snapshot
-    #         copy operation. This parameter is only valid for specifying the destination Region in a
-    #           <code>PresignedUrl</code> parameter, where it is required.</p>
-    #            <p>The snapshot copy is sent to the regional endpoint that you sent the HTTP
-    #       	request to (for example, <code>ec2.us-east-1.amazonaws.com</code>). With the CLI, this is
-    #         specified using the <code>--region</code> parameter or the default Region in your Amazon Web Services
-    #         configuration file.</p>
     #   @return [String]
     # @!attribute encrypted
     #   <p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, 
@@ -6063,19 +6056,6 @@ module Aws::EC2
     #         the action can appear to complete, but eventually fails.</p>
     #   @return [String]
     # @!attribute presigned_url
-    #   <p>When you copy an encrypted source snapshot using the Amazon EC2 Query API, you must supply a
-    #         pre-signed URL. This parameter is optional for unencrypted snapshots. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html">Query
-    #           requests</a>.</p>
-    #            <p>The <code>PresignedUrl</code> should use the snapshot source endpoint, the
-    #           <code>CopySnapshot</code> action, and include the <code>SourceRegion</code>,
-    #           <code>SourceSnapshotId</code>, and <code>DestinationRegion</code> parameters. The
-    #           <code>PresignedUrl</code> must be signed using Amazon Web Services Signature Version 4. Because EBS
-    #         snapshots are stored in Amazon S3, the signing algorithm for this parameter uses the same logic
-    #         that is described in <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">
-    #           Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)</a> in the <i>Amazon S3 API Reference</i>. An
-    #         invalid or improperly signed <code>PresignedUrl</code> will cause the copy operation to fail
-    #         asynchronously, and the snapshot will move to an <code>error</code> state.</p>
     #   @return [String]
     # @!attribute source_region
     #   <p>The ID of the Region that contains the snapshot to be copied.</p>
