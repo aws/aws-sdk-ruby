@@ -2,6 +2,7 @@
 
 module Aws
   module S3Control
+    # @api private
     module Plugins
       # Adds the extended host id to the context when available.
       # @see https://docs.aws.amazon.com/AmazonS3/latest/API/get-request-ids.html

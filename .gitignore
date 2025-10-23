@@ -1,6 +1,7 @@
-.ruby-version
-.idea/
 .bundle/
 .byebug_history
-Gemfile.lock
+.ruby-version
+.yardoc/
+api-docs/
 build/
+Gemfile.lock
