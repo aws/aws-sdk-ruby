@@ -200,8 +200,7 @@ module Aws::NetworkManager
     # @option options [Boolean] :stub_responses
     #  When `true`, the client will return stubbed responses instead of networking requests.
     #  By default fake responses are generated and returned. You can specify the response data
-    #  to return or errors to raise by calling {Stubs#stub_responses}.
-    #  @see Stubs
+    #  to return or errors to raise by calling {Smithy::Client::Stubs#stub_responses}.
     # @option options [Boolean] :use_dualstack_endpoint
     #  When set to `true`, dualstack enabled endpoints (with `.aws` TLD) will be used if available.
     #  This option can also be configured in the following locations:
