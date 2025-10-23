@@ -11,7 +11,6 @@ Gem::Specification.new do |spec|
   spec.license     = 'Apache-2.0'
 
   spec.add_dependency('aws-sdk-core', '4.0.0.pre0')
-  spec.add_dependency('smithy-client', '1.0.0.pre1')
   spec.add_dependency('smithy-json', '1.0.0.pre1')
 
   spec.required_ruby_version = '>= 3.3'
