@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module S3Control
     describe Client do
-      it 'adds the extended s3 host id to the context when available' do
+      it 'adds the extended host id to the context when available' do
         client = Client.new(stub_responses: true)
         client.stub_responses(
           :list_jobs,
