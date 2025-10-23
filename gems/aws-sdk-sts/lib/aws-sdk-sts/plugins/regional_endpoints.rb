@@ -37,8 +37,8 @@ module Aws
             return value.downcase if %w[legacy regional].include?(value.downcase)
 
             raise ArgumentError,
-                  'The `AWS_STS_REGIONAL_ENDPOINTS` environment variable or the `sts_regional_endpoints` profile config ' \
-                  "must be 'legacy' or 'regional', got #{value.inspect}"
+                  'The `AWS_STS_REGIONAL_ENDPOINTS` environment variable or the `sts_regional_endpoints` profile ' \
+                  "config must be 'legacy' or 'regional', got #{value.inspect}"
           end
         end
       end

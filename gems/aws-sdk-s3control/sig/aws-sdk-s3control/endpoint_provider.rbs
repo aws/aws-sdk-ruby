@@ -1,0 +1,5 @@
+module Aws::S3Control
+  class EndpointProvider
+    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
+  end
+end

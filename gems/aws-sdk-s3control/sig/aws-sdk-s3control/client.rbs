@@ -1,0 +1,1601 @@
+module Aws::S3Control
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::S3Control::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?s3_use_arn_region: bool,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAccessGrantsIdentityCenterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_access_grants_identity_center: (
+      ?account_id: String,
+      ?identity_center_arn: String
+    ) -> _AssociateAccessGrantsIdentityCenterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAccessGrantsIdentityCenterResponse
+
+    interface _CreateAccessGrantResponse
+      include Smithy::Client::_Response[Types::CreateAccessGrantResult]
+      def created_at: () -> Time?
+      def access_grant_id: () -> String?
+      def access_grant_arn: () -> String?
+      def grantee: () -> Types::Grantee?
+      def access_grants_location_id: () -> String?
+      def access_grants_location_configuration: () -> Types::AccessGrantsLocationConfiguration?
+      def permission: () -> String?
+      def application_arn: () -> String?
+      def grant_scope: () -> String?
+    end
+    def create_access_grant: (
+      ?account_id: String,
+      ?access_grants_location_id: String,
+      ?access_grants_location_configuration: {
+        s3_sub_prefix: String
+      },
+      ?grantee: {
+        grantee_type: String,
+        grantee_identifier: String
+      },
+      ?permission: String,
+      ?application_arn: String,
+      ?s3_prefix_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAccessGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessGrantResponse
+
+    interface _CreateAccessGrantsInstanceResponse
+      include Smithy::Client::_Response[Types::CreateAccessGrantsInstanceResult]
+      def created_at: () -> Time?
+      def access_grants_instance_id: () -> String?
+      def access_grants_instance_arn: () -> String?
+      def identity_center_arn: () -> String?
+      def identity_center_instance_arn: () -> String?
+      def identity_center_application_arn: () -> String?
+    end
+    def create_access_grants_instance: (
+      ?account_id: String,
+      ?identity_center_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAccessGrantsInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessGrantsInstanceResponse
+
+    interface _CreateAccessGrantsLocationResponse
+      include Smithy::Client::_Response[Types::CreateAccessGrantsLocationResult]
+      def created_at: () -> Time?
+      def access_grants_location_id: () -> String?
+      def access_grants_location_arn: () -> String?
+      def location_scope: () -> String?
+      def iam_role_arn: () -> String?
+    end
+    def create_access_grants_location: (
+      ?account_id: String,
+      ?location_scope: String,
+      ?iam_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAccessGrantsLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessGrantsLocationResponse
+
+    interface _CreateAccessPointResponse
+      include Smithy::Client::_Response[Types::CreateAccessPointResult]
+      def access_point_arn: () -> String?
+      def alias: () -> String?
+    end
+    def create_access_point: (
+      ?account_id: String,
+      ?name: String,
+      ?bucket: String,
+      ?vpc_configuration: {
+        vpc_id: String
+      },
+      ?public_access_block_configuration: {
+        block_public_acls: bool,
+        ignore_public_acls: untyped,
+        block_public_policy: untyped,
+        restrict_public_buckets: untyped
+      },
+      ?bucket_account_id: String,
+      ?scope: {
+        prefixes: Array[String],
+        permissions: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPointResponse
+
+    interface _CreateAccessPointForObjectLambdaResponse
+      include Smithy::Client::_Response[Types::CreateAccessPointForObjectLambdaResult]
+      def object_lambda_access_point_arn: () -> String?
+      def alias: () -> Types::ObjectLambdaAccessPointAlias?
+    end
+    def create_access_point_for_object_lambda: (
+      ?account_id: String,
+      ?name: String,
+      ?configuration: {
+        supporting_access_point: String,
+        cloud_watch_metrics_enabled: bool,
+        allowed_features: Array[String],
+        transformation_configurations: Array[
+          {
+            actions: Array[String],
+            content_transformation: {
+              aws_lambda: {
+                function_arn: String,
+                function_payload: String
+              }
+            }
+          }
+        ]
+      }
+    ) -> _CreateAccessPointForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPointForObjectLambdaResponse
+
+    interface _CreateBucketResponse
+      include Smithy::Client::_Response[Types::CreateBucketResult]
+      def location: () -> String?
+      def bucket_arn: () -> String?
+    end
+    def create_bucket: (
+      ?acl: String,
+      ?bucket: String,
+      ?create_bucket_configuration: {
+        location_constraint: String
+      },
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write: String,
+      ?grant_write_acp: String,
+      ?object_lock_enabled_for_bucket: bool,
+      ?outpost_id: String
+    ) -> _CreateBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketResponse
+
+    interface _CreateJobResponse
+      include Smithy::Client::_Response[Types::CreateJobResult]
+      def job_id: () -> String?
+    end
+    def create_job: (
+      ?account_id: String,
+      ?confirmation_required: bool,
+      ?operation: {
+        lambda_invoke: {
+          function_arn: String,
+          invocation_schema_version: String,
+          user_arguments: Hash[String, String]
+        },
+        s3_put_object_copy: {
+          target_resource: String,
+          canned_access_control_list: String,
+          access_control_grants: Array[
+            {
+              grantee: {
+                type_identifier: String,
+                identifier: String,
+                display_name: untyped
+              },
+              permission: String
+            }
+          ],
+          metadata_directive: String,
+          modified_since_constraint: Time,
+          new_object_metadata: {
+            cache_control: untyped,
+            content_disposition: untyped,
+            content_encoding: untyped,
+            content_language: untyped,
+            user_metadata: Hash[String, String],
+            content_length: Integer,
+            content_md5: untyped,
+            content_type: untyped,
+            http_expires_date: untyped,
+            requester_charged: bool,
+            sse_algorithm: String
+          },
+          new_object_tagging: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          redirect_location: String,
+          requester_pays: untyped,
+          storage_class: String,
+          un_modified_since_constraint: untyped,
+          sse_aws_kms_key_id: String,
+          target_key_prefix: untyped,
+          object_lock_legal_hold_status: String,
+          object_lock_mode: String,
+          object_lock_retain_until_date: untyped,
+          bucket_key_enabled: untyped,
+          checksum_algorithm: String
+        },
+        s3_put_object_acl: {
+          access_control_policy: {
+            access_control_list: {
+              owner: {
+                id: untyped,
+                display_name: untyped
+              },
+              grants: untyped
+            },
+            canned_access_control_list: untyped
+          }
+        },
+        s3_put_object_tagging: {
+          tag_set: untyped
+        },
+        s3_delete_object_tagging: {
+        },
+        s3_initiate_restore_object: {
+          expiration_in_days: Integer,
+          glacier_job_tier: String
+        },
+        s3_put_object_legal_hold: {
+          legal_hold: {
+            status: untyped
+          }
+        },
+        s3_put_object_retention: {
+          bypass_governance_retention: untyped,
+          retention: {
+            retain_until_date: untyped,
+            mode: String
+          }
+        },
+        s3_replicate_object: {
+        },
+        s3_compute_object_checksum: {
+          checksum_algorithm: String,
+          checksum_type: String
+        }
+      },
+      ?report: {
+        bucket: String,
+        format: String,
+        enabled: bool,
+        prefix: String,
+        report_scope: String,
+        expected_bucket_owner: String
+      },
+      ?client_request_token: String,
+      ?manifest: {
+        spec: {
+          format: String,
+          fields: Array[String]
+        },
+        location: {
+          object_arn: String,
+          object_version_id: String,
+          e_tag: String
+        }
+      },
+      ?description: String,
+      ?priority: Integer,
+      ?role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?manifest_generator: {
+        s3_job_manifest_generator: {
+          expected_bucket_owner: String,
+          source_bucket: String,
+          manifest_output_location: {
+            expected_manifest_bucket_owner: untyped,
+            bucket: untyped,
+            manifest_prefix: String,
+            manifest_encryption: {
+              sses3: {
+              },
+              ssekms: {
+                key_id: String
+              }
+            },
+            manifest_format: String
+          },
+          filter: {
+            eligible_for_replication: bool,
+            created_after: Time,
+            created_before: untyped,
+            object_replication_statuses: Array[String],
+            key_name_constraint: {
+              match_any_prefix: Array[String],
+              match_any_suffix: untyped,
+              match_any_substring: untyped
+            },
+            object_size_greater_than_bytes: Integer,
+            object_size_less_than_bytes: Integer,
+            match_any_storage_class: Array[String],
+            match_any_object_encryption: Array[
+              {
+                sses3: {
+                },
+                ssekms: {
+                  kms_key_arn: String,
+                  bucket_key_enabled: untyped
+                },
+                dssekms: {
+                  kms_key_arn: untyped
+                },
+                ssec: {
+                },
+                notsse: {
+                }
+              }
+            ]
+          },
+          enable_manifest_output: untyped
+        }
+      }
+    ) -> _CreateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobResponse
+
+    interface _CreateMultiRegionAccessPointResponse
+      include Smithy::Client::_Response[Types::CreateMultiRegionAccessPointResult]
+      def request_token_arn: () -> String?
+    end
+    def create_multi_region_access_point: (
+      ?account_id: String,
+      ?client_token: String,
+      ?details: {
+        name: String,
+        public_access_block: {
+          block_public_acls: bool,
+          ignore_public_acls: untyped,
+          block_public_policy: untyped,
+          restrict_public_buckets: untyped
+        },
+        regions: Array[
+          {
+            bucket: String,
+            bucket_account_id: String
+          }
+        ]
+      }
+    ) -> _CreateMultiRegionAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMultiRegionAccessPointResponse
+
+    interface _CreateStorageLensGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_storage_lens_group: (
+      ?account_id: String,
+      ?storage_lens_group: {
+        name: String,
+        filter: {
+          match_any_prefix: Array[String],
+          match_any_suffix: Array[String],
+          match_any_tag: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          match_object_age: {
+            days_greater_than: Integer,
+            days_less_than: untyped
+          },
+          match_object_size: {
+            bytes_greater_than: Integer,
+            bytes_less_than: untyped
+          },
+          and: {
+            match_any_prefix: untyped,
+            match_any_suffix: untyped,
+            match_any_tag: untyped,
+            match_object_age: untyped,
+            match_object_size: untyped
+          },
+          or: {
+            match_any_prefix: untyped,
+            match_any_suffix: untyped,
+            match_any_tag: untyped,
+            match_object_age: untyped,
+            match_object_size: untyped
+          }
+        },
+        storage_lens_group_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateStorageLensGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStorageLensGroupResponse
+
+    interface _DeleteAccessGrantResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_grant: (
+      ?account_id: String,
+      ?access_grant_id: String
+    ) -> _DeleteAccessGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessGrantResponse
+
+    interface _DeleteAccessGrantsInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_grants_instance: (
+      ?account_id: String
+    ) -> _DeleteAccessGrantsInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessGrantsInstanceResponse
+
+    interface _DeleteAccessGrantsInstanceResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_grants_instance_resource_policy: (
+      ?account_id: String
+    ) -> _DeleteAccessGrantsInstanceResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessGrantsInstanceResourcePolicyResponse
+
+    interface _DeleteAccessGrantsLocationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_grants_location: (
+      ?account_id: String,
+      ?access_grants_location_id: String
+    ) -> _DeleteAccessGrantsLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessGrantsLocationResponse
+
+    interface _DeleteAccessPointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_point: (
+      ?account_id: String,
+      ?name: String
+    ) -> _DeleteAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPointResponse
+
+    interface _DeleteAccessPointForObjectLambdaResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_point_for_object_lambda: (
+      ?account_id: String,
+      ?name: String
+    ) -> _DeleteAccessPointForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPointForObjectLambdaResponse
+
+    interface _DeleteAccessPointPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_point_policy: (
+      ?account_id: String,
+      ?name: String
+    ) -> _DeleteAccessPointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPointPolicyResponse
+
+    interface _DeleteAccessPointPolicyForObjectLambdaResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_point_policy_for_object_lambda: (
+      ?account_id: String,
+      ?name: String
+    ) -> _DeleteAccessPointPolicyForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPointPolicyForObjectLambdaResponse
+
+    interface _DeleteAccessPointScopeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access_point_scope: (
+      ?account_id: String,
+      ?name: String
+    ) -> _DeleteAccessPointScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPointScopeResponse
+
+    interface _DeleteBucketResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _DeleteBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketResponse
+
+    interface _DeleteBucketLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_lifecycle_configuration: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _DeleteBucketLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketLifecycleConfigurationResponse
+
+    interface _DeleteBucketPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_policy: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _DeleteBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketPolicyResponse
+
+    interface _DeleteBucketReplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_replication: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _DeleteBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketReplicationResponse
+
+    interface _DeleteBucketTaggingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_tagging: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _DeleteBucketTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketTaggingResponse
+
+    interface _DeleteJobTaggingResponse
+      include Smithy::Client::_Response[Types::DeleteJobTaggingResult]
+    end
+    def delete_job_tagging: (
+      ?account_id: String,
+      ?job_id: String
+    ) -> _DeleteJobTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobTaggingResponse
+
+    interface _DeleteMultiRegionAccessPointResponse
+      include Smithy::Client::_Response[Types::DeleteMultiRegionAccessPointResult]
+      def request_token_arn: () -> String?
+    end
+    def delete_multi_region_access_point: (
+      ?account_id: String,
+      ?client_token: String,
+      ?details: {
+        name: String
+      }
+    ) -> _DeleteMultiRegionAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMultiRegionAccessPointResponse
+
+    interface _DeletePublicAccessBlockResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_public_access_block: (
+      ?account_id: String
+    ) -> _DeletePublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublicAccessBlockResponse
+
+    interface _DeleteStorageLensConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_storage_lens_configuration: (
+      ?config_id: String,
+      ?account_id: String
+    ) -> _DeleteStorageLensConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageLensConfigurationResponse
+
+    interface _DeleteStorageLensConfigurationTaggingResponse
+      include Smithy::Client::_Response[Types::DeleteStorageLensConfigurationTaggingResult]
+    end
+    def delete_storage_lens_configuration_tagging: (
+      ?config_id: String,
+      ?account_id: String
+    ) -> _DeleteStorageLensConfigurationTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageLensConfigurationTaggingResponse
+
+    interface _DeleteStorageLensGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_storage_lens_group: (
+      ?name: String,
+      ?account_id: String
+    ) -> _DeleteStorageLensGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageLensGroupResponse
+
+    interface _DescribeJobResponse
+      include Smithy::Client::_Response[Types::DescribeJobResult]
+      def job: () -> Types::JobDescriptor?
+    end
+    def describe_job: (
+      ?account_id: String,
+      ?job_id: String
+    ) -> _DescribeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobResponse
+
+    interface _DescribeMultiRegionAccessPointOperationResponse
+      include Smithy::Client::_Response[Types::DescribeMultiRegionAccessPointOperationResult]
+      def async_operation: () -> Types::AsyncOperation?
+    end
+    def describe_multi_region_access_point_operation: (
+      ?account_id: String,
+      ?request_token_arn: String
+    ) -> _DescribeMultiRegionAccessPointOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiRegionAccessPointOperationResponse
+
+    interface _DissociateAccessGrantsIdentityCenterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def dissociate_access_grants_identity_center: (
+      ?account_id: String
+    ) -> _DissociateAccessGrantsIdentityCenterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DissociateAccessGrantsIdentityCenterResponse
+
+    interface _GetAccessGrantResponse
+      include Smithy::Client::_Response[Types::GetAccessGrantResult]
+      def created_at: () -> Time?
+      def access_grant_id: () -> String?
+      def access_grant_arn: () -> String?
+      def grantee: () -> Types::Grantee?
+      def permission: () -> String?
+      def access_grants_location_id: () -> String?
+      def access_grants_location_configuration: () -> Types::AccessGrantsLocationConfiguration?
+      def grant_scope: () -> String?
+      def application_arn: () -> String?
+    end
+    def get_access_grant: (
+      ?account_id: String,
+      ?access_grant_id: String
+    ) -> _GetAccessGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessGrantResponse
+
+    interface _GetAccessGrantsInstanceResponse
+      include Smithy::Client::_Response[Types::GetAccessGrantsInstanceResult]
+      def access_grants_instance_arn: () -> String?
+      def access_grants_instance_id: () -> String?
+      def identity_center_arn: () -> String?
+      def identity_center_instance_arn: () -> String?
+      def identity_center_application_arn: () -> String?
+      def created_at: () -> Time?
+    end
+    def get_access_grants_instance: (
+      ?account_id: String
+    ) -> _GetAccessGrantsInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessGrantsInstanceResponse
+
+    interface _GetAccessGrantsInstanceForPrefixResponse
+      include Smithy::Client::_Response[Types::GetAccessGrantsInstanceForPrefixResult]
+      def access_grants_instance_arn: () -> String?
+      def access_grants_instance_id: () -> String?
+    end
+    def get_access_grants_instance_for_prefix: (
+      ?account_id: String,
+      ?s3_prefix: String
+    ) -> _GetAccessGrantsInstanceForPrefixResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessGrantsInstanceForPrefixResponse
+
+    interface _GetAccessGrantsInstanceResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetAccessGrantsInstanceResourcePolicyResult]
+      def policy: () -> String?
+      def organization: () -> String?
+      def created_at: () -> Time?
+    end
+    def get_access_grants_instance_resource_policy: (
+      ?account_id: String
+    ) -> _GetAccessGrantsInstanceResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessGrantsInstanceResourcePolicyResponse
+
+    interface _GetAccessGrantsLocationResponse
+      include Smithy::Client::_Response[Types::GetAccessGrantsLocationResult]
+      def created_at: () -> Time?
+      def access_grants_location_id: () -> String?
+      def access_grants_location_arn: () -> String?
+      def location_scope: () -> String?
+      def iam_role_arn: () -> String?
+    end
+    def get_access_grants_location: (
+      ?account_id: String,
+      ?access_grants_location_id: String
+    ) -> _GetAccessGrantsLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessGrantsLocationResponse
+
+    interface _GetAccessPointResponse
+      include Smithy::Client::_Response[Types::GetAccessPointResult]
+      def name: () -> String?
+      def bucket: () -> String?
+      def network_origin: () -> String?
+      def vpc_configuration: () -> Types::VpcConfiguration?
+      def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration?
+      def creation_date: () -> Time?
+      def alias: () -> String?
+      def access_point_arn: () -> String?
+      def endpoints: () -> Hash[String, String]?
+      def bucket_account_id: () -> String?
+      def data_source_id: () -> String?
+      def data_source_type: () -> String?
+    end
+    def get_access_point: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointResponse
+
+    interface _GetAccessPointConfigurationForObjectLambdaResponse
+      include Smithy::Client::_Response[Types::GetAccessPointConfigurationForObjectLambdaResult]
+      def configuration: () -> Types::ObjectLambdaConfiguration?
+    end
+    def get_access_point_configuration_for_object_lambda: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointConfigurationForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointConfigurationForObjectLambdaResponse
+
+    interface _GetAccessPointForObjectLambdaResponse
+      include Smithy::Client::_Response[Types::GetAccessPointForObjectLambdaResult]
+      def name: () -> String?
+      def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration?
+      def creation_date: () -> Time?
+      def alias: () -> Types::ObjectLambdaAccessPointAlias?
+    end
+    def get_access_point_for_object_lambda: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointForObjectLambdaResponse
+
+    interface _GetAccessPointPolicyResponse
+      include Smithy::Client::_Response[Types::GetAccessPointPolicyResult]
+      def policy: () -> String?
+    end
+    def get_access_point_policy: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointPolicyResponse
+
+    interface _GetAccessPointPolicyForObjectLambdaResponse
+      include Smithy::Client::_Response[Types::GetAccessPointPolicyForObjectLambdaResult]
+      def policy: () -> String?
+    end
+    def get_access_point_policy_for_object_lambda: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointPolicyForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointPolicyForObjectLambdaResponse
+
+    interface _GetAccessPointPolicyStatusResponse
+      include Smithy::Client::_Response[Types::GetAccessPointPolicyStatusResult]
+      def policy_status: () -> Types::PolicyStatus?
+    end
+    def get_access_point_policy_status: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointPolicyStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointPolicyStatusResponse
+
+    interface _GetAccessPointPolicyStatusForObjectLambdaResponse
+      include Smithy::Client::_Response[Types::GetAccessPointPolicyStatusForObjectLambdaResult]
+      def policy_status: () -> Types::PolicyStatus?
+    end
+    def get_access_point_policy_status_for_object_lambda: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointPolicyStatusForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointPolicyStatusForObjectLambdaResponse
+
+    interface _GetAccessPointScopeResponse
+      include Smithy::Client::_Response[Types::GetAccessPointScopeResult]
+      def scope: () -> Types::Scope?
+    end
+    def get_access_point_scope: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetAccessPointScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPointScopeResponse
+
+    interface _GetBucketResponse
+      include Smithy::Client::_Response[Types::GetBucketResult]
+      def bucket: () -> String?
+      def public_access_block_enabled: () -> bool?
+      def creation_date: () -> Time?
+    end
+    def get_bucket: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _GetBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketResponse
+
+    interface _GetBucketLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketLifecycleConfigurationResult]
+      def rules: () -> Array[Types::LifecycleRule]?
+    end
+    def get_bucket_lifecycle_configuration: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _GetBucketLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketLifecycleConfigurationResponse
+
+    interface _GetBucketPolicyResponse
+      include Smithy::Client::_Response[Types::GetBucketPolicyResult]
+      def policy: () -> String?
+    end
+    def get_bucket_policy: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _GetBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketPolicyResponse
+
+    interface _GetBucketReplicationResponse
+      include Smithy::Client::_Response[Types::GetBucketReplicationResult]
+      def replication_configuration: () -> Types::ReplicationConfiguration?
+    end
+    def get_bucket_replication: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _GetBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketReplicationResponse
+
+    interface _GetBucketTaggingResponse
+      include Smithy::Client::_Response[Types::GetBucketTaggingResult]
+      def tag_set: () -> Array[Types::S3Tag]?
+    end
+    def get_bucket_tagging: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _GetBucketTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketTaggingResponse
+
+    interface _GetBucketVersioningResponse
+      include Smithy::Client::_Response[Types::GetBucketVersioningResult]
+      def status: () -> String?
+      def mfa_delete: () -> String?
+    end
+    def get_bucket_versioning: (
+      ?account_id: String,
+      ?bucket: String
+    ) -> _GetBucketVersioningResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketVersioningResponse
+
+    interface _GetDataAccessResponse
+      include Smithy::Client::_Response[Types::GetDataAccessResult]
+      def credentials: () -> Types::Credentials?
+      def matched_grant_target: () -> String?
+      def grantee: () -> Types::Grantee?
+    end
+    def get_data_access: (
+      ?account_id: String,
+      ?target: String,
+      ?permission: String,
+      ?duration_seconds: Integer,
+      ?privilege: String,
+      ?target_type: String
+    ) -> _GetDataAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAccessResponse
+
+    interface _GetJobTaggingResponse
+      include Smithy::Client::_Response[Types::GetJobTaggingResult]
+      def tags: () -> Array[Types::S3Tag]?
+    end
+    def get_job_tagging: (
+      ?account_id: String,
+      ?job_id: String
+    ) -> _GetJobTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobTaggingResponse
+
+    interface _GetMultiRegionAccessPointResponse
+      include Smithy::Client::_Response[Types::GetMultiRegionAccessPointResult]
+      def access_point: () -> Types::MultiRegionAccessPointReport?
+    end
+    def get_multi_region_access_point: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetMultiRegionAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMultiRegionAccessPointResponse
+
+    interface _GetMultiRegionAccessPointPolicyResponse
+      include Smithy::Client::_Response[Types::GetMultiRegionAccessPointPolicyResult]
+      def policy: () -> Types::MultiRegionAccessPointPolicyDocument?
+    end
+    def get_multi_region_access_point_policy: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetMultiRegionAccessPointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMultiRegionAccessPointPolicyResponse
+
+    interface _GetMultiRegionAccessPointPolicyStatusResponse
+      include Smithy::Client::_Response[Types::GetMultiRegionAccessPointPolicyStatusResult]
+      def established: () -> Types::PolicyStatus?
+    end
+    def get_multi_region_access_point_policy_status: (
+      ?account_id: String,
+      ?name: String
+    ) -> _GetMultiRegionAccessPointPolicyStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMultiRegionAccessPointPolicyStatusResponse
+
+    interface _GetMultiRegionAccessPointRoutesResponse
+      include Smithy::Client::_Response[Types::GetMultiRegionAccessPointRoutesResult]
+      def mrap: () -> String?
+      def routes: () -> Array[Types::MultiRegionAccessPointRoute]?
+    end
+    def get_multi_region_access_point_routes: (
+      ?account_id: String,
+      ?mrap: String
+    ) -> _GetMultiRegionAccessPointRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMultiRegionAccessPointRoutesResponse
+
+    interface _GetPublicAccessBlockResponse
+      include Smithy::Client::_Response[Types::GetPublicAccessBlockOutput]
+      def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration?
+    end
+    def get_public_access_block: (
+      ?account_id: String
+    ) -> _GetPublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicAccessBlockResponse
+
+    interface _GetStorageLensConfigurationResponse
+      include Smithy::Client::_Response[Types::GetStorageLensConfigurationResult]
+      def storage_lens_configuration: () -> Types::StorageLensConfiguration?
+    end
+    def get_storage_lens_configuration: (
+      ?config_id: String,
+      ?account_id: String
+    ) -> _GetStorageLensConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageLensConfigurationResponse
+
+    interface _GetStorageLensConfigurationTaggingResponse
+      include Smithy::Client::_Response[Types::GetStorageLensConfigurationTaggingResult]
+      def tags: () -> Array[Types::StorageLensTag]?
+    end
+    def get_storage_lens_configuration_tagging: (
+      ?config_id: String,
+      ?account_id: String
+    ) -> _GetStorageLensConfigurationTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageLensConfigurationTaggingResponse
+
+    interface _GetStorageLensGroupResponse
+      include Smithy::Client::_Response[Types::GetStorageLensGroupResult]
+      def storage_lens_group: () -> Types::StorageLensGroup?
+    end
+    def get_storage_lens_group: (
+      ?name: String,
+      ?account_id: String
+    ) -> _GetStorageLensGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageLensGroupResponse
+
+    interface _ListAccessGrantsResponse
+      include Smithy::Client::_Response[Types::ListAccessGrantsResult]
+      def next_token: () -> String?
+      def access_grants_list: () -> Array[Types::ListAccessGrantEntry]?
+    end
+    def list_access_grants: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?grantee_type: String,
+      ?grantee_identifier: String,
+      ?permission: String,
+      ?grant_scope: String,
+      ?application_arn: String
+    ) -> _ListAccessGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessGrantsResponse
+
+    interface _ListAccessGrantsInstancesResponse
+      include Smithy::Client::_Response[Types::ListAccessGrantsInstancesResult]
+      def next_token: () -> String?
+      def access_grants_instances_list: () -> Array[Types::ListAccessGrantsInstanceEntry]?
+    end
+    def list_access_grants_instances: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessGrantsInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessGrantsInstancesResponse
+
+    interface _ListAccessGrantsLocationsResponse
+      include Smithy::Client::_Response[Types::ListAccessGrantsLocationsResult]
+      def next_token: () -> String?
+      def access_grants_locations_list: () -> Array[Types::ListAccessGrantsLocationsEntry]?
+    end
+    def list_access_grants_locations: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?location_scope: String
+    ) -> _ListAccessGrantsLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessGrantsLocationsResponse
+
+    interface _ListAccessPointsResponse
+      include Smithy::Client::_Response[Types::ListAccessPointsResult]
+      def access_point_list: () -> Array[Types::AccessPoint]?
+      def next_token: () -> String?
+    end
+    def list_access_points: (
+      ?account_id: String,
+      ?bucket: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?data_source_id: String,
+      ?data_source_type: String
+    ) -> _ListAccessPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPointsResponse
+
+    interface _ListAccessPointsForDirectoryBucketsResponse
+      include Smithy::Client::_Response[Types::ListAccessPointsForDirectoryBucketsResult]
+      def access_point_list: () -> Array[Types::AccessPoint]?
+      def next_token: () -> String?
+    end
+    def list_access_points_for_directory_buckets: (
+      ?account_id: String,
+      ?directory_bucket: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessPointsForDirectoryBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPointsForDirectoryBucketsResponse
+
+    interface _ListAccessPointsForObjectLambdaResponse
+      include Smithy::Client::_Response[Types::ListAccessPointsForObjectLambdaResult]
+      def object_lambda_access_point_list: () -> Array[Types::ObjectLambdaAccessPoint]?
+      def next_token: () -> String?
+    end
+    def list_access_points_for_object_lambda: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessPointsForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPointsForObjectLambdaResponse
+
+    interface _ListCallerAccessGrantsResponse
+      include Smithy::Client::_Response[Types::ListCallerAccessGrantsResult]
+      def next_token: () -> String?
+      def caller_access_grants_list: () -> Array[Types::ListCallerAccessGrantsEntry]?
+    end
+    def list_caller_access_grants: (
+      ?account_id: String,
+      ?grant_scope: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?allowed_by_application: bool
+    ) -> _ListCallerAccessGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCallerAccessGrantsResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResult]
+      def next_token: () -> String?
+      def jobs: () -> Array[Types::JobListDescriptor]?
+    end
+    def list_jobs: (
+      ?account_id: String,
+      ?job_statuses: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListMultiRegionAccessPointsResponse
+      include Smithy::Client::_Response[Types::ListMultiRegionAccessPointsResult]
+      def access_points: () -> Array[Types::MultiRegionAccessPointReport]?
+      def next_token: () -> String?
+    end
+    def list_multi_region_access_points: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMultiRegionAccessPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultiRegionAccessPointsResponse
+
+    interface _ListRegionalBucketsResponse
+      include Smithy::Client::_Response[Types::ListRegionalBucketsResult]
+      def regional_bucket_list: () -> Array[Types::RegionalBucket]?
+      def next_token: () -> String?
+    end
+    def list_regional_buckets: (
+      ?account_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?outpost_id: String
+    ) -> _ListRegionalBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegionalBucketsResponse
+
+    interface _ListStorageLensConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListStorageLensConfigurationsResult]
+      def next_token: () -> String?
+      def storage_lens_configuration_list: () -> Array[Types::ListStorageLensConfigurationEntry]?
+    end
+    def list_storage_lens_configurations: (
+      ?account_id: String,
+      ?next_token: String
+    ) -> _ListStorageLensConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStorageLensConfigurationsResponse
+
+    interface _ListStorageLensGroupsResponse
+      include Smithy::Client::_Response[Types::ListStorageLensGroupsResult]
+      def next_token: () -> String?
+      def storage_lens_group_list: () -> Array[Types::ListStorageLensGroupEntry]?
+    end
+    def list_storage_lens_groups: (
+      ?account_id: String,
+      ?next_token: String
+    ) -> _ListStorageLensGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStorageLensGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?account_id: String,
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutAccessGrantsInstanceResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutAccessGrantsInstanceResourcePolicyResult]
+      def policy: () -> String?
+      def organization: () -> String?
+      def created_at: () -> Time?
+    end
+    def put_access_grants_instance_resource_policy: (
+      ?account_id: String,
+      ?policy: String,
+      ?organization: String
+    ) -> _PutAccessGrantsInstanceResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccessGrantsInstanceResourcePolicyResponse
+
+    interface _PutAccessPointConfigurationForObjectLambdaResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_access_point_configuration_for_object_lambda: (
+      ?account_id: String,
+      ?name: String,
+      ?configuration: {
+        supporting_access_point: String,
+        cloud_watch_metrics_enabled: bool,
+        allowed_features: Array[String],
+        transformation_configurations: Array[
+          {
+            actions: Array[String],
+            content_transformation: {
+              aws_lambda: {
+                function_arn: String,
+                function_payload: String
+              }
+            }
+          }
+        ]
+      }
+    ) -> _PutAccessPointConfigurationForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccessPointConfigurationForObjectLambdaResponse
+
+    interface _PutAccessPointPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_access_point_policy: (
+      ?account_id: String,
+      ?name: String,
+      ?policy: String
+    ) -> _PutAccessPointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccessPointPolicyResponse
+
+    interface _PutAccessPointPolicyForObjectLambdaResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_access_point_policy_for_object_lambda: (
+      ?account_id: String,
+      ?name: String,
+      ?policy: String
+    ) -> _PutAccessPointPolicyForObjectLambdaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccessPointPolicyForObjectLambdaResponse
+
+    interface _PutAccessPointScopeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_access_point_scope: (
+      ?account_id: String,
+      ?name: String,
+      ?scope: {
+        prefixes: Array[String],
+        permissions: Array[String]
+      }
+    ) -> _PutAccessPointScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccessPointScopeResponse
+
+    interface _PutBucketLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_lifecycle_configuration: (
+      ?account_id: String,
+      ?bucket: String,
+      ?lifecycle_configuration: {
+        rules: Array[
+          {
+            expiration: {
+              date: Time,
+              days: Integer,
+              expired_object_delete_marker: bool
+            },
+            id: String,
+            filter: {
+              prefix: String,
+              tag: {
+                key: String,
+                value: String
+              },
+              and: {
+                prefix: untyped,
+                tags: Array[
+                  {
+                    key: untyped,
+                    value: untyped
+                  }
+                ],
+                object_size_greater_than: Integer,
+                object_size_less_than: Integer
+              },
+              object_size_greater_than: untyped,
+              object_size_less_than: untyped
+            },
+            status: String,
+            transitions: Array[
+              {
+                date: untyped,
+                days: untyped,
+                storage_class: String
+              }
+            ],
+            noncurrent_version_transitions: Array[
+              {
+                noncurrent_days: untyped,
+                storage_class: untyped
+              }
+            ],
+            noncurrent_version_expiration: {
+              noncurrent_days: untyped,
+              newer_noncurrent_versions: Integer
+            },
+            abort_incomplete_multipart_upload: {
+              days_after_initiation: Integer
+            }
+          }
+        ]
+      }
+    ) -> _PutBucketLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketLifecycleConfigurationResponse
+
+    interface _PutBucketPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_policy: (
+      ?account_id: String,
+      ?bucket: String,
+      ?confirm_remove_self_bucket_access: bool,
+      ?policy: String
+    ) -> _PutBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketPolicyResponse
+
+    interface _PutBucketReplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_replication: (
+      ?account_id: String,
+      ?bucket: String,
+      ?replication_configuration: {
+        role: String,
+        rules: Array[
+          {
+            id: String,
+            priority: Integer,
+            prefix: String,
+            filter: {
+              prefix: untyped,
+              tag: {
+                key: String,
+                value: String
+              },
+              and: {
+                prefix: untyped,
+                tags: Array[
+                  {
+                    key: untyped,
+                    value: untyped
+                  }
+                ]
+              }
+            },
+            status: String,
+            source_selection_criteria: {
+              sse_kms_encrypted_objects: {
+                status: String
+              },
+              replica_modifications: {
+                status: String
+              }
+            },
+            existing_object_replication: {
+              status: String
+            },
+            destination: {
+              account: String,
+              bucket: String,
+              replication_time: {
+                status: String,
+                time: {
+                  minutes: Integer
+                }
+              },
+              access_control_translation: {
+                owner: String
+              },
+              encryption_configuration: {
+                replica_kms_key_id: String
+              },
+              metrics: {
+                status: String,
+                event_threshold: untyped
+              },
+              storage_class: String
+            },
+            delete_marker_replication: {
+              status: String
+            },
+            bucket: untyped
+          }
+        ]
+      }
+    ) -> _PutBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketReplicationResponse
+
+    interface _PutBucketTaggingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_tagging: (
+      ?account_id: String,
+      ?bucket: String,
+      ?tagging: {
+        tag_set: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _PutBucketTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketTaggingResponse
+
+    interface _PutBucketVersioningResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_versioning: (
+      ?account_id: String,
+      ?bucket: String,
+      ?mfa: String,
+      ?versioning_configuration: {
+        mfa_delete: String,
+        status: String
+      }
+    ) -> _PutBucketVersioningResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketVersioningResponse
+
+    interface _PutJobTaggingResponse
+      include Smithy::Client::_Response[Types::PutJobTaggingResult]
+    end
+    def put_job_tagging: (
+      ?account_id: String,
+      ?job_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutJobTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutJobTaggingResponse
+
+    interface _PutMultiRegionAccessPointPolicyResponse
+      include Smithy::Client::_Response[Types::PutMultiRegionAccessPointPolicyResult]
+      def request_token_arn: () -> String?
+    end
+    def put_multi_region_access_point_policy: (
+      ?account_id: String,
+      ?client_token: String,
+      ?details: {
+        name: String,
+        policy: String
+      }
+    ) -> _PutMultiRegionAccessPointPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMultiRegionAccessPointPolicyResponse
+
+    interface _PutPublicAccessBlockResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_public_access_block: (
+      ?public_access_block_configuration: {
+        block_public_acls: bool,
+        ignore_public_acls: untyped,
+        block_public_policy: untyped,
+        restrict_public_buckets: untyped
+      },
+      ?account_id: String
+    ) -> _PutPublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPublicAccessBlockResponse
+
+    interface _PutStorageLensConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_storage_lens_configuration: (
+      ?config_id: String,
+      ?account_id: String,
+      ?storage_lens_configuration: {
+        id: String,
+        account_level: {
+          activity_metrics: {
+            is_enabled: bool
+          },
+          bucket_level: {
+            activity_metrics: untyped,
+            prefix_level: {
+              storage_metrics: {
+                is_enabled: untyped,
+                selection_criteria: {
+                  delimiter: String,
+                  max_depth: Integer,
+                  min_storage_bytes_percentage: Float
+                }
+              }
+            },
+            advanced_cost_optimization_metrics: {
+              is_enabled: untyped
+            },
+            advanced_data_protection_metrics: {
+              is_enabled: untyped
+            },
+            detailed_status_codes_metrics: {
+              is_enabled: untyped
+            }
+          },
+          advanced_cost_optimization_metrics: untyped,
+          advanced_data_protection_metrics: untyped,
+          detailed_status_codes_metrics: untyped,
+          storage_lens_group_level: {
+            selection_criteria: {
+              include: Array[String],
+              exclude: Array[String]
+            }
+          }
+        },
+        include: {
+          buckets: Array[String],
+          regions: Array[String]
+        },
+        exclude: {
+          buckets: untyped,
+          regions: untyped
+        },
+        data_export: {
+          s3_bucket_destination: {
+            format: String,
+            output_schema_version: String,
+            account_id: String,
+            arn: String,
+            prefix: String,
+            encryption: {
+              sses3: {
+              },
+              ssekms: {
+                key_id: String
+              }
+            }
+          },
+          cloud_watch_metrics: {
+            is_enabled: untyped
+          }
+        },
+        is_enabled: untyped,
+        aws_org: {
+          arn: String
+        },
+        storage_lens_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutStorageLensConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStorageLensConfigurationResponse
+
+    interface _PutStorageLensConfigurationTaggingResponse
+      include Smithy::Client::_Response[Types::PutStorageLensConfigurationTaggingResult]
+    end
+    def put_storage_lens_configuration_tagging: (
+      ?config_id: String,
+      ?account_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutStorageLensConfigurationTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStorageLensConfigurationTaggingResponse
+
+    interface _SubmitMultiRegionAccessPointRoutesResponse
+      include Smithy::Client::_Response[Types::SubmitMultiRegionAccessPointRoutesResult]
+    end
+    def submit_multi_region_access_point_routes: (
+      ?account_id: String,
+      ?mrap: String,
+      ?route_updates: Array[
+        {
+          bucket: String,
+          region: String,
+          traffic_dial_percentage: Integer
+        }
+      ]
+    ) -> _SubmitMultiRegionAccessPointRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitMultiRegionAccessPointRoutesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+    end
+    def tag_resource: (
+      ?account_id: String,
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+    end
+    def untag_resource: (
+      ?account_id: String,
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessGrantsLocationResponse
+      include Smithy::Client::_Response[Types::UpdateAccessGrantsLocationResult]
+      def created_at: () -> Time?
+      def access_grants_location_id: () -> String?
+      def access_grants_location_arn: () -> String?
+      def location_scope: () -> String?
+      def iam_role_arn: () -> String?
+    end
+    def update_access_grants_location: (
+      ?account_id: String,
+      ?access_grants_location_id: String,
+      ?iam_role_arn: String
+    ) -> _UpdateAccessGrantsLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessGrantsLocationResponse
+
+    interface _UpdateJobPriorityResponse
+      include Smithy::Client::_Response[Types::UpdateJobPriorityResult]
+      def job_id: () -> String?
+      def priority: () -> Integer?
+    end
+    def update_job_priority: (
+      ?account_id: String,
+      ?job_id: String,
+      ?priority: Integer
+    ) -> _UpdateJobPriorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJobPriorityResponse
+
+    interface _UpdateJobStatusResponse
+      include Smithy::Client::_Response[Types::UpdateJobStatusResult]
+      def job_id: () -> String?
+      def status: () -> String?
+      def status_update_reason: () -> String?
+    end
+    def update_job_status: (
+      ?account_id: String,
+      ?job_id: String,
+      ?requested_job_status: String,
+      ?status_update_reason: String
+    ) -> _UpdateJobStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJobStatusResponse
+
+    interface _UpdateStorageLensGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_storage_lens_group: (
+      ?name: String,
+      ?account_id: String,
+      ?storage_lens_group: {
+        name: String,
+        filter: {
+          match_any_prefix: Array[String],
+          match_any_suffix: Array[String],
+          match_any_tag: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          match_object_age: {
+            days_greater_than: Integer,
+            days_less_than: untyped
+          },
+          match_object_size: {
+            bytes_greater_than: Integer,
+            bytes_less_than: untyped
+          },
+          and: {
+            match_any_prefix: untyped,
+            match_any_suffix: untyped,
+            match_any_tag: untyped,
+            match_object_age: untyped,
+            match_object_size: untyped
+          },
+          or: {
+            match_any_prefix: untyped,
+            match_any_suffix: untyped,
+            match_any_tag: untyped,
+            match_object_age: untyped,
+            match_object_size: untyped
+          }
+        },
+        storage_lens_group_arn: String
+      }
+    ) -> _UpdateStorageLensGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStorageLensGroupResponse
+  end
+end

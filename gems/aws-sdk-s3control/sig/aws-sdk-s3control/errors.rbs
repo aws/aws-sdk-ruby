@@ -1,0 +1,38 @@
+module Aws::S3Control
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BucketAlreadyExists < Smithy::Client::ServiceError
+    end
+    class BucketAlreadyOwnedByYou < Smithy::Client::ServiceError
+    end
+    class IdempotencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class JobStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchPublicAccessBlockConfiguration < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end
