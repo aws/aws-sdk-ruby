@@ -18,13 +18,26 @@ module Aws
           resolve_s3_use_arn_region(config) == 'true'
         end
 
+        def after_initialize(client)
+          value = client.config.s3_use_arn_region
+          return if [true, false].include?(value)
+
+          raise ArgumentError, "Expected :s3_use_arn_region to be true or false, got #{value.inspect}"
+        end
+
         class << self
           private
 
           def resolve_s3_use_arn_region(config)
-            ENV['AWS_S3_USE_ARN_REGION'] ||
+            value =
+              ENV['AWS_S3_USE_ARN_REGION'] ||
               Aws::Core.shared_config.profiles.fetch(config.profile, {})['s3_use_arn_region'] ||
               'true'
+            return value.downcase if %w[true false].include?(value.downcase)
+
+            raise ArgumentError,
+                  'The `AWS_S3_USE_ARN_REGION` environment variable or the `s3_use_arn_region` profile config ' \
+                  "must be true or false, got #{value.inspect}"
           end
         end
       end
