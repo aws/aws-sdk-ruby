@@ -80,6 +80,11 @@ module Aws
           # @param [OpenSSL::PKey::RSA, String, nil] key
           # @param [String, nil] iv The initialization vector
           def aes_cipher(mode, block_mode, key, iv)
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
+            ##% The client MUST initialize the cipher,
+            ##% or call an AES-GCM encryption API, with the plaintext data key, the generated IV,
+            ##% and the tag length defined in the Algorithm Suite
+            ##% when encrypting with ALG_AES_256_GCM_IV12_TAG16_NO_KDF.
             cipher = key ?
               OpenSSL::Cipher.new("aes-#{cipher_size(key)}-#{block_mode.downcase}") :
               OpenSSL::Cipher.new("aes-256-#{block_mode.downcase}")

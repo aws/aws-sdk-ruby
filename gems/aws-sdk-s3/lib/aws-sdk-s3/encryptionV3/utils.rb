@@ -123,12 +123,27 @@ module Aws
               raise DecryptionError, "Commitment key length does not match algorithm suite"
             end
 
+            ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
+            ##= type=implication
+            ##% When using an algorithm suite which supports key commitment,
+            ##% the verification of the derived key commitment value MUST be done in constant time.
             unless OpenSSL.secure_compare(
+              ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
+              ##% When using an algorithm suite which supports key commitment,
+              ##% the client MUST verify that the [derived key commitment](./key-derivation.md#hkdf-operation) contains the same bytes
+              ##% as the stored key commitment retrieved from the stored object's metadata.
               Utils.derive_commitment_key(data_key, message_id),
               stored_commitment_key
             )
+              ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
+              ##% When using an algorithm suite which supports key commitment,
+              ##% the client MUST throw an exception when the derived key commitment value and stored key commitment value do not match.
               raise DecryptionError, "Commitment key verification failed"
             end
+
+            ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
+            ##% When using an algorithm suite which supports key commitment,
+            ##% the client MUST verify the key commitment values match before deriving the [derived encryption key](./key-derivation.md#hkdf-operation).
 
             alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(:decrypt, data_key, message_id)
           end
@@ -157,6 +172,12 @@ module Aws
           end
 
           def generate_message_id()
+
+            ##= ../specification/s3-encryption/encryption.md#cipher-initialization
+            ##= type=exception
+            ##= reason=This would be a new runtime error that happens randomly.
+            ##% The client SHOULD validate that the generated IV or Message ID is not zeros.
+
             ##= ../specification/s3-encryption/encryption.md#content-encryption
             ##% The client MUST generate an IV or Message ID using the length of the IV or Message ID defined in the algorithm suite.
             OpenSSL::Random.random_bytes(28)

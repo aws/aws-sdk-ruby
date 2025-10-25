@@ -74,6 +74,11 @@ module Aws
 
         def attach_http_event_listeners(context)
           context.http_response.on_headers(200) do
+            ##= ../specification/s3-encryption/decryption.md#key-commitment
+            ##% The S3EC MUST validate the algorithm suite used for decryption
+            ##% against the key commitment policy before attempting to decrypt the content ciphertext.
+            # This is because the commitment policy _always_ allows decrypting committing algorithms.
+            # In the else branch we check to see if 
             decrypter = if context.http_response.headers.key?('x-amz-meta-x-amz-i')
                 ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
                 ##% - If the metadata contains "x-amz-3" and "x-amz-d" and "x-amz-i" then the object MUST be considered an S3EC-encrypted object using the V3 format.
@@ -81,6 +86,9 @@ module Aws
                 authenticated_decrypter(context, cipher, envelope)
               else
                 if context[:encryption][:commitment_policy] == :require_encrypt_require_decrypt
+                  ##= ../specification/s3-encryption/decryption.md#key-commitment
+                  ##% If the commitment policy requires decryption using a committing algorithm suite,
+                  ##% and the algorithm suite associated with the object does not support key commitment, then the S3EC MUST throw an exception.
                   ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
                   ##% When the commitment policy is REQUIRE_ENCRYPT_REQUIRE_DECRYPT, the S3EC MUST NOT allow decryption using algorithm suites which do not support key commitment.
                   raise Errors::LegacyDecryptionError

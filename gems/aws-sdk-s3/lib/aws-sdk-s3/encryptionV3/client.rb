@@ -460,6 +460,26 @@ module Aws
         ##= type=exception
         ##= reason=This has never been supported in Ruby
         ##% The S3EC MAY support re-encryption/key rotation via Instruction Files.
+        ##= ../specification/s3-encryption/decryption.md#ranged-gets
+        ##= type=exception
+        ##= reason=This has never been supported in Ruby
+        ##% The S3EC MAY support the "range" parameter on GetObject which specifies a subset of bytes to download and decrypt.
+        ##= ../specification/s3-encryption/decryption.md#ranged-gets
+        ##= type=exception
+        ##= reason=This has never been supported in Ruby
+        ##% If the S3EC supports Ranged Gets, the S3EC MUST adjust the customer-provided range to include the beginning and end of the cipher blocks for the given range.
+        ##= ../specification/s3-encryption/decryption.md#ranged-gets
+        ##= type=exception
+        ##= reason=This has never been supported in Ruby
+        ##% If the object was encrypted with ALG_AES_256_GCM_IV12_TAG16_NO_KDF, then ALG_AES_256_CTR_IV16_TAG16_NO_KDF MUST be used to decrypt the range of the object.
+        ##= ../specification/s3-encryption/decryption.md#ranged-gets
+        ##= type=exception
+        ##= reason=This has never been supported in Ruby
+        ##% If the object was encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, then ALG_AES_256_CTR_HKDF_SHA512_COMMIT_KEY MUST be used to decrypt the range of the object.
+        ##= ../specification/s3-encryption/decryption.md#ranged-gets
+        ##= type=exception
+        ##= reason=This has never been supported in Ruby
+        ##% If the GetObject response contains a range, but the GetObject request does not contain a range, the S3EC MUST throw an exception.
 
         # @api private
         def self.cipher_provider(options)
