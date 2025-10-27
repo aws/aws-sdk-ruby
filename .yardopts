@@ -1,7 +1,8 @@
 --title 'AWS SDK for Ruby V4'
 --output-dir api-docs
---markup html
+--markup markdown
 --hide-api private
 --plugin sitemap
 --exclude \/schema.rb$
+--no-cache
 gems/aws-sdk-s3control/lib/**/*.rb
