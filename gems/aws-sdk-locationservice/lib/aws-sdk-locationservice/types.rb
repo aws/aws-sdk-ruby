@@ -24,6 +24,27 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # Unique identifying information for an Android app. Consists of a
+    # package name and a 20 byte SHA-1 certificate fingerprint.
+    #
+    # @!attribute [rw] package
+    #   Unique package name for an Android app.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_fingerprint
+    #   20 byte SHA-1 certificate fingerprint associated with the Android
+    #   app signing certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/AndroidApp AWS API Documentation
+    #
+    class AndroidApp < Struct.new(
+      :package,
+      :certificate_fingerprint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Options for filtering API keys.
     #
     # @!attribute [rw] key_status
@@ -175,13 +196,43 @@ module Aws::LocationService
     #   * No spaces allowed. For example, `https://example.com`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allow_android_apps
+    #   An optional list of allowed Android applications for which requests
+    #   must originate from. Requests using this API key from other sources
+    #   will not be allowed.
+    #   @return [Array<Types::AndroidApp>]
+    #
+    # @!attribute [rw] allow_apple_apps
+    #   An optional list of allowed Apple applications for which requests
+    #   must originate from. Requests using this API key from other sources
+    #   will not be allowed.
+    #   @return [Array<Types::AppleApp>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ApiKeyRestrictions AWS API Documentation
     #
     class ApiKeyRestrictions < Struct.new(
       :allow_actions,
       :allow_resources,
-      :allow_referers)
+      :allow_referers,
+      :allow_android_apps,
+      :allow_apple_apps)
       SENSITIVE = [:allow_referers]
+      include Aws::Structure
+    end
+
+    # Unique identifying information for an Apple app (iOS, macOS, tvOS and
+    # watchOS). Consists of an Apple Bundle ID.
+    #
+    # @!attribute [rw] bundle_id
+    #   The unique identifier of the app across all Apple platforms (iOS,
+    #   macOS, tvOS, watchOS, etc.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/AppleApp AWS API Documentation
+    #
+    class AppleApp < Struct.new(
+      :bundle_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -677,7 +728,7 @@ module Aws::LocationService
     class CalculateRouteCarModeOptions < Struct.new(
       :avoid_ferries,
       :avoid_tolls)
-      SENSITIVE = []
+      SENSITIVE = [:avoid_ferries, :avoid_tolls]
       include Aws::Structure
     end
 
@@ -843,7 +894,7 @@ module Aws::LocationService
       :car_mode_options,
       :truck_mode_options,
       :key)
-      SENSITIVE = [:departure_positions, :destination_positions, :departure_time, :key]
+      SENSITIVE = [:departure_positions, :destination_positions, :departure_time, :depart_now, :key]
       include Aws::Structure
     end
 
@@ -1135,7 +1186,7 @@ module Aws::LocationService
       :arrival_time,
       :optimize_for,
       :key)
-      SENSITIVE = [:departure_position, :destination_position, :waypoint_positions, :departure_time, :arrival_time, :key]
+      SENSITIVE = [:departure_position, :destination_position, :waypoint_positions, :departure_time, :depart_now, :include_leg_geometry, :arrival_time, :key]
       include Aws::Structure
     end
 
@@ -1256,7 +1307,7 @@ module Aws::LocationService
       :distance,
       :duration_seconds,
       :distance_unit)
-      SENSITIVE = [:route_b_box]
+      SENSITIVE = [:route_b_box, :distance, :duration_seconds]
       include Aws::Structure
     end
 
@@ -1298,7 +1349,7 @@ module Aws::LocationService
       :avoid_tolls,
       :dimensions,
       :weight)
-      SENSITIVE = []
+      SENSITIVE = [:avoid_ferries, :avoid_tolls]
       include Aws::Structure
     end
 
@@ -3833,7 +3884,7 @@ module Aws::LocationService
       :x,
       :y,
       :key)
-      SENSITIVE = [:key]
+      SENSITIVE = [:z, :x, :y, :key]
       include Aws::Structure
     end
 
@@ -3909,7 +3960,7 @@ module Aws::LocationService
       :place_id,
       :language,
       :key)
-      SENSITIVE = [:key]
+      SENSITIVE = [:place_id, :key]
       include Aws::Structure
     end
 
@@ -4060,7 +4111,7 @@ module Aws::LocationService
       :duration_seconds,
       :geometry,
       :steps)
-      SENSITIVE = [:start_position, :end_position]
+      SENSITIVE = [:start_position, :end_position, :distance, :duration_seconds]
       include Aws::Structure
     end
 
@@ -5453,7 +5504,7 @@ module Aws::LocationService
       :categories,
       :supplemental_categories,
       :sub_municipality)
-      SENSITIVE = []
+      SENSITIVE = [:label, :address_number, :street, :neighborhood, :municipality, :sub_region, :region, :country, :postal_code, :interpolated, :unit_type, :unit_number, :categories, :supplemental_categories, :sub_municipality]
       include Aws::Structure
     end
 
@@ -5604,7 +5655,7 @@ module Aws::LocationService
       :distance,
       :duration_seconds,
       :error)
-      SENSITIVE = []
+      SENSITIVE = [:distance, :duration_seconds]
       include Aws::Structure
     end
 
@@ -5699,7 +5750,7 @@ module Aws::LocationService
       :place,
       :distance,
       :place_id)
-      SENSITIVE = []
+      SENSITIVE = [:distance, :place_id]
       include Aws::Structure
     end
 
@@ -5750,7 +5801,7 @@ module Aws::LocationService
       :place_id,
       :categories,
       :supplemental_categories)
-      SENSITIVE = []
+      SENSITIVE = [:text, :place_id, :categories, :supplemental_categories]
       include Aws::Structure
     end
 
@@ -5798,7 +5849,7 @@ module Aws::LocationService
       :distance,
       :relevance,
       :place_id)
-      SENSITIVE = []
+      SENSITIVE = [:distance, :relevance, :place_id]
       include Aws::Structure
     end
 
@@ -6068,7 +6119,7 @@ module Aws::LocationService
       :language,
       :filter_categories,
       :key)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :key]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :filter_categories, :key]
       include Aws::Structure
     end
 
@@ -6167,7 +6218,7 @@ module Aws::LocationService
       :data_source,
       :language,
       :filter_categories)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :filter_categories]
       include Aws::Structure
     end
 
@@ -6298,7 +6349,7 @@ module Aws::LocationService
       :language,
       :filter_categories,
       :key)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :key]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :filter_categories, :key]
       include Aws::Structure
     end
 
@@ -6411,7 +6462,7 @@ module Aws::LocationService
       :data_source,
       :language,
       :filter_categories)
-      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :result_b_box]
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :filter_countries, :result_b_box, :filter_categories]
       include Aws::Structure
     end
 
@@ -6478,7 +6529,7 @@ module Aws::LocationService
       :distance,
       :duration_seconds,
       :geometry_offset)
-      SENSITIVE = [:start_position, :end_position]
+      SENSITIVE = [:start_position, :end_position, :distance, :duration_seconds]
       include Aws::Structure
     end
 
@@ -6563,7 +6614,7 @@ module Aws::LocationService
     class TimeZone < Struct.new(
       :name,
       :offset)
-      SENSITIVE = []
+      SENSITIVE = [:name, :offset]
       include Aws::Structure
     end
 
@@ -6639,7 +6690,7 @@ module Aws::LocationService
       :height,
       :width,
       :unit)
-      SENSITIVE = []
+      SENSITIVE = [:length, :height, :width]
       include Aws::Structure
     end
 
@@ -6666,7 +6717,7 @@ module Aws::LocationService
     class TruckWeight < Struct.new(
       :total,
       :unit)
-      SENSITIVE = []
+      SENSITIVE = [:total]
       include Aws::Structure
     end
 

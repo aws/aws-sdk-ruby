@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2025-10-15)
+------------------
+
+* Feature - Add support for manage Lightsail Bucket CORS configuration
+
 1.118.0 (2025-09-25)
 ------------------
 

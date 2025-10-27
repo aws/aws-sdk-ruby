@@ -135,6 +135,19 @@ module Aws
                                                       ) -> _GetAssociationForServiceQuotaTemplateResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssociationForServiceQuotaTemplateResponseSuccess
 
+      interface _GetAutoManagementConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoManagementConfigurationResponse]
+        def opt_in_level: () -> ("ACCOUNT")
+        def opt_in_type: () -> ("NotifyOnly" | "NotifyAndAdjust")
+        def notification_arn: () -> ::String
+        def opt_in_status: () -> ("ENABLED" | "DISABLED")
+        def exclusion_list: () -> ::Hash[::String, ::Array[Types::QuotaInfo]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_auto_management_configuration-instance_method
+      def get_auto_management_configuration: (
+                                             ) -> _GetAutoManagementConfigurationResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoManagementConfigurationResponseSuccess
+
       interface _GetRequestedServiceQuotaChangeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRequestedServiceQuotaChangeResponse]
         def requested_quota: () -> Types::RequestedServiceQuotaChange
@@ -291,6 +304,26 @@ module Aws
                                           ) -> _RequestServiceQuotaIncreaseResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RequestServiceQuotaIncreaseResponseSuccess
 
+      interface _StartAutoManagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAutoManagementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#start_auto_management-instance_method
+      def start_auto_management: (
+                                   opt_in_level: ("ACCOUNT"),
+                                   opt_in_type: ("NotifyOnly" | "NotifyAndAdjust"),
+                                   ?notification_arn: ::String,
+                                   ?exclusion_list: Hash[::String, Array[::String]]
+                                 ) -> _StartAutoManagementResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutoManagementResponseSuccess
+
+      interface _StopAutoManagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAutoManagementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#stop_auto_management-instance_method
+      def stop_auto_management: (
+                                ) -> _StopAutoManagementResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAutoManagementResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -315,6 +348,17 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAutoManagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAutoManagementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#update_auto_management-instance_method
+      def update_auto_management: (
+                                    ?opt_in_type: ("NotifyOnly" | "NotifyAndAdjust"),
+                                    ?notification_arn: ::String,
+                                    ?exclusion_list: Hash[::String, Array[::String]]
+                                  ) -> _UpdateAutoManagementResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutoManagementResponseSuccess
     end
   end
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2025-10-21)
+------------------
+
+* Feature - This release adds the ability to set resolution for the black video generator and also adds the StartJobsQuery and GetJobsQueryResults APIs which allow asynchronous search of job history using new filters.
+
 1.170.0 (2025-08-26)
 ------------------
 

@@ -2139,7 +2139,7 @@ module Aws::SecurityHub
     # permission to perform the `securityhub:BatchUpdateFindings` action.
     # Updates from `BatchUpdateFindingsV2` don't affect the value of
     # f`inding_info.modified_time`, `finding_info.modified_time_dt`, `time`,
-    # `time_dt for a finding`. This API is in private preview and subject to
+    # `time_dt for a finding`. This API is in public preview and subject to
     # change.
     #
     # @option params [Array<String>] :metadata_uids
@@ -2393,7 +2393,7 @@ module Aws::SecurityHub
     end
 
     # Enables aggregation across Amazon Web Services Regions. This API is in
-    # private preview and subject to change.
+    # public preview and subject to change.
     #
     # @option params [required, String] :region_linking_mode
     #   Determines how Regions are linked to an Aggregator V2.
@@ -2878,7 +2878,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates a V2 automation rule. This API is in private preview and
+    # Creates a V2 automation rule. This API is in public preview and
     # subject to change.
     #
     # @option params [required, String] :rule_name
@@ -2926,7 +2926,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -2935,7 +2935,7 @@ module Aws::SecurityHub
     #             ],
     #             date_filters: [
     #               {
-    #                 field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt
+    #                 field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt, resources.image.created_time_dt, resources.image.last_used_time_dt, resources.modified_time_dt
     #                 filter: {
     #                   start: "NonEmptyString",
     #                   end: "NonEmptyString",
@@ -2956,7 +2956,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count
+    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -2968,7 +2968,7 @@ module Aws::SecurityHub
     #             ],
     #             map_filters: [
     #               {
-    #                 field_name: "resources.tags", # accepts resources.tags
+    #                 field_name: "resources.tags", # accepts resources.tags, compliance.control_parameters, databucket.tags, finding_info.tags
     #                 filter: {
     #                   key: "NonEmptyString",
     #                   value: "NonEmptyString",
@@ -2976,6 +2976,17 @@ module Aws::SecurityHub
     #                 },
     #               },
     #             ],
+    #             ip_filters: [
+    #               {
+    #                 field_name: "evidences.dst_endpoint.ip", # accepts evidences.dst_endpoint.ip, evidences.src_endpoint.ip
+    #                 filter: {
+    #                   cidr: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive CompositeFilterList
+    #             },
     #             operator: "AND", # accepts AND, OR
     #           },
     #         ],
@@ -4426,7 +4437,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes the Aggregator V2. This API is in private preview and subject
+    # Deletes the Aggregator V2. This API is in public preview and subject
     # to change.
     #
     # @option params [required, String] :aggregator_v2_arn
@@ -4449,7 +4460,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a V2 automation rule. This API is in private preview and
+    # Deletes a V2 automation rule. This API is in public preview and
     # subject to change.
     #
     # @option params [required, String] :identifier
@@ -5015,7 +5026,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Gets information about the product integration. This API is in private
+    # Gets information about the product integration. This API is in public
     # preview and subject to change.
     #
     # @option params [String] :next_token
@@ -5065,7 +5076,7 @@ module Aws::SecurityHub
     end
 
     # Returns details about the service resource in your account. This API
-    # is in private preview and subject to change.
+    # is in public preview and subject to change.
     #
     # @return [Types::DescribeSecurityHubV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5394,7 +5405,7 @@ module Aws::SecurityHub
     end
 
     # Disable the service for the current Amazon Web Services Region or
-    # specified Amazon Web Services Region. This API is in private preview
+    # specified Amazon Web Services Region. This API is in public preview
     # and subject to change.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5692,7 +5703,7 @@ module Aws::SecurityHub
     end
 
     # Enables the service in account for the current Amazon Web Services
-    # Region or specified Amazon Web Services Region. This API is in private
+    # Region or specified Amazon Web Services Region. This API is in public
     # preview and subject to change.
     #
     # @option params [Hash<String,String>] :tags
@@ -5768,7 +5779,7 @@ module Aws::SecurityHub
     end
 
     # Returns the configuration of the specified Aggregator V2. This API is
-    # in private preview and subject to change.
+    # in public preview and subject to change.
     #
     # @option params [required, String] :aggregator_v2_arn
     #   The ARN of the Aggregator V2.
@@ -5803,7 +5814,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns an automation rule for the V2 service. This API is in private
+    # Returns an automation rule for the V2 service. This API is in public
     # preview and subject to change.
     #
     # @option params [required, String] :identifier
@@ -5838,11 +5849,11 @@ module Aws::SecurityHub
     #   resp.description #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters #=> Array
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.value #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].field_name #=> String, one of "finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].field_name #=> String, one of "finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.start #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.end #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.date_range.value #=> Integer
@@ -5851,17 +5862,21 @@ module Aws::SecurityHub
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters[0].field_name #=> String, one of "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters[0].filter.value #=> Boolean
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].field_name #=> String, one of "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].field_name #=> String, one of "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.gte #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.lte #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.eq #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.gt #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].number_filters[0].filter.lt #=> Float
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].map_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].map_filters[0].field_name #=> String, one of "resources.tags"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].map_filters[0].field_name #=> String, one of "resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].map_filters[0].filter.key #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].map_filters[0].filter.value #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].map_filters[0].filter.comparison #=> String, one of "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].ip_filters #=> Array
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].ip_filters[0].field_name #=> String, one of "evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].ip_filters[0].filter.cidr #=> String
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].nested_composite_filters #=> Types::CompositeFilterList
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].operator #=> String, one of "AND", "OR"
     #   resp.criteria.ocsf_finding_criteria.composite_operator #=> String, one of "AND", "OR"
     #   resp.actions #=> Array
@@ -6423,7 +6438,7 @@ module Aws::SecurityHub
     # Returns aggregated statistical data about findings.
     # `GetFindingStatisticsV2` use `securityhub:GetAdhocInsightResults` in
     # the `Action` element of an IAM policy statement. You must have
-    # permission to perform the `s` action. This API is in private preview
+    # permission to perform the `s` action. This API is in public preview
     # and subject to change.
     #
     # @option params [required, Array<Types::GroupByRule>] :group_by_rules
@@ -6452,7 +6467,7 @@ module Aws::SecurityHub
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name
+    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -6461,7 +6476,7 @@ module Aws::SecurityHub
     #               ],
     #               date_filters: [
     #                 {
-    #                   field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt
+    #                   field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt, resources.image.created_time_dt, resources.image.last_used_time_dt, resources.modified_time_dt
     #                   filter: {
     #                     start: "NonEmptyString",
     #                     end: "NonEmptyString",
@@ -6482,7 +6497,7 @@ module Aws::SecurityHub
     #               ],
     #               number_filters: [
     #                 {
-    #                   field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count
+    #                   field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
     #                   filter: {
     #                     gte: 1.0,
     #                     lte: 1.0,
@@ -6494,7 +6509,7 @@ module Aws::SecurityHub
     #               ],
     #               map_filters: [
     #                 {
-    #                   field_name: "resources.tags", # accepts resources.tags
+    #                   field_name: "resources.tags", # accepts resources.tags, compliance.control_parameters, databucket.tags, finding_info.tags
     #                   filter: {
     #                     key: "NonEmptyString",
     #                     value: "NonEmptyString",
@@ -6502,12 +6517,23 @@ module Aws::SecurityHub
     #                   },
     #                 },
     #               ],
+    #               ip_filters: [
+    #                 {
+    #                   field_name: "evidences.dst_endpoint.ip", # accepts evidences.dst_endpoint.ip, evidences.src_endpoint.ip
+    #                   filter: {
+    #                     cidr: "NonEmptyString",
+    #                   },
+    #                 },
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive CompositeFilterList
+    #               },
     #               operator: "AND", # accepts AND, OR
     #             },
     #           ],
     #           composite_operator: "AND", # accepts AND, OR
     #         },
-    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name
+    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name
     #       },
     #     ],
     #     sort_order: "asc", # accepts asc, desc
@@ -7400,7 +7426,7 @@ module Aws::SecurityHub
     # `GetFindings` and `GetFindingsV2` both use `securityhub:GetFindings`
     # in the `Action` element of an IAM policy statement. You must have
     # permission to perform the `securityhub:GetFindings` action. This API
-    # is in private preview and subject to change.
+    # is in public preview and subject to change.
     #
     # @option params [Types::OcsfFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
@@ -7435,7 +7461,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name
+    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -7444,7 +7470,7 @@ module Aws::SecurityHub
     #           ],
     #           date_filters: [
     #             {
-    #               field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt
+    #               field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt, resources.image.created_time_dt, resources.image.last_used_time_dt, resources.modified_time_dt
     #               filter: {
     #                 start: "NonEmptyString",
     #                 end: "NonEmptyString",
@@ -7465,7 +7491,7 @@ module Aws::SecurityHub
     #           ],
     #           number_filters: [
     #             {
-    #               field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count
+    #               field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
     #               filter: {
     #                 gte: 1.0,
     #                 lte: 1.0,
@@ -7477,7 +7503,7 @@ module Aws::SecurityHub
     #           ],
     #           map_filters: [
     #             {
-    #               field_name: "resources.tags", # accepts resources.tags
+    #               field_name: "resources.tags", # accepts resources.tags, compliance.control_parameters, databucket.tags, finding_info.tags
     #               filter: {
     #                 key: "NonEmptyString",
     #                 value: "NonEmptyString",
@@ -7485,6 +7511,17 @@ module Aws::SecurityHub
     #               },
     #             },
     #           ],
+    #           ip_filters: [
+    #             {
+    #               field_name: "evidences.dst_endpoint.ip", # accepts evidences.dst_endpoint.ip, evidences.src_endpoint.ip
+    #               filter: {
+    #                 cidr: "NonEmptyString",
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive CompositeFilterList
+    #           },
     #           operator: "AND", # accepts AND, OR
     #         },
     #       ],
@@ -8188,7 +8225,7 @@ module Aws::SecurityHub
     end
 
     # Retrieves statistical information about Amazon Web Services resources
-    # and their associated security findings. This API is in private preview
+    # and their associated security findings. This API is in public preview
     # and subject to change.
     #
     # @option params [required, Array<Types::ResourceGroupByRule>] :group_by_rules
@@ -8210,13 +8247,13 @@ module Aws::SecurityHub
     #   resp = client.get_resources_statistics_v2({
     #     group_by_rules: [ # required
     #       {
-    #         group_by_field: "account_id", # required, accepts account_id, region, resource_category, resource_type, resource_name, findings_summary.finding_type
+    #         group_by_field: "AccountId", # required, accepts AccountId, Region, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType
     #         filters: {
     #           composite_filters: [
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "resource_arn", # accepts resource_arn, resource_id, account_id, region, resource_category, resource_type, resource_name, findings_summary.finding_type, findings_summary.product_name
+    #                   field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, Region, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -8225,7 +8262,7 @@ module Aws::SecurityHub
     #               ],
     #               date_filters: [
     #                 {
-    #                   field_name: "resource_detail_capture_time_dt", # accepts resource_detail_capture_time_dt, resource_creation_time_dt
+    #                   field_name: "ResourceDetailCaptureTime", # accepts ResourceDetailCaptureTime, ResourceCreationTime
     #                   filter: {
     #                     start: "NonEmptyString",
     #                     end: "NonEmptyString",
@@ -8238,7 +8275,7 @@ module Aws::SecurityHub
     #               ],
     #               number_filters: [
     #                 {
-    #                   field_name: "findings_summary.total_findings", # accepts findings_summary.total_findings, findings_summary.severities.other, findings_summary.severities.fatal, findings_summary.severities.critical, findings_summary.severities.high, findings_summary.severities.medium, findings_summary.severities.low, findings_summary.severities.informational, findings_summary.severities.unknown
+    #                   field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown
     #                   filter: {
     #                     gte: 1.0,
     #                     lte: 1.0,
@@ -8250,7 +8287,7 @@ module Aws::SecurityHub
     #               ],
     #               map_filters: [
     #                 {
-    #                   field_name: "tags", # accepts tags
+    #                   field_name: "ResourceTags", # accepts ResourceTags
     #                   filter: {
     #                     key: "NonEmptyString",
     #                     value: "NonEmptyString",
@@ -8258,6 +8295,9 @@ module Aws::SecurityHub
     #                   },
     #                 },
     #               ],
+    #               nested_composite_filters: {
+    #                 # recursive ResourcesCompositeFilterList
+    #               },
     #               operator: "AND", # accepts AND, OR
     #             },
     #           ],
@@ -8286,8 +8326,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of resources. This API is in private preview and
-    # subject to change.
+    # Returns a list of resources. This API is in public preview and subject
+    # to change.
     #
     # @option params [Types::ResourcesFilters] :filters
     #   Filters resources based on a set of criteria.
@@ -8319,7 +8359,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "resource_arn", # accepts resource_arn, resource_id, account_id, region, resource_category, resource_type, resource_name, findings_summary.finding_type, findings_summary.product_name
+    #               field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, Region, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -8328,7 +8368,7 @@ module Aws::SecurityHub
     #           ],
     #           date_filters: [
     #             {
-    #               field_name: "resource_detail_capture_time_dt", # accepts resource_detail_capture_time_dt, resource_creation_time_dt
+    #               field_name: "ResourceDetailCaptureTime", # accepts ResourceDetailCaptureTime, ResourceCreationTime
     #               filter: {
     #                 start: "NonEmptyString",
     #                 end: "NonEmptyString",
@@ -8341,7 +8381,7 @@ module Aws::SecurityHub
     #           ],
     #           number_filters: [
     #             {
-    #               field_name: "findings_summary.total_findings", # accepts findings_summary.total_findings, findings_summary.severities.other, findings_summary.severities.fatal, findings_summary.severities.critical, findings_summary.severities.high, findings_summary.severities.medium, findings_summary.severities.low, findings_summary.severities.informational, findings_summary.severities.unknown
+    #               field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown
     #               filter: {
     #                 gte: 1.0,
     #                 lte: 1.0,
@@ -8353,7 +8393,7 @@ module Aws::SecurityHub
     #           ],
     #           map_filters: [
     #             {
-    #               field_name: "tags", # accepts tags
+    #               field_name: "ResourceTags", # accepts ResourceTags
     #               filter: {
     #                 key: "NonEmptyString",
     #                 value: "NonEmptyString",
@@ -8361,6 +8401,9 @@ module Aws::SecurityHub
     #               },
     #             },
     #           ],
+    #           nested_composite_filters: {
+    #             # recursive ResourcesCompositeFilterList
+    #           },
     #           operator: "AND", # accepts AND, OR
     #         },
     #       ],
@@ -8379,7 +8422,7 @@ module Aws::SecurityHub
     # @example Response structure
     #
     #   resp.resources #=> Array
-    #   resp.resources[0].resource_arn #=> String
+    #   resp.resources[0].resource_guid #=> String
     #   resp.resources[0].resource_id #=> String
     #   resp.resources[0].account_id #=> String
     #   resp.resources[0].region #=> String
@@ -8591,7 +8634,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Retrieves a list of V2 aggregators. This API is in private preview and
+    # Retrieves a list of V2 aggregators. This API is in public preview and
     # subject to change.
     #
     # @option params [String] :next_token
@@ -8717,7 +8760,7 @@ module Aws::SecurityHub
     end
 
     # Returns a list of automation rules and metadata for the calling
-    # account. This API is in private preview and subject to change.
+    # account. This API is in public preview and subject to change.
     #
     # @option params [String] :next_token
     #   The token required for pagination. On your first call, set the value
@@ -9907,8 +9950,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Udpates the configuration for the Aggregator V2. This API is in
-    # private preview and subject to change.
+    # Udpates the configuration for the Aggregator V2. This API is in public
+    # preview and subject to change.
     #
     # @option params [required, String] :aggregator_v2_arn
     #   The ARN of the Aggregator V2.
@@ -9952,7 +9995,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates a V2 automation rule. This API is in private preview and
+    # Updates a V2 automation rule. This API is in public preview and
     # subject to change.
     #
     # @option params [required, String] :identifier
@@ -9992,7 +10035,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -10001,7 +10044,7 @@ module Aws::SecurityHub
     #             ],
     #             date_filters: [
     #               {
-    #                 field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt
+    #                 field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt, resources.image.created_time_dt, resources.image.last_used_time_dt, resources.modified_time_dt
     #                 filter: {
     #                   start: "NonEmptyString",
     #                   end: "NonEmptyString",
@@ -10022,7 +10065,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count
+    #                 field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -10034,7 +10077,7 @@ module Aws::SecurityHub
     #             ],
     #             map_filters: [
     #               {
-    #                 field_name: "resources.tags", # accepts resources.tags
+    #                 field_name: "resources.tags", # accepts resources.tags, compliance.control_parameters, databucket.tags, finding_info.tags
     #                 filter: {
     #                   key: "NonEmptyString",
     #                   value: "NonEmptyString",
@@ -10042,6 +10085,17 @@ module Aws::SecurityHub
     #                 },
     #               },
     #             ],
+    #             ip_filters: [
+    #               {
+    #                 field_name: "evidences.dst_endpoint.ip", # accepts evidences.dst_endpoint.ip, evidences.src_endpoint.ip
+    #                 filter: {
+    #                   cidr: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive CompositeFilterList
+    #             },
     #             operator: "AND", # accepts AND, OR
     #           },
     #         ],
@@ -12195,7 +12249,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

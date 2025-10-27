@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2025-10-24)
+------------------
+
+* Feature - This release adds support for MLflow connections Creation in DataZone
+
+1.55.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2025-10-14)
+------------------
+
+* Feature - Support creating scoped and trustedIdentityPropagation enabled connections.
+
 1.53.0 (2025-09-30)
 ------------------
 

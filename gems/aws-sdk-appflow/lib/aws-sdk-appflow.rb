@@ -54,7 +54,7 @@ module Aws::Appflow
   autoload :EndpointProvider, 'aws-sdk-appflow/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appflow/endpoints'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

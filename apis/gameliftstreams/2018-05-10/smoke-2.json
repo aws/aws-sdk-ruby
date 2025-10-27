@@ -1,88 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetStreamSession",
-    "operationName" : "GetStreamSession",
-    "input" : {
-      "Identifier" : "abcdefghi",
-      "StreamSessionIdentifier" : "jklmnopqr"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListTagsForResource",
-    "operationName" : "ListTagsForResource",
-    "input" : {
-      "ResourceArn" : "arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ValidationException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListStreamSessions",
-    "operationName" : "ListStreamSessions",
-    "input" : {
-      "Identifier" : "abcdefghi"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetStreamGroup",
-    "operationName" : "GetStreamGroup",
-    "input" : {
-      "Identifier" : "12ab34cd5"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListStreamGroups",
-    "operationName" : "ListStreamGroups",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "ListStreamSessionsByAccount",
     "operationName" : "ListStreamSessionsByAccount",
     "input" : { },
@@ -118,6 +36,88 @@
       "failure" : {
         "errorId" : "ResourceNotFoundException"
       }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetStreamSession",
+    "operationName" : "GetStreamSession",
+    "input" : {
+      "Identifier" : "abcdefghi",
+      "StreamSessionIdentifier" : "jklmnopqr"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListStreamSessions",
+    "operationName" : "ListStreamSessions",
+    "input" : {
+      "Identifier" : "abcdefghi"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResource",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetStreamGroup",
+    "operationName" : "GetStreamGroup",
+    "input" : {
+      "Identifier" : "12ab34cd5"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListStreamGroups",
+    "operationName" : "ListStreamGroups",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",

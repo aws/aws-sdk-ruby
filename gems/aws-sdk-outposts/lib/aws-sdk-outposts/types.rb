@@ -2273,6 +2273,41 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # @!attribute [rw] outpost_identifier
+    #   The ID or ARN of the Outpost that you want to decommission.
+    #   @return [String]
+    #
+    # @!attribute [rw] validate_only
+    #   Validates the request without starting the decommission process.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartOutpostDecommissionInput AWS API Documentation
+    #
+    class StartOutpostDecommissionInput < Struct.new(
+      :outpost_identifier,
+      :validate_only)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the decommission request.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocking_resource_types
+    #   The resources still associated with the Outpost that you are
+    #   decommissioning.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartOutpostDecommissionOutput AWS API Documentation
+    #
+    class StartOutpostDecommissionOutput < Struct.new(
+      :status,
+      :blocking_resource_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about your Amazon Web Services Outposts
     # subscriptions.
     #

@@ -10635,7 +10635,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] platform_identifier
     #   The platform identifier of the notebook instance runtime
-    #   environment.
+    #   environment. The default value is `notebook-al2-v2`.
     #   @return [String]
     #
     # @!attribute [rw] instance_metadata_service_configuration
@@ -27531,6 +27531,42 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings that affect how the inference component caches data.
+    #
+    # @!attribute [rw] enable_caching
+    #   Sets whether the endpoint that hosts the inference component caches
+    #   the model artifacts and container image.
+    #
+    #   With caching enabled, the endpoint caches this data in each instance
+    #   that it provisions for the inference component. That way, the
+    #   inference component deploys faster during the auto scaling process.
+    #   If caching isn't enabled, the inference component takes longer to
+    #   deploy because of the time it spends downloading the data.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentDataCacheConfig AWS API Documentation
+    #
+    class InferenceComponentDataCacheConfig < Struct.new(
+      :enable_caching)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that affect how the inference component caches data.
+    #
+    # @!attribute [rw] enable_caching
+    #   Indicates whether the inference component caches model artifacts as
+    #   part of the auto scaling process.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentDataCacheConfigSummary AWS API Documentation
+    #
+    class InferenceComponentDataCacheConfigSummary < Struct.new(
+      :enable_caching)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The deployment configuration for an endpoint that hosts inference
     # components. The configuration includes the desired deployment strategy
     # and rollback settings.
@@ -27681,6 +27717,10 @@ module Aws::SageMaker
     #   that you want to adapt.
     #   @return [String]
     #
+    # @!attribute [rw] data_cache_config
+    #   Settings that affect how the inference component caches data.
+    #   @return [Types::InferenceComponentDataCacheConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentSpecification AWS API Documentation
     #
     class InferenceComponentSpecification < Struct.new(
@@ -27688,7 +27728,8 @@ module Aws::SageMaker
       :container,
       :startup_parameters,
       :compute_resource_requirements,
-      :base_inference_component_name)
+      :base_inference_component_name,
+      :data_cache_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27720,6 +27761,10 @@ module Aws::SageMaker
     #   inference component.
     #   @return [String]
     #
+    # @!attribute [rw] data_cache_config
+    #   Settings that affect how the inference component caches data.
+    #   @return [Types::InferenceComponentDataCacheConfigSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentSpecificationSummary AWS API Documentation
     #
     class InferenceComponentSpecificationSummary < Struct.new(
@@ -27727,7 +27772,8 @@ module Aws::SageMaker
       :container,
       :startup_parameters,
       :compute_resource_requirements,
-      :base_inference_component_name)
+      :base_inference_component_name,
+      :data_cache_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41563,7 +41609,7 @@ module Aws::SageMaker
     # @!attribute [rw] s3_data_distribution_type
     #   Whether to distribute the data from Amazon S3 to all processing
     #   instances with `FullyReplicated`, or whether the data from Amazon S3
-    #   is shared by Amazon S3 key, downloading one shard of data to each
+    #   is sharded by Amazon S3 key, downloading one shard of data to each
     #   processing instance.
     #   @return [String]
     #

@@ -99,6 +99,8 @@ module Aws
       end
       class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
       end
+      class NetworkTypeNotSupported < ::Aws::Errors::ServiceError
+      end
       class ResourceNotFoundFault < ::Aws::Errors::ServiceError
       end
       class SNSInvalidTopicFault < ::Aws::Errors::ServiceError

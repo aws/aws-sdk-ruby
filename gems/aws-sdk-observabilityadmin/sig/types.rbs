@@ -128,6 +128,12 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class GetTelemetryEnrichmentStatusOutput
+      attr_accessor status: ("Running" | "Stopped" | "Impaired")
+      attr_accessor aws_resource_explorer_managed_view_arn: ::String
+      SENSITIVE: []
+    end
+
     class GetTelemetryEvaluationStatusForOrganizationOutput
       attr_accessor status: ("NOT_STARTED" | "STARTING" | "FAILED_START" | "RUNNING" | "STOPPING" | "FAILED_STOP" | "STOPPED")
       attr_accessor failure_reason: ::String
@@ -286,6 +292,17 @@ module Aws::ObservabilityAdmin
     class SourceLogsConfiguration
       attr_accessor log_group_selection_criteria: ::String
       attr_accessor encrypted_log_group_strategy: ("ALLOW" | "SKIP")
+      SENSITIVE: []
+    end
+
+    class StartTelemetryEnrichmentOutput
+      attr_accessor status: ("Running" | "Stopped" | "Impaired")
+      attr_accessor aws_resource_explorer_managed_view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopTelemetryEnrichmentOutput
+      attr_accessor status: ("Running" | "Stopped" | "Impaired")
       SENSITIVE: []
     end
 

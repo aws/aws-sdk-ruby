@@ -3848,7 +3848,7 @@ module Aws::CloudFront
       attr_accessor iam_certificate_id: ::String
       attr_accessor acm_certificate_arn: ::String
       attr_accessor ssl_support_method: ("sni-only" | "vip" | "static-ip")
-      attr_accessor minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025")
+      attr_accessor minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025" | "TLSv1.2_2025")
       attr_accessor certificate: ::String
       attr_accessor certificate_source: ("cloudfront" | "iam" | "acm")
       SENSITIVE: []

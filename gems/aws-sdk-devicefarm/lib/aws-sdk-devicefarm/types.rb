@@ -491,6 +491,11 @@ module Aws::DeviceFarm
     # Configuration settings for a remote access session, including billing
     # method.
     #
+    # @!attribute [rw] auxiliary_apps
+    #   A list of upload ARNs for app packages to be installed onto your
+    #   device. (Maximum 3)
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] billing_method
     #   The billing method for the remote access session.
     #   @return [String]
@@ -507,6 +512,7 @@ module Aws::DeviceFarm
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration AWS API Documentation
     #
     class CreateRemoteAccessSessionConfiguration < Struct.new(
+      :auxiliary_apps,
       :billing_method,
       :vpce_configuration_arns,
       :device_proxy)
@@ -524,6 +530,11 @@ module Aws::DeviceFarm
     # @!attribute [rw] device_arn
     #   The ARN of the device for which you want to create a remote access
     #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_arn
+    #   The Amazon Resource Name (ARN) of the app to create the remote
+    #   access session.
     #   @return [String]
     #
     # @!attribute [rw] instance_arn
@@ -620,6 +631,7 @@ module Aws::DeviceFarm
     class CreateRemoteAccessSessionRequest < Struct.new(
       :project_arn,
       :device_arn,
+      :app_arn,
       :instance_arn,
       :ssh_public_key,
       :remote_debug_enabled,
@@ -4439,6 +4451,10 @@ module Aws::DeviceFarm
     #   The device proxy configured for the remote access session.
     #   @return [Types::DeviceProxy]
     #
+    # @!attribute [rw] app_upload
+    #   The ARN for the app to be installed onto your device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
     #
     class RemoteAccessSession < Struct.new(
@@ -4464,7 +4480,8 @@ module Aws::DeviceFarm
       :interaction_mode,
       :skip_app_resign,
       :vpc_config,
-      :device_proxy)
+      :device_proxy,
+      :app_upload)
       SENSITIVE = []
       include Aws::Structure
     end

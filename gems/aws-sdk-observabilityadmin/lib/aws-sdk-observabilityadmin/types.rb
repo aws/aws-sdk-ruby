@@ -443,6 +443,26 @@ module Aws::ObservabilityAdmin
     end
 
     # @!attribute [rw] status
+    #   The current status of the resource tags for telemetry feature
+    #   (`Running`, `Stopped`, or `Impaired`).
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_resource_explorer_managed_view_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Resource
+    #   Explorer managed view used for resource tags for telemetry, if the
+    #   feature is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEnrichmentStatusOutput AWS API Documentation
+    #
+    class GetTelemetryEnrichmentStatusOutput < Struct.new(
+      :status,
+      :aws_resource_explorer_managed_view_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
     #   The onboarding status of the telemetry config feature for the
     #   organization.
     #   @return [String]
@@ -1011,6 +1031,38 @@ module Aws::ObservabilityAdmin
     class SourceLogsConfiguration < Struct.new(
       :log_group_selection_criteria,
       :encrypted_log_group_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the resource tags for telemetry feature after the
+    #   start operation (`Running`, `Stopped`, or `Impaired`).
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_resource_explorer_managed_view_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Resource
+    #   Explorer managed view created for resource tags for telemetry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEnrichmentOutput AWS API Documentation
+    #
+    class StartTelemetryEnrichmentOutput < Struct.new(
+      :status,
+      :aws_resource_explorer_managed_view_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the resource tags for telemetry feature after the stop
+    #   operation (`Running`, `Stopped`, or `Impaired`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StopTelemetryEnrichmentOutput AWS API Documentation
+    #
+    class StopTelemetryEnrichmentOutput < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

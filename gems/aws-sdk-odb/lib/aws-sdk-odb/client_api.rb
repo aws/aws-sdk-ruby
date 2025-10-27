@@ -226,6 +226,8 @@ module Aws::Odb
     OdbPeeringConnectionList = Shapes::ListShape.new(name: 'OdbPeeringConnectionList')
     OdbPeeringConnectionSummary = Shapes::StructureShape.new(name: 'OdbPeeringConnectionSummary')
     PatchingModeType = Shapes::StringShape.new(name: 'PatchingModeType')
+    PeeredCidr = Shapes::StringShape.new(name: 'PeeredCidr')
+    PeeredCidrList = Shapes::ListShape.new(name: 'PeeredCidrList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PreferenceType = Shapes::StringShape.new(name: 'PreferenceType')
     RebootDbNodeInput = Shapes::StructureShape.new(name: 'RebootDbNodeInput')
@@ -265,6 +267,8 @@ module Aws::Odb
     UpdateCloudExadataInfrastructureOutput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureOutput')
     UpdateOdbNetworkInput = Shapes::StructureShape.new(name: 'UpdateOdbNetworkInput')
     UpdateOdbNetworkOutput = Shapes::StructureShape.new(name: 'UpdateOdbNetworkOutput')
+    UpdateOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'UpdateOdbPeeringConnectionInput')
+    UpdateOdbPeeringConnectionOutput = Shapes::StructureShape.new(name: 'UpdateOdbPeeringConnectionOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -687,6 +691,7 @@ module Aws::Odb
     CreateOdbPeeringConnectionInput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
     CreateOdbPeeringConnectionInput.add_member(:peer_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "peerNetworkId"))
     CreateOdbPeeringConnectionInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    CreateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_added, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeAdded"))
     CreateOdbPeeringConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOdbPeeringConnectionInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateOdbPeeringConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateOdbPeeringConnectionInput.struct_class = Types::CreateOdbPeeringConnectionInput
@@ -1161,6 +1166,7 @@ module Aws::Odb
     OdbPeeringConnection.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "odbNetworkArn"))
     OdbPeeringConnection.add_member(:peer_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "peerNetworkArn"))
     OdbPeeringConnection.add_member(:odb_peering_connection_type, Shapes::ShapeRef.new(shape: String, location_name: "odbPeeringConnectionType"))
+    OdbPeeringConnection.add_member(:peer_network_cidrs, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrs"))
     OdbPeeringConnection.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbPeeringConnection.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbPeeringConnection.struct_class = Types::OdbPeeringConnection
@@ -1175,9 +1181,12 @@ module Aws::Odb
     OdbPeeringConnectionSummary.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "odbNetworkArn"))
     OdbPeeringConnectionSummary.add_member(:peer_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "peerNetworkArn"))
     OdbPeeringConnectionSummary.add_member(:odb_peering_connection_type, Shapes::ShapeRef.new(shape: String, location_name: "odbPeeringConnectionType"))
+    OdbPeeringConnectionSummary.add_member(:peer_network_cidrs, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrs"))
     OdbPeeringConnectionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbPeeringConnectionSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbPeeringConnectionSummary.struct_class = Types::OdbPeeringConnectionSummary
+
+    PeeredCidrList.member = Shapes::ShapeRef.new(shape: PeeredCidr)
 
     RebootDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
     RebootDbNodeInput.add_member(:db_node_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dbNodeId"))
@@ -1286,6 +1295,18 @@ module Aws::Odb
     UpdateOdbNetworkOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     UpdateOdbNetworkOutput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "odbNetworkId"))
     UpdateOdbNetworkOutput.struct_class = Types::UpdateOdbNetworkOutput
+
+    UpdateOdbPeeringConnectionInput.add_member(:odb_peering_connection_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbPeeringConnectionId"))
+    UpdateOdbPeeringConnectionInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_added, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeAdded"))
+    UpdateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_removed, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeRemoved"))
+    UpdateOdbPeeringConnectionInput.struct_class = Types::UpdateOdbPeeringConnectionInput
+
+    UpdateOdbPeeringConnectionOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateOdbPeeringConnectionOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateOdbPeeringConnectionOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateOdbPeeringConnectionOutput.add_member(:odb_peering_connection_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "odbPeeringConnectionId"))
+    UpdateOdbPeeringConnectionOutput.struct_class = Types::UpdateOdbPeeringConnectionOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
@@ -1896,6 +1917,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateOdbNetworkInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateOdbNetworkOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_odb_peering_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOdbPeeringConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOdbPeeringConnectionInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOdbPeeringConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

@@ -482,8 +482,13 @@ module Aws
         def account_id: () -> ::String
         def backup_job_id: () -> ::String
         def backup_vault_name: () -> ::String
+        def recovery_point_lifecycle: () -> Types::Lifecycle
         def backup_vault_arn: () -> ::String
+        def vault_type: () -> ::String
+        def vault_lock_state: () -> ::String
         def recovery_point_arn: () -> ::String
+        def encryption_key_arn: () -> ::String
+        def is_encrypted: () -> bool
         def resource_arn: () -> ::String
         def creation_date: () -> ::Time
         def completion_date: () -> ::Time
@@ -667,6 +672,8 @@ module Aws
         def account_id: () -> ::String
         def restore_job_id: () -> ::String
         def recovery_point_arn: () -> ::String
+        def source_resource_arn: () -> ::String
+        def backup_vault_arn: () -> ::String
         def creation_date: () -> ::Time
         def completion_date: () -> ::Time
         def status: () -> ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")

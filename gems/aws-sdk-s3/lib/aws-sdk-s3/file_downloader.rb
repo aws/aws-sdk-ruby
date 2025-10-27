@@ -8,155 +8,232 @@ module Aws
   module S3
     # @api private
     class FileDownloader
-
       MIN_CHUNK_SIZE = 5 * 1024 * 1024
       MAX_PARTS = 10_000
+      HEAD_OPTIONS = Set.new(Client.api.operation(:head_object).input.shape.member_names)
+      GET_OPTIONS = Set.new(Client.api.operation(:get_object).input.shape.member_names)
 
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @executor = options[:executor]
       end
 
       # @return [Client]
       attr_reader :client
 
       def download(destination, options = {})
-        valid_types = [String, Pathname, File, Tempfile]
-        unless valid_types.include?(destination.class)
-          raise ArgumentError, "Invalid destination, expected #{valid_types.join(', ')} but got: #{destination.class}"
-        end
-
-        @destination = destination
-        @mode = options.delete(:mode) || 'auto'
-        @thread_count = options.delete(:thread_count) || 10
-        @chunk_size = options.delete(:chunk_size)
-        @on_checksum_validated = options.delete(:on_checksum_validated)
-        @progress_callback = options.delete(:progress_callback)
-        @params = options
-        validate!
+        validate_destination!(destination)
+        opts = build_download_opts(destination, options)
+        validate_opts!(opts)
 
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          case @mode
-          when 'auto' then multipart_download
-          when 'single_request' then single_request
-          when 'get_range'
-            raise ArgumentError, 'In get_range mode, :chunk_size must be provided' unless @chunk_size
-
-            resp = @client.head_object(@params)
-            multithreaded_get_by_ranges(resp.content_length, resp.etag)
-          else
-            raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
+          case opts[:mode]
+          when 'auto' then multipart_download(opts)
+          when 'single_request' then single_request(opts)
+          when 'get_range' then range_request(opts)
           end
         end
-        File.rename(@temp_path, @destination) if @temp_path
+        File.rename(opts[:temp_path], destination) if opts[:temp_path]
       ensure
-        File.delete(@temp_path) if @temp_path && File.exist?(@temp_path)
+        cleanup_temp_file(opts)
       end
 
       private
 
-      def validate!
-        return unless @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
-
-        raise ArgumentError, ':on_checksum_validated must be callable'
+      def build_download_opts(destination, opts)
+        {
+          destination: destination,
+          mode: opts.delete(:mode) || 'auto',
+          chunk_size: opts.delete(:chunk_size),
+          on_checksum_validated: opts.delete(:on_checksum_validated),
+          progress_callback: opts.delete(:progress_callback),
+          params: opts,
+          temp_path: nil
+        }
       end
 
-      def multipart_download
-        resp = @client.head_object(@params.merge(part_number: 1))
+      def cleanup_temp_file(opts)
+        return unless opts
+
+        temp_file = opts[:temp_path]
+        File.delete(temp_file) if temp_file && File.exist?(temp_file)
+      end
+
+      def download_with_executor(part_list, total_size, opts)
+        download_attempts = 0
+        completion_queue = Queue.new
+        abort_download = false
+        error = nil
+        progress = MultipartProgress.new(part_list, total_size, opts[:progress_callback])
+
+        while (part = part_list.shift)
+          break if abort_download
+
+          download_attempts += 1
+          @executor.post(part) do |p|
+            update_progress(progress, p)
+            resp = @client.get_object(p.params)
+            range = extract_range(resp.content_range)
+            validate_range(range, p.params[:range]) if p.params[:range]
+            write(resp.body, range, opts)
+
+            execute_checksum_callback(resp, opts)
+          rescue StandardError => e
+            abort_download = true
+            error = e
+          ensure
+            completion_queue << :done
+          end
+        end
+
+        download_attempts.times { completion_queue.pop }
+        raise error unless error.nil?
+      end
+
+      def get_opts(opts)
+        GET_OPTIONS.each_with_object({}) { |k, h| h[k] = opts[k] if opts.key?(k) }
+      end
+
+      def head_opts(opts)
+        HEAD_OPTIONS.each_with_object({}) { |k, h| h[k] = opts[k] if opts.key?(k) }
+      end
+
+      def compute_chunk(chunk_size, file_size)
+        raise ArgumentError, ":chunk_size shouldn't exceed total file size." if chunk_size && chunk_size > file_size
+
+        chunk_size || [(file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE].max.to_i
+      end
+
+      def compute_mode(file_size, total_parts, etag, opts)
+        chunk_size = compute_chunk(opts[:chunk_size], file_size)
+        part_size = (file_size.to_f / total_parts).ceil
+
+        resolve_temp_path(opts)
+        if chunk_size < part_size
+          multithreaded_get_by_ranges(file_size, etag, opts)
+        else
+          multithreaded_get_by_parts(total_parts, file_size, etag, opts)
+        end
+      end
+
+      def extract_range(value)
+        value.match(%r{bytes (?<range>\d+-\d+)/\d+})[:range]
+      end
+
+      def multipart_download(opts)
+        resp = @client.head_object(head_opts(opts[:params].merge(part_number: 1)))
         count = resp.parts_count
 
         if count.nil? || count <= 1
           if resp.content_length <= MIN_CHUNK_SIZE
-            single_request
+            single_request(opts)
           else
-            multithreaded_get_by_ranges(resp.content_length, resp.etag)
+            resolve_temp_path(opts)
+            multithreaded_get_by_ranges(resp.content_length, resp.etag, opts)
           end
         else
           # covers cases when given object is not uploaded via UploadPart API
-          resp = @client.head_object(@params) # partNumber is an option
+          resp = @client.head_object(head_opts(opts[:params])) # partNumber is an option
           if resp.content_length <= MIN_CHUNK_SIZE
-            single_request
+            single_request(opts)
           else
-            compute_mode(resp.content_length, count, resp.etag)
+            compute_mode(resp.content_length, count, resp.etag, opts)
           end
         end
       end
 
-      def compute_mode(file_size, count, etag)
-        chunk_size = compute_chunk(file_size)
-        part_size = (file_size.to_f / count).ceil
-        if chunk_size < part_size
-          multithreaded_get_by_ranges(file_size, etag)
-        else
-          multithreaded_get_by_parts(count, file_size, etag)
+      def multithreaded_get_by_parts(total_parts, file_size, etag, opts)
+        parts = (1..total_parts).map do |part|
+          params = get_opts(opts[:params].merge(part_number: part, if_match: etag))
+          Part.new(part_number: part, params: params)
         end
+        download_with_executor(PartList.new(parts), file_size, opts)
       end
 
-      def compute_chunk(file_size)
-        raise ArgumentError, ":chunk_size shouldn't exceed total file size." if @chunk_size && @chunk_size > file_size
-
-        @chunk_size || [(file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE].max.to_i
-      end
-
-      def multithreaded_get_by_ranges(file_size, etag)
+      def multithreaded_get_by_ranges(file_size, etag, opts)
         offset = 0
-        default_chunk_size = compute_chunk(file_size)
+        default_chunk_size = compute_chunk(opts[:chunk_size], file_size)
         chunks = []
         part_number = 1 # parts start at 1
         while offset < file_size
           progress = offset + default_chunk_size
           progress = file_size if progress > file_size
-          params = @params.merge(range: "bytes=#{offset}-#{progress - 1}", if_match: etag)
+          params = get_opts(opts[:params].merge(range: "bytes=#{offset}-#{progress - 1}", if_match: etag))
           chunks << Part.new(part_number: part_number, size: (progress - offset), params: params)
           part_number += 1
           offset = progress
         end
-        download_in_threads(PartList.new(chunks), file_size)
+        download_with_executor(PartList.new(chunks), file_size, opts)
       end
 
-      def multithreaded_get_by_parts(n_parts, total_size, etag)
-        parts = (1..n_parts).map do |part|
-          Part.new(part_number: part, params: @params.merge(part_number: part, if_match: etag))
-        end
-        download_in_threads(PartList.new(parts), total_size)
+      def range_request(opts)
+        resp = @client.head_object(head_opts(opts[:params]))
+        resolve_temp_path(opts)
+        multithreaded_get_by_ranges(resp.content_length, resp.etag, opts)
       end
 
-      def download_in_threads(pending, total_size)
-        threads = []
-        progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
-        unless [File, Tempfile].include?(@destination.class)
-          @temp_path = "#{@destination}.s3tmp.#{SecureRandom.alphanumeric(8)}"
+      def resolve_temp_path(opts)
+        return if [File, Tempfile].include?(opts[:destination].class)
+
+        opts[:temp_path] ||= "#{opts[:destination]}.s3tmp.#{SecureRandom.alphanumeric(8)}"
+      end
+
+      def single_request(opts)
+        params = get_opts(opts[:params]).merge(response_target: opts[:destination])
+        params[:on_chunk_received] = single_part_progress(opts) if opts[:progress_callback]
+        resp = @client.get_object(params)
+        return resp unless opts[:on_checksum_validated]
+
+        opts[:on_checksum_validated].call(resp.checksum_validated, resp) if resp.checksum_validated
+        resp
+      end
+
+      def single_part_progress(opts)
+        proc do |_chunk, bytes_read, total_size|
+          opts[:progress_callback].call([bytes_read], [total_size], total_size)
         end
-        @thread_count.times do
-          thread = Thread.new do
-            begin
-              while (part = pending.shift)
-                if progress
-                  part.params[:on_chunk_received] =
-                    proc do |_chunk, bytes, total|
-                      progress.call(part.part_number, bytes, total)
-                    end
-                end
-                resp = @client.get_object(part.params)
-                range = extract_range(resp.content_range)
-                validate_range(range, part.params[:range]) if part.params[:range]
-                write(resp.body, range)
-                if @on_checksum_validated && resp.checksum_validated
-                  @on_checksum_validated.call(resp.checksum_validated, resp)
-                end
-              end
-              nil
-            rescue StandardError => e
-              pending.clear! # keep other threads from downloading other parts
-              raise e
-            end
+      end
+
+      def update_progress(progress, part)
+        return unless progress.progress_callback
+
+        part.params[:on_chunk_received] =
+          proc do |_chunk, bytes, total|
+            progress.call(part.part_number, bytes, total)
           end
-          threads << thread
-        end
-        threads.map(&:value).compact
       end
 
-      def extract_range(value)
-        value.match(%r{bytes (?<range>\d+-\d+)/\d+})[:range]
+      def execute_checksum_callback(resp, opts)
+        return unless opts[:on_checksum_validated] && resp.checksum_validated
+
+        opts[:on_checksum_validated].call(resp.checksum_validated, resp)
+      end
+
+      def validate_destination!(destination)
+        valid_types = [String, Pathname, File, Tempfile]
+        return if valid_types.include?(destination.class)
+
+        raise ArgumentError, "Invalid destination, expected #{valid_types.join(', ')} but got: #{destination.class}"
+      end
+
+      def validate_opts!(opts)
+        if opts[:on_checksum_validated] && !opts[:on_checksum_validated].respond_to?(:call)
+          raise ArgumentError, ':on_checksum_validated must be callable'
+        end
+
+        valid_modes = %w[auto get_range single_request]
+        unless valid_modes.include?(opts[:mode])
+          msg = "Invalid mode #{opts[:mode]} provided, :mode should be single_request, get_range or auto"
+          raise ArgumentError, msg
+        end
+
+        if opts[:mode] == 'get_range' && opts[:chunk_size].nil?
+          raise ArgumentError, 'In get_range mode, :chunk_size must be provided'
+        end
+
+        if opts[:chunk_size] && opts[:chunk_size] <= 0
+          raise ArgumentError, ':chunk_size must be positive'
+        end
       end
 
       def validate_range(actual, expected)
@@ -165,25 +242,9 @@ module Aws
         raise MultipartDownloadError, "multipart download failed: expected range of #{expected} but got #{actual}"
       end
 
-      def write(body, range)
-        path = @temp_path || @destination
+      def write(body, range, opts)
+        path = opts[:temp_path] || opts[:destination]
         File.write(path, body.read, range.split('-').first.to_i)
-      end
-
-      def single_request
-        params = @params.merge(response_target: @destination)
-        params[:on_chunk_received] = single_part_progress if @progress_callback
-        resp = @client.get_object(params)
-        return resp unless @on_checksum_validated
-
-        @on_checksum_validated.call(resp.checksum_validated, resp) if resp.checksum_validated
-        resp
-      end
-
-      def single_part_progress
-        proc do |_chunk, bytes_read, total_size|
-          @progress_callback.call([bytes_read], [total_size], total_size)
-        end
       end
 
       # @api private
@@ -224,6 +285,8 @@ module Aws
           @total_size = total_size
           @progress_callback = progress_callback
         end
+
+        attr_reader :progress_callback
 
         def call(part_number, bytes_received, total)
           # part numbers start at 1

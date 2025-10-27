@@ -60,6 +60,7 @@ module Aws::BillingConductor
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ComputationPreference = Shapes::StructureShape.new(name: 'ComputationPreference')
+    ComputationRuleEnum = Shapes::StringShape.new(name: 'ComputationRuleEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     CreateBillingGroupInput = Shapes::StructureShape.new(name: 'CreateBillingGroupInput')
@@ -173,6 +174,7 @@ module Aws::BillingConductor
     NumberOfAssociations = Shapes::IntegerShape.new(name: 'NumberOfAssociations')
     NumberOfPricingPlansAssociatedWith = Shapes::IntegerShape.new(name: 'NumberOfPricingPlansAssociatedWith')
     Operation = Shapes::StringShape.new(name: 'Operation')
+    PresentationObject = Shapes::StructureShape.new(name: 'PresentationObject')
     PricingPlanArn = Shapes::StringShape.new(name: 'PricingPlanArn')
     PricingPlanArns = Shapes::ListShape.new(name: 'PricingPlanArns')
     PricingPlanDescription = Shapes::StringShape.new(name: 'PricingPlanDescription')
@@ -368,6 +370,8 @@ module Aws::BillingConductor
     CreateCustomLineItemInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCustomLineItemInput.add_member(:charge_details, Shapes::ShapeRef.new(shape: CustomLineItemChargeDetails, required: true, location_name: "ChargeDetails"))
     CreateCustomLineItemInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    CreateCustomLineItemInput.add_member(:computation_rule, Shapes::ShapeRef.new(shape: ComputationRuleEnum, location_name: "ComputationRule"))
+    CreateCustomLineItemInput.add_member(:presentation_details, Shapes::ShapeRef.new(shape: PresentationObject, location_name: "PresentationDetails"))
     CreateCustomLineItemInput.struct_class = Types::CreateCustomLineItemInput
 
     CreateCustomLineItemOutput.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
@@ -440,6 +444,8 @@ module Aws::BillingConductor
     CustomLineItemListElement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
     CustomLineItemListElement.add_member(:association_size, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "AssociationSize"))
     CustomLineItemListElement.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    CustomLineItemListElement.add_member(:computation_rule, Shapes::ShapeRef.new(shape: ComputationRuleEnum, location_name: "ComputationRule"))
+    CustomLineItemListElement.add_member(:presentation_details, Shapes::ShapeRef.new(shape: PresentationObject, location_name: "PresentationDetails"))
     CustomLineItemListElement.struct_class = Types::CustomLineItemListElement
 
     CustomLineItemNameList.member = Shapes::ShapeRef.new(shape: CustomLineItemName)
@@ -464,6 +470,8 @@ module Aws::BillingConductor
     CustomLineItemVersionListElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
     CustomLineItemVersionListElement.add_member(:start_time, Shapes::ShapeRef.new(shape: Instant, location_name: "StartTime"))
     CustomLineItemVersionListElement.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    CustomLineItemVersionListElement.add_member(:computation_rule, Shapes::ShapeRef.new(shape: ComputationRuleEnum, location_name: "ComputationRule"))
+    CustomLineItemVersionListElement.add_member(:presentation_details, Shapes::ShapeRef.new(shape: PresentationObject, location_name: "PresentationDetails"))
     CustomLineItemVersionListElement.struct_class = Types::CustomLineItemVersionListElement
 
     DeleteBillingGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
@@ -711,6 +719,9 @@ module Aws::BillingConductor
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    PresentationObject.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
+    PresentationObject.struct_class = Types::PresentationObject
+
     PricingPlanArns.member = Shapes::ShapeRef.new(shape: PricingPlanArn)
 
     PricingPlanList.member = Shapes::ShapeRef.new(shape: PricingPlanListElement)
@@ -893,9 +904,10 @@ module Aws::BillingConductor
 
       api.metadata = {
         "apiVersion" => "2021-07-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "billingconductor",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWSBillingConductor",
         "serviceId" => "billingconductor",
         "signatureVersion" => "v4",
@@ -909,8 +921,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/associate-accounts"
         o.input = Shapes::ShapeRef.new(shape: AssociateAccountsInput)
         o.output = Shapes::ShapeRef.new(shape: AssociateAccountsOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -924,8 +936,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/associate-pricing-rules"
         o.input = Shapes::ShapeRef.new(shape: AssociatePricingRulesInput)
         o.output = Shapes::ShapeRef.new(shape: AssociatePricingRulesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -939,8 +951,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/batch-associate-resources-to-custom-line-item"
         o.input = Shapes::ShapeRef.new(shape: BatchAssociateResourcesToCustomLineItemInput)
         o.output = Shapes::ShapeRef.new(shape: BatchAssociateResourcesToCustomLineItemOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -954,8 +966,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/batch-disassociate-resources-from-custom-line-item"
         o.input = Shapes::ShapeRef.new(shape: BatchDisassociateResourcesFromCustomLineItemInput)
         o.output = Shapes::ShapeRef.new(shape: BatchDisassociateResourcesFromCustomLineItemOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -968,8 +980,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/create-billing-group"
         o.input = Shapes::ShapeRef.new(shape: CreateBillingGroupInput)
         o.output = Shapes::ShapeRef.new(shape: CreateBillingGroupOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -982,8 +994,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/create-custom-line-item"
         o.input = Shapes::ShapeRef.new(shape: CreateCustomLineItemInput)
         o.output = Shapes::ShapeRef.new(shape: CreateCustomLineItemOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -996,8 +1008,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/create-pricing-plan"
         o.input = Shapes::ShapeRef.new(shape: CreatePricingPlanInput)
         o.output = Shapes::ShapeRef.new(shape: CreatePricingPlanOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -1011,8 +1023,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/create-pricing-rule"
         o.input = Shapes::ShapeRef.new(shape: CreatePricingRuleInput)
         o.output = Shapes::ShapeRef.new(shape: CreatePricingRuleOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
@@ -1037,8 +1049,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/delete-custom-line-item"
         o.input = Shapes::ShapeRef.new(shape: DeleteCustomLineItemInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteCustomLineItemOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1050,8 +1062,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/delete-pricing-plan"
         o.input = Shapes::ShapeRef.new(shape: DeletePricingPlanInput)
         o.output = Shapes::ShapeRef.new(shape: DeletePricingPlanOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1063,8 +1075,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/delete-pricing-rule"
         o.input = Shapes::ShapeRef.new(shape: DeletePricingRuleInput)
         o.output = Shapes::ShapeRef.new(shape: DeletePricingRuleOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1076,8 +1088,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/disassociate-accounts"
         o.input = Shapes::ShapeRef.new(shape: DisassociateAccountsInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateAccountsOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1090,8 +1102,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/disassociate-pricing-rules"
         o.input = Shapes::ShapeRef.new(shape: DisassociatePricingRulesInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociatePricingRulesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1342,8 +1354,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/update-billing-group"
         o.input = Shapes::ShapeRef.new(shape: UpdateBillingGroupInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateBillingGroupOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1369,8 +1381,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/update-pricing-plan"
         o.input = Shapes::ShapeRef.new(shape: UpdatePricingPlanInput)
         o.output = Shapes::ShapeRef.new(shape: UpdatePricingPlanOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1383,8 +1395,8 @@ module Aws::BillingConductor
         o.http_request_uri = "/update-pricing-rule"
         o.input = Shapes::ShapeRef.new(shape: UpdatePricingRuleInput)
         o.output = Shapes::ShapeRef.new(shape: UpdatePricingRuleOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

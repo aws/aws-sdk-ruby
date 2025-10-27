@@ -6,7 +6,7 @@
     "endpointPrefix":"bedrock-agentcore-control",
     "protocol":"rest-json",
     "protocols":["rest-json"],
-    "serviceFullName":"Amazon Bedrock Agent Core Control Plane Fronting Layer",
+    "serviceFullName":"Amazon Bedrock AgentCore Control",
     "serviceId":"Bedrock AgentCore Control",
     "signatureVersion":"v4",
     "signingName":"bedrock-agentcore",
@@ -18,7 +18,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/runtimes/",
-        "responseCode":201
+        "responseCode":202
       },
       "input":{"shape":"CreateAgentRuntimeRequest"},
       "output":{"shape":"CreateAgentRuntimeResponse"},
@@ -37,7 +37,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/runtimes/{agentRuntimeId}/runtime-endpoints/",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"CreateAgentRuntimeEndpointRequest"},
       "output":{"shape":"CreateAgentRuntimeEndpointResponse"},
@@ -57,7 +57,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/identities/CreateApiKeyCredentialProvider",
-        "responseCode":200
+        "responseCode":201
       },
       "input":{"shape":"CreateApiKeyCredentialProviderRequest"},
       "output":{"shape":"CreateApiKeyCredentialProviderResponse"},
@@ -81,7 +81,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/browsers",
-        "responseCode":201
+        "responseCode":202
       },
       "input":{"shape":"CreateBrowserRequest"},
       "output":{"shape":"CreateBrowserResponse"},
@@ -100,7 +100,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/code-interpreters",
-        "responseCode":201
+        "responseCode":202
       },
       "input":{"shape":"CreateCodeInterpreterRequest"},
       "output":{"shape":"CreateCodeInterpreterResponse"},
@@ -158,7 +158,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/memories/create",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"CreateMemoryInput"},
       "output":{"shape":"CreateMemoryOutput"},
@@ -178,7 +178,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/identities/CreateOauth2CredentialProvider",
-        "responseCode":200
+        "responseCode":201
       },
       "input":{"shape":"CreateOauth2CredentialProviderRequest"},
       "output":{"shape":"CreateOauth2CredentialProviderResponse"},
@@ -202,7 +202,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/identities/CreateWorkloadIdentity",
-        "responseCode":200
+        "responseCode":201
       },
       "input":{"shape":"CreateWorkloadIdentityRequest"},
       "output":{"shape":"CreateWorkloadIdentityResponse"},
@@ -221,7 +221,7 @@
       "http":{
         "method":"DELETE",
         "requestUri":"/runtimes/{agentRuntimeId}/",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"DeleteAgentRuntimeRequest"},
       "output":{"shape":"DeleteAgentRuntimeResponse"},
@@ -239,7 +239,7 @@
       "http":{
         "method":"DELETE",
         "requestUri":"/runtimes/{agentRuntimeId}/runtime-endpoints/{endpointName}/",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"DeleteAgentRuntimeEndpointRequest"},
       "output":{"shape":"DeleteAgentRuntimeEndpointResponse"},
@@ -257,7 +257,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/identities/DeleteApiKeyCredentialProvider",
-        "responseCode":200
+        "responseCode":204
       },
       "input":{"shape":"DeleteApiKeyCredentialProviderRequest"},
       "output":{"shape":"DeleteApiKeyCredentialProviderResponse"},
@@ -276,7 +276,7 @@
       "http":{
         "method":"DELETE",
         "requestUri":"/browsers/{browserId}",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"DeleteBrowserRequest"},
       "output":{"shape":"DeleteBrowserResponse"},
@@ -296,7 +296,7 @@
       "http":{
         "method":"DELETE",
         "requestUri":"/code-interpreters/{codeInterpreterId}",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"DeleteCodeInterpreterRequest"},
       "output":{"shape":"DeleteCodeInterpreterResponse"},
@@ -354,7 +354,7 @@
       "http":{
         "method":"DELETE",
         "requestUri":"/memories/{memoryId}/delete",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"DeleteMemoryInput"},
       "output":{"shape":"DeleteMemoryOutput"},
@@ -372,7 +372,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/identities/DeleteOauth2CredentialProvider",
-        "responseCode":200
+        "responseCode":204
       },
       "input":{"shape":"DeleteOauth2CredentialProviderRequest"},
       "output":{"shape":"DeleteOauth2CredentialProviderResponse"},
@@ -391,7 +391,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/identities/DeleteWorkloadIdentity",
-        "responseCode":200
+        "responseCode":204
       },
       "input":{"shape":"DeleteWorkloadIdentityRequest"},
       "output":{"shape":"DeleteWorkloadIdentityResponse"},
@@ -841,6 +841,26 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "SynchronizeGatewayTargets":{
+      "name":"SynchronizeGatewayTargets",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/gateways/{gatewayIdentifier}/synchronizeTargets",
+        "responseCode":202
+      },
+      "input":{"shape":"SynchronizeGatewayTargetsRequest"},
+      "output":{"shape":"SynchronizeGatewayTargetsResponse"},
+      "errors":[
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ],
+      "idempotent":true
+    },
     "TagResource":{
       "name":"TagResource",
       "http":{
@@ -882,7 +902,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/runtimes/{agentRuntimeId}/",
-        "responseCode":201
+        "responseCode":202
       },
       "input":{"shape":"UpdateAgentRuntimeRequest"},
       "output":{"shape":"UpdateAgentRuntimeResponse"},
@@ -902,7 +922,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/runtimes/{agentRuntimeId}/runtime-endpoints/{endpointName}/",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"UpdateAgentRuntimeEndpointRequest"},
       "output":{"shape":"UpdateAgentRuntimeEndpointResponse"},
@@ -985,7 +1005,7 @@
       "http":{
         "method":"PUT",
         "requestUri":"/memories/{memoryId}/update",
-        "responseCode":200
+        "responseCode":202
       },
       "input":{"shape":"UpdateMemoryInput"},
       "output":{"shape":"UpdateMemoryOutput"},
@@ -1251,6 +1271,25 @@
       "type":"string",
       "pattern":"arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
     },
+    "AtlassianOauth2ProviderConfigInput":{
+      "type":"structure",
+      "required":[
+        "clientId",
+        "clientSecret"
+      ],
+      "members":{
+        "clientId":{"shape":"ClientIdType"},
+        "clientSecret":{"shape":"ClientSecretType"}
+      }
+    },
+    "AtlassianOauth2ProviderConfigOutput":{
+      "type":"structure",
+      "required":["oauthDiscovery"],
+      "members":{
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
+      }
+    },
     "AuthorizationEndpointType":{"type":"string"},
     "AuthorizerConfiguration":{
       "type":"structure",
@@ -1261,7 +1300,10 @@
     },
     "AuthorizerType":{
       "type":"string",
-      "enum":["CUSTOM_JWT"]
+      "enum":[
+        "CUSTOM_JWT",
+        "AWS_IAM"
+      ]
     },
     "AwsAccountId":{
       "type":"string",
@@ -1473,6 +1515,8 @@
         "targetVersion":{"shape":"AgentRuntimeVersion"},
         "agentRuntimeEndpointArn":{"shape":"AgentRuntimeEndpointArn"},
         "agentRuntimeArn":{"shape":"AgentRuntimeArn"},
+        "agentRuntimeId":{"shape":"AgentRuntimeId"},
+        "endpointName":{"shape":"EndpointName"},
         "status":{"shape":"AgentRuntimeEndpointStatus"},
         "createdAt":{"shape":"DateTimestamp"}
       }
@@ -1529,7 +1573,8 @@
       ],
       "members":{
         "name":{"shape":"CredentialProviderName"},
-        "apiKey":{"shape":"ApiKeyType"}
+        "apiKey":{"shape":"ApiKeyType"},
+        "tags":{"shape":"TagsMap"}
       }
     },
     "CreateApiKeyCredentialProviderResponse":{
@@ -1618,8 +1663,7 @@
         "name",
         "roleArn",
         "protocolType",
-        "authorizerType",
-        "authorizerConfiguration"
+        "authorizerType"
       ],
       "members":{
         "name":{"shape":"GatewayName"},
@@ -1675,8 +1719,7 @@
       "required":[
         "gatewayIdentifier",
         "name",
-        "targetConfiguration",
-        "credentialProviderConfigurations"
+        "targetConfiguration"
       ],
       "members":{
         "gatewayIdentifier":{
@@ -1716,7 +1759,8 @@
         "name":{"shape":"TargetName"},
         "description":{"shape":"TargetDescription"},
         "targetConfiguration":{"shape":"TargetConfiguration"},
-        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"}
+        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"},
+        "lastSynchronizedAt":{"shape":"DateTimestamp"}
       }
     },
     "CreateMemoryInput":{
@@ -1766,7 +1810,8 @@
       "members":{
         "name":{"shape":"CredentialProviderName"},
         "credentialProviderVendor":{"shape":"CredentialProviderVendorType"},
-        "oauth2ProviderConfigInput":{"shape":"Oauth2ProviderConfigInput"}
+        "oauth2ProviderConfigInput":{"shape":"Oauth2ProviderConfigInput"},
+        "tags":{"shape":"TagsMap"}
       }
     },
     "CreateOauth2CredentialProviderResponse":{
@@ -1779,7 +1824,9 @@
       "members":{
         "clientSecretArn":{"shape":"Secret"},
         "name":{"shape":"CredentialProviderName"},
-        "credentialProviderArn":{"shape":"CredentialProviderArnType"}
+        "credentialProviderArn":{"shape":"CredentialProviderArnType"},
+        "callbackUrl":{"shape":"String"},
+        "oauth2ProviderConfigOutput":{"shape":"Oauth2ProviderConfigOutput"}
       }
     },
     "CreateWorkloadIdentityRequest":{
@@ -1787,7 +1834,8 @@
       "required":["name"],
       "members":{
         "name":{"shape":"WorkloadIdentityNameType"},
-        "allowedResourceOauth2ReturnUrls":{"shape":"ResourceOauth2ReturnUrlListType"}
+        "allowedResourceOauth2ReturnUrls":{"shape":"ResourceOauth2ReturnUrlListType"},
+        "tags":{"shape":"TagsMap"}
       }
     },
     "CreateWorkloadIdentityResponse":{
@@ -1850,7 +1898,26 @@
         "SlackOauth2",
         "SalesforceOauth2",
         "MicrosoftOauth2",
-        "CustomOauth2"
+        "CustomOauth2",
+        "AtlassianOauth2",
+        "LinkedinOauth2",
+        "XOauth2",
+        "OktaOauth2",
+        "OneLoginOauth2",
+        "PingOneOauth2",
+        "FacebookOauth2",
+        "YandexOauth2",
+        "RedditOauth2",
+        "ZoomOauth2",
+        "TwitchOauth2",
+        "SpotifyOauth2",
+        "DropboxOauth2",
+        "NotionOauth2",
+        "HubspotOauth2",
+        "CyberArkOauth2",
+        "FusionAuthOauth2",
+        "Auth0Oauth2",
+        "CognitoOauth2"
       ]
     },
     "CustomConfigurationInput":{
@@ -1858,7 +1925,8 @@
       "members":{
         "semanticOverride":{"shape":"SemanticOverrideConfigurationInput"},
         "summaryOverride":{"shape":"SummaryOverrideConfigurationInput"},
-        "userPreferenceOverride":{"shape":"UserPreferenceOverrideConfigurationInput"}
+        "userPreferenceOverride":{"shape":"UserPreferenceOverrideConfigurationInput"},
+        "selfManagedConfiguration":{"shape":"SelfManagedConfigurationInput"}
       },
       "union":true
     },
@@ -1932,7 +2000,8 @@
       "type":"structure",
       "required":["oauthDiscovery"],
       "members":{
-        "oauthDiscovery":{"shape":"Oauth2Discovery"}
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
       }
     },
     "DateTimestamp":{
@@ -1980,7 +2049,9 @@
       "type":"structure",
       "required":["status"],
       "members":{
-        "status":{"shape":"AgentRuntimeEndpointStatus"}
+        "status":{"shape":"AgentRuntimeEndpointStatus"},
+        "agentRuntimeId":{"shape":"AgentRuntimeId"},
+        "endpointName":{"shape":"EndpointName"}
       }
     },
     "DeleteAgentRuntimeRequest":{
@@ -1998,7 +2069,8 @@
       "type":"structure",
       "required":["status"],
       "members":{
-        "status":{"shape":"AgentRuntimeStatus"}
+        "status":{"shape":"AgentRuntimeStatus"},
+        "agentRuntimeId":{"shape":"AgentRuntimeId"}
       }
     },
     "DeleteApiKeyCredentialProviderRequest":{
@@ -2334,6 +2406,36 @@
         "protocolType":{"shape":"GatewayProtocolType"}
       }
     },
+    "GatewayTarget":{
+      "type":"structure",
+      "required":[
+        "gatewayArn",
+        "targetId",
+        "createdAt",
+        "updatedAt",
+        "status",
+        "name",
+        "targetConfiguration",
+        "credentialProviderConfigurations"
+      ],
+      "members":{
+        "gatewayArn":{"shape":"GatewayArn"},
+        "targetId":{"shape":"TargetId"},
+        "createdAt":{"shape":"DateTimestamp"},
+        "updatedAt":{"shape":"DateTimestamp"},
+        "status":{"shape":"TargetStatus"},
+        "statusReasons":{"shape":"StatusReasons"},
+        "name":{"shape":"TargetName"},
+        "description":{"shape":"TargetDescription"},
+        "targetConfiguration":{"shape":"TargetConfiguration"},
+        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"},
+        "lastSynchronizedAt":{"shape":"DateTimestamp"}
+      }
+    },
+    "GatewayTargetList":{
+      "type":"list",
+      "member":{"shape":"GatewayTarget"}
+    },
     "GatewayUrl":{
       "type":"string",
       "max":1024,
@@ -2612,7 +2714,8 @@
         "name":{"shape":"TargetName"},
         "description":{"shape":"TargetDescription"},
         "targetConfiguration":{"shape":"TargetConfiguration"},
-        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"}
+        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"},
+        "lastSynchronizedAt":{"shape":"DateTimestamp"}
       }
     },
     "GetMemoryInput":{
@@ -2656,6 +2759,7 @@
         "name":{"shape":"CredentialProviderName"},
         "credentialProviderArn":{"shape":"CredentialProviderArnType"},
         "credentialProviderVendor":{"shape":"CredentialProviderVendorType"},
+        "callbackUrl":{"shape":"String"},
         "oauth2ProviderConfigOutput":{"shape":"Oauth2ProviderConfigOutput"},
         "createdTime":{"shape":"Timestamp"},
         "lastUpdatedTime":{"shape":"Timestamp"}
@@ -2718,7 +2822,8 @@
       "type":"structure",
       "required":["oauthDiscovery"],
       "members":{
-        "oauthDiscovery":{"shape":"Oauth2Discovery"}
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
       }
     },
     "GoogleOauth2ProviderConfigInput":{
@@ -2736,7 +2841,8 @@
       "type":"structure",
       "required":["oauthDiscovery"],
       "members":{
-        "oauthDiscovery":{"shape":"Oauth2Discovery"}
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
       }
     },
     "HeaderName":{
@@ -2745,9 +2851,35 @@
       "min":1,
       "pattern":"(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)"
     },
+    "IncludedOauth2ProviderConfigInput":{
+      "type":"structure",
+      "required":[
+        "clientId",
+        "clientSecret"
+      ],
+      "members":{
+        "clientId":{"shape":"ClientIdType"},
+        "clientSecret":{"shape":"ClientSecretType"},
+        "issuer":{"shape":"IssuerUrlType"},
+        "authorizationEndpoint":{"shape":"AuthorizationEndpointType"},
+        "tokenEndpoint":{"shape":"TokenEndpointType"}
+      }
+    },
+    "IncludedOauth2ProviderConfigOutput":{
+      "type":"structure",
+      "required":["oauthDiscovery"],
+      "members":{
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
+      }
+    },
     "InlinePayload":{
       "type":"string",
       "sensitive":true
+    },
+    "Integer":{
+      "type":"integer",
+      "box":true
     },
     "InternalServerException":{
       "type":"structure",
@@ -2757,6 +2889,32 @@
       "error":{"httpStatusCode":500},
       "exception":true,
       "fault":true
+    },
+    "InvocationConfiguration":{
+      "type":"structure",
+      "required":[
+        "topicArn",
+        "payloadDeliveryBucketName"
+      ],
+      "members":{
+        "topicArn":{"shape":"Arn"},
+        "payloadDeliveryBucketName":{"shape":"String"}
+      }
+    },
+    "InvocationConfigurationInput":{
+      "type":"structure",
+      "required":[
+        "topicArn",
+        "payloadDeliveryBucketName"
+      ],
+      "members":{
+        "topicArn":{"shape":"Arn"},
+        "payloadDeliveryBucketName":{"shape":"InvocationConfigurationInputPayloadDeliveryBucketNameString"}
+      }
+    },
+    "InvocationConfigurationInputPayloadDeliveryBucketNameString":{
+      "type":"string",
+      "pattern":"[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]"
     },
     "IssuerUrlType":{"type":"string"},
     "KeyType":{
@@ -2804,6 +2962,25 @@
       "box":true,
       "max":28800,
       "min":60
+    },
+    "LinkedinOauth2ProviderConfigInput":{
+      "type":"structure",
+      "required":[
+        "clientId",
+        "clientSecret"
+      ],
+      "members":{
+        "clientId":{"shape":"ClientIdType"},
+        "clientSecret":{"shape":"ClientSecretType"}
+      }
+    },
+    "LinkedinOauth2ProviderConfigOutput":{
+      "type":"structure",
+      "required":["oauthDiscovery"],
+      "members":{
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
+      }
     },
     "ListAgentRuntimeEndpointsRequest":{
       "type":"structure",
@@ -3119,6 +3296,17 @@
         "toolSchema":{"shape":"ToolSchema"}
       }
     },
+    "McpServerTargetConfiguration":{
+      "type":"structure",
+      "required":["endpoint"],
+      "members":{
+        "endpoint":{"shape":"McpServerTargetConfigurationEndpointString"}
+      }
+    },
+    "McpServerTargetConfigurationEndpointString":{
+      "type":"string",
+      "pattern":"https://.*"
+    },
     "McpSupportedVersions":{
       "type":"list",
       "member":{"shape":"McpVersion"}
@@ -3128,7 +3316,8 @@
       "members":{
         "openApiSchema":{"shape":"ApiSchemaConfiguration"},
         "smithyModel":{"shape":"ApiSchemaConfiguration"},
-        "lambda":{"shape":"McpLambdaTargetConfiguration"}
+        "lambda":{"shape":"McpLambdaTargetConfiguration"},
+        "mcpServer":{"shape":"McpServerTargetConfiguration"}
       },
       "union":true
     },
@@ -3262,6 +3451,24 @@
       "type":"list",
       "member":{"shape":"MemorySummary"}
     },
+    "MessageBasedTrigger":{
+      "type":"structure",
+      "members":{
+        "messageCount":{"shape":"Integer"}
+      }
+    },
+    "MessageBasedTriggerInput":{
+      "type":"structure",
+      "members":{
+        "messageCount":{"shape":"MessageBasedTriggerInputMessageCountInteger"}
+      }
+    },
+    "MessageBasedTriggerInputMessageCountInteger":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":1
+    },
     "MicrosoftOauth2ProviderConfigInput":{
       "type":"structure",
       "required":[
@@ -3270,14 +3477,16 @@
       ],
       "members":{
         "clientId":{"shape":"ClientIdType"},
-        "clientSecret":{"shape":"ClientSecretType"}
+        "clientSecret":{"shape":"ClientSecretType"},
+        "tenantId":{"shape":"TenantIdType"}
       }
     },
     "MicrosoftOauth2ProviderConfigOutput":{
       "type":"structure",
       "required":["oauthDiscovery"],
       "members":{
-        "oauthDiscovery":{"shape":"Oauth2Discovery"}
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
       }
     },
     "ModifyConsolidationConfiguration":{
@@ -3293,6 +3502,17 @@
         "customExtractionConfiguration":{"shape":"CustomExtractionConfigurationInput"}
       },
       "union":true
+    },
+    "ModifyInvocationConfigurationInput":{
+      "type":"structure",
+      "members":{
+        "topicArn":{"shape":"Arn"},
+        "payloadDeliveryBucketName":{"shape":"ModifyInvocationConfigurationInputPayloadDeliveryBucketNameString"}
+      }
+    },
+    "ModifyInvocationConfigurationInputPayloadDeliveryBucketNameString":{
+      "type":"string",
+      "pattern":"[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]"
     },
     "ModifyMemoryStrategies":{
       "type":"structure",
@@ -3316,11 +3536,26 @@
         "configuration":{"shape":"ModifyStrategyConfiguration"}
       }
     },
+    "ModifySelfManagedConfiguration":{
+      "type":"structure",
+      "members":{
+        "triggerConditions":{"shape":"TriggerConditionInputList"},
+        "invocationConfiguration":{"shape":"ModifyInvocationConfigurationInput"},
+        "historicalContextWindowSize":{"shape":"ModifySelfManagedConfigurationHistoricalContextWindowSizeInteger"}
+      }
+    },
+    "ModifySelfManagedConfigurationHistoricalContextWindowSizeInteger":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":0
+    },
     "ModifyStrategyConfiguration":{
       "type":"structure",
       "members":{
         "extraction":{"shape":"ModifyExtractionConfiguration"},
-        "consolidation":{"shape":"ModifyConsolidationConfiguration"}
+        "consolidation":{"shape":"ModifyConsolidationConfiguration"},
+        "selfManagedConfiguration":{"shape":"ModifySelfManagedConfiguration"}
       }
     },
     "Name":{
@@ -3419,7 +3654,8 @@
         "issuer":{"shape":"IssuerUrlType"},
         "authorizationEndpoint":{"shape":"AuthorizationEndpointType"},
         "tokenEndpoint":{"shape":"TokenEndpointType"},
-        "responseTypes":{"shape":"ResponseListType"}
+        "responseTypes":{"shape":"ResponseListType"},
+        "tokenEndpointAuthMethods":{"shape":"TokenEndpointAuthMethodsType"}
       }
     },
     "Oauth2CredentialProviderItem":{
@@ -3459,7 +3695,10 @@
         "githubOauth2ProviderConfig":{"shape":"GithubOauth2ProviderConfigInput"},
         "slackOauth2ProviderConfig":{"shape":"SlackOauth2ProviderConfigInput"},
         "salesforceOauth2ProviderConfig":{"shape":"SalesforceOauth2ProviderConfigInput"},
-        "microsoftOauth2ProviderConfig":{"shape":"MicrosoftOauth2ProviderConfigInput"}
+        "microsoftOauth2ProviderConfig":{"shape":"MicrosoftOauth2ProviderConfigInput"},
+        "atlassianOauth2ProviderConfig":{"shape":"AtlassianOauth2ProviderConfigInput"},
+        "linkedinOauth2ProviderConfig":{"shape":"LinkedinOauth2ProviderConfigInput"},
+        "includedOauth2ProviderConfig":{"shape":"IncludedOauth2ProviderConfigInput"}
       },
       "union":true
     },
@@ -3471,7 +3710,10 @@
         "githubOauth2ProviderConfig":{"shape":"GithubOauth2ProviderConfigOutput"},
         "slackOauth2ProviderConfig":{"shape":"SlackOauth2ProviderConfigOutput"},
         "salesforceOauth2ProviderConfig":{"shape":"SalesforceOauth2ProviderConfigOutput"},
-        "microsoftOauth2ProviderConfig":{"shape":"MicrosoftOauth2ProviderConfigOutput"}
+        "microsoftOauth2ProviderConfig":{"shape":"MicrosoftOauth2ProviderConfigOutput"},
+        "atlassianOauth2ProviderConfig":{"shape":"AtlassianOauth2ProviderConfigOutput"},
+        "linkedinOauth2ProviderConfig":{"shape":"LinkedinOauth2ProviderConfigOutput"},
+        "includedOauth2ProviderConfig":{"shape":"IncludedOauth2ProviderConfigOutput"}
       },
       "union":true
     },
@@ -3480,7 +3722,8 @@
       "enum":[
         "SEMANTIC_OVERRIDE",
         "SUMMARY_OVERRIDE",
-        "USER_PREFERENCE_OVERRIDE"
+        "USER_PREFERENCE_OVERRIDE",
+        "SELF_MANAGED"
       ]
     },
     "Prompt":{
@@ -3621,7 +3864,8 @@
       "type":"structure",
       "required":["oauthDiscovery"],
       "members":{
-        "oauthDiscovery":{"shape":"Oauth2Discovery"}
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
       }
     },
     "SandboxName":{
@@ -3679,6 +3923,34 @@
       "member":{"shape":"SecurityGroupId"},
       "max":16,
       "min":1
+    },
+    "SelfManagedConfiguration":{
+      "type":"structure",
+      "required":[
+        "triggerConditions",
+        "invocationConfiguration",
+        "historicalContextWindowSize"
+      ],
+      "members":{
+        "triggerConditions":{"shape":"TriggerConditionsList"},
+        "invocationConfiguration":{"shape":"InvocationConfiguration"},
+        "historicalContextWindowSize":{"shape":"Integer"}
+      }
+    },
+    "SelfManagedConfigurationInput":{
+      "type":"structure",
+      "required":["invocationConfiguration"],
+      "members":{
+        "triggerConditions":{"shape":"TriggerConditionInputList"},
+        "invocationConfiguration":{"shape":"InvocationConfigurationInput"},
+        "historicalContextWindowSize":{"shape":"SelfManagedConfigurationInputHistoricalContextWindowSizeInteger"}
+      }
+    },
+    "SelfManagedConfigurationInputHistoricalContextWindowSizeInteger":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":0
     },
     "SemanticConsolidationOverride":{
       "type":"structure",
@@ -3805,7 +4077,8 @@
       "type":"structure",
       "required":["oauthDiscovery"],
       "members":{
-        "oauthDiscovery":{"shape":"Oauth2Discovery"}
+        "oauthDiscovery":{"shape":"Oauth2Discovery"},
+        "clientId":{"shape":"ClientIdType"}
       }
     },
     "StatusReason":{
@@ -3824,7 +4097,8 @@
       "members":{
         "type":{"shape":"OverrideType"},
         "extraction":{"shape":"ExtractionConfiguration"},
-        "consolidation":{"shape":"ConsolidationConfiguration"}
+        "consolidation":{"shape":"ConsolidationConfiguration"},
+        "selfManagedConfiguration":{"shape":"SelfManagedConfiguration"}
       }
     },
     "String":{"type":"string"},
@@ -3873,6 +4147,27 @@
       "members":{
         "appendToPrompt":{"shape":"Prompt"},
         "modelId":{"shape":"String"}
+      }
+    },
+    "SynchronizeGatewayTargetsRequest":{
+      "type":"structure",
+      "required":[
+        "gatewayIdentifier",
+        "targetIdList"
+      ],
+      "members":{
+        "gatewayIdentifier":{
+          "shape":"GatewayIdentifier",
+          "location":"uri",
+          "locationName":"gatewayIdentifier"
+        },
+        "targetIdList":{"shape":"TargetIdList"}
+      }
+    },
+    "SynchronizeGatewayTargetsResponse":{
+      "type":"structure",
+      "members":{
+        "targets":{"shape":"GatewayTargetList"}
       }
     },
     "TagKey":{
@@ -3942,6 +4237,12 @@
       "type":"string",
       "pattern":"[0-9a-zA-Z]{10}"
     },
+    "TargetIdList":{
+      "type":"list",
+      "member":{"shape":"TargetId"},
+      "max":1,
+      "min":1
+    },
     "TargetMaxResults":{
       "type":"integer",
       "box":true,
@@ -3967,7 +4268,9 @@
         "UPDATE_UNSUCCESSFUL",
         "DELETING",
         "READY",
-        "FAILED"
+        "FAILED",
+        "SYNCHRONIZING",
+        "SYNCHRONIZE_UNSUCCESSFUL"
       ]
     },
     "TargetSummaries":{
@@ -3992,6 +4295,11 @@
         "updatedAt":{"shape":"DateTimestamp"}
       }
     },
+    "TenantIdType":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
     "ThrottledException":{
       "type":"structure",
       "members":{
@@ -4015,7 +4323,53 @@
       },
       "exception":true
     },
+    "TimeBasedTrigger":{
+      "type":"structure",
+      "members":{
+        "idleSessionTimeout":{"shape":"Integer"}
+      }
+    },
+    "TimeBasedTriggerInput":{
+      "type":"structure",
+      "members":{
+        "idleSessionTimeout":{"shape":"TimeBasedTriggerInputIdleSessionTimeoutInteger"}
+      }
+    },
+    "TimeBasedTriggerInputIdleSessionTimeoutInteger":{
+      "type":"integer",
+      "box":true,
+      "max":3000,
+      "min":10
+    },
     "Timestamp":{"type":"timestamp"},
+    "TokenAuthMethod":{
+      "type":"string",
+      "pattern":"(client_secret_post|client_secret_basic)"
+    },
+    "TokenBasedTrigger":{
+      "type":"structure",
+      "members":{
+        "tokenCount":{"shape":"Integer"}
+      }
+    },
+    "TokenBasedTriggerInput":{
+      "type":"structure",
+      "members":{
+        "tokenCount":{"shape":"TokenBasedTriggerInputTokenCountInteger"}
+      }
+    },
+    "TokenBasedTriggerInputTokenCountInteger":{
+      "type":"integer",
+      "box":true,
+      "max":500000,
+      "min":100
+    },
+    "TokenEndpointAuthMethodsType":{
+      "type":"list",
+      "member":{"shape":"TokenAuthMethod"},
+      "max":2,
+      "min":1
+    },
     "TokenEndpointType":{"type":"string"},
     "TokenVaultIdType":{
       "type":"string",
@@ -4048,6 +4402,34 @@
         "inlinePayload":{"shape":"ToolDefinitions"}
       },
       "union":true
+    },
+    "TriggerCondition":{
+      "type":"structure",
+      "members":{
+        "messageBasedTrigger":{"shape":"MessageBasedTrigger"},
+        "tokenBasedTrigger":{"shape":"TokenBasedTrigger"},
+        "timeBasedTrigger":{"shape":"TimeBasedTrigger"}
+      },
+      "union":true
+    },
+    "TriggerConditionInput":{
+      "type":"structure",
+      "members":{
+        "messageBasedTrigger":{"shape":"MessageBasedTriggerInput"},
+        "tokenBasedTrigger":{"shape":"TokenBasedTriggerInput"},
+        "timeBasedTrigger":{"shape":"TimeBasedTriggerInput"}
+      },
+      "union":true
+    },
+    "TriggerConditionInputList":{
+      "type":"list",
+      "member":{"shape":"TriggerConditionInput"},
+      "min":1
+    },
+    "TriggerConditionsList":{
+      "type":"list",
+      "member":{"shape":"TriggerCondition"},
+      "min":1
     },
     "UnauthorizedException":{
       "type":"structure",
@@ -4211,8 +4593,7 @@
         "name",
         "roleArn",
         "protocolType",
-        "authorizerType",
-        "authorizerConfiguration"
+        "authorizerType"
       ],
       "members":{
         "gatewayIdentifier":{
@@ -4269,8 +4650,7 @@
         "gatewayIdentifier",
         "targetId",
         "name",
-        "targetConfiguration",
-        "credentialProviderConfigurations"
+        "targetConfiguration"
       ],
       "members":{
         "gatewayIdentifier":{
@@ -4311,7 +4691,8 @@
         "name":{"shape":"TargetName"},
         "description":{"shape":"TargetDescription"},
         "targetConfiguration":{"shape":"TargetConfiguration"},
-        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"}
+        "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"},
+        "lastSynchronizedAt":{"shape":"DateTimestamp"}
       }
     },
     "UpdateMemoryInput":{
@@ -4379,6 +4760,7 @@
         "name":{"shape":"CredentialProviderName"},
         "credentialProviderVendor":{"shape":"CredentialProviderVendorType"},
         "credentialProviderArn":{"shape":"CredentialProviderArnType"},
+        "callbackUrl":{"shape":"String"},
         "oauth2ProviderConfigOutput":{"shape":"Oauth2ProviderConfigOutput"},
         "createdTime":{"shape":"Timestamp"},
         "lastUpdatedTime":{"shape":"Timestamp"}

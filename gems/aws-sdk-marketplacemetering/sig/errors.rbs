@@ -23,6 +23,9 @@ module Aws
       class ExpiredTokenException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class IdempotencyConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InternalServiceErrorException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

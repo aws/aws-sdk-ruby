@@ -13,27 +13,27 @@ module Aws::SESV2
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute endpoint_id
   #   Operation parameter for EndpointId
   #
-  #   @return [String]
+  #   @return [string]
   #
   EndpointParameters = Struct.new(
     :region,

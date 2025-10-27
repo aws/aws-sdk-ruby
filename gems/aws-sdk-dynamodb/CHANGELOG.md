@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2025-10-21)
+------------------
+
+* Feature - Add AccountID based endpoint metric to endpoint rules.
+
 1.154.0 (2025-10-02)
 ------------------
 

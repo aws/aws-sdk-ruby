@@ -197,7 +197,7 @@ module Aws::MediaConvert
       attr_accessor gop_size: ::Float
       attr_accessor max_bitrate: ::Integer
       attr_accessor number_b_frames_between_reference_frames: ::Integer
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor qvbr_settings: Types::Av1QvbrSettings
       attr_accessor rate_control_mode: ("QVBR")
       attr_accessor slices: ::Integer
@@ -218,7 +218,7 @@ module Aws::MediaConvert
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
       attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor telecine: ("NONE" | "HARD")
@@ -421,6 +421,21 @@ module Aws::MediaConvert
       attr_accessor timed_metadata_box_version: ("VERSION_0" | "VERSION_1")
       attr_accessor timed_metadata_scheme_id_uri: ::String
       attr_accessor timed_metadata_value: ::String
+      SENSITIVE: []
+    end
+
+    class CodecMetadata
+      attr_accessor bit_depth: ::Integer
+      attr_accessor chroma_subsampling: ::String
+      attr_accessor coded_frame_rate: Types::FrameRate
+      attr_accessor color_primaries: ("ITU_709" | "UNSPECIFIED" | "RESERVED" | "ITU_470M" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "GENERIC_FILM" | "ITU_2020" | "SMPTE_428_1" | "SMPTE_431_2" | "SMPTE_EG_432_1" | "IPT" | "SMPTE_2067XYZ" | "EBU_3213_E" | "LAST")
+      attr_accessor height: ::Integer
+      attr_accessor level: ::String
+      attr_accessor matrix_coefficients: ("RGB" | "ITU_709" | "UNSPECIFIED" | "RESERVED" | "FCC" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "YCgCo" | "ITU_2020_NCL" | "ITU_2020_CL" | "SMPTE_2085" | "CD_NCL" | "CD_CL" | "ITU_2100ICtCp" | "IPT" | "EBU3213" | "LAST")
+      attr_accessor profile: ::String
+      attr_accessor scan_type: ::String
+      attr_accessor transfer_characteristics: ("ITU_709" | "UNSPECIFIED" | "RESERVED" | "ITU_470M" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "LINEAR" | "LOG10_2" | "LOC10_2_5" | "IEC_61966_2_4" | "ITU_1361" | "IEC_61966_2_1" | "ITU_2020_10bit" | "ITU_2020_12bit" | "SMPTE_2084" | "SMPTE_428_1" | "ARIB_B67" | "LAST")
+      attr_accessor width: ::Integer
       SENSITIVE: []
     end
 
@@ -927,6 +942,18 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class GetJobsQueryResultsRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobsQueryResultsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      attr_accessor status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "ERROR")
+      SENSITIVE: []
+    end
+
     class GetPolicyRequest < Aws::EmptyStructure
     end
 
@@ -1000,7 +1027,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
       attr_accessor qvbr_settings: Types::H264QvbrSettings
       attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
@@ -1057,7 +1084,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
       attr_accessor qvbr_settings: Types::H265QvbrSettings
       attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
@@ -1296,7 +1323,9 @@ module Aws::MediaConvert
       attr_accessor duration: ::Integer
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
+      attr_accessor height: ::Integer
       attr_accessor sample_rate: ::Integer
+      attr_accessor width: ::Integer
       SENSITIVE: []
     end
 
@@ -1417,6 +1446,12 @@ module Aws::MediaConvert
       attr_accessor output_groups: ::Array[Types::OutputGroup]
       attr_accessor timecode_config: Types::TimecodeConfig
       attr_accessor timed_metadata_insertion: Types::TimedMetadataInsertion
+      SENSITIVE: []
+    end
+
+    class JobsQueryFilter
+      attr_accessor key: ("queue" | "status" | "fileInput" | "jobEngineVersionRequested" | "jobEngineVersionUsed" | "audioCodec" | "videoCodec")
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1718,7 +1753,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")
       attr_accessor rate_control_mode: ("VBR" | "CBR")
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
@@ -1882,7 +1917,7 @@ module Aws::MediaConvert
       attr_accessor file_group_settings: Types::FileGroupSettings
       attr_accessor hls_group_settings: Types::HlsGroupSettings
       attr_accessor ms_smooth_group_settings: Types::MsSmoothGroupSettings
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")
       SENSITIVE: []
     end
@@ -1957,7 +1992,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor telecine: ("NONE" | "HARD")
@@ -2086,6 +2121,11 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class SpekeKeyProvider
       attr_accessor certificate_arn: ::String
       attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
@@ -2107,6 +2147,19 @@ module Aws::MediaConvert
 
     class SrtDestinationSettings
       attr_accessor style_passthrough: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class StartJobsQueryRequest
+      attr_accessor filter_list: ::Array[Types::JobsQueryFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class StartJobsQueryResponse
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -2172,7 +2225,7 @@ module Aws::MediaConvert
 
     class Track
       attr_accessor audio_properties: Types::AudioProperties
-      attr_accessor codec: ("UNKNOWN" | "AAC" | "AC3" | "EAC3" | "FLAC" | "MP3" | "OPUS" | "PCM" | "VORBIS" | "AV1" | "AVC" | "HEVC" | "JPEG2000" | "MJPEG" | "MP4V" | "MPEG2" | "PRORES" | "THEORA" | "VP8" | "VP9" | "C608" | "C708" | "WEBVTT")
+      attr_accessor codec: ("UNKNOWN" | "AAC" | "AC3" | "EAC3" | "FLAC" | "MP3" | "OPUS" | "PCM" | "VORBIS" | "AV1" | "AVC" | "HEVC" | "JPEG2000" | "MJPEG" | "MPEG1" | "MP4V" | "MPEG2" | "PRORES" | "THEORA" | "VFW" | "VP8" | "VP9" | "QTRLE" | "C608" | "C708" | "WEBVTT")
       attr_accessor data_properties: Types::DataProperties
       attr_accessor duration: ::Float
       attr_accessor index: ::Integer
@@ -2388,6 +2441,7 @@ module Aws::MediaConvert
     class VideoProperties
       attr_accessor bit_depth: ::Integer
       attr_accessor bit_rate: ::Integer
+      attr_accessor codec_metadata: Types::CodecMetadata
       attr_accessor color_primaries: ("ITU_709" | "UNSPECIFIED" | "RESERVED" | "ITU_470M" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "GENERIC_FILM" | "ITU_2020" | "SMPTE_428_1" | "SMPTE_431_2" | "SMPTE_EG_432_1" | "IPT" | "SMPTE_2067XYZ" | "EBU_3213_E" | "LAST")
       attr_accessor frame_rate: Types::FrameRate
       attr_accessor height: ::Integer
@@ -2529,7 +2583,7 @@ module Aws::MediaConvert
       attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
-      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
       attr_accessor profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor softness: ::Integer

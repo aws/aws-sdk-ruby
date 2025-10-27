@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.242.0 (2025-10-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-rtbfabric` gem.
+
 3.241.0 (2025-09-12)
 ------------------
 

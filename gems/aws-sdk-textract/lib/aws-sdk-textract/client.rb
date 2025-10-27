@@ -2845,7 +2845,7 @@ module Aws::Textract
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2672,7 +2672,7 @@ module Aws::GuardDuty
     UpdateFindingsFeedbackRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdateFindingsFeedbackRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     UpdateFindingsFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: Feedback, required: true, location_name: "feedback"))
-    UpdateFindingsFeedbackRequest.add_member(:comments, Shapes::ShapeRef.new(shape: String, location_name: "comments"))
+    UpdateFindingsFeedbackRequest.add_member(:comments, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "comments"))
     UpdateFindingsFeedbackRequest.struct_class = Types::UpdateFindingsFeedbackRequest
 
     UpdateFindingsFeedbackResponse.struct_class = Types::UpdateFindingsFeedbackResponse

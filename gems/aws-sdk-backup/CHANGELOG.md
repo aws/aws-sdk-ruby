@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2025-10-14)
+------------------
+
+* Feature - The AWS Backup job attribute extension enhancement helps customers better understand the plan that initiated each job, and the properties of the resource each job creates.
+
 1.96.0 (2025-10-06)
 ------------------
 

@@ -26,6 +26,7 @@ module Aws::DeviceFarm
     ArtifactCategory = Shapes::StringShape.new(name: 'ArtifactCategory')
     ArtifactType = Shapes::StringShape.new(name: 'ArtifactType')
     Artifacts = Shapes::ListShape.new(name: 'Artifacts')
+    AuxiliaryAppArnList = Shapes::ListShape.new(name: 'AuxiliaryAppArnList')
     BillingMethod = Shapes::StringShape.new(name: 'BillingMethod')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CPU = Shapes::StructureShape.new(name: 'CPU')
@@ -380,6 +381,8 @@ module Aws::DeviceFarm
 
     Artifacts.member = Shapes::ShapeRef.new(shape: Artifact)
 
+    AuxiliaryAppArnList.member = Shapes::ShapeRef.new(shape: AmazonResourceName)
+
     CPU.add_member(:frequency, Shapes::ShapeRef.new(shape: String, location_name: "frequency"))
     CPU.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
     CPU.add_member(:clock, Shapes::ShapeRef.new(shape: Double, location_name: "clock"))
@@ -442,6 +445,7 @@ module Aws::DeviceFarm
     CreateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     CreateProjectResult.struct_class = Types::CreateProjectResult
 
+    CreateRemoteAccessSessionConfiguration.add_member(:auxiliary_apps, Shapes::ShapeRef.new(shape: AuxiliaryAppArnList, location_name: "auxiliaryApps"))
     CreateRemoteAccessSessionConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     CreateRemoteAccessSessionConfiguration.add_member(:vpce_configuration_arns, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "vpceConfigurationArns"))
     CreateRemoteAccessSessionConfiguration.add_member(:device_proxy, Shapes::ShapeRef.new(shape: DeviceProxy, location_name: "deviceProxy"))
@@ -449,6 +453,7 @@ module Aws::DeviceFarm
 
     CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
     CreateRemoteAccessSessionRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "deviceArn"))
+    CreateRemoteAccessSessionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appArn"))
     CreateRemoteAccessSessionRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
     CreateRemoteAccessSessionRequest.add_member(:ssh_public_key, Shapes::ShapeRef.new(shape: SshPublicKey, location_name: "sshPublicKey"))
     CreateRemoteAccessSessionRequest.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
@@ -1150,6 +1155,7 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     RemoteAccessSession.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     RemoteAccessSession.add_member(:device_proxy, Shapes::ShapeRef.new(shape: DeviceProxy, location_name: "deviceProxy"))
+    RemoteAccessSession.add_member(:app_upload, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appUpload"))
     RemoteAccessSession.struct_class = Types::RemoteAccessSession
 
     RemoteAccessSessions.member = Shapes::ShapeRef.new(shape: RemoteAccessSession)

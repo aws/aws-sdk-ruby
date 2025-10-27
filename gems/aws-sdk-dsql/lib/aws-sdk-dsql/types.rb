@@ -100,6 +100,18 @@ module Aws::DSQL
     #   including the witness region and linked cluster properties.
     #   @return [Types::MultiRegionProperties]
     #
+    # @!attribute [rw] policy
+    #   An optional resource-based policy document in JSON format that
+    #   defines access permissions for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] bypass_policy_lockout_safety_check
+    #   An optional field that controls whether to bypass the lockout
+    #   prevention check. When set to true, this parameter allows you to
+    #   apply a policy that might lock you out of the cluster. Use with
+    #   caution.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateClusterInput AWS API Documentation
     #
     class CreateClusterInput < Struct.new(
@@ -107,7 +119,9 @@ module Aws::DSQL
       :kms_encryption_key,
       :tags,
       :client_token,
-      :multi_region_properties)
+      :multi_region_properties,
+      :policy,
+      :bypass_policy_lockout_safety_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -216,6 +230,45 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The ID of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_policy_version
+    #   The expected version of the policy to delete. This parameter ensures
+    #   that you're deleting the correct version of the policy and helps
+    #   prevent accidental deletions.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token so a request is only processed once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteClusterPolicyInput AWS API Documentation
+    #
+    class DeleteClusterPolicyInput < Struct.new(
+      :identifier,
+      :expected_policy_version,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_version
+    #   The version of the policy that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteClusterPolicyOutput AWS API Documentation
+    #
+    class DeleteClusterPolicyOutput < Struct.new(
+      :policy_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration details about encryption for the cluster including the
     # KMS key ARN, encryption type, and encryption status.
     #
@@ -299,6 +352,37 @@ module Aws::DSQL
       :multi_region_properties,
       :tags,
       :encryption_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ID of the cluster to retrieve the policy from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetClusterPolicyInput AWS API Documentation
+    #
+    class GetClusterPolicyInput < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy document attached to the cluster, returned
+    #   as a JSON string.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version
+    #   The version of the policy document. This version number is
+    #   incremented each time the policy is updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetClusterPolicyOutput AWS API Documentation
+    #
+    class GetClusterPolicyOutput < Struct.new(
+      :policy,
+      :policy_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -415,13 +499,14 @@ module Aws::DSQL
     # containing the witness region and linked cluster settings.
     #
     # @!attribute [rw] witness_region
-    #   The that serves as the witness region for a multi-Region cluster.
-    #   The witness region helps maintain cluster consistency and quorum.
+    #   The Region that serves as the witness region for a multi-Region
+    #   cluster. The witness Region helps maintain cluster consistency and
+    #   quorum.
     #   @return [String]
     #
     # @!attribute [rw] clusters
-    #   The set of linked clusters that form the multi-Region cluster
-    #   configuration. Each linked cluster represents a database instance in
+    #   The set of peered clusters that form the multi-Region cluster
+    #   configuration. Each peered cluster represents a database instance in
     #   a different Region.
     #   @return [Array<String>]
     #
@@ -430,6 +515,59 @@ module Aws::DSQL
     class MultiRegionProperties < Struct.new(
       :witness_region,
       :clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ID of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy document to attach to the cluster. This
+    #   should be a valid JSON policy document that defines permissions and
+    #   conditions.
+    #   @return [String]
+    #
+    # @!attribute [rw] bypass_policy_lockout_safety_check
+    #   A flag that allows you to bypass the policy lockout safety check.
+    #   When set to true, this parameter allows you to apply a policy that
+    #   might lock you out of the cluster. Use with caution.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_policy_version
+    #   The expected version of the current policy. This parameter ensures
+    #   that you're updating the correct version of the policy and helps
+    #   prevent concurrent modification conflicts.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token so a request is only processed once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/PutClusterPolicyInput AWS API Documentation
+    #
+    class PutClusterPolicyInput < Struct.new(
+      :identifier,
+      :policy,
+      :bypass_policy_lockout_safety_check,
+      :expected_policy_version,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_version
+    #   The version of the policy after it has been updated or created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/PutClusterPolicyOutput AWS API Documentation
+    #
+    class PutClusterPolicyOutput < Struct.new(
+      :policy_version)
       SENSITIVE = []
       include Aws::Structure
     end

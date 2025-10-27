@@ -55,7 +55,7 @@ module Aws::AppFabric
   autoload :EndpointProvider, 'aws-sdk-appfabric/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appfabric/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

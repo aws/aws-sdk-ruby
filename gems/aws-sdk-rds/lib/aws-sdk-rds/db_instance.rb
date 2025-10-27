@@ -1729,28 +1729,37 @@ module Aws::RDS
     #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible and you connect from
-    #   outside of the DB instance's virtual private cloud (VPC), its domain
-    #   name system (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB instance's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB instance, the endpoint
     #   resolves to the private IP address. Access to the DB instance is
-    #   controlled by its security group settings.
+    #   ultimately controlled by the security group it uses. That public
+    #   access is not permitted if the security group assigned to the DB
+    #   instance doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
     #
-    #   The default behavior when `PubliclyAccessible` is not specified
-    #   depends on whether a `DBSubnetGroup` is specified.
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
     #
-    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
-    #   `false` for Aurora instances and `true` for non-Aurora instances.
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
     #
-    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
-    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
-    #   case `PubliclyAccessible` defaults to `true`.
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB instance is private.
     #
-    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
-    #   is in doesn't have an internet gateway attached to it, Amazon RDS
-    #   returns an error.
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB instance is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB instance is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB instance is public.
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB instance.
     # @option options [String] :db_cluster_identifier
@@ -3733,7 +3742,7 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   ^
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`

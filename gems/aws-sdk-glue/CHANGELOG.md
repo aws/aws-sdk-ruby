@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.239.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.238.0 (2025-10-10)
+------------------
+
+* Feature - Addition of AuditContext in GetTable/GetTables Request
+
 1.237.0 (2025-10-06)
 ------------------
 

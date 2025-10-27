@@ -594,6 +594,78 @@ module Aws::DataZone
     #
     class AllUsersGrantFilter < Aws::EmptyStructure; end
 
+    # The Amazon Q properties of the connection.
+    #
+    # @!attribute [rw] auth_mode
+    #   The authentication mode of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether Amazon Q is enabled for the connection.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AmazonQPropertiesInput AWS API Documentation
+    #
+    class AmazonQPropertiesInput < Struct.new(
+      :auth_mode,
+      :is_enabled,
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Q properties of the connection.
+    #
+    # @!attribute [rw] auth_mode
+    #   The authentication mode of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether Amazon Q is enabled for the connection.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AmazonQPropertiesOutput AWS API Documentation
+    #
+    class AmazonQPropertiesOutput < Struct.new(
+      :auth_mode,
+      :is_enabled,
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Q properties of the connection.
+    #
+    # @!attribute [rw] auth_mode
+    #   The authentication mode of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether Amazon Q is enabled for the connection.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AmazonQPropertiesPatch AWS API Documentation
+    #
+    class AmazonQPropertiesPatch < Struct.new(
+      :auth_mode,
+      :is_enabled,
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details of the asset filter.
     #
     # @note AssetFilterConfiguration is a union - when making an API calls you must set exactly one of the members.
@@ -1728,6 +1800,10 @@ module Aws::DataZone
     #
     # @note ConnectionPropertiesInput is a union - when making an API calls you must set exactly one of the members.
     #
+    # @!attribute [rw] amazon_q_properties
+    #   The Amazon Q properties of the connection.
+    #   @return [Types::AmazonQPropertiesInput]
+    #
     # @!attribute [rw] athena_properties
     #   The Amazon Athena properties of a connection.
     #   @return [Types::AthenaPropertiesInput]
@@ -1743,6 +1819,10 @@ module Aws::DataZone
     # @!attribute [rw] iam_properties
     #   The IAM properties of a connection.
     #   @return [Types::IamPropertiesInput]
+    #
+    # @!attribute [rw] mlflow_properties
+    #   The MLflow properties of a connection.
+    #   @return [Types::MlflowPropertiesInput]
     #
     # @!attribute [rw] redshift_properties
     #   The Amazon Redshift properties of a connection.
@@ -1763,10 +1843,12 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesInput AWS API Documentation
     #
     class ConnectionPropertiesInput < Struct.new(
+      :amazon_q_properties,
       :athena_properties,
       :glue_properties,
       :hyper_pod_properties,
       :iam_properties,
+      :mlflow_properties,
       :redshift_properties,
       :s3_properties,
       :spark_emr_properties,
@@ -1776,10 +1858,12 @@ module Aws::DataZone
       include Aws::Structure
       include Aws::Structure::Union
 
+      class AmazonQProperties < ConnectionPropertiesInput; end
       class AthenaProperties < ConnectionPropertiesInput; end
       class GlueProperties < ConnectionPropertiesInput; end
       class HyperPodProperties < ConnectionPropertiesInput; end
       class IamProperties < ConnectionPropertiesInput; end
+      class MlflowProperties < ConnectionPropertiesInput; end
       class RedshiftProperties < ConnectionPropertiesInput; end
       class S3Properties < ConnectionPropertiesInput; end
       class SparkEmrProperties < ConnectionPropertiesInput; end
@@ -1790,6 +1874,10 @@ module Aws::DataZone
     # The properties of a connection.
     #
     # @note ConnectionPropertiesOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConnectionPropertiesOutput corresponding to the set member.
+    #
+    # @!attribute [rw] amazon_q_properties
+    #   The Amazon Q properties of the connection.
+    #   @return [Types::AmazonQPropertiesOutput]
     #
     # @!attribute [rw] athena_properties
     #   The Amazon Athena properties of a connection.
@@ -1806,6 +1894,10 @@ module Aws::DataZone
     # @!attribute [rw] iam_properties
     #   The IAM properties of a connection.
     #   @return [Types::IamPropertiesOutput]
+    #
+    # @!attribute [rw] mlflow_properties
+    #   The MLflow properties of a connection.
+    #   @return [Types::MlflowPropertiesOutput]
     #
     # @!attribute [rw] redshift_properties
     #   The Amazon Redshift properties of a connection.
@@ -1826,10 +1918,12 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesOutput AWS API Documentation
     #
     class ConnectionPropertiesOutput < Struct.new(
+      :amazon_q_properties,
       :athena_properties,
       :glue_properties,
       :hyper_pod_properties,
       :iam_properties,
+      :mlflow_properties,
       :redshift_properties,
       :s3_properties,
       :spark_emr_properties,
@@ -1839,10 +1933,12 @@ module Aws::DataZone
       include Aws::Structure
       include Aws::Structure::Union
 
+      class AmazonQProperties < ConnectionPropertiesOutput; end
       class AthenaProperties < ConnectionPropertiesOutput; end
       class GlueProperties < ConnectionPropertiesOutput; end
       class HyperPodProperties < ConnectionPropertiesOutput; end
       class IamProperties < ConnectionPropertiesOutput; end
+      class MlflowProperties < ConnectionPropertiesOutput; end
       class RedshiftProperties < ConnectionPropertiesOutput; end
       class S3Properties < ConnectionPropertiesOutput; end
       class SparkEmrProperties < ConnectionPropertiesOutput; end
@@ -1853,6 +1949,10 @@ module Aws::DataZone
     # The connection properties patch.
     #
     # @note ConnectionPropertiesPatch is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] amazon_q_properties
+    #   The Amazon Q properties of the connection.
+    #   @return [Types::AmazonQPropertiesPatch]
     #
     # @!attribute [rw] athena_properties
     #   The Amazon Athena properties of a connection properties patch.
@@ -1866,6 +1966,10 @@ module Aws::DataZone
     # @!attribute [rw] iam_properties
     #   The IAM properties of a connection properties patch.
     #   @return [Types::IamPropertiesPatch]
+    #
+    # @!attribute [rw] mlflow_properties
+    #   The MLflow properties of a connection.
+    #   @return [Types::MlflowPropertiesPatch]
     #
     # @!attribute [rw] redshift_properties
     #   The Amazon Redshift properties of a connection properties patch.
@@ -1882,9 +1986,11 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesPatch AWS API Documentation
     #
     class ConnectionPropertiesPatch < Struct.new(
+      :amazon_q_properties,
       :athena_properties,
       :glue_properties,
       :iam_properties,
+      :mlflow_properties,
       :redshift_properties,
       :s3_properties,
       :spark_emr_properties,
@@ -1893,9 +1999,11 @@ module Aws::DataZone
       include Aws::Structure
       include Aws::Structure::Union
 
+      class AmazonQProperties < ConnectionPropertiesPatch; end
       class AthenaProperties < ConnectionPropertiesPatch; end
       class GlueProperties < ConnectionPropertiesPatch; end
       class IamProperties < ConnectionPropertiesPatch; end
+      class MlflowProperties < ConnectionPropertiesPatch; end
       class RedshiftProperties < ConnectionPropertiesPatch; end
       class S3Properties < ConnectionPropertiesPatch; end
       class SparkEmrProperties < ConnectionPropertiesPatch; end
@@ -1936,6 +2044,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The connection type.
     #   @return [String]
@@ -1951,6 +2063,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -2651,6 +2764,10 @@ module Aws::DataZone
     #   The ID of the domain where the connection is created.
     #   @return [String]
     #
+    # @!attribute [rw] enable_trusted_identity_propagation
+    #   Specifies whether the trusted identity propagation is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment where the connection is created.
     #   @return [String]
@@ -2663,6 +2780,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesInput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnectionInput AWS API Documentation
     #
     class CreateConnectionInput < Struct.new(
@@ -2670,9 +2791,11 @@ module Aws::DataZone
       :client_token,
       :description,
       :domain_identifier,
+      :enable_trusted_identity_propagation,
       :environment_identifier,
       :name,
-      :props)
+      :props,
+      :scope)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -2713,6 +2836,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The connection type.
     #   @return [String]
@@ -2729,6 +2856,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -8336,6 +8464,10 @@ module Aws::DataZone
     #   Connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The type of the connection.
     #   @return [String]
@@ -8354,6 +8486,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = [:connection_credentials, :description]
       include Aws::Structure
@@ -12485,6 +12618,10 @@ module Aws::DataZone
     #   The ID of the project where you want to list connections.
     #   @return [String]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] sort_by
     #   Specifies how you want to sort the listed connections.
     #   @return [String]
@@ -12506,6 +12643,7 @@ module Aws::DataZone
       :name,
       :next_token,
       :project_identifier,
+      :scope,
       :sort_by,
       :sort_order,
       :type)
@@ -14904,6 +15042,69 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The MLflow properties of a connection.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The tracking server ARN as part of the MLflow properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_name
+    #   The name of the tracking server as part of the MLflow properties of
+    #   a connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MlflowPropertiesInput AWS API Documentation
+    #
+    class MlflowPropertiesInput < Struct.new(
+      :tracking_server_arn,
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow properties of a connection.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The tracking server ARN as part of the MLflow properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_name
+    #   The name of the tracking server as part of the MLflow properties of
+    #   a connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MlflowPropertiesOutput AWS API Documentation
+    #
+    class MlflowPropertiesOutput < Struct.new(
+      :tracking_server_arn,
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow properties of a connection.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The tracking server ARN as part of the MLflow properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_name
+    #   The name of the tracking server as part of the MLflow properties of
+    #   a connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MlflowPropertiesPatch AWS API Documentation
+    #
+    class MlflowPropertiesPatch < Struct.new(
+      :tracking_server_arn,
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The model of the API.
     #
     # @note Model is a union - when making an API calls you must set exactly one of the members.
@@ -15363,6 +15564,11 @@ module Aws::DataZone
     #   The location of a connection.
     #   @return [Types::AwsLocation]
     #
+    # @!attribute [rw] enable_trusted_identity_propagation
+    #   Specified whether trusted identity propagation for the connection is
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] glue_connection
     #   The Amazon Web Services Glue connection.
     #   @return [Types::GlueConnection]
@@ -15391,6 +15597,7 @@ module Aws::DataZone
     #
     class PhysicalEndpoint < Struct.new(
       :aws_location,
+      :enable_trusted_identity_propagation,
       :glue_connection,
       :glue_connection_name,
       :host,
@@ -19725,6 +19932,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The connection type.
     #   @return [String]
@@ -19741,6 +19952,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = [:description]
       include Aws::Structure

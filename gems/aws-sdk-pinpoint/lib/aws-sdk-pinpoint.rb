@@ -54,7 +54,7 @@ module Aws::Pinpoint
   autoload :EndpointProvider, 'aws-sdk-pinpoint/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pinpoint/endpoints'
 
-  GEM_VERSION = '1.113.0'
+  GEM_VERSION = '1.114.0'
 
 end
 

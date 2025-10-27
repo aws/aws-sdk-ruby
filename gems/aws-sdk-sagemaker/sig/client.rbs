@@ -2494,7 +2494,10 @@ module Aws
                                             min_memory_required_in_mb: ::Integer,
                                             max_memory_required_in_mb: ::Integer?
                                           }?,
-                                          base_inference_component_name: ::String?
+                                          base_inference_component_name: ::String?,
+                                          data_cache_config: {
+                                            enable_caching: bool
+                                          }?
                                         },
                                         ?runtime_config: {
                                           copy_count: ::Integer
@@ -9771,7 +9774,10 @@ module Aws
                                             min_memory_required_in_mb: ::Integer,
                                             max_memory_required_in_mb: ::Integer?
                                           }?,
-                                          base_inference_component_name: ::String?
+                                          base_inference_component_name: ::String?,
+                                          data_cache_config: {
+                                            enable_caching: bool
+                                          }?
                                         },
                                         ?runtime_config: {
                                           copy_count: ::Integer

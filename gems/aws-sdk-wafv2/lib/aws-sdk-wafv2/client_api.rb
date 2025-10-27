@@ -1843,6 +1843,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
       api.add_operation(:check_capacity, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2025-10-17)
+------------------
+
+* Feature - The ListEntities API now supports two new CAPI filters: DeliveryOptionTypes for SaaS products and CompatibleAWSServices for Container products.
+
 1.66.0 (2025-08-26)
 ------------------
 

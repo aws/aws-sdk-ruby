@@ -158,6 +158,7 @@ module Aws
       def create_remote_access_session: (
                                           project_arn: ::String,
                                           device_arn: ::String,
+                                          ?app_arn: ::String,
                                           ?instance_arn: ::String,
                                           ?ssh_public_key: ::String,
                                           ?remote_debug_enabled: bool,
@@ -166,6 +167,7 @@ module Aws
                                           ?name: ::String,
                                           ?client_id: ::String,
                                           ?configuration: {
+                                            auxiliary_apps: Array[::String]?,
                                             billing_method: ("METERED" | "UNMETERED")?,
                                             vpce_configuration_arns: Array[::String]?,
                                             device_proxy: {

@@ -75,7 +75,7 @@ module Aws::S3
   autoload :ObjectVersion, 'aws-sdk-s3/object_version'
   autoload :EventStreams, 'aws-sdk-s3/event_streams'
 
-  GEM_VERSION = '1.199.1'
+  GEM_VERSION = '1.201.0'
 
 end
 

@@ -55,7 +55,7 @@ module Aws::CodeDeploy
   autoload :EndpointProvider, 'aws-sdk-codedeploy/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codedeploy/endpoints'
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end
 

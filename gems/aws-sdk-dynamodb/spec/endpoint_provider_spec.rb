@@ -4016,7 +4016,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4048,7 +4048,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4080,7 +4080,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4113,7 +4113,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4127,7 +4127,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4141,7 +4141,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4155,7 +4155,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4169,7 +4169,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4276,7 +4276,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4308,7 +4308,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4482,7 +4482,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4514,7 +4514,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4546,7 +4546,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4632,7 +4632,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4664,7 +4664,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4696,7 +4696,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4729,7 +4729,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4743,7 +4743,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4757,7 +4757,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4771,7 +4771,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4785,7 +4785,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4886,7 +4886,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4918,7 +4918,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5079,7 +5079,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5111,7 +5111,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5143,7 +5143,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -7607,6 +7607,19 @@ module Aws::DynamoDB
       end
     end
 
+    context "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.eu-west-1.api.aws", region: "eu-west-1"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
     context "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}" do
       let(:expected) do
         {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
@@ -7684,19 +7697,6 @@ module Aws::DynamoDB
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}" do
-      let(:expected) do
-        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{endpoint: "https://dynamodb.eu-west-1.api.aws", region: "eu-west-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 

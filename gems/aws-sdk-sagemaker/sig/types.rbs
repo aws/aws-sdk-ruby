@@ -5619,6 +5619,16 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class InferenceComponentDataCacheConfig
+      attr_accessor enable_caching: bool
+      SENSITIVE: []
+    end
+
+    class InferenceComponentDataCacheConfigSummary
+      attr_accessor enable_caching: bool
+      SENSITIVE: []
+    end
+
     class InferenceComponentDeploymentConfig
       attr_accessor rolling_update_policy: Types::InferenceComponentRollingUpdatePolicy
       attr_accessor auto_rollback_configuration: Types::AutoRollbackConfig
@@ -5650,6 +5660,7 @@ module Aws::SageMaker
       attr_accessor startup_parameters: Types::InferenceComponentStartupParameters
       attr_accessor compute_resource_requirements: Types::InferenceComponentComputeResourceRequirements
       attr_accessor base_inference_component_name: ::String
+      attr_accessor data_cache_config: Types::InferenceComponentDataCacheConfig
       SENSITIVE: []
     end
 
@@ -5659,6 +5670,7 @@ module Aws::SageMaker
       attr_accessor startup_parameters: Types::InferenceComponentStartupParameters
       attr_accessor compute_resource_requirements: Types::InferenceComponentComputeResourceRequirements
       attr_accessor base_inference_component_name: ::String
+      attr_accessor data_cache_config: Types::InferenceComponentDataCacheConfigSummary
       SENSITIVE: []
     end
 

@@ -119,6 +119,7 @@ module Aws::DeviceFarm
     end
 
     class CreateRemoteAccessSessionConfiguration
+      attr_accessor auxiliary_apps: ::Array[::String]
       attr_accessor billing_method: ("METERED" | "UNMETERED")
       attr_accessor vpce_configuration_arns: ::Array[::String]
       attr_accessor device_proxy: Types::DeviceProxy
@@ -128,6 +129,7 @@ module Aws::DeviceFarm
     class CreateRemoteAccessSessionRequest
       attr_accessor project_arn: ::String
       attr_accessor device_arn: ::String
+      attr_accessor app_arn: ::String
       attr_accessor instance_arn: ::String
       attr_accessor ssh_public_key: ::String
       attr_accessor remote_debug_enabled: bool
@@ -1066,6 +1068,7 @@ module Aws::DeviceFarm
       attr_accessor skip_app_resign: bool
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor device_proxy: Types::DeviceProxy
+      attr_accessor app_upload: ::String
       SENSITIVE: []
     end
 

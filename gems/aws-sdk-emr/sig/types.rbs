@@ -666,7 +666,7 @@ module Aws::EMR
     end
 
     class InstanceFleetStatus
-      attr_accessor state: ("PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "RESIZING" | "SUSPENDED" | "TERMINATING" | "TERMINATED")
+      attr_accessor state: ("PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "RESIZING" | "RECONFIGURING" | "SUSPENDED" | "TERMINATING" | "TERMINATED")
       attr_accessor state_change_reason: Types::InstanceFleetStateChangeReason
       attr_accessor timeline: Types::InstanceFleetTimeline
       SENSITIVE: []

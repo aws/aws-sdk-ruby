@@ -951,6 +951,7 @@ module Aws::SageMaker
     EmrServerlessComputeConfig = Shapes::StructureShape.new(name: 'EmrServerlessComputeConfig')
     EmrServerlessSettings = Shapes::StructureShape.new(name: 'EmrServerlessSettings')
     EmrSettings = Shapes::StructureShape.new(name: 'EmrSettings')
+    EnableCaching = Shapes::BooleanShape.new(name: 'EnableCaching')
     EnableCapture = Shapes::BooleanShape.new(name: 'EnableCapture')
     EnableInfraCheck = Shapes::BooleanShape.new(name: 'EnableInfraCheck')
     EnableIotRoleAlias = Shapes::BooleanShape.new(name: 'EnableIotRoleAlias')
@@ -1249,6 +1250,8 @@ module Aws::SageMaker
     InferenceComponentContainerSpecification = Shapes::StructureShape.new(name: 'InferenceComponentContainerSpecification')
     InferenceComponentContainerSpecificationSummary = Shapes::StructureShape.new(name: 'InferenceComponentContainerSpecificationSummary')
     InferenceComponentCopyCount = Shapes::IntegerShape.new(name: 'InferenceComponentCopyCount')
+    InferenceComponentDataCacheConfig = Shapes::StructureShape.new(name: 'InferenceComponentDataCacheConfig')
+    InferenceComponentDataCacheConfigSummary = Shapes::StructureShape.new(name: 'InferenceComponentDataCacheConfigSummary')
     InferenceComponentDeploymentConfig = Shapes::StructureShape.new(name: 'InferenceComponentDeploymentConfig')
     InferenceComponentName = Shapes::StringShape.new(name: 'InferenceComponentName')
     InferenceComponentNameContains = Shapes::StringShape.new(name: 'InferenceComponentNameContains')
@@ -7274,6 +7277,12 @@ module Aws::SageMaker
     InferenceComponentContainerSpecificationSummary.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     InferenceComponentContainerSpecificationSummary.struct_class = Types::InferenceComponentContainerSpecificationSummary
 
+    InferenceComponentDataCacheConfig.add_member(:enable_caching, Shapes::ShapeRef.new(shape: EnableCaching, required: true, location_name: "EnableCaching", metadata: {"box" => true}))
+    InferenceComponentDataCacheConfig.struct_class = Types::InferenceComponentDataCacheConfig
+
+    InferenceComponentDataCacheConfigSummary.add_member(:enable_caching, Shapes::ShapeRef.new(shape: EnableCaching, required: true, location_name: "EnableCaching", metadata: {"box" => true}))
+    InferenceComponentDataCacheConfigSummary.struct_class = Types::InferenceComponentDataCacheConfigSummary
+
     InferenceComponentDeploymentConfig.add_member(:rolling_update_policy, Shapes::ShapeRef.new(shape: InferenceComponentRollingUpdatePolicy, required: true, location_name: "RollingUpdatePolicy"))
     InferenceComponentDeploymentConfig.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfig, location_name: "AutoRollbackConfiguration"))
     InferenceComponentDeploymentConfig.struct_class = Types::InferenceComponentDeploymentConfig
@@ -7296,6 +7305,7 @@ module Aws::SageMaker
     InferenceComponentSpecification.add_member(:startup_parameters, Shapes::ShapeRef.new(shape: InferenceComponentStartupParameters, location_name: "StartupParameters"))
     InferenceComponentSpecification.add_member(:compute_resource_requirements, Shapes::ShapeRef.new(shape: InferenceComponentComputeResourceRequirements, location_name: "ComputeResourceRequirements"))
     InferenceComponentSpecification.add_member(:base_inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentName, location_name: "BaseInferenceComponentName"))
+    InferenceComponentSpecification.add_member(:data_cache_config, Shapes::ShapeRef.new(shape: InferenceComponentDataCacheConfig, location_name: "DataCacheConfig"))
     InferenceComponentSpecification.struct_class = Types::InferenceComponentSpecification
 
     InferenceComponentSpecificationSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
@@ -7303,6 +7313,7 @@ module Aws::SageMaker
     InferenceComponentSpecificationSummary.add_member(:startup_parameters, Shapes::ShapeRef.new(shape: InferenceComponentStartupParameters, location_name: "StartupParameters"))
     InferenceComponentSpecificationSummary.add_member(:compute_resource_requirements, Shapes::ShapeRef.new(shape: InferenceComponentComputeResourceRequirements, location_name: "ComputeResourceRequirements"))
     InferenceComponentSpecificationSummary.add_member(:base_inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentName, location_name: "BaseInferenceComponentName"))
+    InferenceComponentSpecificationSummary.add_member(:data_cache_config, Shapes::ShapeRef.new(shape: InferenceComponentDataCacheConfigSummary, location_name: "DataCacheConfig"))
     InferenceComponentSpecificationSummary.struct_class = Types::InferenceComponentSpecificationSummary
 
     InferenceComponentStartupParameters.add_member(:model_data_download_timeout_in_seconds, Shapes::ShapeRef.new(shape: ProductionVariantModelDataDownloadTimeoutInSeconds, location_name: "ModelDataDownloadTimeoutInSeconds"))

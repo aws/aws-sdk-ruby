@@ -32,11 +32,28 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class ConnectorEgressConfig
+      attr_accessor vpc_lattice: Types::ConnectorVpcLatticeEgressConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcLattice < ConnectorEgressConfig
+      end
+      class Unknown < ConnectorEgressConfig
+      end
+    end
+
     class ConnectorFileTransferResult
       attr_accessor file_path: ::String
       attr_accessor status_code: ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor failure_code: ::String
       attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorVpcLatticeEgressConfig
+      attr_accessor resource_configuration_arn: ::String
+      attr_accessor port_number: ::Integer
       SENSITIVE: []
     end
 
@@ -94,6 +111,7 @@ module Aws::Transfer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor security_policy_name: ::String
+      attr_accessor egress_config: Types::ConnectorEgressConfig
       SENSITIVE: []
     end
 
@@ -482,6 +500,27 @@ module Aws::Transfer
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor service_managed_egress_ip_addresses: ::Array[::String]
       attr_accessor security_policy_name: ::String
+      attr_accessor egress_config: Types::DescribedConnectorEgressConfig
+      attr_accessor egress_type: ("SERVICE_MANAGED" | "VPC_LATTICE")
+      attr_accessor error_message: ::String
+      attr_accessor status: ("ACTIVE" | "ERRORED" | "PENDING")
+      SENSITIVE: []
+    end
+
+    class DescribedConnectorEgressConfig
+      attr_accessor vpc_lattice: Types::DescribedConnectorVpcLatticeEgressConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcLattice < DescribedConnectorEgressConfig
+      end
+      class Unknown < DescribedConnectorEgressConfig
+      end
+    end
+
+    class DescribedConnectorVpcLatticeEgressConfig
+      attr_accessor resource_configuration_arn: ::String
+      attr_accessor port_number: ::Integer
       SENSITIVE: []
     end
 
@@ -1304,6 +1343,17 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class UpdateConnectorEgressConfig
+      attr_accessor vpc_lattice: Types::UpdateConnectorVpcLatticeEgressConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcLattice < UpdateConnectorEgressConfig
+      end
+      class Unknown < UpdateConnectorEgressConfig
+      end
+    end
+
     class UpdateConnectorRequest
       attr_accessor connector_id: ::String
       attr_accessor url: ::String
@@ -1312,11 +1362,18 @@ module Aws::Transfer
       attr_accessor logging_role: ::String
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor security_policy_name: ::String
+      attr_accessor egress_config: Types::UpdateConnectorEgressConfig
       SENSITIVE: []
     end
 
     class UpdateConnectorResponse
       attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorVpcLatticeEgressConfig
+      attr_accessor resource_configuration_arn: ::String
+      attr_accessor port_number: ::Integer
       SENSITIVE: []
     end
 

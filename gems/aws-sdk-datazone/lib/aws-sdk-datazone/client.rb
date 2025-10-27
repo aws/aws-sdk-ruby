@@ -1737,7 +1737,10 @@ module Aws::DataZone
     # @option params [required, String] :domain_identifier
     #   The ID of the domain where the connection is created.
     #
-    # @option params [required, String] :environment_identifier
+    # @option params [Boolean] :enable_trusted_identity_propagation
+    #   Specifies whether the trusted identity propagation is enabled.
+    #
+    # @option params [String] :environment_identifier
     #   The ID of the environment where the connection is created.
     #
     # @option params [required, String] :name
@@ -1745,6 +1748,9 @@ module Aws::DataZone
     #
     # @option params [Types::ConnectionPropertiesInput] :props
     #   The connection props.
+    #
+    # @option params [String] :scope
+    #   The scope of the connection.
     #
     # @return [Types::CreateConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1757,6 +1763,7 @@ module Aws::DataZone
     #   * {Types::CreateConnectionOutput#physical_endpoints #physical_endpoints} => Array&lt;Types::PhysicalEndpoint&gt;
     #   * {Types::CreateConnectionOutput#project_id #project_id} => String
     #   * {Types::CreateConnectionOutput#props #props} => Types::ConnectionPropertiesOutput
+    #   * {Types::CreateConnectionOutput#scope #scope} => String
     #   * {Types::CreateConnectionOutput#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -1771,9 +1778,15 @@ module Aws::DataZone
     #     client_token: "String",
     #     description: "CreateConnectionInputDescriptionString",
     #     domain_identifier: "DomainId", # required
-    #     environment_identifier: "EnvironmentId", # required
+    #     enable_trusted_identity_propagation: false,
+    #     environment_identifier: "EnvironmentId",
     #     name: "ConnectionName", # required
     #     props: {
+    #       amazon_q_properties: {
+    #         auth_mode: "AmazonQPropertiesInputAuthModeString",
+    #         is_enabled: false, # required
+    #         profile_arn: "AmazonQPropertiesInputProfileArnString",
+    #       },
     #       athena_properties: {
     #         workgroup_name: "AthenaPropertiesInputWorkgroupNameString",
     #       },
@@ -1844,6 +1857,10 @@ module Aws::DataZone
     #       iam_properties: {
     #         glue_lineage_sync_enabled: false,
     #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String",
+    #         tracking_server_name: "String",
+    #       },
     #       redshift_properties: {
     #         credentials: {
     #           secret_arn: "RedshiftCredentialsSecretArnString",
@@ -1893,6 +1910,7 @@ module Aws::DataZone
     #         worker_type: "SparkGluePropertiesInputWorkerTypeString",
     #       },
     #     },
+    #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #   })
     #
     # @example Response structure
@@ -1908,6 +1926,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -1929,7 +1948,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -1956,6 +1975,9 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.physical_endpoints[0].stage #=> String
     #   resp.project_id #=> String
+    #   resp.props.amazon_q_properties.auth_mode #=> String
+    #   resp.props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.athena_properties.workgroup_name #=> String
     #   resp.props.glue_properties.error_message #=> String
     #   resp.props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -1964,6 +1986,8 @@ module Aws::DataZone
     #   resp.props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.props.iam_properties.environment_id #=> String
     #   resp.props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.props.mlflow_properties.tracking_server_arn #=> String
+    #   resp.props.mlflow_properties.tracking_server_name #=> String
     #   resp.props.redshift_properties.credentials.secret_arn #=> String
     #   resp.props.redshift_properties.credentials.username_password.password #=> String
     #   resp.props.redshift_properties.credentials.username_password.username #=> String
@@ -2006,7 +2030,8 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnection AWS API Documentation
     #
@@ -5656,6 +5681,7 @@ module Aws::DataZone
     #   * {Types::GetConnectionOutput#physical_endpoints #physical_endpoints} => Array&lt;Types::PhysicalEndpoint&gt;
     #   * {Types::GetConnectionOutput#project_id #project_id} => String
     #   * {Types::GetConnectionOutput#props #props} => Types::ConnectionPropertiesOutput
+    #   * {Types::GetConnectionOutput#scope #scope} => String
     #   * {Types::GetConnectionOutput#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -5684,6 +5710,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -5705,7 +5732,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -5732,6 +5759,9 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.physical_endpoints[0].stage #=> String
     #   resp.project_id #=> String
+    #   resp.props.amazon_q_properties.auth_mode #=> String
+    #   resp.props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.athena_properties.workgroup_name #=> String
     #   resp.props.glue_properties.error_message #=> String
     #   resp.props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -5740,6 +5770,8 @@ module Aws::DataZone
     #   resp.props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.props.iam_properties.environment_id #=> String
     #   resp.props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.props.mlflow_properties.tracking_server_arn #=> String
+    #   resp.props.mlflow_properties.tracking_server_name #=> String
     #   resp.props.redshift_properties.credentials.secret_arn #=> String
     #   resp.props.redshift_properties.credentials.username_password.password #=> String
     #   resp.props.redshift_properties.credentials.username_password.username #=> String
@@ -5782,7 +5814,8 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetConnection AWS API Documentation
     #
@@ -8091,8 +8124,11 @@ module Aws::DataZone
     #   NextToken value in a subsequent call to ListConnections to list the
     #   next set of connections.
     #
-    # @option params [required, String] :project_identifier
+    # @option params [String] :project_identifier
     #   The ID of the project where you want to list connections.
+    #
+    # @option params [String] :scope
+    #   The scope of the connection.
     #
     # @option params [String] :sort_by
     #   Specifies how you want to sort the listed connections.
@@ -8118,10 +8154,11 @@ module Aws::DataZone
     #     max_results: 1,
     #     name: "ConnectionName",
     #     next_token: "PaginationToken",
-    #     project_identifier: "ProjectId", # required
+    #     project_identifier: "ProjectId",
+    #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #     sort_by: "NAME", # accepts NAME
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA
+    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW
     #   })
     #
     # @example Response structure
@@ -8137,6 +8174,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.items[0].physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.items[0].physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.items[0].physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.items[0].physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.items[0].physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -8158,7 +8196,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.items[0].physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.items[0].physical_endpoints[0].glue_connection.description #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -8185,6 +8223,9 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.items[0].physical_endpoints[0].stage #=> String
     #   resp.items[0].project_id #=> String
+    #   resp.items[0].props.amazon_q_properties.auth_mode #=> String
+    #   resp.items[0].props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.items[0].props.amazon_q_properties.profile_arn #=> String
     #   resp.items[0].props.athena_properties.workgroup_name #=> String
     #   resp.items[0].props.glue_properties.error_message #=> String
     #   resp.items[0].props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -8193,6 +8234,8 @@ module Aws::DataZone
     #   resp.items[0].props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.items[0].props.iam_properties.environment_id #=> String
     #   resp.items[0].props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.items[0].props.mlflow_properties.tracking_server_arn #=> String
+    #   resp.items[0].props.mlflow_properties.tracking_server_name #=> String
     #   resp.items[0].props.redshift_properties.credentials.secret_arn #=> String
     #   resp.items[0].props.redshift_properties.credentials.username_password.password #=> String
     #   resp.items[0].props.redshift_properties.credentials.username_password.username #=> String
@@ -8235,7 +8278,8 @@ module Aws::DataZone
     #   resp.items[0].props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.items[0].props.spark_glue_properties.python_virtual_env #=> String
     #   resp.items[0].props.spark_glue_properties.worker_type #=> String
-    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.items[0].scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListConnections AWS API Documentation
@@ -12273,6 +12317,7 @@ module Aws::DataZone
     #   * {Types::UpdateConnectionOutput#physical_endpoints #physical_endpoints} => Array&lt;Types::PhysicalEndpoint&gt;
     #   * {Types::UpdateConnectionOutput#project_id #project_id} => String
     #   * {Types::UpdateConnectionOutput#props #props} => Types::ConnectionPropertiesOutput
+    #   * {Types::UpdateConnectionOutput#scope #scope} => String
     #   * {Types::UpdateConnectionOutput#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -12288,6 +12333,11 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     identifier: "ConnectionId", # required
     #     props: {
+    #       amazon_q_properties: {
+    #         auth_mode: "AmazonQPropertiesPatchAuthModeString",
+    #         is_enabled: false, # required
+    #         profile_arn: "AmazonQPropertiesPatchProfileArnString",
+    #       },
     #       athena_properties: {
     #         workgroup_name: "AthenaPropertiesPatchWorkgroupNameString",
     #       },
@@ -12308,6 +12358,10 @@ module Aws::DataZone
     #       },
     #       iam_properties: {
     #         glue_lineage_sync_enabled: false,
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String",
+    #         tracking_server_name: "String",
     #       },
     #       redshift_properties: {
     #         credentials: {
@@ -12361,6 +12415,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -12382,7 +12437,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -12409,6 +12464,9 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.physical_endpoints[0].stage #=> String
     #   resp.project_id #=> String
+    #   resp.props.amazon_q_properties.auth_mode #=> String
+    #   resp.props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.athena_properties.workgroup_name #=> String
     #   resp.props.glue_properties.error_message #=> String
     #   resp.props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -12417,6 +12475,8 @@ module Aws::DataZone
     #   resp.props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.props.iam_properties.environment_id #=> String
     #   resp.props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.props.mlflow_properties.tracking_server_arn #=> String
+    #   resp.props.mlflow_properties.tracking_server_name #=> String
     #   resp.props.redshift_properties.credentials.secret_arn #=> String
     #   resp.props.redshift_properties.credentials.username_password.password #=> String
     #   resp.props.redshift_properties.credentials.username_password.username #=> String
@@ -12459,7 +12519,8 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateConnection AWS API Documentation
     #
@@ -14149,7 +14210,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -252,6 +252,7 @@ module Aws::EC2
     BootModeType = Shapes::StringShape.new(name: 'BootModeType')
     BootModeTypeList = Shapes::ListShape.new(name: 'BootModeTypeList')
     BootModeValues = Shapes::StringShape.new(name: 'BootModeValues')
+    BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedDouble = Shapes::FloatShape.new(name: 'BoxedDouble')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BoxedLong = Shapes::IntegerShape.new(name: 'BoxedLong')
@@ -320,6 +321,15 @@ module Aws::EC2
     CapacityBlockSet = Shapes::ListShape.new(name: 'CapacityBlockSet')
     CapacityBlockStatus = Shapes::StructureShape.new(name: 'CapacityBlockStatus')
     CapacityBlockStatusSet = Shapes::ListShape.new(name: 'CapacityBlockStatusSet')
+    CapacityManagerCondition = Shapes::StructureShape.new(name: 'CapacityManagerCondition')
+    CapacityManagerConditionSet = Shapes::ListShape.new(name: 'CapacityManagerConditionSet')
+    CapacityManagerDataExportId = Shapes::StringShape.new(name: 'CapacityManagerDataExportId')
+    CapacityManagerDataExportIdSet = Shapes::ListShape.new(name: 'CapacityManagerDataExportIdSet')
+    CapacityManagerDataExportResponse = Shapes::StructureShape.new(name: 'CapacityManagerDataExportResponse')
+    CapacityManagerDataExportResponseSet = Shapes::ListShape.new(name: 'CapacityManagerDataExportResponseSet')
+    CapacityManagerDataExportStatus = Shapes::StringShape.new(name: 'CapacityManagerDataExportStatus')
+    CapacityManagerDimension = Shapes::StructureShape.new(name: 'CapacityManagerDimension')
+    CapacityManagerStatus = Shapes::StringShape.new(name: 'CapacityManagerStatus')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
     CapacityReservationBillingRequest = Shapes::StructureShape.new(name: 'CapacityReservationBillingRequest')
     CapacityReservationBillingRequestSet = Shapes::ListShape.new(name: 'CapacityReservationBillingRequestSet')
@@ -353,6 +363,7 @@ module Aws::EC2
     CapacityReservationTargetResponse = Shapes::StructureShape.new(name: 'CapacityReservationTargetResponse')
     CapacityReservationTenancy = Shapes::StringShape.new(name: 'CapacityReservationTenancy')
     CapacityReservationType = Shapes::StringShape.new(name: 'CapacityReservationType')
+    CapacityTenancy = Shapes::StringShape.new(name: 'CapacityTenancy')
     CarrierGateway = Shapes::StructureShape.new(name: 'CarrierGateway')
     CarrierGatewayId = Shapes::StringShape.new(name: 'CarrierGatewayId')
     CarrierGatewayIdSet = Shapes::ListShape.new(name: 'CarrierGatewayIdSet')
@@ -417,8 +428,10 @@ module Aws::EC2
     CoipPoolIdSet = Shapes::ListShape.new(name: 'CoipPoolIdSet')
     CoipPoolMaxResults = Shapes::IntegerShape.new(name: 'CoipPoolMaxResults')
     CoipPoolSet = Shapes::ListShape.new(name: 'CoipPoolSet')
+    Comparison = Shapes::StringShape.new(name: 'Comparison')
     ComponentAccount = Shapes::StringShape.new(name: 'ComponentAccount')
     ComponentRegion = Shapes::StringShape.new(name: 'ComponentRegion')
+    ConditionValueList = Shapes::ListShape.new(name: 'ConditionValueList')
     ConfirmProductInstanceRequest = Shapes::StructureShape.new(name: 'ConfirmProductInstanceRequest')
     ConfirmProductInstanceResult = Shapes::StructureShape.new(name: 'ConfirmProductInstanceResult')
     ConnectionLogOptions = Shapes::StructureShape.new(name: 'ConnectionLogOptions')
@@ -449,6 +462,8 @@ module Aws::EC2
     CopySnapshotRequestPSU = Shapes::StringShape.new(name: 'CopySnapshotRequestPSU')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
     CopyTagsFromSource = Shapes::StringShape.new(name: 'CopyTagsFromSource')
+    CopyVolumesRequest = Shapes::StructureShape.new(name: 'CopyVolumesRequest')
+    CopyVolumesResult = Shapes::StructureShape.new(name: 'CopyVolumesResult')
     CoreCount = Shapes::IntegerShape.new(name: 'CoreCount')
     CoreCountList = Shapes::ListShape.new(name: 'CoreCountList')
     CoreNetworkArn = Shapes::StringShape.new(name: 'CoreNetworkArn')
@@ -459,6 +474,8 @@ module Aws::EC2
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
     CpuPerformanceFactor = Shapes::StructureShape.new(name: 'CpuPerformanceFactor')
     CpuPerformanceFactorRequest = Shapes::StructureShape.new(name: 'CpuPerformanceFactorRequest')
+    CreateCapacityManagerDataExportRequest = Shapes::StructureShape.new(name: 'CreateCapacityManagerDataExportRequest')
+    CreateCapacityManagerDataExportResult = Shapes::StructureShape.new(name: 'CreateCapacityManagerDataExportResult')
     CreateCapacityReservationBySplittingRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationBySplittingRequest')
     CreateCapacityReservationBySplittingResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationBySplittingResult')
     CreateCapacityReservationFleetRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetRequest')
@@ -693,6 +710,8 @@ module Aws::EC2
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
     DefaultingDhcpOptionsId = Shapes::StringShape.new(name: 'DefaultingDhcpOptionsId')
+    DeleteCapacityManagerDataExportRequest = Shapes::StructureShape.new(name: 'DeleteCapacityManagerDataExportRequest')
+    DeleteCapacityManagerDataExportResult = Shapes::StructureShape.new(name: 'DeleteCapacityManagerDataExportResult')
     DeleteCarrierGatewayRequest = Shapes::StructureShape.new(name: 'DeleteCarrierGatewayRequest')
     DeleteCarrierGatewayResult = Shapes::StructureShape.new(name: 'DeleteCarrierGatewayResult')
     DeleteClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'DeleteClientVpnEndpointRequest')
@@ -908,6 +927,9 @@ module Aws::EC2
     DescribeCapacityBlocksMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityBlocksMaxResults')
     DescribeCapacityBlocksRequest = Shapes::StructureShape.new(name: 'DescribeCapacityBlocksRequest')
     DescribeCapacityBlocksResult = Shapes::StructureShape.new(name: 'DescribeCapacityBlocksResult')
+    DescribeCapacityManagerDataExportsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityManagerDataExportsRequest')
+    DescribeCapacityManagerDataExportsRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityManagerDataExportsRequestMaxResults')
+    DescribeCapacityManagerDataExportsResult = Shapes::StructureShape.new(name: 'DescribeCapacityManagerDataExportsResult')
     DescribeCapacityReservationBillingRequestsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationBillingRequestsRequest')
     DescribeCapacityReservationBillingRequestsRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationBillingRequestsRequestMaxResults')
     DescribeCapacityReservationBillingRequestsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationBillingRequestsResult')
@@ -1318,6 +1340,7 @@ module Aws::EC2
     DhcpOptionsId = Shapes::StringShape.new(name: 'DhcpOptionsId')
     DhcpOptionsIdStringList = Shapes::ListShape.new(name: 'DhcpOptionsIdStringList')
     DhcpOptionsList = Shapes::ListShape.new(name: 'DhcpOptionsList')
+    DimensionCondition = Shapes::StructureShape.new(name: 'DimensionCondition')
     DirectoryServiceAuthentication = Shapes::StructureShape.new(name: 'DirectoryServiceAuthentication')
     DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
     DisableAddressTransferRequest = Shapes::StructureShape.new(name: 'DisableAddressTransferRequest')
@@ -1326,6 +1349,8 @@ module Aws::EC2
     DisableAllowedImagesSettingsResult = Shapes::StructureShape.new(name: 'DisableAllowedImagesSettingsResult')
     DisableAwsNetworkPerformanceMetricSubscriptionRequest = Shapes::StructureShape.new(name: 'DisableAwsNetworkPerformanceMetricSubscriptionRequest')
     DisableAwsNetworkPerformanceMetricSubscriptionResult = Shapes::StructureShape.new(name: 'DisableAwsNetworkPerformanceMetricSubscriptionResult')
+    DisableCapacityManagerRequest = Shapes::StructureShape.new(name: 'DisableCapacityManagerRequest')
+    DisableCapacityManagerResult = Shapes::StructureShape.new(name: 'DisableCapacityManagerResult')
     DisableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultRequest')
     DisableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultResult')
     DisableFastLaunchRequest = Shapes::StructureShape.new(name: 'DisableFastLaunchRequest')
@@ -1478,6 +1503,8 @@ module Aws::EC2
     EnableAllowedImagesSettingsResult = Shapes::StructureShape.new(name: 'EnableAllowedImagesSettingsResult')
     EnableAwsNetworkPerformanceMetricSubscriptionRequest = Shapes::StructureShape.new(name: 'EnableAwsNetworkPerformanceMetricSubscriptionRequest')
     EnableAwsNetworkPerformanceMetricSubscriptionResult = Shapes::StructureShape.new(name: 'EnableAwsNetworkPerformanceMetricSubscriptionResult')
+    EnableCapacityManagerRequest = Shapes::StructureShape.new(name: 'EnableCapacityManagerRequest')
+    EnableCapacityManagerResult = Shapes::StructureShape.new(name: 'EnableCapacityManagerResult')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
     EnableFastLaunchRequest = Shapes::StructureShape.new(name: 'EnableFastLaunchRequest')
@@ -1574,6 +1601,7 @@ module Aws::EC2
     FederatedAuthentication = Shapes::StructureShape.new(name: 'FederatedAuthentication')
     FederatedAuthenticationRequest = Shapes::StructureShape.new(name: 'FederatedAuthenticationRequest')
     Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterByDimension = Shapes::StringShape.new(name: 'FilterByDimension')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterPortRange = Shapes::StructureShape.new(name: 'FilterPortRange')
     FindingsFound = Shapes::StringShape.new(name: 'FindingsFound')
@@ -1650,6 +1678,12 @@ module Aws::EC2
     GetAssociatedIpv6PoolCidrsResult = Shapes::StructureShape.new(name: 'GetAssociatedIpv6PoolCidrsResult')
     GetAwsNetworkPerformanceDataRequest = Shapes::StructureShape.new(name: 'GetAwsNetworkPerformanceDataRequest')
     GetAwsNetworkPerformanceDataResult = Shapes::StructureShape.new(name: 'GetAwsNetworkPerformanceDataResult')
+    GetCapacityManagerAttributesRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerAttributesRequest')
+    GetCapacityManagerAttributesResult = Shapes::StructureShape.new(name: 'GetCapacityManagerAttributesResult')
+    GetCapacityManagerMetricDataRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDataRequest')
+    GetCapacityManagerMetricDataResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDataResult')
+    GetCapacityManagerMetricDimensionsRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDimensionsRequest')
+    GetCapacityManagerMetricDimensionsResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDimensionsResult')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
     GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
@@ -1768,6 +1802,8 @@ module Aws::EC2
     GpuDeviceMemorySize = Shapes::IntegerShape.new(name: 'GpuDeviceMemorySize')
     GpuDeviceName = Shapes::StringShape.new(name: 'GpuDeviceName')
     GpuInfo = Shapes::StructureShape.new(name: 'GpuInfo')
+    GroupBy = Shapes::StringShape.new(name: 'GroupBy')
+    GroupBySet = Shapes::ListShape.new(name: 'GroupBySet')
     GroupIdStringList = Shapes::ListShape.new(name: 'GroupIdStringList')
     GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
     GroupIdentifierList = Shapes::ListShape.new(name: 'GroupIdentifierList')
@@ -1905,6 +1941,7 @@ module Aws::EC2
     InferenceDeviceMemoryInfo = Shapes::StructureShape.new(name: 'InferenceDeviceMemoryInfo')
     InferenceDeviceMemorySize = Shapes::IntegerShape.new(name: 'InferenceDeviceMemorySize')
     InferenceDeviceName = Shapes::StringShape.new(name: 'InferenceDeviceName')
+    IngestionStatus = Shapes::StringShape.new(name: 'IngestionStatus')
     InitializationStatusDetails = Shapes::StructureShape.new(name: 'InitializationStatusDetails')
     InitializationType = Shapes::StringShape.new(name: 'InitializationType')
     InsideCidrBlocksStringList = Shapes::ListShape.new(name: 'InsideCidrBlocksStringList')
@@ -2375,9 +2412,16 @@ module Aws::EC2
     MemoryMiBRequest = Shapes::StructureShape.new(name: 'MemoryMiBRequest')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
     MetadataDefaultHttpTokensState = Shapes::StringShape.new(name: 'MetadataDefaultHttpTokensState')
+    Metric = Shapes::StringShape.new(name: 'Metric')
+    MetricDataResult = Shapes::StructureShape.new(name: 'MetricDataResult')
+    MetricDataResultSet = Shapes::ListShape.new(name: 'MetricDataResultSet')
+    MetricDimensionResultSet = Shapes::ListShape.new(name: 'MetricDimensionResultSet')
     MetricPoint = Shapes::StructureShape.new(name: 'MetricPoint')
     MetricPoints = Shapes::ListShape.new(name: 'MetricPoints')
+    MetricSet = Shapes::ListShape.new(name: 'MetricSet')
     MetricType = Shapes::StringShape.new(name: 'MetricType')
+    MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
+    MetricValueSet = Shapes::ListShape.new(name: 'MetricValueSet')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
     ModifyAddressAttributeRequest = Shapes::StructureShape.new(name: 'ModifyAddressAttributeRequest')
     ModifyAddressAttributeResult = Shapes::StructureShape.new(name: 'ModifyAddressAttributeResult')
@@ -2652,6 +2696,7 @@ module Aws::EC2
     OutpostLagIdSet = Shapes::ListShape.new(name: 'OutpostLagIdSet')
     OutpostLagMaxResults = Shapes::IntegerShape.new(name: 'OutpostLagMaxResults')
     OutpostLagSet = Shapes::ListShape.new(name: 'OutpostLagSet')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     OwnerStringList = Shapes::ListShape.new(name: 'OwnerStringList')
     PacketHeaderStatement = Shapes::StructureShape.new(name: 'PacketHeaderStatement')
     PacketHeaderStatementRequest = Shapes::StructureShape.new(name: 'PacketHeaderStatementRequest')
@@ -2675,6 +2720,7 @@ module Aws::EC2
     PerformanceFactorReferenceRequest = Shapes::StructureShape.new(name: 'PerformanceFactorReferenceRequest')
     PerformanceFactorReferenceSet = Shapes::ListShape.new(name: 'PerformanceFactorReferenceSet')
     PerformanceFactorReferenceSetRequest = Shapes::ListShape.new(name: 'PerformanceFactorReferenceSetRequest')
+    Period = Shapes::IntegerShape.new(name: 'Period')
     PeriodType = Shapes::StringShape.new(name: 'PeriodType')
     PermissionGroup = Shapes::StringShape.new(name: 'PermissionGroup')
     Phase1DHGroupNumbersList = Shapes::ListShape.new(name: 'Phase1DHGroupNumbersList')
@@ -2895,11 +2941,13 @@ module Aws::EC2
     RequestSpotLaunchSpecificationSecurityGroupIdList = Shapes::ListShape.new(name: 'RequestSpotLaunchSpecificationSecurityGroupIdList')
     RequestSpotLaunchSpecificationSecurityGroupList = Shapes::ListShape.new(name: 'RequestSpotLaunchSpecificationSecurityGroupList')
     Reservation = Shapes::StructureShape.new(name: 'Reservation')
+    ReservationEndDateType = Shapes::StringShape.new(name: 'ReservationEndDateType')
     ReservationFleetInstanceSpecification = Shapes::StructureShape.new(name: 'ReservationFleetInstanceSpecification')
     ReservationFleetInstanceSpecificationList = Shapes::ListShape.new(name: 'ReservationFleetInstanceSpecificationList')
     ReservationId = Shapes::StringShape.new(name: 'ReservationId')
     ReservationList = Shapes::ListShape.new(name: 'ReservationList')
     ReservationState = Shapes::StringShape.new(name: 'ReservationState')
+    ReservationType = Shapes::StringShape.new(name: 'ReservationType')
     ReservationValue = Shapes::StructureShape.new(name: 'ReservationValue')
     ReservedInstanceIdSet = Shapes::ListShape.new(name: 'ReservedInstanceIdSet')
     ReservedInstanceLimitPrice = Shapes::StructureShape.new(name: 'ReservedInstanceLimitPrice')
@@ -3050,6 +3098,7 @@ module Aws::EC2
     S3StorageUploadPolicy = Shapes::StringShape.new(name: 'S3StorageUploadPolicy')
     S3StorageUploadPolicySignature = Shapes::StringShape.new(name: 'S3StorageUploadPolicySignature')
     SSEType = Shapes::StringShape.new(name: 'SSEType')
+    Schedule = Shapes::StringShape.new(name: 'Schedule')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
     ScheduledInstanceAvailabilitySet = Shapes::ListShape.new(name: 'ScheduledInstanceAvailabilitySet')
@@ -3443,6 +3492,8 @@ module Aws::EC2
     UnsuccessfulItemError = Shapes::StructureShape.new(name: 'UnsuccessfulItemError')
     UnsuccessfulItemList = Shapes::ListShape.new(name: 'UnsuccessfulItemList')
     UnsuccessfulItemSet = Shapes::ListShape.new(name: 'UnsuccessfulItemSet')
+    UpdateCapacityManagerOrganizationsAccessRequest = Shapes::StructureShape.new(name: 'UpdateCapacityManagerOrganizationsAccessRequest')
+    UpdateCapacityManagerOrganizationsAccessResult = Shapes::StructureShape.new(name: 'UpdateCapacityManagerOrganizationsAccessResult')
     UpdateSecurityGroupRuleDescriptionsEgressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressRequest')
     UpdateSecurityGroupRuleDescriptionsEgressResult = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsEgressResult')
     UpdateSecurityGroupRuleDescriptionsIngressRequest = Shapes::StructureShape.new(name: 'UpdateSecurityGroupRuleDescriptionsIngressRequest')
@@ -4711,6 +4762,47 @@ module Aws::EC2
 
     CapacityBlockStatusSet.member = Shapes::ShapeRef.new(shape: CapacityBlockStatus, location_name: "item")
 
+    CapacityManagerCondition.add_member(:dimension_condition, Shapes::ShapeRef.new(shape: DimensionCondition, location_name: "DimensionCondition"))
+    CapacityManagerCondition.struct_class = Types::CapacityManagerCondition
+
+    CapacityManagerConditionSet.member = Shapes::ShapeRef.new(shape: CapacityManagerCondition, location_name: "item")
+
+    CapacityManagerDataExportIdSet.member = Shapes::ShapeRef.new(shape: CapacityManagerDataExportId, location_name: "item")
+
+    CapacityManagerDataExportResponse.add_member(:capacity_manager_data_export_id, Shapes::ShapeRef.new(shape: CapacityManagerDataExportId, location_name: "capacityManagerDataExportId"))
+    CapacityManagerDataExportResponse.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "s3BucketName"))
+    CapacityManagerDataExportResponse.add_member(:s3_bucket_prefix, Shapes::ShapeRef.new(shape: String, location_name: "s3BucketPrefix"))
+    CapacityManagerDataExportResponse.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
+    CapacityManagerDataExportResponse.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "outputFormat"))
+    CapacityManagerDataExportResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createTime"))
+    CapacityManagerDataExportResponse.add_member(:latest_delivery_status, Shapes::ShapeRef.new(shape: CapacityManagerDataExportStatus, location_name: "latestDeliveryStatus"))
+    CapacityManagerDataExportResponse.add_member(:latest_delivery_status_message, Shapes::ShapeRef.new(shape: String, location_name: "latestDeliveryStatusMessage"))
+    CapacityManagerDataExportResponse.add_member(:latest_delivery_s3_location_uri, Shapes::ShapeRef.new(shape: String, location_name: "latestDeliveryS3LocationUri"))
+    CapacityManagerDataExportResponse.add_member(:latest_delivery_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "latestDeliveryTime"))
+    CapacityManagerDataExportResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CapacityManagerDataExportResponse.struct_class = Types::CapacityManagerDataExportResponse
+
+    CapacityManagerDataExportResponseSet.member = Shapes::ShapeRef.new(shape: CapacityManagerDataExportResponse, location_name: "item")
+
+    CapacityManagerDimension.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
+    CapacityManagerDimension.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    CapacityManagerDimension.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    CapacityManagerDimension.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
+    CapacityManagerDimension.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CapacityManagerDimension.add_member(:instance_platform, Shapes::ShapeRef.new(shape: String, location_name: "instancePlatform"))
+    CapacityManagerDimension.add_member(:reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "reservationArn"))
+    CapacityManagerDimension.add_member(:reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "reservationId"))
+    CapacityManagerDimension.add_member(:reservation_type, Shapes::ShapeRef.new(shape: ReservationType, location_name: "reservationType"))
+    CapacityManagerDimension.add_member(:reservation_create_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "reservationCreateTimestamp"))
+    CapacityManagerDimension.add_member(:reservation_start_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "reservationStartTimestamp"))
+    CapacityManagerDimension.add_member(:reservation_end_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "reservationEndTimestamp"))
+    CapacityManagerDimension.add_member(:reservation_end_date_type, Shapes::ShapeRef.new(shape: ReservationEndDateType, location_name: "reservationEndDateType"))
+    CapacityManagerDimension.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityTenancy, location_name: "tenancy"))
+    CapacityManagerDimension.add_member(:reservation_state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "reservationState"))
+    CapacityManagerDimension.add_member(:reservation_instance_match_criteria, Shapes::ShapeRef.new(shape: String, location_name: "reservationInstanceMatchCriteria"))
+    CapacityManagerDimension.add_member(:reservation_unused_financial_owner, Shapes::ShapeRef.new(shape: String, location_name: "reservationUnusedFinancialOwner"))
+    CapacityManagerDimension.struct_class = Types::CapacityManagerDimension
+
     CapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     CapacityReservation.add_member(:capacity_reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationArn"))
@@ -5041,6 +5133,8 @@ module Aws::EC2
 
     CoipPoolSet.member = Shapes::ShapeRef.new(shape: CoipPool, location_name: "item")
 
+    ConditionValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     ConfirmProductInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ConfirmProductInstanceRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductCode"))
     ConfirmProductInstanceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5153,6 +5247,20 @@ module Aws::EC2
     CopySnapshotResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     CopySnapshotResult.struct_class = Types::CopySnapshotResult
 
+    CopyVolumesRequest.add_member(:source_volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "SourceVolumeId"))
+    CopyVolumesRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
+    CopyVolumesRequest.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "Size"))
+    CopyVolumesRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
+    CopyVolumesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CopyVolumesRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CopyVolumesRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
+    CopyVolumesRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
+    CopyVolumesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CopyVolumesRequest.struct_class = Types::CopyVolumesRequest
+
+    CopyVolumesResult.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeList, location_name: "volumeSet"))
+    CopyVolumesResult.struct_class = Types::CopyVolumesResult
+
     CoreCountList.member = Shapes::ShapeRef.new(shape: CoreCount, location_name: "item")
 
     CpuManufacturerSet.member = Shapes::ShapeRef.new(shape: CpuManufacturer, location_name: "item")
@@ -5172,6 +5280,18 @@ module Aws::EC2
 
     CpuPerformanceFactorRequest.add_member(:references, Shapes::ShapeRef.new(shape: PerformanceFactorReferenceSetRequest, location_name: "Reference"))
     CpuPerformanceFactorRequest.struct_class = Types::CpuPerformanceFactorRequest
+
+    CreateCapacityManagerDataExportRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
+    CreateCapacityManagerDataExportRequest.add_member(:s3_bucket_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketPrefix"))
+    CreateCapacityManagerDataExportRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, required: true, location_name: "Schedule"))
+    CreateCapacityManagerDataExportRequest.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "OutputFormat"))
+    CreateCapacityManagerDataExportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateCapacityManagerDataExportRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateCapacityManagerDataExportRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateCapacityManagerDataExportRequest.struct_class = Types::CreateCapacityManagerDataExportRequest
+
+    CreateCapacityManagerDataExportResult.add_member(:capacity_manager_data_export_id, Shapes::ShapeRef.new(shape: CapacityManagerDataExportId, location_name: "capacityManagerDataExportId"))
+    CreateCapacityManagerDataExportResult.struct_class = Types::CreateCapacityManagerDataExportResult
 
     CreateCapacityReservationBySplittingRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateCapacityReservationBySplittingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -6481,6 +6601,13 @@ module Aws::EC2
 
     DedicatedHostIdList.member = Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "item")
 
+    DeleteCapacityManagerDataExportRequest.add_member(:capacity_manager_data_export_id, Shapes::ShapeRef.new(shape: CapacityManagerDataExportId, required: true, location_name: "CapacityManagerDataExportId"))
+    DeleteCapacityManagerDataExportRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteCapacityManagerDataExportRequest.struct_class = Types::DeleteCapacityManagerDataExportRequest
+
+    DeleteCapacityManagerDataExportResult.add_member(:capacity_manager_data_export_id, Shapes::ShapeRef.new(shape: CapacityManagerDataExportId, location_name: "capacityManagerDataExportId"))
+    DeleteCapacityManagerDataExportResult.struct_class = Types::DeleteCapacityManagerDataExportResult
+
     DeleteCarrierGatewayRequest.add_member(:carrier_gateway_id, Shapes::ShapeRef.new(shape: CarrierGatewayId, required: true, location_name: "CarrierGatewayId"))
     DeleteCarrierGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteCarrierGatewayRequest.struct_class = Types::DeleteCarrierGatewayRequest
@@ -7295,6 +7422,17 @@ module Aws::EC2
     DescribeCapacityBlocksResult.add_member(:capacity_blocks, Shapes::ShapeRef.new(shape: CapacityBlockSet, location_name: "capacityBlockSet"))
     DescribeCapacityBlocksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeCapacityBlocksResult.struct_class = Types::DescribeCapacityBlocksResult
+
+    DescribeCapacityManagerDataExportsRequest.add_member(:capacity_manager_data_export_ids, Shapes::ShapeRef.new(shape: CapacityManagerDataExportIdSet, location_name: "CapacityManagerDataExportId"))
+    DescribeCapacityManagerDataExportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityManagerDataExportsRequestMaxResults, location_name: "MaxResults"))
+    DescribeCapacityManagerDataExportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeCapacityManagerDataExportsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeCapacityManagerDataExportsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeCapacityManagerDataExportsRequest.struct_class = Types::DescribeCapacityManagerDataExportsRequest
+
+    DescribeCapacityManagerDataExportsResult.add_member(:capacity_manager_data_exports, Shapes::ShapeRef.new(shape: CapacityManagerDataExportResponseSet, location_name: "capacityManagerDataExportSet"))
+    DescribeCapacityManagerDataExportsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityManagerDataExportsResult.struct_class = Types::DescribeCapacityManagerDataExportsResult
 
     DescribeCapacityReservationBillingRequestsRequest.add_member(:capacity_reservation_ids, Shapes::ShapeRef.new(shape: CapacityReservationIdSet, location_name: "CapacityReservationId"))
     DescribeCapacityReservationBillingRequestsRequest.add_member(:role, Shapes::ShapeRef.new(shape: CallerRole, required: true, location_name: "Role"))
@@ -9134,6 +9272,11 @@ module Aws::EC2
 
     DhcpOptionsList.member = Shapes::ShapeRef.new(shape: DhcpOptions, location_name: "item")
 
+    DimensionCondition.add_member(:dimension, Shapes::ShapeRef.new(shape: FilterByDimension, location_name: "Dimension"))
+    DimensionCondition.add_member(:comparison, Shapes::ShapeRef.new(shape: Comparison, location_name: "Comparison"))
+    DimensionCondition.add_member(:values, Shapes::ShapeRef.new(shape: ConditionValueList, location_name: "Value"))
+    DimensionCondition.struct_class = Types::DimensionCondition
+
     DirectoryServiceAuthentication.add_member(:directory_id, Shapes::ShapeRef.new(shape: String, location_name: "directoryId"))
     DirectoryServiceAuthentication.struct_class = Types::DirectoryServiceAuthentication
 
@@ -9162,6 +9305,14 @@ module Aws::EC2
 
     DisableAwsNetworkPerformanceMetricSubscriptionResult.add_member(:output, Shapes::ShapeRef.new(shape: Boolean, location_name: "output"))
     DisableAwsNetworkPerformanceMetricSubscriptionResult.struct_class = Types::DisableAwsNetworkPerformanceMetricSubscriptionResult
+
+    DisableCapacityManagerRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableCapacityManagerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    DisableCapacityManagerRequest.struct_class = Types::DisableCapacityManagerRequest
+
+    DisableCapacityManagerResult.add_member(:capacity_manager_status, Shapes::ShapeRef.new(shape: CapacityManagerStatus, location_name: "capacityManagerStatus"))
+    DisableCapacityManagerResult.add_member(:organizations_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "organizationsAccess"))
+    DisableCapacityManagerResult.struct_class = Types::DisableCapacityManagerResult
 
     DisableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableEbsEncryptionByDefaultRequest.struct_class = Types::DisableEbsEncryptionByDefaultRequest
@@ -9676,6 +9827,15 @@ module Aws::EC2
 
     EnableAwsNetworkPerformanceMetricSubscriptionResult.add_member(:output, Shapes::ShapeRef.new(shape: Boolean, location_name: "output"))
     EnableAwsNetworkPerformanceMetricSubscriptionResult.struct_class = Types::EnableAwsNetworkPerformanceMetricSubscriptionResult
+
+    EnableCapacityManagerRequest.add_member(:organizations_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "OrganizationsAccess"))
+    EnableCapacityManagerRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableCapacityManagerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    EnableCapacityManagerRequest.struct_class = Types::EnableCapacityManagerRequest
+
+    EnableCapacityManagerResult.add_member(:capacity_manager_status, Shapes::ShapeRef.new(shape: CapacityManagerStatus, location_name: "capacityManagerStatus"))
+    EnableCapacityManagerResult.add_member(:organizations_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "organizationsAccess"))
+    EnableCapacityManagerResult.struct_class = Types::EnableCapacityManagerResult
 
     EnableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableEbsEncryptionByDefaultRequest.struct_class = Types::EnableEbsEncryptionByDefaultRequest
@@ -10328,6 +10488,47 @@ module Aws::EC2
     GetAwsNetworkPerformanceDataResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetAwsNetworkPerformanceDataResult.struct_class = Types::GetAwsNetworkPerformanceDataResult
 
+    GetCapacityManagerAttributesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityManagerAttributesRequest.struct_class = Types::GetCapacityManagerAttributesRequest
+
+    GetCapacityManagerAttributesResult.add_member(:capacity_manager_status, Shapes::ShapeRef.new(shape: CapacityManagerStatus, location_name: "capacityManagerStatus"))
+    GetCapacityManagerAttributesResult.add_member(:organizations_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "organizationsAccess"))
+    GetCapacityManagerAttributesResult.add_member(:data_export_count, Shapes::ShapeRef.new(shape: Integer, location_name: "dataExportCount"))
+    GetCapacityManagerAttributesResult.add_member(:ingestion_status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "ingestionStatus"))
+    GetCapacityManagerAttributesResult.add_member(:ingestion_status_message, Shapes::ShapeRef.new(shape: String, location_name: "ingestionStatusMessage"))
+    GetCapacityManagerAttributesResult.add_member(:earliest_datapoint_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "earliestDatapointTimestamp"))
+    GetCapacityManagerAttributesResult.add_member(:latest_datapoint_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "latestDatapointTimestamp"))
+    GetCapacityManagerAttributesResult.struct_class = Types::GetCapacityManagerAttributesResult
+
+    GetCapacityManagerMetricDataRequest.add_member(:metric_names, Shapes::ShapeRef.new(shape: MetricSet, required: true, location_name: "MetricName"))
+    GetCapacityManagerMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, required: true, location_name: "StartTime"))
+    GetCapacityManagerMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, required: true, location_name: "EndTime"))
+    GetCapacityManagerMetricDataRequest.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
+    GetCapacityManagerMetricDataRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupBySet, location_name: "GroupBy"))
+    GetCapacityManagerMetricDataRequest.add_member(:filter_by, Shapes::ShapeRef.new(shape: CapacityManagerConditionSet, location_name: "FilterBy"))
+    GetCapacityManagerMetricDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetCapacityManagerMetricDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCapacityManagerMetricDataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityManagerMetricDataRequest.struct_class = Types::GetCapacityManagerMetricDataRequest
+
+    GetCapacityManagerMetricDataResult.add_member(:metric_data_results, Shapes::ShapeRef.new(shape: MetricDataResultSet, location_name: "metricDataResultSet"))
+    GetCapacityManagerMetricDataResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCapacityManagerMetricDataResult.struct_class = Types::GetCapacityManagerMetricDataResult
+
+    GetCapacityManagerMetricDimensionsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupBySet, required: true, location_name: "GroupBy"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:filter_by, Shapes::ShapeRef.new(shape: CapacityManagerConditionSet, location_name: "FilterBy"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, required: true, location_name: "StartTime"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, required: true, location_name: "EndTime"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:metric_names, Shapes::ShapeRef.new(shape: MetricSet, required: true, location_name: "MetricName"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCapacityManagerMetricDimensionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityManagerMetricDimensionsRequest.struct_class = Types::GetCapacityManagerMetricDimensionsRequest
+
+    GetCapacityManagerMetricDimensionsResult.add_member(:metric_dimension_results, Shapes::ShapeRef.new(shape: MetricDimensionResultSet, location_name: "metricDimensionResultSet"))
+    GetCapacityManagerMetricDimensionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetCapacityManagerMetricDimensionsResult.struct_class = Types::GetCapacityManagerMetricDimensionsResult
+
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetCapacityReservationUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCapacityReservationUsageRequestMaxResults, location_name: "MaxResults"))
@@ -10874,6 +11075,8 @@ module Aws::EC2
     GpuInfo.add_member(:gpus, Shapes::ShapeRef.new(shape: GpuDeviceInfoList, location_name: "gpus"))
     GpuInfo.add_member(:total_gpu_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalGpuMemory, location_name: "totalGpuMemoryInMiB"))
     GpuInfo.struct_class = Types::GpuInfo
+
+    GroupBySet.member = Shapes::ShapeRef.new(shape: GroupBy, location_name: "item")
 
     GroupIdStringList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "groupId")
 
@@ -12976,6 +13179,15 @@ module Aws::EC2
     MemoryMiBRequest.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
     MemoryMiBRequest.struct_class = Types::MemoryMiBRequest
 
+    MetricDataResult.add_member(:dimension, Shapes::ShapeRef.new(shape: CapacityManagerDimension, location_name: "dimension"))
+    MetricDataResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "timestamp"))
+    MetricDataResult.add_member(:metric_values, Shapes::ShapeRef.new(shape: MetricValueSet, location_name: "metricValueSet"))
+    MetricDataResult.struct_class = Types::MetricDataResult
+
+    MetricDataResultSet.member = Shapes::ShapeRef.new(shape: MetricDataResult, location_name: "item")
+
+    MetricDimensionResultSet.member = Shapes::ShapeRef.new(shape: CapacityManagerDimension, location_name: "item")
+
     MetricPoint.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
     MetricPoint.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
     MetricPoint.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "value"))
@@ -12983,6 +13195,14 @@ module Aws::EC2
     MetricPoint.struct_class = Types::MetricPoint
 
     MetricPoints.member = Shapes::ShapeRef.new(shape: MetricPoint, location_name: "item")
+
+    MetricSet.member = Shapes::ShapeRef.new(shape: Metric, location_name: "item")
+
+    MetricValue.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, location_name: "metric"))
+    MetricValue.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "value"))
+    MetricValue.struct_class = Types::MetricValue
+
+    MetricValueSet.member = Shapes::ShapeRef.new(shape: MetricValue, location_name: "item")
 
     ModifyAddressAttributeRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     ModifyAddressAttributeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainName"))
@@ -14106,6 +14326,7 @@ module Aws::EC2
     NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     NetworkInterface.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     NetworkInterface.add_member(:associated_subnets, Shapes::ShapeRef.new(shape: AssociatedSubnetList, location_name: "associatedSubnetSet"))
+    NetworkInterface.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceAssociation.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
@@ -17174,6 +17395,15 @@ module Aws::EC2
 
     UnsuccessfulItemSet.member = Shapes::ShapeRef.new(shape: UnsuccessfulItem, location_name: "item")
 
+    UpdateCapacityManagerOrganizationsAccessRequest.add_member(:organizations_access, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "OrganizationsAccess"))
+    UpdateCapacityManagerOrganizationsAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UpdateCapacityManagerOrganizationsAccessRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    UpdateCapacityManagerOrganizationsAccessRequest.struct_class = Types::UpdateCapacityManagerOrganizationsAccessRequest
+
+    UpdateCapacityManagerOrganizationsAccessResult.add_member(:capacity_manager_status, Shapes::ShapeRef.new(shape: CapacityManagerStatus, location_name: "capacityManagerStatus"))
+    UpdateCapacityManagerOrganizationsAccessResult.add_member(:organizations_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "organizationsAccess"))
+    UpdateCapacityManagerOrganizationsAccessResult.struct_class = Types::UpdateCapacityManagerOrganizationsAccessResult
+
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "GroupId"))
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "GroupName"))
@@ -17490,6 +17720,7 @@ module Aws::EC2
 
     Volume.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     Volume.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    Volume.add_member(:source_volume_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceVolumeId"))
     Volume.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
     Volume.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
@@ -18414,6 +18645,22 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CopySnapshotResult)
       end)
 
+      api.add_operation(:copy_volumes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyVolumes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyVolumesRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyVolumesResult)
+      end)
+
+      api.add_operation(:create_capacity_manager_data_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCapacityManagerDataExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCapacityManagerDataExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCapacityManagerDataExportResult)
+      end)
+
       api.add_operation(:create_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCapacityReservation"
         o.http_method = "POST"
@@ -19156,6 +19403,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateVpnGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateVpnGatewayResult)
+      end)
+
+      api.add_operation(:delete_capacity_manager_data_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCapacityManagerDataExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCapacityManagerDataExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCapacityManagerDataExportResult)
       end)
 
       api.add_operation(:delete_carrier_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -20036,6 +20291,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeCapacityBlocksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCapacityBlocksResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_capacity_manager_data_exports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityManagerDataExports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityManagerDataExportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityManagerDataExportsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -22093,6 +22362,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableAwsNetworkPerformanceMetricSubscriptionResult)
       end)
 
+      api.add_operation(:disable_capacity_manager, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableCapacityManager"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableCapacityManagerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableCapacityManagerResult)
+      end)
+
       api.add_operation(:disable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableEbsEncryptionByDefault"
         o.http_method = "POST"
@@ -22381,6 +22658,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: EnableAwsNetworkPerformanceMetricSubscriptionResult)
       end)
 
+      api.add_operation(:enable_capacity_manager, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableCapacityManager"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableCapacityManagerRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableCapacityManagerResult)
+      end)
+
       api.add_operation(:enable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableEbsEncryptionByDefault"
         o.http_method = "POST"
@@ -22601,6 +22886,42 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAwsNetworkPerformanceDataRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAwsNetworkPerformanceDataResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_capacity_manager_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityManagerAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityManagerAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityManagerAttributesResult)
+      end)
+
+      api.add_operation(:get_capacity_manager_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityManagerMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityManagerMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityManagerMetricDataResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_capacity_manager_metric_dimensions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityManagerMetricDimensions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityManagerMetricDimensionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityManagerMetricDimensionsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -24383,6 +24704,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UnmonitorInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: UnmonitorInstancesResult)
+      end)
+
+      api.add_operation(:update_capacity_manager_organizations_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCapacityManagerOrganizationsAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCapacityManagerOrganizationsAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCapacityManagerOrganizationsAccessResult)
       end)
 
       api.add_operation(:update_security_group_rule_descriptions_egress, Seahorse::Model::Operation.new.tap do |o|

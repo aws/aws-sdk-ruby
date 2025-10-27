@@ -14488,6 +14488,151 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # List the alerts for a channel with optional filtering based on alert
+    # state.
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :state_filter
+    #
+    # @return [Types::ListAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAlertsResponse#alerts #alerts} => Array&lt;Types::ChannelAlert&gt;
+    #   * {Types::ListAlertsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_alerts({
+    #     channel_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     state_filter: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alerts #=> Array
+    #   resp.alerts[0].alert_type #=> String
+    #   resp.alerts[0].cleared_timestamp #=> Time
+    #   resp.alerts[0].id #=> String
+    #   resp.alerts[0].message #=> String
+    #   resp.alerts[0].pipeline_id #=> String
+    #   resp.alerts[0].set_timestamp #=> Time
+    #   resp.alerts[0].state #=> String, one of "SET", "CLEARED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlerts AWS API Documentation
+    #
+    # @overload list_alerts(params = {})
+    # @param [Hash] params ({})
+    def list_alerts(params = {}, options = {})
+      req = build_request(:list_alerts, params)
+      req.send_request(options)
+    end
+
+    # List the alerts for a cluster with optional filtering based on alert
+    # state.
+    #
+    # @option params [required, String] :cluster_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :state_filter
+    #
+    # @return [Types::ListClusterAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterAlertsResponse#alerts #alerts} => Array&lt;Types::ClusterAlert&gt;
+    #   * {Types::ListClusterAlertsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_alerts({
+    #     cluster_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     state_filter: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alerts #=> Array
+    #   resp.alerts[0].alert_type #=> String
+    #   resp.alerts[0].channel_id #=> String
+    #   resp.alerts[0].cleared_timestamp #=> Time
+    #   resp.alerts[0].id #=> String
+    #   resp.alerts[0].message #=> String
+    #   resp.alerts[0].node_id #=> String
+    #   resp.alerts[0].set_timestamp #=> Time
+    #   resp.alerts[0].state #=> String, one of "SET", "CLEARED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlerts AWS API Documentation
+    #
+    # @overload list_cluster_alerts(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_alerts(params = {}, options = {})
+      req = build_request(:list_cluster_alerts, params)
+      req.send_request(options)
+    end
+
+    # List the alerts for a multiplex with optional filtering based on alert
+    # state.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :state_filter
+    #
+    # @return [Types::ListMultiplexAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMultiplexAlertsResponse#alerts #alerts} => Array&lt;Types::MultiplexAlert&gt;
+    #   * {Types::ListMultiplexAlertsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multiplex_alerts({
+    #     max_results: 1,
+    #     multiplex_id: "__string", # required
+    #     next_token: "__string",
+    #     state_filter: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alerts #=> Array
+    #   resp.alerts[0].alert_type #=> String
+    #   resp.alerts[0].cleared_timestamp #=> Time
+    #   resp.alerts[0].id #=> String
+    #   resp.alerts[0].message #=> String
+    #   resp.alerts[0].pipeline_id #=> String
+    #   resp.alerts[0].set_timestamp #=> Time
+    #   resp.alerts[0].state #=> String, one of "SET", "CLEARED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlerts AWS API Documentation
+    #
+    # @overload list_multiplex_alerts(params = {})
+    # @param [Hash] params ({})
+    def list_multiplex_alerts(params = {}, options = {})
+      req = build_request(:list_multiplex_alerts, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -14506,7 +14651,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

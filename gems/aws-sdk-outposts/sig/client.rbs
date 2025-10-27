@@ -104,7 +104,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#create_order-instance_method
       def create_order: (
                           outpost_identifier: ::String,
-                          line_items: Array[
+                          ?line_items: Array[
                             {
                               catalog_item_id: ::String?,
                               quantity: ::Integer?
@@ -508,6 +508,18 @@ module Aws
                               network_interface_device_index: ::Integer
                             ) -> _StartConnectionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartConnectionResponseSuccess
+
+      interface _StartOutpostDecommissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartOutpostDecommissionOutput]
+        def status: () -> ("SKIPPED" | "BLOCKED" | "REQUESTED")
+        def blocking_resource_types: () -> ::Array[("EC2_INSTANCE" | "OUTPOST_RAM_SHARE" | "LGW_ROUTING_DOMAIN" | "LGW_ROUTE_TABLE" | "LGW_VIRTUAL_INTERFACE_GROUP" | "OUTPOST_ORDER_CANCELLABLE" | "OUTPOST_ORDER_INTERVENTION_REQUIRED")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#start_outpost_decommission-instance_method
+      def start_outpost_decommission: (
+                                        outpost_identifier: ::String,
+                                        ?validate_only: bool
+                                      ) -> _StartOutpostDecommissionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutpostDecommissionResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

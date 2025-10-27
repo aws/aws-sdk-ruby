@@ -599,7 +599,7 @@ module Aws::Route53
     #   resp = client.associate_vpc_with_hosted_zone({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #       vpc_id: "VPCId",
     #     },
     #     comment: "AssociateVPCComment",
@@ -1635,8 +1635,8 @@ module Aws::Route53
     #   * If you send a `CreateHealthCheck` request with the same
     #     `CallerReference` and settings as a previous request, and if the
     #     health check doesn't exist, Amazon Route 53 creates the health
-    #     check. If the health check does exist, Route 53 returns the settings
-    #     for the existing health check.
+    #     check. If the health check does exist, Route 53 returns the health
+    #     check configuration in the response.
     #
     #   * If you send a `CreateHealthCheck` request with the same
     #     `CallerReference` as a deleted health check, regardless of the
@@ -1683,7 +1683,7 @@ module Aws::Route53
     #       enable_sni: false,
     #       regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #       alarm_identifier: {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #         name: "AlarmName", # required
     #       },
     #       insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -1714,7 +1714,7 @@ module Aws::Route53
     #   resp.health_check.health_check_config.enable_sni #=> Boolean
     #   resp.health_check.health_check_config.regions #=> Array
     #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
@@ -1885,7 +1885,7 @@ module Aws::Route53
     #   resp = client.create_hosted_zone({
     #     name: "DNSName", # required
     #     vpc: {
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #       vpc_id: "VPCId",
     #     },
     #     caller_reference: "Nonce", # required
@@ -1914,7 +1914,7 @@ module Aws::Route53
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
     #   resp.delegation_set.name_servers[0] #=> String
-    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.vpc.vpc_id #=> String
     #   resp.location #=> String
     #
@@ -2551,7 +2551,7 @@ module Aws::Route53
     #   resp = client.create_vpc_association_authorization({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #       vpc_id: "VPCId",
     #     },
     #   })
@@ -2559,7 +2559,7 @@ module Aws::Route53
     # @example Response structure
     #
     #   resp.hosted_zone_id #=> String
-    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.vpc.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization AWS API Documentation
@@ -2707,12 +2707,12 @@ module Aws::Route53
     # "free DNS service."
     #
     # You can delete a hosted zone only if it contains only the default SOA
-    # record and NS resource record sets. If the hosted zone contains other
-    # resource record sets, you must delete them before you can delete the
-    # hosted zone. If you try to delete a hosted zone that contains other
-    # resource record sets, the request fails, and Route 53 returns a
-    # `HostedZoneNotEmpty` error. For information about deleting records
-    # from your hosted zone, see [ChangeResourceRecordSets][3].
+    # and NS records and has DNSSEC signing disabled. If the hosted zone
+    # contains other records or has DNSSEC enabled, you must delete the
+    # records and disable DNSSEC before deletion. Attempting to delete a
+    # hosted zone with additional records or DNSSEC enabled returns a
+    # `HostedZoneNotEmpty` error. For information about deleting records,
+    # see [ChangeResourceRecordSets][3].
     #
     # To verify that the hosted zone has been deleted, do one of the
     # following:
@@ -2977,7 +2977,7 @@ module Aws::Route53
     #   resp = client.delete_vpc_association_authorization({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #       vpc_id: "VPCId",
     #     },
     #   })
@@ -3090,7 +3090,7 @@ module Aws::Route53
     #   resp = client.disassociate_vpc_from_hosted_zone({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #       vpc_id: "VPCId",
     #     },
     #     comment: "DisassociateVPCComment",
@@ -3469,7 +3469,7 @@ module Aws::Route53
     #   resp.health_check.health_check_config.enable_sni #=> Boolean
     #   resp.health_check.health_check_config.regions #=> Array
     #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
@@ -3671,7 +3671,7 @@ module Aws::Route53
     #   resp.delegation_set.name_servers #=> Array
     #   resp.delegation_set.name_servers[0] #=> String
     #   resp.vp_cs #=> Array
-    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.vp_cs[0].vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone AWS API Documentation
@@ -4284,7 +4284,7 @@ module Aws::Route53
     #   resp.health_checks[0].health_check_config.enable_sni #=> Boolean
     #   resp.health_checks[0].health_check_config.regions #=> Array
     #   resp.health_checks[0].health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.health_checks[0].health_check_config.alarm_identifier.name #=> String
     #   resp.health_checks[0].health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_checks[0].health_check_config.routing_control_arn #=> String
@@ -4604,7 +4604,7 @@ module Aws::Route53
     #
     #   resp = client.list_hosted_zones_by_vpc({
     #     vpc_id: "VPCId", # required
-    #     vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #     vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, cn-northwest-1, af-south-1, eu-south-1, eu-south-2, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #     max_items: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -5551,7 +5551,7 @@ module Aws::Route53
     #   resp.hosted_zone_id #=> String
     #   resp.next_token #=> String
     #   resp.vp_cs #=> Array
-    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-central-2", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "me-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-south-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "cn-northwest-1", "af-south-1", "eu-south-1", "eu-south-2", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.vp_cs[0].vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations AWS API Documentation
@@ -6016,7 +6016,7 @@ module Aws::Route53
     #     enable_sni: false,
     #     regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #     alarm_identifier: {
-    #       region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6
+    #       region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-4, il-central-1, ca-west-1, ap-southeast-5, mx-central-1, us-isof-south-1, us-isof-east-1, ap-southeast-7, ap-east-2, eu-isoe-west-1, ap-southeast-6, us-isob-west-1
     #       name: "AlarmName", # required
     #     },
     #     insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -6046,7 +6046,7 @@ module Aws::Route53
     #   resp.health_check.health_check_config.enable_sni #=> Boolean
     #   resp.health_check.health_check_config.regions #=> Array
     #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6"
+    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
@@ -6254,7 +6254,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

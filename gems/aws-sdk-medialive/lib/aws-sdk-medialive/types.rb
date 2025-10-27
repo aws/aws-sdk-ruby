@@ -21929,6 +21929,308 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # An alert on a channel
+    #
+    # @!attribute [rw] alert_type
+    #   The type of the alert
+    #   @return [String]
+    #
+    # @!attribute [rw] cleared_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for this alert instance
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   The ID of the pipeline this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] set_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the alert
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelAlert AWS API Documentation
+    #
+    class ChannelAlert < Struct.new(
+      :alert_type,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :pipeline_id,
+      :set_timestamp,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alert on a cluster
+    #
+    # @!attribute [rw] alert_type
+    #   The type of the alert
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   The ID of the channel this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] cleared_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The further subtype of this alert
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The ID of the node this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] set_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the alert
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClusterAlert AWS API Documentation
+    #
+    class ClusterAlert < Struct.new(
+      :alert_type,
+      :channel_id,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :node_id,
+      :set_timestamp,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlertsRequest AWS API Documentation
+    #
+    class ListAlertsRequest < Struct.new(
+      :channel_id,
+      :max_results,
+      :next_token,
+      :state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alerts
+    #   @return [Array<Types::ChannelAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlertsResponse AWS API Documentation
+    #
+    class ListAlertsResponse < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListAlerts request
+    #
+    # @!attribute [rw] alerts
+    #   The alerts found for this channel
+    #   @return [Array<Types::ChannelAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlertsResultModel AWS API Documentation
+    #
+    class ListAlertsResultModel < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlertsRequest AWS API Documentation
+    #
+    class ListClusterAlertsRequest < Struct.new(
+      :cluster_id,
+      :max_results,
+      :next_token,
+      :state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alerts
+    #   @return [Array<Types::ClusterAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlertsResponse AWS API Documentation
+    #
+    class ListClusterAlertsResponse < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListClusterAlerts request
+    #
+    # @!attribute [rw] alerts
+    #   The alerts found for this cluster
+    #   @return [Array<Types::ClusterAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlertsResultModel AWS API Documentation
+    #
+    class ListClusterAlertsResultModel < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlertsRequest AWS API Documentation
+    #
+    class ListMultiplexAlertsRequest < Struct.new(
+      :max_results,
+      :multiplex_id,
+      :next_token,
+      :state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alerts
+    #   @return [Array<Types::MultiplexAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlertsResponse AWS API Documentation
+    #
+    class ListMultiplexAlertsResponse < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListMultiplexAlerts request.
+    #
+    # @!attribute [rw] alerts
+    #   The alerts found for this multiplex
+    #   @return [Array<Types::MultiplexAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlertsResultModel AWS API Documentation
+    #
+    class ListMultiplexAlertsResultModel < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alert on a multiplex
+    #
+    # @!attribute [rw] alert_type
+    #   The type of the alert
+    #   @return [String]
+    #
+    # @!attribute [rw] cleared_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for this alert instance
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   The ID of the pipeline this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] set_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the alert
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexAlert AWS API Documentation
+    #
+    class MultiplexAlert < Struct.new(
+      :alert_type,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :pipeline_id,
+      :set_timestamp,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
   end
 end
 

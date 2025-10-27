@@ -1079,6 +1079,9 @@ module Aws::SecurityHub
     OcsfFindingIdentifier = Shapes::StructureShape.new(name: 'OcsfFindingIdentifier')
     OcsfFindingIdentifierList = Shapes::ListShape.new(name: 'OcsfFindingIdentifierList')
     OcsfFindingsList = Shapes::ListShape.new(name: 'OcsfFindingsList')
+    OcsfIpField = Shapes::StringShape.new(name: 'OcsfIpField')
+    OcsfIpFilter = Shapes::StructureShape.new(name: 'OcsfIpFilter')
+    OcsfIpFilterList = Shapes::ListShape.new(name: 'OcsfIpFilterList')
     OcsfMapField = Shapes::StringShape.new(name: 'OcsfMapField')
     OcsfMapFilter = Shapes::StructureShape.new(name: 'OcsfMapFilter')
     OcsfMapFilterList = Shapes::ListShape.new(name: 'OcsfMapFilterList')
@@ -5502,6 +5505,8 @@ module Aws::SecurityHub
     CompositeFilter.add_member(:boolean_filters, Shapes::ShapeRef.new(shape: OcsfBooleanFilterList, location_name: "BooleanFilters"))
     CompositeFilter.add_member(:number_filters, Shapes::ShapeRef.new(shape: OcsfNumberFilterList, location_name: "NumberFilters"))
     CompositeFilter.add_member(:map_filters, Shapes::ShapeRef.new(shape: OcsfMapFilterList, location_name: "MapFilters"))
+    CompositeFilter.add_member(:ip_filters, Shapes::ShapeRef.new(shape: OcsfIpFilterList, location_name: "IpFilters"))
+    CompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: CompositeFilterList, location_name: "NestedCompositeFilters"))
     CompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
     CompositeFilter.struct_class = Types::CompositeFilter
 
@@ -6627,6 +6632,12 @@ module Aws::SecurityHub
 
     OcsfFindingsList.member = Shapes::ShapeRef.new(shape: OcsfFinding)
 
+    OcsfIpFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: OcsfIpField, location_name: "FieldName"))
+    OcsfIpFilter.add_member(:filter, Shapes::ShapeRef.new(shape: IpFilter, location_name: "Filter"))
+    OcsfIpFilter.struct_class = Types::OcsfIpFilter
+
+    OcsfIpFilterList.member = Shapes::ShapeRef.new(shape: OcsfIpFilter)
+
     OcsfMapFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: OcsfMapField, location_name: "FieldName"))
     OcsfMapFilter.add_member(:filter, Shapes::ShapeRef.new(shape: MapFilter, location_name: "Filter"))
     OcsfMapFilter.struct_class = Types::OcsfMapFilter
@@ -6966,7 +6977,7 @@ module Aws::SecurityHub
     ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResourceResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
+    ResourceResult.add_member(:resource_guid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceGuid"))
     ResourceResult.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
     ResourceResult.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AccountId"))
     ResourceResult.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Region"))
@@ -7002,6 +7013,7 @@ module Aws::SecurityHub
     ResourcesCompositeFilter.add_member(:date_filters, Shapes::ShapeRef.new(shape: ResourcesDateFilterList, location_name: "DateFilters"))
     ResourcesCompositeFilter.add_member(:number_filters, Shapes::ShapeRef.new(shape: ResourcesNumberFilterList, location_name: "NumberFilters"))
     ResourcesCompositeFilter.add_member(:map_filters, Shapes::ShapeRef.new(shape: ResourcesMapFilterList, location_name: "MapFilters"))
+    ResourcesCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: ResourcesCompositeFilterList, location_name: "NestedCompositeFilters"))
     ResourcesCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
     ResourcesCompositeFilter.struct_class = Types::ResourcesCompositeFilter
 

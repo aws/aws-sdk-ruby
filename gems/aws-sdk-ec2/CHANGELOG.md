@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.566.0 (2025-10-22)
+------------------
+
+* Feature - This release adds AvailabilityZoneId support for CreateNetworkInterface and DescribeNetworkInterfaces APIs.
+
+1.565.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.564.0 (2025-10-17)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.563.0 (2025-10-15)
+------------------
+
+* Feature - Introducing EC2 Capacity Manager for monitoring and analyzing capacity usage across On-Demand Instances, Spot Instances, and Capacity Reservations.
+
+1.562.0 (2025-10-14)
+------------------
+
+* Feature - This release adds support for creating instant, point-in-time copies of EBS volumes within the same Availability Zone
+
+1.561.0 (2025-10-13)
+------------------
+
+* Feature - Release Amazon EC2 c8i, c8i-flex, m8a, and r8gb
+
 1.560.0 (2025-09-26)
 ------------------
 

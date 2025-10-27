@@ -1306,6 +1306,7 @@ module Aws::Bedrock
     CreateAutomatedReasoningPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDescription, location_name: "description"))
     CreateAutomatedReasoningPolicyRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAutomatedReasoningPolicyRequest.add_member(:policy_definition, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinition, location_name: "policyDefinition"))
+    CreateAutomatedReasoningPolicyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateAutomatedReasoningPolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateAutomatedReasoningPolicyRequest.struct_class = Types::CreateAutomatedReasoningPolicyRequest
 
@@ -1580,6 +1581,7 @@ module Aws::Bedrock
     DeleteAutomatedReasoningPolicyBuildWorkflowResponse.struct_class = Types::DeleteAutomatedReasoningPolicyBuildWorkflowResponse
 
     DeleteAutomatedReasoningPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyArn, required: true, location: "uri", location_name: "policyArn"))
+    DeleteAutomatedReasoningPolicyRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "force"))
     DeleteAutomatedReasoningPolicyRequest.struct_class = Types::DeleteAutomatedReasoningPolicyRequest
 
     DeleteAutomatedReasoningPolicyResponse.struct_class = Types::DeleteAutomatedReasoningPolicyResponse
@@ -1905,6 +1907,7 @@ module Aws::Bedrock
     GetAutomatedReasoningPolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyId, required: true, location_name: "policyId"))
     GetAutomatedReasoningPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDescription, location_name: "description"))
     GetAutomatedReasoningPolicyResponse.add_member(:definition_hash, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyHash, required: true, location_name: "definitionHash"))
+    GetAutomatedReasoningPolicyResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetAutomatedReasoningPolicyResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetAutomatedReasoningPolicyResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     GetAutomatedReasoningPolicyResponse.struct_class = Types::GetAutomatedReasoningPolicyResponse
@@ -3625,7 +3628,9 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

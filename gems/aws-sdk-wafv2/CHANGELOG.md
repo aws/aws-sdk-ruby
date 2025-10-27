@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.118.0 (2025-10-09)
+------------------
+
+* Feature - This release adds the ability to throw WafLimitsExceededException when the maximum number of Application Load Balancer (ALB) associations per AWS WAF v2 WebACL is exceeded.
+
 1.117.0 (2025-08-26)
 ------------------
 

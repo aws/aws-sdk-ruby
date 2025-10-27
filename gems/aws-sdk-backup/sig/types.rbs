@@ -36,7 +36,12 @@ module Aws::Backup
       attr_accessor backup_job_id: ::String
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
+      attr_accessor vault_type: ::String
+      attr_accessor vault_lock_state: ::String
       attr_accessor recovery_point_arn: ::String
+      attr_accessor recovery_point_lifecycle: Types::Lifecycle
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor is_encrypted: bool
       attr_accessor resource_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
@@ -242,7 +247,11 @@ module Aws::Backup
       attr_accessor source_backup_vault_arn: ::String
       attr_accessor source_recovery_point_arn: ::String
       attr_accessor destination_backup_vault_arn: ::String
+      attr_accessor destination_vault_type: ::String
+      attr_accessor destination_vault_lock_state: ::String
       attr_accessor destination_recovery_point_arn: ::String
+      attr_accessor destination_encryption_key_arn: ::String
+      attr_accessor destination_recovery_point_lifecycle: Types::Lifecycle
       attr_accessor resource_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
@@ -523,8 +532,13 @@ module Aws::Backup
       attr_accessor account_id: ::String
       attr_accessor backup_job_id: ::String
       attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_lifecycle: Types::Lifecycle
       attr_accessor backup_vault_arn: ::String
+      attr_accessor vault_type: ::String
+      attr_accessor vault_lock_state: ::String
       attr_accessor recovery_point_arn: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor is_encrypted: bool
       attr_accessor resource_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
@@ -706,6 +720,8 @@ module Aws::Backup
       attr_accessor account_id: ::String
       attr_accessor restore_job_id: ::String
       attr_accessor recovery_point_arn: ::String
+      attr_accessor source_resource_arn: ::String
+      attr_accessor backup_vault_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")
@@ -1540,8 +1556,12 @@ module Aws::Backup
     class RecoveryPointCreator
       attr_accessor backup_plan_id: ::String
       attr_accessor backup_plan_arn: ::String
+      attr_accessor backup_plan_name: ::String
       attr_accessor backup_plan_version: ::String
       attr_accessor backup_rule_id: ::String
+      attr_accessor backup_rule_name: ::String
+      attr_accessor backup_rule_cron: ::String
+      attr_accessor backup_rule_timezone: ::String
       SENSITIVE: []
     end
 
@@ -1645,6 +1665,8 @@ module Aws::Backup
       attr_accessor account_id: ::String
       attr_accessor restore_job_id: ::String
       attr_accessor recovery_point_arn: ::String
+      attr_accessor source_resource_arn: ::String
+      attr_accessor backup_vault_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")

@@ -105,6 +105,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#associated_subnets-instance_method
       def associated_subnets: () -> ::Array[::String]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#availability_zone_id-instance_method
+      def availability_zone_id: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#load-instance_method

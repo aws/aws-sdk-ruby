@@ -1,0 +1,631 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RTBFabric
+  module Types
+
+    class AcceptLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor log_settings: Types::LinkLogSettings
+      SENSITIVE: []
+    end
+
+    class AcceptLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor peer_gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor direction: ("RESPONSE" | "REQUEST")
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor no_bid: Types::NoBidAction
+      attr_accessor header_tag: Types::HeaderTagAction
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class NoBid < Action
+      end
+      class HeaderTag < Action
+      end
+      class Unknown < Action
+      end
+    end
+
+    class AutoScalingGroupsConfiguration
+      attr_accessor auto_scaling_group_names: ::Array[::String]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInboundExternalLinkRequest
+      attr_accessor client_token: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateInboundExternalLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor peer_gateway_id: ::String
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor http_responder_allowed: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_settings: Types::LinkLogSettings
+      SENSITIVE: []
+    end
+
+    class CreateLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor peer_gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor direction: ("RESPONSE" | "REQUEST")
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor link_id: ::String
+      attr_accessor customer_provided_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOutboundExternalLinkRequest
+      attr_accessor client_token: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor public_endpoint: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateOutboundExternalLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class CreateRequesterGatewayRequest
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRequesterGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class CreateResponderGatewayRequest
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor domain_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateResponderGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class DeleteInboundExternalLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInboundExternalLinkResponse
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class DeleteLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLinkResponse
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class DeleteOutboundExternalLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOutboundExternalLinkResponse
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class DeleteRequesterGatewayRequest
+      attr_accessor gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRequesterGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class DeleteResponderGatewayRequest
+      attr_accessor gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResponderGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class EksEndpointsConfiguration
+      attr_accessor endpoints_resource_name: ::String
+      attr_accessor endpoints_resource_namespace: ::String
+      attr_accessor cluster_api_server_endpoint_uri: ::String
+      attr_accessor cluster_api_server_ca_certificate_chain: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: [:cluster_api_server_ca_certificate_chain]
+    end
+
+    class Filter
+      attr_accessor criteria: ::Array[Types::FilterCriterion]
+      SENSITIVE: []
+    end
+
+    class FilterCriterion
+      attr_accessor path: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetInboundExternalLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInboundExternalLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor domain_name: ::String
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor peer_gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor direction: ("RESPONSE" | "REQUEST")
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor link_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_settings: Types::LinkLogSettings
+      SENSITIVE: []
+    end
+
+    class GetOutboundExternalLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOutboundExternalLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor public_endpoint: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetRequesterGatewayRequest
+      attr_accessor gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRequesterGatewayResponse
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor domain_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor gateway_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor active_links_count: ::Integer
+      attr_accessor total_links_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResponderGatewayRequest
+      attr_accessor gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResponderGatewayResponse
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
+      attr_accessor gateway_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor active_links_count: ::Integer
+      attr_accessor total_links_count: ::Integer
+      attr_accessor inbound_links_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class HeaderTagAction
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LinkApplicationLogConfiguration
+      attr_accessor sampling: Types::LinkApplicationLogSampling
+      SENSITIVE: []
+    end
+
+    class LinkApplicationLogSampling
+      attr_accessor error_log: ::Float
+      attr_accessor filter_log: ::Float
+      SENSITIVE: []
+    end
+
+    class LinkAttributes
+      attr_accessor responder_error_masking: ::Array[Types::ResponderErrorMaskingForHttpCode]
+      attr_accessor customer_provided_id: ::String
+      SENSITIVE: []
+    end
+
+    class LinkLogSettings
+      attr_accessor application_logs: Types::LinkApplicationLogConfiguration
+      SENSITIVE: []
+    end
+
+    class ListLinksRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLinksResponse
+      attr_accessor links: ::Array[Types::ListLinksResponseStructure]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinksResponseStructure
+      attr_accessor gateway_id: ::String
+      attr_accessor peer_gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor direction: ("RESPONSE" | "REQUEST")
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor link_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListRequesterGatewaysRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRequesterGatewaysResponse
+      attr_accessor gateway_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResponderGatewaysRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResponderGatewaysResponse
+      attr_accessor gateway_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedEndpointConfiguration
+      attr_accessor auto_scaling_groups: Types::AutoScalingGroupsConfiguration
+      attr_accessor eks_endpoints: Types::EksEndpointsConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AutoScalingGroups < ManagedEndpointConfiguration
+      end
+      class EksEndpoints < ManagedEndpointConfiguration
+      end
+      class Unknown < ManagedEndpointConfiguration
+      end
+    end
+
+    class ModuleConfiguration
+      attr_accessor version: ::String
+      attr_accessor name: ::String
+      attr_accessor depends_on: ::Array[::String]
+      attr_accessor module_parameters: Types::ModuleParameters
+      SENSITIVE: []
+    end
+
+    class ModuleParameters
+      attr_accessor no_bid: Types::NoBidModuleParameters
+      attr_accessor open_rtb_attribute: Types::OpenRtbAttributeModuleParameters
+      attr_accessor rate_limiter: Types::RateLimiterModuleParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class NoBid < ModuleParameters
+      end
+      class OpenRtbAttribute < ModuleParameters
+      end
+      class RateLimiter < ModuleParameters
+      end
+      class Unknown < ModuleParameters
+      end
+    end
+
+    class NoBidAction
+      attr_accessor no_bid_reason_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class NoBidModuleParameters
+      attr_accessor reason: ::String
+      attr_accessor reason_code: ::Integer
+      attr_accessor pass_through_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class OpenRtbAttributeModuleParameters
+      attr_accessor filter_type: ("INCLUDE" | "EXCLUDE")
+      attr_accessor filter_configuration: ::Array[Types::Filter]
+      attr_accessor action: Types::Action
+      attr_accessor holdback_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class RateLimiterModuleParameters
+      attr_accessor tps: ::Float
+      SENSITIVE: []
+    end
+
+    class RejectLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectLinkResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor peer_gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor direction: ("RESPONSE" | "REQUEST")
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponderErrorMaskingForHttpCode
+      attr_accessor http_code: ::String
+      attr_accessor action: ("NO_BID" | "PASSTHROUGH")
+      attr_accessor logging_types: ::Array[("NONE" | "METRIC" | "RESPONSE")]
+      attr_accessor response_logging_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrustStoreConfiguration
+      attr_accessor certificate_authority_certificates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLinkModuleFlowRequest
+      attr_accessor client_token: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor modules: ::Array[Types::ModuleConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateLinkModuleFlowResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class UpdateLinkRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor log_settings: Types::LinkLogSettings
+      SENSITIVE: []
+    end
+
+    class UpdateLinkResponse
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class UpdateRequesterGatewayRequest
+      attr_accessor client_token: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRequesterGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class UpdateResponderGatewayRequest
+      attr_accessor domain_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResponderGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

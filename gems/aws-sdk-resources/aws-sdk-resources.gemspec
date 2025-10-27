@@ -334,6 +334,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-ram', '~> 1')
   spec.add_dependency('aws-sdk-rds', '~> 1')
   spec.add_dependency('aws-sdk-rdsdataservice', '~> 1')
+  spec.add_dependency('aws-sdk-rtbfabric', '~> 1')
   spec.add_dependency('aws-sdk-recyclebin', '~> 1')
   spec.add_dependency('aws-sdk-redshift', '~> 1')
   spec.add_dependency('aws-sdk-redshiftdataapiservice', '~> 1')

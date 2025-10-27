@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+3.235.0 (2025-10-24)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Update endpoint ruleset parameters casing
+
+3.234.0 (2025-10-21)
+------------------
+
+* Issue - Fix `request_checksum_calculation` `when_required` mode to only calculate checksums when explicitly provided by user.
+
+* Feature - Add `CREDENTIALS_CODE` metric for `static_profile_` prefixed methods in default credential chain.
+
 3.233.0 (2025-09-23)
 ------------------
 

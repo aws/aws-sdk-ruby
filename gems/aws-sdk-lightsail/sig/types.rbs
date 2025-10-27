@@ -221,6 +221,7 @@ module Aws::Lightsail
       attr_accessor resources_receiving_access: ::Array[Types::ResourceReceivingAccess]
       attr_accessor state: Types::BucketState
       attr_accessor access_log_config: Types::BucketAccessLogConfig
+      attr_accessor cors: Types::BucketCorsConfig
       SENSITIVE: []
     end
 
@@ -238,6 +239,21 @@ module Aws::Lightsail
       attr_accessor storage_per_month_in_gb: ::Integer
       attr_accessor transfer_per_month_in_gb: ::Integer
       attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class BucketCorsConfig
+      attr_accessor rules: ::Array[Types::BucketCorsRule]
+      SENSITIVE: []
+    end
+
+    class BucketCorsRule
+      attr_accessor id: ::String
+      attr_accessor allowed_methods: ::Array[::String]
+      attr_accessor allowed_origins: ::Array[::String]
+      attr_accessor allowed_headers: ::Array[::String]
+      attr_accessor expose_headers: ::Array[::String]
+      attr_accessor max_age_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -1396,6 +1412,7 @@ module Aws::Lightsail
       attr_accessor bucket_name: ::String
       attr_accessor page_token: ::String
       attr_accessor include_connected_resources: bool
+      attr_accessor include_cors: bool
       SENSITIVE: []
     end
 
@@ -3034,6 +3051,7 @@ module Aws::Lightsail
       attr_accessor versioning: ::String
       attr_accessor readonly_access_accounts: ::Array[::String]
       attr_accessor access_log_config: Types::BucketAccessLogConfig
+      attr_accessor cors: Types::BucketCorsConfig
       SENSITIVE: []
     end
 

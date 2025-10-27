@@ -522,7 +522,7 @@ module Aws
                                      iam_certificate_id: ::String?,
                                      acm_certificate_arn: ::String?,
                                      ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
-                                     minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025")?,
+                                     minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025" | "TLSv1.2_2025")?,
                                      certificate: ::String?,
                                      certificate_source: ("cloudfront" | "iam" | "acm")?
                                    }?,
@@ -871,7 +871,7 @@ module Aws
                                                  iam_certificate_id: ::String?,
                                                  acm_certificate_arn: ::String?,
                                                  ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
-                                                 minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025")?,
+                                                 minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025" | "TLSv1.2_2025")?,
                                                  certificate: ::String?,
                                                  certificate_source: ("cloudfront" | "iam" | "acm")?
                                                }?,
@@ -2798,7 +2798,7 @@ module Aws
                                      iam_certificate_id: ::String?,
                                      acm_certificate_arn: ::String?,
                                      ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
-                                     minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025")?,
+                                     minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025" | "TLSv1.2_2025")?,
                                      certificate: ::String?,
                                      certificate_source: ("cloudfront" | "iam" | "acm")?
                                    }?,

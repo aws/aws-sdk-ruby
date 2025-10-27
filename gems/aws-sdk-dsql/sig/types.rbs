@@ -32,6 +32,8 @@ module Aws::DSQL
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor multi_region_properties: Types::MultiRegionProperties
+      attr_accessor policy: ::String
+      attr_accessor bypass_policy_lockout_safety_check: bool
       SENSITIVE: []
     end
 
@@ -60,6 +62,18 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class DeleteClusterPolicyInput
+      attr_accessor identifier: ::String
+      attr_accessor expected_policy_version: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterPolicyOutput
+      attr_accessor policy_version: ::String
+      SENSITIVE: []
+    end
+
     class EncryptionDetails
       attr_accessor encryption_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
       attr_accessor kms_key_arn: ::String
@@ -81,6 +95,17 @@ module Aws::DSQL
       attr_accessor multi_region_properties: Types::MultiRegionProperties
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor encryption_details: Types::EncryptionDetails
+      SENSITIVE: []
+    end
+
+    class GetClusterPolicyInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterPolicyOutput
+      attr_accessor policy: ::String
+      attr_accessor policy_version: ::String
       SENSITIVE: []
     end
 
@@ -125,6 +150,20 @@ module Aws::DSQL
     class MultiRegionProperties
       attr_accessor witness_region: ::String
       attr_accessor clusters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutClusterPolicyInput
+      attr_accessor identifier: ::String
+      attr_accessor policy: ::String
+      attr_accessor bypass_policy_lockout_safety_check: bool
+      attr_accessor expected_policy_version: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutClusterPolicyOutput
+      attr_accessor policy_version: ::String
       SENSITIVE: []
     end
 

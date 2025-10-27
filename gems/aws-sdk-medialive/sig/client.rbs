@@ -5100,6 +5100,48 @@ module Aws
                              ) -> _UpdateSdiSourceResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSdiSourceResponseSuccess
 
+      interface _ListAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlertsResponse]
+        def alerts: () -> ::Array[Types::ChannelAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_alerts-instance_method
+      def list_alerts: (
+                         channel_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?state_filter: ::String
+                       ) -> _ListAlertsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlertsResponseSuccess
+
+      interface _ListClusterAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterAlertsResponse]
+        def alerts: () -> ::Array[Types::ClusterAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_cluster_alerts-instance_method
+      def list_cluster_alerts: (
+                                 cluster_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?state_filter: ::String
+                               ) -> _ListClusterAlertsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterAlertsResponseSuccess
+
+      interface _ListMultiplexAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMultiplexAlertsResponse]
+        def alerts: () -> ::Array[Types::MultiplexAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_multiplex_alerts-instance_method
+      def list_multiplex_alerts: (
+                                   ?max_results: ::Integer,
+                                   multiplex_id: ::String,
+                                   ?next_token: ::String,
+                                   ?state_filter: ::String
+                                 ) -> _ListMultiplexAlertsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMultiplexAlertsResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#wait_until-instance_method
       def wait_until: (:channel_created waiter_name, 
                     channel_id: ::String

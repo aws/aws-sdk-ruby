@@ -2245,7 +2245,7 @@ module Aws::EMR
     #   resp.instance_fleets #=> Array
     #   resp.instance_fleets[0].id #=> String
     #   resp.instance_fleets[0].name #=> String
-    #   resp.instance_fleets[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED"
+    #   resp.instance_fleets[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "RECONFIGURING", "SUSPENDED", "TERMINATING", "TERMINATED"
     #   resp.instance_fleets[0].status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "CLUSTER_TERMINATED"
     #   resp.instance_fleets[0].status.state_change_reason.message #=> String
     #   resp.instance_fleets[0].status.timeline.creation_date_time #=> Time
@@ -4514,7 +4514,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

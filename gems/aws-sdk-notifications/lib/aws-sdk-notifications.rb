@@ -55,7 +55,7 @@ module Aws::Notifications
   autoload :EndpointProvider, 'aws-sdk-notifications/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-notifications/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

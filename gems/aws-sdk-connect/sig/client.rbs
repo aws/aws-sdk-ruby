@@ -151,6 +151,20 @@ module Aws
                                         ) -> _AssociateDefaultVocabularyResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDefaultVocabularyResponseSuccess
 
+      interface _AssociateEmailAddressAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEmailAddressAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_email_address_alias-instance_method
+      def associate_email_address_alias: (
+                                           email_address_id: ::String,
+                                           instance_id: ::String,
+                                           alias_configuration: {
+                                             email_address_id: ::String
+                                           },
+                                           ?client_token: ::String
+                                         ) -> _AssociateEmailAddressAliasResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateEmailAddressAliasResponseSuccess
+
       interface _AssociateFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFlowResponse]
       end
@@ -373,6 +387,19 @@ module Aws
                                    attributes: Hash[::String, ::String]?,
                                    campaign: {
                                      campaign_id: ::String?
+                                   }?,
+                                   outbound_strategy: {
+                                     type: ("AGENT_FIRST"),
+                                     config: {
+                                       agent_first: {
+                                         preview: {
+                                           post_accept_timeout_config: {
+                                             duration_in_seconds: ::Integer
+                                           },
+                                           allowed_user_actions: Array[("CALL" | "DISCARD")]
+                                         }?
+                                       }?
+                                     }?
                                    }?
                                  },
                                ]
@@ -1510,6 +1537,7 @@ module Aws
         def description: () -> ::String
         def create_timestamp: () -> ::String
         def modified_timestamp: () -> ::String
+        def alias_configurations: () -> ::Array[Types::AliasConfiguration]
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_email_address-instance_method
@@ -1768,6 +1796,20 @@ module Aws
                               ?client_token: ::String
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateEmailAddressAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateEmailAddressAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_email_address_alias-instance_method
+      def disassociate_email_address_alias: (
+                                              email_address_id: ::String,
+                                              instance_id: ::String,
+                                              alias_configuration: {
+                                                email_address_id: ::String
+                                              },
+                                              ?client_token: ::String
+                                            ) -> _DisassociateEmailAddressAliasResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateEmailAddressAliasResponseSuccess
 
       interface _DisassociateFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFlowResponse]
@@ -4216,7 +4258,20 @@ module Aws
                                             await_answer_machine_prompt: bool?
                                           },
                                           ?campaign_id: ::String,
-                                          ?traffic_type: ("GENERAL" | "CAMPAIGN")
+                                          ?traffic_type: ("GENERAL" | "CAMPAIGN"),
+                                          ?outbound_strategy: {
+                                            type: ("AGENT_FIRST"),
+                                            config: {
+                                              agent_first: {
+                                                preview: {
+                                                  post_accept_timeout_config: {
+                                                    duration_in_seconds: ::Integer
+                                                  },
+                                                  allowed_user_actions: Array[("CALL" | "DISCARD")]
+                                                }?
+                                              }?
+                                            }?
+                                          }
                                         ) -> _StartOutboundVoiceContactResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutboundVoiceContactResponseSuccess
 

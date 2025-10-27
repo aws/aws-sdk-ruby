@@ -5661,6 +5661,9 @@ module Aws::SageMaker
     #         max_memory_required_in_mb: 1,
     #       },
     #       base_inference_component_name: "InferenceComponentName",
+    #       data_cache_config: {
+    #         enable_caching: false, # required
+    #       },
     #     },
     #     runtime_config: {
     #       copy_count: 1, # required
@@ -8169,6 +8172,7 @@ module Aws::SageMaker
     #
     # @option params [String] :platform_identifier
     #   The platform identifier of the notebook instance runtime environment.
+    #   The default value is `notebook-al2-v2`.
     #
     # @option params [Types::InstanceMetadataServiceConfiguration] :instance_metadata_service_configuration
     #   Information on the IMDS configuration of the notebook instance
@@ -15777,6 +15781,7 @@ module Aws::SageMaker
     #   resp.specification.compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specification.compute_resource_requirements.max_memory_required_in_mb #=> Integer
     #   resp.specification.base_inference_component_name #=> String
+    #   resp.specification.data_cache_config.enable_caching #=> Boolean
     #   resp.runtime_config.desired_copy_count #=> Integer
     #   resp.runtime_config.current_copy_count #=> Integer
     #   resp.creation_time #=> Time
@@ -29148,6 +29153,9 @@ module Aws::SageMaker
     #         max_memory_required_in_mb: 1,
     #       },
     #       base_inference_component_name: "InferenceComponentName",
+    #       data_cache_config: {
+    #         enable_caching: false, # required
+    #       },
     #     },
     #     runtime_config: {
     #       copy_count: 1, # required
@@ -31196,7 +31204,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.329.0'
+      context[:gem_version] = '1.332.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5696,5 +5696,99 @@ module Aws::MediaLive
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
+
+    class ChannelAlert
+      attr_accessor alert_type: ::String
+      attr_accessor cleared_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor set_timestamp: ::Time
+      attr_accessor state: ("SET" | "CLEARED")
+      SENSITIVE: []
+    end
+
+    class ClusterAlert
+      attr_accessor alert_type: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor cleared_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor node_id: ::String
+      attr_accessor set_timestamp: ::Time
+      attr_accessor state: ("SET" | "CLEARED")
+      SENSITIVE: []
+    end
+
+    class ListAlertsRequest
+      attr_accessor channel_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsResponse
+      attr_accessor alerts: ::Array[Types::ChannelAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsResultModel
+      attr_accessor alerts: ::Array[Types::ChannelAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterAlertsRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterAlertsResponse
+      attr_accessor alerts: ::Array[Types::ClusterAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterAlertsResultModel
+      attr_accessor alerts: ::Array[Types::ClusterAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexAlertsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor multiplex_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor state_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexAlertsResponse
+      attr_accessor alerts: ::Array[Types::MultiplexAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexAlertsResultModel
+      attr_accessor alerts: ::Array[Types::MultiplexAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexAlert
+      attr_accessor alert_type: ::String
+      attr_accessor cleared_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor set_timestamp: ::Time
+      attr_accessor state: ("SET" | "CLEARED")
+      SENSITIVE: []
+    end
   end
 end

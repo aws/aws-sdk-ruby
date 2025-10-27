@@ -54,7 +54,7 @@ module Aws::Scheduler
   autoload :EndpointProvider, 'aws-sdk-scheduler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-scheduler/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

@@ -100,6 +100,13 @@ module Aws
                                      bandwidth_allocation: ::Float
                                    }?,
                                    agentless: {
+                                   }?,
+                                   preview: {
+                                     bandwidth_allocation: ::Float,
+                                     timeout_config: {
+                                       duration_in_seconds: ::Integer
+                                     },
+                                     agent_actions: Array[("DISCARD")]?
                                    }?
                                  },
                                  default_outbound_config: {
@@ -540,6 +547,13 @@ module Aws
                                                             bandwidth_allocation: ::Float
                                                           }?,
                                                           agentless: {
+                                                          }?,
+                                                          preview: {
+                                                            bandwidth_allocation: ::Float,
+                                                            timeout_config: {
+                                                              duration_in_seconds: ::Integer
+                                                            },
+                                                            agent_actions: Array[("DISCARD")]?
                                                           }?
                                                         },
                                                         default_outbound_config: {

@@ -90,7 +90,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor influx_auth_parameters_secret_arn: ::String
       attr_accessor db_cluster_id: ::String
-      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA")
+      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       SENSITIVE: []
     end
 
@@ -124,6 +125,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor network_type: ("IPV4" | "DUAL")
       attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
       attr_accessor allocated_storage: ::Integer
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
       SENSITIVE: []
     end
 
@@ -139,7 +141,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
       attr_accessor allocated_storage: ::Integer
       attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
-      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA")
+      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       SENSITIVE: []
     end
 
@@ -202,12 +205,13 @@ module Aws::TimestreamInfluxDB
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor influx_auth_parameters_secret_arn: ::String
       attr_accessor db_cluster_id: ::String
-      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA")
+      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       SENSITIVE: []
     end
 
     class Duration
-      attr_accessor duration_type: ("hours" | "minutes" | "seconds" | "milliseconds")
+      attr_accessor duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days")
       attr_accessor value: ::Integer
       SENSITIVE: []
     end
@@ -230,6 +234,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor network_type: ("IPV4" | "DUAL")
       attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
       attr_accessor allocated_storage: ::Integer
+      attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
       attr_accessor publicly_accessible: bool
       attr_accessor db_parameter_group_identifier: ::String
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
@@ -266,7 +271,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor influx_auth_parameters_secret_arn: ::String
       attr_accessor db_cluster_id: ::String
-      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA")
+      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       SENSITIVE: []
     end
 
@@ -290,7 +296,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor no_tasks: bool
       attr_accessor query_concurrency: ::Integer
       attr_accessor query_queue_size: ::Integer
-      attr_accessor tracing_type: ("log" | "jaeger")
+      attr_accessor tracing_type: ("log" | "jaeger" | "disabled")
       attr_accessor metrics_disabled: bool
       attr_accessor http_idle_timeout: Types::Duration
       attr_accessor http_read_header_timeout: Types::Duration
@@ -319,6 +325,105 @@ module Aws::TimestreamInfluxDB
       attr_accessor storage_wal_max_concurrent_writes: ::Integer
       attr_accessor storage_wal_max_write_delay: Types::Duration
       attr_accessor ui_disabled: bool
+      SENSITIVE: []
+    end
+
+    class InfluxDBv3CoreParameters
+      attr_accessor query_file_limit: ::Integer
+      attr_accessor query_log_size: ::Integer
+      attr_accessor log_filter: ::String
+      attr_accessor log_format: ("full")
+      attr_accessor data_fusion_num_threads: ::Integer
+      attr_accessor data_fusion_runtime_type: ("multi-thread" | "multi-thread-alt")
+      attr_accessor data_fusion_runtime_disable_lifo_slot: bool
+      attr_accessor data_fusion_runtime_event_interval: ::Integer
+      attr_accessor data_fusion_runtime_global_queue_interval: ::Integer
+      attr_accessor data_fusion_runtime_max_blocking_threads: ::Integer
+      attr_accessor data_fusion_runtime_max_io_events_per_tick: ::Integer
+      attr_accessor data_fusion_runtime_thread_keep_alive: Types::Duration
+      attr_accessor data_fusion_runtime_thread_priority: ::Integer
+      attr_accessor data_fusion_max_parquet_fanout: ::Integer
+      attr_accessor data_fusion_use_cached_parquet_loader: bool
+      attr_accessor data_fusion_config: ::String
+      attr_accessor max_http_request_size: ::Integer
+      attr_accessor force_snapshot_mem_threshold: Types::PercentOrAbsoluteLong
+      attr_accessor wal_snapshot_size: ::Integer
+      attr_accessor wal_max_write_buffer_size: ::Integer
+      attr_accessor snapshotted_wal_files_to_keep: ::Integer
+      attr_accessor preemptive_cache_age: Types::Duration
+      attr_accessor parquet_mem_cache_prune_percentage: ::Float
+      attr_accessor parquet_mem_cache_prune_interval: Types::Duration
+      attr_accessor disable_parquet_mem_cache: bool
+      attr_accessor parquet_mem_cache_query_path_duration: Types::Duration
+      attr_accessor last_cache_eviction_interval: Types::Duration
+      attr_accessor distinct_cache_eviction_interval: Types::Duration
+      attr_accessor gen1_duration: Types::Duration
+      attr_accessor exec_mem_pool_bytes: Types::PercentOrAbsoluteLong
+      attr_accessor parquet_mem_cache_size: Types::PercentOrAbsoluteLong
+      attr_accessor wal_replay_fail_on_error: bool
+      attr_accessor wal_replay_concurrency_limit: ::Integer
+      attr_accessor table_index_cache_max_entries: ::Integer
+      attr_accessor table_index_cache_concurrency_limit: ::Integer
+      attr_accessor gen1_lookback_duration: Types::Duration
+      attr_accessor retention_check_interval: Types::Duration
+      attr_accessor delete_grace_period: Types::Duration
+      attr_accessor hard_delete_default_duration: Types::Duration
+      SENSITIVE: []
+    end
+
+    class InfluxDBv3EnterpriseParameters
+      attr_accessor query_file_limit: ::Integer
+      attr_accessor query_log_size: ::Integer
+      attr_accessor log_filter: ::String
+      attr_accessor log_format: ("full")
+      attr_accessor data_fusion_num_threads: ::Integer
+      attr_accessor data_fusion_runtime_type: ("multi-thread" | "multi-thread-alt")
+      attr_accessor data_fusion_runtime_disable_lifo_slot: bool
+      attr_accessor data_fusion_runtime_event_interval: ::Integer
+      attr_accessor data_fusion_runtime_global_queue_interval: ::Integer
+      attr_accessor data_fusion_runtime_max_blocking_threads: ::Integer
+      attr_accessor data_fusion_runtime_max_io_events_per_tick: ::Integer
+      attr_accessor data_fusion_runtime_thread_keep_alive: Types::Duration
+      attr_accessor data_fusion_runtime_thread_priority: ::Integer
+      attr_accessor data_fusion_max_parquet_fanout: ::Integer
+      attr_accessor data_fusion_use_cached_parquet_loader: bool
+      attr_accessor data_fusion_config: ::String
+      attr_accessor max_http_request_size: ::Integer
+      attr_accessor force_snapshot_mem_threshold: Types::PercentOrAbsoluteLong
+      attr_accessor wal_snapshot_size: ::Integer
+      attr_accessor wal_max_write_buffer_size: ::Integer
+      attr_accessor snapshotted_wal_files_to_keep: ::Integer
+      attr_accessor preemptive_cache_age: Types::Duration
+      attr_accessor parquet_mem_cache_prune_percentage: ::Float
+      attr_accessor parquet_mem_cache_prune_interval: Types::Duration
+      attr_accessor disable_parquet_mem_cache: bool
+      attr_accessor parquet_mem_cache_query_path_duration: Types::Duration
+      attr_accessor last_cache_eviction_interval: Types::Duration
+      attr_accessor distinct_cache_eviction_interval: Types::Duration
+      attr_accessor gen1_duration: Types::Duration
+      attr_accessor exec_mem_pool_bytes: Types::PercentOrAbsoluteLong
+      attr_accessor parquet_mem_cache_size: Types::PercentOrAbsoluteLong
+      attr_accessor wal_replay_fail_on_error: bool
+      attr_accessor wal_replay_concurrency_limit: ::Integer
+      attr_accessor table_index_cache_max_entries: ::Integer
+      attr_accessor table_index_cache_concurrency_limit: ::Integer
+      attr_accessor gen1_lookback_duration: Types::Duration
+      attr_accessor retention_check_interval: Types::Duration
+      attr_accessor delete_grace_period: Types::Duration
+      attr_accessor hard_delete_default_duration: Types::Duration
+      attr_accessor ingest_query_instances: ::Integer
+      attr_accessor query_only_instances: ::Integer
+      attr_accessor dedicated_compactor: bool
+      attr_accessor compaction_row_limit: ::Integer
+      attr_accessor compaction_max_num_files_per_plan: ::Integer
+      attr_accessor compaction_gen_2_duration: Types::Duration
+      attr_accessor compaction_multipliers: ::String
+      attr_accessor compaction_cleanup_wait: Types::Duration
+      attr_accessor compaction_check_interval: Types::Duration
+      attr_accessor last_value_cache_disable_from_history: bool
+      attr_accessor distinct_value_cache_disable_from_history: bool
+      attr_accessor replication_interval: Types::Duration
+      attr_accessor catalog_sync_interval: Types::Duration
       SENSITIVE: []
     end
 
@@ -393,12 +498,32 @@ module Aws::TimestreamInfluxDB
 
     class Parameters
       attr_accessor influx_d_bv_2: Types::InfluxDBv2Parameters
+      attr_accessor influx_d_bv_3_core: Types::InfluxDBv3CoreParameters
+      attr_accessor influx_d_bv_3_enterprise: Types::InfluxDBv3EnterpriseParameters
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class InfluxDBv2 < Parameters
       end
+      class InfluxDBv3Core < Parameters
+      end
+      class InfluxDBv3Enterprise < Parameters
+      end
       class Unknown < Parameters
+      end
+    end
+
+    class PercentOrAbsoluteLong
+      attr_accessor percent: ::String
+      attr_accessor absolute: ::Integer
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Percent < PercentOrAbsoluteLong
+      end
+      class Absolute < PercentOrAbsoluteLong
+      end
+      class Unknown < PercentOrAbsoluteLong
       end
     end
 
@@ -486,7 +611,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor influx_auth_parameters_secret_arn: ::String
       attr_accessor db_cluster_id: ::String
-      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA")
+      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       SENSITIVE: []
     end
 

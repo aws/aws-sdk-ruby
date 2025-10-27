@@ -13,7 +13,7 @@ require 'aws-sigv4'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagentcorecontrol)
 
-# This module provides support for Amazon Bedrock Agent Core Control Plane Fronting Layer. This module is available in the
+# This module provides support for Amazon Bedrock AgentCore Control. This module is available in the
 # `aws-sdk-bedrockagentcorecontrol` gem.
 #
 # # Client
@@ -29,13 +29,13 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagentcorecontrol)
 #
 # # Errors
 #
-# Errors returned from Amazon Bedrock Agent Core Control Plane Fronting Layer are defined in the
+# Errors returned from Amazon Bedrock AgentCore Control are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::BedrockAgentCoreControl::Errors::ServiceError
-#       # rescues all Amazon Bedrock Agent Core Control Plane Fronting Layer API errors
+#       # rescues all Amazon Bedrock AgentCore Control API errors
 #     end
 #
 # See {Errors} for more information.
@@ -55,7 +55,7 @@ module Aws::BedrockAgentCoreControl
   autoload :EndpointProvider, 'aws-sdk-bedrockagentcorecontrol/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrockagentcorecontrol/endpoints'
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

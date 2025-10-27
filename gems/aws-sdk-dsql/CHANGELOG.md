@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2025-10-23)
+------------------
+
+* Feature - Add support for resource-based policies for Aurora DSQL clusters. This will enable you to implement Block Public Access (BPA) which will help restrict access to your Aurora DSQL public or VPC endpoints.
+
+1.18.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.16.0 (2025-08-26)
 ------------------
 

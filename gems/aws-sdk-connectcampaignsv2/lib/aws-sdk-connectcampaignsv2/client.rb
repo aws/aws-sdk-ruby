@@ -530,6 +530,13 @@ module Aws::ConnectCampaignsV2
     #           },
     #           agentless: {
     #           },
+    #           preview: {
+    #             bandwidth_allocation: 1.0, # required
+    #             timeout_config: { # required
+    #               duration_in_seconds: 1, # required
+    #             },
+    #             agent_actions: ["DISCARD"], # accepts DISCARD
+    #           },
     #         },
     #         default_outbound_config: { # required
     #           connect_contact_flow_id: "ContactFlowId", # required
@@ -889,6 +896,10 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.channel_subtype_config.telephony.connect_queue_id #=> String
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.progressive.bandwidth_allocation #=> Float
     #   resp.campaign.channel_subtype_config.telephony.outbound_mode.predictive.bandwidth_allocation #=> Float
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.bandwidth_allocation #=> Float
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.timeout_config.duration_in_seconds #=> Integer
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.agent_actions #=> Array
+    #   resp.campaign.channel_subtype_config.telephony.outbound_mode.preview.agent_actions[0] #=> String, one of "DISCARD"
     #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.connect_contact_flow_id #=> String
     #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.connect_source_phone_number #=> String
     #   resp.campaign.channel_subtype_config.telephony.default_outbound_config.answer_machine_detection_config.enable_answer_machine_detection #=> Boolean
@@ -1639,6 +1650,13 @@ module Aws::ConnectCampaignsV2
     #           },
     #           agentless: {
     #           },
+    #           preview: {
+    #             bandwidth_allocation: 1.0, # required
+    #             timeout_config: { # required
+    #               duration_in_seconds: 1, # required
+    #             },
+    #             agent_actions: ["DISCARD"], # accepts DISCARD
+    #           },
     #         },
     #         default_outbound_config: { # required
     #           connect_contact_flow_id: "ContactFlowId", # required
@@ -1949,7 +1967,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

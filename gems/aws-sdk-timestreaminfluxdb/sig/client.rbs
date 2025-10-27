@@ -88,19 +88,19 @@ module Aws
       def create_db_cluster: (
                                name: ::String,
                                ?username: ::String,
-                               password: ::String,
+                               ?password: ::String,
                                ?organization: ::String,
                                ?bucket: ::String,
                                ?port: ::Integer,
                                ?db_parameter_group_identifier: ::String,
                                db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                ?db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3"),
-                               allocated_storage: ::Integer,
+                               ?allocated_storage: ::Integer,
                                ?network_type: ("IPV4" | "DUAL"),
                                ?publicly_accessible: bool,
                                vpc_subnet_ids: Array[::String],
                                vpc_security_group_ids: Array[::String],
-                               deployment_type: ("MULTI_NODE_READ_REPLICAS"),
+                               ?deployment_type: ("MULTI_NODE_READ_REPLICAS"),
                                ?failover_mode: ("AUTOMATIC" | "NO_FAILOVER"),
                                ?log_delivery_configuration: {
                                  s3_configuration: {
@@ -134,7 +134,8 @@ module Aws
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
         def influx_auth_parameters_secret_arn: () -> ::String
         def db_cluster_id: () -> ::String
-        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA")
+        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+        def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_instance-instance_method
       def create_db_instance: (
@@ -182,22 +183,22 @@ module Aws
                                            no_tasks: bool?,
                                            query_concurrency: ::Integer?,
                                            query_queue_size: ::Integer?,
-                                           tracing_type: ("log" | "jaeger")?,
+                                           tracing_type: ("log" | "jaeger" | "disabled")?,
                                            metrics_disabled: bool?,
                                            http_idle_timeout: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            http_read_header_timeout: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            http_read_timeout: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            http_write_timeout: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            influxql_max_select_buckets: ::Integer?,
@@ -212,11 +213,11 @@ module Aws
                                            storage_cache_max_memory_size: ::Integer?,
                                            storage_cache_snapshot_memory_size: ::Integer?,
                                            storage_cache_snapshot_write_cold_duration: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            storage_compact_full_write_cold_duration: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            storage_compact_throughput_burst: ::Integer?,
@@ -224,17 +225,211 @@ module Aws
                                            storage_max_index_log_file_size: ::Integer?,
                                            storage_no_validate_field_size: bool?,
                                            storage_retention_check_interval: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            storage_series_file_max_concurrent_snapshot_compactions: ::Integer?,
                                            storage_series_id_set_cache_size: ::Integer?,
                                            storage_wal_max_concurrent_writes: ::Integer?,
                                            storage_wal_max_write_delay: {
-                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
                                            }?,
                                            ui_disabled: bool?
+                                         }?,
+                                         influx_d_bv_3_core: {
+                                           query_file_limit: ::Integer?,
+                                           query_log_size: ::Integer?,
+                                           log_filter: ::String?,
+                                           log_format: ("full")?,
+                                           data_fusion_num_threads: ::Integer?,
+                                           data_fusion_runtime_type: ("multi-thread" | "multi-thread-alt")?,
+                                           data_fusion_runtime_disable_lifo_slot: bool?,
+                                           data_fusion_runtime_event_interval: ::Integer?,
+                                           data_fusion_runtime_global_queue_interval: ::Integer?,
+                                           data_fusion_runtime_max_blocking_threads: ::Integer?,
+                                           data_fusion_runtime_max_io_events_per_tick: ::Integer?,
+                                           data_fusion_runtime_thread_keep_alive: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           data_fusion_runtime_thread_priority: ::Integer?,
+                                           data_fusion_max_parquet_fanout: ::Integer?,
+                                           data_fusion_use_cached_parquet_loader: bool?,
+                                           data_fusion_config: ::String?,
+                                           max_http_request_size: ::Integer?,
+                                           force_snapshot_mem_threshold: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           wal_snapshot_size: ::Integer?,
+                                           wal_max_write_buffer_size: ::Integer?,
+                                           snapshotted_wal_files_to_keep: ::Integer?,
+                                           preemptive_cache_age: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           parquet_mem_cache_prune_percentage: ::Float?,
+                                           parquet_mem_cache_prune_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           disable_parquet_mem_cache: bool?,
+                                           parquet_mem_cache_query_path_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           last_cache_eviction_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           distinct_cache_eviction_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           gen1_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           exec_mem_pool_bytes: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           parquet_mem_cache_size: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           wal_replay_fail_on_error: bool?,
+                                           wal_replay_concurrency_limit: ::Integer?,
+                                           table_index_cache_max_entries: ::Integer?,
+                                           table_index_cache_concurrency_limit: ::Integer?,
+                                           gen1_lookback_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           retention_check_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           delete_grace_period: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           hard_delete_default_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?
+                                         }?,
+                                         influx_d_bv_3_enterprise: {
+                                           query_file_limit: ::Integer?,
+                                           query_log_size: ::Integer?,
+                                           log_filter: ::String?,
+                                           log_format: ("full")?,
+                                           data_fusion_num_threads: ::Integer?,
+                                           data_fusion_runtime_type: ("multi-thread" | "multi-thread-alt")?,
+                                           data_fusion_runtime_disable_lifo_slot: bool?,
+                                           data_fusion_runtime_event_interval: ::Integer?,
+                                           data_fusion_runtime_global_queue_interval: ::Integer?,
+                                           data_fusion_runtime_max_blocking_threads: ::Integer?,
+                                           data_fusion_runtime_max_io_events_per_tick: ::Integer?,
+                                           data_fusion_runtime_thread_keep_alive: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           data_fusion_runtime_thread_priority: ::Integer?,
+                                           data_fusion_max_parquet_fanout: ::Integer?,
+                                           data_fusion_use_cached_parquet_loader: bool?,
+                                           data_fusion_config: ::String?,
+                                           max_http_request_size: ::Integer?,
+                                           force_snapshot_mem_threshold: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           wal_snapshot_size: ::Integer?,
+                                           wal_max_write_buffer_size: ::Integer?,
+                                           snapshotted_wal_files_to_keep: ::Integer?,
+                                           preemptive_cache_age: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           parquet_mem_cache_prune_percentage: ::Float?,
+                                           parquet_mem_cache_prune_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           disable_parquet_mem_cache: bool?,
+                                           parquet_mem_cache_query_path_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           last_cache_eviction_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           distinct_cache_eviction_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           gen1_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           exec_mem_pool_bytes: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           parquet_mem_cache_size: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           wal_replay_fail_on_error: bool?,
+                                           wal_replay_concurrency_limit: ::Integer?,
+                                           table_index_cache_max_entries: ::Integer?,
+                                           table_index_cache_concurrency_limit: ::Integer?,
+                                           gen1_lookback_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           retention_check_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           delete_grace_period: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           hard_delete_default_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           ingest_query_instances: ::Integer,
+                                           query_only_instances: ::Integer,
+                                           dedicated_compactor: bool,
+                                           compaction_row_limit: ::Integer?,
+                                           compaction_max_num_files_per_plan: ::Integer?,
+                                           compaction_gen_2_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           compaction_multipliers: ::String?,
+                                           compaction_cleanup_wait: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           compaction_check_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           last_value_cache_disable_from_history: bool?,
+                                           distinct_value_cache_disable_from_history: bool?,
+                                           replication_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?,
+                                           catalog_sync_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
+                                           }?
                                          }?
                                        },
                                        ?tags: Hash[::String, ::String]
@@ -273,7 +468,8 @@ module Aws
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
         def influx_auth_parameters_secret_arn: () -> ::String
         def db_cluster_id: () -> ::String
-        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA")
+        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+        def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_instance-instance_method
       def delete_db_instance: (
@@ -295,6 +491,7 @@ module Aws
         def network_type: () -> ("IPV4" | "DUAL")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
+        def engine_type: () -> ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
         def publicly_accessible: () -> bool
         def db_parameter_group_identifier: () -> ::String
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
@@ -331,7 +528,8 @@ module Aws
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
         def influx_auth_parameters_secret_arn: () -> ::String
         def db_cluster_id: () -> ::String
-        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA")
+        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+        def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#get_db_instance-instance_method
       def get_db_instance: (
@@ -468,7 +666,8 @@ module Aws
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
         def influx_auth_parameters_secret_arn: () -> ::String
         def db_cluster_id: () -> ::String
-        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA")
+        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+        def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#update_db_instance-instance_method
       def update_db_instance: (

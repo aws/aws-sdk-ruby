@@ -483,8 +483,8 @@ module Aws::MarketplaceMetering
 
     # @!group API Operations
 
-    # The `CustomerIdentifier` parameter is scheduled for deprecation. Use
-    # `CustomerAWSAccountID` instead.
+    # The `CustomerIdentifier` parameter is scheduled for deprecation on
+    # March 31, 2026. Use `CustomerAWSAccountID` instead.
     #
     #  These parameters are mutually exclusive. You can't specify both
     # `CustomerIdentifier` and `CustomerAWSAccountID` in the same request.
@@ -613,9 +613,15 @@ module Aws::MarketplaceMetering
     # provide customers with usage data split into buckets by tags that you
     # define (or allow the customer to define).
     #
-    # Usage records are expected to be submitted as quickly as possible
-    # after the event that is being recorded, and are not accepted more than
-    # 6 hours after the event.
+    # Submit usage records to report events from the previous hour. If you
+    # submit records that are greater than six hours after events occur, the
+    # records won’t be accepted. The timestamp in your request determines
+    # when an event is recorded. You can only report usage once per hour for
+    # each dimension. For AMI-based products, this is per dimension and per
+    # EC2 instance. For container products, this is per dimension and per
+    # ECS task or EKS pod. You can’t modify values after they’re recorded.
+    # If you report usage before the current hour ends, you will be unable
+    # to report additional usage until the next hour begins.
     #
     # For Amazon Web Services Regions that support `MeterUsage`, see
     # [MeterUsage Region support for Amazon EC2][1] and [MeterUsage Region
@@ -656,6 +662,28 @@ module Aws::MarketplaceMetering
     #   `UsageQuantity` of the `MeterUsage` request, and each
     #   `UsageAllocation` must have a unique set of tags (include no tags).
     #
+    # @option params [String] :client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotencyConflictException` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #
     # @return [Types::MeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::MeterUsageResult#metering_record_id #metering_record_id} => String
@@ -679,6 +707,7 @@ module Aws::MarketplaceMetering
     #         ],
     #       },
     #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -864,7 +893,7 @@ module Aws::MarketplaceMetering
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

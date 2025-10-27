@@ -4567,6 +4567,7 @@ module Aws::Glue
     GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     GetTableRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
+    GetTableRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
     GetTableRequest.add_member(:include_status_details, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "IncludeStatusDetails"))
     GetTableRequest.struct_class = Types::GetTableRequest
 
@@ -4602,6 +4603,7 @@ module Aws::Glue
     GetTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetTablesRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     GetTablesRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
+    GetTablesRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
     GetTablesRequest.add_member(:include_status_details, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "IncludeStatusDetails"))
     GetTablesRequest.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: TableAttributesList, location_name: "AttributesToGet"))
     GetTablesRequest.struct_class = Types::GetTablesRequest

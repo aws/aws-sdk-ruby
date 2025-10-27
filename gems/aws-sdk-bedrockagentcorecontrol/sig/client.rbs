@@ -132,6 +132,8 @@ module Aws
         def target_version: () -> ::String
         def agent_runtime_endpoint_arn: () -> ::String
         def agent_runtime_arn: () -> ::String
+        def agent_runtime_id: () -> ::String
+        def endpoint_name: () -> ::String
         def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
         def created_at: () -> ::Time
       end
@@ -155,7 +157,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_api_key_credential_provider-instance_method
       def create_api_key_credential_provider: (
                                                 name: ::String,
-                                                api_key: ::String
+                                                api_key: ::String,
+                                                ?tags: Hash[::String, ::String]
                                               ) -> _CreateApiKeyCredentialProviderResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiKeyCredentialProviderResponseSuccess
 
@@ -228,7 +231,7 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -248,8 +251,8 @@ module Aws
                                 search_type: ("SEMANTIC")?
                               }?
                             },
-                            authorizer_type: ("CUSTOM_JWT"),
-                            authorizer_configuration: {
+                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                            ?authorizer_configuration: {
                               custom_jwt_authorizer: {
                                 discovery_url: ::String,
                                 allowed_audience: Array[::String]?,
@@ -268,12 +271,13 @@ module Aws
         def target_id: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+        def last_synchronized_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway_target-instance_method
       def create_gateway_target: (
@@ -325,10 +329,13 @@ module Aws
                                              },
                                            ]?
                                          }
+                                       }?,
+                                       mcp_server: {
+                                         endpoint: ::String
                                        }?
                                      }?
                                    },
-                                   credential_provider_configurations: Array[
+                                   ?credential_provider_configurations: Array[
                                      {
                                        credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY"),
                                        credential_provider: {
@@ -408,6 +415,26 @@ module Aws
                                        append_to_prompt: ::String,
                                        model_id: ::String
                                      }?
+                                   }?,
+                                   self_managed_configuration: {
+                                     trigger_conditions: Array[
+                                       {
+                                         message_based_trigger: {
+                                           message_count: ::Integer?
+                                         }?,
+                                         token_based_trigger: {
+                                           token_count: ::Integer?
+                                         }?,
+                                         time_based_trigger: {
+                                           idle_session_timeout: ::Integer?
+                                         }?
+                                       },
+                                     ]?,
+                                     invocation_configuration: {
+                                       topic_arn: ::String,
+                                       payload_delivery_bucket_name: ::String
+                                     },
+                                     historical_context_window_size: ::Integer?
                                    }?
                                  }?
                                }?
@@ -422,11 +449,13 @@ module Aws
         def client_secret_arn: () -> Types::Secret
         def name: () -> ::String
         def credential_provider_arn: () -> ::String
+        def callback_url: () -> ::String
+        def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_oauth_2_credential_provider-instance_method
       def create_oauth_2_credential_provider: (
                                                 name: ::String,
-                                                credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2"),
+                                                credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2"),
                                                 oauth2_provider_config_input: {
                                                   custom_oauth_2_provider_config: {
                                                     oauth_discovery: {
@@ -435,7 +464,8 @@ module Aws
                                                         issuer: ::String,
                                                         authorization_endpoint: ::String,
                                                         token_endpoint: ::String,
-                                                        response_types: Array[::String]?
+                                                        response_types: Array[::String]?,
+                                                        token_endpoint_auth_methods: Array[::String]?
                                                       }?
                                                     },
                                                     client_id: ::String,
@@ -459,9 +489,26 @@ module Aws
                                                   }?,
                                                   microsoft_oauth_2_provider_config: {
                                                     client_id: ::String,
+                                                    client_secret: ::String,
+                                                    tenant_id: ::String?
+                                                  }?,
+                                                  atlassian_oauth_2_provider_config: {
+                                                    client_id: ::String,
                                                     client_secret: ::String
+                                                  }?,
+                                                  linkedin_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  included_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String,
+                                                    issuer: ::String?,
+                                                    authorization_endpoint: ::String?,
+                                                    token_endpoint: ::String?
                                                   }?
-                                                }
+                                                },
+                                                ?tags: Hash[::String, ::String]
                                               ) -> _CreateOauth2CredentialProviderResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOauth2CredentialProviderResponseSuccess
 
@@ -474,13 +521,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_workload_identity-instance_method
       def create_workload_identity: (
                                       name: ::String,
-                                      ?allowed_resource_oauth_2_return_urls: Array[::String]
+                                      ?allowed_resource_oauth_2_return_urls: Array[::String],
+                                      ?tags: Hash[::String, ::String]
                                     ) -> _CreateWorkloadIdentityResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadIdentityResponseSuccess
 
       interface _DeleteAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentRuntimeResponse]
         def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def agent_runtime_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_agent_runtime-instance_method
       def delete_agent_runtime: (
@@ -491,6 +540,8 @@ module Aws
       interface _DeleteAgentRuntimeEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentRuntimeEndpointResponse]
         def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def agent_runtime_id: () -> ::String
+        def endpoint_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_agent_runtime_endpoint-instance_method
       def delete_agent_runtime_endpoint: (
@@ -551,7 +602,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayTargetResponse]
         def gateway_arn: () -> ::String
         def target_id: () -> ::String
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_gateway_target-instance_method
@@ -706,7 +757,7 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -724,12 +775,13 @@ module Aws
         def target_id: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+        def last_synchronized_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway_target-instance_method
       def get_gateway_target: (
@@ -753,7 +805,8 @@ module Aws
         def client_secret_arn: () -> Types::Secret
         def name: () -> ::String
         def credential_provider_arn: () -> ::String
-        def credential_provider_vendor: () -> ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+        def credential_provider_vendor: () -> ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
+        def callback_url: () -> ::String
         def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput
         def created_time: () -> ::Time
         def last_updated_time: () -> ::Time
@@ -953,6 +1006,17 @@ module Aws
                                ) -> _SetTokenVaultCMKResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTokenVaultCMKResponseSuccess
 
+      interface _SynchronizeGatewayTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SynchronizeGatewayTargetsResponse]
+        def targets: () -> ::Array[Types::GatewayTarget]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#synchronize_gateway_targets-instance_method
+      def synchronize_gateway_targets: (
+                                         gateway_identifier: ::String,
+                                         target_id_list: Array[::String]
+                                       ) -> _SynchronizeGatewayTargetsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SynchronizeGatewayTargetsResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -1071,7 +1135,7 @@ module Aws
         def role_arn: () -> ::String
         def protocol_type: () -> ("MCP")
         def protocol_configuration: () -> Types::GatewayProtocolConfiguration
-        def authorizer_type: () -> ("CUSTOM_JWT")
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
         def authorizer_configuration: () -> Types::AuthorizerConfiguration
         def kms_key_arn: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -1091,8 +1155,8 @@ module Aws
                                 search_type: ("SEMANTIC")?
                               }?
                             },
-                            authorizer_type: ("CUSTOM_JWT"),
-                            authorizer_configuration: {
+                            authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                            ?authorizer_configuration: {
                               custom_jwt_authorizer: {
                                 discovery_url: ::String,
                                 allowed_audience: Array[::String]?,
@@ -1110,12 +1174,13 @@ module Aws
         def target_id: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED")
+        def status: () -> ("CREATING" | "UPDATING" | "UPDATE_UNSUCCESSFUL" | "DELETING" | "READY" | "FAILED" | "SYNCHRONIZING" | "SYNCHRONIZE_UNSUCCESSFUL")
         def status_reasons: () -> ::Array[::String]
         def name: () -> ::String
         def description: () -> ::String
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
+        def last_synchronized_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway_target-instance_method
       def update_gateway_target: (
@@ -1167,10 +1232,13 @@ module Aws
                                              },
                                            ]?
                                          }
+                                       }?,
+                                       mcp_server: {
+                                         endpoint: ::String
                                        }?
                                      }?
                                    },
-                                   credential_provider_configurations: Array[
+                                   ?credential_provider_configurations: Array[
                                      {
                                        credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY"),
                                        credential_provider: {
@@ -1250,6 +1318,26 @@ module Aws
                                          append_to_prompt: ::String,
                                          model_id: ::String
                                        }?
+                                     }?,
+                                     self_managed_configuration: {
+                                       trigger_conditions: Array[
+                                         {
+                                           message_based_trigger: {
+                                             message_count: ::Integer?
+                                           }?,
+                                           token_based_trigger: {
+                                             token_count: ::Integer?
+                                           }?,
+                                           time_based_trigger: {
+                                             idle_session_timeout: ::Integer?
+                                           }?
+                                         },
+                                       ]?,
+                                       invocation_configuration: {
+                                         topic_arn: ::String,
+                                         payload_delivery_bucket_name: ::String
+                                       },
+                                       historical_context_window_size: ::Integer?
                                      }?
                                    }?
                                  }?
@@ -1288,6 +1376,26 @@ module Aws
                                          model_id: ::String
                                        }?
                                      }?
+                                   }?,
+                                   self_managed_configuration: {
+                                     trigger_conditions: Array[
+                                       {
+                                         message_based_trigger: {
+                                           message_count: ::Integer?
+                                         }?,
+                                         token_based_trigger: {
+                                           token_count: ::Integer?
+                                         }?,
+                                         time_based_trigger: {
+                                           idle_session_timeout: ::Integer?
+                                         }?
+                                       },
+                                     ]?,
+                                     invocation_configuration: {
+                                       topic_arn: ::String?,
+                                       payload_delivery_bucket_name: ::String?
+                                     }?,
+                                     historical_context_window_size: ::Integer?
                                    }?
                                  }?
                                },
@@ -1305,8 +1413,9 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOauth2CredentialProviderResponse]
         def client_secret_arn: () -> Types::Secret
         def name: () -> ::String
-        def credential_provider_vendor: () -> ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2")
+        def credential_provider_vendor: () -> ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2")
         def credential_provider_arn: () -> ::String
+        def callback_url: () -> ::String
         def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput
         def created_time: () -> ::Time
         def last_updated_time: () -> ::Time
@@ -1314,7 +1423,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_oauth_2_credential_provider-instance_method
       def update_oauth_2_credential_provider: (
                                                 name: ::String,
-                                                credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2"),
+                                                credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2"),
                                                 oauth2_provider_config_input: {
                                                   custom_oauth_2_provider_config: {
                                                     oauth_discovery: {
@@ -1323,7 +1432,8 @@ module Aws
                                                         issuer: ::String,
                                                         authorization_endpoint: ::String,
                                                         token_endpoint: ::String,
-                                                        response_types: Array[::String]?
+                                                        response_types: Array[::String]?,
+                                                        token_endpoint_auth_methods: Array[::String]?
                                                       }?
                                                     },
                                                     client_id: ::String,
@@ -1347,7 +1457,23 @@ module Aws
                                                   }?,
                                                   microsoft_oauth_2_provider_config: {
                                                     client_id: ::String,
+                                                    client_secret: ::String,
+                                                    tenant_id: ::String?
+                                                  }?,
+                                                  atlassian_oauth_2_provider_config: {
+                                                    client_id: ::String,
                                                     client_secret: ::String
+                                                  }?,
+                                                  linkedin_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String
+                                                  }?,
+                                                  included_oauth_2_provider_config: {
+                                                    client_id: ::String,
+                                                    client_secret: ::String,
+                                                    issuer: ::String?,
+                                                    authorization_endpoint: ::String?,
+                                                    token_endpoint: ::String?
                                                   }?
                                                 }
                                               ) -> _UpdateOauth2CredentialProviderResponseSuccess

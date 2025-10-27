@@ -122,6 +122,16 @@ module Aws
                            ) -> _AssociateFleetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFleetResponseSuccess
 
+      interface _AssociateSoftwareToImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSoftwareToImageBuilderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#associate_software_to_image_builder-instance_method
+      def associate_software_to_image_builder: (
+                                                 image_builder_name: ::String,
+                                                 software_names: Array[::String]
+                                               ) -> _AssociateSoftwareToImageBuilderResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSoftwareToImageBuilderResponseSuccess
+
       interface _BatchAssociateUserStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateUserStackResult]
         def errors: () -> ::Array[Types::UserStackAssociationError]
@@ -377,7 +387,9 @@ module Aws
                                       endpoint_type: ("STREAMING"),
                                       vpce_id: ::String?
                                     },
-                                  ]
+                                  ],
+                                  ?softwares_to_install: Array[::String],
+                                  ?softwares_to_uninstall: Array[::String]
                                 ) -> _CreateImageBuilderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderResponseSuccess
 
@@ -679,6 +691,19 @@ module Aws
                                ) -> _DescribeAppBlocksResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppBlocksResponseSuccess
 
+      interface _DescribeAppLicenseUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppLicenseUsageResult]
+        def app_license_usages: () -> ::Array[Types::AdminAppLicenseUsageRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_app_license_usage-instance_method
+      def describe_app_license_usage: (
+                                        billing_period: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeAppLicenseUsageResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppLicenseUsageResponseSuccess
+
       interface _DescribeApplicationFleetAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationFleetAssociationsResult]
         def application_fleet_associations: () -> ::Array[Types::ApplicationFleetAssociation]
@@ -805,6 +830,20 @@ module Aws
                              ) -> _DescribeSessionsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSessionsResponseSuccess
 
+      interface _DescribeSoftwareAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSoftwareAssociationsResult]
+        def associated_resource: () -> ::String
+        def software_associations: () -> ::Array[Types::SoftwareAssociations]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_software_associations-instance_method
+      def describe_software_associations: (
+                                            associated_resource: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeSoftwareAssociationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSoftwareAssociationsResponseSuccess
+
       interface _DescribeStacksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStacksResult]
         def stacks: () -> ::Array[Types::Stack]
@@ -918,6 +957,16 @@ module Aws
                               ) -> _DisassociateFleetResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFleetResponseSuccess
 
+      interface _DisassociateSoftwareFromImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSoftwareFromImageBuilderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#disassociate_software_from_image_builder-instance_method
+      def disassociate_software_from_image_builder: (
+                                                      image_builder_name: ::String,
+                                                      software_names: Array[::String]
+                                                    ) -> _DisassociateSoftwareFromImageBuilderResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSoftwareFromImageBuilderResponseSuccess
+
       interface _EnableUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableUserResult]
       end
@@ -1014,6 +1063,16 @@ module Aws
                                  ?appstream_agent_version: ::String
                                ) -> _StartImageBuilderResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImageBuilderResponseSuccess
+
+      interface _StartSoftwareDeploymentToImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSoftwareDeploymentToImageBuilderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#start_software_deployment_to_image_builder-instance_method
+      def start_software_deployment_to_image_builder: (
+                                                        image_builder_name: ::String,
+                                                        ?retry_failed_deployments: bool
+                                                      ) -> _StartSoftwareDeploymentToImageBuilderResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSoftwareDeploymentToImageBuilderResponseSuccess
 
       interface _StopAppBlockBuilderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopAppBlockBuilderResult]

@@ -7806,8 +7806,8 @@ module Aws::DynamoDB
     # Throughput exceeds the current throughput quota for your account. For
     # detailed information about why the request was throttled and the ARN
     # of the impacted resource, find the [ThrottlingReason][1] field in the
-    # returned exception. Contact [Amazon Web Services Support][2] to
-    # request a quota increase.
+    # returned exception. Contact [Amazon Web ServicesSupport][2] to request
+    # a quota increase.
     #
     #
     #

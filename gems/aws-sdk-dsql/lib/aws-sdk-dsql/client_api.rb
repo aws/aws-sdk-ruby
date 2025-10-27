@@ -16,6 +16,7 @@ module Aws::DSQL
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BypassPolicyLockoutSafetyCheck = Shapes::BooleanShape.new(name: 'BypassPolicyLockoutSafetyCheck')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
     ClusterArnList = Shapes::ListShape.new(name: 'ClusterArnList')
@@ -29,12 +30,16 @@ module Aws::DSQL
     CreateClusterOutput = Shapes::StructureShape.new(name: 'CreateClusterOutput')
     DeleteClusterInput = Shapes::StructureShape.new(name: 'DeleteClusterInput')
     DeleteClusterOutput = Shapes::StructureShape.new(name: 'DeleteClusterOutput')
+    DeleteClusterPolicyInput = Shapes::StructureShape.new(name: 'DeleteClusterPolicyInput')
+    DeleteClusterPolicyOutput = Shapes::StructureShape.new(name: 'DeleteClusterPolicyOutput')
     DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     EncryptionDetails = Shapes::StructureShape.new(name: 'EncryptionDetails')
     EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     GetClusterInput = Shapes::StructureShape.new(name: 'GetClusterInput')
     GetClusterOutput = Shapes::StructureShape.new(name: 'GetClusterOutput')
+    GetClusterPolicyInput = Shapes::StructureShape.new(name: 'GetClusterPolicyInput')
+    GetClusterPolicyOutput = Shapes::StructureShape.new(name: 'GetClusterPolicyOutput')
     GetVpcEndpointServiceNameInput = Shapes::StructureShape.new(name: 'GetVpcEndpointServiceNameInput')
     GetVpcEndpointServiceNameOutput = Shapes::StructureShape.new(name: 'GetVpcEndpointServiceNameOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -48,6 +53,10 @@ module Aws::DSQL
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MultiRegionProperties = Shapes::StructureShape.new(name: 'MultiRegionProperties')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PolicyVersion = Shapes::StringShape.new(name: 'PolicyVersion')
+    PutClusterPolicyInput = Shapes::StructureShape.new(name: 'PutClusterPolicyInput')
+    PutClusterPolicyOutput = Shapes::StructureShape.new(name: 'PutClusterPolicyOutput')
     Region = Shapes::StringShape.new(name: 'Region')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
@@ -88,6 +97,8 @@ module Aws::DSQL
     CreateClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateClusterInput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
+    CreateClusterInput.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
+    CreateClusterInput.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BypassPolicyLockoutSafetyCheck, location_name: "bypassPolicyLockoutSafetyCheck"))
     CreateClusterInput.struct_class = Types::CreateClusterInput
 
     CreateClusterOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "identifier"))
@@ -109,6 +120,14 @@ module Aws::DSQL
     DeleteClusterOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: ClusterCreationTime, required: true, location_name: "creationTime"))
     DeleteClusterOutput.struct_class = Types::DeleteClusterOutput
 
+    DeleteClusterPolicyInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
+    DeleteClusterPolicyInput.add_member(:expected_policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, location: "querystring", location_name: "expected-policy-version"))
+    DeleteClusterPolicyInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken" => true}))
+    DeleteClusterPolicyInput.struct_class = Types::DeleteClusterPolicyInput
+
+    DeleteClusterPolicyOutput.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
+    DeleteClusterPolicyOutput.struct_class = Types::DeleteClusterPolicyOutput
+
     EncryptionDetails.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
     EncryptionDetails.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     EncryptionDetails.add_member(:encryption_status, Shapes::ShapeRef.new(shape: EncryptionStatus, required: true, location_name: "encryptionStatus"))
@@ -126,6 +145,13 @@ module Aws::DSQL
     GetClusterOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetClusterOutput.add_member(:encryption_details, Shapes::ShapeRef.new(shape: EncryptionDetails, location_name: "encryptionDetails"))
     GetClusterOutput.struct_class = Types::GetClusterOutput
+
+    GetClusterPolicyInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
+    GetClusterPolicyInput.struct_class = Types::GetClusterPolicyInput
+
+    GetClusterPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
+    GetClusterPolicyOutput.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
+    GetClusterPolicyOutput.struct_class = Types::GetClusterPolicyOutput
 
     GetVpcEndpointServiceNameInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
     GetVpcEndpointServiceNameInput.struct_class = Types::GetVpcEndpointServiceNameInput
@@ -154,6 +180,16 @@ module Aws::DSQL
     MultiRegionProperties.add_member(:witness_region, Shapes::ShapeRef.new(shape: Region, location_name: "witnessRegion"))
     MultiRegionProperties.add_member(:clusters, Shapes::ShapeRef.new(shape: ClusterArnList, location_name: "clusters"))
     MultiRegionProperties.struct_class = Types::MultiRegionProperties
+
+    PutClusterPolicyInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
+    PutClusterPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
+    PutClusterPolicyInput.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BypassPolicyLockoutSafetyCheck, location_name: "bypassPolicyLockoutSafetyCheck"))
+    PutClusterPolicyInput.add_member(:expected_policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, location_name: "expectedPolicyVersion"))
+    PutClusterPolicyInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    PutClusterPolicyInput.struct_class = Types::PutClusterPolicyInput
+
+    PutClusterPolicyOutput.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
+    PutClusterPolicyOutput.struct_class = Types::PutClusterPolicyOutput
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -257,6 +293,20 @@ module Aws::DSQL
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_cluster_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteClusterPolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/cluster/{identifier}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteClusterPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteClusterPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:get_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCluster"
         o.http_method = "GET"
@@ -266,6 +316,19 @@ module Aws::DSQL
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_cluster_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetClusterPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/cluster/{identifier}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetClusterPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetClusterPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -313,6 +376,20 @@ module Aws::DSQL
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_cluster_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutClusterPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/cluster/{identifier}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutClusterPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutClusterPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

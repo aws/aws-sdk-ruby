@@ -92,6 +92,7 @@ module Aws
                                 active_directory_settings: {
                                   domain_name: ::String?,
                                   domain_ipv_4_list: Array[::String]?,
+                                  domain_ipv_6_list: Array[::String]?,
                                   domain_credentials_provider: {
                                     secrets_manager_credentials_provider: {
                                       secret_id: ::String?
@@ -157,6 +158,7 @@ module Aws
                                               active_directory_settings: {
                                                 domain_name: ::String?,
                                                 domain_ipv_4_list: Array[::String]?,
+                                                domain_ipv_6_list: Array[::String]?,
                                                 domain_credentials_provider: {
                                                   secrets_manager_credentials_provider: {
                                                     secret_id: ::String?
@@ -189,6 +191,7 @@ module Aws
                                    active_directory_settings: {
                                      domain_name: ::String?,
                                      domain_ipv_4_list: Array[::String]?,
+                                     domain_ipv_6_list: Array[::String]?,
                                      domain_credentials_provider: {
                                        secrets_manager_credentials_provider: {
                                          secret_id: ::String?
@@ -278,6 +281,7 @@ module Aws
                                             active_directory_settings: {
                                               domain_name: ::String?,
                                               domain_ipv_4_list: Array[::String]?,
+                                              domain_ipv_6_list: Array[::String]?,
                                               domain_credentials_provider: {
                                                 secrets_manager_credentials_provider: {
                                                   secret_id: ::String?
@@ -327,6 +331,7 @@ module Aws
                                         active_directory_settings: {
                                           domain_name: ::String?,
                                           domain_ipv_4_list: Array[::String]?,
+                                          domain_ipv_6_list: Array[::String]?,
                                           domain_credentials_provider: {
                                             secrets_manager_credentials_provider: {
                                               secret_id: ::String?
@@ -364,6 +369,7 @@ module Aws
                                             active_directory_settings: {
                                               domain_name: ::String?,
                                               domain_ipv_4_list: Array[::String]?,
+                                              domain_ipv_6_list: Array[::String]?,
                                               domain_credentials_provider: {
                                                 secrets_manager_credentials_provider: {
                                                   secret_id: ::String?
@@ -399,6 +405,7 @@ module Aws
                                             active_directory_settings: {
                                               domain_name: ::String?,
                                               domain_ipv_4_list: Array[::String]?,
+                                              domain_ipv_6_list: Array[::String]?,
                                               domain_credentials_provider: {
                                                 secrets_manager_credentials_provider: {
                                                   secret_id: ::String?
@@ -431,6 +438,7 @@ module Aws
                                            active_directory_settings: {
                                              domain_name: ::String?,
                                              domain_ipv_4_list: Array[::String]?,
+                                             domain_ipv_6_list: Array[::String]?,
                                              domain_credentials_provider: {
                                                secrets_manager_credentials_provider: {
                                                  secret_id: ::String?
@@ -482,6 +490,7 @@ module Aws
                                                    active_directory_settings: {
                                                      domain_name: ::String?,
                                                      domain_ipv_4_list: Array[::String]?,
+                                                     domain_ipv_6_list: Array[::String]?,
                                                      domain_credentials_provider: {
                                                        secrets_manager_credentials_provider: {
                                                          secret_id: ::String?

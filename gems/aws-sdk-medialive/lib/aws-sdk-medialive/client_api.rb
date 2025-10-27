@@ -133,6 +133,8 @@ module Aws::MediaLive
     CdiInputResolution = Shapes::StringShape.new(name: 'CdiInputResolution')
     CdiInputSpecification = Shapes::StructureShape.new(name: 'CdiInputSpecification')
     Channel = Shapes::StructureShape.new(name: 'Channel')
+    ChannelAlert = Shapes::StructureShape.new(name: 'ChannelAlert')
+    ChannelAlertState = Shapes::StringShape.new(name: 'ChannelAlertState')
     ChannelClass = Shapes::StringShape.new(name: 'ChannelClass')
     ChannelConfigurationValidationError = Shapes::StructureShape.new(name: 'ChannelConfigurationValidationError')
     ChannelEgressEndpoint = Shapes::StructureShape.new(name: 'ChannelEgressEndpoint')
@@ -150,6 +152,8 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateSummary = Shapes::StructureShape.new(name: 'CloudWatchAlarmTemplateSummary')
     CloudWatchAlarmTemplateTargetResourceType = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateTargetResourceType')
     CloudWatchAlarmTemplateTreatMissingData = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateTreatMissingData')
+    ClusterAlert = Shapes::StructureShape.new(name: 'ClusterAlert')
+    ClusterAlertState = Shapes::StringShape.new(name: 'ClusterAlertState')
     ClusterNetworkSettings = Shapes::StructureShape.new(name: 'ClusterNetworkSettings')
     ClusterNetworkSettingsCreateRequest = Shapes::StructureShape.new(name: 'ClusterNetworkSettingsCreateRequest')
     ClusterNetworkSettingsUpdateRequest = Shapes::StructureShape.new(name: 'ClusterNetworkSettingsUpdateRequest')
@@ -584,6 +588,9 @@ module Aws::MediaLive
     KeyProviderSettings = Shapes::StructureShape.new(name: 'KeyProviderSettings')
     LastFrameClippingBehavior = Shapes::StringShape.new(name: 'LastFrameClippingBehavior')
     LimitExceeded = Shapes::StructureShape.new(name: 'LimitExceeded')
+    ListAlertsRequest = Shapes::StructureShape.new(name: 'ListAlertsRequest')
+    ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
+    ListAlertsResultModel = Shapes::StructureShape.new(name: 'ListAlertsResultModel')
     ListChannelPlacementGroupsRequest = Shapes::StructureShape.new(name: 'ListChannelPlacementGroupsRequest')
     ListChannelPlacementGroupsResponse = Shapes::StructureShape.new(name: 'ListChannelPlacementGroupsResponse')
     ListChannelPlacementGroupsResult = Shapes::StructureShape.new(name: 'ListChannelPlacementGroupsResult')
@@ -596,6 +603,9 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplatesRequest = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesRequest')
     ListCloudWatchAlarmTemplatesResponse = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesResponse')
     ListCloudWatchAlarmTemplatesResponseContent = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesResponseContent')
+    ListClusterAlertsRequest = Shapes::StructureShape.new(name: 'ListClusterAlertsRequest')
+    ListClusterAlertsResponse = Shapes::StructureShape.new(name: 'ListClusterAlertsResponse')
+    ListClusterAlertsResultModel = Shapes::StructureShape.new(name: 'ListClusterAlertsResultModel')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
     ListClustersResult = Shapes::StructureShape.new(name: 'ListClustersResult')
@@ -617,6 +627,9 @@ module Aws::MediaLive
     ListInputsRequest = Shapes::StructureShape.new(name: 'ListInputsRequest')
     ListInputsResponse = Shapes::StructureShape.new(name: 'ListInputsResponse')
     ListInputsResultModel = Shapes::StructureShape.new(name: 'ListInputsResultModel')
+    ListMultiplexAlertsRequest = Shapes::StructureShape.new(name: 'ListMultiplexAlertsRequest')
+    ListMultiplexAlertsResponse = Shapes::StructureShape.new(name: 'ListMultiplexAlertsResponse')
+    ListMultiplexAlertsResultModel = Shapes::StructureShape.new(name: 'ListMultiplexAlertsResultModel')
     ListMultiplexProgramsRequest = Shapes::StructureShape.new(name: 'ListMultiplexProgramsRequest')
     ListMultiplexProgramsResponse = Shapes::StructureShape.new(name: 'ListMultiplexProgramsResponse')
     ListMultiplexProgramsResultModel = Shapes::StructureShape.new(name: 'ListMultiplexProgramsResultModel')
@@ -715,6 +728,8 @@ module Aws::MediaLive
     MulticastSourceCreateRequest = Shapes::StructureShape.new(name: 'MulticastSourceCreateRequest')
     MulticastSourceUpdateRequest = Shapes::StructureShape.new(name: 'MulticastSourceUpdateRequest')
     Multiplex = Shapes::StructureShape.new(name: 'Multiplex')
+    MultiplexAlert = Shapes::StructureShape.new(name: 'MultiplexAlert')
+    MultiplexAlertState = Shapes::StringShape.new(name: 'MultiplexAlertState')
     MultiplexConfigurationValidationError = Shapes::StructureShape.new(name: 'MultiplexConfigurationValidationError')
     MultiplexContainerSettings = Shapes::StructureShape.new(name: 'MultiplexContainerSettings')
     MultiplexGroupSettings = Shapes::StructureShape.new(name: 'MultiplexGroupSettings')
@@ -1122,12 +1137,14 @@ module Aws::MediaLive
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfCaptionLanguageMapping')
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
+    __listOfChannelAlert = Shapes::ListShape.new(name: '__listOfChannelAlert')
     __listOfChannelEgressEndpoint = Shapes::ListShape.new(name: '__listOfChannelEgressEndpoint')
     __listOfChannelEngineVersionResponse = Shapes::ListShape.new(name: '__listOfChannelEngineVersionResponse')
     __listOfChannelPipelineIdToRestart = Shapes::ListShape.new(name: '__listOfChannelPipelineIdToRestart')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
     __listOfCloudWatchAlarmTemplateGroupSummary = Shapes::ListShape.new(name: '__listOfCloudWatchAlarmTemplateGroupSummary')
     __listOfCloudWatchAlarmTemplateSummary = Shapes::ListShape.new(name: '__listOfCloudWatchAlarmTemplateSummary')
+    __listOfClusterAlert = Shapes::ListShape.new(name: '__listOfClusterAlert')
     __listOfCmafIngestCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfCmafIngestCaptionLanguageMapping')
     __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
     __listOfDashRoleAudio = Shapes::ListShape.new(name: '__listOfDashRoleAudio')
@@ -1172,6 +1189,7 @@ module Aws::MediaLive
     __listOfMulticastSource = Shapes::ListShape.new(name: '__listOfMulticastSource')
     __listOfMulticastSourceCreateRequest = Shapes::ListShape.new(name: '__listOfMulticastSourceCreateRequest')
     __listOfMulticastSourceUpdateRequest = Shapes::ListShape.new(name: '__listOfMulticastSourceUpdateRequest')
+    __listOfMultiplexAlert = Shapes::ListShape.new(name: '__listOfMultiplexAlert')
     __listOfMultiplexOutputDestination = Shapes::ListShape.new(name: '__listOfMultiplexOutputDestination')
     __listOfMultiplexProgramPipelineDetail = Shapes::ListShape.new(name: '__listOfMultiplexProgramPipelineDetail')
     __listOfMultiplexProgramSummary = Shapes::ListShape.new(name: '__listOfMultiplexProgramSummary')
@@ -1645,6 +1663,15 @@ module Aws::MediaLive
     Channel.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     Channel.struct_class = Types::Channel
 
+    ChannelAlert.add_member(:alert_type, Shapes::ShapeRef.new(shape: __string, location_name: "alertType"))
+    ChannelAlert.add_member(:cleared_timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "clearedTimestamp"))
+    ChannelAlert.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    ChannelAlert.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ChannelAlert.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
+    ChannelAlert.add_member(:set_timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "setTimestamp"))
+    ChannelAlert.add_member(:state, Shapes::ShapeRef.new(shape: ChannelAlertState, location_name: "state"))
+    ChannelAlert.struct_class = Types::ChannelAlert
+
     ChannelConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ChannelConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
     ChannelConfigurationValidationError.struct_class = Types::ChannelConfigurationValidationError
@@ -1713,6 +1740,16 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateSummary.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
     CloudWatchAlarmTemplateSummary.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
     CloudWatchAlarmTemplateSummary.struct_class = Types::CloudWatchAlarmTemplateSummary
+
+    ClusterAlert.add_member(:alert_type, Shapes::ShapeRef.new(shape: __string, location_name: "alertType"))
+    ClusterAlert.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    ClusterAlert.add_member(:cleared_timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "clearedTimestamp"))
+    ClusterAlert.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    ClusterAlert.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ClusterAlert.add_member(:node_id, Shapes::ShapeRef.new(shape: __string, location_name: "nodeId"))
+    ClusterAlert.add_member(:set_timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "setTimestamp"))
+    ClusterAlert.add_member(:state, Shapes::ShapeRef.new(shape: ClusterAlertState, location_name: "state"))
+    ClusterAlert.struct_class = Types::ClusterAlert
 
     ClusterNetworkSettings.add_member(:default_route, Shapes::ShapeRef.new(shape: __string, location_name: "defaultRoute"))
     ClusterNetworkSettings.add_member(:interface_mappings, Shapes::ShapeRef.new(shape: __listOfInterfaceMapping, location_name: "interfaceMappings"))
@@ -3645,6 +3682,20 @@ module Aws::MediaLive
     LimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     LimitExceeded.struct_class = Types::LimitExceeded
 
+    ListAlertsRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    ListAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAlertsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListAlertsRequest.add_member(:state_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "stateFilter"))
+    ListAlertsRequest.struct_class = Types::ListAlertsRequest
+
+    ListAlertsResponse.add_member(:alerts, Shapes::ShapeRef.new(shape: __listOfChannelAlert, location_name: "alerts"))
+    ListAlertsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListAlertsResponse.struct_class = Types::ListAlertsResponse
+
+    ListAlertsResultModel.add_member(:alerts, Shapes::ShapeRef.new(shape: __listOfChannelAlert, location_name: "alerts"))
+    ListAlertsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListAlertsResultModel.struct_class = Types::ListAlertsResultModel
+
     ListChannelPlacementGroupsRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
     ListChannelPlacementGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListChannelPlacementGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -3698,6 +3749,20 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplatesResponseContent.add_member(:cloud_watch_alarm_templates, Shapes::ShapeRef.new(shape: __listOfCloudWatchAlarmTemplateSummary, required: true, location_name: "cloudWatchAlarmTemplates"))
     ListCloudWatchAlarmTemplatesResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
     ListCloudWatchAlarmTemplatesResponseContent.struct_class = Types::ListCloudWatchAlarmTemplatesResponseContent
+
+    ListClusterAlertsRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    ListClusterAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListClusterAlertsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListClusterAlertsRequest.add_member(:state_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "stateFilter"))
+    ListClusterAlertsRequest.struct_class = Types::ListClusterAlertsRequest
+
+    ListClusterAlertsResponse.add_member(:alerts, Shapes::ShapeRef.new(shape: __listOfClusterAlert, location_name: "alerts"))
+    ListClusterAlertsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListClusterAlertsResponse.struct_class = Types::ListClusterAlertsResponse
+
+    ListClusterAlertsResultModel.add_member(:alerts, Shapes::ShapeRef.new(shape: __listOfClusterAlert, location_name: "alerts"))
+    ListClusterAlertsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListClusterAlertsResultModel.struct_class = Types::ListClusterAlertsResultModel
 
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -3786,6 +3851,20 @@ module Aws::MediaLive
     ListInputsResultModel.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOfInput, location_name: "inputs"))
     ListInputsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListInputsResultModel.struct_class = Types::ListInputsResultModel
+
+    ListMultiplexAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMultiplexAlertsRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    ListMultiplexAlertsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListMultiplexAlertsRequest.add_member(:state_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "stateFilter"))
+    ListMultiplexAlertsRequest.struct_class = Types::ListMultiplexAlertsRequest
+
+    ListMultiplexAlertsResponse.add_member(:alerts, Shapes::ShapeRef.new(shape: __listOfMultiplexAlert, location_name: "alerts"))
+    ListMultiplexAlertsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListMultiplexAlertsResponse.struct_class = Types::ListMultiplexAlertsResponse
+
+    ListMultiplexAlertsResultModel.add_member(:alerts, Shapes::ShapeRef.new(shape: __listOfMultiplexAlert, location_name: "alerts"))
+    ListMultiplexAlertsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListMultiplexAlertsResultModel.struct_class = Types::ListMultiplexAlertsResultModel
 
     ListMultiplexProgramsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListMultiplexProgramsRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
@@ -4153,6 +4232,15 @@ module Aws::MediaLive
     Multiplex.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
     Multiplex.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Multiplex.struct_class = Types::Multiplex
+
+    MultiplexAlert.add_member(:alert_type, Shapes::ShapeRef.new(shape: __string, location_name: "alertType"))
+    MultiplexAlert.add_member(:cleared_timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "clearedTimestamp"))
+    MultiplexAlert.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    MultiplexAlert.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    MultiplexAlert.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
+    MultiplexAlert.add_member(:set_timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "setTimestamp"))
+    MultiplexAlert.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexAlertState, location_name: "state"))
+    MultiplexAlert.struct_class = Types::MultiplexAlert
 
     MultiplexConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     MultiplexConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
@@ -5659,6 +5747,8 @@ module Aws::MediaLive
 
     __listOfCaptionSelector.member = Shapes::ShapeRef.new(shape: CaptionSelector)
 
+    __listOfChannelAlert.member = Shapes::ShapeRef.new(shape: ChannelAlert)
+
     __listOfChannelEgressEndpoint.member = Shapes::ShapeRef.new(shape: ChannelEgressEndpoint)
 
     __listOfChannelEngineVersionResponse.member = Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse)
@@ -5670,6 +5760,8 @@ module Aws::MediaLive
     __listOfCloudWatchAlarmTemplateGroupSummary.member = Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateGroupSummary)
 
     __listOfCloudWatchAlarmTemplateSummary.member = Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateSummary)
+
+    __listOfClusterAlert.member = Shapes::ShapeRef.new(shape: ClusterAlert)
 
     __listOfCmafIngestCaptionLanguageMapping.member = Shapes::ShapeRef.new(shape: CmafIngestCaptionLanguageMapping)
 
@@ -5758,6 +5850,8 @@ module Aws::MediaLive
     __listOfMulticastSourceCreateRequest.member = Shapes::ShapeRef.new(shape: MulticastSourceCreateRequest)
 
     __listOfMulticastSourceUpdateRequest.member = Shapes::ShapeRef.new(shape: MulticastSourceUpdateRequest)
+
+    __listOfMultiplexAlert.member = Shapes::ShapeRef.new(shape: MultiplexAlert)
 
     __listOfMultiplexOutputDestination.member = Shapes::ShapeRef.new(shape: MultiplexOutputDestination)
 
@@ -7751,6 +7845,69 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:list_alerts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAlerts"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/channels/{channelId}/alerts"
+        o.input = Shapes::ShapeRef.new(shape: ListAlertsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAlertsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cluster_alerts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClusterAlerts"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters/{clusterId}/alerts"
+        o.input = Shapes::ShapeRef.new(shape: ListClusterAlertsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListClusterAlertsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_multiplex_alerts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMultiplexAlerts"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/alerts"
+        o.input = Shapes::ShapeRef.new(shape: ListMultiplexAlertsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMultiplexAlertsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
     end
 

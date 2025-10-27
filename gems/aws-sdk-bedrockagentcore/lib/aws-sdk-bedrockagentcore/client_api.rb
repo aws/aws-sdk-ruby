@@ -21,6 +21,7 @@ module Aws::BedrockAgentCore
     ActorSummaryList = Shapes::ListShape.new(name: 'ActorSummaryList')
     AgentCard = Shapes::DocumentShape.new(name: 'AgentCard', document: true)
     ApiKeyType = Shapes::StringShape.new(name: 'ApiKeyType')
+    AuthorizationUrlType = Shapes::StringShape.new(name: 'AuthorizationUrlType')
     AutomationStream = Shapes::StructureShape.new(name: 'AutomationStream')
     AutomationStreamStatus = Shapes::StringShape.new(name: 'AutomationStreamStatus')
     AutomationStreamUpdate = Shapes::StructureShape.new(name: 'AutomationStreamUpdate')
@@ -51,6 +52,8 @@ module Aws::BedrockAgentCore
     CodeInterpreterSessionSummary = Shapes::StructureShape.new(name: 'CodeInterpreterSessionSummary')
     CodeInterpreterSessionTimeout = Shapes::IntegerShape.new(name: 'CodeInterpreterSessionTimeout')
     CodeInterpreterStreamOutput = Shapes::StructureShape.new(name: 'CodeInterpreterStreamOutput')
+    CompleteResourceTokenAuthRequest = Shapes::StructureShape.new(name: 'CompleteResourceTokenAuthRequest')
+    CompleteResourceTokenAuthResponse = Shapes::StructureShape.new(name: 'CompleteResourceTokenAuthResponse')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Content = Shapes::UnionShape.new(name: 'Content')
     ContentBlock = Shapes::StructureShape.new(name: 'ContentBlock')
@@ -104,12 +107,15 @@ module Aws::BedrockAgentCore
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvokeAgentRuntimeRequest = Shapes::StructureShape.new(name: 'InvokeAgentRuntimeRequest')
+    InvokeAgentRuntimeRequestAccountIdString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestAccountIdString')
     InvokeAgentRuntimeRequestBaggageString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestBaggageString')
     InvokeAgentRuntimeRequestTraceIdString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceIdString')
     InvokeAgentRuntimeRequestTraceParentString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceParentString')
     InvokeAgentRuntimeRequestTraceStateString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceStateString')
     InvokeAgentRuntimeResponse = Shapes::StructureShape.new(name: 'InvokeAgentRuntimeResponse')
     InvokeCodeInterpreterRequest = Shapes::StructureShape.new(name: 'InvokeCodeInterpreterRequest')
+    InvokeCodeInterpreterRequestTraceIdString = Shapes::StringShape.new(name: 'InvokeCodeInterpreterRequestTraceIdString')
+    InvokeCodeInterpreterRequestTraceParentString = Shapes::StringShape.new(name: 'InvokeCodeInterpreterRequestTraceParentString')
     InvokeCodeInterpreterResponse = Shapes::StructureShape.new(name: 'InvokeCodeInterpreterResponse')
     LeftExpression = Shapes::UnionShape.new(name: 'LeftExpression')
     ListActorsInput = Shapes::StructureShape.new(name: 'ListActorsInput')
@@ -162,6 +168,7 @@ module Aws::BedrockAgentCore
     PayloadTypeList = Shapes::ListShape.new(name: 'PayloadTypeList')
     ProgrammingLanguage = Shapes::StringShape.new(name: 'ProgrammingLanguage')
     RequestIdentifier = Shapes::StringShape.new(name: 'RequestIdentifier')
+    RequestUri = Shapes::StringShape.new(name: 'RequestUri')
     ResourceContent = Shapes::StructureShape.new(name: 'ResourceContent')
     ResourceContentType = Shapes::StringShape.new(name: 'ResourceContentType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -180,16 +187,26 @@ module Aws::BedrockAgentCore
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
     SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
     StartBrowserSessionRequest = Shapes::StructureShape.new(name: 'StartBrowserSessionRequest')
+    StartBrowserSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartBrowserSessionRequestTraceIdString')
+    StartBrowserSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartBrowserSessionRequestTraceParentString')
     StartBrowserSessionResponse = Shapes::StructureShape.new(name: 'StartBrowserSessionResponse')
     StartCodeInterpreterSessionRequest = Shapes::StructureShape.new(name: 'StartCodeInterpreterSessionRequest')
+    StartCodeInterpreterSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceIdString')
+    StartCodeInterpreterSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceParentString')
     StartCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'StartCodeInterpreterSessionResponse')
+    State = Shapes::StringShape.new(name: 'State')
     StopBrowserSessionRequest = Shapes::StructureShape.new(name: 'StopBrowserSessionRequest')
+    StopBrowserSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StopBrowserSessionRequestTraceIdString')
+    StopBrowserSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StopBrowserSessionRequestTraceParentString')
     StopBrowserSessionResponse = Shapes::StructureShape.new(name: 'StopBrowserSessionResponse')
     StopCodeInterpreterSessionRequest = Shapes::StructureShape.new(name: 'StopCodeInterpreterSessionRequest')
+    StopCodeInterpreterSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StopCodeInterpreterSessionRequestTraceIdString')
+    StopCodeInterpreterSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StopCodeInterpreterSessionRequestTraceParentString')
     StopCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'StopCodeInterpreterSessionResponse')
     StopRuntimeSessionRequest = Shapes::StructureShape.new(name: 'StopRuntimeSessionRequest')
     StopRuntimeSessionResponse = Shapes::StructureShape.new(name: 'StopRuntimeSessionResponse')
@@ -208,6 +225,7 @@ module Aws::BedrockAgentCore
     UpdateBrowserStreamRequest = Shapes::StructureShape.new(name: 'UpdateBrowserStreamRequest')
     UpdateBrowserStreamResponse = Shapes::StructureShape.new(name: 'UpdateBrowserStreamResponse')
     UserIdType = Shapes::StringShape.new(name: 'UserIdType')
+    UserIdentifier = Shapes::UnionShape.new(name: 'UserIdentifier')
     UserTokenType = Shapes::StringShape.new(name: 'UserTokenType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
@@ -305,6 +323,12 @@ module Aws::BedrockAgentCore
     CodeInterpreterStreamOutput.add_member(:throttling_exception, Shapes::ShapeRef.new(shape: ThrottlingException, location_name: "throttlingException"))
     CodeInterpreterStreamOutput.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
     CodeInterpreterStreamOutput.struct_class = Types::CodeInterpreterStreamOutput
+
+    CompleteResourceTokenAuthRequest.add_member(:user_identifier, Shapes::ShapeRef.new(shape: UserIdentifier, required: true, location_name: "userIdentifier"))
+    CompleteResourceTokenAuthRequest.add_member(:session_uri, Shapes::ShapeRef.new(shape: RequestUri, required: true, location_name: "sessionUri"))
+    CompleteResourceTokenAuthRequest.struct_class = Types::CompleteResourceTokenAuthRequest
+
+    CompleteResourceTokenAuthResponse.struct_class = Types::CompleteResourceTokenAuthResponse
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -454,13 +478,17 @@ module Aws::BedrockAgentCore
     GetResourceOauth2TokenRequest.add_member(:resource_credential_provider_name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "resourceCredentialProviderName"))
     GetResourceOauth2TokenRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopesListType, required: true, location_name: "scopes"))
     GetResourceOauth2TokenRequest.add_member(:oauth2_flow, Shapes::ShapeRef.new(shape: Oauth2FlowType, required: true, location_name: "oauth2Flow"))
+    GetResourceOauth2TokenRequest.add_member(:session_uri, Shapes::ShapeRef.new(shape: RequestUri, location_name: "sessionUri"))
     GetResourceOauth2TokenRequest.add_member(:resource_oauth_2_return_url, Shapes::ShapeRef.new(shape: ResourceOauth2ReturnUrlType, location_name: "resourceOauth2ReturnUrl"))
     GetResourceOauth2TokenRequest.add_member(:force_authentication, Shapes::ShapeRef.new(shape: Boolean, location_name: "forceAuthentication"))
     GetResourceOauth2TokenRequest.add_member(:custom_parameters, Shapes::ShapeRef.new(shape: CustomRequestParametersType, location_name: "customParameters"))
+    GetResourceOauth2TokenRequest.add_member(:custom_state, Shapes::ShapeRef.new(shape: State, location_name: "customState"))
     GetResourceOauth2TokenRequest.struct_class = Types::GetResourceOauth2TokenRequest
 
-    GetResourceOauth2TokenResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: String, location_name: "authorizationUrl"))
+    GetResourceOauth2TokenResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: AuthorizationUrlType, location_name: "authorizationUrl"))
     GetResourceOauth2TokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessTokenType, location_name: "accessToken"))
+    GetResourceOauth2TokenResponse.add_member(:session_uri, Shapes::ShapeRef.new(shape: RequestUri, location_name: "sessionUri"))
+    GetResourceOauth2TokenResponse.add_member(:session_status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "sessionStatus"))
     GetResourceOauth2TokenResponse.struct_class = Types::GetResourceOauth2TokenResponse
 
     GetWorkloadAccessTokenForJWTRequest.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadIdentityNameType, required: true, location_name: "workloadName"))
@@ -508,6 +536,7 @@ module Aws::BedrockAgentCore
     InvokeAgentRuntimeRequest.add_member(:baggage, Shapes::ShapeRef.new(shape: InvokeAgentRuntimeRequestBaggageString, location: "header", location_name: "baggage"))
     InvokeAgentRuntimeRequest.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "agentRuntimeArn"))
     InvokeAgentRuntimeRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "qualifier"))
+    InvokeAgentRuntimeRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: InvokeAgentRuntimeRequestAccountIdString, location: "querystring", location_name: "accountId"))
     InvokeAgentRuntimeRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "payload"))
     InvokeAgentRuntimeRequest.struct_class = Types::InvokeAgentRuntimeRequest
     InvokeAgentRuntimeRequest[:payload] = :payload
@@ -529,6 +558,8 @@ module Aws::BedrockAgentCore
 
     InvokeCodeInterpreterRequest.add_member(:code_interpreter_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "codeInterpreterIdentifier"))
     InvokeCodeInterpreterRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: CodeInterpreterSessionId, location: "header", location_name: "x-amzn-code-interpreter-session-id"))
+    InvokeCodeInterpreterRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: InvokeCodeInterpreterRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    InvokeCodeInterpreterRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: InvokeCodeInterpreterRequestTraceParentString, location: "header", location_name: "traceparent"))
     InvokeCodeInterpreterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     InvokeCodeInterpreterRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: ToolArguments, location_name: "arguments"))
     InvokeCodeInterpreterRequest.struct_class = Types::InvokeCodeInterpreterRequest
@@ -737,6 +768,8 @@ module Aws::BedrockAgentCore
 
     SessionSummaryList.member = Shapes::ShapeRef.new(shape: SessionSummary)
 
+    StartBrowserSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StartBrowserSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StartBrowserSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StartBrowserSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StartBrowserSessionRequest.add_member(:browser_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "browserIdentifier"))
     StartBrowserSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     StartBrowserSessionRequest.add_member(:session_timeout_seconds, Shapes::ShapeRef.new(shape: BrowserSessionTimeout, location_name: "sessionTimeoutSeconds"))
@@ -750,6 +783,8 @@ module Aws::BedrockAgentCore
     StartBrowserSessionResponse.add_member(:streams, Shapes::ShapeRef.new(shape: BrowserSessionStream, location_name: "streams"))
     StartBrowserSessionResponse.struct_class = Types::StartBrowserSessionResponse
 
+    StartCodeInterpreterSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StartCodeInterpreterSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StartCodeInterpreterSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StartCodeInterpreterSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StartCodeInterpreterSessionRequest.add_member(:code_interpreter_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "codeInterpreterIdentifier"))
     StartCodeInterpreterSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     StartCodeInterpreterSessionRequest.add_member(:session_timeout_seconds, Shapes::ShapeRef.new(shape: CodeInterpreterSessionTimeout, location_name: "sessionTimeoutSeconds"))
@@ -761,6 +796,8 @@ module Aws::BedrockAgentCore
     StartCodeInterpreterSessionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     StartCodeInterpreterSessionResponse.struct_class = Types::StartCodeInterpreterSessionResponse
 
+    StopBrowserSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StopBrowserSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StopBrowserSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StopBrowserSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StopBrowserSessionRequest.add_member(:browser_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "browserIdentifier"))
     StopBrowserSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: BrowserSessionId, required: true, location: "querystring", location_name: "sessionId"))
     StopBrowserSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -771,6 +808,8 @@ module Aws::BedrockAgentCore
     StopBrowserSessionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     StopBrowserSessionResponse.struct_class = Types::StopBrowserSessionResponse
 
+    StopCodeInterpreterSessionRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: StopCodeInterpreterSessionRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
+    StopCodeInterpreterSessionRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: StopCodeInterpreterSessionRequestTraceParentString, location: "header", location_name: "traceparent"))
     StopCodeInterpreterSessionRequest.add_member(:code_interpreter_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "codeInterpreterIdentifier"))
     StopCodeInterpreterSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: CodeInterpreterSessionId, required: true, location: "querystring", location_name: "sessionId"))
     StopCodeInterpreterSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -839,6 +878,14 @@ module Aws::BedrockAgentCore
     UpdateBrowserStreamResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     UpdateBrowserStreamResponse.struct_class = Types::UpdateBrowserStreamResponse
 
+    UserIdentifier.add_member(:user_token, Shapes::ShapeRef.new(shape: UserTokenType, location_name: "userToken"))
+    UserIdentifier.add_member(:user_id, Shapes::ShapeRef.new(shape: UserIdType, location_name: "userId"))
+    UserIdentifier.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UserIdentifier.add_member_subclass(:user_token, Types::UserIdentifier::UserToken)
+    UserIdentifier.add_member_subclass(:user_id, Types::UserIdentifier::UserId)
+    UserIdentifier.add_member_subclass(:unknown, Types::UserIdentifier::Unknown)
+    UserIdentifier.struct_class = Types::UserIdentifier
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
@@ -866,7 +913,7 @@ module Aws::BedrockAgentCore
         "endpointPrefix" => "bedrock-agentcore",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
-        "serviceFullName" => "Amazon Bedrock AgentCore Data Plane Fronting Layer",
+        "serviceFullName" => "Amazon Bedrock AgentCore",
         "serviceId" => "Bedrock AgentCore",
         "signatureVersion" => "v4",
         "signingName" => "bedrock-agentcore",
@@ -913,6 +960,20 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:complete_resource_token_auth, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteResourceTokenAuth"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/CompleteResourceTokenAuth"
+        o.input = Shapes::ShapeRef.new(shape: CompleteResourceTokenAuthRequest)
+        o.output = Shapes::ShapeRef.new(shape: CompleteResourceTokenAuthResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_event, Seahorse::Model::Operation.new.tap do |o|

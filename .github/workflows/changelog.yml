@@ -3,6 +3,10 @@ on:
     paths:
       - 'gems/aws-sdk-core/**/*.rb'
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   changelog_comment_pr:
     runs-on: ubuntu-latest

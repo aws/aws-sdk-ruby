@@ -1432,6 +1432,30 @@ module Aws::ConnectCampaignsV2
       include Aws::Structure
     end
 
+    # Preview config
+    #
+    # @!attribute [rw] bandwidth_allocation
+    #   The bandwidth allocation of a queue resource.
+    #   @return [Float]
+    #
+    # @!attribute [rw] timeout_config
+    #   Timeout Config for preview contacts.
+    #   @return [Types::TimeoutConfig]
+    #
+    # @!attribute [rw] agent_actions
+    #   Actions that can be performed by agent during preview phase.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/PreviewConfig AWS API Documentation
+    #
+    class PreviewConfig < Struct.new(
+      :bandwidth_allocation,
+      :timeout_config,
+      :agent_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a profile outbound request
     #
     # @!attribute [rw] client_token
@@ -2130,12 +2154,17 @@ module Aws::ConnectCampaignsV2
     #   Agentless config
     #   @return [Types::AgentlessConfig]
     #
+    # @!attribute [rw] preview
+    #   Preview config
+    #   @return [Types::PreviewConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/TelephonyOutboundMode AWS API Documentation
     #
     class TelephonyOutboundMode < Struct.new(
       :progressive,
       :predictive,
       :agentless,
+      :preview,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2144,6 +2173,7 @@ module Aws::ConnectCampaignsV2
       class Progressive < TelephonyOutboundMode; end
       class Predictive < TelephonyOutboundMode; end
       class Agentless < TelephonyOutboundMode; end
+      class Preview < TelephonyOutboundMode; end
       class Unknown < TelephonyOutboundMode; end
     end
 
@@ -2200,6 +2230,20 @@ module Aws::ConnectCampaignsV2
     class TimeWindow < Struct.new(
       :open_hours,
       :restricted_periods)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Timeout Config for preview contacts.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   Timeout duration for a preview contact in seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/TimeoutConfig AWS API Documentation
+    #
+    class TimeoutConfig < Struct.new(
+      :duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

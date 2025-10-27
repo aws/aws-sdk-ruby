@@ -2201,6 +2201,14 @@ module Aws::Bedrock
     #   model responses in your application.
     #   @return [Types::AutomatedReasoningPolicyDefinition]
     #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key to use for encrypting the automated
+    #   reasoning policy and its associated artifacts. If you don't specify
+    #   a KMS key, Amazon Bedrock uses an KMS managed key for encryption.
+    #   For enhanced security and control, you can specify a customer
+    #   managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tags to associate with the Automated Reasoning policy.
     #   Tags help you organize and manage your policies.
@@ -2213,6 +2221,7 @@ module Aws::Bedrock
       :description,
       :client_request_token,
       :policy_definition,
+      :kms_key_id,
       :tags)
       SENSITIVE = [:name, :description]
       include Aws::Structure
@@ -3854,10 +3863,20 @@ module Aws::Bedrock
     #   delete.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   Specifies whether to force delete the automated reasoning policy
+    #   even if it has active resources. When `false`, Amazon Bedrock
+    #   validates if all artifacts have been deleted (e.g. policy version,
+    #   test case, test result) for a policy before deletion. When `true`,
+    #   Amazon Bedrock will delete the policy and all its artifacts without
+    #   validation. Default is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteAutomatedReasoningPolicyRequest AWS API Documentation
     #
     class DeleteAutomatedReasoningPolicyRequest < Struct.new(
-      :policy_arn)
+      :policy_arn,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5251,6 +5270,14 @@ module Aws::Bedrock
     #   The hash of the policy definition used as a concurrency token.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   automated reasoning policy and its associated artifacts. If a KMS
+    #   key is not provided during the initial
+    #   CreateAutomatedReasoningPolicyRequest, the kmsKeyArn won't be
+    #   included in the GetAutomatedReasoningPolicyResponse.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy was created.
     #   @return [Time]
@@ -5268,6 +5295,7 @@ module Aws::Bedrock
       :policy_id,
       :description,
       :definition_hash,
+      :kms_key_arn,
       :created_at,
       :updated_at)
       SENSITIVE = [:name, :description]

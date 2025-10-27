@@ -54,7 +54,7 @@ module Aws::Firehose
   autoload :EndpointProvider, 'aws-sdk-firehose/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-firehose/endpoints'
 
-  GEM_VERSION = '1.99.0'
+  GEM_VERSION = '1.100.0'
 
 end
 

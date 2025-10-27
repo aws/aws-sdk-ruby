@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.53.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.52.0 (2025-09-04)
 ------------------
 

@@ -678,6 +678,7 @@ module Aws::Bedrock
       attr_accessor description: ::String
       attr_accessor client_request_token: ::String
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition
+      attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:name, :description]
     end
@@ -1036,6 +1037,7 @@ module Aws::Bedrock
 
     class DeleteAutomatedReasoningPolicyRequest
       attr_accessor policy_arn: ::String
+      attr_accessor force: bool
       SENSITIVE: []
     end
 
@@ -1472,6 +1474,7 @@ module Aws::Bedrock
       attr_accessor policy_id: ::String
       attr_accessor description: ::String
       attr_accessor definition_hash: ::String
+      attr_accessor kms_key_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:name, :description]

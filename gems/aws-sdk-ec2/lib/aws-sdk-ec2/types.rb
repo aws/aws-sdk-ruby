@@ -1085,7 +1085,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] public_ipv_4_pool
-    #   The ID of an address pool.
+    #   The ID of an address pool that you own.
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
@@ -1106,12 +1106,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] carrier_ip
-    #   The carrier IP address. This option is only available for network
-    #   interfaces that reside in a subnet in a Wavelength Zone.
+    #   The carrier IP address. Available only for network interfaces that
+    #   reside in a subnet in a Wavelength Zone.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   The Elastic IP address.
+    #   The Amazon-owned IP address. Not available when using an address
+    #   pool that you own.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressResult AWS API Documentation
@@ -5237,6 +5238,204 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Represents a filter condition for Capacity Manager queries. Contains
+    # dimension-based filtering criteria used to narrow down metric data and
+    # dimension results.
+    #
+    # @!attribute [rw] dimension_condition
+    #   The dimension-based condition that specifies how to filter the data
+    #   based on dimension values.
+    #   @return [Types::DimensionCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerCondition AWS API Documentation
+    #
+    class CapacityManagerCondition < Struct.new(
+      :dimension_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a Capacity Manager data export
+    # configuration, including export settings, delivery status, and recent
+    # export activity.
+    #
+    # @!attribute [rw] capacity_manager_data_export_id
+    #   The unique identifier for the data export configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket where export files are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_prefix
+    #   The S3 key prefix used for organizing export files within the
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The frequency at which data exports are generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The file format of the exported data.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp when the data export configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_delivery_status
+    #   The status of the most recent export delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_delivery_status_message
+    #   A message describing the status of the most recent export delivery,
+    #   including any error details if the delivery failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_delivery_s3_location_uri
+    #   The S3 URI of the most recently delivered export file.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_delivery_time
+    #   The timestamp when the most recent export was delivered to S3.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the data export configuration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerDataExportResponse AWS API Documentation
+    #
+    class CapacityManagerDataExportResponse < Struct.new(
+      :capacity_manager_data_export_id,
+      :s3_bucket_name,
+      :s3_bucket_prefix,
+      :schedule,
+      :output_format,
+      :create_time,
+      :latest_delivery_status,
+      :latest_delivery_status_message,
+      :latest_delivery_s3_location_uri,
+      :latest_delivery_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents dimension values for capacity metrics, including resource
+    # identifiers, geographic information, and reservation details used for
+    # grouping and filtering capacity data.
+    #
+    # @!attribute [rw] resource_region
+    #   The Amazon Web Services Region where the capacity resource is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The unique identifier of the Availability Zone where the capacity
+    #   resource is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that owns the capacity resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   The EC2 instance family of the capacity resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The specific EC2 instance type of the capacity resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_platform
+    #   The platform or operating system of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_arn
+    #   The Amazon Resource Name (ARN) of the capacity reservation. This
+    #   provides a unique identifier that can be used across Amazon Web
+    #   Services services to reference the specific reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_id
+    #   The unique identifier of the capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_type
+    #   The type of capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_create_timestamp
+    #   The timestamp when the capacity reservation was originally created,
+    #   in milliseconds since epoch. This differs from the start timestamp
+    #   as reservations can be created before they become active.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reservation_start_timestamp
+    #   The timestamp when the capacity reservation becomes active and
+    #   available for use, in milliseconds since epoch. This is when the
+    #   reservation begins providing capacity.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reservation_end_timestamp
+    #   The timestamp when the capacity reservation expires and is no longer
+    #   available, in milliseconds since epoch. After this time, the
+    #   reservation will not provide any capacity.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reservation_end_date_type
+    #   The type of end date for the capacity reservation. This indicates
+    #   whether the reservation has a fixed end date, is open-ended, or
+    #   follows a specific termination pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the EC2 instances associated with this capacity
+    #   dimension. Valid values are 'default' for shared tenancy,
+    #   'dedicated' for dedicated instances, or 'host' for dedicated
+    #   hosts.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_state
+    #   The current state of the capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_instance_match_criteria
+    #   The instance matching criteria for the capacity reservation,
+    #   determining how instances are matched to the reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_unused_financial_owner
+    #   The Amazon Web Services account ID that is financially responsible
+    #   for unused capacity reservation costs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerDimension AWS API Documentation
+    #
+    class CapacityManagerDimension < Struct.new(
+      :resource_region,
+      :availability_zone_id,
+      :account_id,
+      :instance_family,
+      :instance_type,
+      :instance_platform,
+      :reservation_arn,
+      :reservation_id,
+      :reservation_type,
+      :reservation_create_timestamp,
+      :reservation_start_timestamp,
+      :reservation_end_timestamp,
+      :reservation_end_date_type,
+      :tenancy,
+      :reservation_state,
+      :reservation_instance_match_criteria,
+      :reservation_unused_financial_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Capacity Reservation.
     #
     # @!attribute [rw] capacity_reservation_id
@@ -7848,6 +8047,133 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_volume_id
+    #   The ID of the source EBS volume to copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume copy. Required for `io1` and `io2` volumes. Optional for
+    #   `gp3` volumes. Omit for all other volume types. Full provisioned
+    #   IOPS performance can be achieved only once the volume copy is fully
+    #   initialized.
+    #
+    #   Valid ranges:
+    #
+    #   * gp3: `3,000 `(*default*)` - 80,000` IOPS
+    #
+    #   * io1: `100 - 64,000` IOPS
+    #
+    #   * io2: `100 - 256,000` IOPS
+    #
+    #   <note markdown="1"> [ Instances built on the Nitro System][1] can support up to 256,000
+    #   IOPS. Other instances can support up to 32,000 IOPS.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size
+    #   The size of the volume copy, in GiBs. The size must be equal to or
+    #   greater than the size of the source volume. If not specified, the
+    #   size defaults to the size of the source volume.
+    #
+    #   Maximum supported sizes:
+    #
+    #   * gp2: `16,384` GiB
+    #
+    #   * gp3: `65,536` GiB
+    #
+    #   * io1: `16,384` GiB
+    #
+    #   * io2: `65,536` GiB
+    #
+    #   * st1 and sc1: `16,384` GiB
+    #
+    #   * standard: `1024` GiB
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type for the volume copy. If not specified, the volume
+    #   type defaults to `gp2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the volume copy during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] multi_attach_enabled
+    #   Indicates whether to enable Amazon EBS Multi-Attach for the volume
+    #   copy. If you enable Multi-Attach, you can attach the volume to up to
+    #   16 Nitro instances in the same Availability Zone simultaneously.
+    #   Supported with `io1` and `io2` volumes only. For more information,
+    #   see [ Amazon EBS Multi-Attach][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput to provision for the volume copy, in MiB/s. Supported
+    #   for `gp3` volumes only. Omit for all other volume types. Full
+    #   provisioned throughput performance can be achieved only once the
+    #   volume copy is fully initialized.
+    #
+    #   Valid Range: `125 - 2000` MiB/s
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [ Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyVolumesRequest AWS API Documentation
+    #
+    class CopyVolumesRequest < Struct.new(
+      :source_volume_id,
+      :iops,
+      :size,
+      :volume_type,
+      :dry_run,
+      :tag_specifications,
+      :multi_attach_enabled,
+      :throughput,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volumes
+    #   Information about the volume copy.
+    #   @return [Array<Types::Volume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyVolumesResult AWS API Documentation
+    #
+    class CopyVolumesResult < Struct.new(
+      :volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The CPU options for the instance.
     #
     # @!attribute [rw] core_count
@@ -7952,6 +8278,75 @@ module Aws::EC2
     #
     class CpuPerformanceFactorRequest < Struct.new(
       :references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket where the capacity data export files will
+    #   be delivered. The bucket must exist and you must have write
+    #   permissions to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_prefix
+    #   The S3 key prefix for the exported data files. This allows you to
+    #   organize exports in a specific folder structure within your bucket.
+    #   If not specified, files are placed at the bucket root.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The frequency at which data exports are generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The file format for the exported data. Parquet format is recommended
+    #   for large datasets and better compression.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see Ensure
+    #   Idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the data export configuration. You can tag the
+    #   export for organization and cost tracking purposes.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityManagerDataExportRequest AWS API Documentation
+    #
+    class CreateCapacityManagerDataExportRequest < Struct.new(
+      :s3_bucket_name,
+      :s3_bucket_prefix,
+      :schedule,
+      :output_format,
+      :client_token,
+      :dry_run,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_data_export_id
+    #   The unique identifier for the created data export configuration. Use
+    #   this ID to reference the export in other API calls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityManagerDataExportResult AWS API Documentation
+    #
+    class CreateCapacityManagerDataExportResult < Struct.new(
+      :capacity_manager_data_export_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14887,27 +15282,22 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS). For `gp3`, `io1`,
-    #   and `io2` volumes, this represents the number of IOPS that are
-    #   provisioned for the volume. For `gp2` volumes, this represents the
-    #   baseline performance of the volume and the rate at which the volume
-    #   accumulates I/O credits for bursting.
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume. Required for `io1` and `io2` volumes. Optional for `gp3`
+    #   volumes. Omit for all other volume types.
     #
-    #   The following are the supported values for each volume type:
+    #   Valid ranges:
     #
-    #   * `gp3`: 3,000 - 80,000 IOPS
+    #   * gp3: `3,000 `(*default*)` - 80,000` IOPS
     #
-    #   * `io1`: 100 - 64,000 IOPS
+    #   * io1: `100 - 64,000` IOPS
     #
-    #   * `io2`: 100 - 256,000 IOPS
+    #   * io2: `100 - 256,000` IOPS
     #
-    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
-    #   built on the Nitro System][1]. On other instances, you can achieve
-    #   performance up to 32,000 IOPS.
+    #   <note markdown="1"> [ Instances built on the Nitro System][1] can support up to 256,000
+    #   IOPS. Other instances can support up to 32,000 IOPS.
     #
-    #   This parameter is required for `io1` and `io2` volumes. The default
-    #   for `gp3` volumes is 3,000 IOPS. This parameter is not supported for
-    #   `gp2`, `st1`, `sc1`, or `standard` volumes.
+    #    </note>
     #
     #
     #
@@ -14951,22 +15341,22 @@ module Aws::EC2
     # @!attribute [rw] size
     #   The size of the volume, in GiBs. You must specify either a snapshot
     #   ID or a volume size. If you specify a snapshot, the default is the
-    #   snapshot size. You can specify a volume size that is equal to or
+    #   snapshot size, and you can specify a volume size that is equal to or
     #   larger than the snapshot size.
     #
-    #   The following are the supported volumes sizes for each volume type:
+    #   Valid sizes:
     #
-    #   * `gp2`: 1 - 16,384 GiB
+    #   * gp2: `1 - 16,384` GiB
     #
-    #   * `gp3`: 1 - 65,536 GiB
+    #   * gp3: `1 - 65,536` GiB
     #
-    #   * `io1`: 4 - 16,384 GiB
+    #   * io1: `4 - 16,384` GiB
     #
-    #   * `io2`: 4 - 65,536 GiB
+    #   * io2: `4 - 65,536` GiB
     #
-    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #   * st1 and sc1: `125 - 16,384` GiB
     #
-    #   * `standard`: 1 - 1024 GiB
+    #   * standard: `1 - 1024` GiB
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -15019,12 +15409,10 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] throughput
-    #   The throughput to provision for a volume, with a maximum of 2,000
-    #   MiB/s.
+    #   The throughput to provision for the volume, in MiB/s. Supported for
+    #   `gp3` volumes only. Omit for all other volume types.
     #
-    #   This parameter is valid only for `gp3` volumes.
-    #
-    #   Valid Range: Minimum value of 125. Maximum value of 2,000.
+    #   Valid Range: `125 - 2000` MiB/s
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -16076,6 +16464,38 @@ module Aws::EC2
       :end_time,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_data_export_id
+    #   The unique identifier of the data export configuration to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCapacityManagerDataExportRequest AWS API Documentation
+    #
+    class DeleteCapacityManagerDataExportRequest < Struct.new(
+      :capacity_manager_data_export_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_data_export_id
+    #   The unique identifier of the deleted data export configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCapacityManagerDataExportResult AWS API Documentation
+    #
+    class DeleteCapacityManagerDataExportResult < Struct.new(
+      :capacity_manager_data_export_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17508,7 +17928,7 @@ module Aws::EC2
     # Contains the output for DeleteNetworkInterfacePermission.
     #
     # @!attribute [rw] return
-    #   Returns `true` if the request succeeds, otherwise returns an error.
+    #   Is `true` if the request succeeds and an error otherwise.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfacePermissionResult AWS API Documentation
@@ -20215,6 +20635,64 @@ module Aws::EC2
     #
     class DescribeCapacityBlocksResult < Struct.new(
       :capacity_blocks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_data_export_ids
+    #   The IDs of the data export configurations to describe. If not
+    #   specified, all export configurations are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. If not
+    #   specified, up to 1000 results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use this value in a
+    #   subsequent call to retrieve additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to narrow the results. Supported filters include
+    #   export status, creation date, and S3 bucket name.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityManagerDataExportsRequest AWS API Documentation
+    #
+    class DescribeCapacityManagerDataExportsRequest < Struct.new(
+      :capacity_manager_data_export_ids,
+      :max_results,
+      :next_token,
+      :dry_run,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_data_exports
+    #   Information about the data export configurations, including export
+    #   settings, delivery status, and recent activity.
+    #   @return [Array<Types::CapacityManagerDataExportResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityManagerDataExportsResult AWS API Documentation
+    #
+    class DescribeCapacityManagerDataExportsResult < Struct.new(
+      :capacity_manager_data_exports,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -27082,6 +27560,9 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone of the network
     #     interface.
     #
+    #   * `availability-zone-id` - The ID of the Availability Zone of the
+    #     network interface.
+    #
     #   * `description` - The description of the network interface.
     #
     #   * `group-id` - The ID of a security group associated with the
@@ -33278,6 +33759,34 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Specifies a condition for filtering capacity data based on dimension
+    # values. Used to create precise filters for metric queries and
+    # dimension lookups.
+    #
+    # @!attribute [rw] dimension
+    #   The name of the dimension to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison
+    #   The comparison operator to use for the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The list of values to match against the specified dimension. For
+    #   'equals' comparison, only the first value is used. For 'in'
+    #   comparison, any matching value will satisfy the condition.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DimensionCondition AWS API Documentation
+    #
+    class DimensionCondition < Struct.new(
+      :dimension,
+      :comparison,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Active Directory.
     #
     # @!attribute [rw] directory_id
@@ -33411,6 +33920,48 @@ module Aws::EC2
     #
     class DisableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
       :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableCapacityManagerRequest AWS API Documentation
+    #
+    class DisableCapacityManagerRequest < Struct.new(
+      :dry_run,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_status
+    #   The current status of Capacity Manager after the disable operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizations_access
+    #   Indicates whether Organizations access is enabled. This will be
+    #   `false` after disabling Capacity Manager.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableCapacityManagerResult AWS API Documentation
+    #
+    class DisableCapacityManagerResult < Struct.new(
+      :capacity_manager_status,
+      :organizations_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34700,8 +35251,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] return
-    #   Returns `true` if the request succeeds; otherwise, it returns an
-    #   error.
+    #   Is `true` if the request succeeds and an error otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
@@ -35168,7 +35718,8 @@ module Aws::EC2
     #   snapshot blocks from Amazon S3 to the volume. This is also known as
     #   *volume initialization*. Specifying a volume initialization rate
     #   ensures that the volume is initialized at a predictable and
-    #   consistent rate after creation.
+    #   consistent rate after creation. For more information, see
+    #   [Initialize Amazon EBS volumes][1] in the *Amazon EC2 User Guide*.
     #
     #   This parameter is supported only for volumes created from snapshots.
     #   Omit this parameter if:
@@ -35187,10 +35738,8 @@ module Aws::EC2
     #   * You want to create a volume that is initialized at the default
     #     rate.
     #
-    #   For more information, see [ Initialize Amazon EBS volumes][1] in the
-    #   *Amazon EC2 User Guide*.
-    #
-    #   This parameter is not supported when using [CreateImage][2].
+    #   This parameter is not supported when using [CreateImage][2] and
+    #   [DescribeImages][3].
     #
     #   Valid range: 100 - 300 MiB/s
     #
@@ -35198,6 +35747,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone_id
@@ -35516,7 +36066,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The EC2 Instance Connect Endpoint.
+    # Describes an EC2 Instance Connect Endpoint.
     #
     # @!attribute [rw] owner_id
     #   The ID of the Amazon Web Services account that created the EC2
@@ -35576,15 +36126,15 @@ module Aws::EC2
     #
     # @!attribute [rw] preserve_client_ip
     #   Indicates whether your client's IP address is preserved as the
-    #   source. The value is `true` or `false`.
+    #   source when you connect to a resource. The following are the
+    #   possible values.
     #
-    #   * If `true`, your client's IP address is used when you connect to a
-    #     resource.
+    #   * `true` - Use the IP address of the client. Your instance must have
+    #     an IPv4 address.
     #
-    #   * If `false`, the elastic network interface IP address is used when
-    #     you connect to a resource.
+    #   * `false` - Use the IP address of the network interface.
     #
-    #   Default: `true`
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] security_group_ids
@@ -36089,6 +36639,55 @@ module Aws::EC2
     #
     class EnableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
       :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organizations_access
+    #   Specifies whether to enable cross-account access for Amazon Web
+    #   Services Organizations. When enabled, Capacity Manager can aggregate
+    #   data from all accounts in your organization. Default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableCapacityManagerRequest AWS API Documentation
+    #
+    class EnableCapacityManagerRequest < Struct.new(
+      :organizations_access,
+      :dry_run,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_status
+    #   The current status of Capacity Manager after the enable operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizations_access
+    #   Indicates whether Organizations access is enabled for cross-account
+    #   data aggregation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableCapacityManagerResult AWS API Documentation
+    #
+    class EnableCapacityManagerResult < Struct.new(
+      :capacity_manager_status,
+      :organizations_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39817,6 +40416,237 @@ module Aws::EC2
     #
     class GetAwsNetworkPerformanceDataResult < Struct.new(
       :data_responses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerAttributesRequest AWS API Documentation
+    #
+    class GetCapacityManagerAttributesRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_status
+    #   The current status of Capacity Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizations_access
+    #   Indicates whether Organizations access is enabled for cross-account
+    #   data aggregation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_export_count
+    #   The number of active data export configurations for this account.
+    #   This count includes all data exports regardless of their current
+    #   delivery status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ingestion_status
+    #   The current data ingestion status. Initial ingestion may take
+    #   several hours after enabling Capacity Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_status_message
+    #   A descriptive message providing additional details about the current
+    #   ingestion status. This may include error information if ingestion
+    #   has failed or progress details during initial setup.
+    #   @return [String]
+    #
+    # @!attribute [rw] earliest_datapoint_timestamp
+    #   The timestamp of the earliest data point available in Capacity
+    #   Manager, in milliseconds since epoch. This indicates how far back
+    #   historical data is available for queries.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_datapoint_timestamp
+    #   The timestamp of the most recent data point ingested by Capacity
+    #   Manager, in milliseconds since epoch. This indicates how current
+    #   your capacity data is.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerAttributesResult AWS API Documentation
+    #
+    class GetCapacityManagerAttributesResult < Struct.new(
+      :capacity_manager_status,
+      :organizations_access,
+      :data_export_count,
+      :ingestion_status,
+      :ingestion_status_message,
+      :earliest_datapoint_timestamp,
+      :latest_datapoint_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_names
+    #   The names of the metrics to retrieve. Maximum of 10 metrics per
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the metric data query, in ISO 8601 format. The
+    #   time range (end time - start time) must be a multiple of the
+    #   specified period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the metric data query, in ISO 8601 format. If the
+    #   end time is beyond the latest ingested data, it will be
+    #   automatically adjusted to the latest available data point.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period
+    #   The granularity, in seconds, of the returned data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_by
+    #   The dimensions by which to group the metric data. This determines
+    #   how the data is aggregated and returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter_by
+    #   Conditions to filter the metric data. Each filter specifies a
+    #   dimension, comparison operator ('equals', 'in'), and values to
+    #   match against.
+    #   @return [Array<Types::CapacityManagerCondition>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of data points to return. Valid range is 1 to
+    #   100,000. Use with NextToken for pagination of large result sets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use this value in a
+    #   subsequent call to retrieve additional data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerMetricDataRequest AWS API Documentation
+    #
+    class GetCapacityManagerMetricDataRequest < Struct.new(
+      :metric_names,
+      :start_time,
+      :end_time,
+      :period,
+      :group_by,
+      :filter_by,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_data_results
+    #   The metric data points returned by the query. Each result contains
+    #   dimension values, timestamp, and metric values with their associated
+    #   statistics.
+    #   @return [Array<Types::MetricDataResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerMetricDataResult AWS API Documentation
+    #
+    class GetCapacityManagerMetricDataResult < Struct.new(
+      :metric_data_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by
+    #   The dimensions to group by when retrieving available dimension
+    #   values. This determines which dimension combinations are returned.
+    #   Required parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter_by
+    #   Conditions to filter which dimension values are returned. Each
+    #   filter specifies a dimension, comparison operator, and values to
+    #   match against.
+    #   @return [Array<Types::CapacityManagerCondition>]
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the dimension query, in ISO 8601 format. Only
+    #   dimensions with data in this time range will be returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the dimension query, in ISO 8601 format. Only
+    #   dimensions with data in this time range will be returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metric_names
+    #   The metric names to use as an additional filter when retrieving
+    #   dimensions. Only dimensions that have data for these metrics will be
+    #   returned. Required parameter with maximum size of 1 for v1.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of dimension combinations to return. Valid range
+    #   is 1 to 1000. Use with NextToken for pagination.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use this value in a
+    #   subsequent call to retrieve additional dimension values.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerMetricDimensionsRequest AWS API Documentation
+    #
+    class GetCapacityManagerMetricDimensionsRequest < Struct.new(
+      :group_by,
+      :filter_by,
+      :start_time,
+      :end_time,
+      :metric_names,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_dimension_results
+    #   The available dimension combinations that have data within the
+    #   specified time range and filters.
+    #   @return [Array<Types::CapacityManagerDimension>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerMetricDimensionsResult AWS API Documentation
+    #
+    class GetCapacityManagerMetricDimensionsResult < Struct.new(
+      :metric_dimension_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -45376,6 +46206,9 @@ module Aws::EC2
     #
     #   * `provisioned-rate` - Volume initialized using an Amazon EBS
     #     Provisioned Rate for Volume Initialization.
+    #
+    #   * `volume-copy` - Volume copy initialized at the rate for volume
+    #     copies.
     #   @return [String]
     #
     # @!attribute [rw] progress
@@ -54348,6 +55181,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains a single data point from a capacity metrics query, including
+    # the dimension values, timestamp, and metric values for that specific
+    # combination.
+    #
+    # @!attribute [rw] dimension
+    #   The dimension values that identify this specific data point, such as
+    #   account ID, region, and instance family.
+    #   @return [Types::CapacityManagerDimension]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp for this data point, indicating when the capacity
+    #   usage occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metric_values
+    #   The metric values and statistics for this data point, containing the
+    #   actual capacity usage numbers.
+    #   @return [Array<Types::MetricValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MetricDataResult AWS API Documentation
+    #
+    class MetricDataResult < Struct.new(
+      :dimension,
+      :timestamp,
+      :metric_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates whether the network was healthy or degraded at a particular
     # point. The value is aggregated from the `startDate` to the `endDate`.
     # Currently only `five_minutes` is supported.
@@ -54377,6 +55239,27 @@ module Aws::EC2
       :end_date,
       :value,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single metric value with its associated statistic, such
+    # as the sum or average of unused capacity hours.
+    #
+    # @!attribute [rw] metric
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The numerical value of the metric for the specified statistic and
+    #   time period.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MetricValue AWS API Documentation
+    #
+    class MetricValue < Struct.new(
+      :metric,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55514,22 +56397,14 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] preserve_client_ip
-    #   Indicates whether the client IP address is preserved as the source.
-    #   The following are the possible values.
+    #   Indicates whether the client IP address is preserved as the source
+    #   when you connect to a resource. The following are the possible
+    #   values.
     #
-    #   * `true` - Use the client IP address as the source.
+    #   * `true` - Use the IP address of the client. Your instance must have
+    #     an IPv4 address.
     #
-    #   * `false` - Use the network interface IP address as the source.
-    #
-    #   <note markdown="1"> `PreserveClientIp=true` is only supported on IPv4 EC2 Instance
-    #   Connect Endpoints. If modifying `PreserveClientIp` to `true`, either
-    #   the endpoint's existing `IpAddressType` must be `ipv4`, or if
-    #   modifying `IpAddressType` in the same request, the new value must be
-    #   `ipv4`.
-    #
-    #    </note>
-    #
-    #   Default: `false`
+    #   * `false` - Use the IP address of the network interface.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceConnectEndpointRequest AWS API Documentation
@@ -55545,9 +56420,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] return
-    #   The return value of the request. Returns `true` if the specified
-    #   product code is owned by the requester and associated with the
-    #   specified instance.
+    #   Is `true` if the request succeeds and an error otherwise.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceConnectEndpointResult AWS API Documentation
@@ -58637,9 +59510,10 @@ module Aws::EC2
     #
     #   * `io2`: 100 - 256,000 IOPS
     #
-    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
-    #   built on the Nitro System][1]. On other instances, you can achieve
-    #   performance up to 32,000 IOPS.
+    #   <note markdown="1"> [ Instances built on the Nitro System][1] can support up to 256,000
+    #   IOPS. Other instances can support up to 32,000 IOPS.
+    #
+    #    </note>
     #
     #   Default: The existing value is retained if you keep the same volume
     #   type. If you change the volume type to `io1`, `io2`, or `gp3`, the
@@ -60891,6 +61765,10 @@ module Aws::EC2
     #   The subnets associated with this network interface.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
@@ -60924,7 +61802,8 @@ module Aws::EC2
       :ipv_6_native,
       :ipv_6_address,
       :operator,
-      :associated_subnets)
+      :associated_subnets,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -76567,6 +77446,55 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] organizations_access
+    #   Specifies whether to enable or disable cross-account access for
+    #   Amazon Web Services Organizations. When enabled, Capacity Manager
+    #   aggregates data from all accounts in your organization.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateCapacityManagerOrganizationsAccessRequest AWS API Documentation
+    #
+    class UpdateCapacityManagerOrganizationsAccessRequest < Struct.new(
+      :organizations_access,
+      :dry_run,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_status
+    #   The current status of Capacity Manager after the update operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizations_access
+    #   The updated Organizations access setting indicating whether
+    #   cross-account data aggregation is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateCapacityManagerOrganizationsAccessResult AWS API Documentation
+    #
+    class UpdateCapacityManagerOrganizationsAccessResult < Struct.new(
+      :capacity_manager_status,
+      :organizations_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -77924,6 +78852,11 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
+    # @!attribute [rw] source_volume_id
+    #   The ID of the source volume from which the volume copy was created.
+    #   Only for volume copies.
+    #   @return [String]
+    #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS). For `gp3`, `io1`,
     #   and `io2` volumes, this represents the number of IOPS that are
@@ -78022,6 +78955,7 @@ module Aws::EC2
     class Volume < Struct.new(
       :availability_zone_id,
       :outpost_arn,
+      :source_volume_id,
       :iops,
       :tags,
       :volume_type,

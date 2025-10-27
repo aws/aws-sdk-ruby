@@ -7,7 +7,7 @@ module Aws
   module S3
     describe FileDownloader do
       let(:client) { S3::Client.new(stub_responses: true) }
-      let(:subject) { FileDownloader.new(client: client) }
+      let(:subject) { FileDownloader.new(client: client, executor: DefaultExecutor.new) }
       let(:tmpdir) { Dir.tmpdir }
 
       describe '#initialize' do
@@ -198,7 +198,6 @@ module Aws
 
           it 'raises when checksum validation fails on multipart object' do
             client.stub_responses(:get_object, { body: 'body', checksum_sha1: 'invalid' })
-            expect(Thread).to receive(:new).and_yield.and_return(double(value: nil))
             expect { subject.download(path, parts_params) }.to raise_error(Aws::Errors::ChecksumError)
           end
 
@@ -208,7 +207,6 @@ module Aws
               expect(ctx.params[:if_match]).to eq('test-etag')
               'PreconditionFailed'
             })
-            expect(Thread).to receive(:new).and_yield.and_return(double(value: nil))
             expect { subject.download(path, range_params.merge(chunk_size: one_meg, mode: 'get_range')) }
               .to raise_error(Aws::S3::Errors::PreconditionFailed)
           end
@@ -219,8 +217,6 @@ module Aws
               expect(ctx.params[:if_match]).to eq('test-etag')
               'PreconditionFailed'
             })
-
-            expect(Thread).to receive(:new).and_yield.and_return(double(value: nil))
             expect { subject.download(path, parts_params) }.to raise_error(Aws::S3::Errors::PreconditionFailed)
           end
 
@@ -246,7 +242,6 @@ module Aws
 
           it 'raises when range validation fails' do
             client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
-            expect(Thread).to receive(:new).and_yield.and_return(double(value: nil))
             expect { subject.download(path, range_params.merge(mode: 'get_range', chunk_size: one_meg)) }
               .to raise_error(Aws::S3::MultipartDownloadError)
           end
@@ -263,7 +258,6 @@ module Aws
               responses[context.params[:range]]
             })
 
-            expect(Thread).to receive(:new).and_yield.and_return(double(value: nil))
             expect { subject.download(path, range_params.merge(chunk_size: 5 * one_meg, mode: 'get_range')) }
               .to raise_error(Aws::S3::MultipartDownloadError)
             expect(File.exist?(path)).to be(true)

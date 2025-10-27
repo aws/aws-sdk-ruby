@@ -404,6 +404,32 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_identifier
+    #   The OAuth2.0 token or user ID that was used to generate the workload
+    #   access token used for initiating the user authorization flow to
+    #   retrieve OAuth2.0 tokens.
+    #   @return [Types::UserIdentifier]
+    #
+    # @!attribute [rw] session_uri
+    #   Unique identifier for the user's authentication session for
+    #   retrieving OAuth2 tokens. This ID tracks the authorization flow
+    #   state across multiple requests and responses during the OAuth2
+    #   authentication process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CompleteResourceTokenAuthRequest AWS API Documentation
+    #
+    class CompleteResourceTokenAuthRequest < Struct.new(
+      :user_identifier,
+      :session_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CompleteResourceTokenAuthResponse AWS API Documentation
+    #
+    class CompleteResourceTokenAuthResponse < Aws::EmptyStructure; end
+
     # The exception that occurs when the request conflicts with the current
     # state of the resource. This can happen when trying to modify a
     # resource that is currently being modified by another request, or when
@@ -1058,6 +1084,13 @@ module Aws::BedrockAgentCore
     #   The type of flow to be performed.
     #   @return [String]
     #
+    # @!attribute [rw] session_uri
+    #   Unique identifier for the user's authentication session for
+    #   retrieving OAuth2 tokens. This ID tracks the authorization flow
+    #   state across multiple requests and responses during the OAuth2
+    #   authentication process.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_oauth_2_return_url
     #   The callback URL to redirect to after the OAuth 2.0 token retrieval
     #   is complete. This URL must be one of the provided URLs configured
@@ -1076,6 +1109,13 @@ module Aws::BedrockAgentCore
     #   override them.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] custom_state
+    #   An opaque string that will be sent back to the callback URL provided
+    #   in resourceOauth2ReturnUrl. This state should be used to protect the
+    #   callback URL of your application against CSRF attacks by ensuring
+    #   the response corresponds to the original request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceOauth2TokenRequest AWS API Documentation
     #
     class GetResourceOauth2TokenRequest < Struct.new(
@@ -1083,10 +1123,12 @@ module Aws::BedrockAgentCore
       :resource_credential_provider_name,
       :scopes,
       :oauth2_flow,
+      :session_uri,
       :resource_oauth_2_return_url,
       :force_authentication,
-      :custom_parameters)
-      SENSITIVE = [:workload_identity_token, :custom_parameters]
+      :custom_parameters,
+      :custom_state)
+      SENSITIVE = [:workload_identity_token, :custom_parameters, :custom_state]
       include Aws::Structure
     end
 
@@ -1099,12 +1141,26 @@ module Aws::BedrockAgentCore
     #   The OAuth 2.0 access token to use.
     #   @return [String]
     #
+    # @!attribute [rw] session_uri
+    #   Unique identifier for the user's authorization session for
+    #   retrieving OAuth2 tokens. This matches the sessionId from the
+    #   request and can be used to track the session state.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_status
+    #   Status indicating whether the user's authorization session is in
+    #   progress or has failed. This helps determine the next steps in the
+    #   OAuth2 authentication flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceOauth2TokenResponse AWS API Documentation
     #
     class GetResourceOauth2TokenResponse < Struct.new(
       :authorization_url,
-      :access_token)
-      SENSITIVE = [:access_token]
+      :access_token,
+      :session_uri,
+      :session_status)
+      SENSITIVE = [:authorization_url, :access_token]
       include Aws::Structure
     end
 
@@ -1308,6 +1364,11 @@ module Aws::BedrockAgentCore
     #   runtime.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The identifier of the Amazon Web Services account for the agent
+    #   runtime resource.
+    #   @return [String]
+    #
     # @!attribute [rw] payload
     #   The input data to send to the agent runtime. The format of this data
     #   depends on the specific agent configuration and must match the
@@ -1330,6 +1391,7 @@ module Aws::BedrockAgentCore
       :baggage,
       :agent_runtime_arn,
       :qualifier,
+      :account_id,
       :payload)
       SENSITIVE = [:payload]
       include Aws::Structure
@@ -1412,6 +1474,14 @@ module Aws::BedrockAgentCore
     #   stopped, the request will fail.
     #   @return [String]
     #
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the code interpreter to invoke.
     #   @return [String]
@@ -1429,6 +1499,8 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterRequest < Struct.new(
       :code_interpreter_identifier,
       :session_id,
+      :trace_id,
+      :trace_parent,
       :name,
       :arguments)
       SENSITIVE = []
@@ -2328,6 +2400,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_identifier
     #   The unique identifier of the browser to use for this session. This
     #   identifier specifies which browser environment to initialize for the
@@ -2367,6 +2447,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartBrowserSessionRequest AWS API Documentation
     #
     class StartBrowserSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :browser_identifier,
       :name,
       :session_timeout_seconds,
@@ -2404,6 +2486,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter to use for this
     #   session. This identifier specifies which code interpreter
@@ -2437,6 +2527,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartCodeInterpreterSessionRequest AWS API Documentation
     #
     class StartCodeInterpreterSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :code_interpreter_identifier,
       :name,
       :session_timeout_seconds,
@@ -2467,6 +2559,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_identifier
     #   The unique identifier of the browser associated with the session.
     #   @return [String]
@@ -2488,6 +2588,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopBrowserSessionRequest AWS API Documentation
     #
     class StopBrowserSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :browser_identifier,
       :session_id,
       :client_token)
@@ -2517,6 +2619,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
     #   session.
@@ -2539,6 +2649,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopCodeInterpreterSessionRequest AWS API Documentation
     #
     class StopCodeInterpreterSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :code_interpreter_identifier,
       :session_id,
       :client_token)
@@ -2847,6 +2959,36 @@ module Aws::BedrockAgentCore
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The OAuth2.0 token or user ID that was used to generate the workload
+    # access token used for initiating the user authorization flow to
+    # retrieve OAuth2.0 tokens.
+    #
+    # @note UserIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] user_token
+    #   The OAuth2.0 token issued by the user’s identity provider
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user for whom you have retrieved a workload access
+    #   token for
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/UserIdentifier AWS API Documentation
+    #
+    class UserIdentifier < Struct.new(
+      :user_token,
+      :user_id,
+      :unknown)
+      SENSITIVE = [:user_token]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserToken < UserIdentifier; end
+      class UserId < UserIdentifier; end
+      class Unknown < UserIdentifier; end
     end
 
     # The exception that occurs when the input fails to satisfy the

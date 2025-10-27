@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.332.0 (2025-10-24)
+------------------
+
+* Feature - Added inference components model data caching feature
+
+1.331.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.330.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.329.0 (2025-09-09)
 ------------------
 

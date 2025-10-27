@@ -22577,6 +22577,21 @@ module Aws::SecurityHub
     #   Enables filtering based on map field values.
     #   @return [Array<Types::OcsfMapFilter>]
     #
+    # @!attribute [rw] ip_filters
+    #   A list of IP address filters that allowing you to filter findings
+    #   based on IP address properties.
+    #   @return [Array<Types::OcsfIpFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   Provides an additional level of filtering, creating a three-layer
+    #   nested structure. The first layer is a `CompositeFilters` array with
+    #   a `CompositeOperator` (`AND`/`OR`). The second layer is a
+    #   `CompositeFilter` object that contains direct filters and
+    #   `NestedCompositeFilters`. The third layer is
+    #   `NestedCompositeFilters`, which contains additional filter
+    #   conditions.
+    #   @return [Array<Types::CompositeFilter>]
+    #
     # @!attribute [rw] operator
     #   The logical operator used to combine multiple filter conditions.
     #   @return [String]
@@ -22589,6 +22604,8 @@ module Aws::SecurityHub
       :boolean_filters,
       :number_filters,
       :map_filters,
+      :ip_filters,
+      :nested_composite_filters,
       :operator)
       SENSITIVE = []
       include Aws::Structure
@@ -28109,6 +28126,25 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The structure for filtering findings based on IP address attributes.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the IP address field to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The IP filter for querying findings.
+    #   @return [Types::IpFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfIpFilter AWS API Documentation
+    #
+    class OcsfIpFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Enables filtering of security findings based on map field values in
     # OCSF.
     #
@@ -29757,8 +29793,8 @@ module Aws::SecurityHub
     # Provides comprehensive details about an Amazon Web Services resource
     # and its associated security findings.
     #
-    # @!attribute [rw] resource_arn
-    #   Specifies the ARN that uniquely identifies a resource.
+    # @!attribute [rw] resource_guid
+    #   The global identifier used to identify a resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -29808,7 +29844,7 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceResult AWS API Documentation
     #
     class ResourceResult < Struct.new(
-      :resource_arn,
+      :resource_guid,
       :resource_id,
       :account_id,
       :region,
@@ -29913,6 +29949,16 @@ module Aws::SecurityHub
     #   Enables filtering based on map-based field values.
     #   @return [Array<Types::ResourcesMapFilter>]
     #
+    # @!attribute [rw] nested_composite_filters
+    #   Provides an additional level of filtering, creating a three-layer
+    #   nested structure. The first layer is a `CompositeFilters` array with
+    #   a `CompositeOperator` (`AND`/`OR`). The second layer is a
+    #   `CompositeFilter` object that contains direct filters and
+    #   `NestedCompositeFilters`. The third layer is
+    #   `NestedCompositeFilters`, which contains additional filter
+    #   conditions.
+    #   @return [Array<Types::ResourcesCompositeFilter>]
+    #
     # @!attribute [rw] operator
     #   The logical operator used to combine multiple filter conditions.
     #   @return [String]
@@ -29924,6 +29970,7 @@ module Aws::SecurityHub
       :date_filters,
       :number_filters,
       :map_filters,
+      :nested_composite_filters,
       :operator)
       SENSITIVE = []
       include Aws::Structure
@@ -32367,7 +32414,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code for the unprocessed security control.
+    #   The error code for the unprocessed security control. The `NOT_FOUND`
+    #   value has been deprecated and replaced by the `RESOURCE_NOT_FOUND`
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] error_reason
@@ -32408,6 +32457,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] error_code
     #   The error code for the unprocessed standard and control association.
+    #   The `NOT_FOUND` value has been deprecated and replaced by the
+    #   `RESOURCE_NOT_FOUND` value.
     #   @return [String]
     #
     # @!attribute [rw] error_reason
@@ -32444,7 +32495,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] error_code
     #   The error code for the unprocessed update of the control's
-    #   enablement status in the specified standard.
+    #   enablement status in the specified standard. The `NOT_FOUND` value
+    #   has been deprecated and replaced by the `RESOURCE_NOT_FOUND` value.
     #   @return [String]
     #
     # @!attribute [rw] error_reason

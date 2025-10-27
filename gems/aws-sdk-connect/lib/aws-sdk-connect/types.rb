@@ -180,6 +180,21 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about agent-first outbound strategy configuration.
+    #
+    # @!attribute [rw] preview
+    #   Information about preview configuration of agent first outbound
+    #   strategy
+    #   @return [Types::Preview]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentFirst AWS API Documentation
+    #
+    class AgentFirst < Struct.new(
+      :preview)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an agent hierarchy group.
     #
     # @!attribute [rw] arn
@@ -241,6 +256,14 @@ module Aws::Connect
     #   The identifier of the agent who accepted the contact.
     #   @return [String]
     #
+    # @!attribute [rw] accepted_by_agent_timestamp
+    #   The timestamp when the contact was accepted by the agent.
+    #   @return [Time]
+    #
+    # @!attribute [rw] preview_end_timestamp
+    #   The timestamp when the agent finished previewing the contact.
+    #   @return [Time]
+    #
     # @!attribute [rw] connected_to_agent_timestamp
     #   The timestamp when the contact was connected to the agent.
     #   @return [Time]
@@ -299,6 +322,8 @@ module Aws::Connect
     #
     class AgentInfo < Struct.new(
       :id,
+      :accepted_by_agent_timestamp,
+      :preview_end_timestamp,
       :connected_to_agent_timestamp,
       :agent_pause_duration_in_seconds,
       :hierarchy_groups,
@@ -543,6 +568,20 @@ module Aws::Connect
     #
     class AgentsCriteria < Struct.new(
       :agent_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information of an email alias.
+    #
+    # @!attribute [rw] email_address_id
+    #   The email address ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AliasConfiguration AWS API Documentation
+    #
+    class AliasConfiguration < Struct.new(
+      :email_address_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -908,6 +947,55 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateDefaultVocabularyResponse AWS API Documentation
     #
     class AssociateDefaultVocabularyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] email_address_id
+    #   The identifier of the email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_configuration
+    #   Configuration object that specifies which email address will serve
+    #   as the alias. The specified email address must already exist in the
+    #   Amazon Connect instance and cannot already be configured as an alias
+    #   or have an alias of its own.
+    #   @return [Types::AliasConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateEmailAddressAliasRequest AWS API Documentation
+    #
+    class AssociateEmailAddressAliasRequest < Struct.new(
+      :email_address_id,
+      :instance_id,
+      :alias_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateEmailAddressAliasResponse AWS API Documentation
+    #
+    class AssociateEmailAddressAliasResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -1620,8 +1708,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web Services
-    # Support.
+    # change. To request access to this API, contact Amazon Web
+    # ServicesSupport.
     #
     # Information about an authentication profile. An authentication profile
     # is a resource that stores the authentication settings for users in
@@ -1734,8 +1822,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web Services
-    # Support.
+    # change. To request access to this API, contact Amazon Web
+    # ServicesSupport.
     #
     # A summary of a given authentication profile.
     #
@@ -2831,7 +2919,14 @@ module Aws::Connect
     #   @return [Array<Types::RecordingInfo>]
     #
     # @!attribute [rw] disconnect_reason
-    #   The disconnect reason for the contact.
+    #   The disconnect reason for the contact. For a list and description of
+    #   all the possible disconnect reasons by channel, see DisconnectReason
+    #   under [ContactTraceRecord][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
     #   @return [String]
     #
     # @!attribute [rw] contact_evaluations
@@ -2839,11 +2934,20 @@ module Aws::Connect
     #   FormId, which is a unique identifier for the form.
     #   @return [Hash<String,Types::ContactEvaluation>]
     #
+    # @!attribute [rw] task_template_info
+    #   If this contact was created using a task template, this contains
+    #   information about the task template.
+    #   @return [Types::TaskTemplateInfoV2]
+    #
     # @!attribute [rw] contact_details
     #   A map of string key/value pairs that contain user-defined attributes
     #   which are lightly typed within the contact. This object is used only
     #   for task contacts.
     #   @return [Types::ContactDetails]
+    #
+    # @!attribute [rw] outbound_strategy
+    #   Information about the outbound strategy.
+    #   @return [Types::OutboundStrategy]
     #
     # @!attribute [rw] attributes
     #   The attributes of the contact.
@@ -2893,7 +2997,9 @@ module Aws::Connect
       :recordings,
       :disconnect_reason,
       :contact_evaluations,
+      :task_template_info,
       :contact_details,
+      :outbound_strategy,
       :attributes)
       SENSITIVE = [:name, :description]
       include Aws::Structure
@@ -2973,6 +3079,10 @@ module Aws::Connect
     #   Structure to store information associated with a campaign.
     #   @return [Types::Campaign]
     #
+    # @!attribute [rw] outbound_strategy
+    #   Information about the outbound strategy.
+    #   @return [Types::OutboundStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactDataRequest AWS API Documentation
     #
     class ContactDataRequest < Struct.new(
@@ -2981,7 +3091,8 @@ module Aws::Connect
       :request_identifier,
       :queue_id,
       :attributes,
-      :campaign)
+      :campaign,
+      :outbound_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3515,7 +3626,7 @@ module Aws::Connect
       class Unknown < ContactMetricValue; end
     end
 
-    # The contact with the specified ID is not active or does not exist.
+    # The contact with the specified ID does not exist.
     #
     # @!attribute [rw] message
     #   The message.
@@ -7280,6 +7391,13 @@ module Aws::Connect
     #   The email address last modification timestamp in ISO 8601 Datetime.
     #   @return [String]
     #
+    # @!attribute [rw] alias_configurations
+    #   A list of alias configurations associated with this email address.
+    #   Contains details about email addresses that forward to this primary
+    #   email address. The list can contain at most one alias configuration
+    #   per email address.
+    #   @return [Array<Types::AliasConfiguration>]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource. For example, \{ "Tags": \{"key1":"value1",
@@ -7296,6 +7414,7 @@ module Aws::Connect
       :description,
       :create_timestamp,
       :modified_timestamp,
+      :alias_configurations,
       :tags)
       SENSITIVE = [:email_address, :display_name, :description]
       include Aws::Structure
@@ -8158,6 +8277,54 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] email_address_id
+    #   The identifier of the email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_configuration
+    #   Configuration object that specifies which alias relationship to
+    #   remove. The alias association must currently exist between the
+    #   primary email address and the specified alias email address.
+    #   @return [Types::AliasConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateEmailAddressAliasRequest AWS API Documentation
+    #
+    class DisassociateEmailAddressAliasRequest < Struct.new(
+      :email_address_id,
+      :instance_id,
+      :alias_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateEmailAddressAliasResponse AWS API Documentation
+    #
+    class DisassociateEmailAddressAliasResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -8668,6 +8835,13 @@ module Aws::Connect
     #   The display name of email address.
     #   @return [String]
     #
+    # @!attribute [rw] alias_configurations
+    #   A list of alias configurations for this email address, showing which
+    #   email addresses forward to this primary address. Each configuration
+    #   contains the email address ID of an alias that forwards emails to
+    #   this address.
+    #   @return [Array<Types::AliasConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EmailAddressMetadata AWS API Documentation
     #
     class EmailAddressMetadata < Struct.new(
@@ -8675,7 +8849,8 @@ module Aws::Connect
       :email_address_arn,
       :email_address,
       :description,
-      :display_name)
+      :display_name,
+      :alias_configurations)
       SENSITIVE = [:email_address, :description, :display_name]
       include Aws::Structure
     end
@@ -16408,6 +16583,7 @@ module Aws::Connect
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #   Both Instance ID and Instance ARN are supported input formats.
     #
     #
     #
@@ -18192,6 +18368,39 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the outbound strategy.
+    #
+    # @!attribute [rw] type
+    #   Type of the outbound strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   Config of the outbound strategy.
+    #   @return [Types::OutboundStrategyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundStrategy AWS API Documentation
+    #
+    class OutboundStrategy < Struct.new(
+      :type,
+      :config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The config of the outbound strategy.
+    #
+    # @!attribute [rw] agent_first
+    #   The config of agent first outbound strategy.
+    #   @return [Types::AgentFirst]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundStrategyConfig AWS API Documentation
+    #
+    class OutboundStrategyConfig < Struct.new(
+      :agent_first)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Thrown for analyzed content when requested OutputType was not enabled
     # for a given contact. For example, if an OutputType.Raw was requested
     # for a contact that had `RedactedOnly` Redaction policy set in the
@@ -18618,6 +18827,21 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Countdown timer configuration after the agent accepted the contact.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   Duration in seconds for the countdown timer after the agent accepted
+    #   the contact.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PostAcceptTimeoutConfig AWS API Documentation
+    #
+    class PostAcceptTimeoutConfig < Struct.new(
+      :duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a predefined attribute.
     #
     # @!attribute [rw] name
@@ -18759,6 +18983,28 @@ module Aws::Connect
 
       class StringList < PredefinedAttributeValues; end
       class Unknown < PredefinedAttributeValues; end
+    end
+
+    # Information about agent-first preview mode outbound strategy
+    # configuration.
+    #
+    # @!attribute [rw] post_accept_timeout_config
+    #   Countdown timer configuration after the agent accepted the preview
+    #   outbound contact.
+    #   @return [Types::PostAcceptTimeoutConfig]
+    #
+    # @!attribute [rw] allowed_user_actions
+    #   The actions the agent can perform after accepting the preview
+    #   outbound contact.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Preview AWS API Documentation
+    #
+    class Preview < Struct.new(
+      :post_accept_timeout_config,
+      :allowed_user_actions)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Information about a problem detail.
@@ -20682,6 +20928,9 @@ module Aws::Connect
     # @!attribute [rw] channel
     #   The channels this queue supports. Valid Values: CHAT \| TASK \|
     #   EMAIL
+    #
+    #   VOICE is not supported. The information shown below is incorrect.
+    #   We're working to correct it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileManualAssignmentQueueConfigSummary AWS API Documentation
@@ -21430,7 +21679,15 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Time range that you additionally want to filter on.
+    # Time range that you **additionally** want to filter on.
+    #
+    # <note markdown="1"> This is different from the [SearchContactsTimeRange][1] data type.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchContactsTimeRange.html
     #
     # @!attribute [rw] criteria
     #   List of criteria of the time range to additionally filter on.
@@ -21555,8 +21812,9 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The timestamp condition indicating which timestamp should be used and
-    # how it should be filtered.
+    # The timestamp condition indicating which contact timestamp should be
+    # used and how it should be filtered. It is not an actual timestamp
+    # value.
     #
     # @!attribute [rw] type
     #   Type of the timestamps to use for the filter.
@@ -24137,6 +24395,10 @@ module Aws::Connect
     #   to `true`. For all other cases, use `GENERAL`.
     #   @return [String]
     #
+    # @!attribute [rw] outbound_strategy
+    #   Information about the outbound strategy.
+    #   @return [Types::OutboundStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest AWS API Documentation
     #
     class StartOutboundVoiceContactRequest < Struct.new(
@@ -24153,7 +24415,8 @@ module Aws::Connect
       :attributes,
       :answer_machine_detection_config,
       :campaign_id,
-      :traffic_type)
+      :traffic_type,
+      :outbound_strategy)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -24602,7 +24865,15 @@ module Aws::Connect
     #
     # @!attribute [rw] disconnect_reason
     #   The reason a contact can be disconnected. Only Amazon Connect
-    #   outbound campaigns can provide this field.
+    #   outbound campaigns can provide this field. For a list and
+    #   description of all the possible disconnect reasons by channel
+    #   (including outbound campaign voice contacts) see DisconnectReason
+    #   under [ContactTraceRecord][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
     #   @return [Types::DisconnectReason]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRequest AWS API Documentation
@@ -25079,6 +25350,26 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateFieldIdentifier AWS API Documentation
     #
     class TaskTemplateFieldIdentifier < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the task template used to create this contact.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the task template used to create
+    #   this contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template used to create this contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateInfoV2 AWS API Documentation
+    #
+    class TaskTemplateInfoV2 < Struct.new(
+      :arn,
       :name)
       SENSITIVE = []
       include Aws::Structure
@@ -26482,7 +26773,7 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact Amazon Web Services Support for
+    #   access this feature, contact Amazon Web ServicesSupport for
     #   allowlisting.
     #
     #    </note>
@@ -28383,7 +28674,7 @@ module Aws::Connect
     #
     #   The currently supported values for `FieldName` are `Username`,
     #   `FirstName`, `LastName`, `RoutingProfileId`, `SecurityProfileId`,
-    #   `ResourceId`.
+    #   `resourceId`.
     #   @return [Types::StringCondition]
     #
     # @!attribute [rw] list_condition

@@ -142,6 +142,19 @@ module Aws
                                        ) -> _BatchUpdateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemoryRecordsResponseSuccess
 
+      interface _CompleteResourceTokenAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteResourceTokenAuthResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#complete_resource_token_auth-instance_method
+      def complete_resource_token_auth: (
+                                          user_identifier: {
+                                            user_token: ::String?,
+                                            user_id: ::String?
+                                          },
+                                          session_uri: ::String
+                                        ) -> _CompleteResourceTokenAuthResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteResourceTokenAuthResponseSuccess
+
       interface _CreateEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventOutput]
         def event: () -> Types::Event
@@ -288,6 +301,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceOauth2TokenResponse]
         def authorization_url: () -> ::String
         def access_token: () -> ::String
+        def session_uri: () -> ::String
+        def session_status: () -> ("IN_PROGRESS" | "FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_resource_oauth_2_token-instance_method
       def get_resource_oauth_2_token: (
@@ -295,9 +310,11 @@ module Aws
                                         resource_credential_provider_name: ::String,
                                         scopes: Array[::String],
                                         oauth2_flow: ("USER_FEDERATION" | "M2M"),
+                                        ?session_uri: ::String,
                                         ?resource_oauth_2_return_url: ::String,
                                         ?force_authentication: bool,
-                                        ?custom_parameters: Hash[::String, ::String]
+                                        ?custom_parameters: Hash[::String, ::String],
+                                        ?custom_state: ::String
                                       ) -> _GetResourceOauth2TokenResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceOauth2TokenResponseSuccess
 
@@ -360,6 +377,7 @@ module Aws
                                   ?baggage: ::String,
                                   agent_runtime_arn: ::String,
                                   ?qualifier: ::String,
+                                  ?account_id: ::String,
                                   payload: ::String
                                 ) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
@@ -373,6 +391,8 @@ module Aws
       def invoke_code_interpreter: (
                                      code_interpreter_identifier: ::String,
                                      ?session_id: ::String,
+                                     ?trace_id: ::String,
+                                     ?trace_parent: ::String,
                                      name: ("executeCode" | "executeCommand" | "readFiles" | "listFiles" | "removeFiles" | "writeFiles" | "startCommandExecution" | "getTask" | "stopTask"),
                                      ?arguments: {
                                        code: ::String?,
@@ -527,6 +547,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_browser_session-instance_method
       def start_browser_session: (
+                                   ?trace_id: ::String,
+                                   ?trace_parent: ::String,
                                    browser_identifier: ::String,
                                    ?name: ::String,
                                    ?session_timeout_seconds: ::Integer,
@@ -546,6 +568,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_code_interpreter_session-instance_method
       def start_code_interpreter_session: (
+                                            ?trace_id: ::String,
+                                            ?trace_parent: ::String,
                                             code_interpreter_identifier: ::String,
                                             ?name: ::String,
                                             ?session_timeout_seconds: ::Integer,
@@ -561,6 +585,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_browser_session-instance_method
       def stop_browser_session: (
+                                  ?trace_id: ::String,
+                                  ?trace_parent: ::String,
                                   browser_identifier: ::String,
                                   session_id: ::String,
                                   ?client_token: ::String
@@ -575,6 +601,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#stop_code_interpreter_session-instance_method
       def stop_code_interpreter_session: (
+                                           ?trace_id: ::String,
+                                           ?trace_parent: ::String,
                                            code_interpreter_identifier: ::String,
                                            session_id: ::String,
                                            ?client_token: ::String

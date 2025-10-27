@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-10-21)
+------------------
+
+* Feature - Added RECONFIGURING to the InstanceFleetState convenience enum.
+
 1.117.0 (2025-08-28)
 ------------------
 

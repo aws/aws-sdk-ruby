@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Lookout for Vision has been removed from the SDK because it has been discontinued.
 
+1.56.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.55.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.54.0 (2025-08-26)
 ------------------
 

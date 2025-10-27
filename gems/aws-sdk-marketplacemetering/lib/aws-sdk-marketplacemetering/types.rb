@@ -119,6 +119,19 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # The `ClientToken` is being used for multiple requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/IdempotencyConflictException AWS API Documentation
+    #
+    class IdempotencyConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal error has occurred. Retry your request. If the problem
     # persists, post a message with details on the Amazon Web Services
     # forums.
@@ -296,6 +309,29 @@ module Aws::MarketplaceMetering
     #   `UsageAllocation` must have a unique set of tags (include no tags).
     #   @return [Array<Types::UsageAllocation>]
     #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotencyConflictException` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest AWS API Documentation
     #
     class MeterUsageRequest < Struct.new(
@@ -304,7 +340,8 @@ module Aws::MarketplaceMetering
       :usage_dimension,
       :usage_quantity,
       :dry_run,
-      :usage_allocations)
+      :usage_allocations,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -513,7 +550,7 @@ module Aws::MarketplaceMetering
     # @!attribute [rw] timestamp
     #   Timestamp, in UTC, for which the usage is being reported.
     #
-    #   Your application can meter usage for up to one hour in the past.
+    #   Your application can meter usage for up to six hours in the past.
     #   Make sure the `timestamp` value is not before the start of the
     #   software usage.
     #   @return [Time]

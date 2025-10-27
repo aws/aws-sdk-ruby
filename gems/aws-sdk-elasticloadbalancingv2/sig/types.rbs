@@ -187,6 +187,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor priority: ::Integer
       attr_accessor actions: ::Array[Types::Action]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor transforms: ::Array[Types::RuleTransform]
       SENSITIVE: []
     end
 
@@ -570,12 +571,19 @@ module Aws::ElasticLoadBalancingV2
 
     class HostHeaderConditionConfig
       attr_accessor values: ::Array[::String]
+      attr_accessor regex_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HostHeaderRewriteConfig
+      attr_accessor rewrites: ::Array[Types::RewriteConfig]
       SENSITIVE: []
     end
 
     class HttpHeaderConditionConfig
       attr_accessor http_header_name: ::String
       attr_accessor values: ::Array[::String]
+      attr_accessor regex_values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -771,6 +779,8 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor rule_arn: ::String
       attr_accessor conditions: ::Array[Types::RuleCondition]
       attr_accessor actions: ::Array[Types::Action]
+      attr_accessor transforms: ::Array[Types::RuleTransform]
+      attr_accessor reset_transforms: bool
       SENSITIVE: []
     end
 
@@ -836,6 +846,7 @@ module Aws::ElasticLoadBalancingV2
 
     class PathPatternConditionConfig
       attr_accessor values: ::Array[::String]
+      attr_accessor regex_values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -922,12 +933,19 @@ module Aws::ElasticLoadBalancingV2
     class RevocationIdNotFoundException < Aws::EmptyStructure
     end
 
+    class RewriteConfig
+      attr_accessor regex: ::String
+      attr_accessor replace: ::String
+      SENSITIVE: []
+    end
+
     class Rule
       attr_accessor rule_arn: ::String
       attr_accessor priority: ::String
       attr_accessor conditions: ::Array[Types::RuleCondition]
       attr_accessor actions: ::Array[Types::Action]
       attr_accessor is_default: bool
+      attr_accessor transforms: ::Array[Types::RuleTransform]
       SENSITIVE: []
     end
 
@@ -940,6 +958,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor query_string_config: Types::QueryStringConditionConfig
       attr_accessor http_request_method_config: Types::HttpRequestMethodConditionConfig
       attr_accessor source_ip_config: Types::SourceIpConditionConfig
+      attr_accessor regex_values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -949,6 +968,13 @@ module Aws::ElasticLoadBalancingV2
     class RulePriorityPair
       attr_accessor rule_arn: ::String
       attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class RuleTransform
+      attr_accessor type: ("host-header-rewrite" | "url-rewrite")
+      attr_accessor host_header_rewrite_config: Types::HostHeaderRewriteConfig
+      attr_accessor url_rewrite_config: Types::UrlRewriteConfig
       SENSITIVE: []
     end
 
@@ -1182,6 +1208,11 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class UnsupportedProtocolException < Aws::EmptyStructure
+    end
+
+    class UrlRewriteConfig
+      attr_accessor rewrites: ::Array[Types::RewriteConfig]
+      SENSITIVE: []
     end
 
     class ZonalCapacityReservationState

@@ -5215,7 +5215,7 @@ module Aws
                                              {
                                                string_filters: Array[
                                                  {
-                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name")?,
+                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
                                                    filter: {
                                                      value: ::String?,
                                                      comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -5224,7 +5224,7 @@ module Aws
                                                ]?,
                                                date_filters: Array[
                                                  {
-                                                   field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt")?,
+                                                   field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt" | "resources.image.created_time_dt" | "resources.image.last_used_time_dt" | "resources.modified_time_dt")?,
                                                    filter: {
                                                      start: ::String?,
                                                      end: ::String?,
@@ -5245,7 +5245,7 @@ module Aws
                                                ]?,
                                                number_filters: Array[
                                                  {
-                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count")?,
+                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
                                                    filter: {
                                                      gte: ::Float?,
                                                      lte: ::Float?,
@@ -5257,7 +5257,7 @@ module Aws
                                                ]?,
                                                map_filters: Array[
                                                  {
-                                                   field_name: ("resources.tags")?,
+                                                   field_name: ("resources.tags" | "compliance.control_parameters" | "databucket.tags" | "finding_info.tags")?,
                                                    filter: {
                                                      key: ::String?,
                                                      value: ::String?,
@@ -5265,6 +5265,15 @@ module Aws
                                                    }?
                                                  },
                                                ]?,
+                                               ip_filters: Array[
+                                                 {
+                                                   field_name: ("evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")?,
+                                                   filter: {
+                                                     cidr: ::String?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               nested_composite_filters: untyped?,
                                                operator: ("AND" | "OR")?
                                              },
                                            ]?,
@@ -6558,7 +6567,7 @@ module Aws
                                                {
                                                  string_filters: Array[
                                                    {
-                                                     field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name")?,
+                                                     field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
                                                      filter: {
                                                        value: ::String?,
                                                        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -6567,7 +6576,7 @@ module Aws
                                                  ]?,
                                                  date_filters: Array[
                                                    {
-                                                     field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt")?,
+                                                     field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt" | "resources.image.created_time_dt" | "resources.image.last_used_time_dt" | "resources.modified_time_dt")?,
                                                      filter: {
                                                        start: ::String?,
                                                        end: ::String?,
@@ -6588,7 +6597,7 @@ module Aws
                                                  ]?,
                                                  number_filters: Array[
                                                    {
-                                                     field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count")?,
+                                                     field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
                                                      filter: {
                                                        gte: ::Float?,
                                                        lte: ::Float?,
@@ -6600,7 +6609,7 @@ module Aws
                                                  ]?,
                                                  map_filters: Array[
                                                    {
-                                                     field_name: ("resources.tags")?,
+                                                     field_name: ("resources.tags" | "compliance.control_parameters" | "databucket.tags" | "finding_info.tags")?,
                                                      filter: {
                                                        key: ::String?,
                                                        value: ::String?,
@@ -6608,12 +6617,21 @@ module Aws
                                                      }?
                                                    },
                                                  ]?,
+                                                 ip_filters: Array[
+                                                   {
+                                                     field_name: ("evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")?,
+                                                     filter: {
+                                                       cidr: ::String?
+                                                     }?
+                                                   },
+                                                 ]?,
+                                                 nested_composite_filters: untyped?,
                                                  operator: ("AND" | "OR")?
                                                },
                                              ]?,
                                              composite_operator: ("AND" | "OR")?
                                            }?,
-                                           group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name")
+                                           group_by_field: ("activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.name" | "compliance.status" | "compliance.control" | "finding_info.title" | "finding_info.types" | "metadata.product.name" | "metadata.product.uid" | "resources.type" | "resources.uid" | "severity" | "status" | "vulnerabilities.fix_coverage" | "class_name" | "vulnerabilities.affected_packages.name" | "finding_info.analytic.name" | "compliance.standards" | "cloud.account.name")
                                          },
                                        ],
                                        ?sort_order: ("asc" | "desc"),
@@ -7347,7 +7365,7 @@ module Aws
                                  {
                                    string_filters: Array[
                                      {
-                                       field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name")?,
+                                       field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
                                        filter: {
                                          value: ::String?,
                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -7356,7 +7374,7 @@ module Aws
                                    ]?,
                                    date_filters: Array[
                                      {
-                                       field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt")?,
+                                       field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt" | "resources.image.created_time_dt" | "resources.image.last_used_time_dt" | "resources.modified_time_dt")?,
                                        filter: {
                                          start: ::String?,
                                          end: ::String?,
@@ -7377,7 +7395,7 @@ module Aws
                                    ]?,
                                    number_filters: Array[
                                      {
-                                       field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count")?,
+                                       field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
                                        filter: {
                                          gte: ::Float?,
                                          lte: ::Float?,
@@ -7389,7 +7407,7 @@ module Aws
                                    ]?,
                                    map_filters: Array[
                                      {
-                                       field_name: ("resources.tags")?,
+                                       field_name: ("resources.tags" | "compliance.control_parameters" | "databucket.tags" | "finding_info.tags")?,
                                        filter: {
                                          key: ::String?,
                                          value: ::String?,
@@ -7397,6 +7415,15 @@ module Aws
                                        }?
                                      },
                                    ]?,
+                                   ip_filters: Array[
+                                     {
+                                       field_name: ("evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")?,
+                                       filter: {
+                                         cidr: ::String?
+                                       }?
+                                     },
+                                   ]?,
+                                   nested_composite_filters: untyped?,
                                    operator: ("AND" | "OR")?
                                  },
                                ]?,
@@ -7473,13 +7500,13 @@ module Aws
       def get_resources_statistics_v2: (
                                          group_by_rules: Array[
                                            {
-                                             group_by_field: ("account_id" | "region" | "resource_category" | "resource_type" | "resource_name" | "findings_summary.finding_type"),
+                                             group_by_field: ("AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType"),
                                              filters: {
                                                composite_filters: Array[
                                                  {
                                                    string_filters: Array[
                                                      {
-                                                       field_name: ("resource_arn" | "resource_id" | "account_id" | "region" | "resource_category" | "resource_type" | "resource_name" | "findings_summary.finding_type" | "findings_summary.product_name")?,
+                                                       field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName")?,
                                                        filter: {
                                                          value: ::String?,
                                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -7488,7 +7515,7 @@ module Aws
                                                    ]?,
                                                    date_filters: Array[
                                                      {
-                                                       field_name: ("resource_detail_capture_time_dt" | "resource_creation_time_dt")?,
+                                                       field_name: ("ResourceDetailCaptureTime" | "ResourceCreationTime")?,
                                                        filter: {
                                                          start: ::String?,
                                                          end: ::String?,
@@ -7501,7 +7528,7 @@ module Aws
                                                    ]?,
                                                    number_filters: Array[
                                                      {
-                                                       field_name: ("findings_summary.total_findings" | "findings_summary.severities.other" | "findings_summary.severities.fatal" | "findings_summary.severities.critical" | "findings_summary.severities.high" | "findings_summary.severities.medium" | "findings_summary.severities.low" | "findings_summary.severities.informational" | "findings_summary.severities.unknown")?,
+                                                       field_name: ("FindingsSummary.TotalFindings" | "FindingsSummary.Severities.Other" | "FindingsSummary.Severities.Fatal" | "FindingsSummary.Severities.Critical" | "FindingsSummary.Severities.High" | "FindingsSummary.Severities.Medium" | "FindingsSummary.Severities.Low" | "FindingsSummary.Severities.Informational" | "FindingsSummary.Severities.Unknown")?,
                                                        filter: {
                                                          gte: ::Float?,
                                                          lte: ::Float?,
@@ -7513,7 +7540,7 @@ module Aws
                                                    ]?,
                                                    map_filters: Array[
                                                      {
-                                                       field_name: ("tags")?,
+                                                       field_name: ("ResourceTags")?,
                                                        filter: {
                                                          key: ::String?,
                                                          value: ::String?,
@@ -7521,6 +7548,7 @@ module Aws
                                                        }?
                                                      },
                                                    ]?,
+                                                   nested_composite_filters: untyped?,
                                                    operator: ("AND" | "OR")?
                                                  },
                                                ]?,
@@ -7545,7 +7573,7 @@ module Aws
                                   {
                                     string_filters: Array[
                                       {
-                                        field_name: ("resource_arn" | "resource_id" | "account_id" | "region" | "resource_category" | "resource_type" | "resource_name" | "findings_summary.finding_type" | "findings_summary.product_name")?,
+                                        field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName")?,
                                         filter: {
                                           value: ::String?,
                                           comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -7554,7 +7582,7 @@ module Aws
                                     ]?,
                                     date_filters: Array[
                                       {
-                                        field_name: ("resource_detail_capture_time_dt" | "resource_creation_time_dt")?,
+                                        field_name: ("ResourceDetailCaptureTime" | "ResourceCreationTime")?,
                                         filter: {
                                           start: ::String?,
                                           end: ::String?,
@@ -7567,7 +7595,7 @@ module Aws
                                     ]?,
                                     number_filters: Array[
                                       {
-                                        field_name: ("findings_summary.total_findings" | "findings_summary.severities.other" | "findings_summary.severities.fatal" | "findings_summary.severities.critical" | "findings_summary.severities.high" | "findings_summary.severities.medium" | "findings_summary.severities.low" | "findings_summary.severities.informational" | "findings_summary.severities.unknown")?,
+                                        field_name: ("FindingsSummary.TotalFindings" | "FindingsSummary.Severities.Other" | "FindingsSummary.Severities.Fatal" | "FindingsSummary.Severities.Critical" | "FindingsSummary.Severities.High" | "FindingsSummary.Severities.Medium" | "FindingsSummary.Severities.Low" | "FindingsSummary.Severities.Informational" | "FindingsSummary.Severities.Unknown")?,
                                         filter: {
                                           gte: ::Float?,
                                           lte: ::Float?,
@@ -7579,7 +7607,7 @@ module Aws
                                     ]?,
                                     map_filters: Array[
                                       {
-                                        field_name: ("tags")?,
+                                        field_name: ("ResourceTags")?,
                                         filter: {
                                           key: ::String?,
                                           value: ::String?,
@@ -7587,6 +7615,7 @@ module Aws
                                         }?
                                       },
                                     ]?,
+                                    nested_composite_filters: untyped?,
                                     operator: ("AND" | "OR")?
                                   },
                                 ]?,
@@ -7898,7 +7927,7 @@ module Aws
                                              {
                                                string_filters: Array[
                                                  {
-                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name")?,
+                                                   field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name")?,
                                                    filter: {
                                                      value: ::String?,
                                                      comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
@@ -7907,7 +7936,7 @@ module Aws
                                                ]?,
                                                date_filters: Array[
                                                  {
-                                                   field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt")?,
+                                                   field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt" | "resources.image.created_time_dt" | "resources.image.last_used_time_dt" | "resources.modified_time_dt")?,
                                                    filter: {
                                                      start: ::String?,
                                                      end: ::String?,
@@ -7928,7 +7957,7 @@ module Aws
                                                ]?,
                                                number_filters: Array[
                                                  {
-                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count")?,
+                                                   field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count")?,
                                                    filter: {
                                                      gte: ::Float?,
                                                      lte: ::Float?,
@@ -7940,7 +7969,7 @@ module Aws
                                                ]?,
                                                map_filters: Array[
                                                  {
-                                                   field_name: ("resources.tags")?,
+                                                   field_name: ("resources.tags" | "compliance.control_parameters" | "databucket.tags" | "finding_info.tags")?,
                                                    filter: {
                                                      key: ::String?,
                                                      value: ::String?,
@@ -7948,6 +7977,15 @@ module Aws
                                                    }?
                                                  },
                                                ]?,
+                                               ip_filters: Array[
+                                                 {
+                                                   field_name: ("evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")?,
+                                                   filter: {
+                                                     cidr: ::String?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               nested_composite_filters: untyped?,
                                                operator: ("AND" | "OR")?
                                              },
                                            ]?,

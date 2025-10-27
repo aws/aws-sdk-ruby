@@ -55,7 +55,7 @@ module Aws::MarketplaceReporting
   autoload :EndpointProvider, 'aws-sdk-marketplacereporting/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacereporting/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

@@ -314,7 +314,18 @@ module Aws
                         restrictions: {
                           allow_actions: Array[::String],
                           allow_resources: Array[::String],
-                          allow_referers: Array[::String]?
+                          allow_referers: Array[::String]?,
+                          allow_android_apps: Array[
+                            {
+                              package: ::String,
+                              certificate_fingerprint: ::String
+                            },
+                          ]?,
+                          allow_apple_apps: Array[
+                            {
+                              bundle_id: ::String
+                            },
+                          ]?
                         },
                         ?description: ::String,
                         ?expire_time: ::Time,
@@ -983,7 +994,18 @@ module Aws
                         ?restrictions: {
                           allow_actions: Array[::String],
                           allow_resources: Array[::String],
-                          allow_referers: Array[::String]?
+                          allow_referers: Array[::String]?,
+                          allow_android_apps: Array[
+                            {
+                              package: ::String,
+                              certificate_fingerprint: ::String
+                            },
+                          ]?,
+                          allow_apple_apps: Array[
+                            {
+                              bundle_id: ::String
+                            },
+                          ]?
                         }
                       ) -> _UpdateKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeyResponseSuccess

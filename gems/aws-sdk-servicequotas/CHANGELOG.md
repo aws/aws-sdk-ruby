@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2025-10-08)
+------------------
+
+* Feature - introduces Service Quotas Automatic Management. Users can opt-in to monitoring and managing service quotas, receive notifications when quota usage reaches thresholds, configure notification channels, subscribe to EventBridge events for automation, and view notifications in the AWS Health dashboard.
+
 1.62.0 (2025-08-28)
 ------------------
 

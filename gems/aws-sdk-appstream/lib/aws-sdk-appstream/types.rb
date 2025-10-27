@@ -36,6 +36,50 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The collection of license usage records.
+    #
+    # @!attribute [rw] user_arn
+    #   The ARN of the user who used the license-included application.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_period
+    #   The billing period for the license usage record.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_aws_account_id
+    #   The account ID of the owner of the license.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_first_used_date
+    #   The date and time when the license was first used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] subscription_last_used_date
+    #   The date and time when the license was last used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] license_type
+    #   The type of license (for example, Microsoft Office).
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user who used the license-included application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AdminAppLicenseUsageRecord AWS API Documentation
+    #
+    class AdminAppLicenseUsageRecord < Struct.new(
+      :user_arn,
+      :billing_period,
+      :owner_aws_account_id,
+      :subscription_first_used_date,
+      :subscription_last_used_date,
+      :license_type,
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an app block.
     #
     # App blocks are an Amazon AppStream 2.0 resource that stores the
@@ -506,6 +550,78 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetResult AWS API Documentation
     #
     class AssociateFleetResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] image_builder_name
+    #   The name of the target image builder instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_names
+    #   The list of license included applications to associate with the
+    #   image builder.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateSoftwareToImageBuilderRequest AWS API Documentation
+    #
+    class AssociateSoftwareToImageBuilderRequest < Struct.new(
+      :image_builder_name,
+      :software_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateSoftwareToImageBuilderResult AWS API Documentation
+    #
+    class AssociateSoftwareToImageBuilderResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] user_stack_associations
     #   The list of UserStackAssociation objects.
@@ -1675,6 +1791,116 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] softwares_to_install
+    #   The list of license included applications to install on the image
+    #   builder during creation.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] softwares_to_uninstall
+    #   The list of license included applications to uninstall from the
+    #   image builder during creation.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
     class CreateImageBuilderRequest < Struct.new(
@@ -1690,7 +1916,9 @@ module Aws::AppStream
       :domain_join_info,
       :appstream_agent_version,
       :tags,
-      :access_endpoints)
+      :access_endpoints,
+      :softwares_to_install,
+      :softwares_to_uninstall)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2502,6 +2730,48 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @!attribute [rw] billing_period
+    #   Billing period for the usage record.
+    #
+    #   Specify the value in *yyyy-mm* format. For example, for August 2025,
+    #   use *2025-08*.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppLicenseUsageRequest AWS API Documentation
+    #
+    class DescribeAppLicenseUsageRequest < Struct.new(
+      :billing_period,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_license_usages
+    #   Collection of license usage records.
+    #   @return [Array<Types::AdminAppLicenseUsageRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppLicenseUsageResult AWS API Documentation
+    #
+    class DescribeAppLicenseUsageResult < Struct.new(
+      :app_license_usages,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] fleet_name
     #   The name of the fleet.
     #   @return [String]
@@ -2924,6 +3194,62 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @!attribute [rw] associated_resource
+    #   The ARN of the resource to describe software associations. Possible
+    #   resources are Image and ImageBuilder.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSoftwareAssociationsRequest AWS API Documentation
+    #
+    class DescribeSoftwareAssociationsRequest < Struct.new(
+      :associated_resource,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_resource
+    #   The ARN of the resource to describe software associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_associations
+    #   Collection of license included applications association details
+    #   including:
+    #
+    #   * License included application name and version information
+    #
+    #   * Deployment status (SoftwareDeploymentStatus enum)
+    #
+    #   * Error details for failed deployments
+    #
+    #   * Association timestamps
+    #   @return [Array<Types::SoftwareAssociations>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSoftwareAssociationsResult AWS API Documentation
+    #
+    class DescribeSoftwareAssociationsResult < Struct.new(
+      :associated_resource,
+      :software_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] names
     #   The names of the stacks to describe.
     #   @return [Array<String>]
@@ -3278,6 +3604,78 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetResult AWS API Documentation
     #
     class DisassociateFleetResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] image_builder_name
+    #   The name of the target image builder instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_names
+    #   The list of license included applications to disassociate from the
+    #   image builder.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateSoftwareFromImageBuilderRequest AWS API Documentation
+    #
+    class DisassociateSoftwareFromImageBuilderRequest < Struct.new(
+      :image_builder_name,
+      :software_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateSoftwareFromImageBuilderResult AWS API Documentation
+    #
+    class DisassociateSoftwareFromImageBuilderResult < Aws::EmptyStructure; end
 
     # Describes the configuration information required to join fleets and
     # image builders to Microsoft Active Directory domains.
@@ -3949,6 +4347,10 @@ module Aws::AppStream
     #   Indicates whether the image is shared with another account ID.
     #   @return [String]
     #
+    # @!attribute [rw] managed_software_included
+    #   Indicates whether the image includes license-included applications.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -3972,7 +4374,8 @@ module Aws::AppStream
       :latest_appstream_agent_version,
       :supported_instance_families,
       :dynamic_app_providers_enabled,
-      :image_shared_with_others)
+      :image_shared_with_others,
+      :managed_software_included)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4817,6 +5220,81 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The association between a license-included application and a resource.
+    #
+    # @!attribute [rw] software_name
+    #   The name of the license-included application.
+    #
+    #   Possible values include the following:
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Professional\_Plus\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Professional\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Professional\_64Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Office\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2021\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_32Bit
+    #
+    #   * Microsoft\_Visio\_2024\_LTSC\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2021\_Standard\_64Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_32Bit
+    #
+    #   * Microsoft\_Project\_2024\_Standard\_64Bit
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The deployment status of the license-included application.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_error
+    #   The error details for failed deployments of the license-included
+    #   application.
+    #   @return [Array<Types::ErrorDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/SoftwareAssociations AWS API Documentation
+    #
+    class SoftwareAssociations < Struct.new(
+      :software_name,
+      :status,
+      :deployment_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a stack.
     #
     # @!attribute [rw] arn
@@ -4995,6 +5473,28 @@ module Aws::AppStream
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] image_builder_name
+    #   The name of the target image builder instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_failed_deployments
+    #   Whether to retry previously failed license included application
+    #   deployments.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartSoftwareDeploymentToImageBuilderRequest AWS API Documentation
+    #
+    class StartSoftwareDeploymentToImageBuilderRequest < Struct.new(
+      :image_builder_name,
+      :retry_failed_deployments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartSoftwareDeploymentToImageBuilderResult AWS API Documentation
+    #
+    class StartSoftwareDeploymentToImageBuilderResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   The name of the app block builder.

@@ -43,6 +43,8 @@ module Aws::Outposts
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     BlockingInstance = Shapes::StructureShape.new(name: 'BlockingInstance')
     BlockingInstancesList = Shapes::ListShape.new(name: 'BlockingInstancesList')
+    BlockingResourceType = Shapes::StringShape.new(name: 'BlockingResourceType')
+    BlockingResourceTypeList = Shapes::ListShape.new(name: 'BlockingResourceTypeList')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     CIDRList = Shapes::ListShape.new(name: 'CIDRList')
     CancelCapacityTaskInput = Shapes::StructureShape.new(name: 'CancelCapacityTaskInput')
@@ -81,6 +83,7 @@ module Aws::Outposts
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
     CreateSiteInput = Shapes::StructureShape.new(name: 'CreateSiteInput')
     CreateSiteOutput = Shapes::StructureShape.new(name: 'CreateSiteOutput')
+    DecommissionRequestStatus = Shapes::StringShape.new(name: 'DecommissionRequestStatus')
     DeleteOutpostInput = Shapes::StructureShape.new(name: 'DeleteOutpostInput')
     DeleteOutpostOutput = Shapes::StructureShape.new(name: 'DeleteOutpostOutput')
     DeleteSiteInput = Shapes::StructureShape.new(name: 'DeleteSiteInput')
@@ -214,6 +217,8 @@ module Aws::Outposts
     StartCapacityTaskOutput = Shapes::StructureShape.new(name: 'StartCapacityTaskOutput')
     StartConnectionRequest = Shapes::StructureShape.new(name: 'StartConnectionRequest')
     StartConnectionResponse = Shapes::StructureShape.new(name: 'StartConnectionResponse')
+    StartOutpostDecommissionInput = Shapes::StructureShape.new(name: 'StartOutpostDecommissionInput')
+    StartOutpostDecommissionOutput = Shapes::StructureShape.new(name: 'StartOutpostDecommissionOutput')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
     StateOrRegionList = Shapes::ListShape.new(name: 'StateOrRegionList')
     StatusList = Shapes::ListShape.new(name: 'StatusList')
@@ -250,6 +255,7 @@ module Aws::Outposts
     UplinkCount = Shapes::StringShape.new(name: 'UplinkCount')
     UplinkGbps = Shapes::StringShape.new(name: 'UplinkGbps')
     VCPUCount = Shapes::IntegerShape.new(name: 'VCPUCount')
+    ValidateOnly = Shapes::BooleanShape.new(name: 'ValidateOnly')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WireGuardPublicKey = Shapes::StringShape.new(name: 'WireGuardPublicKey')
     outpostListDefinition = Shapes::ListShape.new(name: 'outpostListDefinition')
@@ -314,6 +320,8 @@ module Aws::Outposts
     BlockingInstance.struct_class = Types::BlockingInstance
 
     BlockingInstancesList.member = Shapes::ShapeRef.new(shape: BlockingInstance)
+
+    BlockingResourceTypeList.member = Shapes::ShapeRef.new(shape: BlockingResourceType)
 
     CIDRList.member = Shapes::ShapeRef.new(shape: CIDR)
 
@@ -384,7 +392,7 @@ module Aws::Outposts
     CountryCodeList.member = Shapes::ShapeRef.new(shape: CountryCode)
 
     CreateOrderInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location_name: "OutpostIdentifier"))
-    CreateOrderInput.add_member(:line_items, Shapes::ShapeRef.new(shape: LineItemRequestListDefinition, required: true, location_name: "LineItems"))
+    CreateOrderInput.add_member(:line_items, Shapes::ShapeRef.new(shape: LineItemRequestListDefinition, location_name: "LineItems"))
     CreateOrderInput.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, required: true, location_name: "PaymentOption"))
     CreateOrderInput.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
     CreateOrderInput.struct_class = Types::CreateOrderInput
@@ -782,6 +790,14 @@ module Aws::Outposts
     StartConnectionResponse.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "ConnectionId"))
     StartConnectionResponse.add_member(:underlay_ip_address, Shapes::ShapeRef.new(shape: UnderlayIpAddress, location_name: "UnderlayIpAddress"))
     StartConnectionResponse.struct_class = Types::StartConnectionResponse
+
+    StartOutpostDecommissionInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostId"))
+    StartOutpostDecommissionInput.add_member(:validate_only, Shapes::ShapeRef.new(shape: ValidateOnly, location_name: "ValidateOnly"))
+    StartOutpostDecommissionInput.struct_class = Types::StartOutpostDecommissionInput
+
+    StartOutpostDecommissionOutput.add_member(:status, Shapes::ShapeRef.new(shape: DecommissionRequestStatus, location_name: "Status"))
+    StartOutpostDecommissionOutput.add_member(:blocking_resource_types, Shapes::ShapeRef.new(shape: BlockingResourceTypeList, location_name: "BlockingResourceTypes"))
+    StartOutpostDecommissionOutput.struct_class = Types::StartOutpostDecommissionOutput
 
     StateOrRegionList.member = Shapes::ShapeRef.new(shape: StateOrRegion)
 
@@ -1294,6 +1310,19 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_outpost_decommission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartOutpostDecommission"
+        o.http_method = "POST"
+        o.http_request_uri = "/outposts/{OutpostId}/decommission"
+        o.input = Shapes::ShapeRef.new(shape: StartOutpostDecommissionInput)
+        o.output = Shapes::ShapeRef.new(shape: StartOutpostDecommissionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

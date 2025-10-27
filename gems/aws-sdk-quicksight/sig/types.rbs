@@ -8,6 +8,13 @@
 module Aws::QuickSight
   module Types
 
+    class APIKeyConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor api_key: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:api_key, :email]
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -38,6 +45,47 @@ module Aws::QuickSight
       attr_accessor public_sharing_enabled: bool
       attr_accessor termination_protection_enabled: bool
       SENSITIVE: []
+    end
+
+    class ActionConnector
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR")
+      attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor error: Types::ActionConnectorError
+      attr_accessor description: ::String
+      attr_accessor authentication_config: Types::ReadAuthConfig
+      attr_accessor enabled_actions: ::Array[::String]
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class ActionConnectorError
+      attr_accessor message: ::String
+      attr_accessor type: ("INTERNAL_FAILURE")
+      SENSITIVE: []
+    end
+
+    class ActionConnectorSearchFilter
+      attr_accessor name: ("ACTION_CONNECTOR_NAME" | "ACTION_CONNECTOR_TYPE" | "QUICKSIGHT_OWNER" | "QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER")
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ActionConnectorSummary
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR")
+      attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor error: Types::ActionConnectorError
+      SENSITIVE: [:name]
     end
 
     class ActiveIAMPolicyAssignment
@@ -230,6 +278,7 @@ module Aws::QuickSight
 
     class ApplicationTheme
       attr_accessor brand_color_palette: Types::BrandColorPalette
+      attr_accessor contextual_accent_palette: Types::ContextualAccentPalette
       attr_accessor brand_element_style: Types::BrandElementStyle
       SENSITIVE: []
     end
@@ -628,6 +677,65 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AuthConfig
+      attr_accessor authentication_type: ("BASIC" | "API_KEY" | "OAUTH2_CLIENT_CREDENTIALS" | "NONE" | "IAM" | "OAUTH2_AUTHORIZATION_CODE")
+      attr_accessor authentication_metadata: Types::AuthenticationMetadata
+      SENSITIVE: []
+    end
+
+    class AuthenticationMetadata
+      attr_accessor authorization_code_grant_metadata: Types::AuthorizationCodeGrantMetadata
+      attr_accessor client_credentials_grant_metadata: Types::ClientCredentialsGrantMetadata
+      attr_accessor basic_auth_connection_metadata: Types::BasicAuthConnectionMetadata
+      attr_accessor api_key_connection_metadata: Types::APIKeyConnectionMetadata
+      attr_accessor none_connection_metadata: Types::NoneConnectionMetadata
+      attr_accessor iam_connection_metadata: Types::IAMConnectionMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCodeGrantMetadata < AuthenticationMetadata
+      end
+      class ClientCredentialsGrantMetadata < AuthenticationMetadata
+      end
+      class BasicAuthConnectionMetadata < AuthenticationMetadata
+      end
+      class ApiKeyConnectionMetadata < AuthenticationMetadata
+      end
+      class NoneConnectionMetadata < AuthenticationMetadata
+      end
+      class IamConnectionMetadata < AuthenticationMetadata
+      end
+      class Unknown < AuthenticationMetadata
+      end
+    end
+
+    class AuthorizationCodeGrantCredentialsDetails
+      attr_accessor authorization_code_grant_details: Types::AuthorizationCodeGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCodeGrantDetails < AuthorizationCodeGrantCredentialsDetails
+      end
+      class Unknown < AuthorizationCodeGrantCredentialsDetails
+      end
+    end
+
+    class AuthorizationCodeGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor token_endpoint: ::String
+      attr_accessor authorization_endpoint: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class AuthorizationCodeGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor redirect_url: ::String
+      attr_accessor authorization_code_grant_credentials_source: ("PLAIN_CREDENTIALS")
+      attr_accessor authorization_code_grant_credentials_details: Types::AuthorizationCodeGrantCredentialsDetails
+      SENSITIVE: []
+    end
+
     class AuthorizedTargetsByService
       attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
       attr_accessor authorized_targets: ::Array[::String]
@@ -759,6 +867,13 @@ module Aws::QuickSight
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor visual_content_alt_text: ::String
       SENSITIVE: []
+    end
+
+    class BasicAuthConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:username, :password]
     end
 
     class BatchCreateTopicReviewedAnswerRequest
@@ -1035,6 +1150,18 @@ module Aws::QuickSight
       attr_accessor include_content_in_scheduled_reports_email: ("DENY")
       attr_accessor dashboard: ("DENY")
       attr_accessor analysis: ("DENY")
+      attr_accessor automate: ("DENY")
+      attr_accessor flow: ("DENY")
+      attr_accessor publish_without_approval: ("DENY")
+      attr_accessor use_bedrock_models: ("DENY")
+      attr_accessor perform_flow_ui_task: ("DENY")
+      attr_accessor use_agent_web_search: ("DENY")
+      attr_accessor knowledge_base: ("DENY")
+      attr_accessor action: ("DENY")
+      attr_accessor space: ("DENY")
+      attr_accessor chat_agent: ("DENY")
+      attr_accessor create_chat_agents: ("DENY")
+      attr_accessor research: ("DENY")
       SENSITIVE: []
     end
 
@@ -1111,6 +1238,31 @@ module Aws::QuickSight
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor sort_icon_visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor axis_label_options: ::Array[Types::AxisLabelOptions]
+      SENSITIVE: []
+    end
+
+    class ClientCredentialsDetails
+      attr_accessor client_credentials_grant_details: Types::ClientCredentialsGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ClientCredentialsGrantDetails < ClientCredentialsDetails
+      end
+      class Unknown < ClientCredentialsDetails
+      end
+    end
+
+    class ClientCredentialsGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor token_endpoint: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class ClientCredentialsGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor client_credentials_source: ("PLAIN_CREDENTIALS")
+      attr_accessor client_credentials_details: Types::ClientCredentialsDetails
       SENSITIVE: []
     end
 
@@ -1372,8 +1524,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ConfluenceParameters
+      attr_accessor confluence_url: ::String
+      SENSITIVE: []
+    end
+
     class ContextMenuOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ContextualAccentPalette
+      attr_accessor connection: Types::Palette
+      attr_accessor visualization: Types::Palette
+      attr_accessor insight: Types::Palette
+      attr_accessor automation: Types::Palette
       SENSITIVE: []
     end
 
@@ -1439,6 +1604,28 @@ module Aws::QuickSight
       attr_accessor signup_response: Types::SignupResponse
       attr_accessor status: ::Integer
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR")
+      attr_accessor authentication_config: Types::AuthConfig
+      attr_accessor description: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateActionConnectorResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor action_connector_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 
@@ -1566,7 +1753,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS")
       attr_accessor data_source_parameters: Types::DataSourceParameters
       attr_accessor credentials: Types::DataSourceCredentials
       attr_accessor permissions: ::Array[Types::ResourcePermission]
@@ -2047,6 +2234,7 @@ module Aws::QuickSight
       attr_accessor data_point_menu_label_option: Types::DataPointMenuLabelOption
       attr_accessor data_point_tooltip_option: Types::DataPointTooltipOption
       attr_accessor data_qa_enabled_option: Types::DataQAEnabledOption
+      attr_accessor quick_suite_actions_option: Types::QuickSuiteActionsOption
       attr_accessor executive_summary_option: Types::ExecutiveSummaryOption
       attr_accessor data_stories_sharing_option: Types::DataStoriesSharingOption
       SENSITIVE: []
@@ -2340,7 +2528,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS")
       attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -2357,6 +2545,7 @@ module Aws::QuickSight
       attr_accessor credential_pair: Types::CredentialPair
       attr_accessor copy_source_arn: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor web_proxy_credentials: Types::WebProxyCredentials
       SENSITIVE: []
     end
 
@@ -2381,6 +2570,7 @@ module Aws::QuickSight
       attr_accessor rds_parameters: Types::RdsParameters
       attr_accessor redshift_parameters: Types::RedshiftParameters
       attr_accessor s3_parameters: Types::S3Parameters
+      attr_accessor s3_knowledge_base_parameters: Types::S3KnowledgeBaseParameters
       attr_accessor service_now_parameters: Types::ServiceNowParameters
       attr_accessor snowflake_parameters: Types::SnowflakeParameters
       attr_accessor spark_parameters: Types::SparkParameters
@@ -2395,6 +2585,9 @@ module Aws::QuickSight
       attr_accessor big_query_parameters: Types::BigQueryParameters
       attr_accessor impala_parameters: Types::ImpalaParameters
       attr_accessor custom_connection_parameters: Types::CustomConnectionParameters
+      attr_accessor web_crawler_parameters: Types::WebCrawlerParameters
+      attr_accessor confluence_parameters: Types::ConfluenceParameters
+      attr_accessor q_business_parameters: Types::QBusinessParameters
       SENSITIVE: []
     end
 
@@ -2409,7 +2602,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       SENSITIVE: []
@@ -2716,6 +2909,20 @@ module Aws::QuickSight
     end
 
     class DeleteAccountSubscriptionResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteActionConnectorResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -3171,6 +3378,34 @@ module Aws::QuickSight
       attr_accessor account_info: Types::AccountInfo
       attr_accessor status: ::Integer
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorPermissionsResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorResponse
+      attr_accessor action_connector: Types::ActionConnector
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 
@@ -4311,6 +4546,23 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class FlowSummary
+      attr_accessor arn: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor publish_state: ("PUBLISHED" | "DRAFT" | "PENDING_APPROVAL")
+      attr_accessor run_count: ::Integer
+      attr_accessor user_count: ::Integer
+      attr_accessor last_published_by: ::String
+      attr_accessor last_published_at: ::Time
+      SENSITIVE: []
+    end
+
     class Folder
       attr_accessor folder_id: ::String
       attr_accessor arn: ::String
@@ -4922,6 +5174,42 @@ module Aws::QuickSight
       SENSITIVE: [:embed_url]
     end
 
+    class GetFlowMetadataInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFlowMetadataOutput
+      attr_accessor arn: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor publish_state: ("PUBLISHED" | "DRAFT" | "PENDING_APPROVAL")
+      attr_accessor user_count: ::Integer
+      attr_accessor run_count: ::Integer
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFlowPermissionsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFlowPermissionsOutput
+      attr_accessor arn: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class GetSessionEmbedUrlRequest
       attr_accessor aws_account_id: ::String
       attr_accessor entry_point: ::String
@@ -5108,6 +5396,11 @@ module Aws::QuickSight
       attr_accessor chart_configuration: Types::HistogramConfiguration
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor visual_content_alt_text: ::String
+      SENSITIVE: []
+    end
+
+    class IAMConnectionMetadata
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -5631,6 +5924,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListActionConnectorsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionConnectorsResponse
+      attr_accessor action_connector_summaries: ::Array[Types::ActionConnectorSummary]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class ListAnalysesRequest
       attr_accessor aws_account_id: ::String
       attr_accessor next_token: ::String
@@ -5777,6 +6085,21 @@ module Aws::QuickSight
 
     class ListDataSourcesResponse
       attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowsOutput
+      attr_accessor flow_summary_list: ::Array[Types::FlowSummary]
       attr_accessor next_token: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
@@ -6392,6 +6715,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class NoneConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      SENSITIVE: []
+    end
+
     class NullValueFormatConfiguration
       attr_accessor null_string: ::String
       SENSITIVE: [:null_string]
@@ -6687,6 +7015,12 @@ module Aws::QuickSight
       attr_accessor time: Types::DimensionField
       attr_accessor value: Types::MeasureField
       attr_accessor period_time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
+      SENSITIVE: []
+    end
+
+    class Permission
+      attr_accessor actions: ::Array[::String]
+      attr_accessor principal: ::String
       SENSITIVE: []
     end
 
@@ -7032,6 +7366,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class QBusinessParameters
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class QDataKey
       attr_accessor q_data_key_arn: ::String
       attr_accessor q_data_key_type: ("AWS_OWNED" | "CMK")
@@ -7052,6 +7391,11 @@ module Aws::QuickSight
     class QuickSightUserNotFoundException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class QuickSuiteActionsOption
+      attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -7130,6 +7474,111 @@ module Aws::QuickSight
     class RdsParameters
       attr_accessor instance_id: ::String
       attr_accessor database: ::String
+      SENSITIVE: []
+    end
+
+    class ReadAPIKeyConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:email]
+    end
+
+    class ReadAuthConfig
+      attr_accessor authentication_type: ("BASIC" | "API_KEY" | "OAUTH2_CLIENT_CREDENTIALS" | "NONE" | "IAM" | "OAUTH2_AUTHORIZATION_CODE")
+      attr_accessor authentication_metadata: Types::ReadAuthenticationMetadata
+      SENSITIVE: []
+    end
+
+    class ReadAuthenticationMetadata
+      attr_accessor authorization_code_grant_metadata: Types::ReadAuthorizationCodeGrantMetadata
+      attr_accessor client_credentials_grant_metadata: Types::ReadClientCredentialsGrantMetadata
+      attr_accessor basic_auth_connection_metadata: Types::ReadBasicAuthConnectionMetadata
+      attr_accessor api_key_connection_metadata: Types::ReadAPIKeyConnectionMetadata
+      attr_accessor none_connection_metadata: Types::ReadNoneConnectionMetadata
+      attr_accessor iam_connection_metadata: Types::ReadIamConnectionMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCodeGrantMetadata < ReadAuthenticationMetadata
+      end
+      class ClientCredentialsGrantMetadata < ReadAuthenticationMetadata
+      end
+      class BasicAuthConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class ApiKeyConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class NoneConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class IamConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class Unknown < ReadAuthenticationMetadata
+      end
+    end
+
+    class ReadAuthorizationCodeGrantCredentialsDetails
+      attr_accessor read_authorization_code_grant_details: Types::ReadAuthorizationCodeGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ReadAuthorizationCodeGrantDetails < ReadAuthorizationCodeGrantCredentialsDetails
+      end
+      class Unknown < ReadAuthorizationCodeGrantCredentialsDetails
+      end
+    end
+
+    class ReadAuthorizationCodeGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor token_endpoint: ::String
+      attr_accessor authorization_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class ReadAuthorizationCodeGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor redirect_url: ::String
+      attr_accessor read_authorization_code_grant_credentials_details: Types::ReadAuthorizationCodeGrantCredentialsDetails
+      attr_accessor authorization_code_grant_credentials_source: ("PLAIN_CREDENTIALS")
+      SENSITIVE: []
+    end
+
+    class ReadBasicAuthConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class ReadClientCredentialsDetails
+      attr_accessor read_client_credentials_grant_details: Types::ReadClientCredentialsGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ReadClientCredentialsGrantDetails < ReadClientCredentialsDetails
+      end
+      class Unknown < ReadClientCredentialsDetails
+      end
+    end
+
+    class ReadClientCredentialsGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor token_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class ReadClientCredentialsGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor read_client_credentials_details: Types::ReadClientCredentialsDetails
+      attr_accessor client_credentials_source: ("PLAIN_CREDENTIALS")
+      SENSITIVE: []
+    end
+
+    class ReadIamConnectionMetadata
+      attr_accessor role_arn: ::String
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReadNoneConnectionMetadata
+      attr_accessor base_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -7462,6 +7911,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class S3KnowledgeBaseParameters
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_url: ::String
+      attr_accessor metadata_files_location: ::String
+      SENSITIVE: []
+    end
+
     class S3Parameters
       attr_accessor manifest_file_location: Types::ManifestFileLocation
       attr_accessor role_arn: ::String
@@ -7590,6 +8046,22 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SearchActionConnectorsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::ActionConnectorSearchFilter]
+      SENSITIVE: []
+    end
+
+    class SearchActionConnectorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      attr_accessor action_connector_summaries: ::Array[Types::ActionConnectorSummary]
+      SENSITIVE: []
+    end
+
     class SearchAnalysesRequest
       attr_accessor aws_account_id: ::String
       attr_accessor filters: ::Array[Types::AnalysisSearchFilter]
@@ -7651,6 +8123,29 @@ module Aws::QuickSight
       attr_accessor next_token: ::String
       attr_accessor status: ::Integer
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFlowsFilter
+      attr_accessor name: ("assetName" | "assetDescription" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER")
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFlowsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor filters: ::Array[Types::SearchFlowsFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchFlowsOutput
+      attr_accessor flow_summary_list: ::Array[Types::FlowSummary]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 
@@ -9330,6 +9825,42 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class UpdateActionConnectorPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor grant_permissions: ::Array[Types::ResourcePermission]
+      attr_accessor revoke_permissions: ::Array[Types::ResourcePermission]
+      SENSITIVE: []
+    end
+
+    class UpdateActionConnectorPermissionsResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      SENSITIVE: []
+    end
+
+    class UpdateActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor authentication_config: Types::AuthConfig
+      attr_accessor description: ::String
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateActionConnectorResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor update_status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class UpdateAnalysisPermissionsRequest
       attr_accessor aws_account_id: ::String
       attr_accessor analysis_id: ::String
@@ -9610,6 +10141,23 @@ module Aws::QuickSight
     class UpdateDefaultQBusinessApplicationResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFlowPermissionsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor grant_permissions: ::Array[Types::Permission]
+      attr_accessor revoke_permissions: ::Array[Types::Permission]
+      SENSITIVE: []
+    end
+
+    class UpdateFlowPermissionsOutput
+      attr_accessor status: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor request_id: ::String
+      attr_accessor flow_id: ::String
       SENSITIVE: []
     end
 
@@ -10239,6 +10787,24 @@ module Aws::QuickSight
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor visual_content_alt_text: ::String
+      SENSITIVE: []
+    end
+
+    class WebCrawlerParameters
+      attr_accessor web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML")
+      attr_accessor username_field_xpath: ::String
+      attr_accessor password_field_xpath: ::String
+      attr_accessor username_button_xpath: ::String
+      attr_accessor password_button_xpath: ::String
+      attr_accessor login_page_url: ::String
+      attr_accessor web_proxy_host_name: ::String
+      attr_accessor web_proxy_port_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class WebProxyCredentials
+      attr_accessor web_proxy_username: ::String
+      attr_accessor web_proxy_password: ::String
       SENSITIVE: []
     end
 

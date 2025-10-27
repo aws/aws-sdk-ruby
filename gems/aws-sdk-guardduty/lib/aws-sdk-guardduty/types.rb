@@ -6233,7 +6233,7 @@ module Aws::GuardDuty
     #   this parameter to null on your first call to the list action. For
     #   subsequent calls to the action, fill nextToken in the request with
     #   the value of `NextToken` from the previous response to continue
-    #   listing data.
+    #   listing data. The default page size is 100 plans.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareProtectionPlansRequest AWS API Documentation
@@ -10203,7 +10203,7 @@ module Aws::GuardDuty
       :finding_ids,
       :feedback,
       :comments)
-      SENSITIVE = []
+      SENSITIVE = [:comments]
       include Aws::Structure
     end
 

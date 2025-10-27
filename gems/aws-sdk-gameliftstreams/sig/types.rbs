@@ -221,7 +221,7 @@ module Aws::GameLiftStreams
       attr_accessor stream_group_id: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor location: ::String
       attr_accessor signal_request: ::String
@@ -375,7 +375,7 @@ module Aws::GameLiftStreams
       attr_accessor stream_group_id: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor location: ::String
       attr_accessor signal_request: ::String

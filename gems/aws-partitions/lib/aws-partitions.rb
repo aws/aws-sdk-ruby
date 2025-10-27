@@ -562,6 +562,7 @@ module Aws
             'RAM' => 'ram',
             'RDS' => 'rds',
             'RDSDataService' => 'rds-data',
+            'RTBFabric' => 'rtbfabric',
             'RecycleBin' => 'rbin',
             'Redshift' => 'redshift',
             'RedshiftDataAPIService' => 'redshift-data',

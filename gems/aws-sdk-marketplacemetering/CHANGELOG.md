@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2025-10-21)
+------------------
+
+* Feature - Added ClientToken parameter to MeterUsage API for specifying idempotent requests.
+
 1.86.0 (2025-08-26)
 ------------------
 

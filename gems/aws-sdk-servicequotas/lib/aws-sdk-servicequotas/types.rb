@@ -203,6 +203,55 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAutoManagementConfigurationRequest AWS API Documentation
+    #
+    class GetAutoManagementConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] opt_in_level
+    #   Information on the opt-in level for Automatic Management. Only
+    #   Amazon Web Services account level is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_type
+    #   Information on the opt-in type for Automatic Management. There are
+    #   two modes: Notify only and Notify and Auto-Adjust. Currently, only
+    #   NotifyOnly is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_arn
+    #   The [User Notifications][1] Amazon Resource Name (ARN) for Automatic
+    #   Management notifications.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_status
+    #   Status on whether Automatic Management is started or stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusion_list
+    #   List of Amazon Web Services services excluded from Automatic
+    #   Management. You won't be notified of Service Quotas utilization for
+    #   Amazon Web Services services added to the Automatic Management
+    #   exclusion list.
+    #   @return [Hash<String,Array<Types::QuotaInfo>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAutoManagementConfigurationResponse AWS API Documentation
+    #
+    class GetAutoManagementConfigurationResponse < Struct.new(
+      :opt_in_level,
+      :opt_in_type,
+      :notification_arn,
+      :opt_in_status,
+      :exclusion_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] request_id
     #   Specifies the ID of the quota increase request.
     #   @return [String]
@@ -951,6 +1000,34 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # Information on your Service Quotas for [Service Quotas Automatic
+    # Management][1]. Automatic Management monitors your Service Quotas
+    # utilization and notifies you before you run out of your allocated
+    # quotas.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html
+    #
+    # @!attribute [rw] quota_code
+    #   The Service Quotas code for the Amazon Web Services service
+    #   monitored with Automatic Management.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_name
+    #   The Service Quotas name for the Amazon Web Services service
+    #   monitored with Automatic Management.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/QuotaInfo AWS API Documentation
+    #
+    class QuotaInfo < Struct.new(
+      :quota_code,
+      :quota_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the quota period.
     #
     # @!attribute [rw] period_value
@@ -1342,6 +1419,58 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # @!attribute [rw] opt_in_level
+    #   Sets the opt-in level for Automatic Management. Only Amazon Web
+    #   Services account level is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_type
+    #   Sets the opt-in type for Automatic Management. There are two modes:
+    #   Notify only and Notify and Auto-Adjust. Currently, only NotifyOnly
+    #   is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_arn
+    #   The [User Notifications][1] Amazon Resource Name (ARN) for Automatic
+    #   Management notifications.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusion_list
+    #   List of Amazon Web Services services excluded from Automatic
+    #   Management. You won't be notified of Service Quotas utilization for
+    #   Amazon Web Services services added to the Automatic Management
+    #   exclusion list.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartAutoManagementRequest AWS API Documentation
+    #
+    class StartAutoManagementRequest < Struct.new(
+      :opt_in_level,
+      :opt_in_type,
+      :notification_arn,
+      :exclusion_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartAutoManagementResponse AWS API Documentation
+    #
+    class StartAutoManagementResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StopAutoManagementRequest AWS API Documentation
+    #
+    class StopAutoManagementRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StopAutoManagementResponse AWS API Documentation
+    #
+    class StopAutoManagementResponse < Aws::EmptyStructure; end
+
     # A complex data type that contains a tag key and tag value.
     #
     # @!attribute [rw] key
@@ -1483,6 +1612,42 @@ module Aws::ServiceQuotas
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] opt_in_type
+    #   Information on the opt-in type for your Automatic Management
+    #   configuration. There are two modes: Notify only and Notify and
+    #   Auto-Adjust. Currently, only NotifyOnly is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_arn
+    #   The [User Notifications][1] Amazon Resource Name (ARN) for Automatic
+    #   Management notifications you want to update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusion_list
+    #   List of Amazon Web Services services you want to exclude from
+    #   Automatic Management. You won't be notified of Service Quotas
+    #   utilization for Amazon Web Services services added to the Automatic
+    #   Management exclusion list.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UpdateAutoManagementRequest AWS API Documentation
+    #
+    class UpdateAutoManagementRequest < Struct.new(
+      :opt_in_type,
+      :notification_arn,
+      :exclusion_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UpdateAutoManagementResponse AWS API Documentation
+    #
+    class UpdateAutoManagementResponse < Aws::EmptyStructure; end
 
   end
 end

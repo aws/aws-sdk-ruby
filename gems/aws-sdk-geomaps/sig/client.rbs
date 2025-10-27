@@ -153,6 +153,10 @@ module Aws
                                   style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite"),
                                   ?color_scheme: ("Light" | "Dark"),
                                   ?political_view: ::String,
+                                  ?terrain: ("Hillshade"),
+                                  ?contour_density: ("Medium"),
+                                  ?traffic: ("All"),
+                                  ?travel_modes: Array[("Transit" | "Truck")],
                                   ?key: ::String
                                 ) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess
@@ -167,6 +171,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#get_tile-instance_method
       def get_tile: (
+                      ?additional_features: Array[("ContourLines" | "Hillshade" | "Logistics" | "Transit")],
                       tileset: ::String,
                       z: ::String,
                       x: ::String,

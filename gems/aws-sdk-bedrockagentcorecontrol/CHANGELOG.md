@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2025-10-23)
+------------------
+
+* Feature - Fixing the service documentation name
+
+1.11.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2025-10-13)
+------------------
+
+* Feature - Updated http status code in control plane apis of agentcore runtime, tools and identity. Additional included provider types for AgentCore Identity
+
+1.9.0 (2025-10-10)
+------------------
+
+* Feature - Bedrock AgentCore release for Gateway, and Memory including Self-Managed Strategies support for Memory.
+
+1.8.0 (2025-10-08)
+------------------
+
+* Feature - Adding support for authorizer type AWS_IAM to AgentCore Control Gateway.
+
 1.7.0 (2025-10-06)
 ------------------
 

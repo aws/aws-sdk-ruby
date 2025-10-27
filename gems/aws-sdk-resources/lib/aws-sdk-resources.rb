@@ -324,6 +324,7 @@ module Aws
   autoload :RAM, 'aws-sdk-ram'
   autoload :RDS, 'aws-sdk-rds'
   autoload :RDSDataService, 'aws-sdk-rdsdataservice'
+  autoload :RTBFabric, 'aws-sdk-rtbfabric'
   autoload :RecycleBin, 'aws-sdk-recyclebin'
   autoload :Redshift, 'aws-sdk-redshift'
   autoload :RedshiftDataAPIService, 'aws-sdk-redshiftdataapiservice'

@@ -55,7 +55,7 @@ module Aws::ConnectCases
   autoload :EndpointProvider, 'aws-sdk-connectcases/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcases/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

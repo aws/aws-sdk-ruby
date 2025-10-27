@@ -47,7 +47,7 @@ module Aws
             'String' => { 'type' => 'string' },
             'ChecksumAlgorithm' => {
               'type' => 'string',
-              'enum' => ['CRC32', 'CRC32C', 'CRC64NVME', 'SHA1', 'SHA256']
+              'enum' => %w[CRC32 CRC32C CRC64NVME SHA1 SHA256]
             },
             'SomeInput' => {
               'type' => 'structure',
@@ -404,6 +404,16 @@ module Aws
           resp = client.http_checksum_operation
           expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
             .to be_nil
+        end
+
+        it 'when_required; given algorithm; include a checksum' do
+          client = checksum_client.new(
+            stub_responses: true,
+            request_checksum_calculation: 'when_required'
+          )
+          resp = client.http_checksum_operation(checksum_algorithm: 'CRC32')
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
+            .to eq('AAAAAA==')
         end
       end
 

@@ -15,13 +15,19 @@ module Aws::LocationService
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AndroidApp = Shapes::StructureShape.new(name: 'AndroidApp')
+    AndroidPackageName = Shapes::StringShape.new(name: 'AndroidPackageName')
     ApiKey = Shapes::StringShape.new(name: 'ApiKey')
     ApiKeyAction = Shapes::StringShape.new(name: 'ApiKeyAction')
     ApiKeyFilter = Shapes::StructureShape.new(name: 'ApiKeyFilter')
     ApiKeyRestrictions = Shapes::StructureShape.new(name: 'ApiKeyRestrictions')
     ApiKeyRestrictionsAllowActionsList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowActionsList')
+    ApiKeyRestrictionsAllowAndroidAppsList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowAndroidAppsList')
+    ApiKeyRestrictionsAllowAppleAppsList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowAppleAppsList')
     ApiKeyRestrictionsAllowReferersList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowReferersList')
     ApiKeyRestrictionsAllowResourcesList = Shapes::ListShape.new(name: 'ApiKeyRestrictionsAllowResourcesList')
+    AppleApp = Shapes::StructureShape.new(name: 'AppleApp')
+    AppleBundleId = Shapes::StringShape.new(name: 'AppleBundleId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociateTrackerConsumerRequest = Shapes::StructureShape.new(name: 'AssociateTrackerConsumerRequest')
@@ -309,9 +315,12 @@ module Aws::LocationService
     SearchPlaceIndexForTextRequestTextString = Shapes::StringShape.new(name: 'SearchPlaceIndexForTextRequestTextString')
     SearchPlaceIndexForTextResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextResponse')
     SearchPlaceIndexForTextSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextSummary')
+    SensitiveBoolean = Shapes::BooleanShape.new(name: 'SensitiveBoolean')
     SensitiveDouble = Shapes::FloatShape.new(name: 'SensitiveDouble')
+    SensitiveInteger = Shapes::IntegerShape.new(name: 'SensitiveInteger')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Sha1CertificateFingerprint = Shapes::StringShape.new(name: 'Sha1CertificateFingerprint')
     SpeedUnit = Shapes::StringShape.new(name: 'SpeedUnit')
     Status = Shapes::StringShape.new(name: 'Status')
     Step = Shapes::StructureShape.new(name: 'Step')
@@ -368,19 +377,32 @@ module Aws::LocationService
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AndroidApp.add_member(:package, Shapes::ShapeRef.new(shape: AndroidPackageName, required: true, location_name: "Package"))
+    AndroidApp.add_member(:certificate_fingerprint, Shapes::ShapeRef.new(shape: Sha1CertificateFingerprint, required: true, location_name: "CertificateFingerprint"))
+    AndroidApp.struct_class = Types::AndroidApp
+
     ApiKeyFilter.add_member(:key_status, Shapes::ShapeRef.new(shape: Status, location_name: "KeyStatus"))
     ApiKeyFilter.struct_class = Types::ApiKeyFilter
 
     ApiKeyRestrictions.add_member(:allow_actions, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowActionsList, required: true, location_name: "AllowActions"))
     ApiKeyRestrictions.add_member(:allow_resources, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowResourcesList, required: true, location_name: "AllowResources"))
     ApiKeyRestrictions.add_member(:allow_referers, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowReferersList, location_name: "AllowReferers"))
+    ApiKeyRestrictions.add_member(:allow_android_apps, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowAndroidAppsList, location_name: "AllowAndroidApps"))
+    ApiKeyRestrictions.add_member(:allow_apple_apps, Shapes::ShapeRef.new(shape: ApiKeyRestrictionsAllowAppleAppsList, location_name: "AllowAppleApps"))
     ApiKeyRestrictions.struct_class = Types::ApiKeyRestrictions
 
     ApiKeyRestrictionsAllowActionsList.member = Shapes::ShapeRef.new(shape: ApiKeyAction)
 
+    ApiKeyRestrictionsAllowAndroidAppsList.member = Shapes::ShapeRef.new(shape: AndroidApp)
+
+    ApiKeyRestrictionsAllowAppleAppsList.member = Shapes::ShapeRef.new(shape: AppleApp)
+
     ApiKeyRestrictionsAllowReferersList.member = Shapes::ShapeRef.new(shape: RefererPattern)
 
     ApiKeyRestrictionsAllowResourcesList.member = Shapes::ShapeRef.new(shape: GeoArnV2)
+
+    AppleApp.add_member(:bundle_id, Shapes::ShapeRef.new(shape: AppleBundleId, required: true, location_name: "BundleId"))
+    AppleApp.struct_class = Types::AppleApp
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
@@ -502,8 +524,8 @@ module Aws::LocationService
 
     BoundingBox.member = Shapes::ShapeRef.new(shape: Double)
 
-    CalculateRouteCarModeOptions.add_member(:avoid_ferries, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvoidFerries"))
-    CalculateRouteCarModeOptions.add_member(:avoid_tolls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvoidTolls"))
+    CalculateRouteCarModeOptions.add_member(:avoid_ferries, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AvoidFerries"))
+    CalculateRouteCarModeOptions.add_member(:avoid_tolls, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AvoidTolls"))
     CalculateRouteCarModeOptions.struct_class = Types::CalculateRouteCarModeOptions
 
     CalculateRouteMatrixRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CalculatorName"))
@@ -511,7 +533,7 @@ module Aws::LocationService
     CalculateRouteMatrixRequest.add_member(:destination_positions, Shapes::ShapeRef.new(shape: CalculateRouteMatrixRequestDestinationPositionsList, required: true, location_name: "DestinationPositions"))
     CalculateRouteMatrixRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: TravelMode, location_name: "TravelMode"))
     CalculateRouteMatrixRequest.add_member(:departure_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DepartureTime"))
-    CalculateRouteMatrixRequest.add_member(:depart_now, Shapes::ShapeRef.new(shape: Boolean, location_name: "DepartNow"))
+    CalculateRouteMatrixRequest.add_member(:depart_now, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "DepartNow"))
     CalculateRouteMatrixRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
     CalculateRouteMatrixRequest.add_member(:car_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteCarModeOptions, location_name: "CarModeOptions"))
     CalculateRouteMatrixRequest.add_member(:truck_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteTruckModeOptions, location_name: "TruckModeOptions"))
@@ -544,9 +566,9 @@ module Aws::LocationService
     CalculateRouteRequest.add_member(:waypoint_positions, Shapes::ShapeRef.new(shape: CalculateRouteRequestWaypointPositionsList, location_name: "WaypointPositions"))
     CalculateRouteRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: TravelMode, location_name: "TravelMode"))
     CalculateRouteRequest.add_member(:departure_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DepartureTime"))
-    CalculateRouteRequest.add_member(:depart_now, Shapes::ShapeRef.new(shape: Boolean, location_name: "DepartNow"))
+    CalculateRouteRequest.add_member(:depart_now, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "DepartNow"))
     CalculateRouteRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
-    CalculateRouteRequest.add_member(:include_leg_geometry, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeLegGeometry"))
+    CalculateRouteRequest.add_member(:include_leg_geometry, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "IncludeLegGeometry"))
     CalculateRouteRequest.add_member(:car_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteCarModeOptions, location_name: "CarModeOptions"))
     CalculateRouteRequest.add_member(:truck_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteTruckModeOptions, location_name: "TruckModeOptions"))
     CalculateRouteRequest.add_member(:arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ArrivalTime"))
@@ -567,8 +589,8 @@ module Aws::LocationService
     CalculateRouteSummary.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, required: true, location_name: "DistanceUnit"))
     CalculateRouteSummary.struct_class = Types::CalculateRouteSummary
 
-    CalculateRouteTruckModeOptions.add_member(:avoid_ferries, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvoidFerries"))
-    CalculateRouteTruckModeOptions.add_member(:avoid_tolls, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvoidTolls"))
+    CalculateRouteTruckModeOptions.add_member(:avoid_ferries, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AvoidFerries"))
+    CalculateRouteTruckModeOptions.add_member(:avoid_tolls, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AvoidTolls"))
     CalculateRouteTruckModeOptions.add_member(:dimensions, Shapes::ShapeRef.new(shape: TruckDimensions, location_name: "Dimensions"))
     CalculateRouteTruckModeOptions.add_member(:weight, Shapes::ShapeRef.new(shape: TruckWeight, location_name: "Weight"))
     CalculateRouteTruckModeOptions.struct_class = Types::CalculateRouteTruckModeOptions
@@ -1183,23 +1205,23 @@ module Aws::LocationService
     MapConfigurationUpdate.add_member(:custom_layers, Shapes::ShapeRef.new(shape: CustomLayerList, location_name: "CustomLayers"))
     MapConfigurationUpdate.struct_class = Types::MapConfigurationUpdate
 
-    Place.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
+    Place.add_member(:label, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Label"))
     Place.add_member(:geometry, Shapes::ShapeRef.new(shape: PlaceGeometry, required: true, location_name: "Geometry"))
-    Place.add_member(:address_number, Shapes::ShapeRef.new(shape: String, location_name: "AddressNumber"))
-    Place.add_member(:street, Shapes::ShapeRef.new(shape: String, location_name: "Street"))
-    Place.add_member(:neighborhood, Shapes::ShapeRef.new(shape: String, location_name: "Neighborhood"))
-    Place.add_member(:municipality, Shapes::ShapeRef.new(shape: String, location_name: "Municipality"))
-    Place.add_member(:sub_region, Shapes::ShapeRef.new(shape: String, location_name: "SubRegion"))
-    Place.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
-    Place.add_member(:country, Shapes::ShapeRef.new(shape: String, location_name: "Country"))
-    Place.add_member(:postal_code, Shapes::ShapeRef.new(shape: String, location_name: "PostalCode"))
-    Place.add_member(:interpolated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Interpolated"))
+    Place.add_member(:address_number, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "AddressNumber"))
+    Place.add_member(:street, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Street"))
+    Place.add_member(:neighborhood, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Neighborhood"))
+    Place.add_member(:municipality, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Municipality"))
+    Place.add_member(:sub_region, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "SubRegion"))
+    Place.add_member(:region, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Region"))
+    Place.add_member(:country, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Country"))
+    Place.add_member(:postal_code, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "PostalCode"))
+    Place.add_member(:interpolated, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Interpolated"))
     Place.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
-    Place.add_member(:unit_type, Shapes::ShapeRef.new(shape: String, location_name: "UnitType"))
-    Place.add_member(:unit_number, Shapes::ShapeRef.new(shape: String, location_name: "UnitNumber"))
+    Place.add_member(:unit_type, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "UnitType"))
+    Place.add_member(:unit_number, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "UnitNumber"))
     Place.add_member(:categories, Shapes::ShapeRef.new(shape: PlaceCategoryList, location_name: "Categories"))
     Place.add_member(:supplemental_categories, Shapes::ShapeRef.new(shape: PlaceSupplementalCategoryList, location_name: "SupplementalCategories"))
-    Place.add_member(:sub_municipality, Shapes::ShapeRef.new(shape: String, location_name: "SubMunicipality"))
+    Place.add_member(:sub_municipality, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "SubMunicipality"))
     Place.struct_class = Types::Place
 
     PlaceCategoryList.member = Shapes::ShapeRef.new(shape: PlaceCategory)
@@ -1254,7 +1276,7 @@ module Aws::LocationService
 
     SearchForPositionResultList.member = Shapes::ShapeRef.new(shape: SearchForPositionResult)
 
-    SearchForSuggestionsResult.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    SearchForSuggestionsResult.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "Text"))
     SearchForSuggestionsResult.add_member(:place_id, Shapes::ShapeRef.new(shape: PlaceId, location_name: "PlaceId"))
     SearchForSuggestionsResult.add_member(:categories, Shapes::ShapeRef.new(shape: PlaceCategoryList, location_name: "Categories"))
     SearchForSuggestionsResult.add_member(:supplemental_categories, Shapes::ShapeRef.new(shape: PlaceSupplementalCategoryList, location_name: "SupplementalCategories"))
@@ -1364,8 +1386,8 @@ module Aws::LocationService
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    TimeZone.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
-    TimeZone.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, location_name: "Offset"))
+    TimeZone.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "Name"))
+    TimeZone.add_member(:offset, Shapes::ShapeRef.new(shape: SensitiveInteger, location_name: "Offset"))
     TimeZone.struct_class = Types::TimeZone
 
     TrackingFilterGeometry.add_member(:polygon, Shapes::ShapeRef.new(shape: LinearRings, location_name: "Polygon"))
@@ -1515,8 +1537,8 @@ module Aws::LocationService
         o.input = Shapes::ShapeRef.new(shape: AssociateTrackerConsumerRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateTrackerConsumerResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -2334,8 +2356,8 @@ module Aws::LocationService
         o.input = Shapes::ShapeRef.new(shape: PutGeofenceRequest)
         o.output = Shapes::ShapeRef.new(shape: PutGeofenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

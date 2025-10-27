@@ -689,25 +689,15 @@ module Aws::Connect
     #
     # Following are common uses cases for this API:
     #
-    # * Custom contact routing. You can build custom contact routing
-    #   mechanisms beyond the default system routing in Amazon Connect. You
-    #   can create tailored contact distribution logic that offers queued
-    #   contacts directly to specific agents.
+    # * Programmatically assign queued contacts to available users.
     #
-    # * Manual contact assignment. You can programmatically assign queued
-    #   contacts to available users. This provides flexibility to contact
-    #   centers that require manual oversight or specialized routing
-    #   workflows outside of standard queue management.
-    #
-    #   For information about how manual contact assignment works in the
-    #   agent workspace, see the [Access the Worklist app in the Amazon
-    #   Connect agent workspace][1] in the *Amazon Connect Administrator
-    #   Guide*.
+    # * Leverage the IAM context key `connect:PreferredUserArn` to restrict
+    #   contact association to specific preferred user.
     #
     # **Important things to know**
     #
-    # * Use this API chat/SMS, email, and task contacts. It does not support
-    #   voice contacts.
+    # * Use this API with chat, email, and task contacts. It does not
+    #   support voice contacts.
     #
     # * Use it to associate contacts with users regardless of their current
     #   state, including custom states. Ensure your application logic
@@ -721,11 +711,16 @@ module Aws::Connect
     #   associations. Verify that your IAM policies are properly configured
     #   to support your intended use cases.
     #
+    # * The service quota *Queues per routing profile per instance* applies
+    #   to manually assigned queues, too. For more information about this
+    #   quota, see [Amazon Connect quotas][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
     # **Endpoints**: See [Amazon Connect endpoints and quotas][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
     # [2]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
@@ -803,6 +798,134 @@ module Aws::Connect
     # @param [Hash] params ({})
     def associate_default_vocabulary(params = {}, options = {})
       req = build_request(:associate_default_vocabulary, params)
+      req.send_request(options)
+    end
+
+    # Associates an email address alias with an existing email address in an
+    # Amazon Connect instance. This creates a forwarding relationship where
+    # emails sent to the alias email address are automatically forwarded to
+    # the primary email address.
+    #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * **Unified customer support**: Create multiple entry points (for
+    #   example, support@example.com, help@example.com,
+    #   customercare@example.com) that all forward to a single agent queue
+    #   for streamlined management.
+    #
+    # * **Department consolidation**: Forward emails from legacy department
+    #   addresses (for example, sales@example.com, info@example.com) to a
+    #   centralized customer service email during organizational
+    #   restructuring.
+    #
+    # * **Brand management**: Enable you to use familiar brand-specific
+    #   email addresses that forward to the appropriate Amazon Connect
+    #   instance email address.
+    #
+    # **Important things to know**
+    #
+    # * Each email address can have a maximum of one alias. You cannot
+    #   create multiple aliases for the same email address.
+    #
+    # * If the alias email address already receives direct emails, it
+    #   continues to receive direct emails plus forwarded emails.
+    #
+    # * You cannot chain email aliases together (that is, create an alias of
+    #   an alias).
+    #
+    # `AssociateEmailAddressAlias` does not return the following
+    # information:
+    #
+    # * A confirmation of the alias relationship details (you must call
+    #   [DescribeEmailAddress][1] to verify).
+    #
+    # * The timestamp of when the association occurred.
+    #
+    # * The status of the forwarding configuration.
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][2].
+    #
+    # **Related operations**
+    #
+    # * [DisassociateEmailAddressAlias][3]: Removes the alias association
+    #   between two email addresses in an Amazon Connect instance.
+    #
+    # * [DescribeEmailAddress][1]: View current alias configurations for an
+    #   email address.
+    #
+    # * [SearchEmailAddresses][4]: Find email addresses and their alias
+    #   relationships across an instance.
+    #
+    # * [CreateEmailAddress][5]: Create new email addresses that can
+    #   participate in alias relationships.
+    #
+    # * [DeleteEmailAddress][6]: Remove email addresses (automatically
+    #   removes any alias relationships).
+    #
+    # * [UpdateEmailAddressMetadata][7]: Modify email address properties
+    #   (does not affect alias relationships).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociateEmailAddressAlias.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchEmailAddresses.html
+    # [5]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateEmailAddress.html
+    # [6]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteEmailAddress.html
+    # [7]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateEmailAddressMetadata.html
+    #
+    # @option params [required, String] :email_address_id
+    #   The identifier of the email address.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Types::AliasConfiguration] :alias_configuration
+    #   Configuration object that specifies which email address will serve as
+    #   the alias. The specified email address must already exist in the
+    #   Amazon Connect instance and cannot already be configured as an alias
+    #   or have an alias of its own.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_email_address_alias({
+    #     email_address_id: "EmailAddressId", # required
+    #     instance_id: "InstanceId", # required
+    #     alias_configuration: { # required
+    #       email_address_id: "EmailAddressId", # required
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateEmailAddressAlias AWS API Documentation
+    #
+    # @overload associate_email_address_alias(params = {})
+    # @param [Hash] params ({})
+    def associate_email_address_alias(params = {}, options = {})
+      req = build_request(:associate_email_address_alias, params)
       req.send_request(options)
     end
 
@@ -1622,6 +1745,19 @@ module Aws::Connect
     #         campaign: {
     #           campaign_id: "CampaignId",
     #         },
+    #         outbound_strategy: {
+    #           type: "AGENT_FIRST", # required, accepts AGENT_FIRST
+    #           config: {
+    #             agent_first: {
+    #               preview: {
+    #                 post_accept_timeout_config: { # required
+    #                   duration_in_seconds: 1, # required
+    #                 },
+    #                 allowed_user_actions: ["CALL"], # required, accepts CALL, DISCARD
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -1633,7 +1769,7 @@ module Aws::Connect
     #   resp.successful_request_list[0].contact_id #=> String
     #   resp.failed_request_list #=> Array
     #   resp.failed_request_list[0].request_identifier #=> String
-    #   resp.failed_request_list[0].failure_reason_code #=> String, one of "INVALID_ATTRIBUTE_KEY", "INVALID_CUSTOMER_ENDPOINT", "INVALID_SYSTEM_ENDPOINT", "INVALID_QUEUE", "MISSING_CAMPAIGN", "MISSING_CUSTOMER_ENDPOINT", "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT", "REQUEST_THROTTLED", "IDEMPOTENCY_EXCEPTION", "INTERNAL_ERROR"
+    #   resp.failed_request_list[0].failure_reason_code #=> String, one of "INVALID_ATTRIBUTE_KEY", "INVALID_CUSTOMER_ENDPOINT", "INVALID_SYSTEM_ENDPOINT", "INVALID_QUEUE", "INVALID_OUTBOUND_STRATEGY", "MISSING_CAMPAIGN", "MISSING_CUSTOMER_ENDPOINT", "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT", "REQUEST_THROTTLED", "IDEMPOTENCY_EXCEPTION", "INTERNAL_ERROR"
     #   resp.failed_request_list[0].failure_reason_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContact AWS API Documentation
@@ -5469,8 +5605,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web Services
-    # Support.
+    # change. To request access to this API, contact Amazon Web
+    # ServicesSupport.
     #
     # Describes the target authentication profile.
     #
@@ -5527,6 +5663,25 @@ module Aws::Connect
     #
     # Describes the specified contact.
     #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * Retrieve contact information such as the caller's phone number and
+    #   the specific number the caller dialed to integrate into custom
+    #   monitoring or custom agent experience solutions.
+    #
+    # * Detect when a customer chat session disconnects due to a network
+    #   issue on the agent's end. Use the DisconnectReason field in the
+    #   [ContactTraceRecord][1] to detect this event and then re-queue the
+    #   chat for followup.
+    #
+    # * Identify after contact work (ACW) duration and call recordings
+    #   information when a COMPLETED event is received by using the [contact
+    #   event stream][2].
+    #
+    # **Important things to know**
+    #
     # * `SystemEndpoint` is not populated for contacts with initiation
     #   method of MONITOR, QUEUE\_TRANSFER, or CALLBACK
     #
@@ -5534,6 +5689,14 @@ module Aws::Connect
     #   months from the `InitiationTimestamp`, and then it is deleted. Only
     #   contact information that is available in Amazon Connect is returned
     #   by this API.
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-events.html
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5571,6 +5734,8 @@ module Aws::Connect
     #   resp.contact.queue_info.id #=> String
     #   resp.contact.queue_info.enqueue_timestamp #=> Time
     #   resp.contact.agent_info.id #=> String
+    #   resp.contact.agent_info.accepted_by_agent_timestamp #=> Time
+    #   resp.contact.agent_info.preview_end_timestamp #=> Time
     #   resp.contact.agent_info.connected_to_agent_timestamp #=> Time
     #   resp.contact.agent_info.agent_pause_duration_in_seconds #=> Integer
     #   resp.contact.agent_info.hierarchy_groups.level_1.arn #=> String
@@ -5715,8 +5880,14 @@ module Aws::Connect
     #   resp.contact.contact_evaluations["EvaluationId"].end_timestamp #=> Time
     #   resp.contact.contact_evaluations["EvaluationId"].delete_timestamp #=> Time
     #   resp.contact.contact_evaluations["EvaluationId"].export_location #=> String
+    #   resp.contact.task_template_info.arn #=> String
+    #   resp.contact.task_template_info.name #=> String
     #   resp.contact.contact_details.name #=> String
     #   resp.contact.contact_details.description #=> String
+    #   resp.contact.outbound_strategy.type #=> String, one of "AGENT_FIRST"
+    #   resp.contact.outbound_strategy.config.agent_first.preview.post_accept_timeout_config.duration_in_seconds #=> Integer
+    #   resp.contact.outbound_strategy.config.agent_first.preview.allowed_user_actions #=> Array
+    #   resp.contact.outbound_strategy.config.agent_first.preview.allowed_user_actions[0] #=> String, one of "CALL", "DISCARD"
     #   resp.contact.attributes #=> Hash
     #   resp.contact.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
@@ -5969,6 +6140,7 @@ module Aws::Connect
     #   * {Types::DescribeEmailAddressResponse#description #description} => String
     #   * {Types::DescribeEmailAddressResponse#create_timestamp #create_timestamp} => String
     #   * {Types::DescribeEmailAddressResponse#modified_timestamp #modified_timestamp} => String
+    #   * {Types::DescribeEmailAddressResponse#alias_configurations #alias_configurations} => Array&lt;Types::AliasConfiguration&gt;
     #   * {Types::DescribeEmailAddressResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -5987,6 +6159,8 @@ module Aws::Connect
     #   resp.description #=> String
     #   resp.create_timestamp #=> String
     #   resp.modified_timestamp #=> String
+    #   resp.alias_configurations #=> Array
+    #   resp.alias_configurations[0].email_address_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -7308,6 +7482,134 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_bot(params = {}, options = {})
       req = build_request(:disassociate_bot, params)
+      req.send_request(options)
+    end
+
+    # Removes the alias association between two email addresses in an Amazon
+    # Connect instance. After disassociation, emails sent to the former
+    # alias email address are no longer forwarded to the primary email
+    # address. Both email addresses continue to exist independently and can
+    # receive emails directly.
+    #
+    # **Use cases**
+    #
+    # Following are common uses cases for this API:
+    #
+    # * **Department separation**: Remove alias relationships when splitting
+    #   a consolidated support queue back into separate department-specific
+    #   queues.
+    #
+    # * **Email address retirement**: Cleanly remove forwarding
+    #   relationships before decommissioning old email addresses.
+    #
+    # * **Organizational restructuring**: Reconfigure email routing when
+    #   business processes change and aliases are no longer needed.
+    #
+    # **Important things to know**
+    #
+    # * Concurrent operations: This API uses distributed locking, so
+    #   concurrent operations on the same email addresses may be temporarily
+    #   blocked.
+    #
+    # * Emails sent to the former alias address are still delivered directly
+    #   to that address if it exists.
+    #
+    # * You do not need to delete the email addresses after disassociation.
+    #   Both addresses remain active independently.
+    #
+    # * After a successful disassociation, you can immediately create a new
+    #   alias relationship with the same addresses.
+    #
+    # * 200 status means alias was successfully disassociated.
+    #
+    # `DisassociateEmailAddressAlias` does not return the following
+    # information:
+    #
+    # * Details in the response about the email that was disassociated. The
+    #   response returns an empty body.
+    #
+    # * The timestamp of when the disassociation occurred.
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][1].
+    #
+    # **Related operations**
+    #
+    # * [AssociateEmailAddressAlias][2]: Associates an email address alias
+    #   with an existing email address in an Amazon Connect instance.
+    #
+    # * [DescribeEmailAddress][3]: View current alias configurations for an
+    #   email address.
+    #
+    # * [SearchEmailAddresses][4]: Find email addresses and their alias
+    #   relationships across an instance.
+    #
+    # * [CreateEmailAddress][5]: Create new email addresses that can
+    #   participate in alias relationships.
+    #
+    # * [DeleteEmailAddress][6]: Remove email addresses (automatically
+    #   removes any alias relationships).
+    #
+    # * [UpdateEmailAddressMetadata][7]: Modify email address properties
+    #   (does not affect alias relationships).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociateEmailAddressAlias.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchEmailAddresses.html
+    # [5]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateEmailAddress.html
+    # [6]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteEmailAddress.html
+    # [7]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateEmailAddressMetadata.html
+    #
+    # @option params [required, String] :email_address_id
+    #   The identifier of the email address.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Types::AliasConfiguration] :alias_configuration
+    #   Configuration object that specifies which alias relationship to
+    #   remove. The alias association must currently exist between the primary
+    #   email address and the specified alias email address.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_email_address_alias({
+    #     email_address_id: "EmailAddressId", # required
+    #     instance_id: "InstanceId", # required
+    #     alias_configuration: { # required
+    #       email_address_id: "EmailAddressId", # required
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateEmailAddressAlias AWS API Documentation
+    #
+    # @overload disassociate_email_address_alias(params = {})
+    # @param [Hash] params ({})
+    def disassociate_email_address_alias(params = {}, options = {})
+      req = build_request(:disassociate_email_address_alias, params)
       req.send_request(options)
     end
 
@@ -11045,7 +11347,7 @@ module Aws::Connect
     # service level quota of 99 phone numbers, and in any 180 day period you
     # release 99, claim 99, and then release 99, you will have exceeded the
     # 200% limit. At that point you are blocked from claiming any more
-    # numbers until you open an Amazon Web Services Support ticket.
+    # numbers until you open an Amazon Web ServicesSupport ticket.
     #
     #
     #
@@ -11389,8 +11691,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web Services
-    # Support.
+    # change. To request access to this API, contact Amazon Web
+    # ServicesSupport.
     #
     # Provides summary information about the authentication profiles in a
     # specified Amazon Connect instance.
@@ -12980,6 +13282,7 @@ module Aws::Connect
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #   Both Instance ID and Instance ARN are supported input formats.
     #
     #
     #
@@ -13155,9 +13458,9 @@ module Aws::Connect
     # Following are common uses cases for this API:
     #
     # * This API returns list of queues where contacts can be manually
-    #   assigned or picked. The user can additionally filter on queues, if
-    #   they have access to those queues (otherwise a invalid request
-    #   exception will be thrown).
+    #   assigned or picked by an agent who has access to the Worklist app.
+    #   The user can additionally filter on queues, if they have access to
+    #   those queues (otherwise a invalid request exception will be thrown).
     #
     #   For information about how manual contact assignment works in the
     #   agent workspace, see the [Access the Worklist app in the Amazon
@@ -14365,7 +14668,7 @@ module Aws::Connect
     #  After releasing a phone number, the phone number enters into a
     # cooldown period for up to 180 days. It cannot be searched for or
     # claimed again until the period has ended. If you accidentally release
-    # a phone number, contact Amazon Web Services Support.
+    # a phone number, contact Amazon Web ServicesSupport.
     #
     # If you plan to claim and release numbers frequently, contact us for a
     # service quota exception. Otherwise, it is possible you will be blocked
@@ -15243,6 +15546,8 @@ module Aws::Connect
     #   resp.email_addresses[0].email_address #=> String
     #   resp.email_addresses[0].description #=> String
     #   resp.email_addresses[0].display_name #=> String
+    #   resp.email_addresses[0].alias_configurations #=> Array
+    #   resp.email_addresses[0].alias_configurations[0].email_address_id #=> String
     #   resp.approximate_total_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchEmailAddresses AWS API Documentation
@@ -16957,8 +17262,8 @@ module Aws::Connect
     #
     # If you use the `ChatDurationInMinutes` parameter and receive a 400
     # error, your account may not support the ability to configure custom
-    # chat durations. For more information, contact Amazon Web Services
-    # Support.
+    # chat durations. For more information, contact Amazon Web
+    # ServicesSupport.
     #
     # For more information about chat, see the following topics in the
     # *Amazon Connect Administrator Guide*:
@@ -17959,6 +18264,9 @@ module Aws::Connect
     #   Use `CAMPAIGN` if `EnableAnswerMachineDetection` is set to `true`. For
     #   all other cases, use `GENERAL`.
     #
+    # @option params [Types::OutboundStrategy] :outbound_strategy
+    #   Information about the outbound strategy.
+    #
     # @return [Types::StartOutboundVoiceContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartOutboundVoiceContactResponse#contact_id #contact_id} => String
@@ -17993,6 +18301,19 @@ module Aws::Connect
     #     },
     #     campaign_id: "CampaignId",
     #     traffic_type: "GENERAL", # accepts GENERAL, CAMPAIGN
+    #     outbound_strategy: {
+    #       type: "AGENT_FIRST", # required, accepts AGENT_FIRST
+    #       config: {
+    #         agent_first: {
+    #           preview: {
+    #             post_accept_timeout_config: { # required
+    #               duration_in_seconds: 1, # required
+    #             },
+    #             allowed_user_actions: ["CALL"], # required, accepts CALL, DISCARD
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -18450,7 +18771,14 @@ module Aws::Connect
     #
     # @option params [Types::DisconnectReason] :disconnect_reason
     #   The reason a contact can be disconnected. Only Amazon Connect outbound
-    #   campaigns can provide this field.
+    #   campaigns can provide this field. For a list and description of all
+    #   the possible disconnect reasons by channel (including outbound
+    #   campaign voice contacts) see DisconnectReason under
+    #   [ContactTraceRecord][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -18979,8 +19307,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web Services
-    # Support.
+    # change. To request access to this API, contact Amazon Web
+    # ServicesSupport.
     #
     # Updates the selected authentication profile.
     #
@@ -20083,7 +20411,7 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact Amazon Web Services Support for
+    #   access this feature, contact Amazon Web ServicesSupport for
     #   allowlisting.
     #
     #    </note>
@@ -22053,7 +22381,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.218.0'
+      context[:gem_version] = '1.221.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

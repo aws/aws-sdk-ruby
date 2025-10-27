@@ -54,7 +54,7 @@ module Aws::CodeCommit
   autoload :EndpointProvider, 'aws-sdk-codecommit/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codecommit/endpoints'
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end
 

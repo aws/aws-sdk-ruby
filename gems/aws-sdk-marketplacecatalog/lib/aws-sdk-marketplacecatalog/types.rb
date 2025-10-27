@@ -1117,8 +1117,8 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] machine_learning_product_filters
     #   The filters that you can use with the ListEntities operation to
-    #   filter machine learning products. You can filter by EntityId,
-    #   LastModifiedDate, ProductTitle, and Visibility.
+    #   filter machine learning products. You can filter by `EntityId`,
+    #   `astModifiedDate`, `ProductTitle`, and `Visibility`.
     #   @return [Types::MachineLearningProductFilters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeFilters AWS API Documentation
@@ -1496,8 +1496,8 @@ module Aws::MarketplaceCatalog
     end
 
     # The filters that you can use with the ListEntities operation to filter
-    # machine learning products. You can filter by EntityId,
-    # LastModifiedDate, ProductTitle, and Visibility.
+    # machine learning products. You can filter by `EntityId`,
+    # `astModifiedDate`, `ProductTitle`, and `Visibility`.
     #
     # @!attribute [rw] entity_id
     #   Filter machine learning products by their entity IDs.

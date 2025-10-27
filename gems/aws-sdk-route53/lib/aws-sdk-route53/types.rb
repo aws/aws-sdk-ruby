@@ -491,11 +491,32 @@ module Aws::Route53
     #
     #      </note>
     #
+    #   API Gateway APIs
+    #
+    #   : There are no special requirements for setting
+    #     `EvaluateTargetHealth` to `true` when the alias target is an API
+    #     Gateway API. However, because API Gateway is highly available by
+    #     design, `EvaluateTargetHealth` provides no operational benefit and
+    #     [Route 53 health checks][1] are recommended instead for failover
+    #     scenarios.
+    #
     #   S3 buckets
     #
     #   : There are no special requirements for setting
     #     `EvaluateTargetHealth` to `true` when the alias target is an S3
-    #     bucket.
+    #     bucket. However, because S3 buckets are highly available by
+    #     design, `EvaluateTargetHealth` provides no operational benefit and
+    #     [Route 53 health checks][1] are recommended instead for failover
+    #     scenarios.
+    #
+    #   VPC interface endpoints
+    #
+    #   : There are no special requirements for setting
+    #     `EvaluateTargetHealth` to `true` when the alias target is a VPC
+    #     interface endpoint. However, because VPC interface endpoints are
+    #     highly available by design, `EvaluateTargetHealth` provides no
+    #     operational benefit and [Route 53 health checks][1] are
+    #     recommended instead for failover scenarios.
     #
     #   Other records in the same hosted zone
     #
@@ -504,16 +525,26 @@ module Aws::Route53
     #     weighted records) but is not another alias record, we recommend
     #     that you associate a health check with all of the records in the
     #     alias target. For more information, see [What Happens When You
-    #     Omit Health Checks?][1] in the *Amazon Route 53 Developer Guide*.
+    #     Omit Health Checks?][2] in the *Amazon Route 53 Developer Guide*.
+    #
+    #   <note markdown="1"> While `EvaluateTargetHealth` can be set to `true` for highly
+    #   available Amazon Web Services services (such as S3 buckets, VPC
+    #   interface endpoints, and API Gateway), these services are designed
+    #   for high availability and rarely experience outages that would be
+    #   detected by this feature. For failover scenarios with these
+    #   services, consider using [Route 53 health checks][1] that monitor
+    #   your application's ability to access the service instead.
+    #
+    #    </note>
     #
     #   For more information and examples, see [Amazon Route 53 Health
-    #   Checks and DNS Failover][2] in the *Amazon Route 53 Developer
+    #   Checks and DNS Failover][1] in the *Amazon Route 53 Developer
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting
-    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AliasTarget AWS API Documentation
@@ -1211,8 +1242,8 @@ module Aws::Route53
     #   * If you send a `CreateHealthCheck` request with the same
     #     `CallerReference` and settings as a previous request, and if the
     #     health check doesn't exist, Amazon Route 53 creates the health
-    #     check. If the health check does exist, Route 53 returns the
-    #     settings for the existing health check.
+    #     check. If the health check does exist, Route 53 returns the health
+    #     check configuration in the response.
     #
     #   * If you send a `CreateHealthCheck` request with the same
     #     `CallerReference` as a deleted health check, regardless of the

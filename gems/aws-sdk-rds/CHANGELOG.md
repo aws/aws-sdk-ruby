@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.297.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.296.0 (2025-10-10)
+------------------
+
+* Feature - Updated the text in the Important section of the ModifyDBClusterParameterGroup page.
+
 1.295.0 (2025-10-06)
 ------------------
 

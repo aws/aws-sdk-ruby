@@ -475,6 +475,13 @@ module Aws::ConnectCampaignsV2
       SENSITIVE: []
     end
 
+    class PreviewConfig
+      attr_accessor bandwidth_allocation: ::Float
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor agent_actions: ::Array[("DISCARD")]
+      SENSITIVE: []
+    end
+
     class ProfileOutboundRequest
       attr_accessor client_token: ::String
       attr_accessor profile_id: ::String
@@ -698,6 +705,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor progressive: Types::ProgressiveConfig
       attr_accessor predictive: Types::PredictiveConfig
       attr_accessor agentless: Types::AgentlessConfig
+      attr_accessor preview: Types::PreviewConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -706,6 +714,8 @@ module Aws::ConnectCampaignsV2
       class Predictive < TelephonyOutboundMode
       end
       class Agentless < TelephonyOutboundMode
+      end
+      class Preview < TelephonyOutboundMode
       end
       class Unknown < TelephonyOutboundMode
       end
@@ -726,6 +736,11 @@ module Aws::ConnectCampaignsV2
     class TimeWindow
       attr_accessor open_hours: Types::OpenHours
       attr_accessor restricted_periods: Types::RestrictedPeriods
+      SENSITIVE: []
+    end
+
+    class TimeoutConfig
+      attr_accessor duration_in_seconds: ::Integer
       SENSITIVE: []
     end
 

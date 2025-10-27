@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2025-10-23)
+------------------
+
+* Feature - Add NodeJs 24 (nodejs24.x) support to AWS Lambda.
+
+1.162.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2025-10-10)
+------------------
+
+* Feature - Add InvokedViaFunctionUrl context key to limit invocations to only FURL invokes.
+
 1.160.0 (2025-08-26)
 ------------------
 

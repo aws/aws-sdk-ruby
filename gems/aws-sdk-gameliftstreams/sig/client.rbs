@@ -270,7 +270,7 @@ module Aws
         def stream_group_id: () -> ::String
         def user_id: () -> ::String
         def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
         def protocol: () -> ("WebRTC")
         def location: () -> ::String
         def signal_request: () -> ::String
@@ -370,7 +370,7 @@ module Aws
         def stream_group_id: () -> ::String
         def user_id: () -> ::String
         def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
         def protocol: () -> ("WebRTC")
         def location: () -> ::String
         def signal_request: () -> ::String

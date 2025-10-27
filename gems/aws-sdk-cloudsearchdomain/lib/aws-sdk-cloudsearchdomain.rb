@@ -48,7 +48,7 @@ module Aws::CloudSearchDomain
   autoload :Errors, 'aws-sdk-cloudsearchdomain/errors'
   autoload :Resource, 'aws-sdk-cloudsearchdomain/resource'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

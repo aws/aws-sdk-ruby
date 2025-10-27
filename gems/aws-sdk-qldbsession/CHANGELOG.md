@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - QLDB Session has been removed from the SDK because it has been discontinued.
 
+1.61.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.59.0 (2025-08-27)
 ------------------
 

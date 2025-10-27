@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - RoboMaker has been removed from the SDK because it has been discontinued.
 
+1.91.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.90.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.89.0 (2025-08-27)
 ------------------
 

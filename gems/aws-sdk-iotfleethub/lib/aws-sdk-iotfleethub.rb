@@ -54,7 +54,7 @@ module Aws::IoTFleetHub
   autoload :EndpointProvider, 'aws-sdk-iotfleethub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotfleethub/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

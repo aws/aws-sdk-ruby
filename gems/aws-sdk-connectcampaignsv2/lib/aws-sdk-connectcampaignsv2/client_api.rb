@@ -15,6 +15,8 @@ module Aws::ConnectCampaignsV2
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AgentAction = Shapes::StringShape.new(name: 'AgentAction')
+    AgentActions = Shapes::ListShape.new(name: 'AgentActions')
     AgentlessConfig = Shapes::StructureShape.new(name: 'AgentlessConfig')
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -136,6 +138,7 @@ module Aws::ConnectCampaignsV2
     OutboundRequestList = Shapes::ListShape.new(name: 'OutboundRequestList')
     PauseCampaignRequest = Shapes::StructureShape.new(name: 'PauseCampaignRequest')
     PredictiveConfig = Shapes::StructureShape.new(name: 'PredictiveConfig')
+    PreviewConfig = Shapes::StructureShape.new(name: 'PreviewConfig')
     ProfileId = Shapes::StringShape.new(name: 'ProfileId')
     ProfileOutboundRequest = Shapes::StructureShape.new(name: 'ProfileOutboundRequest')
     ProfileOutboundRequestFailureCode = Shapes::StringShape.new(name: 'ProfileOutboundRequestFailureCode')
@@ -193,6 +196,8 @@ module Aws::ConnectCampaignsV2
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp', timestampFormat: "iso8601")
     TimeWindow = Shapes::StructureShape.new(name: 'TimeWindow')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
+    TimeoutConfig = Shapes::StructureShape.new(name: 'TimeoutConfig')
+    TimeoutDuration = Shapes::IntegerShape.new(name: 'TimeoutDuration')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateCampaignChannelSubtypeConfigRequest = Shapes::StructureShape.new(name: 'UpdateCampaignChannelSubtypeConfigRequest')
     UpdateCampaignCommunicationLimitsRequest = Shapes::StructureShape.new(name: 'UpdateCampaignCommunicationLimitsRequest')
@@ -207,6 +212,8 @@ module Aws::ConnectCampaignsV2
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AgentActions.member = Shapes::ShapeRef.new(shape: AgentAction)
 
     AgentlessConfig.struct_class = Types::AgentlessConfig
 
@@ -541,6 +548,11 @@ module Aws::ConnectCampaignsV2
     PredictiveConfig.add_member(:bandwidth_allocation, Shapes::ShapeRef.new(shape: BandwidthAllocation, required: true, location_name: "bandwidthAllocation"))
     PredictiveConfig.struct_class = Types::PredictiveConfig
 
+    PreviewConfig.add_member(:bandwidth_allocation, Shapes::ShapeRef.new(shape: BandwidthAllocation, required: true, location_name: "bandwidthAllocation"))
+    PreviewConfig.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, required: true, location_name: "timeoutConfig"))
+    PreviewConfig.add_member(:agent_actions, Shapes::ShapeRef.new(shape: AgentActions, location_name: "agentActions"))
+    PreviewConfig.struct_class = Types::PreviewConfig
+
     ProfileOutboundRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
     ProfileOutboundRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "profileId"))
     ProfileOutboundRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "expirationTime"))
@@ -702,10 +714,12 @@ module Aws::ConnectCampaignsV2
     TelephonyOutboundMode.add_member(:progressive, Shapes::ShapeRef.new(shape: ProgressiveConfig, location_name: "progressive"))
     TelephonyOutboundMode.add_member(:predictive, Shapes::ShapeRef.new(shape: PredictiveConfig, location_name: "predictive"))
     TelephonyOutboundMode.add_member(:agentless, Shapes::ShapeRef.new(shape: AgentlessConfig, location_name: "agentless"))
+    TelephonyOutboundMode.add_member(:preview, Shapes::ShapeRef.new(shape: PreviewConfig, location_name: "preview"))
     TelephonyOutboundMode.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     TelephonyOutboundMode.add_member_subclass(:progressive, Types::TelephonyOutboundMode::Progressive)
     TelephonyOutboundMode.add_member_subclass(:predictive, Types::TelephonyOutboundMode::Predictive)
     TelephonyOutboundMode.add_member_subclass(:agentless, Types::TelephonyOutboundMode::Agentless)
+    TelephonyOutboundMode.add_member_subclass(:preview, Types::TelephonyOutboundMode::Preview)
     TelephonyOutboundMode.add_member_subclass(:unknown, Types::TelephonyOutboundMode::Unknown)
     TelephonyOutboundMode.struct_class = Types::TelephonyOutboundMode
 
@@ -722,6 +736,9 @@ module Aws::ConnectCampaignsV2
     TimeWindow.add_member(:open_hours, Shapes::ShapeRef.new(shape: OpenHours, required: true, location_name: "openHours"))
     TimeWindow.add_member(:restricted_periods, Shapes::ShapeRef.new(shape: RestrictedPeriods, location_name: "restrictedPeriods"))
     TimeWindow.struct_class = Types::TimeWindow
+
+    TimeoutConfig.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: TimeoutDuration, required: true, location_name: "durationInSeconds"))
+    TimeoutConfig.struct_class = Types::TimeoutConfig
 
     UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

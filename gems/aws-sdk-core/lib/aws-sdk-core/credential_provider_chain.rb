@@ -11,7 +11,7 @@ module Aws
     def resolve
       providers.each do |method_name, options|
         provider = send(method_name, options.merge(config: @config))
-        return provider if provider && provider.set?
+        return provider if provider&.set?
       end
       nil
     end
@@ -54,47 +54,65 @@ module Aws
     end
 
     def static_profile_assume_role_web_identity_credentials(options)
-      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        Aws.shared_config.assume_role_web_identity_credentials_from_config(
+      return unless Aws.shared_config.config_enabled? && options[:config]&.profile
+
+      with_metrics('CREDENTIALS_CODE') do
+        creds = Aws.shared_config.assume_role_web_identity_credentials_from_config(
           profile: options[:config].profile,
           region: options[:config].region
         )
+        return unless creds
+
+        creds.metrics << 'CREDENTIALS_CODE'
+        creds
       end
     end
 
     def static_profile_sso_credentials(options)
-      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        Aws.shared_config.sso_credentials_from_config(
+      return unless Aws.shared_config.config_enabled? && options[:config]&.profile
+
+      with_metrics('CREDENTIALS_CODE') do
+        creds = Aws.shared_config.sso_credentials_from_config(
           profile: options[:config].profile
         )
+        return unless creds
+
+        creds.metrics << 'CREDENTIALS_CODE'
+        creds
       end
     end
 
     def static_profile_assume_role_credentials(options)
-      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        assume_role_with_profile(options, options[:config].profile)
+      return unless Aws.shared_config.config_enabled? && options[:config]&.profile
+
+      with_metrics('CREDENTIALS_CODE') do
+        creds = assume_role_with_profile(options, options[:config].profile)
+        return unless creds
+
+        creds.metrics << 'CREDENTIALS_CODE'
+        creds
       end
     end
 
     def static_profile_credentials(options)
-      if options[:config] && options[:config].profile
-        creds = SharedCredentials.new(profile_name: options[:config].profile)
-        creds.metrics = ['CREDENTIALS_PROFILE']
-        creds
-      end
+      return unless options[:config]&.profile
+
+      creds = SharedCredentials.new(profile_name: options[:config].profile)
+      creds.metrics << 'CREDENTIALS_PROFILE'
+      creds
     rescue Errors::NoSuchProfileError
       nil
     end
 
     def static_profile_process_credentials(options)
-      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
-        if process_provider
-          creds = ProcessCredentials.new([process_provider])
-          creds.metrics << 'CREDENTIALS_PROFILE_PROCESS'
-          creds
-        end
-      end
+      return unless Aws.shared_config.config_enabled? && options[:config]&.profile
+
+      process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
+      return unless process_provider
+
+      creds = ProcessCredentials.new([process_provider])
+      creds.metrics.concat(%w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_CODE])
+      creds
     rescue Errors::NoSuchProfileError
       nil
     end
@@ -122,7 +140,7 @@ module Aws
     end
 
     def determine_profile_name(options)
-      (options[:config] && options[:config].profile) || ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
+      (options[:config]&.profile) || ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
     end
 
     def shared_credentials(options)
@@ -201,10 +219,14 @@ module Aws
         profile: profile_name,
         chain_config: @config
       }
-      if options[:config] && options[:config].region
+      if options[:config]&.region
         assume_opts[:region] = options[:config].region
       end
       Aws.shared_config.assume_role_credentials_from_config(assume_opts)
+    end
+
+    def with_metrics(metrics, &block)
+      Aws::Plugins::UserAgent.metric(*metrics, &block)
     end
   end
 end

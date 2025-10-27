@@ -29,6 +29,12 @@ module Aws::AutoScalingPlans
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              if Aws::Endpoints::Matchers.string_equals?(parameters.region, "us-gov-east-1")
+                return Aws::Endpoints::Endpoint.new(url: "https://autoscaling-plans.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?(parameters.region, "us-gov-west-1")
+                return Aws::Endpoints::Endpoint.new(url: "https://autoscaling-plans.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://autoscaling-plans-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

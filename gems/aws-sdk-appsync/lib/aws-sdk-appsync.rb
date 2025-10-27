@@ -54,7 +54,7 @@ module Aws::AppSync
   autoload :EndpointProvider, 'aws-sdk-appsync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appsync/endpoints'
 
-  GEM_VERSION = '1.112.0'
+  GEM_VERSION = '1.113.0'
 
 end
 

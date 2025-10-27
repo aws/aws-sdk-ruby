@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix multipart upload to respect `request_checksum_calculation` `when_required` mode.
+
+1.200.0 (2025-10-15)
+------------------
+
+* Feature - Add lightweight thread pool executor for multipart `download_file`, `upload_file` and `upload_stream`.
+
+* Feature - Add custom executor support for `Aws::S3::TransferManager`.
+
 1.199.1 (2025-09-25)
 ------------------
 

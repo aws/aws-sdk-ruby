@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2025-10-09)
+------------------
+
+* Feature - This release adds support for ActionConnector and Flow, which are new resources associated with Amazon Quick Suite. Additional updates include expanded Data Source options, further branding customization, and new capabilities that can be restricted by Admins.
+
 1.160.0 (2025-10-06)
 ------------------
 

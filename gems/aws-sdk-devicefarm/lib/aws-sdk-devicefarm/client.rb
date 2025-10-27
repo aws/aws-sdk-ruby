@@ -794,6 +794,10 @@ module Aws::DeviceFarm
     #   The ARN of the device for which you want to create a remote access
     #   session.
     #
+    # @option params [String] :app_arn
+    #   The Amazon Resource Name (ARN) of the app to create the remote access
+    #   session.
+    #
     # @option params [String] :instance_arn
     #   The Amazon Resource Name (ARN) of the device instance for which you
     #   want to create a remote access session.
@@ -901,6 +905,7 @@ module Aws::DeviceFarm
     #   resp = client.create_remote_access_session({
     #     project_arn: "AmazonResourceName", # required
     #     device_arn: "AmazonResourceName", # required
+    #     app_arn: "AmazonResourceName",
     #     instance_arn: "AmazonResourceName",
     #     ssh_public_key: "SshPublicKey",
     #     remote_debug_enabled: false,
@@ -909,6 +914,7 @@ module Aws::DeviceFarm
     #     name: "Name",
     #     client_id: "ClientId",
     #     configuration: {
+    #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #       vpce_configuration_arns: ["AmazonResourceName"],
     #       device_proxy: {
@@ -988,6 +994,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #   resp.remote_access_session.device_proxy.host #=> String
     #   resp.remote_access_session.device_proxy.port #=> Integer
+    #   resp.remote_access_session.app_upload #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
@@ -2438,6 +2445,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #   resp.remote_access_session.device_proxy.host #=> String
     #   resp.remote_access_session.device_proxy.port #=> Integer
+    #   resp.remote_access_session.app_upload #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
     #
@@ -4014,6 +4022,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].vpc_config.vpc_id #=> String
     #   resp.remote_access_sessions[0].device_proxy.host #=> String
     #   resp.remote_access_sessions[0].device_proxy.port #=> Integer
+    #   resp.remote_access_sessions[0].app_upload #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
@@ -5451,6 +5460,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #   resp.remote_access_session.device_proxy.host #=> String
     #   resp.remote_access_session.device_proxy.port #=> Integer
+    #   resp.remote_access_session.app_upload #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
     #
@@ -6216,7 +6226,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

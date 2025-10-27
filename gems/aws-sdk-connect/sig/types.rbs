@@ -54,6 +54,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AgentFirst
+      attr_accessor preview: Types::Preview
+      SENSITIVE: []
+    end
+
     class AgentHierarchyGroup
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -70,6 +75,8 @@ module Aws::Connect
 
     class AgentInfo
       attr_accessor id: ::String
+      attr_accessor accepted_by_agent_timestamp: ::Time
+      attr_accessor preview_end_timestamp: ::Time
       attr_accessor connected_to_agent_timestamp: ::Time
       attr_accessor agent_pause_duration_in_seconds: ::Integer
       attr_accessor hierarchy_groups: Types::HierarchyGroups
@@ -139,6 +146,11 @@ module Aws::Connect
 
     class AgentsCriteria
       attr_accessor agent_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AliasConfiguration
+      attr_accessor email_address_id: ::String
       SENSITIVE: []
     end
 
@@ -232,6 +244,17 @@ module Aws::Connect
     end
 
     class AssociateDefaultVocabularyResponse < Aws::EmptyStructure
+    end
+
+    class AssociateEmailAddressAliasRequest
+      attr_accessor email_address_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor alias_configuration: Types::AliasConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateEmailAddressAliasResponse < Aws::EmptyStructure
     end
 
     class AssociateFlowRequest
@@ -667,7 +690,9 @@ module Aws::Connect
       attr_accessor recordings: ::Array[Types::RecordingInfo]
       attr_accessor disconnect_reason: ::String
       attr_accessor contact_evaluations: ::Hash[::String, Types::ContactEvaluation]
+      attr_accessor task_template_info: Types::TaskTemplateInfoV2
       attr_accessor contact_details: Types::ContactDetails
+      attr_accessor outbound_strategy: Types::OutboundStrategy
       attr_accessor attributes: ::Hash[::String, ::String]
       SENSITIVE: [:name, :description]
     end
@@ -691,6 +716,7 @@ module Aws::Connect
       attr_accessor queue_id: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor campaign: Types::Campaign
+      attr_accessor outbound_strategy: Types::OutboundStrategy
       SENSITIVE: []
     end
 
@@ -1760,6 +1786,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor create_timestamp: ::String
       attr_accessor modified_timestamp: ::String
+      attr_accessor alias_configurations: ::Array[Types::AliasConfiguration]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:email_address, :display_name, :description]
     end
@@ -2027,6 +2054,17 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DisassociateEmailAddressAliasRequest
+      attr_accessor email_address_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor alias_configuration: Types::AliasConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateEmailAddressAliasResponse < Aws::EmptyStructure
+    end
+
     class DisassociateFlowRequest
       attr_accessor instance_id: ::String
       attr_accessor resource_id: ::String
@@ -2160,6 +2198,7 @@ module Aws::Connect
       attr_accessor email_address: ::String
       attr_accessor description: ::String
       attr_accessor display_name: ::String
+      attr_accessor alias_configurations: ::Array[Types::AliasConfiguration]
       SENSITIVE: [:email_address, :description, :display_name]
     end
 
@@ -2496,7 +2535,7 @@ module Aws::Connect
 
     class FailedRequest
       attr_accessor request_identifier: ::String
-      attr_accessor failure_reason_code: ("INVALID_ATTRIBUTE_KEY" | "INVALID_CUSTOMER_ENDPOINT" | "INVALID_SYSTEM_ENDPOINT" | "INVALID_QUEUE" | "MISSING_CAMPAIGN" | "MISSING_CUSTOMER_ENDPOINT" | "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT" | "REQUEST_THROTTLED" | "IDEMPOTENCY_EXCEPTION" | "INTERNAL_ERROR")
+      attr_accessor failure_reason_code: ("INVALID_ATTRIBUTE_KEY" | "INVALID_CUSTOMER_ENDPOINT" | "INVALID_SYSTEM_ENDPOINT" | "INVALID_QUEUE" | "INVALID_OUTBOUND_STRATEGY" | "MISSING_CAMPAIGN" | "MISSING_CUSTOMER_ENDPOINT" | "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT" | "REQUEST_THROTTLED" | "IDEMPOTENCY_EXCEPTION" | "INTERNAL_ERROR")
       attr_accessor failure_reason_message: ::String
       SENSITIVE: []
     end
@@ -4013,6 +4052,17 @@ module Aws::Connect
       SENSITIVE: [:subject, :body]
     end
 
+    class OutboundStrategy
+      attr_accessor type: ("AGENT_FIRST")
+      attr_accessor config: Types::OutboundStrategyConfig
+      SENSITIVE: []
+    end
+
+    class OutboundStrategyConfig
+      attr_accessor agent_first: Types::AgentFirst
+      SENSITIVE: []
+    end
+
     class OutputTypeNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -4118,6 +4168,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class PostAcceptTimeoutConfig
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class PredefinedAttribute
       attr_accessor name: ::String
       attr_accessor values: Types::PredefinedAttributeValues
@@ -4157,6 +4212,12 @@ module Aws::Connect
       end
       class Unknown < PredefinedAttributeValues
       end
+    end
+
+    class Preview
+      attr_accessor post_accept_timeout_config: Types::PostAcceptTimeoutConfig
+      attr_accessor allowed_user_actions: ::Array[("CALL" | "DISCARD")]
+      SENSITIVE: []
     end
 
     class ProblemDetail
@@ -5451,6 +5512,7 @@ module Aws::Connect
       attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
       attr_accessor campaign_id: ::String
       attr_accessor traffic_type: ("GENERAL" | "CAMPAIGN")
+      attr_accessor outbound_strategy: Types::OutboundStrategy
       SENSITIVE: [:name, :description]
     end
 
@@ -5677,6 +5739,12 @@ module Aws::Connect
     end
 
     class TaskTemplateFieldIdentifier
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TaskTemplateInfoV2
+      attr_accessor arn: ::String
       attr_accessor name: ::String
       SENSITIVE: []
     end

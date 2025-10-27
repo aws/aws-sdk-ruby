@@ -1019,6 +1019,9 @@
   "RDSDataService": {
     "models": "rds-data/2018-08-01"
   },
+  "RTBFabric": {
+    "models": "rtbfabric/2023-05-15"
+  },
   "RecycleBin": {
     "models": "rbin/2021-06-15"
   },

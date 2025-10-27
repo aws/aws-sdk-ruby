@@ -518,8 +518,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -580,8 +583,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -620,6 +626,14 @@ module Aws::BillingConductor
     #   be applied to.
     #   @return [String]
     #
+    # @!attribute [rw] computation_rule
+    #   The display settings of the custom line item
+    #   @return [String]
+    #
+    # @!attribute [rw] presentation_details
+    #   The presentation configuration of the custom line item
+    #   @return [Types::PresentationObject]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateCustomLineItemInput AWS API Documentation
     #
     class CreateCustomLineItemInput < Struct.new(
@@ -630,7 +644,9 @@ module Aws::BillingConductor
       :billing_period_range,
       :tags,
       :charge_details,
-      :account_id)
+      :account_id,
+      :computation_rule,
+      :presentation_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -662,8 +678,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -713,8 +732,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that's needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -740,6 +762,7 @@ module Aws::BillingConductor
     #
     # @!attribute [rw] modifier_percentage
     #   A percentage modifier that's applied on the public pricing rates.
+    #   Your entry will be rounded to the nearest 2 decimal places.
     #   @return [Float]
     #
     # @!attribute [rw] service
@@ -769,7 +792,7 @@ module Aws::BillingConductor
     #   If the `Scope` attribute is set to `SKU`, this attribute indicates
     #   which usage type the `PricingRule` is modifying. For example,
     #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
-    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   Large` instance in the US West (Oregon) Region.
     #   @return [String]
     #
     # @!attribute [rw] operation
@@ -948,6 +971,14 @@ module Aws::BillingConductor
     #   be applied to.
     #   @return [String]
     #
+    # @!attribute [rw] computation_rule
+    #   The display settings of the custom line item
+    #   @return [String]
+    #
+    # @!attribute [rw] presentation_details
+    #   The presentation configuration of the custom line item
+    #   @return [Types::PresentationObject]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemListElement AWS API Documentation
     #
     class CustomLineItemListElement < Struct.new(
@@ -961,7 +992,9 @@ module Aws::BillingConductor
       :creation_time,
       :last_modified_time,
       :association_size,
-      :account_id)
+      :account_id,
+      :computation_rule,
+      :presentation_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1051,6 +1084,14 @@ module Aws::BillingConductor
     #   be applied to.
     #   @return [String]
     #
+    # @!attribute [rw] computation_rule
+    #   The display settings of the custom line item
+    #   @return [String]
+    #
+    # @!attribute [rw] presentation_details
+    #   The presentation configuration of the custom line item
+    #   @return [Types::PresentationObject]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
     #
     class CustomLineItemVersionListElement < Struct.new(
@@ -1067,7 +1108,9 @@ module Aws::BillingConductor
       :end_billing_period,
       :arn,
       :start_time,
-      :account_id)
+      :account_id,
+      :computation_rule,
+      :presentation_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1287,8 +1330,8 @@ module Aws::BillingConductor
     # @!attribute [rw] group_by
     #   A list of strings that specify the attributes that are used to break
     #   down costs in the margin summary reports for the billing group. For
-    #   example, you can view your costs by the Amazon Web Service name or
-    #   the billing period.
+    #   example, you can view your costs by the Amazon Web Services service
+    #   name or the billing period.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -2243,6 +2286,20 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # The presentation configuration of the custom line item
+    #
+    # @!attribute [rw] service
+    #   This defines the service of where the custom line item is presented
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PresentationObject AWS API Documentation
+    #
+    class PresentationObject < Struct.new(
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A representation of a pricing plan.
     #
     # @!attribute [rw] name
@@ -2346,7 +2403,7 @@ module Aws::BillingConductor
     #   If the `Scope` attribute is set to `SKU`, this attribute indicates
     #   which usage type the `PricingRule` is modifying. For example,
     #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
-    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   Large` instance in the US West (Oregon) Region.
     #   @return [String]
     #
     # @!attribute [rw] operation
@@ -2858,7 +2915,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] modifier_percentage
-    #   The new modifier to show pricing plan rates as a percentage.
+    #   The new modifier to show pricing plan rates as a percentage. Your
+    #   entry will be rounded to the nearest 2 decimal places.
     #   @return [Float]
     #
     # @!attribute [rw] tiering
@@ -2983,7 +3041,7 @@ module Aws::BillingConductor
     end
 
     # The input doesn't match with the constraints specified by Amazon Web
-    # Services.
+    # Services services.
     #
     # @!attribute [rw] message
     #   @return [String]

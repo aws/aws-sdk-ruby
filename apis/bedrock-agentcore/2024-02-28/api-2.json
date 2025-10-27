@@ -6,7 +6,7 @@
     "endpointPrefix":"bedrock-agentcore",
     "protocol":"rest-json",
     "protocols":["rest-json"],
-    "serviceFullName":"Amazon Bedrock AgentCore Data Plane Fronting Layer",
+    "serviceFullName":"Amazon Bedrock AgentCore",
     "serviceId":"Bedrock AgentCore",
     "signatureVersion":"v4",
     "signingName":"bedrock-agentcore",
@@ -18,7 +18,7 @@
       "http":{
         "method":"POST",
         "requestUri":"/memories/{memoryId}/memoryRecords/batchCreate",
-        "responseCode":200
+        "responseCode":201
       },
       "input":{"shape":"BatchCreateMemoryRecordsInput"},
       "output":{"shape":"BatchCreateMemoryRecordsOutput"},
@@ -68,12 +68,30 @@
         {"shape":"ServiceException"}
       ]
     },
+    "CompleteResourceTokenAuth":{
+      "name":"CompleteResourceTokenAuth",
+      "http":{
+        "method":"POST",
+        "requestUri":"/identities/CompleteResourceTokenAuth",
+        "responseCode":200
+      },
+      "input":{"shape":"CompleteResourceTokenAuthRequest"},
+      "output":{"shape":"CompleteResourceTokenAuthResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "CreateEvent":{
       "name":"CreateEvent",
       "http":{
         "method":"POST",
         "requestUri":"/memories/{memoryId}/events",
-        "responseCode":200
+        "responseCode":201
       },
       "input":{"shape":"CreateEventInput"},
       "output":{"shape":"CreateEventOutput"},
@@ -643,6 +661,11 @@
       "min":1,
       "sensitive":true
     },
+    "AuthorizationUrlType":{
+      "type":"string",
+      "min":1,
+      "sensitive":true
+    },
     "AutomationStream":{
       "type":"structure",
       "required":[
@@ -900,6 +923,21 @@
         "validationException":{"shape":"ValidationException"}
       },
       "eventstream":true
+    },
+    "CompleteResourceTokenAuthRequest":{
+      "type":"structure",
+      "required":[
+        "userIdentifier",
+        "sessionUri"
+      ],
+      "members":{
+        "userIdentifier":{"shape":"UserIdentifier"},
+        "sessionUri":{"shape":"RequestUri"}
+      }
+    },
+    "CompleteResourceTokenAuthResponse":{
+      "type":"structure",
+      "members":{}
     },
     "ConflictException":{
       "type":"structure",
@@ -1359,16 +1397,20 @@
         "resourceCredentialProviderName":{"shape":"CredentialProviderName"},
         "scopes":{"shape":"ScopesListType"},
         "oauth2Flow":{"shape":"Oauth2FlowType"},
+        "sessionUri":{"shape":"RequestUri"},
         "resourceOauth2ReturnUrl":{"shape":"ResourceOauth2ReturnUrlType"},
         "forceAuthentication":{"shape":"Boolean"},
-        "customParameters":{"shape":"CustomRequestParametersType"}
+        "customParameters":{"shape":"CustomRequestParametersType"},
+        "customState":{"shape":"State"}
       }
     },
     "GetResourceOauth2TokenResponse":{
       "type":"structure",
       "members":{
-        "authorizationUrl":{"shape":"String"},
-        "accessToken":{"shape":"AccessTokenType"}
+        "authorizationUrl":{"shape":"AuthorizationUrlType"},
+        "accessToken":{"shape":"AccessTokenType"},
+        "sessionUri":{"shape":"RequestUri"},
+        "sessionStatus":{"shape":"SessionStatus"}
       }
     },
     "GetWorkloadAccessTokenForJWTRequest":{
@@ -1531,9 +1573,18 @@
           "location":"querystring",
           "locationName":"qualifier"
         },
+        "accountId":{
+          "shape":"InvokeAgentRuntimeRequestAccountIdString",
+          "location":"querystring",
+          "locationName":"accountId"
+        },
         "payload":{"shape":"Body"}
       },
       "payload":"payload"
+    },
+    "InvokeAgentRuntimeRequestAccountIdString":{
+      "type":"string",
+      "pattern":"[0-9]{12}"
     },
     "InvokeAgentRuntimeRequestBaggageString":{
       "type":"string",
@@ -1624,9 +1675,29 @@
           "location":"header",
           "locationName":"x-amzn-code-interpreter-session-id"
         },
+        "traceId":{
+          "shape":"InvokeCodeInterpreterRequestTraceIdString",
+          "location":"header",
+          "locationName":"X-Amzn-Trace-Id"
+        },
+        "traceParent":{
+          "shape":"InvokeCodeInterpreterRequestTraceParentString",
+          "location":"header",
+          "locationName":"traceparent"
+        },
         "name":{"shape":"ToolName"},
         "arguments":{"shape":"ToolArguments"}
       }
+    },
+    "InvokeCodeInterpreterRequestTraceIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "InvokeCodeInterpreterRequestTraceParentString":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "InvokeCodeInterpreterResponse":{
       "type":"structure",
@@ -2077,6 +2148,12 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_-]+"
     },
+    "RequestUri":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"urn:ietf:params:oauth:request_uri:[a-zA-Z0-9-._~]+"
+    },
     "ResourceContent":{
       "type":"structure",
       "required":["type"],
@@ -2228,6 +2305,13 @@
       "min":1,
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9-_]*"
     },
+    "SessionStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
     "SessionSummary":{
       "type":"structure",
       "required":[
@@ -2254,6 +2338,16 @@
       "type":"structure",
       "required":["browserIdentifier"],
       "members":{
+        "traceId":{
+          "shape":"StartBrowserSessionRequestTraceIdString",
+          "location":"header",
+          "locationName":"X-Amzn-Trace-Id"
+        },
+        "traceParent":{
+          "shape":"StartBrowserSessionRequestTraceParentString",
+          "location":"header",
+          "locationName":"traceparent"
+        },
         "browserIdentifier":{
           "shape":"String",
           "location":"uri",
@@ -2267,6 +2361,16 @@
           "idempotencyToken":true
         }
       }
+    },
+    "StartBrowserSessionRequestTraceIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "StartBrowserSessionRequestTraceParentString":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "StartBrowserSessionResponse":{
       "type":"structure",
@@ -2286,6 +2390,16 @@
       "type":"structure",
       "required":["codeInterpreterIdentifier"],
       "members":{
+        "traceId":{
+          "shape":"StartCodeInterpreterSessionRequestTraceIdString",
+          "location":"header",
+          "locationName":"X-Amzn-Trace-Id"
+        },
+        "traceParent":{
+          "shape":"StartCodeInterpreterSessionRequestTraceParentString",
+          "location":"header",
+          "locationName":"traceparent"
+        },
         "codeInterpreterIdentifier":{
           "shape":"String",
           "location":"uri",
@@ -2298,6 +2412,16 @@
           "idempotencyToken":true
         }
       }
+    },
+    "StartCodeInterpreterSessionRequestTraceIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "StartCodeInterpreterSessionRequestTraceParentString":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "StartCodeInterpreterSessionResponse":{
       "type":"structure",
@@ -2312,6 +2436,12 @@
         "createdAt":{"shape":"DateTimestamp"}
       }
     },
+    "State":{
+      "type":"string",
+      "max":4096,
+      "min":1,
+      "sensitive":true
+    },
     "StopBrowserSessionRequest":{
       "type":"structure",
       "required":[
@@ -2319,6 +2449,16 @@
         "sessionId"
       ],
       "members":{
+        "traceId":{
+          "shape":"StopBrowserSessionRequestTraceIdString",
+          "location":"header",
+          "locationName":"X-Amzn-Trace-Id"
+        },
+        "traceParent":{
+          "shape":"StopBrowserSessionRequestTraceParentString",
+          "location":"header",
+          "locationName":"traceparent"
+        },
         "browserIdentifier":{
           "shape":"String",
           "location":"uri",
@@ -2334,6 +2474,16 @@
           "idempotencyToken":true
         }
       }
+    },
+    "StopBrowserSessionRequestTraceIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "StopBrowserSessionRequestTraceParentString":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "StopBrowserSessionResponse":{
       "type":"structure",
@@ -2355,6 +2505,16 @@
         "sessionId"
       ],
       "members":{
+        "traceId":{
+          "shape":"StopCodeInterpreterSessionRequestTraceIdString",
+          "location":"header",
+          "locationName":"X-Amzn-Trace-Id"
+        },
+        "traceParent":{
+          "shape":"StopCodeInterpreterSessionRequestTraceParentString",
+          "location":"header",
+          "locationName":"traceparent"
+        },
         "codeInterpreterIdentifier":{
           "shape":"String",
           "location":"uri",
@@ -2370,6 +2530,16 @@
           "idempotencyToken":true
         }
       }
+    },
+    "StopCodeInterpreterSessionRequestTraceIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "StopCodeInterpreterSessionRequestTraceParentString":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "StopCodeInterpreterSessionResponse":{
       "type":"structure",
@@ -2571,6 +2741,14 @@
       "type":"string",
       "max":128,
       "min":1
+    },
+    "UserIdentifier":{
+      "type":"structure",
+      "members":{
+        "userToken":{"shape":"UserTokenType"},
+        "userId":{"shape":"UserIdType"}
+      },
+      "union":true
     },
     "UserTokenType":{
       "type":"string",
