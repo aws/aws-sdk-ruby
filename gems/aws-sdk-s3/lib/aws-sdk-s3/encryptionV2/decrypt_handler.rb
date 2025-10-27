@@ -172,10 +172,8 @@ module Aws
 
         def get_decrypter(context, cipher, envelope)
           if body_contains_auth_tag?(envelope)
-            puts "got one here"
             authenticated_decrypter(context, cipher, envelope)
           else
-            puts "other thing here"
             IODecrypter.new(cipher, context.http_response.body)
           end
         end
