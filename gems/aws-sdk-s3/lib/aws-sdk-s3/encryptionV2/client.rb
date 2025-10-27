@@ -310,7 +310,8 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @cipher_provider = self.class.cipher_provider(options)
+          @cipher_provider = self.class.cipher_provider(options, @client)
+          @key_provider = @cipher_provider.key_provider if @cipher_provider.is_a?(DefaultCipherProvider)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
@@ -318,7 +319,7 @@ module Aws
           @security_profile = extract_security_profile(options)
           # The v3 cipher is only used for decrypt.
           # Therefore any configured v2 `content_encryption_schema` is going to be incorrect.
-          @v3_cipher_provider = Aws::S3::EncryptionV3::Client.cipher_provider(options.except(:content_encryption_schema))
+          @v3_cipher_provider = Aws::S3::EncryptionV3::Client.cipher_provider(options.except(:content_encryption_schema), @client)
         end
 
         # @return [S3::Client]
@@ -426,18 +427,18 @@ module Aws
         end
 
         # @api private
-        def self.cipher_provider(options)
+        def self.cipher_provider(options, client)
           if options[:kms_key_id]
             KmsCipherProvider.new(
               kms_key_id: options[:kms_key_id],
-              kms_client: kms_client(options),
+              kms_client: kms_client(options, client),
               key_wrap_schema: options[:key_wrap_schema],
               content_encryption_schema: options[:content_encryption_schema]
             )
           else
-            @key_provider = extract_key_provider(options)
+            key_provider = extract_key_provider(options)
             DefaultCipherProvider.new(
-              key_provider: @key_provider,
+              key_provider: key_provider,
               key_wrap_schema: options[:key_wrap_schema],
               content_encryption_schema: options[:content_encryption_schema]
             )
@@ -480,11 +481,11 @@ module Aws
           end
         end
 
-        def self.kms_client(options)
+        def self.kms_client(options, client)
           options[:kms_client] || begin
             KMS::Client.new(
-              region: @client.config.region,
-              credentials: @client.config.credentials,
+              region: client.config.region,
+              credentials: client.config.credentials,
               )
           end
         end

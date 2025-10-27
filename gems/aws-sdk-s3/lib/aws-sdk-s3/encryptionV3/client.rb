@@ -318,7 +318,7 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @v3_cipher_provider = self.class.cipher_provider(options)
+          @v3_cipher_provider = self.class.cipher_provider(options, @client)
           ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
           ##% Instruction File writes MUST be optionally configured during client creation or on each PutObject request.
           @envelope_location = extract_location(options)
@@ -334,7 +334,10 @@ module Aws
               content_encryption_schema: :aes_gcm_no_padding,
               key_wrap_schema: options[:key_wrap_schema]
             })
-            @v2_cipher_provider = Aws::S3::EncryptionV2::Client.cipher_provider(new_options)
+            @v2_cipher_provider = Aws::S3::EncryptionV2::Client.cipher_provider(new_options, @client)
+            @key_provider = @v2_cipher_provider.key_provider if @v2_cipher_provider.is_a?(DefaultCipherProvider)
+          else
+            @key_provider = @v3_cipher_provider.key_provider if @v3_cipher_provider.is_a?(DefaultCipherProvider)
           end
         end
 
@@ -482,18 +485,18 @@ module Aws
         ##% If the GetObject response contains a range, but the GetObject request does not contain a range, the S3EC MUST throw an exception.
 
         # @api private
-        def self.cipher_provider(options)
+        def self.cipher_provider(options, client)
           if options[:kms_key_id]
             KmsCipherProvider.new(
               kms_key_id: options[:kms_key_id],
-              kms_client: kms_client(options),
+              kms_client: kms_client(options, client),
               key_wrap_schema: options[:key_wrap_schema],
               content_encryption_schema: options[:content_encryption_schema]
             )
           else
-            @key_provider = extract_key_provider(options)
+            key_provider = extract_key_provider(options)
             DefaultCipherProvider.new(
-              key_provider: @key_provider,
+              key_provider: key_provider,
               key_wrap_schema: options[:key_wrap_schema],
               content_encryption_schema: options[:content_encryption_schema]
             )
@@ -536,11 +539,11 @@ module Aws
           end
         end
 
-        def self.kms_client(options)
+        def self.kms_client(options, client)
           options[:kms_client] || begin
             KMS::Client.new(
-              region: @client.config.region,
-              credentials: @client.config.credentials,
+              region: client.config.region,
+              credentials: client.config.credentials,
               )
           end
         end

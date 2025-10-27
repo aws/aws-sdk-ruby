@@ -8,6 +8,8 @@ module Aws
       # @api private
       class DefaultCipherProvider
 
+        attr_reader :key_provider
+
         def initialize(options = {})
           @key_provider = options[:key_provider]
           @key_wrap_schema = validate_key_wrap(
