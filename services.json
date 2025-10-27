@@ -1321,12 +1321,10 @@
     "models": "voice-id/2021-09-27"
   },
   "WAF": {
-    "models": "waf/2015-08-24",
-    "deprecated": true
+    "models": "waf/2015-08-24"
   },
   "WAFRegional": {
-    "models": "waf-regional/2016-11-28",
-    "deprecated": true
+    "models": "waf-regional/2016-11-28"
   },
   "WAFV2": {
     "models": "wafv2/2019-07-29"

@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Feature - WAF Regional has been removed from the SDK because it has been discontinued.
-
 1.85.0 (2025-08-26)
 ------------------
 
