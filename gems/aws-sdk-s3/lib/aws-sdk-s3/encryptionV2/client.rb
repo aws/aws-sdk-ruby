@@ -316,7 +316,9 @@ module Aws
           @kms_allow_decrypt_with_any_cmk =
             options[:kms_key_id] == :kms_allow_decrypt_with_any_cmk
           @security_profile = extract_security_profile(options)
-          @v3_cipher_provider = Aws::S3::EncryptionV3::Client.cipher_provider(options)
+          # The v3 cipher is only used for decrypt.
+          # Therefore any configured v2 `content_encryption_schema` is going to be incorrect.
+          @v3_cipher_provider = Aws::S3::EncryptionV3::Client.cipher_provider(options.except(:content_encryption_schema))
         end
 
         # @return [S3::Client]

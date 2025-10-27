@@ -14,7 +14,7 @@ module Aws
           @key_wrap_schema = validate_key_wrap(
             options[:key_wrap_schema]
           )
-          @content_encryption_schema = validate_cek(
+          @content_encryption_schema = Utils.validate_cek(
             options[:content_encryption_schema]
           )
         end
@@ -100,18 +100,6 @@ module Aws
           when :kms_context then '12'
           else
             raise ArgumentError, "Unsupported key_wrap_schema: #{key_wrap_schema}"
-          end
-        end
-
-        def validate_cek(content_encryption_schema)
-          if content_encryption_schema.nil?
-            return '115'
-          end
-          case content_encryption_schema
-          when :alg_aes_256_gcm_hkdf_sha512_commit_key
-            '115'
-          else
-            raise ArgumentError, "Unsupported content_encryption_schema: #{content_encryption_schema}"
           end
         end
 

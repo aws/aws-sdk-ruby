@@ -10,6 +10,22 @@ module Aws
 
         class << self
 
+          def validate_cek(content_encryption_schema)
+            if content_encryption_schema.nil?
+              return '115'
+            end
+            case content_encryption_schema
+            when :alg_aes_256_gcm_hkdf_sha512_commit_key
+              '115'
+            else
+              ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-iv16-tag16-no-kdf
+              ##% Attempts to encrypt using AES-CTR MUST fail.
+              ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-hkdf-sha512-commit-key
+              ##% Attempts to encrypt using key committing AES-CTR MUST fail.
+              raise ArgumentError, "Unsupported content_encryption_schema: #{content_encryption_schema}"
+            end
+          end
+
           def encrypt_aes_gcm(key, data, auth_data)
             cipher = aes_encryption_cipher(:GCM, key)
             cipher.iv = (iv = cipher.random_iv)
