@@ -333,7 +333,7 @@ module Aws
           if @commitment_policy != :require_encrypt_require_decrypt
             new_options = options.merge({
               security_profile: security_profile_to_v2(@security_profile),
-              content_encryption_schema: :aes_gcm_no_padding,
+              content_encryption_schema: options[:content_encryption_schema] || :aes_gcm_no_padding,
               key_wrap_schema: options[:key_wrap_schema]
             })
             @v2_cipher_provider = Aws::S3::EncryptionV2::Client.cipher_provider(new_options, @client)

@@ -107,12 +107,25 @@ module Aws
           end
 
           it 'can can use envelope_location: instruction_file' do
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##= type=test
+            ##% The S3EC MUST support writing some or all (depending on format) content metadata to an Instruction File.
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##= type=test
+            ##% Instruction File writes MUST be optionally configured during client creation or on each PutObject request.
+
             client = Aws::S3::EncryptionV3::Client.new(
               options.merge(envelope_location: :instruction_file)
             )
             data = {}
             s3_client.stub_responses(:put_object, lambda { |context|
               if context.params[:key].include? '.instruction'
+                ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+                ##= type=test
+                ##% The content metadata stored in the Instruction File MUST be serialized to a JSON string.
+                ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+                ##= type=test
+                ##% The serialized JSON string MUST be the only contents of the Instruction File.
                 data[:instruction_metadata] = JSON.load(context.params[:body])
               else
                 data[:metadata] = context.params[:metadata]
@@ -137,8 +150,49 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
+          it 'can can use instruction_file_suffix for a custom suffix' do
+            clientPut = Aws::S3::EncryptionV3::Client.new(
+              options.merge(envelope_location: :instruction_file, instruction_file_suffix: "foo")
+            )
+            data = {}
+            s3_client.stub_responses(:put_object, lambda { |context|
+              if context.params[:key].include? '.foo'
+                data[:instruction_metadata] = JSON.load(context.params[:body])
+              else
+                data[:metadata] = context.params[:metadata]
+                data[:enc_body] = context.params[:body].read
+              end
+              {}
+            })
+            clientPut.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+
+            clientGet = Aws::S3::EncryptionV3::Client.new(
+              options.merge(envelope_location: :instruction_file)
+            )
+
+            resp_headers = Hash[*data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.flatten(1)]
+            resp_headers['content-length'] = data[:enc_body].length
+
+            auth_tag = data[:enc_body].unpack('C*')[-16, 16].pack('C*')
+
+            s3_client.stub_responses(
+              :get_object,
+              {status_code: 200, body: data[:enc_body], headers: resp_headers},
+              {body: Json.dump(data[:instruction_metadata])},
+              {body: auth_tag}
+            )
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##= type=test
+            ##% The S3EC SHOULD support providing a custom Instruction File suffix on GetObject requests, regardless of whether or not re-encryption is supported.
+            decrypted = client.get_object(bucket: test_bucket, key: test_object, instruction_file_suffix: "foo").body.read
+            expect(decrypted).to eq(plaintext)
+          end
+
           context 'security_profile: v3' do
             it 'raises a NonCommittingDecryptionError when reading a legacy object' do
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##= type=test
+              ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
               client_v3 = Aws::S3::EncryptionV3::Client.new(options)
 
@@ -160,6 +214,9 @@ module Aws
             }
 
             it 'can decrypt an object encrypted using legacy algorithm' do
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##= type=test
+              ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
 
               expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
@@ -352,6 +409,9 @@ module Aws
 
           context 'security_profile: v3' do
             it 'raises a NonCommittingDecryptionError when reading a legacy object' do
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##= type=test
+              ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
               client_v3 = Aws::S3::EncryptionV3::Client.new(options)
 
@@ -373,6 +433,9 @@ module Aws
             }
 
             it 'can decrypt an object encrypted using legacy algorithm' do
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##= type=test
+              ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
 
               expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
@@ -492,6 +555,9 @@ module Aws
 
           context 'security_profile: v3' do
             it 'raises a NonCommittingDecryptionError when reading a legacy object' do
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##= type=test
+              ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
               client_v1 = Aws::S3::Encryption::Client.new(
                 kms_key_id: kms_key_id, client: s3_client, kms_client: kms_client
               )
@@ -529,6 +595,9 @@ module Aws
             }
 
             it 'can decrypt an object encrypted using legacy algorithm' do
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##= type=test
+              ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
               client_v1 = Aws::S3::Encryption::Client.new(
                 kms_key_id: kms_key_id, client: s3_client, kms_client: kms_client
               )
@@ -704,6 +773,29 @@ module Aws
                   kms_encryption_context: {'aws:x-amz-cek-alg' => 'error'})
               end.to raise_error(ArgumentError,
                                  /Conflict in reserved KMS Encryption Context/)
+            end
+
+            it 'does not change the encryption context' do
+              client = Aws::S3::EncryptionV3::Client.new(options)
+              enc_context = { user_context: '你好' }
+              data = stub_put(s3_client)
+              kms_client.stub_responses(
+                :generate_data_key,
+                {
+                  key_id: kms_key_id,
+                  ciphertext_blob: kms_ciphertext_blob,
+                  plaintext: kms_plaintext
+                }
+              )
+              client.put_object(
+                bucket: test_bucket, key: test_object, body: plaintext,
+                kms_encryption_context: enc_context
+              )
+
+              ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
+              ##= type=test
+              ##% If the S3EC does not support decoding the S3 Server's "double encoding" then it MUST return the content metadata untouched.
+              expect(JSON.parse(data[:metadata]['x-amz-t'])).to include('user_context' => '你好')
             end
           end
         end

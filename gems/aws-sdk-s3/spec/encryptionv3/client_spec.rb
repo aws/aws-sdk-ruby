@@ -145,6 +145,13 @@ module Aws
           end
 
           it 'defaults :envelope_location to :metadata' do
+            client = Client.new(options)
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
+            ##= type=test
+            ##% By default, the S3EC MUST store content metadata in the S3 Object Metadata.
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##= type=test
+            ##% Instruction File writes MUST NOT be enabled by default.
             expect(client.envelope_location).to eq(:metadata)
           end
 
@@ -160,6 +167,9 @@ module Aws
           end
 
           it 'defaults :instruction_file_suffix to ".instruction"' do
+            ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
+            ##= type=test
+            ##% The default Instruction File behavior uses the same S3 object key as its associated object suffixed with ".instruction".
             expect(client.instruction_file_suffix).to eq('.instruction')
           end
 
