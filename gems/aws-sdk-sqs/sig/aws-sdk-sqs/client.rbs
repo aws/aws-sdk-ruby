@@ -46,6 +46,7 @@ module Aws::SQS
       ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
       ?validate_params: bool,
+      ?verify_checksums: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     interface _AddPermissionResponse

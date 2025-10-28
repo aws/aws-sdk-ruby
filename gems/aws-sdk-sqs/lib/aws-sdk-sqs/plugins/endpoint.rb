@@ -32,19 +32,21 @@ module Aws::SQS
       # @api private
       class Handler < Smithy::Client::Handler
         def call(context)
-          context[:endpoint_params] ||= EndpointParameters.create(context)
-          context[:resolved_endpoint] ||= context.config.endpoint_provider.resolve(context[:endpoint_params])
+          params = EndpointParameters.create(context)
+          context[:endpoint_params] = params
+          endpoint = context.config.endpoint_provider.resolve(params)
+          context[:resolved_endpoint] = endpoint
 
-          apply_endpoint(context.http_request, context[:resolved_endpoint])
+          apply_endpoint(context, endpoint)
           @handler.call(context)
         end
 
         private
 
-        def apply_endpoint(http_request, endpoint)
-          http_request.endpoint = endpoint.url
+        def apply_endpoint(context, endpoint)
+          context.http_request.endpoint = endpoint.url
           endpoint.headers.each do |key, value|
-            http_request.headers[key] = value
+            context.http_request.headers[key] = value
           end
         end
       end
