@@ -26,6 +26,7 @@ require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-sqs/plugins/queue_urls'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:sqs)
 
@@ -62,6 +63,7 @@ module Aws::SQS
     add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::SQS::Plugins::QueueUrls)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
