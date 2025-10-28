@@ -81,7 +81,7 @@ module Aws
           ##% - The V3 message format MUST NOT store the mapkey "x-amz-d" and its value in the Instruction File.
           ##% - The V3 message format MUST store the mapkey "x-amz-i" and its value in the Object Metadata when writing with an Instruction File.
           ##% - The V3 message format MUST NOT store the mapkey "x-amz-i" and its value in the Instruction File.
-          metadata_envelop = envelop.select { |k, v| EncryptionV3.METADATA_KEY.include?(k) }
+          metadata_envelop = envelop.select { |k, v| DecryptHandler::METADATA_KEY.include?(k) }
           # Exclude the metadata keys rather than include the envelop keys
           # because there might be additional information
           ##= ../specification/s3-encryption/data-format/metadata-strategy.md#v3-instruction-files
@@ -89,7 +89,7 @@ module Aws
           ##% - The V3 message format MUST store the mapkey "x-amz-w" and its value in the Instruction File.
           ##% - The V3 message format MUST store the mapkey "x-amz-m" and its value (when present in the content metadata) in the Instruction File.
           ##% - The V3 message format MUST store the mapkey "x-amz-t" and its value (when present in the content metadata) in the Instruction File.
-          instruction_envelop = envelop.reject { |k, v| EncryptionV3.METADATA_KEY.include?(k) }
+          instruction_envelop = envelop.reject { |k, v| DecryptHandler::METADATA_KEY.include?(k) }
           
           [instruction_envelop, metadata_envelop]
         end

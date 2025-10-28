@@ -12,6 +12,18 @@ module Aws
 
         # Raised when attempting to decrypt a legacy (V1) encrypted object
         # when using a security_profile that does not support it.
+        class NonCommittingDecryptionError < DecryptionError
+          def initialize(*args)
+            msg = 'The requested object is ' \
+              'was not encrypted with a committing algorithm ' \
+              'and decryption is not supported under :require_encrypt_require_decrypt commitment policy. ' \
+              'Change your commitment policy to :forbid_encrypt_allow_decrypt or :require_encrypt_allow_decrypt'
+            super(msg)
+          end
+        end
+
+        # Raised when attempting to decrypt a legacy (V1) encrypted object
+        # when using a security_profile that does not support it.
         class LegacyDecryptionError < DecryptionError
           def initialize(*args)
             msg = 'The requested object is ' \

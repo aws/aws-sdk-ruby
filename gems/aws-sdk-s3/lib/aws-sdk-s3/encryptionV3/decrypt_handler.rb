@@ -16,7 +16,6 @@ module Aws
         ENVELOP_KEY = %w(
           x-amz-3
           x-amz-w
-          x-amz-t
         )
 
         OPTIONAL_ENVELOP_KEY = %w(
@@ -91,7 +90,7 @@ module Aws
                   ##% and the algorithm suite associated with the object does not support key commitment, then the S3EC MUST throw an exception.
                   ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
                   ##% When the commitment policy is REQUIRE_ENCRYPT_REQUIRE_DECRYPT, the S3EC MUST NOT allow decryption using algorithm suites which do not support key commitment.
-                  raise Errors::LegacyDecryptionError
+                  raise Errors::NonCommittingDecryptionError
                 end
                 ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
                 ##% When the commitment policy is FORBID_ENCRYPT_ALLOW_DECRYPT, the S3EC MUST allow decryption using algorithm suites which do not support key commitment.
