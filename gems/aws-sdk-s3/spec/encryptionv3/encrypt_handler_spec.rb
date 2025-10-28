@@ -10,7 +10,7 @@ module Aws
         let(:handler) { EncryptHandler.new(next_handler) }
 
         let(:cipher) { double('cipher', update: '', final: '', auth_tag: '') }
-        let(:envelope) { {'x-amz-key-v2' => 'env-key'} }
+        let(:envelope) { {'x-amz-3' => 'env-key'} }
         let(:cipher_provider) { double('cipher_provider', encryption_cipher: [envelope, cipher]) }
         let(:context_enc) { { cipher_provider: cipher_provider, envelope_location: :metadata } }
         let(:params) { {bucket: 'bucket', key: 'key'} }
@@ -23,7 +23,7 @@ module Aws
           context 'when envelope_location is :metadata' do
             it 'sets the envelope on metadata' do
               handler.call(context)
-              expect(params[:metadata]).to include('x-amz-key-v2')
+              expect(params[:metadata]).to include('x-amz-3')
             end
           end
 
@@ -46,12 +46,12 @@ module Aws
 
           it 'adds unencrypted-content-length to metadata' do
             handler.call(context)
-            expect(params[:metadata]).to include('x-amz-key-v2')
+            expect(params[:metadata]).to include('x-amz-3')
           end
 
           it 'adds a user_agent_suffix' do
             handler.call(context)
-            expect(config.user_agent_suffix).to include('S3CryptoV2')
+            expect(config.user_agent_suffix).to include('S3CryptoV3')
           end
 
           it 'sets the body to the IOEncrypter and calls close on_headers' do

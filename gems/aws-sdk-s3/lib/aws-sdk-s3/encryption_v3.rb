@@ -16,7 +16,7 @@ module Aws
   module S3
     module EncryptionV3
       AES_GCM_TAG_LEN_BYTES = 16
-      EC_USER_AGENT = 'S3CryptoV2'
+      EC_USER_AGENT = 'S3CryptoV3'
     end
   end
 end

@@ -234,7 +234,9 @@ module Aws
           :require_encrypt_require_decrypt
         ]
 
-        DEFAULT_LEGACY_MODE = false
+        SUPPORTED_SECURITY_PROFILES = [:v3, :v3_and_legacy]
+
+        DEFAULT_SECURITY_PROFILES = :v3
         DEFAULT_COMMITMENT_POLICIES = :require_encrypt_require_decrypt
         DEFAULT_CONTENT_ENCRYPTION_SCHEMA = :alg_aes_256_gcm_hkdf_sha512_commit_key
 
@@ -326,11 +328,11 @@ module Aws
           @kms_allow_decrypt_with_any_cmk =
             options[:kms_key_id] == :kms_allow_decrypt_with_any_cmk
           @commitment_policy = extract_commitment_policy(options)
-          @legacy_modes = options[:legacy_modes] || false
+          @security_profile = extract_security_profile(options)
 
           if @commitment_policy != :require_encrypt_require_decrypt
             new_options = options.merge({
-              security_profile: @legacy_modes ? :v2_and_legacy : :v2,
+              security_profile: security_profile_to_v2(@security_profile),
               content_encryption_schema: :aes_gcm_no_padding,
               key_wrap_schema: options[:key_wrap_schema]
             })
@@ -450,7 +452,8 @@ module Aws
             commitment_policy: commitment_policy
           }.tap do |hash|
             if commitment_policy != :require_encrypt_require_decrypt
-              hash[:security_profile] = @legacy_modes ? :v2_and_legacy : :v2
+              security_profile = security_profile_from_params(params)
+              hash[:security_profile] = security_profile_to_v2(security_profile)
               hash[:cipher_provider] = @v2_cipher_provider
             end
           end
@@ -636,6 +639,49 @@ module Aws
           commitment_policy
         end
 
+        def extract_security_profile(options)
+          validate_security_profile(options[:security_profile])
+        end
+
+        def security_profile_from_params(params)
+          security_profile =
+            if !params[:security_profile].nil?
+              params.delete(:security_profile)
+            else
+              @security_profile
+            end
+          validate_security_profile(security_profile)
+        end
+
+        def validate_security_profile(security_profile)
+          if security_profile.nil?
+            return DEFAULT_SECURITY_PROFILES
+          end
+
+          unless SUPPORTED_SECURITY_PROFILES.include? security_profile
+            raise ArgumentError, "Unsupported security profile: :#{security_profile}. " \
+            "Please provide one of: #{SUPPORTED_SECURITY_PROFILES.map { |s| ":#{s}" }.join(', ')}"
+          end
+          if security_profile == :v3_and_legacy && !@warned_about_legacy
+            @warned_about_legacy = true
+            warn(
+              'The S3 Encryption Client is configured to read encrypted objects ' \
+              "with legacy encryption modes. If you don't have objects " \
+              'encrypted with these legacy modes, you should disable support ' \
+              'for them to enhance security.'
+            )
+          end
+          security_profile
+        end
+
+        def security_profile_to_v2(security_profile)
+          case security_profile
+            when :v3
+              :v2
+            when :v3_and_legacy
+              :v2_and_legacy
+            end
+          end
       end
     end
   end

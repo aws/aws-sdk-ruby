@@ -69,8 +69,6 @@ module Aws
               client: s3_client,
               encryption_key: key,
               key_wrap_schema: :aes_gcm,
-              # content_encryption_schema: :aes_gcm_no_padding,
-              # security_profile: :v2
             }
           end
 
@@ -139,8 +137,8 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
-          context 'security_profile: v2' do
-            it 'raises a DecryptionError when reading a legacy object' do
+          context 'security_profile: v3' do
+            it 'raises a NonCommittingDecryptionError when reading a legacy object' do
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
               client_v3 = Aws::S3::EncryptionV3::Client.new(options)
 
@@ -150,12 +148,16 @@ module Aws
               stub_get(s3_client, data, false)
               expect do
                 client_v3.get_object(bucket: test_bucket, key: test_object)
-              end.to raise_error(Errors::LegacyDecryptionError)
+              end.to raise_error(Errors::NonCommittingDecryptionError)
             end
           end
 
-          context 'security_profile: v2_and_legacy' do
-            let(:legacy_options) { options.merge(security_profile: :v2_and_legacy) }
+          context 'security_profile: v3_and_legacy' do
+            let(:legacy_options) { options.merge(
+                security_profile: :v3_and_legacy,
+                commitment_policy: :require_encrypt_allow_decrypt
+              )
+            }
 
             it 'can decrypt an object encrypted using legacy algorithm' do
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
@@ -348,8 +350,8 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
-          context 'security_profile: v2' do
-            it 'raises a DecryptionError when reading a legacy object' do
+          context 'security_profile: v3' do
+            it 'raises a NonCommittingDecryptionError when reading a legacy object' do
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
               client_v3 = Aws::S3::EncryptionV3::Client.new(options)
 
@@ -359,12 +361,16 @@ module Aws
               stub_get(s3_client, data, false)
               expect do
                 client_v3.get_object(bucket: test_bucket, key: test_object)
-              end.to raise_error(Errors::LegacyDecryptionError)
+              end.to raise_error(Errors::NonCommittingDecryptionError)
             end
           end
 
-          context 'security_profile: v2_and_legacy' do
-            let(:legacy_options) { options.merge(security_profile: :v2_and_legacy) }
+          context 'security_profile: v3_and_legacy' do
+            let(:legacy_options) { options.merge(
+                security_profile: :v3_and_legacy,
+                commitment_policy: :require_encrypt_allow_decrypt
+              )
+            }
 
             it 'can decrypt an object encrypted using legacy algorithm' do
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
@@ -484,8 +490,8 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
-          context 'security_profile: v2' do
-            it 'raises a DecryptionError when reading a legacy object' do
+          context 'security_profile: v3' do
+            it 'raises a NonCommittingDecryptionError when reading a legacy object' do
               client_v1 = Aws::S3::Encryption::Client.new(
                 kms_key_id: kms_key_id, client: s3_client, kms_client: kms_client
               )
@@ -511,12 +517,16 @@ module Aws
                 })
               expect do
                 client_v3.get_object(bucket: test_bucket, key: test_object)
-              end.to raise_error(Errors::LegacyDecryptionError)
+              end.to raise_error(Errors::NonCommittingDecryptionError)
             end
           end
 
-          context 'security_profile: v2_and_legacy' do
-            let(:legacy_options) { options.merge(security_profile: :v2_and_legacy) }
+          context 'security_profile: v3_and_legacy' do
+            let(:legacy_options) { options.merge(
+                security_profile: :v3_and_legacy,
+                commitment_policy: :require_encrypt_allow_decrypt
+              )
+            }
 
             it 'can decrypt an object encrypted using legacy algorithm' do
               client_v1 = Aws::S3::Encryption::Client.new(

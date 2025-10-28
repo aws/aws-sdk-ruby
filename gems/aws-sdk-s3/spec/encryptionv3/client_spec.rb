@@ -76,11 +76,9 @@ module Aws
             end.to raise_error(ArgumentError, /key_wrap_schema/)
           end
 
-          it 'requires the content_encryption_schema to be set' do
-            expect do
-              options.delete(:content_encryption_schema)
-              Client.new(options)
-            end.to raise_error(ArgumentError, /content_encryption_schema/)
+          it 'content_encryption_schema is optional' do
+            options.delete(:content_encryption_schema)
+            Client.new(options)
           end
 
           it 'defaults :kms_allow_decrypt_with_any_cmk to false' do
@@ -98,11 +96,9 @@ module Aws
             expect(client.kms_allow_decrypt_with_any_cmk).to eq(true)
           end
 
-          it 'requires :security_profile to be set' do
-            expect do
-              options.delete(:security_profile)
-              Client.new(options)
-            end.to raise_error(ArgumentError, /security_profile/)
+          it ':security_profile is optional' do
+            options.delete(:security_profile)
+            Client.new(options)
           end
 
           it 'raises an ArgumentError when given invalid :security_profile' do
@@ -111,9 +107,9 @@ module Aws
             end.to raise_error(ArgumentError)
           end
 
-          it 'warns when security_profile is set to :v2_and_legacy' do
+          it 'warns when security_profile is set to :v3_and_legacy' do
             expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
-            Client.new(options.merge(security_profile: :v2_and_legacy))
+            Client.new(options.merge(security_profile: :v3_and_legacy))
           end
 
           it 'constructs a key provider from a master key' do
@@ -246,12 +242,12 @@ module Aws
             client.get_object(params)
 
             expect(context).to include(encryption: {
-              cipher_provider: kind_of(DefaultCipherProvider),
+              commitment_policy: :require_encrypt_require_decrypt,
+              v3_cipher_provider: kind_of(DefaultCipherProvider),
               envelope_location: :metadata,
               instruction_file_suffix: '.instruction',
               kms_encryption_context: nil,
               kms_allow_decrypt_with_any_cmk: false,
-              security_profile: :v2
             })
           end
 
@@ -274,14 +270,19 @@ module Aws
 
           it 'overrides the security_profile when set' do
             expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
-            client.get_object(params.merge(security_profile: :v2_and_legacy))
+            client = Client.new(options.merge(commitment_policy: :require_encrypt_allow_decrypt))
+            client.get_object(params.merge(security_profile: :v3_and_legacy))
 
             expect(context).to include(encryption: hash_including(
+              # Yes, v2.
+              # Even thought the input if v3, we translate it to v2
+              # because this is what is going to be sent to the v2 client.
               security_profile: :v2_and_legacy
             ))
           end
 
           it 'raises an ArgumentError when the security_profile is invalid' do
+            client = Client.new(options.merge(commitment_policy: :require_encrypt_allow_decrypt))
             expect do
               client.get_object(params.merge(security_profile: :bad_profile))
             end.to raise_error(ArgumentError)
