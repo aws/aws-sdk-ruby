@@ -56,23 +56,7 @@ module Aws
         return if @identity && @expiration && !near_expiration?(sync_expiration_length)
 
         # Attempt to refresh the token
-        begin
-          endpoint = determine_endpoint
-          options = {
-            dpop_proof: dpop_proof(token_json['dpopKey'], endpoint),
-            token_input: {
-              client_id: token_json['clientId'],
-              grant_type: 'refresh_token',
-              refresh_token: token_json['refreshToken']
-            }
-          }
-          resp = @client.create_o_auth2_token(options)
-          parse_resp(resp.token_output, token_json)
-          update_creds_from_token(token_json)
-          update_token_cache(token_json)
-        # rescue
-        #   warn('Failed to refresh Login token for LoginCredentialsProvider.')
-        end
+        attempt_refresh(token_json)
 
         # Raise if token is hard expired
         return unless !@expiration || @expiration < Time.now
@@ -100,17 +84,14 @@ module Aws
           raise ArgumentError, 'Missing required field: accessToken. Please reauthenticate with `aws login`.'
         end
 
-        access_token_fields = %w[accessKeyId secretAccessKey sessionToken accountId expiresAt]
-        cached_token_fields = %w[clientId refreshToken dpopKey]
+        required_access_token_fields = %w[accessKeyId secretAccessKey sessionToken accountId expiresAt]
+        required_cached_token_fields = %w[clientId refreshToken dpopKey]
+        missing_fields = required_access_token_fields.reject { |field| access_token[field] } +
+                         required_cached_token_fields.reject { |field| cached_token[field] }
 
-        unless access_token_fields.all? { |field| access_token[field] } &&
-          cached_token_fields.all? { |field| cached_token[field] }
-          missing_access_token_fields = access_token_fields.reject { |field| access_token[field] }
-          missing_cached_token_fields = cached_token_fields.reject { |field| cached_token[field] }
-          raise ArgumentError,
-                "Missing required field(s): #{missing_access_token_fields + missing_cached_token_fields}. " \
-                  'Please reauthenticate with `aws login`.'
-        end
+        return if missing_fields.empty?
+
+        raise ArgumentError, "Missing required field(s): #{missing_fields}. Please reauthenticate with `aws login`."
       end
 
       def update_creds_from_token(token_json)
@@ -122,6 +103,24 @@ module Aws
           session_token: access_token['sessionToken'],
           account_id: access_token['accountId']
         )
+      end
+
+      def attempt_refresh(token_json)
+        endpoint = determine_endpoint
+        options = {
+          dpop_proof: dpop_proof(token_json['dpopKey'], endpoint),
+          token_input: {
+            client_id: token_json['clientId'],
+            grant_type: 'refresh_token',
+            refresh_token: token_json['refreshToken']
+          }
+        }
+        resp = @client.create_o_auth2_token(options)
+        parse_resp(resp.token_output, token_json)
+        update_creds_from_token(token_json)
+        update_token_cache(token_json)
+      rescue StandardError
+        warn('Failed to refresh Login token for LoginCredentialsProvider.')
       end
 
       def determine_endpoint
@@ -147,31 +146,42 @@ module Aws
         y = private_key.public_key.to_octet_string(:uncompressed)[33, 32]
 
         # Construct header and payload
-        header = {
+        header = build_header(x, y)
+        payload = build_payload(endpoint)
+
+        # Base64URL encode header and payload, sign message using private key, and create header
+        message = build_message(header, payload)
+        signature = private_key.sign(OpenSSL::Digest.new('SHA256'), message)
+        jws_signature = der_to_jws(signature)
+        "#{message}.#{Base64.urlsafe_encode64(jws_signature, padding: false)}"
+      end
+
+      def build_header(x_bytes, y_bytes)
+        {
           'alg' => 'ES256', # signing algorithm
           'jwk' => {
             'crv' => 'P-256', # curve name
             'kty' => 'EC', # key type
-            'x' => Base64.urlsafe_encode64(x, padding: false), # public x coordinate
-            'y' => Base64.urlsafe_encode64(y, padding: false) # public y coordinate
+            'x' => Base64.urlsafe_encode64(x_bytes, padding: false), # public x coordinate
+            'y' => Base64.urlsafe_encode64(y_bytes, padding: false) # public y coordinate
           },
           'typ' => 'dpop+jwt' # hardcoded
         }
+      end
 
-        payload = {
+      def build_payload(htu)
+        {
           'jti' => SecureRandom.uuid, # unique identifier (cryptographically random UUID4)
           'htm' => 'POST', # hardcoded
-          'htu' => endpoint, # same endpoint as Sign-In Operation
+          'htu' => htu, # same endpoint as Sign-In Operation
           'iat' => Time.now.utc.to_i # UTC timestamp, specified number of seconds from 1970-01-01T00:00:00Z UTC
         }
+      end
 
-        # Base64URL encode header and payload, sign message using private key, and create header
+      def build_message(header, payload)
         encoded_header = Base64.urlsafe_encode64(JSON.dump(header), padding: false)
         encoded_payload = Base64.urlsafe_encode64(JSON.dump(payload), padding: false)
-        message = "#{encoded_header}.#{encoded_payload}"
-        signature = private_key.sign(OpenSSL::Digest.new('SHA256'), message)
-        jws_signature = der_to_jws(signature)
-        "#{message}.#{Base64.urlsafe_encode64(jws_signature, padding: false)}"
+        "#{encoded_header}.#{encoded_payload}"
       end
 
       # Converts DER-encoded ASN.1 signature to JWS
@@ -187,10 +197,13 @@ module Aws
       end
 
       def parse_resp(resp, token_json)
-        token_json['accessToken']['accessKeyId'] = resp.access_token.access_key_id
-        token_json['accessToken']['secretAccessKey'] = resp.access_token.secret_access_key
-        token_json['accessToken']['sessionToken'] = resp.access_token.session_token
-        token_json['accessToken']['expiresAt'] = (Time.now.utc + resp.expires_in).to_datetime.rfc3339
+        access_token = token_json['accessToken']
+        access_token.merge!(
+          'accessKeyId' => resp.access_token.access_key_id,
+          'secretAccessKey' => resp.access_token.secret_access_key,
+          'sessionToken' => resp.access_token.session_token,
+          'expiresAt' => (Time.now.utc + resp.expires_in).to_datetime.rfc3339
+        )
         token_json['refreshToken'] = resp.refresh_token
       end
 
