@@ -33,6 +33,8 @@ module Aws
           end
           cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.key = key_data.plaintext
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_GCM_IV12_TAG16_NO_KDF MUST use the V2 message format version only.
           envelope = {
             'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),

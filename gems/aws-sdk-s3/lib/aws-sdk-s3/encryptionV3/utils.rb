@@ -11,6 +11,8 @@ module Aws
         class << self
 
           def validate_cek(content_encryption_schema)
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+            ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
             if content_encryption_schema.nil?
               return '115'
             end

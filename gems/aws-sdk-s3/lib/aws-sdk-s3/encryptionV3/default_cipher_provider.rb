@@ -38,7 +38,8 @@ module Aws
                 encrypt_aes_gcm(data_key, @content_encryption_schema)
               )
             end
-
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
           envelope = {
             'x-amz-3' => enc_key,
             'x-amz-c' => @content_encryption_schema,
@@ -132,6 +133,8 @@ module Aws
         end
 
         def materials_description
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+          ##% If the mapkey is not present, the default Material Description value MUST be set to an empty map (`{}`).
           @key_provider.encryption_materials.description || {}
         end
 

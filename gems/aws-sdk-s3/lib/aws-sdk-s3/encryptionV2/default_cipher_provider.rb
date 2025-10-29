@@ -39,6 +39,9 @@ module Aws
               encrypt_aes_gcm(envelope_key(cipher), @content_encryption_schema)
             )
           end
+
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_GCM_IV12_TAG16_NO_KDF MUST use the V2 message format version only.
           envelope = {
             'x-amz-key-v2' => enc_key,
             'x-amz-cek-alg' => @content_encryption_schema,

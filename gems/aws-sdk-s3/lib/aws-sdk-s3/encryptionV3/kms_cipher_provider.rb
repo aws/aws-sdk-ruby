@@ -32,6 +32,8 @@ module Aws
             )
           end
           cipher, message_id, commitment_key = Utils.generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(key_data.plaintext)
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
           envelope = {
             'x-amz-3' => encode64(key_data.ciphertext_blob),
             'x-amz-c' => @content_encryption_schema,
