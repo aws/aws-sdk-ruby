@@ -23,9 +23,6 @@ module Aws
           )
         end
 
-        V3_IV_BYTES = ("\x00" * 12).freeze
-        ALGO_ID = [0x00, 0x73].pack('C*').freeze
-
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
         #   envelope and encryption cipher.
         def encryption_cipher(options = {})
@@ -47,7 +44,7 @@ module Aws
             'x-amz-c' => @content_encryption_schema,
             'x-amz-w' => @key_wrap_schema,
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
-            ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`)
+            ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`).
             'x-amz-m' => materials_description,
             'x-amz-d' => encode64(commitment_key),
             'x-amz-i' => encode64(message_id)

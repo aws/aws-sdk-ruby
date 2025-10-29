@@ -11,12 +11,28 @@ module Aws
 
         V3_HANDLER = Aws::S3::EncryptionV3::DecryptHandler.new
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-key" MUST be present for V1 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-iv" MUST be present for V1 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-matdesc" MUST be present for V1 format objects.
         V1_ENVELOPE_KEYS = %w(
           x-amz-key
           x-amz-iv
           x-amz-matdesc
         )
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-key-v2" MUST be present for V2 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-iv" MUST be present for V2 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-cek-alg" MUST be present for V2 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-wrap-alg" MUST be present for V2 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-matdesc" MUST be present for V2 format objects.
         V2_ENVELOPE_KEYS = %w(
           x-amz-key-v2
           x-amz-iv
@@ -25,6 +41,10 @@ module Aws
           x-amz-matdesc
         )
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=exception
+        ##= reason=The implementation treats this as optional, but verifies its value.
+        ##% - The mapkey "x-amz-tag-len" MUST be present for V2 format objects.
         V2_OPTIONAL_KEYS = %w(x-amz-tag-len)
 
         POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS +

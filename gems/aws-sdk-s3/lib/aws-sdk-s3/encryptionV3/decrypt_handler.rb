@@ -11,18 +11,57 @@ module Aws
       class DecryptHandler < Seahorse::Client::Handler
         @@warned_response_target_proc = false
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% The "x-amz-" prefix denotes that the metadata is owned by an Amazon product and MUST be prepended to all S3EC metadata mapkeys.
+
         V2_HANDLER = Aws::S3::EncryptionV2::DecryptHandler.new
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-3" MUST be present for V3 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-w" MUST be present for V3 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-3") SHOULD be represented by a constant named "ENCRYPTED_DATA_KEY_V3" or similar in the implementation code.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-w") SHOULD be represented by a constant named "ENCRYPTED_DATA_KEY_ALGORITHM_V3" or similar in the implementation code.
         ENVELOP_KEY = %w(
           x-amz-3
           x-amz-w
         )
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-m" SHOULD be present for V3 format objects that use Raw Keyring Material Description.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-t" SHOULD be present for V3 format objects that use KMS Encryption Context.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-m") SHOULD be represented by a constant named "MAT_DESC_V3" or similar in the implementation code.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-t") SHOULD be represented by a constant named "ENCRYPTION_CONTEXT_V3" or similar in the implementation code.
         OPTIONAL_ENVELOP_KEY = %w(
           x-amz-m
           x-amz-t
         )
 
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-c" MUST be present for V3 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-d" MUST be present for V3 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##% - The mapkey "x-amz-i" MUST be present for V3 format objects.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-c") SHOULD be represented by a constant named "CONTENT_CIPHER_V3" or similar in the implementation code.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-d") SHOULD be represented by a constant named "KEY_COMMITMENT_V3" or similar in the implementation code.
+        ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+        ##= type=implication
+        ##% - This mapkey ("x-amz-i") SHOULD be represented by a constant named "MESSAGE_ID_V3" or similar in the implementation code.
         METADATA_KEY = %w(
           x-amz-c
           x-amz-d
@@ -31,13 +70,6 @@ module Aws
 
         POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY + OPTIONAL_ENVELOP_KEY).uniq
         REQUIRED_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY).uniq
-
-        # POSSIBLE_WRAPPING_FORMATS = %w(
-        #   AES/GCM
-        #   kms
-        #   kms+context
-        #   RSA-OAEP-SHA1
-        # )
 
         POSSIBLE_WRAPPING_FORMATS = %w(
           01
@@ -171,6 +203,10 @@ module Aws
 
         def envelope_from_metadata(context)
           POSSIBLE_ENVELOPE_KEYS.filter_map do |suffix|
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+            ##= type=exception
+            ##= reason=Ruby is reading the headers directly
+            ##% The "x-amz-meta-" prefix is automatically added by the S3 server and MUST NOT be included in implementation code.
             if value = context.http_response.headers["x-amz-meta-#{suffix}"]
               ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
               ##= type=exception
@@ -190,7 +226,7 @@ module Aws
             bucket: context.params[:bucket],
             key: context.params[:key] + suffix
           ).body.read)
-          unless METADATA_KEY.any? { |key| possible_envelope.key?(key) }
+          if METADATA_KEY.any? { |key| possible_envelope.key?(key) }
             keys = METADATA_KEY & possible_envelope.keys
             msg = "unsupported metadata key found in instruction file: #{keys.join(', ')}"
             raise Errors::DecryptionError, msg
@@ -208,7 +244,7 @@ module Aws
           end
 
           unless POSSIBLE_ENCRYPTION_FORMATS.include? possible_envelope['x-amz-c']
-            alg = possible_envelope.inspect
+            alg = possible_envelope['x-amz-c'].inspect
             msg = "unsupported content encrypting key (cek) format: #{alg} #{possible_envelope.inspect}"
             raise Errors::DecryptionError, msg
           end

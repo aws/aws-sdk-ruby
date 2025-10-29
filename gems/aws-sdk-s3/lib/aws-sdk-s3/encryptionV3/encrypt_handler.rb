@@ -35,7 +35,7 @@ module Aws
               ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
               ##% The content metadata stored in the Instruction File MUST be serialized to a JSON string.
               ##% The serialized JSON string MUST be the only contents of the Instruction File.
-              body: Json.dump(envelope)
+              body: Json.dump(instruction_envelop)
             )
             context.params[:metadata] ||= {}
             context.params[:metadata].update(metadata_envelop)
