@@ -320,7 +320,6 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @v3_cipher_provider = self.class.cipher_provider(options, @client)
           ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
           ##% Instruction File writes MUST be optionally configured during client creation or on each PutObject request.
           @envelope_location = extract_location(options)
@@ -333,12 +332,20 @@ module Aws
           if @commitment_policy != :require_encrypt_require_decrypt
             new_options = options.merge({
               security_profile: security_profile_to_v2(@security_profile),
-              content_encryption_schema: options[:content_encryption_schema] || :aes_gcm_no_padding,
-              key_wrap_schema: options[:key_wrap_schema]
+              content_encryption_schema: if @commitment_policy == :forbid_encrypt_allow_decrypt
+                options[:content_encryption_schema]
+              else
+                # assert @commitment_policy = :require_encrypt_allow_decrypt
+                # In this case the v2_cipher_provider is only used for decrypt
+                :aes_gcm_no_padding
+              end
             })
             @v2_cipher_provider = Aws::S3::EncryptionV2::Client.cipher_provider(new_options, @client)
+            # In this case the v3 cipher is only used for decrypt.
+            @v3_cipher_provider = self.class.cipher_provider(options.except(:content_encryption_schema), @client)
             @key_provider = @v2_cipher_provider.key_provider if @v2_cipher_provider.is_a?(DefaultCipherProvider)
           else
+            @v3_cipher_provider = self.class.cipher_provider(options, @client)
             @key_provider = @v3_cipher_provider.key_provider if @v3_cipher_provider.is_a?(DefaultCipherProvider)
           end
         end

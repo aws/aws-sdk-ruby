@@ -56,7 +56,8 @@ module Aws
                 client: s3_client,
                 encryption_key: master_key,
                 key_wrap_schema: :aes_gcm,
-                commitment_policy: :forbid_encrypt_allow_decrypt
+                commitment_policy: :forbid_encrypt_allow_decrypt,
+                content_encryption_schema: :aes_gcm_no_padding,
               )
 
               data = stub_put(s3_client)
@@ -139,6 +140,7 @@ module Aws
                 encryption_key: master_key,
                 key_wrap_schema: :aes_gcm,
                 commitment_policy: :forbid_encrypt_allow_decrypt,
+                content_encryption_schema: :aes_gcm_no_padding,
                 security_profile: :v3_and_legacy
               )
 
@@ -167,6 +169,7 @@ module Aws
                 encryption_key: master_key,
                 key_wrap_schema: :aes_gcm,
                 commitment_policy: :require_encrypt_allow_decrypt,
+                content_encryption_schema: :aes_gcm_no_padding,
                 security_profile: :v3_and_legacy
               )
 

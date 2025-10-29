@@ -112,6 +112,48 @@ module Aws
             Client.new(options.merge(security_profile: :v3_and_legacy))
           end
 
+          it 'rejects AES-CTR algorithm with require policy' do
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-iv16-tag16-no-kdf
+            ##= type=test
+            ##% Attempts to encrypt using AES-CTR MUST fail.
+            expect do
+              Client.new(options.merge(content_encryption_schema: :aes_ctr_iv16_tag16_no_kdf))
+            end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
+          end
+
+          it 'rejects AES-CTR algorithm with forbid policy' do
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-iv16-tag16-no-kdf
+            ##= type=test
+            ##% Attempts to encrypt using AES-CTR MUST fail.
+            expect do
+              Client.new(options.merge(
+                commitment_policy: :forbid_encrypt_allow_decrypt,
+                content_encryption_schema: :aes_ctr_iv16_tag16_no_kdf
+              ))
+            end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
+          end
+
+          it 'rejects key committing AES-CTR algorithm with require policy' do
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-hkdf-sha512-commit-key
+            ##= type=test
+            ##% Attempts to encrypt using key committing AES-CTR MUST fail.
+            expect do
+              Client.new(options.merge(content_encryption_schema: :aes_ctr_hkdf_sha512_commit_key))
+            end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
+          end
+
+          it 'rejects key committing AES-CTR algorithm with forbid policy' do
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-hkdf-sha512-commit-key
+            ##= type=test
+            ##% Attempts to encrypt using key committing AES-CTR MUST fail.
+            expect do
+              Client.new(options.merge(
+                commitment_policy: :forbid_encrypt_allow_decrypt,
+                content_encryption_schema: :aes_ctr_hkdf_sha512_commit_key
+              ))
+            end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
+          end
+
           it 'constructs a key provider from a master key' do
             client = Client.new(options.merge(encryption_key: master_key))
             expect(client.key_provider).to be_a_kind_of(DefaultKeyProvider)

@@ -340,6 +340,148 @@ module Aws
             expect(envelope['x-amz-d']).not_to be_nil # Commitment key present
           end
         end
+
+        describe 'Non-HKDF GCM encryption' do
+          let(:key_provider) { DefaultKeyProvider.new(encryption_key: encryption_key) }
+          
+          it 'verifies auth tag is appended to ciphertext for HKDF algorithm' do
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-hkdf-sha512-commit-key
+            ##= type=test
+            ##% The client MUST append the GCM auth tag to the ciphertext if the underlying crypto provider does not do so automatically.
+            cipher_provider = DefaultCipherProvider.new(key_provider: key_provider, key_wrap_schema: :aes_gcm)
+            
+            data = {}
+            s3_client.stub_responses(:put_object, lambda { |context|
+              data[:metadata] = context.params[:metadata]
+              data[:enc_body] = context.params[:body].read
+              {}
+            })
+            
+            client = Aws::S3::EncryptionV3::Client.new(
+              client: s3_client,
+              encryption_key: encryption_key,
+              key_wrap_schema: :aes_gcm
+            )
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # The plaintext + authTag should b plaintext + 16
+            expect(data[:enc_body].bytesize).to eq(plaintext.bytesize + 16)
+            auth_tag_candidate = data[:enc_body][-16..-1]
+            expect(auth_tag_candidate.bytesize).to eq(16)
+            
+            # Verify successful decryption (which confirms tag is valid)
+            resp_headers = Hash[*data[:metadata].map { |k, v| ["x-amz-meta-#{k.to_s}", v] }.flatten(1)]
+            resp_headers['content-length'] = data[:enc_body].length
+            s3_client.stub_responses(
+              :get_object,
+              {status_code: 200, body: data[:enc_body], headers: resp_headers},
+              {body: auth_tag_candidate}
+            )
+            decrypted = client.get_object(bucket: test_bucket, key: test_object).body.read
+            expect(decrypted).to eq(plaintext)
+          end
+        end
+
+        describe 'Algorithm suite validation' do
+          it 'uses plaintext data key, random IV, and no AAD for non-HKDF GCM encryption' do
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
+            ##= type=test
+            ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, 
+            ##% with the plaintext data key, the generated IV, 
+            ##% and the tag length defined in the Algorithm Suite when encrypting with ALG_AES_256_GCM_IV12_TAG16_NO_KDF.
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
+            ##= type=test
+            ##% The client MUST NOT provide any AAD when encrypting with ALG_AES_256_GCM_IV12_TAG16_NO_KDF.
+            ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
+            ##= type=test
+            ##% The client MUST append the GCM auth tag to the ciphertext if the underlying crypto provider does not do so automatically.
+            
+            # With forbid_encrypt_allow_decrypt policy, the client uses non-HKDF (V2) encryption
+            client = Aws::S3::EncryptionV3::Client.new(
+              client: s3_client,
+              encryption_key: encryption_key,
+              key_wrap_schema: :aes_gcm,
+              commitment_policy: :forbid_encrypt_allow_decrypt,
+              content_encryption_schema: :aes_gcm_no_padding
+            )
+            
+            # Track the plaintext data key and cipher initialization
+            plaintext_data_key = nil
+            random_iv = nil
+            cipher_auth_data = nil
+            cipher_initialized = false
+            
+            # Spy on V2 aes_encryption_cipher to capture the plaintext data key and IV
+            allow(Aws::S3::EncryptionV2::Utils).to receive(:aes_encryption_cipher).and_wrap_original do |m, block_mode, key, iv|
+              cipher = m.call(block_mode, key, iv)
+              
+              # Wrap the cipher to capture its key, iv, and auth_data
+              allow(cipher).to receive(:key=).and_wrap_original do |method, k|
+                plaintext_data_key = k
+                method.call(k)
+              end
+              
+              allow(cipher).to receive(:iv=).and_wrap_original do |method, i|
+                random_iv = i
+                method.call(i)
+              end
+              
+              allow(cipher).to receive(:auth_data=).and_wrap_original do |method, ad|
+                cipher_auth_data = ad
+                cipher_initialized = true if block_mode == :GCM
+                method.call(ad)
+              end
+              
+              cipher
+            end
+            
+            # Stub S3 response
+            data = {}
+            s3_client.stub_responses(:put_object, lambda { |context|
+              data[:metadata] = context.params[:metadata]
+              data[:body] = context.params[:body].read
+              {}
+            })
+            
+            # Perform encryption
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify: Cipher was initialized with plaintext data key (not derived via HKDF)
+            expect(plaintext_data_key).not_to be_nil
+            expect(plaintext_data_key.bytesize).to eq(32) # 256-bit key
+            
+            # Verify: Random IV was generated (not zeros like HKDF)
+            expect(random_iv).not_to be_nil
+            expect(random_iv.bytesize).to eq(12) # 12-byte IV for GCM
+            expect(random_iv).not_to eq("\x00" * 12) # Must NOT be all zeros
+            
+            # Verify: NO AAD was provided (empty string, not algorithm suite ID)
+            expect(cipher_initialized).to be true
+            expect(cipher_auth_data).to eq('') # Empty AAD, not algorithm suite ID
+            
+            # Verify: Auth tag is appended to ciphertext
+            # Ciphertext should be: plaintext.length + 16 bytes for auth tag
+            expect(data[:body].bytesize).to eq(plaintext.bytesize + 16)
+            
+            # Verify the last 16 bytes are the auth tag (non-zero for valid encryption)
+            auth_tag = data[:body][-16..-1]
+            expect(auth_tag.bytesize).to eq(16)
+            expect(auth_tag).not_to eq("\x00" * 16) # Auth tag should not be all zeros
+          end
+
+          it 'rejects non-HKDF GCM with default policy' do
+            # V3 client with default policy (require_encrypt_require_decrypt) only supports HKDF algorithms
+            expect do
+              Aws::S3::EncryptionV3::Client.new(
+                client: s3_client,
+                encryption_key: encryption_key,
+                key_wrap_schema: :aes_gcm,
+                content_encryption_schema: :aes_gcm_no_padding
+              )
+            end.to raise_error(ArgumentError, /content_encryption_schema/)
+          end
+        end
       end
 
     end

@@ -59,6 +59,73 @@ module Aws
 
         let(:s3_client) { S3::Client.new(stub_responses: true) }
 
+        describe 'algorithm configuration' do
+          let(:key) { OpenSSL::Cipher.new('aes-256-gcm').random_key }
+          let(:options) do
+            {
+              client: s3_client,
+              encryption_key: key,
+              key_wrap_schema: :aes_gcm,
+            }
+          end
+
+          it 'uses the configured encryption algorithm during encryption' do
+            ##= ../specification/s3-encryption/encryption.md#content-encryption
+            ##= type=test
+            ##% The S3EC MUST use the encryption algorithm configured during [client](./client.md) initialization.
+            
+            # Test with explicitly configured HKDF algorithm (V3 default)
+            client_v3 = Aws::S3::EncryptionV3::Client.new(
+              options.merge(content_encryption_schema: :alg_aes_256_gcm_hkdf_sha512_commit_key)
+            )
+            data_v3 = stub_put(s3_client)
+            client_v3.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            expect(data_v3[:metadata]['x-amz-c']).to eq('115') # ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY
+            
+            # Test with forbid policy uses V2 algorithm (aes_gcm_no_padding is default for V2)
+            client_v2 = Aws::S3::EncryptionV3::Client.new(
+              options.merge(
+                commitment_policy: :forbid_encrypt_allow_decrypt,
+                content_encryption_schema: :aes_gcm_no_padding,
+              )
+            )
+            data_v2 = stub_put(s3_client)
+            client_v2.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            expect(data_v2[:metadata]['x-amz-cek-alg']).to eq('AES/GCM/NoPadding')
+          end
+
+          it 'generates Message ID with correct length for encryption' do
+            ##= ../specification/s3-encryption/encryption.md#content-encryption
+            ##= type=test
+            ##% The client MUST generate an IV or Message ID using the length of the IV or Message ID defined in the algorithm suite.
+            client = Aws::S3::EncryptionV3::Client.new(options)
+            data = stub_put(s3_client)
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify Message ID is present and has correct length (28 bytes base64 encoded)
+            expect(data[:metadata]['x-amz-i']).not_to be_nil
+            decoded_message_id = Base64.decode64(data[:metadata]['x-amz-i'])
+            expect(decoded_message_id.bytesize).to eq(28) # 224 bits for HKDF algorithm
+          end
+
+          it 'includes generated Message ID in content metadata' do
+            ##= ../specification/s3-encryption/encryption.md#content-encryption
+            ##= type=test
+            ##% The generated IV or Message ID MUST be set or returned from the encryption process such that it can be included in the content metadata.
+            client = Aws::S3::EncryptionV3::Client.new(options)
+            data = stub_put(s3_client)
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify Message ID is included in metadata
+            expect(data[:metadata]['x-amz-i']).not_to be_nil
+            
+            # Verify it can be used for decryption
+            stub_get(s3_client, data, true)
+            decrypted = client.get_object(bucket: test_bucket, key: test_object).body.read
+            expect(decrypted).to eq(plaintext)
+          end
+        end
+
         context 'when using a symmetric (AES) key' do
           let(:key) do
             OpenSSL::Cipher.new('aes-256-gcm').random_key
@@ -152,7 +219,7 @@ module Aws
 
           it 'can can use instruction_file_suffix for a custom suffix' do
             clientPut = Aws::S3::EncryptionV3::Client.new(
-              options.merge(envelope_location: :instruction_file, instruction_file_suffix: "foo")
+              options.merge(envelope_location: :instruction_file, instruction_file_suffix: ".foo")
             )
             data = {}
             s3_client.stub_responses(:put_object, lambda { |context|
@@ -184,7 +251,7 @@ module Aws
             ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
             ##= type=test
             ##% The S3EC SHOULD support providing a custom Instruction File suffix on GetObject requests, regardless of whether or not re-encryption is supported.
-            decrypted = client.get_object(bucket: test_bucket, key: test_object, instruction_file_suffix: "foo").body.read
+            decrypted = clientGet.get_object(bucket: test_bucket, key: test_object, instruction_file_suffix: "foo").body.read
             expect(decrypted).to eq(plaintext)
           end
 
@@ -264,7 +331,10 @@ module Aws
           end
 
           it 'raises a DecryptionError when the envelope is missing' do
-            client = Aws::S3::EncryptionV3::Client.new(options.merge(commitment_policy: :forbid_encrypt_allow_decrypt))
+            client = Aws::S3::EncryptionV3::Client.new(options.merge(
+              commitment_policy: :forbid_encrypt_allow_decrypt,
+              content_encryption_schema: :aes_gcm_no_padding,
+            ))
             stub_get(s3_client, {metadata: {}, enc_body: 'encrypted'}, false)
             expect do
               client.get_object(bucket: test_bucket, key: test_object)
