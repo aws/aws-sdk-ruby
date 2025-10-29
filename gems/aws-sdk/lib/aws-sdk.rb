@@ -368,6 +368,7 @@ module Aws # rubocop:disable Metrics/ModuleLength
   autoload :SFN, 'aws-sdk-sfn'
   autoload :Shield, 'aws-sdk-shield'
   autoload :Signer, 'aws-sdk-signer'
+  autoload :Signin, 'aws-sdk-signin'
   autoload :SimSpaceWeaver, 'aws-sdk-simspaceweaver'
   autoload :SnowDeviceManagement, 'aws-sdk-snowdevicemanagement'
   autoload :Snowball, 'aws-sdk-snowball'

@@ -1,0 +1,16 @@
+module Aws::Signin
+  module Errors
+    class ForbiddenError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

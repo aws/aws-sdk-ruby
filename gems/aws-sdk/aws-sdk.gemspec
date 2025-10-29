@@ -379,6 +379,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_dependency('aws-sdk-sfn', '2.0.0.pre0')
   spec.add_dependency('aws-sdk-shield', '2.0.0.pre0')
   spec.add_dependency('aws-sdk-signer', '2.0.0.pre0')
+  spec.add_dependency('aws-sdk-signin', '2.0.0.pre0')
   spec.add_dependency('aws-sdk-simspaceweaver', '2.0.0.pre0')
   spec.add_dependency('aws-sdk-snowdevicemanagement', '2.0.0.pre0')
   spec.add_dependency('aws-sdk-snowball', '2.0.0.pre0')

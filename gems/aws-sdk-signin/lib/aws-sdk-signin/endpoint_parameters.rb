@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::Signin
+  # Endpoint parameters used to resolve endpoints per request.
+  # @!attribute use_dual_stack
+  #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
+  #   @return [Boolean]
+  # @!attribute use_fips
+  #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
+  #   @return [Boolean]
+  # @!attribute endpoint
+  #   Override the endpoint used to send this request
+  #   @return [String]
+  # @!attribute region
+  #   The AWS region used to dispatch the request.
+  #   @return [String]
+  EndpointParameters = Struct.new(
+    :use_dual_stack,
+    :use_fips,
+    :endpoint,
+    :region,
+    keyword_init: true
+  ) do
+    def initialize(options = {})
+      self.use_dual_stack = options.fetch(:use_dual_stack, false)
+      self.use_fips = options.fetch(:use_fips, false)
+      self.endpoint = options.fetch(:endpoint, nil)
+      self.region = options.fetch(:region, nil)
+    end
+
+    # @api private
+    def self.create(context)
+      config = context.config
+      new({
+        use_dual_stack: config.use_dualstack_endpoint,
+        use_fips: config.use_fips_endpoint,
+        endpoint: config.endpoint,
+        region: config.region,
+      }.compact)
+    end
+  end
+end
