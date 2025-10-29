@@ -16,12 +16,16 @@ module Aws
 
         # all the KAT values are hex
         def self.build_kat(raw_kat)
-          Struct.new(:comment, :data_key, :message_id, :encryption_key, :commitment_key).new(
+          Struct.new(:comment, :data_key, :message_id, :encryption_key, :commitment_key,
+                     :plaintext, :ciphertext, :auth_tag).new(
             raw_kat['comment'],
             from_h(raw_kat['data_key']),
             from_h(raw_kat['message_id']),
             from_h(raw_kat['encryption_key']),
-            from_h(raw_kat['commitment_key'])
+            from_h(raw_kat['commitment_key']),
+            raw_kat['plaintext'] ? from_h(raw_kat['plaintext']) : nil,
+            raw_kat['ciphertext'] ? from_h(raw_kat['ciphertext']) : nil,
+            raw_kat['auth_tag'] ? from_h(raw_kat['auth_tag']) : nil
           )
         end
 
@@ -42,6 +46,17 @@ module Aws
             expect(encryption_key).to eq(kat.encryption_key)
             expect(commitment_key).to eq(kat.commitment_key)
 
+            # Only test encryption/decryption if plaintext is present
+            if kat.plaintext             
+              # Test decryption recovers original plaintext
+              decipher = Utils.derive_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(
+                kat.data_key, kat.message_id, kat.commitment_key
+              )
+              decipher.auth_tag = kat.auth_tag
+              decrypted = decipher.update(kat.ciphertext) + decipher.final
+              
+              expect(decrypted).to eq(kat.plaintext)
+            end
           end
         end
       end
