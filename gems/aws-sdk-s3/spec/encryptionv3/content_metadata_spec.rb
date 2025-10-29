@@ -224,6 +224,18 @@ module Aws
               expect(data[:metadata]['x-amz-w']).to eq('02')
             end
 
+            it 'writes wrapping algorithm value 02 for AES/GCM' do
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##= type=test
+              ##% - The wrapping algorithm value "02" MUST be translated to AES/GCM upon retrieval, and vice versa on write.
+
+              client = Client.new(options)
+              data = stub_put(s3_client)
+              client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+              
+              expect(data[:metadata]['x-amz-w']).to eq('02')
+            end
+
             it 'has x-amz-d in metadata' do
               ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
               ##= type=test
@@ -263,6 +275,21 @@ module Aws
               expect(data[:metadata]).to have_key('x-amz-m')
               expect(data[:metadata]['x-amz-m']).to eq(materials_desc)
             end
+
+            it 'uses Material Description for AES/GCM wrapping' do
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##= type=test
+              ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`).
+
+              materials_desc = '{"description":"test-materials"}'
+              client = Client.new(options.merge(materials_description: materials_desc))
+              data = stub_put(s3_client)
+              client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+              
+              # For AES/GCM (02), material description should be present
+              expect(data[:metadata]).to have_key('x-amz-m')
+              expect(data[:metadata]['x-amz-w']).to eq('02')
+            end
           end
 
           context 'with RSA key' do
@@ -300,6 +327,34 @@ module Aws
               client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
               
               expect(data[:metadata]).to have_key('x-amz-w')
+              expect(data[:metadata]['x-amz-w']).to eq('22')
+            end
+
+            it 'writes wrapping algorithm value 22 for RSA-OAEP-SHA1' do
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##= type=test
+              ##% - The wrapping algorithm value "22" MUST be translated to RSA-OAEP-SHA1 upon retrieval, and vice versa on write.
+
+              client = Client.new(options)
+              data = stub_put(s3_client)
+              client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+              
+              expect(data[:metadata]['x-amz-w']).to eq('22')
+            end
+
+            it 'uses Material Description for RSA-OAEP-SHA1 wrapping' do
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##= type=test
+              ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`).
+
+              materials_desc = '{"description":"rsa-test"}'
+              client = Client.new(options.merge(materials_description: materials_desc))
+              data = stub_put(s3_client)
+              client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+              
+              # For RSA-OAEP-SHA1 (22), material description should be present
+              expect(data[:metadata]).to have_key('x-amz-m')
+              expect(data[:metadata]['x-amz-m']).to eq(materials_desc)
               expect(data[:metadata]['x-amz-w']).to eq('22')
             end
 
@@ -379,6 +434,18 @@ module Aws
               expect(data[:metadata]['x-amz-w']).to eq('12')
             end
 
+            it 'writes wrapping algorithm value 12 for kms+context' do
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##= type=test
+              ##% - The wrapping algorithm value "12" MUST be translated to kms+context upon retrieval, and vice versa on write.
+
+              client = Client.new(options)
+              data = stub_put(s3_client)
+              client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+              
+              expect(data[:metadata]['x-amz-w']).to eq('12')
+            end
+
             it 'has x-amz-d in metadata' do
               client = Client.new(options)
               data = stub_put(s3_client)
@@ -417,6 +484,141 @@ module Aws
               expect(stored_context).to include('department' => 'finance')
               expect(stored_context).to include('project' => 'alpha')
             end
+
+            it 'uses Encryption Context for kms+context wrapping' do
+              ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+              ##= type=test
+              ##% The Encryption Context value MUST be used for wrapping algorithm `kms+context` or `12`.
+
+              enc_context = { 'department' => 'finance', 'project' => 'alpha' }
+              client = Client.new(options)
+              data = stub_put(s3_client)
+              client.put_object(
+                bucket: test_bucket,
+                key: test_object,
+                body: plaintext,
+                kms_encryption_context: enc_context
+              )
+              
+              # For kms+context (12), encryption context should be present
+              expect(data[:metadata]).to have_key('x-amz-t')
+              expect(data[:metadata]['x-amz-w']).to eq('12')
+            end
+          end
+        end
+
+        context 'Default Material Description' do
+          it 'defaults material description to empty map when not present' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% If the mapkey is not present, the default Material Description value MUST be set to an empty map (`{}`).
+
+            # Create an object without explicitly providing materials_description
+            key = OpenSSL::Cipher.new('aes-256-gcm').random_key
+            options = {
+              client: s3_client,
+              encryption_key: key,
+              key_wrap_schema: :aes_gcm,
+              envelope_location: :metadata
+            }
+            
+            client = Client.new(options)
+            data = stub_put(s3_client)
+            
+            # Put object without materials_description parameter
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # The default Material Description value should be an empty map
+            expect(data[:metadata]).to have_key('x-amz-m')
+            expect(data[:metadata]['x-amz-m']).to eq('{}')
+          end
+        end
+
+        context 'Algorithm Suite and Message Format Version Compatibility' do
+          it 'allows ALG_AES_256_CBC_IV16_NO_KDF with V1 format' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+            ##= type=test
+            ##% Objects encrypted with ALG_AES_256_CBC_IV16_NO_KDF MAY use either the V1 or V2 message format version.
+
+            # V1 client uses ALG_AES_256_CBC_IV16_NO_KDF with V1 format
+            # This demonstrates that CBC is not restricted to a single format version
+            cbc_key = OpenSSL::Cipher.new('aes-256-cbc').random_key
+            client_v1 = Aws::S3::Encryption::Client.new(
+              encryption_key: cbc_key,
+              client: s3_client
+            )
+            
+            data = stub_put(s3_client)
+            client_v1.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify V1 format is used (has x-amz-key, no x-amz-key-v2 or x-amz-3)
+            expect(data[:metadata]).to have_key('x-amz-key')
+            expect(data[:metadata]).not_to have_key('x-amz-key-v2')
+            expect(data[:metadata]).not_to have_key('x-amz-3')
+            
+            # Verify it uses CBC algorithm (V1 default)
+            expect(data[:metadata]).to have_key('x-amz-iv')
+            expect(data[:metadata]).to have_key('x-amz-matdesc')
+          end
+
+          it 'requires ALG_AES_256_GCM_IV12_TAG16_NO_KDF to use V2 format only' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+            ##= type=test
+            ##% Objects encrypted with ALG_AES_256_GCM_IV12_TAG16_NO_KDF MUST use the V2 message format version only.
+
+            # V3 client with forbid_encrypt_allow_decrypt uses ALG_AES_256_GCM_IV12_TAG16_NO_KDF
+            # which corresponds to V2 format
+            gcm_key = OpenSSL::Cipher.new('aes-256-gcm').random_key
+            client = Client.new(
+              client: s3_client,
+              encryption_key: gcm_key,
+              key_wrap_schema: :aes_gcm,
+              commitment_policy: :forbid_encrypt_allow_decrypt,
+              content_encryption_schema: :aes_gcm_no_padding
+            )
+            
+            data = stub_put(s3_client)
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify V2 format is used (has x-amz-key-v2, not x-amz-key or x-amz-3)
+            expect(data[:metadata]).to have_key('x-amz-key-v2')
+            expect(data[:metadata]).not_to have_key('x-amz-key')
+            expect(data[:metadata]).not_to have_key('x-amz-3')
+            
+            # Verify it uses GCM algorithm with V2 markers
+            expect(data[:metadata]['x-amz-cek-alg']).to eq('AES/GCM/NoPadding')
+            expect(data[:metadata]).to have_key('x-amz-wrap-alg')
+            expect(data[:metadata]).to have_key('x-amz-iv')
+          end
+
+          it 'requires ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY to use V3 format only' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+            ##= type=test
+            ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
+
+            # V3 client with default settings uses ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY
+            gcm_key = OpenSSL::Cipher.new('aes-256-gcm').random_key
+            client = Client.new(
+              client: s3_client,
+              encryption_key: gcm_key,
+              key_wrap_schema: :aes_gcm
+            )
+            
+            data = stub_put(s3_client)
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify V3 format is used (has x-amz-3, not x-amz-key or x-amz-key-v2)
+            expect(data[:metadata]).to have_key('x-amz-3')
+            expect(data[:metadata]).not_to have_key('x-amz-key')
+            expect(data[:metadata]).not_to have_key('x-amz-key-v2')
+            
+            # Verify it uses the HKDF algorithm (suite ID 115)
+            expect(data[:metadata]['x-amz-c']).to eq('115')
+            
+            # Verify V3-specific keys are present
+            expect(data[:metadata]).to have_key('x-amz-w')
+            expect(data[:metadata]).to have_key('x-amz-d')
+            expect(data[:metadata]).to have_key('x-amz-i')
           end
         end
       end

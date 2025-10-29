@@ -154,6 +154,19 @@ module Aws
             expect(data[:object_metadata]).not_to have_key('x-amz-w')
           end
 
+          it 'writes wrapping algorithm value 02 for AES/GCM in instruction file' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% - The wrapping algorithm value "02" MUST be translated to AES/GCM upon retrieval, and vice versa on write.
+
+            client = Client.new(options)
+            data = stub_put_with_instruction_file(s3_client)
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            expect(data[:instruction_metadata]['x-amz-w']).to eq('02')
+          end
+
           it 'stores x-amz-m in instruction file when materials description is provided' do
             ##= ../specification/s3-encryption/data-format/metadata-strategy.md#v3-instruction-files
             ##= type=test
@@ -171,6 +184,23 @@ module Aws
             
             # x-amz-m must NOT be in object metadata
             expect(data[:object_metadata]).not_to have_key('x-amz-m')
+          end
+
+          it 'uses Material Description for AES/GCM wrapping in instruction file' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`).
+
+            materials_desc = '{"description":"test-materials"}'
+            client = Client.new(options.merge(materials_description: materials_desc))
+            data = stub_put_with_instruction_file(s3_client)
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # For AES/GCM (02), material description should be present
+            expect(data[:instruction_metadata]).to have_key('x-amz-m')
+            expect(data[:instruction_metadata]['x-amz-w']).to eq('02')
+            expect(data[:instruction_metadata]['x-amz-m']).to eq(materials_desc)
           end
 
           it 'can decrypt objects encrypted with instruction files' do
@@ -220,6 +250,36 @@ module Aws
             # Object metadata must NOT contain x-amz-3, x-amz-w
             expect(data[:object_metadata]).not_to have_key('x-amz-3')
             expect(data[:object_metadata]).not_to have_key('x-amz-w')
+          end
+
+          it 'writes wrapping algorithm value 22 for RSA-OAEP-SHA1 in instruction file' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% - The wrapping algorithm value "22" MUST be translated to RSA-OAEP-SHA1 upon retrieval, and vice versa on write.
+
+            client = Client.new(options)
+            data = stub_put_with_instruction_file(s3_client)
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            expect(data[:instruction_metadata]['x-amz-w']).to eq('22')
+          end
+
+          it 'uses Material Description for RSA-OAEP-SHA1 wrapping in instruction file' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% The Material Description MUST be used for wrapping algorithms `AES/GCM` (`02`) and `RSA-OAEP-SHA1` (`22`).
+
+            materials_desc = '{"description":"rsa-test"}'
+            client = Client.new(options.merge(materials_description: materials_desc))
+            data = stub_put_with_instruction_file(s3_client)
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # For RSA-OAEP-SHA1 (22), material description should be present
+            expect(data[:instruction_metadata]).to have_key('x-amz-m')
+            expect(data[:instruction_metadata]['x-amz-m']).to eq(materials_desc)
+            expect(data[:instruction_metadata]['x-amz-w']).to eq('22')
           end
 
           it 'can decrypt RSA encrypted objects with instruction files' do
@@ -288,6 +348,28 @@ module Aws
             expect(data[:object_metadata]).not_to have_key('x-amz-w')
           end
 
+          it 'writes wrapping algorithm value 12 for kms+context in instruction file' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% - The wrapping algorithm value "12" MUST be translated to kms+context upon retrieval, and vice versa on write.
+
+            kms_client.stub_responses(
+              :generate_data_key,
+              {
+                key_id: kms_key_id,
+                ciphertext_blob: kms_ciphertext_blob,
+                plaintext: kms_plaintext
+              }
+            )
+
+            client = Client.new(options)
+            data = stub_put_with_instruction_file(s3_client)
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            expect(data[:instruction_metadata]['x-amz-w']).to eq('12')
+          end
+
           it 'stores x-amz-t in instruction file when KMS encryption context is provided' do
             ##= ../specification/s3-encryption/data-format/metadata-strategy.md#v3-instruction-files
             ##= type=test
@@ -321,6 +403,36 @@ module Aws
             
             # x-amz-t must NOT be in object metadata
             expect(data[:object_metadata]).not_to have_key('x-amz-t')
+          end
+
+          it 'uses Encryption Context for kms+context wrapping in instruction file' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% The Encryption Context value MUST be used for wrapping algorithm `kms+context` or `12`.
+
+            kms_client.stub_responses(
+              :generate_data_key,
+              {
+                key_id: kms_key_id,
+                ciphertext_blob: kms_ciphertext_blob,
+                plaintext: kms_plaintext
+              }
+            )
+
+            enc_context = { 'department' => 'finance', 'project' => 'alpha' }
+            client = Client.new(options)
+            data = stub_put_with_instruction_file(s3_client)
+            
+            client.put_object(
+              bucket: test_bucket,
+              key: test_object,
+              body: plaintext,
+              kms_encryption_context: enc_context
+            )
+            
+            # For kms+context (12), encryption context should be present
+            expect(data[:instruction_metadata]).to have_key('x-amz-t')
+            expect(data[:instruction_metadata]['x-amz-w']).to eq('12')
           end
 
           it 'can decrypt KMS encrypted objects with instruction files' do

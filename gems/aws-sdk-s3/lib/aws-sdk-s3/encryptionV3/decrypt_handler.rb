@@ -68,7 +68,20 @@ module Aws
           x-amz-i
         )
 
-        POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY + OPTIONAL_ENVELOP_KEY).uniq
+        # These are a copy of Aws::S3::EncryptionV2::DecryptHandler::POSSIBLE_ENVELOPE_KEYS
+        # This breaks the circular dependency without a lot of re-engineering
+        # It is not ideal, but it should be the case that V2 is stable and will not have any new metadata or features
+        LEGACY_POSSIBLE_ENVELOPE_KEYS = %w(
+          x-amz-key
+          x-amz-key-v2
+          x-amz-iv
+          x-amz-cek-alg
+          x-amz-wrap-alg
+          x-amz-matdesc
+          x-amz-tag-len
+        )
+
+        POSSIBLE_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY + OPTIONAL_ENVELOP_KEY + LEGACY_POSSIBLE_ENVELOPE_KEYS).uniq
         REQUIRED_ENVELOPE_KEYS = (ENVELOP_KEY + METADATA_KEY).uniq
 
         POSSIBLE_WRAPPING_FORMATS = %w(
@@ -226,8 +239,7 @@ module Aws
             bucket: context.params[:bucket],
             key: context.params[:key] + suffix
           ).body.read)
-          if METADATA_KEY.any? { |key| possible_envelope.key?(key) }
-            keys = METADATA_KEY & possible_envelope.keys
+          unless (keys = possible_envelope.keys & METADATA_KEY).empty?
             msg = "unsupported metadata key found in instruction file: #{keys.join(', ')}"
             raise Errors::DecryptionError, msg
           end
@@ -237,10 +249,11 @@ module Aws
         end
 
         def v3_envelope?(possible_envelope)
-          if possible_envelope.key?('x-amz-key') || possible_envelope.key?('x-amz-key-v2')
+          unless (keys = possible_envelope.keys & LEGACY_POSSIBLE_ENVELOPE_KEYS).empty?
             ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
             ##% If there are multiple mapkeys which are meant to be exclusive, such as "x-amz-key", "x-amz-key-v2", and "x-amz-3" then the S3EC SHOULD throw an exception.
-            raise Errors::LegacyDecryptionError
+            msg = "legacy metadata key found: #{keys.join(', ')}"
+            raise Errors::DecryptionError, msg
           end
 
           unless POSSIBLE_ENCRYPTION_FORMATS.include? possible_envelope['x-amz-c']
