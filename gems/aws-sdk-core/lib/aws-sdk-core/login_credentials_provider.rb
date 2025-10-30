@@ -40,7 +40,7 @@ module Aws
         super
       end
 
-      # @return [SignIn::Client]
+      # @return [Signin::Client]
       attr_reader :client
 
       # Feature IDs for the User-Agent
@@ -96,7 +96,7 @@ module Aws
 
       def update_creds_from_token(token_json)
         access_token = token_json['accessToken']
-        @expiration = Time.parse(access_token['expiresAt']).localtime
+        @expiration = Time.parse(access_token['expiresAt'])
         @identity = Credentials.new(
           access_key_id: access_token['accessKeyId'],
           secret_access_key: access_token['secretAccessKey'],
@@ -132,11 +132,11 @@ module Aws
             refresh_token: 'dummy_refresh_token'
           }
         }
-        req = @client.build_request(:create_o_auth2_token, params)
-        context = req.context
+        context = @client.build_request(:create_o_auth2_token, params).context
         endpoint_params = Aws::Signin::EndpointParameters.create(context)
         endpoint = context.config.endpoint_provider.resolve(endpoint_params)
-        endpoint.url + Signin::Client.service.operation(:create_o_auth2_token).traits['smithy.api#http']['uri']
+        uri = Signin::Client.service.operation(:create_o_auth2_token).traits['smithy.api#http']['uri']
+        URI.join(endpoint.url, uri).to_s
       end
 
       def dpop_proof(dpop_key, endpoint)

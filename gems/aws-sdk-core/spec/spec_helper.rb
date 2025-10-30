@@ -3,6 +3,7 @@
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sso/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sts/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-ssooidc/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-signin/lib', __dir__))
 
 require 'byebug'
 require 'rspec'
@@ -12,6 +13,7 @@ require 'aws-sdk-core'
 require 'aws-sdk-sts'
 require 'aws-sdk-sso'
 require 'aws-sdk-ssooidc'
+require 'aws-sdk-signin'
 
 require_relative 'client_helper'
 

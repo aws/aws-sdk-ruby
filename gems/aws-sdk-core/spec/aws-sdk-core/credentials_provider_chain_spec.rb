@@ -1562,6 +1562,72 @@ module Aws
           end
         end
 
+        describe '#profile_login_credentials' do
+          let(:expiration) { (Time.now.utc + 900).to_datetime.rfc3339 }
+          let(:cached_token) do
+            {
+              'accessToken' => {
+                'accessKeyId' => 'akid_login',
+                'secretAccessKey' => 'secret_login',
+                'sessionToken' => 'token_login',
+                'accountId' => '123456789012',
+                'expiresAt' => expiration
+              },
+              'tokenType' => 'aws_sigv4',
+              'refreshToken' => 'refresh_token',
+              'idToken' => 'identity_token',
+              'clientId' => 'arn:aws:signin:::devtools/same-device',
+              'dpopKey' => OpenSSL::PKey::EC.generate('prime256v1').to_pem
+            }
+          end
+
+          it 'resolves login credentials from profile' do
+            shared_config = <<~CONFIG
+              [profile default]
+              login_session = arn:aws:iam::0123456789012:user/Admin
+            CONFIG
+            mock_shared_config(shared_config)
+            expect_any_instance_of(LoginCredentialsProvider).to receive(:read_cached_token).and_return(cached_token)
+            provider = client.config.credentials_provider
+            creds = provider.identity
+            expect(creds.access_key_id).to eq('akid_login')
+            expect(creds.secret_access_key).to eq('secret_login')
+            expect(creds.session_token).to eq('token_login')
+            expect(creds.account_id).to eq('123456789012')
+            expect(provider.expiration).to eq(Time.parse(expiration))
+          end
+
+          it 'fails to resolve login credentials when login_session is missing' do
+            expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile default]
+            CONFIG
+            mock_shared_config(shared_config)
+            expect(client.config.credentials_provider).to be_nil
+          end
+
+          it 'fails to resolve login credentials when profile is not configured' do
+            expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile not-default]
+              login_session = arn:aws:iam::0123456789012:user/Admin
+            CONFIG
+            mock_shared_config(shared_config)
+            expect(client.config.credentials_provider).to be_nil
+          end
+
+          it 'tracks the correct feature id' do
+            shared_config = <<~CONFIG
+              [profile default]
+              login_session = arn:aws:iam::0123456789012:user/Admin
+            CONFIG
+            mock_shared_config(shared_config)
+            expect_any_instance_of(LoginCredentialsProvider).to receive(:read_cached_token).and_return(cached_token)
+            provider = client.config.credentials_provider
+            expect(provider.features).to eq(%w[CREDENTIALS_PROFILE_SIGN_IN CREDENTIALS_SIGN_IN])
+          end
+        end
+
         describe '#profile_process_credentials' do
           let(:expiration) { Time.now.round + 3600 }
           let(:creds_json) do
