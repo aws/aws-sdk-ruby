@@ -57,6 +57,9 @@ module Aws
 
     # @param [Hash] options
     # @option options [Integer] :retries (1) Number of times to retry when retrieving credentials.
+    # @option options [Numeric, Proc] :backoff By default, failures are retried with exponential back-off, i.e.
+    #   `lambda { |num_failures| sleep(1.2 ** num_failures) }`. You can pass a number of seconds to sleep
+    #   between failed attempts, or a Proc that accepts the number of failures.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS endpoint. This option has precedence
     #    over the `:endpoint_mode`.
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for the instance metadata service. This is
@@ -67,14 +70,11 @@ module Aws
     # @option options [Integer] :port (80)
     # @option options [Float] :http_open_timeout (1)
     # @option options [Float] :http_read_timeout (1)
-    # @option options [Numeric, Proc] :delay By default, failures are retried with exponential back-off, i.e.
-    #   `sleep(1.2 ** num_failures)`. You can pass a number of seconds to sleep between failed attempts, or a Proc
-    #   that accepts the number of failures.
     # @option options [IO] :http_debug_output (nil) HTTP wire traces are sent to this object.
     #   You can specify something like `$stdout`.
-    # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2 Metadata Token used for fetching
-    #   Metadata Profile Credentials, defaults to 21600 seconds.
-    # @option options [Callable] :before_refresh Proc called before credentials are refreshed. `before_refresh`
+    # @option options [Integer] :token_ttl (21600) Time-to-Live in seconds for EC2 Metadata Token used for fetching
+    #   Metadata Profile Credentials.
+    # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. `:before_refresh`
     #   is called with an instance of this object when AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       @backoff = resolve_backoff(options[:backoff])
