@@ -9,7 +9,7 @@ module Aws
 
       # The known answer tests are a shared set of test cases
       # to ensure interop between SDKs
-      describe 'HKDF Known Answer Tests' do
+      context 'HKDF Known Answer Tests' do
         def self.from_h(s)
           [s].pack('H*')
         end

@@ -233,10 +233,6 @@ module Aws
             )
           end
 
-          def valid_commitment_key?(derived, stored)
-            OpenSSL.secure_compare(derived, stored)
-          end
-
           def hkdf(input_key_material, salt, info, desired_length)
             OpenSSL::KDF.hkdf(
               ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
