@@ -150,7 +150,7 @@ module Aws
                 message_attributes: message_attributes,
                 message_system_attributes: message_system_attributes
               )
-            end.to raise_error(ChecksumError)
+            end.to raise_error(Aws::Core::Errors::ChecksumError)
           end
 
           it 'raises when the md5 checksums do not match for the body' do
@@ -163,7 +163,7 @@ module Aws
                 message_attributes: message_attributes,
                 message_system_attributes: message_system_attributes
               )
-            end.to raise_error(ChecksumError)
+            end.to raise_error(Aws::Core::Errors::ChecksumError)
           end
 
           it 'does not interfere with service errors' do
@@ -237,7 +237,7 @@ module Aws
                   }
                 ]
               )
-            end.to raise_error(ChecksumError)
+            end.to raise_error(Aws::Core::Errors::ChecksumError)
           end
 
           it 'raises when the md5 checksums do not match for the body' do
@@ -254,7 +254,7 @@ module Aws
                   }
                 ]
               )
-            end.to raise_error(ChecksumError)
+            end.to raise_error(Aws::Core::Errors::ChecksumError)
           end
 
           it 'skips failed errors' do

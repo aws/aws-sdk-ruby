@@ -4,18 +4,36 @@ require 'openssl'
 
 module Aws
   module SQS
-    # This error indicates a checksum failed.
-    class ChecksumError < RuntimeError; end
-
     # @api private
     module Plugins
       # @api private
       class VerifyChecksums < Smithy::Client::Plugin
+        option(
+          :verify_checksums,
+          doc_default: true,
+          doc_type: 'Boolean',
+          docstring: <<~DOCS
+            When `true`, MD5 checksums will be computed for messages sent to an SQS queue and matched against
+            MD5 checksums returned by Amazon SQS. `Aws::Core::Errors::Checksum` errors are raised for cases
+            where checksums do not match.
+          DOCS
+        ) do |config|
+          # By default, we will disable checksum verification when response stubbing is enabled.
+          # If a user decides to enable both features, then they will need to stub the MD5s in the response.
+          # See the spec/aws/sqs/client/verify_checksums_spec.rb for examples of how to do this.
+          !config.stub_responses
+        end
+
+        def add_handlers(handlers, config)
+          return unless config.verify_checksums
+
+          handlers.add(Handler, step: :validate, operations: %i[send_message send_message_batch])
+        end
+
         # @api private
         class Handler < Smithy::Client::Handler
           TRANSPORT_TYPE_ENCODINGS = { 'String' => 1, 'Binary' => 2, 'Number' => 1 }.freeze
           DATA_TYPE = /\A(String|Binary|Number)(\..+)?\z/
-          NORMALIZED_ENCODING = Encoding::UTF_8
 
           def call(context)
             @handler.call(context).on_done(200..299) do |response|
@@ -43,10 +61,10 @@ module Aws
               body = entry[:message_body]
               attributes = entry[:message_attributes]
               system_attributes = entry[:message_system_attributes]
-              message_response = response.successful.select { |r| r.id == id }[0]
-              unless message_response.nil?
-                validate_single_message(body, attributes, system_attributes, message_response)
-              end
+              message_response = response.successful.find { |r| r.id == id }
+              next if message_response.nil?
+
+              validate_single_message(body, attributes, system_attributes, message_response)
             end
           end
 
@@ -63,13 +81,8 @@ module Aws
             returned_md5 = response.md5_of_message_body
             return unless calculated_md5 != returned_md5
 
-            error_message = mismatch_error_message(
-              'message body',
-              calculated_md5,
-              returned_md5,
-              response
-            )
-            raise ChecksumError, error_message
+            error_message = mismatch_error_message('message body', calculated_md5, returned_md5, response)
+            raise Aws::Core::Errors::ChecksumError, error_message
           end
 
           def validate_attributes(attributes, response)
@@ -77,13 +90,8 @@ module Aws
             returned_md5 = response.md5_of_message_attributes
             return unless returned_md5 != calculated_md5
 
-            error_message = mismatch_error_message(
-              'message attributes',
-              calculated_md5,
-              returned_md5,
-              response
-            )
-            raise ChecksumError, error_message
+            error_message = mismatch_error_message('message attributes', calculated_md5, returned_md5, response)
+            raise Aws::Core::Errors::ChecksumError, error_message
           end
 
           def validate_system_attributes(system_attributes, response)
@@ -91,13 +99,8 @@ module Aws
             returned_md5 = response.md5_of_message_system_attributes
             return unless returned_md5 != calculated_md5
 
-            error_message = mismatch_error_message(
-              'message system attributes',
-              calculated_md5,
-              returned_md5,
-              response
-            )
-            raise ChecksumError, error_message
+            error_message = mismatch_error_message('message system attributes', calculated_md5, returned_md5, response)
+            raise Aws::Core::Errors::ChecksumError, error_message
           end
 
           def md5_of_message_body(message_body)
@@ -157,7 +160,7 @@ module Aws
 
           def encode_length_and_string(string)
             string = String.new(string)
-            string.encode!(NORMALIZED_ENCODING)
+            string.encode!(Encoding::UTF_8)
             encode_length_and_bytes(string)
           end
 
@@ -166,45 +169,11 @@ module Aws
           end
 
           def mismatch_error_message(section, local_md5, returned_md5, response)
-            m = 'MD5 returned by SQS does not match ' \
-                'the calculation on the original request. ('
+            m = 'MD5 returned by SQS does not match the calculation on the original request. ('
             m = "#{m}Message ID: #{response.id}, " if response.respond_to?(:id) && !response.id.nil?
             "#{m}MD5 calculated by the #{section}: " \
               "'#{local_md5}', MD5 checksum returned: '#{returned_md5}')"
           end
-        end
-
-        option(:verify_checksums,
-               doc_default: true,
-               doc_type: 'Boolean',
-               docstring: <<~DOCS
-                 When `true` MD5 checksums will be computed for messages sent to
-                 an SQS queue and matched against MD5 checksums returned by Amazon SQS.
-                 `Aws::Errors::Checksum` errors are raised for cases where checksums do
-                 not match.
-               DOCS
-              ) do |config|
-          # By default, we will disable checksum verification when response
-          # stubbing is enable. If a user decides to enable both features,
-          # then they will need to stub the MD5s in the response.
-          # See the spec/aws/sqs/client/verify_checksums_spec.rb for
-          # examples of how to do this.
-          if config.respond_to?(:stub_responses)
-            !config.stub_responses
-          else
-            config.verify_checksums
-          end
-        end
-
-        def add_handlers(handlers, config)
-          return unless config.verify_checksums
-
-          handlers.add(
-            Handler,
-            priority: 10,
-            step: :validate,
-            operations: %i[send_message send_message_batch]
-          )
         end
       end
     end
