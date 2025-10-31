@@ -310,7 +310,7 @@ module Aws
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @cipher_provider = self.class.cipher_provider(options, @client)
+          @cipher_provider = build_cipher_provider(options)
           @key_provider = @cipher_provider.key_provider if @cipher_provider.is_a?(DefaultCipherProvider)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
@@ -319,7 +319,7 @@ module Aws
           @security_profile = extract_security_profile(options)
           # The v3 cipher is only used for decrypt.
           # Therefore any configured v2 `content_encryption_schema` is going to be incorrect.
-          @v3_cipher_provider = Aws::S3::EncryptionV3::Client.cipher_provider(options.except(:content_encryption_schema), @client)
+          @v3_cipher_provider = build_v3_cipher_provider_for_decrypt(options.except(:content_encryption_schema))
         end
 
         # @return [S3::Client]
@@ -426,12 +426,13 @@ module Aws
           end
         end
 
-        # @api private
-        def self.cipher_provider(options, client)
+        private
+
+        def build_cipher_provider(options)
           if options[:kms_key_id]
             KmsCipherProvider.new(
               kms_key_id: options[:kms_key_id],
-              kms_client: kms_client(options, client),
+              kms_client: kms_client(options),
               key_wrap_schema: options[:key_wrap_schema],
               content_encryption_schema: options[:content_encryption_schema]
             )
@@ -445,7 +446,31 @@ module Aws
           end
         end
 
-        private
+        def build_v3_cipher_provider_for_decrypt(options)
+          if options[:kms_key_id]
+            Aws::S3::EncryptionV3::KmsCipherProvider.new(
+              kms_key_id: options[:kms_key_id],
+              kms_client: kms_client(options),
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          else
+            # Create V3 key provider explicitly for proper namespace consistency
+            key_provider = if options[:key_provider]
+              options[:key_provider]
+            elsif options[:encryption_key]
+              Aws::S3::EncryptionV3::DefaultKeyProvider.new(options)
+            else
+              msg = 'you must pass a :kms_key_id, :key_provider, or :encryption_key'
+              raise ArgumentError, msg
+            end
+            Aws::S3::EncryptionV3::DefaultCipherProvider.new(
+              key_provider: key_provider,
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          end
+        end
 
         # Validate required parameters exist and don't conflict.
         # The cek_alg and wrap_alg are passed on to the CipherProviders
@@ -481,16 +506,16 @@ module Aws
           end
         end
 
-        def self.kms_client(options, client)
+        def kms_client(options)
           options[:kms_client] || begin
             KMS::Client.new(
-              region: client.config.region,
-              credentials: client.config.credentials,
+              region: @client.config.region,
+              credentials: @client.config.credentials,
               )
           end
         end
 
-        def self.extract_key_provider(options)
+        def extract_key_provider(options)
           if options[:key_provider]
             options[:key_provider]
           elsif options[:encryption_key]
