@@ -122,10 +122,10 @@ module Aws
             let(:md5_of_system_attributes) { '5b7ef6c8a8d46001c7cdadaeea917aa4' }
 
             before(:each) do
-              message_attributes.keys.each do |attribute_name|
+              message_attributes.each_key do |attribute_name|
                 message_attributes[attribute_name][:data_type] += '.test'
               end
-              message_system_attributes.keys.each do |attribute_name|
+              message_system_attributes.each_key do |attribute_name|
                 message_system_attributes[attribute_name][:data_type] += '.test'
               end
             end
@@ -146,7 +146,7 @@ module Aws
             expect do
               client.send_message(
                 queue_url: 'https://queue.url',
-                message_body: message_body + 'junk',
+                message_body: "#{message_body}junk",
                 message_attributes: message_attributes,
                 message_system_attributes: message_system_attributes
               )
@@ -231,7 +231,7 @@ module Aws
                 entries: [
                   {
                     id: 'msg-id',
-                    message_body: message_body + 'junk',
+                    message_body: "#{message_body}junk",
                     message_attributes: message_attributes,
                     message_system_attributes: message_system_attributes
                   }

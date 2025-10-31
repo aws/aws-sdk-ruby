@@ -41,6 +41,8 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   Max: 200
+  Exclude:
+    - '**/spec/**/*.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:

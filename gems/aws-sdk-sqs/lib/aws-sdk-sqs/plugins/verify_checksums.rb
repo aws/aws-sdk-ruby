@@ -32,9 +32,6 @@ module Aws
 
         # @api private
         class Handler < Smithy::Client::Handler
-          TRANSPORT_TYPE_ENCODINGS = { 'String' => 1, 'Binary' => 2, 'Number' => 1 }.freeze
-          DATA_TYPE = /\A(String|Binary|Number)(\..+)?\z/
-
           def call(context)
             @handler.call(context).on_done(200..299) do |response|
               case context.operation_name
@@ -86,7 +83,7 @@ module Aws
           end
 
           def validate_attributes(attributes, response)
-            calculated_md5 = md5_of_message_attributes(attributes)
+            calculated_md5 = md5_of_attributes(attributes)
             returned_md5 = response.md5_of_message_attributes
             return unless returned_md5 != calculated_md5
 
@@ -95,7 +92,7 @@ module Aws
           end
 
           def validate_system_attributes(system_attributes, response)
-            calculated_md5 = md5_of_message_system_attributes(system_attributes)
+            calculated_md5 = md5_of_attributes(system_attributes)
             returned_md5 = response.md5_of_message_system_attributes
             return unless returned_md5 != calculated_md5
 
@@ -107,56 +104,57 @@ module Aws
             OpenSSL::Digest::MD5.hexdigest(message_body)
           end
 
-          # MD5 of Message Attributes and System Attributes are effectively
-          # the same calculation. However, keeping these as two methods because
-          # they are modeled as two different shapes.
-          ###
-          def md5_of_message_attributes(message_attributes)
-            encoded = {}
-            message_attributes.each do |name, attribute|
-              name = name.to_s
-              encoded[name] = String.new
-              data_type_without_label = DATA_TYPE.match(attribute[:data_type])[1]
-              encoded[name] << encode_length_and_bytes(name) <<
-                encode_length_and_bytes(attribute[:data_type]) <<
-                [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C')
-
-              if !attribute[:string_value].nil?
-                encoded[name] << encode_length_and_string(attribute[:string_value])
-              elsif !attribute[:binary_value].nil?
-                encoded[name] << encode_length_and_bytes(attribute[:binary_value])
-              end
-            end
-
-            buffer = encoded.keys.sort.reduce(String.new) do |string, name|
-              string << encoded[name]
-            end
+          def md5_of_attributes(attributes)
+            encoded = encode_attributes(attributes)
+            buffer = build_sorted_buffer(encoded)
             OpenSSL::Digest::MD5.hexdigest(buffer)
           end
 
-          def md5_of_message_system_attributes(message_system_attributes)
+          def encode_attributes(attributes)
+            transport_type_encodings = { 'String' => 1, 'Binary' => 2, 'Number' => 1 }
+            data_type_pattern = /\A(String|Binary|Number)(\..+)?\z/
+
             encoded = {}
-            message_system_attributes.each do |name, attribute|
-              name = name.to_s
-              encoded[name] = String.new
-              data_type_without_label = DATA_TYPE.match(attribute[:data_type])[1]
-              encoded[name] << encode_length_and_bytes(name) <<
-                encode_length_and_bytes(attribute[:data_type]) <<
-                [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C')
-
-              if !attribute[:string_value].nil?
-                encoded[name] << encode_length_and_string(attribute[:string_value])
-              elsif !attribute[:binary_value].nil?
-                encoded[name] << encode_length_and_bytes(attribute[:binary_value])
-              end
+            attributes.each do |name, attribute|
+              encoded[name.to_s] = encode_single_attribute(name, attribute, transport_type_encodings, data_type_pattern)
             end
+            encoded
+          end
 
-            buffer = encoded.keys.sort.reduce(String.new) do |string, name|
+          def encode_single_attribute(name, attribute, transport_type_encodings, data_type_pattern)
+            encoded = encode_attribute_metadata(name, attribute, transport_type_encodings, data_type_pattern)
+            encoded << encode_attribute_value(attribute)
+            encoded
+          end
+
+          def encode_attribute_metadata(name, attribute, transport_type_encodings, data_type_pattern)
+            name_str = name.to_s
+            data_type = attribute[:data_type]
+            data_type_without_label = data_type_pattern.match(data_type)[1]
+            transport_type = [transport_type_encodings[data_type_without_label]].pack('C')
+
+            encoded = String.new
+            encoded << encode_length_and_bytes(name_str)
+            encoded << encode_length_and_bytes(data_type)
+            encoded << transport_type
+            encoded
+          end
+
+          def encode_attribute_value(attribute)
+            if !attribute[:string_value].nil?
+              encode_length_and_string(attribute[:string_value])
+            elsif !attribute[:binary_value].nil?
+              encode_length_and_bytes(attribute[:binary_value])
+            else
+              ''
+            end
+          end
+
+          def build_sorted_buffer(encoded)
+            encoded.keys.sort.reduce(String.new) do |string, name|
               string << encoded[name]
             end
-            OpenSSL::Digest::MD5.hexdigest(buffer)
           end
-          ###
 
           def encode_length_and_string(string)
             string = String.new(string)
@@ -169,10 +167,9 @@ module Aws
           end
 
           def mismatch_error_message(section, local_md5, returned_md5, response)
-            m = 'MD5 returned by SQS does not match the calculation on the original request. ('
-            m = "#{m}Message ID: #{response.id}, " if response.respond_to?(:id) && !response.id.nil?
-            "#{m}MD5 calculated by the #{section}: " \
-              "'#{local_md5}', MD5 checksum returned: '#{returned_md5}')"
+            id_part = response.respond_to?(:id) && !response.id.nil? ? "Message ID: #{response.id}, " : ''
+            "MD5 returned by SQS does not match the calculation on the original request. (#{id_part}MD5 " \
+              "calculated by the #{section}: '#{local_md5}', MD5 checksum returned: '#{returned_md5}')"
           end
         end
       end
