@@ -95,7 +95,7 @@ module Aws
       super
     end
 
-    # @return [Boolean0
+    # @return [Boolean]
     attr_reader :disable_imds_v1
 
     # @return [Integer]
