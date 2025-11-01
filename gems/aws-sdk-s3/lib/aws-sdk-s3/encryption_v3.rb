@@ -12,6 +12,7 @@ require 'aws-sdk-s3/encryptionV3/kms_cipher_provider'
 require 'aws-sdk-s3/encryptionV3/materials'
 require 'aws-sdk-s3/encryptionV3/utils'
 require 'aws-sdk-s3/encryptionV3/default_key_provider'
+require 'aws-sdk-s3/encryptionV3/rfc2047'
 
 module Aws
   module S3
