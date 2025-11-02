@@ -506,7 +506,7 @@ module Aws
         # @return [Hash]
         attr_reader :request_params
 
-        def initialize(options)
+        def initialize(options) # rubocop:disable Metrics/MethodLength
           @idle_timeout = nil
           @skip_delete = false
           @before_request = nil
