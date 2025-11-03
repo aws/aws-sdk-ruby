@@ -139,7 +139,7 @@ module Aws
 
           it 'constructs a KMS cipher provider with default client from a kms_key_id' do
             kms_client = double('kms_client')
-            expect(KMS::Client).to receive(:new).twice.and_return(kms_client)
+            expect(KMS::Client).to receive(:new).and_return(kms_client)
             expect(KmsCipherProvider).to receive(:new).with(
               hash_including(kms_key_id: kms_key_id, kms_client: kms_client)
             )

@@ -575,12 +575,12 @@ module Aws
         end
 
         def kms_client(options)
-          options[:kms_client] || begin
+          options[:kms_client] || (@kms_client ||=
             KMS::Client.new(
               region: @client.config.region,
               credentials: @client.config.credentials,
               )
-          end
+          )
         end
 
         def extract_key_provider(options)
