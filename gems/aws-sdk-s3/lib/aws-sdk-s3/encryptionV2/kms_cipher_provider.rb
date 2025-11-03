@@ -55,9 +55,15 @@ module Aws
 
           case envelope['x-amz-wrap-alg']
           when 'kms'
+            ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+            ##% The S3EC MUST support the option to enable or disable legacy wrapping algorithms.
             unless options[:security_profile] == :v2_and_legacy
+              ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy wrapping algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy wrapping algorithm.
               raise Errors::LegacyDecryptionError
             end
+            ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+            ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all supported wrapping algorithms (both legacy and fully supported).
           when 'kms+context'
             if cek_alg != encryption_context['aws:x-amz-cek-alg']
               raise Errors::CEKAlgMismatchError

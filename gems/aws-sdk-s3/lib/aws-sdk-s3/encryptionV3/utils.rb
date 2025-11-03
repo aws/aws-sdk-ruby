@@ -10,6 +10,8 @@ module Aws
 
         class << self
 
+          ##= ../specification/s3-encryption/client.md#encryption-algorithm
+          ##% The S3EC MUST validate that the configured encryption algorithm is not legacy.
           def validate_cek(content_encryption_schema)
             ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
             ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
@@ -24,6 +26,10 @@ module Aws
               ##% Attempts to encrypt using AES-CTR MUST fail.
               ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-hkdf-sha512-commit-key
               ##% Attempts to encrypt using key committing AES-CTR MUST fail.
+              ##= ../specification/s3-encryption/client.md#encryption-algorithm
+              ##% If the configured encryption algorithm is legacy, then the S3EC MUST throw an exception.
+              ##= ../specification/s3-encryption/client.md#key-commitment
+              ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
               raise ArgumentError, "Unsupported content_encryption_schema: #{content_encryption_schema}"
             end
           end

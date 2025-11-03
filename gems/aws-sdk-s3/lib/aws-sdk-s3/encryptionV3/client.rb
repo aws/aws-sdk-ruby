@@ -227,15 +227,45 @@ module Aws
     module EncryptionV3
       class Client
 
+        ##= ../specification/s3-encryption/client.md#aws-sdk-compatibility
+        ##= type=implication
+        ##% The S3EC MUST provide a different set of configuration options than the conventional S3 client.
+
         REQUIRED_PARAMS = [:key_wrap_schema].freeze
+
+        OPTIONAL_PARAMS = [
+            :kms_key_id,
+            :kms_client,
+            :key_provider,
+            :encryption_key,
+            :envelope_location,
+            ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+            ##% In this case, the Instruction File Configuration SHOULD be optional, such that its default configuration is used when none is provided.
+            :instruction_file_suffix,
+            ##= ../specification/s3-encryption/client.md#encryption-algorithm
+            ##% The S3EC MUST support configuration of the encryption algorithm (or algorithm suite) during its initialization.
+            :content_encryption_schema,
+            :security_profile,
+            ##= ../specification/s3-encryption/client.md#key-commitment
+            ##% The S3EC MUST support configuration of the [Key Commitment policy](./key-commitment.md) during its initialization.
+            :commitment_policy,
+        ].freeze
         SUPPORTED_COMMITMENT_POLICIES = [
           :forbid_encrypt_allow_decrypt,
           :require_encrypt_allow_decrypt,
-          :require_encrypt_require_decrypt
+          :require_encrypt_require_decrypt,
         ].freeze
 
+        ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+        ##% The S3EC MUST support the option to enable or disable legacy wrapping algorithms.
+        ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+        ##% The S3EC MUST support the option to enable or disable legacy unauthenticated modes (content encryption algorithms).
         SUPPORTED_SECURITY_PROFILES = [:v3, :v3_and_legacy].freeze
 
+        ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+        ##% The option to enable legacy unauthenticated modes MUST be set to false by default.
+        ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+        ##% The option to enable legacy wrapping algorithms MUST be set to false by default.
         DEFAULT_SECURITY_PROFILES = :v3
         DEFAULT_COMMITMENT_POLICIES = :require_encrypt_require_decrypt
         DEFAULT_CONTENT_ENCRYPTION_SCHEMA = :alg_aes_256_gcm_hkdf_sha512_commit_key
@@ -319,9 +349,15 @@ module Aws
         #
         def initialize(options = {})
           validate_params(options)
+          ##= ../specification/s3-encryption/client.md#wrapped-s3-client-s
+          ##% The S3EC MUST support the option to provide an SDK S3 client instance during its initialization.
           @client = extract_client(options)
           ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
           ##% Instruction File writes MUST be optionally configured during client creation or on each PutObject request.
+          ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+          ##% The S3EC MAY support the option to provide Instruction File Configuration during its initialization.
+          ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+          ##% If the S3EC in a given language supports Instruction Files, then it MUST accept Instruction File Configuration during its initialization.
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
@@ -329,9 +365,13 @@ module Aws
           @commitment_policy = extract_commitment_policy(options)
           @security_profile = extract_security_profile(options)
 
+          ##= ../specification/s3-encryption/client.md#key-commitment
+          ##% The S3EC MUST validate the configured Encryption Algorithm against the provided key commitment policy.
           if @commitment_policy != :require_encrypt_require_decrypt
             new_options = options.merge({
               security_profile: security_profile_to_v2(@security_profile),
+              ##= ../specification/s3-encryption/client.md#key-commitment
+              ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
               content_encryption_schema: if @commitment_policy == :forbid_encrypt_allow_decrypt
                 options[:content_encryption_schema]
               else
@@ -373,6 +413,14 @@ module Aws
         #   by this string.
         attr_reader :instruction_file_suffix
 
+        ##= ../specification/s3-encryption/client.md#aws-sdk-compatibility
+        ##= type=implication
+        ##% The S3EC MUST adhere to the same interface for API operations as the conventional AWS SDK S3 client.
+        ##= ../specification/s3-encryption/client.md#aws-sdk-compatibility
+        ##= type=exception
+        ##= reason=The ruby client does not support other operations
+        ##% The S3EC SHOULD support invoking operations unrelated to client-side encryption e.g.
+
         # Uploads an object to Amazon S3, encrypting data client-side.
         # See {S3::Client#put_object} for documentation on accepted
         # request parameters.
@@ -385,7 +433,11 @@ module Aws
         # @see S3::Client#put_object
         def put_object(params = {})
           kms_encryption_context = params.delete(:kms_encryption_context)
+          ##= ../specification/s3-encryption/client.md#required-api-operations
+          ##% - PutObject MUST be implemented by the S3EC.
           req = @client.build_request(:put_object, params)
+          ##= ../specification/s3-encryption/client.md#required-api-operations
+          ##% - PutObject MUST encrypt its input data before it is uploaded to S3.
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
             cipher_provider: if @commitment_policy == :forbid_encrypt_allow_decrypt
@@ -448,7 +500,11 @@ module Aws
           kms_any_cmk_mode = kms_any_cmk_mode(params)
           commitment_policy = commitment_policy_from_params(params)
 
+          ##= ../specification/s3-encryption/client.md#required-api-operations
+          ##% - GetObject MUST be implemented by the S3EC.
           req = @client.build_request(:get_object, params)
+          ##= ../specification/s3-encryption/client.md#required-api-operations
+          ##% - GetObject MUST decrypt data received from the S3 server and return it as plaintext.
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             v3_cipher_provider: @v3_cipher_provider,
@@ -505,6 +561,8 @@ module Aws
               content_encryption_schema: options[:content_encryption_schema]
             )
           else
+            ##= ../specification/s3-encryption/client.md#cryptographic-materials
+            ##% The S3EC MAY accept key material directly.
             key_provider = extract_key_provider(options)
             DefaultCipherProvider.new(
               key_provider: key_provider,
@@ -561,15 +619,18 @@ module Aws
         end
 
         def extract_client(options)
+          ##= ../specification/s3-encryption/client.md#wrapped-s3-client-s
+          ##= type=exception
+          ##= reason=this would be a breaking change to ruby
+          ##% The S3EC MUST NOT support use of S3EC as the provided S3 client during its initialization; it MUST throw an exception in this case.
           options[:client] || begin
             options = options.dup
-            options.delete(:kms_key_id)
-            options.delete(:kms_client)
-            options.delete(:key_provider)
-            options.delete(:encryption_key)
-            options.delete(:envelope_location)
-            options.delete(:instruction_file_suffix)
+            OPTIONAL_PARAMS.each { |p| options.delete(p) }
             REQUIRED_PARAMS.each { |p| options.delete(p) }
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##% The S3EC MAY support directly configuring the wrapped SDK clients through its initialization.
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##% For example, the S3EC MAY accept a credentials provider instance during its initialization.
             S3::Client.new(options)
           end
         end
@@ -577,9 +638,11 @@ module Aws
         def kms_client(options)
           options[:kms_client] || (@kms_client ||=
             KMS::Client.new(
+              ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+              ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped SDK clients including the KMS client.
               region: @client.config.region,
               credentials: @client.config.credentials,
-              )
+            )
           )
         end
 
@@ -718,3 +781,76 @@ module Aws
     end
   end
 end
+
+##= ../specification/s3-encryption/client.md#cryptographic-materials
+##= type=exception
+##= reason=the ruby client does not use keyrings
+##% The S3EC MUST accept either one CMM or one Keyring instance upon initialization.
+##= ../specification/s3-encryption/client.md#cryptographic-materials
+##= type=exception
+##= reason=the ruby client does not use keyrings
+##% If both a CMM and a Keyring are provided, the S3EC MUST throw an exception.
+##= ../specification/s3-encryption/client.md#cryptographic-materials
+##= type=exception
+##= reason=the ruby client does not use keyrings
+##% When a Keyring is provided, the S3EC MUST create an instance of the DefaultCMM using the provided Keyring.
+##= ../specification/s3-encryption/client.md#enable-delayed-authentication
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% The S3EC MUST support the option to enable or disable Delayed Authentication mode.
+##= ../specification/s3-encryption/client.md#enable-delayed-authentication
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% Delayed Authentication mode MUST be set to false by default.
+##= ../specification/s3-encryption/client.md#enable-delayed-authentication
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% When enabled, the S3EC MAY release plaintext from a stream which has not been authenticated.
+##= ../specification/s3-encryption/client.md#enable-delayed-authentication
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% When disabled the S3EC MUST NOT release plaintext from a stream which has not been authenticated.
+##= ../specification/s3-encryption/client.md#set-buffer-size
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% The S3EC SHOULD accept a configurable buffer size which refers to the maximum ciphertext length in bytes to store in memory when Delayed Authentication mode is disabled.
+##= ../specification/s3-encryption/client.md#set-buffer-size
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% If Delayed Authentication mode is enabled, and the buffer size has been set to a value other than its default, the S3EC MUST throw an exception.
+##= ../specification/s3-encryption/client.md#set-buffer-size
+##= type=exception
+##= reason=the ruby client does not support delayed authentication
+##% If Delayed Authentication mode is disabled, and no buffer size is provided, the S3EC MUST set the buffer size to a reasonable default.
+##= ../specification/s3-encryption/client.md#randomness
+##= type=exception
+##= reason=the ruby client does not support a configured source of randomness
+##% The S3EC MAY accept a source of randomness during client initialization.
+##= ../specification/s3-encryption/client.md#optional-api-operations
+##= type=exception
+##= reason=the ruby client does not support any additional S3 operations
+##% - CreateMultipartUpload MAY be implemented by the S3EC.
+##%   - If implemented, CreateMultipartUpload MUST initiate a multipart upload.
+##% - UploadPart MAY be implemented by the S3EC.
+##%   - UploadPart MUST encrypt each part.
+##%   - Each part MUST be encrypted in sequence.
+##%   - Each part MUST be encrypted using the same cipher instance for each part.
+##% - CompleteMultipartUpload MAY be implemented by the S3EC.
+##%   - CompleteMultipartUpload MUST complete the multipart upload.
+##% - AbortMultipartUpload MAY be implemented by the S3EC.
+##%   - AbortMultipartUpload MUST abort the multipart upload.
+##% 
+##% The S3EC may provide implementations for the following S3EC-specific operation(s):
+##% 
+##% - ReEncryptInstructionFile MAY be implemented by the S3EC.
+##%   - ReEncryptInstructionFile MUST decrypt the instruction file's encrypted data key for the given object using the client's CMM.
+##%   - ReEncryptInstructionFile MUST re-encrypt the plaintext data key with a provided keyring.
+##= ../specification/s3-encryption/client.md#required-api-operations
+##= type=exception
+##= reason=the ruby client does not support the delete operation, this would be a bending change
+##% - DeleteObject MUST be implemented by the S3EC.
+##%   - DeleteObject MUST delete the given object key.
+##%   - DeleteObject MUST delete the associated instruction file using the default instruction file suffix.
+##% - DeleteObjects MUST be implemented by the S3EC.
+##%   - DeleteObjects MUST delete each of the given objects.
+##%   - DeleteObjects MUST delete each of the corresponding instruction files using the default instruction file suffix.
