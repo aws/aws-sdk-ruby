@@ -5,8 +5,8 @@ require 'forwardable'
 module Aws
   module S3
 
-    REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile]
-    SUPPORTED_SECURITY_PROFILES = [:v2, :v2_and_legacy]
+    REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile].freeze
+    SUPPORTED_SECURITY_PROFILES = [:v2, :v2_and_legacy].freeze
 
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.  The `EncryptionV2::Client` (V2 Client)

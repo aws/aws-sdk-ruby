@@ -227,14 +227,14 @@ module Aws
     module EncryptionV3
       class Client
 
-        REQUIRED_PARAMS = [:key_wrap_schema]
+        REQUIRED_PARAMS = [:key_wrap_schema].freeze
         SUPPORTED_COMMITMENT_POLICIES = [
           :forbid_encrypt_allow_decrypt,
           :require_encrypt_allow_decrypt,
           :require_encrypt_require_decrypt
-        ]
+        ].freeze
 
-        SUPPORTED_SECURITY_PROFILES = [:v3, :v3_and_legacy]
+        SUPPORTED_SECURITY_PROFILES = [:v3, :v3_and_legacy].freeze
 
         DEFAULT_SECURITY_PROFILES = :v3
         DEFAULT_COMMITMENT_POLICIES = :require_encrypt_require_decrypt

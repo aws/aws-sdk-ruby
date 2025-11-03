@@ -24,7 +24,7 @@ module Aws
         ENVELOP_KEY = %w(
           x-amz-3
           x-amz-w
-        )
+        ).freeze
 
         ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
         ##% - The mapkey "x-amz-m" SHOULD be present for V3 format objects that use Raw Keyring Material Description.
@@ -39,7 +39,7 @@ module Aws
         OPTIONAL_ENVELOP_KEY = %w(
           x-amz-m
           x-amz-t
-        )
+        ).freeze
 
         ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
         ##% - The mapkey "x-amz-c" MUST be present for V3 format objects.
@@ -60,7 +60,7 @@ module Aws
           x-amz-c
           x-amz-d
           x-amz-i
-        )
+        ).freeze
 
         # Reference V2's envelope keys rather than duplicating them
         LEGACY_POSSIBLE_ENVELOPE_KEYS = Aws::S3::EncryptionV2::Decryption::POSSIBLE_ENVELOPE_KEYS
@@ -75,11 +75,11 @@ module Aws
           12
           21
           22
-        )
+        ).freeze
 
         POSSIBLE_ENCRYPTION_FORMATS = %w(
           115
-        )
+        ).freeze
 
         class << self
 
@@ -228,7 +228,7 @@ module Aws
           possible_envelope
         end
 
-        end # class << self
+        end
       end
     end
   end
