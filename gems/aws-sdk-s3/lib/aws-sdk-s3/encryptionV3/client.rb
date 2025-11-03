@@ -342,7 +342,7 @@ module Aws
             })
             @v2_cipher_provider = build_v2_cipher_provider_for_decrypt(new_options)
             # In this case the v3 cipher is only used for decrypt.
-            @v3_cipher_provider = build_cipher_provider(options.except(:content_encryption_schema))
+            @v3_cipher_provider = build_cipher_provider(options.reject { |k, _| k == :content_encryption_schema })
             @key_provider = @v2_cipher_provider.key_provider if @v2_cipher_provider.is_a?(DefaultCipherProvider)
           else
             @v3_cipher_provider = build_cipher_provider(options)

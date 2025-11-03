@@ -145,7 +145,7 @@ module Aws
             ##= type=implication
             ##% When using an algorithm suite which supports key commitment,
             ##% the verification of the derived key commitment value MUST be done in constant time.
-            unless OpenSSL.secure_compare(
+            unless timing_safe_equal?(
               ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
               ##% When using an algorithm suite which supports key commitment,
               ##% the client MUST verify that the [derived key commitment](./key-derivation.md#hkdf-operation) contains the same bytes
@@ -247,6 +247,20 @@ module Aws
               ##% - The hash function MUST be specified by the algorithm suite commitment settings.
               hash: SHA512_DIGEST
             )
+          end
+
+          def timing_safe_equal?(a, b)
+            if defined?(OpenSSL) && OpenSSL.respond_to?(:secure_compare)
+              OpenSSL.secure_compare(a, b)
+            else
+              # Fallback
+              return false unless a.bytesize == b.bytesize
+
+              l = a.unpack("C*")
+              r = 0
+              b.each_byte { |byte| r |= byte ^ l.shift }
+              r == 0
+            end
           end
 
         end
