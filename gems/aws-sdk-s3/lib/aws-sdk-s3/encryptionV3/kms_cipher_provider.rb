@@ -50,10 +50,10 @@ module Aws
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
         def decryption_cipher(envelope, options = {})
-          # Check the wrapping algo first
-          # Because this can be nil
           case envelope['x-amz-w']
           when '12'
+            cek_alg = envelope['x-amz-c']
+            encryption_context = Json.load(envelope['x-amz-t'])
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
             ##% - The wrapping algorithm value "12" MUST be translated to kms+context upon retrieval, and vice versa on write.
             if cek_alg != encryption_context['aws:x-amz-cek-alg']
@@ -78,9 +78,6 @@ module Aws
             raise ArgumentError, 'Unsupported wrapping algorithm: ' \
                 "#{envelope['x-amz-w']}"
           end
-
-          encryption_context = Json.load(envelope['x-amz-t'])
-          cek_alg = envelope['x-amz-c']
 
           any_cmk_mode = false || options[:kms_allow_decrypt_with_any_cmk]
           decrypt_options = {
