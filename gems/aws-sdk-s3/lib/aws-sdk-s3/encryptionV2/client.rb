@@ -319,7 +319,7 @@ module Aws
           @security_profile = extract_security_profile(options)
           # The v3 cipher is only used for decrypt.
           # Therefore any configured v2 `content_encryption_schema` is going to be incorrect.
-          @v3_cipher_provider = build_v3_cipher_provider_for_decrypt(options.except(:content_encryption_schema))
+          @v3_cipher_provider = build_v3_cipher_provider_for_decrypt(options.reject { |k, _| k == :content_encryption_schema })
         end
 
         # @return [S3::Client]
