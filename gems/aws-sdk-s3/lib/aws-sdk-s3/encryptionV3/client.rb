@@ -624,26 +624,35 @@ module Aws
           ##= reason=this would be a breaking change to ruby
           ##% The S3EC MUST NOT support use of S3EC as the provided S3 client during its initialization; it MUST throw an exception in this case.
           options[:client] || begin
-            options = options.dup
-            OPTIONAL_PARAMS.each { |p| options.delete(p) }
-            REQUIRED_PARAMS.each { |p| options.delete(p) }
             ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
             ##% The S3EC MAY support directly configuring the wrapped SDK clients through its initialization.
             ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
             ##% For example, the S3EC MAY accept a credentials provider instance during its initialization.
-            S3::Client.new(options)
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped S3 clients.
+            S3::Client.new(extract_sdk_options(options))
           end
         end
 
         def kms_client(options)
           options[:kms_client] || (@kms_client ||=
             KMS::Client.new(
+              # extract the region and credentials first, if they are not configured, then getting them from an existing client is faster
               ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
               ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped SDK clients including the KMS client.
-              region: @client.config.region,
-              credentials: @client.config.credentials,
+              {
+                region: @client.config.region,
+                credentials: @client.config.credentials,
+              }.merge(extract_sdk_options(options))
             )
           )
+        end
+
+        def extract_sdk_options(options)
+          options = options.dup
+          OPTIONAL_PARAMS.each { |p| options.delete(p) }
+          REQUIRED_PARAMS.each { |p| options.delete(p) }
+          options
         end
 
         def extract_key_provider(options)

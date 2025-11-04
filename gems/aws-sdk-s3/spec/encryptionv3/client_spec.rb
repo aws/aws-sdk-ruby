@@ -38,6 +38,9 @@ module Aws
 
         describe '#initialize' do
           it 'constructs a default s3 client when one is not given' do
+            ##= ../specification/s3-encryption/client.md#wrapped-s3-client-s
+            ##= type=test
+            ##% The S3EC MUST support the option to provide an SDK S3 client instance during its initialization.
             api_client = double('client')
             expect(S3::Client).to receive(:new).and_return(api_client)
             client = Client.new(required_opts.merge(encryption_key: master_key))
@@ -45,6 +48,12 @@ module Aws
           end
 
           it 'accepts vanilla client options' do
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##= type=test
+            ##% The S3EC MAY support directly configuring the wrapped SDK clients through its initialization.
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##= type=test
+            ##% For example, the S3EC MAY accept a credentials provider instance during its initialization.
             opts = {
               region: 'us-west-2',
               credentials: Credentials.new('akid', 'secret'),
@@ -58,6 +67,57 @@ module Aws
             expect(
               enc_client.client.config.credentials.secret_access_key
             ).to eq('secret')
+          end
+
+          it 'applies SDK configuration to wrapped S3 client' do
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##= type=test
+            ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped S3 clients.
+            opts = {
+              region: 'eu-west-1',
+              credentials: Credentials.new('test_key', 'test_secret'),
+              encryption_key: master_key
+            }
+            enc_client = Client.new(opts.merge(required_opts))
+            
+            # Verify the S3 client was created with the provided configuration
+            expect(enc_client.client.config.region).to eq('eu-west-1')
+            expect(enc_client.client.config.credentials.access_key_id).to eq('test_key')
+            expect(enc_client.client.config.credentials.secret_access_key).to eq('test_secret')
+          end
+
+          it 'applies SDK configuration to KMS client' do
+            ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+            ##= type=test
+            ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped SDK clients including the KMS client.
+            opts = {
+              region: 'ap-southeast-1',
+              credentials: Credentials.new('kms_key', 'kms_secret'),
+              kms_key_id: kms_key_id,
+              key_wrap_schema: :kms_context
+            }
+            
+            # Mock S3 client to capture its config
+            s3_client_double = double('s3_client')
+            allow(S3::Client).to receive(:new).and_return(s3_client_double)
+            s3_config = double('s3_config')
+            allow(s3_client_double).to receive(:config).and_return(s3_config)
+            allow(s3_config).to receive(:region).and_return('ap-southeast-1')
+            allow(s3_config).to receive(:credentials).and_return(Credentials.new('kms_key', 'kms_secret'))
+            
+            # Expect KMS client to be created with the same configuration
+            kms_client_double = double('kms_client')
+            expect(KMS::Client).to receive(:new).with(
+              hash_including(
+                region: 'ap-southeast-1',
+                credentials: kind_of(Credentials)
+              )
+            ).and_return(kms_client_double)
+            
+            enc_client = Client.new(opts)
+            
+            # Trigger KMS client creation by accessing it
+            enc_client.send(:kms_client, opts)
           end
 
           it 'requires an encryption key or provider' do
