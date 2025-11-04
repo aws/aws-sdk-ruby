@@ -107,15 +107,45 @@ module Aws
             end.to raise_error(ArgumentError)
           end
 
+          ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+          ##= type=test
+          ##% The S3EC MUST support the option to enable or disable legacy wrapping algorithms.
+          ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+          ##= type=test
+          ##% The S3EC MUST support the option to enable or disable legacy unauthenticated modes (content encryption algorithms).
+
+          it ':v3 is a valid :security_profile' do
+            Client.new(options.merge(security_profile: :v3))
+          end
+
           it 'warns when security_profile is set to :v3_and_legacy' do
             expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
             Client.new(options.merge(security_profile: :v3_and_legacy))
+          end
+
+          it 'rejects legacy content encryption schemas by default' do
+            ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+            ##= type=test
+            ##% The option to enable legacy wrapping algorithms MUST be set to false by default.
+            ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+            ##= type=test
+            ##% The option to enable legacy unauthenticated modes MUST be set to false by default.
+            
+            expect do
+              Client.new(options.merge(content_encryption_schema: :aes_gcm_no_padding))
+            end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
           end
 
           it 'rejects AES-CTR algorithm with require policy' do
             ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-iv16-tag16-no-kdf
             ##= type=test
             ##% Attempts to encrypt using AES-CTR MUST fail.
+            ##= ../specification/s3-encryption/client.md#encryption-algorithm
+            ##= type=test
+            ##% The S3EC MUST validate that the configured encryption algorithm is not legacy.
+            ##= ../specification/s3-encryption/client.md#encryption-algorithm
+            ##= type=test
+            ##% If the configured encryption algorithm is legacy, then the S3EC MUST throw an exception.
             expect do
               Client.new(options.merge(content_encryption_schema: :aes_ctr_iv16_tag16_no_kdf))
             end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
@@ -125,6 +155,12 @@ module Aws
             ##= ../specification/s3-encryption/encryption.md#alg-aes-256-ctr-iv16-tag16-no-kdf
             ##= type=test
             ##% Attempts to encrypt using AES-CTR MUST fail.
+            ##= ../specification/s3-encryption/client.md#encryption-algorithm
+            ##= type=test
+            ##% The S3EC MUST validate that the configured encryption algorithm is not legacy.
+            ##= ../specification/s3-encryption/client.md#encryption-algorithm
+            ##= type=test
+            ##% If the configured encryption algorithm is legacy, then the S3EC MUST throw an exception.
             expect do
               Client.new(options.merge(
                 commitment_policy: :forbid_encrypt_allow_decrypt,
@@ -152,6 +188,15 @@ module Aws
                 content_encryption_schema: :aes_ctr_hkdf_sha512_commit_key
               ))
             end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
+          end
+
+          it 'accepts key material directly via encryption_key' do
+            ##= ../specification/s3-encryption/client.md#cryptographic-materials
+            ##= type=test
+            ##% The S3EC MAY accept key material directly.
+            client = Client.new(options.merge(encryption_key: master_key))
+            expect(client.key_provider).to be_a_kind_of(DefaultKeyProvider)
+            expect(client.key_provider.key_for('')).to eq(master_key)
           end
 
           it 'constructs a key provider from a master key' do
@@ -194,6 +239,9 @@ module Aws
             ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
             ##= type=test
             ##% Instruction File writes MUST NOT be enabled by default.
+            ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+            ##= type=test
+            ##% In this case, the Instruction File Configuration SHOULD be optional, such that its default configuration is used when none is provided.
             expect(client.envelope_location).to eq(:metadata)
           end
 
@@ -223,6 +271,38 @@ module Aws
           it 'can be used with a Resource client', rbs_test: :skip do
             resource = S3::Resource.new(client: client)
             expect(resource.client.config).to eq(api_client.config)
+          end
+
+          it 'validates the configured encryption algorithm against the key commitment policy' do
+            ##= ../specification/s3-encryption/client.md#key-commitment
+            ##= type=test
+            ##% The S3EC MUST validate the configured Encryption Algorithm against the provided key commitment policy.
+            expect do
+              Client.new(options.merge(
+                content_encryption_schema: :alg_aes_256_gcm_hkdf_sha512_commit_key,
+                commitment_policy: :require_encrypt_require_decrypt
+              ))
+            end.not_to raise_error
+
+            # Valid combination: non-committing algorithm with forbid policy
+            expect do
+              Client.new(options.merge(
+                content_encryption_schema: :aes_gcm_no_padding,
+                commitment_policy: :forbid_encrypt_allow_decrypt
+              ))
+            end.not_to raise_error
+          end
+
+          it 'throws an exception when encryption algorithm is incompatible with key commitment policy' do
+            ##= ../specification/s3-encryption/client.md#key-commitment
+            ##= type=test
+            ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
+            expect do
+              Client.new(options.merge(
+                content_encryption_schema: :aes_gcm_no_padding,
+                commitment_policy: :require_encrypt_require_decrypt
+              ))
+            end.to raise_error(ArgumentError, /Unsupported content_encryption_schema/)
           end
         end
 

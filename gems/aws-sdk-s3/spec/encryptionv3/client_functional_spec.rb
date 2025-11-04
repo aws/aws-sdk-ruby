@@ -73,6 +73,9 @@ module Aws
             ##= ../specification/s3-encryption/encryption.md#content-encryption
             ##= type=test
             ##% The S3EC MUST use the encryption algorithm configured during [client](./client.md) initialization.
+            ##= ../specification/s3-encryption/client.md#encryption-algorithm
+            ##= type=test
+            ##% The S3EC MUST support configuration of the encryption algorithm (or algorithm suite) during its initialization.
             
             # Test with explicitly configured HKDF algorithm (V3 default)
             client_v3 = Aws::S3::EncryptionV3::Client.new(
@@ -151,6 +154,81 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
+          it 'implements PutObject operation' do
+            ##= ../specification/s3-encryption/client.md#required-api-operations
+            ##= type=test
+            ##% - PutObject MUST be implemented by the S3EC.
+            client = Aws::S3::EncryptionV3::Client.new(options)
+            data = stub_put(s3_client)
+            
+            # Verify PutObject can be called without errors
+            expect do
+              client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            end.not_to raise_error
+            
+            # Verify the operation completed successfully
+            expect(data[:enc_body]).not_to be_nil
+          end
+
+          it 'encrypts data before uploading with PutObject' do
+            ##= ../specification/s3-encryption/client.md#required-api-operations
+            ##= type=test
+            ##% - PutObject MUST encrypt its input data before it is uploaded to S3.
+            client = Aws::S3::EncryptionV3::Client.new(options)
+            data = stub_put(s3_client)
+            
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify the encrypted body is different from plaintext
+            expect(data[:enc_body]).not_to eq(plaintext)
+            
+            # Verify encryption metadata is present
+            expect(data[:metadata]['x-amz-c']).not_to be_nil
+            expect(data[:metadata]['x-amz-w']).not_to be_nil
+            expect(data[:metadata]['x-amz-d']).not_to be_nil
+          end
+
+          it 'implements GetObject operation' do
+            ##= ../specification/s3-encryption/client.md#required-api-operations
+            ##= type=test
+            ##% - GetObject MUST be implemented by the S3EC.
+            client = Aws::S3::EncryptionV3::Client.new(options)
+            data = stub_put(s3_client)
+            
+            # First encrypt some data
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            stub_get(s3_client, data, true)
+            
+            # Verify GetObject can be called without errors
+            expect do
+              client.get_object(bucket: test_bucket, key: test_object)
+            end.not_to raise_error
+          end
+
+          it 'decrypts data received from S3 with GetObject' do
+            ##= ../specification/s3-encryption/client.md#required-api-operations
+            ##= type=test
+            ##% - GetObject MUST decrypt data received from the S3 server and return it as plaintext.
+            client = Aws::S3::EncryptionV3::Client.new(options)
+            data = stub_put(s3_client)
+            
+            # Encrypt and upload data
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            
+            # Verify data was encrypted (different from plaintext)
+            expect(data[:enc_body]).not_to eq(plaintext)
+            
+            stub_get(s3_client, data, true)
+            
+            # GetObject should return decrypted plaintext
+            decrypted = client.get_object(bucket: test_bucket, key: test_object).body.read
+            expect(decrypted).to eq(plaintext)
+            
+            # Verify we're not just returning the encrypted data
+            expect(decrypted).not_to eq(data[:enc_body])
+          end
+
           it 'supports #get_object with a block and raises a warning the first time' do
             client = Aws::S3::EncryptionV3::Client.new(options)
             data = stub_put(s3_client)
@@ -180,6 +258,15 @@ module Aws
             ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
             ##= type=test
             ##% Instruction File writes MUST be optionally configured during client creation or on each PutObject request.
+            ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+            ##= type=test
+            ##% The S3EC MAY support the option to provide Instruction File Configuration during its initialization.
+            ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+            ##= type=test
+            ##% If the S3EC in a given language supports Instruction Files, then it MUST accept Instruction File Configuration during its initialization.
+            ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+            ##= type=test
+            ##% In this case, the Instruction File Configuration SHOULD be optional, such that its default configuration is used when none is provided.
 
             client = Aws::S3::EncryptionV3::Client.new(
               options.merge(envelope_location: :instruction_file)
@@ -260,6 +347,9 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#legacy-decryption
               ##= type=test
               ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##= type=test
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy content encryption algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy content encryption algorithm.
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
               client_v3 = Aws::S3::EncryptionV3::Client.new(options)
 
@@ -284,6 +374,9 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#legacy-decryption
               ##= type=test
               ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##= type=test
+              ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all content encryption algorithms (both legacy and fully supported).
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
 
               expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
@@ -482,6 +575,12 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#legacy-decryption
               ##= type=test
               ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##= type=test
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy content encryption algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy content encryption algorithm.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+              ##= type=test
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy wrapping algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy wrapping algorithm.
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
               client_v3 = Aws::S3::EncryptionV3::Client.new(options)
 
@@ -506,6 +605,12 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#legacy-decryption
               ##= type=test
               ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##= type=test
+              ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all content encryption algorithms (both legacy and fully supported).
+              ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+              ##= type=test
+              ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all supported wrapping algorithms (both legacy and fully supported).
               client_v1 = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3_client)
 
               expect_any_instance_of(Aws::S3::EncryptionV3::Client).to receive(:warn)
@@ -628,6 +733,12 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#legacy-decryption
               ##= type=test
               ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##= type=test
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy content encryption algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy content encryption algorithm.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+              ##= type=test
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy wrapping algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy wrapping algorithm.
               client_v1 = Aws::S3::Encryption::Client.new(
                 kms_key_id: kms_key_id, client: s3_client, kms_client: kms_client
               )
@@ -668,6 +779,12 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#legacy-decryption
               ##= type=test
               ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##= type=test
+              ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all content encryption algorithms (both legacy and fully supported).
+              ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+              ##= type=test
+              ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all supported wrapping algorithms (both legacy and fully supported).
               client_v1 = Aws::S3::Encryption::Client.new(
                 kms_key_id: kms_key_id, client: s3_client, kms_client: kms_client
               )

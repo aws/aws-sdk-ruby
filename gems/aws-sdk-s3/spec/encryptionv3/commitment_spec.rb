@@ -45,6 +45,10 @@ module Aws
         let(:test_object) { 'test-object' }
         let(:plaintext) { 'super secret plain text' }
 
+        ##= ../specification/s3-encryption/client.md#key-commitment
+        ##= type=test
+        ##% The S3EC MUST support configuration of the [Key Commitment policy](./key-commitment.md) during its initialization.
+
         describe 'encryption behavior' do
           context 'with FORBID_ENCRYPT_ALLOW_DECRYPT' do
             it 'does not encrypt with committing algorithms' do
