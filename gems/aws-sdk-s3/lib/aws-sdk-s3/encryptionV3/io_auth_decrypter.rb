@@ -5,7 +5,6 @@ module Aws
     module EncryptionV3
       # @api private
       class IOAuthDecrypter
-
         # @option options [required, IO#write] :io
         #   An IO-like object that responds to {#write}.
         # @option options [required, Integer] :encrypted_content_length
@@ -24,10 +23,10 @@ module Aws
 
         def write(chunk)
           chunk = truncate_chunk(chunk)
-          if chunk.bytesize > 0
-            @bytes_written += chunk.bytesize
-            @decrypter.write(chunk)
-          end
+          return unless chunk.bytesize.positive?
+
+          @bytes_written += chunk.bytesize
+          @decrypter.write(chunk)
         end
 
         def finalize
@@ -48,10 +47,9 @@ module Aws
           else
             # If the tag was sent over after the full body has been read,
             # we don't want to accidentally append it.
-            ""
+            ''
           end
         end
-
       end
     end
   end

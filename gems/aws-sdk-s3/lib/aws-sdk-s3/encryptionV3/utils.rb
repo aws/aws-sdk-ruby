@@ -7,17 +7,14 @@ module Aws
     module EncryptionV3
       # @api private
       module Utils
-
         class << self
-
           ##= ../specification/s3-encryption/client.md#encryption-algorithm
           ##% The S3EC MUST validate that the configured encryption algorithm is not legacy.
           def validate_cek(content_encryption_schema)
             ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
             ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
-            if content_encryption_schema.nil?
-              return '115'
-            end
+            return '115' if content_encryption_schema.nil?
+
             case content_encryption_schema
             when :alg_aes_256_gcm_hkdf_sha512_commit_key
               '115'
@@ -51,9 +48,9 @@ module Aws
           def decrypt_aes_gcm(key, data, auth_data)
             # data is iv (12B) + key + tag (16B)
             buf = data.unpack('C*')
-            iv = buf[0,12].pack('C*') # iv will always be 12 bytes
+            iv = buf[0, 12].pack('C*') # iv will always be 12 bytes
             tag = buf[-16, 16].pack('C*') # tag is 16 bytes
-            enc_key = buf[12, buf.size - (12+16)].pack('C*')
+            enc_key = buf[12, buf.size - (12 + 16)].pack('C*')
             cipher = aes_cipher(:decrypt, :GCM, key, iv)
             cipher.auth_tag = tag
             cipher.auth_data = auth_data
@@ -66,7 +63,7 @@ module Aws
             buf = key.private_decrypt(enc_data, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING).unpack('C*')
             key_length = buf[0]
             data = buf[1, key_length].pack('C*')
-            auth_data = buf[key_length+1, buf.length - key_length].pack('C*')
+            auth_data = buf[key_length + 1, buf.length - key_length].pack('C*')
             [data, auth_data]
           end
 
@@ -89,9 +86,11 @@ module Aws
           # @param [OpenSSL::PKey::RSA, String, nil] key
           # @param [String, nil] iv The initialization vector
           def aes_cipher(mode, block_mode, key, iv)
-            cipher = key ?
-              OpenSSL::Cipher.new("aes-#{cipher_size(key)}-#{block_mode.downcase}") :
-              OpenSSL::Cipher.new("aes-256-#{block_mode.downcase}")
+            cipher = if key
+                       OpenSSL::Cipher.new("aes-#{cipher_size(key)}-#{block_mode.downcase}")
+                     else
+                       OpenSSL::Cipher.new("aes-256-#{block_mode.downcase}")
+                     end
             cipher.send(mode) # encrypt or decrypt
             cipher.key = key if key
             cipher.iv = iv if iv
@@ -106,18 +105,17 @@ module Aws
           end
 
           # There is only 1 supported algorithm suite at this time
-          ENCRYPTION_KEY_INFO = ([0x00, 0x73].pack('C*') + "DERIVEKEY".encode('UTF-8')).freeze
-          COMMITMENT_KEY_INFO = ([0x00, 0x73].pack('C*') + "COMMITKEY".encode('UTF-8')).freeze
+          ENCRYPTION_KEY_INFO = ([0x00, 0x73].pack('C*') + 'DERIVEKEY'.encode('UTF-8')).freeze
+          COMMITMENT_KEY_INFO = ([0x00, 0x73].pack('C*') + 'COMMITKEY'.encode('UTF-8')).freeze
 
-          SHA512_DIGEST = OpenSSL::Digest::SHA512.new.freeze
+          SHA512_DIGEST = OpenSSL::Digest.new('SHA512').freeze
           V3_IV_BYTES = ("\x00" * 12).freeze
           ALGO_ID = [0x00, 0x73].pack('C*').freeze
 
           def generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
-
             ##= ../specification/s3-encryption/encryption.md#content-encryption
             ##% The client MUST generate an IV or Message ID using the length of the IV or Message ID defined in the algorithm suite.
-            message_id = Utils.generate_message_id()
+            message_id = Utils.generate_message_id
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
             ##% - The salt MUST be the Message ID with the length defined in the algorithm suite.
             commitment_key = Utils.derive_commitment_key(data_key, message_id)
@@ -135,16 +133,12 @@ module Aws
           end
 
           def derive_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id, stored_commitment_key)
-            unless data_key.length == 32
-              raise DecryptionError, "Data key length does not match algorithm suite"
-            end
+            raise DecryptionError, 'Data key length does not match algorithm suite' unless data_key.length == 32
 
-            unless message_id.length == 28
-              raise DecryptionError, "Message id length does not match algorithm suite"
-            end
+            raise DecryptionError, 'Message id length does not match algorithm suite' unless message_id.length == 28
 
             unless stored_commitment_key.length == 28
-              raise DecryptionError, "Commitment key length does not match algorithm suite"
+              raise DecryptionError, 'Commitment key length does not match algorithm suite'
             end
 
             ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
@@ -162,7 +156,7 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
               ##% When using an algorithm suite which supports key commitment,
               ##% the client MUST throw an exception when the derived key commitment value and stored key commitment value do not match.
-              raise DecryptionError, "Commitment key verification failed"
+              raise DecryptionError, 'Commitment key verification failed'
             end
 
             ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
@@ -175,7 +169,7 @@ module Aws
           def alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(mode, data_key, message_id)
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
             ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only zeros, and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
-            cipher =  Utils.aes_cipher(
+            cipher = Utils.aes_cipher(
               mode,
               :GCM,
               ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-hkdf-sha512-commit-key
@@ -191,12 +185,11 @@ module Aws
             cipher
           end
 
-          def generate_data_key()
+          def generate_data_key
             OpenSSL::Random.random_bytes(32)
           end
 
-          def generate_message_id()
-
+          def generate_message_id
             ##= ../specification/s3-encryption/encryption.md#cipher-initialization
             ##= type=exception
             ##= reason=This would be a new runtime error that happens randomly.
@@ -251,27 +244,26 @@ module Aws
             # N = ceil(L/HashLen)
             # T = T(1) | T(2) | T(3) | ... | T(N)
             # OKM = first L octets of T
-            # 
+            #
             # where:
             # T(0) = empty string (zero length)
             # T(1) = HMAC-Hash(PRK, T(0) | info | 0x01)
             # T(2) = HMAC-Hash(PRK, T(1) | info | 0x02)
             # T(3) = HMAC-Hash(PRK, T(2) | info | 0x03)
-            # 
+            #
             # L == desired_length
             # HashLen == 64 (because SHA512_DIGEST is fixed)
             # N = ceil(desired_length/64)
             # The only supported suites have desired_length less than 64
             # This will result in a single iteration of the expand loop.
             # This check verifies that it is safe to do not do a loop
-            if desired_length > 64
-              raise Errors::DecryptionError, "Unsupported length: #{desired_length}"
-            end
+            raise Errors::DecryptionError, "Unsupported length: #{desired_length}" if desired_length > 64
+
             # assert N == 1
-            # 
+            #
             # For a single iteration of the loop we then get:
             # OKM = first L of T(0) | T(1)
-            # == 
+            # ==
             #   (T(0) + T(1))[0, desired_length]
             # == {assert T(0) == ''}
             #   ('' +  HMAC-Hash(PRK, '' + info + 0x01))[0, desired_length]
@@ -311,13 +303,12 @@ module Aws
             def timing_safe_equal?(a, b)
               return false unless a.bytesize == b.bytesize
 
-              l = a.unpack("C*")
+              l = a.unpack('C*')
               r = 0
               b.each_byte { |byte| r |= byte ^ l.shift }
-              r == 0
+              r.zero?
             end
           end
-
         end
       end
     end

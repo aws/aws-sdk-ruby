@@ -5,7 +5,6 @@ module Aws
     module EncryptionV3
       # @api private
       class IODecrypter
-
         # @param [OpenSSL::Cipher] cipher
         # @param [IO#write] io An IO-like object that responds to `#write`.
         def initialize(cipher, io)
@@ -30,7 +29,6 @@ module Aws
         def finalize
           @io.write(@cipher.final)
         end
-
       end
     end
   end

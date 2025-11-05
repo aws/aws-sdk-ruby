@@ -4,7 +4,6 @@ require 'forwardable'
 
 module Aws
   module S3
-
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.  The `EncryptionV2::Client` (V2 Client)
     # provides improved security over the `Encryption::Client` (V1 Client)
@@ -226,7 +225,6 @@ module Aws
     #
     module EncryptionV3
       class Client
-
         ##= ../specification/s3-encryption/client.md#aws-sdk-compatibility
         ##= type=implication
         ##% The S3EC MUST provide a different set of configuration options than the conventional S3 client.
@@ -234,33 +232,33 @@ module Aws
         REQUIRED_PARAMS = [:key_wrap_schema].freeze
 
         OPTIONAL_PARAMS = [
-            :kms_key_id,
-            :kms_client,
-            :key_provider,
-            :encryption_key,
-            :envelope_location,
-            ##= ../specification/s3-encryption/client.md#instruction-file-configuration
-            ##% In this case, the Instruction File Configuration SHOULD be optional, such that its default configuration is used when none is provided.
-            :instruction_file_suffix,
-            ##= ../specification/s3-encryption/client.md#encryption-algorithm
-            ##% The S3EC MUST support configuration of the encryption algorithm (or algorithm suite) during its initialization.
-            :content_encryption_schema,
-            :security_profile,
-            ##= ../specification/s3-encryption/client.md#key-commitment
-            ##% The S3EC MUST support configuration of the [Key Commitment policy](./key-commitment.md) during its initialization.
-            :commitment_policy,
+          :kms_key_id,
+          :kms_client,
+          :key_provider,
+          :encryption_key,
+          :envelope_location,
+          ##= ../specification/s3-encryption/client.md#instruction-file-configuration
+          ##% In this case, the Instruction File Configuration SHOULD be optional, such that its default configuration is used when none is provided.
+          :instruction_file_suffix,
+          ##= ../specification/s3-encryption/client.md#encryption-algorithm
+          ##% The S3EC MUST support configuration of the encryption algorithm (or algorithm suite) during its initialization.
+          :content_encryption_schema,
+          :security_profile,
+          ##= ../specification/s3-encryption/client.md#key-commitment
+          ##% The S3EC MUST support configuration of the [Key Commitment policy](./key-commitment.md) during its initialization.
+          :commitment_policy
         ].freeze
-        SUPPORTED_COMMITMENT_POLICIES = [
-          :forbid_encrypt_allow_decrypt,
-          :require_encrypt_allow_decrypt,
-          :require_encrypt_require_decrypt,
+        SUPPORTED_COMMITMENT_POLICIES = %i[
+          forbid_encrypt_allow_decrypt
+          require_encrypt_allow_decrypt
+          require_encrypt_require_decrypt
         ].freeze
 
         ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
         ##% The S3EC MUST support the option to enable or disable legacy wrapping algorithms.
         ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
         ##% The S3EC MUST support the option to enable or disable legacy unauthenticated modes (content encryption algorithms).
-        SUPPORTED_SECURITY_PROFILES = [:v3, :v3_and_legacy].freeze
+        SUPPORTED_SECURITY_PROFILES = %i[v3 v3_and_legacy].freeze
 
         ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
         ##% The option to enable legacy unauthenticated modes MUST be set to false by default.
@@ -369,17 +367,17 @@ module Aws
           ##% The S3EC MUST validate the configured Encryption Algorithm against the provided key commitment policy.
           if @commitment_policy != :require_encrypt_require_decrypt
             new_options = options.merge({
-              security_profile: security_profile_to_v2(@security_profile),
-              ##= ../specification/s3-encryption/client.md#key-commitment
-              ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
-              content_encryption_schema: if @commitment_policy == :forbid_encrypt_allow_decrypt
-                options[:content_encryption_schema]
-              else
-                # assert @commitment_policy = :require_encrypt_allow_decrypt
-                # In this case the v2_cipher_provider is only used for decrypt
-                :aes_gcm_no_padding
-              end
-            })
+                                          security_profile: security_profile_to_v2(@security_profile),
+                                          ##= ../specification/s3-encryption/client.md#key-commitment
+                                          ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
+                                          content_encryption_schema: if @commitment_policy == :forbid_encrypt_allow_decrypt
+                                                                       options[:content_encryption_schema]
+                                                                     else
+                                                                       # assert @commitment_policy = :require_encrypt_allow_decrypt
+                                                                       # In this case the v2_cipher_provider is only used for decrypt
+                                                                       :aes_gcm_no_padding
+                                                                     end
+                                        })
             @v2_cipher_provider = build_v2_cipher_provider_for_decrypt(new_options)
             # In this case the v3 cipher is only used for decrypt.
             @v3_cipher_provider = build_cipher_provider(options.reject { |k, _| k == :content_encryption_schema })
@@ -440,7 +438,8 @@ module Aws
           ##% - PutObject MUST encrypt its input data before it is uploaded to S3.
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
-            cipher_provider: if @commitment_policy == :forbid_encrypt_allow_decrypt
+            cipher_provider:
+            if @commitment_policy == :forbid_encrypt_allow_decrypt
               ##= ../specification/s3-encryption/key-commitment.md#commitment-policy
               ##% When the commitment policy is FORBID_ENCRYPT_ALLOW_DECRYPT, the S3EC MUST NOT encrypt using an algorithm suite which supports key commitment.
               @v2_cipher_provider
@@ -492,9 +491,8 @@ module Aws
         # @see S3::Client#get_object
         # @note The `:range` request parameter is not supported.
         def get_object(params = {}, &block)
-          if params[:range]
-            raise NotImplementedError, '#get_object with :range not supported'
-          end
+          raise NotImplementedError, '#get_object with :range not supported' if params[:range]
+
           envelope_location, instruction_file_suffix = envelope_options(params)
           kms_encryption_context = params.delete(:kms_encryption_context)
           kms_any_cmk_mode = kms_any_cmk_mode(params)
@@ -583,13 +581,13 @@ module Aws
           else
             # Create V2 key provider explicitly for proper namespace consistency
             key_provider = if options[:key_provider]
-              options[:key_provider]
-            elsif options[:encryption_key]
-              Aws::S3::EncryptionV2::DefaultKeyProvider.new(options)
-            else
-              msg = 'you must pass a :kms_key_id, :key_provider, or :encryption_key'
-              raise ArgumentError, msg
-            end
+                             options[:key_provider]
+                           elsif options[:encryption_key]
+                             Aws::S3::EncryptionV2::DefaultKeyProvider.new(options)
+                           else
+                             msg = 'you must pass a :kms_key_id, :key_provider, or :encryption_key'
+                             raise ArgumentError, msg
+                           end
             Aws::S3::EncryptionV2::DefaultCipherProvider.new(
               key_provider: key_provider,
               key_wrap_schema: options[:key_wrap_schema],
@@ -603,8 +601,8 @@ module Aws
         # and further validated there
         def validate_params(options)
           unless (missing_params = REQUIRED_PARAMS - options.keys).empty?
-            raise ArgumentError, "Missing required parameter(s): "\
-              "#{missing_params.map{ |s| ":#{s}" }.join(', ')}"
+            raise ArgumentError, 'Missing required parameter(s): '\
+              "#{missing_params.map { |s| ":#{s}" }.join(', ')}"
           end
 
           wrap_alg = options[:key_wrap_schema]
@@ -612,9 +610,7 @@ module Aws
           # validate that the wrap alg matches the type of key given
           case wrap_alg
           when :kms_context
-            unless options[:kms_key_id]
-              raise ArgumentError, 'You must provide :kms_key_id to use :kms_context'
-            end
+            raise ArgumentError, 'You must provide :kms_key_id to use :kms_context' unless options[:kms_key_id]
           end
         end
 
@@ -636,16 +632,16 @@ module Aws
 
         def kms_client(options)
           options[:kms_client] || (@kms_client ||=
-            KMS::Client.new(
-              # extract the region and credentials first, if they are not configured, then getting them from an existing client is faster
-              ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
-              ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped SDK clients including the KMS client.
-              {
-                region: @client.config.region,
-                credentials: @client.config.credentials,
-              }.merge(extract_sdk_options(options))
-            )
-          )
+                                     KMS::Client.new(
+                                       # extract the region and credentials first, if they are not configured, then getting them from an existing client is faster
+                                       ##= ../specification/s3-encryption/client.md#inherited-sdk-configuration
+                                       ##% If the S3EC accepts SDK client configuration, the configuration MUST be applied to all wrapped SDK clients including the KMS client.
+                                       {
+                                         region: @client.config.region,
+                                         credentials: @client.config.credentials
+                                       }.merge(extract_sdk_options(options))
+                                     )
+                                  )
         end
 
         def extract_sdk_options(options)
@@ -678,13 +674,13 @@ module Aws
           end
         end
 
-      def extract_location(options)
+        def extract_location(options)
           ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata
           ##% By default, the S3EC MUST store content metadata in the S3 Object Metadata.
           ##= ../specification/s3-encryption/data-format/metadata-strategy.md#instruction-file
           ##% Instruction File writes MUST NOT be enabled by default.
           location = options[:envelope_location] || :metadata
-          if [:metadata, :instruction_file].include?(location)
+          if %i[metadata instruction_file].include?(location)
             location
           else
             msg = ':envelope_location must be :metadata or :instruction_file '\
@@ -732,9 +728,7 @@ module Aws
         end
 
         def validate_commitment_policy(commitment_policy)
-          if commitment_policy.nil?
-            return DEFAULT_COMMITMENT_POLICIES
-          end
+          return DEFAULT_COMMITMENT_POLICIES if commitment_policy.nil?
 
           unless SUPPORTED_COMMITMENT_POLICIES.include? commitment_policy
             raise ArgumentError, "Unsupported security profile: :#{commitment_policy}. " \
@@ -758,9 +752,7 @@ module Aws
         end
 
         def validate_security_profile(security_profile)
-          if security_profile.nil?
-            return DEFAULT_SECURITY_PROFILES
-          end
+          return DEFAULT_SECURITY_PROFILES if security_profile.nil?
 
           unless SUPPORTED_SECURITY_PROFILES.include? security_profile
             raise ArgumentError, "Unsupported security profile: :#{security_profile}. " \
@@ -780,12 +772,12 @@ module Aws
 
         def security_profile_to_v2(security_profile)
           case security_profile
-            when :v3
-              :v2
-            when :v3_and_legacy
-              :v2_and_legacy
-            end
+          when :v3
+            :v2
+          when :v3_and_legacy
+            :v2_and_legacy
           end
+        end
       end
     end
   end
@@ -848,9 +840,9 @@ end
 ##%   - CompleteMultipartUpload MUST complete the multipart upload.
 ##% - AbortMultipartUpload MAY be implemented by the S3EC.
 ##%   - AbortMultipartUpload MUST abort the multipart upload.
-##% 
+##%
 ##% The S3EC may provide implementations for the following S3EC-specific operation(s):
-##% 
+##%
 ##% - ReEncryptInstructionFile MAY be implemented by the S3EC.
 ##%   - ReEncryptInstructionFile MUST decrypt the instruction file's encrypted data key for the given object using the client's CMM.
 ##%   - ReEncryptInstructionFile MUST re-encrypt the plaintext data key with a provided keyring.

@@ -6,7 +6,6 @@ module Aws
   module S3
     module EncryptionV3
       class Materials
-
         # @option options [required, OpenSSL::PKey::RSA, String] :key
         #   The master key to use for encrypting/decrypting all objects.
         #
@@ -53,7 +52,6 @@ module Aws
           msg = 'expected description to be a valid JSON document string'
           raise ArgumentError, msg
         end
-
       end
     end
   end

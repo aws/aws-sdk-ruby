@@ -3,7 +3,6 @@
 module Aws
   module S3
     module EncryptionV3
-
       # This module defines the interface required for a {Client#key_provider}.
       # A key provider is any object that:
       #
@@ -17,14 +16,12 @@ module Aws
       #   * `String` - 32, 24, or 16 bytes long, for symmetric encryption
       #
       module KeyProvider
-
         # @return [Materials]
         def encryption_materials; end
 
         # @param [String<JSON>] materials_description
         # @return [OpenSSL::PKey::RSA, String] encryption_key
         def key_for(materials_description); end
-
       end
     end
   end

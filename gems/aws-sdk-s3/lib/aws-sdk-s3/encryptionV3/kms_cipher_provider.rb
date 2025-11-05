@@ -7,7 +7,6 @@ module Aws
     module EncryptionV3
       # @api private
       class KmsCipherProvider
-
         def initialize(options = {})
           @kms_key_id = validate_kms_key(options[:kms_key_id])
           @kms_client = options[:kms_client]
@@ -56,9 +55,7 @@ module Aws
             encryption_context = Json.load(envelope['x-amz-t'])
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
             ##% - The wrapping algorithm value "12" MUST be translated to kms+context upon retrieval, and vice versa on write.
-            if cek_alg != encryption_context['aws:x-amz-cek-alg']
-              raise Errors::CEKAlgMismatchError
-            end
+            raise Errors::CEKAlgMismatchError if cek_alg != encryption_context['aws:x-amz-cek-alg']
 
             if encryption_context != build_encryption_context(cek_alg, options)
               raise Errors::DecryptionError, 'Value of encryption context from'\
@@ -79,14 +76,12 @@ module Aws
                 "#{envelope['x-amz-w']}"
           end
 
-          any_cmk_mode = false || options[:kms_allow_decrypt_with_any_cmk]
+          any_cmk_mode = options[:kms_allow_decrypt_with_any_cmk]
           decrypt_options = {
             ciphertext_blob: decode64(envelope['x-amz-3']),
             encryption_context: encryption_context
           }
-          unless any_cmk_mode
-            decrypt_options[:key_id] = @kms_key_id
-          end
+          decrypt_options[:key_id] = @kms_key_id unless any_cmk_mode
 
           data_key = Aws::Plugins::UserAgent.metric('S3_CRYPTO_V3') do
             @kms_client.decrypt(decrypt_options).plaintext
@@ -109,7 +104,7 @@ module Aws
         end
 
         def validate_kms_key(kms_key_id)
-          if kms_key_id.nil? || kms_key_id.length.zero?
+          if kms_key_id.nil? || kms_key_id.empty?
             raise ArgumentError, 'KMS CMK ID was not specified. ' \
               'Please specify a CMK ID, ' \
               'or set kms_key_id: :kms_allow_decrypt_with_any_cmk to use ' \
@@ -125,7 +120,7 @@ module Aws
 
         def build_encryption_context(cek_alg, options = {})
           kms_context = (options[:kms_encryption_context] || {})
-            .each_with_object({}) { |(k, v), h| h[k.to_s] = v }
+                        .transform_keys(&:to_s)
           if kms_context.include? 'aws:x-amz-cek-alg'
             raise ArgumentError, 'Conflict in reserved KMS Encryption Context ' \
               'key aws:x-amz-cek-alg. This value is reserved for the S3 ' \
@@ -137,7 +132,7 @@ module Aws
         end
 
         def encode64(str)
-          Base64.encode64(str).split("\n") * ""
+          Base64.encode64(str).split("\n") * ''
         end
 
         def decode64(str)
@@ -145,11 +140,11 @@ module Aws
         end
 
         def validate_key_for_encryption
-          if @kms_key_id == :kms_allow_decrypt_with_any_cmk
-            raise ArgumentError, 'Unable to encrypt/write objects with '\
-              'kms_key_id = :kms_allow_decrypt_with_any_cmk.  Provide ' \
-              'a valid kms_key_id on client construction.'
-          end
+          return unless @kms_key_id == :kms_allow_decrypt_with_any_cmk
+
+          raise ArgumentError, 'Unable to encrypt/write objects with '\
+            'kms_key_id = :kms_allow_decrypt_with_any_cmk.  Provide ' \
+            'a valid kms_key_id on client construction.'
         end
       end
     end

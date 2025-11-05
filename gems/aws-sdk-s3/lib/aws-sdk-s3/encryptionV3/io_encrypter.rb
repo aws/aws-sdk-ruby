@@ -6,18 +6,18 @@ require 'tempfile'
 module Aws
   module S3
     module EncryptionV3
-
       # Provides an IO wrapper encrypting a stream of data.
       # @api private
       class IOEncrypter
-
         # @api private
         ONE_MEGABYTE = 1024 * 1024
 
         def initialize(cipher, io)
-          @encrypted = io.size <= ONE_MEGABYTE ?
-            encrypt_to_stringio(cipher, io.read) :
-            encrypt_to_tempfile(cipher, io)
+          @encrypted = if io.size <= ONE_MEGABYTE
+                         encrypt_to_stringio(cipher, io.read)
+                       else
+                         encrypt_to_tempfile(cipher, io)
+                       end
           @size = @encrypted.size
         end
 
@@ -55,7 +55,7 @@ module Aws
         end
 
         def encrypt_to_tempfile(cipher, io)
-          encrypted = Tempfile.new(self.object_id.to_s)
+          encrypted = Tempfile.new(object_id.to_s)
           encrypted.binmode
           ##= ../specification/s3-encryption/encryption.md#content-encryption
           ##= type=implication
@@ -65,8 +65,8 @@ module Aws
           # See OpenSSL: https://github.com/openssl/openssl/blob/master/crypto/modes/gcm128.c#L784
           # The relevant line is:
           # if (mlen > ((U64(1) << 36) - 32) || (sizeof(len) == 8 && mlen < len))
-          #   return -1;          
-          while chunk = io.read(ONE_MEGABYTE, read_buffer ||= String.new)
+          #   return -1;
+          while (chunk = io.read(ONE_MEGABYTE, read_buffer ||= String.new))
             if cipher.method(:update).arity == 1
               encrypted.write(cipher.update(chunk))
             else
@@ -78,7 +78,6 @@ module Aws
           encrypted.rewind
           encrypted
         end
-
       end
     end
   end

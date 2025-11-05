@@ -7,7 +7,6 @@ module Aws
     module EncryptionV3
       # @api private
       class DefaultCipherProvider
-
         def initialize(options = {})
           @key_provider = options[:key_provider]
           @key_wrap_schema = validate_key_wrap(
@@ -27,17 +26,17 @@ module Aws
         #   envelope and encryption cipher.
         def encryption_cipher(options = {})
           validate_options(options)
-          data_key = Utils.generate_data_key()
+          data_key = Utils.generate_data_key
           cipher, message_id, commitment_key = Utils.generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
           enc_key = if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
-              enc_key = encode64(
-                encrypt_rsa(data_key, @content_encryption_schema)
-              )
-            else
-              enc_key = encode64(
-                encrypt_aes_gcm(data_key, @content_encryption_schema)
-              )
-            end
+                      encode64(
+                        encrypt_rsa(data_key, @content_encryption_schema)
+                      )
+                    else
+                      encode64(
+                        encrypt_aes_gcm(data_key, @content_encryption_schema)
+                      )
+                    end
           ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
           ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
           envelope = {
@@ -70,8 +69,8 @@ module Aws
                   ' with an RSA key and the x-amz-wrap-alg is AES/GCM.'
               end
               Utils.decrypt_aes_gcm(wrapping_key,
-                                  decode64(envelope['x-amz-3']),
-                                  @content_encryption_schema)
+                                    decode64(envelope['x-amz-3']),
+                                    @content_encryption_schema)
             when '22'
               ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
               ##% - The wrapping algorithm value "22" MUST be translated to RSA-OAEP-SHA1 upon retrieval, and vice versa on write.
@@ -81,6 +80,7 @@ module Aws
               end
               key, cek_alg = Utils.decrypt_rsa(wrapping_key, decode64(envelope['x-amz-3']))
               raise Errors::CEKAlgMismatchError unless cek_alg == @content_encryption_schema
+
               key
             when '12'
               raise ArgumentError, 'Key mismatch - Client is configured' \
@@ -91,7 +91,7 @@ module Aws
               raise ArgumentError, 'Unsupported wrapping algorithm: ' \
                     "#{envelope['x-amz-w']}"
             end
-          
+
           message_id = decode64(envelope['x-amz-i'])
           commitment_key = decode64(envelope['x-amz-d'])
 
@@ -147,10 +147,10 @@ module Aws
         end
 
         def validate_options(options)
-          if !options[:kms_encryption_context].nil?
-            raise ArgumentError, 'Cannot provide :kms_encryption_context ' \
-            'with non KMS client.'
-          end
+          return if options[:kms_encryption_context].nil?
+
+          raise ArgumentError, 'Cannot provide :kms_encryption_context ' \
+          'with non KMS client.'
         end
       end
     end

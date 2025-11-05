@@ -4,7 +4,6 @@ module Aws
   module S3
     module EncryptionV3
       module Errors
-
         # Generic DecryptionError
         class DecryptionError < RuntimeError; end
 
@@ -13,7 +12,7 @@ module Aws
         # Raised when attempting to decrypt a legacy (V1) encrypted object
         # when using a security_profile that does not support it.
         class NonCommittingDecryptionError < DecryptionError
-          def initialize(*args)
+          def initialize(*_args)
             msg = 'The requested object is ' \
               'was not encrypted with a committing algorithm ' \
               'and decryption is not supported under :require_encrypt_require_decrypt commitment policy. ' \
@@ -25,7 +24,7 @@ module Aws
         # Raised when attempting to decrypt a legacy (V1) encrypted object
         # when using a security_profile that does not support it.
         class LegacyDecryptionError < DecryptionError
-          def initialize(*args)
+          def initialize(*_args)
             msg = 'The requested object is ' \
               'encrypted with V1 encryption schemas that have been disabled ' \
               'by client configuration security_profile = :v2. Retry with ' \
@@ -35,14 +34,13 @@ module Aws
         end
 
         class CEKAlgMismatchError < DecryptionError
-          def initialize(*args)
+          def initialize(*_args)
             msg = 'The content encryption algorithm used at encryption time ' \
               'does not match the algorithm stored for decryption time. ' \
               'The object may be altered or corrupted.'
             super(msg)
           end
         end
-
       end
     end
   end
