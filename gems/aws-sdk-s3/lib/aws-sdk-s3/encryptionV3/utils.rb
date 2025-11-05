@@ -106,8 +106,8 @@ module Aws
           end
 
           # There is only 1 supported algorithm suite at this time
-          ENCRYPTION_KEY_INFO = [0x00, 0x73].pack('C*').freeze + "DERIVEKEY".encode('UTF-8')
-          COMMITMENT_KEY_INFO = [0x00, 0x73].pack('C*').freeze + "COMMITKEY".encode('UTF-8')
+          ENCRYPTION_KEY_INFO = ([0x00, 0x73].pack('C*') + "DERIVEKEY".encode('UTF-8')).freeze
+          COMMITMENT_KEY_INFO = ([0x00, 0x73].pack('C*') + "COMMITKEY".encode('UTF-8')).freeze
 
           SHA512_DIGEST = OpenSSL::Digest::SHA512.new.freeze
           V3_IV_BYTES = ("\x00" * 12).freeze
@@ -239,30 +239,47 @@ module Aws
             )
           end
 
+          ONE_BYTE = [1].pack('C').freeze
           # assert: the following function is equivalent to `OpenSSL::KDF.hkdf` for all desired_length <= 64
+          # see spec: 'produces identical output to native hkdf for random inputs (property-based test)'
           def hkdf_fallback(input_key_material, salt, info, desired_length)
-            hash = SHA512_DIGEST
-            extract_hmac = OpenSSL::HMAC.new(salt, hash)
+            extract_hmac = OpenSSL::HMAC.new(salt, SHA512_DIGEST)
             extract_hmac.update(input_key_material)
             prk = extract_hmac.digest
 
-            # The hash length of SHA512_DIGEST is 512/8 == 64
-            # hash_length = 64
-            # N = (desired_length.to_f / hash_length).ceil
-            # However, the only supported suites have lengths less than 64
+            # From RFC 5869
+            # N = ceil(L/HashLen)
+            # T = T(1) | T(2) | T(3) | ... | T(N)
+            # OKM = first L octets of T
+            # 
+            # where:
+            # T(0) = empty string (zero length)
+            # T(1) = HMAC-Hash(PRK, T(0) | info | 0x01)
+            # T(2) = HMAC-Hash(PRK, T(1) | info | 0x02)
+            # T(3) = HMAC-Hash(PRK, T(2) | info | 0x03)
+            # 
+            # L == desired_length
+            # HashLen == 64 (because SHA512_DIGEST is fixed)
+            # N = ceil(desired_length/64)
+            # The only supported suites have desired_length less than 64
             # This will result in a single iteration of the expand loop.
             # This check verifies that it is safe to do not do a loop
             if desired_length > 64
               raise Errors::DecryptionError, "Unsupported length: #{desired_length}"
             end
             # assert N == 1
-
-            OpenSSL::HMAC.digest(hash,
-              prk,
-              ''.b +
-              info +
-              [1].pack('C')
-            )[0, desired_length]
+            # 
+            # For a single iteration of the loop we then get:
+            # OKM = first L of T(0) | T(1)
+            # == 
+            #   (T(0) + T(1))[0, desired_length]
+            # == {assert T(0) == ''}
+            #   ('' +  HMAC-Hash(PRK, '' + info + 0x01))[0, desired_length]
+            # == HMAC-Hash(PRK, info + 0x01)[0, desired_length]
+            # == {assert ONE_BYTE == 0x01}
+            # HMAC-Hash(PRK, info + ONE_BYTE)[0, desired_length]
+            # ==
+            OpenSSL::HMAC.digest(SHA512_DIGEST, prk, info + ONE_BYTE)[0, desired_length]
           end
 
           if defined?(OpenSSL::KDF) && OpenSSL::KDF.respond_to?(:hkdf)

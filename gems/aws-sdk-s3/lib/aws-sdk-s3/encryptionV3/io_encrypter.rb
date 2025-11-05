@@ -14,21 +14,6 @@ module Aws
         # @api private
         ONE_MEGABYTE = 1024 * 1024
 
-        ##= ../specification/s3-encryption/encryption.md#content-encryption
-        ##% The client MUST validate that the length of the plaintext bytes does not exceed the algorithm suite's cipher's maximum content length in bytes.
-        #  Maximum number of bytes for a single AES-GCM "operation."
-        # This is related to the GHASH block size,
-        # and can be thought of as the maximum bytes
-        # that can be encrypted with a single key/IV pair.
-        # The AWS Encryption SDK for Javascript
-        # does not support non-framed encrypt
-        # https://github.com/awslabs/aws-encryption-sdk-specification/blob/master/data-format/message-body.md#non-framed-data
-        # So this value is only needed to ensure
-        # that messages submitted for decrypt
-        # are well formed.
-        # 
-        BYTES_PER_AES_GCM_NONCE = 2 ** 36 - 32,
-
         def initialize(cipher, io)
           @encrypted = io.size <= ONE_MEGABYTE ?
             encrypt_to_stringio(cipher, io.read) :
