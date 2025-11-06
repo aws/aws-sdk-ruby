@@ -108,7 +108,7 @@ module Aws
           ENCRYPTION_KEY_INFO = ([0x00, 0x73].pack('C*') + 'DERIVEKEY'.encode('UTF-8')).freeze
           COMMITMENT_KEY_INFO = ([0x00, 0x73].pack('C*') + 'COMMITKEY'.encode('UTF-8')).freeze
 
-          SHA512_DIGEST = OpenSSL::Digest.new('SHA512').freeze
+          SHA512_DIGEST = OpenSSL::Digest::SHA512.new.freeze
           V3_IV_BYTES = ("\x00" * 12).freeze
           ALGO_ID = [0x00, 0x73].pack('C*').freeze
 
@@ -236,11 +236,11 @@ module Aws
           # assert: the following function is equivalent to `OpenSSL::KDF.hkdf` for all desired_length <= 64
           # see spec: 'produces identical output to native hkdf for random inputs (property-based test)'
           def hkdf_fallback(input_key_material, salt, info, desired_length)
-            extract_hmac = OpenSSL::HMAC.new(salt, SHA512_DIGEST)
-            extract_hmac.update(input_key_material)
-            prk = extract_hmac.digest
+            # Extract from RFC 5869
+            # PRK = HMAC-Hash(salt, IKM)
+            prk = OpenSSL::HMAC.digest(SHA512_DIGEST, salt, input_key_material)
 
-            # From RFC 5869
+            # Expand from RFC 5869
             # N = ceil(L/HashLen)
             # T = T(1) | T(2) | T(3) | ... | T(N)
             # OKM = first L octets of T
