@@ -222,7 +222,7 @@ module Aws::SQS
     # @option options [Boolean] :verify_checksums (true)
     #  When `true` MD5 checksums will be computed for messages sent to
     #  an SQS queue and matched against MD5 checksums returned by Amazon SQS.
-    #  `Aws::Errors::Checksum` errors are raised for cases where checksums do
+    #  `Aws::Core::Errors::ChecksumError` are raised for cases where checksums do
     #  not match.
     def initialize(*options)
       super
