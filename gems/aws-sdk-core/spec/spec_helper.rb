@@ -38,3 +38,10 @@ RSpec.configure do |config|
     mock_shared_config
   end
 end
+
+def expect_metrics_from_user_agent_header(resp, features)
+  header = resp.context.http_request.headers['User-Agent']
+  metrics = header.match(%r{ m/([A-Za-z0-9+-,]+)})[1].split(',')
+  expect(metrics.uniq).to eq(metrics)
+  expect(metrics).to include(*features)
+end
