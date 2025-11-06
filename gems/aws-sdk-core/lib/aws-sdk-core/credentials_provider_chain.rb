@@ -35,6 +35,17 @@ module Aws
         ]
       end
 
+      def profile_based_providers
+        %i[
+          profile_static_credentials
+          profile_assume_role_credentials
+          profile_assume_role_web_identity_credentials
+          profile_sso_credentials
+          profile_login_credentials
+          profile_process_credentials
+        ]
+      end
+
       # 1. Resolve static credentials from code when client is configured directly with
       #    access key id and secret access key.
       def code_static_credentials
@@ -56,20 +67,13 @@ module Aws
       def code_profile_credentials
         return unless @config.profile
 
-        chain = %i[
-          profile_static_credentials
-          profile_assume_role_credentials
-          profile_assume_role_web_identity_credentials
-          profile_sso_credentials
-          profile_login_credentials
-          profile_process_credentials
-        ]
-
-        chain.each do |method_name|
-          provider = send(method_name)
-          if provider&.set?
-            provider.features << 'CREDENTIALS_CODE'
-            return provider
+        profile_based_providers.each do |method_name|
+          Smithy::Client::Features.track('CREDENTIALS_CODE') do
+            provider = send(method_name)
+            if provider&.set?
+              provider.features << 'CREDENTIALS_CODE'
+              return provider
+            end
           end
         end
 
@@ -106,13 +110,15 @@ module Aws
         role_arn = ENV.fetch('AWS_ROLE_ARN', nil)
         return unless defined?(Aws::STS) && token_file && role_arn
 
-        provider = AssumeRoleWebIdentityCredentialsProvider.new(
-          web_identity_token_file: token_file,
-          role_arn: role_arn,
-          role_session_name: ENV.fetch('AWS_ROLE_SESSION_NAME', nil)
-        )
-        provider.features = %w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
-        provider
+        Smithy::Client::Features.track('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN') do
+          provider = AssumeRoleWebIdentityCredentialsProvider.new(
+            web_identity_token_file: token_file,
+            role_arn: role_arn,
+            role_session_name: ENV.fetch('AWS_ROLE_SESSION_NAME', nil)
+          )
+          provider.features = %w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+          provider
+        end
       end
 
       # 5. Resolve static credentials from profile when shared config for resolved
@@ -147,9 +153,12 @@ module Aws
         # If AssumeRoleWebIdentityCredentialsProvider should be checked, source provider will be nil
         return unless source_provider
 
-        provider = AssumeRoleCredentialsProvider.new(assume_role_options(profile, profile_config, source_provider))
-        provider.features = source_provider.features << 'CREDENTIALS_STS_ASSUME_ROLE'
-        provider
+        Smithy::Client::Features.track(source_provider.features) do
+          provider = AssumeRoleCredentialsProvider.new(assume_role_options(profile, profile_config, source_provider))
+          source_provider.features << 'CREDENTIALS_STS_ASSUME_ROLE'
+          provider.features = source_provider.features
+          provider
+        end
       end
 
       def valid_assume_role_inputs?(profile_config)
@@ -168,7 +177,7 @@ module Aws
           raise "Profile #{profile} has a source_profile and a credential_source. For assume role credentials, it " \
                 'must provide only source_profile or credential_source, not both.'
         elsif source_profile
-          resolve_source_profile(options, profile, source_profile)
+          resolve_source_profile(options, profile, profile_config, source_profile)
         elsif credential_source
           resolve_credential_source(profile, profile_config, credential_source)
         elsif profile_config['web_identity_token_file']
@@ -179,39 +188,33 @@ module Aws
         end
       end
 
-      def resolve_source_profile(options, profile, source_profile)
-        options = visit_source_profile(options, profile, source_profile)
+      def resolve_source_profile(options, profile, profile_config, source_profile)
+        options = visit_source_profile(options, profile, profile_config, source_profile)
         # check all profile-based credentials providers for credentials
-        chain = %i[
-          profile_static_credentials
-          profile_assume_role_credentials
-          profile_assume_role_web_identity_credentials
-          profile_sso_credentials
-          profile_process_credentials
-        ]
+        profile_based_providers.each do |method_name|
+          Smithy::Client::Features.track('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
+            provider = send(method_name, options)
+            next unless provider&.set?
 
-        chain.each do |method_name|
-          provider = send(method_name, options)
-          next unless provider&.set?
-
-          provider.features.delete('CREDENTIALS_STS_ASSUME_ROLE') if provider.is_a? AssumeRoleCredentialsProvider
-          unless provider.features.first == 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
-            provider.features.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
+            provider.features.delete('CREDENTIALS_STS_ASSUME_ROLE') if provider.is_a? AssumeRoleCredentialsProvider
+            unless provider.features.first == 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
+              provider.features.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
+            end
+            return provider
           end
-          return provider
         end
 
         raise "Profile #{source_profile} has a role_arn and source_profile " \
               'but the source_profile does not provide credentials.'
       end
 
-      def visit_source_profile(options, profile, source_profile)
+      def visit_source_profile(options, profile, profile_config, source_profile)
         visited_profiles = options[:visited_profiles] || Set[profile]
         unless Aws::Core.shared_config.profiles.key?(source_profile)
           raise "source_profile #{source_profile} does not exist."
         end
 
-        if visited_profiles.include?(source_profile) && profile != source_profile
+        if circular_profile_reference?(visited_profiles, profile, source_profile, profile_config)
           raise "Circular reference in assume role source profiles, have already visited: #{source_profile}"
         end
 
@@ -221,6 +224,17 @@ module Aws
           profile_config: Aws::Core.shared_config.profiles[source_profile],
           visited_profiles: visited_profiles
         }
+      end
+
+      def circular_profile_reference?(visited_profiles, profile, source_profile, profile_config)
+        return false unless visited_profiles.include?(source_profile)
+
+        # If profile references itself and contains static credentials then it is a valid configuration
+        if profile == source_profile && profile_config['aws_access_key_id'] && profile_config['aws_secret_access_key']
+          return false
+        end
+
+        true
       end
 
       def resolve_credential_source(profile, profile_config, credential_source)
@@ -260,14 +274,16 @@ module Aws
         profile_config = options[:profile_config] || resolve_profile_config
         return unless defined?(Aws::STS) && profile_config['web_identity_token_file'] && profile_config['role_arn']
 
-        provider = AssumeRoleWebIdentityCredentialsProvider.new(
-          profile: profile,
-          web_identity_token_file: profile_config['web_identity_token_file'],
-          role_arn: profile_config['role_arn'],
-          role_session_name: profile_config['role_session_name']
-        )
-        provider.features = %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
-        provider
+        Smithy::Client::Features.track('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
+          provider = AssumeRoleWebIdentityCredentialsProvider.new(
+            profile: profile,
+            web_identity_token_file: profile_config['web_identity_token_file'],
+            role_arn: profile_config['role_arn'],
+            role_session_name: profile_config['role_session_name']
+          )
+          provider.features = %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+          provider
+        end
       end
 
       # 8. Resolve sso credentials from profile when shared config for resolved profile is
@@ -280,14 +296,16 @@ module Aws
         sso_session = Aws::Core::SharedConfig.sso_session(profile, profile_config['sso_session'])
         validate_sso_conflicts(profile, profile_config, sso_session)
 
-        provider = SSOCredentialsProvider.new(
-          sso_session: profile_config['sso_session'],
-          sso_account_id: profile_config['sso_account_id'],
-          sso_role_name: profile_config['sso_role_name'],
-          sso_region: sso_session['sso_region']
-        )
-        provider.features = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
-        provider
+        Smithy::Client::Features.track('CREDENTIALS_PROFILE_SSO') do
+          provider = SSOCredentialsProvider.new(
+            sso_session: profile_config['sso_session'],
+            sso_account_id: profile_config['sso_account_id'],
+            sso_role_name: profile_config['sso_role_name'],
+            sso_region: sso_session['sso_region']
+          )
+          provider.features = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+          provider
+        end
       end
 
       def valid_sso_inputs?(profile_config)

@@ -111,14 +111,14 @@ module Aws
         end
 
         describe '#env_assume_role_web_identity_credentials' do
-          let(:client) { STS::Client.new(stub_responses: true) }
+          let(:sts_client) { STS::Client.new(stub_responses: true) }
           let(:token_file) { Tempfile.new('token.jwt') }
           let(:token_file_path) { token_file.path }
 
           context 'resolves' do
             before do
-              expect(STS::Client).to receive(:new).and_return(client)
-              client.stub_responses(
+              expect(STS::Client).to receive(:new).and_return(sts_client)
+              sts_client.stub_responses(
                 :assume_role_with_web_identity,
                 {
                   credentials: {
@@ -134,7 +134,6 @@ module Aws
               ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
               ENV['AWS_ROLE_ARN'] = 'role_arn'
               ENV['AWS_ROLE_SESSION_NAME'] = 'role_session_name'
-              client = client_class.new
               creds = client.config.credentials_provider.identity
               expect(creds.access_key_id).to eq('akid_web_id_env')
               expect(creds.secret_access_key).to eq('secret_web_ib_env')
@@ -144,7 +143,6 @@ module Aws
             it 'resolves assume role web identity credentials when AWS_ROLE_SESSION_NAME is not set' do
               ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
               ENV['AWS_ROLE_ARN'] = 'role_arn'
-              client = client_class.new
               creds = client.config.credentials_provider.identity
               expect(creds.access_key_id).to eq('akid_web_id_env')
               expect(creds.secret_access_key).to eq('secret_web_ib_env')
@@ -155,22 +153,29 @@ module Aws
               ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
               ENV['AWS_ROLE_ARN'] = 'role_arn'
               ENV['AWS_ROLE_SESSION_NAME'] = 'role_session_name'
-              client = client_class.new(
-                access_key_id: nil,
-                secret_access_key: nil,
-                stub_responses: true
-              )
               provider = client.config.credentials_provider
               expect(provider.features).to eq(
                 %w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
               )
+            end
+
+            it 'tracks the correct feature id for intermediate STS call' do
+              ENV['AWS_WEB_IDENTITY_TOKEN_FILE'] = token_file_path
+              ENV['AWS_ROLE_ARN'] = 'role_arn'
+              ENV['AWS_ROLE_SESSION_NAME'] = 'role_session_name'
+              expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity)
+                .and_wrap_original do |m, *args|
+                resp = m.call(*args)
+                expect_metrics_from_user_agent_header(resp, ['h'])
+                resp
+              end
+              client
             end
           end
 
           context 'fails to resolve' do
             it 'fails to resolve assume role web identity credentials when required ENV variables are not set' do
               expect(InstanceProfileCredentialsProvider).to receive(:new).and_return(mock_instance_creds)
-              client = client_class.new
               expect(client.config.credentials_provider).to be_nil
             end
           end
@@ -241,11 +246,6 @@ module Aws
               aws_account_id = 123456789012
             CONFIG
             mock_shared_config(shared_config)
-            client = client_class.new(
-              access_key_id: nil,
-              secret_access_key: nil,
-              stub_responses: true
-            )
             provider = client.config.credentials_provider
             expect(provider.features).to eq(%w[CREDENTIALS_PROFILE])
           end
@@ -307,7 +307,6 @@ module Aws
                 end
 
                 it 'resolves assume role credentials from profile with source_profile of static' do
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_static')
                   expect(creds.secret_access_key).to eq('secret_ar_static')
@@ -329,7 +328,6 @@ module Aws
                     aws_account_id = 123456789012
                   CONFIG
                   mock_shared_config(shared_config)
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_static')
                   expect(creds.secret_access_key).to eq('secret_ar_static')
@@ -354,7 +352,6 @@ module Aws
                     aws_account_id = 123456789012
                   CONFIG
                   mock_shared_config(shared_config)
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_static')
                   expect(creds.secret_access_key).to eq('secret_ar_static')
@@ -378,7 +375,6 @@ module Aws
                     aws_account_id = 123456789012
                   CONFIG
                   mock_shared_config(shared_config)
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_static')
                   expect(creds.secret_access_key).to eq('secret_ar_static')
@@ -397,7 +393,6 @@ module Aws
                     source_profile = default
                   CONFIG
                   mock_shared_config(shared_config)
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_static')
                   expect(creds.secret_access_key).to eq('secret_ar_static')
@@ -405,11 +400,19 @@ module Aws
                 end
 
                 it 'tracks the correct feature id' do
-                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[o n])
+                    resp
+                  end
+                  client
                 end
               end
 
@@ -510,7 +513,6 @@ module Aws
                   end
 
                   it 'resolves assume role credentials from profile with chained assume role profiles' do
-                    client = client_class.new
                     creds = client.config.credentials_provider.identity
                     expect(creds.access_key_id).to eq('akid_ar_assume')
                     expect(creds.secret_access_key).to eq('secret_ar_assume')
@@ -518,11 +520,19 @@ module Aws
                   end
 
                   it 'tracks the correct feature id' do
-                    client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                     provider = client.config.credentials_provider
                     expect(provider.features).to eq(
                       %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
                     )
+                  end
+
+                  it 'tracks the correct feature id for intermediate STS call' do
+                    expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                      resp = m.call(*args)
+                      expect_metrics_from_user_agent_header(resp, %w[o n])
+                      resp
+                    end
+                    client
                   end
                 end
 
@@ -588,7 +598,6 @@ module Aws
                   end
 
                   it 'resolves assume role credentials from chained assume role profiles with static credentials' do
-                    client = client_class.new
                     creds = client.config.credentials_provider.identity
                     expect(creds.access_key_id).to eq('akid_ar_assume')
                     expect(creds.secret_access_key).to eq('secret_ar_assume')
@@ -596,11 +605,19 @@ module Aws
                   end
 
                   it 'tracks the correct feature id' do
-                    client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                     provider = client.config.credentials_provider
                     expect(provider.features).to eq(
                       %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
                     )
+                  end
+
+                  it 'tracks the correct feature id for intermediate STS call' do
+                    expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                      resp = m.call(*args)
+                      expect_metrics_from_user_agent_header(resp, %w[o n])
+                      resp
+                    end
+                    client
                   end
                 end
 
@@ -707,12 +724,7 @@ module Aws
 
                   it 'tracks the correct feature id' do
                     # Profile must be configured explicitly for credential_source = Environment
-                    client = client_class.new(
-                      profile: 'default',
-                      access_key_id: nil,
-                      secret_access_key: nil,
-                      stub_responses: true
-                    )
+                    client = client_class.new(profile: 'default')
                     provider = client.config.credentials_provider
                     expect(provider.features).to eq(
                       %w[
@@ -723,6 +735,16 @@ module Aws
                         CREDENTIALS_CODE
                       ]
                     )
+                  end
+
+                  it 'tracks the correct feature id for intermediate STS call' do
+                    expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                      resp = m.call(*args)
+                      expect_metrics_from_user_agent_header(resp, %w[e o p g])
+                      resp
+                    end
+                    # Profile must be configured explicitly for credential_source = Environment
+                    client_class.new(profile: 'default')
                   end
                 end
               end
@@ -791,7 +813,6 @@ module Aws
                 end
 
                 it 'resolves assume role credentials from profile with source_profile of web identity' do
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_arwid')
                   expect(creds.secret_access_key).to eq('secret_ar_arwid')
@@ -799,7 +820,6 @@ module Aws
                 end
 
                 it 'tracks the correct feature id' do
-                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[
@@ -809,6 +829,15 @@ module Aws
                       CREDENTIALS_STS_ASSUME_ROLE
                     ]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[o q k])
+                    resp
+                  end
+                  client
                 end
               end
 
@@ -890,7 +919,6 @@ module Aws
                 end
 
                 it 'resolves assume role credentials from profile with source_profile of sso' do
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_sso')
                   expect(creds.secret_access_key).to eq('secret_ar_sso')
@@ -898,7 +926,6 @@ module Aws
                 end
 
                 it 'tracks the correct feature id' do
-                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[
@@ -908,6 +935,15 @@ module Aws
                       CREDENTIALS_STS_ASSUME_ROLE
                     ]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[o r s])
+                    resp
+                  end
+                  client
                 end
               end
 
@@ -961,7 +997,6 @@ module Aws
                 end
 
                 it 'resolves assume role credentials from profile with source_profile of process' do
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_process')
                   expect(creds.secret_access_key).to eq('secret_ar_process')
@@ -969,7 +1004,6 @@ module Aws
                 end
 
                 it 'tracks the correct feature id' do
-                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[
@@ -979,6 +1013,15 @@ module Aws
                       CREDENTIALS_STS_ASSUME_ROLE
                     ]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[o v w])
+                    resp
+                  end
+                  client
                 end
               end
             end
@@ -1033,7 +1076,6 @@ module Aws
                 end
 
                 it 'resolves assume role credentials from profile with credential_source of instance' do
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_instance')
                   expect(creds.secret_access_key).to eq('secret_ar_instance')
@@ -1041,11 +1083,19 @@ module Aws
                 end
 
                 it 'tracks the correct feature id' do
-                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS CREDENTIALS_STS_ASSUME_ROLE]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[p 0])
+                    resp
+                  end
+                  client
                 end
               end
 
@@ -1095,7 +1145,6 @@ module Aws
                 end
 
                 it 'resolves assume role credentials from profile with credential_source of container' do
-                  client = client_class.new
                   creds = client.config.credentials_provider.identity
                   expect(creds.access_key_id).to eq('akid_ar_container')
                   expect(creds.secret_access_key).to eq('secret_ar_container')
@@ -1103,11 +1152,19 @@ module Aws
                 end
 
                 it 'tracks the correct feature id' do
-                  client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP CREDENTIALS_STS_ASSUME_ROLE]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[p z])
+                    resp
+                  end
+                  client
                 end
               end
 
@@ -1168,12 +1225,7 @@ module Aws
 
                 it 'tracks the correct feature id' do
                   # Profile must be configured explicitly for credential_source = Environment
-                  client = client_class.new(
-                    profile: 'default',
-                    access_key_id: nil,
-                    secret_access_key: nil,
-                    stub_responses: true
-                  )
+                  client = client_class.new(profile: 'default')
                   provider = client.config.credentials_provider
                   expect(provider.features).to eq(
                     %w[
@@ -1183,6 +1235,16 @@ module Aws
                       CREDENTIALS_CODE
                     ]
                   )
+                end
+
+                it 'tracks the correct feature id for intermediate STS call' do
+                  expect(sts_client).to receive(:assume_role).and_wrap_original do |m, *args|
+                    resp = m.call(*args)
+                    expect_metrics_from_user_agent_header(resp, %w[e p g])
+                    resp
+                  end
+                  # Profile must be configured explicitly for credential_source = Environment
+                  client_class.new(profile: 'default')
                 end
               end
             end
@@ -1288,6 +1350,16 @@ module Aws
               expect { client }.to raise_error(/Unsupported credential_source found in profile/)
             end
 
+            it 'raises when profile references itself without having a full set of static credentials' do
+              shared_config = <<~CONFIG
+                [profile default]
+                role_arn = role_arn_default
+                source_profile = default
+              CONFIG
+              mock_shared_config(shared_config)
+              expect { client }.to raise_error(/Circular reference in assume role source profiles/)
+            end
+
             it 'raises when chained assume role profiles loop infinitely' do
               shared_config = <<~CONFIG
                 [profile default]
@@ -1352,7 +1424,6 @@ module Aws
                 region = 'us-west-2'
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new
               creds = client.config.credentials_provider.identity
               expect(creds.access_key_id).to eq('akid_web_id_profile')
               expect(creds.secret_access_key).to eq('secret_web_id_profile')
@@ -1367,7 +1438,6 @@ module Aws
                 region = 'us-west-2'
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new
               creds = client.config.credentials_provider.identity
               expect(creds.access_key_id).to eq('akid_web_id_profile')
               expect(creds.secret_access_key).to eq('secret_web_id_profile')
@@ -1383,11 +1453,28 @@ module Aws
                 region = 'us-west-2'
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
               provider = client.config.credentials_provider
               expect(provider.features).to eq(
                 %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
               )
+            end
+
+            it 'tracks the correct feature id for intermediate STS call' do
+              shared_config = <<~CONFIG
+                [profile default]
+                web_identity_token_file = #{token_file_path}
+                role_arn = 'role_arn'
+                role_session_name = 'role_session_name'
+                region = 'us-west-2'
+              CONFIG
+              mock_shared_config(shared_config)
+              expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity)
+                .and_wrap_original do |m, *args|
+                resp = m.call(*args)
+                expect_metrics_from_user_agent_header(resp, ['q'])
+                resp
+              end
+              client
             end
           end
 
@@ -1412,7 +1499,6 @@ module Aws
                 role_session_name = 'role_session_name'
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new
               expect(client.config.credentials_provider).to be_nil
             end
           end
@@ -1420,7 +1506,7 @@ module Aws
 
         describe '#profile_sso_credentials' do
           context 'resolves' do
-            let(:client) { SSO::Client.new(stub_responses: true) }
+            let(:sso_client) { SSO::Client.new(stub_responses: true) }
             let(:token) { SSOOIDCToken.new(token: 'token') }
             let(:token_provider) do
               double(
@@ -1432,9 +1518,9 @@ module Aws
             end
 
             before(:each) do
-              expect(SSO::Client).to receive(:new).and_return(client)
+              expect(SSO::Client).to receive(:new).and_return(sso_client)
               expect(SSOOIDCTokenProvider).to receive(:new).and_return(token_provider)
-              client.stub_responses(
+              sso_client.stub_responses(
                 :get_role_credentials,
                 {
                   role_credentials: {
@@ -1459,7 +1545,6 @@ module Aws
                 sso_start_url = SSO_START_URL
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new
               creds = client.config.credentials_provider.identity
               expect(creds.access_key_id).to eq('akid_sso')
               expect(creds.secret_access_key).to eq('secret_sso')
@@ -1481,7 +1566,6 @@ module Aws
                 sso_start_url = SSO_START_URL
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new
               creds = client.config.credentials_provider.identity
               expect(creds.access_key_id).to eq('akid_sso')
               expect(creds.secret_access_key).to eq('secret_sso')
@@ -1501,9 +1585,28 @@ module Aws
                 sso_start_url = SSO_START_URL
               CONFIG
               mock_shared_config(shared_config)
-              client = client_class.new(access_key_id: nil, secret_access_key: nil, stub_responses: true)
               provider = client.config.credentials_provider
               expect(provider.features).to eq(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
+            end
+
+            it 'tracks the correct feature id for intermediate STS call' do
+              shared_config = <<~CONFIG
+                [profile default]
+                sso_session = SSO_SESSION
+                sso_account_id = 123456789012
+                sso_role_name = SSO_ROLE_NAME
+
+                [sso-session SSO_SESSION]
+                sso_region = us-east-1
+                sso_start_url = SSO_START_URL
+              CONFIG
+              mock_shared_config(shared_config)
+              expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
+                resp = m.call(*args)
+                expect_metrics_from_user_agent_header(resp, ['r'])
+                resp
+              end
+              client
             end
           end
 
@@ -1750,11 +1853,6 @@ module Aws
             ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = path
             stub_request(:get, "http://169.254.170.2#{path}")
               .to_return(status: 200, body: resp)
-            client = client_class.new(
-              access_key_id: nil,
-              secret_access_key: nil,
-              stub_responses: true
-            )
             provider = client.config.credentials_provider
             expect(provider.features).to eq(%w[CREDENTIALS_HTTP])
           end
@@ -1803,11 +1901,6 @@ module Aws
           end
 
           it 'tracks the correct feature id' do
-            client = client_class.new(
-              access_key_id: nil,
-              secret_access_key: nil,
-              stub_responses: true
-            )
             provider = client.config.credentials_provider
             expect(provider.features).to eq(%w[CREDENTIALS_IMDS])
           end
