@@ -43,10 +43,9 @@ module Aws
 
         private
 
-        ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
-        ##% The client MUST append the GCM auth tag to the ciphertext if the underlying crypto provider does not do so automatically.
-
         def encrypt_to_stringio(cipher, plain_text)
+          ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
+          ##% The client MUST append the GCM auth tag to the ciphertext if the underlying crypto provider does not do so automatically.
           if plain_text.empty?
             StringIO.new(cipher.final + cipher.auth_tag)
           else
