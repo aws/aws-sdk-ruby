@@ -52,7 +52,12 @@ module Aws
           case envelope['x-amz-w']
           when '12'
             cek_alg = envelope['x-amz-c']
-            encryption_context = Json.load(envelope['x-amz-t'])
+            encryption_context =
+              if !envelope['x-amz-t'].nil?
+                Json.load(envelope['x-amz-t'])
+              else
+                {}
+              end
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
             ##% - The wrapping algorithm value "12" MUST be translated to kms+context upon retrieval, and vice versa on write.
             raise Errors::CEKAlgMismatchError if cek_alg != encryption_context['aws:x-amz-cek-alg']
