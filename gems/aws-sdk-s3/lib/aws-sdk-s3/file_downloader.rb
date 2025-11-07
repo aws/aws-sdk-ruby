@@ -90,12 +90,29 @@ module Aws
         raise error unless error.nil?
       end
 
+      def handle_checksum_mode_option(option_key, opts)
+        return false unless option_key == :checksum_mode && opts[:checksum_mode] == 'DISABLED'
+
+        msg = ':checksum_mode option is deprecated. Checksums will be validated by default. ' \
+          'To disable checksum validation, set :response_checksum_validation to "when_required" on your S3 client.'
+        warn(msg)
+        true
+      end
+
       def get_opts(opts)
-        GET_OPTIONS.each_with_object({}) { |k, h| h[k] = opts[k] if opts.key?(k) }
+        GET_OPTIONS.each_with_object({}) do |k, h|
+          next if k == :checksum_mode
+
+          h[k] = opts[k] if opts.key?(k)
+        end
       end
 
       def head_opts(opts)
-        HEAD_OPTIONS.each_with_object({}) { |k, h| h[k] = opts[k] if opts.key?(k) }
+        HEAD_OPTIONS.each_with_object({}) do |k, h|
+          next if handle_checksum_mode_option(k, opts)
+
+          h[k] = opts[k] if opts.key?(k)
+        end
       end
 
       def compute_chunk(chunk_size, file_size)

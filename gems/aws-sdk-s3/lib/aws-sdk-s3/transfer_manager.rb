@@ -124,10 +124,9 @@ module Aws
       #   Only used when no custom executor is provided (creates {DefaultExecutor} with given thread count).
       #
       # @option options [String] :checksum_mode ("ENABLED")
-      #   When `"ENABLED"` and the object has a stored checksum, it will be used to validate the download and will
-      #   raise an `Aws::Errors::ChecksumError` if checksum validation fails. You may provide a `on_checksum_validated`
-      #   callback if you need to verify that validation occurred and which algorithm was used.
-      #   To disable checksum validation, set `checksum_mode` to `"DISABLED"`.
+      #   This option is deprecated. Use `:response_checksum_validation` on your S3 client instead.
+      #   To disable checksum validation, set `response_checksum_validation: 'when_required'`
+      #   when creating your S3 client.
       #
       # @option options [Callable] :on_checksum_validated
       #   Called each time a request's checksum is validated with the checksum algorithm and the
