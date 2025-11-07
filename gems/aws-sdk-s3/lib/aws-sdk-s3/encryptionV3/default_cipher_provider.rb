@@ -28,15 +28,16 @@ module Aws
           validate_options(options)
           data_key = Utils.generate_data_key
           cipher, message_id, commitment_key = Utils.generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
-          enc_key = if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
-                      encode64(
-                        encrypt_rsa(data_key, @content_encryption_schema)
-                      )
-                    else
-                      encode64(
-                        encrypt_aes_gcm(data_key, @content_encryption_schema)
-                      )
-                    end
+          enc_key =
+            if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
+              encode64(
+                encrypt_rsa(data_key, @content_encryption_schema)
+              )
+            else
+              encode64(
+                encrypt_aes_gcm(data_key, @content_encryption_schema)
+              )
+            end
           ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
           ##% Objects encrypted with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY MUST use the V3 message format version only.
           envelope = {

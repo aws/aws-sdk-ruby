@@ -86,11 +86,12 @@ module Aws
           # @param [OpenSSL::PKey::RSA, String, nil] key
           # @param [String, nil] iv The initialization vector
           def aes_cipher(mode, block_mode, key, iv)
-            cipher = if key
-                       OpenSSL::Cipher.new("aes-#{cipher_size(key)}-#{block_mode.downcase}")
-                     else
-                       OpenSSL::Cipher.new("aes-256-#{block_mode.downcase}")
-                     end
+            cipher =
+              if key
+                OpenSSL::Cipher.new("aes-#{cipher_size(key)}-#{block_mode.downcase}")
+              else
+                OpenSSL::Cipher.new("aes-256-#{block_mode.downcase}")
+              end
             cipher.send(mode) # encrypt or decrypt
             cipher.key = key if key
             cipher.iv = iv if iv

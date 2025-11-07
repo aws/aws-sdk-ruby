@@ -366,18 +366,20 @@ module Aws
           ##= ../specification/s3-encryption/client.md#key-commitment
           ##% The S3EC MUST validate the configured Encryption Algorithm against the provided key commitment policy.
           if @commitment_policy != :require_encrypt_require_decrypt
-            new_options = options.merge({
-                                          security_profile: security_profile_to_v2(@security_profile),
-                                          ##= ../specification/s3-encryption/client.md#key-commitment
-                                          ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
-                                          content_encryption_schema: if @commitment_policy == :forbid_encrypt_allow_decrypt
-                                                                       options[:content_encryption_schema]
-                                                                     else
-                                                                       # assert @commitment_policy = :require_encrypt_allow_decrypt
-                                                                       # In this case the v2_cipher_provider is only used for decrypt
-                                                                       :aes_gcm_no_padding
-                                                                     end
-                                        })
+            new_options = options.merge(
+              {
+                security_profile: security_profile_to_v2(@security_profile),
+                ##= ../specification/s3-encryption/client.md#key-commitment
+                ##% If the configured Encryption Algorithm is incompatible with the key commitment policy, then it MUST throw an exception.
+                content_encryption_schema: if @commitment_policy == :forbid_encrypt_allow_decrypt
+                                             options[:content_encryption_schema]
+                                           else
+                                             # assert @commitment_policy = :require_encrypt_allow_decrypt
+                                             # In this case the v2_cipher_provider is only used for decrypt
+                                             :aes_gcm_no_padding
+                                           end
+              }
+            )
             @v2_cipher_provider = build_v2_cipher_provider_for_decrypt(new_options)
             # In this case the v3 cipher is only used for decrypt.
             @v3_cipher_provider = build_cipher_provider(options.reject { |k, _| k == :content_encryption_schema })

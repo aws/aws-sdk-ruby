@@ -128,21 +128,23 @@ module Aws
 
           def get_encryption_envelope(context)
             # Get initial envelope data from :envelope_location
-            envelope = if context[:encryption][:envelope_location] == :metadata
-                         envelope_from_metadata(context)
-                       else
-                         envelope_from_instr_file(context)
-                       end
+            envelope =
+              if context[:encryption][:envelope_location] == :metadata
+                envelope_from_metadata(context)
+              else
+                envelope_from_instr_file(context)
+              end
 
             # If empty or incomplete, get/merge data from secondary source
             ##= ../specification/s3-encryption/data-format/content-metadata.md#determining-s3ec-object-status
             ##% If the object matches none of the V1/V2/V3 formats, the S3EC MUST attempt to get the instruction file.
             if envelope.nil? || envelope.empty? || !complete_envelop?(envelope)
-              secondary = if context[:encryption][:envelope_location] == :metadata
-                            envelope_from_instr_file(context)
-                          else
-                            envelope_from_metadata(context)
-                          end
+              secondary =
+                if context[:encryption][:envelope_location] == :metadata
+                  envelope_from_instr_file(context)
+                else
+                  envelope_from_metadata(context)
+                end
               envelope.merge!(secondary) if secondary
             end
 
