@@ -121,16 +121,8 @@ module Aws
           expect(callback_data[:called]).to eq(4)
         end
 
-        it 'supports disabling checksum_mode' do
-          client.stub_responses(:head_object, lambda { |context|
-            expect(context.params[:checksum_mode]).to eq('DISABLED')
-            { content_length: one_meg, parts_count: nil }
-          })
-          client.stub_responses(:get_object, lambda { |context|
-            expect(context.params[:checksum_mode]).to eq('DISABLED')
-            { body: 'body' }
-          })
-
+        it 'warns when :checksum_mode is set to DISABLED' do
+          expect(subject).to receive(:warn).with(/checksum_mode option is deprecated/)
           subject.download(path, single_params.merge(checksum_mode: 'DISABLED'))
         end
 
