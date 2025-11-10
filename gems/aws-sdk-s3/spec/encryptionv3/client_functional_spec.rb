@@ -32,6 +32,8 @@ module Aws
           s3_client.stub_responses(
             :get_object,
             {status_code: 200, body: data[:enc_body], headers: resp_headers},
+            # The auth tag is left for legacy reasons.
+            # The v3 client accumulates this from the current get object.
             {body: auth_tag}
           )
         end
@@ -718,10 +720,6 @@ module Aws
                 plaintext: kms_plaintext,
                 encryption_algorithm: "SYMMETRIC_DEFAULT"
               })
-
-            expect(s3_client).to receive(:get_object)
-                                   .with(hash_including(version_id: 'version_id'))
-                                   .and_call_original
 
             decrypted = client.get_object(bucket: test_bucket, key: test_object,
                                           version_id: 'version_id').body.read

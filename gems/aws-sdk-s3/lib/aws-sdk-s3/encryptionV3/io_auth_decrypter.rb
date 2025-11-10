@@ -13,12 +13,13 @@ module Aws
         #   the cipher auth tag.
         # @option options [required, OpenSSL::Cipher] :cipher An initialized
         #   cipher that can be used to decrypt the bytes as they are
-        #   written to the `:io` object. The cipher should already have
-        #   its `#auth_tag` set.
+        #   written to the `:io` object.
         def initialize(options = {})
           @decrypter = IODecrypter.new(options[:cipher], options[:io])
           @max_bytes = options[:encrypted_content_length]
           @bytes_written = 0
+          @cipher = options[:cipher]
+          @auth_tag = String.new
         end
 
         def write(chunk)
@@ -30,6 +31,7 @@ module Aws
         end
 
         def finalize
+          @cipher.auth_tag = @auth_tag
           @decrypter.finalize
         end
 
@@ -43,8 +45,10 @@ module Aws
           if chunk.bytesize + @bytes_written <= @max_bytes
             chunk
           elsif @bytes_written < @max_bytes
+            @auth_tag << chunk[@max_bytes - @bytes_written..-1]
             chunk[0..(@max_bytes - @bytes_written - 1)]
           else
+            @auth_tag << chunk
             # If the tag was sent over after the full body has been read,
             # we don't want to accidentally append it.
             ''

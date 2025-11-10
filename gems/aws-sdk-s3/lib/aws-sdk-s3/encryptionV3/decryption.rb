@@ -106,19 +106,11 @@ module Aws
           def get_decrypter(context, cipher, _envelope)
             http_resp = context.http_response
             content_length = http_resp.headers['content-length'].to_i
-
-            auth_tag = context.client.get_object(
-              bucket: context.params[:bucket],
-              key: context.params[:key],
-              version_id: context.params[:version_id],
-              range: "bytes=-#{AES_GCM_TAG_LEN_BYTES}"
-            ).body.read
-
-            cipher.auth_tag = auth_tag
             cipher.auth_data = ''
 
             # The encrypted object contains both the cipher text
             # plus a trailing auth tag.
+            # The trailing auth tag will be accumulated and added to the cipher.auth_tag.
             IOAuthDecrypter.new(
               io: http_resp.body,
               encrypted_content_length: content_length - AES_GCM_TAG_LEN_BYTES,
