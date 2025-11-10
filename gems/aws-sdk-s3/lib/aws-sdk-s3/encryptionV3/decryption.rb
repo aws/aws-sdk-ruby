@@ -106,7 +106,6 @@ module Aws
           def get_decrypter(context, cipher, _envelope)
             http_resp = context.http_response
             content_length = http_resp.headers['content-length'].to_i
-            cipher.auth_data = ''
 
             # The encrypted object contains both the cipher text
             # plus a trailing auth tag.
