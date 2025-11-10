@@ -35,7 +35,7 @@ module Aws::DynamoDBStreams
   class Client < Smithy::Client::Base
     include Smithy::Client::Stubs
 
-    self.service = Schema::DynamoDBStreams20120810
+    self.service = Schema::DynamoDBStreams_20120810
     @identifier = :dynamodbstreams
 
     add_plugin(::Aws::DynamoDBStreams::Plugins::Endpoint)

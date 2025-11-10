@@ -189,9 +189,9 @@ module Aws::DynamoDBStreams
     TrimmedDataAccessException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TrimmedDataAccessException.type = Types::TrimmedDataAccessException
 
-    DynamoDBStreams20120810 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
+    DynamoDBStreams_20120810 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.dynamodbstreams#DynamoDBStreams_20120810"
-      service.name = "DynamoDBStreams20120810"
+      service.name = "DynamoDBStreams_20120810"
       service.version = "2012-08-10"
       service.traits = {"aws.api#service" => {"sdkId" => "DynamoDB Streams", "arnNamespace" => "dynamodb", "cloudFormationName" => "DynamoDBStreams", "cloudTrailEventSource" => "dynamodbstreams.amazonaws.com", "docId" => "streams-dynamodb-2012-08-10", "endpointPrefix" => "streams.dynamodb"}, "aws.auth#sigv4" => {"name" => "dynamodb"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon DynamoDB Streams", "smithy.api#xmlNamespace" => {"uri" => "http://dynamodb.amazonaws.com/doc/2012-08-10/"}}
       service.add_operation(:describe_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

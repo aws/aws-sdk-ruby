@@ -7,6 +7,8 @@ require_relative 'welds/sigv4'
 
 require_relative 'welds/services/cloudfront'
 require_relative 'welds/services/docdb'
+require_relative 'welds/services/dynamodb'
+require_relative 'welds/services/dynamodbstreams'
 require_relative 'welds/services/ec2'
 require_relative 'welds/services/neptune'
 require_relative 'welds/services/pinpointsmsvoice'
