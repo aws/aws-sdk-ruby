@@ -26,6 +26,8 @@ require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-sqs/plugins/queue_urls'
+require 'aws-sdk-sqs/plugins/verify_checksums'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:sqs)
 
@@ -62,6 +64,8 @@ module Aws::SQS
     add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::SQS::Plugins::QueueUrls)
+    add_plugin(Aws::SQS::Plugins::VerifyChecksums)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -215,6 +219,11 @@ module Aws::SQS
     #  * `~/.aws/config` as `use_fips_endpoint` under a profile
     # @option options [Boolean] :validate_params (true)
     #  When `true`, request parameters are validated before sending the request.
+    # @option options [Boolean] :verify_checksums (true)
+    #  When `true` MD5 checksums will be computed for messages sent to
+    #  an SQS queue and matched against MD5 checksums returned by Amazon SQS.
+    #  `Aws::Core::Errors::ChecksumError` are raised for cases where checksums do
+    #  not match.
     def initialize(*options)
       super
     end
