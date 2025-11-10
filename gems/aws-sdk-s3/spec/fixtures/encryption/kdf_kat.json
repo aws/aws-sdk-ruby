@@ -14,13 +14,13 @@
     "commitment_key": "5c1e73e47f6fe3a70d6d094283aceaa76d2975feb829212d88f0afc1"
   },
   {
-    "comment": "S3EC.ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY with encryption test",
-    "data_key": "f331a37a67de41312aba59889b0a7153beddc8c1603e4b307244c12f7960ebbb",
-    "message_id": "61678bbe745d80302928e5b5a82ba73de86deb959824b4342da62443",
-    "encryption_key": "5c8bc1c3d2d866f3724143a0d48ddc134cd1088312313d503497eac33cca6d4a",
-    "commitment_key": "abe6c3a3f7223dddbbceaa382a1bdbdbf064746b7898aec3a0f4c1ae",
+    "comment": "Example KAT entry",
+    "data_key": "09b579890de8618fa436ced66b655af4aa6ec760fabf3eb9e7cc7fd22e79851e",
+    "message_id": "9faa68cd791762eb7280bab11ca1d4011de7e3a255a628d9fbe54f0a",
+    "encryption_key": "bd99a917127150fae9e6f87193b122c52ae72fbcdc30e8d18cdf81fabf8b2df3",
+    "commitment_key": "ebbeb009a83d2dad7ce3d8df0b7814d1dfe7e9e89703f768ab6ffe3f",
     "plaintext": "48656c6c6f2c20576f726c6421",
-    "ciphertext": "66295d01a48d699b7da7ec4dae",
-    "auth_tag": "d0f126ec41e62cb2130824ebcc600f12"
+    "ciphertext": "ac9f0d1185cbc1d2b7e77788b4",
+    "auth_tag": "abe58c0c421fa648faca6de694057e9a"
   }
 ]

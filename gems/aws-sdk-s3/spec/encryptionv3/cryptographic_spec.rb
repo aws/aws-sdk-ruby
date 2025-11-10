@@ -120,18 +120,19 @@ module Aws
             handler.call(context)
           end
 
-          it 'uses IV containing only zeros for AES-GCM encryption' do
+          it 'uses IV containing only 0x01 for AES-GCM encryption' do
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
             ##= type=test
-            ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, the IV used in the AES-GCM content encryption/decryption MUST contain only zeros of the length defined in the algorithm suite.
+            ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY,
+            ##% the IV used in the AES-GCM content encryption/decryption MUST consist entirely of bytes with the value 0x01.
 
-            v3_iv_bytes = "\x00" * 12
-            zero_iv_used = false
+            v3_iv_bytes = "\x01" * 12
+            iv_used = false
             
             # aes_cipher is called multiple times - check that at least one uses zero IV
             allow(Utils).to receive(:aes_cipher).and_wrap_original do |m, mode, block_mode, key, iv|
               if iv == v3_iv_bytes && block_mode == :GCM
-                zero_iv_used = true
+                iv_used = true
               end
               m.call(mode, block_mode, key, iv)
             end
@@ -143,13 +144,13 @@ module Aws
             context = double(params: params, client: s3_client, :[] => context_enc, http_response: http_response, config: config)
 
             handler.call(context)
-            expect(zero_iv_used).to be true
+            expect(iv_used).to be true
           end
 
           it 'initializes cipher with derived encryption key and zero IV' do
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
-            ##= type=test
-            ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only zeros, and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
+            ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only bytes with the value 0x01,
+            ##% and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
 
             # Verify aes_cipher is called with the derived encryption key and zero IV
             derived_key = nil
@@ -158,7 +159,7 @@ module Aws
               derived_key
             end
 
-            v3_iv_bytes = "\x00" * 12
+            v3_iv_bytes = "\x01" * 12
             correct_cipher_init = false
             
             allow(Utils).to receive(:aes_cipher).and_wrap_original do |m, mode, block_mode, key, iv|

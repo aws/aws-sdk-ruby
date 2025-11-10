@@ -135,7 +135,7 @@ module Aws
 
         def materials_description
           ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
-          ##% If the mapkey is not present, the default Material Description value MUST be set to an empty map (`{}`).
+          ##% If the mapkey x-amz-m is not present, the default Material Description value MUST be set to an empty map (`{}`).
           @key_provider.encryption_materials.description || {}
         end
 

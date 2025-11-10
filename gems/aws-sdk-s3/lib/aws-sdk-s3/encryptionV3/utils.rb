@@ -110,7 +110,7 @@ module Aws
           COMMITMENT_KEY_INFO = ([0x00, 0x73].pack('C*') + 'COMMITKEY'.encode('UTF-8')).freeze
 
           SHA512_DIGEST = OpenSSL::Digest::SHA512.new.freeze
-          V3_IV_BYTES = ("\x00" * 12).freeze
+          V3_IV_BYTES = ("\x01" * 12).freeze
           ALGO_ID = [0x00, 0x73].pack('C*').freeze
 
           def generate_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key)
@@ -169,7 +169,8 @@ module Aws
 
           def alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(mode, data_key, message_id)
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
-            ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only zeros, and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
+            ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only bytes with the value 0x01,
+            ##% and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
             cipher = Utils.aes_cipher(
               mode,
               :GCM,
@@ -177,7 +178,8 @@ module Aws
               ##% The client MUST use HKDF to derive the key commitment value and the derived encrypting key as described in [Key Derivation](key-derivation.md).
               Utils.derive_encryption_key(data_key, message_id),
               ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
-              ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY, the IV used in the AES-GCM content encryption/decryption MUST contain only zeros of the length defined in the algorithm suite.
+              ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY,
+              ##% the IV used in the AES-GCM content encryption/decryption MUST consist entirely of bytes with the value 0x01.
               V3_IV_BYTES
             ) #OpenSSL::Cipher.new("aes-256-gcm")
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation

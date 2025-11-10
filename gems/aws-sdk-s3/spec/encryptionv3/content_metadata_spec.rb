@@ -511,9 +511,8 @@ module Aws
           it 'defaults material description to empty map when not present' do
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
             ##= type=test
-            ##% If the mapkey is not present, the default Material Description value MUST be set to an empty map (`{}`).
+            ##% If the mapkey x-amz-m is not present, the default Material Description value MUST be set to an empty map (`{}`).
 
-            # Create an object without explicitly providing materials_description
             key = OpenSSL::Cipher.new('aes-256-gcm').random_key
             options = {
               client: s3_client,
