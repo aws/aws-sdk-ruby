@@ -1869,9 +1869,9 @@ module Aws::DynamoDB
     WriteRequest.type = Types::WriteRequest
     WriteRequests.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WriteRequest)
 
-    DynamoDB_20120810 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
+    DynamoDB20120810 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.dynamodb#DynamoDB_20120810"
-      service.name = "DynamoDB_20120810"
+      service.name = "DynamoDB20120810"
       service.version = "2012-08-10"
       service.traits = {"aws.api#clientEndpointDiscovery" => {"operation" => "com.amazonaws.dynamodb#DescribeEndpoints", "error" => "com.amazonaws.dynamodb#InvalidEndpointException"}, "aws.api#service" => {"sdkId" => "DynamoDB", "arnNamespace" => "dynamodb", "cloudFormationName" => "DynamoDB", "cloudTrailEventSource" => "dynamodb.amazonaws.com", "endpointPrefix" => "dynamodb"}, "aws.auth#sigv4" => {"name" => "dynamodb"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#suppress" => ["RuleSetAwsBuiltIn.AWS::Auth::AccountId"], "smithy.api#title" => "Amazon DynamoDB", "smithy.api#xmlNamespace" => {"uri" => "http://dynamodb.amazonaws.com/doc/2012-08-10/"}}
       service.add_operation(:batch_execute_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

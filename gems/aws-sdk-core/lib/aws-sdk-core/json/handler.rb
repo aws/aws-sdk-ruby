@@ -38,7 +38,8 @@ module Aws
         end
 
         def target(context)
-          "#{context.config.service.name}.#{context.operation.name}"
+          id = context.config.service.id
+          "#{id.split('#').last}.#{context.operation.name}"
         end
 
         def query_compatible?(context)
