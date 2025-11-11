@@ -33,8 +33,11 @@ module Aws
             context.http_response.on_data do |chunk|
               actual = Zlib.crc32(chunk, actual || 0) if expected
             end
-            context.http_response.on_done do
-              raise Core::Errors::ChecksumError, 'Response failed CRC32 check.' if expected && expected.to_i != actual
+            context.http_response.on_success do
+              if expected && expected.to_i != actual
+                error = Core::Errors::ChecksumError.new('Response failed CRC32 check.')
+                context.http_response.signal_error(Smithy::Client::NetworkingError.new(error))
+              end
             end
             @handler.call(context)
           end

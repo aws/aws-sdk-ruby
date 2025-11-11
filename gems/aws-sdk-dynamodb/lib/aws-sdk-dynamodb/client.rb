@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-dynamodb/plugins/crc32_validation'
+require 'aws-sdk-dynamodb/plugins/extended_retries'
 require 'aws-sdk-dynamodb/plugins/simple_attributes'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:dynamodb)
@@ -65,6 +66,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::DynamoDB::Plugins::CRC32Validation)
+    add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
     add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
 
     # @param options [Hash] Client options
