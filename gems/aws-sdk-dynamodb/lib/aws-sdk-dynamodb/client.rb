@@ -26,6 +26,7 @@ require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-dynamodb/plugins/crc32_validation'
 require 'aws-sdk-dynamodb/plugins/simple_attributes'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:dynamodb)
@@ -63,6 +64,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::DynamoDB::Plugins::CRC32Validation)
     add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
 
     # @param options [Hash] Client options
@@ -82,6 +84,9 @@ module Aws::DynamoDB
     # @option options [Array<String>] :auth_scheme_preference
     #  An ordered list of preferred authentication schemes to use when making a request.
     #  The items in the list must be a fully qualified scheme IDs, such as `smithy.api#httpBearerAuth`.
+    # @option options [Boolean] :compute_checksums (true)
+    #  When `true`, a CRC32 checksum is computed of every HTTP response body and compared against the `X-Amz-Crc32` header.
+    #  If the checksums do not match, the request is re-sent up to the configured number of retries.
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
     # @option options [#identity] :credentials_provider
