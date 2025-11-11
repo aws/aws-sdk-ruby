@@ -26,6 +26,7 @@ require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/json_rpc_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-dynamodb/plugins/simple_attributes'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:dynamodb)
 
@@ -35,7 +36,7 @@ module Aws::DynamoDB
   class Client < Smithy::Client::Base
     include Smithy::Client::Stubs
 
-    self.service = Schema::DynamoDB20120810
+    self.service = Schema::DynamoDB_20120810
     @identifier = :dynamodb
 
     add_plugin(::Aws::DynamoDB::Plugins::Endpoint)
@@ -62,6 +63,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Core::Plugins::JsonRpcProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -197,6 +199,11 @@ module Aws::DynamoDB
     #  `AWS_SDK_UA_APP_ID` or the shared config profile attribute `sdk_ua_app_id`.
     # @option options [String] :secret_access_key
     # @option options [String] :session_token
+    # @option options [Boolean] :simple_attributes (true)
+    #  Enables working with DynamoDB attribute values using Ruby primitives.
+    #  Disabling this option requires that all request attribute values have their types specified,
+    #  e.g. `{ s: 'abc' }` instead of simply `'abc'`.
+    #  See {Aws::DynamoDB::Plugins::SimpleAttributes} for more information.
     # @option options [Boolean] :stub_responses
     #  When `true`, the client will return stubbed responses instead of networking requests.
     #  By default fake responses are generated and returned. You can specify the response data

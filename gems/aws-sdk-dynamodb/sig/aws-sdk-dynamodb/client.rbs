@@ -42,6 +42,7 @@ module Aws::DynamoDB
       ?sdk_ua_app_id: String,
       ?secret_access_key: String,
       ?session_token: String,
+      ?simple_attributes: bool,
       ?stub_responses: bool,
       ?use_dualstack_endpoint: bool,
       ?use_fips_endpoint: bool,
