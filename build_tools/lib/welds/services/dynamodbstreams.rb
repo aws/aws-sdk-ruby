@@ -9,7 +9,7 @@ module BuildTools
       class DynamoDBStreams < Smithy::Weld
         def for?(service)
           _id, service = service.first
-          return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'DynamoDBStreams'
+          return false unless service.fetch('traits', {}).fetch('aws.api#service', {})['sdkId'] == 'DynamoDB Streams'
 
           say_status :insert, 'Adding customizations for DynamoDBStreams', @plan.quiet
           true
