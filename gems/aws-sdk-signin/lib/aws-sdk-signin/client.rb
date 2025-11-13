@@ -232,13 +232,11 @@ module Aws::Signin
     # The operation behavior is determined by the grant_type parameter in the request body:
     # 
     # **Authorization Code Flow (NOT Idempotent):**
-    # - DPoP proof JWT header for demonstrating proof-of-possession of private key
     # - JSON or form-encoded body with client_id, grant_type=authorization_code, code, redirect_uri, code_verifier
     # - Returns access_token, token_type, expires_in, refresh_token, and id_token
     # - Each authorization code can only be used ONCE for security (prevents replay attacks)
     # 
     # **Token Refresh Flow (Idempotent):**
-    # - DPoP proof JWT header (same private key as original auth_code redemption)
     # - JSON or form-encoded body with client_id, grant_type=refresh_token, refresh_token
     # - Returns access_token, token_type, expires_in, and refresh_token (no id_token)
     # - Multiple calls with same refresh_token return consistent results within validity window
@@ -250,18 +248,11 @@ module Aws::Signin
     # Note: This operation cannot be marked as @idempotent because it handles both idempotent
     # (token refresh) and non-idempotent (auth code redemption) flows in a single endpoint.
     # @param [Hash, Types::CreateOAuth2TokenRequest] params
-    # @option params [String] :dpop_proof
-    #   DPoP proof JWT header for demonstrating proof-of-possession of the private key
-    #   
-    #   Header format: {"typ": "dpop+jwt", "alg": "ES256", "jwk": {...}}
-    #   Payload format: {"htm": "POST", "htu": "https://server.example.com/token", "iat": timestamp, "jti": "unique-id"}
-    #   Must be signed with the private key corresponding to the embedded jwk
     # @option params [Types::CreateOAuth2TokenRequestBody] :token_input
     #   Flattened token operation inputs
     #   The specific operation is determined by grant_type in the request body
     # @example Request syntax with placeholder values
     #   params = {
-    #     dpop_proof: "DPoPProof", # required
     #     token_input: { # required
     #       client_id: "ClientId", # required
     #       grant_type: "GrantType", # required

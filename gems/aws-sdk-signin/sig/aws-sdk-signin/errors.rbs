@@ -1,15 +1,19 @@
 module Aws::Signin
   module Errors
-    class ForbiddenError < Smithy::Client::ServiceError
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def error: () -> String?
       def message: () -> String?
     end
-    class InvalidRequestError < Smithy::Client::ServiceError
+    class InternalServerException < Smithy::Client::ServiceError
+      def error: () -> String?
       def message: () -> String?
     end
     class TooManyRequestsError < Smithy::Client::ServiceError
+      def error: () -> String?
       def message: () -> String?
     end
-    class UnauthorizedError < Smithy::Client::ServiceError
+    class ValidationException < Smithy::Client::ServiceError
+      def error: () -> String?
       def message: () -> String?
     end
   end

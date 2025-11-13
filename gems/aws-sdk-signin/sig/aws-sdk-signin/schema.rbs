@@ -2,6 +2,7 @@ module Aws::Signin
   module Schema
     include Smithy::Schema::Shapes
 
+    AccessDeniedException: StructureShape
     AccessToken: StructureShape
     AuthorizationCode: StringShape
     ClientId: StringShape
@@ -10,17 +11,16 @@ module Aws::Signin
     CreateOAuth2TokenRequestBody: StructureShape
     CreateOAuth2TokenResponse: StructureShape
     CreateOAuth2TokenResponseBody: StructureShape
-    DPoPProof: StringShape
     ExpiresIn: IntegerShape
-    ForbiddenError: StructureShape
     GrantType: StringShape
     IdToken: StringShape
-    InvalidRequestError: StructureShape
+    InternalServerException: StructureShape
+    OAuth2ErrorCode: EnumShape
     RedirectUri: StringShape
     RefreshToken: StringShape
     TokenType: StringShape
     TooManyRequestsError: StructureShape
-    UnauthorizedError: StructureShape
+    ValidationException: StructureShape
 
     Signin: ServiceShape
   end

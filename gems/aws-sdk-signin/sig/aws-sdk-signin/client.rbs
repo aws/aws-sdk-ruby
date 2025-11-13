@@ -53,7 +53,6 @@ module Aws::Signin
       def token_output: () -> Types::CreateOAuth2TokenResponseBody?
     end
     def create_o_auth2_token: (
-      ?dpop_proof: String,
       ?token_input: {
         client_id: String,
         grant_type: String,

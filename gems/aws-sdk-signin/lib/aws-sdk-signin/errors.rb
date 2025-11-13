@@ -22,60 +22,64 @@ module Aws::Signin
   #
   # ## Error Classes
   #
-  # * {ForbiddenError}
-  # * {InvalidRequestError}
+  # * {AccessDeniedException}
+  # * {InternalServerException}
   # * {TooManyRequestsError}
-  # * {UnauthorizedError}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # Error thrown when the client is not authorized or has insufficient permissions
+    # Error thrown for access denied scenarios with flexible HTTP status mapping
     # 
-    # HTTP Status Code: 403 Forbidden
+    # Runtime HTTP Status Code Mapping:
+    # - HTTP 401 (Unauthorized): TOKEN_EXPIRED, AUTHCODE_EXPIRED
+    # - HTTP 403 (Forbidden): USER_CREDENTIALS_CHANGED, INSUFFICIENT_PERMISSIONS
     # 
-    # Possible causes:
-    # - Unauthorized widget or client_id not registered
-    # - Insufficient permissions for the requested scope
-    # - Client not authorized to use the specified grant_type
-    # - DPoP key binding validation failure (cnf.jkt mismatch)
-    # - Policy evaluation failure for credential scoping
-    class ForbiddenError < Smithy::Client::ServiceError
+    # The specific HTTP status code is determined at runtime based on the error enum value.
+    # Consumers should use the error field to determine the specific access denial reason.
+    class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
-      # @param [Aws::Signin::Types::ForbiddenError] data
+      # @param [Aws::Signin::Types::AccessDeniedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
 
-      # Detailed message explaining the authorization failure
-      # Provides information about permission or policy violations
+      # OAuth 2.0 error code indicating the specific type of access denial
+      # Can be TOKEN_EXPIRED, AUTHCODE_EXPIRED, USER_CREDENTIALS_CHANGED, or INSUFFICIENT_PERMISSIONS
+      def error
+        @data[:error]
+      end
+
+      # Detailed message explaining the access denial
+      # Provides specific information about why access was denied
       def message
         @data[:message]
       end
     end
 
-    # Error thrown when the request is malformed or missing required parameters
+    # Error thrown when an internal server error occurs
     # 
-    # HTTP Status Code: 400 Bad Request
+    # HTTP Status Code: 500 Internal Server Error
     # 
-    # Possible causes:
-    # - Malformed request body (invalid form encoding)
-    # - Missing required parameters (client_id, grant_type, code, etc.)
-    # - Invalid parameter values (malformed client_id ARN, invalid grant_type)
-    # - Invalid DPoP proof JWT format or signature
-    # - PKCE code_verifier validation failure
-    # - Redirect URI mismatch with original authorization request
-    class InvalidRequestError < Smithy::Client::ServiceError
+    # Used for unexpected server-side errors that prevent request processing.
+    class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
-      # @param [Aws::Signin::Types::InvalidRequestError] data
+      # @param [Aws::Signin::Types::InternalServerException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
 
-      # Detailed message explaining the request validation failure
-      # Provides specific information about which parameter or validation failed
+      # OAuth 2.0 error code indicating server error
+      # Will be SERVER_ERROR for internal server errors
+      def error
+        @data[:error]
+      end
+
+      # Detailed message explaining the server error
+      # May include error details for debugging purposes
       def message
         @data[:message]
       end
@@ -84,6 +88,9 @@ module Aws::Signin
     # Error thrown when rate limit is exceeded
     # 
     # HTTP Status Code: 429 Too Many Requests
+    # 
+    # Possible OAuth2ErrorCode values:
+    # - INVALID_REQUEST: Rate limiting, too many requests, abuse prevention
     # 
     # Possible causes:
     # - Too many token requests from the same client
@@ -97,6 +104,12 @@ module Aws::Signin
         super
       end
 
+      # OAuth 2.0 error code indicating the specific type of error
+      # Will be INVALID_REQUEST for rate limiting scenarios
+      def error
+        @data[:error]
+      end
+
       # Detailed message about the rate limiting
       # May include retry-after information or rate limit details
       def message
@@ -104,25 +117,27 @@ module Aws::Signin
       end
     end
 
-    # Error thrown when the access token is invalid or expired
+    # Error thrown when request validation fails
     # 
-    # HTTP Status Code: 401 Unauthorized
+    # HTTP Status Code: 400 Bad Request
     # 
-    # Possible causes:
-    # - Invalid or expired authorization code
-    # - Invalid or expired refresh token
-    # - DPoP proof JWT validation failure (invalid signature, expired, wrong key)
-    # - Authorization code already used (replay attack prevention)
-    # - Refresh token revoked or invalid
-    class UnauthorizedError < Smithy::Client::ServiceError
+    # Used for request validation errors such as malformed parameters,
+    # missing required fields, or invalid parameter values.
+    class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
-      # @param [Aws::Signin::Types::UnauthorizedError] data
+      # @param [Aws::Signin::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
 
-      # Detailed message explaining the authentication failure
-      # Indicates specific authentication issue (expired token, invalid signature, etc.)
+      # OAuth 2.0 error code indicating validation failure
+      # Will be INVALID_REQUEST for validation errors
+      def error
+        @data[:error]
+      end
+
+      # Detailed message explaining the validation failure
+      # Provides specific information about which validation failed
       def message
         @data[:message]
       end

@@ -21,7 +21,7 @@ module Aws::Signin
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ap-northeast-3.aws-signin-testing.amazon.com", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.aws.amazon.com", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
             return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.amazonaws.cn", headers: {}, properties: {})

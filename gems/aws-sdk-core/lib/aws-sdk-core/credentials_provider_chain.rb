@@ -190,8 +190,10 @@ module Aws
 
       def resolve_source_profile(options, profile, profile_config, source_profile)
         options = visit_source_profile(options, profile, profile_config, source_profile)
-        # check all profile-based credentials providers for credentials
-        profile_based_providers.each do |method_name|
+        # check all profile-based credentials providers for credentials except for LoginCredentialsProvider
+        providers = profile_based_providers
+        providers.delete(:profile_login_credentials)
+        providers.each do |method_name|
           Smithy::Client::Features.track('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             provider = send(method_name, options)
             next unless provider&.set?

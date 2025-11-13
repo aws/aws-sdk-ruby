@@ -6,6 +6,30 @@ module Aws::Signin
   # This module contains the types returned by client operations.
   module Types
 
+    # Error thrown for access denied scenarios with flexible HTTP status mapping
+    # 
+    # Runtime HTTP Status Code Mapping:
+    # - HTTP 401 (Unauthorized): TOKEN_EXPIRED, AUTHCODE_EXPIRED
+    # - HTTP 403 (Forbidden): USER_CREDENTIALS_CHANGED, INSUFFICIENT_PERMISSIONS
+    # 
+    # The specific HTTP status code is determined at runtime based on the error enum value.
+    # Consumers should use the error field to determine the specific access denial reason.
+    # @!attribute error
+    #   OAuth 2.0 error code indicating the specific type of access denial
+    #   Can be TOKEN_EXPIRED, AUTHCODE_EXPIRED, USER_CREDENTIALS_CHANGED, or INSUFFICIENT_PERMISSIONS
+    #   @return [String]
+    # @!attribute message
+    #   Detailed message explaining the access denial
+    #   Provides specific information about why access was denied
+    #   @return [String]
+    class AccessDeniedException < Struct.new(
+      :error,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # AWS credentials structure containing temporary access credentials
     # 
     # The scoped-down, 15 minute duration AWS credentials.
@@ -34,19 +58,11 @@ module Aws::Signin
     # 
     # Contains flattened token operation inputs for both authorization code and refresh token flows.
     # The operation type is determined by the grant_type parameter in the request body.
-    # @!attribute dpop_proof
-    #   DPoP proof JWT header for demonstrating proof-of-possession of the private key
-    #   
-    #   Header format: {"typ": "dpop+jwt", "alg": "ES256", "jwk": {...}}
-    #   Payload format: {"htm": "POST", "htu": "https://server.example.com/token", "iat": timestamp, "jti": "unique-id"}
-    #   Must be signed with the private key corresponding to the embedded jwk
-    #   @return [String]
     # @!attribute token_input
     #   Flattened token operation inputs
     #   The specific operation is determined by grant_type in the request body
     #   @return [Types::CreateOAuth2TokenRequestBody]
     class CreateOAuth2TokenRequest < Struct.new(
-      :dpop_proof,
       :token_input,
       keyword_init: true
     )
@@ -146,43 +162,21 @@ module Aws::Signin
       include ::Smithy::Schema::Structure
     end
 
-    # Error thrown when the client is not authorized or has insufficient permissions
+    # Error thrown when an internal server error occurs
     # 
-    # HTTP Status Code: 403 Forbidden
+    # HTTP Status Code: 500 Internal Server Error
     # 
-    # Possible causes:
-    # - Unauthorized widget or client_id not registered
-    # - Insufficient permissions for the requested scope
-    # - Client not authorized to use the specified grant_type
-    # - DPoP key binding validation failure (cnf.jkt mismatch)
-    # - Policy evaluation failure for credential scoping
-    # @!attribute message
-    #   Detailed message explaining the authorization failure
-    #   Provides information about permission or policy violations
+    # Used for unexpected server-side errors that prevent request processing.
+    # @!attribute error
+    #   OAuth 2.0 error code indicating server error
+    #   Will be SERVER_ERROR for internal server errors
     #   @return [String]
-    class ForbiddenError < Struct.new(
-      :message,
-      keyword_init: true
-    )
-      include ::Smithy::Schema::Structure
-    end
-
-    # Error thrown when the request is malformed or missing required parameters
-    # 
-    # HTTP Status Code: 400 Bad Request
-    # 
-    # Possible causes:
-    # - Malformed request body (invalid form encoding)
-    # - Missing required parameters (client_id, grant_type, code, etc.)
-    # - Invalid parameter values (malformed client_id ARN, invalid grant_type)
-    # - Invalid DPoP proof JWT format or signature
-    # - PKCE code_verifier validation failure
-    # - Redirect URI mismatch with original authorization request
     # @!attribute message
-    #   Detailed message explaining the request validation failure
-    #   Provides specific information about which parameter or validation failed
+    #   Detailed message explaining the server error
+    #   May include error details for debugging purposes
     #   @return [String]
-    class InvalidRequestError < Struct.new(
+    class InternalServerException < Struct.new(
+      :error,
       :message,
       keyword_init: true
     )
@@ -193,37 +187,46 @@ module Aws::Signin
     # 
     # HTTP Status Code: 429 Too Many Requests
     # 
+    # Possible OAuth2ErrorCode values:
+    # - INVALID_REQUEST: Rate limiting, too many requests, abuse prevention
+    # 
     # Possible causes:
     # - Too many token requests from the same client
     # - Rate limiting based on client_id or IP address
     # - Abuse prevention mechanisms triggered
     # - Service protection against excessive token generation
+    # @!attribute error
+    #   OAuth 2.0 error code indicating the specific type of error
+    #   Will be INVALID_REQUEST for rate limiting scenarios
+    #   @return [String]
     # @!attribute message
     #   Detailed message about the rate limiting
     #   May include retry-after information or rate limit details
     #   @return [String]
     class TooManyRequestsError < Struct.new(
+      :error,
       :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # Error thrown when the access token is invalid or expired
+    # Error thrown when request validation fails
     # 
-    # HTTP Status Code: 401 Unauthorized
+    # HTTP Status Code: 400 Bad Request
     # 
-    # Possible causes:
-    # - Invalid or expired authorization code
-    # - Invalid or expired refresh token
-    # - DPoP proof JWT validation failure (invalid signature, expired, wrong key)
-    # - Authorization code already used (replay attack prevention)
-    # - Refresh token revoked or invalid
-    # @!attribute message
-    #   Detailed message explaining the authentication failure
-    #   Indicates specific authentication issue (expired token, invalid signature, etc.)
+    # Used for request validation errors such as malformed parameters,
+    # missing required fields, or invalid parameter values.
+    # @!attribute error
+    #   OAuth 2.0 error code indicating validation failure
+    #   Will be INVALID_REQUEST for validation errors
     #   @return [String]
-    class UnauthorizedError < Struct.new(
+    # @!attribute message
+    #   Detailed message explaining the validation failure
+    #   Provides specific information about which validation failed
+    #   @return [String]
+    class ValidationException < Struct.new(
+      :error,
       :message,
       keyword_init: true
     )

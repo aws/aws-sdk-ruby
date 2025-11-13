@@ -5,8 +5,9 @@ module Aws
     # An auto-refreshing credential provider that retrieves credentials from
     # a cached login token. This class does NOT implement the AWS Sign-In
     # login flow - tokens must be generated separately by running `aws login`
-    # from the AWS CLI with the correct profile. The {LoginCredentialsProvider}
-    # will auto-refresh the AWS credentials from Sign-In.
+    # from the AWS CLI/AWS Tools for PowerShell with the correct profile.
+    # The {LoginCredentialsProvider} will auto-refresh the AWS credentials
+    # from AWS Sign-In.
     #
     #     # You must first run aws login --profile your-login-profile
     #     credentials = Aws::Core::LoginCredentialsProvider.new(login_session: 'my_login_session')
@@ -20,9 +21,10 @@ module Aws
       # Raised when Login Token is invalid
       class InvalidLoginToken < RuntimeError; end
 
-      # @option options [required, String] :login_session The login session.
-      #   This value can be found in the AWS config file which is set by the
-      #   AWS CLI automatically.
+      # @option options [required, String] :login_session An opaque string
+      #   used to determine the cache file location. This value can be found
+      #   in the AWS config file which is set by the AWS CLI/AWS Tools for
+      #   PowerShell automatically.
       #
       # @option options [Signin::Client] :client Optional `Signin::Client`.
       #   If not provided, a client will be constructed.
@@ -52,8 +54,16 @@ module Aws
       def refresh
         # First reload the token from disk to ensure it hasn't been refreshed externally
         token_json = read_cached_token
-        update_creds_from_token(token_json)
+        update_creds(token_json['accessToken'])
         return if @identity && @expiration && !near_expiration?(sync_expiration_length)
+
+        # Using OpenSSL 3.6.0 may result in errors like "certificate verify failed (unable to get certificate CRL)."
+        # A recommended workaround is to use OpenSSL version < 3.6.0 or requiring the openssl gem with a version of at
+        # least 3.2.2. GitHub issue: https://github.com/openssl/openssl/issues/28752.
+        if OpenSSL::OPENSSL_LIBRARY_VERSION.include?('3.6.') &&
+           (!Gem.loaded_specs['openssl'] || Gem.loaded_specs['openssl'].version < Gem::Version.new('3.2.2'))
+          warn 'WARNING: OpenSSL 3.6.x may cause certificate verify errors, use OpenSSL < 3.6.0 or openssl gem >= 3.2.2'
+        end
 
         # Attempt to refresh the token
         attempt_refresh(token_json)
@@ -61,7 +71,7 @@ module Aws
         # Raise if token is hard expired
         return unless !@expiration || @expiration < Time.now
 
-        raise InvalidLoginToken, 'Login token is invalid and failed to refresh. Please reauthenticate with `aws login`.'
+        raise InvalidLoginToken, 'Login token is invalid and failed to refresh. Please reauthenticate.'
       end
 
       def read_cached_token
@@ -69,7 +79,7 @@ module Aws
         validate_cached_token(cached_token)
         cached_token
       rescue Errno::ENOENT, JSON::ParserError
-        raise InvalidLoginToken, 'Failed to load a Login token for profile. Please reauthenticate with `aws login`.'
+        raise InvalidLoginToken, "Failed to load a Login token for session #{@login_session}. Please reauthenticate."
       end
 
       def login_cache_file
@@ -79,23 +89,24 @@ module Aws
       end
 
       def validate_cached_token(cached_token)
-        access_token = cached_token['accessToken']
-        unless access_token
-          raise ArgumentError, 'Missing required field: accessToken. Please reauthenticate with `aws login`.'
+        required_cached_token_fields = %w[accessToken clientId refreshToken dpopKey]
+        missing_fields = required_cached_token_fields.reject { |field| cached_token[field] }
+        unless missing_fields.empty?
+          raise ArgumentError, "Cached login token is missing required field(s): #{missing_fields}. " \
+                               'Please reauthenticate.'
         end
 
+        access_token = cached_token['accessToken']
         required_access_token_fields = %w[accessKeyId secretAccessKey sessionToken accountId expiresAt]
-        required_cached_token_fields = %w[clientId refreshToken dpopKey]
-        missing_fields = required_access_token_fields.reject { |field| access_token[field] } +
-                         required_cached_token_fields.reject { |field| cached_token[field] }
+        missing_fields = required_access_token_fields.reject { |field| access_token[field] }
 
         return if missing_fields.empty?
 
-        raise ArgumentError, "Missing required field(s): #{missing_fields}. Please reauthenticate with `aws login`."
+        raise ArgumentError, "Access token in cached login token is missing required field(s): #{missing_fields}. " \
+                             'Please reauthenticate.'
       end
 
-      def update_creds_from_token(token_json)
-        access_token = token_json['accessToken']
+      def update_creds(access_token)
         @expiration = Time.parse(access_token['expiresAt'])
         @identity = Credentials.new(
           access_key_id: access_token['accessKeyId'],
@@ -106,47 +117,49 @@ module Aws
       end
 
       def attempt_refresh(token_json)
-        endpoint = determine_endpoint
+        resp = make_request(token_json)
+        parse_resp(resp.token_output, token_json)
+        update_creds(token_json['accessToken'])
+        update_token_cache(token_json)
+      rescue Signin::Errors::AccessDeniedException => e
+        case e.error
+        when 'TOKEN_EXPIRED'
+          warn 'Your session has expired. Please reauthenticate.'
+        when 'USER_CREDENTIALS_CHANGED'
+          warn 'Unable to refresh credentials because of a change in your password. ' \
+               'Please reauthenticate with your new password.'
+        when 'INSUFFICIENT_PERMISSIONS'
+          warn 'Unable to refresh credentials due to insufficient permissions. ' \
+               'You may be missing permission for the `CreateOAuth2Token` action.'
+        end
+      rescue StandardError => e
+        warn("Failed to refresh Login token for LoginCredentialsProvider: #{e.message}")
+      end
+
+      def make_request(token_json)
         options = {
-          dpop_proof: dpop_proof(token_json['dpopKey'], endpoint),
           token_input: {
             client_id: token_json['clientId'],
             grant_type: 'refresh_token',
             refresh_token: token_json['refreshToken']
           }
         }
-        resp = @client.create_o_auth2_token(options)
-        parse_resp(resp.token_output, token_json)
-        update_creds_from_token(token_json)
-        update_token_cache(token_json)
-      rescue StandardError
-        warn('Failed to refresh Login token for LoginCredentialsProvider.')
-      end
-
-      def determine_endpoint
-        params = {
-          dpop_proof: 'dummy_dpop_proof',
-          token_input: {
-            client_id: 'dummy_client_id',
-            grant_type: 'dummy_grant_type',
-            refresh_token: 'dummy_refresh_token'
-          }
-        }
-        context = @client.build_request(:create_o_auth2_token, params).context
-        endpoint_params = Aws::Signin::EndpointParameters.create(context)
-        endpoint = context.config.endpoint_provider.resolve(endpoint_params)
-        uri = Signin::Client.service.operation(:create_o_auth2_token).traits['smithy.api#http']['uri']
-        URI.join(endpoint.url, uri).to_s
+        req = @client.build_request(:create_o_auth2_token, options)
+        endpoint_params = Aws::Signin::EndpointParameters.create(req.context)
+        endpoint = req.context.config.endpoint_provider.resolve(endpoint_params)
+        uri = @client.config.service.operation(:create_o_auth2_token).traits['smithy.api#http']['uri']
+        endpoint = URI.join(endpoint.url, uri).to_s
+        req.context.http_request.headers['DPoP'] = dpop_proof(token_json['dpopKey'], endpoint)
+        req.send_request
       end
 
       def dpop_proof(dpop_key, endpoint)
         # Load private key from cached token file
         private_key = OpenSSL::PKey.read(dpop_key)
-        x = private_key.public_key.to_octet_string(:uncompressed)[1, 32]
-        y = private_key.public_key.to_octet_string(:uncompressed)[33, 32]
+        public_key = private_key.public_key.to_octet_string(:uncompressed)
 
         # Construct header and payload
-        header = build_header(x, y)
+        header = build_header(public_key[1, 32], public_key[33, 32])
         payload = build_payload(endpoint)
 
         # Base64URL encode header and payload, sign message using private key, and create header
@@ -171,9 +184,9 @@ module Aws
 
       def build_payload(htu)
         {
-          'jti' => SecureRandom.uuid, # unique identifier (cryptographically random UUID4)
-          'htm' => 'POST', # hardcoded
-          'htu' => htu, # same endpoint as Sign-In Operation
+          'jti' => SecureRandom.uuid, # unique identifier (UUID4)
+          'htm' => @client.config.service.operation(:create_o_auth2_token).traits['smithy.api#http']['method'], # POST
+          'htu' => htu, # endpoint of the CreateOAuth2Token operation, with path
           'iat' => Time.now.utc.to_i # UTC timestamp, specified number of seconds from 1970-01-01T00:00:00Z UTC
         }
       end
@@ -209,7 +222,15 @@ module Aws
 
       def update_token_cache(token_json)
         cached_token = token_json.dup
-        File.write(login_cache_file, JSON.dump(cached_token))
+        # File.write is not atomic so use temp file and move
+        temp_file = Tempfile.new('temp_file')
+        begin
+          temp_file.write(JSON.dump(cached_token))
+          temp_file.close
+          FileUtils.mv(temp_file.path, login_cache_file)
+        ensure
+          temp_file.unlink if File.exist?(temp_file.path) # Ensure temp file is cleaned up
+        end
       end
     end
   end

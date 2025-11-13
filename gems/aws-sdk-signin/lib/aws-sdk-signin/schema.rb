@@ -6,6 +6,7 @@ module Aws::Signin
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client"})
     AccessToken = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#AccessToken", name: "AccessToken", traits: {"smithy.api#sensitive" => {}})
     AuthorizationCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#AuthorizationCode", name: "AuthorizationCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     ClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#ClientId", name: "ClientId", traits: {"smithy.api#pattern" => "^aws:signin:::cli/(same-device|cross-device|in-band|out-of-band)$"})
@@ -14,23 +15,24 @@ module Aws::Signin
     CreateOAuth2TokenRequestBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#CreateOAuth2TokenRequestBody", name: "CreateOAuth2TokenRequestBody")
     CreateOAuth2TokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#CreateOAuth2TokenResponse", name: "CreateOAuth2TokenResponse")
     CreateOAuth2TokenResponseBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#CreateOAuth2TokenResponseBody", name: "CreateOAuth2TokenResponseBody")
-    DPoPProof = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#DPoPProof", name: "DPoPProof", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     ExpiresIn = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.signin#ExpiresIn", name: "ExpiresIn", traits: {"smithy.api#range" => {"min" => 1, "max" => 900}})
-    ForbiddenError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#ForbiddenError", name: "ForbiddenError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     GrantType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#GrantType", name: "GrantType", traits: {"smithy.api#pattern" => "^(authorization_code|refresh_token)$"})
     IdToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#IdToken", name: "IdToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
-    InvalidRequestError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#InvalidRequestError", name: "InvalidRequestError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    OAuth2ErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.signin#OAuth2ErrorCode", name: "OAuth2ErrorCode")
     RedirectUri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#RedirectUri", name: "RedirectUri", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     RefreshToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#RefreshToken", name: "RefreshToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#sensitive" => {}})
     TokenType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.signin#TokenType", name: "TokenType", traits: {"smithy.api#pattern" => "^aws_sigv4$"})
     TooManyRequestsError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#TooManyRequestsError", name: "TooManyRequestsError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
-    UnauthorizedError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#UnauthorizedError", name: "UnauthorizedError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
+    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.signin#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
+    AccessDeniedException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.type = Types::AccessDeniedException
     AccessToken.add_member(:access_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "accessKeyId", traits: {"smithy.api#jsonName" => "accessKeyId", "smithy.api#required" => {}}))
     AccessToken.add_member(:secret_access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "secretAccessKey", traits: {"smithy.api#jsonName" => "secretAccessKey", "smithy.api#required" => {}}))
     AccessToken.add_member(:session_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "sessionToken", traits: {"smithy.api#jsonName" => "sessionToken", "smithy.api#required" => {}}))
     AccessToken.type = Types::AccessToken
-    CreateOAuth2TokenRequest.add_member(:dpop_proof, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DPoPProof, location_name: "dpopProof", traits: {"smithy.api#httpHeader" => "DPoP", "smithy.api#required" => {}}))
     CreateOAuth2TokenRequest.add_member(:token_input, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOAuth2TokenRequestBody, location_name: "tokenInput", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateOAuth2TokenRequest[:http_payload] = :token_input
     CreateOAuth2TokenRequest[:http_payload_member] = CreateOAuth2TokenRequest.member(:token_input)
@@ -52,14 +54,21 @@ module Aws::Signin
     CreateOAuth2TokenResponseBody.add_member(:refresh_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken", traits: {"smithy.api#jsonName" => "refreshToken", "smithy.api#required" => {}}))
     CreateOAuth2TokenResponseBody.add_member(:id_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdToken, location_name: "idToken", traits: {"smithy.api#jsonName" => "idToken"}))
     CreateOAuth2TokenResponseBody.type = Types::CreateOAuth2TokenResponseBody
-    ForbiddenError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    ForbiddenError.type = Types::ForbiddenError
-    InvalidRequestError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    InvalidRequestError.type = Types::InvalidRequestError
+    InternalServerException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.type = Types::InternalServerException
+    OAuth2ErrorCode.add_member(:token_expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "TOKEN_EXPIRED", traits: {"smithy.api#enumValue" => "TOKEN_EXPIRED"}))
+    OAuth2ErrorCode.add_member(:user_credentials_changed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USER_CREDENTIALS_CHANGED", traits: {"smithy.api#enumValue" => "USER_CREDENTIALS_CHANGED"}))
+    OAuth2ErrorCode.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSIONS"}))
+    OAuth2ErrorCode.add_member(:authcode_expired, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AUTHCODE_EXPIRED", traits: {"smithy.api#enumValue" => "AUTHCODE_EXPIRED"}))
+    OAuth2ErrorCode.add_member(:server_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SERVER_ERROR", traits: {"smithy.api#enumValue" => "server_error"}))
+    OAuth2ErrorCode.add_member(:invalid_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INVALID_REQUEST", traits: {"smithy.api#enumValue" => "INVALID_REQUEST"}))
+    TooManyRequestsError.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
     TooManyRequestsError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
     TooManyRequestsError.type = Types::TooManyRequestsError
-    UnauthorizedError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
-    UnauthorizedError.type = Types::UnauthorizedError
+    ValidationException.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OAuth2ErrorCode, location_name: "error", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.type = Types::ValidationException
 
     Signin = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.signin#Signin"
@@ -71,11 +80,11 @@ module Aws::Signin
         operation.name = "CreateOAuth2Token"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOAuth2TokenRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateOAuth2TokenResponse)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequestError)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsError)
-        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedError)
-        operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/v1/token"}, "smithy.test#smokeTests" => [{"id" => "TokenOperationSmokeTest", "params" => {"dpopProof" => "test-dpop-proof", "tokenInput" => {"clientId" => "aws:signin:::cli/same-device", "grantType" => "authorization_code", "code" => "test-code", "redirectUri" => "https://example.com", "codeVerifier" => "test-code-verifier-1234567890abcdefghijklmnop"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {}, "expect" => {"failure" => {}}}]}
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#auth" => [], "smithy.api#http" => {"method" => "POST", "uri" => "/v1/token"}, "smithy.test#smokeTests" => [{"id" => "TokenOperationSmokeTest", "params" => {"tokenInput" => {"clientId" => "aws:signin:::cli/same-device", "grantType" => "authorization_code", "code" => "test-code", "redirectUri" => "https://example.com", "codeVerifier" => "test-code-verifier-1234567890abcdefghijklmnop"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {}, "expect" => {"failure" => {}}}]}
       end)
     end
 
