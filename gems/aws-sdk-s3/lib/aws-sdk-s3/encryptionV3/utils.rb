@@ -134,12 +134,12 @@ module Aws
           end
 
           def derive_alg_aes_256_gcm_hkdf_sha512_commit_key_cipher(data_key, message_id, stored_commitment_key)
-            raise DecryptionError, 'Data key length does not match algorithm suite' unless data_key.length == 32
+            raise Errors::DecryptionError, 'Data key length does not match algorithm suite' unless data_key.length == 32
 
-            raise DecryptionError, 'Message id length does not match algorithm suite' unless message_id.length == 28
+            raise Errors::DecryptionError, 'Message id length does not match algorithm suite' unless message_id.length == 28
 
             unless stored_commitment_key.length == 28
-              raise DecryptionError, 'Commitment key length does not match algorithm suite'
+              raise Errors::DecryptionError, 'Commitment key length does not match algorithm suite'
             end
 
             ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
@@ -157,7 +157,7 @@ module Aws
               ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
               ##% When using an algorithm suite which supports key commitment,
               ##% the client MUST throw an exception when the derived key commitment value and stored key commitment value do not match.
-              raise DecryptionError, 'Commitment key verification failed'
+              raise Errors::DecryptionError, 'Commitment key verification failed'
             end
 
             ##= ../specification/s3-encryption/decryption.md#decrypting-with-commitment
