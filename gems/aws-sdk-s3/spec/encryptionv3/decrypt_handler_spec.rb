@@ -397,7 +397,66 @@ module Aws
             }.not_to raise_error
           end
         end
-      end
+
+        context 'KMS encryption' do
+          let(:kms_client) { KMS::Client.new(stub_responses: true) }
+          let(:kms_key_id) { 'arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012' }
+
+          it 'if x-amx-t does not exist, then it defaults to {}' do
+            ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+            ##= type=test
+            ##% If the mapkey x-amz-t is not present, the default Material Description value MUST be set to an empty map (`{}`).
+
+            kms_plaintext = OpenSSL::Cipher.new('aes-256-gcm').random_key
+            kms_ciphertext_blob = 'encrypted-data-key-blob'
+            
+            kms_client.stub_responses(:generate_data_key, {
+              key_id: kms_key_id,
+              ciphertext_blob: kms_ciphertext_blob,
+              plaintext: kms_plaintext
+            })
+            
+            kms_client.stub_responses(:decrypt, {
+              key_id: kms_key_id,
+              plaintext: kms_plaintext
+            })
+
+            # Create V3 KMS encryption client
+            client = Client.new(
+              kms_key_id: kms_key_id,
+              key_wrap_schema: :kms_context,
+              kms_client: kms_client,
+              client: s3_client
+            )
+
+            # Capture encrypted data during put
+            data = {}
+            s3_client.stub_responses(:put_object, lambda { |context|
+              data[:metadata] = context.params[:metadata]
+              data[:body] = context.params[:body].read
+              {}
+            })
+
+            # Encrypt and upload
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+
+            # Stub get_object to return the encrypted data, filtering out x-amz-t
+            filtered_metadata = data[:metadata].reject { |k, _v| k == 'x-amz-t' }
+            resp_headers = filtered_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h
+            resp_headers['content-length'] = data[:body].length.to_s
+            
+            s3_client.stub_responses(:get_object,
+              {status_code: 200, body: data[:body], headers: resp_headers}
+            )
+
+            # Decrypt should fail with CEKAlgMismatchError because x-amz-t is missing
+            # When missing, encryption context defaults to {}, but it needs aws:x-amz-cek-alg
+            expect {
+              client.get_object(bucket: test_bucket, key: test_object)
+            }.to raise_error(Errors::CEKAlgMismatchError)
+          end
+        end
     end
   end
+end
 end

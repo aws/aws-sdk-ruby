@@ -125,6 +125,9 @@ module Aws
             ##= type=test
             ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY,
             ##% the IV used in the AES-GCM content encryption/decryption MUST consist entirely of bytes with the value 0x01.
+            ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##= type=test
+            ##% The IV's total length MUST match the IV length defined by the algorithm suite.
 
             v3_iv_bytes = "\x01" * 12
             iv_used = false
@@ -149,6 +152,7 @@ module Aws
 
           it 'initializes cipher with derived encryption key and zero IV' do
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+            ##= type=test
             ##% The client MUST initialize the cipher, or call an AES-GCM encryption API, with the derived encryption key, an IV containing only bytes with the value 0x01,
             ##% and the tag length defined in the Algorithm Suite when encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY.
 

@@ -180,6 +180,8 @@ module Aws
               ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
               ##% When encrypting or decrypting with ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY,
               ##% the IV used in the AES-GCM content encryption/decryption MUST consist entirely of bytes with the value 0x01.
+              ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation
+              ##% The IV's total length MUST match the IV length defined by the algorithm suite.
               V3_IV_BYTES
             ) #OpenSSL::Cipher.new("aes-256-gcm")
             ##= ../specification/s3-encryption/key-derivation.md#hkdf-operation

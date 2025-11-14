@@ -56,6 +56,8 @@ module Aws
               if !envelope['x-amz-t'].nil?
                 Json.load(envelope['x-amz-t'])
               else
+                ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
+                ##% If the mapkey x-amz-t is not present, the default Material Description value MUST be set to an empty map (`{}`).
                 {}
               end
             ##= ../specification/s3-encryption/data-format/content-metadata.md#v3-only
