@@ -346,16 +346,16 @@ module Aws
 
         def apply_request_checksum(context, headers, checksum_properties)
           header_name = checksum_properties[:name]
-          body = context.http_request.body_contents
           headers[header_name] = calculate_checksum(
             checksum_properties[:algorithm],
-            body
+            context.http_request.body
           )
         end
 
         def calculate_checksum(algorithm, body)
           digest = ChecksumAlgorithm.digest_for_algorithm(algorithm)
           if body.respond_to?(:read)
+            body.rewind
             update_in_chunks(digest, body)
           else
             digest.update(body)
