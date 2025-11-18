@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2025-11-17)
+------------------
+
+* Feature - Adds support for LLM as Primary, allowing usage of LLMs as the default NLU system.
+
 1.81.0 (2025-10-22)
 ------------------
 

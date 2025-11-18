@@ -3417,7 +3417,7 @@ module Aws::Bedrock
     #   resp = client.get_automated_reasoning_policy_build_workflow_result_assets({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
-    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION
+    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES
     #   })
     #
     # @example Response structure
@@ -3534,6 +3534,10 @@ module Aws::Bedrock
     #   resp.build_workflow_assets.build_log.entries[0].build_steps[0].messages #=> Array
     #   resp.build_workflow_assets.build_log.entries[0].build_steps[0].messages[0].message #=> String
     #   resp.build_workflow_assets.build_log.entries[0].build_steps[0].messages[0].message_type #=> String, one of "INFO", "WARNING", "ERROR"
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases #=> Array
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].query_content #=> String
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].guard_content #=> String
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].expected_aggregated_findings_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyBuildWorkflowResultAssets AWS API Documentation
     #
@@ -6244,7 +6248,7 @@ module Aws::Bedrock
     #
     #   * Failed – This job has failed. Check the failure message for any
     #     further details. For further assistance, reach out to the [Amazon
-    #     Web ServicesSupport Center][3].
+    #     Web Services Support Center][3].
     #
     #   * Stopped – This job was stopped by a user.
     #
@@ -7628,7 +7632,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

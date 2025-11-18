@@ -12,11 +12,11 @@ module Aws::AppStream
 
     # Describes an interface VPC endpoint (interface endpoint) that lets you
     # create a private connection between the virtual private cloud (VPC)
-    # that you specify and AppStream 2.0. When you specify an interface
-    # endpoint for a stack, users of the stack can connect to AppStream 2.0
-    # only through that endpoint. When you specify an interface endpoint for
-    # an image builder, administrators can connect to the image builder only
-    # through that endpoint.
+    # that you specify and WorkSpaces Applications. When you specify an
+    # interface endpoint for a stack, users of the stack can connect to
+    # WorkSpaces Applications only through that endpoint. When you specify
+    # an interface endpoint for an image builder, administrators can connect
+    # to the image builder only through that endpoint.
     #
     # @!attribute [rw] endpoint_type
     #   The type of interface endpoint.
@@ -82,7 +82,7 @@ module Aws::AppStream
 
     # Describes an app block.
     #
-    # App blocks are an Amazon AppStream 2.0 resource that stores the
+    # App blocks are a WorkSpaces Applications resource that stores the
     # details about the virtual hard disk in an S3 bucket. It also stores
     # the setup script with details about how to mount the virtual hard
     # disk. The virtual hard disk includes the application binaries and
@@ -134,10 +134,10 @@ module Aws::AppStream
     # @!attribute [rw] state
     #   The state of the app block.
     #
-    #   An app block with AppStream 2.0 packaging will be in the `INACTIVE`
-    #   state if no application package (VHD) is assigned to it. After an
-    #   application package (VHD) is created by an app block builder for an
-    #   app block, it becomes `ACTIVE`.
+    #   An app block with WorkSpaces Applications packaging will be in the
+    #   `INACTIVE` state if no application package (VHD) is assigned to it.
+    #   After an application package (VHD) is created by an app block
+    #   builder for an app block, it becomes `ACTIVE`.
     #
     #   Custom app blocks are always in the `ACTIVE` state and no action is
     #   required to use them.
@@ -370,6 +370,72 @@ module Aws::AppStream
       :instance_families,
       :created_time)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for an application in the imported image's application
+    # catalog. This structure defines how applications appear and launch for
+    # users.
+    #
+    # @!attribute [rw] name
+    #   The name of the application. This is a required field that must be
+    #   unique within the application catalog and between 1-100 characters,
+    #   matching the pattern ^\[a-zA-Z0-9\]\[a-zA-Z0-9\_.-\]\{0,99}$.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name shown to users for this application. This field is
+    #   optional and can be 0-100 characters, matching the pattern
+    #   ^\[a-zA-Z0-9\]\[a-zA-Z0-9\_. -\]\{0,99}$.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_app_path
+    #   The absolute path to the executable file that launches the
+    #   application. This is a required field that can be 1-32767 characters
+    #   to support Windows extended file paths. Use escaped file path
+    #   strings like
+    #   "C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\notepad.exe".
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_icon_path
+    #   The absolute path to the icon file for the application. This field
+    #   is optional and can be 1-32767 characters. If not provided, the icon
+    #   is derived from the executable. Use PNG images with proper
+    #   transparency for the best user experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] absolute_manifest_path
+    #   The absolute path to the prewarm manifest file for this application.
+    #   This field is optional and only applicable when using
+    #   application-specific manifests. The path can be 1-32767 characters
+    #   and should point to a text file containing file paths to prewarm.
+    #   @return [String]
+    #
+    # @!attribute [rw] working_directory
+    #   The working directory to use when launching the application. This
+    #   field is optional and can be 0-32767 characters. Use escaped file
+    #   path strings like
+    #   "C:\\\\\\\\Path\\\\\\\\To\\\\\\\\Working\\\\\\\\Directory".
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_parameters
+    #   The launch parameters to pass to the application executable. This
+    #   field is optional and can be 0-1024 characters. Use escaped strings
+    #   with the full list of required parameters, such as PowerShell script
+    #   paths or command-line arguments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationConfig AWS API Documentation
+    #
+    class ApplicationConfig < Struct.new(
+      :name,
+      :display_name,
+      :absolute_app_path,
+      :absolute_icon_path,
+      :absolute_manifest_path,
+      :working_directory,
+      :launch_parameters)
+      SENSITIVE = [:absolute_app_path, :absolute_icon_path, :absolute_manifest_path, :working_directory, :launch_parameters]
       include Aws::Structure
     end
 
@@ -876,7 +942,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
-    #   AppStream 2.0 Administration Guide*.
+    #   WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -921,13 +987,14 @@ module Aws::AppStream
     #   block builder. To assume a role, the app block builder calls the AWS
     #   Security Token Service (STS) `AssumeRole` API operation and passes
     #   the ARN of the role to use. The operation creates a new session with
-    #   temporary credentials. AppStream 2.0 retrieves the temporary
-    #   credentials and creates the **appstream\_machine\_role** credential
-    #   profile on the instance.
+    #   temporary credentials. WorkSpaces Applications retrieves the
+    #   temporary credentials and creates the **appstream\_machine\_role**
+    #   credential profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -1240,6 +1307,58 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @!attribute [rw] image_name
+    #   The name of the WorkSpaces Applications image to export. The image
+    #   must be in an available state and owned by your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] ami_name
+    #   The name for the exported EC2 AMI. This is a required field that
+    #   must be unique within your account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role that allows WorkSpaces Applications to
+    #   create the AMI. The role must have permissions to copy images,
+    #   describe images, and create tags, with a trust relationship allowing
+    #   appstream.amazonaws.com to assume the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the exported AMI. These tags help you organize
+    #   and manage your EC2 AMIs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ami_description
+    #   An optional description for the exported AMI. This description will
+    #   be applied to the resulting EC2 AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateExportImageTaskRequest AWS API Documentation
+    #
+    class CreateExportImageTaskRequest < Struct.new(
+      :image_name,
+      :ami_name,
+      :iam_role_arn,
+      :tag_specifications,
+      :ami_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_image_task
+    #   Information about the export image task that was created, including
+    #   the task ID and initial state.
+    #   @return [Types::ExportImageTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateExportImageTaskResult AWS API Documentation
+    #
+    class CreateExportImageTaskResult < Struct.new(
+      :export_image_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   A unique name for the fleet.
     #   @return [String]
@@ -1306,8 +1425,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -1333,12 +1450,6 @@ module Aws::AppStream
     #   * stream.graphics.g5.16xlarge
     #
     #   * stream.graphics.g5.24xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g6.xlarge
     #
@@ -1462,7 +1573,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
-    #   AppStream 2.0 Administration Guide*.
+    #   WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -1504,13 +1615,14 @@ module Aws::AppStream
     #   fleet. To assume a role, a fleet instance calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -1518,11 +1630,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] stream_view
-    #   The AppStream 2.0 view that is displayed to your users when they
-    #   stream from the fleet. When `APP` is specified, only the windows of
-    #   applications opened by users display. When `DESKTOP` is specified,
-    #   the standard desktop that is provided by the operating system
-    #   displays.
+    #   The WorkSpaces Applications view that is displayed to your users
+    #   when they stream from the fleet. When `APP` is specified, only the
+    #   windows of applications opened by users display. When `DESKTOP` is
+    #   specified, the standard desktop that is provided by the operating
+    #   system displays.
     #
     #   The default value is `APP`.
     #   @return [String]
@@ -1553,6 +1665,12 @@ module Aws::AppStream
     #   applies to multi-session fleets.
     #   @return [Integer]
     #
+    # @!attribute [rw] root_volume_config
+    #   The configuration for the root volume of fleet instances. Use this
+    #   to customize storage capacity from 200 GB up to 500 GB based on your
+    #   application requirements.
+    #   @return [Types::VolumeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1577,7 +1695,8 @@ module Aws::AppStream
       :max_concurrent_sessions,
       :usb_device_filter_strings,
       :session_script_s3_location,
-      :max_sessions_per_instance)
+      :max_sessions_per_instance,
+      :root_volume_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1656,8 +1775,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -1669,12 +1786,6 @@ module Aws::AppStream
     #   * stream.graphics.g4dn.12xlarge
     #
     #   * stream.graphics.g4dn.16xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g5.xlarge
     #
@@ -1737,13 +1848,14 @@ module Aws::AppStream
     #   builder. To assume a role, the image builder calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -1760,9 +1872,9 @@ module Aws::AppStream
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] appstream_agent_version
-    #   The version of the AppStream 2.0 agent to use for this image
-    #   builder. To use the latest version of the AppStream 2.0 agent,
-    #   specify \[LATEST\].
+    #   The version of the WorkSpaces Applications agent to use for this
+    #   image builder. To use the latest version of the WorkSpaces
+    #   Applications agent, specify \[LATEST\].
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1778,7 +1890,7 @@ module Aws::AppStream
     #   If you do not specify a value, the value is set to an empty string.
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -1790,6 +1902,12 @@ module Aws::AppStream
     #   Administrators can connect to the image builder only through the
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
+    #
+    # @!attribute [rw] root_volume_config
+    #   The configuration for the root volume of the image builder. Use this
+    #   to customize storage capacity from 200 GB up to 500 GB based on your
+    #   application installation requirements.
+    #   @return [Types::VolumeConfig]
     #
     # @!attribute [rw] softwares_to_install
     #   The list of license included applications to install on the image
@@ -1917,6 +2035,7 @@ module Aws::AppStream
       :appstream_agent_version,
       :tags,
       :access_endpoints,
+      :root_volume_config,
       :softwares_to_install,
       :softwares_to_uninstall)
       SENSITIVE = []
@@ -1954,7 +2073,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] streaming_url
-    #   The URL to start the AppStream 2.0 streaming session.
+    #   The URL to start the WorkSpaces Applications streaming session.
     #   @return [String]
     #
     # @!attribute [rw] expires
@@ -1967,6 +2086,96 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A unique name for the imported image. The name must be between 1 and
+    #   100 characters and can contain letters, numbers, underscores,
+    #   periods, and hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_ami_id
+    #   The ID of the EC2 AMI to import. The AMI must meet specific
+    #   requirements including Windows Server 2022 Full Base, UEFI boot
+    #   mode, TPM 2.0 support, and proper drivers.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role that allows WorkSpaces Applications to
+    #   access your AMI. The role must have permissions to modify image
+    #   attributes and describe images, with a trust relationship allowing
+    #   appstream.amazonaws.com to assume the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the imported image. The description must
+    #   match approved regex patterns and can be up to 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   An optional display name for the imported image. The display name
+    #   must match approved regex patterns and can be up to 100 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the imported image. Tags help you organize and
+    #   manage your WorkSpaces Applications resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] runtime_validation_config
+    #   Configuration for runtime validation of the imported image. When
+    #   specified, WorkSpaces Applications provisions an instance to test
+    #   streaming functionality, which helps ensure the image is suitable
+    #   for use.
+    #   @return [Types::RuntimeValidationConfig]
+    #
+    # @!attribute [rw] agent_software_version
+    #   The version of the WorkSpaces Applications agent to use for the
+    #   imported image. Choose CURRENT\_LATEST to use the agent version
+    #   available at the time of import, or ALWAYS\_LATEST to automatically
+    #   update to the latest agent version when new versions are released.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_catalog_config
+    #   Configuration for the application catalog of the imported image.
+    #   This allows you to specify applications available for streaming,
+    #   including their paths, icons, and launch parameters. This field
+    #   contains sensitive data.
+    #   @return [Array<Types::ApplicationConfig>]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to true, performs validation checks without actually
+    #   creating the imported image. Use this to verify your configuration
+    #   before executing the actual import operation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImportedImageRequest AWS API Documentation
+    #
+    class CreateImportedImageRequest < Struct.new(
+      :name,
+      :source_ami_id,
+      :iam_role_arn,
+      :description,
+      :display_name,
+      :tags,
+      :runtime_validation_config,
+      :agent_software_version,
+      :app_catalog_config,
+      :dry_run)
+      SENSITIVE = [:app_catalog_config]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image
+    #   Describes an image.
+    #   @return [Types::Image]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImportedImageResult AWS API Documentation
+    #
+    class CreateImportedImageResult < Struct.new(
+      :image)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2023,7 +2232,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -2032,14 +2241,14 @@ module Aws::AppStream
     #
     # @!attribute [rw] access_endpoints
     #   The list of interface VPC endpoint (interface endpoint) objects.
-    #   Users of the stack can connect to AppStream 2.0 only through the
-    #   specified endpoints.
+    #   Users of the stack can connect to WorkSpaces Applications only
+    #   through the specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
     # @!attribute [rw] embed_host_domains
-    #   The domains where AppStream 2.0 streaming sessions can be embedded
-    #   in an iframe. You must approve the domains that you want to host
-    #   embedded AppStream 2.0 streaming sessions.
+    #   The domains where WorkSpaces Applications streaming sessions can be
+    #   embedded in an iframe. You must approve the domains that you want to
+    #   host embedded WorkSpaces Applications streaming sessions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] streaming_experience_settings
@@ -2106,7 +2315,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] session_context
     #   The session context. For more information, see [Session Context][1]
-    #   in the *Amazon AppStream 2.0 Administration Guide*.
+    #   in the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -2127,7 +2336,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] streaming_url
-    #   The URL to start the AppStream 2.0 streaming session.
+    #   The URL to start the WorkSpaces Applications streaming session.
     #   @return [String]
     #
     # @!attribute [rw] expires
@@ -2233,7 +2442,7 @@ module Aws::AppStream
     #   If you do not specify a value, the value is set to an empty string.
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -2242,12 +2451,12 @@ module Aws::AppStream
     #
     # @!attribute [rw] dry_run
     #   Indicates whether to display the status of image update availability
-    #   before AppStream 2.0 initiates the process of creating a new updated
-    #   image. If this value is set to `true`, AppStream 2.0 displays
-    #   whether image updates are available. If this value is set to
-    #   `false`, AppStream 2.0 initiates the process of creating a new
-    #   updated image without displaying whether image updates are
-    #   available.
+    #   before WorkSpaces Applications initiates the process of creating a
+    #   new updated image. If this value is set to `true`, WorkSpaces
+    #   Applications displays whether image updates are available. If this
+    #   value is set to `false`, WorkSpaces Applications initiates the
+    #   process of creating a new updated image without displaying whether
+    #   image updates are available.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImageRequest AWS API Documentation
@@ -2290,12 +2499,13 @@ module Aws::AppStream
     #   The Amazon S3 bucket where generated reports are stored.
     #
     #   If you enabled on-instance session scripts and Amazon S3 logging for
-    #   your session script configuration, AppStream 2.0 created an S3
-    #   bucket to store the script output. The bucket is unique to your
-    #   account and Region. When you enable usage reporting in this case,
-    #   AppStream 2.0 uses the same bucket to store your usage reports. If
-    #   you haven't already enabled on-instance session scripts, when you
-    #   enable usage reports, AppStream 2.0 creates a new S3 bucket.
+    #   your session script configuration, WorkSpaces Applications created
+    #   an S3 bucket to store the script output. The bucket is unique to
+    #   your account and Region. When you enable usage reporting in this
+    #   case, WorkSpaces Applications uses the same bucket to store your
+    #   usage reports. If you haven't already enabled on-instance session
+    #   scripts, when you enable usage reports, WorkSpaces Applications
+    #   creates a new S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -3699,6 +3909,22 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The exception that is thrown when a dry run operation is requested.
+    # This indicates that the validation checks have been performed
+    # successfully, but no actual resources were created or modified.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DryRunOperationException AWS API Documentation
+    #
+    class DryRunOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_name
     #   The email address of the user.
     #
@@ -3744,9 +3970,9 @@ module Aws::AppStream
 
     # Specifies an entitlement. Entitlements control access to specific
     # applications within a stack, based on user attributes. Entitlements
-    # apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user
-    # pool and streaming URL users are entitled to all applications in a
-    # stack. Entitlements don't apply to the desktop stream view
+    # apply to SAML 2.0 federated user identities. WorkSpaces Applications
+    # user pool and streaming URL users are entitled to all applications in
+    # a stack. Entitlements don't apply to the desktop stream view
     # application, or to applications managed by a dynamic app provider
     # using the Dynamic Application Framework.
     #
@@ -3808,12 +4034,12 @@ module Aws::AppStream
 
     # An attribute associated with an entitlement. Application entitlements
     # work by matching a supported SAML 2.0 attribute name to a value when a
-    # user identity federates to an Amazon AppStream 2.0 SAML application.
+    # user identity federates to a WorkSpaces Applications SAML application.
     #
     # @!attribute [rw] name
     #   A supported AWS IAM SAML `PrincipalTag` attribute that is matched to
-    #   the associated value when a user identity federates into an Amazon
-    #   AppStream 2.0 SAML application.
+    #   the associated value when a user identity federates into a
+    #   WorkSpaces Applications SAML application.
     #
     #   The following are valid values:
     #
@@ -3834,7 +4060,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] value
     #   A value that is matched to a supported SAML attribute name when a
-    #   user identity federates into an Amazon AppStream 2.0 SAML
+    #   user identity federates into a WorkSpaces Applications SAML
     #   application.
     #   @return [String]
     #
@@ -3895,6 +4121,88 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionResult AWS API Documentation
     #
     class ExpireSessionResult < Aws::EmptyStructure; end
+
+    # Information about an export image task, including its current state,
+    # timestamps, and any error details.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier for the export image task. Use this ID to
+    #   track the task's progress and retrieve its details.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The ARN of the WorkSpaces Applications image being exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] ami_name
+    #   The name of the EC2 AMI that will be created by this export task.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date and time when the export image task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ami_description
+    #   The description that will be applied to the exported EC2 AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the export image task, such as PENDING,
+    #   RUNNING, COMPLETED, or FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] ami_id
+    #   The ID of the EC2 AMI that was created by this export task. This
+    #   field is only populated when the task completes successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags that will be applied to the exported EC2 AMI.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] error_details
+    #   Details about any errors that occurred during the export process.
+    #   This field is only populated when the task fails.
+    #   @return [Array<Types::ErrorDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExportImageTask AWS API Documentation
+    #
+    class ExportImageTask < Struct.new(
+      :task_id,
+      :image_arn,
+      :ami_name,
+      :created_date,
+      :ami_description,
+      :state,
+      :ami_id,
+      :tag_specifications,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for narrowing down the results when listing export image
+    # tasks. Filters allow you to specify criteria such as task state or
+    # creation date.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Valid filter names depend on the operation
+    #   being performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values for the filter. Multiple values can be specified for a
+    #   single filter name.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes a fleet.
     #
@@ -3972,8 +4280,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -3985,12 +4291,6 @@ module Aws::AppStream
     #   * stream.graphics.g4dn.12xlarge
     #
     #   * stream.graphics.g4dn.16xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g5.xlarge
     #
@@ -4137,12 +4437,14 @@ module Aws::AppStream
     #   role, the fleet instance calls the AWS Security Token Service (STS)
     #   `AssumeRole` API operation and passes the ARN of the role to use.
     #   The operation creates a new session with temporary credentials.
-    #   AppStream 2.0 retrieves the temporary credentials and creates the
-    #   **appstream\_machine\_role** credential profile on the instance.
+    #   WorkSpaces Applications retrieves the temporary credentials and
+    #   creates the **appstream\_machine\_role** credential profile on the
+    #   instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -4150,11 +4452,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] stream_view
-    #   The AppStream 2.0 view that is displayed to your users when they
-    #   stream from the fleet. When `APP` is specified, only the windows of
-    #   applications opened by users display. When `DESKTOP` is specified,
-    #   the standard desktop that is provided by the operating system
-    #   displays.
+    #   The WorkSpaces Applications view that is displayed to your users
+    #   when they stream from the fleet. When `APP` is specified, only the
+    #   windows of applications opened by users display. When `DESKTOP` is
+    #   specified, the standard desktop that is provided by the operating
+    #   system displays.
     #
     #   The default value is `APP`.
     #   @return [String]
@@ -4180,6 +4482,11 @@ module Aws::AppStream
     #   The maximum number of user sessions on an instance. This only
     #   applies to multi-session fleets.
     #   @return [Integer]
+    #
+    # @!attribute [rw] root_volume_config
+    #   The current configuration of the root volume for fleet instances,
+    #   including the storage size in GB.
+    #   @return [Types::VolumeConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
@@ -4208,7 +4515,8 @@ module Aws::AppStream
       :max_concurrent_sessions,
       :usb_device_filter_strings,
       :session_script_s3_location,
-      :max_sessions_per_instance)
+      :max_sessions_per_instance,
+      :root_volume_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4228,6 +4536,32 @@ module Aws::AppStream
     class FleetError < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The unique identifier of the export image task to retrieve
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/GetExportImageTaskRequest AWS API Documentation
+    #
+    class GetExportImageTaskRequest < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_image_task
+    #   Information about the export image task, including its current
+    #   state, created date, and any error details.
+    #   @return [Types::ExportImageTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/GetExportImageTaskResult AWS API Documentation
+    #
+    class GetExportImageTaskResult < Struct.new(
+      :export_image_task)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4297,8 +4631,8 @@ module Aws::AppStream
     #   @return [Time]
     #
     # @!attribute [rw] appstream_agent_version
-    #   The version of the AppStream 2.0 agent to use for instances that are
-    #   launched from this image.
+    #   The version of the WorkSpaces Applications agent to use for
+    #   instances that are launched from this image.
     #   @return [String]
     #
     # @!attribute [rw] image_permissions
@@ -4312,8 +4646,8 @@ module Aws::AppStream
     #   @return [Array<Types::ResourceError>]
     #
     # @!attribute [rw] latest_appstream_agent_version
-    #   Indicates whether the image is using the latest AppStream 2.0 agent
-    #   version or not.
+    #   Indicates whether the image is using the latest WorkSpaces
+    #   Applications agent version or not.
     #   @return [String]
     #
     # @!attribute [rw] supported_instance_families
@@ -4340,7 +4674,7 @@ module Aws::AppStream
     #
     # @!attribute [rw] dynamic_app_providers_enabled
     #   Indicates whether dynamic app providers are enabled within an
-    #   AppStream 2.0 image or not.
+    #   WorkSpaces Applications image or not.
     #   @return [String]
     #
     # @!attribute [rw] image_shared_with_others
@@ -4350,6 +4684,14 @@ module Aws::AppStream
     # @!attribute [rw] managed_software_included
     #   Indicates whether the image includes license-included applications.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] image_type
+    #   The type of the image. Images created through AMI import have type
+    #   "custom", while WorkSpaces Applications provided images have type
+    #   "native". Custom images support additional instance types
+    #   including GeneralPurpose, MemoryOptimized, ComputeOptimized, and
+    #   Accelerated instance families.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
@@ -4375,7 +4717,8 @@ module Aws::AppStream
       :supported_instance_families,
       :dynamic_app_providers_enabled,
       :image_shared_with_others,
-      :managed_software_included)
+      :managed_software_included,
+      :image_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4456,8 +4799,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -4469,12 +4810,6 @@ module Aws::AppStream
     #   * stream.graphics.g4dn.12xlarge
     #
     #   * stream.graphics.g4dn.16xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g5.xlarge
     #
@@ -4528,13 +4863,14 @@ module Aws::AppStream
     #   assume a role, the image builder calls the AWS Security Token
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -4572,8 +4908,8 @@ module Aws::AppStream
     #   @return [Array<Types::ResourceError>]
     #
     # @!attribute [rw] appstream_agent_version
-    #   The version of the AppStream 2.0 agent that is currently being used
-    #   by the image builder.
+    #   The version of the WorkSpaces Applications agent that is currently
+    #   being used by the image builder.
     #   @return [String]
     #
     # @!attribute [rw] access_endpoints
@@ -4582,9 +4918,14 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] root_volume_config
+    #   The current configuration of the root volume for the image builder,
+    #   including the storage size in GB.
+    #   @return [Types::VolumeConfig]
+    #
     # @!attribute [rw] latest_appstream_agent_version
-    #   Indicates whether the image builder is using the latest AppStream
-    #   2.0 agent version or not.
+    #   Indicates whether the image builder is using the latest WorkSpaces
+    #   Applications agent version or not.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
@@ -4608,6 +4949,7 @@ module Aws::AppStream
       :image_builder_errors,
       :appstream_agent_version,
       :access_endpoints,
+      :root_volume_config,
       :latest_appstream_agent_version)
       SENSITIVE = []
       include Aws::Structure
@@ -4882,6 +5224,50 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   Optional filters to apply when listing export image tasks. Filters
+    #   help you narrow down the results based on specific criteria.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of export image tasks to return in a single
+    #   request. The valid range is 1-500, with a default of 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request. Use this to retrieve
+    #   the next page of results when there are more tasks than the
+    #   MaxResults limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListExportImageTasksRequest AWS API Documentation
+    #
+    class ListExportImageTasksRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_image_tasks
+    #   The list of export image tasks that match the specified criteria.
+    #   @return [Array<Types::ExportImageTask>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use for retrieving the next page of results.
+    #   This field is only present when there are more results available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListExportImageTasksResult AWS API Documentation
+    #
+    class ListExportImageTasksResult < Struct.new(
+      :export_image_tasks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -4914,8 +5300,9 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] eni_ipv_6_addresses
-    #   The IPv6 addresses of the elastic network interface that is attached
-    #   to instances in your VPC.
+    #   The IPv6 addresses assigned to the elastic network interface. This
+    #   field supports IPv6 connectivity for WorkSpaces Applications
+    #   instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] eni_id
@@ -4948,9 +5335,9 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # AppStream 2.0 can’t process the request right now because the Describe
-    # calls from your AWS account are being throttled by Amazon EC2. Try
-    # again later.
+    # WorkSpaces Applications can’t process the request right now because
+    # the Describe calls from your AWS account are being throttled by Amazon
+    # EC2. Try again later.
     #
     # @!attribute [rw] message
     #   The error message in the exception.
@@ -5040,6 +5427,24 @@ module Aws::AppStream
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for runtime validation of imported images. This
+    # structure specifies the instance type to use for testing the imported
+    # image's streaming capabilities.
+    #
+    # @!attribute [rw] intended_instance_type
+    #   The instance type to use for runtime validation testing. It's
+    #   recommended to use the same instance type you plan to use for your
+    #   fleet to ensure accurate validation results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/RuntimeValidationConfig AWS API Documentation
+    #
+    class RuntimeValidationConfig < Struct.new(
+      :intended_instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5353,14 +5758,14 @@ module Aws::AppStream
     #
     # @!attribute [rw] access_endpoints
     #   The list of virtual private cloud (VPC) interface endpoint objects.
-    #   Users of the stack can connect to AppStream 2.0 only through the
-    #   specified endpoints.
+    #   Users of the stack can connect to WorkSpaces Applications only
+    #   through the specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
     # @!attribute [rw] embed_host_domains
-    #   The domains where AppStream 2.0 streaming sessions can be embedded
-    #   in an iframe. You must approve the domains that you want to host
-    #   embedded AppStream 2.0 streaming sessions.
+    #   The domains where WorkSpaces Applications streaming sessions can be
+    #   embedded in an iframe. You must approve the domains that you want to
+    #   host embedded WorkSpaces Applications streaming sessions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] streaming_experience_settings
@@ -5454,9 +5859,9 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] appstream_agent_version
-    #   The version of the AppStream 2.0 agent to use for this image
-    #   builder. To use the latest version of the AppStream 2.0 agent,
-    #   specify \[LATEST\].
+    #   The version of the WorkSpaces Applications agent to use for this
+    #   image builder. To use the latest version of the WorkSpaces
+    #   Applications agent, specify \[LATEST\].
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderRequest AWS API Documentation
@@ -5582,8 +5987,9 @@ module Aws::AppStream
     #
     # @!attribute [rw] domains_require_admin_consent
     #   The OneDrive for Business domains where you require admin consent
-    #   when users try to link their OneDrive account to AppStream 2.0. The
-    #   attribute can only be specified when ConnectorType=ONE\_DRIVE.
+    #   when users try to link their OneDrive account to WorkSpaces
+    #   Applications. The attribute can only be specified when
+    #   ConnectorType=ONE\_DRIVE.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
@@ -5785,13 +6191,14 @@ module Aws::AppStream
     #   block builder. To assume a role, the app block builder calls the AWS
     #   Security Token Service (STS) `AssumeRole` API operation and passes
     #   the ARN of the role to use. The operation creates a new session with
-    #   temporary credentials. AppStream 2.0 retrieves the temporary
-    #   credentials and creates the **appstream\_machine\_role** credential
-    #   profile on the instance.
+    #   temporary credentials. WorkSpaces Applications retrieves the
+    #   temporary credentials and creates the **appstream\_machine\_role**
+    #   credential profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -6063,8 +6470,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -6076,12 +6481,6 @@ module Aws::AppStream
     #   * stream.graphics.g4dn.12xlarge
     #
     #   * stream.graphics.g4dn.16xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g5.xlarge
     #
@@ -6231,13 +6630,14 @@ module Aws::AppStream
     #   fleet. To assume a role, a fleet instance calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications
+    #   Streaming Instances][1] in the *Amazon WorkSpaces Applications
+    #   Administration Guide*.
     #
     #
     #
@@ -6245,11 +6645,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] stream_view
-    #   The AppStream 2.0 view that is displayed to your users when they
-    #   stream from the fleet. When `APP` is specified, only the windows of
-    #   applications opened by users display. When `DESKTOP` is specified,
-    #   the standard desktop that is provided by the operating system
-    #   displays.
+    #   The WorkSpaces Applications view that is displayed to your users
+    #   when they stream from the fleet. When `APP` is specified, only the
+    #   windows of applications opened by users display. When `DESKTOP` is
+    #   specified, the standard desktop that is provided by the operating
+    #   system displays.
     #
     #   The default value is `APP`.
     #   @return [String]
@@ -6279,6 +6679,12 @@ module Aws::AppStream
     #   applies to multi-session fleets.
     #   @return [Integer]
     #
+    # @!attribute [rw] root_volume_config
+    #   The updated configuration for the root volume of fleet instances.
+    #   Note that volume size cannot be decreased below the image volume
+    #   size.
+    #   @return [Types::VolumeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -6303,7 +6709,8 @@ module Aws::AppStream
       :max_concurrent_sessions,
       :usb_device_filter_strings,
       :session_script_s3_location,
-      :max_sessions_per_instance)
+      :max_sessions_per_instance,
+      :root_volume_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6396,14 +6803,14 @@ module Aws::AppStream
     #
     # @!attribute [rw] access_endpoints
     #   The list of interface VPC endpoint (interface endpoint) objects.
-    #   Users of the stack can connect to AppStream 2.0 only through the
-    #   specified endpoints.
+    #   Users of the stack can connect to WorkSpaces Applications only
+    #   through the specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
     # @!attribute [rw] embed_host_domains
-    #   The domains where AppStream 2.0 streaming sessions can be embedded
-    #   in an iframe. You must approve the domains that you want to host
-    #   embedded AppStream 2.0 streaming sessions.
+    #   The domains where WorkSpaces Applications streaming sessions can be
+    #   embedded in an iframe. You must approve the domains that you want to
+    #   host embedded WorkSpaces Applications streaming sessions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] streaming_experience_settings
@@ -6520,12 +6927,13 @@ module Aws::AppStream
     #   The Amazon S3 bucket where generated reports are stored.
     #
     #   If you enabled on-instance session scripts and Amazon S3 logging for
-    #   your session script configuration, AppStream 2.0 created an S3
-    #   bucket to store the script output. The bucket is unique to your
-    #   account and Region. When you enable usage reporting in this case,
-    #   AppStream 2.0 uses the same bucket to store your usage reports. If
-    #   you haven't already enabled on-instance session scripts, when you
-    #   enable usage reports, AppStream 2.0 creates a new S3 bucket.
+    #   your session script configuration, WorkSpaces Applications created
+    #   an S3 bucket to store the script output. The bucket is unique to
+    #   your account and Region. When you enable usage reporting in this
+    #   case, WorkSpaces Applications uses the same bucket to store your
+    #   usage reports. If you haven't already enabled on-instance session
+    #   scripts, when you enable usage reports, WorkSpaces Applications
+    #   creates a new S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -6711,6 +7119,25 @@ module Aws::AppStream
       :user_stack_association,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for the root volume of fleet instances and image
+    # builders. This allows you to customize the storage capacity beyond the
+    # default 200 GB.
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size of the root volume in GB. Valid range is 200-500 GB. The
+    #   default is 200 GB, which is included in the hourly instance rate.
+    #   Additional storage beyond 200 GB incurs extra charges and applies to
+    #   instances regardless of their running state.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VolumeConfig AWS API Documentation
+    #
+    class VolumeConfig < Struct.new(
+      :volume_size_in_gb)
       SENSITIVE = []
       include Aws::Structure
     end

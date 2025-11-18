@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-11-17)
+------------------
+
+* Feature - Added support for the managed Slurm REST API endpoint
+
 1.34.0 (2025-10-22)
 ------------------
 

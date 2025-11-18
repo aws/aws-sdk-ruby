@@ -542,54 +542,8 @@ module Aws::DeviceFarm
     #   want to create a remote access session.
     #   @return [String]
     #
-    # @!attribute [rw] ssh_public_key
-    #   Ignored. The public key of the `ssh` key pair you want to use for
-    #   connecting to remote devices in your remote debugging session. This
-    #   key is required only if `remoteDebugEnabled` is set to `true`.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [String]
-    #
-    # @!attribute [rw] remote_debug_enabled
-    #   Set to `true` if you want to access devices remotely for debugging
-    #   in your remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_enabled
-    #   Set to `true` to enable remote recording for the remote access
-    #   session.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_app_arn
-    #   The Amazon Resource Name (ARN) for the app to be recorded in the
-    #   remote access session.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the remote access session to create.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_id
-    #   Unique identifier for the client. If you want access to multiple
-    #   devices on the same client, you should pass the same `clientId`
-    #   value in each call to `CreateRemoteAccessSession`. This identifier
-    #   is required only if `remoteDebugEnabled` is set to `true`.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -597,20 +551,8 @@ module Aws::DeviceFarm
     #   @return [Types::CreateRemoteAccessSessionConfiguration]
     #
     # @!attribute [rw] interaction_mode
-    #   The interaction mode of the remote access session. Valid values are:
-    #
-    #   * INTERACTIVE: You can interact with the iOS device by viewing,
-    #     touching, and rotating the screen. You cannot run XCUITest
-    #     framework-based tests in this mode.
-    #
-    #   * NO\_VIDEO: You are connected to the device, but cannot interact
-    #     with it or view the screen. This mode has the fastest test
-    #     execution speed. You can run XCUITest framework-based tests in
-    #     this mode.
-    #
-    #   * VIDEO\_ONLY: You can view the screen, but cannot touch or rotate
-    #     it. You can run XCUITest framework-based tests and watch the
-    #     screen in this mode.
+    #   The interaction mode of the remote access session. Changing the
+    #   interactive mode of remote access sessions is no longer available.
     #   @return [String]
     #
     # @!attribute [rw] skip_app_resign
@@ -633,12 +575,7 @@ module Aws::DeviceFarm
       :device_arn,
       :app_arn,
       :instance_arn,
-      :ssh_public_key,
-      :remote_debug_enabled,
-      :remote_record_enabled,
-      :remote_record_app_arn,
       :name,
-      :client_id,
       :configuration,
       :interaction_mode,
       :skip_app_resign)
@@ -4263,6 +4200,28 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Represents the remote endpoints for viewing and controlling a device
+    # during a remote access session.
+    #
+    # @!attribute [rw] remote_driver_endpoint
+    #   URL for controlling the device using WebDriver-compliant clients,
+    #   like Appium, during the remote access session.
+    #   @return [String]
+    #
+    # @!attribute [rw] interactive_endpoint
+    #   URL for viewing and interacting with the device during the remote
+    #   access session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessEndpoints AWS API Documentation
+    #
+    class RemoteAccessEndpoints < Struct.new(
+      :remote_driver_endpoint,
+      :interactive_endpoint)
+      SENSITIVE = [:remote_driver_endpoint, :interactive_endpoint]
+      include Aws::Structure
+    end
+
     # Represents information about the remote access session.
     #
     # @!attribute [rw] arn
@@ -4339,50 +4298,6 @@ module Aws::DeviceFarm
     #   The ARN of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] remote_debug_enabled
-    #   This flag is set to `true` if remote debugging is enabled for the
-    #   remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_enabled
-    #   This flag is set to `true` if remote recording is enabled for the
-    #   remote access session.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_app_arn
-    #   The ARN for the app to be recorded in the remote access session.
-    #   @return [String]
-    #
-    # @!attribute [rw] host_address
-    #   IP address of the EC2 host where you need to connect to remotely
-    #   debug devices. Only returned if remote debugging is enabled for the
-    #   remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [String]
-    #
-    # @!attribute [rw] client_id
-    #   Unique identifier of your client for the remote access session. Only
-    #   returned if remote debugging is enabled for the remote access
-    #   session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [String]
-    #
     # @!attribute [rw] billing_method
     #   The billing method of the remote access session. Possible values
     #   include `METERED` or `UNMETERED`. For more information about metered
@@ -4399,7 +4314,9 @@ module Aws::DeviceFarm
     #   @return [Types::DeviceMinutes]
     #
     # @!attribute [rw] endpoint
-    #   The endpoint for the remote access sesssion.
+    #   The endpoint for the remote access session. This field is
+    #   deprecated, and is replaced by the new
+    #   `endpoints.interactiveEndpoint` field.
     #   @return [String]
     #
     # @!attribute [rw] device_udid
@@ -4414,20 +4331,8 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] interaction_mode
-    #   The interaction mode of the remote access session. Valid values are:
-    #
-    #   * INTERACTIVE: You can interact with the iOS device by viewing,
-    #     touching, and rotating the screen. You cannot run XCUITest
-    #     framework-based tests in this mode.
-    #
-    #   * NO\_VIDEO: You are connected to the device, but cannot interact
-    #     with it or view the screen. This mode has the fastest test
-    #     execution speed. You can run XCUITest framework-based tests in
-    #     this mode.
-    #
-    #   * VIDEO\_ONLY: You can view the screen, but cannot touch or rotate
-    #     it. You can run XCUITest framework-based tests and watch the
-    #     screen in this mode.
+    #   The interaction mode of the remote access session. Changing the
+    #   interactive mode of remote access sessions is no longer available.
     #   @return [String]
     #
     # @!attribute [rw] skip_app_resign
@@ -4455,6 +4360,11 @@ module Aws::DeviceFarm
     #   The ARN for the app to be installed onto your device.
     #   @return [String]
     #
+    # @!attribute [rw] endpoints
+    #   Represents the remote endpoints for viewing and controlling a device
+    #   during a remote access session.
+    #   @return [Types::RemoteAccessEndpoints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
     #
     class RemoteAccessSession < Struct.new(
@@ -4468,11 +4378,6 @@ module Aws::DeviceFarm
       :stopped,
       :device,
       :instance_arn,
-      :remote_debug_enabled,
-      :remote_record_enabled,
-      :remote_record_app_arn,
-      :host_address,
-      :client_id,
       :billing_method,
       :device_minutes,
       :endpoint,
@@ -4481,7 +4386,8 @@ module Aws::DeviceFarm
       :skip_app_resign,
       :vpc_config,
       :device_proxy,
-      :app_upload)
+      :app_upload,
+      :endpoints)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -136,6 +136,9 @@ module Aws::Bedrock
     AutomatedReasoningPolicyDisjointRuleSetList = Shapes::ListShape.new(name: 'AutomatedReasoningPolicyDisjointRuleSetList')
     AutomatedReasoningPolicyDisjointedRuleIdList = Shapes::ListShape.new(name: 'AutomatedReasoningPolicyDisjointedRuleIdList')
     AutomatedReasoningPolicyFormatVersion = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyFormatVersion')
+    AutomatedReasoningPolicyGeneratedTestCase = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyGeneratedTestCase')
+    AutomatedReasoningPolicyGeneratedTestCaseList = Shapes::ListShape.new(name: 'AutomatedReasoningPolicyGeneratedTestCaseList')
+    AutomatedReasoningPolicyGeneratedTestCases = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyGeneratedTestCases')
     AutomatedReasoningPolicyHash = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyHash')
     AutomatedReasoningPolicyId = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyId')
     AutomatedReasoningPolicyIngestContentAnnotation = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyIngestContentAnnotation')
@@ -983,10 +986,12 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildResultAssets.add_member(:policy_definition, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinition, location_name: "policyDefinition"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:quality_report, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinitionQualityReport, location_name: "qualityReport"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:build_log, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildLog, location_name: "buildLog"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:generated_test_cases, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyGeneratedTestCases, location_name: "generatedTestCases"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:policy_definition, Types::AutomatedReasoningPolicyBuildResultAssets::PolicyDefinition)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:quality_report, Types::AutomatedReasoningPolicyBuildResultAssets::QualityReport)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:build_log, Types::AutomatedReasoningPolicyBuildResultAssets::BuildLog)
+    AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:generated_test_cases, Types::AutomatedReasoningPolicyBuildResultAssets::GeneratedTestCases)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:unknown, Types::AutomatedReasoningPolicyBuildResultAssets::Unknown)
     AutomatedReasoningPolicyBuildResultAssets.struct_class = Types::AutomatedReasoningPolicyBuildResultAssets
 
@@ -1131,6 +1136,16 @@ module Aws::Bedrock
     AutomatedReasoningPolicyDisjointRuleSetList.member = Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDisjointRuleSet)
 
     AutomatedReasoningPolicyDisjointedRuleIdList.member = Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinitionRuleId)
+
+    AutomatedReasoningPolicyGeneratedTestCase.add_member(:query_content, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyTestQueryContent, required: true, location_name: "queryContent"))
+    AutomatedReasoningPolicyGeneratedTestCase.add_member(:guard_content, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyTestGuardContent, required: true, location_name: "guardContent"))
+    AutomatedReasoningPolicyGeneratedTestCase.add_member(:expected_aggregated_findings_result, Shapes::ShapeRef.new(shape: AutomatedReasoningCheckResult, required: true, location_name: "expectedAggregatedFindingsResult"))
+    AutomatedReasoningPolicyGeneratedTestCase.struct_class = Types::AutomatedReasoningPolicyGeneratedTestCase
+
+    AutomatedReasoningPolicyGeneratedTestCaseList.member = Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyGeneratedTestCase)
+
+    AutomatedReasoningPolicyGeneratedTestCases.add_member(:generated_test_cases, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyGeneratedTestCaseList, required: true, location_name: "generatedTestCases"))
+    AutomatedReasoningPolicyGeneratedTestCases.struct_class = Types::AutomatedReasoningPolicyGeneratedTestCases
 
     AutomatedReasoningPolicyIngestContentAnnotation.add_member(:content, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyAnnotationIngestContent, required: true, location_name: "content"))
     AutomatedReasoningPolicyIngestContentAnnotation.struct_class = Types::AutomatedReasoningPolicyIngestContentAnnotation

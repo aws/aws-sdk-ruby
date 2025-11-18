@@ -485,7 +485,7 @@ module Aws::OpenSearchService
     end
 
     # Configuration settings for an OpenSearch application. For more
-    # information, see see [Using the OpenSearch user interface in Amazon
+    # information, see [Using the OpenSearch user interface in Amazon
     # OpenSearch Service][1].
     #
     #
@@ -1820,6 +1820,46 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to create. Must be between 1 and 255
+    #   characters and follow OpenSearch naming conventions.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_schema
+    #   The JSON schema defining index mappings, settings, and semantic
+    #   enrichment configuration. The schema specifies which text fields
+    #   should be automatically enriched for semantic search capabilities
+    #   and includes OpenSearch index configuration parameters.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateIndexRequest AWS API Documentation
+    #
+    class CreateIndexRequest < Struct.new(
+      :domain_name,
+      :index_name,
+      :index_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the index creation operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateIndexResponse AWS API Documentation
+    #
+    class CreateIndexResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `CreateOutboundConnection`
     # operation.
     #
@@ -2215,6 +2255,37 @@ module Aws::OpenSearchService
     #
     class DeleteInboundConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteIndexRequest AWS API Documentation
+    #
+    class DeleteIndexRequest < Struct.new(
+      :domain_name,
+      :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the index deletion operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteIndexResponse AWS API Documentation
+    #
+    class DeleteIndexResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3611,8 +3682,8 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the domain. For more information,
-    #   see [IAM identifiers ][1] in the *AWS Identity and Access Management
-    #   User Guide*.
+    #   see [IAM identifiers ][1] in the *Amazon Web Services Identity and
+    #   Access Management User Guide*.
     #
     #
     #
@@ -4349,6 +4420,38 @@ module Aws::OpenSearchService
       :action,
       :created_at,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetIndexRequest AWS API Documentation
+    #
+    class GetIndexRequest < Struct.new(
+      :domain_name,
+      :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_schema
+    #   The JSON schema of the index including mappings, settings, and
+    #   semantic enrichment configuration.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetIndexResponse AWS API Documentation
+    #
+    class GetIndexResponse < Struct.new(
+      :index_schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7335,6 +7438,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling. Reduce the frequency
+    # of your requests and try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
     # @!attribute [rw] id
     #   The unique identifier for the OpenSearch application to be updated.
     #   @return [String]
@@ -7692,6 +7802,43 @@ module Aws::OpenSearchService
       :domain_config,
       :dry_run_results,
       :dry_run_progress_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_schema
+    #   The updated JSON schema for the index including any changes to
+    #   mappings, settings, and semantic enrichment configuration.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateIndexRequest AWS API Documentation
+    #
+    class UpdateIndexRequest < Struct.new(
+      :domain_name,
+      :index_name,
+      :index_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the index update operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateIndexResponse AWS API Documentation
+    #
+    class UpdateIndexResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

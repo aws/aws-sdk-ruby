@@ -817,7 +817,7 @@ module Aws::AppStream
 
     # Creates an app block.
     #
-    # App blocks are an Amazon AppStream 2.0 resource that stores the
+    # App blocks are a WorkSpaces Applications resource that stores the
     # details about the virtual hard disk in an S3 bucket. It also stores
     # the setup script with details about how to mount the virtual hard
     # disk. The virtual hard disk includes the application binaries and
@@ -948,7 +948,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
-    #   AppStream 2.0 Administration Guide*.
+    #   WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -987,13 +987,14 @@ module Aws::AppStream
     #   block builder. To assume a role, the app block builder calls the AWS
     #   Security Token Service (STS) `AssumeRole` API operation and passes the
     #   ARN of the role to use. The operation creates a new session with
-    #   temporary credentials. AppStream 2.0 retrieves the temporary
+    #   temporary credentials. WorkSpaces Applications retrieves the temporary
     #   credentials and creates the **appstream\_machine\_role** credential
     #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications Streaming
+    #   Instances][1] in the *Amazon WorkSpaces Applications Administration
+    #   Guide*.
     #
     #
     #
@@ -1050,7 +1051,7 @@ module Aws::AppStream
     #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.app_block_builder.created_time #=> Time
     #   resp.app_block_builder.app_block_builder_errors #=> Array
-    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
     #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
     #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
@@ -1105,7 +1106,7 @@ module Aws::AppStream
 
     # Creates an application.
     #
-    # Applications are an Amazon AppStream 2.0 resource that stores the
+    # Applications are a WorkSpaces Applications resource that stores the
     # details about how to launch applications on Elastic fleet streaming
     # instances. An application consists of the launch details, icon, and
     # display name. Applications are associated with an app block that
@@ -1207,9 +1208,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a Directory Config object in AppStream 2.0. This object
-    # includes the configuration information required to join fleets and
-    # image builders to Microsoft Active Directory domains.
+    # Creates a Directory Config object in WorkSpaces Applications. This
+    # object includes the configuration information required to join fleets
+    # and image builders to Microsoft Active Directory domains.
     #
     # @option params [required, String] :directory_name
     #   The fully qualified name of the directory (for example,
@@ -1276,9 +1277,9 @@ module Aws::AppStream
 
     # Creates a new entitlement. Entitlements control access to specific
     # applications within a stack, based on user attributes. Entitlements
-    # apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user
-    # pool and streaming URL users are entitled to all applications in a
-    # stack. Entitlements don't apply to the desktop stream view
+    # apply to SAML 2.0 federated user identities. WorkSpaces Applications
+    # user pool and streaming URL users are entitled to all applications in
+    # a stack. Entitlements don't apply to the desktop stream view
     # application, or to applications managed by a dynamic app provider
     # using the Dynamic Application Framework.
     #
@@ -1334,6 +1335,72 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def create_entitlement(params = {}, options = {})
       req = build_request(:create_entitlement, params)
+      req.send_request(options)
+    end
+
+    # Creates a task to export a WorkSpaces Applications image to an EC2
+    # AMI. This allows you to use your customized WorkSpaces Applications
+    # images with other AWS services or for backup purposes.
+    #
+    # @option params [required, String] :image_name
+    #   The name of the WorkSpaces Applications image to export. The image
+    #   must be in an available state and owned by your account.
+    #
+    # @option params [required, String] :ami_name
+    #   The name for the exported EC2 AMI. This is a required field that must
+    #   be unique within your account and region.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The ARN of the IAM role that allows WorkSpaces Applications to create
+    #   the AMI. The role must have permissions to copy images, describe
+    #   images, and create tags, with a trust relationship allowing
+    #   appstream.amazonaws.com to assume the role.
+    #
+    # @option params [Hash<String,String>] :tag_specifications
+    #   The tags to apply to the exported AMI. These tags help you organize
+    #   and manage your EC2 AMIs.
+    #
+    # @option params [String] :ami_description
+    #   An optional description for the exported AMI. This description will be
+    #   applied to the resulting EC2 AMI.
+    #
+    # @return [Types::CreateExportImageTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExportImageTaskResult#export_image_task #export_image_task} => Types::ExportImageTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_export_image_task({
+    #     image_name: "Name", # required
+    #     ami_name: "AmiName", # required
+    #     iam_role_arn: "Arn", # required
+    #     tag_specifications: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     ami_description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_image_task.task_id #=> String
+    #   resp.export_image_task.image_arn #=> String
+    #   resp.export_image_task.ami_name #=> String
+    #   resp.export_image_task.created_date #=> Time
+    #   resp.export_image_task.ami_description #=> String
+    #   resp.export_image_task.state #=> String, one of "EXPORTING", "COMPLETED", "FAILED"
+    #   resp.export_image_task.ami_id #=> String
+    #   resp.export_image_task.tag_specifications #=> Hash
+    #   resp.export_image_task.tag_specifications["TagKey"] #=> String
+    #   resp.export_image_task.error_details #=> Array
+    #   resp.export_image_task.error_details[0].error_code #=> String
+    #   resp.export_image_task.error_details[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateExportImageTask AWS API Documentation
+    #
+    # @overload create_export_image_task(params = {})
+    # @param [Hash] params ({})
+    def create_export_image_task(params = {}, options = {})
+      req = build_request(:create_export_image_task, params)
       req.send_request(options)
     end
 
@@ -1403,8 +1470,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -1430,12 +1495,6 @@ module Aws::AppStream
     #   * stream.graphics.g5.16xlarge
     #
     #   * stream.graphics.g5.24xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g6.xlarge
     #
@@ -1547,7 +1606,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information, see [Tagging Your Resources][1] in the *Amazon
-    #   AppStream 2.0 Administration Guide*.
+    #   WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -1586,23 +1645,25 @@ module Aws::AppStream
     #   To assume a role, a fleet instance calls the AWS Security Token
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications Streaming
+    #   Instances][1] in the *Amazon WorkSpaces Applications Administration
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #
     # @option params [String] :stream_view
-    #   The AppStream 2.0 view that is displayed to your users when they
-    #   stream from the fleet. When `APP` is specified, only the windows of
-    #   applications opened by users display. When `DESKTOP` is specified, the
-    #   standard desktop that is provided by the operating system displays.
+    #   The WorkSpaces Applications view that is displayed to your users when
+    #   they stream from the fleet. When `APP` is specified, only the windows
+    #   of applications opened by users display. When `DESKTOP` is specified,
+    #   the standard desktop that is provided by the operating system
+    #   displays.
     #
     #   The default value is `APP`.
     #
@@ -1626,6 +1687,11 @@ module Aws::AppStream
     # @option params [Integer] :max_sessions_per_instance
     #   The maximum number of user sessions on an instance. This only applies
     #   to multi-session fleets.
+    #
+    # @option params [Types::VolumeConfig] :root_volume_config
+    #   The configuration for the root volume of fleet instances. Use this to
+    #   customize storage capacity from 200 GB up to 500 GB based on your
+    #   application requirements.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1670,6 +1736,9 @@ module Aws::AppStream
     #       s3_key: "S3Key",
     #     },
     #     max_sessions_per_instance: 1,
+    #     root_volume_config: {
+    #       volume_size_in_gb: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1699,7 +1768,7 @@ module Aws::AppStream
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
-    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #   resp.fleet.enable_default_internet_access #=> Boolean
     #   resp.fleet.domain_join_info.directory_name #=> String
@@ -1714,6 +1783,7 @@ module Aws::AppStream
     #   resp.fleet.session_script_s3_location.s3_bucket #=> String
     #   resp.fleet.session_script_s3_location.s3_key #=> String
     #   resp.fleet.max_sessions_per_instance #=> Integer
+    #   resp.fleet.root_volume_config.volume_size_in_gb #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -1789,8 +1859,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -1802,12 +1870,6 @@ module Aws::AppStream
     #   * stream.graphics.g4dn.12xlarge
     #
     #   * stream.graphics.g4dn.16xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g5.xlarge
     #
@@ -1866,13 +1928,14 @@ module Aws::AppStream
     #   builder. To assume a role, the image builder calls the AWS Security
     #   Token Service (STS) `AssumeRole` API operation and passes the ARN of
     #   the role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications Streaming
+    #   Instances][1] in the *Amazon WorkSpaces Applications Administration
+    #   Guide*.
     #
     #
     #
@@ -1886,9 +1949,9 @@ module Aws::AppStream
     #   the image builder to a Microsoft Active Directory domain.
     #
     # @option params [String] :appstream_agent_version
-    #   The version of the AppStream 2.0 agent to use for this image builder.
-    #   To use the latest version of the AppStream 2.0 agent, specify
-    #   \[LATEST\].
+    #   The version of the WorkSpaces Applications agent to use for this image
+    #   builder. To use the latest version of the WorkSpaces Applications
+    #   agent, specify \[LATEST\].
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to associate with the image builder. A tag is a key-value
@@ -1903,7 +1966,7 @@ module Aws::AppStream
     #   If you do not specify a value, the value is set to an empty string.
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -1913,6 +1976,11 @@ module Aws::AppStream
     #   The list of interface VPC endpoint (interface endpoint) objects.
     #   Administrators can connect to the image builder only through the
     #   specified endpoints.
+    #
+    # @option params [Types::VolumeConfig] :root_volume_config
+    #   The configuration for the root volume of the image builder. Use this
+    #   to customize storage capacity from 200 GB up to 500 GB based on your
+    #   application installation requirements.
     #
     # @option params [Array<String>] :softwares_to_install
     #   The list of license included applications to install on the image
@@ -2055,6 +2123,9 @@ module Aws::AppStream
     #         vpce_id: "String",
     #       },
     #     ],
+    #     root_volume_config: {
+    #       volume_size_in_gb: 1,
+    #     },
     #     softwares_to_install: ["String"],
     #     softwares_to_uninstall: ["String"],
     #   })
@@ -2073,7 +2144,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -2085,13 +2156,14 @@ module Aws::AppStream
     #   resp.image_builder.network_access_configuration.eni_ipv_6_addresses[0] #=> String
     #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
@@ -2135,6 +2207,155 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def create_image_builder_streaming_url(params = {}, options = {})
       req = build_request(:create_image_builder_streaming_url, params)
+      req.send_request(options)
+    end
+
+    # Creates a custom WorkSpaces Applications image by importing an EC2
+    # AMI. This allows you to use your own customized AMI to create
+    # WorkSpaces Applications images that support additional instance types
+    # beyond the standard stream.* instances.
+    #
+    # @option params [required, String] :name
+    #   A unique name for the imported image. The name must be between 1 and
+    #   100 characters and can contain letters, numbers, underscores, periods,
+    #   and hyphens.
+    #
+    # @option params [required, String] :source_ami_id
+    #   The ID of the EC2 AMI to import. The AMI must meet specific
+    #   requirements including Windows Server 2022 Full Base, UEFI boot mode,
+    #   TPM 2.0 support, and proper drivers.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The ARN of the IAM role that allows WorkSpaces Applications to access
+    #   your AMI. The role must have permissions to modify image attributes
+    #   and describe images, with a trust relationship allowing
+    #   appstream.amazonaws.com to assume the role.
+    #
+    # @option params [String] :description
+    #   An optional description for the imported image. The description must
+    #   match approved regex patterns and can be up to 256 characters.
+    #
+    # @option params [String] :display_name
+    #   An optional display name for the imported image. The display name must
+    #   match approved regex patterns and can be up to 100 characters.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the imported image. Tags help you organize and
+    #   manage your WorkSpaces Applications resources.
+    #
+    # @option params [Types::RuntimeValidationConfig] :runtime_validation_config
+    #   Configuration for runtime validation of the imported image. When
+    #   specified, WorkSpaces Applications provisions an instance to test
+    #   streaming functionality, which helps ensure the image is suitable for
+    #   use.
+    #
+    # @option params [String] :agent_software_version
+    #   The version of the WorkSpaces Applications agent to use for the
+    #   imported image. Choose CURRENT\_LATEST to use the agent version
+    #   available at the time of import, or ALWAYS\_LATEST to automatically
+    #   update to the latest agent version when new versions are released.
+    #
+    # @option params [Array<Types::ApplicationConfig>] :app_catalog_config
+    #   Configuration for the application catalog of the imported image. This
+    #   allows you to specify applications available for streaming, including
+    #   their paths, icons, and launch parameters. This field contains
+    #   sensitive data.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to true, performs validation checks without actually creating
+    #   the imported image. Use this to verify your configuration before
+    #   executing the actual import operation.
+    #
+    # @return [Types::CreateImportedImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImportedImageResult#image #image} => Types::Image
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_imported_image({
+    #     name: "Name", # required
+    #     source_ami_id: "PhotonAmiId", # required
+    #     iam_role_arn: "Arn", # required
+    #     description: "ImageImportDescription",
+    #     display_name: "ImageImportDisplayName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     runtime_validation_config: {
+    #       intended_instance_type: "InstanceType",
+    #     },
+    #     agent_software_version: "CURRENT_LATEST", # accepts CURRENT_LATEST, ALWAYS_LATEST
+    #     app_catalog_config: [
+    #       {
+    #         name: "AppName", # required
+    #         display_name: "AppDisplayName",
+    #         absolute_app_path: "FilePath", # required
+    #         absolute_icon_path: "FilePath",
+    #         absolute_manifest_path: "FilePath",
+    #         working_directory: "FilePath",
+    #         launch_parameters: "LaunchParameters",
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image.name #=> String
+    #   resp.image.arn #=> String
+    #   resp.image.base_image_arn #=> String
+    #   resp.image.display_name #=> String
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"
+    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
+    #   resp.image.image_builder_supported #=> Boolean
+    #   resp.image.image_builder_name #=> String
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.description #=> String
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
+    #   resp.image.state_change_reason.message #=> String
+    #   resp.image.applications #=> Array
+    #   resp.image.applications[0].name #=> String
+    #   resp.image.applications[0].display_name #=> String
+    #   resp.image.applications[0].icon_url #=> String
+    #   resp.image.applications[0].launch_path #=> String
+    #   resp.image.applications[0].launch_parameters #=> String
+    #   resp.image.applications[0].enabled #=> Boolean
+    #   resp.image.applications[0].metadata #=> Hash
+    #   resp.image.applications[0].metadata["String"] #=> String
+    #   resp.image.applications[0].working_directory #=> String
+    #   resp.image.applications[0].description #=> String
+    #   resp.image.applications[0].arn #=> String
+    #   resp.image.applications[0].app_block_arn #=> String
+    #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
+    #   resp.image.applications[0].icon_s3_location.s3_key #=> String
+    #   resp.image.applications[0].platforms #=> Array
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.applications[0].instance_families #=> Array
+    #   resp.image.applications[0].instance_families[0] #=> String
+    #   resp.image.applications[0].created_time #=> Time
+    #   resp.image.created_time #=> Time
+    #   resp.image.public_base_image_released_date #=> Time
+    #   resp.image.appstream_agent_version #=> String
+    #   resp.image.image_permissions.allow_fleet #=> Boolean
+    #   resp.image.image_permissions.allow_image_builder #=> Boolean
+    #   resp.image.image_errors #=> Array
+    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
+    #   resp.image.image_errors[0].error_message #=> String
+    #   resp.image.image_errors[0].error_timestamp #=> Time
+    #   resp.image.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image.supported_instance_families #=> Array
+    #   resp.image.supported_instance_families[0] #=> String
+    #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
+    #   resp.image.managed_software_included #=> Boolean
+    #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImportedImage AWS API Documentation
+    #
+    # @overload create_imported_image(params = {})
+    # @param [Hash] params ({})
+    def create_imported_image(params = {}, options = {})
+      req = build_request(:create_imported_image, params)
       req.send_request(options)
     end
 
@@ -2186,7 +2407,7 @@ module Aws::AppStream
     #   \_ . : / = + \\ - @
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -2194,13 +2415,13 @@ module Aws::AppStream
     #
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
     #   The list of interface VPC endpoint (interface endpoint) objects. Users
-    #   of the stack can connect to AppStream 2.0 only through the specified
-    #   endpoints.
+    #   of the stack can connect to WorkSpaces Applications only through the
+    #   specified endpoints.
     #
     # @option params [Array<String>] :embed_host_domains
-    #   The domains where AppStream 2.0 streaming sessions can be embedded in
-    #   an iframe. You must approve the domains that you want to host embedded
-    #   AppStream 2.0 streaming sessions.
+    #   The domains where WorkSpaces Applications streaming sessions can be
+    #   embedded in an iframe. You must approve the domains that you want to
+    #   host embedded WorkSpaces Applications streaming sessions.
     #
     # @option params [Types::StreamingExperienceSettings] :streaming_experience_settings
     #   The streaming protocol you want your stack to prefer. This can be UDP
@@ -2294,9 +2515,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a temporary URL to start an AppStream 2.0 streaming session
-    # for the specified user. A streaming URL enables application streaming
-    # to be tested without user setup.
+    # Creates a temporary URL to start an WorkSpaces Applications streaming
+    # session for the specified user. A streaming URL enables application
+    # streaming to be tested without user setup.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack.
@@ -2320,7 +2541,7 @@ module Aws::AppStream
     #
     # @option params [String] :session_context
     #   The session context. For more information, see [Session Context][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -2435,11 +2656,12 @@ module Aws::AppStream
     end
 
     # Creates a new image with the latest Windows operating system updates,
-    # driver updates, and AppStream 2.0 agent software.
+    # driver updates, and WorkSpaces Applications agent software.
     #
     # For more information, see the "Update an Image by Using Managed
-    # AppStream 2.0 Image Updates" section in [Administer Your AppStream
-    # 2.0 Images][1], in the *Amazon AppStream 2.0 Administration Guide*.
+    # WorkSpaces Applications Image Updates" section in [Administer Your
+    # WorkSpaces Applications Images][1], in the *Amazon WorkSpaces
+    # Applications Administration Guide*.
     #
     #
     #
@@ -2471,7 +2693,7 @@ module Aws::AppStream
     #   If you do not specify a value, the value is set to an empty string.
     #
     #   For more information about tags, see [Tagging Your Resources][1] in
-    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #   the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -2479,11 +2701,12 @@ module Aws::AppStream
     #
     # @option params [Boolean] :dry_run
     #   Indicates whether to display the status of image update availability
-    #   before AppStream 2.0 initiates the process of creating a new updated
-    #   image. If this value is set to `true`, AppStream 2.0 displays whether
-    #   image updates are available. If this value is set to `false`,
-    #   AppStream 2.0 initiates the process of creating a new updated image
-    #   without displaying whether image updates are available.
+    #   before WorkSpaces Applications initiates the process of creating a new
+    #   updated image. If this value is set to `true`, WorkSpaces Applications
+    #   displays whether image updates are available. If this value is set to
+    #   `false`, WorkSpaces Applications initiates the process of creating a
+    #   new updated image without displaying whether image updates are
+    #   available.
     #
     # @return [Types::CreateUpdatedImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2509,13 +2732,13 @@ module Aws::AppStream
     #   resp.image.arn #=> String
     #   resp.image.base_image_arn #=> String
     #   resp.image.display_name #=> String
-    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
     #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image.description #=> String
-    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
     #   resp.image.applications #=> Array
     #   resp.image.applications[0].name #=> String
@@ -2543,7 +2766,7 @@ module Aws::AppStream
     #   resp.image.image_permissions.allow_fleet #=> Boolean
     #   resp.image.image_permissions.allow_image_builder #=> Boolean
     #   resp.image.image_errors #=> Array
-    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image.image_errors[0].error_message #=> String
     #   resp.image.image_errors[0].error_timestamp #=> Time
     #   resp.image.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
@@ -2552,6 +2775,7 @@ module Aws::AppStream
     #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
+    #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE"
     #   resp.can_update_image #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImage AWS API Documentation
@@ -2708,9 +2932,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified Directory Config object from AppStream 2.0. This
-    # object includes the information required to join streaming instances
-    # to an Active Directory domain.
+    # Deletes the specified Directory Config object from WorkSpaces
+    # Applications. This object includes the information required to join
+    # streaming instances to an Active Directory domain.
     #
     # @option params [required, String] :directory_name
     #   The name of the directory configuration.
@@ -2803,13 +3027,13 @@ module Aws::AppStream
     #   resp.image.arn #=> String
     #   resp.image.base_image_arn #=> String
     #   resp.image.display_name #=> String
-    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
     #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image.description #=> String
-    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
     #   resp.image.applications #=> Array
     #   resp.image.applications[0].name #=> String
@@ -2837,7 +3061,7 @@ module Aws::AppStream
     #   resp.image.image_permissions.allow_fleet #=> Boolean
     #   resp.image.image_permissions.allow_image_builder #=> Boolean
     #   resp.image.image_errors #=> Array
-    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image.image_errors[0].error_message #=> String
     #   resp.image.image_errors[0].error_timestamp #=> Time
     #   resp.image.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
@@ -2846,6 +3070,7 @@ module Aws::AppStream
     #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
+    #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -2885,7 +3110,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -2897,13 +3122,14 @@ module Aws::AppStream
     #   resp.image_builder.network_access_configuration.eni_ipv_6_addresses[0] #=> String
     #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
@@ -3128,7 +3354,7 @@ module Aws::AppStream
     #   resp.app_block_builders[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.app_block_builders[0].created_time #=> Time
     #   resp.app_block_builders[0].app_block_builder_errors #=> Array
-    #   resp.app_block_builders[0].app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builders[0].app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.app_block_builders[0].app_block_builder_errors[0].error_message #=> String
     #   resp.app_block_builders[0].app_block_builder_errors[0].error_timestamp #=> Time
     #   resp.app_block_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR"
@@ -3361,9 +3587,9 @@ module Aws::AppStream
     end
 
     # Retrieves a list that describes one or more specified Directory Config
-    # objects for AppStream 2.0, if the names for these objects are
-    # provided. Otherwise, all Directory Config objects in the account are
-    # described. These objects include the configuration information
+    # objects for WorkSpaces Applications, if the names for these objects
+    # are provided. Otherwise, all Directory Config objects in the account
+    # are described. These objects include the configuration information
     # required to join fleets and image builders to Microsoft Active
     # Directory domains.
     #
@@ -3518,7 +3744,7 @@ module Aws::AppStream
     #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
     #   resp.fleets[0].created_time #=> Time
     #   resp.fleets[0].fleet_errors #=> Array
-    #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.fleets[0].fleet_errors[0].error_message #=> String
     #   resp.fleets[0].enable_default_internet_access #=> Boolean
     #   resp.fleets[0].domain_join_info.directory_name #=> String
@@ -3533,6 +3759,7 @@ module Aws::AppStream
     #   resp.fleets[0].session_script_s3_location.s3_bucket #=> String
     #   resp.fleets[0].session_script_s3_location.s3_key #=> String
     #   resp.fleets[0].max_sessions_per_instance #=> Integer
+    #   resp.fleets[0].root_volume_config.volume_size_in_gb #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -3592,7 +3819,7 @@ module Aws::AppStream
     #   resp.image_builders[0].instance_type #=> String
     #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builders[0].iam_role_arn #=> String
-    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
+    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builders[0].state_change_reason.message #=> String
     #   resp.image_builders[0].created_time #=> Time
@@ -3604,13 +3831,14 @@ module Aws::AppStream
     #   resp.image_builders[0].network_access_configuration.eni_ipv_6_addresses[0] #=> String
     #   resp.image_builders[0].network_access_configuration.eni_id #=> String
     #   resp.image_builders[0].image_builder_errors #=> Array
-    #   resp.image_builders[0].image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builders[0].image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image_builders[0].image_builder_errors[0].error_message #=> String
     #   resp.image_builders[0].image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builders[0].appstream_agent_version #=> String
     #   resp.image_builders[0].access_endpoints #=> Array
     #   resp.image_builders[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builders[0].access_endpoints[0].vpce_id #=> String
+    #   resp.image_builders[0].root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builders[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.next_token #=> String
     #
@@ -3720,13 +3948,13 @@ module Aws::AppStream
     #   resp.images[0].arn #=> String
     #   resp.images[0].base_image_arn #=> String
     #   resp.images[0].display_name #=> String
-    #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"
+    #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].image_builder_name #=> String
     #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.images[0].description #=> String
-    #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
+    #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
     #   resp.images[0].applications #=> Array
     #   resp.images[0].applications[0].name #=> String
@@ -3754,7 +3982,7 @@ module Aws::AppStream
     #   resp.images[0].image_permissions.allow_fleet #=> Boolean
     #   resp.images[0].image_permissions.allow_image_builder #=> Boolean
     #   resp.images[0].image_errors #=> Array
-    #   resp.images[0].image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.images[0].image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.images[0].image_errors[0].error_message #=> String
     #   resp.images[0].image_errors[0].error_timestamp #=> Time
     #   resp.images[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
@@ -3763,6 +3991,7 @@ module Aws::AppStream
     #   resp.images[0].dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
     #   resp.images[0].image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.images[0].managed_software_included #=> Boolean
+    #   resp.images[0].image_type #=> String, one of "CUSTOM", "NATIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -4159,8 +4388,8 @@ module Aws::AppStream
     end
 
     # Disables the specified user in the user pool. Users can't sign in to
-    # AppStream 2.0 until they are re-enabled. This action does not delete
-    # the user.
+    # WorkSpaces Applications until they are re-enabled. This action does
+    # not delete the user.
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
@@ -4378,8 +4607,8 @@ module Aws::AppStream
     end
 
     # Enables a user in the user pool. After being enabled, users can sign
-    # in to AppStream 2.0 and open applications from the stacks to which
-    # they are assigned.
+    # in to WorkSpaces Applications and open applications from the stacks to
+    # which they are assigned.
     #
     # @option params [required, String] :user_name
     #   The email address of the user.
@@ -4431,6 +4660,47 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def expire_session(params = {}, options = {})
       req = build_request(:expire_session, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an export image task, including its
+    # current state, progress, and any error details.
+    #
+    # @option params [String] :task_id
+    #   The unique identifier of the export image task to retrieve information
+    #   about.
+    #
+    # @return [Types::GetExportImageTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportImageTaskResult#export_image_task #export_image_task} => Types::ExportImageTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export_image_task({
+    #     task_id: "UUID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_image_task.task_id #=> String
+    #   resp.export_image_task.image_arn #=> String
+    #   resp.export_image_task.ami_name #=> String
+    #   resp.export_image_task.created_date #=> Time
+    #   resp.export_image_task.ami_description #=> String
+    #   resp.export_image_task.state #=> String, one of "EXPORTING", "COMPLETED", "FAILED"
+    #   resp.export_image_task.ami_id #=> String
+    #   resp.export_image_task.tag_specifications #=> Hash
+    #   resp.export_image_task.tag_specifications["TagKey"] #=> String
+    #   resp.export_image_task.error_details #=> Array
+    #   resp.export_image_task.error_details[0].error_code #=> String
+    #   resp.export_image_task.error_details[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/GetExportImageTask AWS API Documentation
+    #
+    # @overload get_export_image_task(params = {})
+    # @param [Hash] params ({})
+    def get_export_image_task(params = {}, options = {})
+      req = build_request(:get_export_image_task, params)
       req.send_request(options)
     end
 
@@ -4552,11 +4822,72 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Retrieves a list of all tags for the specified AppStream 2.0 resource.
-    # You can tag AppStream 2.0 image builders, images, fleets, and stacks.
+    # Lists export image tasks, with optional filtering and pagination. Use
+    # this operation to monitor the status of multiple export operations.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Optional filters to apply when listing export image tasks. Filters
+    #   help you narrow down the results based on specific criteria.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of export image tasks to return in a single
+    #   request. The valid range is 1-500, with a default of 50.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request. Use this to retrieve the
+    #   next page of results when there are more tasks than the MaxResults
+    #   limit.
+    #
+    # @return [Types::ListExportImageTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportImageTasksResult#export_image_tasks #export_image_tasks} => Array&lt;Types::ExportImageTask&gt;
+    #   * {Types::ListExportImageTasksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_export_image_tasks({
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_image_tasks #=> Array
+    #   resp.export_image_tasks[0].task_id #=> String
+    #   resp.export_image_tasks[0].image_arn #=> String
+    #   resp.export_image_tasks[0].ami_name #=> String
+    #   resp.export_image_tasks[0].created_date #=> Time
+    #   resp.export_image_tasks[0].ami_description #=> String
+    #   resp.export_image_tasks[0].state #=> String, one of "EXPORTING", "COMPLETED", "FAILED"
+    #   resp.export_image_tasks[0].ami_id #=> String
+    #   resp.export_image_tasks[0].tag_specifications #=> Hash
+    #   resp.export_image_tasks[0].tag_specifications["TagKey"] #=> String
+    #   resp.export_image_tasks[0].error_details #=> Array
+    #   resp.export_image_tasks[0].error_details[0].error_code #=> String
+    #   resp.export_image_tasks[0].error_details[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListExportImageTasks AWS API Documentation
+    #
+    # @overload list_export_image_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_export_image_tasks(params = {}, options = {})
+      req = build_request(:list_export_image_tasks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all tags for the specified WorkSpaces Applications
+    # resource. You can tag WorkSpaces Applications image builders, images,
+    # fleets, and stacks.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon AppStream 2.0 Administration Guide*.
+    # the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -4628,7 +4959,7 @@ module Aws::AppStream
     #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.app_block_builder.created_time #=> Time
     #   resp.app_block_builder.app_block_builder_errors #=> Array
-    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
     #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
     #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
@@ -4674,9 +5005,9 @@ module Aws::AppStream
     #   The name of the image builder.
     #
     # @option params [String] :appstream_agent_version
-    #   The version of the AppStream 2.0 agent to use for this image builder.
-    #   To use the latest version of the AppStream 2.0 agent, specify
-    #   \[LATEST\].
+    #   The version of the WorkSpaces Applications agent to use for this image
+    #   builder. To use the latest version of the WorkSpaces Applications
+    #   agent, specify \[LATEST\].
     #
     # @return [Types::StartImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4703,7 +5034,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -4715,13 +5046,14 @@ module Aws::AppStream
     #   resp.image_builder.network_access_configuration.eni_ipv_6_addresses[0] #=> String
     #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
@@ -4796,7 +5128,7 @@ module Aws::AppStream
     #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.app_block_builder.created_time #=> Time
     #   resp.app_block_builder.app_block_builder_errors #=> Array
-    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
     #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
     #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
@@ -4865,7 +5197,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -4877,13 +5209,14 @@ module Aws::AppStream
     #   resp.image_builder.network_access_configuration.eni_ipv_6_addresses[0] #=> String
     #   resp.image_builder.network_access_configuration.eni_id #=> String
     #   resp.image_builder.image_builder_errors #=> Array
-    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
     #   resp.image_builder.appstream_agent_version #=> String
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
@@ -4895,9 +5228,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Adds or overwrites one or more tags for the specified AppStream 2.0
-    # resource. You can tag AppStream 2.0 image builders, images, fleets,
-    # and stacks.
+    # Adds or overwrites one or more tags for the specified WorkSpaces
+    # Applications resource. You can tag WorkSpaces Applications image
+    # builders, images, fleets, and stacks.
     #
     # Each tag consists of a key and an optional value. If a resource
     # already has a tag with the same key, this operation updates its value.
@@ -4906,7 +5239,7 @@ module Aws::AppStream
     # To disassociate tags from your resources, use UntagResource.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon AppStream 2.0 Administration Guide*.
+    # the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -4947,13 +5280,13 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Disassociates one or more specified tags from the specified AppStream
-    # 2.0 resource.
+    # Disassociates one or more specified tags from the specified WorkSpaces
+    # Applications resource.
     #
     # To list the current tags for your resources, use ListTagsForResource.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
-    # the *Amazon AppStream 2.0 Administration Guide*.
+    # the *Amazon WorkSpaces Applications Administration Guide*.
     #
     #
     #
@@ -5033,13 +5366,14 @@ module Aws::AppStream
     #   block builder. To assume a role, the app block builder calls the AWS
     #   Security Token Service (STS) `AssumeRole` API operation and passes the
     #   ARN of the role to use. The operation creates a new session with
-    #   temporary credentials. AppStream 2.0 retrieves the temporary
+    #   temporary credentials. WorkSpaces Applications retrieves the temporary
     #   credentials and creates the **appstream\_machine\_role** credential
     #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications Streaming
+    #   Instances][1] in the *Amazon WorkSpaces Applications Administration
+    #   Guide*.
     #
     #
     #
@@ -5097,7 +5431,7 @@ module Aws::AppStream
     #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
     #   resp.app_block_builder.created_time #=> Time
     #   resp.app_block_builder.app_block_builder_errors #=> Array
-    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
     #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
     #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
@@ -5198,9 +5532,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the specified Directory Config object in AppStream 2.0. This
-    # object includes the configuration information required to join fleets
-    # and image builders to Microsoft Active Directory domains.
+    # Updates the specified Directory Config object in WorkSpaces
+    # Applications. This object includes the configuration information
+    # required to join fleets and image builders to Microsoft Active
+    # Directory domains.
     #
     # @option params [required, String] :directory_name
     #   The name of the Directory Config object.
@@ -5407,8 +5742,6 @@ module Aws::AppStream
     #
     #   * stream.graphics-design.4xlarge
     #
-    #   * stream.graphics-desktop.2xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -5420,12 +5753,6 @@ module Aws::AppStream
     #   * stream.graphics.g4dn.12xlarge
     #
     #   * stream.graphics.g4dn.16xlarge
-    #
-    #   * stream.graphics-pro.4xlarge
-    #
-    #   * stream.graphics-pro.8xlarge
-    #
-    #   * stream.graphics-pro.16xlarge
     #
     #   * stream.graphics.g5.xlarge
     #
@@ -5560,23 +5887,25 @@ module Aws::AppStream
     #   To assume a role, a fleet instance calls the AWS Security Token
     #   Service (STS) `AssumeRole` API operation and passes the ARN of the
     #   role to use. The operation creates a new session with temporary
-    #   credentials. AppStream 2.0 retrieves the temporary credentials and
-    #   creates the **appstream\_machine\_role** credential profile on the
-    #   instance.
+    #   credentials. WorkSpaces Applications retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
     #
     #   For more information, see [Using an IAM Role to Grant Permissions to
-    #   Applications and Scripts Running on AppStream 2.0 Streaming
-    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #   Applications and Scripts Running on WorkSpaces Applications Streaming
+    #   Instances][1] in the *Amazon WorkSpaces Applications Administration
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
     #
     # @option params [String] :stream_view
-    #   The AppStream 2.0 view that is displayed to your users when they
-    #   stream from the fleet. When `APP` is specified, only the windows of
-    #   applications opened by users display. When `DESKTOP` is specified, the
-    #   standard desktop that is provided by the operating system displays.
+    #   The WorkSpaces Applications view that is displayed to your users when
+    #   they stream from the fleet. When `APP` is specified, only the windows
+    #   of applications opened by users display. When `DESKTOP` is specified,
+    #   the standard desktop that is provided by the operating system
+    #   displays.
     #
     #   The default value is `APP`.
     #
@@ -5599,6 +5928,10 @@ module Aws::AppStream
     # @option params [Integer] :max_sessions_per_instance
     #   The maximum number of user sessions on an instance. This only applies
     #   to multi-session fleets.
+    #
+    # @option params [Types::VolumeConfig] :root_volume_config
+    #   The updated configuration for the root volume of fleet instances. Note
+    #   that volume size cannot be decreased below the image volume size.
     #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5630,7 +5963,7 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION, MAX_SESSIONS_PER_INSTANCE
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION, MAX_SESSIONS_PER_INSTANCE, VOLUME_CONFIGURATION
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
     #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8
@@ -5641,6 +5974,9 @@ module Aws::AppStream
     #       s3_key: "S3Key",
     #     },
     #     max_sessions_per_instance: 1,
+    #     root_volume_config: {
+    #       volume_size_in_gb: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5670,7 +6006,7 @@ module Aws::AppStream
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
     #   resp.fleet.created_time #=> Time
     #   resp.fleet.fleet_errors #=> Array
-    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #   resp.fleet.enable_default_internet_access #=> Boolean
     #   resp.fleet.domain_join_info.directory_name #=> String
@@ -5685,6 +6021,7 @@ module Aws::AppStream
     #   resp.fleet.session_script_s3_location.s3_bucket #=> String
     #   resp.fleet.session_script_s3_location.s3_key #=> String
     #   resp.fleet.max_sessions_per_instance #=> Integer
+    #   resp.fleet.root_volume_config.volume_size_in_gb #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -5770,13 +6107,13 @@ module Aws::AppStream
     #
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
     #   The list of interface VPC endpoint (interface endpoint) objects. Users
-    #   of the stack can connect to AppStream 2.0 only through the specified
-    #   endpoints.
+    #   of the stack can connect to WorkSpaces Applications only through the
+    #   specified endpoints.
     #
     # @option params [Array<String>] :embed_host_domains
-    #   The domains where AppStream 2.0 streaming sessions can be embedded in
-    #   an iframe. You must approve the domains that you want to host embedded
-    #   AppStream 2.0 streaming sessions.
+    #   The domains where WorkSpaces Applications streaming sessions can be
+    #   embedded in an iframe. You must approve the domains that you want to
+    #   host embedded WorkSpaces Applications streaming sessions.
     #
     # @option params [Types::StreamingExperienceSettings] :streaming_experience_settings
     #   The streaming protocol you want your stack to prefer. This can be UDP
@@ -5974,7 +6311,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1155,6 +1155,128 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates a new Scheduled Query that runs CloudWatch Logs Insights
+    # queries on a schedule and delivers results to specified destinations.
+    #
+    # @option params [required, String] :name
+    #   A unique name for the scheduled query within the region for an AWS
+    #   account. The name can contain letters, numbers, underscores, hyphens,
+    #   forward slashes, periods, and hash symbols.
+    #
+    # @option params [String] :description
+    #   An optional description for the scheduled query to help identify its
+    #   purpose.
+    #
+    # @option params [required, String] :query_language
+    #   The query language to use for the scheduled query. Valid values are
+    #   LogsQL (CloudWatch Logs Insights query language), PPL (OpenSearch
+    #   Service Piped Processing Language), and SQL (OpenSearch Service
+    #   Structured Query Language).
+    #
+    # @option params [required, String] :query_string
+    #   The CloudWatch Logs Insights query string to execute. This is the
+    #   actual query that will be run against your log data on the specified
+    #   schedule.
+    #
+    # @option params [Array<String>] :log_group_identifiers
+    #   The log group identifiers to query. You can specify log group names or
+    #   log group ARNs. If querying log groups in a source account from a
+    #   monitoring account, you must specify the ARN of the log group.
+    #
+    # @option params [required, String] :schedule_expression
+    #   A cron expression that defines when the scheduled query runs. The
+    #   format is cron(fields) where fields consist of six space-separated
+    #   values: minutes, hours, day\_of\_month, month, day\_of\_week, year.
+    #
+    # @option params [String] :timezone
+    #   The timezone in which the schedule expression is evaluated. If not
+    #   provided, defaults to UTC.
+    #
+    # @option params [Integer] :start_time_offset
+    #   Time offset in seconds from the execution time for the start of the
+    #   query time range. This defines the lookback period for the query (for
+    #   example, 3600 for the last hour).
+    #
+    # @option params [Types::DestinationConfiguration] :destination_configuration
+    #   Configuration for destinations where the query results will be
+    #   delivered after successful execution. You can configure delivery to S3
+    #   buckets or EventBridge event buses.
+    #
+    # @option params [Integer] :schedule_start_time
+    #   The start time for the query schedule in Unix epoch time (seconds
+    #   since January 1, 1970, 00:00:00 UTC). If not specified, the schedule
+    #   starts immediately.
+    #
+    # @option params [Integer] :schedule_end_time
+    #   The end time for the query schedule in Unix epoch time (seconds since
+    #   January 1, 1970, 00:00:00 UTC). If not specified, the schedule runs
+    #   indefinitely.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that CloudWatch Logs
+    #   will assume to execute the scheduled query and deliver results to the
+    #   specified destinations.
+    #
+    # @option params [String] :state
+    #   The initial state of the scheduled query. Valid values are ENABLED
+    #   (the query will run according to its schedule) and DISABLED (the query
+    #   is paused and will not run). If not provided, defaults to ENABLED.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional list of key-value pairs to associate with the resource.
+    #
+    #   For more information about tagging, see [Tagging Amazon Web Services
+    #   resources][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScheduledQueryResponse#scheduled_query_arn #scheduled_query_arn} => String
+    #   * {Types::CreateScheduledQueryResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scheduled_query({
+    #     name: "ScheduledQueryName", # required
+    #     description: "ScheduledQueryDescription",
+    #     query_language: "CWLI", # required, accepts CWLI, SQL, PPL
+    #     query_string: "QueryString", # required
+    #     log_group_identifiers: ["LogGroupIdentifier"],
+    #     schedule_expression: "ScheduleExpression", # required
+    #     timezone: "ScheduleTimezone",
+    #     start_time_offset: 1,
+    #     destination_configuration: {
+    #       s3_configuration: { # required
+    #         destination_identifier: "S3Uri", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
+    #     schedule_start_time: 1,
+    #     schedule_end_time: 1,
+    #     execution_role_arn: "RoleArn", # required
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_query_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateScheduledQuery AWS API Documentation
+    #
+    # @overload create_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def create_scheduled_query(params = {}, options = {})
+      req = build_request(:create_scheduled_query, params)
+      req.send_request(options)
+    end
+
     # Deletes a CloudWatch Logs account policy. This stops the account-wide
     # policy from applying to log groups in the account. If you delete a
     # data protection policy or subscription filter policy, any log-group
@@ -1666,6 +1788,30 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def delete_retention_policy(params = {}, options = {})
       req = build_request(:delete_retention_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing scheduled query and all its associated
+    # configurations. This operation permanently removes the scheduled query
+    # and cannot be undone.
+    #
+    # @option params [required, String] :identifier
+    #   The name or ARN of the scheduled query to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_query({
+    #     identifier: "ScheduledQueryIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteScheduledQuery AWS API Documentation
+    #
+    # @overload delete_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_query(params = {}, options = {})
+      req = build_request(:delete_scheduled_query, params)
       req.send_request(options)
     end
 
@@ -3937,6 +4083,141 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns detailed information about a specified scheduled query,
+    # including its configuration, current state, and execution history.
+    #
+    # @option params [required, String] :identifier
+    #   The name or ARN of the scheduled query to retrieve.
+    #
+    # @return [Types::GetScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetScheduledQueryResponse#scheduled_query_arn #scheduled_query_arn} => String
+    #   * {Types::GetScheduledQueryResponse#name #name} => String
+    #   * {Types::GetScheduledQueryResponse#description #description} => String
+    #   * {Types::GetScheduledQueryResponse#query_language #query_language} => String
+    #   * {Types::GetScheduledQueryResponse#query_string #query_string} => String
+    #   * {Types::GetScheduledQueryResponse#log_group_identifiers #log_group_identifiers} => Array&lt;String&gt;
+    #   * {Types::GetScheduledQueryResponse#schedule_expression #schedule_expression} => String
+    #   * {Types::GetScheduledQueryResponse#timezone #timezone} => String
+    #   * {Types::GetScheduledQueryResponse#start_time_offset #start_time_offset} => Integer
+    #   * {Types::GetScheduledQueryResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
+    #   * {Types::GetScheduledQueryResponse#state #state} => String
+    #   * {Types::GetScheduledQueryResponse#last_triggered_time #last_triggered_time} => Integer
+    #   * {Types::GetScheduledQueryResponse#last_execution_status #last_execution_status} => String
+    #   * {Types::GetScheduledQueryResponse#schedule_start_time #schedule_start_time} => Integer
+    #   * {Types::GetScheduledQueryResponse#schedule_end_time #schedule_end_time} => Integer
+    #   * {Types::GetScheduledQueryResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetScheduledQueryResponse#creation_time #creation_time} => Integer
+    #   * {Types::GetScheduledQueryResponse#last_updated_time #last_updated_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_scheduled_query({
+    #     identifier: "ScheduledQueryIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_query_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.query_language #=> String, one of "CWLI", "SQL", "PPL"
+    #   resp.query_string #=> String
+    #   resp.log_group_identifiers #=> Array
+    #   resp.log_group_identifiers[0] #=> String
+    #   resp.schedule_expression #=> String
+    #   resp.timezone #=> String
+    #   resp.start_time_offset #=> Integer
+    #   resp.destination_configuration.s3_configuration.destination_identifier #=> String
+    #   resp.destination_configuration.s3_configuration.role_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.last_triggered_time #=> Integer
+    #   resp.last_execution_status #=> String, one of "Running", "InvalidQuery", "Complete", "Failed", "Timeout"
+    #   resp.schedule_start_time #=> Integer
+    #   resp.schedule_end_time #=> Integer
+    #   resp.execution_role_arn #=> String
+    #   resp.creation_time #=> Integer
+    #   resp.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetScheduledQuery AWS API Documentation
+    #
+    # @overload get_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def get_scheduled_query(params = {}, options = {})
+      req = build_request(:get_scheduled_query, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the execution history of a scheduled query within a
+    # specified time range, including execution status and destination
+    # processing metadata.
+    #
+    # @option params [required, String] :identifier
+    #   The name or ARN of the scheduled query to retrieve history for.
+    #
+    # @option params [required, Integer] :start_time
+    #   The start time for the history retrieval window in Unix epoch time.
+    #
+    # @option params [required, Integer] :end_time
+    #   The end time for the history retrieval window in Unix epoch time.
+    #
+    # @option params [Array<String>] :execution_statuses
+    #   Filter results by execution status (Running, Complete, Failed,
+    #   Timeout, or InvalidQuery).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of history records to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::GetScheduledQueryHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetScheduledQueryHistoryResponse#name #name} => String
+    #   * {Types::GetScheduledQueryHistoryResponse#scheduled_query_arn #scheduled_query_arn} => String
+    #   * {Types::GetScheduledQueryHistoryResponse#trigger_history #trigger_history} => Array&lt;Types::TriggerHistoryRecord&gt;
+    #   * {Types::GetScheduledQueryHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_scheduled_query_history({
+    #     identifier: "ScheduledQueryIdentifier", # required
+    #     start_time: 1, # required
+    #     end_time: 1, # required
+    #     execution_statuses: ["Running"], # accepts Running, InvalidQuery, Complete, Failed, Timeout
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.scheduled_query_arn #=> String
+    #   resp.trigger_history #=> Array
+    #   resp.trigger_history[0].query_id #=> String
+    #   resp.trigger_history[0].execution_status #=> String, one of "Running", "InvalidQuery", "Complete", "Failed", "Timeout"
+    #   resp.trigger_history[0].triggered_timestamp #=> Integer
+    #   resp.trigger_history[0].error_message #=> String
+    #   resp.trigger_history[0].destinations #=> Array
+    #   resp.trigger_history[0].destinations[0].destination_type #=> String, one of "S3"
+    #   resp.trigger_history[0].destinations[0].destination_identifier #=> String
+    #   resp.trigger_history[0].destinations[0].status #=> String, one of "IN_PROGRESS", "CLIENT_ERROR", "FAILED", "COMPLETE"
+    #   resp.trigger_history[0].destinations[0].processed_identifier #=> String
+    #   resp.trigger_history[0].destinations[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetScheduledQueryHistory AWS API Documentation
+    #
+    # @overload get_scheduled_query_history(params = {})
+    # @param [Hash] params ({})
+    def get_scheduled_query_history(params = {}, options = {})
+      req = build_request(:get_scheduled_query_history, params)
+      req.send_request(options)
+    end
+
     # Returns the information about the log transformer associated with this
     # log group.
     #
@@ -4391,6 +4672,60 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Lists all scheduled queries in the current AWS account and region with
+    # optional filtering by state.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of scheduled queries to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [String] :state
+    #   Filter results by the state of scheduled queries (ENABLED or
+    #   DISABLED).
+    #
+    # @return [Types::ListScheduledQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScheduledQueriesResponse#next_token #next_token} => String
+    #   * {Types::ListScheduledQueriesResponse#scheduled_queries #scheduled_queries} => Array&lt;Types::ScheduledQuerySummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scheduled_queries({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.scheduled_queries #=> Array
+    #   resp.scheduled_queries[0].scheduled_query_arn #=> String
+    #   resp.scheduled_queries[0].name #=> String
+    #   resp.scheduled_queries[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.scheduled_queries[0].last_triggered_time #=> Integer
+    #   resp.scheduled_queries[0].last_execution_status #=> String, one of "Running", "InvalidQuery", "Complete", "Failed", "Timeout"
+    #   resp.scheduled_queries[0].schedule_expression #=> String
+    #   resp.scheduled_queries[0].timezone #=> String
+    #   resp.scheduled_queries[0].destination_configuration.s3_configuration.destination_identifier #=> String
+    #   resp.scheduled_queries[0].destination_configuration.s3_configuration.role_arn #=> String
+    #   resp.scheduled_queries[0].creation_time #=> Integer
+    #   resp.scheduled_queries[0].last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListScheduledQueries AWS API Documentation
+    #
+    # @overload list_scheduled_queries(params = {})
+    # @param [Hash] params ({})
+    def list_scheduled_queries(params = {}, options = {})
+      req = build_request(:list_scheduled_queries, params)
+      req.send_request(options)
+    end
+
     # Displays the tags associated with a CloudWatch Logs resource.
     # Currently, log groups and destinations support tagging.
     #
@@ -4613,6 +4948,8 @@ module Aws::CloudWatchLogs
     # CloudWatch Logs provides default field indexes for all log groups in
     # the Standard log class. Default field indexes are automatically
     # available for the following fields:
+    #
+    # * `@logStream`
     #
     # * `@aws.region`
     #
@@ -5295,8 +5632,23 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :log_type
     #   Defines the type of log that the source is sending.
     #
-    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS` and
-    #     `TRACES`.
+    #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
+    #     and `EVENT_LOGS`.
+    #
+    #   * For Amazon Bedrock Knowledge Bases, the valid value is
+    #     `APPLICATION_LOGS`.
+    #
+    #   * For Amazon Bedrock AgentCore Runtime, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Tools, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Identity, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Gateway, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
     #
@@ -5316,9 +5668,9 @@ module Aws::CloudWatchLogs
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
     #
-    #   * For Amazon Q, the valid value is `EVENT_LOGS`.
+    #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
     #
-    #   * For Amazon SES mail manager, the valid values are `APPLICATION_LOG`
+    #   * For Amazon SES mail manager, the valid values are `APPLICATION_LOGS`
     #     and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
@@ -5532,6 +5884,8 @@ module Aws::CloudWatchLogs
     # CloudWatch Logs provides default field indexes for all log groups in
     # the Standard log class. Default field indexes are automatically
     # available for the following fields:
+    #
+    # * `@logStream`
     #
     # * `@aws.region`
     #
@@ -6018,8 +6372,22 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a resource policy allowing other Amazon Web
     # Services services to put log events to this account, such as Amazon
-    # Route 53. An account can have up to 10 resource policies per Amazon
-    # Web Services Region.
+    # Route 53. This API has the following restrictions:
+    #
+    # * **Supported actions** - Policy only supports `logs:PutLogEvents` and
+    #   `logs:CreateLogStream ` actions
+    #
+    # * **Supported principals** - Policy only applies when operations are
+    #   invoked by Amazon Web Services service principals (not IAM users,
+    #   roles, or cross-account principals
+    #
+    # * **Policy limits** - An account can have a maximum of 10 policies
+    #   without resourceARN and one per LogGroup resourceARN
+    #
+    # Resource policies with actions invoked by non-Amazon Web Services
+    # service principals (such as IAM users, roles, or other Amazon Web
+    # Services accounts) will not be enforced. For access control involving
+    # these principals, use the IAM policies.
     #
     # @option params [String] :policy_name
     #   Name of the new policy. This parameter is required.
@@ -7591,6 +7959,128 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Updates the configuration of an existing scheduled query. This
+    # operation follows PUT semantics, replacing the existing configuration
+    # with the provided values.
+    #
+    # @option params [required, String] :identifier
+    #   The name or ARN of the scheduled query to update.
+    #
+    # @option params [String] :description
+    #   Updated description for the scheduled query.
+    #
+    # @option params [required, String] :query_language
+    #   Updated query language to use (LogsQL, PPL, or SQL).
+    #
+    # @option params [required, String] :query_string
+    #   Updated CloudWatch Logs Insights query string to execute.
+    #
+    # @option params [Array<String>] :log_group_identifiers
+    #   Updated log group identifiers to query.
+    #
+    # @option params [required, String] :schedule_expression
+    #   Updated cron expression that defines when the scheduled query runs.
+    #
+    # @option params [String] :timezone
+    #   Updated timezone in which the schedule expression is evaluated.
+    #
+    # @option params [Integer] :start_time_offset
+    #   Updated time offset in seconds from the execution time for the start
+    #   of the query time range.
+    #
+    # @option params [Types::DestinationConfiguration] :destination_configuration
+    #   Updated configuration for destinations where the query results will be
+    #   delivered.
+    #
+    # @option params [Integer] :schedule_start_time
+    #   Updated start time for the query schedule in Unix epoch time.
+    #
+    # @option params [Integer] :schedule_end_time
+    #   Updated end time for the query schedule in Unix epoch time.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   Updated ARN of the IAM role that CloudWatch Logs will assume to
+    #   execute the scheduled query.
+    #
+    # @option params [String] :state
+    #   Updated state of the scheduled query (ENABLED or DISABLED).
+    #
+    # @return [Types::UpdateScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScheduledQueryResponse#scheduled_query_arn #scheduled_query_arn} => String
+    #   * {Types::UpdateScheduledQueryResponse#name #name} => String
+    #   * {Types::UpdateScheduledQueryResponse#description #description} => String
+    #   * {Types::UpdateScheduledQueryResponse#query_language #query_language} => String
+    #   * {Types::UpdateScheduledQueryResponse#query_string #query_string} => String
+    #   * {Types::UpdateScheduledQueryResponse#log_group_identifiers #log_group_identifiers} => Array&lt;String&gt;
+    #   * {Types::UpdateScheduledQueryResponse#schedule_expression #schedule_expression} => String
+    #   * {Types::UpdateScheduledQueryResponse#timezone #timezone} => String
+    #   * {Types::UpdateScheduledQueryResponse#start_time_offset #start_time_offset} => Integer
+    #   * {Types::UpdateScheduledQueryResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
+    #   * {Types::UpdateScheduledQueryResponse#state #state} => String
+    #   * {Types::UpdateScheduledQueryResponse#last_triggered_time #last_triggered_time} => Integer
+    #   * {Types::UpdateScheduledQueryResponse#last_execution_status #last_execution_status} => String
+    #   * {Types::UpdateScheduledQueryResponse#schedule_start_time #schedule_start_time} => Integer
+    #   * {Types::UpdateScheduledQueryResponse#schedule_end_time #schedule_end_time} => Integer
+    #   * {Types::UpdateScheduledQueryResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::UpdateScheduledQueryResponse#creation_time #creation_time} => Integer
+    #   * {Types::UpdateScheduledQueryResponse#last_updated_time #last_updated_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scheduled_query({
+    #     identifier: "ScheduledQueryIdentifier", # required
+    #     description: "ScheduledQueryDescription",
+    #     query_language: "CWLI", # required, accepts CWLI, SQL, PPL
+    #     query_string: "QueryString", # required
+    #     log_group_identifiers: ["LogGroupIdentifier"],
+    #     schedule_expression: "ScheduleExpression", # required
+    #     timezone: "ScheduleTimezone",
+    #     start_time_offset: 1,
+    #     destination_configuration: {
+    #       s3_configuration: { # required
+    #         destination_identifier: "S3Uri", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
+    #     schedule_start_time: 1,
+    #     schedule_end_time: 1,
+    #     execution_role_arn: "RoleArn", # required
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_query_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.query_language #=> String, one of "CWLI", "SQL", "PPL"
+    #   resp.query_string #=> String
+    #   resp.log_group_identifiers #=> Array
+    #   resp.log_group_identifiers[0] #=> String
+    #   resp.schedule_expression #=> String
+    #   resp.timezone #=> String
+    #   resp.start_time_offset #=> Integer
+    #   resp.destination_configuration.s3_configuration.destination_identifier #=> String
+    #   resp.destination_configuration.s3_configuration.role_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.last_triggered_time #=> Integer
+    #   resp.last_execution_status #=> String, one of "Running", "InvalidQuery", "Complete", "Failed", "Timeout"
+    #   resp.schedule_start_time #=> Integer
+    #   resp.schedule_end_time #=> Integer
+    #   resp.execution_role_arn #=> String
+    #   resp.creation_time #=> Integer
+    #   resp.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateScheduledQuery AWS API Documentation
+    #
+    # @overload update_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def update_scheduled_query(params = {}, options = {})
+      req = build_request(:update_scheduled_query, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7609,7 +8099,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

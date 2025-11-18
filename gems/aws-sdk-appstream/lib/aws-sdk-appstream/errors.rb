@@ -28,6 +28,7 @@ module Aws::AppStream
   #
   # ## Error Classes
   # * {ConcurrentModificationException}
+  # * {DryRunOperationException}
   # * {EntitlementAlreadyExistsException}
   # * {EntitlementNotFoundException}
   # * {IncompatibleImageException}
@@ -53,6 +54,21 @@ module Aws::AppStream
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AppStream::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DryRunOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppStream::Types::DryRunOperationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -286,6 +286,7 @@ module Aws::BedrockRuntime
       attr_accessor additional_model_response_field_paths: ::Array[::String]
       attr_accessor request_metadata: ::Hash[::String, ::String]
       attr_accessor performance_config: Types::PerformanceConfiguration
+      attr_accessor service_tier: Types::ServiceTier
       SENSITIVE: [:prompt_variables, :request_metadata]
     end
 
@@ -297,6 +298,7 @@ module Aws::BedrockRuntime
       attr_accessor additional_model_response_fields: untyped
       attr_accessor trace: Types::ConverseTrace
       attr_accessor performance_config: Types::PerformanceConfiguration
+      attr_accessor service_tier: Types::ServiceTier
       SENSITIVE: []
     end
 
@@ -305,6 +307,7 @@ module Aws::BedrockRuntime
       attr_accessor metrics: Types::ConverseStreamMetrics
       attr_accessor trace: Types::ConverseStreamTrace
       attr_accessor performance_config: Types::PerformanceConfiguration
+      attr_accessor service_tier: Types::ServiceTier
       attr_accessor event_type: untyped
       SENSITIVE: []
     end
@@ -326,6 +329,7 @@ module Aws::BedrockRuntime
       attr_accessor additional_model_response_field_paths: ::Array[::String]
       attr_accessor request_metadata: ::Hash[::String, ::String]
       attr_accessor performance_config: Types::PerformanceConfiguration
+      attr_accessor service_tier: Types::ServiceTier
       SENSITIVE: [:prompt_variables, :request_metadata]
     end
 
@@ -343,6 +347,8 @@ module Aws::BedrockRuntime
     class ConverseTokensRequest
       attr_accessor messages: ::Array[Types::Message]
       attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor additional_model_request_fields: untyped
       SENSITIVE: []
     end
 
@@ -854,6 +860,7 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_identifier: ::String
       attr_accessor guardrail_version: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
+      attr_accessor service_tier: ("priority" | "default" | "flex")
       SENSITIVE: [:body]
     end
 
@@ -861,6 +868,7 @@ module Aws::BedrockRuntime
       attr_accessor body: ::String
       attr_accessor content_type: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
+      attr_accessor service_tier: ("priority" | "default" | "flex")
       SENSITIVE: [:body]
     end
 
@@ -889,6 +897,7 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_identifier: ::String
       attr_accessor guardrail_version: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
+      attr_accessor service_tier: ("priority" | "default" | "flex")
       SENSITIVE: [:body]
     end
 
@@ -896,6 +905,7 @@ module Aws::BedrockRuntime
       attr_accessor body: Types::ResponseStream
       attr_accessor content_type: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
+      attr_accessor service_tier: ("priority" | "default" | "flex")
       SENSITIVE: []
     end
 
@@ -1038,6 +1048,11 @@ module Aws::BedrockRuntime
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceTier
+      attr_accessor type: ("priority" | "default" | "flex")
       SENSITIVE: []
     end
 

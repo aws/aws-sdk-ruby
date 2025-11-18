@@ -188,6 +188,30 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class CreateScheduledQueryRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor query_language: ("CWLI" | "SQL" | "PPL")
+      attr_accessor query_string: ::String
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor schedule_expression: ::String
+      attr_accessor timezone: ::String
+      attr_accessor start_time_offset: ::Integer
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor schedule_start_time: ::Integer
+      attr_accessor schedule_end_time: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateScheduledQueryResponse
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class DataAlreadyAcceptedException
       attr_accessor expected_sequence_token: ::String
       SENSITIVE: []
@@ -304,6 +328,14 @@ module Aws::CloudWatchLogs
     class DeleteRetentionPolicyRequest
       attr_accessor log_group_name: ::String
       SENSITIVE: []
+    end
+
+    class DeleteScheduledQueryRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledQueryResponse < Aws::EmptyStructure
     end
 
     class DeleteSubscriptionFilterRequest
@@ -590,6 +622,11 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class DestinationConfiguration
+      attr_accessor s3_configuration: Types::S3Configuration
+      SENSITIVE: []
+    end
+
     class DisassociateKmsKeyRequest
       attr_accessor log_group_name: ::String
       attr_accessor resource_identifier: ::String
@@ -824,6 +861,51 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class GetScheduledQueryHistoryRequest
+      attr_accessor identifier: ::String
+      attr_accessor start_time: ::Integer
+      attr_accessor end_time: ::Integer
+      attr_accessor execution_statuses: ::Array[("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetScheduledQueryHistoryResponse
+      attr_accessor name: ::String
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor trigger_history: ::Array[Types::TriggerHistoryRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetScheduledQueryRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetScheduledQueryResponse
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor query_language: ("CWLI" | "SQL" | "PPL")
+      attr_accessor query_string: ::String
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor schedule_expression: ::String
+      attr_accessor timezone: ::String
+      attr_accessor start_time_offset: ::Integer
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor last_triggered_time: ::Integer
+      attr_accessor last_execution_status: ("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")
+      attr_accessor schedule_start_time: ::Integer
+      attr_accessor schedule_end_time: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_updated_time: ::Integer
+      SENSITIVE: []
+    end
+
     class GetTransformerRequest
       attr_accessor log_group_identifier: ::String
       SENSITIVE: []
@@ -874,6 +956,9 @@ module Aws::CloudWatchLogs
       attr_accessor integration_type: ("OPENSEARCH")
       attr_accessor integration_status: ("PROVISIONING" | "ACTIVE" | "FAILED")
       SENSITIVE: []
+    end
+
+    class InternalServerException < Aws::EmptyStructure
     end
 
     class InternalStreamingException
@@ -961,6 +1046,19 @@ module Aws::CloudWatchLogs
     class ListLogGroupsResponse
       attr_accessor log_groups: ::Array[Types::LogGroupSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduledQueriesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListScheduledQueriesResponse
+      attr_accessor next_token: ::String
+      attr_accessor scheduled_queries: ::Array[Types::ScheduledQuerySummary]
       SENSITIVE: []
     end
 
@@ -1596,9 +1694,38 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class S3Configuration
+      attr_accessor destination_identifier: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class S3DeliveryConfiguration
       attr_accessor suffix_path: ::String
       attr_accessor enable_hive_compatible_path: bool
+      SENSITIVE: []
+    end
+
+    class ScheduledQueryDestination
+      attr_accessor destination_type: ("S3")
+      attr_accessor destination_identifier: ::String
+      attr_accessor status: ("IN_PROGRESS" | "CLIENT_ERROR" | "FAILED" | "COMPLETE")
+      attr_accessor processed_identifier: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledQuerySummary
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor last_triggered_time: ::Integer
+      attr_accessor last_execution_status: ("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")
+      attr_accessor schedule_expression: ::String
+      attr_accessor timezone: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_updated_time: ::Integer
       SENSITIVE: []
     end
 
@@ -1759,6 +1886,15 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class TriggerHistoryRecord
+      attr_accessor query_id: ::String
+      attr_accessor execution_status: ("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")
+      attr_accessor triggered_timestamp: ::Integer
+      attr_accessor error_message: ::String
+      attr_accessor destinations: ::Array[Types::ScheduledQueryDestination]
+      SENSITIVE: []
+    end
+
     class TrimString
       attr_accessor with_keys: ::Array[::String]
       SENSITIVE: []
@@ -1817,6 +1953,45 @@ module Aws::CloudWatchLogs
       attr_accessor filter_pattern: ::String
       attr_accessor anomaly_visibility_time: ::Integer
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateScheduledQueryRequest
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor query_language: ("CWLI" | "SQL" | "PPL")
+      attr_accessor query_string: ::String
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor schedule_expression: ::String
+      attr_accessor timezone: ::String
+      attr_accessor start_time_offset: ::Integer
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor schedule_start_time: ::Integer
+      attr_accessor schedule_end_time: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateScheduledQueryResponse
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor query_language: ("CWLI" | "SQL" | "PPL")
+      attr_accessor query_string: ::String
+      attr_accessor log_group_identifiers: ::Array[::String]
+      attr_accessor schedule_expression: ::String
+      attr_accessor timezone: ::String
+      attr_accessor start_time_offset: ::Integer
+      attr_accessor destination_configuration: Types::DestinationConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor last_triggered_time: ::Integer
+      attr_accessor last_execution_status: ("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")
+      attr_accessor schedule_start_time: ::Integer
+      attr_accessor schedule_end_time: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_updated_time: ::Integer
       SENSITIVE: []
     end
 

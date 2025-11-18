@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2025-11-17)
+------------------
+
+* Feature - Add support for SCTE messages in Segment file output
+
 1.52.0 (2025-10-21)
 ------------------
 

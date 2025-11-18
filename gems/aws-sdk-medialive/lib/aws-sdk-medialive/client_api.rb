@@ -80,6 +80,8 @@ module Aws::MediaLive
     Av1RateControlMode = Shapes::StringShape.new(name: 'Av1RateControlMode')
     Av1SceneChangeDetect = Shapes::StringShape.new(name: 'Av1SceneChangeDetect')
     Av1Settings = Shapes::StructureShape.new(name: 'Av1Settings')
+    Av1SpatialAq = Shapes::StringShape.new(name: 'Av1SpatialAq')
+    Av1TemporalAq = Shapes::StringShape.new(name: 'Av1TemporalAq')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     AvailBlankingState = Shapes::StringShape.new(name: 'AvailBlankingState')
     AvailConfiguration = Shapes::StructureShape.new(name: 'AvailConfiguration')
@@ -457,6 +459,7 @@ module Aws::MediaLive
     H265TimecodeInsertionBehavior = Shapes::StringShape.new(name: 'H265TimecodeInsertionBehavior')
     H265TreeblockSize = Shapes::StringShape.new(name: 'H265TreeblockSize')
     Hdr10Settings = Shapes::StructureShape.new(name: 'Hdr10Settings')
+    Hlg2020Settings = Shapes::StructureShape.new(name: 'Hlg2020Settings')
     HlsAdMarkers = Shapes::StringShape.new(name: 'HlsAdMarkers')
     HlsAkamaiHttpTransferMode = Shapes::StringShape.new(name: 'HlsAkamaiHttpTransferMode')
     HlsAkamaiSettings = Shapes::StructureShape.new(name: 'HlsAkamaiSettings')
@@ -1440,6 +1443,8 @@ module Aws::MediaLive
     Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max12000000, location_name: "bitrate"))
     Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
     Av1Settings.add_member(:min_bitrate, Shapes::ShapeRef.new(shape: __integerMin0Max8000000, location_name: "minBitrate"))
+    Av1Settings.add_member(:spatial_aq, Shapes::ShapeRef.new(shape: Av1SpatialAq, location_name: "spatialAq"))
+    Av1Settings.add_member(:temporal_aq, Shapes::ShapeRef.new(shape: Av1TemporalAq, location_name: "temporalAq"))
     Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
@@ -3217,6 +3222,7 @@ module Aws::MediaLive
     H265ColorSpaceSettings.add_member(:hdr_10_settings, Shapes::ShapeRef.new(shape: Hdr10Settings, location_name: "hdr10Settings"))
     H265ColorSpaceSettings.add_member(:rec_601_settings, Shapes::ShapeRef.new(shape: Rec601Settings, location_name: "rec601Settings"))
     H265ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
+    H265ColorSpaceSettings.add_member(:hlg_2020_settings, Shapes::ShapeRef.new(shape: Hlg2020Settings, location_name: "hlg2020Settings"))
     H265ColorSpaceSettings.struct_class = Types::H265ColorSpaceSettings
 
     H265FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
@@ -3270,6 +3276,8 @@ module Aws::MediaLive
     Hdr10Settings.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxCll"))
     Hdr10Settings.add_member(:max_fall, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxFall"))
     Hdr10Settings.struct_class = Types::Hdr10Settings
+
+    Hlg2020Settings.struct_class = Types::Hlg2020Settings
 
     HlsAkamaiSettings.add_member(:connection_retry_interval, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "connectionRetryInterval"))
     HlsAkamaiSettings.add_member(:filecache_duration, Shapes::ShapeRef.new(shape: __integerMin0Max600, location_name: "filecacheDuration"))

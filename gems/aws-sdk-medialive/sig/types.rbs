@@ -1427,6 +1427,7 @@ module Aws::MediaLive
       attr_accessor hdr_10_settings: Types::Hdr10Settings
       attr_accessor rec_601_settings: Types::Rec601Settings
       attr_accessor rec_709_settings: Types::Rec709Settings
+      attr_accessor hlg_2020_settings: Types::Hlg2020Settings
       SENSITIVE: []
     end
 
@@ -4772,6 +4773,8 @@ module Aws::MediaLive
       attr_accessor bitrate: ::Integer
       attr_accessor rate_control_mode: ("CBR" | "QVBR")
       attr_accessor min_bitrate: ::Integer
+      attr_accessor spatial_aq: ("DISABLED" | "ENABLED")
+      attr_accessor temporal_aq: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -5789,6 +5792,9 @@ module Aws::MediaLive
       attr_accessor set_timestamp: ::Time
       attr_accessor state: ("SET" | "CLEARED")
       SENSITIVE: []
+    end
+
+    class Hlg2020Settings < Aws::EmptyStructure
     end
   end
 end

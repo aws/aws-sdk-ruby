@@ -418,6 +418,19 @@ module Aws
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
 
+      interface _CreateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexResponse]
+        def status: () -> ("CREATED" | "UPDATED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#create_index-instance_method
+      def create_index: (
+                          domain_name: ::String,
+                          index_name: ::String,
+                          index_schema: {
+                          }
+                        ) -> _CreateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
+
       interface _CreateOutboundConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutboundConnectionResponse]
         def local_domain_info: () -> Types::DomainInformationContainer
@@ -545,6 +558,17 @@ module Aws
                                        connection_id: ::String
                                      ) -> _DeleteInboundConnectionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInboundConnectionResponseSuccess
+
+      interface _DeleteIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIndexResponse]
+        def status: () -> ("CREATED" | "UPDATED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#delete_index-instance_method
+      def delete_index: (
+                          domain_name: ::String,
+                          index_name: ::String
+                        ) -> _DeleteIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIndexResponseSuccess
 
       interface _DeleteOutboundConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutboundConnectionResponse]
@@ -882,6 +906,17 @@ module Aws
                                            maintenance_id: ::String
                                          ) -> _GetDomainMaintenanceStatusResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainMaintenanceStatusResponseSuccess
+
+      interface _GetIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIndexResponse]
+        def index_schema: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_index-instance_method
+      def get_index: (
+                       domain_name: ::String,
+                       index_name: ::String
+                     ) -> _GetIndexResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexResponseSuccess
 
       interface _GetPackageVersionHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionHistoryResponse]
@@ -1392,6 +1427,19 @@ module Aws
                                   }
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess
+
+      interface _UpdateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIndexResponse]
+        def status: () -> ("CREATED" | "UPDATED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_index-instance_method
+      def update_index: (
+                          domain_name: ::String,
+                          index_name: ::String,
+                          index_schema: {
+                          }
+                        ) -> _UpdateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIndexResponseSuccess
 
       interface _UpdatePackageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageResponse]

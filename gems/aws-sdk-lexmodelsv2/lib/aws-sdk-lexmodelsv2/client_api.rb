@@ -126,6 +126,7 @@ module Aws::LexModelsV2
     AnalyticsUtteranceResults = Shapes::ListShape.new(name: 'AnalyticsUtteranceResults')
     AnalyticsUtteranceSortByName = Shapes::StringShape.new(name: 'AnalyticsUtteranceSortByName')
     AnswerField = Shapes::StringShape.new(name: 'AnswerField')
+    AssistedNluMode = Shapes::StringShape.new(name: 'AssistedNluMode')
     AssociatedTranscript = Shapes::StructureShape.new(name: 'AssociatedTranscript')
     AssociatedTranscriptFilter = Shapes::StructureShape.new(name: 'AssociatedTranscriptFilter')
     AssociatedTranscriptFilterName = Shapes::StringShape.new(name: 'AssociatedTranscriptFilterName')
@@ -2919,6 +2920,7 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem.struct_class = Types::NewCustomVocabularyItem
 
     NluImprovementSpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "enabled"))
+    NluImprovementSpecification.add_member(:assisted_nlu_mode, Shapes::ShapeRef.new(shape: AssistedNluMode, location_name: "assistedNluMode"))
     NluImprovementSpecification.struct_class = Types::NluImprovementSpecification
 
     OSIncludeFields.member = Shapes::ShapeRef.new(shape: IncludeField)

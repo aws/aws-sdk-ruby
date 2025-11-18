@@ -758,6 +758,9 @@
   "MWAA": {
     "models": "mwaa/2020-07-01"
   },
+  "MWAAServerless": {
+    "models": "mwaa-serverless/2024-07-26"
+  },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
     "addPlugins": [

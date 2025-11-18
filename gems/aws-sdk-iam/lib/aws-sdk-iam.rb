@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:iam)
 # structure.
 #
 #     iam = Aws::IAM::Client.new
-#     resp = iam.add_client_id_to_open_id_connect_provider(params)
+#     resp = iam.accept_delegation_request(params)
 #
 # See {Client} for more information.
 #
@@ -76,7 +76,7 @@ module Aws::IAM
   autoload :UserPolicy, 'aws-sdk-iam/user_policy'
   autoload :VirtualMfaDevice, 'aws-sdk-iam/virtual_mfa_device'
 
-  GEM_VERSION = '1.133.0'
+  GEM_VERSION = '1.134.0'
 
 end
 

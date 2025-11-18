@@ -274,6 +274,8 @@ module Aws::BedrockRuntime
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceTier = Shapes::StructureShape.new(name: 'ServiceTier')
+    ServiceTierType = Shapes::StringShape.new(name: 'ServiceTierType')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SortAsyncInvocationBy = Shapes::StringShape.new(name: 'SortAsyncInvocationBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -516,6 +518,7 @@ module Aws::BedrockRuntime
     ConverseRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
     ConverseRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "requestMetadata"))
     ConverseRequest.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseRequest.struct_class = Types::ConverseRequest
 
     ConverseRequestAdditionalModelResponseFieldPathsList.member = Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsListMemberString)
@@ -527,12 +530,14 @@ module Aws::BedrockRuntime
     ConverseResponse.add_member(:additional_model_response_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelResponseFields"))
     ConverseResponse.add_member(:trace, Shapes::ShapeRef.new(shape: ConverseTrace, location_name: "trace"))
     ConverseResponse.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseResponse.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseResponse.struct_class = Types::ConverseResponse
 
     ConverseStreamMetadataEvent.add_member(:usage, Shapes::ShapeRef.new(shape: TokenUsage, required: true, location_name: "usage"))
     ConverseStreamMetadataEvent.add_member(:metrics, Shapes::ShapeRef.new(shape: ConverseStreamMetrics, required: true, location_name: "metrics"))
     ConverseStreamMetadataEvent.add_member(:trace, Shapes::ShapeRef.new(shape: ConverseStreamTrace, location_name: "trace"))
     ConverseStreamMetadataEvent.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseStreamMetadataEvent.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseStreamMetadataEvent.struct_class = Types::ConverseStreamMetadataEvent
 
     ConverseStreamMetrics.add_member(:latency_ms, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "latencyMs"))
@@ -562,6 +567,7 @@ module Aws::BedrockRuntime
     ConverseStreamRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
     ConverseStreamRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "requestMetadata"))
     ConverseStreamRequest.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseStreamRequest.struct_class = Types::ConverseStreamRequest
 
     ConverseStreamRequestAdditionalModelResponseFieldPathsList.member = Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsListMemberString)
@@ -577,6 +583,8 @@ module Aws::BedrockRuntime
 
     ConverseTokensRequest.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
     ConverseTokensRequest.add_member(:system, Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: "system"))
+    ConverseTokensRequest.add_member(:tool_config, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfig"))
+    ConverseTokensRequest.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     ConverseTokensRequest.struct_class = Types::ConverseTokensRequest
 
     ConverseTrace.add_member(:guardrail, Shapes::ShapeRef.new(shape: GuardrailTraceAssessment, location_name: "guardrail"))
@@ -971,6 +979,7 @@ module Aws::BedrockRuntime
     InvokeModelRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location: "header", location_name: "X-Amzn-Bedrock-GuardrailIdentifier"))
     InvokeModelRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelRequest.struct_class = Types::InvokeModelRequest
     InvokeModelRequest[:payload] = :body
     InvokeModelRequest[:payload_member] = InvokeModelRequest.member(:body)
@@ -978,6 +987,7 @@ module Aws::BedrockRuntime
     InvokeModelResponse.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "body"))
     InvokeModelResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location: "header", location_name: "Content-Type"))
     InvokeModelResponse.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelResponse.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelResponse.struct_class = Types::InvokeModelResponse
     InvokeModelResponse[:payload] = :body
     InvokeModelResponse[:payload_member] = InvokeModelResponse.member(:body)
@@ -1016,6 +1026,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location: "header", location_name: "X-Amzn-Bedrock-GuardrailIdentifier"))
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelWithResponseStreamRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelWithResponseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelWithResponseStreamRequest.struct_class = Types::InvokeModelWithResponseStreamRequest
     InvokeModelWithResponseStreamRequest[:payload] = :body
     InvokeModelWithResponseStreamRequest[:payload_member] = InvokeModelWithResponseStreamRequest.member(:body)
@@ -1023,6 +1034,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamResponse.add_member(:body, Shapes::ShapeRef.new(shape: ResponseStream, required: true, eventstream: true, location_name: "body"))
     InvokeModelWithResponseStreamResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location: "header", location_name: "X-Amzn-Bedrock-Content-Type"))
     InvokeModelWithResponseStreamResponse.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelWithResponseStreamResponse.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelWithResponseStreamResponse.struct_class = Types::InvokeModelWithResponseStreamResponse
     InvokeModelWithResponseStreamResponse[:payload] = :body
     InvokeModelWithResponseStreamResponse[:payload_member] = InvokeModelWithResponseStreamResponse.member(:body)
@@ -1132,6 +1144,9 @@ module Aws::BedrockRuntime
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ServiceTier.add_member(:type, Shapes::ShapeRef.new(shape: ServiceTierType, required: true, location_name: "type"))
+    ServiceTier.struct_class = Types::ServiceTier
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException

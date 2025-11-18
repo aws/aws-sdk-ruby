@@ -567,6 +567,9 @@ module Aws::PCS
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD", # required, accepts STANDARD, NONE
     #       },
+    #       slurm_rest: {
+    #         mode: "STANDARD", # required, accepts STANDARD, NONE
+    #       },
     #     },
     #     client_token: "SBClientToken",
     #     tags: {
@@ -591,15 +594,18 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
     #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.slurm_rest.mode #=> String, one of "STANDARD", "NONE"
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
     #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
-    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
     #   resp.cluster.endpoints[0].ipv6_address #=> String
@@ -1028,15 +1034,18 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
     #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.slurm_rest.mode #=> String, one of "STANDARD", "NONE"
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
     #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
-    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
     #   resp.cluster.endpoints[0].ipv6_address #=> String
@@ -1378,7 +1387,7 @@ module Aws::PCS
     #   resp.node_id #=> String
     #   resp.shared_secret #=> String
     #   resp.endpoints #=> Array
-    #   resp.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.endpoints[0].private_ip_address #=> String
     #   resp.endpoints[0].public_ip_address #=> String
     #   resp.endpoints[0].ipv6_address #=> String
@@ -1503,6 +1512,9 @@ module Aws::PCS
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD", # accepts STANDARD, NONE
     #       },
+    #       slurm_rest: {
+    #         mode: "STANDARD", # accepts STANDARD, NONE
+    #       },
     #     },
     #   })
     #
@@ -1523,15 +1535,18 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
     #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.slurm_rest.mode #=> String, one of "STANDARD", "NONE"
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
     #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
-    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
     #   resp.cluster.endpoints[0].ipv6_address #=> String
@@ -1791,7 +1806,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

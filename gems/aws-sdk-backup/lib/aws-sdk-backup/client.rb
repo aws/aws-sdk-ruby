@@ -582,6 +582,7 @@ module Aws::Backup
     #         {
     #           rule_name: "BackupRuleName", # required
     #           target_backup_vault_name: "BackupVaultName", # required
+    #           target_logically_air_gapped_backup_vault_arn: "ARN",
     #           schedule_expression: "CronExpression",
     #           start_window_minutes: 1,
     #           completion_window_minutes: 1,
@@ -589,6 +590,7 @@ module Aws::Backup
     #             move_to_cold_storage_after_days: 1,
     #             delete_after_days: 1,
     #             opt_in_to_archive_for_supported_resources: false,
+    #             delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #           },
     #           recovery_point_tags: {
     #             "TagKey" => "TagValue",
@@ -599,6 +601,7 @@ module Aws::Backup
     #                 move_to_cold_storage_after_days: 1,
     #                 delete_after_days: 1,
     #                 opt_in_to_archive_for_supported_resources: false,
+    #                 delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #               },
     #               destination_backup_vault_arn: "ARN", # required
     #             },
@@ -1364,6 +1367,78 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Creates a tiering configuration.
+    #
+    # A tiering configuration enables automatic movement of backup data to a
+    # lower-cost storage tier based on the age of backed-up objects in the
+    # backup vault.
+    #
+    # Each vault can only have one vault-specific tiering configuration, in
+    # addition to any global configuration that applies to all vaults.
+    #
+    # @option params [required, Types::TieringConfigurationInputForCreate] :tiering_configuration
+    #   A tiering configuration must contain a unique
+    #   `TieringConfigurationName` string you create and must contain a
+    #   `BackupVaultName` and `ResourceSelection`. You may optionally include
+    #   a `CreatorRequestId` string.
+    #
+    #   The `TieringConfigurationName` is a unique string that is the name of
+    #   the tiering configuration. This cannot be changed after creation, and
+    #   it must consist of only alphanumeric characters and underscores.
+    #
+    # @option params [Hash<String,String>] :tiering_configuration_tags
+    #   The tags to assign to the tiering configuration.
+    #
+    # @option params [String] :creator_request_id
+    #   This is a unique string that identifies the request and allows failed
+    #   requests to be retried without the risk of running the operation
+    #   twice. This parameter is optional. If used, this parameter must
+    #   contain 1 to 50 alphanumeric or '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateTieringConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTieringConfigurationOutput#tiering_configuration_arn #tiering_configuration_arn} => String
+    #   * {Types::CreateTieringConfigurationOutput#tiering_configuration_name #tiering_configuration_name} => String
+    #   * {Types::CreateTieringConfigurationOutput#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tiering_configuration({
+    #     tiering_configuration: { # required
+    #       tiering_configuration_name: "TieringConfigurationName", # required
+    #       backup_vault_name: "BackupVaultNameOrWildcard", # required
+    #       resource_selection: [ # required
+    #         {
+    #           resources: ["ARN"], # required
+    #           tiering_down_settings_in_days: 1, # required
+    #           resource_type: "ResourceType", # required
+    #         },
+    #       ],
+    #     },
+    #     tiering_configuration_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     creator_request_id: "CreatorRequestId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tiering_configuration_arn #=> String
+    #   resp.tiering_configuration_name #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateTieringConfiguration AWS API Documentation
+    #
+    # @overload create_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_tiering_configuration(params = {}, options = {})
+      req = build_request(:create_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a backup plan. A backup plan can only be deleted after all
     # associated selections of resources have been deleted. Deleting a
     # backup plan deletes the current version of a backup plan. Previous
@@ -1688,6 +1763,29 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Deletes the tiering configuration specified by a tiering configuration
+    # name.
+    #
+    # @option params [required, String] :tiering_configuration_name
+    #   The unique name of a tiering configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tiering_configuration({
+    #     tiering_configuration_name: "TieringConfigurationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteTieringConfiguration AWS API Documentation
+    #
+    # @overload delete_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_tiering_configuration(params = {}, options = {})
+      req = build_request(:delete_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns backup job details for the specified `BackupJobId`.
     #
     # @option params [required, String] :backup_job_id
@@ -1742,6 +1840,7 @@ module Aws::Backup
     #   resp.recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.recovery_point_lifecycle.delete_after_days #=> Integer
     #   resp.recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.recovery_point_lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_vault_arn #=> String
     #   resp.vault_type #=> String
     #   resp.vault_lock_state #=> String
@@ -1888,6 +1987,7 @@ module Aws::Backup
     #   resp.copy_job.destination_recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.copy_job.destination_recovery_point_lifecycle.delete_after_days #=> Integer
     #   resp.copy_job.destination_recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.copy_job.destination_recovery_point_lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.copy_job.resource_arn #=> String
     #   resp.copy_job.creation_date #=> Time
     #   resp.copy_job.completion_date #=> Time
@@ -1903,6 +2003,7 @@ module Aws::Backup
     #   resp.copy_job.created_by.backup_rule_name #=> String
     #   resp.copy_job.created_by.backup_rule_cron #=> String
     #   resp.copy_job.created_by.backup_rule_timezone #=> String
+    #   resp.copy_job.created_by_backup_job_id #=> String
     #   resp.copy_job.resource_type #=> String
     #   resp.copy_job.parent_job_id #=> String
     #   resp.copy_job.is_parent #=> Boolean
@@ -2129,6 +2230,7 @@ module Aws::Backup
     #   resp.lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.lifecycle.delete_after_days #=> Integer
     #   resp.lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.encryption_key_arn #=> String
     #   resp.is_encrypted #=> Boolean
     #   resp.storage_class #=> String, one of "WARM", "COLD", "DELETED"
@@ -2507,12 +2609,14 @@ module Aws::Backup
     #   resp.backup_plan.rules #=> Array
     #   resp.backup_plan.rules[0].rule_name #=> String
     #   resp.backup_plan.rules[0].target_backup_vault_name #=> String
+    #   resp.backup_plan.rules[0].target_logically_air_gapped_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].schedule_expression #=> String
     #   resp.backup_plan.rules[0].start_window_minutes #=> Integer
     #   resp.backup_plan.rules[0].completion_window_minutes #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_plan.rules[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_plan.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan.rules[0].rule_id #=> String
@@ -2520,6 +2624,7 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan.rules[0].schedule_expression_timezone #=> String
@@ -2576,12 +2681,14 @@ module Aws::Backup
     #   resp.backup_plan.rules #=> Array
     #   resp.backup_plan.rules[0].rule_name #=> String
     #   resp.backup_plan.rules[0].target_backup_vault_name #=> String
+    #   resp.backup_plan.rules[0].target_logically_air_gapped_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].schedule_expression #=> String
     #   resp.backup_plan.rules[0].start_window_minutes #=> Integer
     #   resp.backup_plan.rules[0].completion_window_minutes #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_plan.rules[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_plan.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan.rules[0].rule_id #=> String
@@ -2589,6 +2696,7 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan.rules[0].schedule_expression_timezone #=> String
@@ -2630,12 +2738,14 @@ module Aws::Backup
     #   resp.backup_plan_document.rules #=> Array
     #   resp.backup_plan_document.rules[0].rule_name #=> String
     #   resp.backup_plan_document.rules[0].target_backup_vault_name #=> String
+    #   resp.backup_plan_document.rules[0].target_logically_air_gapped_backup_vault_arn #=> String
     #   resp.backup_plan_document.rules[0].schedule_expression #=> String
     #   resp.backup_plan_document.rules[0].start_window_minutes #=> Integer
     #   resp.backup_plan_document.rules[0].completion_window_minutes #=> Integer
     #   resp.backup_plan_document.rules[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_plan_document.rules[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_plan_document.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan_document.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan_document.rules[0].rule_id #=> String
@@ -2643,6 +2753,7 @@ module Aws::Backup
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_plan_document.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan_document.rules[0].enable_continuous_backup #=> Boolean
     #   resp.backup_plan_document.rules[0].schedule_expression_timezone #=> String
@@ -3143,6 +3254,46 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Returns `TieringConfiguration` details for the specified
+    # `TieringConfigurationName`. The details are the body of a tiering
+    # configuration in JSON format, in addition to configuration metadata.
+    #
+    # @option params [required, String] :tiering_configuration_name
+    #   The unique name of a tiering configuration.
+    #
+    # @return [Types::GetTieringConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTieringConfigurationOutput#tiering_configuration #tiering_configuration} => Types::TieringConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tiering_configuration({
+    #     tiering_configuration_name: "TieringConfigurationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tiering_configuration.tiering_configuration_name #=> String
+    #   resp.tiering_configuration.tiering_configuration_arn #=> String
+    #   resp.tiering_configuration.backup_vault_name #=> String
+    #   resp.tiering_configuration.resource_selection #=> Array
+    #   resp.tiering_configuration.resource_selection[0].resources #=> Array
+    #   resp.tiering_configuration.resource_selection[0].resources[0] #=> String
+    #   resp.tiering_configuration.resource_selection[0].tiering_down_settings_in_days #=> Integer
+    #   resp.tiering_configuration.resource_selection[0].resource_type #=> String
+    #   resp.tiering_configuration.creator_request_id #=> String
+    #   resp.tiering_configuration.creation_time #=> Time
+    #   resp.tiering_configuration.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetTieringConfiguration AWS API Documentation
+    #
+    # @overload get_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_tiering_configuration(params = {}, options = {})
+      req = build_request(:get_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # This is a request for a summary of backup jobs created or running
     # within the most recent 30 days. You can include parameters AccountID,
     # State, ResourceType, MessageCategory, AggregationPeriod, MaxResults,
@@ -3439,6 +3590,7 @@ module Aws::Backup
     #   resp.backup_jobs[0].recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_jobs[0].recovery_point_lifecycle.delete_after_days #=> Integer
     #   resp.backup_jobs[0].recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.backup_jobs[0].recovery_point_lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.backup_jobs[0].encryption_key_arn #=> String
     #   resp.backup_jobs[0].is_encrypted #=> Boolean
     #   resp.backup_jobs[0].resource_arn #=> String
@@ -3968,6 +4120,9 @@ module Aws::Backup
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
     #
+    # @option params [String] :by_source_recovery_point_arn
+    #   Filters copy jobs by the specified source recovery point ARN.
+    #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
@@ -3991,6 +4146,7 @@ module Aws::Backup
     #     by_complete_after: Time.now,
     #     by_parent_job_id: "string",
     #     by_message_category: "string",
+    #     by_source_recovery_point_arn: "string",
     #   })
     #
     # @example Response structure
@@ -4008,6 +4164,7 @@ module Aws::Backup
     #   resp.copy_jobs[0].destination_recovery_point_lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.copy_jobs[0].destination_recovery_point_lifecycle.delete_after_days #=> Integer
     #   resp.copy_jobs[0].destination_recovery_point_lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.copy_jobs[0].destination_recovery_point_lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.copy_jobs[0].resource_arn #=> String
     #   resp.copy_jobs[0].creation_date #=> Time
     #   resp.copy_jobs[0].completion_date #=> Time
@@ -4023,6 +4180,7 @@ module Aws::Backup
     #   resp.copy_jobs[0].created_by.backup_rule_name #=> String
     #   resp.copy_jobs[0].created_by.backup_rule_cron #=> String
     #   resp.copy_jobs[0].created_by.backup_rule_timezone #=> String
+    #   resp.copy_jobs[0].created_by_backup_job_id #=> String
     #   resp.copy_jobs[0].resource_type #=> String
     #   resp.copy_jobs[0].parent_job_id #=> String
     #   resp.copy_jobs[0].is_parent #=> Boolean
@@ -4460,6 +4618,7 @@ module Aws::Backup
     #   resp.recovery_points[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.recovery_points[0].lifecycle.delete_after_days #=> Integer
     #   resp.recovery_points[0].lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.recovery_points[0].lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.recovery_points[0].encryption_key_arn #=> String
     #   resp.recovery_points[0].is_encrypted #=> Boolean
     #   resp.recovery_points[0].last_restore_time #=> Time
@@ -5290,6 +5449,50 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Returns a list of tiering configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `MaxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #
+    # @return [Types::ListTieringConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTieringConfigurationsOutput#tiering_configurations #tiering_configurations} => Array&lt;Types::TieringConfigurationsListMember&gt;
+    #   * {Types::ListTieringConfigurationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tiering_configurations({
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tiering_configurations #=> Array
+    #   resp.tiering_configurations[0].tiering_configuration_arn #=> String
+    #   resp.tiering_configurations[0].tiering_configuration_name #=> String
+    #   resp.tiering_configurations[0].backup_vault_name #=> String
+    #   resp.tiering_configurations[0].creation_time #=> Time
+    #   resp.tiering_configurations[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListTieringConfigurations AWS API Documentation
+    #
+    # @overload list_tiering_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_tiering_configurations(params = {}, options = {})
+      req = build_request(:list_tiering_configurations, params)
+      req.send_request(options)
+    end
+
     # Sets a resource-based policy that is used to manage access permissions
     # on the target backup vault. Requires a backup vault name and an access
     # policy document in JSON format.
@@ -5547,6 +5750,14 @@ module Aws::Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
     #
+    # @option params [String] :logically_air_gapped_backup_vault_arn
+    #   The ARN of a logically air-gapped vault. ARN must be in the same
+    #   account and Region. If provided, supported fully managed resources
+    #   back up directly to logically air-gapped vault, while other supported
+    #   resources create a temporary (billable) snapshot in backup vault, then
+    #   copy it to logically air-gapped vault. Unsupported resources only back
+    #   up to the specified backup vault.
+    #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
     #   format of the ARN depends on the resource type.
@@ -5652,6 +5863,7 @@ module Aws::Backup
     #
     #   resp = client.start_backup_job({
     #     backup_vault_name: "BackupVaultName", # required
+    #     logically_air_gapped_backup_vault_arn: "ARN",
     #     resource_arn: "ARN", # required
     #     iam_role_arn: "IAMRoleArn", # required
     #     idempotency_token: "string",
@@ -5661,6 +5873,7 @@ module Aws::Backup
     #       move_to_cold_storage_after_days: 1,
     #       delete_after_days: 1,
     #       opt_in_to_archive_for_supported_resources: false,
+    #       delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #     },
     #     recovery_point_tags: {
     #       "TagKey" => "TagValue",
@@ -5767,6 +5980,7 @@ module Aws::Backup
     #       move_to_cold_storage_after_days: 1,
     #       delete_after_days: 1,
     #       opt_in_to_archive_for_supported_resources: false,
+    #       delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #     },
     #   })
     #
@@ -6113,6 +6327,7 @@ module Aws::Backup
     #         {
     #           rule_name: "BackupRuleName", # required
     #           target_backup_vault_name: "BackupVaultName", # required
+    #           target_logically_air_gapped_backup_vault_arn: "ARN",
     #           schedule_expression: "CronExpression",
     #           start_window_minutes: 1,
     #           completion_window_minutes: 1,
@@ -6120,6 +6335,7 @@ module Aws::Backup
     #             move_to_cold_storage_after_days: 1,
     #             delete_after_days: 1,
     #             opt_in_to_archive_for_supported_resources: false,
+    #             delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #           },
     #           recovery_point_tags: {
     #             "TagKey" => "TagValue",
@@ -6130,6 +6346,7 @@ module Aws::Backup
     #                 move_to_cold_storage_after_days: 1,
     #                 delete_after_days: 1,
     #                 opt_in_to_archive_for_supported_resources: false,
+    #                 delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #               },
     #               destination_backup_vault_arn: "ARN", # required
     #             },
@@ -6260,6 +6477,11 @@ module Aws::Backup
     #   A value for Multi-party approval, styled as "Mpa": `isMpaEnabled`.
     #   Values can be true or false. Example: `update-global-settings
     #   --global-settings isMpaEnabled=false --region us-west-2`.
+    #
+    #   A value for Backup Service-Linked Role creation, styled
+    #   as`isDelegatedAdministratorEnabled`. Values can be true or false.
+    #   Example: `update-global-settings --global-settings
+    #   isDelegatedAdministratorEnabled=false --region us-west-2`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6404,6 +6626,7 @@ module Aws::Backup
     #       move_to_cold_storage_after_days: 1,
     #       delete_after_days: 1,
     #       opt_in_to_archive_for_supported_resources: false,
+    #       delete_after_event: "DELETE_AFTER_COPY", # accepts DELETE_AFTER_COPY
     #     },
     #   })
     #
@@ -6414,6 +6637,7 @@ module Aws::Backup
     #   resp.lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.lifecycle.delete_after_days #=> Integer
     #   resp.lifecycle.opt_in_to_archive_for_supported_resources #=> Boolean
+    #   resp.lifecycle.delete_after_event #=> String, one of "DELETE_AFTER_COPY"
     #   resp.calculated_lifecycle.move_to_cold_storage_at #=> Time
     #   resp.calculated_lifecycle.delete_at #=> Time
     #
@@ -6692,6 +6916,63 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request will send changes to your specified tiering
+    # configuration. `TieringConfigurationName` cannot be updated after it
+    # is created.
+    #
+    # `ResourceSelection` can contain:
+    #
+    # * `Resources`
+    #
+    # * `TieringDownSettingsInDays`
+    #
+    # * `ResourceType`
+    #
+    # @option params [required, String] :tiering_configuration_name
+    #   The name of a tiering configuration to update.
+    #
+    # @option params [required, Types::TieringConfigurationInputForUpdate] :tiering_configuration
+    #   Specifies the body of a tiering configuration.
+    #
+    # @return [Types::UpdateTieringConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTieringConfigurationOutput#tiering_configuration_arn #tiering_configuration_arn} => String
+    #   * {Types::UpdateTieringConfigurationOutput#tiering_configuration_name #tiering_configuration_name} => String
+    #   * {Types::UpdateTieringConfigurationOutput#creation_time #creation_time} => Time
+    #   * {Types::UpdateTieringConfigurationOutput#last_updated_time #last_updated_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_tiering_configuration({
+    #     tiering_configuration_name: "TieringConfigurationName", # required
+    #     tiering_configuration: { # required
+    #       resource_selection: [ # required
+    #         {
+    #           resources: ["ARN"], # required
+    #           tiering_down_settings_in_days: 1, # required
+    #           resource_type: "ResourceType", # required
+    #         },
+    #       ],
+    #       backup_vault_name: "BackupVaultNameOrWildcard", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tiering_configuration_arn #=> String
+    #   resp.tiering_configuration_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateTieringConfiguration AWS API Documentation
+    #
+    # @overload update_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_tiering_configuration(params = {}, options = {})
+      req = build_request(:update_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6710,7 +6991,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

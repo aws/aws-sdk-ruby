@@ -3400,6 +3400,21 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Indicates that the parameters in the current request do not match the
+    # parameters from a previous request with the same client token within
+    # the idempotency window.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/IdempotentParameterMismatchError AWS API Documentation
+    #
+    class IdempotentParameterMismatchError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an EC2 instance.
     #
     # @!attribute [rw] instance_id
@@ -3464,6 +3479,47 @@ module Aws::AutoScaling
       :launch_template,
       :protected_from_scale_in,
       :weighted_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a collection of instances launched in the Auto
+    # Scaling group.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the launched instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] market_type
+    #   The market type for the instances (On-Demand or Spot).
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet where the instances were launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the instances were launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the instances in this collection were
+    #   launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   A list of instance IDs for the successfully launched instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceCollection AWS API Documentation
+    #
+    class InstanceCollection < Struct.new(
+      :instance_type,
+      :market_type,
+      :subnet_id,
+      :availability_zone,
+      :availability_zone_id,
+      :instance_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4642,6 +4698,146 @@ module Aws::AutoScaling
     class LaunchConfigurationsType < Struct.new(
       :launch_configurations,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about errors encountered during instance launch
+    # attempts.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type that failed to launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] market_type
+    #   The market type (On-Demand or Spot) that encountered the launch
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet ID where the instance launch was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the instance launch was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the launch error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code representing the type of error encountered (e.g.,
+    #   InsufficientInstanceCapacity).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A descriptive message providing details about the error encountered
+    #   during the launch attempt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstancesError AWS API Documentation
+    #
+    class LaunchInstancesError < Struct.new(
+      :instance_type,
+      :market_type,
+      :subnet_id,
+      :availability_zone,
+      :availability_zone_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group to launch instances into.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_capacity
+    #   The number of instances to launch. Although this value can exceed
+    #   100 for instance weights, the actual instance count is limited to
+    #   100 instances per launch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones for the instance launch. Must match or be
+    #   included in the Auto Scaling group's Availability Zone
+    #   configuration. Either `AvailabilityZones` or `SubnetIds` must be
+    #   specified for groups with multiple Availability Zone configurations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   A list of Availability Zone IDs where instances should be launched.
+    #   Must match or be included in the group's AZ configuration. You
+    #   cannot specify both AvailabilityZones and AvailabilityZoneIds.
+    #   Required for multi-AZ groups, optional for single-AZ groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs for the instance launch. Either `AvailabilityZones`
+    #   or `SubnetIds` must be specified. If both are specified, the subnets
+    #   must reside in the specified Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] retry_strategy
+    #   Specifies whether to retry asynchronously if the synchronous launch
+    #   fails. Valid values are NONE (default, no async retry) and
+    #   RETRY\_WITH\_GROUP\_CONFIGURATION (increase desired capacity and
+    #   retry with group configuration).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstancesRequest AWS API Documentation
+    #
+    class LaunchInstancesRequest < Struct.new(
+      :auto_scaling_group_name,
+      :requested_capacity,
+      :client_token,
+      :availability_zones,
+      :availability_zone_ids,
+      :subnet_ids,
+      :retry_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group where the instances were
+    #   launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token used for the request, either
+    #   customer-specified or auto-generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] instances
+    #   A list of successfully launched instances including details such as
+    #   instance type, Availability Zone, subnet, lifecycle state, and
+    #   instance IDs.
+    #   @return [Array<Types::InstanceCollection>]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors encountered during the launch attempt including
+    #   details about failed instance launches with their corresponding
+    #   error codes and messages.
+    #   @return [Array<Types::LaunchInstancesError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstancesResult AWS API Documentation
+    #
+    class LaunchInstancesResult < Struct.new(
+      :auto_scaling_group_name,
+      :client_token,
+      :instances,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end

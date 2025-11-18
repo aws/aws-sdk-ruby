@@ -307,7 +307,8 @@ module Aws
                                      }?
                                    }?,
                                    nlu_improvement: {
-                                     enabled: bool
+                                     enabled: bool,
+                                     assisted_nlu_mode: ("Primary" | "Fallback")?
                                    }?
                                  }?,
                                  buildtime_settings: {
@@ -7572,7 +7573,8 @@ module Aws
                                      }?
                                    }?,
                                    nlu_improvement: {
-                                     enabled: bool
+                                     enabled: bool,
+                                     assisted_nlu_mode: ("Primary" | "Fallback")?
                                    }?
                                  }?,
                                  buildtime_settings: {

@@ -989,7 +989,7 @@ module Aws::Route53Resolver
     #     name: "Name", # required
     #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
     #     qtype: "Qtype",
-    #     dns_threat_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #     dns_threat_protection: "DGA", # accepts DGA, DNS_TUNNELING, DICTIONARY_DGA
     #     confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #   })
     #
@@ -1010,7 +1010,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.modification_time #=> String
     #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
-    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRule AWS API Documentation
@@ -1660,7 +1660,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.modification_time #=> String
     #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
-    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRule AWS API Documentation
@@ -3150,7 +3150,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rules[0].modification_time #=> String
     #   resp.firewall_rules[0].firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rules[0].qtype #=> String
-    #   resp.firewall_rules[0].dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rules[0].dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_rules[0].confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRules AWS API Documentation
@@ -4485,7 +4485,7 @@ module Aws::Route53Resolver
     #     name: "Name",
     #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
     #     qtype: "Qtype",
-    #     dns_threat_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #     dns_threat_protection: "DGA", # accepts DGA, DNS_TUNNELING, DICTIONARY_DGA
     #     confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #   })
     #
@@ -4506,7 +4506,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.modification_time #=> String
     #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
-    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRule AWS API Documentation
@@ -4920,7 +4920,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

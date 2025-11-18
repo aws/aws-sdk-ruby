@@ -113,13 +113,15 @@ module Aws
                                     {
                                       rule_name: ::String,
                                       target_backup_vault_name: ::String,
+                                      target_logically_air_gapped_backup_vault_arn: ::String?,
                                       schedule_expression: ::String?,
                                       start_window_minutes: ::Integer?,
                                       completion_window_minutes: ::Integer?,
                                       lifecycle: {
                                         move_to_cold_storage_after_days: ::Integer?,
                                         delete_after_days: ::Integer?,
-                                        opt_in_to_archive_for_supported_resources: bool?
+                                        opt_in_to_archive_for_supported_resources: bool?,
+                                        delete_after_event: ("DELETE_AFTER_COPY")?
                                       }?,
                                       recovery_point_tags: Hash[::String, ::String]?,
                                       copy_actions: Array[
@@ -127,7 +129,8 @@ module Aws
                                           lifecycle: {
                                             move_to_cold_storage_after_days: ::Integer?,
                                             delete_after_days: ::Integer?,
-                                            opt_in_to_archive_for_supported_resources: bool?
+                                            opt_in_to_archive_for_supported_resources: bool?,
+                                            delete_after_event: ("DELETE_AFTER_COPY")?
                                           }?,
                                           destination_backup_vault_arn: ::String
                                         },
@@ -402,6 +405,30 @@ module Aws
                                             ) -> _CreateRestoreTestingSelectionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRestoreTestingSelectionResponseSuccess
 
+      interface _CreateTieringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTieringConfigurationOutput]
+        def tiering_configuration_arn: () -> ::String
+        def tiering_configuration_name: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_tiering_configuration-instance_method
+      def create_tiering_configuration: (
+                                          tiering_configuration: {
+                                            tiering_configuration_name: ::String,
+                                            backup_vault_name: ::String,
+                                            resource_selection: Array[
+                                              {
+                                                resources: Array[::String],
+                                                tiering_down_settings_in_days: ::Integer,
+                                                resource_type: ::String
+                                              },
+                                            ]
+                                          },
+                                          ?tiering_configuration_tags: Hash[::String, ::String],
+                                          ?creator_request_id: ::String
+                                        ) -> _CreateTieringConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTieringConfigurationResponseSuccess
+
       interface _DeleteBackupPlanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackupPlanOutput]
         def backup_plan_id: () -> ::String
@@ -477,6 +504,15 @@ module Aws
                                               restore_testing_selection_name: ::String
                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteTieringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTieringConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#delete_tiering_configuration-instance_method
+      def delete_tiering_configuration: (
+                                          tiering_configuration_name: ::String
+                                        ) -> _DeleteTieringConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTieringConfigurationResponseSuccess
 
       interface _DescribeBackupJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupJobOutput]
@@ -919,6 +955,16 @@ module Aws
       def get_supported_resource_types: () -> _GetSupportedResourceTypesResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSupportedResourceTypesResponseSuccess
 
+      interface _GetTieringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTieringConfigurationOutput]
+        def tiering_configuration: () -> Types::TieringConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_tiering_configuration-instance_method
+      def get_tiering_configuration: (
+                                       tiering_configuration_name: ::String
+                                     ) -> _GetTieringConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTieringConfigurationResponseSuccess
+
       interface _ListBackupJobSummariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupJobSummariesOutput]
         def backup_job_summaries: () -> ::Array[Types::BackupJobSummary]
@@ -1062,7 +1108,8 @@ module Aws
                             ?by_complete_before: ::Time,
                             ?by_complete_after: ::Time,
                             ?by_parent_job_id: ::String,
-                            ?by_message_category: ::String
+                            ?by_message_category: ::String,
+                            ?by_source_recovery_point_arn: ::String
                           ) -> _ListCopyJobsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCopyJobsResponseSuccess
 
@@ -1313,6 +1360,18 @@ module Aws
                      ) -> _ListTagsResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
 
+      interface _ListTieringConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTieringConfigurationsOutput]
+        def tiering_configurations: () -> ::Array[Types::TieringConfigurationsListMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#list_tiering_configurations-instance_method
+      def list_tiering_configurations: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListTieringConfigurationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTieringConfigurationsResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#put_backup_vault_access_policy-instance_method
       def put_backup_vault_access_policy: (
                                             backup_vault_name: ::String,
@@ -1363,6 +1422,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#start_backup_job-instance_method
       def start_backup_job: (
                               backup_vault_name: ::String,
+                              ?logically_air_gapped_backup_vault_arn: ::String,
                               resource_arn: ::String,
                               iam_role_arn: ::String,
                               ?idempotency_token: ::String,
@@ -1371,7 +1431,8 @@ module Aws
                               ?lifecycle: {
                                 move_to_cold_storage_after_days: ::Integer?,
                                 delete_after_days: ::Integer?,
-                                opt_in_to_archive_for_supported_resources: bool?
+                                opt_in_to_archive_for_supported_resources: bool?,
+                                delete_after_event: ("DELETE_AFTER_COPY")?
                               },
                               ?recovery_point_tags: Hash[::String, ::String],
                               ?backup_options: Hash[::String, ::String],
@@ -1395,7 +1456,8 @@ module Aws
                             ?lifecycle: {
                               move_to_cold_storage_after_days: ::Integer?,
                               delete_after_days: ::Integer?,
-                              opt_in_to_archive_for_supported_resources: bool?
+                              opt_in_to_archive_for_supported_resources: bool?,
+                              delete_after_event: ("DELETE_AFTER_COPY")?
                             }
                           ) -> _StartCopyJobResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCopyJobResponseSuccess
@@ -1463,13 +1525,15 @@ module Aws
                                     {
                                       rule_name: ::String,
                                       target_backup_vault_name: ::String,
+                                      target_logically_air_gapped_backup_vault_arn: ::String?,
                                       schedule_expression: ::String?,
                                       start_window_minutes: ::Integer?,
                                       completion_window_minutes: ::Integer?,
                                       lifecycle: {
                                         move_to_cold_storage_after_days: ::Integer?,
                                         delete_after_days: ::Integer?,
-                                        opt_in_to_archive_for_supported_resources: bool?
+                                        opt_in_to_archive_for_supported_resources: bool?,
+                                        delete_after_event: ("DELETE_AFTER_COPY")?
                                       }?,
                                       recovery_point_tags: Hash[::String, ::String]?,
                                       copy_actions: Array[
@@ -1477,7 +1541,8 @@ module Aws
                                           lifecycle: {
                                             move_to_cold_storage_after_days: ::Integer?,
                                             delete_after_days: ::Integer?,
-                                            opt_in_to_archive_for_supported_resources: bool?
+                                            opt_in_to_archive_for_supported_resources: bool?,
+                                            delete_after_event: ("DELETE_AFTER_COPY")?
                                           }?,
                                           destination_backup_vault_arn: ::String
                                         },
@@ -1567,7 +1632,8 @@ module Aws
                                              ?lifecycle: {
                                                move_to_cold_storage_after_days: ::Integer?,
                                                delete_after_days: ::Integer?,
-                                               opt_in_to_archive_for_supported_resources: bool?
+                                               opt_in_to_archive_for_supported_resources: bool?,
+                                               delete_after_event: ("DELETE_AFTER_COPY")?
                                              }
                                            ) -> _UpdateRecoveryPointLifecycleResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecoveryPointLifecycleResponseSuccess
@@ -1665,6 +1731,29 @@ module Aws
                                               restore_testing_selection_name: ::String
                                             ) -> _UpdateRestoreTestingSelectionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRestoreTestingSelectionResponseSuccess
+
+      interface _UpdateTieringConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTieringConfigurationOutput]
+        def tiering_configuration_arn: () -> ::String
+        def tiering_configuration_name: () -> ::String
+        def creation_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_tiering_configuration-instance_method
+      def update_tiering_configuration: (
+                                          tiering_configuration_name: ::String,
+                                          tiering_configuration: {
+                                            resource_selection: Array[
+                                              {
+                                                resources: Array[::String],
+                                                tiering_down_settings_in_days: ::Integer,
+                                                resource_type: ::String
+                                              },
+                                            ],
+                                            backup_vault_name: ::String
+                                          }
+                                        ) -> _UpdateTieringConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTieringConfigurationResponseSuccess
     end
   end
 end

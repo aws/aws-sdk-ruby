@@ -118,6 +118,8 @@ module Aws::WAFV2
     DescribeManagedProductsByVendorResponse = Shapes::StructureShape.new(name: 'DescribeManagedProductsByVendorResponse')
     DescribeManagedRuleGroupRequest = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupRequest')
     DescribeManagedRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupResponse')
+    DisallowedFeature = Shapes::StructureShape.new(name: 'DisallowedFeature')
+    DisallowedFeatures = Shapes::ListShape.new(name: 'DisallowedFeatures')
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
     DownloadUrl = Shapes::StringShape.new(name: 'DownloadUrl')
@@ -288,6 +290,7 @@ module Aws::WAFV2
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
+    PricingPlanFeatureName = Shapes::StringShape.new(name: 'PricingPlanFeatureName')
     ProductDescription = Shapes::StringShape.new(name: 'ProductDescription')
     ProductId = Shapes::StringShape.new(name: 'ProductId')
     ProductLink = Shapes::StringShape.new(name: 'ProductLink')
@@ -335,6 +338,7 @@ module Aws::WAFV2
     RequestBodyAssociatedResourceTypeConfig = Shapes::StructureShape.new(name: 'RequestBodyAssociatedResourceTypeConfig')
     RequestInspection = Shapes::StructureShape.new(name: 'RequestInspection')
     RequestInspectionACFP = Shapes::StructureShape.new(name: 'RequestInspectionACFP')
+    RequiredPricingPlanName = Shapes::StringShape.new(name: 'RequiredPricingPlanName')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -433,6 +437,7 @@ module Aws::WAFV2
     WAFConfigurationWarningException = Shapes::StructureShape.new(name: 'WAFConfigurationWarningException')
     WAFDuplicateItemException = Shapes::StructureShape.new(name: 'WAFDuplicateItemException')
     WAFExpiredManagedRuleGroupVersionException = Shapes::StructureShape.new(name: 'WAFExpiredManagedRuleGroupVersionException')
+    WAFFeatureNotIncludedInPricingPlanException = Shapes::StructureShape.new(name: 'WAFFeatureNotIncludedInPricingPlanException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
     WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
     WAFInvalidParameterException = Shapes::StructureShape.new(name: 'WAFInvalidParameterException')
@@ -781,6 +786,12 @@ module Aws::WAFV2
     DescribeManagedRuleGroupResponse.add_member(:available_labels, Shapes::ShapeRef.new(shape: LabelSummaries, location_name: "AvailableLabels"))
     DescribeManagedRuleGroupResponse.add_member(:consumed_labels, Shapes::ShapeRef.new(shape: LabelSummaries, location_name: "ConsumedLabels"))
     DescribeManagedRuleGroupResponse.struct_class = Types::DescribeManagedRuleGroupResponse
+
+    DisallowedFeature.add_member(:feature, Shapes::ShapeRef.new(shape: PricingPlanFeatureName, location_name: "Feature"))
+    DisallowedFeature.add_member(:required_pricing_plan, Shapes::ShapeRef.new(shape: RequiredPricingPlanName, location_name: "RequiredPricingPlan"))
+    DisallowedFeature.struct_class = Types::DisallowedFeature
+
+    DisallowedFeatures.member = Shapes::ShapeRef.new(shape: DisallowedFeature)
 
     DisassociateWebACLRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DisassociateWebACLRequest.struct_class = Types::DisassociateWebACLRequest
@@ -1726,6 +1737,10 @@ module Aws::WAFV2
     WAFExpiredManagedRuleGroupVersionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFExpiredManagedRuleGroupVersionException.struct_class = Types::WAFExpiredManagedRuleGroupVersionException
 
+    WAFFeatureNotIncludedInPricingPlanException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFFeatureNotIncludedInPricingPlanException.add_member(:disallowed_features, Shapes::ShapeRef.new(shape: DisallowedFeatures, location_name: "DisallowedFeatures"))
+    WAFFeatureNotIncludedInPricingPlanException.struct_class = Types::WAFFeatureNotIncludedInPricingPlanException
+
     WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
 
@@ -1844,6 +1859,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFFeatureNotIncludedInPricingPlanException)
       end)
 
       api.add_operation(:check_capacity, Seahorse::Model::Operation.new.tap do |o|
@@ -2419,6 +2435,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLogDestinationPermissionIssueException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFFeatureNotIncludedInPricingPlanException)
       end)
 
       api.add_operation(:put_managed_rule_set_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -2554,6 +2571,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
         o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFFeatureNotIncludedInPricingPlanException)
       end)
     end
 

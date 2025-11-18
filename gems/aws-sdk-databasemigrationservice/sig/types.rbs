@@ -466,6 +466,7 @@ module Aws::DatabaseMigrationService
       attr_accessor postgre_sql_settings: Types::PostgreSqlDataProviderSettings
       attr_accessor my_sql_settings: Types::MySqlDataProviderSettings
       attr_accessor oracle_settings: Types::OracleDataProviderSettings
+      attr_accessor sybase_ase_settings: Types::SybaseAseDataProviderSettings
       attr_accessor microsoft_sql_server_settings: Types::MicrosoftSqlServerDataProviderSettings
       attr_accessor doc_db_settings: Types::DocDbDataProviderSettings
       attr_accessor maria_db_settings: Types::MariaDbDataProviderSettings
@@ -482,6 +483,8 @@ module Aws::DatabaseMigrationService
       class MySqlSettings < DataProviderSettings
       end
       class OracleSettings < DataProviderSettings
+      end
+      class SybaseAseSettings < DataProviderSettings
       end
       class MicrosoftSqlServerSettings < DataProviderSettings
       end
@@ -2250,6 +2253,21 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class ProcessedObject
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor endpoint_type: ::String
+      SENSITIVE: []
+    end
+
+    class Progress
+      attr_accessor progress_percent: ::Float
+      attr_accessor total_objects: ::Integer
+      attr_accessor progress_step: ::String
+      attr_accessor processed_object: Types::ProcessedObject
+      SENSITIVE: []
+    end
+
     class ProvisionData
       attr_accessor provision_state: ::String
       attr_accessor provisioned_capacity_units: ::Integer
@@ -2744,6 +2762,7 @@ module Aws::DatabaseMigrationService
       attr_accessor migration_project_arn: ::String
       attr_accessor error: Types::ErrorDetails
       attr_accessor export_sql_details: Types::ExportSqlDetails
+      attr_accessor progress: Types::Progress
       SENSITIVE: []
     end
 
@@ -3006,6 +3025,16 @@ module Aws::DatabaseMigrationService
       attr_accessor endpoint_type: ("source" | "target")
       attr_accessor replication_instance_engine_minimum_version: ::String
       attr_accessor engine_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class SybaseAseDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor encrypt_password: bool
+      attr_accessor certificate_arn: ::String
       SENSITIVE: []
     end
 

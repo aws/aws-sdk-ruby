@@ -564,6 +564,36 @@ module Aws
                                ) -> _DescribeReplicatorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicatorResponseSuccess
 
+      interface _DescribeTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicResponse]
+        def topic_arn: () -> ::String
+        def topic_name: () -> ::String
+        def replication_factor: () -> ::Integer
+        def partition_count: () -> ::Integer
+        def configs: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_topic-instance_method
+      def describe_topic: (
+                            cluster_arn: ::String,
+                            topic_name: ::String
+                          ) -> _DescribeTopicResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicResponseSuccess
+
+      interface _DescribeTopicPartitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicPartitionsResponse]
+        def partitions: () -> ::Array[Types::TopicPartitionInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_topic_partitions-instance_method
+      def describe_topic_partitions: (
+                                       cluster_arn: ::String,
+                                       topic_name: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeTopicPartitionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicPartitionsResponseSuccess
+
       interface _DescribeVpcConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcConnectionResponse]
         def vpc_connection_arn: () -> ::String
@@ -786,6 +816,20 @@ module Aws
                                   ?next_token: ::String
                                 ) -> _ListVpcConnectionsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcConnectionsResponseSuccess
+
+      interface _ListTopicsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTopicsResponse]
+        def topics: () -> ::Array[Types::TopicInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_topics-instance_method
+      def list_topics: (
+                         cluster_arn: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?topic_name_filter: ::String
+                       ) -> _ListTopicsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTopicsResponseSuccess
 
       interface _RejectClientVpcConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RejectClientVpcConnectionResponse]

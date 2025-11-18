@@ -10,6 +10,18 @@
 module Aws::IAM
   module Types
 
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier of the delegation request to accept.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AcceptDelegationRequestRequest AWS API Documentation
+    #
+    class AcceptDelegationRequestRequest < Struct.new(
+      :delegation_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains details about when a principal in the reported
     # Organizations entity last attempted to access an Amazon Web Services
     # service. A principal can be an IAM user, an IAM role, or the Amazon
@@ -374,6 +386,18 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier of the delegation request to associate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AssociateDelegationRequestRequest AWS API Documentation
+    #
+    class AssociateDelegationRequestRequest < Struct.new(
+      :delegation_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_name
     #   The name (friendly name, not ARN) of the group to attach the policy
     #   to.
@@ -707,30 +731,89 @@ module Aws::IAM
     end
 
     # @!attribute [rw] owner_account_id
+    #   The Amazon Web Services account ID this delegation request is
+    #   targeted to.
+    #
+    #   If the account ID is not known, this parameter can be omitted,
+    #   resulting in a request that can be associated by any account. If the
+    #   account ID passed, then the created delegation request can only be
+    #   associated with an identity of that target account.
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   A description of the delegation request.
     #   @return [String]
     #
     # @!attribute [rw] permissions
+    #   The permissions to be delegated in this delegation request.
     #   @return [Types::DelegationPermission]
     #
     # @!attribute [rw] request_message
+    #   A message explaining the reason for the delegation request.
+    #
+    #   Requesters can utilize this field to add a custom note to the
+    #   delegation request. This field is different from the description
+    #   such that this is to be utilized for a custom messaging on a
+    #   case-by-case basis.
+    #
+    #   For example, if the current delegation request is in response to a
+    #   previous request being rejected, this explanation can be added to
+    #   the request via this field.
     #   @return [String]
     #
     # @!attribute [rw] requestor_workflow_id
+    #   The workflow ID associated with the requestor.
+    #
+    #   This is the unique identifier on the partner side that can be used
+    #   to track the progress of the request.
+    #
+    #   IAM maintains a uniqueness check on this workflow id for each
+    #   request - if a workflow id for an existing request is passed, this
+    #   API call will fail.
     #   @return [String]
     #
     # @!attribute [rw] redirect_url
+    #   The URL to redirect to after the delegation request is processed.
+    #
+    #   This URL is used by the IAM console to show a link to the customer
+    #   to re-load the partner workflow.
     #   @return [String]
     #
     # @!attribute [rw] notification_channel
+    #   The notification channel for updates about the delegation request.
+    #
+    #   At this time,only SNS topic ARNs are accepted for notification. This
+    #   topic ARN must have a resource policy granting `SNS:Publish`
+    #   permission to the IAM service principal (`iam.amazonaws.com`). See
+    #   [partner onboarding documentation][1] for more details.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html
     #   @return [String]
     #
     # @!attribute [rw] session_duration
+    #   The duration for which the delegated session should remain active,
+    #   in seconds.
+    #
+    #   The active time window for the session starts when the customer
+    #   calls the [SendDelegationToken][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html
     #   @return [Integer]
     #
     # @!attribute [rw] only_send_by_owner
+    #   Specifies whether the delegation token should only be sent by the
+    #   owner.
+    #
+    #   This flag prevents any party other than the owner from calling
+    #   `SendDelegationToken` API for this delegation request. This behavior
+    #   becomes useful when the delegation request owner needs to be present
+    #   for subsequent partner interactions, but the delegation request was
+    #   sent to a more privileged user for approval due to the owner lacking
+    #   sufficient delegation permissions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateDelegationRequestRequest AWS API Documentation
@@ -750,9 +833,18 @@ module Aws::IAM
     end
 
     # @!attribute [rw] console_deep_link
+    #   A deep link URL to the Amazon Web Services Management Console for
+    #   managing the delegation request.
+    #
+    #   For a console based workflow, partners should redirect the customer
+    #   to this URL. If the customer is not logged in to any Amazon Web
+    #   Services account, the Amazon Web Services workflow will
+    #   automatically direct the customer to log in and then display the
+    #   delegation request approval page.
     #   @return [String]
     #
     # @!attribute [rw] delegation_request_id
+    #   The unique identifier for the created delegation request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateDelegationRequestResponse AWS API Documentation
@@ -1972,7 +2064,80 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains information about the permissions being delegated in a
+    # delegation request.
+    #
     # @!attribute [rw] policy_template_arn
+    #   This ARN maps to a pre-registered policy content for this partner.
+    #   See the [partner onboarding documentation]() to understand how to
+    #   create a delegation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A list of policy parameters that define the scope and constraints of
+    #   the delegated permissions.
+    #   @return [Array<Types::PolicyParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DelegationPermission AWS API Documentation
+    #
+    class DelegationPermission < Struct.new(
+      :policy_template_arn,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a delegation request, including its status,
+    # permissions, and associated metadata.
+    #
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier for the delegation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   Amazon Web Services account ID of the owner of the delegation
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the delegation request. This is a message that is
+    #   provided by the Amazon Web Services partner that filed the
+    #   delegation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_message
+    #   A custom message that is added to the delegation request by the
+    #   partner.
+    #
+    #   This element is different from the `Description` element such that
+    #   this is a request specific message injected by the partner. The
+    #   `Description` is typically a generic explanation of what the
+    #   delegation request is targeted to do.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Contains information about the permissions being delegated in a
+    #   delegation request.
+    #   @return [Types::DelegationPermission]
+    #
+    # @!attribute [rw] permission_policy
+    #   JSON content of the associated permission policy of this delegation
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_permission_restriction_arns
+    #   If the `PermissionPolicy` includes role creation permissions, this
+    #   element will include the list of permissions boundary policies
+    #   associated with the role creation. See [Permissions boundaries for
+    #   IAM entities](IAM/latest/UserGuide/access_policies_boundaries.html)
+    #   for more details about IAM permission boundaries.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] owner_id
+    #   ARN of the owner of this delegation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] approver_id
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for
     #   Amazon Web Services resources.
     #
@@ -1984,14 +2149,90 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
-    # @!attribute [rw] parameters
-    #   @return [Array<Types::PolicyParameter>]
+    # @!attribute [rw] state
+    #   The state of this delegation request.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DelegationPermission AWS API Documentation
+    #   See the [Understanding the Request
+    #   Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html)
+    #   for an explanation of how these states are transitioned.
+    #   @return [String]
     #
-    class DelegationPermission < Struct.new(
-      :policy_template_arn,
-      :parameters)
+    # @!attribute [rw] requestor_id
+    #   Identity of the requestor of this delegation request. This will be
+    #   an Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] requestor_name
+    #   A friendly name of the requestor.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   Creation date (timestamp) of this delegation request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_duration
+    #   The life-time of the requested session credential.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redirect_url
+    #   A URL to be redirected to once the delegation request is approved.
+    #   Partners provide this URL when creating the delegation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   Notes added to this delegation request, if this request was updated
+    #   via the [UpdateDelegationRequest][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateDelegationRequest.html
+    #   @return [String]
+    #
+    # @!attribute [rw] rejection_reason
+    #   Reasons for rejecting this delegation request, if this request was
+    #   rejected. See also [RejectDelegationRequest][1] API documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_RejectDelegationRequest.html
+    #   @return [String]
+    #
+    # @!attribute [rw] only_send_by_owner
+    #   A flag indicating whether the [SendDelegationToken][1] must be
+    #   called by the owner of this delegation request. This is set by the
+    #   requesting partner.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] updated_time
+    #   Last updated timestamp of the request.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DelegationRequest AWS API Documentation
+    #
+    class DelegationRequest < Struct.new(
+      :delegation_request_id,
+      :owner_account_id,
+      :description,
+      :request_message,
+      :permissions,
+      :permission_policy,
+      :role_permission_restriction_arns,
+      :owner_id,
+      :approver_id,
+      :state,
+      :requestor_id,
+      :requestor_name,
+      :create_date,
+      :session_duration,
+      :redirect_url,
+      :notes,
+      :rejection_reason,
+      :only_send_by_owner,
+      :updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3588,6 +3829,80 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier of the delegation request to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] delegation_permission_check
+    #   Specifies whether to perform a permission check for the delegation
+    #   request.
+    #
+    #   If set to true, the `GetDelegationRequest` API call will start a
+    #   permission check process. This process calculates whether the caller
+    #   has sufficient permissions to cover the asks from this delegation
+    #   request.
+    #
+    #   Setting this parameter to true does not guarantee an answer in the
+    #   response. See the `PermissionCheckStatus` and the
+    #   `PermissionCheckResult` response attributes for further details.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetDelegationRequestRequest AWS API Documentation
+    #
+    class GetDelegationRequestRequest < Struct.new(
+      :delegation_request_id,
+      :delegation_permission_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegation_request
+    #   The delegation request object containing all details about the
+    #   request.
+    #   @return [Types::DelegationRequest]
+    #
+    # @!attribute [rw] permission_check_status
+    #   The status of the permission check for the delegation request.
+    #
+    #   This value indicates the status of the process to check whether the
+    #   caller has sufficient permissions to cover the requested actions in
+    #   the delegation request. Since this is an asynchronous process, there
+    #   are three potential values:
+    #
+    #   * `IN_PROGRESS` : The permission check process has started.
+    #
+    #   * `COMPLETED` : The permission check process has completed. The
+    #     `PermissionCheckResult` will include the result.
+    #
+    #   * `FAILED` : The permission check process has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_check_result
+    #   The result of the permission check, indicating whether the caller
+    #   has sufficient permissions to cover the requested permissions. This
+    #   is an approximate result.
+    #
+    #   * `ALLOWED` : The caller has sufficient permissions cover all the
+    #     requested permissions.
+    #
+    #   * `DENIED` : The caller does not have sufficient permissions to
+    #     cover all the requested permissions.
+    #
+    #   * `UNSURE` : It is not possible to determine whether the caller has
+    #     all the permissions needed. This output is most likely for cases
+    #     when the caller has permissions with conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetDelegationRequestResponse AWS API Documentation
+    #
+    class GetDelegationRequestResponse < Struct.new(
+      :delegation_request,
+      :permission_check_status,
+      :permission_check_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_name
     #   The name of the group the policy is associated with.
     #
@@ -3736,6 +4051,52 @@ module Aws::IAM
       :users,
       :is_truncated,
       :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_arn
+    #   Arn of the entity to be summarized. At this time, the only supported
+    #   entity type is `delegation-request`
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   A string representing the locale to use for the summary generation.
+    #   The supported locale strings are based on the [ Supported languages
+    #   of the Amazon Web Services Management Console
+    #   ](/awsconsolehelpdocs/latest/gsg/change-language.html#supported-languages).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetHumanReadableSummaryRequest AWS API Documentation
+    #
+    class GetHumanReadableSummaryRequest < Struct.new(
+      :entity_arn,
+      :locale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summary_content
+    #   Summary content in the specified locale. Summary content is
+    #   non-empty only if the `SummaryState` is `AVAILABLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale that this response was generated for. This maps to the
+    #   input locale.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary_state
+    #   State of summary generation. This generation process is asynchronous
+    #   and this attribute indicates the state of the generation process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetHumanReadableSummaryResponse AWS API Documentation
+    #
+    class GetHumanReadableSummaryResponse < Struct.new(
+      :summary_content,
+      :locale,
+      :summary_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4024,7 +4385,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] job_creation_date
-    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   The date and time, in [ISO 8601 date-time format][1], when the
     #   report job was created.
     #
     #
@@ -4033,7 +4394,7 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] job_completion_date
-    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   The date and time, in [ISO 8601 date-time format][1], when the
     #   generated report job was completed or failed.
     #
     #   This field is null if the job is still in progress, as indicated by
@@ -4055,7 +4416,7 @@ module Aws::IAM
     #   @return [Integer]
     #
     # @!attribute [rw] access_details
-    #   An object that contains details about the most recent attempt to
+    #   An object that contains details about the most recent attempt to
     #   access the service.
     #   @return [Array<Types::AccessDetail>]
     #
@@ -4532,7 +4893,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] job_creation_date
-    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   The date and time, in [ISO 8601 date-time format][1], when the
     #   report job was created.
     #
     #
@@ -4541,12 +4902,12 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] services_last_accessed
-    #   A `ServiceLastAccessed` object that contains details about the most
+    #   A `ServiceLastAccessed` object that contains details about the most
     #   recent attempt to access the service.
     #   @return [Array<Types::ServiceLastAccessed>]
     #
     # @!attribute [rw] job_completion_date
-    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   The date and time, in [ISO 8601 date-time format][1], when the
     #   generated report job was completed or failed.
     #
     #   This field is null if the job is still in progress, as indicated by
@@ -4609,7 +4970,7 @@ module Aws::IAM
     #   details for that service. In the first paragraph, find the service
     #   prefix. For example, `(service prefix: a4b)`. For more information
     #   about service namespaces, see [Amazon Web Services service
-    #   namespaces][2] in the *Amazon Web Services General Reference*.
+    #   namespaces][2] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -4653,7 +5014,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] job_creation_date
-    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   The date and time, in [ISO 8601 date-time format][1], when the
     #   report job was created.
     #
     #
@@ -4662,7 +5023,7 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] job_completion_date
-    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   The date and time, in [ISO 8601 date-time format][1], when the
     #   generated report job was completed or failed.
     #
     #   This field is null if the job is still in progress, as indicated by
@@ -4674,7 +5035,7 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] entity_details_list
-    #   An `EntityDetailsList` object that contains details about when an
+    #   An `EntityDetailsList` object that contains details about when an
     #   IAM entity (user or role) used group or policy permissions in an
     #   attempt to access the specified Amazon Web Services service.
     #   @return [Array<Types::EntityDetails>]
@@ -5654,6 +6015,66 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] owner_id
+    #   The owner ID to filter delegation requests by.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is
+    #   `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults
+    #   to 100. Note that IAM may return fewer results, even when there are
+    #   more results available. In that case, the `IsTruncated` response
+    #   element returns `true`, and `Marker` contains a value to include in
+    #   the subsequent call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListDelegationRequestsRequest AWS API Documentation
+    #
+    class ListDelegationRequestsRequest < Struct.new(
+      :owner_id,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegation_requests
+    #   A list of delegation requests that match the specified criteria.
+    #   @return [Array<Types::DelegationRequest>]
+    #
+    # @!attribute [rw] marker
+    #   When `isTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can make a subsequent pagination
+    #   request using the `Marker` request parameter to retrieve more items.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListDelegationRequestsResponse AWS API Documentation
+    #
+    class ListDelegationRequestsResponse < Struct.new(
+      :delegation_requests,
+      :marker,
+      :is_truncated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy for which you want
     #   the versions.
@@ -5696,10 +6117,9 @@ module Aws::IAM
     # @!attribute [rw] policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set
+    #   permissions boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.
@@ -6627,7 +7047,7 @@ module Aws::IAM
     #   details for that service. In the first paragraph, find the service
     #   prefix. For example, `(service prefix: a4b)`. For more information
     #   about service namespaces, see [Amazon Web Services service
-    #   namespaces][2] in the *Amazon Web Services General Reference*.
+    #   namespaces][2] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -6646,7 +7066,7 @@ module Aws::IAM
     end
 
     # @!attribute [rw] policies_granting_service_access
-    #   A `ListPoliciesGrantingServiceAccess` object that contains details
+    #   A `ListPoliciesGrantingServiceAccess` object that contains details
     #   about the permissions policies attached to the specified identity
     #   (user, group, or role).
     #   @return [Array<Types::ListPoliciesGrantingServiceAccessEntry>]
@@ -6713,10 +7133,9 @@ module Aws::IAM
     # @!attribute [rw] policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set
+    #   permissions boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.
@@ -8768,13 +9187,19 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains information about a policy parameter used to customize
+    # delegated permissions.
+    #
     # @!attribute [rw] name
+    #   The name of the policy parameter.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The allowed values for the policy parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
+    #   The data type of the policy parameter value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyParameter AWS API Documentation
@@ -9205,6 +9630,24 @@ module Aws::IAM
       :user_name,
       :policy_name,
       :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier of the delegation request to reject.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   Optional notes explaining the reason for rejecting the delegation
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RejectDelegationRequestRequest AWS API Documentation
+    #
+    class RejectDelegationRequestRequest < Struct.new(
+      :delegation_request_id,
+      :notes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9962,6 +10405,19 @@ module Aws::IAM
       :ssh_public_key_id,
       :status,
       :upload_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier of the delegation request for which to send
+    #   the token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SendDelegationTokenRequest AWS API Documentation
+    #
+    class SendDelegationTokenRequest < Struct.new(
+      :delegation_request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11843,6 +12299,23 @@ module Aws::IAM
     class UpdateAssumeRolePolicyRequest < Struct.new(
       :role_name,
       :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegation_request_id
+    #   The unique identifier of the delegation request to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] notes
+    #   Additional notes or comments to add to the delegation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateDelegationRequestRequest AWS API Documentation
+    #
+    class UpdateDelegationRequestRequest < Struct.new(
+      :delegation_request_id,
+      :notes)
       SENSITIVE = []
       include Aws::Structure
     end

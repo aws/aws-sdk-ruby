@@ -1260,7 +1260,7 @@ module Aws
       def get_automated_reasoning_policy_build_workflow_result_assets: (
                                                                          policy_arn: ::String,
                                                                          build_workflow_id: ::String,
-                                                                         asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION")
+                                                                         asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES")
                                                                        ) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponseSuccess
                                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponseSuccess
 

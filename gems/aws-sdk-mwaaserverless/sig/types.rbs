@@ -1,0 +1,404 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MWAAServerless
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor engine_version: ::Integer
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor trigger_mode: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor workflow_status: ("READY" | "DELETING")
+      attr_accessor workflow_version: ::String
+      attr_accessor is_latest_version: bool
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DefinitionS3Location
+      attr_accessor bucket: ::String
+      attr_accessor object_key: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor type: ("AWS_MANAGED_KEY" | "CUSTOMER_MANAGED_KEY")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTaskInstanceRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor task_instance_id: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTaskInstanceResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor run_id: ::String
+      attr_accessor task_instance_id: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor status: ("QUEUED" | "FAILED" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "UP_FOR_RESCHEDULE" | "UP_FOR_RETRY" | "UPSTREAM_FAILED" | "REMOVED" | "RESTARTING" | "DEFERRED" | "NONE" | "CANCELLED" | "TIMEOUT")
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor operator_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor attempt_number: ::Integer
+      attr_accessor error_message: ::String
+      attr_accessor task_id: ::String
+      attr_accessor log_stream: ::String
+      attr_accessor xcom: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor engine_version: ::Integer
+      attr_accessor workflow_status: ("READY" | "DELETING")
+      attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor trigger_mode: ::String
+      attr_accessor workflow_definition: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor run_id: ::String
+      attr_accessor run_type: ("ON_DEMAND" | "SCHEDULED")
+      attr_accessor override_parameters: ::Hash[::String, untyped]
+      attr_accessor run_detail: Types::WorkflowRunDetail
+      SENSITIVE: [:override_parameters]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTaskInstancesRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor run_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTaskInstancesResponse
+      attr_accessor task_instances: ::Array[Types::TaskInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowRunsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowRunsResponse
+      attr_accessor workflow_runs: ::Array[Types::WorkflowRunSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workflow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowVersionsResponse
+      attr_accessor workflow_versions: ::Array[Types::WorkflowVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor workflows: ::Array[Types::WorkflowSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OperationTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RunDetailSummary
+      attr_accessor status: ("STARTING" | "QUEUED" | "RUNNING" | "SUCCESS" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+      attr_accessor created_on: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ScheduleConfiguration
+      attr_accessor cron_expression: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class StartWorkflowRunRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor override_parameters: ::Hash[::String, untyped]
+      attr_accessor workflow_version: ::String
+      SENSITIVE: [:override_parameters]
+    end
+
+    class StartWorkflowRunResponse
+      attr_accessor run_id: ::String
+      attr_accessor status: ("STARTING" | "QUEUED" | "RUNNING" | "SUCCESS" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StopWorkflowRunRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopWorkflowRunResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor run_id: ::String
+      attr_accessor status: ("STARTING" | "QUEUED" | "RUNNING" | "SUCCESS" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskInstanceSummary
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor run_id: ::String
+      attr_accessor task_instance_id: ::String
+      attr_accessor status: ("QUEUED" | "FAILED" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "UP_FOR_RESCHEDULE" | "UP_FOR_RETRY" | "UPSTREAM_FAILED" | "REMOVED" | "RESTARTING" | "DEFERRED" | "NONE" | "CANCELLED" | "TIMEOUT")
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor operator_name: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkflowRequest
+      attr_accessor workflow_arn: ::String
+      attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor engine_version: ::Integer
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor trigger_mode: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowResponse
+      attr_accessor workflow_arn: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor workflow_version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowRunDetail
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor run_id: ::String
+      attr_accessor run_type: ("ON_DEMAND" | "SCHEDULED")
+      attr_accessor started_on: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor error_message: ::String
+      attr_accessor task_instances: ::Array[::String]
+      attr_accessor run_state: ("STARTING" | "QUEUED" | "RUNNING" | "SUCCESS" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class WorkflowRunSummary
+      attr_accessor run_id: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor run_type: ("ON_DEMAND" | "SCHEDULED")
+      attr_accessor run_detail_summary: Types::RunDetailSummary
+      SENSITIVE: []
+    end
+
+    class WorkflowSummary
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_version: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor workflow_status: ("READY" | "DELETING")
+      attr_accessor trigger_mode: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowVersionSummary
+      attr_accessor workflow_version: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor is_latest_version: bool
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor definition_s3_location: Types::DefinitionS3Location
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor trigger_mode: ::String
+      SENSITIVE: []
+    end
+  end
+end

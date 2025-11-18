@@ -1453,6 +1453,66 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Creates an OpenSearch index with optional automatic semantic
+    # enrichment for specified text fields. Automatic semantic enrichment
+    # enables semantic search capabilities without requiring machine
+    # learning expertise, improving search relevance by up to 20% by
+    # understanding search intent and contextual meaning beyond keyword
+    # matching. The semantic enrichment process has zero impact on search
+    # latency as sparse encodings are stored directly within the index
+    # during indexing. For more information, see [Automatic semantic
+    # enrichment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-semantic-enrichment.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to create. Must be between 1 and 255 characters
+    #   and follow OpenSearch naming conventions.
+    #
+    # @option params [required, Hash,Array,String,Numeric,Boolean] :index_schema
+    #   The JSON schema defining index mappings, settings, and semantic
+    #   enrichment configuration. The schema specifies which text fields
+    #   should be automatically enriched for semantic search capabilities and
+    #   includes OpenSearch index configuration parameters.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIndexResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #     index_schema: { # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATED", "UPDATED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateIndex AWS API Documentation
+    #
+    # @overload create_index(params = {})
+    # @param [Hash] params ({})
+    def create_index(params = {}, options = {})
+      req = build_request(:create_index, params)
+      req.send_request(options)
+    end
+
     # Creates a new cross-cluster search connection from a source Amazon
     # OpenSearch Service domain to a destination domain. For more
     # information, see [Cross-cluster search for Amazon OpenSearch
@@ -1961,6 +2021,41 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def delete_inbound_connection(params = {}, options = {})
       req = build_request(:delete_inbound_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes an OpenSearch index. This operation permanently removes the
+    # index and cannot be undone.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to delete.
+    #
+    # @return [Types::DeleteIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIndexResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATED", "UPDATED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteIndex AWS API Documentation
+    #
+    # @overload delete_index(params = {})
+    # @param [Hash] params ({})
+    def delete_index(params = {}, options = {})
+      req = build_request(:delete_index, params)
       req.send_request(options)
     end
 
@@ -3490,7 +3585,7 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Dissociates multiple packages from a domain simulatneously.
+    # Dissociates multiple packages from a domain simultaneously.
     #
     # @option params [required, Array<String>] :package_list
     #   A list of package IDs to be dissociated from a domain.
@@ -3764,6 +3859,42 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_domain_maintenance_status(params = {}, options = {})
       req = build_request(:get_domain_maintenance_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an OpenSearch index including its schema
+    # and semantic enrichment configuration. Use this operation to view the
+    # current index structure and semantic search settings.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to retrieve information about.
+    #
+    # @return [Types::GetIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIndexResponse#index_schema #index_schema} => Hash,Array,String,Numeric,Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetIndex AWS API Documentation
+    #
+    # @overload get_index(params = {})
+    # @param [Hash] params ({})
+    def get_index(params = {}, options = {})
+      req = build_request(:get_index, params)
       req.send_request(options)
     end
 
@@ -5562,6 +5693,54 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Updates an existing OpenSearch index schema and semantic enrichment
+    # configuration. This operation allows modification of field mappings
+    # and semantic search settings for text fields. Changes to semantic
+    # enrichment configuration will apply to newly ingested documents.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to update.
+    #
+    # @option params [required, Hash,Array,String,Numeric,Boolean] :index_schema
+    #   The updated JSON schema for the index including any changes to
+    #   mappings, settings, and semantic enrichment configuration.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @return [Types::UpdateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIndexResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #     index_schema: { # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATED", "UPDATED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateIndex AWS API Documentation
+    #
+    # @overload update_index(params = {})
+    # @param [Hash] params ({})
+    def update_index(params = {}, options = {})
+      req = build_request(:update_index, params)
+      req.send_request(options)
+    end
+
     # Updates a package for use with Amazon OpenSearch Service domains. For
     # more information, see [Custom packages for Amazon OpenSearch
     # Service][1].
@@ -5910,7 +6089,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

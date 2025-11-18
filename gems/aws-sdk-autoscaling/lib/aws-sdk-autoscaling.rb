@@ -65,7 +65,7 @@ module Aws::AutoScaling
   autoload :ScheduledAction, 'aws-sdk-autoscaling/scheduled_action'
   autoload :Tag, 'aws-sdk-autoscaling/tag'
 
-  GEM_VERSION = '1.146.0'
+  GEM_VERSION = '1.147.0'
 
 end
 

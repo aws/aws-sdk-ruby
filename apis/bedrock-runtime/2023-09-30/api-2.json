@@ -605,7 +605,8 @@
         "promptVariables":{"shape":"PromptVariableMap"},
         "additionalModelResponseFieldPaths":{"shape":"ConverseRequestAdditionalModelResponseFieldPathsList"},
         "requestMetadata":{"shape":"RequestMetadata"},
-        "performanceConfig":{"shape":"PerformanceConfiguration"}
+        "performanceConfig":{"shape":"PerformanceConfiguration"},
+        "serviceTier":{"shape":"ServiceTier"}
       }
     },
     "ConverseRequestAdditionalModelResponseFieldPathsList":{
@@ -634,7 +635,8 @@
         "metrics":{"shape":"ConverseMetrics"},
         "additionalModelResponseFields":{"shape":"Document"},
         "trace":{"shape":"ConverseTrace"},
-        "performanceConfig":{"shape":"PerformanceConfiguration"}
+        "performanceConfig":{"shape":"PerformanceConfiguration"},
+        "serviceTier":{"shape":"ServiceTier"}
       }
     },
     "ConverseStreamMetadataEvent":{
@@ -647,7 +649,8 @@
         "usage":{"shape":"TokenUsage"},
         "metrics":{"shape":"ConverseStreamMetrics"},
         "trace":{"shape":"ConverseStreamTrace"},
-        "performanceConfig":{"shape":"PerformanceConfiguration"}
+        "performanceConfig":{"shape":"PerformanceConfiguration"},
+        "serviceTier":{"shape":"ServiceTier"}
       },
       "event":true
     },
@@ -693,7 +696,8 @@
         "promptVariables":{"shape":"PromptVariableMap"},
         "additionalModelResponseFieldPaths":{"shape":"ConverseStreamRequestAdditionalModelResponseFieldPathsList"},
         "requestMetadata":{"shape":"RequestMetadata"},
-        "performanceConfig":{"shape":"PerformanceConfiguration"}
+        "performanceConfig":{"shape":"PerformanceConfiguration"},
+        "serviceTier":{"shape":"ServiceTier"}
       }
     },
     "ConverseStreamRequestAdditionalModelResponseFieldPathsList":{
@@ -725,7 +729,9 @@
       "type":"structure",
       "members":{
         "messages":{"shape":"Messages"},
-        "system":{"shape":"SystemContentBlocks"}
+        "system":{"shape":"SystemContentBlocks"},
+        "toolConfig":{"shape":"ToolConfiguration"},
+        "additionalModelRequestFields":{"shape":"Document"}
       }
     },
     "ConverseTrace":{
@@ -1876,6 +1882,11 @@
           "shape":"PerformanceConfigLatency",
           "location":"header",
           "locationName":"X-Amzn-Bedrock-PerformanceConfig-Latency"
+        },
+        "serviceTier":{
+          "shape":"ServiceTierType",
+          "location":"header",
+          "locationName":"X-Amzn-Bedrock-Service-Tier"
         }
       },
       "payload":"body"
@@ -1897,6 +1908,11 @@
           "shape":"PerformanceConfigLatency",
           "location":"header",
           "locationName":"X-Amzn-Bedrock-PerformanceConfig-Latency"
+        },
+        "serviceTier":{
+          "shape":"ServiceTierType",
+          "location":"header",
+          "locationName":"X-Amzn-Bedrock-Service-Tier"
         }
       },
       "payload":"body"
@@ -1991,6 +2007,11 @@
           "shape":"PerformanceConfigLatency",
           "location":"header",
           "locationName":"X-Amzn-Bedrock-PerformanceConfig-Latency"
+        },
+        "serviceTier":{
+          "shape":"ServiceTierType",
+          "location":"header",
+          "locationName":"X-Amzn-Bedrock-Service-Tier"
         }
       },
       "payload":"body"
@@ -2012,6 +2033,11 @@
           "shape":"PerformanceConfigLatency",
           "location":"header",
           "locationName":"X-Amzn-Bedrock-PerformanceConfig-Latency"
+        },
+        "serviceTier":{
+          "shape":"ServiceTierType",
+          "location":"header",
+          "locationName":"X-Amzn-Bedrock-Service-Tier"
         }
       },
       "payload":"body"
@@ -2336,6 +2362,21 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "ServiceTier":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{"shape":"ServiceTierType"}
+      }
+    },
+    "ServiceTierType":{
+      "type":"string",
+      "enum":[
+        "priority",
+        "default",
+        "flex"
+      ]
     },
     "ServiceUnavailableException":{
       "type":"structure",

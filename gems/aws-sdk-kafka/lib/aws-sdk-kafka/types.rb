@@ -1623,6 +1623,123 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for DescribeTopic.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicRequest AWS API Documentation
+    #
+    class DescribeTopicRequest < Struct.new(
+      :cluster_arn,
+      :topic_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DescribeTopicPartitions.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicPartitionsRequest AWS API Documentation
+    #
+    class DescribeTopicPartitionsRequest < Struct.new(
+      :cluster_arn,
+      :topic_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response containing details for a topic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_factor
+    #   @return [Integer]
+    #
+    # @!attribute [rw] partition_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] configs
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicResponse AWS API Documentation
+    #
+    class DescribeTopicResponse < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :replication_factor,
+      :partition_count,
+      :configs,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response containing partitions details for a topic.
+    #
+    # @!attribute [rw] partitions
+    #   @return [Array<Types::TopicPartitionInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicPartitionsResponse AWS API Documentation
+    #
+    class DescribeTopicPartitionsResponse < Struct.new(
+      :partitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a topic partition.
+    #
+    # @!attribute [rw] partition
+    #   @return [Integer]
+    #
+    # @!attribute [rw] leader
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replicas
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] isr
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicPartitionInfo AWS API Documentation
+    #
+    class TopicPartitionInfo < Struct.new(
+      :partition,
+      :leader,
+      :replicas,
+      :isr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replicator_arn
     #   @return [String]
     #
@@ -3179,6 +3296,48 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for ListTopics.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicsRequest AWS API Documentation
+    #
+    class ListTopicsRequest < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :topic_name_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response contains an array of topics on a MSK Cluster.
+    #
+    # @!attribute [rw] topics
+    #   @return [Array<Types::TopicInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicsResponse AWS API Documentation
+    #
+    class ListTopicsResponse < Struct.new(
+      :topics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -3876,6 +4035,35 @@ module Aws::Kafka
     class Tls < Struct.new(
       :certificate_authority_arn_list,
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Includes identification info about the topic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_factor
+    #   @return [Integer]
+    #
+    # @!attribute [rw] partition_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] out_of_sync_replica_count
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicInfo AWS API Documentation
+    #
+    class TopicInfo < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :replication_factor,
+      :partition_count,
+      :out_of_sync_replica_count)
       SENSITIVE = []
       include Aws::Structure
     end

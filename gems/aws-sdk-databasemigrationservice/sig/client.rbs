@@ -242,6 +242,14 @@ module Aws
                                       s3_path: ::String?,
                                       s3_access_role_arn: ::String?
                                     }?,
+                                    sybase_ase_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      encrypt_password: bool?,
+                                      certificate_arn: ::String?
+                                    }?,
                                     microsoft_sql_server_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
@@ -1986,6 +1994,14 @@ module Aws
                                       secrets_manager_security_db_encryption_access_role_arn: ::String?,
                                       s3_path: ::String?,
                                       s3_access_role_arn: ::String?
+                                    }?,
+                                    sybase_ase_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      encrypt_password: bool?,
+                                      certificate_arn: ::String?
                                     }?,
                                     microsoft_sql_server_settings: {
                                       server_name: ::String?,

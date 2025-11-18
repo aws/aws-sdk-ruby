@@ -5476,6 +5476,10 @@ module Aws::MediaLive
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
     #
+    # @!attribute [rw] hlg_2020_settings
+    #   Hlg2020 Settings
+    #   @return [Types::Hlg2020Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265ColorSpaceSettings AWS API Documentation
     #
     class H265ColorSpaceSettings < Struct.new(
@@ -5483,7 +5487,8 @@ module Aws::MediaLive
       :dolby_vision_81_settings,
       :hdr_10_settings,
       :rec_601_settings,
-      :rec_709_settings)
+      :rec_709_settings,
+      :hlg_2020_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5754,10 +5759,15 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] gop_b_reference
-    #   H265 Gop BReference
+    #   Allows the encoder to use a B-Frame as a reference frame as well.
+    #   ENABLED: B-frames will also serve as reference frames. DISABLED:
+    #   B-frames won't be reference frames. Must be DISABLED if resolution
+    #   is greater than 1080p or when using tiled hevc encoding.
     #   @return [String]
     #
     # @!attribute [rw] gop_num_b_frames
+    #   Sets the number of B-frames between reference frames. Set to 2 if
+    #   resolution is greater than 1080p or when using tiled hevc encoding.
     #   @return [Integer]
     #
     # @!attribute [rw] min_bitrate
@@ -5768,7 +5778,10 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] subgop_length
-    #   H265 Sub Gop Length
+    #   Sets the number of B-frames in each sub-GOP. FIXED: Use the value in
+    #   Num B-frames. DYNAMIC: Optimizes the number of B-frames in each
+    #   sub-GOP to improve visual quality. Must be FIXED if resolution is
+    #   greater than 1080p or when using tiled hevc encoding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
@@ -18431,6 +18444,22 @@ module Aws::MediaLive
     #   bandwidth for this output.
     #   @return [Integer]
     #
+    # @!attribute [rw] spatial_aq
+    #   Spatial AQ makes adjustments within each frame based on spatial
+    #   variation of content complexity. Enabled: MediaLive will determine
+    #   the appropriate level of spatial AQ to apply. Disabled: No spatial
+    #   AQ. For more information, see the topic about video adaptive
+    #   quantization in the MediaLive user guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] temporal_aq
+    #   Temporal AQ makes adjustments within each frame based on variations
+    #   in content complexity over time. Enabled: MediaLive will determine
+    #   the appropriate level of temporal AQ to apply. Disabled: No temporal
+    #   AQ. For more information, see the topic about video adaptive
+    #   quantization in the MediaLive user guide.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
     #
     class Av1Settings < Struct.new(
@@ -18453,7 +18482,9 @@ module Aws::MediaLive
       :timecode_burnin_settings,
       :bitrate,
       :rate_control_mode,
-      :min_bitrate)
+      :min_bitrate,
+      :spatial_aq,
+      :temporal_aq)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22230,6 +22261,14 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Hlg2020 Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Hlg2020Settings AWS API Documentation
+    #
+    class Hlg2020Settings < Aws::EmptyStructure; end
 
   end
 end

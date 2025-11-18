@@ -679,6 +679,8 @@ module Aws::EC2
     CreateVpcPeeringConnectionResult = Shapes::StructureShape.new(name: 'CreateVpcPeeringConnectionResult')
     CreateVpcRequest = Shapes::StructureShape.new(name: 'CreateVpcRequest')
     CreateVpcResult = Shapes::StructureShape.new(name: 'CreateVpcResult')
+    CreateVpnConcentratorRequest = Shapes::StructureShape.new(name: 'CreateVpnConcentratorRequest')
+    CreateVpnConcentratorResult = Shapes::StructureShape.new(name: 'CreateVpnConcentratorResult')
     CreateVpnConnectionRequest = Shapes::StructureShape.new(name: 'CreateVpnConnectionRequest')
     CreateVpnConnectionResult = Shapes::StructureShape.new(name: 'CreateVpnConnectionResult')
     CreateVpnConnectionRouteRequest = Shapes::StructureShape.new(name: 'CreateVpnConnectionRouteRequest')
@@ -881,6 +883,8 @@ module Aws::EC2
     DeleteVpcPeeringConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionRequest')
     DeleteVpcPeeringConnectionResult = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionResult')
     DeleteVpcRequest = Shapes::StructureShape.new(name: 'DeleteVpcRequest')
+    DeleteVpnConcentratorRequest = Shapes::StructureShape.new(name: 'DeleteVpnConcentratorRequest')
+    DeleteVpnConcentratorResult = Shapes::StructureShape.new(name: 'DeleteVpnConcentratorResult')
     DeleteVpnConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVpnConnectionRequest')
     DeleteVpnConnectionRouteRequest = Shapes::StructureShape.new(name: 'DeleteVpnConnectionRouteRequest')
     DeleteVpnGatewayRequest = Shapes::StructureShape.new(name: 'DeleteVpnGatewayRequest')
@@ -1069,6 +1073,11 @@ module Aws::EC2
     DescribeInstanceImageMetadataMaxResults = Shapes::IntegerShape.new(name: 'DescribeInstanceImageMetadataMaxResults')
     DescribeInstanceImageMetadataRequest = Shapes::StructureShape.new(name: 'DescribeInstanceImageMetadataRequest')
     DescribeInstanceImageMetadataResult = Shapes::StructureShape.new(name: 'DescribeInstanceImageMetadataResult')
+    DescribeInstanceSqlHaHistoryStatesRequest = Shapes::StructureShape.new(name: 'DescribeInstanceSqlHaHistoryStatesRequest')
+    DescribeInstanceSqlHaHistoryStatesResult = Shapes::StructureShape.new(name: 'DescribeInstanceSqlHaHistoryStatesResult')
+    DescribeInstanceSqlHaStatesRequest = Shapes::StructureShape.new(name: 'DescribeInstanceSqlHaStatesRequest')
+    DescribeInstanceSqlHaStatesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'DescribeInstanceSqlHaStatesRequestMaxResultsInteger')
+    DescribeInstanceSqlHaStatesResult = Shapes::StructureShape.new(name: 'DescribeInstanceSqlHaStatesResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
     DescribeInstanceStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceStatusResult')
     DescribeInstanceTopologyGroupNameSet = Shapes::ListShape.new(name: 'DescribeInstanceTopologyGroupNameSet')
@@ -1332,6 +1341,8 @@ module Aws::EC2
     DescribeVpcsMaxResults = Shapes::IntegerShape.new(name: 'DescribeVpcsMaxResults')
     DescribeVpcsRequest = Shapes::StructureShape.new(name: 'DescribeVpcsRequest')
     DescribeVpcsResult = Shapes::StructureShape.new(name: 'DescribeVpcsResult')
+    DescribeVpnConcentratorsRequest = Shapes::StructureShape.new(name: 'DescribeVpnConcentratorsRequest')
+    DescribeVpnConcentratorsResult = Shapes::StructureShape.new(name: 'DescribeVpnConcentratorsResult')
     DescribeVpnConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeVpnConnectionsRequest')
     DescribeVpnConnectionsResult = Shapes::StructureShape.new(name: 'DescribeVpnConnectionsResult')
     DescribeVpnGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeVpnGatewaysRequest')
@@ -1390,6 +1401,8 @@ module Aws::EC2
     DisableImageDeregistrationProtectionResult = Shapes::StructureShape.new(name: 'DisableImageDeregistrationProtectionResult')
     DisableImageRequest = Shapes::StructureShape.new(name: 'DisableImageRequest')
     DisableImageResult = Shapes::StructureShape.new(name: 'DisableImageResult')
+    DisableInstanceSqlHaStandbyDetectionsRequest = Shapes::StructureShape.new(name: 'DisableInstanceSqlHaStandbyDetectionsRequest')
+    DisableInstanceSqlHaStandbyDetectionsResult = Shapes::StructureShape.new(name: 'DisableInstanceSqlHaStandbyDetectionsResult')
     DisableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountRequest')
     DisableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountResult')
     DisableRouteServerPropagationRequest = Shapes::StructureShape.new(name: 'DisableRouteServerPropagationRequest')
@@ -1544,6 +1557,8 @@ module Aws::EC2
     EnableImageDeregistrationProtectionResult = Shapes::StructureShape.new(name: 'EnableImageDeregistrationProtectionResult')
     EnableImageRequest = Shapes::StructureShape.new(name: 'EnableImageRequest')
     EnableImageResult = Shapes::StructureShape.new(name: 'EnableImageResult')
+    EnableInstanceSqlHaStandbyDetectionsRequest = Shapes::StructureShape.new(name: 'EnableInstanceSqlHaStandbyDetectionsRequest')
+    EnableInstanceSqlHaStandbyDetectionsResult = Shapes::StructureShape.new(name: 'EnableInstanceSqlHaStandbyDetectionsResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
     EnableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountResult')
     EnableReachabilityAnalyzerOrganizationSharingRequest = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingRequest')
@@ -1837,6 +1852,7 @@ module Aws::EC2
     GroupIdentifierSet = Shapes::ListShape.new(name: 'GroupIdentifierSet')
     GroupIds = Shapes::ListShape.new(name: 'GroupIds')
     GroupNameStringList = Shapes::ListShape.new(name: 'GroupNameStringList')
+    HaStatus = Shapes::StringShape.new(name: 'HaStatus')
     HibernationFlag = Shapes::BooleanShape.new(name: 'HibernationFlag')
     HibernationOptions = Shapes::StructureShape.new(name: 'HibernationOptions')
     HibernationOptionsRequest = Shapes::StructureShape.new(name: 'HibernationOptionsRequest')
@@ -2023,6 +2039,7 @@ module Aws::EC2
     InstanceIdList = Shapes::ListShape.new(name: 'InstanceIdList')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
+    InstanceIdUpdateStringList = Shapes::ListShape.new(name: 'InstanceIdUpdateStringList')
     InstanceIdWithVolumeResolver = Shapes::StringShape.new(name: 'InstanceIdWithVolumeResolver')
     InstanceIdsSet = Shapes::ListShape.new(name: 'InstanceIdsSet')
     InstanceImageMetadata = Shapes::StructureShape.new(name: 'InstanceImageMetadata')
@@ -2939,6 +2956,8 @@ module Aws::EC2
     RegisterTransitGatewayMulticastGroupMembersResult = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupMembersResult')
     RegisterTransitGatewayMulticastGroupSourcesRequest = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupSourcesRequest')
     RegisterTransitGatewayMulticastGroupSourcesResult = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupSourcesResult')
+    RegisteredInstance = Shapes::StructureShape.new(name: 'RegisteredInstance')
+    RegisteredInstanceList = Shapes::ListShape.new(name: 'RegisteredInstanceList')
     RejectCapacityReservationBillingOwnershipRequest = Shapes::StructureShape.new(name: 'RejectCapacityReservationBillingOwnershipRequest')
     RejectCapacityReservationBillingOwnershipResult = Shapes::StructureShape.new(name: 'RejectCapacityReservationBillingOwnershipResult')
     RejectTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'RejectTransitGatewayMulticastDomainAssociationsRequest')
@@ -3187,6 +3206,7 @@ module Aws::EC2
     SearchTransitGatewayMulticastGroupsResult = Shapes::StructureShape.new(name: 'SearchTransitGatewayMulticastGroupsResult')
     SearchTransitGatewayRoutesRequest = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesRequest')
     SearchTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesResult')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroupForVpc = Shapes::StructureShape.new(name: 'SecurityGroupForVpc')
     SecurityGroupForVpcList = Shapes::ListShape.new(name: 'SecurityGroupForVpcList')
@@ -3292,6 +3312,7 @@ module Aws::EC2
     SpotPrice = Shapes::StructureShape.new(name: 'SpotPrice')
     SpotPriceHistoryList = Shapes::ListShape.new(name: 'SpotPriceHistoryList')
     SpreadLevel = Shapes::StringShape.new(name: 'SpreadLevel')
+    SqlServerLicenseUsage = Shapes::StringShape.new(name: 'SqlServerLicenseUsage')
     StaleIpPermission = Shapes::StructureShape.new(name: 'StaleIpPermission')
     StaleIpPermissionSet = Shapes::ListShape.new(name: 'StaleIpPermissionSet')
     StaleSecurityGroup = Shapes::StructureShape.new(name: 'StaleSecurityGroup')
@@ -3725,6 +3746,11 @@ module Aws::EC2
     VpcPeeringConnectionVpcInfo = Shapes::StructureShape.new(name: 'VpcPeeringConnectionVpcInfo')
     VpcState = Shapes::StringShape.new(name: 'VpcState')
     VpcTenancy = Shapes::StringShape.new(name: 'VpcTenancy')
+    VpnConcentrator = Shapes::StructureShape.new(name: 'VpnConcentrator')
+    VpnConcentratorId = Shapes::StringShape.new(name: 'VpnConcentratorId')
+    VpnConcentratorIdStringList = Shapes::ListShape.new(name: 'VpnConcentratorIdStringList')
+    VpnConcentratorList = Shapes::ListShape.new(name: 'VpnConcentratorList')
+    VpnConcentratorType = Shapes::StringShape.new(name: 'VpnConcentratorType')
     VpnConnection = Shapes::StructureShape.new(name: 'VpnConnection')
     VpnConnectionDeviceSampleConfiguration = Shapes::StringShape.new(name: 'VpnConnectionDeviceSampleConfiguration')
     VpnConnectionDeviceType = Shapes::StructureShape.new(name: 'VpnConnectionDeviceType')
@@ -6614,10 +6640,20 @@ module Aws::EC2
     CreateVpcResult.add_member(:vpc, Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc"))
     CreateVpcResult.struct_class = Types::CreateVpcResult
 
+    CreateVpnConcentratorRequest.add_member(:type, Shapes::ShapeRef.new(shape: VpnConcentratorType, required: true, location_name: "Type"))
+    CreateVpnConcentratorRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "TransitGatewayId"))
+    CreateVpnConcentratorRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVpnConcentratorRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVpnConcentratorRequest.struct_class = Types::CreateVpnConcentratorRequest
+
+    CreateVpnConcentratorResult.add_member(:vpn_concentrator, Shapes::ShapeRef.new(shape: VpnConcentrator, location_name: "vpnConcentrator"))
+    CreateVpnConcentratorResult.struct_class = Types::CreateVpnConcentratorResult
+
     CreateVpnConnectionRequest.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: CustomerGatewayId, required: true, location_name: "CustomerGatewayId"))
     CreateVpnConnectionRequest.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
     CreateVpnConnectionRequest.add_member(:vpn_gateway_id, Shapes::ShapeRef.new(shape: VpnGatewayId, location_name: "VpnGatewayId"))
     CreateVpnConnectionRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "TransitGatewayId"))
+    CreateVpnConnectionRequest.add_member(:vpn_concentrator_id, Shapes::ShapeRef.new(shape: VpnConcentratorId, location_name: "VpnConcentratorId"))
     CreateVpnConnectionRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpnConnectionRequest.add_member(:pre_shared_key_storage, Shapes::ShapeRef.new(shape: String, location_name: "PreSharedKeyStorage"))
     CreateVpnConnectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -7307,6 +7343,13 @@ module Aws::EC2
     DeleteVpcRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     DeleteVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteVpcRequest.struct_class = Types::DeleteVpcRequest
+
+    DeleteVpnConcentratorRequest.add_member(:vpn_concentrator_id, Shapes::ShapeRef.new(shape: VpnConcentratorId, required: true, location_name: "VpnConcentratorId"))
+    DeleteVpnConcentratorRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteVpnConcentratorRequest.struct_class = Types::DeleteVpnConcentratorRequest
+
+    DeleteVpnConcentratorResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DeleteVpnConcentratorResult.struct_class = Types::DeleteVpnConcentratorResult
 
     DeleteVpnConnectionRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
     DeleteVpnConnectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -8090,6 +8133,30 @@ module Aws::EC2
     DescribeInstanceImageMetadataResult.add_member(:instance_image_metadata, Shapes::ShapeRef.new(shape: InstanceImageMetadataList, location_name: "instanceImageMetadataSet"))
     DescribeInstanceImageMetadataResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeInstanceImageMetadataResult.struct_class = Types::DescribeInstanceImageMetadataResult
+
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "StartTime"))
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndTime"))
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeInstanceSqlHaStatesRequestMaxResultsInteger, location_name: "MaxResults"))
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceSqlHaHistoryStatesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceSqlHaHistoryStatesRequest.struct_class = Types::DescribeInstanceSqlHaHistoryStatesRequest
+
+    DescribeInstanceSqlHaHistoryStatesResult.add_member(:instances, Shapes::ShapeRef.new(shape: RegisteredInstanceList, location_name: "instanceSet"))
+    DescribeInstanceSqlHaHistoryStatesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeInstanceSqlHaHistoryStatesResult.struct_class = Types::DescribeInstanceSqlHaHistoryStatesResult
+
+    DescribeInstanceSqlHaStatesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
+    DescribeInstanceSqlHaStatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstanceSqlHaStatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeInstanceSqlHaStatesRequestMaxResultsInteger, location_name: "MaxResults"))
+    DescribeInstanceSqlHaStatesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceSqlHaStatesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceSqlHaStatesRequest.struct_class = Types::DescribeInstanceSqlHaStatesRequest
+
+    DescribeInstanceSqlHaStatesResult.add_member(:instances, Shapes::ShapeRef.new(shape: RegisteredInstanceList, location_name: "instanceSet"))
+    DescribeInstanceSqlHaStatesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeInstanceSqlHaStatesResult.struct_class = Types::DescribeInstanceSqlHaStatesResult
 
     DescribeInstanceStatusRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
     DescribeInstanceStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
@@ -9333,6 +9400,17 @@ module Aws::EC2
     DescribeVpcsResult.add_member(:vpcs, Shapes::ShapeRef.new(shape: VpcList, location_name: "vpcSet"))
     DescribeVpcsResult.struct_class = Types::DescribeVpcsResult
 
+    DescribeVpnConcentratorsRequest.add_member(:vpn_concentrator_ids, Shapes::ShapeRef.new(shape: VpnConcentratorIdStringList, location_name: "VpnConcentratorId"))
+    DescribeVpnConcentratorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeVpnConcentratorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GVCDMaxResults, location_name: "MaxResults"))
+    DescribeVpnConcentratorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVpnConcentratorsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeVpnConcentratorsRequest.struct_class = Types::DescribeVpnConcentratorsRequest
+
+    DescribeVpnConcentratorsResult.add_member(:vpn_concentrators, Shapes::ShapeRef.new(shape: VpnConcentratorList, location_name: "vpnConcentratorSet"))
+    DescribeVpnConcentratorsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeVpnConcentratorsResult.struct_class = Types::DescribeVpnConcentratorsResult
+
     DescribeVpnConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeVpnConnectionsRequest.add_member(:vpn_connection_ids, Shapes::ShapeRef.new(shape: VpnConnectionIdStringList, location_name: "VpnConnectionId"))
     DescribeVpnConnectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -9556,6 +9634,13 @@ module Aws::EC2
 
     DisableImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DisableImageResult.struct_class = Types::DisableImageResult
+
+    DisableInstanceSqlHaStandbyDetectionsRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdUpdateStringList, required: true, location_name: "InstanceId"))
+    DisableInstanceSqlHaStandbyDetectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableInstanceSqlHaStandbyDetectionsRequest.struct_class = Types::DisableInstanceSqlHaStandbyDetectionsRequest
+
+    DisableInstanceSqlHaStandbyDetectionsResult.add_member(:instances, Shapes::ShapeRef.new(shape: RegisteredInstanceList, location_name: "instanceSet"))
+    DisableInstanceSqlHaStandbyDetectionsResult.struct_class = Types::DisableInstanceSqlHaStandbyDetectionsResult
 
     DisableIpamOrganizationAdminAccountRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableIpamOrganizationAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DelegatedAdminAccountId"))
@@ -10093,6 +10178,14 @@ module Aws::EC2
 
     EnableImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     EnableImageResult.struct_class = Types::EnableImageResult
+
+    EnableInstanceSqlHaStandbyDetectionsRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdUpdateStringList, required: true, location_name: "InstanceId"))
+    EnableInstanceSqlHaStandbyDetectionsRequest.add_member(:sql_server_credentials, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SqlServerCredentials"))
+    EnableInstanceSqlHaStandbyDetectionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableInstanceSqlHaStandbyDetectionsRequest.struct_class = Types::EnableInstanceSqlHaStandbyDetectionsRequest
+
+    EnableInstanceSqlHaStandbyDetectionsResult.add_member(:instances, Shapes::ShapeRef.new(shape: RegisteredInstanceList, location_name: "instanceSet"))
+    EnableInstanceSqlHaStandbyDetectionsResult.struct_class = Types::EnableInstanceSqlHaStandbyDetectionsResult
 
     EnableIpamOrganizationAdminAccountRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableIpamOrganizationAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DelegatedAdminAccountId"))
@@ -12008,6 +12101,8 @@ module Aws::EC2
     InstanceIdSet.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
     InstanceIdStringList.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId")
+
+    InstanceIdUpdateStringList.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
     InstanceIdsSet.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
@@ -15391,6 +15486,17 @@ module Aws::EC2
     RegisterTransitGatewayMulticastGroupSourcesResult.add_member(:registered_multicast_group_sources, Shapes::ShapeRef.new(shape: TransitGatewayMulticastRegisteredGroupSources, location_name: "registeredMulticastGroupSources"))
     RegisterTransitGatewayMulticastGroupSourcesResult.struct_class = Types::RegisterTransitGatewayMulticastGroupSourcesResult
 
+    RegisteredInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
+    RegisteredInstance.add_member(:sql_server_license_usage, Shapes::ShapeRef.new(shape: SqlServerLicenseUsage, location_name: "sqlServerLicenseUsage"))
+    RegisteredInstance.add_member(:ha_status, Shapes::ShapeRef.new(shape: HaStatus, location_name: "haStatus"))
+    RegisteredInstance.add_member(:processing_status, Shapes::ShapeRef.new(shape: String, location_name: "processingStatus"))
+    RegisteredInstance.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastUpdatedTime"))
+    RegisteredInstance.add_member(:sql_server_credentials, Shapes::ShapeRef.new(shape: String, location_name: "sqlServerCredentials"))
+    RegisteredInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    RegisteredInstance.struct_class = Types::RegisteredInstance
+
+    RegisteredInstanceList.member = Shapes::ShapeRef.new(shape: RegisteredInstance, location_name: "item")
+
     RejectCapacityReservationBillingOwnershipRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     RejectCapacityReservationBillingOwnershipRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     RejectCapacityReservationBillingOwnershipRequest.struct_class = Types::RejectCapacityReservationBillingOwnershipRequest
@@ -18365,8 +18471,21 @@ module Aws::EC2
     VpcPeeringConnectionVpcInfo.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     VpcPeeringConnectionVpcInfo.struct_class = Types::VpcPeeringConnectionVpcInfo
 
+    VpnConcentrator.add_member(:vpn_concentrator_id, Shapes::ShapeRef.new(shape: String, location_name: "vpnConcentratorId"))
+    VpnConcentrator.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    VpnConcentrator.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
+    VpnConcentrator.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayAttachmentId"))
+    VpnConcentrator.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    VpnConcentrator.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VpnConcentrator.struct_class = Types::VpnConcentrator
+
+    VpnConcentratorIdStringList.member = Shapes::ShapeRef.new(shape: VpnConcentratorId, location_name: "VpnConcentratorId")
+
+    VpnConcentratorList.member = Shapes::ShapeRef.new(shape: VpnConcentrator, location_name: "item")
+
     VpnConnection.add_member(:category, Shapes::ShapeRef.new(shape: String, location_name: "category"))
     VpnConnection.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
+    VpnConnection.add_member(:vpn_concentrator_id, Shapes::ShapeRef.new(shape: String, location_name: "vpnConcentratorId"))
     VpnConnection.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "coreNetworkArn"))
     VpnConnection.add_member(:core_network_attachment_arn, Shapes::ShapeRef.new(shape: String, location_name: "coreNetworkAttachmentArn"))
     VpnConnection.add_member(:gateway_association_state, Shapes::ShapeRef.new(shape: GatewayAssociationState, location_name: "gatewayAssociationState"))
@@ -19736,6 +19855,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateVpcPeeringConnectionResult)
       end)
 
+      api.add_operation(:create_vpn_concentrator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpnConcentrator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpnConcentratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpnConcentratorResult)
+      end)
+
       api.add_operation(:create_vpn_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVpnConnection"
         o.http_method = "POST"
@@ -20414,6 +20541,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteVpcPeeringConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteVpcPeeringConnectionResult)
+      end)
+
+      api.add_operation(:delete_vpn_concentrator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpnConcentrator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpnConcentratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpnConcentratorResult)
       end)
 
       api.add_operation(:delete_vpn_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -21256,6 +21391,22 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_instance_sql_ha_history_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceSqlHaHistoryStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceSqlHaHistoryStatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceSqlHaHistoryStatesResult)
+      end)
+
+      api.add_operation(:describe_instance_sql_ha_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceSqlHaStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceSqlHaStatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceSqlHaStatesResult)
       end)
 
       api.add_operation(:describe_instance_status, Seahorse::Model::Operation.new.tap do |o|
@@ -22681,6 +22832,20 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_vpn_concentrators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpnConcentrators"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpnConcentratorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpnConcentratorsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_vpn_connections, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeVpnConnections"
         o.http_method = "POST"
@@ -22831,6 +22996,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisableImageDeregistrationProtectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DisableImageDeregistrationProtectionResult)
+      end)
+
+      api.add_operation(:disable_instance_sql_ha_standby_detections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableInstanceSqlHaStandbyDetections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableInstanceSqlHaStandbyDetectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableInstanceSqlHaStandbyDetectionsResult)
       end)
 
       api.add_operation(:disable_ipam_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
@@ -23127,6 +23300,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableImageDeregistrationProtectionRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableImageDeregistrationProtectionResult)
+      end)
+
+      api.add_operation(:enable_instance_sql_ha_standby_detections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableInstanceSqlHaStandbyDetections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableInstanceSqlHaStandbyDetectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableInstanceSqlHaStandbyDetectionsResult)
       end)
 
       api.add_operation(:enable_ipam_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|

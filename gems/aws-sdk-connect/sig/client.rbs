@@ -4467,7 +4467,8 @@ module Aws
                                                 }?
                                               }?
                                             }?
-                                          }
+                                          },
+                                          ?ring_timeout_in_seconds: ::Integer
                                         ) -> _StartOutboundVoiceContactResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutboundVoiceContactResponseSuccess
 

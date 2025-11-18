@@ -105,7 +105,7 @@ module Aws::Route53Resolver
       attr_accessor name: ::String
       attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
-      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end
@@ -348,7 +348,7 @@ module Aws::Route53Resolver
       attr_accessor modification_time: ::String
       attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
-      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end
@@ -1114,7 +1114,7 @@ module Aws::Route53Resolver
       attr_accessor name: ::String
       attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
-      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end

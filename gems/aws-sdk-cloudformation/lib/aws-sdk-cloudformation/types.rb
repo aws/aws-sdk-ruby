@@ -1071,6 +1071,25 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_mode
+    #   Determines how CloudFormation handles configuration drift during
+    #   deployment.
+    #
+    #   * `REVERT_DRIFT` – Creates a drift-aware change set that brings
+    #     actual resource states in line with template definitions. Provides
+    #     a three-way comparison between actual state, previous deployment
+    #     state, and desired state.
+    #
+    #   ^
+    #
+    #   For more information, see [Using drift-aware change sets][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -1092,7 +1111,8 @@ module Aws::CloudFormation
       :resources_to_import,
       :include_nested_stacks,
       :on_stack_failure,
-      :import_existing_resources)
+      :import_existing_resources,
+      :deployment_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1618,10 +1638,16 @@ module Aws::CloudFormation
     #   Unique identifier of the stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   A unique identifier for this stack operation that can be used to
+    #   track the operation's progress and events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackOutput AWS API Documentation
     #
     class CreateStackOutput < Struct.new(
-      :stack_id)
+      :stack_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2581,6 +2607,22 @@ module Aws::CloudFormation
     #   error message.
     #   @return [String]
     #
+    # @!attribute [rw] stack_drift_status
+    #   The drift status of the stack when the change set was created. Valid
+    #   values:
+    #
+    #   * `DRIFTED` – The stack has drifted from its last deployment.
+    #
+    #   * `IN_SYNC` – The stack is in sync with its last deployment.
+    #
+    #   * `NOT_CHECKED` – CloudFormation doesn’t currently return this
+    #     value.
+    #
+    #   * `UNKNOWN` – The drift status could not be determined.
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
     # @!attribute [rw] notification_arns
     #   The ARNs of the Amazon SNS topics that will be associated with the
     #   stack if you execute the change set.
@@ -2665,6 +2707,11 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_mode
+    #   The deployment mode specified when the change set was created. Valid
+    #   value is `REVERT_DRIFT`. Only present for drift-aware change sets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2678,6 +2725,7 @@ module Aws::CloudFormation
       :execution_status,
       :status,
       :status_reason,
+      :stack_drift_status,
       :notification_arns,
       :rollback_configuration,
       :capabilities,
@@ -2688,7 +2736,64 @@ module Aws::CloudFormation
       :parent_change_set_id,
       :root_change_set_id,
       :on_stack_failure,
-      :import_existing_resources)
+      :import_existing_resources,
+      :deployment_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_name
+    #   The name or unique stack ID for which you want to retrieve events.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_set_name
+    #   The name or Amazon Resource Name (ARN) of the change set for which
+    #   you want to retrieve events.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier of the operation for which you want to
+    #   retrieve events.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when retrieving events.
+    #   @return [Types::EventFilter]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeEventsInput AWS API Documentation
+    #
+    class DescribeEventsInput < Struct.new(
+      :stack_name,
+      :change_set_name,
+      :operation_id,
+      :filters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_events
+    #   A list of operation events that match the specified criteria.
+    #   @return [Array<Types::OperationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `DescribeEvents` again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeEventsOutput AWS API Documentation
+    #
+    class DescribeEventsOutput < Struct.new(
+      :operation_events,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4215,6 +4320,21 @@ module Aws::CloudFormation
     #
     class EstimateTemplateCostOutput < Struct.new(
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Event filter allows you to focus on specific events in an operation.
+    #
+    # @!attribute [rw] failed_events
+    #   When set to true, only returns failed events within the operation.
+    #   This helps quickly identify root causes for a failed operation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EventFilter AWS API Documentation
+    #
+    class EventFilter < Struct.new(
+      :failed_events)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6429,6 +6549,31 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Contains drift information for a resource property, including actual
+    # value, previous deployment value, and drift detection timestamp.
+    #
+    # @!attribute [rw] previous_value
+    #   The configuration value from the previous CloudFormation deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_value
+    #   The current live configuration value of the resource property.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_detection_timestamp
+    #   The timestamp when drift was detected for this resource property.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/LiveResourceDrift AWS API Documentation
+    #
+    class LiveResourceDrift < Struct.new(
+      :previous_value,
+      :actual_value,
+      :drift_detection_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains logging configuration information for an extension.
     #
     # @!attribute [rw] log_role_arn
@@ -6535,6 +6680,171 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/NameAlreadyExistsException AWS API Documentation
     #
     class NameAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Contains information about a CloudFormation operation.
+    #
+    # @!attribute [rw] operation_type
+    #   The type of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier for the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationEntry AWS API Documentation
+    #
+    class OperationEntry < Struct.new(
+      :operation_type,
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about an event that occurred during a
+    # CloudFormation operation.
+    #
+    # @!attribute [rw] event_id
+    #   A unique identifier for this event.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_id
+    #   The unique ID name of the instance of the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier of the operation this event belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The type of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_status
+    #   The current status of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical name of the resource as specified in the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id
+    #   The name or unique identifier that corresponds to a physical
+    #   instance ID of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   Time the status was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the event started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the event ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_status
+    #   Current status of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_status_reason
+    #   Success or failure message associated with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_properties
+    #   The properties used to create the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request that initiated this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_type
+    #   The type name of the Hook that was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status
+    #   The status of the Hook invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status_reason
+    #   Additional information about the Hook status.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_invocation_point
+    #   The point in the operation lifecycle when the Hook was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_failure_mode
+    #   Specifies how Hook failures are handled.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   Additional status information about the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_failure_mode
+    #   Specifies how validation failures are handled.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_name
+    #   The name of the validation that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The status of the validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status_reason
+    #   Additional information about the validation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_path
+    #   The path within the resource where the validation was applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationEvent AWS API Documentation
+    #
+    class OperationEvent < Struct.new(
+      :event_id,
+      :stack_id,
+      :operation_id,
+      :operation_type,
+      :operation_status,
+      :event_type,
+      :logical_resource_id,
+      :physical_resource_id,
+      :resource_type,
+      :timestamp,
+      :start_time,
+      :end_time,
+      :resource_status,
+      :resource_status_reason,
+      :resource_properties,
+      :client_request_token,
+      :hook_type,
+      :hook_status,
+      :hook_status_reason,
+      :hook_invocation_point,
+      :hook_failure_mode,
+      :detailed_status,
+      :validation_failure_mode,
+      :validation_name,
+      :validation_status,
+      :validation_status_reason,
+      :validation_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The specified operation ID already exists.
     #
@@ -7172,8 +7482,10 @@ module Aws::CloudFormation
     # @!attribute [rw] action
     #   The action that CloudFormation takes on the resource, such as `Add`
     #   (adds a new resource), `Modify` (changes a resource), `Remove`
-    #   (deletes a resource), `Import` (imports a resource), or `Dynamic`
-    #   (exact action for the resource can't be determined).
+    #   (deletes a resource), `Import` (imports a resource), `Dynamic`
+    #   (exact action for the resource can't be determined), or
+    #   `SyncWithActual` (resource will not be changed, only CloudFormation
+    #   metadata will change).
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -7212,6 +7524,31 @@ module Aws::CloudFormation
     #   attribute's `Metadata`, `Properties`, or `Tags`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_drift_status
+    #   The drift status of the resource. Valid values:
+    #
+    #   * `IN_SYNC` – The resource matches its template definition.
+    #
+    #   * `MODIFIED` – Resource properties were modified outside
+    #     CloudFormation.
+    #
+    #   * `DELETED` – The resource was deleted outside CloudFormation.
+    #
+    #   * `NOT_CHECKED` – CloudFormation doesn’t currently return this
+    #     value.
+    #
+    #   * `UNKNOWN` – Drift status could not be determined.
+    #
+    #   * `UNSUPPORTED` – Resource type does not support actual state
+    #     comparison.
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_drift_ignored_attributes
+    #   List of resource attributes for which drift was ignored.
+    #   @return [Array<Types::ResourceDriftIgnoredAttribute>]
+    #
     # @!attribute [rw] details
     #   For the `Modify` action, a list of `ResourceChangeDetail` structures
     #   that describes the changes that CloudFormation will make to the
@@ -7238,6 +7575,11 @@ module Aws::CloudFormation
     #   after the change is executed.
     #   @return [String]
     #
+    # @!attribute [rw] previous_deployment_context
+    #   Information about the resource's state from the previous
+    #   CloudFormation deployment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
@@ -7248,11 +7590,14 @@ module Aws::CloudFormation
       :resource_type,
       :replacement,
       :scope,
+      :resource_drift_status,
+      :resource_drift_ignored_attributes,
       :details,
       :change_set_id,
       :module_info,
       :before_context,
-      :after_context)
+      :after_context,
+      :previous_deployment_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7314,6 +7659,9 @@ module Aws::CloudFormation
     #     nested stack's template might have changed. Changes to a nested
     #     stack's template aren't visible to CloudFormation until you run
     #     an update on the parent stack.
+    #
+    #   * `NoModification` entities are changes made to the template that
+    #     matches the actual state of the resource.
     #   @return [String]
     #
     # @!attribute [rw] causing_entity
@@ -7452,6 +7800,32 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `ResourceDriftIgnoredAttribute` data type.
+    #
+    # @!attribute [rw] path
+    #   Path of the resource attribute for which drift was ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Reason why drift was ignored for the attribute, can have 2 possible
+    #   values:
+    #
+    #   * `WRITE_ONLY_PROPERTY` - Property is not included in read response
+    #     for the resource’s live state.
+    #
+    #   * `MANAGED_BY_AWS` - Property is managed by an Amazon Web Services
+    #     service and is expected to be dynamically modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceDriftIgnoredAttribute AWS API Documentation
+    #
+    class ResourceDriftIgnoredAttribute < Struct.new(
+      :path,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7659,6 +8033,33 @@ module Aws::CloudFormation
     #   can be truncated.
     #   @return [String]
     #
+    # @!attribute [rw] before_value_from
+    #   Indicates the source of the before value. Valid values:
+    #
+    #   * `ACTUAL_STATE` – The before value represents current actual state.
+    #
+    #   * `PREVIOUS_DEPLOYMENT_STATE` – The before value represents the
+    #     previous CloudFormation deployment state.
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_value_from
+    #   Indicates the source of the after value. Valid value:
+    #
+    #   * `TEMPLATE` – The after value comes from the new template.
+    #
+    #   ^
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift
+    #   Detailed drift information for the resource property, including
+    #   actual values, previous deployment values, and drift detection
+    #   timestamps.
+    #   @return [Types::LiveResourceDrift]
+    #
     # @!attribute [rw] attribute_change_type
     #   The type of change to be made to the property if the change is
     #   executed.
@@ -7668,6 +8069,9 @@ module Aws::CloudFormation
     #   * `Remove` The item will be removed.
     #
     #   * `Modify` The item will be modified.
+    #
+    #   * `SyncWithActual` The drift status of this item will be reset but
+    #     the item will not be modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition AWS API Documentation
@@ -7679,6 +8083,9 @@ module Aws::CloudFormation
       :path,
       :before_value,
       :after_value,
+      :before_value_from,
+      :after_value_from,
+      :drift,
       :attribute_change_type)
       SENSITIVE = []
       include Aws::Structure
@@ -7827,10 +8234,16 @@ module Aws::CloudFormation
     #   Unique identifier of the stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   A unique identifier for this rollback operation that can be used to
+    #   track the operation's progress and events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackOutput AWS API Documentation
     #
     class RollbackStackOutput < Struct.new(
-      :stack_id)
+      :stack_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8342,6 +8755,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
     #   @return [String]
     #
+    # @!attribute [rw] last_operations
+    #   Information about the most recent operations performed on this
+    #   stack.
+    #   @return [Array<Types::OperationEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -8369,7 +8787,8 @@ module Aws::CloudFormation
       :drift_information,
       :retain_except_on_create,
       :deletion_mode,
-      :detailed_status)
+      :detailed_status,
+      :last_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8490,6 +8909,11 @@ module Aws::CloudFormation
     #   The name associated with a stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier of the operation that generated this stack
+    #   event.
+    #   @return [String]
+    #
     # @!attribute [rw] logical_resource_id
     #   The logical name of the resource specified in the template.
     #   @return [String]
@@ -8602,6 +9026,7 @@ module Aws::CloudFormation
       :stack_id,
       :event_id,
       :stack_name,
+      :operation_id,
       :logical_resource_id,
       :physical_resource_id,
       :resource_type,
@@ -10527,6 +10952,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackDriftInformationSummary]
     #
+    # @!attribute [rw] last_operations
+    #   Information about the most recent operations performed on this
+    #   stack.
+    #   @return [Array<Types::OperationEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary AWS API Documentation
     #
     class StackSummary < Struct.new(
@@ -10540,7 +10970,8 @@ module Aws::CloudFormation
       :stack_status_reason,
       :parent_id,
       :root_id,
-      :drift_information)
+      :drift_information,
+      :last_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11867,10 +12298,16 @@ module Aws::CloudFormation
     #   Unique identifier of the stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   A unique identifier for this update operation that can be used to
+    #   track the operation's progress and events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackOutput AWS API Documentation
     #
     class UpdateStackOutput < Struct.new(
-      :stack_id)
+      :stack_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end

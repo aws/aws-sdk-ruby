@@ -448,6 +448,12 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class DisallowedFeature
+      attr_accessor feature: ::String
+      attr_accessor required_pricing_plan: ::String
+      SENSITIVE: []
+    end
+
     class DisassociateWebACLRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -1630,6 +1636,12 @@ module Aws::WAFV2
 
     class WAFExpiredManagedRuleGroupVersionException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFFeatureNotIncludedInPricingPlanException
+      attr_accessor message: ::String
+      attr_accessor disallowed_features: ::Array[Types::DisallowedFeature]
       SENSITIVE: []
     end
 

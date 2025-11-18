@@ -451,6 +451,44 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class DescribeTopicRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTopicPartitionsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTopicResponse
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor replication_factor: ::Integer
+      attr_accessor partition_count: ::Integer
+      attr_accessor configs: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class DescribeTopicPartitionsResponse
+      attr_accessor partitions: ::Array[Types::TopicPartitionInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class TopicPartitionInfo
+      attr_accessor partition: ::Integer
+      attr_accessor leader: ::Integer
+      attr_accessor replicas: ::Array[::Integer]
+      attr_accessor isr: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
     class DescribeReplicatorRequest
       attr_accessor replicator_arn: ::String
       SENSITIVE: []
@@ -897,6 +935,20 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class ListTopicsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor topic_name_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicsResponse
+      attr_accessor topics: ::Array[Types::TopicInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListReplicatorsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -1097,6 +1149,15 @@ module Aws::Kafka
     class Tls
       attr_accessor certificate_authority_arn_list: ::Array[::String]
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class TopicInfo
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor replication_factor: ::Integer
+      attr_accessor partition_count: ::Integer
+      attr_accessor out_of_sync_replica_count: ::Integer
       SENSITIVE: []
     end
 

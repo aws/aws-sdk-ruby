@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2025-11-18)
+------------------
+
+* Feature - Added the AssociateDelegationRequest, GetDelegationRequest, AcceptDelegationRequest, RejectDelegatonRequest, ListDelegationRequests, UpdateDelegationRequest, SendDelegationToken and GetHumanReadableSummary APIs for the IAM temporary delegation feature.
+
 1.133.0 (2025-11-10)
 ------------------
 

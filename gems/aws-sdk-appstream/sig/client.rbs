@@ -315,6 +315,20 @@ module Aws
                               ) -> _CreateEntitlementResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEntitlementResponseSuccess
 
+      interface _CreateExportImageTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExportImageTaskResult]
+        def export_image_task: () -> Types::ExportImageTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_export_image_task-instance_method
+      def create_export_image_task: (
+                                      image_name: ::String,
+                                      ami_name: ::String,
+                                      iam_role_arn: ::String,
+                                      ?tag_specifications: Hash[::String, ::String],
+                                      ?ami_description: ::String
+                                    ) -> _CreateExportImageTaskResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExportImageTaskResponseSuccess
+
       interface _CreateFleetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetResult]
         def fleet: () -> Types::Fleet
@@ -354,7 +368,10 @@ module Aws
                             s3_bucket: ::String,
                             s3_key: ::String?
                           },
-                          ?max_sessions_per_instance: ::Integer
+                          ?max_sessions_per_instance: ::Integer,
+                          ?root_volume_config: {
+                            volume_size_in_gb: ::Integer?
+                          }
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
 
@@ -388,6 +405,9 @@ module Aws
                                       vpce_id: ::String?
                                     },
                                   ],
+                                  ?root_volume_config: {
+                                    volume_size_in_gb: ::Integer?
+                                  },
                                   ?softwares_to_install: Array[::String],
                                   ?softwares_to_uninstall: Array[::String]
                                 ) -> _CreateImageBuilderResponseSuccess
@@ -404,6 +424,37 @@ module Aws
                                                 ?validity: ::Integer
                                               ) -> _CreateImageBuilderStreamingURLResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderStreamingURLResponseSuccess
+
+      interface _CreateImportedImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImportedImageResult]
+        def image: () -> Types::Image
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_imported_image-instance_method
+      def create_imported_image: (
+                                   name: ::String,
+                                   source_ami_id: ::String,
+                                   iam_role_arn: ::String,
+                                   ?description: ::String,
+                                   ?display_name: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   ?runtime_validation_config: {
+                                     intended_instance_type: ::String?
+                                   },
+                                   ?agent_software_version: ("CURRENT_LATEST" | "ALWAYS_LATEST"),
+                                   ?app_catalog_config: Array[
+                                     {
+                                       name: ::String,
+                                       display_name: ::String?,
+                                       absolute_app_path: ::String,
+                                       absolute_icon_path: ::String?,
+                                       absolute_manifest_path: ::String?,
+                                       working_directory: ::String?,
+                                       launch_parameters: ::String?
+                                     },
+                                   ],
+                                   ?dry_run: bool
+                                 ) -> _CreateImportedImageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImportedImageResponseSuccess
 
       interface _CreateStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackResult]
@@ -986,6 +1037,16 @@ module Aws
                           ) -> _ExpireSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExpireSessionResponseSuccess
 
+      interface _GetExportImageTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExportImageTaskResult]
+        def export_image_task: () -> Types::ExportImageTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#get_export_image_task-instance_method
+      def get_export_image_task: (
+                                   ?task_id: ::String
+                                 ) -> _GetExportImageTaskResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExportImageTaskResponseSuccess
+
       interface _ListAssociatedFleetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedFleetsResult]
         def names: () -> ::Array[::String]
@@ -1023,6 +1084,24 @@ module Aws
                                         ?max_results: ::Integer
                                       ) -> _ListEntitledApplicationsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitledApplicationsResponseSuccess
+
+      interface _ListExportImageTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExportImageTasksResult]
+        def export_image_tasks: () -> ::Array[Types::ExportImageTask]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#list_export_image_tasks-instance_method
+      def list_export_image_tasks: (
+                                     ?filters: Array[
+                                       {
+                                         name: ::String,
+                                         values: Array[::String]
+                                       },
+                                     ],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListExportImageTasksResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExportImageTasksResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -1238,7 +1317,7 @@ module Aws
                             organizational_unit_distinguished_name: ::String?
                           },
                           ?idle_disconnect_timeout_in_seconds: ::Integer,
-                          ?attributes_to_delete: Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE")],
+                          ?attributes_to_delete: Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE" | "VOLUME_CONFIGURATION")],
                           ?iam_role_arn: ::String,
                           ?stream_view: ("APP" | "DESKTOP"),
                           ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8" | "ROCKY_LINUX8"),
@@ -1248,7 +1327,10 @@ module Aws
                             s3_bucket: ::String,
                             s3_key: ::String?
                           },
-                          ?max_sessions_per_instance: ::Integer
+                          ?max_sessions_per_instance: ::Integer,
+                          ?root_volume_config: {
+                            volume_size_in_gb: ::Integer?
+                          }
                         ) -> _UpdateFleetResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
 

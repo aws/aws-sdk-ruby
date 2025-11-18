@@ -1398,11 +1398,13 @@ module Aws::Glue
       attr_accessor resource_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CreateIntegrationResourcePropertyResponse
       attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
       SENSITIVE: []
@@ -2150,6 +2152,14 @@ module Aws::Glue
     class DeleteIntegrationRequest
       attr_accessor integration_identifier: ::String
       SENSITIVE: []
+    end
+
+    class DeleteIntegrationResourcePropertyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationResourcePropertyResponse < Aws::EmptyStructure
     end
 
     class DeleteIntegrationResponse
@@ -3236,6 +3246,7 @@ module Aws::Glue
 
     class GetIntegrationResourcePropertyResponse
       attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
       SENSITIVE: []
@@ -4206,6 +4217,20 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IntegrationResourceProperty
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
+      attr_accessor source_processing_properties: Types::SourceProcessingProperties
+      attr_accessor target_processing_properties: Types::TargetProcessingProperties
+      SENSITIVE: []
+    end
+
+    class IntegrationResourcePropertyFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -4701,6 +4726,19 @@ module Aws::Glue
     class ListEntitiesResponse
       attr_accessor entities: ::Array[Types::Entity]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationResourcePropertiesRequest
+      attr_accessor marker: ::String
+      attr_accessor filters: ::Array[Types::IntegrationResourcePropertyFilter]
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIntegrationResourcePropertiesResponse
+      attr_accessor integration_resource_property_list: ::Array[Types::IntegrationResourceProperty]
+      attr_accessor marker: ::String
       SENSITIVE: []
     end
 
@@ -7024,6 +7062,7 @@ module Aws::Glue
 
     class UpdateIntegrationResourcePropertyResponse
       attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
       SENSITIVE: []

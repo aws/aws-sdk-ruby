@@ -216,10 +216,18 @@ module Aws::PCS
     #   secret**.
     #   @return [Types::SlurmAuthKey]
     #
+    # @!attribute [rw] jwt_auth
+    #   The JWT authentication configuration for Slurm REST API access.
+    #   @return [Types::JwtAuth]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
     #   @return [Types::Accounting]
+    #
+    # @!attribute [rw] slurm_rest
+    #   The Slurm REST API configuration for the cluster.
+    #   @return [Types::SlurmRest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSlurmConfiguration AWS API Documentation
     #
@@ -227,7 +235,9 @@ module Aws::PCS
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :auth_key,
-      :accounting)
+      :jwt_auth,
+      :accounting,
+      :slurm_rest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -250,12 +260,17 @@ module Aws::PCS
     #   Slurm accounting.
     #   @return [Types::AccountingRequest]
     #
+    # @!attribute [rw] slurm_rest
+    #   The Slurm REST API configuration for the cluster.
+    #   @return [Types::SlurmRestRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSlurmConfigurationRequest AWS API Documentation
     #
     class ClusterSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
-      :accounting)
+      :accounting,
+      :slurm_rest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1154,6 +1169,42 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The JWT authentication configuration for Slurm REST API access.
+    #
+    # @!attribute [rw] jwt_key
+    #   The JWT key for Slurm REST API authentication.
+    #   @return [Types::JwtKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JwtAuth AWS API Documentation
+    #
+    class JwtAuth < Struct.new(
+      :jwt_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The JWT key stored in AWS Secrets Manager for Slurm REST API
+    # authentication.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
+    #   containing the JWT key.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_version
+    #   The version of the AWS Secrets Manager secret containing the JWT
+    #   key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JwtKey AWS API Documentation
+    #
+    class JwtKey < Struct.new(
+      :secret_arn,
+      :secret_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The value of `nextToken` is a unique pagination token for each page
     #   of results returned. If `nextToken` is returned, there are more
@@ -1863,6 +1914,40 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The Slurm REST API configuration includes settings for enabling and
+    # configuring the Slurm REST API. It's a property of the
+    # **ClusterSlurmConfiguration** object.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means the Slurm REST API is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/SlurmRest AWS API Documentation
+    #
+    class SlurmRest < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Slurm REST API configuration includes settings for enabling and
+    # configuring the Slurm REST API. It's a property of the
+    # **ClusterSlurmConfiguration** object.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means the Slurm REST API is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/SlurmRestRequest AWS API Documentation
+    #
+    class SlurmRestRequest < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional configuration when you specify `SPOT` as the
     # `purchaseOption` for the `CreateComputeNodeGroup` API action.
     #
@@ -1906,6 +1991,10 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Your request exceeded a request rate quota. Check the resource's
     # request rate quota and try again.
     #
@@ -1942,6 +2031,10 @@ module Aws::PCS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The accounting configuration includes configurable settings for Slurm
     # accounting.
@@ -2038,12 +2131,17 @@ module Aws::PCS
     #   Slurm accounting.
     #   @return [Types::UpdateAccountingRequest]
     #
+    # @!attribute [rw] slurm_rest
+    #   The Slurm REST API configuration for the cluster.
+    #   @return [Types::UpdateSlurmRestRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateClusterSlurmConfigurationRequest AWS API Documentation
     #
     class UpdateClusterSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
-      :accounting)
+      :accounting,
+      :slurm_rest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2237,6 +2335,22 @@ module Aws::PCS
     #
     class UpdateQueueSlurmConfigurationRequest < Struct.new(
       :slurm_custom_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Slurm REST API configuration includes settings for enabling and
+    # configuring the Slurm REST API.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means the Slurm REST API is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateSlurmRestRequest AWS API Documentation
+    #
+    class UpdateSlurmRestRequest < Struct.new(
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end

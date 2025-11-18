@@ -643,6 +643,15 @@ module Aws::Backup
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] target_logically_air_gapped_backup_vault_arn
+    #   The ARN of a logically air-gapped vault. ARN must be in the same
+    #   account and Region. If provided, supported fully managed resources
+    #   back up directly to logically air-gapped vault, while other
+    #   supported resources create a temporary (billable) snapshot in backup
+    #   vault, then copy it to logically air-gapped vault. Unsupported
+    #   resources only back up to the specified backup vault.
+    #   @return [String]
+    #
     # @!attribute [rw] schedule_expression
     #   A cron expression in UTC specifying when Backup initiates a backup
     #   job. When no CRON expression is provided, Backup will use the
@@ -750,6 +759,7 @@ module Aws::Backup
     class BackupRule < Struct.new(
       :rule_name,
       :target_backup_vault_name,
+      :target_logically_air_gapped_backup_vault_arn,
       :schedule_expression,
       :start_window_minutes,
       :completion_window_minutes,
@@ -776,6 +786,15 @@ module Aws::Backup
     #   vaults are identified by names that are unique to the account used
     #   to create them and the Amazon Web Services Region where they are
     #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_logically_air_gapped_backup_vault_arn
+    #   The ARN of a logically air-gapped vault. ARN must be in the same
+    #   account and Region. If provided, supported fully managed resources
+    #   back up directly to logically air-gapped vault, while other
+    #   supported resources create a temporary (billable) snapshot in backup
+    #   vault, then copy it to logically air-gapped vault. Unsupported
+    #   resources only back up to the specified backup vault.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -870,6 +889,7 @@ module Aws::Backup
     class BackupRuleInput < Struct.new(
       :rule_name,
       :target_backup_vault_name,
+      :target_logically_air_gapped_backup_vault_arn,
       :schedule_expression,
       :start_window_minutes,
       :completion_window_minutes,
@@ -1572,6 +1592,12 @@ module Aws::Backup
     #   to initiate the recovery point backup.
     #   @return [Types::RecoveryPointCreator]
     #
+    # @!attribute [rw] created_by_backup_job_id
+    #   The backup job ID that initiated this copy job. Only applicable to
+    #   scheduled copy jobs and automatic copy jobs to logically air-gapped
+    #   vault.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The type of Amazon Web Services resource to be copied; for example,
     #   an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
@@ -1651,6 +1677,7 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :created_by,
+      :created_by_backup_job_id,
       :resource_type,
       :parent_job_id,
       :is_parent,
@@ -2454,6 +2481,70 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] tiering_configuration
+    #   A tiering configuration must contain a unique
+    #   `TieringConfigurationName` string you create and must contain a
+    #   `BackupVaultName` and `ResourceSelection`. You may optionally
+    #   include a `CreatorRequestId` string.
+    #
+    #   The `TieringConfigurationName` is a unique string that is the name
+    #   of the tiering configuration. This cannot be changed after creation,
+    #   and it must consist of only alphanumeric characters and underscores.
+    #   @return [Types::TieringConfigurationInputForCreate]
+    #
+    # @!attribute [rw] tiering_configuration_tags
+    #   The tags to assign to the tiering configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] creator_request_id
+    #   This is a unique string that identifies the request and allows
+    #   failed requests to be retried without the risk of running the
+    #   operation twice. This parameter is optional. If used, this parameter
+    #   must contain 1 to 50 alphanumeric or '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateTieringConfigurationInput AWS API Documentation
+    #
+    class CreateTieringConfigurationInput < Struct.new(
+      :tiering_configuration,
+      :tiering_configuration_tags,
+      :creator_request_id)
+      SENSITIVE = [:tiering_configuration_tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tiering_configuration_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the created
+    #   tiering configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiering_configuration_name
+    #   This unique string is the name of the tiering configuration.
+    #
+    #   The name cannot be changed after creation. The name consists of only
+    #   alphanumeric characters and underscores. Maximum length is 200.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time a tiering configuration was created, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationTime` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateTieringConfigurationOutput AWS API Documentation
+    #
+    class CreateTieringConfigurationOutput < Struct.new(
+      :tiering_configuration_arn,
+      :tiering_configuration_name,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This is a resource filter containing FromDate: DateTime and ToDate:
     # DateTime. Both values are required. Future DateTime values are not
     # permitted.
@@ -2683,6 +2774,22 @@ module Aws::Backup
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] tiering_configuration_name
+    #   The unique name of a tiering configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteTieringConfigurationInput AWS API Documentation
+    #
+    class DeleteTieringConfigurationInput < Struct.new(
+      :tiering_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteTieringConfigurationOutput AWS API Documentation
+    #
+    class DeleteTieringConfigurationOutput < Aws::EmptyStructure; end
 
     # A dependent Amazon Web Services service or resource returned an error
     # to the Backup service, and the action cannot be completed.
@@ -3281,8 +3388,9 @@ module Aws::Backup
     class DescribeGlobalSettingsInput < Aws::EmptyStructure; end
 
     # @!attribute [rw] global_settings
-    #   The status of the flags `isCrossAccountBackupEnabled` and
-    #   `isMpaEnabled` ('Mpa' refers to multi-party approval).
+    #   The status of the flags `isCrossAccountBackupEnabled`,
+    #   `isMpaEnabled` ('Mpa' refers to multi-party approval), and
+    #   `isDelegatedAdministratorEnabled`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_update_time
@@ -4783,6 +4891,31 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] tiering_configuration_name
+    #   The unique name of a tiering configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetTieringConfigurationInput AWS API Documentation
+    #
+    class GetTieringConfigurationInput < Struct.new(
+      :tiering_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tiering_configuration
+    #   Specifies the body of a tiering configuration. Includes
+    #   `TieringConfigurationName`.
+    #   @return [Types::TieringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetTieringConfigurationOutput AWS API Documentation
+    #
+    class GetTieringConfigurationOutput < Struct.new(
+      :tiering_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This is an optional array within a BackupRule.
     #
     # IndexAction consists of one ResourceTypes.
@@ -5155,12 +5288,19 @@ module Aws::Backup
     #   lifecycle settings.
     #   @return [Boolean]
     #
+    # @!attribute [rw] delete_after_event
+    #   The event after which a recovery point is deleted. A recovery point
+    #   with both `DeleteAfterDays` and `DeleteAfterEvent` will delete after
+    #   whichever condition is satisfied first. Not valid as an input.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Lifecycle AWS API Documentation
     #
     class Lifecycle < Struct.new(
       :move_to_cold_storage_after_days,
       :delete_after_days,
-      :opt_in_to_archive_for_supported_resources)
+      :opt_in_to_archive_for_supported_resources,
+      :delete_after_event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5965,6 +6105,10 @@ module Aws::Backup
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
     #   @return [String]
     #
+    # @!attribute [rw] by_source_recovery_point_arn
+    #   Filters copy jobs by the specified source recovery point ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -5980,7 +6124,8 @@ module Aws::Backup
       :by_complete_before,
       :by_complete_after,
       :by_parent_job_id,
-      :by_message_category)
+      :by_message_category,
+      :by_source_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7092,6 +7237,47 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListTieringConfigurationsInput AWS API Documentation
+    #
+    class ListTieringConfigurationsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tiering_configurations
+    #   An array of tiering configurations returned by the
+    #   `ListTieringConfigurations` call.
+    #   @return [Array<Types::TieringConfigurationsListMember>]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `MaxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListTieringConfigurationsOutput AWS API Documentation
+    #
+    class ListTieringConfigurationsOutput < Struct.new(
+      :tiering_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates that a required parameter is missing.
     #
     # @!attribute [rw] code
@@ -8067,6 +8253,41 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This contains metadata about resource selection for tiering
+    # configurations.
+    #
+    # You can specify up to 5 different resource selections per tiering
+    # configuration. Data moved to lower-cost tier remains there until
+    # deletion (one-way transition).
+    #
+    # @!attribute [rw] resources
+    #   An array of strings that either contains ARNs of the associated
+    #   resources or contains a wildcard `*` to specify all resources. You
+    #   can specify up to 100 specific resources per tiering configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tiering_down_settings_in_days
+    #   The number of days after creation within a backup vault that an
+    #   object can transition to the low cost warm storage tier. Must be a
+    #   positive integer between 60 and 36500 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource; for example, `S3` for
+    #   Amazon S3. For tiering configurations, this is currently limited to
+    #   `S3`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ResourceSelection AWS API Documentation
+    #
+    class ResourceSelection < Struct.new(
+      :resources,
+      :tiering_down_settings_in_days,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9067,6 +9288,15 @@ module Aws::Backup
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] logically_air_gapped_backup_vault_arn
+    #   The ARN of a logically air-gapped vault. ARN must be in the same
+    #   account and Region. If provided, supported fully managed resources
+    #   back up directly to logically air-gapped vault, while other
+    #   supported resources create a temporary (billable) snapshot in backup
+    #   vault, then copy it to logically air-gapped vault. Unsupported
+    #   resources only back up to the specified backup vault.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource.
     #   The format of the ARN depends on the resource type.
@@ -9176,6 +9406,7 @@ module Aws::Backup
     #
     class StartBackupJobInput < Struct.new(
       :backup_vault_name,
+      :logically_air_gapped_backup_vault_arn,
       :resource_arn,
       :iam_role_arn,
       :idempotency_token,
@@ -9539,6 +9770,162 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # This contains metadata about a tiering configuration.
+    #
+    # @!attribute [rw] tiering_configuration_name
+    #   The unique name of the tiering configuration. This cannot be changed
+    #   after creation, and it must consist of only alphanumeric characters
+    #   and underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiering_configuration_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the tiering
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault where the tiering configuration
+    #   applies. Use `*` to apply to all backup vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_selection
+    #   An array of resource selection objects that specify which resources
+    #   are included in the tiering configuration and their tiering
+    #   settings.
+    #   @return [Array<Types::ResourceSelection>]
+    #
+    # @!attribute [rw] creator_request_id
+    #   This is a unique string that identifies the request and allows
+    #   failed requests to be retried without the risk of running the
+    #   operation twice.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time a tiering configuration was created, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationTime` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time a tiering configuration was updated, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `LastUpdatedTime` is accurate to milliseconds. For example, the
+    #   value 1516925490.087 represents Friday, January 26, 2018
+    #   12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TieringConfiguration AWS API Documentation
+    #
+    class TieringConfiguration < Struct.new(
+      :tiering_configuration_name,
+      :tiering_configuration_arn,
+      :backup_vault_name,
+      :resource_selection,
+      :creator_request_id,
+      :creation_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This contains metadata about a tiering configuration for create
+    # operations.
+    #
+    # @!attribute [rw] tiering_configuration_name
+    #   The unique name of the tiering configuration. This cannot be changed
+    #   after creation, and it must consist of only alphanumeric characters
+    #   and underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault where the tiering configuration
+    #   applies. Use `*` to apply to all backup vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_selection
+    #   An array of resource selection objects that specify which resources
+    #   are included in the tiering configuration and their tiering
+    #   settings.
+    #   @return [Array<Types::ResourceSelection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TieringConfigurationInputForCreate AWS API Documentation
+    #
+    class TieringConfigurationInputForCreate < Struct.new(
+      :tiering_configuration_name,
+      :backup_vault_name,
+      :resource_selection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This contains metadata about a tiering configuration for update
+    # operations.
+    #
+    # @!attribute [rw] resource_selection
+    #   An array of resource selection objects that specify which resources
+    #   are included in the tiering configuration and their tiering
+    #   settings.
+    #   @return [Array<Types::ResourceSelection>]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault where the tiering configuration
+    #   applies. Use `*` to apply to all backup vaults.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TieringConfigurationInputForUpdate AWS API Documentation
+    #
+    class TieringConfigurationInputForUpdate < Struct.new(
+      :resource_selection,
+      :backup_vault_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This contains metadata about a tiering configuration returned in a
+    # list.
+    #
+    # @!attribute [rw] tiering_configuration_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the tiering
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiering_configuration_name
+    #   The unique name of the tiering configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault where the tiering configuration
+    #   applies. Use `*` to apply to all backup vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time a tiering configuration was created, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationTime` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time a tiering configuration was updated, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `LastUpdatedTime` is accurate to milliseconds. For example, the
+    #   value 1516925490.087 represents Friday, January 26, 2018
+    #   12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TieringConfigurationsListMember AWS API Documentation
+    #
+    class TieringConfigurationsListMember < Struct.new(
+      :tiering_configuration_arn,
+      :tiering_configuration_name,
+      :backup_vault_name,
+      :creation_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the type of the tagged resource.
@@ -9694,6 +10081,11 @@ module Aws::Backup
     #   A value for Multi-party approval, styled as "Mpa": `isMpaEnabled`.
     #   Values can be true or false. Example: `update-global-settings
     #   --global-settings isMpaEnabled=false --region us-west-2`.
+    #
+    #   A value for Backup Service-Linked Role creation, styled
+    #   as`isDelegatedAdministratorEnabled`. Values can be true or false.
+    #   Example: `update-global-settings --global-settings
+    #   isDelegatedAdministratorEnabled=false --region us-west-2`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettingsInput AWS API Documentation
@@ -10082,6 +10474,58 @@ module Aws::Backup
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tiering_configuration_name
+    #   The name of a tiering configuration to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiering_configuration
+    #   Specifies the body of a tiering configuration.
+    #   @return [Types::TieringConfigurationInputForUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateTieringConfigurationInput AWS API Documentation
+    #
+    class UpdateTieringConfigurationInput < Struct.new(
+      :tiering_configuration_name,
+      :tiering_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tiering_configuration_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the updated
+    #   tiering configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiering_configuration_name
+    #   This unique string is the name of the tiering configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time a tiering configuration was created, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `CreationTime` is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time a tiering configuration was updated, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   `LastUpdatedTime` is accurate to milliseconds. For example, the
+    #   value 1516925490.087 represents Friday, January 26, 2018
+    #   12:11:30.087AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateTieringConfigurationOutput AWS API Documentation
+    #
+    class UpdateTieringConfigurationOutput < Struct.new(
+      :tiering_configuration_arn,
+      :tiering_configuration_name,
+      :creation_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end

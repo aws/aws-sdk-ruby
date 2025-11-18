@@ -8,6 +8,11 @@
 module Aws::IAM
   module Types
 
+    class AcceptDelegationRequestRequest
+      attr_accessor delegation_request_id: ::String
+      SENSITIVE: []
+    end
+
     class AccessDetail
       attr_accessor service_name: ::String
       attr_accessor service_namespace: ::String
@@ -60,6 +65,11 @@ module Aws::IAM
     class AddUserToGroupRequest
       attr_accessor group_name: ::String
       attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDelegationRequestRequest
+      attr_accessor delegation_request_id: ::String
       SENSITIVE: []
     end
 
@@ -327,6 +337,29 @@ module Aws::IAM
     class DelegationPermission
       attr_accessor policy_template_arn: ::String
       attr_accessor parameters: ::Array[Types::PolicyParameter]
+      SENSITIVE: []
+    end
+
+    class DelegationRequest
+      attr_accessor delegation_request_id: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor description: ::String
+      attr_accessor request_message: ::String
+      attr_accessor permissions: Types::DelegationPermission
+      attr_accessor permission_policy: ::String
+      attr_accessor role_permission_restriction_arns: ::Array[::String]
+      attr_accessor owner_id: ::String
+      attr_accessor approver_id: ::String
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNED" | "PENDING_APPROVAL" | "FINALIZED" | "ACCEPTED" | "REJECTED" | "EXPIRED")
+      attr_accessor requestor_id: ::String
+      attr_accessor requestor_name: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor session_duration: ::Integer
+      attr_accessor redirect_url: ::String
+      attr_accessor notes: ::String
+      attr_accessor rejection_reason: ::String
+      attr_accessor only_send_by_owner: bool
+      attr_accessor updated_time: ::Time
       SENSITIVE: []
     end
 
@@ -669,6 +702,19 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class GetDelegationRequestRequest
+      attr_accessor delegation_request_id: ::String
+      attr_accessor delegation_permission_check: bool
+      SENSITIVE: []
+    end
+
+    class GetDelegationRequestResponse
+      attr_accessor delegation_request: Types::DelegationRequest
+      attr_accessor permission_check_status: ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor permission_check_result: ("ALLOWED" | "DENIED" | "UNSURE")
+      SENSITIVE: []
+    end
+
     class GetGroupPolicyRequest
       attr_accessor group_name: ::String
       attr_accessor policy_name: ::String
@@ -694,6 +740,19 @@ module Aws::IAM
       attr_accessor users: ::Array[Types::User]
       attr_accessor is_truncated: bool
       attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetHumanReadableSummaryRequest
+      attr_accessor entity_arn: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class GetHumanReadableSummaryResponse
+      attr_accessor summary_content: ::String
+      attr_accessor locale: ::String
+      attr_accessor summary_state: ("AVAILABLE" | "NOT_AVAILABLE" | "NOT_SUPPORTED" | "FAILED")
       SENSITIVE: []
     end
 
@@ -1055,6 +1114,20 @@ module Aws::IAM
       attr_accessor attached_policies: ::Array[Types::AttachedPolicy]
       attr_accessor is_truncated: bool
       attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListDelegationRequestsRequest
+      attr_accessor owner_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDelegationRequestsResponse
+      attr_accessor delegation_requests: ::Array[Types::DelegationRequest]
+      attr_accessor marker: ::String
+      attr_accessor is_truncated: bool
       SENSITIVE: []
     end
 
@@ -1680,6 +1753,12 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class RejectDelegationRequestRequest
+      attr_accessor delegation_request_id: ::String
+      attr_accessor notes: ::String
+      SENSITIVE: []
+    end
+
     class RemoveClientIDFromOpenIDConnectProviderRequest
       attr_accessor open_id_connect_provider_arn: ::String
       attr_accessor client_id: ::String
@@ -1803,6 +1882,11 @@ module Aws::IAM
       attr_accessor ssh_public_key_id: ::String
       attr_accessor status: ("Active" | "Inactive" | "Expired")
       attr_accessor upload_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SendDelegationTokenRequest
+      attr_accessor delegation_request_id: ::String
       SENSITIVE: []
     end
 
@@ -2083,6 +2167,12 @@ module Aws::IAM
     class UpdateAssumeRolePolicyRequest
       attr_accessor role_name: ::String
       attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDelegationRequestRequest
+      attr_accessor delegation_request_id: ::String
+      attr_accessor notes: ::String
       SENSITIVE: []
     end
 

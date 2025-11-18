@@ -2878,7 +2878,7 @@ module Aws::MediaPackageV2
     #
     # @!attribute [rw] mqcs_input_switching
     #   When true, AWS Elemental MediaPackage performs input switching based
-    #   on the MQCS. Default is true. This setting is valid only when
+    #   on the MQCS. Default is false. This setting is valid only when
     #   `InputType` is `CMAF`.
     #   @return [Boolean]
     #
@@ -3581,10 +3581,23 @@ module Aws::MediaPackageV2
     #   in the output.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scte_in_segments
+    #   Controls whether SCTE-35 messages are included in segment files.
+    #
+    #   * None – SCTE-35 messages are not included in segments (default)
+    #
+    #   * All – SCTE-35 messages are embedded in segment data
+    #
+    #   For DASH manifests, when set to `All`, an `InbandEventStream` tag
+    #   signals that SCTE messages are present in segments. This setting
+    #   works independently of manifest ad markers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/Scte AWS API Documentation
     #
     class Scte < Struct.new(
-      :scte_filter)
+      :scte_filter,
+      :scte_in_segments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3624,13 +3637,15 @@ module Aws::MediaPackageV2
     #
     #   Value description:
     #
+    #   * SCTE35\_ENHANCED - Generate industry-standard CUE tag ad markers
+    #     in HLS manifests based on SCTE-35 input messages from the input
+    #     stream.
+    #
     #   * DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program
     #     transition events in TS and CMAF manifests. If you use DATERANGE,
     #     you must set a programDateTimeIntervalSeconds value of 1 or
     #     higher. To learn more about DATERANGE, see [SCTE-35 Ad Marker
     #     EXT-X-DATERANGE][1].
-    #
-    #   ^
     #
     #
     #

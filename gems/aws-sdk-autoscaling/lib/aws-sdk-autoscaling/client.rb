@@ -5367,6 +5367,97 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Launches a specified number of instances in an Auto Scaling group.
+    # Returns instance IDs and other details if launch is successful or
+    # error details if launch is unsuccessful.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group to launch instances into.
+    #
+    # @option params [required, Integer] :requested_capacity
+    #   The number of instances to launch. Although this value can exceed 100
+    #   for instance weights, the actual instance count is limited to 100
+    #   instances per launch.
+    #
+    # @option params [required, String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<String>] :availability_zones
+    #   The Availability Zones for the instance launch. Must match or be
+    #   included in the Auto Scaling group's Availability Zone configuration.
+    #   Either `AvailabilityZones` or `SubnetIds` must be specified for groups
+    #   with multiple Availability Zone configurations.
+    #
+    # @option params [Array<String>] :availability_zone_ids
+    #   A list of Availability Zone IDs where instances should be launched.
+    #   Must match or be included in the group's AZ configuration. You cannot
+    #   specify both AvailabilityZones and AvailabilityZoneIds. Required for
+    #   multi-AZ groups, optional for single-AZ groups.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The subnet IDs for the instance launch. Either `AvailabilityZones` or
+    #   `SubnetIds` must be specified. If both are specified, the subnets must
+    #   reside in the specified Availability Zones.
+    #
+    # @option params [String] :retry_strategy
+    #   Specifies whether to retry asynchronously if the synchronous launch
+    #   fails. Valid values are NONE (default, no async retry) and
+    #   RETRY\_WITH\_GROUP\_CONFIGURATION (increase desired capacity and retry
+    #   with group configuration).
+    #
+    # @return [Types::LaunchInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LaunchInstancesResult#auto_scaling_group_name #auto_scaling_group_name} => String
+    #   * {Types::LaunchInstancesResult#client_token #client_token} => String
+    #   * {Types::LaunchInstancesResult#instances #instances} => Array&lt;Types::InstanceCollection&gt;
+    #   * {Types::LaunchInstancesResult#errors #errors} => Array&lt;Types::LaunchInstancesError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.launch_instances({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     requested_capacity: 1, # required
+    #     client_token: "ClientToken", # required
+    #     availability_zones: ["XmlStringMaxLen255"],
+    #     availability_zone_ids: ["XmlStringMaxLen255"],
+    #     subnet_ids: ["XmlStringMaxLen255"],
+    #     retry_strategy: "retry-with-group-configuration", # accepts retry-with-group-configuration, none
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auto_scaling_group_name #=> String
+    #   resp.client_token #=> String
+    #   resp.instances #=> Array
+    #   resp.instances[0].instance_type #=> String
+    #   resp.instances[0].market_type #=> String
+    #   resp.instances[0].subnet_id #=> String
+    #   resp.instances[0].availability_zone #=> String
+    #   resp.instances[0].availability_zone_id #=> String
+    #   resp.instances[0].instance_ids #=> Array
+    #   resp.instances[0].instance_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].instance_type #=> String
+    #   resp.errors[0].market_type #=> String
+    #   resp.errors[0].subnet_id #=> String
+    #   resp.errors[0].availability_zone #=> String
+    #   resp.errors[0].availability_zone_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstances AWS API Documentation
+    #
+    # @overload launch_instances(params = {})
+    # @param [Hash] params ({})
+    def launch_instances(params = {}, options = {})
+      req = build_request(:launch_instances, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a lifecycle hook for the specified Auto Scaling
     # group.
     #
@@ -7493,7 +7584,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -174,7 +174,7 @@ module Aws
                                   name: ::String,
                                   ?firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN"),
                                   ?qtype: ::String,
-                                  ?dns_threat_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?dns_threat_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA"),
                                   ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
                                 ) -> _CreateFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleResponseSuccess
@@ -933,7 +933,7 @@ module Aws
                                   ?name: ::String,
                                   ?firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN"),
                                   ?qtype: ::String,
-                                  ?dns_threat_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?dns_threat_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA"),
                                   ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
                                 ) -> _UpdateFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallRuleResponseSuccess

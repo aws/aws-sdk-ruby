@@ -242,6 +242,7 @@ module Aws
   autoload :MQ, 'aws-sdk-mq'
   autoload :MTurk, 'aws-sdk-mturk'
   autoload :MWAA, 'aws-sdk-mwaa'
+  autoload :MWAAServerless, 'aws-sdk-mwaaserverless'
   autoload :MachineLearning, 'aws-sdk-machinelearning'
   autoload :Macie2, 'aws-sdk-macie2'
   autoload :MailManager, 'aws-sdk-mailmanager'

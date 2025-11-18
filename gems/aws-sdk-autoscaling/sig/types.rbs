@@ -707,6 +707,11 @@ module Aws::AutoScaling
       SENSITIVE: []
     end
 
+    class IdempotentParameterMismatchError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Instance
       attr_accessor instance_id: ::String
       attr_accessor instance_type: ::String
@@ -717,6 +722,16 @@ module Aws::AutoScaling
       attr_accessor launch_template: Types::LaunchTemplateSpecification
       attr_accessor protected_from_scale_in: bool
       attr_accessor weighted_capacity: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceCollection
+      attr_accessor instance_type: ::String
+      attr_accessor market_type: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -870,6 +885,36 @@ module Aws::AutoScaling
     class LaunchConfigurationsType
       attr_accessor launch_configurations: ::Array[Types::LaunchConfiguration]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchInstancesError
+      attr_accessor instance_type: ::String
+      attr_accessor market_type: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchInstancesRequest
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor requested_capacity: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor retry_strategy: ("retry-with-group-configuration" | "none")
+      SENSITIVE: []
+    end
+
+    class LaunchInstancesResult
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor instances: ::Array[Types::InstanceCollection]
+      attr_accessor errors: ::Array[Types::LaunchInstancesError]
       SENSITIVE: []
     end
 

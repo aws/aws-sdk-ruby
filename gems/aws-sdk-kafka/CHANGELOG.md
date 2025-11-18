@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2025-11-18)
+------------------
+
+* Feature - Amazon MSK adds three new APIs, ListTopics, DescribeTopic, and DescribeTopicPartitions for viewing Kafka topics in your MSK clusters.
+
 1.99.0 (2025-11-10)
 ------------------
 

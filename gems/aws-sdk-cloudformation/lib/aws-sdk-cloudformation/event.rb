@@ -47,6 +47,13 @@ module Aws::CloudFormation
       data[:stack_name]
     end
 
+    # The unique identifier of the operation that generated this stack
+    # event.
+    # @return [String]
+    def operation_id
+      data[:operation_id]
+    end
+
     # The logical name of the resource specified in the template.
     # @return [String]
     def logical_resource_id

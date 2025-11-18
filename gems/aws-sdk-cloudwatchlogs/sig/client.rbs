@@ -162,6 +162,35 @@ module Aws
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _CreateScheduledQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduledQueryResponse]
+        def scheduled_query_arn: () -> ::String
+        def state: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_scheduled_query-instance_method
+      def create_scheduled_query: (
+                                    name: ::String,
+                                    ?description: ::String,
+                                    query_language: ("CWLI" | "SQL" | "PPL"),
+                                    query_string: ::String,
+                                    ?log_group_identifiers: Array[::String],
+                                    schedule_expression: ::String,
+                                    ?timezone: ::String,
+                                    ?start_time_offset: ::Integer,
+                                    ?destination_configuration: {
+                                      s3_configuration: {
+                                        destination_identifier: ::String,
+                                        role_arn: ::String
+                                      }
+                                    },
+                                    ?schedule_start_time: ::Integer,
+                                    ?schedule_end_time: ::Integer,
+                                    execution_role_arn: ::String,
+                                    ?state: ("ENABLED" | "DISABLED"),
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateScheduledQueryResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledQueryResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_account_policy-instance_method
       def delete_account_policy: (
                                    policy_name: ::String,
@@ -273,6 +302,15 @@ module Aws
                                      log_group_name: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteScheduledQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduledQueryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_scheduled_query-instance_method
+      def delete_scheduled_query: (
+                                    identifier: ::String
+                                  ) -> _DeleteScheduledQueryResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduledQueryResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_subscription_filter-instance_method
       def delete_subscription_filter: (
@@ -692,6 +730,51 @@ module Aws
                              ) -> _GetQueryResultsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
 
+      interface _GetScheduledQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScheduledQueryResponse]
+        def scheduled_query_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def query_language: () -> ("CWLI" | "SQL" | "PPL")
+        def query_string: () -> ::String
+        def log_group_identifiers: () -> ::Array[::String]
+        def schedule_expression: () -> ::String
+        def timezone: () -> ::String
+        def start_time_offset: () -> ::Integer
+        def destination_configuration: () -> Types::DestinationConfiguration
+        def state: () -> ("ENABLED" | "DISABLED")
+        def last_triggered_time: () -> ::Integer
+        def last_execution_status: () -> ("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")
+        def schedule_start_time: () -> ::Integer
+        def schedule_end_time: () -> ::Integer
+        def execution_role_arn: () -> ::String
+        def creation_time: () -> ::Integer
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_scheduled_query-instance_method
+      def get_scheduled_query: (
+                                 identifier: ::String
+                               ) -> _GetScheduledQueryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduledQueryResponseSuccess
+
+      interface _GetScheduledQueryHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScheduledQueryHistoryResponse]
+        def name: () -> ::String
+        def scheduled_query_arn: () -> ::String
+        def trigger_history: () -> ::Array[Types::TriggerHistoryRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_scheduled_query_history-instance_method
+      def get_scheduled_query_history: (
+                                         identifier: ::String,
+                                         start_time: ::Integer,
+                                         end_time: ::Integer,
+                                         ?execution_statuses: Array[("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetScheduledQueryHistoryResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduledQueryHistoryResponseSuccess
+
       interface _GetTransformerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTransformerResponse]
         def log_group_identifier: () -> ::String
@@ -772,6 +855,19 @@ module Aws
                                        ?max_results: ::Integer
                                      ) -> _ListLogGroupsForQueryResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogGroupsForQueryResponseSuccess
+
+      interface _ListScheduledQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduledQueriesResponse]
+        def next_token: () -> ::String
+        def scheduled_queries: () -> ::Array[Types::ScheduledQuerySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_scheduled_queries-instance_method
+      def list_scheduled_queries: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?state: ("ENABLED" | "DISABLED")
+                                  ) -> _ListScheduledQueriesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduledQueriesResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -1415,6 +1511,50 @@ module Aws
                                          enabled: bool
                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateScheduledQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScheduledQueryResponse]
+        def scheduled_query_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def query_language: () -> ("CWLI" | "SQL" | "PPL")
+        def query_string: () -> ::String
+        def log_group_identifiers: () -> ::Array[::String]
+        def schedule_expression: () -> ::String
+        def timezone: () -> ::String
+        def start_time_offset: () -> ::Integer
+        def destination_configuration: () -> Types::DestinationConfiguration
+        def state: () -> ("ENABLED" | "DISABLED")
+        def last_triggered_time: () -> ::Integer
+        def last_execution_status: () -> ("Running" | "InvalidQuery" | "Complete" | "Failed" | "Timeout")
+        def schedule_start_time: () -> ::Integer
+        def schedule_end_time: () -> ::Integer
+        def execution_role_arn: () -> ::String
+        def creation_time: () -> ::Integer
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#update_scheduled_query-instance_method
+      def update_scheduled_query: (
+                                    identifier: ::String,
+                                    ?description: ::String,
+                                    query_language: ("CWLI" | "SQL" | "PPL"),
+                                    query_string: ::String,
+                                    ?log_group_identifiers: Array[::String],
+                                    schedule_expression: ::String,
+                                    ?timezone: ::String,
+                                    ?start_time_offset: ::Integer,
+                                    ?destination_configuration: {
+                                      s3_configuration: {
+                                        destination_identifier: ::String,
+                                        role_arn: ::String
+                                      }
+                                    },
+                                    ?schedule_start_time: ::Integer,
+                                    ?schedule_end_time: ::Integer,
+                                    execution_role_arn: ::String,
+                                    ?state: ("ENABLED" | "DISABLED")
+                                  ) -> _UpdateScheduledQueryResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduledQueryResponseSuccess
     end
   end
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.579.0 (2025-11-18)
+------------------
+
+* Feature - AWS Site-to-Site VPN now supports VPN Concentrator, a new feature that enables customers to connect multiple low-bandwidth sites connections through a single attachment, simplifying multi-site connectivity for distributed enterprises.
+
+1.578.0 (2025-11-17)
+------------------
+
+* Feature - This release introduces new APIs: DescribeInstanceSqlHaStates, DescribeInstanceSqlHaHistoryStates, EnableInstanceSqlHaStandbyDetections and DisableInstanceSqlHaStandbyDetections on Amazon EC2, allowing customers to enroll and monitor SQL Server licensing fee savings for their SQL HA EC2 instances.
+
 1.577.0 (2025-11-14)
 ------------------
 

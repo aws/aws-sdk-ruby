@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2025-11-17)
+------------------
+
+* Feature - This release introduces the SAP ASE(Sybase) Data Provider for AWS Data Migration Service (DMS). In addition, DMS Schema Conversion now supports this provider, enabling customers to migrate SAP ASE(Sybase) databases to Amazon RDS for PostgreSQL or Aurora PostgreSQL seamlessly.
+
 1.133.0 (2025-11-12)
 ------------------
 

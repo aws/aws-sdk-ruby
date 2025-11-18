@@ -844,6 +844,25 @@ module Aws
                                            ) -> _GetPredictiveScalingForecastResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPredictiveScalingForecastResponseSuccess
 
+      interface _LaunchInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LaunchInstancesResult]
+        def auto_scaling_group_name: () -> ::String
+        def client_token: () -> ::String
+        def instances: () -> ::Array[Types::InstanceCollection]
+        def errors: () -> ::Array[Types::LaunchInstancesError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#launch_instances-instance_method
+      def launch_instances: (
+                              auto_scaling_group_name: ::String,
+                              requested_capacity: ::Integer,
+                              client_token: ::String,
+                              ?availability_zones: Array[::String],
+                              ?availability_zone_ids: Array[::String],
+                              ?subnet_ids: Array[::String],
+                              ?retry_strategy: ("retry-with-group-configuration" | "none")
+                            ) -> _LaunchInstancesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LaunchInstancesResponseSuccess
+
       interface _PutLifecycleHookResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutLifecycleHookAnswer]
       end

@@ -11201,16 +11201,28 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Specifies whether the assisted nlu feature is turned on or off.
+    # Configures the Assisted Natural Language Understanding (NLU) feature
+    # for your bot. This specification determines whether enhanced intent
+    # recognition and utterance understanding capabilities are active.
     #
     # @!attribute [rw] enabled
-    #   Specifies whether the assisted nlu feature is enabled.
+    #   Determines whether the Assisted NLU feature is enabled for the bot.
+    #   When set to `true`, Amazon Lex uses advanced models to improve
+    #   intent recognition and slot resolution, with the default being
+    #   `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] assisted_nlu_mode
+    #   Specifies the mode for Assisted NLU operation. Use `Primary` to make
+    #   Assisted NLU the primary intent recognition method, or `Fallback` to
+    #   use it only when standard NLU confidence is low.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/NluImprovementSpecification AWS API Documentation
     #
     class NluImprovementSpecification < Struct.new(
-      :enabled)
+      :enabled,
+      :assisted_nlu_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11934,7 +11946,9 @@ module Aws::LexModelsV2
     #   @return [Types::SlotResolutionImprovementSpecification]
     #
     # @!attribute [rw] nlu_improvement
-    #   An object containing specifications for the assisted nlu feature.
+    #   An object containing specifications for the Assisted NLU feature
+    #   within the bot's runtime settings. These settings determine how the
+    #   bot processes and interprets user utterances during conversations.
     #   @return [Types::NluImprovementSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RuntimeSettings AWS API Documentation

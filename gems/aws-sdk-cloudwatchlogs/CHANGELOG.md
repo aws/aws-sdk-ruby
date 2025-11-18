@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-11-18)
+------------------
+
+* Feature - CloudWatch Logs updates: Added capability to setup a recurring schedule for log insights queries. Logs introduced Scheduled Queries (managed through Create/Update/Get/Delete/List/History Scheduled Query APIs). For more information, see CloudWatch Logs API documentation.
+
 1.129.0 (2025-10-31)
 ------------------
 

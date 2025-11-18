@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.244.0 (2025-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mwaaserverless` gem.
+
 3.243.0 (2025-10-31)
 ------------------
 

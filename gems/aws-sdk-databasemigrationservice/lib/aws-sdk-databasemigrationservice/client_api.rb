@@ -365,6 +365,8 @@ module Aws::DatabaseMigrationService
     PostgreSqlDataProviderSettings = Shapes::StructureShape.new(name: 'PostgreSqlDataProviderSettings')
     PremigrationAssessmentStatus = Shapes::StructureShape.new(name: 'PremigrationAssessmentStatus')
     PremigrationAssessmentStatusList = Shapes::ListShape.new(name: 'PremigrationAssessmentStatusList')
+    ProcessedObject = Shapes::StructureShape.new(name: 'ProcessedObject')
+    Progress = Shapes::StructureShape.new(name: 'Progress')
     ProvisionData = Shapes::StructureShape.new(name: 'ProvisionData')
     PublicIpAddressList = Shapes::ListShape.new(name: 'PublicIpAddressList')
     RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
@@ -493,6 +495,7 @@ module Aws::DatabaseMigrationService
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
     SupportedEndpointType = Shapes::StructureShape.new(name: 'SupportedEndpointType')
     SupportedEndpointTypeList = Shapes::ListShape.new(name: 'SupportedEndpointTypeList')
+    SybaseAseDataProviderSettings = Shapes::StructureShape.new(name: 'SybaseAseDataProviderSettings')
     SybaseSettings = Shapes::StructureShape.new(name: 'SybaseSettings')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     TableListToReload = Shapes::ListShape.new(name: 'TableListToReload')
@@ -903,6 +906,7 @@ module Aws::DatabaseMigrationService
     DataProviderSettings.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSqlDataProviderSettings, location_name: "PostgreSqlSettings"))
     DataProviderSettings.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySqlDataProviderSettings, location_name: "MySqlSettings"))
     DataProviderSettings.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleDataProviderSettings, location_name: "OracleSettings"))
+    DataProviderSettings.add_member(:sybase_ase_settings, Shapes::ShapeRef.new(shape: SybaseAseDataProviderSettings, location_name: "SybaseAseSettings"))
     DataProviderSettings.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSqlServerDataProviderSettings, location_name: "MicrosoftSqlServerSettings"))
     DataProviderSettings.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbDataProviderSettings, location_name: "DocDbSettings"))
     DataProviderSettings.add_member(:maria_db_settings, Shapes::ShapeRef.new(shape: MariaDbDataProviderSettings, location_name: "MariaDbSettings"))
@@ -914,6 +918,7 @@ module Aws::DatabaseMigrationService
     DataProviderSettings.add_member_subclass(:postgre_sql_settings, Types::DataProviderSettings::PostgreSqlSettings)
     DataProviderSettings.add_member_subclass(:my_sql_settings, Types::DataProviderSettings::MySqlSettings)
     DataProviderSettings.add_member_subclass(:oracle_settings, Types::DataProviderSettings::OracleSettings)
+    DataProviderSettings.add_member_subclass(:sybase_ase_settings, Types::DataProviderSettings::SybaseAseSettings)
     DataProviderSettings.add_member_subclass(:microsoft_sql_server_settings, Types::DataProviderSettings::MicrosoftSqlServerSettings)
     DataProviderSettings.add_member_subclass(:doc_db_settings, Types::DataProviderSettings::DocDbSettings)
     DataProviderSettings.add_member_subclass(:maria_db_settings, Types::DataProviderSettings::MariaDbSettings)
@@ -2290,6 +2295,17 @@ module Aws::DatabaseMigrationService
 
     PremigrationAssessmentStatusList.member = Shapes::ShapeRef.new(shape: PremigrationAssessmentStatus)
 
+    ProcessedObject.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ProcessedObject.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ProcessedObject.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: String, location_name: "EndpointType"))
+    ProcessedObject.struct_class = Types::ProcessedObject
+
+    Progress.add_member(:progress_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "ProgressPercent"))
+    Progress.add_member(:total_objects, Shapes::ShapeRef.new(shape: Long, location_name: "TotalObjects"))
+    Progress.add_member(:progress_step, Shapes::ShapeRef.new(shape: String, location_name: "ProgressStep"))
+    Progress.add_member(:processed_object, Shapes::ShapeRef.new(shape: ProcessedObject, location_name: "ProcessedObject"))
+    Progress.struct_class = Types::Progress
+
     ProvisionData.add_member(:provision_state, Shapes::ShapeRef.new(shape: String, location_name: "ProvisionState"))
     ProvisionData.add_member(:provisioned_capacity_units, Shapes::ShapeRef.new(shape: Integer, location_name: "ProvisionedCapacityUnits"))
     ProvisionData.add_member(:date_provisioned, Shapes::ShapeRef.new(shape: TStamp, location_name: "DateProvisioned"))
@@ -2720,6 +2736,7 @@ module Aws::DatabaseMigrationService
     SchemaConversionRequest.add_member(:migration_project_arn, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectArn"))
     SchemaConversionRequest.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
     SchemaConversionRequest.add_member(:export_sql_details, Shapes::ShapeRef.new(shape: ExportSqlDetails, location_name: "ExportSqlDetails"))
+    SchemaConversionRequest.add_member(:progress, Shapes::ShapeRef.new(shape: Progress, location_name: "Progress"))
     SchemaConversionRequest.struct_class = Types::SchemaConversionRequest
 
     SchemaConversionRequestList.member = Shapes::ShapeRef.new(shape: SchemaConversionRequest)
@@ -2919,6 +2936,14 @@ module Aws::DatabaseMigrationService
     SupportedEndpointType.struct_class = Types::SupportedEndpointType
 
     SupportedEndpointTypeList.member = Shapes::ShapeRef.new(shape: SupportedEndpointType)
+
+    SybaseAseDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    SybaseAseDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    SybaseAseDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    SybaseAseDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    SybaseAseDataProviderSettings.add_member(:encrypt_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EncryptPassword"))
+    SybaseAseDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    SybaseAseDataProviderSettings.struct_class = Types::SybaseAseDataProviderSettings
 
     SybaseSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     SybaseSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2025-11-18)
+------------------
+
+* Feature - AssociateWebACL, UpdateWebACL and PutLoggingConfiguration will now throw WAFFeatureNotIncludedInPricingPlanException when the request contains a feature that is not included in the CloudFront pricing plan of the WebACL.
+
 1.120.0 (2025-11-10)
 ------------------
 

@@ -16293,6 +16293,48 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] type
+    #   The type of VPN concentrator to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway to attach the VPN concentrator to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the VPN concentrator during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConcentratorRequest AWS API Documentation
+    #
+    class CreateVpnConcentratorRequest < Struct.new(
+      :type,
+      :transit_gateway_id,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_concentrator
+    #   Information about the VPN concentrator.
+    #   @return [Types::VpnConcentrator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConcentratorResult AWS API Documentation
+    #
+    class CreateVpnConcentratorResult < Struct.new(
+      :vpn_concentrator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateVpnConnection.
     #
     # @!attribute [rw] customer_gateway_id
@@ -16311,6 +16353,10 @@ module Aws::EC2
     # @!attribute [rw] transit_gateway_id
     #   The ID of the transit gateway. If you specify a transit gateway, you
     #   cannot specify a virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_concentrator_id
+    #   The ID of the VPN concentrator to associate with the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -16341,6 +16387,7 @@ module Aws::EC2
       :type,
       :vpn_gateway_id,
       :transit_gateway_id,
+      :vpn_concentrator_id,
       :tag_specifications,
       :pre_shared_key_storage,
       :dry_run,
@@ -19645,6 +19692,39 @@ module Aws::EC2
     class DeleteVpcRequest < Struct.new(
       :vpc_id,
       :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_concentrator_id
+    #   The ID of the VPN concentrator to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConcentratorRequest AWS API Documentation
+    #
+    class DeleteVpnConcentratorRequest < Struct.new(
+      :vpn_concentrator_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConcentratorResult AWS API Documentation
+    #
+    class DeleteVpnConcentratorResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24595,6 +24675,173 @@ module Aws::EC2
     #
     class DescribeInstanceImageMetadataResult < Struct.new(
       :instance_image_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_ids
+    #   The IDs of the SQL Server High Availability instances to describe.
+    #   If omitted, the API returns historical states for all SQL Server
+    #   High Availability instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The start data and time of the period for which to get the
+    #   historical SQL Server High Availability states. If omitted, the API
+    #   returns all available historical states.
+    #
+    #   Timezone: UTC
+    #
+    #   Format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end data and time of the period for which to get historical SQL
+    #   Server High Availability states. If omitted, the API returns
+    #   historical states up to the current date and time.
+    #
+    #   Timezone: UTC
+    #
+    #   Format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to apply to the results. Supported filters
+    #   include:
+    #
+    #   * `tag:<key>` - The tag key and value pair assigned to the instance.
+    #     For example, to find all instances tagged with `Owner:TeamA`,
+    #     specify `tag:Owner` for the filter name and `TeamA` for the filter
+    #     value.
+    #
+    #   * `tag-key` - The tag key assigned to the instance.
+    #
+    #   * `haStatus` - The SQL Server High Availability status of the SQL
+    #     Server High Availability instance (`processing` \| `active` \|
+    #     `standby` \| `invalid`).
+    #
+    #   * `sqlServerLicenseUsage` - The license type for the SQL Server
+    #     license (`full` \| `waived`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceSqlHaHistoryStatesRequest AWS API Documentation
+    #
+    class DescribeInstanceSqlHaHistoryStatesRequest < Struct.new(
+      :instance_ids,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   Information about the historical SQL Server High Availability states
+    #   of the SQL Server High Availability instances.
+    #   @return [Array<Types::RegisteredInstance>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceSqlHaHistoryStatesResult AWS API Documentation
+    #
+    class DescribeInstanceSqlHaHistoryStatesResult < Struct.new(
+      :instances,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_ids
+    #   The IDs of the SQL Server High Availability instances to describe.
+    #   If omitted, the API returns SQL Server High Availability states for
+    #   all SQL Server High Availability instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to apply to the results. Supported filters
+    #   include:
+    #
+    #   * `tag:<key>` - The tag key and value pair assigned to the instance.
+    #     For example, to find all instances tagged with `Owner:TeamA`,
+    #     specify `tag:Owner` for the filter name and `TeamA` for the filter
+    #     value.
+    #
+    #   * `tag-key` - The tag key assigned to the instance.
+    #
+    #   * `haStatus` - The SQL Server High Availability status of the SQL
+    #     Server High Availability instance (`processing` \| `active` \|
+    #     `standby` \| `invalid`).
+    #
+    #   * `sqlServerLicenseUsage` - The license type for the SQL Server
+    #     license (`full` \| `waived`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceSqlHaStatesRequest AWS API Documentation
+    #
+    class DescribeInstanceSqlHaStatesRequest < Struct.new(
+      :instance_ids,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   Information about the SQL Server High Availability instances.
+    #   @return [Array<Types::RegisteredInstance>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceSqlHaStatesResult AWS API Documentation
+    #
+    class DescribeInstanceSqlHaStatesResult < Struct.new(
+      :instances,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -33779,6 +34026,61 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpn_concentrator_ids
+    #   One or more VPN concentrator IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the results.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConcentratorsRequest AWS API Documentation
+    #
+    class DescribeVpnConcentratorsRequest < Struct.new(
+      :vpn_concentrator_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_concentrators
+    #   Information about the VPN concentrators.
+    #   @return [Array<Types::VpnConcentrator>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConcentratorsResult AWS API Documentation
+    #
+    class DescribeVpnConcentratorsResult < Struct.new(
+      :vpn_concentrators,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeVpnConnections.
     #
     # @!attribute [rw] filters
@@ -34945,6 +35247,40 @@ module Aws::EC2
     #
     class DisableImageResult < Struct.new(
       :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_ids
+    #   The IDs of the instances to disable from SQL Server High
+    #   Availability standby detection monitoring.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableInstanceSqlHaStandbyDetectionsRequest AWS API Documentation
+    #
+    class DisableInstanceSqlHaStandbyDetectionsRequest < Struct.new(
+      :instance_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   Information about the instances that were disabled from SQL Server
+    #   High Availability standby detection monitoring.
+    #   @return [Array<Types::RegisteredInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableInstanceSqlHaStandbyDetectionsResult AWS API Documentation
+    #
+    class DisableInstanceSqlHaStandbyDetectionsResult < Struct.new(
+      :instances)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37807,6 +38143,50 @@ module Aws::EC2
     #
     class EnableImageResult < Struct.new(
       :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_ids
+    #   The IDs of the instances to enable for SQL Server High Availability
+    #   standby detection monitoring.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sql_server_credentials
+    #   The ARN of the Secrets Manager secret containing the SQL Server
+    #   access credentials. The specified secret must contain valid SQL
+    #   Server credentials for the specified instances. If not specified,
+    #   deafult local user credentials will be used by the Amazon Web
+    #   Services Systems Manager agent. To enable instances with different
+    #   credentials, you must make separate requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableInstanceSqlHaStandbyDetectionsRequest AWS API Documentation
+    #
+    class EnableInstanceSqlHaStandbyDetectionsRequest < Struct.new(
+      :instance_ids,
+      :sql_server_credentials,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   Information about the instances that were enabled for SQL Server
+    #   High Availability standby detection monitoring.
+    #   @return [Array<Types::RegisteredInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableInstanceSqlHaStandbyDetectionsResult AWS API Documentation
+    #
+    class EnableInstanceSqlHaStandbyDetectionsResult < Struct.new(
+      :instances)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -67051,6 +67431,78 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an Amazon EC2 instance that is enabled for SQL Server High
+    # Availability standby detection monitoring.
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the SQL Server High Availability instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql_server_license_usage
+    #   The license type for the SQL Server license. Valid values include:
+    #
+    #   * `full` - The SQL Server High Availability instance is using a full
+    #     SQL Server license.
+    #
+    #   * `waived` - The SQL Server High Availability instance is waived
+    #     from the SQL Server license.
+    #   @return [String]
+    #
+    # @!attribute [rw] ha_status
+    #   The SQL Server High Availability status of the instance. Valid
+    #   values are:
+    #
+    #   * `processing` - The SQL Server High Availability status for the SQL
+    #     Server High Availability instance is being updated.
+    #
+    #   * `active` - The SQL Server High Availability instance is an active
+    #     node in an SQL Server High Availability cluster.
+    #
+    #   * `standby` - The SQL Server High Availability instance is a standby
+    #     failover node in an SQL Server High Availability cluster.
+    #
+    #   * `invalid` - An error occurred due to misconfigured permissions, or
+    #     unable to dertemine SQL Server High Availability status for the
+    #     SQL Server High Availability instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] processing_status
+    #   A brief description of the SQL Server High Availability status. If
+    #   the instance is in the `invalid` High Availability status, this
+    #   parameter includes the error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time when the instance's SQL Server High Availability
+    #   status was last updated, in the ISO 8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] sql_server_credentials
+    #   The ARN of the Secrets Manager secret containing the SQL Server
+    #   access credentials for the SQL Server High Availability instance. If
+    #   not specified, deafult local user credentials will be used by the
+    #   Amazon Web Services Systems Manager agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the SQL Server High Availability instance.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisteredInstance AWS API Documentation
+    #
+    class RegisteredInstance < Struct.new(
+      :instance_id,
+      :sql_server_license_usage,
+      :ha_status,
+      :processing_status,
+      :last_updated_time,
+      :sql_server_credentials,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -82036,6 +82488,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a VPN concentrator.
+    #
+    # @!attribute [rw] vpn_concentrator_id
+    #   The ID of the VPN concentrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the VPN concentrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway associated with the VPN concentrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment for the VPN concentrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of VPN concentrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the VPN concentrator.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConcentrator AWS API Documentation
+    #
+    class VpnConcentrator < Struct.new(
+      :vpn_concentrator_id,
+      :state,
+      :transit_gateway_id,
+      :transit_gateway_attachment_id,
+      :type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a VPN connection.
     #
     # @!attribute [rw] category
@@ -82046,6 +82537,10 @@ module Aws::EC2
     #
     # @!attribute [rw] transit_gateway_id
     #   The ID of the transit gateway associated with the VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_concentrator_id
+    #   The ID of the VPN concentrator associated with the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] core_network_arn
@@ -82115,6 +82610,7 @@ module Aws::EC2
     class VpnConnection < Struct.new(
       :category,
       :transit_gateway_id,
+      :vpn_concentrator_id,
       :core_network_arn,
       :core_network_attachment_arn,
       :gateway_association_state,

@@ -558,10 +558,9 @@ module Aws::IAM
     # @option options [String] :policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set permissions
+    #   boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.
@@ -615,10 +614,9 @@ module Aws::IAM
     # @option options [String] :policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set permissions
+    #   boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.
@@ -672,10 +670,9 @@ module Aws::IAM
     # @option options [String] :policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set permissions
+    #   boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.

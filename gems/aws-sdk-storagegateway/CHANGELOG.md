@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-11-18)
+------------------
+
+* Feature - Adds support for European Sovereign Cloud ARNs in Storage Gateway API parameters.
+
 1.118.0 (2025-10-23)
 ------------------
 

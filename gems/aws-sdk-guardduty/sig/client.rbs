@@ -1048,6 +1048,19 @@ module Aws
                                     ) -> _ListTrustedEntitySetsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustedEntitySetsResponseSuccess
 
+      interface _SendObjectMalwareScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendObjectMalwareScanResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#send_object_malware_scan-instance_method
+      def send_object_malware_scan: (
+                                      ?s3_object: {
+                                        bucket: ::String?,
+                                        key: ::String?,
+                                        version_id: ::String?
+                                      }
+                                    ) -> _SendObjectMalwareScanResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendObjectMalwareScanResponseSuccess
+
       interface _StartMalwareScanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMalwareScanResponse]
         def scan_id: () -> ::String

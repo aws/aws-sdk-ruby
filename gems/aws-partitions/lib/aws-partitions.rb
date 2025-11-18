@@ -480,6 +480,7 @@ module Aws
             'MQ' => 'mq',
             'MTurk' => 'mturk-requester',
             'MWAA' => 'airflow',
+            'MWAAServerless' => 'airflow-serverless',
             'MachineLearning' => 'machinelearning',
             'Macie2' => 'macie2',
             'MailManager' => 'mail-manager',

@@ -914,6 +914,10 @@ module Aws::BedrockRuntime
     # @option params [Types::PerformanceConfiguration] :performance_config
     #   Model performance settings for the request.
     #
+    # @option params [Types::ServiceTier] :service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #
     # @return [Types::ConverseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConverseResponse#output #output} => Types::ConverseOutput
@@ -923,6 +927,7 @@ module Aws::BedrockRuntime
     #   * {Types::ConverseResponse#additional_model_response_fields #additional_model_response_fields} => Hash,Array,String,Numeric,Boolean
     #   * {Types::ConverseResponse#trace #trace} => Types::ConverseTrace
     #   * {Types::ConverseResponse#performance_config #performance_config} => Types::PerformanceConfiguration
+    #   * {Types::ConverseResponse#service_tier #service_tier} => Types::ServiceTier
     #
     # @example Request syntax with placeholder values
     #
@@ -1172,6 +1177,9 @@ module Aws::BedrockRuntime
     #     },
     #     performance_config: {
     #       latency: "standard", # accepts standard, optimized
+    #     },
+    #     service_tier: {
+    #       type: "priority", # required, accepts priority, default, flex
     #     },
     #   })
     #
@@ -1583,6 +1591,7 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.action_reason #=> String
     #   resp.trace.prompt_router.invoked_model_id #=> String
     #   resp.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.service_tier.type #=> String, one of "priority", "default", "flex"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Converse AWS API Documentation
     #
@@ -1775,6 +1784,10 @@ module Aws::BedrockRuntime
     #
     # @option params [Types::PerformanceConfiguration] :performance_config
     #   Model performance settings for the request.
+    #
+    # @option params [Types::ServiceTier] :service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
     #
     # @return [Types::ConverseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2209,6 +2222,9 @@ module Aws::BedrockRuntime
     #     performance_config: {
     #       latency: "standard", # accepts standard, optimized
     #     },
+    #     service_tier: {
+    #       type: "priority", # required, accepts priority, default, flex
+    #     },
     #   })
     #
     # @example Response structure
@@ -2592,6 +2608,7 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.action_reason #=> String
     #   event.trace.prompt_router.invoked_model_id #=> String
     #   event.performance_config.latency #=> String, one of "standard", "optimized"
+    #   event.service_tier.type #=> String, one of "priority", "default", "flex"
     #
     #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -2895,6 +2912,37 @@ module Aws::BedrockRuntime
     #             },
     #           },
     #         ],
+    #         tool_config: {
+    #           tools: [ # required
+    #             {
+    #               tool_spec: {
+    #                 name: "ToolName", # required
+    #                 description: "NonEmptyString",
+    #                 input_schema: { # required
+    #                   json: {
+    #                   },
+    #                 },
+    #               },
+    #               system_tool: {
+    #                 name: "ToolName", # required
+    #               },
+    #               cache_point: {
+    #                 type: "default", # required, accepts default
+    #               },
+    #             },
+    #           ],
+    #           tool_choice: {
+    #             auto: {
+    #             },
+    #             any: {
+    #             },
+    #             tool: {
+    #               name: "ToolName", # required
+    #             },
+    #           },
+    #         },
+    #         additional_model_request_fields: {
+    #         },
     #       },
     #     },
     #   })
@@ -3069,11 +3117,15 @@ module Aws::BedrockRuntime
     # @option params [String] :performance_config_latency
     #   Model performance settings for the request.
     #
+    # @option params [String] :service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #
     # @return [Types::InvokeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeModelResponse#body #body} => String
     #   * {Types::InvokeModelResponse#content_type #content_type} => String
     #   * {Types::InvokeModelResponse#performance_config_latency #performance_config_latency} => String
+    #   * {Types::InvokeModelResponse#service_tier #service_tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3086,6 +3138,7 @@ module Aws::BedrockRuntime
     #     guardrail_identifier: "GuardrailIdentifier",
     #     guardrail_version: "GuardrailVersion",
     #     performance_config_latency: "standard", # accepts standard, optimized
+    #     service_tier: "priority", # accepts priority, default, flex
     #   })
     #
     # @example Response structure
@@ -3093,6 +3146,7 @@ module Aws::BedrockRuntime
     #   resp.body #=> String
     #   resp.content_type #=> String
     #   resp.performance_config_latency #=> String, one of "standard", "optimized"
+    #   resp.service_tier #=> String, one of "priority", "default", "flex"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModel AWS API Documentation
     #
@@ -3223,11 +3277,15 @@ module Aws::BedrockRuntime
     # @option params [String] :performance_config_latency
     #   Model performance settings for the request.
     #
+    # @option params [String] :service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #
     # @return [Types::InvokeModelWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeModelWithResponseStreamResponse#body #body} => Types::ResponseStream
     #   * {Types::InvokeModelWithResponseStreamResponse#content_type #content_type} => String
     #   * {Types::InvokeModelWithResponseStreamResponse#performance_config_latency #performance_config_latency} => String
+    #   * {Types::InvokeModelWithResponseStreamResponse#service_tier #service_tier} => String
     #
     # @example EventStream Operation Example
     #
@@ -3383,6 +3441,7 @@ module Aws::BedrockRuntime
     #     guardrail_identifier: "GuardrailIdentifier",
     #     guardrail_version: "GuardrailVersion",
     #     performance_config_latency: "standard", # accepts standard, optimized
+    #     service_tier: "priority", # accepts priority, default, flex
     #   })
     #
     # @example Response structure
@@ -3416,6 +3475,7 @@ module Aws::BedrockRuntime
     #
     #   resp.content_type #=> String
     #   resp.performance_config_latency #=> String, one of "standard", "optimized"
+    #   resp.service_tier #=> String, one of "priority", "default", "flex"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStream AWS API Documentation
     #
@@ -3610,7 +3670,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

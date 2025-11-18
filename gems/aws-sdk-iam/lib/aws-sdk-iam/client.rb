@@ -476,6 +476,43 @@ module Aws::IAM
 
     # @!group API Operations
 
+    # Accepts a delegation request, granting the requested temporary access.
+    #
+    # Once the delegation request is accepted, it is eligible to send the
+    # exchange token to the partner. The [SendDelegationToken][1] API has to
+    # be explicitly called to send the delegation token.
+    #
+    # At the time of acceptance, IAM records the details and the state of
+    # the identity that called this API. This is the identity that gets
+    # mapped to the delegated credential.
+    #
+    # An accepted request may be rejected before the exchange token is sent
+    # to the partner.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html
+    #
+    # @option params [required, String] :delegation_request_id
+    #   The unique identifier of the delegation request to accept.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_delegation_request({
+    #     delegation_request_id: "delegationRequestIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AcceptDelegationRequest AWS API Documentation
+    #
+    # @overload accept_delegation_request(params = {})
+    # @param [Hash] params ({})
+    def accept_delegation_request(params = {}, options = {})
+      req = build_request(:accept_delegation_request, params)
+      req.send_request(options)
+    end
+
     # Adds a new client ID (also known as audience) to the list of client
     # IDs already registered for the specified IAM OpenID Connect (OIDC)
     # provider resource.
@@ -664,6 +701,50 @@ module Aws::IAM
     # @param [Hash] params ({})
     def add_user_to_group(params = {}, options = {})
       req = build_request(:add_user_to_group, params)
+      req.send_request(options)
+    end
+
+    # Associates a delegation request with the current identity.
+    #
+    # If the partner that created the delegation request has specified the
+    # owner account during creation, only an identity from that owner
+    # account can call the `AssociateDelegationRequest` API for the
+    # specified delegation request. Once the `AssociateDelegationRequest`
+    # API call is successful, the ARN of the current calling identity will
+    # be stored as the `ownerId` of the request.
+    #
+    # If the partner that created the delegation request has not specified
+    # the owner account during creation, any caller from any account can
+    # call the `AssociateDelegationRequest` API for the delegation request.
+    # Once this API call is successful, the ARN of the current calling
+    # identity will be stored as the `ownerId` and the Amazon Web Services
+    # account ID of the current calling identity will be stored as the
+    # `ownerAccount` of the request.
+    #
+    # For more details, see [ Managing Permissions for Delegation
+    # Requests][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions
+    #
+    # @option params [required, String] :delegation_request_id
+    #   The unique identifier of the delegation request to associate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_delegation_request({
+    #     delegation_request_id: "delegationRequestIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AssociateDelegationRequest AWS API Documentation
+    #
+    # @overload associate_delegation_request(params = {})
+    # @param [Hash] params ({})
+    def associate_delegation_request(params = {}, options = {})
+      req = build_request(:associate_delegation_request, params)
       req.send_request(options)
     end
 
@@ -1075,25 +1156,92 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # This API is currently unavailable for general use.
+    # Creates an IAM delegation request for temporary access delegation.
+    #
+    # This API is not available for general use. In order to use this API, a
+    # caller first need to go through an onboarding process described in the
+    # [partner onboarding documentation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html
     #
     # @option params [String] :owner_account_id
+    #   The Amazon Web Services account ID this delegation request is targeted
+    #   to.
+    #
+    #   If the account ID is not known, this parameter can be omitted,
+    #   resulting in a request that can be associated by any account. If the
+    #   account ID passed, then the created delegation request can only be
+    #   associated with an identity of that target account.
     #
     # @option params [required, String] :description
+    #   A description of the delegation request.
     #
     # @option params [required, Types::DelegationPermission] :permissions
+    #   The permissions to be delegated in this delegation request.
     #
     # @option params [String] :request_message
+    #   A message explaining the reason for the delegation request.
+    #
+    #   Requesters can utilize this field to add a custom note to the
+    #   delegation request. This field is different from the description such
+    #   that this is to be utilized for a custom messaging on a case-by-case
+    #   basis.
+    #
+    #   For example, if the current delegation request is in response to a
+    #   previous request being rejected, this explanation can be added to the
+    #   request via this field.
     #
     # @option params [required, String] :requestor_workflow_id
+    #   The workflow ID associated with the requestor.
+    #
+    #   This is the unique identifier on the partner side that can be used to
+    #   track the progress of the request.
+    #
+    #   IAM maintains a uniqueness check on this workflow id for each request
+    #   - if a workflow id for an existing request is passed, this API call
+    #   will fail.
     #
     # @option params [String] :redirect_url
+    #   The URL to redirect to after the delegation request is processed.
+    #
+    #   This URL is used by the IAM console to show a link to the customer to
+    #   re-load the partner workflow.
     #
     # @option params [required, String] :notification_channel
+    #   The notification channel for updates about the delegation request.
+    #
+    #   At this time,only SNS topic ARNs are accepted for notification. This
+    #   topic ARN must have a resource policy granting `SNS:Publish`
+    #   permission to the IAM service principal (`iam.amazonaws.com`). See
+    #   [partner onboarding documentation][1] for more details.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation-partner-guide.html
     #
     # @option params [required, Integer] :session_duration
+    #   The duration for which the delegated session should remain active, in
+    #   seconds.
+    #
+    #   The active time window for the session starts when the customer calls
+    #   the [SendDelegationToken][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SendDelegationToken.html
     #
     # @option params [Boolean] :only_send_by_owner
+    #   Specifies whether the delegation token should only be sent by the
+    #   owner.
+    #
+    #   This flag prevents any party other than the owner from calling
+    #   `SendDelegationToken` API for this delegation request. This behavior
+    #   becomes useful when the delegation request owner needs to be present
+    #   for subsequent partner interactions, but the delegation request was
+    #   sent to a more privileged user for approval due to the owner lacking
+    #   sufficient delegation permissions.
     #
     # @return [Types::CreateDelegationRequestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4397,7 +4545,7 @@ module Aws::IAM
     # troubleshooting, and supported Regions see [Reducing permissions using
     # service last accessed data][1] in the *IAM User Guide*.
     #
-    # The data includes all attempts to access Amazon Web Services, not just
+    # The data includes all attempts to access Amazon Web Services, not just
     # the successful ones. This includes all attempts that were made using
     # the Amazon Web Services Management Console, the Amazon Web Services
     # API through any of the SDKs, or any of the command line tools. An
@@ -4405,7 +4553,7 @@ module Aws::IAM
     # an account has been compromised, because the request might have been
     # denied. Refer to your CloudTrail logs as the authoritative source for
     # information about all API calls and whether they were successful or
-    # denied access. For more information, see [Logging IAM events with
+    # denied access. For more information, see [Logging IAM events with
     # CloudTrail][2] in the *IAM User Guide*.
     #
     # This operation returns a `JobId`. Use this parameter in the `
@@ -4563,7 +4711,7 @@ module Aws::IAM
     # accessed information is displayed, see [IAM action last accessed
     # information services and actions][2].
     #
-    # The service last accessed data includes all attempts to access an
+    # The service last accessed data includes all attempts to access an
     # Amazon Web Services API, not just the successful ones. This includes
     # all attempts that were made using the Amazon Web Services Management
     # Console, the Amazon Web Services API through any of the SDKs, or any
@@ -4572,7 +4720,7 @@ module Aws::IAM
     # because the request might have been denied. Refer to your CloudTrail
     # logs as the authoritative source for information about all API calls
     # and whether they were successful or denied access. For more
-    # information, see [Logging IAM events with CloudTrail][3] in the *IAM
+    # information, see [Logging IAM events with CloudTrail][3] in the *IAM
     # User Guide*.
     #
     # The `GenerateServiceLastAccessedDetails` operation returns a `JobId`.
@@ -5207,6 +5355,89 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Retrieves information about a specific delegation request.
+    #
+    # If a delegation request has no owner or owner account,
+    # `GetDelegationRequest` for that delegation request can be called by
+    # any account. If the owner account is assigned but there is no owner
+    # id, only identities within that owner account can call
+    # `GetDelegationRequest` for the delegation request. Once the delegation
+    # request is fully owned, the owner of the request gets a default
+    # permission to get that delegation request. For more details, see [
+    # Managing Permissions for Delegation Requests][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions
+    #
+    # @option params [required, String] :delegation_request_id
+    #   The unique identifier of the delegation request to retrieve.
+    #
+    # @option params [Boolean] :delegation_permission_check
+    #   Specifies whether to perform a permission check for the delegation
+    #   request.
+    #
+    #   If set to true, the `GetDelegationRequest` API call will start a
+    #   permission check process. This process calculates whether the caller
+    #   has sufficient permissions to cover the asks from this delegation
+    #   request.
+    #
+    #   Setting this parameter to true does not guarantee an answer in the
+    #   response. See the `PermissionCheckStatus` and the
+    #   `PermissionCheckResult` response attributes for further details.
+    #
+    # @return [Types::GetDelegationRequestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDelegationRequestResponse#delegation_request #delegation_request} => Types::DelegationRequest
+    #   * {Types::GetDelegationRequestResponse#permission_check_status #permission_check_status} => String
+    #   * {Types::GetDelegationRequestResponse#permission_check_result #permission_check_result} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_delegation_request({
+    #     delegation_request_id: "delegationRequestIdType", # required
+    #     delegation_permission_check: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delegation_request.delegation_request_id #=> String
+    #   resp.delegation_request.owner_account_id #=> String
+    #   resp.delegation_request.description #=> String
+    #   resp.delegation_request.request_message #=> String
+    #   resp.delegation_request.permissions.policy_template_arn #=> String
+    #   resp.delegation_request.permissions.parameters #=> Array
+    #   resp.delegation_request.permissions.parameters[0].name #=> String
+    #   resp.delegation_request.permissions.parameters[0].values #=> Array
+    #   resp.delegation_request.permissions.parameters[0].values[0] #=> String
+    #   resp.delegation_request.permissions.parameters[0].type #=> String, one of "string", "stringList"
+    #   resp.delegation_request.permission_policy #=> String
+    #   resp.delegation_request.role_permission_restriction_arns #=> Array
+    #   resp.delegation_request.role_permission_restriction_arns[0] #=> String
+    #   resp.delegation_request.owner_id #=> String
+    #   resp.delegation_request.approver_id #=> String
+    #   resp.delegation_request.state #=> String, one of "UNASSIGNED", "ASSIGNED", "PENDING_APPROVAL", "FINALIZED", "ACCEPTED", "REJECTED", "EXPIRED"
+    #   resp.delegation_request.requestor_id #=> String
+    #   resp.delegation_request.requestor_name #=> String
+    #   resp.delegation_request.create_date #=> Time
+    #   resp.delegation_request.session_duration #=> Integer
+    #   resp.delegation_request.redirect_url #=> String
+    #   resp.delegation_request.notes #=> String
+    #   resp.delegation_request.rejection_reason #=> String
+    #   resp.delegation_request.only_send_by_owner #=> Boolean
+    #   resp.delegation_request.updated_time #=> Time
+    #   resp.permission_check_status #=> String, one of "COMPLETE", "IN_PROGRESS", "FAILED"
+    #   resp.permission_check_result #=> String, one of "ALLOWED", "DENIED", "UNSURE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetDelegationRequest AWS API Documentation
+    #
+    # @overload get_delegation_request(params = {})
+    # @param [Hash] params ({})
+    def get_delegation_request(params = {}, options = {})
+      req = build_request(:get_delegation_request, params)
+      req.send_request(options)
+    end
+
     # Returns a list of IAM users that are in the specified IAM group. You
     # can paginate the results using the `MaxItems` and `Marker` parameters.
     #
@@ -5363,6 +5594,67 @@ module Aws::IAM
     # @param [Hash] params ({})
     def get_group_policy(params = {}, options = {})
       req = build_request(:get_group_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a human readable summary for a given entity. At this time,
+    # the only supported entity type is `delegation-request`
+    #
+    # This method uses a Large Language Model (LLM) to generate the summary.
+    #
+    # If a delegation request has no owner or owner account,
+    # `GetHumanReadableSummary` for that delegation request can be called by
+    # any account. If the owner account is assigned but there is no owner
+    # id, only identities within that owner account can call
+    # `GetHumanReadableSummary` for the delegation request to retrieve a
+    # summary of that request. Once the delegation request is fully owned,
+    # the owner of the request gets a default permission to get that
+    # delegation request. For more details, read [default permissions
+    # granted to delegation requests](). These rules are identical to
+    # [GetDelegationRequest][1] API behavior, such that a party who has
+    # permissions to call [GetDelegationRequest][1] for a given delegation
+    # request will always be able to retrieve the human readable summary for
+    # that request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetDelegationRequest.html
+    #
+    # @option params [required, String] :entity_arn
+    #   Arn of the entity to be summarized. At this time, the only supported
+    #   entity type is `delegation-request`
+    #
+    # @option params [String] :locale
+    #   A string representing the locale to use for the summary generation.
+    #   The supported locale strings are based on the [ Supported languages of
+    #   the Amazon Web Services Management Console
+    #   ](/awsconsolehelpdocs/latest/gsg/change-language.html#supported-languages).
+    #
+    # @return [Types::GetHumanReadableSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHumanReadableSummaryResponse#summary_content #summary_content} => String
+    #   * {Types::GetHumanReadableSummaryResponse#locale #locale} => String
+    #   * {Types::GetHumanReadableSummaryResponse#summary_state #summary_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_human_readable_summary({
+    #     entity_arn: "arnType", # required
+    #     locale: "localeType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summary_content #=> String
+    #   resp.locale #=> String
+    #   resp.summary_state #=> String, one of "AVAILABLE", "NOT_AVAILABLE", "NOT_SUPPORTED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetHumanReadableSummary AWS API Documentation
+    #
+    # @overload get_human_readable_summary(params = {})
+    # @param [Hash] params ({})
+    def get_human_readable_summary(params = {}, options = {})
+      req = build_request(:get_human_readable_summary, params)
       req.send_request(options)
     end
 
@@ -6530,8 +6822,8 @@ module Aws::IAM
     #   User Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For example,
     #   `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [Amazon Web Services service namespaces][2] in
-    #   the *Amazon Web Services General Reference*.
+    #   namespaces, see [Amazon Web Services service namespaces][2] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -7329,6 +7621,93 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Lists delegation requests based on the specified criteria.
+    #
+    # If a delegation request has no owner, even if it is assigned to a
+    # specific account, it will not be part of the `ListDelegationRequests`
+    # output for that account.
+    #
+    # For more details, see [ Managing Permissions for Delegation
+    # Requests][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions
+    #
+    # @option params [String] :owner_id
+    #   The owner ID to filter delegation requests by.
+    #
+    # @option params [String] :marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you received
+    #   to indicate where the next call should start.
+    #
+    # @option params [Integer] :max_items
+    #   Use this only when paginating results to indicate the maximum number
+    #   of items you want in the response. If additional items exist beyond
+    #   the maximum you specify, the `IsTruncated` response element is `true`.
+    #
+    #   If you do not include this parameter, the number of items defaults to
+    #   100. Note that IAM may return fewer results, even when there are more
+    #   results available. In that case, the `IsTruncated` response element
+    #   returns `true`, and `Marker` contains a value to include in the
+    #   subsequent call that tells the service where to continue from.
+    #
+    # @return [Types::ListDelegationRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDelegationRequestsResponse#delegation_requests #delegation_requests} => Array&lt;Types::DelegationRequest&gt;
+    #   * {Types::ListDelegationRequestsResponse#marker #marker} => String
+    #   * {Types::ListDelegationRequestsResponse#is_truncated #is_truncated} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_delegation_requests({
+    #     owner_id: "ownerIdType",
+    #     marker: "markerType",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delegation_requests #=> Array
+    #   resp.delegation_requests[0].delegation_request_id #=> String
+    #   resp.delegation_requests[0].owner_account_id #=> String
+    #   resp.delegation_requests[0].description #=> String
+    #   resp.delegation_requests[0].request_message #=> String
+    #   resp.delegation_requests[0].permissions.policy_template_arn #=> String
+    #   resp.delegation_requests[0].permissions.parameters #=> Array
+    #   resp.delegation_requests[0].permissions.parameters[0].name #=> String
+    #   resp.delegation_requests[0].permissions.parameters[0].values #=> Array
+    #   resp.delegation_requests[0].permissions.parameters[0].values[0] #=> String
+    #   resp.delegation_requests[0].permissions.parameters[0].type #=> String, one of "string", "stringList"
+    #   resp.delegation_requests[0].permission_policy #=> String
+    #   resp.delegation_requests[0].role_permission_restriction_arns #=> Array
+    #   resp.delegation_requests[0].role_permission_restriction_arns[0] #=> String
+    #   resp.delegation_requests[0].owner_id #=> String
+    #   resp.delegation_requests[0].approver_id #=> String
+    #   resp.delegation_requests[0].state #=> String, one of "UNASSIGNED", "ASSIGNED", "PENDING_APPROVAL", "FINALIZED", "ACCEPTED", "REJECTED", "EXPIRED"
+    #   resp.delegation_requests[0].requestor_id #=> String
+    #   resp.delegation_requests[0].requestor_name #=> String
+    #   resp.delegation_requests[0].create_date #=> Time
+    #   resp.delegation_requests[0].session_duration #=> Integer
+    #   resp.delegation_requests[0].redirect_url #=> String
+    #   resp.delegation_requests[0].notes #=> String
+    #   resp.delegation_requests[0].rejection_reason #=> String
+    #   resp.delegation_requests[0].only_send_by_owner #=> Boolean
+    #   resp.delegation_requests[0].updated_time #=> Time
+    #   resp.marker #=> String
+    #   resp.is_truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListDelegationRequests AWS API Documentation
+    #
+    # @overload list_delegation_requests(params = {})
+    # @param [Hash] params ({})
+    def list_delegation_requests(params = {}, options = {})
+      req = build_request(:list_delegation_requests, params)
+      req.send_request(options)
+    end
+
     # Lists all IAM users, groups, and roles that the specified managed
     # policy is attached to.
     #
@@ -7379,10 +7758,9 @@ module Aws::IAM
     # @option params [String] :policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set permissions
+    #   boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.
@@ -8392,10 +8770,9 @@ module Aws::IAM
     # @option params [String] :policy_usage_filter
     #   The policy usage method to use for filtering the results.
     #
-    #   To list only permissions policies,
-    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
-    #   policies used to set permissions boundaries, set the value
-    #   to `PermissionsBoundary`.
+    #   To list only permissions policies, set `PolicyUsageFilter` to
+    #   `PermissionsPolicy`. To list only the policies used to set permissions
+    #   boundaries, set the value to `PermissionsBoundary`.
     #
     #   This parameter is optional. If it is not included, all policies are
     #   returned.
@@ -8529,8 +8906,8 @@ module Aws::IAM
     #   User Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For example,
     #   `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [Amazon Web Services service namespaces][2] in
-    #   the *Amazon Web Services General Reference*.
+    #   namespaces, see [Amazon Web Services service namespaces][2] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -10459,6 +10836,46 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Rejects a delegation request, denying the requested temporary access.
+    #
+    # Once a request is rejected, it cannot be accepted or updated later.
+    # Rejected requests expire after 7 days.
+    #
+    # When rejecting a request, an optional explanation can be added using
+    # the `Notes` request parameter.
+    #
+    # For more details, see [ Managing Permissions for Delegation
+    # Requests][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions
+    #
+    # @option params [required, String] :delegation_request_id
+    #   The unique identifier of the delegation request to reject.
+    #
+    # @option params [String] :notes
+    #   Optional notes explaining the reason for rejecting the delegation
+    #   request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_delegation_request({
+    #     delegation_request_id: "delegationRequestIdType", # required
+    #     notes: "notesType",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RejectDelegationRequest AWS API Documentation
+    #
+    # @overload reject_delegation_request(params = {})
+    # @param [Hash] params ({})
+    def reject_delegation_request(params = {}, options = {})
+      req = build_request(:reject_delegation_request, params)
+      req.send_request(options)
+    end
+
     # Removes the specified client ID (also known as audience) from the list
     # of client IDs registered for the specified IAM OpenID Connect (OIDC)
     # provider resource object.
@@ -10754,6 +11171,45 @@ module Aws::IAM
     # @param [Hash] params ({})
     def resync_mfa_device(params = {}, options = {})
       req = build_request(:resync_mfa_device, params)
+      req.send_request(options)
+    end
+
+    # Sends the exchange token for an accepted delegation request.
+    #
+    # The exchange token is sent to the partner via an asynchronous
+    # notification channel, established by the partner.
+    #
+    # The delegation request must be in the `ACCEPTED` state when calling
+    # this API. After the `SendDelegationToken` API call is successful, the
+    # request transitions to a `FINALIZED` state and cannot be rolled back.
+    # However, a user may reject an accepted request before the
+    # `SendDelegationToken` API is called.
+    #
+    # For more details, see [ Managing Permissions for Delegation
+    # Requests][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions
+    #
+    # @option params [required, String] :delegation_request_id
+    #   The unique identifier of the delegation request for which to send the
+    #   token.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_delegation_token({
+    #     delegation_request_id: "delegationRequestIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SendDelegationToken AWS API Documentation
+    #
+    # @overload send_delegation_token(params = {})
+    # @param [Hash] params ({})
+    def send_delegation_token(params = {}, options = {})
+      req = build_request(:send_delegation_token, params)
       req.send_request(options)
     end
 
@@ -12943,6 +13399,42 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Updates an existing delegation request with additional information.
+    # When the delegation request is updated, it reaches the
+    # `PENDING_APPROVAL` state.
+    #
+    # Once a delegation request has an owner, that owner gets a default
+    # permission to update the delegation request. For more details, see [
+    # Managing Permissions for Delegation Requests][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-temporary-delegation.html#temporary-delegation-managing-permissions
+    #
+    # @option params [required, String] :delegation_request_id
+    #   The unique identifier of the delegation request to update.
+    #
+    # @option params [String] :notes
+    #   Additional notes or comments to add to the delegation request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_delegation_request({
+    #     delegation_request_id: "delegationRequestIdType", # required
+    #     notes: "notesType",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateDelegationRequest AWS API Documentation
+    #
+    # @overload update_delegation_request(params = {})
+    # @param [Hash] params ({})
+    def update_delegation_request(params = {}, options = {})
+      req = build_request(:update_delegation_request, params)
+      req.send_request(options)
+    end
+
     # Updates the name and/or the path of the specified IAM group.
     #
     # You should understand the implications of changing a group's path or
@@ -14131,7 +14623,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

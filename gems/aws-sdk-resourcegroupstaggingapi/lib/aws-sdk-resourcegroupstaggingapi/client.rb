@@ -562,6 +562,17 @@ module Aws::ResourceGroupsTaggingAPI
     #   * For more information about ARNs, see [Amazon Resource Names (ARNs)
     #     and Amazon Web Services Service Namespaces][3].
     #
+    #   <note markdown="1"> For the list of services whose resources you can tag using the
+    #   Resource Groups Tagging API, see [Services that support the Resource
+    #   Groups Tagging API][4]. If an Amazon Web Services service isn't
+    #   listed on that page, you might still be able to tag that service's
+    #   resources by using that service's native tagging operations instead
+    #   of using Resource Groups Tagging API operations. All tagged resources,
+    #   whether the tagging used the Resource Groups Tagging API or not, are
+    #   returned by the `Get*` operation.
+    #
+    #    </note>
+    #
     #   You can specify multiple resource types by using a comma separated
     #   array. The array can include up to 100 items. Note that the length
     #   constraint requirement applies to each resource type filter.
@@ -571,6 +582,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax
     #   [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [4]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
     #
     # @option params [Array<String>] :tag_key_filters
     #   Specifies that you want the response to include information for only
@@ -655,9 +667,19 @@ module Aws::ResourceGroupsTaggingAPI
     # `null` value. A null value for `PaginationToken` indicates that there
     # are no more results waiting to be returned.
     #
+    # <note markdown="1"> `GetResources` does not return untagged resources.
+    #
+    #  To find untagged resources in your account, use Amazon Web Services
+    # Resource Explorer with a query that uses `tag:none`. For more
+    # information, see [ Search query syntax reference for Resource
+    # Explorer][2].
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    # [2]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html
     #
     # @option params [String] :pagination_token
     #   Specifies a `PaginationToken` response value from a previous request
@@ -671,12 +693,16 @@ module Aws::ResourceGroupsTaggingAPI
     #   a key with values optional. A request can include up to 50 keys, and
     #   each key can include up to 20 values.
     #
+    #   You can't specify both this parameter and the `ResourceArnList`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
     #   Note the following when deciding how to use TagFilters:
     #
     #   * If you *don't* specify a `TagFilter`, the response includes all
     #     resources that are currently tagged or ever had a tag. Resources
-    #     that currently don't have tags are shown with an empty tag set,
-    #     like this: `"Tags": []`.
+    #     that were previously tagged, *but do not currently* have tags, are
+    #     shown with an empty tag set, like this: `"Tags": []`.
     #
     #   * If you specify more than one filter in a single request, the
     #     response returns only those resources that satisfy all filters.
@@ -688,8 +714,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   * If you don't specify a value for a key, the response returns all
     #     resources that are tagged with that key, with any or no value.
     #
-    #     For example, for the following filters: `filter1= {keyA,{value1}}`,
-    #     `filter2={keyB,{value2,value3,value4}}`, `filter3= {keyC}`:
+    #     For example, for the following filters: `filter1= {key1,{value1}}`,
+    #     `filter2={key2,{value2,value3,value4}}`, `filter3= {key3}`:
     #
     #     * `GetResources({filter1})` returns resources tagged with
     #       `key1=value1`
@@ -736,14 +762,27 @@ module Aws::ResourceGroupsTaggingAPI
     # @option params [Array<String>] :resource_type_filters
     #   Specifies the resource types that you want included in the response.
     #   The format of each resource type is `service[:resourceType]`. For
-    #   example, specifying a resource type of `ec2` returns all Amazon EC2
+    #   example, specifying a service of `ec2` returns all Amazon EC2
     #   resources (which includes EC2 instances). Specifying a resource type
     #   of `ec2:instance` returns only EC2 instances.
     #
+    #   You can't specify both this parameter and the `ResourceArnList`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
     #   The string for each service name and resource type is the same as that
-    #   embedded in a resource's Amazon Resource Name (ARN). For the list of
-    #   services whose resources you can use in this parameter, see [Services
-    #   that support the Resource Groups Tagging API][1].
+    #   embedded in a resource's Amazon Resource Name (ARN).
+    #
+    #   <note markdown="1"> For the list of services whose resources you can tag using the
+    #   Resource Groups Tagging API, see [Services that support the Resource
+    #   Groups Tagging API][1]. If an Amazon Web Services service isn't
+    #   listed on that page, you might still be able to tag that service's
+    #   resources by using that service's native tagging operations instead
+    #   of using Resource Groups Tagging API operations. All tagged resources,
+    #   whether the tagging used the Resource Groups Tagging API or not, are
+    #   returned by the `Get*` operation.
+    #
+    #    </note>
     #
     #   You can specify multiple resource types by using an array. The array
     #   can include up to 100 items. Note that the length constraint
@@ -772,10 +811,19 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @option params [Array<String>] :resource_arn_list
     #   Specifies a list of ARNs of resources for which you want to retrieve
-    #   tag data. You can't specify both this parameter and any of the
-    #   pagination parameters (`ResourcesPerPage`, `TagsPerPage`,
-    #   `PaginationToken`) in the same request. If you specify both, you get
-    #   an `Invalid Parameter` exception.
+    #   tag data.
+    #
+    #   You can't specify both this parameter and the `ResourceTypeFilters`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
+    #   You can't specify both this parameter and the `TagFilters` parameter
+    #   in the same request. If you do, you get an `Invalid Parameter`
+    #   exception.
+    #
+    #   You can't specify both this parameter and any of the pagination
+    #   parameters (`ResourcesPerPage`, `TagsPerPage`, `PaginationToken`) in
+    #   the same request. If you do, you get an `Invalid Parameter` exception.
     #
     #   If a resource specified by this parameter doesn't exist, it doesn't
     #   generate an error; it simply isn't included in the response.
@@ -930,6 +978,52 @@ module Aws::ResourceGroupsTaggingAPI
       req.send_request(options)
     end
 
+    # Lists the required tags for supported resource types in an Amazon Web
+    # Services account.
+    #
+    # @option params [String] :next_token
+    #   A token for requesting another page of required tags if the
+    #   `NextToken` response element indicates that more required tags are
+    #   available. Use the value of the returned `NextToken` element in your
+    #   request until the token comes back as null. Pass null if this is the
+    #   first call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of required tags.
+    #
+    # @return [Types::ListRequiredTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRequiredTagsOutput#required_tags #required_tags} => Array&lt;Types::RequiredTag&gt;
+    #   * {Types::ListRequiredTagsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_required_tags({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.required_tags #=> Array
+    #   resp.required_tags[0].resource_type #=> String
+    #   resp.required_tags[0].cloud_formation_resource_types #=> Array
+    #   resp.required_tags[0].cloud_formation_resource_types[0] #=> String
+    #   resp.required_tags[0].reporting_tag_keys #=> Array
+    #   resp.required_tags[0].reporting_tag_keys[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ListRequiredTags AWS API Documentation
+    #
+    # @overload list_required_tags(params = {})
+    # @param [Hash] params ({})
+    def list_required_tags(params = {}, options = {})
+      req = build_request(:list_required_tags, params)
+      req.send_request(options)
+    end
+
     # Generates a report that lists all tagged resources in the accounts
     # across your organization and tells whether each resource is compliant
     # with the effective tag policy. Compliance data is refreshed daily. The
@@ -937,19 +1031,36 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # The generated report is saved to the following location:
     #
-    # `s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv`
+    # `s3://amzn-s3-demo-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv`
+    #
+    # For more information about evaluating resource compliance with tag
+    # policies, including the required permissions, review [Permissions for
+    # evaluating organization-wide compliance][1] in the *Tagging Amazon Web
+    # Services Resources and Tag Editor* user guide.
     #
     # You can call this operation only from the organization's management
     # account and from the us-east-1 Region.
+    #
+    # If the account associated with the identity used to call
+    # `StartReportCreation` is different from the account that owns the
+    # Amazon S3 bucket, there must be a bucket policy attached to the bucket
+    # to provide access. For more information, review [Amazon S3 bucket
+    # policy for report storage][2] in the *Tagging Amazon Web Services
+    # Resources and Tag Editor* user guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-permissions-org
+    # [2]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy
     #
     # @option params [required, String] :s3_bucket
     #   The name of the Amazon S3 bucket where the report will be stored; for
     #   example:
     #
-    #   `awsexamplebucket`
+    #   `amzn-s3-demo-bucket`
     #
     #   For more information on S3 bucket requirements, including an example
-    #   bucket policy, see the example S3 bucket policy on this page.
+    #   bucket policy, see the example Amazon S3 bucket policy on this page.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -990,6 +1101,15 @@ module Aws::ResourceGroupsTaggingAPI
     #   adding tags. For more information, see the documentation for each
     #   service.
     #
+    # * When you use the [Amazon Web Services Resource Groups Tagging
+    #   API][3] to update tags for Amazon Web Services CloudFormation stack
+    #   sets, Amazon Web Services calls the [Amazon Web Services
+    #   CloudFormation `UpdateStack` ][4] operation. This operation may
+    #   initiate additional resource property updates in addition to the
+    #   desired tag updates. To avoid unexpected resource updates, Amazon
+    #   Web Services recommends that you only apply or update tags to your
+    #   CloudFormation stack sets using Amazon Web Services CloudFormation.
+    #
     # Do not store personally identifiable information (PII) or other
     # confidential or sensitive information in tags. We use tags to provide
     # you with billing and administration services. Tags are not intended to
@@ -1003,14 +1123,24 @@ module Aws::ResourceGroupsTaggingAPI
     # instance using the `TagResources` operation, you must have both of the
     # following permissions:
     #
-    # * `tag:TagResource`
+    # * `tag:TagResources`
     #
     # * `ec2:CreateTags`
+    #
+    # <note markdown="1"> In addition, some services might have specific requirements for
+    # tagging some types of resources. For example, to tag an Amazon S3
+    # bucket, you must also have the `s3:GetBucketTagging` permission. If
+    # the expected minimum permissions don't work, check the documentation
+    # for that service's tagging APIs for more information.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
     # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
+    # [3]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
+    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html
     #
     # @option params [required, Array<String>] :resource_arn_list
     #   Specifies the list of ARNs of the resources that you want to apply
@@ -1078,9 +1208,17 @@ module Aws::ResourceGroupsTaggingAPI
     # from an Amazon EC2 instance using the `UntagResources` operation, you
     # must have both of the following permissions:
     #
-    # * `tag:UntagResource`
+    # * `tag:UntagResources`
     #
     # * `ec2:DeleteTags`
+    #
+    # <note markdown="1"> In addition, some services might have specific requirements for
+    # untagging some types of resources. For example, to untag Amazon Web
+    # Services Glue Connection, you must also have the `glue:GetConnection`
+    # permission. If the expected minimum permissions don't work, check the
+    # documentation for that service's tagging APIs for more information.
+    #
+    #  </note>
     #
     # @option params [required, Array<String>] :resource_arn_list
     #   Specifies a list of ARNs of the resources that you want to remove tags
@@ -1143,7 +1281,7 @@ module Aws::ResourceGroupsTaggingAPI
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourcegroupstaggingapi'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

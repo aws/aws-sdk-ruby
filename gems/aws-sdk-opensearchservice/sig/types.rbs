@@ -431,6 +431,18 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class CreateIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_schema: untyped
+      SENSITIVE: []
+    end
+
+    class CreateIndexResponse
+      attr_accessor status: ("CREATED" | "UPDATED" | "DELETED")
+      SENSITIVE: []
+    end
+
     class CreateOutboundConnectionRequest
       attr_accessor local_domain_info: Types::DomainInformationContainer
       attr_accessor remote_domain_info: Types::DomainInformationContainer
@@ -551,6 +563,17 @@ module Aws::OpenSearchService
 
     class DeleteInboundConnectionResponse
       attr_accessor connection: Types::InboundConnection
+      SENSITIVE: []
+    end
+
+    class DeleteIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIndexResponse
+      attr_accessor status: ("CREATED" | "UPDATED" | "DELETED")
       SENSITIVE: []
     end
 
@@ -1101,6 +1124,17 @@ module Aws::OpenSearchService
       attr_accessor action: ("REBOOT_NODE" | "RESTART_SEARCH_PROCESS" | "RESTART_DASHBOARD")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetIndexResponse
+      attr_accessor index_schema: untyped
       SENSITIVE: []
     end
 
@@ -1868,6 +1902,9 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
     class UpdateApplicationRequest
       attr_accessor id: ::String
       attr_accessor data_sources: ::Array[Types::DataSource]
@@ -1943,6 +1980,18 @@ module Aws::OpenSearchService
       attr_accessor domain_config: Types::DomainConfig
       attr_accessor dry_run_results: Types::DryRunResults
       attr_accessor dry_run_progress_status: Types::DryRunProgressStatus
+      SENSITIVE: []
+    end
+
+    class UpdateIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_schema: untyped
+      SENSITIVE: []
+    end
+
+    class UpdateIndexResponse
+      attr_accessor status: ("CREATED" | "UPDATED" | "DELETED")
       SENSITIVE: []
     end
 

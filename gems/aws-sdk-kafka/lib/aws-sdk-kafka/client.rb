@@ -1757,6 +1757,92 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Returns topic details of this topic on a MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :topic_name
+    #
+    # @return [Types::DescribeTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTopicResponse#topic_arn #topic_arn} => String
+    #   * {Types::DescribeTopicResponse#topic_name #topic_name} => String
+    #   * {Types::DescribeTopicResponse#replication_factor #replication_factor} => Integer
+    #   * {Types::DescribeTopicResponse#partition_count #partition_count} => Integer
+    #   * {Types::DescribeTopicResponse#configs #configs} => String
+    #   * {Types::DescribeTopicResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_topic({
+    #     cluster_arn: "__string", # required
+    #     topic_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_arn #=> String
+    #   resp.topic_name #=> String
+    #   resp.replication_factor #=> Integer
+    #   resp.partition_count #=> Integer
+    #   resp.configs #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopic AWS API Documentation
+    #
+    # @overload describe_topic(params = {})
+    # @param [Hash] params ({})
+    def describe_topic(params = {}, options = {})
+      req = build_request(:describe_topic, params)
+      req.send_request(options)
+    end
+
+    # Returns partition details of this topic on a MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :topic_name
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::DescribeTopicPartitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTopicPartitionsResponse#partitions #partitions} => Array&lt;Types::TopicPartitionInfo&gt;
+    #   * {Types::DescribeTopicPartitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_topic_partitions({
+    #     cluster_arn: "__string", # required
+    #     topic_name: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.partitions #=> Array
+    #   resp.partitions[0].partition #=> Integer
+    #   resp.partitions[0].leader #=> Integer
+    #   resp.partitions[0].replicas #=> Array
+    #   resp.partitions[0].replicas[0] #=> Integer
+    #   resp.partitions[0].isr #=> Array
+    #   resp.partitions[0].isr[0] #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicPartitions AWS API Documentation
+    #
+    # @overload describe_topic_partitions(params = {})
+    # @param [Hash] params ({})
+    def describe_topic_partitions(params = {}, options = {})
+      req = build_request(:describe_topic_partitions, params)
+      req.send_request(options)
+    end
+
     # Displays information about the specified Amazon MSK VPC connection.
     #
     # @option params [required, String] :arn
@@ -2674,6 +2760,51 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # List topics in a MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :topic_name_filter
+    #
+    # @return [Types::ListTopicsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTopicsResponse#topics #topics} => Array&lt;Types::TopicInfo&gt;
+    #   * {Types::ListTopicsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_topics({
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     topic_name_filter: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topics #=> Array
+    #   resp.topics[0].topic_arn #=> String
+    #   resp.topics[0].topic_name #=> String
+    #   resp.topics[0].replication_factor #=> Integer
+    #   resp.topics[0].partition_count #=> Integer
+    #   resp.topics[0].out_of_sync_replica_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopics AWS API Documentation
+    #
+    # @overload list_topics(params = {})
+    # @param [Hash] params ({})
+    def list_topics(params = {}, options = {})
+      req = build_request(:list_topics, params)
+      req.send_request(options)
+    end
+
     # @option params [required, String] :cluster_arn
     #
     # @option params [required, String] :vpc_connection_arn
@@ -3491,7 +3622,7 @@ module Aws::Kafka
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

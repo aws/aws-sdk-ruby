@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2025-11-17)
+------------------
+
+* Feature - This release adds index operation APIs to support Automatic Semantic Enrichment feature
+
 1.78.0 (2025-11-07)
 ------------------
 

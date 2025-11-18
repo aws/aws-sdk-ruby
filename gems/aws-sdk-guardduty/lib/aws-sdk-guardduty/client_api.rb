@@ -492,6 +492,7 @@ module Aws::GuardDuty
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     S3ObjectDetail = Shapes::StructureShape.new(name: 'S3ObjectDetail')
     S3ObjectDetails = Shapes::ListShape.new(name: 'S3ObjectDetails')
+    S3ObjectForSendObjectMalwareScan = Shapes::StructureShape.new(name: 'S3ObjectForSendObjectMalwareScan')
     S3ObjectUids = Shapes::ListShape.new(name: 'S3ObjectUids')
     Scan = Shapes::StructureShape.new(name: 'Scan')
     ScanCondition = Shapes::StructureShape.new(name: 'ScanCondition')
@@ -514,6 +515,8 @@ module Aws::GuardDuty
     SecurityContext = Shapes::StructureShape.new(name: 'SecurityContext')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    SendObjectMalwareScanRequest = Shapes::StructureShape.new(name: 'SendObjectMalwareScanRequest')
+    SendObjectMalwareScanResponse = Shapes::StructureShape.new(name: 'SendObjectMalwareScanResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     Sequence = Shapes::StructureShape.new(name: 'Sequence')
     SequenceDescription = Shapes::StringShape.new(name: 'SequenceDescription')
@@ -2402,6 +2405,11 @@ module Aws::GuardDuty
 
     S3ObjectDetails.member = Shapes::ShapeRef.new(shape: S3ObjectDetail)
 
+    S3ObjectForSendObjectMalwareScan.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
+    S3ObjectForSendObjectMalwareScan.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    S3ObjectForSendObjectMalwareScan.add_member(:version_id, Shapes::ShapeRef.new(shape: String, location_name: "versionId"))
+    S3ObjectForSendObjectMalwareScan.struct_class = Types::S3ObjectForSendObjectMalwareScan
+
     S3ObjectUids.member = Shapes::ShapeRef.new(shape: String)
 
     Scan.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
@@ -2480,6 +2488,11 @@ module Aws::GuardDuty
     SecurityGroup.struct_class = Types::SecurityGroup
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
+
+    SendObjectMalwareScanRequest.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3ObjectForSendObjectMalwareScan, location_name: "s3Object"))
+    SendObjectMalwareScanRequest.struct_class = Types::SendObjectMalwareScanRequest
+
+    SendObjectMalwareScanResponse.struct_class = Types::SendObjectMalwareScanResponse
 
     Sequence.add_member(:uid, Shapes::ShapeRef.new(shape: String, required: true, location_name: "uid"))
     Sequence.add_member(:description, Shapes::ShapeRef.new(shape: SequenceDescription, required: true, location_name: "description"))
@@ -3631,6 +3644,17 @@ module Aws::GuardDuty
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:send_object_malware_scan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendObjectMalwareScan"
+        o.http_method = "POST"
+        o.http_request_uri = "/object-malware-scan/send"
+        o.input = Shapes::ShapeRef.new(shape: SendObjectMalwareScanRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendObjectMalwareScanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:start_malware_scan, Seahorse::Model::Operation.new.tap do |o|

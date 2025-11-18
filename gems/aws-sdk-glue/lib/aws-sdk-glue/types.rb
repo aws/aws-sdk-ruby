@@ -5984,18 +5984,30 @@ module Aws::Glue
     #   The resource properties associated with the integration target.
     #   @return [Types::TargetProcessingProperties]
     #
+    # @!attribute [rw] tags
+    #   Metadata assigned to the resource consisting of a list of key-value
+    #   pairs.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegrationResourcePropertyRequest AWS API Documentation
     #
     class CreateIntegrationResourcePropertyRequest < Struct.new(
       :resource_arn,
       :source_processing_properties,
-      :target_processing_properties)
+      :target_processing_properties,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_arn
     #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
     #   @return [String]
     #
     # @!attribute [rw] source_processing_properties
@@ -6010,6 +6022,7 @@ module Aws::Glue
     #
     class CreateIntegrationResourcePropertyResponse < Struct.new(
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties)
       SENSITIVE = []
@@ -9175,6 +9188,22 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteIntegrationResourcePropertyRequest AWS API Documentation
+    #
+    class DeleteIntegrationResourcePropertyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteIntegrationResourcePropertyResponse AWS API Documentation
+    #
+    class DeleteIntegrationResourcePropertyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] source_arn
     #   The ARN of the source for the integration.
@@ -13125,6 +13154,12 @@ module Aws::Glue
     #   The connection ARN of the source, or the database ARN of the target.
     #   @return [String]
     #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
+    #   @return [String]
+    #
     # @!attribute [rw] source_processing_properties
     #   The resource properties associated with the integration source.
     #   @return [Types::SourceProcessingProperties]
@@ -13137,6 +13172,7 @@ module Aws::Glue
     #
     class GetIntegrationResourcePropertyResponse < Struct.new(
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties)
       SENSITIVE = []
@@ -16862,7 +16898,6 @@ module Aws::Glue
     #   to align the refresh rate with your specific data update patterns,
     #   system load considerations, and performance optimization goals. Time
     #   increment can be set from 15 minutes to 8640 minutes (six days).
-    #   Currently supports creation of `RefreshInterval` only.
     #   @return [String]
     #
     # @!attribute [rw] source_properties
@@ -17032,6 +17067,57 @@ module Aws::Glue
     #
     class IntegrationQuotaExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure representing an integration resource property.
+    #
+    # @!attribute [rw] resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
+    #   @return [String]
+    #
+    # @!attribute [rw] source_processing_properties
+    #   The resource properties associated with the integration source.
+    #   @return [Types::SourceProcessingProperties]
+    #
+    # @!attribute [rw] target_processing_properties
+    #   The resource properties associated with the integration target.
+    #   @return [Types::TargetProcessingProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationResourceProperty AWS API Documentation
+    #
+    class IntegrationResourceProperty < Struct.new(
+      :resource_arn,
+      :resource_property_arn,
+      :source_processing_properties,
+      :target_processing_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for integration resource properties.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Supported filter keys are `SourceArn` and
+    #   `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of filter values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationResourcePropertyFilter AWS API Documentation
+    #
+    class IntegrationResourcePropertyFilter < Struct.new(
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19572,6 +19658,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] marker
+    #   This is the pagination token for next page, initial value is `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filters, supported filter Key is `SourceArn` and
+    #   `TargetArn`.
+    #   @return [Array<Types::IntegrationResourcePropertyFilter>]
+    #
+    # @!attribute [rw] max_records
+    #   This is total number of items to be evaluated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationResourcePropertiesRequest AWS API Documentation
+    #
+    class ListIntegrationResourcePropertiesRequest < Struct.new(
+      :marker,
+      :filters,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_resource_property_list
+    #   A list of integration resource property meeting the filter criteria.
+    #   @return [Array<Types::IntegrationResourceProperty>]
+    #
+    # @!attribute [rw] marker
+    #   This is the pagination token for the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationResourcePropertiesResponse AWS API Documentation
+    #
+    class ListIntegrationResourcePropertiesResponse < Struct.new(
+      :integration_resource_property_list,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation request.
     #   @return [String]
@@ -20635,7 +20761,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] integration_config
-    #   Properties associated with the integration.
+    #   The configuration settings for the integration. Currently, only the
+    #   RefreshInterval can be modified.
     #   @return [Types::IntegrationConfig]
     #
     # @!attribute [rw] integration_name
@@ -20723,7 +20850,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] integration_config
-    #   Properties associated with the integration.
+    #   The updated configuration settings for the integration.
     #   @return [Types::IntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ModifyIntegrationResponse AWS API Documentation
@@ -28724,6 +28851,12 @@ module Aws::Glue
     #   The connection ARN of the source, or the database ARN of the target.
     #   @return [String]
     #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
+    #   @return [String]
+    #
     # @!attribute [rw] source_processing_properties
     #   The resource properties associated with the integration source.
     #   @return [Types::SourceProcessingProperties]
@@ -28736,6 +28869,7 @@ module Aws::Glue
     #
     class UpdateIntegrationResourcePropertyResponse < Struct.new(
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties)
       SENSITIVE = []

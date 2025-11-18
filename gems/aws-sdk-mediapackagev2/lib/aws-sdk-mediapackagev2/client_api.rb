@@ -207,6 +207,7 @@ module Aws::MediaPackageV2
     ScteFilter = Shapes::StringShape.new(name: 'ScteFilter')
     ScteFilterList = Shapes::ListShape.new(name: 'ScteFilterList')
     ScteHls = Shapes::StructureShape.new(name: 'ScteHls')
+    ScteInSegments = Shapes::StringShape.new(name: 'ScteInSegments')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SegmentSegmentDurationSecondsInteger = Shapes::IntegerShape.new(name: 'SegmentSegmentDurationSecondsInteger')
     SegmentSegmentNameString = Shapes::StringShape.new(name: 'SegmentSegmentNameString')
@@ -894,6 +895,7 @@ module Aws::MediaPackageV2
     S3DestinationConfig.struct_class = Types::S3DestinationConfig
 
     Scte.add_member(:scte_filter, Shapes::ShapeRef.new(shape: ScteFilterList, location_name: "ScteFilter"))
+    Scte.add_member(:scte_in_segments, Shapes::ShapeRef.new(shape: ScteInSegments, location_name: "ScteInSegments"))
     Scte.struct_class = Types::Scte
 
     ScteDash.add_member(:ad_marker_dash, Shapes::ShapeRef.new(shape: AdMarkerDash, location_name: "AdMarkerDash"))

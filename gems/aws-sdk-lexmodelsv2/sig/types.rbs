@@ -2568,6 +2568,7 @@ module Aws::LexModelsV2
 
     class NluImprovementSpecification
       attr_accessor enabled: bool
+      attr_accessor assisted_nlu_mode: ("Primary" | "Fallback")
       SENSITIVE: []
     end
 

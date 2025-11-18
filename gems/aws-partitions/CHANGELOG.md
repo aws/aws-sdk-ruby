@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.1184.0 (2025-11-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1183.0 (2025-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MWAAServerless`.
+
 1.1182.0 (2025-11-14)
 ------------------
 

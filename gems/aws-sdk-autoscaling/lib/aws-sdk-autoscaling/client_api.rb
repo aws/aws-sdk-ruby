@@ -63,8 +63,10 @@ module Aws::AutoScaling
     AutoScalingInstancesType = Shapes::StructureShape.new(name: 'AutoScalingInstancesType')
     AutoScalingNotificationTypes = Shapes::ListShape.new(name: 'AutoScalingNotificationTypes')
     AvailabilityZoneDistribution = Shapes::StructureShape.new(name: 'AvailabilityZoneDistribution')
+    AvailabilityZoneIdsLimit1 = Shapes::ListShape.new(name: 'AvailabilityZoneIdsLimit1')
     AvailabilityZoneImpairmentPolicy = Shapes::StructureShape.new(name: 'AvailabilityZoneImpairmentPolicy')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+    AvailabilityZonesLimit1 = Shapes::ListShape.new(name: 'AvailabilityZonesLimit1')
     BakeTime = Shapes::IntegerShape.new(name: 'BakeTime')
     BareMetal = Shapes::StringShape.new(name: 'BareMetal')
     BaselineEbsBandwidthMbpsRequest = Shapes::StructureShape.new(name: 'BaselineEbsBandwidthMbpsRequest')
@@ -96,6 +98,7 @@ module Aws::AutoScaling
     CheckpointDelay = Shapes::IntegerShape.new(name: 'CheckpointDelay')
     CheckpointPercentages = Shapes::ListShape.new(name: 'CheckpointPercentages')
     ClassicLinkVPCSecurityGroups = Shapes::ListShape.new(name: 'ClassicLinkVPCSecurityGroups')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CompleteLifecycleActionAnswer = Shapes::StructureShape.new(name: 'CompleteLifecycleActionAnswer')
     CompleteLifecycleActionType = Shapes::StructureShape.new(name: 'CompleteLifecycleActionType')
     Context = Shapes::StringShape.new(name: 'Context')
@@ -177,10 +180,13 @@ module Aws::AutoScaling
     HealthCheckGracePeriod = Shapes::IntegerShape.new(name: 'HealthCheckGracePeriod')
     HeartbeatTimeout = Shapes::IntegerShape.new(name: 'HeartbeatTimeout')
     HonorCooldown = Shapes::BooleanShape.new(name: 'HonorCooldown')
+    IdempotentParameterMismatchError = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchError', error: {"code" => "IdempotentParameterMismatch", "httpStatusCode" => 400, "senderFault" => true})
     ImpairedZoneHealthCheckBehavior = Shapes::StringShape.new(name: 'ImpairedZoneHealthCheckBehavior')
     IncludeDeletedGroups = Shapes::BooleanShape.new(name: 'IncludeDeletedGroups')
     IncludeInstances = Shapes::BooleanShape.new(name: 'IncludeInstances')
     Instance = Shapes::StructureShape.new(name: 'Instance')
+    InstanceCollection = Shapes::StructureShape.new(name: 'InstanceCollection')
+    InstanceCollections = Shapes::ListShape.new(name: 'InstanceCollections')
     InstanceGeneration = Shapes::StringShape.new(name: 'InstanceGeneration')
     InstanceGenerations = Shapes::ListShape.new(name: 'InstanceGenerations')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
@@ -216,6 +222,10 @@ module Aws::AutoScaling
     LaunchConfigurationNamesType = Shapes::StructureShape.new(name: 'LaunchConfigurationNamesType')
     LaunchConfigurations = Shapes::ListShape.new(name: 'LaunchConfigurations')
     LaunchConfigurationsType = Shapes::StructureShape.new(name: 'LaunchConfigurationsType')
+    LaunchInstancesError = Shapes::StructureShape.new(name: 'LaunchInstancesError')
+    LaunchInstancesErrors = Shapes::ListShape.new(name: 'LaunchInstancesErrors')
+    LaunchInstancesRequest = Shapes::StructureShape.new(name: 'LaunchInstancesRequest')
+    LaunchInstancesResult = Shapes::StructureShape.new(name: 'LaunchInstancesResult')
     LaunchTemplate = Shapes::StructureShape.new(name: 'LaunchTemplate')
     LaunchTemplateName = Shapes::StringShape.new(name: 'LaunchTemplateName')
     LaunchTemplateOverrides = Shapes::StructureShape.new(name: 'LaunchTemplateOverrides')
@@ -332,9 +342,11 @@ module Aws::AutoScaling
     RefreshInstanceWarmup = Shapes::IntegerShape.new(name: 'RefreshInstanceWarmup')
     RefreshPreferences = Shapes::StructureShape.new(name: 'RefreshPreferences')
     RefreshStrategy = Shapes::StringShape.new(name: 'RefreshStrategy')
+    RequestedCapacity = Shapes::IntegerShape.new(name: 'RequestedCapacity')
     ResourceContentionFault = Shapes::StructureShape.new(name: 'ResourceContentionFault', error: {"code" => "ResourceContention", "httpStatusCode" => 500, "senderFault" => true})
     ResourceInUseFault = Shapes::StructureShape.new(name: 'ResourceInUseFault', error: {"code" => "ResourceInUse", "httpStatusCode" => 400, "senderFault" => true})
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    RetryStrategy = Shapes::StringShape.new(name: 'RetryStrategy')
     ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ReuseOnScaleIn = Shapes::BooleanShape.new(name: 'ReuseOnScaleIn')
     RollbackDetails = Shapes::StructureShape.new(name: 'RollbackDetails')
@@ -371,6 +383,7 @@ module Aws::AutoScaling
     StepAdjustment = Shapes::StructureShape.new(name: 'StepAdjustment')
     StepAdjustments = Shapes::ListShape.new(name: 'StepAdjustments')
     String = Shapes::StringShape.new(name: 'String')
+    SubnetIdsLimit1 = Shapes::ListShape.new(name: 'SubnetIdsLimit1')
     SuspendedProcess = Shapes::StructureShape.new(name: 'SuspendedProcess')
     SuspendedProcesses = Shapes::ListShape.new(name: 'SuspendedProcesses')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -581,11 +594,15 @@ module Aws::AutoScaling
     AvailabilityZoneDistribution.add_member(:capacity_distribution_strategy, Shapes::ShapeRef.new(shape: CapacityDistributionStrategy, location_name: "CapacityDistributionStrategy"))
     AvailabilityZoneDistribution.struct_class = Types::AvailabilityZoneDistribution
 
+    AvailabilityZoneIdsLimit1.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
+
     AvailabilityZoneImpairmentPolicy.add_member(:zonal_shift_enabled, Shapes::ShapeRef.new(shape: ZonalShiftEnabled, location_name: "ZonalShiftEnabled"))
     AvailabilityZoneImpairmentPolicy.add_member(:impaired_zone_health_check_behavior, Shapes::ShapeRef.new(shape: ImpairedZoneHealthCheckBehavior, location_name: "ImpairedZoneHealthCheckBehavior"))
     AvailabilityZoneImpairmentPolicy.struct_class = Types::AvailabilityZoneImpairmentPolicy
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
+
+    AvailabilityZonesLimit1.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     BaselineEbsBandwidthMbpsRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Min"))
     BaselineEbsBandwidthMbpsRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Max"))
@@ -975,6 +992,9 @@ module Aws::AutoScaling
     GetPredictiveScalingForecastType.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "EndTime"))
     GetPredictiveScalingForecastType.struct_class = Types::GetPredictiveScalingForecastType
 
+    IdempotentParameterMismatchError.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Message"))
+    IdempotentParameterMismatchError.struct_class = Types::IdempotentParameterMismatchError
+
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, required: true, location_name: "InstanceId"))
     Instance.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
     Instance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AvailabilityZone"))
@@ -985,6 +1005,16 @@ module Aws::AutoScaling
     Instance.add_member(:protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, required: true, location_name: "ProtectedFromScaleIn"))
     Instance.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "WeightedCapacity"))
     Instance.struct_class = Types::Instance
+
+    InstanceCollection.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
+    InstanceCollection.add_member(:market_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "MarketType"))
+    InstanceCollection.add_member(:subnet_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "SubnetId"))
+    InstanceCollection.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AvailabilityZone"))
+    InstanceCollection.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AvailabilityZoneId"))
+    InstanceCollection.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIds, location_name: "InstanceIds"))
+    InstanceCollection.struct_class = Types::InstanceCollection
+
+    InstanceCollections.member = Shapes::ShapeRef.new(shape: InstanceCollection)
 
     InstanceGenerations.member = Shapes::ShapeRef.new(shape: InstanceGeneration)
 
@@ -1118,6 +1148,32 @@ module Aws::AutoScaling
     LaunchConfigurationsType.add_member(:launch_configurations, Shapes::ShapeRef.new(shape: LaunchConfigurations, required: true, location_name: "LaunchConfigurations"))
     LaunchConfigurationsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     LaunchConfigurationsType.struct_class = Types::LaunchConfigurationsType
+
+    LaunchInstancesError.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
+    LaunchInstancesError.add_member(:market_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "MarketType"))
+    LaunchInstancesError.add_member(:subnet_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "SubnetId"))
+    LaunchInstancesError.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AvailabilityZone"))
+    LaunchInstancesError.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AvailabilityZoneId"))
+    LaunchInstancesError.add_member(:error_code, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, location_name: "ErrorCode"))
+    LaunchInstancesError.add_member(:error_message, Shapes::ShapeRef.new(shape: XmlString, location_name: "ErrorMessage"))
+    LaunchInstancesError.struct_class = Types::LaunchInstancesError
+
+    LaunchInstancesErrors.member = Shapes::ShapeRef.new(shape: LaunchInstancesError)
+
+    LaunchInstancesRequest.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    LaunchInstancesRequest.add_member(:requested_capacity, Shapes::ShapeRef.new(shape: RequestedCapacity, required: true, location_name: "RequestedCapacity"))
+    LaunchInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    LaunchInstancesRequest.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZonesLimit1, location_name: "AvailabilityZones"))
+    LaunchInstancesRequest.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIdsLimit1, location_name: "AvailabilityZoneIds"))
+    LaunchInstancesRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdsLimit1, location_name: "SubnetIds"))
+    LaunchInstancesRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
+    LaunchInstancesRequest.struct_class = Types::LaunchInstancesRequest
+
+    LaunchInstancesResult.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
+    LaunchInstancesResult.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    LaunchInstancesResult.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceCollections, location_name: "Instances"))
+    LaunchInstancesResult.add_member(:errors, Shapes::ShapeRef.new(shape: LaunchInstancesErrors, location_name: "Errors"))
+    LaunchInstancesResult.struct_class = Types::LaunchInstancesResult
 
     LaunchTemplate.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplateSpecification"))
     LaunchTemplate.add_member(:overrides, Shapes::ShapeRef.new(shape: Overrides, location_name: "Overrides"))
@@ -1517,6 +1573,8 @@ module Aws::AutoScaling
     StepAdjustment.struct_class = Types::StepAdjustment
 
     StepAdjustments.member = Shapes::ShapeRef.new(shape: StepAdjustment)
+
+    SubnetIdsLimit1.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     SuspendedProcess.add_member(:process_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "ProcessName"))
     SuspendedProcess.add_member(:suspension_reason, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "SuspensionReason"))
@@ -2220,6 +2278,16 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: GetPredictiveScalingForecastType)
         o.output = Shapes::ShapeRef.new(shape: GetPredictiveScalingForecastAnswer)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
+      api.add_operation(:launch_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "LaunchInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: LaunchInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: LaunchInstancesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchError)
       end)
 
       api.add_operation(:put_lifecycle_hook, Seahorse::Model::Operation.new.tap do |o|

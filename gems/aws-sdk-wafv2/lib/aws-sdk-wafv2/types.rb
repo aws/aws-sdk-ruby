@@ -2660,6 +2660,27 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # A WAF feature that is not supported by the CloudFront pricing plan
+    # associated with the web ACL.
+    #
+    # @!attribute [rw] feature
+    #   The name of the disallowed WAF feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_pricing_plan
+    #   The name of the CloudFront pricing plan required to use the WAF
+    #   feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisallowedFeature AWS API Documentation
+    #
+    class DisallowedFeature < Struct.new(
+      :feature,
+      :required_pricing_plan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to disassociate from
     #   the web ACL.
@@ -10265,6 +10286,25 @@ module Aws::WAFV2
     #
     class WAFExpiredManagedRuleGroupVersionException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because the specified WAF feature isn't
+    # supported by the CloudFront pricing plan associated with the web ACL.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] disallowed_features
+    #   The names of the disallowed WAF features.
+    #   @return [Array<Types::DisallowedFeature>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFFeatureNotIncludedInPricingPlanException AWS API Documentation
+    #
+    class WAFFeatureNotIncludedInPricingPlanException < Struct.new(
+      :message,
+      :disallowed_features)
       SENSITIVE = []
       include Aws::Structure
     end

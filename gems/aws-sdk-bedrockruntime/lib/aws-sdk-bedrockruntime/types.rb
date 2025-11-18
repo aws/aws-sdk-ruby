@@ -906,6 +906,11 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseRequest AWS API Documentation
     #
     class ConverseRequest < Struct.new(
@@ -919,7 +924,8 @@ module Aws::BedrockRuntime
       :prompt_variables,
       :additional_model_response_field_paths,
       :request_metadata,
-      :performance_config)
+      :performance_config,
+      :service_tier)
       SENSITIVE = [:prompt_variables, :request_metadata]
       include Aws::Structure
     end
@@ -955,6 +961,11 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseResponse AWS API Documentation
     #
     class ConverseResponse < Struct.new(
@@ -964,7 +975,8 @@ module Aws::BedrockRuntime
       :metrics,
       :additional_model_response_fields,
       :trace,
-      :performance_config)
+      :performance_config,
+      :service_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -993,6 +1005,11 @@ module Aws::BedrockRuntime
     #   event.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStreamMetadataEvent AWS API Documentation
     #
     class ConverseStreamMetadataEvent < Struct.new(
@@ -1000,6 +1017,7 @@ module Aws::BedrockRuntime
       :metrics,
       :trace,
       :performance_config,
+      :service_tier,
       :event_type)
       SENSITIVE = []
       include Aws::Structure
@@ -1143,6 +1161,11 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStreamRequest AWS API Documentation
     #
     class ConverseStreamRequest < Struct.new(
@@ -1156,7 +1179,8 @@ module Aws::BedrockRuntime
       :prompt_variables,
       :additional_model_response_field_paths,
       :request_metadata,
-      :performance_config)
+      :performance_config,
+      :service_tier)
       SENSITIVE = [:prompt_variables, :request_metadata]
       include Aws::Structure
     end
@@ -1213,11 +1237,25 @@ module Aws::BedrockRuntime
     #   provided.
     #   @return [Array<Types::SystemContentBlock>]
     #
+    # @!attribute [rw] tool_config
+    #   The toolConfig of Converse input request to count tokens for.
+    #   Configuration information for the tools that the model can use when
+    #   generating a response.
+    #   @return [Types::ToolConfiguration]
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   The additionalModelRequestFields of Converse input request to count
+    #   tokens for. Use this field when you want to pass additional
+    #   parameters that the model supports.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseTokensRequest AWS API Documentation
     #
     class ConverseTokensRequest < Struct.new(
       :messages,
-      :system)
+      :system,
+      :tool_config,
+      :additional_model_request_fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3047,6 +3085,10 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelRequest AWS API Documentation
     #
     class InvokeModelRequest < Struct.new(
@@ -3057,7 +3099,8 @@ module Aws::BedrockRuntime
       :trace,
       :guardrail_identifier,
       :guardrail_version,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = [:body]
       include Aws::Structure
     end
@@ -3081,12 +3124,17 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelResponse AWS API Documentation
     #
     class InvokeModelResponse < Struct.new(
       :body,
       :content_type,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = [:body]
       include Aws::Structure
     end
@@ -3246,6 +3294,10 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamRequest AWS API Documentation
     #
     class InvokeModelWithResponseStreamRequest < Struct.new(
@@ -3256,7 +3308,8 @@ module Aws::BedrockRuntime
       :trace,
       :guardrail_identifier,
       :guardrail_version,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = [:body]
       include Aws::Structure
     end
@@ -3279,12 +3332,17 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamResponse AWS API Documentation
     #
     class InvokeModelWithResponseStreamResponse < Struct.new(
       :body,
       :content_type,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3723,6 +3781,21 @@ module Aws::BedrockRuntime
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the processing tier configuration used for serving the
+    # request.
+    #
+    # @!attribute [rw] type
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ServiceTier AWS API Documentation
+    #
+    class ServiceTier < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

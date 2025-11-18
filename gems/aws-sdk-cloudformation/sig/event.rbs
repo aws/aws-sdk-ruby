@@ -24,6 +24,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#stack_name-instance_method
       def stack_name: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#operation_id-instance_method
+      def operation_id: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#logical_resource_id-instance_method
       def logical_resource_id: () -> ::String
 

@@ -5159,6 +5159,43 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Initiates a malware scan for a specific S3 object. This API allows you
+    # to perform on-demand malware scanning of individual objects in S3
+    # buckets that have Malware Protection for S3 enabled.
+    #
+    # When you use this API, the Amazon Web Services service terms for
+    # GuardDuty Malware Protection apply. For more information, see [Amazon
+    # Web Services service terms for GuardDuty Malware Protection][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty
+    #
+    # @option params [Types::S3ObjectForSendObjectMalwareScan] :s3_object
+    #   The S3 object information for the object you want to scan. The bucket
+    #   must have a Malware Protection plan configured to use this API.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_object_malware_scan({
+    #     s3_object: {
+    #       bucket: "String",
+    #       key: "String",
+    #       version_id: "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SendObjectMalwareScan AWS API Documentation
+    #
+    # @overload send_object_malware_scan(params = {})
+    # @param [Hash] params ({})
+    def send_object_malware_scan(params = {}, options = {})
+      req = build_request(:send_object_malware_scan, params)
+      req.send_request(options)
+    end
+
     # Initiates the malware scan. Invoking this API will automatically
     # create the [Service-linked role][1] in the corresponding account.
     #
@@ -6218,7 +6255,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

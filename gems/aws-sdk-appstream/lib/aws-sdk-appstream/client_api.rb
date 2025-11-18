@@ -22,6 +22,8 @@ module Aws::AppStream
     Action = Shapes::StringShape.new(name: 'Action')
     AdminAppLicenseUsageList = Shapes::ListShape.new(name: 'AdminAppLicenseUsageList')
     AdminAppLicenseUsageRecord = Shapes::StructureShape.new(name: 'AdminAppLicenseUsageRecord')
+    AgentSoftwareVersion = Shapes::StringShape.new(name: 'AgentSoftwareVersion')
+    AmiName = Shapes::StringShape.new(name: 'AmiName')
     AppBlock = Shapes::StructureShape.new(name: 'AppBlock')
     AppBlockBuilder = Shapes::StructureShape.new(name: 'AppBlockBuilder')
     AppBlockBuilderAppBlockAssociation = Shapes::StructureShape.new(name: 'AppBlockBuilderAppBlockAssociation')
@@ -35,10 +37,14 @@ module Aws::AppStream
     AppBlockBuilderStateChangeReasonCode = Shapes::StringShape.new(name: 'AppBlockBuilderStateChangeReasonCode')
     AppBlockState = Shapes::StringShape.new(name: 'AppBlockState')
     AppBlocks = Shapes::ListShape.new(name: 'AppBlocks')
+    AppCatalogConfig = Shapes::ListShape.new(name: 'AppCatalogConfig')
+    AppDisplayName = Shapes::StringShape.new(name: 'AppDisplayName')
+    AppName = Shapes::StringShape.new(name: 'AppName')
     AppVisibility = Shapes::StringShape.new(name: 'AppVisibility')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationAttribute = Shapes::StringShape.new(name: 'ApplicationAttribute')
     ApplicationAttributes = Shapes::ListShape.new(name: 'ApplicationAttributes')
+    ApplicationConfig = Shapes::StructureShape.new(name: 'ApplicationConfig')
     ApplicationFleetAssociation = Shapes::StructureShape.new(name: 'ApplicationFleetAssociation')
     ApplicationFleetAssociationList = Shapes::ListShape.new(name: 'ApplicationFleetAssociationList')
     ApplicationSettings = Shapes::StructureShape.new(name: 'ApplicationSettings')
@@ -85,12 +91,16 @@ module Aws::AppStream
     CreateDirectoryConfigResult = Shapes::StructureShape.new(name: 'CreateDirectoryConfigResult')
     CreateEntitlementRequest = Shapes::StructureShape.new(name: 'CreateEntitlementRequest')
     CreateEntitlementResult = Shapes::StructureShape.new(name: 'CreateEntitlementResult')
+    CreateExportImageTaskRequest = Shapes::StructureShape.new(name: 'CreateExportImageTaskRequest')
+    CreateExportImageTaskResult = Shapes::StructureShape.new(name: 'CreateExportImageTaskResult')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
     CreateFleetResult = Shapes::StructureShape.new(name: 'CreateFleetResult')
     CreateImageBuilderRequest = Shapes::StructureShape.new(name: 'CreateImageBuilderRequest')
     CreateImageBuilderResult = Shapes::StructureShape.new(name: 'CreateImageBuilderResult')
     CreateImageBuilderStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateImageBuilderStreamingURLRequest')
     CreateImageBuilderStreamingURLResult = Shapes::StructureShape.new(name: 'CreateImageBuilderStreamingURLResult')
+    CreateImportedImageRequest = Shapes::StructureShape.new(name: 'CreateImportedImageRequest')
+    CreateImportedImageResult = Shapes::StructureShape.new(name: 'CreateImportedImageResult')
     CreateStackRequest = Shapes::StructureShape.new(name: 'CreateStackRequest')
     CreateStackResult = Shapes::StructureShape.new(name: 'CreateStackResult')
     CreateStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateStreamingURLRequest')
@@ -189,6 +199,7 @@ module Aws::AppStream
     Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
+    DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     DynamicAppProvidersEnabled = Shapes::StringShape.new(name: 'DynamicAppProvidersEnabled')
     EmbedHostDomain = Shapes::StringShape.new(name: 'EmbedHostDomain')
     EmbedHostDomains = Shapes::ListShape.new(name: 'EmbedHostDomains')
@@ -207,7 +218,16 @@ module Aws::AppStream
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
+    ExportImageTask = Shapes::StructureShape.new(name: 'ExportImageTask')
+    ExportImageTaskState = Shapes::StringShape.new(name: 'ExportImageTaskState')
+    ExportImageTasks = Shapes::ListShape.new(name: 'ExportImageTasks')
     FeedbackURL = Shapes::StringShape.new(name: 'FeedbackURL')
+    FilePath = Shapes::StringShape.new(name: 'FilePath')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterValue = Shapes::StringShape.new(name: 'FilterValue')
+    FilterValues = Shapes::ListShape.new(name: 'FilterValues')
+    Filters = Shapes::ListShape.new(name: 'Filters')
     Fleet = Shapes::StructureShape.new(name: 'Fleet')
     FleetAttribute = Shapes::StringShape.new(name: 'FleetAttribute')
     FleetAttributes = Shapes::ListShape.new(name: 'FleetAttributes')
@@ -217,19 +237,25 @@ module Aws::AppStream
     FleetList = Shapes::ListShape.new(name: 'FleetList')
     FleetState = Shapes::StringShape.new(name: 'FleetState')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
+    GetExportImageTaskRequest = Shapes::StructureShape.new(name: 'GetExportImageTaskRequest')
+    GetExportImageTaskResult = Shapes::StructureShape.new(name: 'GetExportImageTaskResult')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageBuilder = Shapes::StructureShape.new(name: 'ImageBuilder')
     ImageBuilderList = Shapes::ListShape.new(name: 'ImageBuilderList')
     ImageBuilderState = Shapes::StringShape.new(name: 'ImageBuilderState')
     ImageBuilderStateChangeReason = Shapes::StructureShape.new(name: 'ImageBuilderStateChangeReason')
     ImageBuilderStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageBuilderStateChangeReasonCode')
+    ImageImportDescription = Shapes::StringShape.new(name: 'ImageImportDescription')
+    ImageImportDisplayName = Shapes::StringShape.new(name: 'ImageImportDisplayName')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImagePermissions = Shapes::StructureShape.new(name: 'ImagePermissions')
     ImageSharedWithOthers = Shapes::StringShape.new(name: 'ImageSharedWithOthers')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
+    ImageType = Shapes::StringShape.new(name: 'ImageType')
     IncompatibleImageException = Shapes::StructureShape.new(name: 'IncompatibleImageException')
+    InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAccountStatusException = Shapes::StructureShape.new(name: 'InvalidAccountStatusException')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
@@ -237,6 +263,7 @@ module Aws::AppStream
     LastReportGenerationExecutionError = Shapes::StructureShape.new(name: 'LastReportGenerationExecutionError')
     LastReportGenerationExecutionErrors = Shapes::ListShape.new(name: 'LastReportGenerationExecutionErrors')
     LatestAppstreamAgentVersion = Shapes::StringShape.new(name: 'LatestAppstreamAgentVersion')
+    LaunchParameters = Shapes::StringShape.new(name: 'LaunchParameters')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAssociatedFleetsRequest = Shapes::StructureShape.new(name: 'ListAssociatedFleetsRequest')
     ListAssociatedFleetsResult = Shapes::StructureShape.new(name: 'ListAssociatedFleetsResult')
@@ -244,6 +271,8 @@ module Aws::AppStream
     ListAssociatedStacksResult = Shapes::StructureShape.new(name: 'ListAssociatedStacksResult')
     ListEntitledApplicationsRequest = Shapes::StructureShape.new(name: 'ListEntitledApplicationsRequest')
     ListEntitledApplicationsResult = Shapes::StructureShape.new(name: 'ListEntitledApplicationsResult')
+    ListExportImageTasksRequest = Shapes::StructureShape.new(name: 'ListExportImageTasksRequest')
+    ListExportImageTasksResult = Shapes::StructureShape.new(name: 'ListExportImageTasksResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -257,6 +286,7 @@ module Aws::AppStream
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
     PackagingType = Shapes::StringShape.new(name: 'PackagingType')
     Permission = Shapes::StringShape.new(name: 'Permission')
+    PhotonAmiId = Shapes::StringShape.new(name: 'PhotonAmiId')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     Platforms = Shapes::ListShape.new(name: 'Platforms')
     PreferredProtocol = Shapes::StringShape.new(name: 'PreferredProtocol')
@@ -270,6 +300,7 @@ module Aws::AppStream
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotAvailableException = Shapes::StructureShape.new(name: 'ResourceNotAvailableException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RuntimeValidationConfig = Shapes::StructureShape.new(name: 'RuntimeValidationConfig')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
@@ -333,6 +364,7 @@ module Aws::AppStream
     ThemeStyling = Shapes::StringShape.new(name: 'ThemeStyling')
     ThemeTitleText = Shapes::StringShape.new(name: 'ThemeTitleText')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UUID = Shapes::StringShape.new(name: 'UUID')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'UpdateAppBlockBuilderRequest')
@@ -370,6 +402,7 @@ module Aws::AppStream
     UserStackAssociationList = Shapes::ListShape.new(name: 'UserStackAssociationList')
     Username = Shapes::StringShape.new(name: 'Username')
     VisibilityType = Shapes::StringShape.new(name: 'VisibilityType')
+    VolumeConfig = Shapes::StructureShape.new(name: 'VolumeConfig')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
     AccessEndpoint.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: AccessEndpointType, required: true, location_name: "EndpointType"))
@@ -434,6 +467,8 @@ module Aws::AppStream
 
     AppBlocks.member = Shapes::ShapeRef.new(shape: AppBlock)
 
+    AppCatalogConfig.member = Shapes::ShapeRef.new(shape: ApplicationConfig)
+
     Application.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Application.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
     Application.add_member(:icon_url, Shapes::ShapeRef.new(shape: String, location_name: "IconURL"))
@@ -452,6 +487,15 @@ module Aws::AppStream
     Application.struct_class = Types::Application
 
     ApplicationAttributes.member = Shapes::ShapeRef.new(shape: ApplicationAttribute)
+
+    ApplicationConfig.add_member(:name, Shapes::ShapeRef.new(shape: AppName, required: true, location_name: "Name"))
+    ApplicationConfig.add_member(:display_name, Shapes::ShapeRef.new(shape: AppDisplayName, location_name: "DisplayName"))
+    ApplicationConfig.add_member(:absolute_app_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "AbsoluteAppPath"))
+    ApplicationConfig.add_member(:absolute_icon_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "AbsoluteIconPath"))
+    ApplicationConfig.add_member(:absolute_manifest_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "AbsoluteManifestPath"))
+    ApplicationConfig.add_member(:working_directory, Shapes::ShapeRef.new(shape: FilePath, location_name: "WorkingDirectory"))
+    ApplicationConfig.add_member(:launch_parameters, Shapes::ShapeRef.new(shape: LaunchParameters, location_name: "LaunchParameters"))
+    ApplicationConfig.struct_class = Types::ApplicationConfig
 
     ApplicationFleetAssociation.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     ApplicationFleetAssociation.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ApplicationArn"))
@@ -620,6 +664,16 @@ module Aws::AppStream
     CreateEntitlementResult.add_member(:entitlement, Shapes::ShapeRef.new(shape: Entitlement, location_name: "Entitlement"))
     CreateEntitlementResult.struct_class = Types::CreateEntitlementResult
 
+    CreateExportImageTaskRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ImageName"))
+    CreateExportImageTaskRequest.add_member(:ami_name, Shapes::ShapeRef.new(shape: AmiName, required: true, location_name: "AmiName"))
+    CreateExportImageTaskRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "IamRoleArn"))
+    CreateExportImageTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: Tags, location_name: "TagSpecifications"))
+    CreateExportImageTaskRequest.add_member(:ami_description, Shapes::ShapeRef.new(shape: Description, location_name: "AmiDescription"))
+    CreateExportImageTaskRequest.struct_class = Types::CreateExportImageTaskRequest
+
+    CreateExportImageTaskResult.add_member(:export_image_task, Shapes::ShapeRef.new(shape: ExportImageTask, location_name: "ExportImageTask"))
+    CreateExportImageTaskResult.struct_class = Types::CreateExportImageTaskResult
+
     CreateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: Name, location_name: "ImageName"))
     CreateFleetRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
@@ -642,6 +696,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
     CreateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     CreateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
+    CreateFleetRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -660,6 +715,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     CreateImageBuilderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateImageBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    CreateImageBuilderRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     CreateImageBuilderRequest.add_member(:softwares_to_install, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToInstall"))
     CreateImageBuilderRequest.add_member(:softwares_to_uninstall, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToUninstall"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
@@ -674,6 +730,21 @@ module Aws::AppStream
     CreateImageBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
     CreateImageBuilderStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateImageBuilderStreamingURLResult.struct_class = Types::CreateImageBuilderStreamingURLResult
+
+    CreateImportedImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateImportedImageRequest.add_member(:source_ami_id, Shapes::ShapeRef.new(shape: PhotonAmiId, required: true, location_name: "SourceAmiId"))
+    CreateImportedImageRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "IamRoleArn"))
+    CreateImportedImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageImportDescription, location_name: "Description"))
+    CreateImportedImageRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageImportDisplayName, location_name: "DisplayName"))
+    CreateImportedImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateImportedImageRequest.add_member(:runtime_validation_config, Shapes::ShapeRef.new(shape: RuntimeValidationConfig, location_name: "RuntimeValidationConfig"))
+    CreateImportedImageRequest.add_member(:agent_software_version, Shapes::ShapeRef.new(shape: AgentSoftwareVersion, location_name: "AgentSoftwareVersion"))
+    CreateImportedImageRequest.add_member(:app_catalog_config, Shapes::ShapeRef.new(shape: AppCatalogConfig, location_name: "AppCatalogConfig"))
+    CreateImportedImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateImportedImageRequest.struct_class = Types::CreateImportedImageRequest
+
+    CreateImportedImageResult.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "Image"))
+    CreateImportedImageResult.struct_class = Types::CreateImportedImageResult
 
     CreateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -1044,6 +1115,9 @@ module Aws::AppStream
 
     DomainList.member = Shapes::ShapeRef.new(shape: Domain)
 
+    DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DryRunOperationException.struct_class = Types::DryRunOperationException
+
     EmbedHostDomains.member = Shapes::ShapeRef.new(shape: EmbedHostDomain)
 
     EnableUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "UserName"))
@@ -1091,6 +1165,27 @@ module Aws::AppStream
 
     ExpireSessionResult.struct_class = Types::ExpireSessionResult
 
+    ExportImageTask.add_member(:task_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TaskId"))
+    ExportImageTask.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ImageArn"))
+    ExportImageTask.add_member(:ami_name, Shapes::ShapeRef.new(shape: AmiName, required: true, location_name: "AmiName"))
+    ExportImageTask.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    ExportImageTask.add_member(:ami_description, Shapes::ShapeRef.new(shape: Description, location_name: "AmiDescription"))
+    ExportImageTask.add_member(:state, Shapes::ShapeRef.new(shape: ExportImageTaskState, location_name: "State"))
+    ExportImageTask.add_member(:ami_id, Shapes::ShapeRef.new(shape: PhotonAmiId, location_name: "AmiId"))
+    ExportImageTask.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: Tags, location_name: "TagSpecifications"))
+    ExportImageTask.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetailsList, location_name: "ErrorDetails"))
+    ExportImageTask.struct_class = Types::ExportImageTask
+
+    ExportImageTasks.member = Shapes::ShapeRef.new(shape: ExportImageTask)
+
+    Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "Name"))
+    Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "Values"))
+    Filter.struct_class = Types::Filter
+
+    FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
+
+    Filters.member = Shapes::ShapeRef.new(shape: Filter)
+
     Fleet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     Fleet.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Fleet.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
@@ -1116,6 +1211,7 @@ module Aws::AppStream
     Fleet.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
     Fleet.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     Fleet.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
+    Fleet.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -1127,6 +1223,12 @@ module Aws::AppStream
     FleetErrors.member = Shapes::ShapeRef.new(shape: FleetError)
 
     FleetList.member = Shapes::ShapeRef.new(shape: Fleet)
+
+    GetExportImageTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: UUID, location_name: "TaskId"))
+    GetExportImageTaskRequest.struct_class = Types::GetExportImageTaskRequest
+
+    GetExportImageTaskResult.add_member(:export_image_task, Shapes::ShapeRef.new(shape: ExportImageTask, location_name: "ExportImageTask"))
+    GetExportImageTaskResult.struct_class = Types::GetExportImageTaskResult
 
     Image.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Image.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -1150,6 +1252,7 @@ module Aws::AppStream
     Image.add_member(:dynamic_app_providers_enabled, Shapes::ShapeRef.new(shape: DynamicAppProvidersEnabled, location_name: "DynamicAppProvidersEnabled"))
     Image.add_member(:image_shared_with_others, Shapes::ShapeRef.new(shape: ImageSharedWithOthers, location_name: "ImageSharedWithOthers"))
     Image.add_member(:managed_software_included, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedSoftwareIncluded"))
+    Image.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, location_name: "ImageType"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -1170,6 +1273,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:image_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageBuilderErrors"))
     ImageBuilder.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     ImageBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    ImageBuilder.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     ImageBuilder.add_member(:latest_appstream_agent_version, Shapes::ShapeRef.new(shape: LatestAppstreamAgentVersion, location_name: "LatestAppstreamAgentVersion"))
     ImageBuilder.struct_class = Types::ImageBuilder
 
@@ -1236,6 +1340,15 @@ module Aws::AppStream
     ListEntitledApplicationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEntitledApplicationsResult.struct_class = Types::ListEntitledApplicationsResult
 
+    ListExportImageTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListExportImageTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListExportImageTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListExportImageTasksRequest.struct_class = Types::ListExportImageTasksRequest
+
+    ListExportImageTasksResult.add_member(:export_image_tasks, Shapes::ShapeRef.new(shape: ExportImageTasks, location_name: "ExportImageTasks"))
+    ListExportImageTasksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListExportImageTasksResult.struct_class = Types::ListExportImageTasksResult
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1278,6 +1391,9 @@ module Aws::AppStream
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RuntimeValidationConfig.add_member(:intended_instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "IntendedInstanceType"))
+    RuntimeValidationConfig.struct_class = Types::RuntimeValidationConfig
 
     S3Location.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
     S3Location.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
@@ -1510,6 +1626,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
     UpdateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     UpdateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
+    UpdateFleetRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -1596,6 +1713,9 @@ module Aws::AppStream
     UserStackAssociationErrorList.member = Shapes::ShapeRef.new(shape: UserStackAssociationError)
 
     UserStackAssociationList.member = Shapes::ShapeRef.new(shape: UserStackAssociation)
+
+    VolumeConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "VolumeSizeInGb"))
+    VolumeConfig.struct_class = Types::VolumeConfig
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))
@@ -1801,6 +1921,21 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: EntitlementAlreadyExistsException)
       end)
 
+      api.add_operation(:create_export_image_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExportImageTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateExportImageTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateExportImageTaskResult)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+      end)
+
       api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFleet"
         o.http_method = "POST"
@@ -1847,6 +1982,22 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: CreateImageBuilderStreamingURLResult)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_imported_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImportedImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateImportedImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImportedImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:create_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -2371,6 +2522,16 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: ExpireSessionResult)
       end)
 
+      api.add_operation(:get_export_image_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExportImageTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetExportImageTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExportImageTaskResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_associated_fleets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAssociatedFleets"
         o.http_method = "POST"
@@ -2396,6 +2557,15 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
+      end)
+
+      api.add_operation(:list_export_image_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExportImageTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExportImageTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExportImageTasksResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

@@ -265,6 +265,7 @@ module Aws::Bedrock
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition
       attr_accessor quality_report: Types::AutomatedReasoningPolicyDefinitionQualityReport
       attr_accessor build_log: Types::AutomatedReasoningPolicyBuildLog
+      attr_accessor generated_test_cases: Types::AutomatedReasoningPolicyGeneratedTestCases
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -273,6 +274,8 @@ module Aws::Bedrock
       class QualityReport < AutomatedReasoningPolicyBuildResultAssets
       end
       class BuildLog < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class GeneratedTestCases < AutomatedReasoningPolicyBuildResultAssets
       end
       class Unknown < AutomatedReasoningPolicyBuildResultAssets
       end
@@ -442,6 +445,18 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDisjointRuleSet
       attr_accessor variables: ::Array[::String]
       attr_accessor rules: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutomatedReasoningPolicyGeneratedTestCase
+      attr_accessor query_content: ::String
+      attr_accessor guard_content: ::String
+      attr_accessor expected_aggregated_findings_result: ("VALID" | "INVALID" | "SATISFIABLE" | "IMPOSSIBLE" | "TRANSLATION_AMBIGUOUS" | "TOO_COMPLEX" | "NO_TRANSLATION")
+      SENSITIVE: [:query_content, :guard_content]
+    end
+
+    class AutomatedReasoningPolicyGeneratedTestCases
+      attr_accessor generated_test_cases: ::Array[Types::AutomatedReasoningPolicyGeneratedTestCase]
       SENSITIVE: []
     end
 
@@ -1439,7 +1454,7 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest
       attr_accessor policy_arn: ::String
       attr_accessor build_workflow_id: ::String
-      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION")
+      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES")
       SENSITIVE: []
     end
 

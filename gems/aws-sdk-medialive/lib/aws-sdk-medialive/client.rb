@@ -1807,6 +1807,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -3225,6 +3227,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -4407,6 +4411,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -6806,6 +6812,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -7795,6 +7803,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -8817,6 +8827,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -9722,6 +9734,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -11214,6 +11228,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -14651,7 +14667,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

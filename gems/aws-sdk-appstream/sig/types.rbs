@@ -89,6 +89,17 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class ApplicationConfig
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor absolute_app_path: ::String
+      attr_accessor absolute_icon_path: ::String
+      attr_accessor absolute_manifest_path: ::String
+      attr_accessor working_directory: ::String
+      attr_accessor launch_parameters: ::String
+      SENSITIVE: [:absolute_app_path, :absolute_icon_path, :absolute_manifest_path, :working_directory, :launch_parameters]
+    end
+
     class ApplicationFleetAssociation
       attr_accessor fleet_name: ::String
       attr_accessor application_arn: ::String
@@ -315,6 +326,20 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class CreateExportImageTaskRequest
+      attr_accessor image_name: ::String
+      attr_accessor ami_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor tag_specifications: ::Hash[::String, ::String]
+      attr_accessor ami_description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExportImageTaskResult
+      attr_accessor export_image_task: Types::ExportImageTask
+      SENSITIVE: []
+    end
+
     class CreateFleetRequest
       attr_accessor name: ::String
       attr_accessor image_name: ::String
@@ -338,6 +363,7 @@ module Aws::AppStream
       attr_accessor usb_device_filter_strings: ::Array[::String]
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
+      attr_accessor root_volume_config: Types::VolumeConfig
       SENSITIVE: []
     end
 
@@ -360,6 +386,7 @@ module Aws::AppStream
       attr_accessor appstream_agent_version: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor softwares_to_install: ::Array[::String]
       attr_accessor softwares_to_uninstall: ::Array[::String]
       SENSITIVE: []
@@ -379,6 +406,25 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLResult
       attr_accessor streaming_url: ::String
       attr_accessor expires: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateImportedImageRequest
+      attr_accessor name: ::String
+      attr_accessor source_ami_id: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor runtime_validation_config: Types::RuntimeValidationConfig
+      attr_accessor agent_software_version: ("CURRENT_LATEST" | "ALWAYS_LATEST")
+      attr_accessor app_catalog_config: ::Array[Types::ApplicationConfig]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateImportedImageResult
+      attr_accessor image: Types::Image
       SENSITIVE: []
     end
 
@@ -905,6 +951,11 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class DryRunOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class EnableUserRequest
       attr_accessor user_name: ::String
       attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
@@ -960,6 +1011,25 @@ module Aws::AppStream
     class ExpireSessionResult < Aws::EmptyStructure
     end
 
+    class ExportImageTask
+      attr_accessor task_id: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor ami_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor ami_description: ::String
+      attr_accessor state: ("EXPORTING" | "COMPLETED" | "FAILED")
+      attr_accessor ami_id: ::String
+      attr_accessor tag_specifications: ::Hash[::String, ::String]
+      attr_accessor error_details: ::Array[Types::ErrorDetails]
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Fleet
       attr_accessor arn: ::String
       attr_accessor name: ::String
@@ -986,12 +1056,23 @@ module Aws::AppStream
       attr_accessor usb_device_filter_strings: ::Array[::String]
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
+      attr_accessor root_volume_config: Types::VolumeConfig
       SENSITIVE: []
     end
 
     class FleetError
-      attr_accessor error_code: ("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "IAM_SERVICE_ROLE_IS_MISSING" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "FLEET_STOPPED" | "FLEET_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR")
+      attr_accessor error_code: ("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "IAM_SERVICE_ROLE_IS_MISSING" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "FLEET_STOPPED" | "FLEET_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR" | "VALIDATION_ERROR")
       attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportImageTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportImageTaskResult
+      attr_accessor export_image_task: Types::ExportImageTask
       SENSITIVE: []
     end
 
@@ -1000,7 +1081,7 @@ module Aws::AppStream
       attr_accessor arn: ::String
       attr_accessor base_image_arn: ::String
       attr_accessor display_name: ::String
-      attr_accessor state: ("PENDING" | "AVAILABLE" | "FAILED" | "COPYING" | "DELETING" | "CREATING" | "IMPORTING")
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "FAILED" | "COPYING" | "DELETING" | "CREATING" | "IMPORTING" | "VALIDATING")
       attr_accessor visibility: ("PUBLIC" | "PRIVATE" | "SHARED")
       attr_accessor image_builder_supported: bool
       attr_accessor image_builder_name: ::String
@@ -1018,6 +1099,7 @@ module Aws::AppStream
       attr_accessor dynamic_app_providers_enabled: ("ENABLED" | "DISABLED")
       attr_accessor image_shared_with_others: ("TRUE" | "FALSE")
       attr_accessor managed_software_included: bool
+      attr_accessor image_type: ("CUSTOM" | "NATIVE")
       SENSITIVE: []
     end
 
@@ -1031,7 +1113,7 @@ module Aws::AppStream
       attr_accessor instance_type: ::String
       attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8" | "ROCKY_LINUX8")
       attr_accessor iam_role_arn: ::String
-      attr_accessor state: ("PENDING" | "UPDATING_AGENT" | "RUNNING" | "STOPPING" | "STOPPED" | "REBOOTING" | "SNAPSHOTTING" | "DELETING" | "FAILED" | "UPDATING" | "PENDING_QUALIFICATION" | "PENDING_SYNCING_APPS" | "SYNCING_APPS")
+      attr_accessor state: ("PENDING" | "UPDATING_AGENT" | "RUNNING" | "STOPPING" | "STOPPED" | "REBOOTING" | "SNAPSHOTTING" | "DELETING" | "FAILED" | "UPDATING" | "PENDING_QUALIFICATION" | "PENDING_SYNCING_APPS" | "SYNCING_APPS" | "PENDING_IMAGE_IMPORT")
       attr_accessor state_change_reason: Types::ImageBuilderStateChangeReason
       attr_accessor created_time: ::Time
       attr_accessor enable_default_internet_access: bool
@@ -1040,6 +1122,7 @@ module Aws::AppStream
       attr_accessor image_builder_errors: ::Array[Types::ResourceError]
       attr_accessor appstream_agent_version: ::String
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor latest_appstream_agent_version: ("TRUE" | "FALSE")
       SENSITIVE: []
     end
@@ -1057,7 +1140,7 @@ module Aws::AppStream
     end
 
     class ImageStateChangeReason
-      attr_accessor code: ("INTERNAL_ERROR" | "IMAGE_BUILDER_NOT_AVAILABLE" | "IMAGE_COPY_FAILURE")
+      attr_accessor code: ("INTERNAL_ERROR" | "IMAGE_BUILDER_NOT_AVAILABLE" | "IMAGE_COPY_FAILURE" | "IMAGE_UPDATE_FAILURE" | "IMAGE_IMPORT_FAILURE")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1131,6 +1214,19 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class ListExportImageTasksRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportImageTasksResult
+      attr_accessor export_image_tasks: ::Array[Types::ExportImageTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -1164,7 +1260,7 @@ module Aws::AppStream
     end
 
     class ResourceError
-      attr_accessor error_code: ("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "IAM_SERVICE_ROLE_IS_MISSING" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "FLEET_STOPPED" | "FLEET_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR")
+      attr_accessor error_code: ("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "IAM_SERVICE_ROLE_IS_MISSING" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "FLEET_STOPPED" | "FLEET_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR" | "VALIDATION_ERROR")
       attr_accessor error_message: ::String
       attr_accessor error_timestamp: ::Time
       SENSITIVE: []
@@ -1182,6 +1278,11 @@ module Aws::AppStream
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeValidationConfig
+      attr_accessor intended_instance_type: ::String
       SENSITIVE: []
     end
 
@@ -1451,7 +1552,7 @@ module Aws::AppStream
       attr_accessor enable_default_internet_access: bool
       attr_accessor domain_join_info: Types::DomainJoinInfo
       attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
-      attr_accessor attributes_to_delete: ::Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE")]
+      attr_accessor attributes_to_delete: ::Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE" | "VOLUME_CONFIGURATION")]
       attr_accessor iam_role_arn: ::String
       attr_accessor stream_view: ("APP" | "DESKTOP")
       attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8" | "ROCKY_LINUX8")
@@ -1459,6 +1560,7 @@ module Aws::AppStream
       attr_accessor usb_device_filter_strings: ::Array[::String]
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
+      attr_accessor root_volume_config: Types::VolumeConfig
       SENSITIVE: []
     end
 
@@ -1555,6 +1657,11 @@ module Aws::AppStream
       attr_accessor user_stack_association: Types::UserStackAssociation
       attr_accessor error_code: ("STACK_NOT_FOUND" | "USER_NAME_NOT_FOUND" | "DIRECTORY_NOT_FOUND" | "INTERNAL_ERROR")
       attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class VolumeConfig
+      attr_accessor volume_size_in_gb: ::Integer
       SENSITIVE: []
     end
 

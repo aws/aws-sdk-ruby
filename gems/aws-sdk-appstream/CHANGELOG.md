@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-11-17)
+------------------
+
+* Feature - Adding support for additional instances and extended storage
+
 1.121.0 (2025-11-10)
 ------------------
 

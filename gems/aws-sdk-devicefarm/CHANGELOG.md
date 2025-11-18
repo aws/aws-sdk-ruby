@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2025-11-17)
+------------------
+
+* Feature - This release adds support for interacting with devices during a remote access session using the remoteDriverEndpoint interface
+
 1.96.0 (2025-10-22)
 ------------------
 

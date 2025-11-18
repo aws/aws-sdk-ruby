@@ -107,6 +107,9 @@ module Aws
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,
                                 mode: ("STANDARD" | "NONE")
+                              }?,
+                              slurm_rest: {
+                                mode: ("STANDARD" | "NONE")
                               }?
                             },
                             ?client_token: ::String,
@@ -306,19 +309,25 @@ module Aws
                                                 ) -> _RegisterComputeNodeGroupInstanceResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterComputeNodeGroupInstanceResponseSuccess
 
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#tag_resource-instance_method
       def tag_resource: (
                           resource_arn: ::String,
                           tags: Hash[::String, ::String]
-                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
 
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#untag_resource-instance_method
       def untag_resource: (
                             resource_arn: ::String,
                             tag_keys: Array[::String]
-                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResponse]
@@ -338,6 +347,9 @@ module Aws
                               ]?,
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,
+                                mode: ("STANDARD" | "NONE")?
+                              }?,
+                              slurm_rest: {
                                 mode: ("STANDARD" | "NONE")?
                               }?
                             }

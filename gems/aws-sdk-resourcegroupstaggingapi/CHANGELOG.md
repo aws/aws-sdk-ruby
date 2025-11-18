@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2025-11-18)
+------------------
+
+* Feature - Add support for new ListRequiredTags API used to retrieve the required tags specified in a customer's effective tag policy.
+
 1.87.0 (2025-10-31)
 ------------------
 

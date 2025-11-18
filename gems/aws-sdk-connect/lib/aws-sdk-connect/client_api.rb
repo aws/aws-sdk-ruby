@@ -1231,6 +1231,7 @@ module Aws::Connect
     ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
     ResumeContactRequest = Shapes::StructureShape.new(name: 'ResumeContactRequest')
     ResumeContactResponse = Shapes::StructureShape.new(name: 'ResumeContactResponse')
+    RingTimeoutInSeconds = Shapes::IntegerShape.new(name: 'RingTimeoutInSeconds')
     RoutingCriteria = Shapes::StructureShape.new(name: 'RoutingCriteria')
     RoutingCriteriaInput = Shapes::StructureShape.new(name: 'RoutingCriteriaInput')
     RoutingCriteriaInputStep = Shapes::StructureShape.new(name: 'RoutingCriteriaInputStep')
@@ -2244,6 +2245,7 @@ module Aws::Connect
     Contact.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTimestamp"))
     Contact.add_member(:last_paused_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastPausedTimestamp"))
     Contact.add_member(:last_resumed_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastResumedTimestamp"))
+    Contact.add_member(:ring_start_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "RingStartTimestamp"))
     Contact.add_member(:total_pause_count, Shapes::ShapeRef.new(shape: TotalPauseCount, location_name: "TotalPauseCount"))
     Contact.add_member(:total_pause_duration_in_seconds, Shapes::ShapeRef.new(shape: TotalPauseDurationInSeconds, location_name: "TotalPauseDurationInSeconds"))
     Contact.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
@@ -6311,6 +6313,7 @@ module Aws::Connect
     StartOutboundVoiceContactRequest.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
     StartOutboundVoiceContactRequest.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "TrafficType"))
     StartOutboundVoiceContactRequest.add_member(:outbound_strategy, Shapes::ShapeRef.new(shape: OutboundStrategy, location_name: "OutboundStrategy"))
+    StartOutboundVoiceContactRequest.add_member(:ring_timeout_in_seconds, Shapes::ShapeRef.new(shape: RingTimeoutInSeconds, location_name: "RingTimeoutInSeconds"))
     StartOutboundVoiceContactRequest.struct_class = Types::StartOutboundVoiceContactRequest
 
     StartOutboundVoiceContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))

@@ -198,7 +198,8 @@ module Aws
                                ],
                                ?include_nested_stacks: bool,
                                ?on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE"),
-                               ?import_existing_resources: bool
+                               ?import_existing_resources: bool,
+                               ?deployment_mode: ("REVERT_DRIFT")
                              ) -> _CreateChangeSetResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChangeSetResponseSuccess
 
@@ -227,6 +228,7 @@ module Aws
       interface _CreateStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackOutput]
         def stack_id: () -> ::String
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_stack-instance_method
       def create_stack: (
@@ -499,6 +501,7 @@ module Aws
         def execution_status: () -> ("UNAVAILABLE" | "AVAILABLE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "OBSOLETE")
         def status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "FAILED")
         def status_reason: () -> ::String
+        def stack_drift_status: () -> ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
         def notification_arns: () -> ::Array[::String]
         def rollback_configuration: () -> Types::RollbackConfiguration
         def capabilities: () -> ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
@@ -510,6 +513,7 @@ module Aws
         def root_change_set_id: () -> ::String
         def on_stack_failure: () -> ("DO_NOTHING" | "ROLLBACK" | "DELETE")
         def import_existing_resources: () -> bool
+        def deployment_mode: () -> ("REVERT_DRIFT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_change_set-instance_method
       def describe_change_set: (
@@ -538,6 +542,23 @@ module Aws
                                        ?logical_resource_id: ::String
                                      ) -> _DescribeChangeSetHooksResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChangeSetHooksResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsOutput]
+        def operation_events: () -> ::Array[Types::OperationEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?stack_name: ::String,
+                             ?change_set_name: ::String,
+                             ?operation_id: ::String,
+                             ?filters: {
+                               failed_events: bool?
+                             },
+                             ?next_token: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
 
       interface _DescribeGeneratedTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGeneratedTemplateOutput]
@@ -677,7 +698,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_resource_drifts-instance_method
       def describe_stack_resource_drifts: (
                                             stack_name: ::String,
-                                            ?stack_resource_drift_status_filters: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")],
+                                            ?stack_resource_drift_status_filters: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN" | "UNSUPPORTED")],
                                             ?next_token: ::String,
                                             ?max_results: ::Integer
                                           ) -> _DescribeStackResourceDriftsResponseSuccess
@@ -1095,7 +1116,7 @@ module Aws
                                                  stack_set_name: ::String,
                                                  ?next_token: ::String,
                                                  ?max_results: ::Integer,
-                                                 ?stack_instance_resource_drift_statuses: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN")],
+                                                 ?stack_instance_resource_drift_statuses: Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED" | "UNKNOWN" | "UNSUPPORTED")],
                                                  stack_instance_account: ::String,
                                                  stack_instance_region: ::String,
                                                  operation_id: ::String,
@@ -1352,6 +1373,7 @@ module Aws
       interface _RollbackStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RollbackStackOutput]
         def stack_id: () -> ::String
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#rollback_stack-instance_method
       def rollback_stack: (
@@ -1472,6 +1494,7 @@ module Aws
       interface _UpdateStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStackOutput]
         def stack_id: () -> ::String
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#update_stack-instance_method
       def update_stack: (

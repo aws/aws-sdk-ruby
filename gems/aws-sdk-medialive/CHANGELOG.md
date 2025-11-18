@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2025-11-17)
+------------------
+
+* Feature - Adds configurations for spatial/temporal adaptive quantization in AV1 codec, and conversion to HLG output color space in H265 codec.
+
 1.167.0 (2025-11-14)
 ------------------
 

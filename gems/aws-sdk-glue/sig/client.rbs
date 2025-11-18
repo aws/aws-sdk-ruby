@@ -912,6 +912,7 @@ module Aws
       interface _CreateIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationResourcePropertyResponse]
         def resource_arn: () -> ::String
+        def resource_property_arn: () -> ::String
         def source_processing_properties: () -> Types::SourceProcessingProperties
         def target_processing_properties: () -> Types::TargetProcessingProperties
       end
@@ -926,7 +927,13 @@ module Aws
                                                     kms_arn: ::String?,
                                                     connection_name: ::String?,
                                                     event_bus_arn: ::String?
-                                                  }
+                                                  },
+                                                  ?tags: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      value: ::String?
+                                                    },
+                                                  ]
                                                 ) -> _CreateIntegrationResourcePropertyResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResourcePropertyResponseSuccess
 
@@ -3227,6 +3234,15 @@ module Aws
                               ) -> _DeleteIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResponseSuccess
 
+      interface _DeleteIntegrationResourcePropertyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationResourcePropertyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_integration_resource_property-instance_method
+      def delete_integration_resource_property: (
+                                                  resource_arn: ::String
+                                                ) -> _DeleteIntegrationResourcePropertyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResourcePropertyResponseSuccess
+
       interface _DeleteIntegrationTablePropertiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationTablePropertiesResponse]
       end
@@ -3955,6 +3971,7 @@ module Aws
       interface _GetIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationResourcePropertyResponse]
         def resource_arn: () -> ::String
+        def resource_property_arn: () -> ::String
         def source_processing_properties: () -> Types::SourceProcessingProperties
         def target_processing_properties: () -> Types::TargetProcessingProperties
       end
@@ -5064,6 +5081,24 @@ module Aws
                            ?data_store_api_version: ::String
                          ) -> _ListEntitiesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitiesResponseSuccess
+
+      interface _ListIntegrationResourcePropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationResourcePropertiesResponse]
+        def integration_resource_property_list: () -> ::Array[Types::IntegrationResourceProperty]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_integration_resource_properties-instance_method
+      def list_integration_resource_properties: (
+                                                  ?marker: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ],
+                                                  ?max_records: ::Integer
+                                                ) -> _ListIntegrationResourcePropertiesResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationResourcePropertiesResponseSuccess
 
       interface _ListJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]
@@ -6356,6 +6391,7 @@ module Aws
       interface _UpdateIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationResourcePropertyResponse]
         def resource_arn: () -> ::String
+        def resource_property_arn: () -> ::String
         def source_processing_properties: () -> Types::SourceProcessingProperties
         def target_processing_properties: () -> Types::TargetProcessingProperties
       end

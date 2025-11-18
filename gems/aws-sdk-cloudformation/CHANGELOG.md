@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2025-11-18)
+------------------
+
+* Feature - New CloudFormation DescribeEvents API with operation ID tracking and failure filtering capabilities to quickly identify root causes of deployment failures. Also, a DeploymentMode parameter for the CreateChangeSet API that enables creation of drift-aware change sets for safe drift management.
+
 1.144.0 (2025-11-13)
 ------------------
 

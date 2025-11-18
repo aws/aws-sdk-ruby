@@ -54,7 +54,7 @@ module Aws::GuardDuty
   autoload :EndpointProvider, 'aws-sdk-guardduty/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-guardduty/endpoints'
 
-  GEM_VERSION = '1.132.0'
+  GEM_VERSION = '1.133.0'
 
 end
 

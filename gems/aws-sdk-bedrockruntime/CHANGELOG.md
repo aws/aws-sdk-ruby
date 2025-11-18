@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2025-11-18)
+------------------
+
+* Feature - Amazon Bedrock Runtime Service Tier Support Launch
+
 1.63.0 (2025-10-29)
 ------------------
 

@@ -8969,6 +8969,34 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # The S3 object path to initiate a scan, including bucket name, object
+    # key, and optional version ID.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket containing the object to scan. The bucket
+    #   must have GuardDuty Malware Protection enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key (name) of the S3 object to scan for malware. This must be
+    #   the full key path of the object within the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the S3 object to scan. If not specified, the
+    #   latest version of the object is scanned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3ObjectForSendObjectMalwareScan AWS API Documentation
+    #
+    class S3ObjectForSendObjectMalwareScan < Struct.new(
+      :bucket,
+      :key,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about malware scans associated with GuardDuty
     # Malware Protection for EC2.
     #
@@ -9327,6 +9355,24 @@ module Aws::GuardDuty
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] s3_object
+    #   The S3 object information for the object you want to scan. The
+    #   bucket must have a Malware Protection plan configured to use this
+    #   API.
+    #   @return [Types::S3ObjectForSendObjectMalwareScan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SendObjectMalwareScanRequest AWS API Documentation
+    #
+    class SendObjectMalwareScanRequest < Struct.new(
+      :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SendObjectMalwareScanResponse AWS API Documentation
+    #
+    class SendObjectMalwareScanResponse < Aws::EmptyStructure; end
 
     # Contains information about the GuardDuty attack sequence finding.
     #

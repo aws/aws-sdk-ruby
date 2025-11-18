@@ -17,6 +17,9 @@ module Aws
       class AlreadyExistsFault < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class IdempotentParameterMismatchError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InstanceRefreshInProgressFault < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

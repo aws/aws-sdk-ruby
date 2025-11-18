@@ -689,6 +689,7 @@ module Aws::Connect
       attr_accessor last_update_timestamp: ::Time
       attr_accessor last_paused_timestamp: ::Time
       attr_accessor last_resumed_timestamp: ::Time
+      attr_accessor ring_start_timestamp: ::Time
       attr_accessor total_pause_count: ::Integer
       attr_accessor total_pause_duration_in_seconds: ::Integer
       attr_accessor scheduled_timestamp: ::Time
@@ -5839,6 +5840,7 @@ module Aws::Connect
       attr_accessor campaign_id: ::String
       attr_accessor traffic_type: ("GENERAL" | "CAMPAIGN")
       attr_accessor outbound_strategy: Types::OutboundStrategy
+      attr_accessor ring_timeout_in_seconds: ::Integer
       SENSITIVE: [:name, :description]
     end
 

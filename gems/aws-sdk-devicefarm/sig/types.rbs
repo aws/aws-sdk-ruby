@@ -131,12 +131,7 @@ module Aws::DeviceFarm
       attr_accessor device_arn: ::String
       attr_accessor app_arn: ::String
       attr_accessor instance_arn: ::String
-      attr_accessor ssh_public_key: ::String
-      attr_accessor remote_debug_enabled: bool
-      attr_accessor remote_record_enabled: bool
-      attr_accessor remote_record_app_arn: ::String
       attr_accessor name: ::String
-      attr_accessor client_id: ::String
       attr_accessor configuration: Types::CreateRemoteAccessSessionConfiguration
       attr_accessor interaction_mode: ("INTERACTIVE" | "NO_VIDEO" | "VIDEO_ONLY")
       attr_accessor skip_app_resign: bool
@@ -1044,6 +1039,12 @@ module Aws::DeviceFarm
       SENSITIVE: []
     end
 
+    class RemoteAccessEndpoints
+      attr_accessor remote_driver_endpoint: ::String
+      attr_accessor interactive_endpoint: ::String
+      SENSITIVE: [:remote_driver_endpoint, :interactive_endpoint]
+    end
+
     class RemoteAccessSession
       attr_accessor arn: ::String
       attr_accessor name: ::String
@@ -1055,11 +1056,6 @@ module Aws::DeviceFarm
       attr_accessor stopped: ::Time
       attr_accessor device: Types::Device
       attr_accessor instance_arn: ::String
-      attr_accessor remote_debug_enabled: bool
-      attr_accessor remote_record_enabled: bool
-      attr_accessor remote_record_app_arn: ::String
-      attr_accessor host_address: ::String
-      attr_accessor client_id: ::String
       attr_accessor billing_method: ("METERED" | "UNMETERED")
       attr_accessor device_minutes: Types::DeviceMinutes
       attr_accessor endpoint: ::String
@@ -1069,6 +1065,7 @@ module Aws::DeviceFarm
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor device_proxy: Types::DeviceProxy
       attr_accessor app_upload: ::String
+      attr_accessor endpoints: Types::RemoteAccessEndpoints
       SENSITIVE: []
     end
 

@@ -2985,8 +2985,8 @@ module Aws::Glue
     #
     #   resp = client.create_integration({
     #     integration_name: "String128", # required
-    #     source_arn: "String128", # required
-    #     target_arn: "String128", # required
+    #     source_arn: "String512", # required
+    #     target_arn: "String512", # required
     #     description: "IntegrationDescription",
     #     data_filter: "String2048",
     #     kms_key_id: "String2048",
@@ -3058,16 +3058,21 @@ module Aws::Glue
     # @option params [Types::TargetProcessingProperties] :target_processing_properties
     #   The resource properties associated with the integration target.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata assigned to the resource consisting of a list of key-value
+    #   pairs.
+    #
     # @return [Types::CreateIntegrationResourcePropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntegrationResourcePropertyResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateIntegrationResourcePropertyResponse#resource_property_arn #resource_property_arn} => String
     #   * {Types::CreateIntegrationResourcePropertyResponse#source_processing_properties #source_processing_properties} => Types::SourceProcessingProperties
     #   * {Types::CreateIntegrationResourcePropertyResponse#target_processing_properties #target_processing_properties} => Types::TargetProcessingProperties
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration_resource_property({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     source_processing_properties: {
     #       role_arn: "String128",
     #     },
@@ -3077,11 +3082,18 @@ module Aws::Glue
     #       connection_name: "String128",
     #       event_bus_arn: "String2048",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #   resp.resource_property_arn #=> String
     #   resp.source_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.kms_arn #=> String
@@ -3130,7 +3142,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #     source_table_config: {
     #       fields: ["String128"],
@@ -5241,6 +5253,29 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # This API is used for deleting the `ResourceProperty` of the Glue
+    # connection (for the source) or Glue database ARN (for the target).
+    #
+    # @option params [required, String] :resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration_resource_property({
+    #     resource_arn: "String512", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteIntegrationResourceProperty AWS API Documentation
+    #
+    # @overload delete_integration_resource_property(params = {})
+    # @param [Hash] params ({})
+    def delete_integration_resource_property(params = {}, options = {})
+      req = build_request(:delete_integration_resource_property, params)
+      req.send_request(options)
+    end
+
     # Deletes the table properties that have been created for the tables
     # that need to be replicated.
     #
@@ -5255,7 +5290,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #   })
     #
@@ -6167,7 +6202,7 @@ module Aws::Glue
     #     integration_arn: "String128",
     #     marker: "String128",
     #     max_records: 1,
-    #     target_arn: "String128",
+    #     target_arn: "String512",
     #   })
     #
     # @example Response structure
@@ -8362,18 +8397,20 @@ module Aws::Glue
     # @return [Types::GetIntegrationResourcePropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIntegrationResourcePropertyResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetIntegrationResourcePropertyResponse#resource_property_arn #resource_property_arn} => String
     #   * {Types::GetIntegrationResourcePropertyResponse#source_processing_properties #source_processing_properties} => Types::SourceProcessingProperties
     #   * {Types::GetIntegrationResourcePropertyResponse#target_processing_properties #target_processing_properties} => Types::TargetProcessingProperties
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_integration_resource_property({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #   resp.resource_property_arn #=> String
     #   resp.source_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.kms_arn #=> String
@@ -8415,7 +8452,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #   })
     #
@@ -13147,6 +13184,58 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # List integration resource properties for a single customer. It
+    # supports the filters, maxRecords and markers.
+    #
+    # @option params [String] :marker
+    #   This is the pagination token for next page, initial value is `null`.
+    #
+    # @option params [Array<Types::IntegrationResourcePropertyFilter>] :filters
+    #   A list of filters, supported filter Key is `SourceArn` and
+    #   `TargetArn`.
+    #
+    # @option params [Integer] :max_records
+    #   This is total number of items to be evaluated.
+    #
+    # @return [Types::ListIntegrationResourcePropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntegrationResourcePropertiesResponse#integration_resource_property_list #integration_resource_property_list} => Array&lt;Types::IntegrationResourceProperty&gt;
+    #   * {Types::ListIntegrationResourcePropertiesResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_integration_resource_properties({
+    #     marker: "String1024",
+    #     filters: [
+    #       {
+    #         name: "String128",
+    #         values: ["String128"],
+    #       },
+    #     ],
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_resource_property_list #=> Array
+    #   resp.integration_resource_property_list[0].resource_arn #=> String
+    #   resp.integration_resource_property_list[0].resource_property_arn #=> String
+    #   resp.integration_resource_property_list[0].source_processing_properties.role_arn #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.role_arn #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.kms_arn #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.connection_name #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.event_bus_arn #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationResourceProperties AWS API Documentation
+    #
+    # @overload list_integration_resource_properties(params = {})
+    # @param [Hash] params ({})
+    def list_integration_resource_properties(params = {}, options = {})
+      req = build_request(:list_integration_resource_properties, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all job resources in this Amazon Web Services
     # account, or the resources with the specified tag. This operation
     # allows you to see which resources are available in your account, and
@@ -13790,7 +13879,8 @@ module Aws::Glue
     #   Selects source tables for the integration using Maxwell filter syntax.
     #
     # @option params [Types::IntegrationConfig] :integration_config
-    #   Properties associated with the integration.
+    #   The configuration settings for the integration. Currently, only the
+    #   RefreshInterval can be modified.
     #
     # @option params [String] :integration_name
     #   A unique name for an integration in Glue.
@@ -16816,13 +16906,14 @@ module Aws::Glue
     # @return [Types::UpdateIntegrationResourcePropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIntegrationResourcePropertyResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateIntegrationResourcePropertyResponse#resource_property_arn #resource_property_arn} => String
     #   * {Types::UpdateIntegrationResourcePropertyResponse#source_processing_properties #source_processing_properties} => Types::SourceProcessingProperties
     #   * {Types::UpdateIntegrationResourcePropertyResponse#target_processing_properties #target_processing_properties} => Types::TargetProcessingProperties
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_integration_resource_property({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     source_processing_properties: {
     #       role_arn: "String128",
     #     },
@@ -16837,6 +16928,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #   resp.resource_property_arn #=> String
     #   resp.source_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.kms_arn #=> String
@@ -16880,7 +16972,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #     source_table_config: {
     #       fields: ["String128"],
@@ -17960,7 +18052,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.240.0'
+      context[:gem_version] = '1.241.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

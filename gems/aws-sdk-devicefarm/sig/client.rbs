@@ -160,12 +160,7 @@ module Aws
                                           device_arn: ::String,
                                           ?app_arn: ::String,
                                           ?instance_arn: ::String,
-                                          ?ssh_public_key: ::String,
-                                          ?remote_debug_enabled: bool,
-                                          ?remote_record_enabled: bool,
-                                          ?remote_record_app_arn: ::String,
                                           ?name: ::String,
-                                          ?client_id: ::String,
                                           ?configuration: {
                                             auxiliary_apps: Array[::String]?,
                                             billing_method: ("METERED" | "UNMETERED")?,

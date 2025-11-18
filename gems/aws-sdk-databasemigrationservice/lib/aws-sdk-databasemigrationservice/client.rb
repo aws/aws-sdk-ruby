@@ -696,6 +696,12 @@ module Aws::DatabaseMigrationService
     #   resp.request.error.default_error_details.message #=> String
     #   resp.request.export_sql_details.s3_object_key #=> String
     #   resp.request.export_sql_details.object_url #=> String
+    #   resp.request.progress.progress_percent #=> Float
+    #   resp.request.progress.total_objects #=> Integer
+    #   resp.request.progress.progress_step #=> String
+    #   resp.request.progress.processed_object.name #=> String
+    #   resp.request.progress.processed_object.type #=> String
+    #   resp.request.progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelMetadataModelConversion AWS API Documentation
     #
@@ -735,6 +741,12 @@ module Aws::DatabaseMigrationService
     #   resp.request.error.default_error_details.message #=> String
     #   resp.request.export_sql_details.s3_object_key #=> String
     #   resp.request.export_sql_details.object_url #=> String
+    #   resp.request.progress.progress_percent #=> Float
+    #   resp.request.progress.total_objects #=> Integer
+    #   resp.request.progress.progress_step #=> String
+    #   resp.request.progress.processed_object.name #=> String
+    #   resp.request.progress.processed_object.type #=> String
+    #   resp.request.progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelMetadataModelCreation AWS API Documentation
     #
@@ -936,8 +948,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, `db2`,
-    #   `db2-zos` and `docdb`. A value of `"aurora"` represents Amazon Aurora
-    #   MySQL-Compatible Edition.
+    #   `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"` represents
+    #   Amazon Aurora MySQL-Compatible Edition.
     #
     # @option params [Boolean] :virtual
     #   Indicates whether the data provider is virtual.
@@ -1041,6 +1053,14 @@ module Aws::DatabaseMigrationService
     #         s3_path: "String",
     #         s3_access_role_arn: "String",
     #       },
+    #       sybase_ase_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         encrypt_password: false,
+    #         certificate_arn: "String",
+    #       },
     #       microsoft_sql_server_settings: {
     #         server_name: "String",
     #         port: 1,
@@ -1141,6 +1161,12 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.s3_path #=> String
     #   resp.data_provider.settings.oracle_settings.s3_access_role_arn #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.server_name #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.port #=> Integer
+    #   resp.data_provider.settings.sybase_ase_settings.database_name #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.sybase_ase_settings.encrypt_password #=> Boolean
+    #   resp.data_provider.settings.sybase_ase_settings.certificate_arn #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
@@ -3746,6 +3772,12 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.s3_path #=> String
     #   resp.data_provider.settings.oracle_settings.s3_access_role_arn #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.server_name #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.port #=> Integer
+    #   resp.data_provider.settings.sybase_ase_settings.database_name #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.sybase_ase_settings.encrypt_password #=> Boolean
+    #   resp.data_provider.settings.sybase_ase_settings.certificate_arn #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
@@ -5421,6 +5453,12 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
     #   resp.data_providers[0].settings.oracle_settings.s3_path #=> String
     #   resp.data_providers[0].settings.oracle_settings.s3_access_role_arn #=> String
+    #   resp.data_providers[0].settings.sybase_ase_settings.server_name #=> String
+    #   resp.data_providers[0].settings.sybase_ase_settings.port #=> Integer
+    #   resp.data_providers[0].settings.sybase_ase_settings.database_name #=> String
+    #   resp.data_providers[0].settings.sybase_ase_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.sybase_ase_settings.encrypt_password #=> Boolean
+    #   resp.data_providers[0].settings.sybase_ase_settings.certificate_arn #=> String
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_providers[0].settings.microsoft_sql_server_settings.database_name #=> String
@@ -6385,6 +6423,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeExtensionPackAssociations AWS API Documentation
     #
@@ -7061,6 +7105,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelAssessments AWS API Documentation
     #
@@ -7225,6 +7275,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelConversions AWS API Documentation
     #
@@ -7289,6 +7345,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelCreations AWS API Documentation
     #
@@ -7387,6 +7449,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelExportsAsScript AWS API Documentation
     #
@@ -7485,6 +7553,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelExportsToTarget AWS API Documentation
     #
@@ -7580,6 +7654,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].error.default_error_details.message #=> String
     #   resp.requests[0].export_sql_details.s3_object_key #=> String
     #   resp.requests[0].export_sql_details.object_url #=> String
+    #   resp.requests[0].progress.progress_percent #=> Float
+    #   resp.requests[0].progress.total_objects #=> Integer
+    #   resp.requests[0].progress.progress_step #=> String
+    #   resp.requests[0].progress.processed_object.name #=> String
+    #   resp.requests[0].progress.processed_object.type #=> String
+    #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelImports AWS API Documentation
     #
@@ -9591,8 +9671,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, `db2`,
-    #   `db2-zos` and `docdb`. A value of `"aurora"` represents Amazon Aurora
-    #   MySQL-Compatible Edition.
+    #   `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"` represents
+    #   Amazon Aurora MySQL-Compatible Edition.
     #
     # @option params [Boolean] :virtual
     #   Indicates whether the data provider is virtual.
@@ -9702,6 +9782,14 @@ module Aws::DatabaseMigrationService
     #         s3_path: "String",
     #         s3_access_role_arn: "String",
     #       },
+    #       sybase_ase_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         encrypt_password: false,
+    #         certificate_arn: "String",
+    #       },
     #       microsoft_sql_server_settings: {
     #         server_name: "String",
     #         port: 1,
@@ -9795,6 +9883,12 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
     #   resp.data_provider.settings.oracle_settings.s3_path #=> String
     #   resp.data_provider.settings.oracle_settings.s3_access_role_arn #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.server_name #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.port #=> Integer
+    #   resp.data_provider.settings.sybase_ase_settings.database_name #=> String
+    #   resp.data_provider.settings.sybase_ase_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.sybase_ase_settings.encrypt_password #=> Boolean
+    #   resp.data_provider.settings.sybase_ase_settings.certificate_arn #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
     #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
     #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
@@ -13543,7 +13637,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

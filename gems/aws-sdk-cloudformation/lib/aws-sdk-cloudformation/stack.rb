@@ -244,6 +244,12 @@ module Aws::CloudFormation
       data[:detailed_status]
     end
 
+    # Information about the most recent operations performed on this stack.
+    # @return [Array<Types::OperationEntry>]
+    def last_operations
+      data[:last_operations]
+    end
+
     # @!endgroup
 
     # @return [Client]

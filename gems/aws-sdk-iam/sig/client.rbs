@@ -78,6 +78,12 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#accept_delegation_request-instance_method
+      def accept_delegation_request: (
+                                       delegation_request_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#add_client_id_to_open_id_connect_provider-instance_method
       def add_client_id_to_open_id_connect_provider: (
                                                        open_id_connect_provider_arn: ::String,
@@ -98,6 +104,12 @@ module Aws
                                user_name: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#associate_delegation_request-instance_method
+      def associate_delegation_request: (
+                                          delegation_request_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#attach_group_policy-instance_method
       def attach_group_policy: (
@@ -692,6 +704,19 @@ module Aws
       def get_credential_report: () -> _GetCredentialReportResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCredentialReportResponseSuccess
 
+      interface _GetDelegationRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDelegationRequestResponse]
+        def delegation_request: () -> Types::DelegationRequest
+        def permission_check_status: () -> ("COMPLETE" | "IN_PROGRESS" | "FAILED")
+        def permission_check_result: () -> ("ALLOWED" | "DENIED" | "UNSURE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_delegation_request-instance_method
+      def get_delegation_request: (
+                                    delegation_request_id: ::String,
+                                    ?delegation_permission_check: bool
+                                  ) -> _GetDelegationRequestResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDelegationRequestResponseSuccess
+
       interface _GetGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupResponse]
         def group: () -> Types::Group
@@ -719,6 +744,19 @@ module Aws
                               policy_name: ::String
                             ) -> _GetGroupPolicyResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupPolicyResponseSuccess
+
+      interface _GetHumanReadableSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHumanReadableSummaryResponse]
+        def summary_content: () -> ::String
+        def locale: () -> ::String
+        def summary_state: () -> ("AVAILABLE" | "NOT_AVAILABLE" | "NOT_SUPPORTED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_human_readable_summary-instance_method
+      def get_human_readable_summary: (
+                                        entity_arn: ::String,
+                                        ?locale: ::String
+                                      ) -> _GetHumanReadableSummaryResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHumanReadableSummaryResponseSuccess
 
       interface _GetInstanceProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceProfileResponse]
@@ -1012,6 +1050,20 @@ module Aws
                                          ?max_items: ::Integer
                                        ) -> _ListAttachedUserPoliciesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachedUserPoliciesResponseSuccess
+
+      interface _ListDelegationRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDelegationRequestsResponse]
+        def delegation_requests: () -> ::Array[Types::DelegationRequest]
+        def marker: () -> ::String
+        def is_truncated: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_delegation_requests-instance_method
+      def list_delegation_requests: (
+                                      ?owner_id: ::String,
+                                      ?marker: ::String,
+                                      ?max_items: ::Integer
+                                    ) -> _ListDelegationRequestsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDelegationRequestsResponseSuccess
 
       interface _ListEntitiesForPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitiesForPolicyResponse]
@@ -1467,6 +1519,13 @@ module Aws
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#reject_delegation_request-instance_method
+      def reject_delegation_request: (
+                                       delegation_request_id: ::String,
+                                       ?notes: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#remove_client_id_from_open_id_connect_provider-instance_method
       def remove_client_id_from_open_id_connect_provider: (
                                                             open_id_connect_provider_arn: ::String,
@@ -1507,6 +1566,12 @@ module Aws
                                authentication_code_2: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#send_delegation_token-instance_method
+      def send_delegation_token: (
+                                   delegation_request_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#set_default_policy_version-instance_method
       def set_default_policy_version: (
@@ -1756,6 +1821,13 @@ module Aws
       def update_assume_role_policy: (
                                        role_name: ::String,
                                        policy_document: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_delegation_request-instance_method
+      def update_delegation_request: (
+                                       delegation_request_id: ::String,
+                                       ?notes: ::String
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

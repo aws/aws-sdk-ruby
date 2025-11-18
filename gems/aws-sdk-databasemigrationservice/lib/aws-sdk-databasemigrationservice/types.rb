@@ -744,8 +744,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`,
-    #   `db2`, `db2-zos` and `docdb`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   `db2`, `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"`
+    #   represents Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] virtual
@@ -2157,8 +2157,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`,
-    #   `db2`, `db2-zos` and `docdb`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   `db2`, `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"`
+    #   represents Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] virtual
@@ -2262,6 +2262,10 @@ module Aws::DatabaseMigrationService
     #   Provides information that defines an Oracle data provider.
     #   @return [Types::OracleDataProviderSettings]
     #
+    # @!attribute [rw] sybase_ase_settings
+    #   Provides information that defines an SAP ASE data provider.
+    #   @return [Types::SybaseAseDataProviderSettings]
+    #
     # @!attribute [rw] microsoft_sql_server_settings
     #   Provides information that defines a Microsoft SQL Server data
     #   provider.
@@ -2294,6 +2298,7 @@ module Aws::DatabaseMigrationService
       :postgre_sql_settings,
       :my_sql_settings,
       :oracle_settings,
+      :sybase_ase_settings,
       :microsoft_sql_server_settings,
       :doc_db_settings,
       :maria_db_settings,
@@ -2309,6 +2314,7 @@ module Aws::DatabaseMigrationService
       class PostgreSqlSettings < DataProviderSettings; end
       class MySqlSettings < DataProviderSettings; end
       class OracleSettings < DataProviderSettings; end
+      class SybaseAseSettings < DataProviderSettings; end
       class MicrosoftSqlServerSettings < DataProviderSettings; end
       class DocDbSettings < DataProviderSettings; end
       class MariaDbSettings < DataProviderSettings; end
@@ -7924,8 +7930,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`,
-    #   `db2`, `db2-zos` and `docdb`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   `db2`, `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"`
+    #   represents Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] virtual
@@ -10533,6 +10539,82 @@ module Aws::DatabaseMigrationService
       :result_encryption_mode,
       :result_kms_key_arn,
       :result_statistic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The database object that the schema conversion operation currently
+    # uses.
+    #
+    # @!attribute [rw] name
+    #   The name of the database object.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the database object. For example, a table, view,
+    #   procedure, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the data provider. This parameter can store one of the
+    #   following values: `"SOURCE"` or `"TARGET"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ProcessedObject AWS API Documentation
+    #
+    class ProcessedObject < Struct.new(
+      :name,
+      :type,
+      :endpoint_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the progress of the schema conversion
+    # operation.
+    #
+    # @!attribute [rw] progress_percent
+    #   The percent complete for the current step of the schema conversion
+    #   operation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_objects
+    #   The number of objects in this schema conversion operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] progress_step
+    #   The step of the schema conversion operation. This parameter can
+    #   store one of the following values:
+    #
+    #   * `IN_PROGRESS` – The operation is running.
+    #
+    #   * `LOADING_METADATA` – Loads metadata from the source database.
+    #
+    #   * `COUNTING_OBJECTS` – Determines the number of objects involved in
+    #     the operation.
+    #
+    #   * `ANALYZING` – Analyzes the source database objects.
+    #
+    #   * `CONVERTING` – Converts the source database objects to a format
+    #     compatible with the target database.
+    #
+    #   * `APPLYING` – Applies the converted code to the target database.
+    #
+    #   * `FINISHED` – The operation completed successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_object
+    #   The name of the database object that the schema conversion operation
+    #   currently uses.
+    #   @return [Types::ProcessedObject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Progress AWS API Documentation
+    #
+    class Progress < Struct.new(
+      :progress_percent,
+      :total_objects,
+      :progress_step,
+      :processed_object)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13510,6 +13592,11 @@ module Aws::DatabaseMigrationService
     #   SQL.
     #   @return [Types::ExportSqlDetails]
     #
+    # @!attribute [rw] progress
+    #   Provides information about the progress of the schema conversion
+    #   operation.
+    #   @return [Types::Progress]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SchemaConversionRequest AWS API Documentation
     #
     class SchemaConversionRequest < Struct.new(
@@ -13517,7 +13604,8 @@ module Aws::DatabaseMigrationService
       :request_identifier,
       :migration_project_arn,
       :error,
-      :export_sql_details)
+      :export_sql_details,
+      :progress)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14523,6 +14611,49 @@ module Aws::DatabaseMigrationService
       :endpoint_type,
       :replication_instance_engine_minimum_version,
       :engine_display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines an SAP ASE data provider.
+    #
+    # @!attribute [rw] server_name
+    #   The name of the SAP ASE server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the SAP ASE data provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the SAP ASE data provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the SAP ASE data provider. The
+    #   default value is `none`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypt_password
+    #   Specifies whether to encrypt the password when connecting to the
+    #   Sybase ASE database. When set to true, the connection password is
+    #   encrypted during transmission. Default is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate used for SSL
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SybaseAseDataProviderSettings AWS API Documentation
+    #
+    class SybaseAseDataProviderSettings < Struct.new(
+      :server_name,
+      :port,
+      :database_name,
+      :ssl_mode,
+      :encrypt_password,
+      :certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end

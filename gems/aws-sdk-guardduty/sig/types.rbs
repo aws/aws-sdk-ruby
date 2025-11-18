@@ -2213,6 +2213,13 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class S3ObjectForSendObjectMalwareScan
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
     class Scan
       attr_accessor detector_id: ::String
       attr_accessor admin_detector_id: ::String
@@ -2305,6 +2312,14 @@ module Aws::GuardDuty
       attr_accessor group_id: ::String
       attr_accessor group_name: ::String
       SENSITIVE: []
+    end
+
+    class SendObjectMalwareScanRequest
+      attr_accessor s3_object: Types::S3ObjectForSendObjectMalwareScan
+      SENSITIVE: []
+    end
+
+    class SendObjectMalwareScanResponse < Aws::EmptyStructure
     end
 
     class Sequence

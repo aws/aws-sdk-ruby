@@ -1291,6 +1291,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       filter_settings: {
@@ -1405,7 +1407,9 @@ module Aws
                                       }?,
                                       bitrate: ::Integer?,
                                       rate_control_mode: ("CBR" | "QVBR")?,
-                                      min_bitrate: ::Integer?
+                                      min_bitrate: ::Integer?,
+                                      spatial_aq: ("DISABLED" | "ENABLED")?,
+                                      temporal_aq: ("DISABLED" | "ENABLED")?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -3431,6 +3435,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       filter_settings: {
@@ -3545,7 +3551,9 @@ module Aws
                                       }?,
                                       bitrate: ::Integer?,
                                       rate_control_mode: ("CBR" | "QVBR")?,
-                                      min_bitrate: ::Integer?
+                                      min_bitrate: ::Integer?,
+                                      spatial_aq: ("DISABLED" | "ENABLED")?,
+                                      temporal_aq: ("DISABLED" | "ENABLED")?
                                     }?
                                   }?,
                                   height: ::Integer?,
