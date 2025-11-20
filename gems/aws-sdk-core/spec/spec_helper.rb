@@ -16,6 +16,7 @@ require 'aws-sdk-ssooidc'
 require 'aws-sdk-signin'
 
 require_relative 'client_helper'
+require_relative 'login_credentials_provider_helper'
 
 def mock_shared_config(config_contents = '', credentials_contents = '')
   parsed_config = Aws::Core::ConfigFileParser.new(config_contents).parse
@@ -33,6 +34,8 @@ def mock_shared_config(config_contents = '', credentials_contents = '')
 end
 
 RSpec.configure do |config|
+  config.include LoginCredentialsProviderHelper
+
   config.before(:each) do
     stub_const('ENV', {})
 

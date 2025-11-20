@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative '../spec_helper'
-require_relative 'login_credentials_provider_helper'
 
 module Aws
   module Core
@@ -13,7 +12,7 @@ module Aws
       let(:expiration) { (time.utc + 900).to_datetime.rfc3339 }
       let(:private_key) { OpenSSL::PKey::EC.generate('prime256v1') }
       let(:pem) { private_key.to_pem }
-
+      let(:token_file) { Tempfile.new }
       let(:cached_token) do
         {
           'accessToken' => {
@@ -31,25 +30,8 @@ module Aws
         }
       end
 
-      def mock_token_file(login_session, cached_token)
-        login_session_sha = OpenSSL::Digest::SHA256.hexdigest(login_session.strip.encode('utf-8'))
-        allow(Dir).to receive(:home).and_return('HOME')
-        directory = ENV['AWS_LOGIN_CACHE_DIRECTORY'] || File.join(Dir.home, '.aws', 'login', 'cache')
-        path = File.join(directory, "#{login_session_sha}.json")
-        allow(File).to receive(:read).and_call_original
-        allow(File).to receive(:read).with(path, encoding: Encoding::UTF_8).and_return(JSON.dump(cached_token))
-      end
-
-      def expect_token_write_back(login_session, expected_token)
-        login_session_sha = OpenSSL::Digest::SHA256.hexdigest(login_session.strip.encode('utf-8'))
-        allow(Dir).to receive(:home).and_return('HOME')
-        directory = ENV['AWS_LOGIN_CACHE_DIRECTORY'] || File.join(Dir.home, '.aws', 'login', 'cache')
-        path = File.join(directory, "#{login_session_sha}.json")
-
-        expect(File).to receive(:write) do |arg1, arg2|
-          expect(arg1).to eq(path)
-          expect(arg2).to eq(JSON.dump(expected_token))
-        end
+      before do
+        allow_any_instance_of(LoginCredentialsProvider).to receive(:warn).with(/WARNING: OpenSSL 3.6.x/)
       end
 
       describe '#initialize' do
@@ -75,22 +57,22 @@ module Aws
 
       describe '#login_cache_file' do
         it 'produces the correct file location for a basic name' do
-          test_client = client
-          login_session = 'arn:aws:iam::123456789012:user/Admin'
-          mock_token_file(login_session, cached_token)
-          provider = LoginCredentialsProvider.new(login_session: login_session, client: test_client)
+          allow(Dir).to receive(:home).and_return('HOME')
+          login_session = 'arn:aws:iam::0123456789012:user/Admin'
+          expect_any_instance_of(LoginCredentialsProvider).to receive(:refresh)
+          provider = LoginCredentialsProvider.new(login_session: login_session, client: client)
           expect(File.basename(provider.send(:login_cache_file)))
-            .to eq('10cabd19777b6651ac57333b55c7c10a1242b1c2337f40e674926d7324698347.json')
+            .to eq('36db1d138ff460920374e4c3d8e01f53f9f73537e89c88d639f68393df0e2726.json')
         end
 
         it 'produces the correct file location when AWS_LOGIN_CACHE_DIRECTORY is set' do
-          test_client = client
-          login_session = 'arn:aws:iam::123456789012:user/Admin'
+          allow(Dir).to receive(:home).and_return('HOME')
+          login_session = 'arn:aws:iam::0123456789012:user/Admin'
           ENV['AWS_LOGIN_CACHE_DIRECTORY'] = '/tmp'
-          mock_token_file(login_session, cached_token)
-          provider = LoginCredentialsProvider.new(login_session: login_session, client: test_client)
+          expect_any_instance_of(LoginCredentialsProvider).to receive(:refresh)
+          provider = LoginCredentialsProvider.new(login_session: login_session, client: client)
           expect(provider.send(:login_cache_file))
-            .to eq('/tmp/10cabd19777b6651ac57333b55c7c10a1242b1c2337f40e674926d7324698347.json')
+            .to eq('/tmp/36db1d138ff460920374e4c3d8e01f53f9f73537e89c88d639f68393df0e2726.json')
         end
       end
 
@@ -207,7 +189,6 @@ module Aws
           it 'refreshes the token' do
             mock_token_file(login_session, cached_token)
             client.stub_responses(:create_o_auth2_token, signin_resp)
-            expect_token_write_back(login_session, expected_token)
             provider = LoginCredentialsProvider.new(login_session: login_session, client: client)
             creds = provider.identity
             expect(creds.access_key_id).to eq('new_akid')
@@ -215,6 +196,7 @@ module Aws
             expect(creds.session_token).to eq('new_token')
             expect(creds.account_id).to eq('123456789012')
             expect(provider.expiration).to eq(Time.parse(new_expiration))
+            expect_token_write_back(expected_token)
           end
         end
 
@@ -234,7 +216,7 @@ module Aws
               mock_token_file(login_session, cached_token)
               expect do
                 LoginCredentialsProvider.new(login_session: login_session, client: client)
-              end.to raise_error(/Missing required field: accessToken/)
+              end.to raise_error(/Cached login token is missing required field\(s\)/)
             end
           end
 
@@ -258,7 +240,7 @@ module Aws
               mock_token_file(login_session, cached_token)
               expect do
                 LoginCredentialsProvider.new(login_session: login_session, client: client)
-              end.to raise_error(/Missing required field\(s\)/)
+              end.to raise_error(/Access token in cached login token is missing required field\(s\)/)
             end
           end
 
@@ -283,7 +265,32 @@ module Aws
               mock_token_file(login_session, cached_token)
               expect do
                 LoginCredentialsProvider.new(login_session: login_session, client: client)
-              end.to raise_error(/Missing required field\(s\)/)
+              end.to raise_error(/Cached login token is missing required field\(s\)/)
+            end
+          end
+
+          context 'missing client id' do
+            let(:cached_token) do
+              {
+                accessToken: {
+                  accessKeyId: 'akid',
+                  secretAccessKey: 'secret',
+                  sessionToken: 'token',
+                  accountId: '123456789012',
+                  expiresAt: expiration
+                },
+                tokenType: 'aws_sigv4',
+                refreshToken: 'refresh_token',
+                idToken: 'identity_token',
+                dpopKey: pem
+              }
+            end
+
+            it 'raises an error' do
+              mock_token_file(login_session, cached_token)
+              expect do
+                LoginCredentialsProvider.new(login_session: login_session, client: client)
+              end.to raise_error(/Cached login token is missing required field\(s\)/)
             end
           end
 
@@ -308,7 +315,7 @@ module Aws
               mock_token_file(login_session, cached_token)
               expect do
                 LoginCredentialsProvider.new(login_session: login_session, client: client)
-              end.to raise_error(/Missing required field\(s\)/)
+              end.to raise_error(/Cached login token is missing required field\(s\)/)
             end
           end
         end

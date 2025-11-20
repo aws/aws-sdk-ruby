@@ -37,7 +37,7 @@ module Aws
 
         @login_session = options.delete(:login_session)
         @client = options[:client] || Signin::Client.new(options.merge(credentials_provider: nil))
-        @features = ['CREDENTIALS_SIGN_IN']
+        @features = ['CREDENTIALS_LOGIN']
         @async_refresh = true
         super
       end

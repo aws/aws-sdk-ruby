@@ -341,8 +341,8 @@ module Aws
         profile_config = resolve_profile_config
         return unless profile_config['login_session']
 
-        provider = LoginCredentialsProvider.new(login_session: profile_config['login_session'])
-        provider.features = %w[CREDENTIALS_PROFILE_SIGN_IN CREDENTIALS_SIGN_IN]
+        provider = LoginCredentialsProvider.new(login_session: profile_config['login_session'], region: @config.region)
+        provider.features = %w[CREDENTIALS_PROFILE_LOGIN CREDENTIALS_LOGIN]
         provider
       end
 

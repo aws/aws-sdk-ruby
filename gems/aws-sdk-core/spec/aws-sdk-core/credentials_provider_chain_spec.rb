@@ -1727,7 +1727,7 @@ module Aws
             mock_shared_config(shared_config)
             expect_any_instance_of(LoginCredentialsProvider).to receive(:read_cached_token).and_return(cached_token)
             provider = client.config.credentials_provider
-            expect(provider.features).to eq(%w[CREDENTIALS_PROFILE_SIGN_IN CREDENTIALS_SIGN_IN])
+            expect(provider.features).to eq(%w[CREDENTIALS_PROFILE_LOGIN CREDENTIALS_LOGIN])
           end
         end
 
@@ -1987,6 +1987,15 @@ module Aws
                 allow(SSOCredentialsProvider)
                   .to receive(:new).and_return(sso_provider)
                 allow(sso_provider).to receive(:features=)
+              when 'loginToken'
+                login_provider = double(
+                  'LoginCredentialsProvider',
+                  identity: credentials(values),
+                  set?: true
+                )
+                allow(LoginCredentialsProvider)
+                  .to receive(:new).and_return(login_provider)
+                allow(login_provider).to receive(:features=)
               when 'processResponse'
                 process_provider = double(
                   'ProcessCredentialsProvider',
