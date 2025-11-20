@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix region configuration for LoginCredential's Signin client.
+
 3.238.0 (2025-11-19)
 ------------------
 
