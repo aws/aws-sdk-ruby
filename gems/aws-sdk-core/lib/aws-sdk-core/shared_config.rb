@@ -176,8 +176,8 @@ module Aws
     # file, if present.
     def login_credentials_from_config(opts = {})
       p = opts[:profile] || @profile_name
-      credentials = login_credentials_from_profile(@parsed_credentials, p)
-      credentials ||= login_credentials_from_profile(@parsed_config, p) if @parsed_config
+      credentials = login_credentials_from_profile(@parsed_credentials, p, opts[:region])
+      credentials ||= login_credentials_from_profile(@parsed_config, p, opts[:region]) if @parsed_config
       credentials
     end
 
@@ -479,10 +479,12 @@ module Aws
       end
     end
 
-    def login_credentials_from_profile(cfg, profile)
+    def login_credentials_from_profile(cfg, profile, region)
       return unless @parsed_config && (prof_config = cfg[profile]) && prof_config['login_session']
 
-      creds = LoginCredentials.new(login_session: prof_config['login_session'])
+      cfg = { login_session: prof_config['login_session'] }
+      cfg[:region] = region if region
+      creds = LoginCredentials.new(cfg)
       creds.metrics << 'CREDENTIALS_PROFILE_LOGIN'
       creds
     end

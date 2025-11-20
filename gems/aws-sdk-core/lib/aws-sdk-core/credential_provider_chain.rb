@@ -110,7 +110,10 @@ module Aws
       return unless Aws.shared_config.config_enabled? && options[:config]&.profile
 
       with_metrics('CREDENTIALS_CODE') do
-        creds = Aws.shared_config.login_credentials_from_config(profile: options[:config].profile)
+        creds = Aws.shared_config.login_credentials_from_config(
+          profile: options[:config].profile,
+          region: options[:config].region
+        )
         return unless creds
 
         creds.metrics << 'CREDENTIALS_CODE'
@@ -170,7 +173,7 @@ module Aws
       return unless Aws.shared_config.config_enabled?
 
       profile_name = determine_profile_name(options)
-      Aws.shared_config.login_credentials_from_config(profile: profile_name)
+      Aws.shared_config.login_credentials_from_config(profile: profile_name, region: options[:config].region)
     rescue Errors::NoSuchProfileError
       nil
     end

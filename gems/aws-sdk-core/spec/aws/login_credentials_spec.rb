@@ -186,6 +186,10 @@ module Aws
           }
         end
 
+        before do
+          allow_any_instance_of(LoginCredentials).to receive(:warn).with(/WARNING: OpenSSL 3.6.x/)
+        end
+
         it 'refreshes the token' do
           mock_token_file(login_session, cached_token)
           client.stub_responses(:create_o_auth_2_token, signin_resp)

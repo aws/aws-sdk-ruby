@@ -1220,7 +1220,8 @@
     "models": "signer/2017-08-25"
   },
   "Signin": {
-    "models": "signin/2023-01-01"
+    "models": "signin/2023-01-01",
+    "gemName": "aws-sdk-core"
   },
   "SimSpaceWeaver": {
     "models": "simspaceweaver/2022-10-28"
