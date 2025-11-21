@@ -162,9 +162,7 @@ module Aws
           context[:http_checksum] ||= {}
 
           # Set validation mode to enabled when supported.
-          if context.config.response_checksum_validation == 'when_supported'
-            enable_request_validation_mode(context)
-          end
+          enable_request_validation_mode(context) if context.config.response_checksum_validation == 'when_supported'
 
           @handler.call(context)
         end
@@ -194,9 +192,7 @@ module Aws
             calculate_request_checksum(context, request_algorithm)
           end
 
-          if should_verify_response_checksum?(context)
-            add_verify_response_checksum_handlers(context)
-          end
+          add_verify_response_checksum_handlers(context) if should_verify_response_checksum?(context)
 
           with_metrics(context.config, algorithm) { @handler.call(context) }
         end
@@ -388,13 +384,15 @@ module Aws
           unless context.http_request.body.respond_to?(:size)
             raise Aws::Errors::ChecksumError, 'Could not determine length of the body'
           end
+
           headers['X-Amz-Decoded-Content-Length'] = context.http_request.body.size
 
-          context.http_request.body = AwsChunkedTrailerDigestIO.new(
-            context.http_request.body,
-            checksum_properties[:algorithm],
-            location_name
-          )
+          context.http_request.body =
+            AwsChunkedTrailerDigestIO.new(
+              io: context.http_request.body,
+              algorithm: checksum_properties[:algorithm],
+              location_name: location_name
+            )
         end
 
         def should_verify_response_checksum?(context)
@@ -417,10 +415,7 @@ module Aws
           context[:http_checksum][:validation_list] = validation_list
 
           context.http_response.on_headers do |_status, headers|
-            header_name, algorithm = response_header_to_verify(
-              headers,
-              validation_list
-            )
+            header_name, algorithm = response_header_to_verify(headers, validation_list)
             next unless header_name
 
             expected = headers[header_name]
@@ -466,52 +461,67 @@ module Aws
       # Wrapper for request body that implements application-layer
       # chunking with Digest computed on chunks + added as a trailer
       class AwsChunkedTrailerDigestIO
-        CHUNK_SIZE = 16_384
+        DEFAULT_CHUNK_SIZE = 16_384
 
-        def initialize(io, algorithm, location_name)
-          @io = io
-          @location_name = location_name
-          @algorithm = algorithm
-          @digest = ChecksumAlgorithm.digest_for_algorithm(algorithm)
-          @trailer_io = nil
+        def initialize(options = {})
+          @io = options.delete(:io)
+          @location_name = options.delete(:location_name)
+          @algorithm = options.delete(:algorithm)
+          @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
+
+          @chunk_size = options.delete(:chunk_size) || DEFAULT_CHUNK_SIZE
+          @overhead_bytes = calculate_overhead(@chunk_size)
+          @max_chunk_size = @chunk_size - @overhead_bytes
+          @current_chunk = ''.b
+          @eof = false
         end
 
         # the size of the application layer aws-chunked + trailer body
         def size
-          # compute the number of chunks
-          # a full chunk has 4 + 4 bytes overhead, a partial chunk is len.to_s(16).size + 4
           orig_body_size = @io.size
-          n_full_chunks = orig_body_size / CHUNK_SIZE
-          partial_bytes = orig_body_size % CHUNK_SIZE
-          chunked_body_size = n_full_chunks * (CHUNK_SIZE + 8)
-          chunked_body_size += partial_bytes.to_s(16).size + partial_bytes + 4 unless  partial_bytes.zero?
+          n_full_chunks = orig_body_size / @max_chunk_size
+          partial_bytes = orig_body_size % @max_chunk_size
+
+          chunked_body_size = n_full_chunks * (@max_chunk_size + @max_chunk_size.to_s(16).size + 4)
+          chunked_body_size += partial_bytes.to_s(16).size + partial_bytes + 4 unless partial_bytes.zero?
           trailer_size = ChecksumAlgorithm.trailer_length(@algorithm, @location_name)
           chunked_body_size + trailer_size
         end
 
         def rewind
           @io.rewind
+          @current_chunk = ''.b
+          @eof = false
         end
 
         def read(length, buf = nil)
-          # account for possible leftover bytes at the end, if we have trailer bytes, send them
-          if @trailer_io
-            return @trailer_io.read(length, buf)
-          end
+          return if @eof
 
-          chunk = @io.read(length)
+          buf&.clear
+          output_buffer = buf || ''.b
+          fill_chunk(length) if @current_chunk.empty? && !@eof
+
+          output_buffer << @current_chunk
+          @current_chunk.clear
+          output_buffer
+        end
+
+        private
+
+        def calculate_overhead(chunk_size)
+          chunk_size.to_s(16).size + 4 # hex_length + "\r\n\r\n"
+        end
+
+        def fill_chunk(_length)
+          chunk = @io.read(@max_chunk_size)
           if chunk
             @digest.update(chunk)
-            application_chunked = "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
-            return StringIO.new(application_chunked).read(application_chunked.size, buf)
+            @current_chunk << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
           else
-            trailers = {}
-            trailers[@location_name] = @digest.base64digest
-            trailers = trailers.map { |k,v| "#{k}:#{v}" }.join("\r\n")
-            @trailer_io = StringIO.new("0\r\n#{trailers}\r\n\r\n")
-            chunk = @trailer_io.read(length, buf)
+            trailer_str = { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
+            @current_chunk << "0\r\n#{trailer_str}\r\n\r\n"
+            @eof = true
           end
-          chunk
         end
       end
     end
