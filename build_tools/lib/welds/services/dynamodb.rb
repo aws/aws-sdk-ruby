@@ -24,6 +24,10 @@ module BuildTools
             Aws::DynamoDB::Plugins::SimpleAttributes => { require_path: 'aws-sdk-dynamodb/plugins/simple_attributes' }
           }
         end
+
+        def add_dependencies
+          { 'bigdecimal' => '~> 3' }
+        end
       end
     end
   end

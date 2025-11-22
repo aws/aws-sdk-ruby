@@ -36,7 +36,7 @@ module Aws::DynamoDBStreams
       ?raise_response_errors: bool,
       ?region: String,
       ?request_min_compression_size_bytes: Integer,
-      ?retry_backoff: #call(attempts),
+      ?retry_backoff: Smithy::Client::Retry::ExponentialBackoff,
       ?retry_base_delay: untyped,
       ?retry_max_attempts: Integer,
       ?retry_max_delay: untyped,

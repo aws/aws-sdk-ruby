@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module DynamoDB
     describe Client do
-      let(:options) { { access_key_id: 'akid', secret_access_key: 'secret' } }
+      let(:options) { { region: 'us-stubbed-1', access_key_id: 'akid', secret_access_key: 'secret' } }
       let(:client) { Client.new(options) }
 
       describe ':simple_attributes' do
