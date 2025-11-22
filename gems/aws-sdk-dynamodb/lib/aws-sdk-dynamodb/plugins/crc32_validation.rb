@@ -25,7 +25,7 @@ module Aws
         # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
-            @handler.call(context).on_done do |response|
+            @handler.call(context).on_done(200..299) do |response|
               response.error = validate(context)
             end
           end
