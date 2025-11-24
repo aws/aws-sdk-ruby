@@ -173,7 +173,8 @@ module Aws
       return unless Aws.shared_config.config_enabled?
 
       profile_name = determine_profile_name(options)
-      Aws.shared_config.login_credentials_from_config(profile: profile_name, region: options[:config].region)
+      region = options[:config].region if options[:config]
+      Aws.shared_config.login_credentials_from_config(profile: profile_name, region: region)
     rescue Errors::NoSuchProfileError
       nil
     end

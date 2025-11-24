@@ -169,6 +169,11 @@ module Aws
       it 'defaults to nil' do
         expect(credentials).to be(nil)
       end
+
+      it 'defaults to nil when config is enabled' do
+        Aws.shared_config.fresh(config_enabled: true)
+        expect(credentials).to be(nil)
+      end
     end
 
     describe 'with shared credentials' do
