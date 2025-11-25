@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `login_credentials` in credentials chain when config is enabled.
+
 3.239.1 (2025-11-21)
 ------------------
 
