@@ -5,6 +5,7 @@
 require 'aws-sdk-core'
 require 'smithy-json'
 require 'aws-sigv4'
+require 'bigdecimal'
 require 'smithy-client'
 
 Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
@@ -26,8 +27,8 @@ require_relative 'aws-sdk-dynamodbstreams/schema'
 require_relative 'aws-sdk-dynamodbstreams/auth_parameters'
 require_relative 'aws-sdk-dynamodbstreams/auth_resolver'
 require_relative 'aws-sdk-dynamodbstreams/client'
-require_relative 'aws-sdk-dynamodbstreams/customizations'
 require_relative 'aws-sdk-dynamodbstreams/errors'
 require_relative 'aws-sdk-dynamodbstreams/endpoint_parameters'
 require_relative 'aws-sdk-dynamodbstreams/endpoint_provider'
 require_relative 'aws-sdk-dynamodbstreams/waiters'
+require_relative 'aws-sdk-dynamodbstreams/customizations'
